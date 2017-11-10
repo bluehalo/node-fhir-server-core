@@ -18,7 +18,7 @@ Implemented using node.js, typescript, and express.js
 ```
 
 ### To add new API endpoint routes:
-1. Create a test for the route under /test/<your-new-route>.spec.ts
+1. Create a test for the route under /test/<your-new-route>.router.spec.ts
 
 2. Create or modify a router class under /src/routes/<your-new-route>.router.ts
 
