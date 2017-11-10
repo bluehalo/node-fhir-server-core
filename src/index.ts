@@ -1,5 +1,5 @@
 import * as http from 'http'
-const debug = require('debug')('fhir-express:server')
+const debug = require('debug')('asy-fhir-server:server')
 
 import Server from './server'
 
