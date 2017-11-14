@@ -1,152 +1,105 @@
-
-
-    {
-       "resourceType": "Patient",
-       "id": "3",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "text":
-       {
-           "status": "generated",
-           "div": "<div xmlns="http://www.w3.org/1999/xhtml"><div class="hapiHeaderText"> Addison <b>AVA </b></div><table class="hapiPropertyTable"><tbody><tr><td>Identifier</td><td>1081332</td></tr><tr><td>Address</td><td><span>19 Church Street </span><br /><span>Apt #29 </span><br /><span>Tulsa </span><span>OK </span><span>US </span></td></tr><tr><td>Date of birth</td><td><span>02 October 2003</span></td></tr></tbody></table></div>"
-       },
-       "extension":
-       [
-           {
-               "url": "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
-               "valueString": "Jane"
-           },
-           {
-               "url": "http://hl7.org/fhir/StructureDefinition/birthPlace",
-               "valueAddress":
-               {
-                   "use": "home",
-                   "line":
-                   [
-                       "2110 Silverspring Rd",
-                       "Apt #29"
-                   ],
-                   "city": "Tulsa",
-                   "state": "OK",
-                   "postalCode": "74108",
-                   "country": "US"
-               }
-           },
-           {
-               "url": "http://hl7.org/fhir/StructureDefinition/us-core-race",
-               "valueCodeableConcept":
-               {
-                   "coding":
-                   [
-                       {
-                           "system": "http://hl7.org/fhir/v3/vs/Race",
-                           "code": "1002-5",
-                           "display": "American Indian or Alaska Native"
-                       }
-                   ]
-               }
-           },
-           {
-               "url": "http://hl7.org/fhir/StructureDefinition/us-core-ethnicity",
-               "valueCodeableConcept":
-               {
-                   "coding":
-                   [
-                       {
-                           "system": "http://hl7.org/fhir/v3/Ethnicity",
-                           "code": "2135-2",
-                           "display": "Hispanic or Latino"
-                       }
-                   ]
-               }
-           },
-           {
-               "url": "http://hl7.org/fhir/StructureDefinition/us-core-religion",
-               "valueCodeableConcept":
-               {
-                   "coding":
-                   [
-                       {
-                           "system": "http://hl7.org/fhir/v3/vs/ReligiousAffiliation",
-                           "code": "1001",
-                           "display": "Adventist"
-                       }
-                   ]
-               }
-           }
-       ],
-       "identifier":
-       [
-           {
-               "use": "official",
-               "system": "https://sitenv.org",
-               "value": "1081332"
-           }
-       ],
-       "active": true,
-       "name":
-       [
-           {
-               "family":
-               [
-                   "Ava"
-               ],
-               "given":
-               [
-                   "Addison"
-               ]
-           }
-       ],
-       "telecom":
-       [
-           {
-               "system": "phone",
-               "value": "800-960-9294",
-               "use": "home"
-           }
-       ],
-       "gender": "female",
-       "birthDate": "2003-10-02",
-       "address":
-       [
-           {
-               "line":
-               [
-                   "19 Church Street",
-                   "Apt #29"
-               ],
-               "city": "Tulsa",
-               "state": "OK",
-               "postalCode": "74108",
-               "country": "US"
-           }
-       ],
-       "maritalStatus":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/v3/MaritalStatus",
-                   "code": "S"
-               }
-           ]
-       },
-       "communication":
-       [
-           {
-               "language":
-               {
-                   "coding":
-                   [
-                       {
-                           "system": "http://tools.ietf.org/html/bcp47",
-                           "display": "English"
-                       }
-                   ]
-               }
-           }
-       ]
-    }
-
+{
+	"resourceType": "Patient",
+	"id": "3",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"text": {
+		"status": "generated",
+		"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\"> Addison <b>AVA </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>1081332</td></tr><tr><td>Address</td><td><span>19 Church Street </span><br /><span>Apt #29 </span><br /><span>Tulsa </span><span>OK </span><span>US </span></td></tr><tr><td>Date of birth</td><td><span>02 October 2003</span></td></tr></tbody></table></div>"
+	},
+	"extension": [{
+			"url": "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
+			"valueString": "Jane"
+		},
+		{
+			"url": "http://hl7.org/fhir/StructureDefinition/birthPlace",
+			"valueAddress": {
+				"use": "home",
+				"line": [
+					"2110 Silverspring Rd",
+					"Apt #29"
+				],
+				"city": "Tulsa",
+				"state": "OK",
+				"postalCode": "74108",
+				"country": "US"
+			}
+		},
+		{
+			"url": "http://hl7.org/fhir/StructureDefinition/us-core-race",
+			"valueCodeableConcept": {
+				"coding": [{
+					"system": "http://hl7.org/fhir/v3/vs/Race",
+					"code": "1002-5",
+					"display": "American Indian or Alaska Native"
+				}]
+			}
+		},
+		{
+			"url": "http://hl7.org/fhir/StructureDefinition/us-core-ethnicity",
+			"valueCodeableConcept": {
+				"coding": [{
+					"system": "http://hl7.org/fhir/v3/Ethnicity",
+					"code": "2135-2",
+					"display": "Hispanic or Latino"
+				}]
+			}
+		},
+		{
+			"url": "http://hl7.org/fhir/StructureDefinition/us-core-religion",
+			"valueCodeableConcept": {
+				"coding": [{
+					"system": "http://hl7.org/fhir/v3/vs/ReligiousAffiliation",
+					"code": "1001",
+					"display": "Adventist"
+				}]
+			}
+		}
+	],
+	"identifier": [{
+		"use": "official",
+		"system": "https://sitenv.org",
+		"value": "1081332"
+	}],
+	"active": true,
+	"name": [{
+		"family": [
+			"Ava"
+		],
+		"given": [
+			"Addison"
+		]
+	}],
+	"telecom": [{
+		"system": "phone",
+		"value": "800-960-9294",
+		"use": "home"
+	}],
+	"gender": "female",
+	"birthDate": "2003-10-02",
+	"address": [{
+		"line": [
+			"19 Church Street",
+			"Apt #29"
+		],
+		"city": "Tulsa",
+		"state": "OK",
+		"postalCode": "74108",
+		"country": "US"
+	}],
+	"maritalStatus": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/v3/MaritalStatus",
+			"code": "S"
+		}]
+	},
+	"communication": [{
+		"language": {
+			"coding": [{
+				"system": "http://tools.ietf.org/html/bcp47",
+				"display": "English"
+			}]
+		}
+	}]
+}

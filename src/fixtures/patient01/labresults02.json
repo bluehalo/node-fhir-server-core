@@ -1,53 +1,36 @@
-
-
-    {
-       "resourceType": "Observation",
-       "id": "7",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "6655"
-           }
-       ],
-       "status": "final",
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/observation-category",
-                   "code": "laboratory",
-                   "display": "Laboratory"
-               }
-           ]
-       },
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://loinc.org",
-                   "code": "2339-0",
-                   "display": "Glucose [Mass/volume] in Blood"
-               }
-           ],
-           "text": "Glucose [Mass/volume] in Blood"
-       },
-       "subject":
-       {
-           "reference": "Patient/1"
-       },
-       "effectiveDateTime": "2005-07-05T00:00:00+00:00",
-       "valueQuantity":
-       {
-           "value": 76,
-           "unit": "mg/dL",
-           "system": "http://unitsofmeasure.org"
-       }
-    }
-
+{
+	"resourceType": "Observation",
+	"id": "7",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "6655"
+	}],
+	"status": "final",
+	"category": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/observation-category",
+			"code": "laboratory",
+			"display": "Laboratory"
+		}]
+	},
+	"code": {
+		"coding": [{
+			"system": "http://loinc.org",
+			"code": "2339-0",
+			"display": "Glucose [Mass/volume] in Blood"
+		}],
+		"text": "Glucose [Mass/volume] in Blood"
+	},
+	"subject": {
+		"reference": "Patient/1"
+	},
+	"effectiveDateTime": "2005-07-05T00:00:00+00:00",
+	"valueQuantity": {
+		"value": 76,
+		"unit": "mg/dL",
+		"system": "http://unitsofmeasure.org"
+	}
+}

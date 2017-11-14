@@ -1,53 +1,34 @@
-
-
-    {
-       "resourceType": "AllergyIntolerance",
-       "id": "14",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "recorder":
-       {
-           "reference": "Practitioner/1"
-       },
-       "patient":
-       {
-           "reference": "Patient/1"
-       },
-       "substance":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://fda.gov/UNII/",
-                   "code": "EYO007VX98",
-                   "display": "Dust"
-               }
-           ]
-       },
-       "status": "confirmed",
-       "criticality": "CRITH",
-       "category": "environment",
-       "reaction":
-       [
-           {
-               "manifestation":
-               [
-                   {
-                       "coding":
-                       [
-                           {
-                               "system": "http://snomed.info/sct",
-                               "code": "389145006",
-                               "display": "Allergic Asthma"
-                           }
-                       ],
-                       "text": "Allergic Asthma"
-                   }
-               ],
-               "severity": "severe"
-           }
-       ]
-    }
-
+{
+	"resourceType": "AllergyIntolerance",
+	"id": "14",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"recorder": {
+		"reference": "Practitioner/1"
+	},
+	"patient": {
+		"reference": "Patient/1"
+	},
+	"substance": {
+		"coding": [{
+			"system": "http://fda.gov/UNII/",
+			"code": "EYO007VX98",
+			"display": "Dust"
+		}]
+	},
+	"status": "confirmed",
+	"criticality": "CRITH",
+	"category": "environment",
+	"reaction": [{
+		"manifestation": [{
+			"coding": [{
+				"system": "http://snomed.info/sct",
+				"code": "389145006",
+				"display": "Allergic Asthma"
+			}],
+			"text": "Allergic Asthma"
+		}],
+		"severity": "severe"
+	}]
+}

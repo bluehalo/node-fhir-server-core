@@ -1,71 +1,47 @@
-
-
-    {
-       "resourceType": "Observation",
-       "id": "5",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "5566"
-           }
-       ],
-       "status": "final",
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/observation-category",
-                   "code": "vital-signs",
-                   "display": "VItal Signs"
-               }
-           ]
-       },
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://loinc.org",
-                   "code": "9279-1",
-                   "display": "Respiratory rate"
-               }
-           ],
-           "text": "Respiratory rate"
-       },
-       "subject":
-       {
-           "reference": "Patient/1"
-       },
-       "effectiveDateTime": "2005-07-06T00:00:00+00:00",
-       "component":
-       [
-           {
-               "code":
-               {
-                   "coding":
-                   [
-                       {
-                           "system": "http://loinc.org",
-                           "code": "9279-1",
-                           "display": "Respiratory rate"
-                       }
-                   ],
-                   "text": "Respiratory rate"
-               },
-               "valueQuantity":
-               {
-                   "value": 60,
-                   "unit": "/min",
-                   "system": "http://unitsofmeasure.org",
-                   "code": "/min"
-               }
-           }
-       ]
-    }
-
+{
+	"resourceType": "Observation",
+	"id": "5",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "5566"
+	}],
+	"status": "final",
+	"category": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/observation-category",
+			"code": "vital-signs",
+			"display": "VItal Signs"
+		}]
+	},
+	"code": {
+		"coding": [{
+			"system": "http://loinc.org",
+			"code": "9279-1",
+			"display": "Respiratory rate"
+		}],
+		"text": "Respiratory rate"
+	},
+	"subject": {
+		"reference": "Patient/1"
+	},
+	"effectiveDateTime": "2005-07-06T00:00:00+00:00",
+	"component": [{
+		"code": {
+			"coding": [{
+				"system": "http://loinc.org",
+				"code": "9279-1",
+				"display": "Respiratory rate"
+			}],
+			"text": "Respiratory rate"
+		},
+		"valueQuantity": {
+			"value": 60,
+			"unit": "/min",
+			"system": "http://unitsofmeasure.org",
+			"code": "/min"
+		}
+	}]
+}
