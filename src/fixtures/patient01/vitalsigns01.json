@@ -1,0 +1,71 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "3",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7788"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "vital-signs",
+                   "display": "Vital Signs"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "8310-5",
+                   "display": "Body Temperature"
+               }
+           ],
+           "text": "Body Temperature"
+       },
+       "subject":
+       {
+           "reference": "Patient/1"
+       },
+       "effectiveDateTime": "2005-07-05T00:00:00+00:00",
+       "component":
+       [
+           {
+               "code":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://loinc.org",
+                           "code": "8310-5",
+                           "display": "Body Temperature"
+                       }
+                   ],
+                   "text": "Body Temperature"
+               },
+               "valueQuantity":
+               {
+                   "value": 38,
+                   "unit": "Cel",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "Cel"
+               }
+           }
+       ]
+    }
+

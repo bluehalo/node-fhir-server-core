@@ -1,0 +1,53 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "18",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7707"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "laboratory",
+                   "display": "Laboratory"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "1959-6",
+                   "display": "HCO3 Bld-sCnc"
+               }
+           ],
+           "text": "HCO3 Bld-sCnc"
+       },
+       "subject":
+       {
+           "reference": "Patient/8"
+       },
+       "effectiveDateTime": "2006-07-22T00:00:00+00:00",
+       "valueQuantity":
+       {
+           "value": 23.1,
+           "unit": "mmol/L",
+           "system": ""http://unitsofmeasure.org""
+       }
+    }
+

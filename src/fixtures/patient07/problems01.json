@@ -1,0 +1,52 @@
+
+
+    {
+       "resourceType": "Condition",
+       "id": "8",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7706"
+           }
+       ],
+       "patient":
+       {
+           "reference": "Patient/7"
+       },
+       "asserter":
+       {
+           "reference": "Practitioner/1"
+       },
+       "dateRecorded": "2013-08-12",
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://snomed.info/sct",
+                   "code": "65363002",
+                   "display": "Otitis media"
+               }
+           ]
+       },
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+                   "code": "problem",
+                   "display": "Problem"
+               }
+           ]
+       },
+       "clinicalStatus": "active",
+       "verificationStatus": "confirmed",
+       "onsetDateTime": "2015-01-04T00:00:00+00:00"
+    }
+

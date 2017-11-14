@@ -1,0 +1,30 @@
+
+
+    {
+       "resourceType": "Immunization",
+       "id": "2",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "status": "completed",
+       "date": "2007-09-27T00:00:00+00:00",
+       "vaccineCode":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+                   "code": "110",
+                   "display": "DTaP-hepatitis B and poliovirus vaccine"
+               }
+           ]
+       },
+       "patient":
+       {
+           "reference": "Patient/2"
+       },
+       "wasNotGiven": false,
+       "reported": false
+    }
+

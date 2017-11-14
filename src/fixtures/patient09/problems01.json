@@ -1,0 +1,52 @@
+
+
+    {
+       "resourceType": "Condition",
+       "id": "10",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7708"
+           }
+       ],
+       "patient":
+       {
+           "reference": "Patient/9"
+       },
+       "asserter":
+       {
+           "reference": "Practitioner/1"
+       },
+       "dateRecorded": "2015-10-22",
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://snomed.info/sct",
+                   "code": "25374005",
+                   "display": "Other and unspecified noninfectious gastroenteritis and colitis"
+               }
+           ]
+       },
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+                   "code": "problem",
+                   "display": "Problem"
+               }
+           ]
+       },
+       "clinicalStatus": "active",
+       "verificationStatus": "confirmed",
+       "onsetDateTime": "2002-10-14T00:00:00+00:00"
+    }
+

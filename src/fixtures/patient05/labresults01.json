@@ -1,0 +1,53 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "15",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7704"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "laboratory",
+                   "display": "Laboratory"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "20565-8",
+                   "display": "CO2 Bld-sCnc"
+               }
+           ],
+           "text": "CO2 Bld-sCnc"
+       },
+       "subject":
+       {
+           "reference": "Patient/5"
+       },
+       "effectiveDateTime": "2005-07-02T00:00:00+00:00",
+       "valueQuantity":
+       {
+           "value": 24,
+           "unit": "mmol/L",
+           "system": ""http://unitsofmeasure.org""
+       }
+    }
+

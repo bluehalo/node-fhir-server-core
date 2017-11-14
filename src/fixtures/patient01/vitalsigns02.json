@@ -1,0 +1,71 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "4",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7755"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "vital-signs",
+                   "display": "VItal Signs"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "8867-4",
+                   "display": "Heart rate"
+               }
+           ],
+           "text": "Heart rate"
+       },
+       "subject":
+       {
+           "reference": "Patient/1"
+       },
+       "effectiveDateTime": "2005-07-05T00:00:00+00:00",
+       "component":
+       [
+           {
+               "code":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://loinc.org",
+                           "code": "8867-4",
+                           "display": "Heart rate"
+                       }
+                   ],
+                   "text": "Heart rate"
+               },
+               "valueQuantity":
+               {
+                   "value": 70,
+                   "unit": "/min",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "/min"
+               }
+           }
+       ]
+    }
+

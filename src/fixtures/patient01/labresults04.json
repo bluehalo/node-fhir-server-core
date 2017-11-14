@@ -1,0 +1,53 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "9",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "6969"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "laboratory",
+                   "display": "Laboratory"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "2514-8",
+                   "display": "Ketones [Presence] in Urine by Test strip"
+               }
+           ],
+           "text": "Ketones"
+       },
+       "subject":
+       {
+           "reference": "Patient/1"
+       },
+       "effectiveDateTime": "2005-07-05T00:00:00+00:00",
+       "valueQuantity":
+       {
+           "value": 40,
+           "unit": "mg/dL",
+           "system": "http://unitsofmeasure.org"
+       }
+    }
+

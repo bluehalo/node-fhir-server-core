@@ -1,0 +1,52 @@
+
+
+    {
+       "resourceType": "Condition",
+       "id": "6",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7704"
+           }
+       ],
+       "patient":
+       {
+           "reference": "Patient/5"
+       },
+       "asserter":
+       {
+           "reference": "Practitioner/1"
+       },
+       "dateRecorded": "2015-11-05",
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://snomed.info/sct",
+                   "code": "235595009",
+                   "display": "Gastroesophageal reflux disease"
+               }
+           ]
+       },
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+                   "code": "problem",
+                   "display": "Problem"
+               }
+           ]
+       },
+       "clinicalStatus": "active",
+       "verificationStatus": "confirmed",
+       "onsetDateTime": "2007-10-14T00:00:00+00:00"
+    }
+

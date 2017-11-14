@@ -1,0 +1,30 @@
+
+
+    {
+       "resourceType": "Immunization",
+       "id": "5",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "status": "completed",
+       "date": "2014-05-16T00:00:00+00:00",
+       "vaccineCode":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+                   "code": "21",
+                   "display": "varicella virus vaccine"
+               }
+           ]
+       },
+       "patient":
+       {
+           "reference": "Patient/5"
+       },
+       "wasNotGiven": false,
+       "reported": false
+    }
+

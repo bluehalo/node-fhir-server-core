@@ -1,0 +1,30 @@
+
+
+    {
+       "resourceType": "Immunization",
+       "id": "10",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "status": "completed",
+       "date": "2011-11-09T00:00:00+00:00",
+       "vaccineCode":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+                   "code": "43",
+                   "display": "hepatitis B vaccine, adult dosage"
+               }
+           ]
+       },
+       "patient":
+       {
+           "reference": "Patient/10"
+       },
+       "wasNotGiven": false,
+       "reported": false
+    }
+

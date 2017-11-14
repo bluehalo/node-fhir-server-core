@@ -1,0 +1,30 @@
+
+
+    {
+       "resourceType": "Immunization",
+       "id": "6",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "status": "completed",
+       "date": "2015-04-06T00:00:00+00:00",
+       "vaccineCode":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+                   "code": "104",
+                   "display": "hepatitis A and hepatitis B vaccine"
+               }
+           ]
+       },
+       "patient":
+       {
+           "reference": "Patient/6"
+       },
+       "wasNotGiven": false,
+       "reported": false
+    }
+

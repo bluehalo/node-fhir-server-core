@@ -1,0 +1,152 @@
+
+
+    {
+       "resourceType": "Patient",
+       "id": "10",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "text":
+       {
+           "status": "generated",
+           "div": "<div xmlns="http://www.w3.org/1999/xhtml"><div class="hapiHeaderText"> Hopkins <b>STEPHEN </b></div><table class="hapiPropertyTable"><tbody><tr><td>Identifier</td><td>1272431</td></tr><tr><td>Address</td><td><span>27 Park Road </span><br /><span>Apt #17 </span><br /><span>Mounds </span><span>OK </span><span>US </span></td></tr><tr><td>Date of birth</td><td><span>01 May 1945</span></td></tr></tbody></table></div>"
+       },
+       "extension":
+       [
+           {
+               "url": "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
+               "valueString": "Jane"
+           },
+           {
+               "url": "http://hl7.org/fhir/StructureDefinition/birthPlace",
+               "valueAddress":
+               {
+                   "use": "home",
+                   "line":
+                   [
+                       "24 street",
+                       "Apt #2"
+                   ],
+                   "city": "Tulsa",
+                   "state": "OK",
+                   "postalCode": "74108",
+                   "country": "US"
+               }
+           },
+           {
+               "url": "http://hl7.org/fhir/StructureDefinition/us-core-race",
+               "valueCodeableConcept":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://hl7.org/fhir/v3/vs/Race",
+                           "code": "1002-5",
+                           "display": "American Indian or Alaska Native"
+                       }
+                   ]
+               }
+           },
+           {
+               "url": "http://hl7.org/fhir/StructureDefinition/us-core-ethnicity",
+               "valueCodeableConcept":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://hl7.org/fhir/v3/Ethnicity",
+                           "code": "2135-2",
+                           "display": "Hispanic or Latino"
+                       }
+                   ]
+               }
+           },
+           {
+               "url": "http://hl7.org/fhir/StructureDefinition/us-core-religion",
+               "valueCodeableConcept":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://hl7.org/fhir/v3/vs/ReligiousAffiliation",
+                           "code": "1001",
+                           "display": "Adventist"
+                       }
+                   ]
+               }
+           }
+       ],
+       "identifier":
+       [
+           {
+               "use": "official",
+               "system": "https://sitenv.org",
+               "value": "1272431"
+           }
+       ],
+       "active": true,
+       "name":
+       [
+           {
+               "family":
+               [
+                   "Stephen"
+               ],
+               "given":
+               [
+                   "Hopkins"
+               ]
+           }
+       ],
+       "telecom":
+       [
+           {
+               "system": "phone",
+               "value": "800-504-7300",
+               "use": "home"
+           }
+       ],
+       "gender": "male",
+       "birthDate": "1945-05-01",
+       "address":
+       [
+           {
+               "line":
+               [
+                   "27 Park Road",
+                   "Apt #17"
+               ],
+               "city": "Mounds",
+               "state": "OK",
+               "postalCode": "74047",
+               "country": "US"
+           }
+       ],
+       "maritalStatus":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/v3/MaritalStatus",
+                   "code": "M"
+               }
+           ]
+       },
+       "communication":
+       [
+           {
+               "language":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://tools.ietf.org/html/bcp47",
+                           "display": "English"
+                       }
+                   ]
+               }
+           }
+       ]
+    }
+

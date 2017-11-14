@@ -1,0 +1,30 @@
+
+
+    {
+       "resourceType": "Immunization",
+       "id": "8",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "status": "completed",
+       "date": "2015-03-03T00:00:00+00:00",
+       "vaccineCode":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+                   "code": "137",
+                   "display": "HPV, unspecified formulation"
+               }
+           ]
+       },
+       "patient":
+       {
+           "reference": "Patient/8"
+       },
+       "wasNotGiven": false,
+       "reported": false
+    }
+

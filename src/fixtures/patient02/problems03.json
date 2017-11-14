@@ -1,0 +1,52 @@
+
+
+    {
+       "resourceType": "Condition",
+       "id": "16",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "SITE",
+               "value": "7714"
+           }
+       ],
+       "patient":
+       {
+           "reference": "Patient/2"
+       },
+       "asserter":
+       {
+           "reference": "Practitioner/1"
+       },
+       "dateRecorded": "2011-11-22",
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://snomed.info/sct",
+                   "code": "267024001",
+                   "display": "Abnormal weight loss"
+               }
+           ]
+       },
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+                   "code": "problem",
+                   "display": "Problem"
+               }
+           ]
+       },
+       "clinicalStatus": "active",
+       "verificationStatus": "confirmed",
+       "onsetDateTime": "2005-12-05T00:00:00+00:00"
+    }
+

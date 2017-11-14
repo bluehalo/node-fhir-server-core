@@ -1,0 +1,53 @@
+
+
+    {
+       "resourceType": "AllergyIntolerance",
+       "id": "10",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "recorder":
+       {
+           "reference": "Practitioner/1"
+       },
+       "patient":
+       {
+           "reference": "Patient/8"
+       },
+       "substance":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://fda.gov/UNII/",
+                   "code": "2LQ0UUW8IN",
+                   "display": "Latex"
+               }
+           ]
+       },
+       "status": "confirmed",
+       "criticality": "CRITH",
+       "category": "environment",
+       "reaction":
+       [
+           {
+               "manifestation":
+               [
+                   {
+                       "coding":
+                       [
+                           {
+                               "system": "http://snomed.info/sct",
+                               "code": "238575004",
+                               "display": "Allergic contact dermatitis"
+                           }
+                       ],
+                       "text": "Allergic contact dermatitis"
+                   }
+               ],
+               "severity": "severe"
+           }
+       ]
+    }
+

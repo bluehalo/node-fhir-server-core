@@ -1,0 +1,92 @@
+
+
+    {
+       "resourceType": "Observation",
+       "id": "6",
+       "meta":
+       {
+           "versionId": "2.0"
+       },
+       "identifier":
+       [
+           {
+               "system": "https://sitenv.org",
+               "value": "7766"
+           }
+       ],
+       "status": "final",
+       "category":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://hl7.org/fhir/observation-category",
+                   "code": "vital-signs",
+                   "display": "VItal Signs"
+               }
+           ]
+       },
+       "code":
+       {
+           "coding":
+           [
+               {
+                   "system": "http://loinc.org",
+                   "code": "55284-4",
+                   "display": "Blood pressure systolic and diastolic"
+               }
+           ],
+           "text": "Blood pressure systolic and diastolic"
+       },
+       "subject":
+       {
+           "reference": "Patient/1"
+       },
+       "effectiveDateTime": "2005-07-07T00:00:00+00:00",
+       "component":
+       [
+           {
+               "code":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://loinc.org",
+                           "code": "8462-4",
+                           "display": "Diastolic blood pressure"
+                       }
+                   ],
+                   "text": "Diastolic blood pressure"
+               },
+               "valueQuantity":
+               {
+                   "value": 44,
+                   "unit": "mmHg",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "mmHg"
+               }
+           },
+           {
+               "code":
+               {
+                   "coding":
+                   [
+                       {
+                           "system": "http://loinc.org",
+                           "code": "8480-6",
+                           "display": "Systolic blood pressure"
+                       }
+                   ],
+                   "text": "Systolic blood pressure"
+               },
+               "valueQuantity":
+               {
+                   "value": 109,
+                   "unit": "mmHg",
+                   "system": "http://unitsofmeasure.org",
+                   "code": "mmHg"
+               }
+           }
+       ]
+    }
+
