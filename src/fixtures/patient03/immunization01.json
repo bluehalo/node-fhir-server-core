@@ -1,30 +1,21 @@
-
-
-    {
-       "resourceType": "Immunization",
-       "id": "3",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "status": "completed",
-       "date": "2005-06-15T00:00:00+00:00",
-       "vaccineCode":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
-                   "code": "89",
-                   "display": "poliovirus vaccine, unspecified formulation"
-               }
-           ]
-       },
-       "patient":
-       {
-           "reference": "Patient/3"
-       },
-       "wasNotGiven": false,
-       "reported": false
-    }
-
+{
+	"resourceType": "Immunization",
+	"id": "3",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"status": "completed",
+	"date": "2005-06-15T00:00:00+00:00",
+	"vaccineCode": {
+		"coding": [{
+			"system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+			"code": "89",
+			"display": "poliovirus vaccine, unspecified formulation"
+		}]
+	},
+	"patient": {
+		"reference": "Patient/3"
+	},
+	"wasNotGiven": false,
+	"reported": false
+}

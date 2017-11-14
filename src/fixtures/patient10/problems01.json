@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "11",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7709"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/10"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2014-11-22",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "62315008",
-                   "display": "Diarrhea"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "problem",
-                   "display": "Problem"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2005-01-11T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "11",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7709"
+	}],
+	"patient": {
+		"reference": "Patient/10"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2014-11-22",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "62315008",
+			"display": "Diarrhea"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "problem",
+			"display": "Problem"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2005-01-11T00:00:00+00:00"
+}

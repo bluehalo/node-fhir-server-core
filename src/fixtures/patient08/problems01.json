@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "9",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7707"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/8"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2012-10-26",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "68235000",
-                   "display": "Other diseases of nasal cavity and sinuses"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "problem",
-                   "display": "Problem"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2008-01-19T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "9",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7707"
+	}],
+	"patient": {
+		"reference": "Patient/8"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2012-10-26",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "68235000",
+			"display": "Other diseases of nasal cavity and sinuses"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "problem",
+			"display": "Problem"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2008-01-19T00:00:00+00:00"
+}

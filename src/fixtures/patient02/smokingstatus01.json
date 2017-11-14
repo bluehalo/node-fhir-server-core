@@ -1,59 +1,39 @@
-
-
-    {
-       "resourceType": "Observation",
-       "id": "12",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7701"
-           }
-       ],
-       "status": "final",
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/observation-category",
-                   "code": "social-history",
-                   "display": "Social History"
-               }
-           ]
-       },
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://loinc.org",
-                   "code": "72166-2",
-                   "display": "Tobacco smoking status"
-               }
-           ],
-           "text": "Tobacco smoking status"
-       },
-       "subject":
-       {
-           "reference": "Patient/2"
-       },
-       "issued": "2005-07-05T00:00:00.000+00:00",
-       "valueCodeableConcept":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "8517006",
-                   "display": "Former smoker"
-               }
-           ],
-           "text": "Former smoker"
-       }
-    }
-
+{
+	"resourceType": "Observation",
+	"id": "12",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7701"
+	}],
+	"status": "final",
+	"category": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/observation-category",
+			"code": "social-history",
+			"display": "Social History"
+		}]
+	},
+	"code": {
+		"coding": [{
+			"system": "http://loinc.org",
+			"code": "72166-2",
+			"display": "Tobacco smoking status"
+		}],
+		"text": "Tobacco smoking status"
+	},
+	"subject": {
+		"reference": "Patient/2"
+	},
+	"issued": "2005-07-05T00:00:00.000+00:00",
+	"valueCodeableConcept": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "8517006",
+			"display": "Former smoker"
+		}],
+		"text": "Former smoker"
+	}
+}

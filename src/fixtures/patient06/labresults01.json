@@ -1,53 +1,37 @@
-
-
-    {
-       "resourceType": "Observation",
-       "id": "16",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7705"
-           }
-       ],
-       "status": "final",
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/observation-category",
-                   "code": "laboratory",
-                   "display": "Laboratory"
-               }
-           ]
-       },
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://loinc.org",
-                   "code": "2713-6",
-                   "display": "SaO2% from pO2 Bld"
-               }
-           ],
-           "text": "SaO2% from pO2 Bld"
-       },
-       "subject":
-       {
-           "reference": "Patient/6"
-       },
-       "effectiveDateTime": "2006-07-02T00:00:00+00:00",
-       "valueQuantity":
-       {
-           "value": 92,
-           "unit": "%",
-           "system": ""http://unitsofmeasure.org""
-       }
-    }
-
+{
+	"resourceType": "Observation",
+	"id": "16",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7705"
+	}],
+	"status": "final",
+	"category": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/observation-category",
+			"code": "laboratory",
+			"display": "Laboratory"
+		}]
+	},
+	"code": {
+		"coding": [{
+			"system": "http://loinc.org",
+			"code": "2713-6",
+			"display": "SaO2% from pO2 Bld"
+		}],
+		"text": "SaO2% from pO2 Bld"
+	},
+	"subject": {
+		"reference": "Patient/6"
+	},
+	"effectiveDateTime": "2006-07-02T00:00:00+00:00",
+	"valueQuantity": {
+		"value": 92,
+		"unit": "%",
+		"system": ""
+		http: //unitsofmeasure.org""
+	}
+}

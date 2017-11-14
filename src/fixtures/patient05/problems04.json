@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "29",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "SITE",
-               "value": "7727"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/5"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2011-06-05",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "267024001",
-                   "display": "Abnormal weight loss"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "health-concern",
-                   "display": "Health Concern"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2005-06-02T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "29",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "SITE",
+		"value": "7727"
+	}],
+	"patient": {
+		"reference": "Patient/5"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2011-06-05",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "267024001",
+			"display": "Abnormal weight loss"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "health-concern",
+			"display": "Health Concern"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2005-06-02T00:00:00+00:00"
+}

@@ -1,53 +1,34 @@
-
-
-    {
-       "resourceType": "AllergyIntolerance",
-       "id": "16",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "recorder":
-       {
-           "reference": "Practitioner/1"
-       },
-       "patient":
-       {
-           "reference": "Patient/2"
-       },
-       "substance":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                   "code": "4053",
-                   "display": "Erythromycin"
-               }
-           ]
-       },
-       "status": "confirmed",
-       "criticality": "CRITL",
-       "category": "medication",
-       "reaction":
-       [
-           {
-               "manifestation":
-               [
-                   {
-                       "coding":
-                       [
-                           {
-                               "system": "http://snomed.info/sct",
-                               "code": "64144002",
-                               "display": "Pruritic Rash"
-                           }
-                       ],
-                       "text": "Pruritic Rash"
-                   }
-               ],
-               "severity": "severe"
-           }
-       ]
-    }
-
+{
+	"resourceType": "AllergyIntolerance",
+	"id": "16",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"recorder": {
+		"reference": "Practitioner/1"
+	},
+	"patient": {
+		"reference": "Patient/2"
+	},
+	"substance": {
+		"coding": [{
+			"system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+			"code": "4053",
+			"display": "Erythromycin"
+		}]
+	},
+	"status": "confirmed",
+	"criticality": "CRITL",
+	"category": "medication",
+	"reaction": [{
+		"manifestation": [{
+			"coding": [{
+				"system": "http://snomed.info/sct",
+				"code": "64144002",
+				"display": "Pruritic Rash"
+			}],
+			"text": "Pruritic Rash"
+		}],
+		"severity": "severe"
+	}]
+}

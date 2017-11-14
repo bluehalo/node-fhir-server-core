@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "24",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "SITE",
-               "value": "7722"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/4"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2011-04-22",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "442311008",
-                   "display": "Single liveborn, born in hospital, delivered without mention of cesarean section"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "problem",
-                   "display": "Problem"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2005-05-05T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "24",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "SITE",
+		"value": "7722"
+	}],
+	"patient": {
+		"reference": "Patient/4"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2011-04-22",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "442311008",
+			"display": "Single liveborn, born in hospital, delivered without mention of cesarean section"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "problem",
+			"display": "Problem"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2005-05-05T00:00:00+00:00"
+}

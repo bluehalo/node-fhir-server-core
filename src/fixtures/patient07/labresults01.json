@@ -1,53 +1,37 @@
-
-
-    {
-       "resourceType": "Observation",
-       "id": "17",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7706"
-           }
-       ],
-       "status": "final",
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://hl7.org/fhir/observation-category",
-                   "code": "laboratory",
-                   "display": "Laboratory"
-               }
-           ]
-       },
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://loinc.org",
-                   "code": "2339-0",
-                   "display": "Glucose Bld-mCnc"
-               }
-           ],
-           "text": "Glucose Bld-mCnc"
-       },
-       "subject":
-       {
-           "reference": "Patient/7"
-       },
-       "effectiveDateTime": "2006-07-14T00:00:00+00:00",
-       "valueQuantity":
-       {
-           "value": 71,
-           "unit": "mg/dL",
-           "system": ""http://unitsofmeasure.org""
-       }
-    }
-
+{
+	"resourceType": "Observation",
+	"id": "17",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7706"
+	}],
+	"status": "final",
+	"category": {
+		"coding": [{
+			"system": "http://hl7.org/fhir/observation-category",
+			"code": "laboratory",
+			"display": "Laboratory"
+		}]
+	},
+	"code": {
+		"coding": [{
+			"system": "http://loinc.org",
+			"code": "2339-0",
+			"display": "Glucose Bld-mCnc"
+		}],
+		"text": "Glucose Bld-mCnc"
+	},
+	"subject": {
+		"reference": "Patient/7"
+	},
+	"effectiveDateTime": "2006-07-14T00:00:00+00:00",
+	"valueQuantity": {
+		"value": 71,
+		"unit": "mg/dL",
+		"system": ""
+		http: //unitsofmeasure.org""
+	}
+}

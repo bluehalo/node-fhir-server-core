@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "21",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "SITE",
-               "value": "7719"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/3"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2011-11-05",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "310249008",
-                   "display": "Follow-up encounter"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "health-concern",
-                   "display": "Health Concern"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2005-12-02T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "21",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "SITE",
+		"value": "7719"
+	}],
+	"patient": {
+		"reference": "Patient/3"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2011-11-05",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "310249008",
+			"display": "Follow-up encounter"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "health-concern",
+			"display": "Health Concern"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2005-12-02T00:00:00+00:00"
+}

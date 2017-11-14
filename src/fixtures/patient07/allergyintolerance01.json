@@ -1,53 +1,34 @@
-
-
-    {
-       "resourceType": "AllergyIntolerance",
-       "id": "9",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "recorder":
-       {
-           "reference": "Practitioner/1"
-       },
-       "patient":
-       {
-           "reference": "Patient/7"
-       },
-       "substance":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://fda.gov/UNII/",
-                   "code": "1891LE191T",
-                   "display": "Shrimp"
-               }
-           ]
-       },
-       "status": "confirmed",
-       "criticality": "CRITH",
-       "category": "environment",
-       "reaction":
-       [
-           {
-               "manifestation":
-               [
-                   {
-                       "coding":
-                       [
-                           {
-                               "system": "http://snomed.info/sct",
-                               "code": "39579001",
-                               "display": "Anaphylaxis"
-                           }
-                       ],
-                       "text": "Anaphylaxis"
-                   }
-               ],
-               "severity": "severe"
-           }
-       ]
-    }
-
+{
+	"resourceType": "AllergyIntolerance",
+	"id": "9",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"recorder": {
+		"reference": "Practitioner/1"
+	},
+	"patient": {
+		"reference": "Patient/7"
+	},
+	"substance": {
+		"coding": [{
+			"system": "http://fda.gov/UNII/",
+			"code": "1891LE191T",
+			"display": "Shrimp"
+		}]
+	},
+	"status": "confirmed",
+	"criticality": "CRITH",
+	"category": "environment",
+	"reaction": [{
+		"manifestation": [{
+			"coding": [{
+				"system": "http://snomed.info/sct",
+				"code": "39579001",
+				"display": "Anaphylaxis"
+			}],
+			"text": "Anaphylaxis"
+		}],
+		"severity": "severe"
+	}]
+}

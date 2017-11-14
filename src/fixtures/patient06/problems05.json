@@ -1,52 +1,35 @@
-
-
-    {
-       "resourceType": "Condition",
-       "id": "34",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "SITE",
-               "value": "7732"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/6"
-       },
-       "asserter":
-       {
-           "reference": "Practitioner/1"
-       },
-       "dateRecorded": "2011-11-28",
-       "code":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://snomed.info/sct",
-                   "code": "25374005",
-                   "display": "Other and unspecified noninfectious gastroenteritis and colitis"
-               }
-           ]
-       },
-       "category":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
-                   "code": "problem",
-                   "display": "Problem"
-               }
-           ]
-       },
-       "clinicalStatus": "active",
-       "verificationStatus": "confirmed",
-       "onsetDateTime": "2005-11-28T00:00:00+00:00"
-    }
-
+{
+	"resourceType": "Condition",
+	"id": "34",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "SITE",
+		"value": "7732"
+	}],
+	"patient": {
+		"reference": "Patient/6"
+	},
+	"asserter": {
+		"reference": "Practitioner/1"
+	},
+	"dateRecorded": "2011-11-28",
+	"code": {
+		"coding": [{
+			"system": "http://snomed.info/sct",
+			"code": "25374005",
+			"display": "Other and unspecified noninfectious gastroenteritis and colitis"
+		}]
+	},
+	"category": {
+		"coding": [{
+			"system": "http://argonautwiki.hl7.org/index.php?title=Argonaut_Extension_Codes",
+			"code": "problem",
+			"display": "Problem"
+		}]
+	},
+	"clinicalStatus": "active",
+	"verificationStatus": "confirmed",
+	"onsetDateTime": "2005-11-28T00:00:00+00:00"
+}

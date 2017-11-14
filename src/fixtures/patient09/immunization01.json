@@ -1,30 +1,21 @@
-
-
-    {
-       "resourceType": "Immunization",
-       "id": "9",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "status": "completed",
-       "date": "2014-04-04T00:00:00+00:00",
-       "vaccineCode":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
-                   "code": "136",
-                   "display": "meningococcal oligosaccharide (groups A, C, Y and W-135) diphtheria toxoid conjugate vaccine (MCV4O)"
-               }
-           ]
-       },
-       "patient":
-       {
-           "reference": "Patient/9"
-       },
-       "wasNotGiven": false,
-       "reported": false
-    }
-
+{
+	"resourceType": "Immunization",
+	"id": "9",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"status": "completed",
+	"date": "2014-04-04T00:00:00+00:00",
+	"vaccineCode": {
+		"coding": [{
+			"system": "http://www2a.cdc.gov/vaccines/IIS/IISStandards/vaccines.asp?rpt=cvx",
+			"code": "136",
+			"display": "meningococcal oligosaccharide (groups A, C, Y and W-135) diphtheria toxoid conjugate vaccine (MCV4O)"
+		}]
+	},
+	"patient": {
+		"reference": "Patient/9"
+	},
+	"wasNotGiven": false,
+	"reported": false
+}

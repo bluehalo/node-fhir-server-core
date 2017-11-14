@@ -1,63 +1,41 @@
-
-
-    {
-       "resourceType": "MedicationStatement",
-       "id": "2",
-       "meta":
-       {
-           "versionId": "2.0"
-       },
-       "identifier":
-       [
-           {
-               "system": "https://sitenv.org",
-               "value": "7701"
-           }
-       ],
-       "patient":
-       {
-           "reference": "Patient/2"
-       },
-       "status": "active",
-       "wasNotTaken": false,
-       "effectivePeriod":
-       {
-           "start": "2015-02-01T00:00:00+00:00"
-       },
-       "medicationCodeableConcept":
-       {
-           "coding":
-           [
-               {
-                   "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                   "code": "582620",
-                   "display": "Nizatidine 15 MG/ML Oral Solution [Axid]"
-               }
-           ]
-       },
-       "dosage":
-       [
-           {
-               "timing":
-               {
-                   "repeat":
-                   {
-                       "frequency": 2,
-                       "period": 1,
-                       "periodUnits": "d"
-                   }
-               },
-               "route":
-               {
-                   "coding":
-                   [
-                       {
-                           "code": "C38192",
-                           "display": "AURICULAR"
-                       }
-                   ]
-               }
-           }
-       ]
-    }
-
+{
+	"resourceType": "MedicationStatement",
+	"id": "2",
+	"meta": {
+		"versionId": "2.0"
+	},
+	"identifier": [{
+		"system": "https://sitenv.org",
+		"value": "7701"
+	}],
+	"patient": {
+		"reference": "Patient/2"
+	},
+	"status": "active",
+	"wasNotTaken": false,
+	"effectivePeriod": {
+		"start": "2015-02-01T00:00:00+00:00"
+	},
+	"medicationCodeableConcept": {
+		"coding": [{
+			"system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+			"code": "582620",
+			"display": "Nizatidine 15 MG/ML Oral Solution [Axid]"
+		}]
+	},
+	"dosage": [{
+		"timing": {
+			"repeat": {
+				"frequency": 2,
+				"period": 1,
+				"periodUnits": "d"
+			}
+		},
+		"route": {
+			"coding": [{
+				"code": "C38192",
+				"display": "AURICULAR"
+			}]
+		}
+	}]
+}
