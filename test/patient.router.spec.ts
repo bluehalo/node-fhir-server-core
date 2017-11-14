@@ -10,8 +10,7 @@ const expect = chai.expect
 const TEST_ENDPOINT_ALL = '/api/v1/patients'
 const TEST_ENDPOINT_ONE = '/api/v1/patients/1'
 
-const EXPECTED_PATIENT_ALL = 'Wolverine'
-const EXPECTED_PATIENT_ONE = 'Luke Cage'
+const EXPECTED_PATIENT_ID = '1'
 
 describe(`GET ${TEST_ENDPOINT_ALL}`, () => {
 
@@ -20,23 +19,28 @@ describe(`GET ${TEST_ENDPOINT_ALL}`, () => {
 		expect(res.status).to.equal(200)
 		expect(res).to.be.json
 		expect(res.body).to.be.an('array')
-		expect(res.body).to.have.length(5)
+		expect(res.body).to.have.length(1)
 	})
 
-	it(`should include expected patient=${EXPECTED_PATIENT_ALL}`, async () => {
+	it(`should include expected patient=${EXPECTED_PATIENT_ID}`, async () => {
 		const res = await chai.request(server).get(TEST_ENDPOINT_ALL)
-		let Patient = res.body.find((patient: any) => patient.name === EXPECTED_PATIENT_ALL)
+		let Patient = res.body.find((patient: any) => patient.id === EXPECTED_PATIENT_ID)
 		expect(Patient).to.exist
 		expect(Patient).to.have.all.keys([
+			'resourceType',
 			'id',
+			'meta',
+			'text',
+			'extension',
+			'identifier',
+			'active',
 			'name',
-			'aliases',
-			'occupation',
+			'telecom',
 			'gender',
-			'height',
-			'hair',
-			'eyes',
-			'powers'
+			'birthDate',
+			'address',
+			'maritalStatus',
+			'communication'
 		])
 	})
 })
@@ -50,8 +54,8 @@ describe(`GET ${TEST_ENDPOINT_ONE}`, () => {
 		expect(res.body).to.be.an('object')
 	})
 
-	it(`should return expected patient=${EXPECTED_PATIENT_ONE}`, async () => {
+	it(`should return expected patient=${EXPECTED_PATIENT_ID}`, async () => {
 		const res = await chai.request(server).get(TEST_ENDPOINT_ONE)
-		expect(res.body.patient.name).to.equal(EXPECTED_PATIENT_ONE)
+		expect(res.body.patient.id).to.equal(EXPECTED_PATIENT_ID)
 	})
 })

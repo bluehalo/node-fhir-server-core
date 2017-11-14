@@ -1,5 +1,5 @@
 import {Router, Request, Response, NextFunction} from 'express'
-const patients = require('../fixtures/patients')
+const patients = [require('../fixtures/patient01/patient')]
 
 class PatientRouter {
 	router: Router
@@ -14,7 +14,7 @@ class PatientRouter {
 	}
 
 	public getOne(req: Request, res: Response, next: NextFunction) {
-		let query = parseInt(req.params.id)
+		let query = req.params.id
 		let patient = patients.find((patient: any) => patient.id === query)
 		if (patient) {
 			res.status(200)
