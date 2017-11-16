@@ -7,8 +7,8 @@ import server from '../src/server'
 chai.use(chaiHttp)
 const expect = chai.expect
 
-const TEST_ENDPOINT_ALL = '/api/v1/patients'
-const TEST_ENDPOINT_ONE = '/api/v1/patients/1'
+const TEST_ENDPOINT_ALL = '/Patient'
+const TEST_ENDPOINT_ONE = '/Patient/1'
 
 const EXPECTED_PATIENT_ID = '1'
 

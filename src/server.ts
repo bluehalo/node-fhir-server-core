@@ -4,7 +4,7 @@ import * as bodyParser from 'body-parser'
 
 // import ExampleRouter from './routes/_example.router'
 import ConformanceRouter from './routes/conformance.router'
-import PatientRouter from './routes/patient.router'
+import PatientRouter from './routes/Patient.router'
 
 class Server {
 
@@ -25,7 +25,7 @@ class Server {
 	private routes(): void {
 		// this.express.use('/', ExampleRouter)
 		this.express.use('/metadata', ConformanceRouter)
-		this.express.use('/api/v1/patients', PatientRouter)
+		this.express.use('/Patient', PatientRouter)
 	}
 
 }
