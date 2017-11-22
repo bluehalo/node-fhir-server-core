@@ -1,6 +1,6 @@
 swagger: 2.0
 info:
-  title: FIHR Server
+  title: FHIR Server
   version: 0.0.1
   description: An FHIR server that is conformant to the Argonaut Data Query Implementation specification.
   termsOfService: https://www.google.com
@@ -21,6 +21,24 @@ securityDefinitions:
     scopes:
       read:patients: Read some patient data
 paths:
+  /metadata:
+    get:
+      tags:
+        - metadata
+      summary: Get metadata for SMART on FHIR authorization access
+      description: Returns the conformance statement and urls necessary for authentication
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Metadata'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFound'
   /Patient/{id}:
     get:
       tags:
@@ -55,6 +73,8 @@ paths:
           schema:
             $ref: '#/definitions/NotFound'
 definitions:
+  Metadata:
+    $ref: definitions/metadata.yml#/Metadata
   Patient:
     $ref: definitions/patient.yml#/Patient
   Unauthorized:

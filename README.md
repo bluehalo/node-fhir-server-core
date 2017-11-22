@@ -18,4 +18,4 @@ API docs are generated during the setup phase. When you run `npm install`, there
 
 ### Regenerating the docs
 
-If you have only changed the `openapi.yml` or any of the other `yml` files in the `docs/src/definitions` folder, you can just reload the page, it will load the updated yml files.  You can also update the css or the js file used to generate the documentation. If you do, you will need to run one of two npm scripts. You can run `npm run build-docs` to generate them once or you can run `npm run watch-docs` to build them and watch for changes. `npm run watch-docs` is better for active development.
+You will need to run one of two npm scripts. You can run `npm run build-docs` to generate them once or you can run `npm run watch-docs` to build them and watch for changes. `npm run watch-docs` is better for active development.

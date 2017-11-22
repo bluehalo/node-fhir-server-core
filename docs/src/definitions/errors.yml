@@ -1,6 +1,6 @@
 NotFound:
   xml:
-    name: Error
+    name: error
   type: object
   properties:
     data:

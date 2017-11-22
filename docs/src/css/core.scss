@@ -15,4 +15,12 @@ body {
   box-sizing: inherit;
 }
 
+/**
+* Swagger Default css
+*/
 @import '~swagger-ui-dist/swagger-ui';
+
+/**
+* Swagger Overrides
+*/
+@import 'overrides';

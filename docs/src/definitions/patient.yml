@@ -1,4 +1,6 @@
 Patient:
+  xml:
+    name: patient
   type: object
   properties:
     error:
