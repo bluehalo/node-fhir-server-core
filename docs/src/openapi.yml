@@ -1,0 +1,63 @@
+swagger: 2.0
+info:
+  title: FIHR Server
+  version: 0.0.1
+  description: An FHIR server that is conformant to the Argonaut Data Query Implementation specification.
+  termsOfService: https://www.google.com
+  contact:
+    email: foo@bar.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: asy.fhir.io
+basePath: /0.0.1
+schemes:
+  - https
+securityDefinitions:
+  standard_auth:
+    type: oauth2
+    authorizationUrl: http://www.some.auth.url/com/authorize
+    flow: implicit
+    scopes:
+      read:patients: Read some patient data
+paths:
+  /Patient/{id}:
+    get:
+      tags:
+        - patient
+      summary: Get patient by their patient id
+      description: Returns a single patient
+      security:
+        standard_auth:
+          - read:patients
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          description: Id of the patient to look up
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Patient'
+        401:
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFound'
+definitions:
+  Patient:
+    $ref: definitions/patient.yml#/Patient
+  Unauthorized:
+    $ref: definitions/errors.yml#/Unauthorized
+  NotFound:
+    $ref: definitions/errors.yml#/NotFound

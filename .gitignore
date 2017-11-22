@@ -1,3 +1,9 @@
+# Dependencies
 node_modules
+
+# Generated files
 npm-debug.log
 .DS_Store
+docs/dist
+
+
