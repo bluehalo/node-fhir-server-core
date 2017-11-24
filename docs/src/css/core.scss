@@ -1,0 +1,26 @@
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fefefe;
+  margin: 0;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+/**
+* Swagger Default css
+*/
+@import '~swagger-ui-dist/swagger-ui';
+
+/**
+* Swagger Overrides
+*/
+@import 'overrides';

@@ -1,34 +1,21 @@
 Asymmetrik FHIR API Server
-=====
+==========================
+> A Rest implementation for the [ONC FHIR Challenge](https://www.cccinnovationcenter.com/challenges/secure-api-server-showdown-challenge/).
 
-__A REST Implementation for the [ONC FHIR Challenge](https://www.cccinnovationcenter.com/challenges/secure-api-server-showdown-challenge/)__
+## Introduction
 
-Implemented using node.js, typescript, and express.js
+Our implementation uses ...
 
-### To install and test:
-```
-> yarn install
-> npm test
-```
+## Getting Started
 
-### To develop with hot typescript reloading:
-*(starts server at http://localhost:3000 and watches /src for changes)*
-```
-> npm start
-```
+### Installation
 
-### To add new API endpoint routes:
-1. Create a test for the route under /test/<your-new-route>.router.spec.ts
+### Testing
 
-2. Create or modify a router class under /src/routes/<your-new-route>.router.ts
+## API Documentation
 
-3. Add the new route to /src/server.ts:
-```
-...
-import YourNewRouter from './routes/<your-new-route>.router'
-...
-private routes(): void {
-  ...
-  this.express.use('/an/existing/endpoint', ExistingRouter)
-  this.express.use('/your/new/endpoint', YourNewRouter)
-```
+API docs are generated during the setup phase. When you run `npm install`, there is a `postinstall` script that generates a web page to display the API documentation. It is written with Swagger based on the [OpenAPI Specification version 3.0.0](https://swagger.io/specification/). The web page to view the docs can be found in the `docs/dist` folder and must be deployed to a web server.  If you do not have access to a web server and have installed the project's minimum requirements. You can run `npm run serve-docs` in your terminal to start up a simple node.js server to host your docs. After running that, navigate to [localhost:3001](http://localhost:3001).
+
+### Regenerating the docs
+
+You will need to run one of two npm scripts. You can run `npm run build-docs` to generate them once or you can run `npm run watch-docs` to build them and watch for changes. `npm run watch-docs` is better for active development.

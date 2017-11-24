@@ -1,0 +1,20 @@
+NotFound:
+  xml:
+    name: error
+  type: object
+  properties:
+    data:
+      type: boolean
+      default: false
+    error:
+      type: string
+Unauthorized:
+  xml:
+    name: Error
+  type: object
+  properties:
+    data:
+      type: boolean
+      default: false
+    error:
+      type: string
