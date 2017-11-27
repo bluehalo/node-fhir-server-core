@@ -19,8 +19,11 @@
     "test:e2e": "jest --runInBand e2e/*.spec.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "express": "^4.16.2",
-    "got": "^7.1.0"
+    "got": "^7.1.0",
+    "jsonwebtoken": "^8.1.0",
+    "jwk-to-pem": "^1.2.6"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.2.1",
