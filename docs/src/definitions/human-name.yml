@@ -1,0 +1,34 @@
+HumanName:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique id for the element within a resource (for internal references).
+    # extension:
+    #   type: object
+    #   properties:
+    use:
+      type: string
+      description: usual | official | temp | nickname | anonymous | old | maiden
+    text:
+      type: string
+      description: Text representation of the full name
+    family:
+      type: string
+      description: Family name (often called 'Surname')
+    given:
+      type: string
+      description: Given names (not always 'first'). Includes middle names
+    suffix:
+      type: array
+      description: Parts that come before the name
+      items:
+        type: string
+    prefix:
+      type: array
+      description: Parts that come after the name
+      items:
+        type: string
+    period:
+      description: Time period when name was/is in use
+      $ref: period.yml#/Period

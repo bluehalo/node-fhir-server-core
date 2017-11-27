@@ -1,0 +1,18 @@
+Coding:
+  type: object
+  properties:
+    system:
+      type: string
+      description: Identity of the terminology of the system
+    version:
+      type: string
+      description: Version of the system - if relevant
+    code:
+      type: string
+      description: Symbol in syntax defined by the system
+    display:
+      type: string
+      description: Representation defined by the system
+    userSelected:
+      type: string
+      description: If this coding was chosen directly by the user

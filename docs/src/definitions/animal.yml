@@ -1,0 +1,39 @@
+Animal:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique id for the element within a resource (for internal references).
+    species:
+      type: object
+      description: Identifies the high level taxonomic categorization of the kind of animal.
+      properties:
+        text:
+          type: string
+          description: Plain text representation of the concept
+        coding:
+          type: array
+          items:
+            $ref: coding.yml#/Coding
+    breed:
+      type: object
+      description: Identifies the high level taxonomic categorization of the kind of animal.
+      properties:
+        text:
+          type: string
+          description: Plain text representation of the concept
+        coding:
+          type: array
+          items:
+            $ref: coding.yml#/Coding
+    genderStatus:
+      type: object
+      description: Indicates the current state of the animal's reproductive organs.
+      properties:
+        text:
+          type: string
+          description: Plain text representation of the concept
+        coding:
+          type: array
+          items:
+            $ref: coding.yml#/Coding

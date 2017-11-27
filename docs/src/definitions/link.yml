@@ -1,0 +1,13 @@
+Link:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique id for the element within a resource (for internal references).
+    other:
+      description: The other patient resource that the link refers to. See http://hl7.org/fhir/StructureDefinition/Patient.
+      $ref: reference.yml#/Reference
+    type:
+      type: string
+      description: The type of link between this patient resource and another patient resource. Types are - replace | refer | seealso. See http://hl7.org/fhir/ValueSet/link-type
+      

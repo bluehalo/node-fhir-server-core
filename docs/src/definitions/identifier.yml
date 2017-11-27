@@ -1,0 +1,29 @@
+Identifier:
+  type: object
+  properties:
+    use:
+      type: string
+      description: usual | official | temp | secondary (If known)
+    type:
+      type: array
+      items:
+        type: object
+        properties:
+          text:
+            type: string
+            description: Plain text representation of the concept
+          coding:
+            type: array
+            items:
+              $ref: coding.yml#/Coding
+    system:
+      type: string
+      description: The namespace for the identifier
+    value:
+      type: string
+      description: The valus that is unique
+    period:
+      $ref: period.yml#/Period
+    assigner:
+      $ref: reference.yml#/Reference
+      
