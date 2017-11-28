@@ -13,6 +13,7 @@ Animal:
           description: Plain text representation of the concept
         coding:
           type: array
+          description: Codes available at - http://hl7.org/fhir/valueset-animal-species.html
           items:
             $ref: coding.yml#/Coding
     breed:
@@ -24,6 +25,7 @@ Animal:
           description: Plain text representation of the concept
         coding:
           type: array
+          description: Codes available at - http://hl7.org/fhir/ValueSet/animal-breeds
           items:
             $ref: coding.yml#/Coding
     genderStatus:
@@ -35,5 +37,6 @@ Animal:
           description: Plain text representation of the concept
         coding:
           type: array
+          description: Codes available at - http://hl7.org/fhir/ValueSet/animal-genderstatus
           items:
             $ref: coding.yml#/Coding

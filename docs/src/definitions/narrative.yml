@@ -5,12 +5,7 @@ Narrative:
   properties:
     status:
       type: string
-      description: generated | extensions | additional | empty
-      enum:
-        - generated
-        - extensions
-        - additional
-        - empty
+      description: generated | extensions | additional | empty. Full coding available at http://hl7.org/fhir/DSTU2/valueset-narrative-status.html
     div:
       type: string
       description: Limited escaped XHTML

@@ -9,7 +9,7 @@ Coding:
       description: Version of the system - if relevant
     code:
       type: string
-      description: Symbol in syntax defined by the system
+      description: Symbol in syntax defined by the system (Like an Enum). This indicates the value is taken from a set of controlled strings defined elsewhere.
     display:
       type: string
       description: Representation defined by the system

@@ -15,6 +15,7 @@ Contact:
             description: Plain text representation of the concept
           coding:
             type: array
+            description: Coding available at - http://hl7.org/fhir/ValueSet/patient-contact-relationship
             items:
               $ref: coding.yml#/Coding
     name:
@@ -30,10 +31,7 @@ Contact:
       $ref: address.yml#/Address
     gender:
       type: string
-      description: Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.
-      enum:
-        - M
-        - F
+      description: Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes. Full coding available at http://hl7.org/fhir/ValueSet/administrative-gender
     organization:
       description: Organization on behalf of which the contact is acting or for which the contact is working.
       $ref: reference.yml#/Reference

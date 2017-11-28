@@ -3,18 +3,14 @@ NotFound:
     name: error
   type: object
   properties:
-    data:
-      type: boolean
-      default: false
-    error:
+    message:
       type: string
+      required: true
 Unauthorized:
   xml:
     name: Error
   type: object
   properties:
-    data:
-      type: boolean
-      default: false
-    error:
+    message:
       type: string
+      required: true

@@ -27,7 +27,7 @@ Patient:
             type: string
         security:
           type: array
-          description: Security labels applied to this resource
+          description: Security labels applied to this resource. Full coding available at http://hl7.org/fhir/DSTU2/valueset-security-labels.html
           items:
             $ref: coding.yml#/Coding
         tag:
@@ -46,38 +46,39 @@ Patient:
     text:
       required: false
       $ref: narrative.yml#/Narrative
-      description: A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
+      description: >
+        A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human.
+        The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a
+        human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
     contained:
-      type: object
+      type: array
       required: false
       description: These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
+      items:
+        type: object
     extension:
-      type: object
+      type: array
       required: true
-      properties:
-        race:
-          type: string
-          required: true
-          description: Coding defined here - http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html
-        ethnicity:
-          type: string
-          required: true
-          description: Coding defined here - http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-ethnicity.html
-        birthsex:
-          type: string
-          required: true
-          description: Coding defined here - http://www.fhir.org/guides/argonaut/r2/ValueSet-usrealm-birthsex.html
+      description: >
+        There are three required extensions. `race`, `ethnicity`, and `birthsex`. Codings are available at http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html,
+        http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-ethnicity.html, and http://www.fhir.org/guides/argonaut/r2/ValueSet-usrealm-birthsex.html. The extensions url values are
+        http://fhir.org/guides/argonaut/StructureDefinition/argo-race, http://fhir.org/guides/argonaut/StructureDefinition/argo-ethnicity, and
+        http://fhir.org/guides/argonaut/StructureDefinition/argo-birthsex.
+      items:
+        $ref: extension.yml#/Extension
     identifier:
-      required: false
+      required: true
       $ref: identifier.yml#/Identifier
     active:
       type: boolean
       required: false
       description: Whether this patient record is in active use.
     name:
+      type: array
       required: true
       description: A name associated with the individual.
-      $ref: human-name.yml#/HumanName
+      items:
+        $ref: human-name.yml#/HumanName
     telecom:
       type: array
       required: false
@@ -87,10 +88,7 @@ Patient:
     gender:
       type: string
       required: false
-      description: Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.
-      enum:
-        - M
-        - F
+      description: Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes. Full coding available at http://hl7.org/fhir/ValueSet/administrative-gender
     birthDate:
       type: string
       format: date
@@ -99,7 +97,7 @@ Patient:
     deceased:
       type: boolean
       required: false
-      description: Indicates if the individual is deceased or not.
+      description: Indicates if the individual is deceased or not. Could be boolean or dateTime.
     address:
       type: array
       required: false
@@ -116,16 +114,18 @@ Patient:
           description: Plain text representation of the concept
         coding:
           type: array
+          description: Full coding available at http://hl7.org/fhir/valueset-marital-status.html
           items:
             $ref: coding.yml#/Coding
     multipleBirth:
       required: false
       description: Indicates whether the patient is part of a multiple or indicates the actual birth order. Either boolean or integer.
-      example: false
     photo:
+      type: array
       required: false
       description: Image of the patient.
-      $ref: attachment.yml#/Attachment
+      items:
+        $ref: attachment.yml#/Attachment
     contact:
       type: array
       required: false
@@ -137,9 +137,11 @@ Patient:
       description: This patient is known to be an animal.
       $ref: animal.yml#/Animal
     communication:
+      type: array
       required: true
       description: Languages which may be used to communicate with the patient about his or her health.
-      $ref: communication.yml#/Communication
+      items:
+        $ref: communication.yml#/Communication
     careProvider:
       type: array
       required: false
@@ -150,5 +152,10 @@ Patient:
       required: false
       description: Organization that is the custodian of the patient record.
       $ref: reference.yml#/Reference
-  
+    link:
+      type: array
+      required: false
+      description: Link to another patient resource that concerns the same actual patient.
+      items:
+        $ref: link.yml#/Link
   

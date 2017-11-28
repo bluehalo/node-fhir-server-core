@@ -7,10 +7,12 @@ Address:
       example: Address
     use:
       type: string
-      description: home | work | temp | old - purpose of this address
+      required: true
+      description: home | work | temp | old - purpose of this address. Full coding available at http://hl7.org/fhir/DSTU2/valueset-address-use.html
     type:
       type: string
-      description: postal | physical | both
+      required: true
+      description: postal | physical | both. Full coding available at http://hl7.org/fhir/DSTU2/valueset-address-type.html
     text:
       type: string
       description: Text representation of the address

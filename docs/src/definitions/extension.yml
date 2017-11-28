@@ -1,0 +1,13 @@
+Extension:
+  type: array
+  example: { "url": "http://fhir.org/guides/argonaut/StructureDefinition/argo-race", "valueCode": "2106-3" }
+  items:
+    type: object
+    properties:
+      url:
+        type: string
+        required: true
+        description: Identifies the meaning of the extension
+      value[x]:
+        required: true
+        description: See explanation on value[x] at http://hl7.org/fhir/DSTU2/extensibility.html. The name of this argument changes based on the type.

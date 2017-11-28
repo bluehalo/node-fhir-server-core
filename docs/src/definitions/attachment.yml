@@ -3,9 +3,11 @@ Attachment:
   properties:
     contentType:
       type: string
-      description: Mime type of the content, with charset etc.
+      required: true
+      description: Mime type of the content, with charset etc. Full specification available here - http://www.rfc-editor.org/bcp/bcp13.txt
     language:
       type: string
+      required: true
       description: Human language of the content (BCP-47) https://tools.ietf.org/html/bcp47
     data:
       type: string

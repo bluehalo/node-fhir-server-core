@@ -4,21 +4,23 @@ HumanName:
     id:
       type: string
       description: Unique id for the element within a resource (for internal references).
-    # extension:
-    #   type: object
-    #   properties:
     use:
       type: string
-      description: usual | official | temp | nickname | anonymous | old | maiden
+      required: true
+      description: usual | official | temp | nickname | anonymous | old | maiden. Full coding available at http://hl7.org/fhir/DSTU2/valueset-name-use.html
     text:
       type: string
       description: Text representation of the full name
     family:
-      type: string
+      type: array
       description: Family name (often called 'Surname')
+      items:
+        type: string
     given:
-      type: string
+      type: array
       description: Given names (not always 'first'). Includes middle names
+      items:
+        type: string
     suffix:
       type: array
       description: Parts that come before the name
