@@ -1,6 +1,5 @@
 Extension:
   type: array
-  example: { "url": "http://fhir.org/guides/argonaut/StructureDefinition/argo-race", "valueCode": "2106-3" }
   items:
     type: object
     properties:

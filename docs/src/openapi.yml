@@ -64,20 +64,38 @@ paths:
           description: Successful operation
           schema:
             $ref: '#/definitions/Patient'
+        400:
+          description: Invalid parameter
+          schema:
+            $ref: '#/definitions/Invalid'
         401:
-          description: Unauthorized
+          description: Unauthorized request
           schema:
             $ref: '#/definitions/Unauthorized'
+        403:
+          description: Insufficient scope
+          schema:
+            $ref: '#/definitions/InsufficientScope'
         404:
           description: Not Found
           schema:
             $ref: '#/definitions/NotFound'
+        410:
+          description: Resource deleted
+          schema:
+            $ref: '#/definitions/Deleted'
 definitions:
   Metadata:
     $ref: definitions/metadata.yml#/Metadata
   Patient:
     $ref: definitions/patient.yml#/Patient
+  Invalid:
+    $ref: definitions/errors.yml#/Invalid
   Unauthorized:
     $ref: definitions/errors.yml#/Unauthorized
+  InsufficientScope:
+    $ref: definitions/errors.yml#/InsufficientScope
   NotFound:
     $ref: definitions/errors.yml#/NotFound
+  Deleted:
+    $ref: definitions/errors.yml#/Deleted

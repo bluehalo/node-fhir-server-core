@@ -3,6 +3,11 @@ Patient:
     name: patient
   type: object
   properties:
+    resourceType:
+      type: string
+      default: Patient
+      example: Patient
+      description: Type of resource
     id:
       type: string
       required: false
@@ -59,6 +64,7 @@ Patient:
     extension:
       type: array
       required: true
+      example: [{"url":"http://fhir.org/guides/argonaut/StructureDefinition/argo-race","valueCodeableConcept":{"text":"race","coding":[{"system":"http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html","code":"2106-3","display":"text"}]}}]
       description: >
         There are three required extensions. `race`, `ethnicity`, and `birthsex`. Codings are available at http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html,
         http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-ethnicity.html, and http://www.fhir.org/guides/argonaut/r2/ValueSet-usrealm-birthsex.html. The extensions url values are
@@ -94,10 +100,15 @@ Patient:
       format: date
       required: true
       description: The date of birth for the individual.
-    deceased:
+    deceasedBoolean:
       type: boolean
       required: false
-      description: Indicates if the individual is deceased or not. Could be boolean or dateTime.
+      description: Indicates if the individual is deceased or not.
+    deceasedDateTime:
+      type: string
+      format: date-time
+      required: false
+      description: Time of death.
     address:
       type: array
       required: false
@@ -117,9 +128,12 @@ Patient:
           description: Full coding available at http://hl7.org/fhir/valueset-marital-status.html
           items:
             $ref: coding.yml#/Coding
-    multipleBirth:
+    multipleBirthBoolean:
       required: false
-      description: Indicates whether the patient is part of a multiple or indicates the actual birth order. Either boolean or integer.
+      description: Indicates whether the patient is part of a multiple birth.
+    multipleBirthInteger:
+      required: false
+      description: Indicates the patients actual birth order.
     photo:
       type: array
       required: false

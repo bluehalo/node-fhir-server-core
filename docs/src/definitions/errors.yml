@@ -1,4 +1,4 @@
-NotFound:
+Invalid:
   xml:
     name: error
   type: object
@@ -6,6 +6,7 @@ NotFound:
     message:
       type: string
       required: true
+      example: Invalid parameter
 Unauthorized:
   xml:
     name: Error
@@ -14,3 +15,31 @@ Unauthorized:
     message:
       type: string
       required: true
+      example: Unauthorized request
+InsufficientScope:
+  xml:
+    name: error
+  type: object
+  properties:
+    message:
+      type: string
+      required: true
+      example: Insufficient scope
+NotFound:
+  xml:
+    name: error
+  type: object
+  properties:
+    message:
+      type: string
+      required: true
+      example: Unknown resource
+Deleted:
+  xml:
+    name: error
+  type: object
+  properties:
+    message:
+      type: string
+      required: true
+      example: Deleted resource
