@@ -5,7 +5,29 @@ Metadata:
   properties:
     resourceType:
       type: string
-      default: "Conformance"
+      default: CapabilityStatement
+      example: CapabilityStatement
+    status:
+      type: string
+      example: active
+      description: draft | active | retired | unknown. Full coding available at http://hl7.org/fhir/valueset-publication-status.html
+    date:
+      type: string
+      format: date-time
+      description: Date this was last changed
+    kind:
+      type: string
+      example: instance
+      description: instance | capability | requirements. Full coding available at http://hl7.org/fhir/valueset-capability-statement-kind.html
+    software:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A name the software is known by
+        version:
+          type: string
+          description: Version covered by this statement
     rest:
       type: array
       items:
