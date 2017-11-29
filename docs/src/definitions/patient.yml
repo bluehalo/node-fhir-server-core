@@ -3,78 +3,173 @@ Patient:
     name: patient
   type: object
   properties:
-    error:
-      type: boolean
-      default: false
-    data:
+    resourceType:
+      type: string
+      default: Patient
+      example: Patient
+      description: Type of resource
+    id:
+      type: string
+      required: false
+      description: The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
+    meta:
       type: object
+      required: false
+      description: The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.
       properties:
-        id:
-          type: integer
-          format: int64
-        identifier:
-          type: object
-          properties:
-            type:
-              type: string
-            system:
-              type: string
-            value:
-              type: string
-        full_name:
+        versionId:
           type: string
-        family_name:
+          description: Version specific identifier
+        lastUpdated:
           type: string
-        given_name:
+          description: When the resource last changed
+        profile:
+          type: array
+          description: Profiles this resource claims to conform to
+          items:
+            xml:
+              name: profiles
+            type: string
+        security:
+          type: array
+          description: Security labels applied to this resource. Full coding available at http://hl7.org/fhir/DSTU2/valueset-security-labels.html
+          items:
+            $ref: coding.yml#/Coding
+        tag:
+          type: array
+          description: Tags applied to this resource
+          items:
+            $ref: coding.yml#/Coding
+    implicitRules:
+      type: string
+      required: false
+      description: A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content.
+    language:
+      type: string
+      required: false
+      description: The base language in which the resource is written.
+    text:
+      required: false
+      $ref: narrative.yml#/Narrative
+      description: >
+        A human-readable narrative that contains a summary of the resource, and may be used to represent the content of the resource to a human.
+        The narrative need not encode all the structured data, but is required to contain sufficient detail to make it \"clinically safe\" for a
+        human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
+    contained:
+      type: array
+      required: false
+      description: These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
+      items:
+        type: object
+    extension:
+      type: array
+      required: true
+      example: [{"url":"http://fhir.org/guides/argonaut/StructureDefinition/argo-race","valueCodeableConcept":{"text":"race","coding":[{"system":"http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html","code":"2106-3","display":"text"}]}}]
+      description: >
+        There are three required extensions. `race`, `ethnicity`, and `birthsex`. Codings are available at http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-race.html,
+        http://www.fhir.org/guides/argonaut/r2/ValueSet-omb-ethnicity.html, and http://www.fhir.org/guides/argonaut/r2/ValueSet-usrealm-birthsex.html. The extensions url values are
+        http://fhir.org/guides/argonaut/StructureDefinition/argo-race, http://fhir.org/guides/argonaut/StructureDefinition/argo-ethnicity, and
+        http://fhir.org/guides/argonaut/StructureDefinition/argo-birthsex.
+      items:
+        $ref: extension.yml#/Extension
+    identifier:
+      required: true
+      $ref: identifier.yml#/Identifier
+    active:
+      type: boolean
+      required: false
+      description: Whether this patient record is in active use.
+    name:
+      type: array
+      required: true
+      description: A name associated with the individual.
+      items:
+        $ref: human-name.yml#/HumanName
+    telecom:
+      type: array
+      required: false
+      description: A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.
+      items:
+        $ref: contact-point.yml#/ContactPoint
+    gender:
+      type: string
+      required: false
+      description: Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes. Full coding available at http://hl7.org/fhir/ValueSet/administrative-gender
+    birthDate:
+      type: string
+      format: date
+      required: true
+      description: The date of birth for the individual.
+    deceasedBoolean:
+      type: boolean
+      required: false
+      description: Indicates if the individual is deceased or not.
+    deceasedDateTime:
+      type: string
+      format: date-time
+      required: false
+      description: Time of death.
+    address:
+      type: array
+      required: false
+      description: Addresses for the individual.
+      items:
+        $ref: address.yml#/Address
+    maritalStatus:
+      required: false
+      type: object
+      description: This field contains a patient's most recent marital (civil) status.
+      properties:
+        text:
           type: string
-        mothers_maiden_name:
-          type: string
-        address_line_1:
-          type: string
-        address_line_2:
-          type: string
-        address_city:
-          type: string
-        address_state:
-          type: string
-        address_zip:
-          type: string
-        address_country:
-          type: string
-        gender:
-          type: string
-        birthsex:
-          type: string
-        birth_date:
-          type: string
-        birth_place:
-          type: object
-          properties:
-            resourceType:
-              type: string
-            use:
-              type: string
-            line1:
-              type: string
-            line2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
-        marital_status:
-          type: string
-        communication_language:
-          type: string
-        active:
-          type: string
-        race:
-          type: string
-        ethnicity:
-          type: string
-        religion:
-          type: string
+          description: Plain text representation of the concept
+        coding:
+          type: array
+          description: Full coding available at http://hl7.org/fhir/valueset-marital-status.html
+          items:
+            $ref: coding.yml#/Coding
+    multipleBirthBoolean:
+      required: false
+      description: Indicates whether the patient is part of a multiple birth.
+    multipleBirthInteger:
+      required: false
+      description: Indicates the patients actual birth order.
+    photo:
+      type: array
+      required: false
+      description: Image of the patient.
+      items:
+        $ref: attachment.yml#/Attachment
+    contact:
+      type: array
+      required: false
+      description: A contact party (e.g. guardian, partner, friend) for the patient.
+      items:
+        $ref: contact.yml#/Contact
+    animal:
+      required: false
+      description: This patient is known to be an animal.
+      $ref: animal.yml#/Animal
+    communication:
+      type: array
+      required: true
+      description: Languages which may be used to communicate with the patient about his or her health.
+      items:
+        $ref: communication.yml#/Communication
+    careProvider:
+      type: array
+      required: false
+      description: Organization reference - http://hl7.org/fhir/StructureDefinition/Organization. Practicitioner reference - http://hl7.org/fhir/StructureDefinition/Practitioner
+      items:
+        $ref: reference.yml#/Reference
+    managingOrganization:
+      required: false
+      description: Organization that is the custodian of the patient record.
+      $ref: reference.yml#/Reference
+    link:
+      type: array
+      required: false
+      description: Link to another patient resource that concerns the same actual patient.
+      items:
+        $ref: link.yml#/Link
+  
