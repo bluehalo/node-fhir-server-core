@@ -3,6 +3,7 @@ secrets.js
 
 # Dependencies
 node_modules
+package-lock.json
 
 # Generated files
 npm-debug.log
