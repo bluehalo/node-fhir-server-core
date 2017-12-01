@@ -3,7 +3,7 @@ const service = require(path.resolve('./src/server/patient/services/patient.serv
 
 /**
  * @name exports
- * @summary Patient routes
+ * @summary Patient controller
  */
 module.exports.getPatient = (req, res) => {
   

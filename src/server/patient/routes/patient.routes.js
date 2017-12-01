@@ -7,6 +7,6 @@ const controller = require(path.resolve('./src/server/patient/controllers/patien
  */
 module.exports = app => {
   
-  app.get('/Patient', controller.getPatient);
+  app.get('/patient', controller.getPatient);
   
 };
