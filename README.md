@@ -23,7 +23,7 @@ To start local development, run `npm run nodemon` and open your browser to [loca
 
 ### Production
 
-You can test production locally. Before you can, you will need to generate a cert and pem file. You can do this with openssl as long as you have it installed on your system. Once complete, make sure you set the `HTTPS_KEY_PATH` and `HTTPS_CERT_PATH` environment variables or you set the path in the `src/env/production.js` file, under security. When you pull up the app in the browser, you will have to allow self-signed certs in order to continue. This is fine for local development but you should get real certs for an actual production deploy. See [Generate self signed certs](#Generate-self-signed-certs)
+You can test production locally. Before you can, you will need to generate a self-signed certificate. You can do this with `openssl` as long as you have it installed on your system. Once complete, make sure you set the `HTTPS_KEY_PATH` and `HTTPS_CERT_PATH` environment variables or you set the path in the `src/env/production.js` file, under security. When you pull up the app in the browser, you will have to allow self-signed certs in order to continue. This is fine for local development but you should get real certs for an actual production deploy. See [Generate self signed certs](#Generate-self-signed-certs)
 
 To test production locally, run `npm start` and open your browser to [https://localhost:3000](https://localhost:3000).
 
@@ -31,7 +31,7 @@ Before deploying to production, obtain valid certs and change the port in `src/e
 
 #### Generate self signed certs
 
-Make sure you have openssl installed and run the following commands. You can use dummy data for the questions for local development.
+Make sure you have openssl installed and run the following commands.
 
 ```shell
 openssl genrsa -out key.pem 2048
