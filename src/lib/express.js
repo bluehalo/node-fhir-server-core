@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
+const errors = require(path.resolve('./src/server/utils/error.utils'));
 const config = require(path.resolve('./src/config/config'));
 const logger = require(path.resolve('./src/lib/winston'));
 
@@ -20,9 +21,6 @@ let configureMiddleware = function (app) {
   
   // Enable stack traces
   app.set('showStackError', true);
-  
-  // Enable jsonp
-  app.enable('jsonp callback');
   
   // Add compression
   app.use(compression({ level: 9 }));
@@ -68,6 +66,39 @@ let setupRoutes = function (app) {
 };
 
 /**
+ * @function setupErrorHandler
+ * @summary Add error handler
+ * @param {Express.app} app
+ */
+let setupErrorHandler = function (app) {
+  // Generic catch all error handler
+  // Errors should be thrown with next and passed through
+  app.use((err, req, res, next) => {
+    // If there is an error and it is our error type
+    if (err && errors.isServerError(err)) {
+      logger.error(err.code, err.message);
+      res.status(err.code).end(err.message);
+    }
+    // If there is still an error, throw a 500 and pass the message through
+    else if (err) {
+      logger.error(500, err.message);
+      res.status(500).end(err.message);
+    }
+    // No error
+    else {
+      next();
+    }
+  });
+  
+  // Nothing has responded by now, respond with 404
+  app.use((req, res) => {
+    let error = errors.notFound();
+    logger.error(error.code, error.message);
+    res.status(error.code).end(error.message);
+  });
+};
+
+/**
  * @function initialize
  * @return {Promise} 
  */
@@ -83,8 +114,9 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
     configureMiddleware(app);
     secureHeaders(app);
     setupRoutes(app);
+    setupErrorHandler(app);
     
-    // Use an https server in production
+    // Use an https server in production, this must be last
     if (IS_PRODUCTION) {
       
       // These are required for running in https
@@ -93,7 +125,8 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
         cert: fs.readFileSync(config.security.cert)
       };
       
-      app = https.createServer(options, app);
+      // Pass back our https server
+      resolve(https.createServer(options, app));
     }
 
     // Pass our app back if we are successful
