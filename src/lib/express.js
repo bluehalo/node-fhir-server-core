@@ -3,8 +3,13 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
+const https = require('https');
 const path = require('path');
+const fs = require('fs');
+const config = require(path.resolve('./src/config/config'));
 const logger = require(path.resolve('./src/lib/winston'));
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 /**
  * @function configureMiddleware
@@ -49,8 +54,17 @@ let secureHeaders = function (app) {
   */
   app.use(helmet({
     // Needs https running first
-    hsts: false
+    hsts: IS_PRODUCTION
   }));
+};
+
+/**
+ * @function setupRoutes
+ * @summary Add routes
+ * @param {Express.app} app
+ */
+let setupRoutes = function (app) {
+  config.files.routes.forEach(route => require(path.resolve(route))(app));
 };
 
 /**
@@ -61,13 +75,26 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
   logger.info('Initializing express');
 
   try {
-    
+
     // Create our express instance
     let app = express();
     
     // Add some configurations to our app
     configureMiddleware(app);
     secureHeaders(app);
+    setupRoutes(app);
+    
+    // Use an https server in production
+    if (IS_PRODUCTION) {
+      
+      // These are required for running in https
+      let options = {
+        key: fs.readFileSync(config.security.key),
+        cert: fs.readFileSync(config.security.cert)
+      };
+      
+      app = https.createServer(options, app);
+    }
 
     // Pass our app back if we are successful
     resolve(app);
