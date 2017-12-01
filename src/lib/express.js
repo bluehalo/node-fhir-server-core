@@ -116,7 +116,13 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
     setupRoutes(app);
     setupErrorHandler(app);
     
-    // Use an https server in production, this must be last
+    /**
+    * Use an https server in production, this must be last
+    * If this app is behind a load balancer on AWS that has SSL certs, then you
+    * do not necessarily need this, but if this is being deployed with nothing in
+    * front of it, then you must add some SSL certs. This last section can be updated
+    * depending on the environment that you are deploying to.
+    */
     if (IS_PRODUCTION) {
       
       // These are required for running in https
