@@ -3,6 +3,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
+const axios = require('axios');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
@@ -16,8 +17,10 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
  * @function configureMiddleware
  * @summary Configure some basic express middleware
  * @param {Express.app} app
+ * @param {Object} authConfig
+ * @param {Object} jwksConfig
  */
-let configureMiddleware = function (app) {
+let configureMiddleware = function (app, authConfig, jwksConfig) {
   
   // Enable stack traces
   app.set('showStackError', true);
@@ -66,6 +69,41 @@ let setupRoutes = function (app) {
 };
 
 /**
+ * @function initAuthServerConfigs
+ * @summary Retrieve authorization server configurations via config or discovery.
+ */
+let initAuthServerConfigs = async function() {
+    
+  const hasConfig = typeof config.issuer === 'object';
+  let authConfig, jwksConfig;
+  if (hasConfig) {
+    authConfig = config.issuer.authConfig;
+    jwksConfig = config.issuer.jwksConfig;
+  } else {
+    const discoveryEndpoint = `${config.issuer}.well-known/openid-configuration`;
+    authConfig = await axios.get(discoveryEndpoint).then(res => res.data);
+    jwksConfig = await axios.get(authConfig.jwks_uri).then(res => res.data);
+  }
+
+  if (typeof jwksConfig.keys === 'undefined') {
+    throw new Error('keys are not defined');
+  }
+  if (typeof authConfig.authorization_endpoint !== 'string') {
+    throw new Error('authorization_endpoint is not a string');
+  }  
+  if (typeof authConfig.token_endpoint !== 'string') {
+    throw new Error('token_endpoint is not a string');
+  }    
+  
+  // Introspection is not required depending on the oath2 implementation (required for openid)
+  if (!hasConfig && typeof authConfig.introspection_endpoint !== 'string') {
+    throw new Error('introspection_endpoint is not a string');
+  }
+
+  return {authConfig, jwksConfig};
+};
+
+/**
  * @function setupErrorHandler
  * @summary Add error handler
  * @param {Express.app} app
@@ -102,16 +140,19 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise} 
  */
-module.exports.initialize  = () => new Promise((resolve, reject) => {
+module.exports.initialize  = async() => {
   logger.info('Initializing express');
 
   try {
 
     // Create our express instance
     let app = express();
+
+    // Setup auth configs for middleware
+    let {authConfig, jwksConfig} = await initAuthServerConfigs();    
     
     // Add some configurations to our app
-    configureMiddleware(app);
+    configureMiddleware(app, authConfig, jwksConfig);
     secureHeaders(app);
     setupRoutes(app);
     setupErrorHandler(app);
@@ -132,15 +173,15 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
       };
       
       // Pass back our https server
-      resolve(https.createServer(options, app));
+      return Promise.resolve(https.createServer(options, app));
     }
 
     // Pass our app back if we are successful
-    resolve(app);
+    return Promise.resolve(app);
 
   } catch (err) {
 
     // Pass the error out, implementor should exit if this errors
-    reject(err);
+    return Promise.reject(err);
   }
-});
+};
