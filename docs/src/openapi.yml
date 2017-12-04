@@ -35,10 +35,26 @@ paths:
           description: Successful operation
           schema:
             $ref: '#/definitions/Metadata'
+        400:
+          description: Invalid parameter
+          schema:
+            $ref: '#/definitions/Invalid'
+        401:
+          description: Unauthorized request
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: Insufficient scope
+          schema:
+            $ref: '#/definitions/InsufficientScope'
         404:
           description: Not Found
           schema:
             $ref: '#/definitions/NotFound'
+        410:
+          description: Resource deleted
+          schema:
+            $ref: '#/definitions/Deleted'
   /Patient/{id}:
     get:
       tags:
