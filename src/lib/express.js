@@ -71,6 +71,7 @@ let setupRoutes = function (app) {
 /**
  * @function initAuthServerConfigs
  * @summary Retrieve authorization server configurations via config or discovery.
+ * @return {Promise} 
  */
 let initAuthServerConfigs = async function() {
     
@@ -143,45 +144,37 @@ let setupErrorHandler = function (app) {
 module.exports.initialize  = async() => {
   logger.info('Initializing express');
 
-  try {
+  // Create our express instance
+  let app = express();
 
-    // Create our express instance
-    let app = express();
-
-    // Setup auth configs for middleware
-    let {authConfig, jwksConfig} = await initAuthServerConfigs();    
+  // Setup auth configs for middleware
+  let {authConfig, jwksConfig} = await initAuthServerConfigs();
+  
+  // Add some configurations to our app
+  configureMiddleware(app, authConfig, jwksConfig);
+  secureHeaders(app);
+  setupRoutes(app);
+  setupErrorHandler(app);
+  
+  /**
+  * Use an https server in production, this must be last
+  * If this app is behind a load balancer on AWS that has SSL certs, then you
+  * do not necessarily need this, but if this is being deployed with nothing in
+  * front of it, then you must add some SSL certs. This last section can be updated
+  * depending on the environment that you are deploying to.
+  */
+  if (IS_PRODUCTION) {
     
-    // Add some configurations to our app
-    configureMiddleware(app, authConfig, jwksConfig);
-    secureHeaders(app);
-    setupRoutes(app);
-    setupErrorHandler(app);
+    // These are required for running in https
+    let options = {
+      key: fs.readFileSync(config.security.key),
+      cert: fs.readFileSync(config.security.cert)
+    };
     
-    /**
-    * Use an https server in production, this must be last
-    * If this app is behind a load balancer on AWS that has SSL certs, then you
-    * do not necessarily need this, but if this is being deployed with nothing in
-    * front of it, then you must add some SSL certs. This last section can be updated
-    * depending on the environment that you are deploying to.
-    */
-    if (IS_PRODUCTION) {
-      
-      // These are required for running in https
-      let options = {
-        key: fs.readFileSync(config.security.key),
-        cert: fs.readFileSync(config.security.cert)
-      };
-      
-      // Pass back our https server
-      return Promise.resolve(https.createServer(options, app));
-    }
-
-    // Pass our app back if we are successful
-    return Promise.resolve(app);
-
-  } catch (err) {
-
-    // Pass the error out, implementor should exit if this errors
-    return Promise.reject(err);
+    // Pass back our https server
+    return https.createServer(options, app);
   }
+
+  // Pass our app back if we are successful
+  return app;
 };
