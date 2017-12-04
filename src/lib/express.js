@@ -73,16 +73,15 @@ let setupRoutes = function (app) {
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise} 
  */
-let initAuthServerConfigs = async function() {
-    
-  const hasConfig = typeof config.issuer === 'object';
+let initAuthServerConfigs = async function() {  
+  const discoveryUrl = config.issuer.discoveryUrl;
   let authConfig, jwksConfig;
-  if (hasConfig) {
+  
+  if (!discoveryUrl) {
     authConfig = config.issuer.authConfig;
     jwksConfig = config.issuer.jwksConfig;
   } else {
-    const discoveryEndpoint = `${config.issuer}.well-known/openid-configuration`;
-    authConfig = await axios.get(discoveryEndpoint).then(res => res.data);
+    authConfig = await axios.get(discoveryUrl).then(res => res.data);
     jwksConfig = await axios.get(authConfig.jwks_uri).then(res => res.data);
   }
 
@@ -91,13 +90,16 @@ let initAuthServerConfigs = async function() {
   }
   if (typeof authConfig.authorization_endpoint !== 'string') {
     throw new Error('authorization_endpoint is not a string');
-  }  
+  }
   if (typeof authConfig.token_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
-  }    
+  }
+  if (typeof authConfig.issuer !== 'string') {
+    throw new Error('issuer is not a string');
+  }
   
   // Introspection is not required depending on the oath2 implementation (required for openid)
-  if (!hasConfig && typeof authConfig.introspection_endpoint !== 'string') {
+  if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
   }
 

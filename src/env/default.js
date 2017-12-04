@@ -7,14 +7,17 @@ module.exports = {
   // Server port
   port: 3000,
 
-  // Trusted Authentication Server
-  issuer: 'https://sb-auth.smarthealthit.org/',
-  // If it was a config (introspection is optional depending on oauth2 implementation)
+  // Trusted Authentication Server if using discovery
+  issuer: {
+    discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration'
+  },
+  // If not using discovery(introspection is optional depending on oauth2 implementation)
   /*issuer: {
     authConfig: {
       authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
       token_endpoint: 'https://sb-auth.smarthealthit.org/token',
-      introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect'
+      introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
+      issuer: 'https://sb-auth.smarthealthit.org'
     },
     jwksConfig: {
       keys: [{
