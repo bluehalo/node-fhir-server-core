@@ -11,7 +11,7 @@ module.exports = {
   issuer: {
     discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration'
   },
-  // If not using discovery(introspection is optional depending on oauth2 implementation)
+  // If not using discovery (introspection is optional depending on oauth2 implementation)
   /*issuer: {
     authConfig: {
       authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
