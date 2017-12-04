@@ -1,3 +1,4 @@
+const sanitize = require('sanitize-html');
 const validator = require('validator');
 const path = require('path');
 const xss = require('xss');
@@ -16,7 +17,7 @@ let parseValue = function (type, value) {
       // strip characters that are < 32 and 127 from unicode table
       // xss helps prevent xss from slipping in
       // replace any non word characters
-      result = validator.stripLow(xss(value)).replace(/[^\w]/g, '');
+      result = validator.stripLow(xss(sanitize(value))).replace(/[^\w]/g, '');
       break;
   }
   return result;
@@ -60,7 +61,7 @@ let sanitizeMiddleware = function (config) {
           args[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
         }
       } catch (err) {
-        return next(err);
+        return next(errors.invalidParameter(conf.name + ' is invalid.'));
       }
       
       // If we have the arg and the type if wrong, throw invalid arg
