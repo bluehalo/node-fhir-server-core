@@ -25,8 +25,8 @@ paths:
     get:
       tags:
         - metadata
-      summary: Get metadata for SMART on FHIR authorization access
-      description: Returns the conformance statement and urls necessary for authentication
+      summary: View the capability statement
+      description: Returns the conformance/capability statement
       produces:
         - application/json
         - application/xml
