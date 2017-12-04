@@ -7,16 +7,26 @@ let parseValue = function (type, value) {
   let result;
   switch (type) {
     case 'number':
-      result = parseFloat(value);
+      result = validator.toFloat(value);
       break;
     case 'boolean':
-      result = (value.toLowerCase() === 'true') ? true : false;
+      result = validator.toBoolean(value);
       break;
     case 'string':
-      result = xss(value);
+      // strip characters that are < 32 and 127 from unicode table
+      // xss helps prevent xss from slipping in
+      // replace any non word characters
+      result = validator.stripLow(xss(value)).replace(/[^\w]/g, '');
       break;
   }
   return result;
+};
+
+let parseParams = req => {
+  if (Object.keys(req.params).length) { return req.params; }
+  if (Object.keys(req.query).length) { return req.query; }
+  if (Object.keys(req.body).length) { return req.body; }
+  return {};
 };
 
 /**
@@ -32,32 +42,37 @@ let parseValue = function (type, value) {
 let sanitizeMiddleware = function (config) {
   return function (req, res, next) {
     let args = {};
-    
     // Check each argument in the config
-    let currentArgs = req.params || req.body || {};
-    
+    let currentArgs = parseParams(req);
+
     for (let i = 0; i < config.length; i++) {
       let conf = config[i];
+      
       // If the argument is required but not present
       if (!currentArgs[conf.name] && conf.required) {
         return next(errors.invalidParameter(conf.name + ' is required.'));
       }
-      // Try to cast the type to the correct type
+      
+      // Try to cast the type to the correct type, do this first so that if something
+      // returns as NaN we can bail on it
       try {
-        args[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
+        if (currentArgs[conf.name]) {
+          args[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
+        }
       } catch (err) {
-        return next();
+        return next(err);
       }
       
-      // If we have the arg, it is fatal if it is not correct, and the type if wrong, throw invalid arg
-      if (currentArgs[conf.name] && conf.fatal && typeof currentArgs[conf.name] !== conf.type) {
+      // If we have the arg and the type if wrong, throw invalid arg
+      if (currentArgs[conf.name] && typeof currentArgs[conf.name] !== conf.type) {
         return next(errors.invalidParameter(conf.name));
       }
     }
     
-    // All is well, update params and body, and move on to the next middleware/function
-    if (req.params) { req.params = args; }
-    if (req.body) { req.body = args; }
+    // All is well, update params, query, or body, and move on to the next middleware/function
+    if (Object.keys(req.params).length) { req.params = args; }
+    if (Object.keys(req.query).length) { req.query = args; }
+    if (Object.keys(req.body).length) { req.body = args; }
     next();
   };
 };
