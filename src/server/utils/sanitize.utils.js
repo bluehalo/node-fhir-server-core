@@ -14,8 +14,9 @@ let parseValue = function (type, value) {
       result = validator.toBoolean(value);
       break;
     case 'string':
-      // strip characters that are < 32 and 127 from unicode table
-      // xss helps prevent xss from slipping in
+      // strip any html tags from the query
+      // xss helps prevent html from slipping in
+      // strip a certain range of unicode characters
       // replace any non word characters
       result = validator.stripLow(xss(sanitize(value))).replace(/[^\w]/g, '');
       break;
@@ -42,10 +43,10 @@ let parseParams = req => {
  */
 let sanitizeMiddleware = function (config) {
   return function (req, res, next) {
-    let args = {};
-    // Check each argument in the config
     let currentArgs = parseParams(req);
+    let cleanArgs = {};
 
+    // Check each argument in the config
     for (let i = 0; i < config.length; i++) {
       let conf = config[i];
       
@@ -58,22 +59,22 @@ let sanitizeMiddleware = function (config) {
       // returns as NaN we can bail on it
       try {
         if (currentArgs[conf.name]) {
-          args[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
+          cleanArgs[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
         }
       } catch (err) {
         return next(errors.invalidParameter(conf.name + ' is invalid.'));
       }
       
       // If we have the arg and the type if wrong, throw invalid arg
-      if (currentArgs[conf.name] && typeof currentArgs[conf.name] !== conf.type) {
+      if (cleanArgs[conf.name] && typeof cleanArgs[conf.name] !== conf.type) {
         return next(errors.invalidParameter(conf.name));
       }
     }
     
     // All is well, update params, query, or body, and move on to the next middleware/function
-    if (Object.keys(req.params).length) { req.params = args; }
-    if (Object.keys(req.query).length) { req.query = args; }
-    if (Object.keys(req.body).length) { req.body = args; }
+    if (Object.keys(req.params).length) { req.params = cleanArgs; }
+    if (Object.keys(req.query).length) { req.query = cleanArgs; }
+    if (Object.keys(req.body).length) { req.body = cleanArgs; }
     next();
   };
 };
