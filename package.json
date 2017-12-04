@@ -32,6 +32,7 @@
     "jwk-to-pem": "^1.2.6",
     "method-override": "^2.3.10",
     "nodemon": "^1.12.1",
+    "validator": "^9.1.2",
     "winston": "^2.4.0",
     "xss": "^0.3.4"
   },

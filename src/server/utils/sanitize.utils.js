@@ -1,3 +1,4 @@
+const validator = require('validator');
 const path = require('path');
 const xss = require('xss');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
@@ -14,9 +15,6 @@ let parseValue = function (type, value) {
     case 'string':
       result = xss(value);
       break;
-    case 'object':
-      result = value;
-      break;
   }
   return result;
 };
@@ -28,7 +26,7 @@ let parseValue = function (type, value) {
  * req.body and/or req.params with a clean object
  * @param {Array<Object>} config - Sanitize config for how to deal with params
  * @param {string} config.name - Argument name
- * @param {string} config.type - Argument type. Acceptable types are (boolean, string, number, object)
+ * @param {string} config.type - Argument type. Acceptable types are (boolean, string, number)
  * @param {boolean} required - Should we throw if this argument is present and invalid, default is false
  */
 let sanitizeMiddleware = function (config) {
