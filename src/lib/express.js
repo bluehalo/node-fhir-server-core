@@ -144,55 +144,12 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
-<<<<<<< HEAD
-module.exports.initialize = () => new Promise((resolve, reject) => {
-=======
 module.exports.initialize  = async() => {
->>>>>>> a4580607b35b718ac24fc2bdeffaef4a66549200
   logger.info('Initializing express');
 
   // Create our express instance
   let app = express();
 
-<<<<<<< HEAD
-    // Create our express instance
-    let app = express();
-
-    // Add some configurations to our app
-    configureMiddleware(app);
-    secureHeaders(app);
-    setupRoutes(app);
-    setupErrorHandler(app);
-
-    /**
-    * Use an https server in production, this must be last
-    * If this app is behind a load balancer on AWS that has SSL certs, then you
-    * do not necessarily need this, but if this is being deployed with nothing in
-    * front of it, then you must add some SSL certs. This last section can be updated
-    * depending on the environment that you are deploying to.
-    */
-    if (IS_PRODUCTION) {
-
-      // These are required for running in https
-      let options = {
-        key: fs.readFileSync(config.security.key),
-        cert: fs.readFileSync(config.security.cert)
-      };
-
-      // Pass back our https server
-      resolve(https.createServer(options, app));
-    }
-
-    // Pass our app back if we are successful
-    resolve(app);
-
-  } catch (err) {
-
-    // Pass the error out, implementor should exit if this errors
-    reject(err);
-  }
-});
-=======
   // Setup auth configs for middleware
   let {authConfig, jwkSet} = await retrieveAuthServerInfo();
   
@@ -224,4 +181,3 @@ module.exports.initialize  = async() => {
   // Pass our app back if we are successful
   return app;
 };
->>>>>>> a4580607b35b718ac24fc2bdeffaef4a66549200
