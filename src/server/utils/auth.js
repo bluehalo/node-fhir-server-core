@@ -44,15 +44,18 @@ module.exports.validate = (req, res, next) => {
         const bearerToken = req.headers.bearer;
         const decodedToken = jwt.decode(bearerToken);
 
-        if (decodedToken.header.alg.startsWith('HS')) {
-            // IF HS*** algorith, validate signature based on secret key
-            _verifyToken(bearerToken, config.secret, next);
+        // check algorithm so we know how to validate the signature
+        if (decodedToken && decodedToken.header && decodedToken.header.alg) {
+            if (decodedToken.header.alg.startsWith('HS')) {
+                // IF HS*** algorith, validate signature based on secret key
+                _verifyToken(bearerToken, config.secret, next);
 
-        } else if (decodedToken.header.alg.startsWith('RS')) {
-            // IF RS*** algorithm, validate signature based on certificate
-            // Get public key
-            const cert = fs.readFileSync(config.security.key);
-            _verifyToken(bearerToken, cert, next);
+            } else if (decodedToken.header.alg.startsWith('RS')) {
+                // IF RS*** algorithm, validate signature based on certificate
+                // Get public key
+                const cert = fs.readFileSync(config.security.key);
+                _verifyToken(bearerToken, cert, next);
+            }
         }
     }
 
