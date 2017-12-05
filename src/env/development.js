@@ -12,4 +12,8 @@ module.exports = {
 
   }
 
+  },
+  // AUTH client ID and secret
+  clientId: 'my cliend id',
+  secret: 'secret'
 };
