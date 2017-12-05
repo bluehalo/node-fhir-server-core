@@ -11,6 +11,9 @@
   ],
   "license": "MIT",
   "private": true,
+	"engines": {
+		"node": ">=8.6"
+	},
   "scripts": {
     "start": "export NODE_ENV=production; node src/server/server;",
     "nodemon": "export NODE_ENV=development; node src/scripts/nodemon",

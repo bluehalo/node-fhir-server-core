@@ -9,10 +9,13 @@ let getFilePaths = () => ({
 });
 
 let make = function () {
-  // If there is no NODE_ENV set, set one to development, we may change this to exit
-  // and force the developer to sepcify one
+  // If there is no NODE_ENV set, throw an error. One must be specified to continue.
   if (process.env.NODE_ENV === null || process.env.NODE_ENV === undefined) {
-    process.env.NODE_ENV = 'development';
+    throw new Error(
+			'You do not have an environment file matching your NODE_ENV.'
+			+ ' You either need to set NODE_ENV to development or production'
+			+ ` or create a environment file called ${process.env.NODE_ENV}.js in 'src/env'.`
+		);
   }
 
   // Grab our config's
