@@ -1,5 +1,6 @@
 const sanitize = require('sanitize-html');
 const validator = require('validator');
+const moment = require('moment');
 const path = require('path');
 const xss = require('xss');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
@@ -20,6 +21,21 @@ let parseValue = function (type, value) {
       // replace any non word characters
       result = validator.stripLow(xss(sanitize(value))).replace(/[^\w]/g, '');
       break;
+  }
+  return result;
+};
+
+let validateType = function (type, value) {
+  let result;
+  switch (type) {
+    case 'number':
+      result = validator.isNumeric(value);
+    case 'boolean':
+      result = validator.isBoolean(value);
+    case 'string':
+      result = typeof value === 'string';
+    case 'date':
+      result = moment(value).isValid();
   }
   return result;
 };
@@ -65,8 +81,8 @@ let sanitizeMiddleware = function (config) {
         return next(errors.invalidParameter(conf.name + ' is invalid.'));
       }
       
-      // If we have the arg and the type if wrong, throw invalid arg
-      if (cleanArgs[conf.name] && typeof cleanArgs[conf.name] !== conf.type) {
+      // If we have the arg and the type is wrong, throw invalid arg
+      if (cleanArgs[conf.name] && validateType(conf.type, cleanArgs[conf.name])) {
         return next(errors.invalidParameter(conf.name));
       }
     }

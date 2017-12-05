@@ -18,7 +18,10 @@
     "serve-docs": "npm run build-docs;node docs/server",
     "build-docs": "webpack --config docs/webpack.config.js;",
     "watch-docs": "export NODE_ENV=development;webpack --config docs/webpack.config.js;",
-    "test:e2e": "jest --runInBand e2e/*.spec.js"
+    "test:lint": "eslint src/**/*.js",
+    "test:e2e": "jest --runInBand e2e/*.spec.js",
+    "test:src": "jest src",
+    "test": "set -e; npm run test:lint; npm run test:e2e; npm run test:src;"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -31,6 +34,7 @@
     "jsonwebtoken": "^8.1.0",
     "jwk-to-pem": "^1.2.6",
     "method-override": "^2.3.10",
+    "moment": "^2.19.3",
     "nodemon": "^1.12.1",
     "sanitize-html": "^1.16.1",
     "validator": "^9.1.2",
