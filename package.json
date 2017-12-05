@@ -21,7 +21,7 @@
     "test:lint": "eslint \"src/**/*.js\"",
     "test:e2e": "jest --runInBand e2e/*.spec.js",
     "test:src": "jest src",
-    "test": "set -e; npm run test:lint; npm run test:e2e; npm run test:src;"
+    "test": "set -e; npm run test:lint; npm run test:src;"
   },
   "dependencies": {
     "axios": "^0.17.1",

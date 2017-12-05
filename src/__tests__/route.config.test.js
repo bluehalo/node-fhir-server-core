@@ -9,23 +9,23 @@ const ALLOWED_METHODS = ['get', 'post', 'put', 'delete'];
 let routeConfigs;
 
 describe('Route Config Tests', () => {
-  
+
   beforeAll(() => {
     routeConfigs = glob
       .sync('src/server/*/*.config.js')
       .map(filepath => require(path.resolve(filepath)));
   });
-  
-  it('should expose a routes object', () => {
+
+  test('should expose a routes object', () => {
     expect(routeConfigs.every(conf => conf.routes)).toBeTruthy();
   });
-  
-  it('should contain all the required fields', () => {
+
+  test('should contain all the required fields', () => {
     routeConfigs.forEach((config) => {
       // Routes must be an array
       let { routes } = config;
       expect(Array.isArray(routes)).toBeTruthy();
-      
+
       // each route must have the following: type, path, args, controller, and scope
       // right now scope is not implemented, so this will update in the near future
       routes.forEach(route => {
@@ -47,8 +47,8 @@ describe('Route Config Tests', () => {
           }
         });
       });
-      
+
     });
   });
-  
+
 });
