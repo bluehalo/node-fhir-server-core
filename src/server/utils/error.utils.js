@@ -25,5 +25,6 @@ module.exports = {
   insufficientScope: () => new ServerError(403, 'Insufficient scope'),
   notFound: () => new ServerError(404, 'Not found'),
   deleted: () => new ServerError(410, 'Resource deleted'),
+  custom: (code, message) => new ServerError(code, message),
   isServerError: (err) => err instanceof ServerError
 };

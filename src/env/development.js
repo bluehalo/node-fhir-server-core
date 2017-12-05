@@ -12,4 +12,7 @@ module.exports = {
 
   }
 
+  },
+  clientId: 'my cliend id',
+  secret: 'secret'
 };
