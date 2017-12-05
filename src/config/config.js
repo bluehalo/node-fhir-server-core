@@ -14,11 +14,11 @@ let make = function () {
   if (process.env.NODE_ENV === null || process.env.NODE_ENV === undefined) {
     process.env.NODE_ENV = 'development';
   }
-  
+
   // Grab our config's
   let envConfig = require(path.resolve(`./src/env/${process.env.NODE_ENV}`));
   let defaultConfig = require(path.resolve('./src/env/default'));
-  
+
   return Object.assign({}, defaultConfig, envConfig, getFilePaths());
 };
 

@@ -1,4 +1,4 @@
-const methodOverride = require('method-override');
+// const methodOverride = require('method-override');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -18,17 +18,17 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
  * @param {Express.app} app
  */
 let configureMiddleware = function (app) {
-  
+
   // Enable stack traces
   app.set('showStackError', true);
-  
+
   // Add compression
   app.use(compression({ level: 9 }));
-  
+
   // Enable the body parser
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  
+
   // Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
   // app.use(methodOverride());
 
@@ -89,7 +89,7 @@ let setupErrorHandler = function (app) {
       next();
     }
   });
-  
+
   // Nothing has responded by now, respond with 404
   app.use((req, res) => {
     let error = errors.notFound();
@@ -100,22 +100,22 @@ let setupErrorHandler = function (app) {
 
 /**
  * @function initialize
- * @return {Promise} 
+ * @return {Promise}
  */
-module.exports.initialize  = () => new Promise((resolve, reject) => {
+module.exports.initialize = () => new Promise((resolve, reject) => {
   logger.info('Initializing express');
 
   try {
 
     // Create our express instance
     let app = express();
-    
+
     // Add some configurations to our app
     configureMiddleware(app);
     secureHeaders(app);
     setupRoutes(app);
     setupErrorHandler(app);
-    
+
     /**
     * Use an https server in production, this must be last
     * If this app is behind a load balancer on AWS that has SSL certs, then you
@@ -124,13 +124,13 @@ module.exports.initialize  = () => new Promise((resolve, reject) => {
     * depending on the environment that you are deploying to.
     */
     if (IS_PRODUCTION) {
-      
+
       // These are required for running in https
       let options = {
         key: fs.readFileSync(config.security.key),
         cert: fs.readFileSync(config.security.cert)
       };
-      
+
       // Pass back our https server
       resolve(https.createServer(options, app));
     }

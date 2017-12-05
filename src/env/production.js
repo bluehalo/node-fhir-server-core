@@ -5,21 +5,21 @@ const path = require('path');
  * @summary Production specific application configurations
  */
 module.exports = {
-    
+
   // Server port
   port: 3000,
 
   // Logging info
   logging: {
-      
+
     level: 'info'
 
   },
-  
+
   // Security configurations
   security: {
     key: path.resolve('./src/key.pem'),
-    cert: path.resolve('./src/cert.pem') 
+    cert: path.resolve('./src/cert.pem')
   }
-   
+
 };
