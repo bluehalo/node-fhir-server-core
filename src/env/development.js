@@ -10,6 +10,9 @@ module.exports = {
 
     level: 'debug'
 
-  }
+  },
 
+  // AUTH client ID and secret
+  clientId: 'my cliend id',
+  secret: 'secret'
 };

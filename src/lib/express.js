@@ -3,6 +3,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
+const axios = require('axios');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
@@ -66,6 +67,47 @@ let setupRoutes = function (app) {
 };
 
 /**
+ * @function retrieveAuthServerInfo
+ * @summary Retrieve authorization server configurations via config or discovery.
+ * @return {Promise} 
+ */
+let retrieveAuthServerInfo = async function() {  
+  const discoveryUrl = config.issuer.discoveryUrl;
+  let authConfig, jwkSet;
+  
+  if (!discoveryUrl) {
+    authConfig = config.issuer.authConfig;
+    jwkSet = config.issuer.jwkSet;
+  } else {
+    authConfig = await axios.get(discoveryUrl).then(res => res.data);
+    jwkSet = await axios.get(authConfig.jwks_uri).then(res => res.data);
+  }
+
+  if (typeof jwkSet.keys === 'undefined') {
+    throw new Error('keys are not defined');
+  }
+  if (typeof authConfig.authorization_endpoint !== 'string') {
+    throw new Error('authorization_endpoint is not a string');
+  }
+  if (typeof authConfig.token_endpoint !== 'string') {
+    throw new Error('token_endpoint is not a string');
+  }
+  if (typeof authConfig.registration_endpoint !== 'string') {
+    throw new Error('token_endpoint is not a string');
+  }
+  if (typeof authConfig.issuer !== 'string') {
+    throw new Error('issuer is not a string');
+  }
+  
+  // Introspection is not required depending on the oath2 implementation (required for openid)
+  if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
+    throw new Error('introspection_endpoint is not a string');
+  }
+
+  return {authConfig, jwkSet};
+};
+
+/**
  * @function setupErrorHandler
  * @summary Add error handler
  * @param {Express.app} app
@@ -102,11 +144,17 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
+<<<<<<< HEAD
 module.exports.initialize = () => new Promise((resolve, reject) => {
+=======
+module.exports.initialize  = async() => {
+>>>>>>> a4580607b35b718ac24fc2bdeffaef4a66549200
   logger.info('Initializing express');
 
-  try {
+  // Create our express instance
+  let app = express();
 
+<<<<<<< HEAD
     // Create our express instance
     let app = express();
 
@@ -144,3 +192,36 @@ module.exports.initialize = () => new Promise((resolve, reject) => {
     reject(err);
   }
 });
+=======
+  // Setup auth configs for middleware
+  let {authConfig, jwkSet} = await retrieveAuthServerInfo();
+  
+  // Add some configurations to our app
+  configureMiddleware(app);
+  secureHeaders(app);
+  setupRoutes(app);
+  setupErrorHandler(app);
+  
+  /**
+  * Use an https server in production, this must be last
+  * If this app is behind a load balancer on AWS that has SSL certs, then you
+  * do not necessarily need this, but if this is being deployed with nothing in
+  * front of it, then you must add some SSL certs. This last section can be updated
+  * depending on the environment that you are deploying to.
+  */
+  if (IS_PRODUCTION) {
+    
+    // These are required for running in https
+    let options = {
+      key: fs.readFileSync(config.security.key),
+      cert: fs.readFileSync(config.security.cert)
+    };
+    
+    // Pass back our https server
+    return https.createServer(options, app);
+  }
+
+  // Pass our app back if we are successful
+  return app;
+};
+>>>>>>> a4580607b35b718ac24fc2bdeffaef4a66549200
