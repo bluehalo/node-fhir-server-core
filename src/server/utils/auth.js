@@ -30,7 +30,7 @@ function _verifyToken(token, secretOrPublicKey, next) {
         // TODO get scopes/permissions
 
         next();
-      });
+    });
 }
 
 /**
