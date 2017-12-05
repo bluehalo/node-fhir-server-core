@@ -92,6 +92,9 @@ let retrieveAuthServerInfo = async function() {
   if (typeof authConfig.token_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
+  if (typeof authConfig.registration_endpoint !== 'string') {
+    throw new Error('token_endpoint is not a string');
+  }
   if (typeof authConfig.issuer !== 'string') {
     throw new Error('issuer is not a string');
   }

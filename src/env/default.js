@@ -16,6 +16,7 @@ module.exports = {
     authConfig: {
       authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
       token_endpoint: 'https://sb-auth.smarthealthit.org/token',
+      registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
       introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
       issuer: 'https://sb-auth.smarthealthit.org/'
     },
