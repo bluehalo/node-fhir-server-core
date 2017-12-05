@@ -7,7 +7,7 @@ const { routes } = require(path.resolve('./src/server/patient/patient.config'));
  * @summary Patient routes
  */
 module.exports = app => {
-  
+
   routes.forEach((route) => {
     app[route.type](
       route.path,
@@ -15,5 +15,5 @@ module.exports = app => {
       route.controller
     );
   });
-  
+
 };

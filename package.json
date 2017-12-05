@@ -18,7 +18,7 @@
     "serve-docs": "npm run build-docs;node docs/server",
     "build-docs": "webpack --config docs/webpack.config.js;",
     "watch-docs": "export NODE_ENV=development;webpack --config docs/webpack.config.js;",
-    "test:lint": "eslint src/**/*.js",
+    "test:lint": "eslint \"src/**/*.js\"",
     "test:e2e": "jest --runInBand e2e/*.spec.js",
     "test:src": "jest src",
     "test": "set -e; npm run test:lint; npm run test:e2e; npm run test:src;"

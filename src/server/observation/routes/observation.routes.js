@@ -6,7 +6,7 @@ const controller = require(path.resolve('./src/server/observation/controllers/ob
  * @summary Observation routes
  */
 module.exports = app => {
-  
+
   app.get('/observation', controller.getObservations);
-  
+
 };

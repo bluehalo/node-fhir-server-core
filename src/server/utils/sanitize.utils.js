@@ -30,12 +30,19 @@ let validateType = function (type, value) {
   switch (type) {
     case 'number':
       result = validator.isNumeric(value);
+			break;
     case 'boolean':
       result = validator.isBoolean(value);
+			break;
     case 'string':
       result = typeof value === 'string';
+			break;
     case 'date':
       result = moment(value).isValid();
+			break;
+		default:
+			result = false;
+			break;
   }
   return result;
 };
@@ -65,12 +72,12 @@ let sanitizeMiddleware = function (config) {
     // Check each argument in the config
     for (let i = 0; i < config.length; i++) {
       let conf = config[i];
-      
+
       // If the argument is required but not present
       if (!currentArgs[conf.name] && conf.required) {
         return next(errors.invalidParameter(conf.name + ' is required.'));
       }
-      
+
       // Try to cast the type to the correct type, do this first so that if something
       // returns as NaN we can bail on it
       try {
@@ -80,13 +87,13 @@ let sanitizeMiddleware = function (config) {
       } catch (err) {
         return next(errors.invalidParameter(conf.name + ' is invalid.'));
       }
-      
+
       // If we have the arg and the type is wrong, throw invalid arg
       if (cleanArgs[conf.name] && validateType(conf.type, cleanArgs[conf.name])) {
         return next(errors.invalidParameter(conf.name));
       }
     }
-    
+
     // All is well, update params, query, or body, and move on to the next middleware/function
     if (Object.keys(req.params).length) { req.params = cleanArgs; }
     if (Object.keys(req.query).length) { req.query = cleanArgs; }
