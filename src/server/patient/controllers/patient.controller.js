@@ -1,5 +1,5 @@
-const path = require('path');
-const service = require(path.resolve('./src/server/patient/services/patient.service'));
+// const path = require('path');
+// const service = require(path.resolve('./src/server/patient/services/patient.service'));
 
 
 module.exports.getPatient = (req, res) => {

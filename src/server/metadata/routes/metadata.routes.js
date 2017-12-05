@@ -6,7 +6,7 @@ const controller = require(path.resolve('./src/server/metadata/controllers/metad
  * @summary Metadata routes
  */
 module.exports = app => {
-  
+
   app.get('/metadata', controller.getCapabilityStatement);
-  
+
 };

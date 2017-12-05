@@ -5,7 +5,7 @@
 class ServerError extends Error {
   constructor (code, message) {
     super(message);
-    
+
     if (Error.captureStackStrace) {
       Error.captureStackStrace(this, ServerError);
     }
