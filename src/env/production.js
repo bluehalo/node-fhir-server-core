@@ -20,6 +20,10 @@ module.exports = {
   security: {
     key: path.resolve('./src/key.pem'),
     cert: path.resolve('./src/cert.pem') 
-  }
+  },
+
+  // AUTH client ID and secret 
+  clientId: 'my cliend id',
+  secret: 'secret'
    
 };
