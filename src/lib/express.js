@@ -17,10 +17,8 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
  * @function configureMiddleware
  * @summary Configure some basic express middleware
  * @param {Express.app} app
- * @param {Object} authConfig
- * @param {Object} jwksConfig
  */
-let configureMiddleware = function (app, authConfig, jwksConfig) {
+let configureMiddleware = function (app) {
   
   // Enable stack traces
   app.set('showStackError', true);
@@ -69,23 +67,23 @@ let setupRoutes = function (app) {
 };
 
 /**
- * @function initAuthServerConfigs
+ * @function retrieveAuthServerInfo
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise} 
  */
-let initAuthServerConfigs = async function() {  
+let retrieveAuthServerInfo = async function() {  
   const discoveryUrl = config.issuer.discoveryUrl;
-  let authConfig, jwksConfig;
+  let authConfig, jwkSet;
   
   if (!discoveryUrl) {
     authConfig = config.issuer.authConfig;
-    jwksConfig = config.issuer.jwksConfig;
+    jwkSet = config.issuer.jwkSet;
   } else {
     authConfig = await axios.get(discoveryUrl).then(res => res.data);
-    jwksConfig = await axios.get(authConfig.jwks_uri).then(res => res.data);
+    jwkSet = await axios.get(authConfig.jwks_uri).then(res => res.data);
   }
 
-  if (typeof jwksConfig.keys === 'undefined') {
+  if (typeof jwkSet.keys === 'undefined') {
     throw new Error('keys are not defined');
   }
   if (typeof authConfig.authorization_endpoint !== 'string') {
@@ -103,7 +101,7 @@ let initAuthServerConfigs = async function() {
     throw new Error('introspection_endpoint is not a string');
   }
 
-  return {authConfig, jwksConfig};
+  return {authConfig, jwkSet};
 };
 
 /**
@@ -150,10 +148,10 @@ module.exports.initialize  = async() => {
   let app = express();
 
   // Setup auth configs for middleware
-  let {authConfig, jwksConfig} = await initAuthServerConfigs();
+  let {authConfig, jwkSet} = await retrieveAuthServerInfo();
   
   // Add some configurations to our app
-  configureMiddleware(app, authConfig, jwksConfig);
+  configureMiddleware(app);
   secureHeaders(app);
   setupRoutes(app);
   setupErrorHandler(app);
