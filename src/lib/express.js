@@ -68,44 +68,45 @@ let setupRoutes = function (app) {
 };
 
 /**
- * @function retrieveAuthServerInfo
+ * @function initAuthConfig
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise}
  */
-let retrieveAuthServerInfo = async function () {
-  const discoveryUrl = config.issuer.discoveryUrl;
-  let authConfig, jwkSet;
+let initAuthConfig = async function(cfg) {
+  const discoveryUrl = cfg.authConfig.discoveryUrl;
+  let discoveredConfig, discoveredKeys;
+  
+  if (discoveryUrl) {
+    discoveredConfig = await axios.get(discoveryUrl).then(res => res.data);
+    discoveredKeys = await axios.get(discoveredConfig.jwks_uri).then(res => res.data);
 
-  if (!discoveryUrl) {
-    authConfig = config.issuer.authConfig;
-    jwkSet = config.issuer.jwkSet;
-  } else {
-    authConfig = await axios.get(discoveryUrl).then(res => res.data);
-    jwkSet = await axios.get(authConfig.jwks_uri).then(res => res.data);
+    cfg.authConfig.jwkSet = {}
+    Object.assign(cfg.authConfig.jwkSet, discoveredKeys);
+    Object.assign(cfg.authConfig, discoveredConfig);
   }
 
-  if (typeof jwkSet.keys === 'undefined') {
+  if (typeof cfg.authConfig.jwkSet.keys === 'undefined') {
     throw new Error('keys are not defined');
   }
-  if (typeof authConfig.authorization_endpoint !== 'string') {
+  if (typeof cfg.authConfig.authorization_endpoint !== 'string') {
     throw new Error('authorization_endpoint is not a string');
   }
-  if (typeof authConfig.token_endpoint !== 'string') {
+  if (typeof cfg.authConfig.token_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
-  if (typeof authConfig.registration_endpoint !== 'string') {
-    throw new Error('token_endpoint is not a string');
+  if (typeof cfg.authConfig.registration_endpoint !== 'string') {
+    throw new Error('registration_endpoint is not a string');
   }
-  if (typeof authConfig.issuer !== 'string') {
+  if (typeof cfg.authConfig.issuer !== 'string') {
     throw new Error('issuer is not a string');
   }
 
   // Introspection is not required depending on the oath2 implementation (required for openid)
-  if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
+  if (discoveryUrl && typeof cfg.authConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
   }
 
-  return {authConfig, jwkSet};
+  return;
 };
 
 /**
@@ -153,8 +154,8 @@ module.exports.initialize  = async () => {
   let app = express();
 
   // Setup auth configs for middleware
-  let {authConfig, jwkSet} = await retrieveAuthServerInfo();
-
+  await initAuthConfig(config);
+  
   // Add some configurations to our app
   configureMiddleware(app);
   secureHeaders(app);

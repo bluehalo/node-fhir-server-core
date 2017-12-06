@@ -7,19 +7,28 @@ module.exports = {
   // Server port
   port: 3000,
 
-  issuer: {
-    // Trusted Authentication Server if using discovery
+  authConfig: {
+
+    clientId: undefined,
+      
+    // Is used instead of jwkSet if defined
+    // secretKey: '',
+
+    // Used for introspection (optional)
+    protectedResourceClientId: 'ae83b0eb-35ed-483b-a933-edb2277f4aad',
+    protectedResourceClientSecret: 'AK1MPC0PT44icz7awMie4Pasd9BOMcJ6rTAazq2Ni01nQLecxqqtrcXKrz4bciQOaL5tjclmSKO064u9n1IoDzE',
+
+    // if using discovery
     discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration'
 
     // If not using discovery (introspection is optional depending on oauth2 implementation)
     /*
-    authConfig: {
-      authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
-      token_endpoint: 'https://sb-auth.smarthealthit.org/token',
-      registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
-      introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
-      issuer: 'https://sb-auth.smarthealthit.org/'
-    },
+    authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
+    token_endpoint: 'https://sb-auth.smarthealthit.org/token',
+    registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
+    introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
+    issuer: 'https://sb-auth.smarthealthit.org/',
+    
     jwkSet: {
       keys: [{
         "kty": "RSA",

@@ -1,10 +1,23 @@
 const path = require('path');
+const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const jwkToPem = require('jwk-to-pem')
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const config = require(path.resolve('./src/config/config'));
 const logger = require(path.resolve('./src/lib/winston'));
 
+// TODO: If there is more than one key
+function _getKeyForTokenValidation(decodedToken, authConfig) {
+    if (authConfig.secretKey) {
+        return authConfig.secretKey;
+    } else if (_.get(authConfig, 'jwkSet.keys', []).length === 1) {
+        const jwt = authConfig.jwkSet.keys[0];
+        return jwkToPem(jwt)
+    } else {
+        return null;
+    }
+}
 
 /**
  * Parse the `token` from the given
@@ -48,7 +61,7 @@ function _parseBearerToken(req) {
  */
 function _verifyToken(token, secretOrPublicKey, options = {}, next) {
     const issuer = config.authConfig.issuer;
-    const clientId = config.clientId;
+    const clientId = config.authConfig.clientId;
     const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
 
     // verify the token and signature with secret/pub key
@@ -61,7 +74,7 @@ function _verifyToken(token, secretOrPublicKey, options = {}, next) {
 
         // token should be valid at this point
         // TODO get scopes/permissions
-
+        
         next();
     });
 }
@@ -76,20 +89,8 @@ module.exports.validate = (req, res, next) => {
 
     if (bearerToken) {
         const decodedToken = jwt.decode(bearerToken, {complete: true});
-
-        // check algorithm so we know how to validate the signature
-        if (decodedToken && decodedToken.header && decodedToken.header.alg) {
-            if (decodedToken.header.alg.startsWith('HS')) {
-                // IF HS*** algorith, validate signature based on secret key
-                _verifyToken(bearerToken, config.secret, {}, next);
-
-            } else if (decodedToken.header.alg.startsWith('RS')) {
-                // IF RS*** algorithm, validate signature based on certificate
-                // Get public key (update this to point to the correct public key path)
-                const cert = fs.readFileSync(config.security.cert);
-                _verifyToken(bearerToken, cert, {algorithms: [decodedToken.header.alg]}, next);
-            }
-        }
+        const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig) 
+        _verifyToken(bearerToken, tokenKey, {}, next);
     }
 
     // did not pass checks, return 401 message
