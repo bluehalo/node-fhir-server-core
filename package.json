@@ -2,7 +2,7 @@
 	"name": "asy-fhir-server",
 	"version": "0.0.1",
 	"description": "Node FHIR Rest API Server",
-	"main": "src/server/server",
+	"main": "src/index",
 	"author": "Asymmetrik Ltd.",
 	"contributors": [
 		"Bryan Young <byoung@asymmetrik.com>",

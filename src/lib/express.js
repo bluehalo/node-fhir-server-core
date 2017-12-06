@@ -6,20 +6,17 @@ const helmet = require('helmet');
 const axios = require('axios');
 const https = require('https');
 const path = require('path');
+const glob = require('glob');
 const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
-const config = require(path.resolve('./src/config/config'));
-const logger = require(path.resolve('./src/lib/winston'));
-
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const USE_HTTPS = (config.security && config.security.key && config.security.cert);
+const appConfig = require(path.resolve('./src/config'));
 
 /**
  * @function configureMiddleware
  * @summary Configure some basic express middleware
  * @param {Express.app} app
  */
-let configureMiddleware = function (app) {
+let configureMiddleware = function (app, IS_PRODUCTION) {
 
   // Enable stack traces
   app.set('showStackError', !IS_PRODUCTION);
@@ -41,7 +38,7 @@ let configureMiddleware = function (app) {
  * @summary Add helmet to secure headers
  * @param {Express.app} app
  */
-let secureHeaders = function (app) {
+let secureHeaders = function (app, USE_HTTPS) {
   /**
   * The following headers are turned on by default:
   * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
@@ -63,8 +60,9 @@ let secureHeaders = function (app) {
  * @summary Add routes
  * @param {Express.app} app
  */
-let setupRoutes = function (app) {
-  config.files.routes.forEach(route => require(path.resolve(route))(app));
+let setupRoutes = function (app, logger, profiles) {
+	let routes = glob.sync(appConfig.routes);
+	routes.forEach(route => require(path.resolve(route))(app, logger, profiles));
 };
 
 /**
@@ -72,7 +70,7 @@ let setupRoutes = function (app) {
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise}
  */
-let retrieveAuthServerInfo = async function () {
+let retrieveAuthServerInfo = async function (config) {
   const discoveryUrl = config.issuer.discoveryUrl;
   let authConfig, jwkSet;
 
@@ -105,7 +103,7 @@ let retrieveAuthServerInfo = async function () {
     throw new Error('introspection_endpoint is not a string');
   }
 
-  return {authConfig, jwkSet};
+  return { authConfig, jwkSet };
 };
 
 /**
@@ -113,7 +111,7 @@ let retrieveAuthServerInfo = async function () {
  * @summary Add error handler
  * @param {Express.app} app
  */
-let setupErrorHandler = function (app) {
+let setupErrorHandler = function (app, logger) {
   // Generic catch all error handler
   // Errors should be thrown with next and passed through
   app.use((err, req, res, next) => {
@@ -145,21 +143,26 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
-module.exports.initialize  = async () => {
-
+module.exports.initialize = async ({ config, logger }) => {
   logger.info('Initializing express');
+
+	const USE_HTTPS = (config.security && config.security.key && config.security.cert);
+	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+	const { auth, profiles } = config;
 
   // Create our express instance
   let app = express();
 
   // Setup auth configs for middleware
-  let {authConfig, jwkSet} = await retrieveAuthServerInfo();
+	/* eslint-disable no-unused-vars */
+  let { authConfig, jwkSet } = await retrieveAuthServerInfo(auth);
+	/* eslint-enable no-unused-vars */
 
   // Add some configurations to our app
-  configureMiddleware(app);
-  secureHeaders(app);
-  setupRoutes(app);
-  setupErrorHandler(app);
+  configureMiddleware(app, IS_PRODUCTION);
+  secureHeaders(app, USE_HTTPS);
+  setupRoutes(app, logger, profiles);
+  setupErrorHandler(app, logger);
 
   /**
   * Use an https server in production, this must be last
@@ -172,8 +175,8 @@ module.exports.initialize  = async () => {
 
     // These are required for running in https
     let options = {
-      key: fs.readFileSync(config.security.key),
-      cert: fs.readFileSync(config.security.cert)
+      key: fs.readFileSync(config.ssl.key),
+      cert: fs.readFileSync(config.ssl.cert)
     };
 
     // Pass back our https server
