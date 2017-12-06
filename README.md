@@ -41,6 +41,14 @@ openssl x509 -req -in client-csr.pem -signkey key.pem -out cert.pem
 
 ### Testing
 
+## Deployment
+
+Requirements for deploying are ...
+
+### ATTENTION
+
+This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 BUT not 8.5.
+
 ## API Documentation
 
 API docs are generated during the setup phase. When you run `npm install`, there is a `postinstall` script that generates a web page to display the API documentation. It is written with Swagger based on the [OpenAPI Specification version 3.0.0](https://swagger.io/specification/). The web page to view the docs can be found in the `docs/dist` folder and must be deployed to a web server.  If you do not have access to a web server and have installed the project's minimum requirements. You can run `npm run serve-docs` in your terminal to start up a simple node.js server to host your docs. After running that, navigate to [localhost:3001](http://localhost:3001).

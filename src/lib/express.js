@@ -12,6 +12,7 @@ const config = require(path.resolve('./src/config/config'));
 const logger = require(path.resolve('./src/lib/winston'));
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const USE_HTTPS = (config.security && config.security.key && config.security.cert);
 
 /**
  * @function configureMiddleware
@@ -21,7 +22,7 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 let configureMiddleware = function (app) {
 
   // Enable stack traces
-  app.set('showStackError', true);
+  app.set('showStackError', !IS_PRODUCTION);
 
   // Add compression
   app.use(compression({ level: 9 }));
@@ -53,7 +54,7 @@ let secureHeaders = function (app) {
   */
   app.use(helmet({
     // Needs https running first
-    hsts: IS_PRODUCTION
+    hsts: USE_HTTPS
   }));
 };
 
@@ -69,12 +70,12 @@ let setupRoutes = function (app) {
 /**
  * @function retrieveAuthServerInfo
  * @summary Retrieve authorization server configurations via config or discovery.
- * @return {Promise} 
+ * @return {Promise}
  */
-let retrieveAuthServerInfo = async function() {  
+let retrieveAuthServerInfo = async function () {
   const discoveryUrl = config.issuer.discoveryUrl;
   let authConfig, jwkSet;
-  
+
   if (!discoveryUrl) {
     authConfig = config.issuer.authConfig;
     jwkSet = config.issuer.jwkSet;
@@ -98,7 +99,7 @@ let retrieveAuthServerInfo = async function() {
   if (typeof authConfig.issuer !== 'string') {
     throw new Error('issuer is not a string');
   }
-  
+
   // Introspection is not required depending on the oath2 implementation (required for openid)
   if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
@@ -144,7 +145,8 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
-module.exports.initialize  = async() => {
+module.exports.initialize  = async () => {
+
   logger.info('Initializing express');
 
   // Create our express instance
@@ -152,13 +154,13 @@ module.exports.initialize  = async() => {
 
   // Setup auth configs for middleware
   let {authConfig, jwkSet} = await retrieveAuthServerInfo();
-  
+
   // Add some configurations to our app
   configureMiddleware(app);
   secureHeaders(app);
   setupRoutes(app);
   setupErrorHandler(app);
-  
+
   /**
   * Use an https server in production, this must be last
   * If this app is behind a load balancer on AWS that has SSL certs, then you
@@ -166,14 +168,14 @@ module.exports.initialize  = async() => {
   * front of it, then you must add some SSL certs. This last section can be updated
   * depending on the environment that you are deploying to.
   */
-  if (IS_PRODUCTION) {
-    
+  if (USE_HTTPS) {
+
     // These are required for running in https
     let options = {
       key: fs.readFileSync(config.security.key),
       cert: fs.readFileSync(config.security.cert)
     };
-    
+
     // Pass back our https server
     return https.createServer(options, app);
   }
