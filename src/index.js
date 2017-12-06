@@ -2,14 +2,15 @@ const Server = require('./server/server');
 
 let mockConfig = {
 	auth: {
-		clientId: '',
-		secret: '',
+		clientId: 'client_id',
+		secret: 'secret',
 		issuer: {
 			discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration'
 		}
 	},
 	server: {
 		port: 3000,
+		// @TODO Implement this
 		sessionStore: null,
 		ssl: {
 			key: '',
@@ -21,11 +22,11 @@ let mockConfig = {
 	},
 	profiles: {
 		patient: {
-			adapter: '', // Required as a string or module
+			service: '', // Required as a string or module
 			resolver: '' // Required as a string or module
 		},
 		observation: {
-			adapter: '', // Required as a string or module
+			service: '', // Required as a string or module
 			resolver: '' // Required as a string or module
 		}
 	}

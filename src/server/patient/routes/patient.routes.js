@@ -6,13 +6,13 @@ const { routes } = require(path.resolve('./src/server/patient/patient.config'));
  * @name exports
  * @summary Patient routes
  */
-module.exports = app => {
+module.exports = (app, profiles, logger) => {
 
   routes.forEach((route) => {
     app[route.type](
       route.path,
       sanitizeMiddleware(route.args),
-      route.controller
+      route.controller(profiles.patient, logger)
     );
   });
 
