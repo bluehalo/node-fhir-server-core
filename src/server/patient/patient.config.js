@@ -19,7 +19,7 @@ let routes = [
       name: 'given',
       type: 'string'
     }],
-    scopes: [],
+    scopes: ['patient/*.read'],
     controller: controller.getPatient
   },
   {

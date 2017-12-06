@@ -3,7 +3,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
-const axios = require('axios');
+const request = require('superagent');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
@@ -77,8 +77,8 @@ let initAuthConfig = async function(cfg) {
   let discoveredConfig, discoveredKeys;
   
   if (discoveryUrl) {
-    discoveredConfig = await axios.get(discoveryUrl).then(res => res.data);
-    discoveredKeys = await axios.get(discoveredConfig.jwks_uri).then(res => res.data);
+    discoveredConfig = await request.get(discoveryUrl).then(res => res.body);
+    discoveredKeys = await request.get(discoveredConfig.jwks_uri).then(res => res.body);
 
     cfg.authConfig.jwkSet = {}
     Object.assign(cfg.authConfig.jwkSet, discoveredKeys);

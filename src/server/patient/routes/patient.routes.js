@@ -13,7 +13,7 @@ module.exports = app => {
     app[route.type](
       route.path,
       sanitizeMiddleware(route.args),
-      validate,
+      validate(route.scopes),
       route.controller
     );
   });
