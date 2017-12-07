@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+
 // Load in our css
 require('docs/css/core.scss');
 

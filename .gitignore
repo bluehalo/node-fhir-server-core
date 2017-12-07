@@ -8,8 +8,6 @@ package-lock.json
 # Generated files
 src/key.pem
 src/cert.pem
+src/docs/dist
 npm-debug.log
 .DS_Store
-docs/dist
-
-

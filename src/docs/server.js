@@ -5,8 +5,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-app.use(express.static('docs'));
-app.use(express.static('docs/dist'));
+app.use(express.static('src/docs'));
+app.use(express.static('src/docs/dist'));
 
 app.listen(PORT, () => {
   console.log('[\x1B[34mExpress\x1B[39m] \x1B[1mAPI Documentation Server\x1B[1m');
