@@ -9,7 +9,7 @@ const scopes = [
   'patient/*.*',
   'patient/Patient.*',
   'patient/Patient.read',
-  'patient/*.read',
+  'patient/*.read'
 ];
 
 let routes = [

@@ -24,10 +24,10 @@ function _checkForScopes(decodedTokenOrIntrospection, requiredScopes, next) {
 
     if (intersection.length > 0) {
         logger.info('Access token and scope have been verified');
-        next();
+        return next();
     } else {
         logger.error('Access token lacks one of the proper scopes');
-        next(errors.unauthorized());
+        return next(errors.unauthorized());
     }
 }
 
@@ -100,41 +100,46 @@ function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, ne
     logger.debug(`JWT verify options: ${JSON.stringify(allOptions)}`);
 
     // verify the token and signature with secret/pub key
-    jwt.verify(token, secretOrPublicKey, allOptions, function(err, decoded) {
-        if (err) {
-            // log error return 401 with error message;
-            logger.error(err, err.message);
-            return next(errors.custom(401, 'Unauthorized request: ' + err.message));
-        }
 
+    try {
+        const decoded = jwt.verify(token, secretOrPublicKey, allOptions);
         logger.debug('Token has been verified. Searching for scope ...');
 
         if (typeof decoded.scope === 'string') {
             logger.debug('Scope was found in decoded token');
-            _checkForScopes(decoded, requiredScopes, next);
+            return _checkForScopes(decoded, requiredScopes, next);
         } else if (config.authConfig.introspection_endpoint) {
             logger.debug('Attempting to introspect token');
 
             const protectedResourceClientId = config.authConfig.protectedResourceClientId;
             const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;
 
-            request
+            return request
                 .post(config.authConfig.introspection_endpoint)
                 .auth(protectedResourceClientId, protectedResourceClientSecret)
                 .send(`token=${token}`)
             .then((response) => {
                 const introspection = response.body;
                 logger.debug(`Successfully introspected token: ${JSON.stringify(introspection)}`);
-                _checkForScopes(introspection, requiredScopes, next);
+                if (introspection.active) {
+                    return _checkForScopes(introspection, requiredScopes, next);
+                } else {
+                    logger.error('Access token is not active');
+                    return next(errors.unauthorized());
+                }
             }, (error) => {
-                logger.error(`Failed to instrospect token ${error}`);
-                next(errors.unauthorized());
+                logger.error(`Failed to introspect token ${error}`);
+                return next(errors.unauthorized());
             });
         } else {
             logger.error(`Could not find scope or introspect token ${JSON.stringify(decoded)}`);
-            next(errors.unauthorized());
+            return next(errors.unauthorized());
         }
-    });
+    } catch (err) {
+        // log error return 401 with error message;
+        logger.error(err, err.message);
+        return next(errors.custom(401, 'Unauthorized request: ' + err.message));
+    }
 }
 
 /**
@@ -143,7 +148,7 @@ function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, ne
  * @param {Array<String>} requiredScopes - Scopes that each individually allow access to the resource.
  */
 module.exports.validate = (requiredScopes) => {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         // get bearer token
         const bearerToken = _parseBearerToken(req);
 
@@ -152,11 +157,11 @@ module.exports.validate = (requiredScopes) => {
             const decodedToken = jwt.decode(bearerToken, {complete: true});
             logger.debug(`Decoded bearer token in request: ${JSON.stringify(decodedToken)}`);
             const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig);
-            _verifyToken(bearerToken, tokenKey, {}, requiredScopes, next);
+            return await _verifyToken(bearerToken, tokenKey, {}, requiredScopes, next);
         } else {
             // did not pass checks, return 401 message
             logger.error('Could not find bearer token in request headers');
-            next(errors.unauthorized());
+            return next(errors.unauthorized());
         }
     };
 };
