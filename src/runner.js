@@ -27,7 +27,19 @@ const CONFIG = {
 	},
 	server: {
 		port: 3000,
-		// @TODO Implement this
+		// Needs to be in instance of express-session, for example, with Mongo
+		/**
+		* app.use(session({
+		* 	resave: true,
+		* 	saveUninitialized: true,
+		* 	secret: config.auth.sessionSecret,
+		* 	cookie: config.auth.sessionCookie,
+		* 	store: new MongoStore({
+		*			mongooseConnection: connection,
+		* 		collection: config.auth.collection
+		* 	})
+		* }));
+		*/
 		sessionStore: null,
 		ssl: {
 			key: path.resolve('./src/key.pem'),

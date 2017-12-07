@@ -34,6 +34,18 @@ let configureMiddleware = function (app, IS_PRODUCTION) {
 };
 
 /**
+ * @function configureSession
+ * @summary Configure some basic express middleware
+ * @param {Express.app} app
+ */
+let configureSession = function (app, serverConfig) {
+	// If a session was passed in the config, let's use it
+	if (serverConfig.sessionStore) {
+		app.use(serverConfig.sessionStore);
+	}
+};
+
+/**
  * @function secureHeaders
  * @summary Add helmet to secure headers
  * @param {Express.app} app
@@ -160,6 +172,7 @@ module.exports.initialize = async ({ config, logger }) => {
 
   // Add some configurations to our app
   configureMiddleware(app, IS_PRODUCTION);
+	configureSession(app, server);
   secureHeaders(app, USE_HTTPS);
   setupRoutes(app, profiles, logger);
   setupErrorHandler(app, logger);

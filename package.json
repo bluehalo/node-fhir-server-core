@@ -19,7 +19,7 @@
 		"nodemon": "export NODE_ENV=development; node src/scripts/nodemon",
 		"postinstall": "npm run build-docs",
 		"serve-docs": "npm run build-docs;node docs/server",
-		"build-docs": "webpack --config docs/webpack.config.js;",
+		"build-docs": "export NODE_ENV=production;webpack --config docs/webpack.config.js;",
 		"watch-docs": "export NODE_ENV=development;webpack --config docs/webpack.config.js;",
 		"test:lint": "eslint \"src/**/*.js\"",
 		"test:e2e": "jest --runInBand e2e/*.spec.js",

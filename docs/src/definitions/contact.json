@@ -1,0 +1,58 @@
+{
+  "Contact": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique id for the element within a resource (for internal references)."
+      },
+      "relationship": {
+        "type": "array",
+        "description": "The nature of the relationship between the patient and the contact person.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "Plain text representation of the concept"
+            },
+            "coding": {
+              "type": "array",
+              "description": "Coding available at - http://hl7.org/fhir/ValueSet/patient-contact-relationship",
+              "items": {
+                "$ref": "coding.json#/Coding"
+              }
+            }
+          }
+        }
+      },
+      "name": {
+        "description": "A name associated with the contact person.",
+        "$ref": "human-name.json#/HumanName"
+      },
+      "telecom": {
+        "type": "array",
+        "description": "A contact detail for the person, e.g. a telephone number or an email address.",
+        "items": {
+          "$ref": "contact-point.json#/ContactPoint"
+        }
+      },
+      "address": {
+        "description": "Address for the contact person.",
+        "$ref": "address.json#/Address"
+      },
+      "gender": {
+        "type": "string",
+        "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes. Full coding available at http://hl7.org/fhir/ValueSet/administrative-gender"
+      },
+      "organization": {
+        "description": "Organization on behalf of which the contact is acting or for which the contact is working.",
+        "$ref": "reference.json#/Reference"
+      },
+      "period": {
+        "description": "The period during which this contact person or organization is valid to be contacted relating to this patient.",
+        "$ref": "period.json#/Period"
+      }
+    }
+  }
+}

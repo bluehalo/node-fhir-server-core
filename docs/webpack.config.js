@@ -1,7 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -31,10 +30,10 @@ module.exports = {
       inject: false
     }),
     new CopyWebpackPlugin([
-      path.resolve('./docs/src/openapi.yml'),
+			path.resolve('./docs/src/openapi.json'),
       {
         from: path.resolve('./docs/src/definitions'),
-        to:  path.resolve('./docs/dist/definitions')
+        to: path.resolve('./docs/dist/definitions')
       }
     ])
   ]

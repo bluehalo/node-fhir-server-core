@@ -1,0 +1,264 @@
+{
+  "Metadata": {
+    "xml": {
+      "name": "metadata"
+    },
+    "type": "object",
+    "properties": {
+      "resourceType": {
+        "type": "string",
+        "default": "CapabilityStatement",
+        "example": "CapabilityStatement"
+      },
+      "status": {
+        "type": "string",
+        "example": "active",
+        "description": "draft | active | retired | unknown. Full coding available at http://hl7.org/fhir/valueset-publication-status.html"
+      },
+      "date": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date this was last changed"
+      },
+      "kind": {
+        "type": "string",
+        "example": "instance",
+        "description": "instance | capability | requirements. Full coding available at http://hl7.org/fhir/valueset-capability-statement-kind.html"
+      },
+      "software": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A name the software is known by"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version covered by this statement"
+          }
+        }
+      },
+      "implementation": {
+        "type": "object",
+        "description": "Only required if this describes a specific instance, i.e. a particular installation as opposed to the capabilities of the software program",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Describes this specific instance"
+          }
+        }
+      },
+      "fhirVersion": {
+        "type": "string",
+        "example": "3.0.1",
+        "description": "FHIR Version the system uses"
+      },
+      "acceptUnknown": {
+        "type": "string",
+        "example": "extensions",
+        "description": "no | extensions | elements | both. Full coding available at http://hl7.org/fhir/valueset-unknown-content-code.html"
+      },
+      "format": {
+        "type": "array",
+        "example": [
+          "application/fhir+xml",
+          "application/fhir+json"
+        ],
+        "description": "Formats supported (xml | json | ttl | mime type). See http://www.rfc-editor.org/bcp/bcp13.txt",
+        "items": {
+          "type": "string"
+        }
+      },
+      "rest": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "example": "server",
+              "description": "client | server. Full coding available at http://hl7.org/fhir/valueset-restful-capability-mode.html"
+            },
+            "resource": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "Patient",
+                    "description": "A resource type that is supported. Coding available at http://hl7.org/fhir/valueset-resource-types.html"
+                  },
+                  "interaction": {
+                    "type": "array",
+                    "description": "What operations are supported",
+                    "example": [
+                      {
+                        "code": "read"
+                      },
+                      {
+                        "code": "vread"
+                      },
+                      {
+                        "code": "history-instance"
+                      }
+                    ],
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "read | vread | update | patch | delete | history-instance | history-type | create | search-type. Full coding available at http://hl7.org/fhir/valueset-type-restful-interaction.html"
+                        },
+                        "documentation": {
+                          "type": "string",
+                          "description": "Anything special about operation behavior"
+                        }
+                      }
+                    }
+                  },
+                  "searchParam": {
+                    "type": "array",
+                    "description": "Search parameters supported by implementation",
+                    "example": [
+                      {
+                        "name": "id",
+                        "type": "string",
+                        "definition": "Id of the patient"
+                      }
+                    ],
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of search parameter"
+                        },
+                        "definition": {
+                          "type": "string",
+                          "description": "Source of definition of the parameter"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "number | date | string | token | reference | composite | quantity | uri. Full coding available at http://hl7.org/fhir/valueset-search-param-type.html"
+                        },
+                        "documentation": {
+                          "type": "string",
+                          "description": "Server-specific usage"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "messaging": {
+        "type": "array",
+        "description": "Only required if messaging is enabled. If it is, all the following properties must be included.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "array",
+              "description": "Where messages should be sent",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "protocol": {
+                    "type": "string",
+                    "description": "http | ftp | mllp +, Full coding available at http://hl7.org/fhir/valueset-message-transport.html",
+                    "example": "http"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Network address or identifier of the end-point"
+                  }
+                }
+              }
+            },
+            "supportedMessage": {
+              "type": "array",
+              "description": "Messages supported by this system",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "description": "sender | receiver. Full coding available at http://hl7.org/fhir/valueset-event-capability-mode.html",
+                    "example": "sender"
+                  },
+                  "definition": {
+                    "type": "object",
+                    "description": "See http://hl7.org/fhir/messagedefinition.html#MessageDefinition and http://hl7.org/fhir/references.html#Reference. This type is Reference(MessageDefinition) and if needed, you should read the definitions linked here to understand what is required to set those up.\n",
+                    "example": {}
+                  }
+                }
+              }
+            },
+            "event": {
+              "type": "array",
+              "description": "Declare support for this event",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "object",
+                    "description": "Event type. See http://hl7.org/fhir/valueset-resource-types.html",
+                    "example": {}
+                  },
+                  "mode": {
+                    "type": "string",
+                    "description": "sender | receiver. Full coding available at http://hl7.org/fhir/valueset-event-capability-mode.html",
+                    "example": "receiver"
+                  },
+                  "focus": {
+                    "type": "string",
+                    "description": "Resource that's focus of the message. See http://hl7.org/fhir/valueset-resource-types.html"
+                  },
+                  "request": {
+                    "type": "object",
+                    "description": "Profile that describes the request. See http://hl7.org/fhir/structuredefinition.html#StructureDefinition and http://hl7.org/fhir/references.html#Reference. This type is Reference(StructureDefinition) and if needed, you should read the definitions linked here to understand what is required to set those up.\n",
+                    "example": {}
+                  },
+                  "response": {
+                    "type": "object",
+                    "description": "Profile that describes the response. See http://hl7.org/fhir/structuredefinition.html#StructureDefinition and http://hl7.org/fhir/references.html#Reference. This type is Reference(StructureDefinition) and if needed, you should read the definitions linked here to understand what is required to set those up.\n",
+                    "example": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "document": {
+        "type": "array",
+        "description": "Document definition, only required if this exists",
+        "items": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "producer | consumer. Does this application produce or consume documents of the specified type. Full coding available at http://hl7.org/fhir/valueset-document-mode.html",
+              "example": "producer"
+            },
+            "profile": {
+              "type": "object",
+              "description": "Constraint on a resource used in the document. See http://hl7.org/fhir/references.html#Reference",
+              "properties": {
+                "reference": {
+                  "type": "string",
+                  "description": "Literal reference, relative, internal or absolute URL",
+                  "example": "http://hl7.org/fhir/Profile/Patient"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

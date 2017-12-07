@@ -8,7 +8,7 @@ const { presets, plugins } = SwaggerUIBundle;
 
 function main () {
   window.ui = SwaggerUIBundle({
-    url: 'openapi.yml',
+    url: 'openapi.json',
     dom_id: '#site-documentation',
     layout: 'StandaloneLayout',
     presets: [
@@ -21,7 +21,7 @@ function main () {
     defaultModelExpandDepth: 0,
     validatorUrl: false
   });
-};
+}
 
 if (document.readyState === 'complete') {
   main();
