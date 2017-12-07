@@ -60,17 +60,18 @@ const CONFIG = {
 };
 
 let handler = promise => promise
-	.then(data => [data])
-	.catch(err => [null, err]);
+	.then(data => [null, data])
+	.catch(err => [err]);
 
 let main = async function () {
 	/* eslint-disable no-unused-vars */
-	const [server, err] = await handler(fhirServer(CONFIG));
+	const [ err, server ] = await handler(fhirServer(CONFIG));
 	/* eslint-enable no-unused-vars */
 
 	// If something happened on initialization, handle it here
 	if (err) {
-		process.exit(err);
+		console.error(err.message);
+		process.exit(1);
 	}
 
 };

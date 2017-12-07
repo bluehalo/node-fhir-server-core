@@ -73,7 +73,7 @@ let secureHeaders = function (app, USE_HTTPS) {
  * @param {Express.app} app
  */
 let setupRoutes = function (app, profiles, logger) {
-	let routes = glob.sync(appConfig.routes);
+	let routes = glob.sync(appConfig.files.routes);
 	routes.forEach(route => require(path.resolve(route))(app, profiles, logger));
 };
 

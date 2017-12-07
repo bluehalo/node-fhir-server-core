@@ -1,5 +1,4 @@
 const path = require('path');
-// const config = require(path.resolve('./src/config/config'));
 const express = require(path.resolve('./src/lib/express'));
 const Logger = require(path.resolve('./src/lib/winston'));
 
@@ -14,9 +13,19 @@ let validSSLConfiguration = (config = {}) => {
 /**
  * @description Helper for validating Adapters for profiles
  */
-let validProfile = (profile = {}) => {
-	// Later we should require these and save them or save them if they
-	// are already modules.
+let loadProfile = (key, profile = {}) => {
+	if (typeof profile.service === 'string') {
+		try {
+			profile.service = require(path.resolve(profile.service));
+		} catch (err) {
+			// Let's throw a more informative error than the default
+			throw new Error(
+				`Unable to load service for ${key} profile.`
+				+ ` Check your configuration for the ${key} profile and`
+				+ ' make sure the path is correct or pass the module in directly.'
+			);
+		}
+	}
 	return profile.service;
 };
 
@@ -58,7 +67,7 @@ class Server {
 		// Validate profiles
 		let profileKeys = Object.keys(config.profiles);
 		let hasValidProfileConfiguration = profileKeys.some(profileKey => {
-			return validProfile(config.profiles[profileKey]);
+			return loadProfile(profileKey, config.profiles[profileKey]);
 		});
 
 		// Throw errors if any of these conditions have failed

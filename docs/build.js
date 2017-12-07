@@ -14,12 +14,13 @@ console.log('--------------------');
 compiler.run((err, stats) => {
 
 	// Output some statistics
-	// console.log(stats.toString({
-	// 	errorDetails: true,
-	// 	warnings: true,
-	// 	chunks: false,
-	// 	colors: true
-	// }));
+	console.log(stats.toString({
+		errorDetails: true,
+		warnings: true,
+		modules: false,
+		assets: false,
+		chunks: false
+	}));
 
 	// Build is completed
 	console.log('-----------------------');
