@@ -72,38 +72,38 @@ let setupRoutes = function (app, profiles, logger) {
  */
 let retrieveAuthServerInfo = async function (config) {
   const discoveryUrl = config.issuer.discoveryUrl;
-  let authConfig, jwkSet;
+  let oauthConfig, jwkSet;
 
   if (!discoveryUrl) {
-    authConfig = config.issuer.authConfig;
+    oauthConfig = config.issuer.oauthConfig;
     jwkSet = config.issuer.jwkSet;
   } else {
-    authConfig = await axios.get(discoveryUrl).then(res => res.data);
-    jwkSet = await axios.get(authConfig.jwks_uri).then(res => res.data);
+    oauthConfig = await axios.get(discoveryUrl).then(res => res.data);
+    jwkSet = await axios.get(oauthConfig.jwks_uri).then(res => res.data);
   }
 
   if (typeof jwkSet.keys === 'undefined') {
     throw new Error('keys are not defined');
   }
-  if (typeof authConfig.authorization_endpoint !== 'string') {
+  if (typeof oauthConfig.authorization_endpoint !== 'string') {
     throw new Error('authorization_endpoint is not a string');
   }
-  if (typeof authConfig.token_endpoint !== 'string') {
+  if (typeof oauthConfig.token_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
-  if (typeof authConfig.registration_endpoint !== 'string') {
+  if (typeof oauthConfig.registration_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
-  if (typeof authConfig.issuer !== 'string') {
+  if (typeof oauthConfig.issuer !== 'string') {
     throw new Error('issuer is not a string');
   }
 
   // Introspection is not required depending on the oath2 implementation (required for openid)
-  if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
+  if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
   }
 
-  return { authConfig, jwkSet };
+  return { oauthConfig, jwkSet };
 };
 
 /**
@@ -146,16 +146,16 @@ let setupErrorHandler = function (app, logger) {
 module.exports.initialize = async ({ config, logger }) => {
   logger.info('Initializing express');
 
-	const USE_HTTPS = (config.security && config.security.key && config.security.cert);
+	const { auth, profiles, server } = config;
+	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-	const { auth, profiles } = config;
 
   // Create our express instance
   let app = express();
 
   // Setup auth configs for middleware
 	/* eslint-disable no-unused-vars */
-  let { authConfig, jwkSet } = await retrieveAuthServerInfo(auth);
+  let { oauthConfig, jwkSet } = await retrieveAuthServerInfo(auth);
 	/* eslint-enable no-unused-vars */
 
   // Add some configurations to our app
@@ -175,8 +175,8 @@ module.exports.initialize = async ({ config, logger }) => {
 
     // These are required for running in https
     let options = {
-      key: fs.readFileSync(config.ssl.key),
-      cert: fs.readFileSync(config.ssl.cert)
+      key: fs.readFileSync(server.ssl.key),
+      cert: fs.readFileSync(server.ssl.cert)
     };
 
     // Pass back our https server

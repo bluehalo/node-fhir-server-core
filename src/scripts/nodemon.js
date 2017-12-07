@@ -1,19 +1,13 @@
 const nodemon = require('nodemon');
 const path = require('path');
-const logger = require(path.resolve('./src/lib/winston'));
+const logger = require(path.resolve('./src/lib/winston'))({ level: 'debug' });
 
 nodemon({
   ignore: ['node_modules'],
-  script: 'src/server/server',
+  script: 'src/runner',
   ext: 'js json',
   verbose: true,
-  watch: [
-    'src/scripts/**/*.js',
-    'src/server/**/*.js',
-    'src/config/**/*.js',
-    'src/env/**/*.js',
-    'src/lib/**/*.js'
-  ],
+  watch: [ 'src/**/*.js' ],
   env: process.env
 });
 

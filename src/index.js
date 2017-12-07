@@ -1,45 +1,19 @@
 const Server = require('./server/server');
 
-let mockConfig = {
-	auth: {
-		clientId: 'client_id',
-		secret: 'secret',
-		issuer: {
-			discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration'
-		}
-	},
-	server: {
-		port: 3000,
-		// @TODO Implement this
-		sessionStore: null,
-		ssl: {
-			key: '',
-			cert: ''
-		}
-	},
-	logging: {
-		level: 'debug'
-	},
-	profiles: {
-		patient: {
-			service: '', // Required as a string or module
-			resolver: '' // Required as a string or module
-		},
-		observation: {
-			service: '', // Required as a string or module
-			resolver: '' // Required as a string or module
-		}
-	}
-};
-
 /**
  * @name exports
  * @description Export a function to generate a FHIR compatible server
  * @param {Object} config - FHIR Server configuration object
  */
-module.exports = (config) => {
+module.exports = (config) => new Promise((resolve, reject) => {
+	let server;
 	// Create our FHIR server
-	let server = new Server(config || mockConfig);
+	try {
+		server = new Server(config);
+	} catch (err) {
+		reject(err);
+	}
+
 	// Start our server
-	server.start();
-};
+	return server.start();
+});
