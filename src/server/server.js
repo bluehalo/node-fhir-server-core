@@ -17,7 +17,7 @@ let validSSLConfiguration = (config = {}) => {
 let validProfile = (profile = {}) => {
 	// Later we should require these and save them or save them if they
 	// are already modules.
-	return profile.service && profile.resolver;
+	return profile.service;
 };
 
 

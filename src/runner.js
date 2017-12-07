@@ -51,17 +51,17 @@ const CONFIG = {
 	},
 	profiles: {
 		patient: {
-			service: 'foo', // Required as a string or module
-			resolver: 'bar' // Required as a string or module
+			service: 'foo' // Required as a string or module
 		},
 		observation: {
-			service: '', // Required as a string or module
-			resolver: '' // Required as a string or module
+			service: '' // Required as a string or module
 		}
 	}
 };
 
-let handler = promise => promise.then(data => [data]).catch(err => [null, err]);
+let handler = promise => promise
+	.then(data => [data])
+	.catch(err => [null, err]);
 
 let main = async function () {
 	/* eslint-disable no-unused-vars */
