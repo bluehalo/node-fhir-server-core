@@ -75,12 +75,12 @@ let setupRoutes = function (app) {
 let initAuthConfig = async function(cfg) {
   const discoveryUrl = cfg.authConfig.discoveryUrl;
   let discoveredConfig, discoveredKeys;
-  
+
   if (discoveryUrl) {
     discoveredConfig = await request.get(discoveryUrl).then(res => res.body);
     discoveredKeys = await request.get(discoveredConfig.jwks_uri).then(res => res.body);
 
-    cfg.authConfig.jwkSet = {}
+    cfg.authConfig.jwkSet = {};
     Object.assign(cfg.authConfig.jwkSet, discoveredKeys);
     Object.assign(cfg.authConfig, discoveredConfig);
   }
@@ -146,8 +146,7 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
-module.exports.initialize  = async () => {
-
+module.exports.initialize = async() => {
   logger.info('Initializing express');
 
   // Create our express instance
@@ -155,7 +154,7 @@ module.exports.initialize  = async () => {
 
   // Setup auth configs for middleware
   await initAuthConfig(config);
-  
+
   // Add some configurations to our app
   configureMiddleware(app);
   secureHeaders(app);

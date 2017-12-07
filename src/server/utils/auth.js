@@ -2,36 +2,50 @@ const path = require('path');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const request = require('superagent');
-const jwkToPem = require('jwk-to-pem')
+const jwkToPem = require('jwk-to-pem');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const config = require(path.resolve('./src/config/config'));
 const logger = require(path.resolve('./src/lib/winston'));
 
 /**
- * 
+ * Check the decoded token or instrospection for at least one required scope.
+ *
+ * @param {Object} decodedTokenOrIntrospection
+ * @param {Array<String>} requiredScopes
+ * @param {*} next
  */
 function _checkForScopes(decodedTokenOrIntrospection, requiredScopes, next) {
     const tokenScope = decodedTokenOrIntrospection.scope;
     const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(' ') : [];
-    logger.info(`Token Scopes: ${scopeArray}`);
-    logger.info(`Require at least one scope for route: ${requiredScopes}`);
     const intersection = _.intersection(scopeArray, requiredScopes);
+
+    logger.debug(`Required scopes for resource ${requiredScopes}`);
+    logger.debug(`Scope found on request ${scopeArray}`);
+
     if (intersection.length > 0) {
-        logger.info(`Access token has one of the required scopes: ${intersection[0]}`);
+        logger.info('Access token and scope have been verified');
         next();
     } else {
-        logger.info('Access token does not have one of the required scopes');
+        logger.error('Access token lacks one of the proper scopes');
         next(errors.unauthorized());
     }
 }
 
-// TODO: If there is more than one key and read from file.
+/**
+ * Returns the appropriate key to verify the JWT.
+ *
+ * @param {Object} decodedToken
+ * @param {Object} authConfig
+ */
 function _getKeyForTokenValidation(decodedToken, authConfig) {
     if (authConfig.secretKey) {
         return authConfig.secretKey;
     } else if (_.get(authConfig, 'jwkSet.keys', []).length === 1) {
-        const jwt = authConfig.jwkSet.keys[0];
-        return jwkToPem(jwt)
+        const jwtKey = authConfig.jwkSet.keys[0];
+        return jwkToPem(jwtKey);
+    } else if (_.get(authConfig, 'jwkSet.keys', []).length > 1) {
+        const jwtKey = _.find(authConfig.jwkSet.keys, ['kid', decodedToken.header.kid]);
+        return jwkToPem(jwtKey);
     } else {
         return null;
     }
@@ -55,7 +69,7 @@ function _parseBearerToken(req) {
     // split on space
     const parts = auth.split(' ');
     if (parts.length < 2) {
-        return;
+        return null;
     }
 
     // get schema and token from array
@@ -73,14 +87,17 @@ function _parseBearerToken(req) {
 /**
  * Verify the JWT token
  *
- * @param {*} token
- * @param {*} secretOrPublicKey
+ * @param {String} token
+ * @param {String} secretOrPublicKey
+ * @param {Object} options
+ * @param {Array<String>} requiredScopes
  * @param {*} next
  */
 function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, next) {
     const issuer = config.authConfig.issuer;
     const clientId = config.authConfig.clientId;
     const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
+    logger.debug(`JWT verify options: ${JSON.stringify(allOptions)}`);
 
     // verify the token and signature with secret/pub key
     jwt.verify(token, secretOrPublicKey, allOptions, function(err, decoded) {
@@ -90,17 +107,16 @@ function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, ne
             return next(errors.custom(401, 'Unauthorized request: ' + err.message));
         }
 
-        logger.info('Token has been verified. Checking Scopes.');
-        // token should be valid at this point
-        // TODO get scopes/permissions
+        logger.debug('Token has been verified. Searching for scope ...');
 
-        if (decoded.scope) {
-            _checkForScopes(decoded, requiredScopes, next);            
+        if (typeof decoded.scope === 'string') {
+            logger.debug('Scope was found in decoded token');
+            _checkForScopes(decoded, requiredScopes, next);
         } else if (config.authConfig.introspection_endpoint) {
-            logger.info(`Attempting to introspect token ${token}`);
-            
+            logger.debug('Attempting to introspect token');
+
             const protectedResourceClientId = config.authConfig.protectedResourceClientId;
-            const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;            
+            const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;
 
             request
                 .post(config.authConfig.introspection_endpoint)
@@ -108,33 +124,39 @@ function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, ne
                 .send(`token=${token}`)
             .then((response) => {
                 const introspection = response.body;
-
-                logger.info(`Result from Introspection: ${JSON.stringify(introspection)}`);
+                logger.debug(`Successfully introspected token: ${JSON.stringify(introspection)}`);
                 _checkForScopes(introspection, requiredScopes, next);
-            }, (err) => {
-                logger.error(`Failed to instrospect token ${err}`);
-                next(errors.unauthorized());                
-            })
+            }, (error) => {
+                logger.error(`Failed to instrospect token ${error}`);
+                next(errors.unauthorized());
+            });
         } else {
-            next(errors.unauthorized());            
+            logger.error(`Could not find scope or introspect token ${JSON.stringify(decoded)}`);
+            next(errors.unauthorized());
         }
     });
 }
 
 /**
  * @name Validate
- * @summary Validates the bearer token in the headers.
+ * @summary Returns a middleware function to verify a token and validate scopes.
+ * @param {Array<String>} requiredScopes - Scopes that each individually allow access to the resource.
  */
-module.exports.validate = (requiredScopes) => { return(req, res, next) => {
-    // get bearer token
-    const bearerToken = _parseBearerToken(req);
+module.exports.validate = (requiredScopes) => {
+    return (req, res, next) => {
+        // get bearer token
+        const bearerToken = _parseBearerToken(req);
 
-    if (bearerToken) {
-        const decodedToken = jwt.decode(bearerToken, {complete: true});
-        const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig) 
-        _verifyToken(bearerToken, tokenKey, {}, requiredScopes, next);
-    } else {
-        // did not pass checks, return 401 message
-        next(errors.unauthorized());
-    }
-}};
+        if (bearerToken) {
+            logger.debug(`Found bearer token in request: ${bearerToken}`);
+            const decodedToken = jwt.decode(bearerToken, {complete: true});
+            logger.debug(`Decoded bearer token in request: ${JSON.stringify(decodedToken)}`);
+            const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig);
+            _verifyToken(bearerToken, tokenKey, {}, requiredScopes, next);
+        } else {
+            // did not pass checks, return 401 message
+            logger.error('Could not find bearer token in request headers');
+            next(errors.unauthorized());
+        }
+    };
+};

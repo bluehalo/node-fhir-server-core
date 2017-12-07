@@ -10,12 +10,12 @@ module.exports = {
   authConfig: {
 
     clientId: undefined,
-      
+
     // Is used instead of jwkSet if defined
     // secretKey: '',
 
     // Used for introspection (optional)
-    
+
     protectedResourceClientId: 'ae83b0eb-35ed-483b-a933-edb2277f4aad',
     protectedResourceClientSecret: 'AK1MPC0PT44icz7awMie4Pasd9BOMcJ6rTAazq2Ni01nQLecxqqtrcXKrz4bciQOaL5tjclmSKO064u9n1IoDzE',
 
@@ -29,7 +29,7 @@ module.exports = {
     registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
     introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
     issuer: 'https://sb-auth.smarthealthit.org/',
-    
+
     jwkSet: {
       keys: [{
         "kty": "RSA",

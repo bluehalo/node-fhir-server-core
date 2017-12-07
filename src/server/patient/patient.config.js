@@ -1,6 +1,16 @@
 const path = require('path');
 const controller = require(path.resolve('./src/server/patient/controllers/patient.controller'));
 
+const scopes = [
+  'user/*.*',
+  'user/Patient.*',
+  'user/Patient.read',
+  'user/*.read',
+  'patient/*.*',
+  'patient/Patient.*',
+  'patient/Patient.read',
+  'patient/*.read',
+];
 
 let routes = [
   {
@@ -19,7 +29,7 @@ let routes = [
       name: 'given',
       type: 'string'
     }],
-    scopes: ['patient/*.read'],
+    scopes,
     controller: controller.getPatient
   },
   {
@@ -30,7 +40,7 @@ let routes = [
       type: 'string',
       required: true
     }],
-    scopes: [],
+    scopes,
     controller: controller.getPatientById
   }
 ];
