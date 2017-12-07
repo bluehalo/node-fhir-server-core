@@ -5,14 +5,14 @@ const path = require('path');
 
 module.exports = {
   watch: process.env.NODE_ENV === 'development',
-  entry: path.resolve('./src/docs/src/js/main.js'),
+  entry: path.resolve('./docs/src/js/main.js'),
   output: {
-    path: path.resolve('./src/docs/dist'),
+    path: path.resolve('./docs/dist'),
     filename: 'js/main.min.js'
   },
   resolve: {
     alias: {
-      docs: path.resolve('./src/docs/src')
+      docs: path.resolve('./docs/src')
     }
   },
   module: {
@@ -26,14 +26,14 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('css/core.css'),
     new HtmlWebpackPlugin({
-      template: path.resolve('./src/docs/src/index.html'),
+      template: path.resolve('./docs/src/index.html'),
       inject: false
     }),
     new CopyWebpackPlugin([
-			path.resolve('./src/docs/src/openapi.json'),
+			path.resolve('./docs/src/openapi.json'),
       {
-        from: path.resolve('./src/docs/src/definitions'),
-        to: path.resolve('./src/docs/dist/definitions')
+        from: path.resolve('./docs/src/definitions'),
+        to: path.resolve('./docs/dist/definitions')
       }
     ])
   ]

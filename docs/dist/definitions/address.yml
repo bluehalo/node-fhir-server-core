@@ -1,0 +1,42 @@
+Address:
+  type: object
+  properties:
+    resourceType:
+      type: string
+      default: Address
+      example: Address
+    use:
+      type: string
+      required: true
+      description: home | work | temp | old - purpose of this address. Full coding available at http://hl7.org/fhir/DSTU2/valueset-address-use.html
+    type:
+      type: string
+      required: true
+      description: postal | physical | both. Full coding available at http://hl7.org/fhir/DSTU2/valueset-address-type.html
+    text:
+      type: string
+      description: Text representation of the address
+    line:
+      type: array
+      description: Street name, number, direction & P.O. Box etc.
+      items:
+        type: string
+    city:
+      type: string
+      description:  Name of city, town etc.
+    district:
+      type: string
+      description: District name (aka county)
+    state:
+      type: string
+      description: Sub-unit of country (abbreviations ok)
+    postalCode:
+      type: string
+      description: Postal code for the area
+    country:
+      type: string
+      description: Country (can be ISO 3166 3 letter code)
+    period:
+      description: Time period when address was/is in use
+      $ref: period.yml#/Period
+      

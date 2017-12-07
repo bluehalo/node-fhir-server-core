@@ -1,0 +1,33 @@
+Identifier:
+  type: object
+  properties:
+    use:
+      type: string
+      required: true
+      description: usual | official | temp | secondary (If known). Full coding available at http://hl7.org/fhir/DSTU2/valueset-identifier-use.html
+    type:
+      type: array
+      items:
+        type: object
+        properties:
+          text:
+            type: string
+            description: Plain text representation of the concept
+          coding:
+            type: array
+            description: Full coding available at http://hl7.org/fhir/DSTU2/valueset-identifier-type.html
+            items:
+              $ref: coding.yml#/Coding
+    system:
+      type: string
+      required: true
+      description: The namespace for the identifier (uri)
+    value:
+      type: string
+      description: The valus that is unique
+    period:
+      $ref: period.yml#/Period
+    assigner:
+      description: Organization reference available at http://hl7.org/fhir/StructureDefinition/Organization
+      $ref: reference.yml#/Reference
+      

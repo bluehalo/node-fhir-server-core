@@ -1,0 +1,24 @@
+ContactPoint:
+  type: object
+  properties:
+    resourceType:
+      type: string
+      default: ContactPoint
+      example: ContactPoint
+    system:
+      type: string
+      required: true
+      description: phone | fax | email | pager | other. Full coding available at http://hl7.org/fhir/DSTU2/valueset-contact-point-system.html
+    value:
+      type: string
+      description: The actual contact point details
+    use:
+      type: string
+      required: true
+      description: home | work | temp | old | mobile - purpose of this contact point. Full coding available at http://hl7.org/fhir/DSTU2/valueset-contact-point-use.html
+    rank:
+      type: integer
+      description: Specify preferred order of use (1 = highest)
+    period:
+      description: Time period when the contact point was/is in use
+      $ref: period.yml#/Period
