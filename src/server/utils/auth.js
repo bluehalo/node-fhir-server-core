@@ -26,9 +26,9 @@ function _checkForScopes(decodedTokenOrIntrospection, requiredScopes, next) {
         logger.info('Access token and scope have been verified');
         return next();
     } else {
-        logger.error('Access token lacks one of the proper scopes');
-        return next(errors.unauthorized());
-    }
+        logger.error('Access token has an insufficient scope');
+				return next(errors.custom(401, 'insufficient_scope'));
+			}
 }
 
 /**
@@ -125,20 +125,20 @@ function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, ne
                     return _checkForScopes(introspection, requiredScopes, next);
                 } else {
                     logger.error('Access token is not active');
-                    return next(errors.unauthorized());
+                    return next(errors.custom(401, 'invalid_token'));
                 }
             }, (error) => {
                 logger.error(`Failed to introspect token ${error}`);
-                return next(errors.unauthorized());
-            });
+								return next(errors.custom(403, 'insufficient_scope'));
+							});
         } else {
             logger.error(`Could not find scope or introspect token ${JSON.stringify(decoded)}`);
-            return next(errors.unauthorized());
+            return next(errors.custom(403, 'insufficient_scope'));
         }
     } catch (err) {
         // log error return 401 with error message;
         logger.error(err, err.message);
-        return next(errors.custom(401, 'Unauthorized request: ' + err.message));
+        return next(errors.custom(401, 'invalid_token'));
     }
 }
 
@@ -161,7 +161,7 @@ module.exports.validate = (requiredScopes) => {
         } else {
             // did not pass checks, return 401 message
             logger.error('Could not find bearer token in request headers');
-            return next(errors.unauthorized());
+            return next(errors.custom(401, 'invalid_token'));
         }
     };
 };
