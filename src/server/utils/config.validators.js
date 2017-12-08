@@ -14,7 +14,7 @@ let validSSLConfiguration = (config = {}) => {
 let loadProfile = (key, profile = {}) => {
 	if (typeof profile.service === 'string') {
 		try {
-			profile.service = require(path.resolve(profile.service));
+			profile.serviceModule = require(path.resolve(profile.service));
 		} catch (err) {
 			// Let's throw a more informative error than the default
 			throw new Error(
@@ -23,8 +23,12 @@ let loadProfile = (key, profile = {}) => {
 				+ ' make sure the path is correct or pass the module in directly.'
 			);
 		}
+	} else {
+		profile.serviceModule = profile.service;
 	}
-	return profile.service;
+
+	// @TODO Add profile specifiv validation to ensure the profile is conformant to the spec
+	return profile.serviceModule;
 };
 
 module.exports = {

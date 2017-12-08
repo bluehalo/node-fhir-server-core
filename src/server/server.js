@@ -79,7 +79,8 @@ class Server {
 		})
 		.catch(err => {
 			this.logger.error('Fatal error starting the application.', err);
-			process.exit(err);
+			// Throw so this can be caught by the adapter
+			throw err;
 		});
 
 	}
