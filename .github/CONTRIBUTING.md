@@ -14,16 +14,16 @@ Try to explain the current behavior, expected behavior, provide a reproducible c
 If you want to submit a pull request, please adhere to the following guidelines.
 
 1. Fork the repo and checkout the `develop` branch. You should create a new branch off of `develop`.
-2. If your adding new code, add tests to cover them or at least demonstrate how to test the new feature.
+2. If you're adding new code, add tests to cover them or at least demonstrate how to test the new feature.
 3. Update documentation if applicable.
 4. Ensure your branch passes all the tests, by running `npm test`.
 5. Submit your PR back to the `develop` branch.
 
 ## Code style
-Code style is governed by eslint. You can view all the rules in our `.eslintrc` or just run `npm run test:lint` to see any issues.
+Code style is governed by eslint and our `.editorconfig`. You can view all the rules in our `.eslintrc` or just run `npm run test:lint` to see any issues.
 
 ## Getting Started
-Follow the instructions below for setting up your environment. Once you have completed all the steps under installation. See either [Development](#Development), [Production](#Production), or [Testing](#Testing). You can test a production server locally but this requires you to have generated a Cert and Key. Instructions for how to set this up are under the [Production](#Production) instructions.
+Follow the steps for installation below. Then see the [Development](#Development), [Production](#Production), or [Testing](#Testing) sections for specific instructions. You can test a production server locally but this requires you to have generated a Cert and Key. Instructions for how to set this up are under the [Production](#Production) instructions.
 
 ### Installation
 1. Install the latest LTS for [Node.js](https://nodejs.org/en/).

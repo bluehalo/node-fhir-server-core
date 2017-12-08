@@ -35,10 +35,15 @@ let routes = [
   }
 ];
 
+let codes = {
+	gender: ['male', 'female', 'other', 'unknown']
+};
+
 /**
  * @name exports
  * @summary Patient config
  */
 module.exports = {
-  routes
+  routes,
+	codes
 };
