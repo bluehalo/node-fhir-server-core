@@ -161,7 +161,7 @@ module.exports.validate = (requiredScopes) => {
         } else {
             // did not pass checks, return 401 message
             logger.error('Could not find bearer token in request headers');
-            return next(errors.custom(401, 'invalid_token'));
+            return next(errors.unauthorized());
         }
     };
 };

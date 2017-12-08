@@ -44,7 +44,7 @@ describe('Auth Utils Test', () => {
 
     test('should not validate a request without a valid authorization header', async() => {
         await validateFn({headers: {}}, {}, mockNext);
-        expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(401, 'invalid_token'));
+        expect(mockNext.mock.calls[0][0]).toEqual(errors.unauthorized());
 			});
 
     test('should not validate a request with an undecodable token', async() => {
