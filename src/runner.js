@@ -29,7 +29,7 @@ const CONFIG = {
 		port: 3000,
 		// Needs to be in instance of express-session, for example, with Mongo
 		/**
-		* app.use(session({
+		* session({
 		* 	resave: true,
 		* 	saveUninitialized: true,
 		* 	secret: config.auth.sessionSecret,
@@ -38,7 +38,7 @@ const CONFIG = {
 		*			mongooseConnection: connection,
 		* 		collection: config.auth.collection
 		* 	})
-		* }));
+		* });
 		*/
 		sessionStore: null,
 		ssl: {
