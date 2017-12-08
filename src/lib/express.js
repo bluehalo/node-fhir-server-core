@@ -110,7 +110,7 @@ let retrieveAuthServerInfo = async function (config) {
     throw new Error('issuer is not a string');
   }
 
-  // Introspection is not required depending on the oath2 implementation (required for openid)
+  // Introspection is not required depending on the oauth2 implementation (required for openid)
   if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
   }
@@ -156,46 +156,46 @@ let setupErrorHandler = function (app, logger) {
  * @return {Promise}
  */
 module.exports.initialize = async ({ config, logger }) => {
-  logger.info('Initializing express');
+	logger.info('Initializing express');
 
 	const { auth, profiles, server } = config;
 	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-  // Create our express instance
-  let app = express();
+	// Create our express instance
+	let app = express();
 
-  // Setup auth configs for middleware
+	// Setup auth configs for middleware
 	/* eslint-disable no-unused-vars */
-  let { oauthConfig, jwkSet } = await retrieveAuthServerInfo(auth);
+	let { oauthConfig, jwkSet } = await retrieveAuthServerInfo(auth);
 	/* eslint-enable no-unused-vars */
 
-  // Add some configurations to our app
-  configureMiddleware(app, IS_PRODUCTION);
+	// Add some configurations to our app
+	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
-  secureHeaders(app, USE_HTTPS);
-  setupRoutes(app, profiles, logger);
-  setupErrorHandler(app, logger);
+	secureHeaders(app, USE_HTTPS);
+	setupRoutes(app, profiles, logger);
+	setupErrorHandler(app, logger);
 
-  /**
-  * Use an https server in production, this must be last
-  * If this app is behind a load balancer on AWS that has SSL certs, then you
-  * do not necessarily need this, but if this is being deployed with nothing in
-  * front of it, then you must add some SSL certs. This last section can be updated
-  * depending on the environment that you are deploying to.
-  */
-  if (USE_HTTPS) {
+	/**
+	* Use an https server in production, this must be last
+	* If this app is behind a load balancer on AWS that has SSL certs, then you
+	* do not necessarily need this, but if this is being deployed with nothing in
+	* front of it, then you must add some SSL certs. This last section can be updated
+	* depending on the environment that you are deploying to.
+	*/
+	if (USE_HTTPS) {
 
-    // These are required for running in https
-    let options = {
-      key: fs.readFileSync(server.ssl.key),
-      cert: fs.readFileSync(server.ssl.cert)
-    };
+		// These are required for running in https
+		let options = {
+			key: fs.readFileSync(server.ssl.key),
+			cert: fs.readFileSync(server.ssl.cert)
+		};
 
-    // Pass back our https server
-    return https.createServer(options, app);
-  }
+		// Pass back our https server
+		return https.createServer(options, app);
+	}
 
-  // Pass our app back if we are successful
-  return app;
+	// Pass our app back if we are successful
+	return app;
 };
