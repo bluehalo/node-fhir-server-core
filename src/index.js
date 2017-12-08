@@ -15,5 +15,5 @@ module.exports = (config) => new Promise((resolve, reject) => {
 	}
 
 	// Start our server
-	return server.start();
+	return server.start().then(resolve).catch(reject);
 });

@@ -64,6 +64,7 @@ let handler = promise => promise
 	.catch(err => [err]);
 
 let main = async function () {
+
 	/* eslint-disable no-unused-vars */
 	const [ err, server ] = await handler(fhirServer(CONFIG));
 	/* eslint-enable no-unused-vars */
@@ -72,6 +73,8 @@ let main = async function () {
 	if (err) {
 		console.error(err.message);
 		process.exit(1);
+	} else {
+		server.logger.info('My Server is working');
 	}
 
 };

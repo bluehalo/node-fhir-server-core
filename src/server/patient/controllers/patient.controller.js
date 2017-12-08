@@ -1,10 +1,11 @@
 module.exports.getPatient = (adapter, logger) => {
-	let { service } = adapter;
-	// Attach the logger to the service and resolver so they can be used
-	service.logger = logger;
-
+	// let { service } = adapter;
 	// validate arguments
-	// return service.getPatient();
+	/**
+	* return service.getPatient(req, logger)
+	*		.then(sanitizeResponse) // Only show the user what they are allowed to see
+	*		.then(validateResponse); // Make sure the response data conforms to the spec
+	*/
 
 	return (req, res) => {
 		res.send('Here is your patient args' + JSON.stringify(req.query));
@@ -13,12 +14,13 @@ module.exports.getPatient = (adapter, logger) => {
 
 
 module.exports.getPatientById = (adapter, logger) => {
-	let { service } = adapter;
-	// Attach the logger to the service and resolver so they can be used
-	service.logger = logger;
-
+	// let { service } = adapter;
 	// validate arguments
-	// return service.getPatientById();
+	/**
+	* return service.getPatientById(req, logger)
+	*		.then(sanitizeResponse) // Only show the user what they are allowed to see
+	*		.then(validateResponse); // Make sure the response data conforms to the spec
+	*/
 
 	return (req, res) => {
 		res.send('Here is your patient' + JSON.stringify(req.params));

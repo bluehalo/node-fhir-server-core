@@ -39,8 +39,9 @@ const config = {
 
 // Using promises
 fhirServer(config)
-	// Do something with the express app if you want to
-	.then(app => { ... })
+	// Do something with the server if you want to, some notable properties
+	// are server.logger (Winston), server.app (Express), and server.config (Your config)
+	.then(server => { ... })
 	// This may include details about why the server could not start,
 	// such as an invalid config, or incorrect path to a service, etc.
 	.catch(console.error);
@@ -70,20 +71,15 @@ Here is an example config with all the currently supported options. See descript
 		port: 3000,
 		sessionStore: null,
 		ssl: {
-			key: '',
-			cert: ''
+			key: 'path/to/key.pem',
+			cert: 'path/to.cert.pem'
 		}
 	},
 	logging: {
-		// Currently this is the only logging configuration supported. We use Winston
-		// for logging and will eventually add support for more options. Logging level
-		// can be anything supported by winston.
-		// See https://github.com/winstonjs/winston#using-logging-levels
 		level: 'debug'
 	},
 	profiles: {
 		patient: {
-			// Service can be the service path, a string, or the actual module
 			service: './patient/patient.controller'
 		},
 		observation: {
@@ -151,14 +147,14 @@ const fhirConfig = {
 #### `server.ssl.key`
 
 - **Type:** `string`
-- **Description:** Path to your private key.
+- **Description:** Path to your private key. See [Contributor's guide](./.github/CONTRIBUTING.md#generate-self-signed-certs) for how to generate a self-signed cert for local development.
 - **Required:** No. If you want to setup express to use ssl, you need both a key and cert.
 - **Default:** `none`
 
 #### `server.ssl.cert`
 
 - **Type:** `string`
-- **Description:** Path to your certificate.
+- **Description:** Path to your certificate. See [Contributor's guide](./.github/CONTRIBUTING.md#generate-self-signed-certs) for how to generate a self-signed cert for local development.
 - **Required:** No. If you want to setup express to use ssl, you need both a key and cert.
 - **Default:** `none`
 
@@ -175,24 +171,117 @@ const fhirConfig = {
 
 - **Type:** `string` | `object`
 - **Description:** Path to a service or the actual module itself. Each service must conform to the profiles requirement.
-- **Required:** Yes. You must provide a service on a profile object. There must be atleast one valid profile configuration for the server to run, otherwise it will throw an error stating the profiles configuration is invalid.
+- **Required:** Yes. You must provide a service on a profile object. There must be at least one valid profile configuration for the server to run, otherwise it will throw an error stating the profiles configuration is invalid.
 - **Default:** `none`
-
-
 
 ### Profiles
 Currently we are only supporting profiles listed in the table below. As we add support for more profiles, we will update the documentation below with the necessary methods to support those profiles.
 
-| Profile      | Key            | Interface                   |
+| Profile      | Config Key     | Interface                   |
 |--------------|----------------|-----------------------------|
 | Patient      | `patient`      | [patient](#patient)         |
 | Observation  | `observation`  | [observation](#observation) |
 
 #### Patient
+> The patient service must implement the following methods.
+
+##### `getCount`
+
+- **Params:** `(req: Express.Request, logger: Winston)`
+- **Return:** `Promise`
+- **Description:** Get the count of the number of patients.
+- **Required:** Yes
+
+##### `getPatientById`
+
+- **Params:** `(req: Express.Request, logger: Winston)`
+- **Return:** `Promise`
+- **Description:** Get the patient given an id in the req.params.
+- **Required:** Yes
+
+##### `getPatient`
+
+- **Params:** `(req: Express.Request, logger: Winston)`
+- **Return:** `Promise`
+- **Description:** Get the patient given an one of several valid argument combinations in the req.query. Valid argument combinations include:
+	- identifier
+	- name + birthdate
+	- name + gender
+	- family + gender
+	- given + gender
+- **Required:** Yes
 
 #### Observation
 
 ## Examples
+
+#### Setting up a https server with my own patient service
+
+```javascript
+const fhirServer = require('@asymmetrik/fhir-server-core');
+const config = {
+	server: {
+		port: 3000,
+		ssl: {
+			key: path.resolve('./key.pem'),
+			cert: path.resolve('./cert.pem')
+		}
+	},
+	logging: {
+		level: 'debug'
+	},
+	profiles: {
+		patient: {
+			// Path to a service or the actual module
+			service: require(path.resolve('./profiles/patient/patient.controller'))
+		}
+	}
+};
+
+let main = async function () {
+	// If the app fails to start, log the error
+	let server = await fhirServer(config).catch(console.error);
+	
+	if (server) {
+		server.logger.verbose('My FHIR Server is up and running!');
+		server.logger.info(`See it at https://localhost:${config.port}`);
+	}
+};
+
+main();
+```
+
+#### Setting up a minimal dev server with my own patient service
+
+```javascript
+const fhirServer = require('@asymmetrik/fhir-server-core');
+const config = {
+	server: {
+		port: 3000
+	},
+	logging: {
+		level: 'debug'
+	},
+	profiles: {
+		patient: {
+			// Path to a service or the actual module
+			service: require(path.resolve('./profiles/patient/patient.controller'))
+		}
+	}
+};
+
+let main = async function () {
+	// If the app fails to start, log the error
+	let server = await fhirServer(config).catch(console.error);
+	
+	if (server) {
+		server.logger.verbose('My FHIR Server is up and running!');
+		server.logger.info(`See it at http://localhost:${config.port}`);
+	}
+};
+
+main();
+```
 
 ## Contributing
 Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) if interested in contributing.
