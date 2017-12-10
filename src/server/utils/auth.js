@@ -11,24 +11,19 @@ const logger = require(path.resolve('./src/lib/winston'));
  * Check the decoded token or instrospection for at least one required scope.
  *
  * @param {Object} decodedTokenOrIntrospection
- * @param {Array<String>} requiredScopes
+ * @param {Array<String>} validScopes
  * @param {*} next
+ * @returns {Boolean}
  */
-function _checkForScopes(decodedTokenOrIntrospection, requiredScopes, next) {
+function _hasCorrectScope(decodedTokenOrIntrospection, validScopes) {
     const tokenScope = decodedTokenOrIntrospection.scope;
     const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(' ') : [];
-    const intersection = _.intersection(scopeArray, requiredScopes);
+    const intersection = _.intersection(scopeArray, validScopes);
 
-    logger.debug(`Required scopes for resource ${requiredScopes}`);
+    logger.debug(`Required scopes for resource ${validScopes}`);
     logger.debug(`Scope found on request ${scopeArray}`);
 
-    if (intersection.length > 0) {
-        logger.info('Access token and scope have been verified');
-        return next();
-    } else {
-        logger.error('Access token has an insufficient scope');
-				return next(errors.custom(401, 'insufficient_scope'));
-			}
+    return intersection.length > 0;
 }
 
 /**
@@ -36,6 +31,7 @@ function _checkForScopes(decodedTokenOrIntrospection, requiredScopes, next) {
  *
  * @param {Object} decodedToken
  * @param {Object} authConfig
+ * @returns {String}
  */
 function _getKeyForTokenValidation(decodedToken, authConfig) {
     if (authConfig.secretKey) {
@@ -52,10 +48,8 @@ function _getKeyForTokenValidation(decodedToken, authConfig) {
 }
 
 /**
- * Parse the `token` from the given
- * `req`'s authorization header.
+ * Parse the `token` from the given `req`'s authorization header.
  *
- * @api public
  * @param {Request} req
  * @return {String|null}
  */
@@ -63,7 +57,7 @@ function _parseBearerToken(req) {
 
     let auth;
     if (!req.headers || !(auth = req.headers.authorization)) {
-      return null;
+				return null;
     }
 
     // split on space
@@ -85,69 +79,75 @@ function _parseBearerToken(req) {
 }
 
 /**
- * Verify the JWT token
+ * Verify the JWT token and validate its scopes.
  *
  * @param {String} token
  * @param {String} secretOrPublicKey
  * @param {Object} options
- * @param {Array<String>} requiredScopes
- * @param {*} next
+ * @param {Array<String>} validScopes
+ * @param {Function} next
+ * @returns {Promise} Returns a promise that resolves to the result of the `next`.
  */
-function _verifyToken(token, secretOrPublicKey, options = {}, requiredScopes, next) {
+async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes, next) {
     const issuer = config.authConfig.issuer;
     const clientId = config.authConfig.clientId;
     const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
     logger.debug(`JWT verify options: ${JSON.stringify(allOptions)}`);
 
-    // verify the token and signature with secret/pub key
-
+		// verify the token and signature with secret/pub key
+		let decoded;
     try {
-        const decoded = jwt.verify(token, secretOrPublicKey, allOptions);
-        logger.debug('Token has been verified. Searching for scope ...');
-
-        if (typeof decoded.scope === 'string') {
-            logger.debug('Scope was found in decoded token');
-            return _checkForScopes(decoded, requiredScopes, next);
-        } else if (config.authConfig.introspection_endpoint) {
-            logger.debug('Attempting to introspect token');
-
-            const protectedResourceClientId = config.authConfig.protectedResourceClientId;
-            const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;
-
-            return request
-                .post(config.authConfig.introspection_endpoint)
-                .auth(protectedResourceClientId, protectedResourceClientSecret)
-                .send(`token=${token}`)
-            .then((response) => {
-                const introspection = response.body;
-                logger.debug(`Successfully introspected token: ${JSON.stringify(introspection)}`);
-                if (introspection.active) {
-                    return _checkForScopes(introspection, requiredScopes, next);
-                } else {
-                    logger.error('Access token is not active');
-                    return next(errors.custom(401, 'invalid_token'));
-                }
-            }, (error) => {
-                logger.error(`Failed to introspect token ${error}`);
-								return next(errors.custom(403, 'insufficient_scope'));
-							});
-        } else {
-            logger.error(`Could not find scope or introspect token ${JSON.stringify(decoded)}`);
-            return next(errors.custom(403, 'insufficient_scope'));
-        }
-    } catch (err) {
+				decoded = jwt.verify(token, secretOrPublicKey, allOptions);
+		} catch (err) {
         // log error return 401 with error message;
         logger.error(err, err.message);
         return next(errors.custom(401, 'invalid_token'));
-    }
+		}
+
+		logger.debug('Token has been verified. Searching for scope ...');
+
+		if (typeof decoded.scope === 'string' && _hasCorrectScope(decoded, validScopes)) {
+				return next();
+		} else if (config.authConfig.introspection_endpoint) {
+				logger.debug('Attempting to introspect token');
+
+				const protectedResourceClientId = config.authConfig.protectedResourceClientId;
+				const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;
+
+				try {
+						const introspectionResponse = await request
+								.post(config.authConfig.introspection_endpoint)
+								.auth(protectedResourceClientId, protectedResourceClientSecret)
+								.send(`token=${token}`);
+						const introspection = introspectionResponse.body;
+
+						logger.debug(`Successfully introspected token: ${JSON.stringify(introspection)}`);
+						if (!introspection.active) {
+								logger.error('Access token is not active');
+								return next(errors.custom(401, 'invalid_token'));
+						} else if (!_hasCorrectScope(introspection, validScopes)) {
+								logger.error('Access token has insufficient scope');
+								return next(errors.custom(403, 'insufficient_scope'));
+						} else {
+								logger.info('Access token and scope have been verified');
+								return next();
+						}
+				} catch (error) {
+					logger.error(`Failed to introspect token ${error}`);
+					return next(errors.custom(403, 'insufficient_scope'));
+				}
+		} else {
+				logger.error('The scope of the token is insufficient or the token cannot be introspected');
+				return next(errors.custom(403, 'insufficient_scope'));
+		}
 }
 
 /**
- * @name Validate
- * @summary Returns a middleware function to verify a token and validate scopes.
- * @param {Array<String>} requiredScopes - Scopes that each individually allow access to the resource.
+ * @name validate
+ * @summary {Function} Returns a middleware function that verifies bearer token and checks scope
+ * @param {Array<String>} validScopes A list of scopes that allow access to the resource.
  */
-module.exports.validate = (requiredScopes) => {
+module.exports.validate = (validScopes) => {
     return async (req, res, next) => {
         // get bearer token
         const bearerToken = _parseBearerToken(req);
@@ -157,7 +157,7 @@ module.exports.validate = (requiredScopes) => {
             const decodedToken = jwt.decode(bearerToken, {complete: true});
             logger.debug(`Decoded bearer token in request: ${JSON.stringify(decodedToken)}`);
             const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig);
-            return await _verifyToken(bearerToken, tokenKey, {}, requiredScopes, next);
+            return await _verifyToken(bearerToken, tokenKey, {}, validScopes, next);
         } else {
             // did not pass checks, return 401 message
             logger.error('Could not find bearer token in request headers');
