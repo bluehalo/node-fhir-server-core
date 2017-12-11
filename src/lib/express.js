@@ -5,6 +5,7 @@ const express = require('express');
 const helmet = require('helmet');
 const axios = require('axios');
 const https = require('https');
+const http = require('http');
 const path = require('path');
 const glob = require('glob');
 const fs = require('fs');
@@ -197,5 +198,5 @@ module.exports.initialize = async ({ config, logger }) => {
 	}
 
 	// Pass our app back if we are successful
-	return app;
+	return http.createServer(app);
 };
