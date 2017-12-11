@@ -36,7 +36,7 @@ class Server {
 
 		// Validate logger settings
 		// These are not required, so if something is missing, we will set some sensible defaults
-		if (!config.logging || !(config.logging && config.logging.level)) {
+		if (!(config.logging && config.logging.level)) {
 			// Add the default logging level but nothing else
 			config.logging = Object.assign({}, config.logging, { level: 'error' });
 		}
