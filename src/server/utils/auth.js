@@ -12,7 +12,6 @@ const logger = require(path.resolve('./src/lib/winston'));
  *
  * @param {Object} decodedTokenOrIntrospection
  * @param {Array<String>} validScopes
- * @param {*} next
  * @returns {Boolean}
  */
 function _hasCorrectScope(decodedTokenOrIntrospection, validScopes) {
@@ -30,15 +29,19 @@ function _hasCorrectScope(decodedTokenOrIntrospection, validScopes) {
  * Returns the appropriate key to verify the JWT.
  *
  * @param {Object} decodedToken
- * @param {Object} authConfig
  * @returns {String}
  */
-function _getKeyForTokenValidation(decodedToken, authConfig) {
+function _getKeyForTokenValidation(decodedToken) {
+		const authConfig = config.authConfig;
+
+		// Check for a private key first
     if (authConfig.secretKey) {
-        return authConfig.secretKey;
+				return authConfig.secretKey;
+		// Then check if there is a key in the jwkSet.
     } else if (_.get(authConfig, 'jwkSet.keys', []).length === 1) {
         const jwtKey = authConfig.jwkSet.keys[0];
-        return jwkToPem(jwtKey);
+				return jwkToPem(jwtKey);
+		// If there is more than one key, check the key identifier.
     } else if (_.get(authConfig, 'jwkSet.keys', []).length > 1) {
         const jwtKey = _.find(authConfig.jwkSet.keys, ['kid', decodedToken.header.kid]);
         return jwkToPem(jwtKey);
@@ -92,7 +95,6 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
     const issuer = config.authConfig.issuer;
     const clientId = config.authConfig.clientId;
     const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
-    logger.debug(`JWT verify options: ${JSON.stringify(allOptions)}`);
 
 		// verify the token and signature with secret/pub key
 		let decoded;
@@ -121,7 +123,7 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 								.send(`token=${token}`);
 						const introspection = introspectionResponse.body;
 
-						logger.debug(`Successfully introspected token: ${JSON.stringify(introspection)}`);
+						logger.debug('Successfully introspected token');
 						if (!introspection.active) {
 								logger.error('Access token is not active');
 								return next(errors.custom(401, 'invalid_token'));
@@ -153,10 +155,10 @@ module.exports.validate = (validScopes) => {
         const bearerToken = _parseBearerToken(req);
 
         if (bearerToken) {
-            logger.debug(`Found bearer token in request: ${bearerToken}`);
+            logger.debug('Found bearer token in request');
             const decodedToken = jwt.decode(bearerToken, {complete: true});
-            logger.debug(`Decoded bearer token in request: ${JSON.stringify(decodedToken)}`);
-            const tokenKey = _getKeyForTokenValidation(decodedToken, config.authConfig);
+            logger.debug('Decoded bearer token from request');
+            const tokenKey = _getKeyForTokenValidation(decodedToken);
             return await _verifyToken(bearerToken, tokenKey, {}, validScopes, next);
         } else {
             // did not pass checks, return 401 message
