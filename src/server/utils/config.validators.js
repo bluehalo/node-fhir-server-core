@@ -27,7 +27,7 @@ let loadProfile = (key, profile = {}) => {
 		profile.serviceModule = profile.service;
 	}
 
-	// @TODO Add profile specifiv validation to ensure the profile is conformant to the spec
+	// @TODO Add profile specific validation to ensure the profile is conformant to the spec
 	return profile.serviceModule;
 };
 
