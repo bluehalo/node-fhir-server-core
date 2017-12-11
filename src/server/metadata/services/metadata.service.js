@@ -51,8 +51,9 @@ let generateCapabilityStatement = (req, profiles, logger) => new Promise((resolv
 	// for any validation etc,
 	return Promise.all(conformance_documents.map(doc => doc.getCount(req, logger)))
 		.then((results) => {
-			// Generate the completed statement
+			// Generate the completed statement, conformanceFunc just adds the count to the json
 			let resources = conformance_documents.map((doc, i) => doc.conformanceFunc(results[i]));
+			// Add these resources to the main CapabilityStatement
 			return resolve(makeStatement(resources));
 		})
 		.catch(reject);
