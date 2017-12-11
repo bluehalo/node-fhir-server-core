@@ -1,0 +1,42 @@
+{
+  "Attachment": {
+    "type": "object",
+    "properties": {
+      "contentType": {
+        "type": "string",
+        "required": true,
+        "description": "Mime type of the content, with charset etc. Full specification available here - http://www.rfc-editor.org/bcp/bcp13.txt"
+      },
+      "language": {
+        "type": "string",
+        "required": true,
+        "description": "Human language of the content (BCP-47) https://tools.ietf.org/html/bcp47"
+      },
+      "data": {
+        "type": "string",
+        "description": "Data inline, base64ed"
+      },
+      "url": {
+        "type": "string",
+        "description": "Uri where the data can be found"
+      },
+      "size": {
+        "type": "integer",
+        "description": "Number of bytes of content (if url provided)"
+      },
+      "hash": {
+        "type": "string",
+        "description": "Hash of the data (sha-1, base64ed)"
+      },
+      "title": {
+        "type": "string",
+        "description": "Label to display in place of the data"
+      },
+      "creation": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date attachment was first created"
+      }
+    }
+  }
+}

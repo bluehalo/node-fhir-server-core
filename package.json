@@ -1,8 +1,8 @@
 {
-	"name": "asy-fhir-server",
+	"name": "@asymmetrik/fhir-server-core",
 	"version": "0.0.1",
 	"description": "Node FHIR Rest API Server",
-	"main": "src/server/server",
+	"main": "src/index",
 	"author": "Asymmetrik Ltd.",
 	"contributors": [
 		"Bryan Young <byoung@asymmetrik.com>",
@@ -15,12 +15,12 @@
 		"node": ">=8.6"
 	},
 	"scripts": {
-		"start": "export NODE_ENV=production; node src/server/server;",
+		"start": "export NODE_ENV=production; node src/runner;",
 		"nodemon": "export NODE_ENV=development; node src/scripts/nodemon",
 		"postinstall": "npm run build-docs",
 		"serve-docs": "npm run build-docs;node docs/server",
-		"build-docs": "webpack --config docs/webpack.config.js;",
-		"watch-docs": "export NODE_ENV=development;webpack --config docs/webpack.config.js;",
+		"build-docs": "export NODE_ENV=production;node docs/build;",
+		"watch-docs": "export NODE_ENV=development;node docs/build;",
 		"test:lint": "eslint \"src/**/*.js\"",
 		"test:e2e": "jest --runInBand e2e/*.spec.js",
 		"test:src": "jest src",

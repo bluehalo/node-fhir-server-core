@@ -5,21 +5,19 @@ const express = require('express');
 const helmet = require('helmet');
 const axios = require('axios');
 const https = require('https');
+const http = require('http');
 const path = require('path');
+const glob = require('glob');
 const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
-const config = require(path.resolve('./src/config/config'));
-const logger = require(path.resolve('./src/lib/winston'));
-
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-const USE_HTTPS = (config.security && config.security.key && config.security.cert);
+const appConfig = require(path.resolve('./src/config'));
 
 /**
  * @function configureMiddleware
  * @summary Configure some basic express middleware
  * @param {Express.app} app
  */
-let configureMiddleware = function (app) {
+let configureMiddleware = function (app, IS_PRODUCTION) {
 
   // Enable stack traces
   app.set('showStackError', !IS_PRODUCTION);
@@ -37,11 +35,23 @@ let configureMiddleware = function (app) {
 };
 
 /**
+ * @function configureSession
+ * @summary Configure some basic express middleware
+ * @param {Express.app} app
+ */
+let configureSession = function (app, serverConfig) {
+	// If a session was passed in the config, let's use it
+	if (serverConfig.sessionStore) {
+		app.use(serverConfig.sessionStore);
+	}
+};
+
+/**
  * @function secureHeaders
  * @summary Add helmet to secure headers
  * @param {Express.app} app
  */
-let secureHeaders = function (app) {
+let secureHeaders = function (app, USE_HTTPS) {
   /**
   * The following headers are turned on by default:
   * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
@@ -63,8 +73,9 @@ let secureHeaders = function (app) {
  * @summary Add routes
  * @param {Express.app} app
  */
-let setupRoutes = function (app) {
-  config.files.routes.forEach(route => require(path.resolve(route))(app));
+let setupRoutes = function (app, profiles, logger) {
+	let routes = glob.sync(appConfig.files.routes);
+	routes.forEach(route => require(path.resolve(route))(app, profiles, logger));
 };
 
 /**
@@ -72,40 +83,40 @@ let setupRoutes = function (app) {
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise}
  */
-let retrieveAuthServerInfo = async function () {
+let retrieveAuthServerInfo = async function (config) {
   const discoveryUrl = config.issuer.discoveryUrl;
-  let authConfig, jwkSet;
+  let oauthConfig, jwkSet;
 
   if (!discoveryUrl) {
-    authConfig = config.issuer.authConfig;
+    oauthConfig = config.issuer.oauthConfig;
     jwkSet = config.issuer.jwkSet;
   } else {
-    authConfig = await axios.get(discoveryUrl).then(res => res.data);
-    jwkSet = await axios.get(authConfig.jwks_uri).then(res => res.data);
+    oauthConfig = await axios.get(discoveryUrl).then(res => res.data);
+    jwkSet = await axios.get(oauthConfig.jwks_uri).then(res => res.data);
   }
 
   if (typeof jwkSet.keys === 'undefined') {
     throw new Error('keys are not defined');
   }
-  if (typeof authConfig.authorization_endpoint !== 'string') {
+  if (typeof oauthConfig.authorization_endpoint !== 'string') {
     throw new Error('authorization_endpoint is not a string');
   }
-  if (typeof authConfig.token_endpoint !== 'string') {
+  if (typeof oauthConfig.token_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
-  if (typeof authConfig.registration_endpoint !== 'string') {
+  if (typeof oauthConfig.registration_endpoint !== 'string') {
     throw new Error('token_endpoint is not a string');
   }
-  if (typeof authConfig.issuer !== 'string') {
+  if (typeof oauthConfig.issuer !== 'string') {
     throw new Error('issuer is not a string');
   }
 
-  // Introspection is not required depending on the oath2 implementation (required for openid)
-  if (discoveryUrl && typeof authConfig.introspection_endpoint !== 'string') {
+  // Introspection is not required depending on the oauth2 implementation (required for openid)
+  if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
     throw new Error('introspection_endpoint is not a string');
   }
 
-  return {authConfig, jwkSet};
+  return { oauthConfig, jwkSet };
 };
 
 /**
@@ -113,7 +124,7 @@ let retrieveAuthServerInfo = async function () {
  * @summary Add error handler
  * @param {Express.app} app
  */
-let setupErrorHandler = function (app) {
+let setupErrorHandler = function (app, logger) {
   // Generic catch all error handler
   // Errors should be thrown with next and passed through
   app.use((err, req, res, next) => {
@@ -145,41 +156,47 @@ let setupErrorHandler = function (app) {
  * @function initialize
  * @return {Promise}
  */
-module.exports.initialize  = async () => {
+module.exports.initialize = async ({ config, logger }) => {
+	logger.info('Initializing express');
 
-  logger.info('Initializing express');
+	const { auth, profiles, server } = config;
+	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
+	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-  // Create our express instance
-  let app = express();
+	// Create our express instance
+	let app = express();
 
-  // Setup auth configs for middleware
-  let {authConfig, jwkSet} = await retrieveAuthServerInfo();
+	// Setup auth configs for middleware
+	/* eslint-disable no-unused-vars */
+	let { oauthConfig, jwkSet } = await retrieveAuthServerInfo(auth);
+	/* eslint-enable no-unused-vars */
 
-  // Add some configurations to our app
-  configureMiddleware(app);
-  secureHeaders(app);
-  setupRoutes(app);
-  setupErrorHandler(app);
+	// Add some configurations to our app
+	configureMiddleware(app, IS_PRODUCTION);
+	configureSession(app, server);
+	secureHeaders(app, USE_HTTPS);
+	setupRoutes(app, profiles, logger);
+	setupErrorHandler(app, logger);
 
-  /**
-  * Use an https server in production, this must be last
-  * If this app is behind a load balancer on AWS that has SSL certs, then you
-  * do not necessarily need this, but if this is being deployed with nothing in
-  * front of it, then you must add some SSL certs. This last section can be updated
-  * depending on the environment that you are deploying to.
-  */
-  if (USE_HTTPS) {
+	/**
+	* Use an https server in production, this must be last
+	* If this app is behind a load balancer on AWS that has SSL certs, then you
+	* do not necessarily need this, but if this is being deployed with nothing in
+	* front of it, then you must add some SSL certs. This last section can be updated
+	* depending on the environment that you are deploying to.
+	*/
+	if (USE_HTTPS) {
 
-    // These are required for running in https
-    let options = {
-      key: fs.readFileSync(config.security.key),
-      cert: fs.readFileSync(config.security.cert)
-    };
+		// These are required for running in https
+		let options = {
+			key: fs.readFileSync(server.ssl.key),
+			cert: fs.readFileSync(server.ssl.cert)
+		};
 
-    // Pass back our https server
-    return https.createServer(options, app);
-  }
+		// Pass back our https server
+		return https.createServer(options, app);
+	}
 
-  // Pass our app back if we are successful
-  return app;
+	// Pass our app back if we are successful
+	return http.createServer(app);
 };
