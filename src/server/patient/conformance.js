@@ -3,11 +3,11 @@
  * @summary Patient conformance statement
  */
 
-module.exports = {
+module.exports = (count) => ({
 	extension: [{
 		url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
 		// This will be resolved dynamically by the service methods
-		valueDecimal: 0
+		valueDecimal: count
 	}],
 	type: 'Patient',
 	profile: {
@@ -47,4 +47,4 @@ module.exports = {
 		type: 'token',
 		definition: 'A patient identifier'
 	}]
-};
+});
