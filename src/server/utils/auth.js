@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken');
 const request = require('superagent');
 const jwkToPem = require('jwk-to-pem');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
-const config = require(path.resolve('./src/config/config'));
-const logger = require(path.resolve('./src/lib/winston'));
+
+// Injected in validation function.
+let logger;
 
 /**
  * Check the decoded token or instrospection for at least one required scope.
@@ -31,19 +32,18 @@ function _hasCorrectScope(decodedTokenOrIntrospection, validScopes) {
  * @param {Object} decodedToken
  * @returns {String}
  */
-function _getKeyForTokenValidation(decodedToken) {
-		const authConfig = config.authConfig;
+function _getKeyForTokenValidation(decodedToken, oauthConfig) {
 
 		// Check for a private key first
-    if (authConfig.secretKey) {
-				return authConfig.secretKey;
+    if (oauthConfig.secretKey) {
+				return oauthConfig.secretKey;
 		// Then check if there is a key in the jwkSet.
-    } else if (_.get(authConfig, 'jwkSet.keys', []).length === 1) {
-        const jwtKey = authConfig.jwkSet.keys[0];
+    } else if (_.get(oauthConfig, 'jwkSet.keys', []).length === 1) {
+        const jwtKey = oauthConfig.jwkSet.keys[0];
 				return jwkToPem(jwtKey);
 		// If there is more than one key, check the key identifier.
-    } else if (_.get(authConfig, 'jwkSet.keys', []).length > 1) {
-        const jwtKey = _.find(authConfig.jwkSet.keys, ['kid', decodedToken.header.kid]);
+    } else if (_.get(oauthConfig, 'jwkSet.keys', []).length > 1) {
+        const jwtKey = _.find(oauthConfig.jwkSet.keys, ['kid', decodedToken.header.kid]);
         return jwkToPem(jwtKey);
     } else {
         return null;
@@ -91,9 +91,9 @@ function _parseBearerToken(req) {
  * @param {Function} next
  * @returns {Promise} Returns a promise that resolves to the result of the `next`.
  */
-async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes, next) {
-    const issuer = config.authConfig.issuer;
-    const clientId = config.authConfig.clientId;
+async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes, oauthConfig, next) {
+    const issuer = oauthConfig.issuer;
+    const clientId = oauthConfig.clientId;
     const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
 
 		// verify the token and signature with secret/pub key
@@ -110,15 +110,15 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 
 		if (typeof decoded.scope === 'string' && _hasCorrectScope(decoded, validScopes)) {
 				return next();
-		} else if (config.authConfig.introspection_endpoint) {
+		} else if (oauthConfig.introspection_endpoint) {
 				logger.debug('Attempting to introspect token');
 
-				const protectedResourceClientId = config.authConfig.protectedResourceClientId;
-				const protectedResourceClientSecret = config.authConfig.protectedResourceClientSecret;
+				const protectedResourceClientId = oauthConfig.protectedResourceClientId;
+				const protectedResourceClientSecret = oauthConfig.protectedResourceClientSecret;
 
 				try {
 						const introspectionResponse = await request
-								.post(config.authConfig.introspection_endpoint)
+								.post(oauthConfig.introspection_endpoint)
 								.auth(protectedResourceClientId, protectedResourceClientSecret)
 								.send(`token=${token}`);
 						const introspection = introspectionResponse.body;
@@ -149,7 +149,8 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
  * @summary {Function} Returns a middleware function that verifies bearer token and checks scope
  * @param {Array<String>} validScopes A list of scopes that allow access to the resource.
  */
-module.exports.validate = (validScopes) => {
+module.exports.validate = (validScopes, loggerUtil, oauthConfig) => {
+		logger = logger || loggerUtil;
     return async (req, res, next) => {
         // get bearer token
         const bearerToken = _parseBearerToken(req);
@@ -158,8 +159,8 @@ module.exports.validate = (validScopes) => {
             logger.debug('Found bearer token in request');
             const decodedToken = jwt.decode(bearerToken, {complete: true});
             logger.debug('Decoded bearer token from request');
-            const tokenKey = _getKeyForTokenValidation(decodedToken);
-            return await _verifyToken(bearerToken, tokenKey, {}, validScopes, next);
+            const tokenKey = _getKeyForTokenValidation(decodedToken, oauthConfig);
+            return await _verifyToken(bearerToken, tokenKey, {}, validScopes, oauthConfig, next);
         } else {
             // did not pass checks, return 401 message
             logger.error('Could not find bearer token in request headers');

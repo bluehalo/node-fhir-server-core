@@ -7,15 +7,19 @@ const {validate} = require(path.resolve('./src/server/utils/auth'));
  * @name exports
  * @summary Patient routes
  */
-module.exports = app => {
+module.exports = (app, profiles, logger, oauthConfig) => {
 
-  routes.forEach((route) => {
-    app[route.type](
-      route.path,
-      sanitizeMiddleware(route.args),
-      validate(route.scopes),
-      route.controller
-    );
-  });
+	// Only add routes if we have a patient profile
+	// the endpoint can't function without the config
+	if (profiles.patient) {
+		routes.forEach((route) => {
+			app[route.type](
+				route.path,
+				sanitizeMiddleware(route.args),
+				validate(route.scopes, logger, oauthConfig),
+				route.controller(profiles.patient, logger)
+			);
+		});
+	}
 
 };

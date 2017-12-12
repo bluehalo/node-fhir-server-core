@@ -7,7 +7,7 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 8
   },
   "extends": "eslint:recommended",
   "rules": {

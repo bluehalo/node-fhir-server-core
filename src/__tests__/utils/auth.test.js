@@ -5,14 +5,19 @@ const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 
 const auth = require(path.resolve('./src/server/utils/auth'));
-const config = require(path.resolve('./src/config/config'));
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 
 // The auth methods should return errors according to https://tools.ietf.org/html/rfc6750#section-3.1
 describe('Auth Utils Test', () => {
 
-    const originalConfig = _.cloneDeep(config);
-    const mockNext = jest.fn();
+		let config = {};
+		const mockNext = jest.fn();
+
+		const mockLogger = {
+			error: _.noop,
+			info: _.noop,
+			debug: _.noop
+		};
 
     const secretKey = 'secret';
     const aud = 'audience';
@@ -25,20 +30,20 @@ describe('Auth Utils Test', () => {
 
     const introspection_endpoint = 'https://introspection.com';
 
-    const validateFn = auth.validate(requiredScopes);
+    const validateFn = auth.validate(requiredScopes, mockLogger, config);
 
     beforeEach(() => {
-        config.authConfig = {
+        Object.assign(config, {
             clientId: aud,
             secretKey,
             issuer: iss,
             introspection_endpoint
-        };
+        });
     });
 
     afterEach(() => {
-        Object.keys(config).forEach(k => delete config[k]);
-        Object.assign(config, originalConfig);
+        //Object.keys(config).forEach(k => delete config[k]);
+        //Object.assign(config, originalConfig);
         mockNext.mockClear();
     });
 
@@ -63,7 +68,7 @@ describe('Auth Utils Test', () => {
 			});
 
     test('should not validate a request with a valid token without a scope or an introspection endpoint', async() => {
-        config.authConfig.introspection_endpoint = undefined;
+        config.introspection_endpoint = undefined;
         await validateFn({headers: {authorization: `Bearer ${validTokenWithoutScopes}`}}, {}, mockNext);
         expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
 			});

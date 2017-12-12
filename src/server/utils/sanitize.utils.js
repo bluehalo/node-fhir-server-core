@@ -89,7 +89,7 @@ let sanitizeMiddleware = function (config) {
       }
 
       // If we have the arg and the type is wrong, throw invalid arg
-      if (cleanArgs[conf.name] && validateType(conf.type, cleanArgs[conf.name])) {
+      if (cleanArgs[conf.name] && !validateType(conf.type, cleanArgs[conf.name])) {
         return next(errors.invalidParameter(conf.name));
       }
     }
