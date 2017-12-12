@@ -42,14 +42,14 @@ let generateCapabilityStatement = (req, profiles, logger) => new Promise((resolv
 	logger.info('Metadata.generateCapabilityStatement');
 	// Create a new base capability statement per request
 
-	// Iterate over the availalbe resources
+	// Map all the active resources
 	let active_resources = RESOURCES
 		.map(mapResources(profiles))
 		.filter(filterResources);
 
 	// Iterate over the active_resources and execute getCount for each one.
 	// req and logger are by no means necessary, but pass them in so the service can
-	// access the logger and see information in the request if necessary for any validation etc,
+	// access the logger and see information in the request if necessary for any validation etc.
 	return Promise.all(active_resources.map(resource => resource.getCount(req, logger)))
 		.then((results) => {
 			// Generate the resources conformance statement and add these to the main Capability Statement

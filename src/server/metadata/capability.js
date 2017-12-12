@@ -1,12 +1,14 @@
 const moment = require('moment-timezone');
+const path = require('path');
+const { DSTU2 } = require(path.resolve('./src/constants'));
 
 /**
  * @name exports
  * @summary Capability statement shell
  */
 module.exports.makeStatement = resources => ({
-	resourceType: 'CapabilityStatement',
-	status: 'active',
+	resourceType: DSTU2.RESOURCE_TYPES.CONFORMANCE,
+	status: DSTU2.STATUSES.DRAFT,
 	date: moment().tz('America/New_York').format(),
 	publisher: 'Not provided',
 	kind: 'instance',
@@ -20,7 +22,6 @@ module.exports.makeStatement = resources => ({
 	fhirVersion: '2.0',
 	acceptUnknown: 'extensions',
 	format: [
-		'application/fhir+xml',
 		'application/fhir+json'
 	],
 	rest: [

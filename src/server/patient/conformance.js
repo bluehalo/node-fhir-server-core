@@ -1,3 +1,6 @@
+const path = require('path');
+const { DSTU2 } = require(path.resolve('./src/constants'));
+
 /**
  * @name exports
  * @summary Patient conformance statement
@@ -11,14 +14,14 @@ module.exports = {
 			// This will be resolved dynamically by the service methods
 			valueDecimal: count
 		}],
-		type: 'Patient',
+		type: DSTU2.RESOURCE_TYPES.PATIENT,
 		profile: {
 			reference: 'http://hl7.org/fhir/Profile/Patient'
 		},
 		interaction: [{
 			code: 'read'
 		}, {
-			code: 'vread'
+			code: 'search'
 		}],
 		searchParam: [{
 			name: 'id',
