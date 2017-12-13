@@ -149,7 +149,7 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 /**
  * @name validate
  * @summary {Function} Returns a middleware function that verifies bearer token and checks scope
- * @param {Array<String>} validScopes A list of scopes that allow access to the resource.
+ * @param {Array<String>} validScopes
  * @param {Object} loggerUtil
  * @param {Object} oauthConfig
  */

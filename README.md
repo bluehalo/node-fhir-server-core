@@ -61,11 +61,28 @@ Here is an example config with all the currently supported options. See descript
 ```javascript
 {
 	auth: {
-		clientId: '',
-		secret: '',
-		issuer: {
-			discoveryUrl: ''
-		}
+		clientId: 'my-client-id',
+		discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration',
+
+		authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
+		token_endpoint: 'https://sb-auth.smarthealthit.org/token',
+		registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
+		introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
+		issuer: 'https://sb-auth.smarthealthit.org/',
+
+		jwkSet: {
+			keys: [{
+				"kty": "RSA",
+				"e": "AQAB",
+				"kid": "rsa1",
+				"alg": "RS256",
+				"n": "big_string"
+			}]
+		},
+		secret: 'access token secret',
+
+		protectedResourceClientId: 'protected-resource-id',
+		protectedResourceClientSecret: 'protected-resource-secret'
 	},
 	server: {
 		port: 3000,
@@ -91,24 +108,87 @@ Here is an example config with all the currently supported options. See descript
 
 #### `auth.clientId`
 
-- **Type:**
-- **Description:**
-- **Required:** 
-- **Default:**
+- **Type:** `string`
+- **Description:** The name of the resource server. All access tokens should have an `aud` value set to this value, otherwise they will not pass validation.
+- **Required:** true
+- **Default:** undefined
 
 #### `auth.secret`
 
-- **Type:**
-- **Description:**
-- **Required:** 
-- **Default:**
+- **Type:** `string`
+- **Description:** The secret key used to verify an access token's signature. If you are using a public key to verify the signature, use `jwkSet`.
+- **Required:** false
+- **Default:** undefined
 
-#### `auth.issuer.discoveryUrl`
+#### `auth.discoveryUrl`
 
-- **Type:**
-- **Description:**
-- **Required:** 
-- **Default:**
+- **Type:** `string`
+- **Description:** If the authorization server follows the OpenId Connect specification, this can be used to call the authentication server's discovery endpoint and set the following properties (unless they are explicitly overridden here): `authorization_endpoint`, `token_endpoint`, `registration_endpoint`, `introspection_endpoint`, `issuer`, and `jwkSet`.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.discoveryUrl`
+
+- **Type:** `string`
+- **Description:** If the authentication server follows the OpenId Connect specification, this can be used to call the authentication server's discovery endpoint and set the following properties (unless they are explicitly overridden here): authorization_endpoint, token_endpoint, registration_endpoint, introspection_endpoint, issuer, and jwkSet.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.authorization_endpoint`
+
+- **Type:** `string`
+- **Description:** The endpoint a client application must use to receive an access code as described by the OAuth2 standard.
+- **Required:** true
+- **Default:** undefined
+
+#### `auth.registration_endpoint`
+
+- **Type:** `string`
+- **Description:** The endpoint a client application must use to register their application with the authentication server.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.token_endpoint`
+
+- **Type:** `string`
+- **Description:** The endpoint a client application must use to receive an access token as described by the OAuth2 standard.
+- **Required:** true
+- **Default:** undefined
+
+#### `auth.introspection_endpoint`
+
+- **Type:** `string`
+- **Description:** The endpoint the resource server calls to introspect the token as described by RFC 662 OAuth 2.0 Token Introspection. If the authentication server does not support introspection, this is not required.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.issuer`
+
+- **Type:** `string`
+- **Description:** The name of the authentication server. All access tokens should have an `iss` value set to this value, otherwise they will not pass validation.
+- **Required:** true
+- **Default:** undefined
+
+#### `auth.protectedResourceClientId`
+
+- **Type:** `string`
+- **Description:** The Client ID given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.protectedResourceClientSecret`
+
+- **Type:** `string`
+- **Description:** The Client Secret given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.jwkSet`
+
+- **Type:** `object`
+- **Description:** A JSON Web Key (JWK) as described by RFC 7517. If there is more than one key, they each must have a key identifier `kid` so that the resource server knows which key to use when verifying a given access token. If you are using a private key to verify the signature, use `secret`.
+- **Required:** false
+- **Default:** undefined
 
 #### `server.port`
 

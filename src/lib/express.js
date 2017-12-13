@@ -19,18 +19,18 @@ const appConfig = require(path.resolve('./src/config'));
  */
 let configureMiddleware = function (app, IS_PRODUCTION) {
 
-  // Enable stack traces
-  app.set('showStackError', !IS_PRODUCTION);
+	// Enable stack traces
+	app.set('showStackError', !IS_PRODUCTION);
 
-  // Add compression
-  app.use(compression({ level: 9 }));
+	// Add compression
+	app.use(compression({ level: 9 }));
 
-  // Enable the body parser
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+	// Enable the body parser
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
 
-  // Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
-  // app.use(methodOverride());
+	// Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
+	// app.use(methodOverride());
 
 };
 
@@ -62,10 +62,10 @@ let secureHeaders = function (app, USE_HTTPS) {
   * - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
   * - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
   */
-  app.use(helmet({
-    // Needs https running first
-    hsts: USE_HTTPS
-  }));
+	app.use(helmet({
+		// Needs https running first
+		hsts: USE_HTTPS
+	}));
 };
 
 /**
@@ -84,39 +84,39 @@ let setupRoutes = function (app, profiles, logger, oauthConfig) {
  * @return {Promise}
  */
 let initAuthConfig = async function (config) {
-  const discoveryUrl = config.discoveryUrl;
+	const discoveryUrl = config.discoveryUrl;
 	let oauthConfig = {};
+
+	if (discoveryUrl) {
+		const discoveryResponse = await request.get(discoveryUrl).then(res => res.body);
+		discoveryResponse.jwkSet = await request.get(discoveryResponse.jwks_uri).then(res => res.body);
+		Object.assign(oauthConfig, discoveryResponse);
+	}
 
 	Object.assign(oauthConfig, config);
 
-  if (discoveryUrl) {
-    const discoveryResponse = await request.get(discoveryUrl).then(res => res.body);
-		discoveryResponse.jwkSet = await request.get(discoveryResponse.jwks_uri).then(res => res.body);
-		Object.assign(oauthConfig, discoveryResponse);
-  }
+	if (typeof oauthConfig.jwkSet.keys === 'undefined') {
+		throw new Error('keys are not defined');
+	}
+	if (typeof oauthConfig.authorization_endpoint !== 'string') {
+		throw new Error('authorization_endpoint is not a string');
+	}
+	if (typeof oauthConfig.token_endpoint !== 'string') {
+		throw new Error('token_endpoint is not a string');
+	}
+	if (typeof oauthConfig.registration_endpoint !== 'string') {
+		throw new Error('token_endpoint is not a string');
+	}
+	if (typeof oauthConfig.issuer !== 'string') {
+		throw new Error('issuer is not a string');
+	}
 
-  if (typeof oauthConfig.jwkSet.keys === 'undefined') {
-    throw new Error('keys are not defined');
-  }
-  if (typeof oauthConfig.authorization_endpoint !== 'string') {
-    throw new Error('authorization_endpoint is not a string');
-  }
-  if (typeof oauthConfig.token_endpoint !== 'string') {
-    throw new Error('token_endpoint is not a string');
-  }
-  if (typeof oauthConfig.registration_endpoint !== 'string') {
-    throw new Error('token_endpoint is not a string');
-  }
-  if (typeof oauthConfig.issuer !== 'string') {
-    throw new Error('issuer is not a string');
-  }
+	// Introspection is not required depending on the oauth2 implementation (required for openid)
+	if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
+		throw new Error('introspection_endpoint is not a string');
+	}
 
-  // Introspection is not required depending on the oauth2 implementation (required for openid)
-  if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
-    throw new Error('introspection_endpoint is not a string');
-  }
-
-  return oauthConfig;
+	return oauthConfig;
 };
 
 /**
@@ -125,31 +125,31 @@ let initAuthConfig = async function (config) {
  * @param {Express.app} app
  */
 let setupErrorHandler = function (app, logger) {
-  // Generic catch all error handler
-  // Errors should be thrown with next and passed through
-  app.use((err, req, res, next) => {
-    // If there is an error and it is our error type
-    if (err && errors.isServerError(err)) {
-      logger.error(err.code, err.message);
-      res.status(err.code).end(err.message);
-    }
-    // If there is still an error, throw a 500 and pass the message through
-    else if (err) {
-      logger.error(500, err.message);
-      res.status(500).end(err.message);
-    }
-    // No error
-    else {
-      next();
-    }
-  });
+	// Generic catch all error handler
+	// Errors should be thrown with next and passed through
+	app.use((err, req, res, next) => {
+		// If there is an error and it is our error type
+		if (err && errors.isServerError(err)) {
+			logger.error(err.code, err.message);
+			res.status(err.code).end(err.message);
+		}
+		// If there is still an error, throw a 500 and pass the message through
+		else if (err) {
+			logger.error(500, err.message);
+			res.status(500).end(err.message);
+		}
+		// No error
+		else {
+			next();
+		}
+	});
 
-  // Nothing has responded by now, respond with 404
-  app.use((req, res) => {
-    let error = errors.notFound();
-    logger.error(error.code, error.message);
-    res.status(error.code).end(error.message);
-  });
+	// Nothing has responded by now, respond with 404
+	app.use((req, res) => {
+		let error = errors.notFound();
+		logger.error(error.code, error.message);
+		res.status(error.code).end(error.message);
+	});
 };
 
 /**
