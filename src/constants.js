@@ -1,7 +1,7 @@
 exports.DSTU2 = {
 	RESOURCE_TYPES: {
-		CONFORMANCE: 'CONFORMANCE',
-		PATIENT: 'PATIENT'
+		CONFORMANCE: 'Conformance',
+		PATIENT: 'Patient'
 	},
 	STATUSES: {
 		DRAFT: 'draft',
