@@ -1,6 +1,6 @@
 const sanitize = require('sanitize-html');
+const moment = require('moment-timezone');
 const validator = require('validator');
-const moment = require('moment');
 const path = require('path');
 const xss = require('xss');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
@@ -11,6 +11,11 @@ let parseValue = function (type, value) {
     case 'number':
       result = validator.toFloat(value);
       break;
+    case 'date':
+      result = parseInt(value)
+				? moment(+value).tz('America/New_York')
+				: moment(value).tz('America/New_York');
+      break;
     case 'boolean':
       result = validator.toBoolean(value);
       break;
@@ -19,7 +24,7 @@ let parseValue = function (type, value) {
       // xss helps prevent html from slipping in
       // strip a certain range of unicode characters
       // replace any non word characters
-      result = validator.stripLow(xss(sanitize(value))).replace(/[^\w]/g, '');
+      result = validator.stripLow(xss(sanitize(value)));
       break;
   }
   return result;
@@ -29,10 +34,10 @@ let validateType = function (type, value) {
   let result;
   switch (type) {
     case 'number':
-      result = validator.isNumeric(value);
+      result = typeof value === 'number' && !Number.isNaN(value);
 			break;
     case 'boolean':
-      result = validator.isBoolean(value);
+      result = typeof value === 'boolean';
 			break;
     case 'string':
       result = typeof value === 'string';
@@ -48,9 +53,9 @@ let validateType = function (type, value) {
 };
 
 let parseParams = req => {
-  if (Object.keys(req.params).length) { return req.params; }
-  if (Object.keys(req.query).length) { return req.query; }
-  if (Object.keys(req.body).length) { return req.body; }
+  if (req.params && Object.keys(req.params).length) { return req.params; }
+  if (req.query && Object.keys(req.query).length) { return req.query; }
+  if (req.body && Object.keys(req.body).length) { return req.body; }
   return {};
 };
 
@@ -89,15 +94,15 @@ let sanitizeMiddleware = function (config) {
       }
 
       // If we have the arg and the type is wrong, throw invalid arg
-      if (cleanArgs[conf.name] && !validateType(conf.type, cleanArgs[conf.name])) {
+      if (cleanArgs[conf.name] !== undefined && !validateType(conf.type, cleanArgs[conf.name])) {
         return next(errors.invalidParameter(conf.name));
       }
     }
 
     // All is well, update params, query, or body, and move on to the next middleware/function
-    if (Object.keys(req.params).length) { req.params = cleanArgs; }
-    if (Object.keys(req.query).length) { req.query = cleanArgs; }
-    if (Object.keys(req.body).length) { req.body = cleanArgs; }
+    if (req.params && Object.keys(req.params).length) { req.params = cleanArgs; }
+    if (req.query && Object.keys(req.query).length) { req.query = cleanArgs; }
+    if (req.body && Object.keys(req.body).length) { req.body = cleanArgs; }
     next();
   };
 };
