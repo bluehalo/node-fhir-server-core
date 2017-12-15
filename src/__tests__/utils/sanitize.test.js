@@ -19,6 +19,10 @@ const ARGS = [
 	{
 		name: 'age',
 		type: 'number'
+	},
+	{
+		name: 'identifier',
+		type: 'string'
 	}
 ];
 
@@ -30,7 +34,27 @@ const REQUIRED_ARGS = [
 	}
 ];
 
+const INVALID_TYPE_ARGS = [
+	{
+		name: 'age',
+		type: 'integer'
+	}
+];
+
 describe('Sanitize Utils Tests', () => {
+
+	test('should not pass an error if no args are provided and none are required', () => {
+		let middleware = sanitizeMiddleware(ARGS);
+		let req = {};
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		// Make sure next was called but without an error
+		expect(next).toHaveBeenCalled();
+		expect(next.mock.calls[0][0]).toBeUndefined();
+	});
 
 	test('should coerce the arguments into the correct type', () => {
 		let middleware = sanitizeMiddleware(ARGS);
@@ -56,6 +80,19 @@ describe('Sanitize Utils Tests', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
+	test('should accept a different format for date types', () => {
+		let middleware = sanitizeMiddleware(ARGS);
+		let query = { birthdate: '2017-03-01T13:10:00' };
+		let req = { query };
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		expect(req.query.birthdate.isValid()).toBeTruthy();
+		expect(req.query.birthdate).toBeInstanceOf(moment);
+	});
+
 	test('should filter out extra arguments that do not belong', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
 		let body = { id: 'john-doe', age: '24', birthdate: '740088404220', isAlive: 'true' };
@@ -74,6 +111,50 @@ describe('Sanitize Utils Tests', () => {
 		// Make sure next was called but without an error
 		expect(next).toHaveBeenCalled();
 		expect(next.mock.calls[0][0]).toBeUndefined();
+	});
+
+	test('should allow a valid identifier to be passed without stripping characters', () => {
+		let middleware = sanitizeMiddleware(ARGS);
+		let params = { identifier: 'http://www.example.com|2334567' };
+		let req = { params };
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		expect(req.params.identifier).toEqual('http://www.example.com|2334567');
+	});
+
+	test('should not validate non-configured types', () => {
+		let middleware = sanitizeMiddleware(INVALID_TYPE_ARGS);
+		let params = { age: 32 };
+		let req = { params };
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		let nextArg = next.mock.calls[0][0];
+
+		expect(next).toHaveBeenCalled();
+		expect(nextArg).toBeInstanceOf(errors.ServerError);
+		expect(nextArg.message).toEqual('Invalid parameter');
+	});
+
+	test('should strip out characters that might cause xss', () => {
+		let middleware = sanitizeMiddleware(ARGS);
+		let params = {
+			identifier: '<script>alert(2+2);</script>',
+			first_name: '<script>hello</script>world!'
+		};
+		let req = { params };
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		expect(req.params.identifier).toEqual('');
+		expect(req.params.first_name).toEqual('world!');
 	});
 
 	test('should pass an error to next if a required argument is missing', () => {

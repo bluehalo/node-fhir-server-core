@@ -26,6 +26,15 @@
 		"test:src": "jest src",
 		"test": "set -e; npm run test:lint; npm run test:src;"
 	},
+	"jest": {
+		"verbose": true,
+		"collectCoverage": true,
+		"coverageReporters": [
+			"text",
+			"lcov",
+			"json"
+		]
+	},
 	"dependencies": {
 		"axios": "^0.17.1",
 		"body-parser": "^1.18.2",

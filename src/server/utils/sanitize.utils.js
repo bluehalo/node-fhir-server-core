@@ -12,7 +12,7 @@ let parseValue = function (type, value) {
 			result = validator.toFloat(value);
 			break;
 		case 'date':
-			result = parseInt(value)
+			result = /^[0-9]*$/g.test(value)
 				? moment(+value).tz('America/New_York')
 				: moment(value).tz('America/New_York');
 			break;
@@ -25,6 +25,10 @@ let parseValue = function (type, value) {
 			// strip a certain range of unicode characters
 			// replace any non word characters
 			result = validator.stripLow(xss(sanitize(value)));
+			break;
+		default:
+			// Pass the value through, unknown types will fail when being validated
+			result = value;
 			break;
 	}
 	return result;
