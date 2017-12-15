@@ -11,3 +11,4 @@ src/cert.pem
 docs/dist
 npm-debug.log
 .DS_Store
+coverage
