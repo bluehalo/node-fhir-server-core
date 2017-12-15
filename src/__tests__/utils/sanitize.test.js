@@ -54,7 +54,6 @@ describe('Sanitize Utils Tests', () => {
 		// This should be the argument next would be invoked with
 		// calls[0] is the first set of arguments, calls[0][0] is the first argument
 		expect(next.mock.calls[0][0]).toBeUndefined();
-		// console.log(next.mock.calls[0][0].message);
 	});
 
 	test('should filter out extra arguments that do not belong', () => {
@@ -75,7 +74,6 @@ describe('Sanitize Utils Tests', () => {
 		// Make sure next was called but without an error
 		expect(next).toHaveBeenCalled();
 		expect(next.mock.calls[0][0]).toBeUndefined();
-
 	});
 
 	test('should pass an error to next if a required argument is missing', () => {
@@ -91,7 +89,6 @@ describe('Sanitize Utils Tests', () => {
 		expect(next).toHaveBeenCalled();
 		expect(nextArg).toBeInstanceOf(errors.ServerError);
 		expect(nextArg.message).toEqual('Invalid parameter');
-
 	});
 
 	test('should pass an error to next if an argument is not the correct type', () => {
