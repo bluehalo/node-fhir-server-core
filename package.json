@@ -39,6 +39,7 @@
 		"axios": "^0.17.1",
 		"body-parser": "^1.18.2",
 		"compression": "^1.7.1",
+		"cors": "^2.8.4",
 		"eslint": "^4.12.1",
 		"express": "^4.16.2",
 		"glob": "^7.1.2",
