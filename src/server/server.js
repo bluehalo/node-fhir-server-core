@@ -43,7 +43,7 @@ class Server {
 
 		// Validate profiles
 		let profileKeys = Object.keys(config.profiles);
-		let hasValidProfileConfiguration = profileKeys.some(profileKey => {
+		let hasValidProfileConfiguration = profileKeys.every(profileKey => {
 			return loadProfile(profileKey, config.profiles[profileKey]);
 		});
 
