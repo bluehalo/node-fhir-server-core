@@ -6,13 +6,13 @@ const { routes } = require(path.resolve('./src/server/metadata/metadata.config')
  * @name exports
  * @summary Metadata routes
  */
-module.exports = (app, profiles, logger) => {
+module.exports = (app, profiles, logger, security) => {
 
   routes.forEach((route) => {
 		app[route.type](
 			route.path,
 			sanitizeMiddleware(route.args),
-			route.controller(profiles, logger)
+			route.controller(profiles, logger, security)
 		);
 	});
 

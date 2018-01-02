@@ -1,7 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const { files } = require(path.resolve('./src/config'));
-const { makeStatement } = require(path.resolve('./src/server/metadata/capability'));
+const { makeStatement, securityStatement } = require(path.resolve('./src/server/metadata/capability'));
 
 // Load all the conformance documents ahead of time
 const RESOURCES = glob
@@ -38,7 +38,7 @@ let filterResources = (resource) => resource.makeResource && resource.getCount;
  * @param {Winston} logger - Instance of Winston's logger
  * @return {Promise<Object>} - Return the capability statement
  */
-let generateCapabilityStatement = (req, profiles, logger) => new Promise((resolve, reject) => {
+let generateCapabilityStatement = (req, profiles, logger, security) => new Promise((resolve, reject) => {
 	logger.info('Metadata.generateCapabilityStatement');
 	// Create a new base capability statement per request
 
@@ -52,10 +52,18 @@ let generateCapabilityStatement = (req, profiles, logger) => new Promise((resolv
 	// access the logger and see information in the request if necessary for any validation etc.
 	return Promise.all(active_resources.map(resource => resource.getCount(req, logger)))
 		.then((results) => {
+
+			// Our server statment
+			const server = {mode: 'server'};
 			// Generate the resources conformance statement and add these to the main Capability Statement
-			let resource_statements = active_resources.map((resource, i) => resource.makeResource(results[i]));
+			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
+
+			if (security) {
+				server.security = securityStatement(security);
+			}
+
 			// Add these resources to the main CapabilityStatement
-			return resolve(makeStatement(resource_statements));
+			return resolve(makeStatement(server));
 		})
 		.catch(reject);
 });

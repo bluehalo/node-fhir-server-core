@@ -77,9 +77,10 @@ let secureHeaders = function (app, USE_HTTPS) {
  * @summary Add routes
  * @param {Express.app} app
  */
-let setupRoutes = function (app, profiles, logger) {
+let setupRoutes = function (app, profiles, logger, security) {
+
 	let routes = glob.sync(appConfig.files.routes);
-	routes.forEach(route => require(path.resolve(route))(app, profiles, logger));
+	routes.forEach(route => require(path.resolve(route))(app, profiles, logger, security));
 };
 
 /**
@@ -163,7 +164,7 @@ let setupErrorHandler = function (app, logger) {
 module.exports.initialize = async ({ config, logger }) => {
 	logger.info('Initializing express');
 
-	const { auth, profiles, server } = config;
+	const { auth, profiles, server, security } = config;
 	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -179,7 +180,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
 	secureHeaders(app, USE_HTTPS);
-	setupRoutes(app, profiles, logger);
+	setupRoutes(app, profiles, logger, security);
 	setupErrorHandler(app, logger);
 
 	/**

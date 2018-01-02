@@ -1,30 +1,44 @@
 const fhirServer = require('./index.js');
-const path = require('path');
 
 const CONFIG = {
 	auth: {
 		clientId: 'client_id',
 		secret: 'secret',
 		issuer: {
+			uri: 'https://lit-lake-71789.herokuapp.com',
 			discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration',
 		}
 	},
 	server: {
 		port: 3000,
-		ssl: {
-			key: path.resolve('./src/key.pem'),
-			cert: path.resolve('./src/cert.pem')
-		}
+		// ssl: {
+		// 	key: path.resolve('./src/key.pem'),
+		// 	cert: path.resolve('./src/cert.pem')
+		// }
 	},
 	logging: {
 		level: 'debug'
 	},
+	// security: [
+	// 	{
+	// 		url: 'authorize',
+	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/authorize'
+	// 	},
+	// 	{
+	// 		url: 'token',
+	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/token'
+	// 	}
+	// 	// optional - registration
+	// ],
 	profiles: {
-		patient: {
-			service: './src/server/patient/service.mock.js'
-		},
+		// patient: {
+		// 	service: './src/server/patient/service.mock.js'
+		// },
 		observation: {
-			service: './src/server/observation/service.mock.js'
+			service: './src/services/observation.service.js'
+		},
+		oauth: {
+			service: './src/services/oauthstub.service.js' // optional if you plan to implement oauth in the same project
 		}
 	}
 };
