@@ -131,7 +131,7 @@ Here is an example config with all the currently supported options. See descript
 #### `server.corsOptions`
 
 - **Type:** `object`
-- **Description:** Any default cors options you would like applied to all routes. Please see (https://github.com/expressjs/cors#configuration-options)[https://github.com/expressjs/cors#configuration-options] for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Description:** Any default cors options you would like applied to all routes. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
@@ -194,7 +194,7 @@ const fhirConfig = {
 #### `profiles.[key].corsOptions`
 
 - **Type:** `object`
-- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see (https://github.com/expressjs/cors#configuration-options)[https://github.com/expressjs/cors#configuration-options] for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
