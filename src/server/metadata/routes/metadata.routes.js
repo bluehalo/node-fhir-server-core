@@ -10,7 +10,7 @@ const { routes } = require(path.resolve('./src/server/metadata/metadata.config')
 module.exports = (app, config, logger) => {
 	let { profiles } = config;
 
-  routes.forEach((route) => {
+	routes.forEach((route) => {
 		// Enable options
 		app.options(route.path, cors(route.corsOptions));
 		// Enable route
