@@ -7,8 +7,8 @@ const { routes } = require(path.resolve('./src/server/observation/observation.co
  * @name exports
  * @summary Patient routes
  */
-module.exports = (app, profiles, logger) => {
-
+module.exports = (app, config, logger) => {
+	let { profiles } = config;
 	// Only add routes if we have a patient profile
 	// the endpoint can't function without the config
 	if (profiles.observation) {
