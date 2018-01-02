@@ -28,10 +28,12 @@ class Narrative extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			status: this._status,
 			div: this._div
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 

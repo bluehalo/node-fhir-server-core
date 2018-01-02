@@ -223,7 +223,7 @@ class Observation extends DomainResource {
 	}
 
 	toJSON() {
-		const thisObj = {
+		const json = {
 			identifier: this._identifier,
 			status: this._status,
 			category: this._category,
@@ -245,7 +245,7 @@ class Observation extends DomainResource {
 		};
 
 		// return in order
-		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), thisObj);
+		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);
 	}
 
 }

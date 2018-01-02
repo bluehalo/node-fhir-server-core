@@ -23,10 +23,12 @@ class Range extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			low: this._low,
 			high: this._high
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 
 }

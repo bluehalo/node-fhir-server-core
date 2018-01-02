@@ -24,10 +24,12 @@ class Period extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			start: this._start,
 			end: this._end
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 

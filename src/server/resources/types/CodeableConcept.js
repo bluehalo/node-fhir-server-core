@@ -31,10 +31,12 @@ class CodeableConcept extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			coding: this._coding,
 			text: this._text
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 
