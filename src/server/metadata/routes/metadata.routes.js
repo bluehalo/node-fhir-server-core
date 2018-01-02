@@ -1,12 +1,24 @@
+const cors = require('cors');
 const path = require('path');
-const controller = require(path.resolve('./src/server/metadata/controllers/metadata.controller'));
+const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize.utils'));
+const { routes } = require(path.resolve('./src/server/metadata/metadata.config'));
 
 /**
  * @name exports
  * @summary Metadata routes
  */
-module.exports = app => {
+module.exports = (app, profiles, logger) => {
 
-  app.get('/metadata', controller.getCapabilityStatement);
+  routes.forEach((route) => {
+		// Enable options
+		app.options(route.path, cors(route.corsOptions));
+		// Enable route
+		app[route.type](
+			route.path,
+			cors(route.corsOptions),
+			sanitizeMiddleware(route.args),
+			route.controller(profiles, logger)
+		);
+	});
 
 };

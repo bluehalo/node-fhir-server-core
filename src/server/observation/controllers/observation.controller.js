@@ -1,12 +1,22 @@
-// const path = require('path');
-// const service = require(path.resolve('./src/server/observation/services/observation.service'));
+const path = require('path');
+const { ServerError } = require(path.resolve('./src/server/utils/error.utils'));
 
-/**
- * @name exports
- * @summary Observation controller
- */
-module.exports.getObservations = (req, res) => {
+module.exports.getObservation = (profile, logger) => {
+	let { serviceModule: service } = profile;
 
-  res.send('Here are your observations');
-
+	return (req, res, next) => {
+		// @TODO Validate arguments and response
+		/**
+		* return service.getObservation(req, logger)
+		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
+		*		.then(validateResponse); // Make sure the response data conforms to the spec
+		*/
+		return service.getObservation(req, logger)
+			.then(() => {
+				res.send('Here is your observation args' + JSON.stringify(req.query));
+			})
+			.catch((err) => {
+				next(new ServerError(500, err.message));
+			});
+	};
 };

@@ -45,6 +45,9 @@ const CONFIG = {
 	profiles: {
 		patient: {
 			service: './src/server/patient/service.mock.js'
+		},
+		observation: {
+			service: './src/server/observation/service.mock.js'
 		}
 	}
 };

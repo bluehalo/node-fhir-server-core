@@ -25,9 +25,19 @@
 		"test:src": "jest src",
 		"test": "set -e; npm run test:lint; npm run test:src;"
 	},
+	"jest": {
+		"verbose": true,
+		"collectCoverage": true,
+		"coverageReporters": [
+			"text",
+			"lcov",
+			"json"
+		]
+	},
 	"dependencies": {
 		"body-parser": "^1.18.2",
 		"compression": "^1.7.1",
+		"cors": "^2.8.4",
 		"eslint": "^4.12.1",
 		"express": "^4.16.2",
 		"glob": "^7.1.2",
@@ -35,7 +45,8 @@
 		"jsonwebtoken": "^8.1.0",
 		"jwk-to-pem": "^1.2.6",
 		"method-override": "^2.3.10",
-		"moment": "^2.19.3",
+		"moment": "^2.19.4",
+		"moment-timezone": "^0.5.14",
 		"nodemon": "^1.12.1",
 		"sanitize-html": "^1.16.1",
 		"superagent": "^3.8.1",

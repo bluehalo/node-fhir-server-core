@@ -292,6 +292,21 @@ Currently we are only supporting profiles listed in the table below. As we add s
 - **Required:** Yes
 
 #### Observation
+> The observation service must implement the following methods
+
+##### `getCount`
+
+- **Params:** `(req: Express.Request, logger: Winston)`
+- **Return:** `Promise`
+- **Description:** Get the count of the number of observations.
+- **Required:** Yes
+
+##### `getObservation`
+
+- **Params:** `(req: Express.Request, logger: Winston)`
+- **Return:** `Promise`
+- **Description:** TODO
+- **Required:** Yes
 
 ## Examples
 
