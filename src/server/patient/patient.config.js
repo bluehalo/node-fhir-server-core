@@ -3,36 +3,42 @@ const controller = require(path.resolve('./src/server/patient/controllers/patien
 
 
 let routes = [
-  {
-    type: 'get',
-    path: '/dstu2/patient',
-    args: [{
-      name: 'name',
-      type: 'string'
-    }, {
-      name: 'birthdate',
-      type: 'string'
-    }, {
-      name: 'gender',
-      type: 'string'
-    }, {
-      name: 'given',
-      type: 'string'
-    }],
-    scopes: [],
-    controller: controller.getPatient
-  },
-  {
-    type: 'get',
-    path: '/dstu2/patient/:id',
-    args: [{
-      name: 'id',
-      type: 'string',
-      required: true
-    }],
-    scopes: [],
-    controller: controller.getPatientById
-  }
+	{
+		type: 'get',
+		path: '/dstu2/patient',
+		corsOptions: {
+			methods: ['GET']
+		},
+		args: [{
+			name: 'name',
+			type: 'string'
+		}, {
+			name: 'birthdate',
+			type: 'string'
+		}, {
+			name: 'gender',
+			type: 'string'
+		}, {
+			name: 'given',
+			type: 'string'
+		}],
+		scopes: [],
+		controller: controller.getPatient
+	},
+	{
+		type: 'get',
+		path: '/dstu2/patient/:id',
+		corsOptions: {
+			methods: ['GET']
+		},
+		args: [{
+			name: 'id',
+			type: 'string',
+			required: true
+		}],
+		scopes: [],
+		controller: controller.getPatientById
+	}
 ];
 
 let codes = {
@@ -44,6 +50,6 @@ let codes = {
  * @summary Patient config
  */
 module.exports = {
-  routes,
+	routes,
 	codes
 };

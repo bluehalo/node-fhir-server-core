@@ -8,7 +8,6 @@ const https = require('https');
 const http = require('http');
 const path = require('path');
 const glob = require('glob');
-const cors = require('cors');
 const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const appConfig = require(path.resolve('./src/config'));
@@ -29,9 +28,6 @@ let configureMiddleware = function (app, IS_PRODUCTION) {
 	// Enable the body parser
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
-
-	// Enable CORS on all requests
-	app.use(cors());
 
 	// Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
 	// app.use(methodOverride());
