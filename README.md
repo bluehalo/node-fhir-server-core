@@ -69,6 +69,9 @@ Here is an example config with all the currently supported options. See descript
 	},
 	server: {
 		port: 3000,
+		corsOptions: {
+			maxAge: 86400
+		},
 		sessionStore: null,
 		ssl: {
 			key: 'path/to/key.pem',
@@ -80,10 +83,18 @@ Here is an example config with all the currently supported options. See descript
 	},
 	profiles: {
 		patient: {
-			service: './patient/patient.controller'
+			service: './patient/patient.controller',
+			corsOptions: {
+				// Have a different max age for all the routes in the patient profile
+				maxAge: 3600
+			}
 		},
 		observation: {
-			service: require('./observation/observation.controller')
+			service: require('./observation/observation.controller'),
+			corsOptions: {
+				// Disable cors on this profile, maybe this is for internal use only
+				origin: false
+			}
 		}
 	}
 }
@@ -115,6 +126,13 @@ Here is an example config with all the currently supported options. See descript
 - **Type:** `number`
 - **Description:** Port the express app will listen to.
 - **Required:** Yes
+- **Default:** `none`
+
+#### `server.corsOptions`
+
+- **Type:** `object`
+- **Description:** Any default cors options you would like applied to all routes. Please see (https://github.com/expressjs/cors#configuration-options)[https://github.com/expressjs/cors#configuration-options] for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Required:** No
 - **Default:** `none`
 
 #### `server.sessionStore`
@@ -167,11 +185,17 @@ const fhirConfig = {
 - **Default:** `error`
 
 #### `profiles.[key].service`
-> Profiles currently only have a service property. More properties may be added in the future.
 
 - **Type:** `string` | `object`
 - **Description:** Path to a service or the actual module itself. Each service must conform to the profiles requirement.
 - **Required:** Yes. You must provide a service on a profile object. There must be at least one valid profile configuration for the server to run, otherwise it will throw an error stating the profiles configuration is invalid.
+- **Default:** `none`
+
+#### `profiles.[key].corsOptions`
+
+- **Type:** `object`
+- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see (https://github.com/expressjs/cors#configuration-options)[https://github.com/expressjs/cors#configuration-options] for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Required:** No
 - **Default:** `none`
 
 ### Profiles
@@ -182,24 +206,24 @@ Currently we are only supporting profiles listed in the table below. As we add s
 | Patient      | `patient`      | [patient](#patient)         |
 | Observation  | `observation`  | [observation](#observation) |
 
-#### Patient
+### Patient
 > The patient service must implement the following methods.
 
-##### `getCount`
+#### `getCount`
 
 - **Params:** `(req: Express.Request, logger: Winston)`
 - **Return:** `Promise`
 - **Description:** Get the count of the number of patients.
 - **Required:** Yes
 
-##### `getPatientById`
+#### `getPatientById`
 
 - **Params:** `(req: Express.Request, logger: Winston)`
 - **Return:** `Promise`
 - **Description:** Get the patient given an id in the req.params.
 - **Required:** Yes
 
-##### `getPatient`
+#### `getPatient`
 
 - **Params:** `(req: Express.Request, logger: Winston)`
 - **Return:** `Promise`
@@ -211,17 +235,17 @@ Currently we are only supporting profiles listed in the table below. As we add s
 	- given + gender
 - **Required:** Yes
 
-#### Observation
+### Observation
 > The observation service must implement the following methods
 
-##### `getCount`
+#### `getCount`
 
 - **Params:** `(req: Express.Request, logger: Winston)`
 - **Return:** `Promise`
 - **Description:** Get the count of the number of observations.
 - **Required:** Yes
 
-##### `getObservation`
+#### `getObservation`
 
 - **Params:** `(req: Express.Request, logger: Winston)`
 - **Return:** `Promise`
