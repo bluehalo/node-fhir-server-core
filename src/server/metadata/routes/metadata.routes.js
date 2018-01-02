@@ -10,13 +10,12 @@ const { routes } = require(path.resolve('./src/server/metadata/metadata.config')
 module.exports = (app, profiles, logger) => {
 
   routes.forEach((route) => {
-		let corsOptions = { methods: [route.type] };
 		// Enable options
-		app.options(route.path, cors(corsOptions));
+		app.options(route.path, cors(route.corsOptions));
 		// Enable route
 		app[route.type](
 			route.path,
-			cors(corsOptions),
+			cors(route.corsOptions),
 			sanitizeMiddleware(route.args),
 			route.controller(profiles, logger)
 		);

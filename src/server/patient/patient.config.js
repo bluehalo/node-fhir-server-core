@@ -6,6 +6,9 @@ let routes = [
   {
     type: 'get',
     path: '/dstu2/patient',
+		corsOptions: {
+			methods: ['GET']
+		},
     args: [{
       name: 'name',
       type: 'string'

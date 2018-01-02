@@ -6,6 +6,9 @@ let routes = [
   {
     type: 'get',
     path: '/dstu2/metadata',
+		corsOptions: {
+			methods: ['GET']
+		},
     args: [],
     scopes: [],
     controller: controller.getCapabilityStatement

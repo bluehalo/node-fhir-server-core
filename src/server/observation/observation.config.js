@@ -6,6 +6,9 @@ let routes = [
   {
     type: 'get',
     path: '/dstu2/observation',
+		corsOptions: {
+			methods: ['GET']
+		},
     args: [],
     scopes: [],
     controller: controller.getObservation

@@ -13,13 +13,12 @@ module.exports = (app, profiles, logger) => {
 	// the endpoint can't function without the config
 	if (profiles.patient) {
 		routes.forEach((route) => {
-			let corsOptions = { methods: [route.type] };
 			// Enable options
-			app.options(route.path, cors(corsOptions));
+			app.options(route.path, cors(route.corsOptions));
 			// Enable route
 			app[route.type](
 				route.path,
-				cors(corsOptions),
+				cors(route.corsOptions),
 				sanitizeMiddleware(route.args),
 				route.controller(profiles.patient, logger)
 			);
