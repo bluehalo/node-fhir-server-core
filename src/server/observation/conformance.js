@@ -6,7 +6,7 @@ const { DSTU2 } = require('../../constants');
  */
 
 module.exports = {
-	Profile: 'patient',
+	Profile: 'observation',
 	Resource: (count) => ({
 		extension: [{
 			url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
