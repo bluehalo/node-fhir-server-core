@@ -30,7 +30,7 @@ module.exports.getObservations = (profile, logger) => {
 							'search': {
 								'mode': 'match'
 							},
-							'resource': resource.toJSON(),
+							'resource': resource,
 							'fullUrl': `localhost:3000/Observation/${resource.id}`
 						};
 						searchResults.entry.push(entry);
@@ -57,7 +57,7 @@ module.exports.getObservationByID = (profile, logger) => {
 		*/
 		return service.getObservation(req, logger)
 			.then((observation) => {
-					res.send(observation.toJSON);
+					res.send(observation);
 			})
 			.catch((err) => {
 				next(new ServerError(500, err.message));

@@ -3,7 +3,10 @@ const controller = require(path.resolve('./src/server/observation/controllers/ob
 let routes = [
   {
     type: 'get',
-    path: '/dstu2/observation',
+		path: '/dstu2/observation',
+		corsOptions: {
+			methods: ['GET']
+		},
     args: [{
       name: 'patient',
 			type: 'string',
@@ -26,7 +29,10 @@ let routes = [
   },
   {
     type: 'get',
-    path: '/dstu2/observation/:id',
+		path: '/dstu2/observation/:id',
+		corsOptions: {
+			methods: ['GET']
+		},
     args: [{
       name: 'id',
       type: 'number',
@@ -44,5 +50,5 @@ let routes = [
  * @summary Observations config
  */
 module.exports = {
-  routes
+	routes
 };
