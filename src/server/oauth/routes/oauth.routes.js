@@ -5,13 +5,13 @@ const { routes } = require(path.resolve('./src/server/oauth/oauth.config'));
 
 /**
  * @name exports
- * @summary Patient routes
+ * @summary Oauth routes
  */
 module.exports = (app, profiles, logger) => {
-	// Only add routes if we have a observation profile
+	// Only add routes if we have an OAUTH profile
 	// the endpoint can't function without the config
 
-	if (profiles.observation) {
+	if (profiles.oauth) {
 		routes.forEach((route) => {
 			app[route.type](
 				route.path,
