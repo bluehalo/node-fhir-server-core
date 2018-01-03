@@ -31,9 +31,9 @@ const CONFIG = {
 	// 	// optional - registration
 	// ],
 	profiles: {
-		// patient: {
-		// 	service: './src/server/patient/service.mock.js'
-		// },
+		patient: {
+			service: './src/services/patient.service.js'
+		},
 		observation: {
 			service: './src/services/observation.service.js'
 		},

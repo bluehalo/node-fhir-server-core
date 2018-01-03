@@ -18,7 +18,7 @@ class PatientContact {
 	// PatientContactRelationship (Extensible)
 	set relationship(relationship) {
 		if (Array.isArray(relationship)) {
-			this._relationship = relationship;
+			this._relationship = relationship.map((x) => new CodeableConcept(x));
 		} else {
 			this._relationship = [new CodeableConcept(relationship)];
 		}
@@ -40,7 +40,7 @@ class PatientContact {
 	// telecom		0..*	ContactPoint	A contact detail for the person
 	set telecom(telecom) {
 		if (Array.isArray(telecom)) {
-			this._telecom = telecom;
+			this._telecom = telecom.map((x) => new ContactPoint(x));
 		} else {
 			this._telecom = [new ContactPoint(telecom)];
 		}

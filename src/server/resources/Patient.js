@@ -78,9 +78,14 @@ class Communication {
 
 
 class Patient extends DomainResource {
-	constructor() {
+	constructor(obj) {
 		super();
 		this._resourceType = 'Patient';
+		Object.assign(this, obj);
+	}
+
+	set resourceType(resourceType) {
+		this._resourceType = resourceType;
 	}
 
 	get resourceType() {
@@ -90,7 +95,7 @@ class Patient extends DomainResource {
 	// identifier		0..*	Identifier	Unique Id for this particular observation
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
-			this._identifier = identifier;
+			this._identifier = identifier.map((x) => new Identifier(x));
 		} else {
 			this._identifier = [new Identifier(identifier)];
 		}
@@ -112,7 +117,7 @@ class Patient extends DomainResource {
 	// Σ	0..*	HumanName	A name associated with the patient
 	set name(name) {
 		if (Array.isArray(name)) {
-			this._name = name;
+			this._name = name.map((x) => new HumanName(x));
 		} else {
 			this._name = [new HumanName(name)];
 		}
@@ -125,7 +130,7 @@ class Patient extends DomainResource {
 	// telecom	Σ	0..*	ContactPoint	A contact detail for the individual
 	set telecom(telecom) {
 		if (Array.isArray(telecom)) {
-			this._telecom = telecom;
+			this._telecom = telecom.map((x) => new ContactPoint(x));
 		} else {
 			this._telecom = [new ContactPoint(telecom)];
 		}
@@ -177,7 +182,7 @@ class Patient extends DomainResource {
 	// address	Σ	0..*	Address	Addresses for the individual
 	set address(address) {
 		if (Array.isArray(address)) {
-			this._address = address;
+			this._address = address.map((x) => new Address(x));
 		} else {
 			this._address = [new Address(address)];
 		}
@@ -220,7 +225,7 @@ class Patient extends DomainResource {
 	// photo		0..*	Attachment	Image of the patient
 	set photo(photo) {
 		if (Array.isArray(photo)) {
-			this._photo = photo;
+			this._photo = photo.map((x) => new Attachment(x));
 		} else {
 			this._photo = [new Attachment(photo)];
 		}
@@ -234,7 +239,7 @@ class Patient extends DomainResource {
 	// SHALL at least contain a contact's details or a reference to an organization
 	set contact(contact) {
 		if (Array.isArray(contact)) {
-			this._contact = contact;
+			this._contact = contact.map((x) => new PatientContact(x));
 		} else {
 			this._contact = [new PatientContact(contact)];
 		}
@@ -256,7 +261,7 @@ class Patient extends DomainResource {
 	// communication		0..*	BackboneElement	A list of Languages which may be used to communicate with the patient about his or her health
 	set communication(communication) {
 		if (Array.isArray(communication)) {
-			this._communication = communication;
+			this._communication = communication.map((x) => new Communication(x));
 		} else {
 			this._communication = [new Communication(communication)];
 		}
@@ -269,7 +274,7 @@ class Patient extends DomainResource {
 	// careProvider		0..*	Reference(Organization | Practitioner)	Patient's nominated primary care provider
 	set careProvider(careProvider) {
 		if (Array.isArray(careProvider)) {
-			this._careProvider = careProvider;
+			this._careProvider = careProvider.map((x) => new Reference(x));
 		} else {
 			this._careProvider = [new Reference(careProvider)];
 		}
@@ -291,9 +296,9 @@ class Patient extends DomainResource {
 	// link	?!	0..*	BackboneElement	Link to another patient resource that concerns the same actual person
 	set link(link) {
 		if (Array.isArray(link)) {
-			this._link = link;
+			this._link = link.map((x) => new Link(x));
 		} else {
-			this._link = new Link(link);
+			this._link = [new Link(link)];
 		}
 	}
 

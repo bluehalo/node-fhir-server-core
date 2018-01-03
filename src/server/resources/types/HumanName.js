@@ -31,7 +31,7 @@ class HumanName extends Element {
 
 	// family	Σ	0..*	string	Family name (often called 'Surname')
 	set family(family) {
-		this._family = family;
+		this._family = [].concat(family);
 	}
 
 	get family() {
@@ -40,11 +40,7 @@ class HumanName extends Element {
 
 	// given	Σ	0..*	string	Given names (not always 'first'). Includes middle names
 	set given(given) {
-		if (Array.isArray(given)) {
-			this._given = given;
-		} else {
-			this._given = [given];
-		}
+			this._given = [].concat(given);
 	}
 
 	get given() {
@@ -53,11 +49,7 @@ class HumanName extends Element {
 
 	// prefix	Σ	0..*	string	Parts that come before the name
 	set prefix(prefix) {
-		if (Array.isArray(prefix)) {
-			this._prefix = prefix;
-		} else {
-			this._prefix = [prefix];
-		}
+			this._prefix = [].concat(prefix);
 	}
 
 	get prefix() {
@@ -66,11 +58,7 @@ class HumanName extends Element {
 
 	// suffix	Σ	0..*	string	Parts that come after the name
 	set suffix(suffix) {
-		if (Array.isArray(suffix)) {
-			this._suffix = suffix;
-		} else {
-			this._suffix = [suffix];
-		}
+			this._suffix = [].concat(suffix);
 	}
 
 	get suffix() {

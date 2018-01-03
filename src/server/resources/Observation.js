@@ -10,9 +10,14 @@ const Component = require(path.resolve('./src/server/resources/types/Component')
 
 
 class Observation extends DomainResource {
-	constructor() {
+	constructor(obj) {
 		super();
+		Object.assign(this, obj);
 		this._resourceType = 'Observation';
+	}
+
+	set resourceType(resourceType) {
+		this._resourceType = resourceType;
 	}
 
 	get resourceType() {
@@ -21,7 +26,11 @@ class Observation extends DomainResource {
 
 	// identifier		0..*	Identifier	Unique Id for this particular observation
 	set identifier(identifier) {
-		this._identifier = new Identifier(identifier);
+		if (Array.isArray(identifier)) {
+			this._identifier = identifier.map((i) => new Identifier(i));
+		} else {
+			this._identifier = [new Identifier(identifier)];
+		}
 	}
 
 	get identifier() {
@@ -105,7 +114,11 @@ class Observation extends DomainResource {
 
 	// Σ	0..*	Reference(Practitioner | Organization | Patient | RelatedPerson)	Who is responsible for the observation
 	set performer(performer) {
-		this._performer = new Reference(performer);
+		if (Array.isArray(performer)) {
+			this._performer = performer.map((i) => new Reference(i));
+		} else {
+			this._performer = [new Reference(performer)];
+		}
 	}
 
 	get performer() {
@@ -201,7 +214,11 @@ class Observation extends DomainResource {
 	// I	0..*	BackboneElement	Provides guide for interpretation
 	// Must have at least a low or a high or text
 	set referenceRange(referenceRange) {
-		this._referenceRange = new ReferenceRange(referenceRange);
+		if (Array.isArray(referenceRange)) {
+			this._referenceRange = referenceRange.map((x) => new ReferenceRange(x));
+		} else {
+			this._referenceRange = [new ReferenceRange(referenceRange)];
+		}
 	}
 
 	get referenceRange() {
@@ -211,8 +228,7 @@ class Observation extends DomainResource {
 	// Σ	0..*	BackboneElement	Σ	0..*	BackboneElement	Component results results
 	set component(component) {
 		if (Array.isArray(component)) {
-			// loop and test class?
-			this._component = component;
+			this._component = component.map((x) => new Component(x));
 		} else {
 			this._component = [new Component(component)];
 		}

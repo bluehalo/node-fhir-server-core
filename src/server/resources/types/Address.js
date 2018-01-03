@@ -42,7 +42,7 @@ class Address extends Element {
 
 	// line	Σ	0..*	string	Street name, number, direction & P.O. Box etc.
 	set line(line) {
-		this._line = line;
+		this._line = [].concat(line);
 	}
 
 	get line() {

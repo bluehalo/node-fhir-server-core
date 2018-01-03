@@ -1,3 +1,6 @@
+const path = require('path');
+const Element = require(path.resolve('./src/server/resources/types/Element'));
+
 class Range extends Element {
 	constructor(obj) {
 		super();

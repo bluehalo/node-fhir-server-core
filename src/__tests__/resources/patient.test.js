@@ -12,8 +12,8 @@ const PatientContact = require(path.resolve('./src/server/resources/types/Patien
 const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
 const Coding = require(path.resolve('./src/server/resources/types/Coding'));
 
-describe('Observation Resource Tests', () => {
-	test('should create an Observation Object default type', () => {
+describe('Patient Resource Tests', () => {
+	test('should create an Patient Object default type', () => {
 		let patient = new Patient();
 
 		const expected = {
@@ -25,7 +25,7 @@ describe('Observation Resource Tests', () => {
 		expect(JSON.stringify(patient)).toEqual(JSON.stringify(expected));
 	});
 
-	test('should validate observation test object', () => {
+	test('should validate Patient test object', () => {
 
 		const patient = new Patient();
 		patient.id = '13664';

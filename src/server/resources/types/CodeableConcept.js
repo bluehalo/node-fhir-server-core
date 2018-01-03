@@ -11,10 +11,11 @@ class CodeableConcept extends Element {
 
 	// coding	Σ	0..*	Coding	Code defined by a terminology system
 	set coding(coding) {
-		if (!Array.isArray()) {
+		if (Array.isArray(coding)) {
+			this._coding = coding.map((x) => new Coding(x));
+		} else {
 			this._coding = [new Coding(coding)];
 		}
-		this._coding = coding;
 	}
 
 	get coding() {

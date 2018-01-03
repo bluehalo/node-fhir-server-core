@@ -19,7 +19,11 @@ class DomainResource extends Resource {
 
 	// contained		0..*	Resource	Contained, inline Resources
 	set contained(contained) {
-		this._contained = contained;
+		if (Array.isArray(contained)) {
+			this._contained = contained.map((x) => new Resource(x));
+		} else {
+			this._contained = [new Resource(contained)];
+		}
 	}
 
 	get contained() {
@@ -28,7 +32,11 @@ class DomainResource extends Resource {
 
 	// extension		0..*	Extension	Additional Content defined by implementations
 	set extension(extension) {
-		this._extension = new Extension(extension);
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((x) => new Extension(x));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
 	}
 
 	get extension() {
@@ -37,7 +45,11 @@ class DomainResource extends Resource {
 
 	// modifierExtension	?!	0..*	Extension
 	set modifierExtension(modifierExtension) {
-		this._modifierExtension = new Extension(modifierExtension);
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((x) => new Extension(x));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
 	}
 
 	get modifierExtension() {

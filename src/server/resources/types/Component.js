@@ -1,6 +1,8 @@
 const path = require('path');
 const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
 const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
+const ReferenceRange = require(path.resolve('./src/server/resources/types/ReferenceRange'));
+
 
 class Component {
 	constructor(obj) {
@@ -37,7 +39,11 @@ class Component {
 
 	// 0..*	see referenceRange	Provides guide for interpretation of component result
 	set referenceRange(referenceRange) {
-		this._referenceRange = referenceRange;
+		if (Array.isArray(referenceRange)) {
+			this._referenceRange = referenceRange.map((x) => new ReferenceRange(x));
+		} else {
+			this._referenceRange = [new ReferenceRange(referenceRange)];
+		}
 	}
 
 	get referenceRange() {

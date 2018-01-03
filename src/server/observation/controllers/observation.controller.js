@@ -10,7 +10,7 @@ module.exports.getObservations = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.findObservations(req, logger)
+		return service.getObservation(req, logger)
 			.then((observations) => {
 
 				const searchResults = {
@@ -50,14 +50,19 @@ module.exports.getObservationByID = (profile, logger) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
+		logger.info('Get observation by id');
 		/**
 		* return service.getObservation(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservation(req, logger)
+		return service.getObservationByID(req, logger)
 			.then((observation) => {
-					res.send(observation.toJSON);
+				if (observation) {
+					res.send(observation);
+				} else {
+					res.status(404).end();
+				}
 			})
 			.catch((err) => {
 				next(new ServerError(500, err.message));
