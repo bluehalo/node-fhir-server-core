@@ -1,6 +1,4 @@
-const path = require('path');
-const controller = require(path.resolve('./src/server/observation/controllers/observation.controller'));
-
+const controller = require('./controllers/observation.controller');
 
 let routes = [
 	{

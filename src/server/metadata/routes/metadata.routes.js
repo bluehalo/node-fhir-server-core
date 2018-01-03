@@ -1,7 +1,6 @@
 const cors = require('cors');
-const path = require('path');
-const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize.utils'));
-const { routes } = require(path.resolve('./src/server/metadata/metadata.config'));
+const { sanitizeMiddleware } = require('../../utils/sanitize.utils');
+const { routes } = require('../metadata.config');
 
 /**
  * @name exports

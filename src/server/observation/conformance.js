@@ -1,5 +1,4 @@
-const path = require('path');
-const { DSTU2 } = require(path.resolve('./src/constants'));
+const { DSTU2 } = require('../../constants');
 
 /**
  * @name exports

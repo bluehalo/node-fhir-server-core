@@ -1,6 +1,5 @@
-const path = require('path');
-const service = require(path.resolve('./src/server/metadata/services/metadata.service'));
-const { ServerError } = require(path.resolve('./src/server/utils/error.utils'));
+const service = require('../services/metadata.service');
+const { ServerError } = require('../../utils/error.utils');
 
 /**
  * @name exports
