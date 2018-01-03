@@ -3,13 +3,16 @@ const controller = require(path.resolve('./src/server/metadata/controllers/metad
 
 
 let routes = [
-  {
-    type: 'get',
-    path: '/dstu2/metadata',
-    args: [],
-    scopes: [],
-    controller: controller.getCapabilityStatement
-  }
+	{
+		type: 'get',
+		path: '/dstu2/metadata',
+		corsOptions: {
+			methods: ['GET']
+		},
+		args: [],
+		scopes: [],
+		controller: controller.getCapabilityStatement
+	}
 ];
 
 /**
@@ -17,5 +20,5 @@ let routes = [
  * @summary Metadata config
  */
 module.exports = {
-  routes
+	routes
 };

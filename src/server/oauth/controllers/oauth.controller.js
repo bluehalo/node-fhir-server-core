@@ -2,7 +2,7 @@
  * This is a stub for oauth.
  *
  * @name exports
- * @summary Metadata controller
+ * @summary Authorizes the request and return a signed code to be exchanged for a token.
  */
 module.exports.authorize = (profile, logger) => {
 	let { serviceModule: service } = profile;

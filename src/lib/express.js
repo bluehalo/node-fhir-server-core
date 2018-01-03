@@ -8,7 +8,6 @@ const https = require('https');
 const http = require('http');
 const path = require('path');
 const glob = require('glob');
-const cors = require('cors');
 const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const appConfig = require(path.resolve('./src/config'));
@@ -29,9 +28,6 @@ let configureMiddleware = function (app, IS_PRODUCTION) {
 	// Enable the body parser
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
-
-	// Enable CORS on all requests
-	app.use(cors());
 
 	// Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
 	// app.use(methodOverride());
@@ -77,10 +73,9 @@ let secureHeaders = function (app, USE_HTTPS) {
  * @summary Add routes
  * @param {Express.app} app
  */
-let setupRoutes = function (app, profiles, logger, security) {
-
+let setupRoutes = function (app, config, logger) {
 	let routes = glob.sync(appConfig.files.routes);
-	routes.forEach(route => require(path.resolve(route))(app, profiles, logger, security));
+	routes.forEach(route => require(path.resolve(route))(app, config, logger));
 };
 
 /**
@@ -164,7 +159,7 @@ let setupErrorHandler = function (app, logger) {
 module.exports.initialize = async ({ config, logger }) => {
 	logger.info('Initializing express');
 
-	const { auth, profiles, server, security } = config;
+	const { auth, server } = config;
 	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -180,7 +175,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
 	secureHeaders(app, USE_HTTPS);
-	setupRoutes(app, profiles, logger, security);
+	setupRoutes(app, config, logger);
 	setupErrorHandler(app, logger);
 
 	/**

@@ -33,8 +33,6 @@ module.exports.getObservationByID = (req, logger) => new Promise((resolve, rejec
 		const db = mongo.getClient();
 		const collection = db.collection('observation');
 
-		console.log(req.params);
-
 		collection.findOne({id: `${req.params.id}`}, function (e, observation) {
 			if (e) {
 				logger.error(e);
