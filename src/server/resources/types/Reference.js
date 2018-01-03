@@ -11,9 +11,18 @@ class Reference {
 		return this._reference;
 	}
 
+	set display(display) {
+		this._display = display;
+	}
+
+	get display() {
+		return this._display;
+	}
+
 	toJSON() {
 		return {
-			reference: this._reference
+			reference: this._reference,
+			display: this._display
 		};
 	}
 }

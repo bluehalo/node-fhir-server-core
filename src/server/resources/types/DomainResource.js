@@ -45,14 +45,14 @@ class DomainResource extends Resource {
 	}
 
 	toJSON() {
-		const toSerialize = {
+		const json = {
 			text: this._text,
 			contained: this._contained,
 			extension: this._extension,
 			modifierExtension: this._modifierExtension
 		};
 
-		return Object.assign(toSerialize, super.toJSON());
+		return Object.assign(super.toJSON(), json);
 	}
 }
 

@@ -20,7 +20,7 @@ class PatientContact {
 		if (Array.isArray(relationship)) {
 			this._relationship = relationship;
 		} else {
-			this._relationship = new CodeableConcept(relationship);
+			this._relationship = [new CodeableConcept(relationship)];
 		}
 	}
 
@@ -85,6 +85,18 @@ class PatientContact {
 
 	get period() {
 		return this._period;
+	}
+
+	toJSON() {
+		return {
+			relationship: this._relationship,
+			name: this._name,
+			telecom: this._telecom,
+			address: this._address,
+			gender: this._gender,
+			organization: this._organization,
+			period: this._period
+		};
 	}
 }
 

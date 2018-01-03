@@ -4,6 +4,11 @@ const Code = require(path.resolve('./src/server/resources/types/Code'));
 const Period = require(path.resolve('./src/server/resources/types/Period'));
 
 class ContactPoint extends Element {
+	constructor(obj) {
+		super();
+		Object.assign(this, obj);
+	}
+
 	// system	Σ I	0..1	code	phone | fax | email | pager | other
 	// ContactPointSystem (Required)
 	set system(system){
