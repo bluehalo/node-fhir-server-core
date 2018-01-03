@@ -30,7 +30,7 @@ module.exports.getPatient = (profile, logger) => {
 							'search': {
 								'mode': 'match'
 							},
-							'resource': resource.toJSON(),
+							'resource': resource,
 							'fullUrl': `localhost:3000/Patient/${resource.id}`
 						};
 						searchResults.entry.push(entry);
