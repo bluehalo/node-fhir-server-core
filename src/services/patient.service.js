@@ -75,34 +75,26 @@ module.exports.getPatient = (req, logger) => new Promise((resolve, reject) => {
 		options.identifier.push(identifier);
 	}
 
+	const name = {};
+
 	if (params.name) {
-		if (!options.name) {
-			options.name = [];
-			options.name.push({family: [params.name]});
-		} else {
-			options.name[0].family = params.name;
-		}
+		name.text = params.name;
 	}
 
 	if (params.family) {
-		if (!options.name) {
-			options.name = [];
-			options.name.push({family: [params.family]});
-		} else {
-			options.name[0].family = params.family;
-		}
+		name.family = [params.family];
 	}
 
 	if (params.given) {
-		if (!options.name) {
-			options.name = [{given: [params.given]}];
-		} else {
-			options.name[0].given = [params.given];
-		}
+		name.given = [params.given];
 	}
 
 	if (params.gender) {
 		options.gender = params.gender;
+	}
+
+	if (name.text || name.given || name.family) {
+		options.name = [name];
 	}
 
 	if (params.birthdate) {
