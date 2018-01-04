@@ -11,6 +11,9 @@ const CONFIG = {
 	},
 	server: {
 		port: 3000,
+		corsOptions: {
+			maxAge: 86400
+		},
 		ssl: {
 			key: path.resolve('./src/key.pem'),
 			cert: path.resolve('./src/cert.pem')
@@ -21,7 +24,10 @@ const CONFIG = {
 	},
 	profiles: {
 		patient: {
-			service: './src/server/patient/service.mock.js'
+			service: './src/server/patient/service.mock.js',
+			corsOptions: {
+				maxAge: 3600
+			}
 		},
 		observation: {
 			service: './src/server/observation/service.mock.js'

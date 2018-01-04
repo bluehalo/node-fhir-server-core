@@ -7,17 +7,20 @@ const { routes } = require('../observation.config');
  * @summary Patient routes
  */
 module.exports = (app, config, logger) => {
-	let { profiles } = config;
+	let { profiles, server } = config;
 	// Only add routes if we have a patient profile
 	// the endpoint can't function without the config
 	if (profiles.observation) {
+		let baseOptions = Object.assign({}, server.corsOptions, profiles.observation.corsOptions);
+
 		routes.forEach((route) => {
+			let corsOptions = Object.assign({}, baseOptions, route.corsOptions);
 			// Enable options
-			app.options(route.path, cors(route.corsOptions));
+			app.options(route.path, cors(corsOptions));
 			// Enable route
 			app[route.type](
 				route.path,
-				cors(route.corsOptions),
+				cors(corsOptions),
 				sanitizeMiddleware(route.args),
 				route.controller(profiles.observation, logger)
 			);
