@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const logger = require(path.resolve('./src/lib/winston'));
-const config = require(path.resolve('./src/lib/winston'));
-
-
 
 /**
  * Parse the `token` from the given
@@ -25,11 +22,7 @@ function _parseBearerToken(req) {
 		// split on space
 		const parts = auth.split(' ');
 		if (parts.length < 2) {
-<<<<<<< HEAD
-				return null;
-=======
 				return;
->>>>>>> 650eeeb49cb233df46ca6705490f6451cdd0afb0
 		}
 
 		// get schema and token from array
