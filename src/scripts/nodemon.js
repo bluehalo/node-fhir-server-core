@@ -1,6 +1,5 @@
 const nodemon = require('nodemon');
-const path = require('path');
-const logger = require(path.resolve('./src/lib/winston'))({ level: 'debug' });
+const logger = require('../lib/winston')({ level: 'debug' });
 
 nodemon({
   ignore: ['node_modules'],

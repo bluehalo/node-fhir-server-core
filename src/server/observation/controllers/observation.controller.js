@@ -1,5 +1,4 @@
-const path = require('path');
-const { ServerError } = require(path.resolve('./src/server/utils/error.utils'));
+const { ServerError } = require('../../utils/error.utils');
 
 module.exports.getObservation = (profile, logger) => {
 	let { serviceModule: service } = profile;

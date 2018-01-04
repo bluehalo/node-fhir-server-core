@@ -9,8 +9,8 @@ const http = require('http');
 const path = require('path');
 const glob = require('glob');
 const fs = require('fs');
-const errors = require(path.resolve('./src/server/utils/error.utils'));
-const appConfig = require(path.resolve('./src/config'));
+const errors = require('../server/utils/error.utils');
+const appConfig = require('../config');
 
 /**
  * @function configureMiddleware
@@ -74,8 +74,9 @@ let secureHeaders = function (app, USE_HTTPS) {
  * @param {Express.app} app
  */
 let setupRoutes = function (app, config, logger) {
-	let routes = glob.sync(appConfig.files.routes);
-	routes.forEach(route => require(path.resolve(route))(app, config, logger));
+	let routePaths = path.resolve(__dirname, '../..', appConfig.files.routes);
+	let routes = glob.sync(routePaths);
+	routes.forEach(route => require(route)(app, config, logger));
 };
 
 /**
