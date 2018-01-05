@@ -17,7 +17,6 @@
 	"scripts": {
 		"start": "export NODE_ENV=production; node src/runner;",
 		"nodemon": "export NODE_ENV=development; node src/scripts/nodemon",
-		"postinstall": "npm run build-docs",
 		"serve-docs": "npm run build-docs;node docs/server",
 		"build-docs": "export NODE_ENV=production;node docs/build;",
 		"watch-docs": "export NODE_ENV=development;node docs/build;",
