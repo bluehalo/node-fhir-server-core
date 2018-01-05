@@ -1,15 +1,18 @@
 const path = require('path');
 const glob = require('glob');
-const { files } = require(path.resolve('./src/config'));
-const { makeStatement, securityStatement } = require(path.resolve('./src/server/metadata/capability'));
+const { files } = require('../../../config');
+const { makeStatement } = require('../capability');
+
+// Make base relative to src
+const base = path.resolve(__dirname, '../../../..');
 
 // Load all the conformance documents ahead of time
 const RESOURCES = glob
-	.sync(files.conformanceStatements)
+	.sync(path.resolve(base, files.conformanceStatements))
 	.map(resource_path => {
 		// Resource is a function that returns the conformance statement for this resource
 		// and takes the number of that particular resource
-		const { Profile, Resource } = require(path.resolve(resource_path));
+		const { Profile, Resource } = require(resource_path);
 		return { Profile, Resource };
 	});
 

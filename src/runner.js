@@ -11,9 +11,12 @@ const CONFIG = {
 	},
 	server: {
 		port: 3000,
+		corsOptions: {
+			maxAge: 86400
+		},
 		// ssl: {
-		// 	key: path.resolve('./src/key.pem'),
-		// 	cert: path.resolve('./src/cert.pem')
+		// 	key: './src/key.pem',
+		// 	cert: './src/cert.pem'
 		// }
 	},
 	logging: {
@@ -32,7 +35,10 @@ const CONFIG = {
 	// ],
 	profiles: {
 		patient: {
-			service: './src/services/patient.service.js'
+			service: './src/services/patient.service.js',
+			corsOptions: {
+				maxAge: 3600
+			}
 		},
 		observation: {
 			service: './src/services/observation.service.js'

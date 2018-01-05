@@ -93,7 +93,7 @@ patient
 When a proper profile configuration is provided (essentially a valid service is provided, see the [README.md](../README.md) for detailed instructions), the routes will be created and this profile will be active. If we do not have a valid config, the routes will not be activated, the documentation will not be generated, and the conformance information will not be included.
 
 #### Route Configuration
-Route configfuration's are in the config file for each profile. They have several arugments you can provide to customize the behavior of the route.
+Route configuration's are in the config file for each profile. They have several arguments you can provide to customize the behavior of the route.
 
 ```javascript
 {
