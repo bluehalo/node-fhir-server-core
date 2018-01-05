@@ -1,7 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const { files } = require('../../../config');
-const { makeStatement } = require('../capability');
+const { makeStatement, securityStatement } = require('../capability');
 
 // Make base relative to src
 const base = path.resolve(__dirname, '../../../..');
