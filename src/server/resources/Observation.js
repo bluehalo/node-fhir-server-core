@@ -7,6 +7,13 @@ const Reference = require(path.resolve('./src/server/resources/types/Reference')
 const ReferenceRange = require(path.resolve('./src/server/resources/types/ReferenceRange'));
 const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
 const Component = require(path.resolve('./src/server/resources/types/Component'));
+const Ratio = require(path.resolve('./src/server/resources/types/Ratio'));
+const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
+const SampledData = require(path.resolve('./src/server/resources/types/SampledData'));
+const Period = require(path.resolve('./src/server/resources/types/Period'));
+
+
+
 
 
 class Observation extends DomainResource {
@@ -126,22 +133,93 @@ class Observation extends DomainResource {
 	}
 
 	// Σ	0..1		Actual result
-	set value(value) {
-		//this[`_${value.constructor.name}`] = value;
-		this._value = value;
-	}
-
-	get value() {
-		return this._value;
-	}
-
-	// move this
-	set valueQuantity(valueQuantity) {
-		this._valueQuantity = new Quantity(valueQuantity);
+	// valueQuantity : Quantity
+	set valueQuantity(value) {
+		this._valueQuantity = new Quantity(value);
 	}
 
 	get valueQuantity() {
 		return this._valueQuantity;
+	}
+
+	// valueCodeableConcept			CodeableConcept
+	set valueCodeableConcept(value) {
+		this._valueCodeableConcept = new CodeableConcept(value);
+	}
+
+	get valueCodeableConcept() {
+		return this._valueCodeableConcept;
+	}
+	// valueString			string
+	set valueString(value) {
+		this._valueString = value;
+	}
+
+	get valueString() {
+		return this._valueString;
+	}
+
+	// valueRange			Range
+	set valueRange(value) {
+		this._valueRange = new Range(value);
+	}
+
+	get valueRange() {
+		return this._valueRange;
+	}
+
+	// valueRatio			Ratio
+	set valueRatio(value) {
+		this._valueRatio = new Ratio(value);
+	}
+
+	get valueRatio() {
+		return this._valueRatio;
+	}
+
+	// valueSampledData			SampledData
+	set valueSampledData(value) {
+		this._valueSampledData = new SampledData(value);
+	}
+
+	get valueSampledData() {
+		return this._valueSampledData;
+	}
+
+	// valueAttachment			Attachment
+	set valueAttachment(value) {
+		this._valueAttachment = new Attachment(value);
+	}
+
+	get valueAttachment() {
+		return this._valueAttachment;
+	}
+
+	// valueTime			time
+	set valueTime(value) {
+		this._valueTime = value;
+	}
+
+	get valueTime() {
+		return this._valueTime;
+	}
+
+	// valueDateTime			dateTime
+	set valueDateTime(value) {
+		this._valueDateTime = value;
+	}
+
+	get valueDateTime() {
+		return this._valueDateTime;
+	}
+
+	// valuePeriod			Period
+	set valuePeriod(value) {
+		this._valuePeriod = new Period(value);
+	}
+
+	get valuePeriod() {
+		return this._valuePeriod;
 	}
 
 	// I	0..1	CodeableConcept	Why the result is missing
@@ -249,8 +327,16 @@ class Observation extends DomainResource {
 			effectiveDateTime: this._effectiveDateTime,
 			effectivePeriod: this._effectivePeriod,
 			performer: this._performer,
-			// value(x)
 			valueQuantity: this._valueQuantity,
+			valueCodeableConcept: this._valueCodeableConcept,
+			valueString: this._valueString,
+			valueRange: this._valueRange,
+			valueRatio: this._valueRatio,
+			valueSampledData: this._valueSampledData,
+			valueAttachment: this._valueAttachment,
+			valueTime: this._valueTime,
+			valueDateTime: this._valueDateTime,
+			valuePeriod: this._valuePeriod,
 			dataAbsentReason: this._dataAbsentReason,
 			interpretation: this._interpretation,
 			comments: this._comments,

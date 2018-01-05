@@ -4,8 +4,9 @@ const Extension = require(path.resolve('./src/server/resources/types/Extension')
 
 
 class DomainResource extends Resource {
-	constructor() {
+	constructor(obj) {
 		super();
+		Object.assign(this, obj);
 	}
 
 	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation

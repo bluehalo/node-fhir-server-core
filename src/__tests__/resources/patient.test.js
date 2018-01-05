@@ -1,5 +1,5 @@
 const path = require('path');
-const { Patient } = require(path.resolve('./src/server/resources/Patient'));
+const { Patient, PatientContact } = require(path.resolve('./src/server/resources/Patient'));
 const Metadata = require(path.resolve('./src/server/resources/types/Metadata'));
 const Narrative = require(path.resolve('./src/server/resources/types/Narrative'));
 const Identifier = require(path.resolve('./src/server/resources/types/Identifier'));
@@ -8,7 +8,6 @@ const Reference = require(path.resolve('./src/server/resources/types/Reference')
 const HumanName = require(path.resolve('./src/server/resources/types/HumanName'));
 const ContactPoint = require(path.resolve('./src/server/resources/types/ContactPoint'));
 const Address = require(path.resolve('./src/server/resources/types/Address'));
-const PatientContact = require(path.resolve('./src/server/resources/types/PatientContact'));
 const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
 const Coding = require(path.resolve('./src/server/resources/types/Coding'));
 
