@@ -14,7 +14,11 @@ class Element {
 
 	// extension		0..*	Extension	Additional Content defined by implementations
 	set extension(extension) {
-		this._extension = new Extension(extension);
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((x) => new Extension(x));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
 	}
 
 	get extension() {

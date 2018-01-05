@@ -134,11 +134,98 @@ describe('Observation Resource Tests', () => {
 			]
 		};
 
-
 		const v = new Validator();
 		expect(JSON.stringify(observation)).toEqual(JSON.stringify(expected));
 
 		// validate serialized object
 		expect(v.validate(JSON.parse(JSON.stringify(observation)), observationSchema).valid).toEqual(true);
 	});
+
+	test('should create an Observation Object from database type', () => {
+
+		const databaseResult = {
+			_id: '5a29526726530607b10cdff7',
+			resourceType: 'Observation',
+			id: '2',
+			meta: {
+				versionId: '2.0'
+			},
+			identifier: [{
+				system: 'https://sitenv.org',
+				value: '7799'
+			}],
+			status: 'final',
+			category: {
+				coding: [{
+					system: 'http://hl7.org/fhir/observation-category',
+					code: 'laboratory',
+					display: 'Laboratory'
+				}]
+			},
+			code: {
+				coding: [{
+					system: 'http://loinc.org',
+					code: '2951-2',
+					display: 'Sodium'
+				}],
+				text: 'Sodium'
+			},
+			subject: {
+				reference: 'Patient/1'
+			},
+			effectiveDateTime: '2005-07-04T00:00:00+00:00',
+			valueQuantity: {
+				value: 138,
+				unit: 'mmol/L',
+				system: 'http://unitsofmeasure.org'
+			}
+		};
+
+		const observation = new Observation(databaseResult);
+
+		const expected = {
+			resourceType: 'Observation',
+			id: '2',
+			meta: {
+				versionId: '2.0'
+			},
+			identifier: [{
+				system: 'https://sitenv.org',
+				value: '7799'
+			}],
+			status: 'final',
+			category: {
+				coding: [{
+					system: 'http://hl7.org/fhir/observation-category',
+					code: 'laboratory',
+					display: 'Laboratory'
+				}]
+			},
+			code: {
+				coding: [{
+					system: 'http://loinc.org',
+					code: '2951-2',
+					display: 'Sodium'
+				}],
+				text: 'Sodium'
+			},
+			subject: {
+				reference: 'Patient/1'
+			},
+			effectiveDateTime: '2005-07-04T00:00:00+00:00',
+			valueQuantity: {
+				value: 138,
+				unit: 'mmol/L',
+				system: 'http://unitsofmeasure.org'
+			}
+		};
+
+
+
+		expect(observation).toBeInstanceOf(Observation);
+		expect(observation.resourceType).toEqual('Observation');
+		expect(JSON.stringify(observation)).toEqual(JSON.stringify(expected));
+	});
+
 });
+

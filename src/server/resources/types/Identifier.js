@@ -1,14 +1,20 @@
 const path = require('path');
+const Element = require(path.resolve('./src/server/resources/types/Element'));
 const Code = require(path.resolve('./src/server/resources/types/Code'));
+const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
+const Period = require(path.resolve('./src/server/resources/types/Period'));
+const Reference = require(path.resolve('./src/server/resources/types/Reference'));
 
-class Identifier {
+
+
+class Identifier extends Element {
 	constructor(obj) {
+		super();
 		Object.assign(this, obj);
 	}
 
-
 	// use	code	usual | official | temp | secondary (If known)
-	// IdentifierUse (Required)
+	// Identifier Use (Required)
 	set use(use) {
 		this._use = new Code(use);
 	}
@@ -20,7 +26,7 @@ class Identifier {
 	// type	Σ	0..1	CodeableConcept	Description of identifier
 	// Identifier Type Codes (Extensible)
 	set type(type) {
-		this._type = type.trim();
+		this._type = new CodeableConcept(type);
 	}
 
 	get type() {
@@ -29,7 +35,7 @@ class Identifier {
 
 	// system	Σ	0..1	uri	The namespace for the identifier
 	set system(system) {
-		this._system = system.trim();
+		this._system = system;
 	}
 
 	get system() {
@@ -38,7 +44,7 @@ class Identifier {
 
 	// value	Σ	0..1	string	The value that is unique
 	set value(value) {
-		this._value = value.trim();
+		this._value = value;
 	}
 
 	get value() {
@@ -47,7 +53,7 @@ class Identifier {
 
 	// period	Σ	0..1	Period	Time period when id is/was valid for use
 	set period(period) {
-		this._period = period.trim();
+		this._period = new Period(period);
 	}
 
 	get period() {
@@ -56,7 +62,7 @@ class Identifier {
 
 	// assigner	Σ	0..1	Reference(Organization)	Organization that issued id (may be just text)
 	set assigner(assigner) {
-		this._assigner = assigner.trim();
+		this._assigner = new Reference(assigner);
 	}
 
 	get assigner() {
@@ -64,7 +70,7 @@ class Identifier {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			use: this._use,
 			type: this._type,
 			system: this._system,
@@ -72,6 +78,8 @@ class Identifier {
 			period: this._period,
 			assigner: this._assigner
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 

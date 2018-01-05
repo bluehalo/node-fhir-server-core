@@ -1,3 +1,6 @@
+const path = require('path');
+const Element = require(path.resolve('./src/server/resources/types/Element'));
+
 class Range extends Element {
 	constructor(obj) {
 		super();
@@ -23,10 +26,12 @@ class Range extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			low: this._low,
 			high: this._high
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 
 }

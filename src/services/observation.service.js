@@ -2,6 +2,8 @@ const path = require('path');
 const dateUtils = require(path.resolve('./src/server/utils/date.utils'));
 const mongo = require(path.resolve('./src/services/mongo.client'));
 
+const Observation = require(path.resolve('./src/server/resources/Observation'));
+
 /**
  *
  * @param {*} req
@@ -11,31 +13,40 @@ module.exports.getCount = (req, logger) => new Promise((resolve, reject) => {
 
 	const db = mongo.getClient();
 	const collection = db.collection('observation');
-	collection.find({}).count(function (e, count) {
+	collection.find(req.params).count(function (e, count) {
 		if (e) {
 			logger.error(e);
 			reject(e);
 		}
 		resolve(count);
 	});
+});
 
+/**
+ *
+ * @param {*} req
+ * @param {*} logger
+ */
+module.exports.getObservationByID = (req, logger) => new Promise((resolve, reject) => {
+	if (req.params.id) {
+		// Use connect method to connect to the server
+		const db = mongo.getClient();
+		const collection = db.collection('observation');
 
-	// Use connect method to connect to the server
-	// MongoClient.connect(URL, function(err, client) {
-	// 	if (err) {
-	// 		logger.error(err);
-	// 		reject(err);
-	// 	}
-
-	// 	collection.find({}).count(function (e, count) {
-	// 		if (e) {
-	// 			logger.error(e);
-	// 			reject(e);
-	// 		}
-	// 		db.close();
-  //     resolve(count);
-  //   });
-	// });
+		collection.findOne({id: `${req.params.id}`}, function (e, observation) {
+			if (e) {
+				logger.error(e);
+				reject(e);
+			}
+			if (observation) {
+				resolve(new Observation(observation));
+			} else {
+				resolve();
+			}
+		});
+	} else {
+		reject('ID not specified');
+	}
 });
 
 /**
@@ -44,24 +55,6 @@ module.exports.getCount = (req, logger) => new Promise((resolve, reject) => {
  * @param {*} logger
  */
 module.exports.getObservation = (req, logger) => new Promise((resolve, reject) => {
-	// Use connect method to connect to the server
-	const db = mongo.getClient();
-	const collection = db.collection('observation');
-	collection.findOne({}, function (e, observation) {
-		if (e) {
-			logger.error(e);
-			reject(e);
-		}
-		resolve(observation);
-    });
-});
-
-/**
- *
- * @param {*} req
- * @param {*} logger
- */
-module.exports.findObservations = (req, logger) => new Promise((resolve, reject) => {
 
 	const params = req.query;
 
@@ -97,8 +90,6 @@ module.exports.findObservations = (req, logger) => new Promise((resolve, reject)
 		options['code.coding.code'] = {$in: codes};
 	}
 
-	logger.debug(JSON.stringify(options));
-
 	// Use connect method to connect to the server
 	const db = mongo.getClient();
 	const collection = db.collection('observation');
@@ -107,6 +98,10 @@ module.exports.findObservations = (req, logger) => new Promise((resolve, reject)
 			logger.error(e);
 			reject(e);
 		}
-		resolve(observations);
+		if (observations && observations.length > 0) {
+			resolve(observations.map((ob) => new Observation(ob)));
+		} else {
+			resolve([]);
+		}
 	});
 });

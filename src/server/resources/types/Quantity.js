@@ -63,13 +63,15 @@ class Quantity extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			value: this._value,
 			comparator: this._comparator,
 			unit: this._unit,
 			system: this._system,
 			code: this._code
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 
 }

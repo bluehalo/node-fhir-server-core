@@ -4,7 +4,6 @@ const fs = require('fs');
 const errors = require(path.resolve('./src/server/utils/error.utils'));
 const logger = require(path.resolve('./src/lib/winston'));
 
-
 /**
  * Parse the `token` from the given
  * `req`'s authorization header.
@@ -70,6 +69,7 @@ function _verifyToken(token, secretOrPublicKey, options = {}, config, next) {
  * @summary Validates the bearer token in the headers.
  */
 module.exports.validate = (req, res, next) => {
+	// placeholder
 	const config = req.config;
 
 	// get bearer token

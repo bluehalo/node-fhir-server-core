@@ -7,12 +7,24 @@ const Reference = require(path.resolve('./src/server/resources/types/Reference')
 const ReferenceRange = require(path.resolve('./src/server/resources/types/ReferenceRange'));
 const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
 const Component = require(path.resolve('./src/server/resources/types/Component'));
+const Ratio = require(path.resolve('./src/server/resources/types/Ratio'));
+const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
+const SampledData = require(path.resolve('./src/server/resources/types/SampledData'));
+const Period = require(path.resolve('./src/server/resources/types/Period'));
+
+
+
 
 
 class Observation extends DomainResource {
-	constructor() {
+	constructor(obj) {
 		super();
+		Object.assign(this, obj);
 		this._resourceType = 'Observation';
+	}
+
+	set resourceType(resourceType) {
+		this._resourceType = resourceType;
 	}
 
 	get resourceType() {
@@ -21,7 +33,11 @@ class Observation extends DomainResource {
 
 	// identifier		0..*	Identifier	Unique Id for this particular observation
 	set identifier(identifier) {
-		this._identifier = new Identifier(identifier);
+		if (Array.isArray(identifier)) {
+			this._identifier = identifier.map((i) => new Identifier(i));
+		} else {
+			this._identifier = [new Identifier(identifier)];
+		}
 	}
 
 	get identifier() {
@@ -105,7 +121,11 @@ class Observation extends DomainResource {
 
 	// Σ	0..*	Reference(Practitioner | Organization | Patient | RelatedPerson)	Who is responsible for the observation
 	set performer(performer) {
-		this._performer = new Reference(performer);
+		if (Array.isArray(performer)) {
+			this._performer = performer.map((i) => new Reference(i));
+		} else {
+			this._performer = [new Reference(performer)];
+		}
 	}
 
 	get performer() {
@@ -113,22 +133,93 @@ class Observation extends DomainResource {
 	}
 
 	// Σ	0..1		Actual result
-	set value(value) {
-		//this[`_${value.constructor.name}`] = value;
-		this._value = value;
-	}
-
-	get value() {
-		return this._value;
-	}
-
-	// move this
-	set valueQuantity(valueQuantity) {
-		this._valueQuantity = new Quantity(valueQuantity);
+	// valueQuantity : Quantity
+	set valueQuantity(value) {
+		this._valueQuantity = new Quantity(value);
 	}
 
 	get valueQuantity() {
 		return this._valueQuantity;
+	}
+
+	// valueCodeableConcept			CodeableConcept
+	set valueCodeableConcept(value) {
+		this._valueCodeableConcept = new CodeableConcept(value);
+	}
+
+	get valueCodeableConcept() {
+		return this._valueCodeableConcept;
+	}
+	// valueString			string
+	set valueString(value) {
+		this._valueString = value;
+	}
+
+	get valueString() {
+		return this._valueString;
+	}
+
+	// valueRange			Range
+	set valueRange(value) {
+		this._valueRange = new Range(value);
+	}
+
+	get valueRange() {
+		return this._valueRange;
+	}
+
+	// valueRatio			Ratio
+	set valueRatio(value) {
+		this._valueRatio = new Ratio(value);
+	}
+
+	get valueRatio() {
+		return this._valueRatio;
+	}
+
+	// valueSampledData			SampledData
+	set valueSampledData(value) {
+		this._valueSampledData = new SampledData(value);
+	}
+
+	get valueSampledData() {
+		return this._valueSampledData;
+	}
+
+	// valueAttachment			Attachment
+	set valueAttachment(value) {
+		this._valueAttachment = new Attachment(value);
+	}
+
+	get valueAttachment() {
+		return this._valueAttachment;
+	}
+
+	// valueTime			time
+	set valueTime(value) {
+		this._valueTime = value;
+	}
+
+	get valueTime() {
+		return this._valueTime;
+	}
+
+	// valueDateTime			dateTime
+	set valueDateTime(value) {
+		this._valueDateTime = value;
+	}
+
+	get valueDateTime() {
+		return this._valueDateTime;
+	}
+
+	// valuePeriod			Period
+	set valuePeriod(value) {
+		this._valuePeriod = new Period(value);
+	}
+
+	get valuePeriod() {
+		return this._valuePeriod;
 	}
 
 	// I	0..1	CodeableConcept	Why the result is missing
@@ -201,7 +292,11 @@ class Observation extends DomainResource {
 	// I	0..*	BackboneElement	Provides guide for interpretation
 	// Must have at least a low or a high or text
 	set referenceRange(referenceRange) {
-		this._referenceRange = new ReferenceRange(referenceRange);
+		if (Array.isArray(referenceRange)) {
+			this._referenceRange = referenceRange.map((x) => new ReferenceRange(x));
+		} else {
+			this._referenceRange = [new ReferenceRange(referenceRange)];
+		}
 	}
 
 	get referenceRange() {
@@ -211,8 +306,7 @@ class Observation extends DomainResource {
 	// Σ	0..*	BackboneElement	Σ	0..*	BackboneElement	Component results results
 	set component(component) {
 		if (Array.isArray(component)) {
-			// loop and test class?
-			this._component = component;
+			this._component = component.map((x) => new Component(x));
 		} else {
 			this._component = [new Component(component)];
 		}
@@ -223,7 +317,7 @@ class Observation extends DomainResource {
 	}
 
 	toJSON() {
-		const thisObj = {
+		const json = {
 			identifier: this._identifier,
 			status: this._status,
 			category: this._category,
@@ -233,8 +327,16 @@ class Observation extends DomainResource {
 			effectiveDateTime: this._effectiveDateTime,
 			effectivePeriod: this._effectivePeriod,
 			performer: this._performer,
-			// value(x)
 			valueQuantity: this._valueQuantity,
+			valueCodeableConcept: this._valueCodeableConcept,
+			valueString: this._valueString,
+			valueRange: this._valueRange,
+			valueRatio: this._valueRatio,
+			valueSampledData: this._valueSampledData,
+			valueAttachment: this._valueAttachment,
+			valueTime: this._valueTime,
+			valueDateTime: this._valueDateTime,
+			valuePeriod: this._valuePeriod,
 			dataAbsentReason: this._dataAbsentReason,
 			interpretation: this._interpretation,
 			comments: this._comments,
@@ -245,7 +347,7 @@ class Observation extends DomainResource {
 		};
 
 		// return in order
-		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), thisObj);
+		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);
 	}
 
 }

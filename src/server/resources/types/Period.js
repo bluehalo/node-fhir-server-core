@@ -1,9 +1,16 @@
+const path = require('path');
+const Element = require(path.resolve('./src/server/resources/types/Element'));
 
 /**
  * Time range defined by start and end date/time.
  * If present, start SHALL have a lower value than end
  */
 class Period extends Element {
+
+	constructor(obj) {
+		super();
+		Object.assign(this, obj);
+	}
 
 	//	Σ I	0..1	dateTime	Starting time with inclusive boundary
 	set start(start) {
@@ -24,10 +31,12 @@ class Period extends Element {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			start: this._start,
 			end: this._end
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 
