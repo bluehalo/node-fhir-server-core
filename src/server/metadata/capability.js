@@ -24,9 +24,26 @@ module.exports.makeStatement = resources => ({
 		'application/fhir+json'
 	],
 	rest: [
-		{
-			mode: 'server',
-			resource: resources
-		}
+		resources
 	]
 });
+
+
+/**
+ * @name exports
+ * @summary Capability statement shell
+ */
+module.exports.securityStatement = securityUrls => ({
+	extension: [{
+		url: 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris',
+		extension: securityUrls,
+		service: {
+			coding: [{
+					system: 'http://hl7.org/fhir/restful-security-service',
+					code: 'SMART-on-FHIR'
+			}],
+			text: 'OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
+		}
+	}]
+});
+

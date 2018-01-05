@@ -7,7 +7,7 @@ const { routes } = require('../metadata.config');
  * @summary Metadata routes
  */
 module.exports = (app, config, logger) => {
-	let { profiles } = config;
+	let { profiles, security } = config;
 
 	routes.forEach((route) => {
 		// Enable options
@@ -17,7 +17,7 @@ module.exports = (app, config, logger) => {
 			route.path,
 			cors(route.corsOptions),
 			sanitizeMiddleware(route.args),
-			route.controller(profiles, logger)
+			route.controller(profiles, logger, security)
 		);
 	});
 

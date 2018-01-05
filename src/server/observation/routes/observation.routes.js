@@ -26,5 +26,4 @@ module.exports = (app, config, logger) => {
 			);
 		});
 	}
-
 };

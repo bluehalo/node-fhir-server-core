@@ -1,4 +1,5 @@
 const Server = require('./server/server');
+const mongo = require('./services/mongo.client');
 
 /**
  * @name exports
@@ -9,6 +10,9 @@ module.exports = (config) => new Promise((resolve, reject) => {
 	let server;
 	// Create our FHIR server
 	try {
+		// start mongo
+		mongo.initializeMongo();
+
 		server = new Server(config);
 	} catch (err) {
 		reject(err);
