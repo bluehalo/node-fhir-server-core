@@ -1,6 +1,5 @@
-const path = require('path');
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Element = require(path.resolve('./src/server/resources/types/Element'));
+const Code = require('./Code');
+const Element = require('./Element');
 
 // Quantity	Σ I		Element	A measured or measurable amount
 // If a code for the unit is present, the system SHALL also be present

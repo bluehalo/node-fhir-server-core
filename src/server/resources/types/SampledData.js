@@ -1,5 +1,4 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
+const Element = require('./Element');
 
 // SampledData	Σ		Element	A series of measurements taken by a device
 class SampledData extends Element {

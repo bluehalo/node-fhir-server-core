@@ -1,5 +1,4 @@
-const path = require('path');
-const Code = require(path.resolve('./src/server/resources/types/Code'));
+const Code = require('./Code');
 
 class Coding {
 	constructor(obj) {

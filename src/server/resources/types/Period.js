@@ -1,5 +1,4 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
+const Element = require('./Element');
 
 /**
  * Time range defined by start and end date/time.

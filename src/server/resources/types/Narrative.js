@@ -1,6 +1,5 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
+const Element = require('./Element');
+const Code = require('./Code');
 
 
 class Narrative extends Element {

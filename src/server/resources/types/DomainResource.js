@@ -1,6 +1,5 @@
-const path = require('path');
-const Resource = require(path.resolve('./src/server/resources/types/Resource'));
-const Extension = require(path.resolve('./src/server/resources/types/Extension'));
+const Resource = require('./Resource');
+const Extension = require('./Extension');
 
 
 class DomainResource extends Resource {

@@ -1,7 +1,9 @@
-const path = require('path');
-const Extension = require(path.resolve('./src/server/resources/types/Extension'));
+const Extension = require('./Extension');
 
 class Element {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
 
 	// id		0..1	id	xml:id (or equivalent in JSON)
 	set id(id) {

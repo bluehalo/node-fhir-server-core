@@ -1,6 +1,5 @@
 class Code {
 	constructor(code) {
-		// call setter
 		this.code = code;
 	}
 

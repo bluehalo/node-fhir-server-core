@@ -1,8 +1,7 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
-const Range = require(path.resolve('./src/server/resources/types/Range'));
+const Element = require('./Element');
+const Code = require('./Code');
+const Period = require('./Period');
+const Range = require('./Range');
 
 // Σ		Element	A timing schedule that specifies an event that may occur multiple times
 class TimingRepeat extends Element {
@@ -126,7 +125,7 @@ class TimingRepeat extends Element {
 	}
 
 	// when	Σ	0..1	code	Regular life events the event is tied to
-	//EventTiming (Required)
+	// EventTiming (Required)
 	set when(when) {
 		this._when = new Code(when);
 	}
