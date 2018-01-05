@@ -1,5 +1,5 @@
-const path = require('path');
-const controller = require(path.resolve('./src/server/oauth/controllers/oauth.controller'));
+const controller = require('./controllers/oauth.controller');
+
 let routes = [
 	{
 		type: 'get',
