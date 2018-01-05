@@ -1,5 +1,5 @@
 {
-	"name": "@asymmetrik/fhir-server-core",
+	"name": "@asymmetrik/node-fhir-server-core",
 	"version": "0.0.1",
 	"description": "Node FHIR Rest API Server",
 	"main": "src/index",
