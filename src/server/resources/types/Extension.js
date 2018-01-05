@@ -1,17 +1,16 @@
-const path = require('path');
-const Coding = require(path.resolve('./src/server/resources/types/Coding'));
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
-const Identifier = require(path.resolve('./src/server/resources/types/Identifier'));
-const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
-const Range = require(path.resolve('./src/server/resources/types/Range'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
-const Ratio = require(path.resolve('./src/server/resources/types/Ratio'));
-const Address = require(path.resolve('./src/server/resources/types/Address'));
-const ContactPoint = require(path.resolve('./src/server/resources/types/ContactPoint'));
-const Timing = require(path.resolve('./src/server/resources/types/ContactPoint'));
-const Signature = require(path.resolve('./src/server/resources/types/Signature'));
-const Reference = require(path.resolve('./src/server/resources/types/Reference'));
+const Coding = require('./Coding');
+const CodeableConcept = require('./CodeableConcept');
+const Attachment = require('./Attachment');
+const Identifier = require('./Identifier');
+const Quantity = require('./Quantity');
+const Range = require('./Range');
+const Period = require('./Period');
+const Ratio = require('./Ratio');
+const Address = require('./Address');
+const ContactPoint = require('./ContactPoint');
+const Timing = require('./ContactPoint');
+const Signature = require('./Signature');
+const Reference = require('./Reference');
 
 
 

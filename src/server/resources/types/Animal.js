@@ -1,5 +1,4 @@
-const path = require('path');
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
+const CodeableConcept = require('./CodeableConcept');
 
 // animal	?! Σ	0..1	BackboneElement	This patient is known to be an animal (non-human)
 class Animal{

@@ -1,6 +1,5 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
+const Element = require('./Element');
+const Quantity = require('./Quantity');
 
 
 // Ratio	Σ I		Element	A ratio of two Quantity values - a numerator and a denominator

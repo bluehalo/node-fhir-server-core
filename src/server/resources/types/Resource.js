@@ -1,15 +1,12 @@
-'use strict';
-
-const path = require('path');
-const Meta = require(path.resolve('./src/server/resources/types/Metadata'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-
+const Meta = require('./Metadata');
+const Code = require('./Code');
 
 class Resource {
-	constructor(id) {
-		this._id = id;
+	constructor(obj) {
+		Object.assign(this, obj);
 	}
 
+	// Σ	0..1	id	Logical id of this artifact
 	set id(id) {
 		this._id = id;
 	}
@@ -18,6 +15,7 @@ class Resource {
 		return this._id;
 	}
 
+	// Σ	0..1	Meta	Metadata about the resource
 	get meta() {
 		return this._meta;
 	}
@@ -37,7 +35,6 @@ class Resource {
 
 	// language		0..1	code
 	set language(language) {
-		console.log('setting language');
 		this._language = new Code(language);
 	}
 

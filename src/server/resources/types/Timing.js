@@ -1,7 +1,6 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const TimingRepeat = require(path.resolve('./src/server/resources/types/TimingRepeat'));
+const Element = require('./Element');
+const Code = require('./Code');
+const TimingRepeat = require('./TimingRepeat');
 
 
 // Σ		Element	A timing schedule that specifies an event that may occur multiple times

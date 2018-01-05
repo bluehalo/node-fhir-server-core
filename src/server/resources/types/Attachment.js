@@ -1,10 +1,14 @@
-const path = require('path');
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Element = require(path.resolve('./src/server/resources/types/Element'));
+const Code = require('./Code');
+const Element = require('./Element');
 
 // Attachment	Σ I		Element	Content in a format defined elsewhere
 // It the Attachment has data, it SHALL have a contentType
 class Attachment extends Element {
+	constructor(obj) {
+		super();
+		Object.assign(this, obj);
+	}
+
 	// contentType	Σ	0..1	code	Mime type of the content, with charset etc.
 	// MimeType  (Required)
 	set contentType(contentType) {

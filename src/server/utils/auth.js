@@ -1,8 +1,6 @@
-const path = require('path');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const errors = require(path.resolve('./src/server/utils/error.utils'));
-const logger = require(path.resolve('./src/lib/winston'));
+const errors = require('./error.utils');
 
 /**
  * Parse the `token` from the given
@@ -53,7 +51,6 @@ function _verifyToken(token, secretOrPublicKey, options = {}, config, next) {
 	jwt.verify(token, secretOrPublicKey, allOptions, function(err, decoded) {
 			if (err) {
 					// log error return 401 with error message;
-					logger.error(err, err.message);
 					return next(errors.custom(401, 'Unauthorized request: ' + err.message));
 			}
 

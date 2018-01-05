@@ -1,20 +1,15 @@
-const path = require('path');
-const DomainResource = require(path.resolve('./src/server/resources/types/DomainResource'));
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Identifier = require(path.resolve('./src/server/resources/types/Identifier'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Reference = require(path.resolve('./src/server/resources/types/Reference'));
-const ReferenceRange = require(path.resolve('./src/server/resources/types/ReferenceRange'));
-const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
-const Component = require(path.resolve('./src/server/resources/types/Component'));
-const Ratio = require(path.resolve('./src/server/resources/types/Ratio'));
-const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
-const SampledData = require(path.resolve('./src/server/resources/types/SampledData'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
-
-
-
-
+const DomainResource = require('./types/DomainResource');
+const CodeableConcept = require('./types/CodeableConcept');
+const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
+const Reference = require('./types/Reference');
+const ReferenceRange = require('./types/ReferenceRange');
+const Quantity = require('./types/Quantity');
+const Component = require('./types/Component');
+const Ratio = require('./types/Ratio');
+const Attachment = require('./types/Attachment');
+const SampledData = require('./types/SampledData');
+const Period = require('./types/Period');
 
 class Observation extends DomainResource {
 	constructor(obj) {

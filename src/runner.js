@@ -22,6 +22,7 @@ const CONFIG = {
 	logging: {
 		level: 'debug'
 	},
+	// TODO: will make this into a flag
 	// security: [
 	// 	{
 	// 		url: 'authorize',
@@ -35,16 +36,19 @@ const CONFIG = {
 	// ],
 	profiles: {
 		patient: {
-			service: './src/services/patient.service.js',
+			service: './src/server/patient/service.mock.js',
 			corsOptions: {
 				maxAge: 3600
 			}
 		},
 		observation: {
-			service: './src/services/observation.service.js'
+			service: './src/server/observation/service.mock.js',
+			corsOptions: {
+				maxAge: 3600
+			}
 		},
 		oauth: {
-			service: './src/services/oauthstub.service.js' // optional if you plan to implement oauth in the same project
+			service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
 		}
 	}
 };

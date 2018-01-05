@@ -1,6 +1,5 @@
-const path = require('path');
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Range = require(path.resolve('./src/server/resources/types/Range'));
+const CodeableConcept = require('./CodeableConcept');
+const Range = require('./Range');
 
 // I	0..*	BackboneElement	Provides guide for interpretation
 // Must have at least a low or a high or text
@@ -65,8 +64,6 @@ class ReferenceRange {
 			text: this._text
 		};
 	}
-
-
 }
 
 module.exports = ReferenceRange;

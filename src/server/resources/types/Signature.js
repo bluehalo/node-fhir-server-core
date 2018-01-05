@@ -1,8 +1,7 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Coding = require(path.resolve('./src/server/resources/types/Coding'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Reference = require(path.resolve('./src/server/resources/types/Reference'));
+const Element = require('./Element');
+const Coding = require('./Coding');
+const Code = require('./Code');
+const Reference = require('./Reference');
 
 
 // Signature	Σ		Element	A digital Signature - XML DigSig, JWT, Graphical image of signature, etc.

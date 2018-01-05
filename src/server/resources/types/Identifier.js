@@ -1,9 +1,8 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
-const Reference = require(path.resolve('./src/server/resources/types/Reference'));
+const Element = require('./Element');
+const Code = require('./Code');
+const CodeableConcept = require('./CodeableConcept');
+const Period = require('./Period');
+const Reference = require('./Reference');
 
 
 

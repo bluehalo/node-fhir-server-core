@@ -1,8 +1,6 @@
-const path = require('path');
-const Coding = require(path.resolve('./src/server/resources/types/Coding'));
+const Coding = require('./Coding');
 
 class Meta {
-
 	constructor(obj) {
 		Object.assign(this, obj);
 	}

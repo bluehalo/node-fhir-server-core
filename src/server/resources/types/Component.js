@@ -1,11 +1,10 @@
-const path = require('path');
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Quantity = require(path.resolve('./src/server/resources/types/Quantity'));
-const ReferenceRange = require(path.resolve('./src/server/resources/types/ReferenceRange'));
-const SampledData = require(path.resolve('./src/server/resources/types/SampledData'));
-const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
-const Ratio = require(path.resolve('./src/server/resources/types/Ratio'));
+const CodeableConcept = require('./CodeableConcept');
+const Quantity = require('./Quantity');
+const ReferenceRange = require('./ReferenceRange');
+const SampledData = require('./SampledData');
+const Attachment = require('./Attachment');
+const Period = require('./Period');
+const Ratio = require('./Ratio');
 
 
 

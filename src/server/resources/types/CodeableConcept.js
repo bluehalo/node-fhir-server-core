@@ -1,6 +1,5 @@
-const path = require('path');
-const Element = require(path.resolve('./src/server/resources/types/Element'));
-const Coding = require(path.resolve('./src/server/resources/types/Coding'));
+const Element = require('./Element');
+const Coding = require('./Coding');
 
 //	Σ		Element	Concept - reference to a terminology or just text
 class CodeableConcept extends Element {

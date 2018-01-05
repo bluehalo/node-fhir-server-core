@@ -1,14 +1,13 @@
-const path = require('path');
-const DomainResource = require(path.resolve('./src/server/resources/types/DomainResource'));
-const Identifier = require(path.resolve('./src/server/resources/types/Identifier'));
-const Code = require(path.resolve('./src/server/resources/types/Code'));
-const Reference = require(path.resolve('./src/server/resources/types/Reference'));
-const HumanName = require(path.resolve('./src/server/resources/types/HumanName'));
-const ContactPoint = require(path.resolve('./src/server/resources/types/ContactPoint'));
-const CodeableConcept = require(path.resolve('./src/server/resources/types/CodeableConcept'));
-const Address = require(path.resolve('./src/server/resources/types/Address'));
-const Attachment = require(path.resolve('./src/server/resources/types/Attachment'));
-const Period = require(path.resolve('./src/server/resources/types/Period'));
+const DomainResource = require('./types/DomainResource');
+const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
+const Reference = require('./types/Reference');
+const HumanName = require('./types/HumanName');
+const ContactPoint = require('./types/ContactPoint');
+const CodeableConcept = require('./types/CodeableConcept');
+const Address = require('./types/Address');
+const Attachment = require('./types/Attachment');
+const Period = require('./types/Period');
 
 class Link {
 	constructor(obj) {
