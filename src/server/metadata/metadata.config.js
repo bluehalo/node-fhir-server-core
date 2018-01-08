@@ -1,5 +1,4 @@
-const path = require('path');
-const controller = require(path.resolve('./src/server/metadata/controllers/metadata.controller'));
+const controller = require('./controllers/metadata.controller');
 
 
 let routes = [

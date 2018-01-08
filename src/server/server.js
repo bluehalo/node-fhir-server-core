@@ -1,11 +1,10 @@
-const path = require('path');
-const express = require(path.resolve('./src/lib/express'));
-const Logger = require(path.resolve('./src/lib/winston'));
+const express = require('../lib/express');
+const Logger = require('../lib/winston');
 
 const {
 	validSSLConfiguration,
 	loadProfile
-} = require(path.resolve('./src/server/utils/config.validators'));
+} = require('./utils/config.validators');
 
 
 class Server {

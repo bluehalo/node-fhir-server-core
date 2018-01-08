@@ -1,5 +1,4 @@
-const path = require('path');
-const controller = require(path.resolve('./src/server/patient/controllers/patient.controller'));
+const controller = require('./controllers/patient.controller');
 
 const scopes = [
   'user/*.*',

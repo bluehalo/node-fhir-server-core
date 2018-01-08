@@ -3,7 +3,7 @@ const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const request = require('superagent');
 const jwkToPem = require('jwk-to-pem');
-const errors = require(path.resolve('./src/server/utils/error.utils'));
+const errors = require('./error.utils');
 
 // Injected in validation function.
 let logger;
@@ -59,6 +59,7 @@ function _getKeyForTokenValidation(decodedToken, oauthConfig) {
  */
 function _parseBearerToken(req) {
 
+<<<<<<< HEAD
 	let auth;
 	if (!req.headers || !(auth = req.headers.authorization)) {
 		return null;
@@ -81,6 +82,30 @@ function _parseBearerToken(req) {
 
 	return token;
 }
+=======
+		let auth;
+		if (!req.headers || !(auth = req.headers.authorization)) {
+			return null;
+		}
+
+		// split on space
+		const parts = auth.split(' ');
+		if (parts.length < 2) {
+				return;
+		}
+
+		// get schema and token from array
+		const schema = parts.shift().toLowerCase();
+		const token = parts.join(' ');
+
+		// validate that it is a bearer
+		if (schema !== 'bearer') {
+				return null;
+		}
+
+		return token;
+	}
+>>>>>>> 6a6901408a0480850b4aac8fc07781a1604d9895
 
 /**
  * Verify the JWT token and validate its scopes.
@@ -93,6 +118,7 @@ function _parseBearerToken(req) {
  * @param {Function} next
  * @returns {Promise} Returns a promise that resolves to the result of the `next`.
  */
+<<<<<<< HEAD
 async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes, oauthConfig, next) {
 	const issuer = oauthConfig.issuer;
 	const clientId = oauthConfig.clientId;
@@ -144,6 +170,25 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 		logger.error('The scope of the token is insufficient or the token cannot be introspected');
 		return next(errors.custom(403, 'insufficient_scope'));
 	}
+=======
+function _verifyToken(token, secretOrPublicKey, options = {}, config, next) {
+	const issuer = config.authConfig.issuer;
+	const clientId = config.clientId;
+	const allOptions = Object.assign(options, { audience: clientId, issuer: issuer });
+
+	// verify the token and signature with secret/pub key
+	jwt.verify(token, secretOrPublicKey, allOptions, function(err, decoded) {
+			if (err) {
+					// log error return 401 with error message;
+					return next(errors.custom(401, 'Unauthorized request: ' + err.message));
+			}
+
+			// token should be valid at this point
+			// TODO get scopes/permissions
+
+			next(decoded);
+	});
+>>>>>>> 6a6901408a0480850b4aac8fc07781a1604d9895
 }
 
 /**
@@ -153,6 +198,7 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
  * @param {Object} loggerUtil
  * @param {Object} oauthConfig
  */
+<<<<<<< HEAD
 module.exports.validate = (validScopes, loggerUtil, oauthConfig) => {
 	logger = logger || loggerUtil;
 	return async (req, res, next) => {
@@ -171,4 +217,33 @@ module.exports.validate = (validScopes, loggerUtil, oauthConfig) => {
 			return next(errors.unauthorized());
 		}
 	};
+=======
+module.exports.validate = (req, res, next) => {
+	// placeholder
+	const config = req.config;
+
+	// get bearer token
+	const bearerToken = _parseBearerToken(req);
+
+	if (bearerToken) {
+			const decodedToken = jwt.decode(bearerToken, {complete: true});
+
+			// check algorithm so we know how to validate the signature
+			if (decodedToken && decodedToken.header && decodedToken.header.alg) {
+					if (decodedToken.header.alg.startsWith('HS')) {
+							// IF HS*** algorith, validate signature based on secret key
+							_verifyToken(bearerToken, config.secret, {}, config, next);
+
+					} else if (decodedToken.header.alg.startsWith('RS')) {
+							// IF RS*** algorithm, validate signature based on certificate
+							// Get public key (update this to point to the correct public key path)
+							const cert = fs.readFileSync(config.security.cert);
+							_verifyToken(bearerToken, cert, {algorithms: [decodedToken.header.alg]}, config, next);
+					}
+			}
+	}
+
+	// did not pass checks, return 401 message
+	next(errors.unauthorized());
+>>>>>>> 6a6901408a0480850b4aac8fc07781a1604d9895
 };

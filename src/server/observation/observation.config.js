@@ -1,19 +1,49 @@
-const path = require('path');
-const controller = require(path.resolve('./src/server/observation/controllers/observation.controller'));
-
+const controller = require('./controllers/observation.controller');
 
 let routes = [
-	{
-		type: 'get',
+  {
+    type: 'get',
 		path: '/dstu2/observation',
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [],
-		scopes: [],
-		controller: controller.getObservation
-	}
+    args: [{
+      name: 'patient',
+			type: 'string',
+			required: true
+    }, {
+      name: 'category',
+      type: 'string'
+    }, {
+      name: 'code',
+      type: 'string'
+    }, {
+      name: 'date',
+      type: 'string'
+    }, {
+			name: '_format',
+			type: 'string'
+		}],
+    scopes: [],
+    controller: controller.getObservations
+  },
+  {
+    type: 'get',
+		path: '/dstu2/observation/:id',
+		corsOptions: {
+			methods: ['GET']
+		},
+    args: [{
+      name: 'id',
+      type: 'number',
+      required: true
+    }],
+    scopes: [],
+    controller: controller.getObservationByID
+  }
 ];
+
+
 
 /**
  * @name exports

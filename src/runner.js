@@ -1,5 +1,4 @@
 const fhirServer = require('./index.js');
-const path = require('path');
 
 const CONFIG = {
 	auth: {
@@ -34,20 +33,44 @@ const CONFIG = {
 	},
 	server: {
 		port: 3000,
-		ssl: {
-			key: path.resolve('./src/key.pem'),
-			cert: path.resolve('./src/cert.pem')
-		}
+		corsOptions: {
+			maxAge: 86400
+		},
+		// ssl: {
+		// 	key: './src/key.pem',
+		// 	cert: './src/cert.pem'
+		// }
 	},
 	logging: {
 		level: 'debug'
 	},
+	// TODO: will make this into a flag
+	// security: [
+	// 	{
+	// 		url: 'authorize',
+	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/authorize'
+	// 	},
+	// 	{
+	// 		url: 'token',
+	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/token'
+	// 	}
+	// 	// optional - registration
+	// ],
 	profiles: {
 		patient: {
-			service: './src/server/patient/service.mock.js'
+			service: './src/server/patient/service.mock.js',
+			corsOptions: {
+				maxAge: 3600
+			}
 		},
 		observation: {
-			service: './src/server/observation/service.mock.js'
+			service: './src/server/observation/service.mock.js',
+			corsOptions: {
+				maxAge: 3600
+			}
+		},
+		oauth: {
+			service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
 		}
 	}
 };

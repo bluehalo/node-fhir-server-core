@@ -1,9 +1,8 @@
 const sanitize = require('sanitize-html');
 const moment = require('moment-timezone');
+const errors = require('./error.utils');
 const validator = require('validator');
-const path = require('path');
 const xss = require('xss');
-const errors = require(path.resolve('./src/server/utils/error.utils'));
 
 let parseValue = function (type, value) {
 	let result;
