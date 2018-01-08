@@ -3,7 +3,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
-const axios = require('axios');
+const request = require('superagent');
 const https = require('https');
 const http = require('http');
 const path = require('path');
@@ -53,15 +53,15 @@ let configureSession = function (app, serverConfig) {
  */
 let secureHeaders = function (app, USE_HTTPS) {
 	/**
-	* The following headers are turned on by default:
-	* - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
-	* - frameguard (prevent clickjacking). https://helmetjs.github.io/docs/frameguard
-	* - hidePoweredBy (remove the X-Powered-By header). https://helmetjs.github.io/docs/hide-powered-by
-	* - hsts (HTTP strict transport security). https://helmetjs.github.io/docs/hsts
-	* - ieNoOpen (sets X-Download-Options for IE8+). https://helmetjs.github.io/docs/ienoopen
-	* - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
-	* - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
-	*/
+	 * The following headers are turned on by default:
+	 * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
+	 * - frameguard (prevent clickjacking). https://helmetjs.github.io/docs/frameguard
+	 * - hidePoweredBy (remove the X-Powered-By header). https://helmetjs.github.io/docs/hide-powered-by
+	 * - hsts (HTTP strict transport security). https://helmetjs.github.io/docs/hsts
+	 * - ieNoOpen (sets X-Download-Options for IE8+). https://helmetjs.github.io/docs/ienoopen
+	 * - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
+	 * - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
+	 */
 	app.use(helmet({
 		// Needs https running first
 		hsts: USE_HTTPS
@@ -80,23 +80,23 @@ let setupRoutes = function (app, config, logger) {
 };
 
 /**
- * @function retrieveAuthServerInfo
+ * @function initAuthConfig
  * @summary Retrieve authorization server configurations via config or discovery.
  * @return {Promise}
  */
-let retrieveAuthServerInfo = async function (config) {
-	const discoveryUrl = config.issuer.discoveryUrl;
-	let oauthConfig, jwkSet;
+let initAuthConfig = async function (config) {
+	const discoveryUrl = config.discoveryUrl;
+	let oauthConfig = {};
 
-	if (!discoveryUrl) {
-		oauthConfig = config.issuer.oauthConfig;
-		jwkSet = config.issuer.jwkSet;
-	} else {
-		oauthConfig = await axios.get(discoveryUrl).then(res => res.data);
-		jwkSet = await axios.get(oauthConfig.jwks_uri).then(res => res.data);
+	if (discoveryUrl) {
+		const discoveryResponse = await request.get(discoveryUrl).then(res => res.body);
+		discoveryResponse.jwkSet = await request.get(discoveryResponse.jwks_uri).then(res => res.body);
+		Object.assign(oauthConfig, discoveryResponse);
 	}
 
-	if (typeof jwkSet.keys === 'undefined') {
+	Object.assign(oauthConfig, config);
+
+	if (typeof oauthConfig.jwkSet.keys === 'undefined') {
 		throw new Error('keys are not defined');
 	}
 	if (typeof oauthConfig.authorization_endpoint !== 'string') {
@@ -117,7 +117,7 @@ let retrieveAuthServerInfo = async function (config) {
 		throw new Error('introspection_endpoint is not a string');
 	}
 
-	return { oauthConfig, jwkSet };
+	return oauthConfig;
 };
 
 /**
@@ -168,9 +168,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	let app = express();
 
 	// Setup auth configs for middleware
-	/* eslint-disable no-unused-vars */
-	let { oauthConfig, jwkSet } = await retrieveAuthServerInfo(auth);
-	/* eslint-enable no-unused-vars */
+	await initAuthConfig(auth);
 
 	// Add some configurations to our app
 	configureMiddleware(app, IS_PRODUCTION);

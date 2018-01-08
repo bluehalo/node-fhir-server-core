@@ -1,6 +1,8 @@
 const cors = require('cors');
 const { sanitizeMiddleware } = require('../../utils/sanitize.utils');
 const { routes } = require('../observation.config');
+const { validate } = require('../../utils/auth');
+
 
 /**
  * @name exports
@@ -18,10 +20,12 @@ module.exports = (app, config, logger) => {
 			// Enable options
 			app.options(route.path, cors(corsOptions));
 			// Enable route
+
 			app[route.type](
 				route.path,
 				cors(corsOptions),
 				sanitizeMiddleware(route.args),
+				validate(route.scopes, logger, config),
 				route.controller(profiles.observation, logger)
 			);
 		});

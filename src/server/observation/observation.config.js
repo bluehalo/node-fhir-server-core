@@ -1,5 +1,17 @@
 const controller = require('./controllers/observation.controller');
 
+const scopes = [
+  'user/*.*',
+  'user/Observation.*',
+  'user/Observation.read',
+  'user/*.read',
+  'patient/*.*',
+  'patient/Observation.*',
+  'patient/Observation.read',
+  'patient/*.read'
+];
+
+
 let routes = [
   {
     type: 'get',
@@ -24,7 +36,7 @@ let routes = [
 			name: '_format',
 			type: 'string'
 		}],
-    scopes: [],
+    scopes: scopes,
     controller: controller.getObservations
   },
   {
@@ -38,7 +50,7 @@ let routes = [
       type: 'number',
       required: true
     }],
-    scopes: [],
+    scopes: scopes,
     controller: controller.getObservationByID
   }
 ];

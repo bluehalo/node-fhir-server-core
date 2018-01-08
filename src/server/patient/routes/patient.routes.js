@@ -1,5 +1,6 @@
 const cors = require('cors');
 const { sanitizeMiddleware } = require('../../utils/sanitize.utils');
+const { validate } = require('../../utils/auth');
 const { routes } = require('../patient.config');
 
 /**
@@ -23,6 +24,7 @@ module.exports = (app, config, logger) => {
 				route.path,
 				cors(corsOptions),
 				sanitizeMiddleware(route.args),
+				validate(route.scopes, logger, config),
 				route.controller(profiles.patient, logger)
 			);
 		});
