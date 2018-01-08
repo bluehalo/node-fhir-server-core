@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const { files } = require('../../../config');
+const { DSTU2 } = require('../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
 // Make base relative to src
@@ -41,9 +42,10 @@ let filterResources = (resource) => resource.makeResource && resource.getCount;
  * @param {Winston} logger - Instance of Winston's logger
  * @return {Promise<Object>} - Return the capability statement
  */
-let generateCapabilityStatement = (req, profiles, logger, security) => new Promise((resolve, reject) => {
+let generateCapabilityStatement = (req, config, logger) => new Promise((resolve, reject) => {
 	logger.info('Metadata.generateCapabilityStatement');
 	// Create a new base capability statement per request
+	const { profiles, security } = config;
 
 	// Map all the active resources
 	let active_resources = RESOURCES
@@ -61,7 +63,7 @@ let generateCapabilityStatement = (req, profiles, logger, security) => new Promi
 			// Generate the resources conformance statement and add these to the main Capability Statement
 			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
 
-			if (security) {
+			if (config.server && config.server.mode === DSTU2.MODE.CONFIDENTIAL && security) {
 				server.security = securityStatement(security);
 			}
 

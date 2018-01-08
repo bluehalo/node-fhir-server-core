@@ -168,7 +168,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	let app = express();
 
 	// Setup auth configs for middleware
-	let oauthConfig = await initAuthConfig(auth);
+	await initAuthConfig(auth);
 
 	// Add some configurations to our app
 	configureMiddleware(app, IS_PRODUCTION);

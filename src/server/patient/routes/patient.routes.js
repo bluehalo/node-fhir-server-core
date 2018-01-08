@@ -8,7 +8,7 @@ const { routes } = require('../patient.config');
  * @summary Patient routes
  */
 module.exports = (app, config, logger) => {
-	let { profiles, server, oauthConfig } = config;
+	let { profiles, server } = config;
 
 	// Only add routes if we have a patient profile
 	// the endpoint can't function without the config
@@ -24,7 +24,7 @@ module.exports = (app, config, logger) => {
 				route.path,
 				cors(corsOptions),
 				sanitizeMiddleware(route.args),
-				validate(route.scopes, logger, oauthConfig),
+				validate(route.scopes, logger, config),
 				route.controller(profiles.patient, logger)
 			);
 		});

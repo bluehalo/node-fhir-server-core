@@ -8,5 +8,9 @@ exports.DSTU2 = {
 		DRAFT: 'draft',
 		ACTIVE: 'active',
 		RETIRED: 'retired'
+	},
+	MODE: {
+		CONFIDENTIAL: 'confidential',
+		PUBLIC: 'public'
 	}
 };

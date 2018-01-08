@@ -2,8 +2,8 @@ const fhirServer = require('./index.js');
 
 const CONFIG = {
 	auth: {
-		clientId: undefined,
-		// secret: 'secret',
+		clientId: 'client id',
+		secret: 'secret',
 		discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration',
 
 		protectedResourceClientId: 'ae83b0eb-35ed-483b-a933-edb2277f4aad',
@@ -32,6 +32,8 @@ const CONFIG = {
 		*/
 	},
 	server: {
+		// server mode to be confidential or public
+		mode: 'confidential',
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -44,18 +46,17 @@ const CONFIG = {
 	logging: {
 		level: 'debug'
 	},
-	// TODO: will make this into a flag
-	// security: [
-	// 	{
-	// 		url: 'authorize',
-	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/authorize'
-	// 	},
-	// 	{
-	// 		url: 'token',
-	// 		valueUri: 'https://lit-lake-71789.herokuapp.com/token'
-	// 	}
-	// 	// optional - registration
-	// ],
+	security: [
+		{
+			url: 'authorize',
+			valueUri: 'https://lit-lake-71789.herokuapp.com/authorize'
+		},
+		{
+			url: 'token',
+			valueUri: 'https://lit-lake-71789.herokuapp.com/token'
+		}
+		// optional - registration
+	],
 	profiles: {
 		patient: {
 			service: './src/server/patient/service.mock.js',
