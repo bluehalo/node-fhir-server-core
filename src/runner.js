@@ -33,7 +33,7 @@ const CONFIG = {
 	},
 	server: {
 		// server mode to be confidential or public
-		mode: 'confidential',
+		mode: 'public',
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
