@@ -10,7 +10,7 @@ module.exports.getPatient = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getPatient(req, logger)
+		return service.getPatient(req, logger, { dstu2: true })
 			.then((patients) => {
 				const searchResults = {
 					'total': patients ? patients.length : 0,
@@ -57,7 +57,7 @@ module.exports.getPatientById = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getPatientById(req, logger)
+		return service.getPatientById(req, logger, { dstu2: true })
 			.then((patient) => {
 				if (patient) {
 					res.send(patient);

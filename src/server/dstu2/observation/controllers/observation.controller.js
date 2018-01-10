@@ -9,7 +9,7 @@ module.exports.getObservations = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservation(req, logger)
+		return service.getObservation(req, logger, { dstu2: true })
 			.then((observations) => {
 
 				const searchResults = {
@@ -55,7 +55,7 @@ module.exports.getObservationByID = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservationByID(req, logger)
+		return service.getObservationByID(req, logger, { dstu2: true })
 			.then((observation) => {
 				if (observation) {
 					res.send(observation);

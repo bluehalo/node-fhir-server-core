@@ -50,12 +50,10 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		.map(mapResources(profiles.dstu2))
 		.filter(filterResources);
 
-	console.log(active_resources);
-
 	// Iterate over the active_resources and execute getCount for each one.
 	// req and logger are by no means necessary, but pass them in so the service can
 	// access the logger and see information in the request if necessary for any validation etc.
-	return Promise.all(active_resources.map(resource => resource.getCount(req, logger)))
+	return Promise.all(active_resources.map(resource => resource.getCount(req, logger, { dstu2: true })))
 		.then((results) => {
 
 			// Our server statment
