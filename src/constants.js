@@ -14,3 +14,8 @@ exports.DSTU2 = {
 		PUBLIC: 'public'
 	}
 };
+
+exports.VERSIONS = {
+	DSTU2: 'dstu2',
+	STU3: 'stu3'
+};

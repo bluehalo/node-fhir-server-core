@@ -1,26 +1,32 @@
-const { ServerError } = require('../../utils/error.utils');
+const { ServerError } = require('../../../utils/error.utils');
+const { VERSIONS } = require('../../../../constants');
 
-module.exports.getObservations = (profile, logger) => {
+module.exports.getPatient = (profile, logger) => {
 	let { serviceModule: service } = profile;
 
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
+
 	return (req, res, next) => {
+		// @TODO Validate arguments and response
 		/**
-		* return service.getObservation(req, logger)
+		* return service.getPatient(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservation(req, logger)
-			.then((observations) => {
-
+		return service.getPatient(req, logger, context)
+			.then((patients) => {
 				const searchResults = {
-					'total': observations ? observations.length : 0,
+					'total': patients ? patients.length : 0,
 					'resourceType': 'Bundle',
 					'type': 'searchset',
 					'entry': []
 				};
 
-				if (observations) {
-					for (let resource of observations) {
+				if (patients) {
+					for (let resource of patients) {
 						// Modes:
 						// match - This resource matched the search specification.
 						// include - This resource is returned because it is referred to from another resource in the search set.
@@ -30,7 +36,7 @@ module.exports.getObservations = (profile, logger) => {
 								'mode': 'match'
 							},
 							'resource': resource,
-							'fullUrl': `localhost:3000/Observation/${resource.id}`
+							'fullUrl': `localhost:3000/Patient/${resource.id}`
 						};
 						searchResults.entry.push(entry);
 					}
@@ -42,23 +48,30 @@ module.exports.getObservations = (profile, logger) => {
 				next(new ServerError(500, err.message));
 			});
 	};
+
+
 };
 
 
-module.exports.getObservationByID = (profile, logger) => {
+module.exports.getPatientById = (profile, logger) => {
 	let { serviceModule: service } = profile;
 
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
+
 	return (req, res, next) => {
-		logger.info('Get observation by id');
+		// @TODO Validate arguments and response
 		/**
-		* return service.getObservation(req, logger)
+		* return service.getPatientById(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservationByID(req, logger)
-			.then((observation) => {
-				if (observation) {
-					res.send(observation);
+		return service.getPatientById(req, logger, context)
+			.then((patient) => {
+				if (patient) {
+					res.send(patient);
 				} else {
 					res.status(404).end();
 				}
