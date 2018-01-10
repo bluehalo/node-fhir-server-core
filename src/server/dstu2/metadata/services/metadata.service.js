@@ -1,6 +1,6 @@
 const path = require('path');
 const glob = require('glob');
-const { DSTU2 } = require('../../../../constants');
+const { DSTU2, VERSIONS } = require('../../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
 // Glob for discovering all dstu2 conformance statements
@@ -50,10 +50,15 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		.map(mapResources(profiles.dstu2))
 		.filter(filterResources);
 
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
+
 	// Iterate over the active_resources and execute getCount for each one.
 	// req and logger are by no means necessary, but pass them in so the service can
 	// access the logger and see information in the request if necessary for any validation etc.
-	return Promise.all(active_resources.map(resource => resource.getCount(req, logger, { dstu2: true })))
+	return Promise.all(active_resources.map(resource => resource.getCount(req, logger, context)))
 		.then((results) => {
 
 			// Our server statment
