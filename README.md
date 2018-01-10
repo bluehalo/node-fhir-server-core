@@ -6,14 +6,14 @@ Asymmetrik FHIR API Server
 
 ```shell
 # npm
-npm install @asymmetrik/fhir-server-core --save
+npm install @asymmetrik/node-fhir-server-core --save
 
 # yarn
-yarn add @asymmetrik/fhir-server-core
+yarn add @asymmetrik/node-fhir-server-core
 ```
 
 ## Usage
-`@asymmetrik/fhir-server-core` exposes a single function which takes a   and returns a promise. You can give it server, auth, logging, and profile configurations. The full list of possible configurations is listed below under [Config](#config). At minimum, your config must include a `server.port` and one profile. Profiles must contain a service and each service must contain certain functions. You can view the requirements for each profile under [Profiles](#profiles).
+`@asymmetrik/node-fhir-server-core` exposes a single function which takes a   and returns a promise. You can give it server, auth, logging, and profile configurations. The full list of possible configurations is listed below under [Config](#config). At minimum, your config must include a `server.port` and one profile. Profiles must contain a service and each service must contain certain functions. You can view the requirements for each profile under [Profiles](#profiles).
 
 You can see a fully built example that utilizes MongoDB for the backend at [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo). Also see [Examples](#Examples) below.
 
@@ -165,7 +165,7 @@ Here is an example config with all the currently supported options. See descript
 #### `server.corsOptions`
 
 - **Type:** `object`
-- **Description:** Any default cors options you would like applied to all routes. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Description:** Any default cors options you would like applied to all routes. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
@@ -230,7 +230,7 @@ const fhirConfig = {
 > Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
 
 - **Type:** `object`
-- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
+- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
@@ -316,7 +316,7 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 #### Setting up a https server with my own patient service
 
 ```javascript
-const fhirServerCore = require('@asymmetrik/fhir-server-core');
+const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
 const config = {
 	server: {
 		port: 3000,
@@ -352,7 +352,7 @@ main();
 #### Setting up a minimal dev server with my own patient service
 
 ```javascript
-const fhirServerCore = require('@asymmetrik/fhir-server-core');
+const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
 const config = {
 	server: {
 		port: 3000
@@ -389,4 +389,4 @@ Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) if interested in contrib
 This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 BUT not 8.5.
 
 ## License
-`@asymmetrik/fhir-server-core` is [MIT licensed](./LICENSE).
+`@asymmetrik/node-fhir-server-core` is [MIT licensed](./LICENSE).
