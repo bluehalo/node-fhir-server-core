@@ -1,15 +1,13 @@
 const path = require('path');
 const glob = require('glob');
-const { files } = require('../../../config');
-const { DSTU2 } = require('../../../constants');
+const { DSTU2 } = require('../../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
-// Make base relative to src
-const base = path.resolve(__dirname, '../../../..');
+// Glob for discovering all dstu2 conformance statements
+const files = path.resolve(__dirname, '../../*/conformance.js');
 
 // Load all the conformance documents ahead of time
-const RESOURCES = glob
-	.sync(path.resolve(base, files.conformanceStatements))
+const RESOURCES = glob.sync(files)
 	.map(resource_path => {
 		// Resource is a function that returns the conformance statement for this resource
 		// and takes the number of that particular resource
@@ -49,8 +47,10 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles))
+		.map(mapResources(profiles.dstu2))
 		.filter(filterResources);
+
+	console.log(active_resources);
 
 	// Iterate over the active_resources and execute getCount for each one.
 	// req and logger are by no means necessary, but pass them in so the service can

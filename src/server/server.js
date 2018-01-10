@@ -41,8 +41,8 @@ class Server {
 		}
 
 		// Validate profiles for any spec provided
-		let dstu2ProfileKeys = Object.keys(config.profiles.dstu2);
-		let stu3ProfileKeys = Object.keys(config.profiles.stu3);
+		let dstu2ProfileKeys = config.profiles.dstu2 ? Object.keys(config.profiles.dstu2) : [];
+		let stu3ProfileKeys = config.profiles.stu3 ? Object.keys(config.profiles.stu3) : [];
 
 		let hasValidDSTU2ProfileConfiguration = dstu2ProfileKeys.every(profileKey => {
 			return loadProfile(profileKey, config.profiles.dstu2[profileKey]);

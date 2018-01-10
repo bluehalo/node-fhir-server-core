@@ -1,4 +1,4 @@
-const { DSTU2 } = require('../../constants');
+const { DSTU2 } = require('../../../constants');
 
 /**
  * @name exports

@@ -1,4 +1,4 @@
-const { ServerError } = require('../../utils/error.utils');
+const { ServerError } = require('../../../utils/error.utils');
 
 module.exports.getObservations = (profile, logger) => {
 	let { serviceModule: service } = profile;

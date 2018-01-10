@@ -60,13 +60,13 @@ const CONFIG = {
 	profiles: {
 		dstu2: {
 			patient: {
-				service: './src/server/patient/service.mock.js',
+				service: './src/server/dstu2/patient/service.mock.js',
 				corsOptions: {
 					maxAge: 3600
 				}
 			},
 			observation: {
-				service: './src/server/observation/service.mock.js',
+				service: './src/server/dstu2/observation/service.mock.js',
 				corsOptions: {
 					maxAge: 3600
 				}

@@ -1,5 +1,5 @@
+const { ServerError } = require('../../../utils/error.utils');
 const service = require('../services/metadata.service');
-const { ServerError } = require('../../utils/error.utils');
 
 /**
  * @name exports
