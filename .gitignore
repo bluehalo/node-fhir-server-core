@@ -1,9 +1,14 @@
+# Secrets
+secrets.js
+
 # Dependencies
 node_modules
+package-lock.json
 
 # Generated files
+src/key.pem
+src/cert.pem
+docs/dist
 npm-debug.log
 .DS_Store
-docs/dist
-
-
+coverage

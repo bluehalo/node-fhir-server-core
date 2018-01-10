@@ -2,18 +2,18 @@
 require('docs/css/core.scss');
 
 // import all necessary javascript
-const SwaggerUIStandalonePreset = require('swagger-ui-dist/swagger-ui-standalone-preset');
-const SwaggerUIBundle = require('swagger-ui-dist/swagger-ui-bundle');
-const { presets, plugins } = SwaggerUIBundle;
+const swaggerUIStandalonePreset = require('swagger-ui-dist/swagger-ui-standalone-preset');
+const swaggerUIBundle = require('swagger-ui-dist/swagger-ui-bundle');
+const { presets, plugins } = swaggerUIBundle;
 
 function main () {
-  window.ui = SwaggerUIBundle({
-    url: 'openapi.yml',
+  window.ui = swaggerUIBundle({
+    url: 'openapi.json',
     dom_id: '#site-documentation',
     layout: 'StandaloneLayout',
     presets: [
       presets.apis,
-      SwaggerUIStandalonePreset
+      swaggerUIStandalonePreset
     ],
     plugins: [
       plugins.DownloadUrl
@@ -21,7 +21,7 @@ function main () {
     defaultModelExpandDepth: 0,
     validatorUrl: false
   });
-};
+}
 
 if (document.readyState === 'complete') {
   main();
