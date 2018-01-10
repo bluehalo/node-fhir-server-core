@@ -13,47 +13,9 @@ yarn add @asymmetrik/fhir-server-core
 ```
 
 ## Usage
-`@asymmetrik/fhir-server-core` exposes a single function which takes a config and returns a promise. You can give it server, auth, logging, and profile configurations. The full list of possible configurations is listed below under [Config](#config). At minimum, you must give it a `server.port` and some `profiles` in the config. `@asymmetrik/fhir-server-core` will take care of the rest. Your profiles must contain a service and each service must implement that profiles requirements. You can view the requirements for each profile under [Profiles](#profiles).
+`@asymmetrik/fhir-server-core` exposes a single function which takes a   and returns a promise. You can give it server, auth, logging, and profile configurations. The full list of possible configurations is listed below under [Config](#config). At minimum, your config must include a `server.port` and one profile. Profiles must contain a service and each service must contain certain functions. You can view the requirements for each profile under [Profiles](#profiles).
 
-For example:
-
-```javascript
-// require the server core
-const fhirServer = require('@asymmetrik/fhir-server-core');
-
-// setup a basic config
-const config = {
-	server: {
-		port: 3000
-	},
-	logging: {
-		level: 'debug'
-	},
-	profiles: {
-		patient: {
-			// Path to a service or the actual module
-			service: require('./patient/patient.controller')
-		}
-	}
-};
-
-// Using promises
-fhirServer(config)
-	// Do something with the server if you want to, some notable properties
-	// are server.logger (Winston), server.app (Express), and server.config (Your config)
-	.then(server => { ... })
-	// This may include details about why the server could not start,
-	// such as an invalid config, or incorrect path to a service, etc.
-	.catch(console.error);
-
-// Using async/await
-let main = async function () {
-	let app = await fhirServer(config).catch(console.error);
-};
-
-main();
-
-```
+You can see a fully built example that utilizes MongoDB for the backend at [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo). Also see [Examples](#Examples) below.
 
 ### Config
 Here is an example config with all the currently supported options. See descriptions below.
@@ -62,27 +24,24 @@ Here is an example config with all the currently supported options. See descript
 {
 	auth: {
 		clientId: 'my-client-id',
+		secret: 'access token secret',
 		discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration',
-
+		protectedResourceClientId: 'protected-resource-id',
+		protectedResourceClientSecret: 'protected-resource-secret',
 		authorization_endpoint: 'https://sb-auth.smarthealthit.org/authorize',
 		token_endpoint: 'https://sb-auth.smarthealthit.org/token',
 		registration_endpoint: 'https://sb-auth.smarthealthit.org/register',
 		introspection_endpoint: 'https://sb-auth.smarthealthit.org/introspect',
 		issuer: 'https://sb-auth.smarthealthit.org/',
-
 		jwkSet: {
 			keys: [{
-				"kty": "RSA",
-				"e": "AQAB",
-				"kid": "rsa1",
-				"alg": "RS256",
-				"n": "big_string"
+				kty: 'RSA',
+				e: 'AQAB',
+				kid: 'rsa1',
+				alg: 'RS256',
+				n: 'big_string'
 			}]
-		},
-		secret: 'access token secret',
-
-		protectedResourceClientId: 'protected-resource-id',
-		protectedResourceClientSecret: 'protected-resource-secret'
+		}
 	},
 	server: {
 		port: 3000,
@@ -99,18 +58,20 @@ Here is an example config with all the currently supported options. See descript
 		level: 'debug'
 	},
 	profiles: {
-		patient: {
-			service: './patient/patient.controller',
-			corsOptions: {
-				// Have a different max age for all the routes in the patient profile
-				maxAge: 3600
-			}
-		},
-		observation: {
-			service: require('./observation/observation.controller'),
-			corsOptions: {
-				// Disable cors on this profile, maybe this is for internal use only
-				origin: false
+		dstu2: {
+			patient: {
+				service: './patient/patient.controller',
+				corsOptions: {
+					// Have a different max age for all the routes in the patient profile
+					maxAge: 3600
+				}
+			},
+			observation: {
+				service: require('./observation/observation.controller'),
+				corsOptions: {
+					// Disable cors on this profile, maybe this is for internal use only
+					origin: false
+				}
 			}
 		}
 	}
@@ -138,10 +99,17 @@ Here is an example config with all the currently supported options. See descript
 - **Required:** false
 - **Default:** undefined
 
-#### `auth.discoveryUrl`
+#### `auth.protectedResourceClientId`
 
 - **Type:** `string`
-- **Description:** If the authentication server follows the OpenId Connect specification, this can be used to call the authentication server's discovery endpoint and set the following properties (unless they are explicitly overridden here): authorization_endpoint, token_endpoint, registration_endpoint, introspection_endpoint, issuer, and jwkSet.
+- **Description:** The Client ID given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
+- **Required:** false
+- **Default:** undefined
+
+#### `auth.protectedResourceClientSecret`
+
+- **Type:** `string`
+- **Description:** The Client Secret given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
 - **Required:** false
 - **Default:** undefined
 
@@ -180,20 +148,6 @@ Here is an example config with all the currently supported options. See descript
 - **Required:** true
 - **Default:** undefined
 
-#### `auth.protectedResourceClientId`
-
-- **Type:** `string`
-- **Description:** The Client ID given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
-- **Required:** false
-- **Default:** undefined
-
-#### `auth.protectedResourceClientSecret`
-
-- **Type:** `string`
-- **Description:** The Client Secret given to this resource server to authorize the resource server to make calls to the introspection endpoint of the authentication server. This is only required if this resource server is using introspection when verifying a token.
-- **Required:** false
-- **Default:** undefined
-
 #### `auth.jwkSet`
 
 - **Type:** `object`
@@ -218,7 +172,7 @@ Here is an example config with all the currently supported options. See descript
 #### `server.sessionStore`
 
 - **Type:** `object`
-- **Description:** Instance of an `express-session`. Depending on your back end, you can create and configure your own session store and pass it. For example, something like this:
+- **Description:** Instance of an `express-session`. Depending on your back end, you can create and configure your own session store and pass it in. For example:
 
 ```javascript
 const session = require('express-session');
@@ -264,14 +218,16 @@ const fhirConfig = {
 - **Required:** No
 - **Default:** `error`
 
-#### `profiles.[key].service`
+#### `profiles[spec][key]service`
+> Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
 
 - **Type:** `string` | `object`
 - **Description:** Path to a service or the actual module itself. Each service must conform to the profiles requirement.
 - **Required:** Yes. You must provide a service on a profile object. There must be at least one valid profile configuration for the server to run, otherwise it will throw an error stating the profiles configuration is invalid.
 - **Default:** `none`
 
-#### `profiles.[key].corsOptions`
+#### `profiles[spec][key]corsOptions`
+> Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
 
 - **Type:** `object`
 - **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/fhir-server-core` and cannot be overridden.
@@ -286,27 +242,46 @@ Currently we are only supporting profiles listed in the table below. As we add s
 | Patient      | `patient`      | [patient](#patient)         |
 | Observation  | `observation`  | [observation](#observation) |
 
+Each method in your profile service will receive the following arguments:
+- `req` - The request object from Express
+- `logger` - A Winston logger instance
+- `context` - An object containing some additional contextual information. This currently only contains a version, which can be useful if you use the same service for multiple specs.
+
+Here is an example implementation for a service method, in particular, `patient.getCount`:
+
+```javascript
+// In patient service
+module.exports.getCount = (req, logger, context) => new Promise((resolve, reject) => {
+	logger.info('Patient >>> getCount');
+	logger.info(`Version >>> ${context.version}`);
+	// Logs 'Version >>> dstu2' if this is from a dstu2 route
+	// Do some async query to your data source here
+	db.patients.count((err, count) => {
+		if (err) {
+			logger.error('Error with Patient.getCount');
+			return reject(err);
+		}
+		return resolve(count);
+	});
+});
+```
+
 ### Patient
-> The patient service must implement the following methods.
 
 #### `getCount`
 
-- **Params:** `(req: Express.Request, logger: Winston)`
-- **Return:** `Promise`
-- **Description:** Get the count of the number of patients.
+- **Description:** Return the number of patients in your data store.
 - **Required:** Yes
+- **Return:** `Promise.<number, Error>`
 
 #### `getPatientById`
 
-- **Params:** `(req: Express.Request, logger: Winston)`
-- **Return:** `Promise`
 - **Description:** Get the patient given an id in the req.params.
 - **Required:** Yes
+- **Return:** `Promise.<object, Error>`
 
 #### `getPatient`
 
-- **Params:** `(req: Express.Request, logger: Winston)`
-- **Return:** `Promise`
 - **Description:** Get the patient given an one of several valid argument combinations in the req.query. Valid argument combinations include:
 	- identifier
 	- name + birthdate
@@ -314,30 +289,34 @@ Currently we are only supporting profiles listed in the table below. As we add s
 	- family + gender
 	- given + gender
 - **Required:** Yes
+- **Return:** `Promise.<object, Error>`
 
 ### Observation
-> The observation service must implement the following methods
 
 #### `getCount`
 
-- **Params:** `(req: Express.Request, logger: Winston)`
-- **Return:** `Promise`
 - **Description:** Get the count of the number of observations.
 - **Required:** Yes
+- **Return:** `Promise.<number, Error>`
 
 #### `getObservation`
 
-- **Params:** `(req: Express.Request, logger: Winston)`
-- **Return:** `Promise`
 - **Description:** TODO
 - **Required:** Yes
+- **Return:** `Promise.<object, Error>`
+
+#### `getObservationById`
+
+- **Description:** TODO
+- **Required:** Yes
+- **Return:** `Promise.<object, Error>`
 
 ## Examples
 
 #### Setting up a https server with my own patient service
 
 ```javascript
-const fhirServer = require('@asymmetrik/fhir-server-core');
+const fhirServerCore = require('@asymmetrik/fhir-server-core');
 const config = {
 	server: {
 		port: 3000,
@@ -352,14 +331,14 @@ const config = {
 	profiles: {
 		patient: {
 			// Path to a service or the actual module
-			service: require(path.resolve('./profiles/patient/patient.controller'))
+			service: require(path.resolve('./profiles/patient/patient.service'))
 		}
 	}
 };
 
 let main = async function () {
 	// If the app fails to start, log the error
-	let server = await fhirServer(config).catch(console.error);
+	let server = await fhirServerCore(config).catch(console.error);
 	
 	if (server) {
 		server.logger.verbose('My FHIR Server is up and running!');
@@ -373,7 +352,7 @@ main();
 #### Setting up a minimal dev server with my own patient service
 
 ```javascript
-const fhirServer = require('@asymmetrik/fhir-server-core');
+const fhirServerCore = require('@asymmetrik/fhir-server-core');
 const config = {
 	server: {
 		port: 3000
@@ -384,14 +363,14 @@ const config = {
 	profiles: {
 		patient: {
 			// Path to a service or the actual module
-			service: require(path.resolve('./profiles/patient/patient.controller'))
+			service: require(path.resolve('./profiles/patient/patient.service'))
 		}
 	}
 };
 
 let main = async function () {
 	// If the app fails to start, log the error
-	let server = await fhirServer(config).catch(console.error);
+	let server = await fhirServerCore(config).catch(console.error);
 	
 	if (server) {
 		server.logger.verbose('My FHIR Server is up and running!');
@@ -410,3 +389,4 @@ Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) if interested in contrib
 This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 BUT not 8.5.
 
 ## License
+`@asymmetrik/fhir-server-core` is [MIT licensed](./LICENSE).
