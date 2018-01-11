@@ -58,9 +58,9 @@ function getValidScopes(scopes, allowedScopes) {
  * @param {Object} introspectionEndpoint
  * @returns {Promise} Returns the intrspection.
  */
-async function introspect(token, config, introspectionEndpoint) {
+async function introspect(token, config) {
 	const introspectionResponse = await request
-		.post(introspectionEndpoint)
+		.post(config.auth.discoveryUrl)
 		.auth(config.auth.protectedResourceClientId, config.auth.protectedResourceClientSecret)
 		.send(`token=${token}`);
 
@@ -171,7 +171,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						// if client isn't found, attempt to introspect
 						if (config.auth.discoveryUrl) {
 
-							let [ introspectionError, introspection ] = await handler(introspect(bearerToken, config, config.auth.discoveryUrl));
+							let [ introspectionError, introspection ] = await handler(introspect(bearerToken, config));
 							if (introspectionError) {
 								logger.error(introspectionError);
 								return next(errors.unauthorized());
