@@ -35,6 +35,28 @@ let routes = [
 		controller: controller.getPatient
 	},
 	{
+		type: 'post',
+		path: '/dstu2/patient/_search',
+		corsOptions: {
+			methods: ['POST']
+		},
+		args: [{
+			name: 'name',
+			type: 'string'
+		}, {
+			name: 'birthdate',
+			type: 'string'
+		}, {
+			name: 'gender',
+			type: 'string'
+		}, {
+			name: 'given',
+			type: 'string'
+		}],
+		scopes: scopes,
+		controller: controller.getPatient
+	},
+	{
 		type: 'get',
 		path: '/dstu2/patient/:id',
 		corsOptions: {
