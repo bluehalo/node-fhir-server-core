@@ -3,12 +3,12 @@ const { routes } = require('../oauth.config');
 
 /**
  * @name exports
- * @summary Patient routes
+ * @summary Oauth routes
  */
 module.exports = (app, config, logger) => {
 	let { profiles, server } = config;
 
-	// Only add routes if we have a patient profile
+	// Only add routes if we have a oauth profile
 	// the endpoint can't function without the config
 	if (profiles.oauth) {
 		routes.forEach((route) => {
