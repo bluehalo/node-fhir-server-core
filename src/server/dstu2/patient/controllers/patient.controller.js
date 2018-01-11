@@ -1,7 +1,13 @@
-const { ServerError } = require('../../utils/error.utils');
+const { ServerError } = require('../../../utils/error.utils');
+const { VERSIONS } = require('../../../../constants');
 
 module.exports.getPatient = (profile, logger) => {
 	let { serviceModule: service } = profile;
+
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
 
 	return (req, res, next) => {
 		// @TODO Validate arguments and response
@@ -10,7 +16,7 @@ module.exports.getPatient = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getPatient(req, logger)
+		return service.getPatient(req, logger, context)
 			.then((patients) => {
 				const searchResults = {
 					'total': patients ? patients.length : 0,
@@ -50,6 +56,11 @@ module.exports.getPatient = (profile, logger) => {
 module.exports.getPatientById = (profile, logger) => {
 	let { serviceModule: service } = profile;
 
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
+
 	return (req, res, next) => {
 		// @TODO Validate arguments and response
 		/**
@@ -57,7 +68,7 @@ module.exports.getPatientById = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getPatientById(req, logger)
+		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
 					res.send(patient);

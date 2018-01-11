@@ -1,5 +1,5 @@
 const cors = require('cors');
-const { sanitizeMiddleware } = require('../../utils/sanitize.utils');
+const { sanitizeMiddleware } = require('../../../utils/sanitize.utils');
 const { routes } = require('../metadata.config');
 
 /**
