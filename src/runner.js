@@ -12,7 +12,6 @@ const CONFIG = {
 		service: './src/server/utils/auth.validator.mock.js'
 	},
 	server: {
-		// server mode to be confidential or public
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
