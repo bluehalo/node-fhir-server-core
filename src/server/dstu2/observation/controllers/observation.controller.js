@@ -1,7 +1,13 @@
-const { ServerError } = require('../../utils/error.utils');
+const { ServerError } = require('../../../utils/error.utils');
+const { VERSIONS } = require('../../../../constants');
 
 module.exports.getObservations = (profile, logger) => {
 	let { serviceModule: service } = profile;
+
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
 
 	return (req, res, next) => {
 		/**
@@ -9,7 +15,7 @@ module.exports.getObservations = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservation(req, logger)
+		return service.getObservation(req, logger, context)
 			.then((observations) => {
 
 				const searchResults = {
@@ -45,8 +51,13 @@ module.exports.getObservations = (profile, logger) => {
 };
 
 
-module.exports.getObservationByID = (profile, logger) => {
+module.exports.getObservationById = (profile, logger) => {
 	let { serviceModule: service } = profile;
+
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
 
 	return (req, res, next) => {
 		logger.info('Get observation by id');
@@ -55,7 +66,7 @@ module.exports.getObservationByID = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservationByID(req, logger)
+		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
 					res.send(observation);

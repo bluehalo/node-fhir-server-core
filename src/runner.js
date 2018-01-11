@@ -56,20 +56,22 @@ const CONFIG = {
 		// optional - registration
 	],
 	profiles: {
-		patient: {
-			service: './src/server/patient/service.mock.js',
-			corsOptions: {
-				maxAge: 3600
+		dstu2: {
+			patient: {
+				service: './src/server/dstu2/patient/service.mock.js',
+				corsOptions: {
+					maxAge: 3600
+				}
+			},
+			observation: {
+				service: './src/server/dstu2/observation/service.mock.js',
+				corsOptions: {
+					maxAge: 3600
+				}
+			},
+			oauth: {
+				service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
 			}
-		},
-		observation: {
-			service: './src/server/observation/service.mock.js',
-			corsOptions: {
-				maxAge: 3600
-			}
-		},
-		oauth: {
-			service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
 		}
 	}
 };
