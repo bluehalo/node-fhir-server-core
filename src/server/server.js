@@ -3,7 +3,8 @@ const Logger = require('../lib/winston');
 
 const {
 	validSSLConfiguration,
-	loadProfile
+	loadProfile,
+	loadAuthValidator
 } = require('./utils/config.validators');
 
 
@@ -40,6 +41,8 @@ class Server {
 			config.logging = Object.assign({}, config.logging, { level: 'error' });
 		}
 
+		// Validate auth validator
+		config.auth = loadAuthValidator('auth', config.auth);
 		// Validate profiles
 		let profileKeys = Object.keys(config.profiles);
 		let hasValidProfileConfiguration = profileKeys.every(profileKey => {

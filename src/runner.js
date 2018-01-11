@@ -30,10 +30,10 @@ const CONFIG = {
 			}]
 		}
 		*/
+		service: './src/server/utils/auth.validator.mock.js'
 	},
 	server: {
 		// server mode to be confidential or public
-		mode: 'confidential',
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -71,8 +71,8 @@ const CONFIG = {
 			}
 		},
 		oauth: {
-			service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
-		}
+			service: './src/server/oauth/service.mock.js'
+		},
 	}
 };
 

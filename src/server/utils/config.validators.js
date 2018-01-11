@@ -31,7 +31,35 @@ let loadProfile = (key, profile = {}) => {
 	return profile.serviceModule;
 };
 
+/**
+ * @description Helper for validating Adapters for profiles
+ */
+let loadAuthValidator = (key, auth = {}) => {
+
+	if (typeof auth.service === 'string') {
+		try {
+			auth.serviceModule = require(path.resolve(auth.service));
+		} catch (err) {
+			console.error(err);
+			// Let's throw a more informative error than the default
+			throw new Error(
+				`Unable to load service for ${key} service.`
+				+ ` Check your configuration for the ${key} service and`
+				+ ' make sure the path is correct or pass the module in directly.'
+			);
+		}
+	} else {
+		auth.serviceModule = auth.service;
+	}
+
+
+
+	return auth;
+};
+
+
 module.exports = {
 	validSSLConfiguration,
-	loadProfile
+	loadProfile,
+	loadAuthValidator
 };
