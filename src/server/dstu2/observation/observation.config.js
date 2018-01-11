@@ -51,7 +51,7 @@ let routes = [
       required: true
     }],
     scopes: scopes,
-    controller: controller.getObservationByID
+    controller: controller.getObservationById
   }
 ];
 
