@@ -42,7 +42,7 @@ module.exports.getObservations = (profile, logger) => {
 					}
 				}
 
-				res.send(searchResults);
+				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message));
@@ -69,9 +69,9 @@ module.exports.getObservationById = (profile, logger) => {
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
-					res.send(observation);
+					res.status(200).json(observation);
 				} else {
-					res.status(404).end();
+					next(errors.notFound('Observation not found'));
 				}
 			})
 			.catch((err) => {
