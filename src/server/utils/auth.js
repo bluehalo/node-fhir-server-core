@@ -206,16 +206,11 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						return next(errors.unauthorized('Invalid token'));
 					}
 				} else {
-<<<<<<< HEAD
-					return next(errors.unauthorized());
-				}
-=======
 					// invalid bearer token
 					return next(errors.unauthorized('Invalid token'));
 				}
 
 
->>>>>>> 2055abddee28a69351db4b58dcd640c5a3a202fb
 			} else {
 				// did not pass checks, return 401 message
 				logger.error('Could not find bearer token in request headers');
