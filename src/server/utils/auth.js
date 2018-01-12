@@ -100,7 +100,7 @@ async function verifyToken(decodedToken, token, client, issuer) {
 		if (decodedToken.header.alg.startsWith('HS')) {
 
 			// IF HS*** algorith, validate signature based on secret key
-			validToken = jwt.verify(token, client.secret, baseOptions);
+			validToken = jwt.verify(token, client.clientSecret, baseOptions);
 
 		} else if (decodedToken.header.alg.startsWith('RS')) {
 			// IF RS*** algorithm, validate signature based on certificate

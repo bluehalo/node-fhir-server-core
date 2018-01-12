@@ -1,5 +1,7 @@
 const { ServerError } = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
+const { Patient } = require('../../../resources/Patient');
+
 
 module.exports.getPatient = (profile, logger, config) => {
 	let { serviceModule: service } = profile;
@@ -35,7 +37,7 @@ module.exports.getPatient = (profile, logger, config) => {
 							'search': {
 								'mode': 'match'
 							},
-							'resource': resource,
+							'resource': new Patient(resource),
 							'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
 						};
 						searchResults.entry.push(entry);
@@ -71,7 +73,7 @@ module.exports.getPatientById = (profile, logger) => {
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
-					res.send(patient);
+					res.send(new Patient(patient));
 				} else {
 					res.status(404).end();
 				}

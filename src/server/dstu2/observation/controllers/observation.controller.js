@@ -1,5 +1,7 @@
 const { ServerError } = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
+const { Observation } = require('../../../resources/Patient');
+
 
 module.exports.getObservations = (profile, logger, config) => {
 	let { serviceModule: service } = profile;
@@ -35,7 +37,7 @@ module.exports.getObservations = (profile, logger, config) => {
 							'search': {
 								'mode': 'match'
 							},
-							'resource': resource,
+							'resource': new Observation(resource),
 							'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
 						};
 						searchResults.entry.push(entry);
@@ -69,7 +71,7 @@ module.exports.getObservationById = (profile, logger) => {
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
-					res.send(observation);
+					res.send(new Observation(observation));
 				} else {
 					res.status(404).end();
 				}
