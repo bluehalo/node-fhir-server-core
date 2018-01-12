@@ -12,11 +12,7 @@ module.exports.getObservations = (profile, logger, config) => {
 	};
 
 	return (req, res, next) => {
-		/**
-		* return service.getObservation(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
+
 		return service.getObservation(req, logger, context)
 			.then((observations) => {
 
@@ -26,6 +22,8 @@ module.exports.getObservations = (profile, logger, config) => {
 					'type': 'searchset',
 					'entry': []
 				};
+
+				let unauthorizedAccesses = [];
 
 				if (observations) {
 					for (let resource of observations) {
@@ -41,10 +39,24 @@ module.exports.getObservations = (profile, logger, config) => {
 							'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
 						};
 						searchResults.entry.push(entry);
+						// if req.patient is present, they are only allowed to access observations
+						// which reference a patient with their id, so if any resource.id
+						// does not equal the req.patient, then they are attempting to access
+						// a patients records that they are not allowed to access
+						if (req.patient && req.patient !== entry.resource.patientId) {
+							unauthorizedAccesses.push(entry.resource.patientId);
+						}
 					}
 				}
 
-				res.status(200).json(searchResults);
+				if (unauthorizedAccesses.length) {
+					let message = `You are not allowed to access observations(s) referencing patients with id(s) ${unauthorizedAccesses.join(',')}.`;
+					message += `  You are only allowed to access records with patient id ${req.patient}.`;
+					next(errors.unauthorized(message));
+				}
+				else {
+					res.status(200).json(searchResults);
+				}
 			})
 			.catch((err) => {
 				next(errors.internal(err.message));
@@ -63,15 +75,20 @@ module.exports.getObservationById = (profile, logger) => {
 
 	return (req, res, next) => {
 		logger.info('Get observation by id');
-		/**
-		* return service.getObservation(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
+
 		return service.getObservationById(req, logger, context)
-			.then((observation) => {
-				if (observation) {
-					res.status(200).json(new Observation(observation));
+			.then((patientObservation) => {
+				if (patientObservation) {
+					let observation = new Observation(patientObservation);
+					// If we have req.patient, then we need to validate that this patient
+					// is only accessing Observations referencing his patient Id
+					// he is not allowed to access others
+					if (req.patient && observation.patientId && req.patient !== observation.patientId) {
+						next(errors.unauthorized(`You are not allowed to access Observations referencing ${observation.patientId}.`));
+					}
+					else {
+						res.status(200).json(observation);
+					}
 				} else {
 					next(errors.notFound('Observation not found'));
 				}
