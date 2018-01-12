@@ -1,6 +1,6 @@
 const errors = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
-const { Patient } = require('../../../resources');
+const { Patient } = require('../../resources');
 
 
 module.exports.getPatient = (profile, logger, config) => {
