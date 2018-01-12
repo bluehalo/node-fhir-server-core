@@ -155,7 +155,13 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					let validToken;
 
 					// get client
-					let client = await service.getClient(decodedToken.payload.aud);
+					let [clientErr, client] = await handler(service.getClient(decodedToken.payload.aud));
+					if (clientErr) {
+						return next(errors.unauthorized(clientErr.message));
+
+					}
+
+
 					if (client) {
 						// verify token and signature
 						let [error, token] = await handler(verifyToken(decodedToken, bearerToken, client, config.auth.resourceServer));
