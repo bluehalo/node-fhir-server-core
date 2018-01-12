@@ -88,9 +88,9 @@ async function introspect(token, config) {
 async function verifyToken(decodedToken, token, client, issuer) {
 
 	// validates the aud, issuer
-	const baseOptions = { 
-		audience: client.clientId, 
-		issuer: issuer 
+	const baseOptions = {
+		audience: client.clientId,
+		issuer: issuer
 	};
 
 	// check for algorithm
@@ -104,7 +104,7 @@ async function verifyToken(decodedToken, token, client, issuer) {
 
 		} else if (decodedToken.header.alg.startsWith('RS')) {
 			// IF RS*** algorithm, validate signature based on certificate
-	
+
 			// add algorithm to options
 			const options = Object.assign(options, { algorithms: [decodedToken.header.alg] });
 
@@ -189,7 +189,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					} else if (client.scope) {
 						// let's look at the scopes of the client
 						scopes = getValidScopes(client.scope, allowedScopes);
-					} 
+					}
 
 					// verify if token has one of the required scopes
 					if (scopes && scopes.length > 0) {
@@ -205,17 +205,18 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						// validation complete
 						return next();
 					} else {
-						return next(errors.unauthorized());
+						return next(errors.unauthorized('Invalid token'));
 					}
 				} else {
-					return next(errors.unauthorized()); 
+					// invalid bearer token
+					return next(errors.unauthorized('Invalid token'));
 				}
-				
+
 
 			} else {
 				// did not pass checks, return 401 message
 				logger.error('Could not find bearer token in request headers');
-				return next(errors.unauthorized());
+				return next(errors.unauthorized('Invalid token'));
 			}
 	};
 };

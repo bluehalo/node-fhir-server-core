@@ -56,7 +56,7 @@ describe('Auth Utils Test', () => {
 
 	test('should not validate a request with an undecodable token', async () => {
 		await validateFn({ headers: { authorization: 'Bearer asdfasdfasdfa' } }, {}, mockNext);
-		expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(401, 'invalid_token'));
+		expect(mockNext.mock.calls[0][0]).toEqual(errors.unauthorized('Invalid token'));
 	});
 
 	test('should validate a request with a valid token with sufficient scopes in the token', async () => {
@@ -66,7 +66,7 @@ describe('Auth Utils Test', () => {
 
 	test('should not validate a request with a valid token with insufficient scopes', async () => {
 		await validateFn({ headers: { authorization: `Bearer ${validTokenWithInsufficientScopes}` } }, {}, mockNext);
-		expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
+		expect(mockNext.mock.calls[0][0]).toEqual(errors.insufficientScope());
 	});
 
 	// ***** Introspection test website is down at the moment ********
@@ -75,35 +75,35 @@ describe('Auth Utils Test', () => {
 	// 	config.introspection_endpoint = undefined;
 	// 	await validateFn({ headers: { authorization: `Bearer ${validTokenWithoutScopes}` } }, {}, mockNext);
 	// 	console.log(mockNext.mock.calls);
-	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
+	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.insufficientScope());
 	// });
 
 	// test('should not validate a request with a valid token but introspection endpoint fails', async () => {
 	// 	nock(introspection_endpoint).post('/').reply(500);
 
 	// 	await validateFn({ headers: { authorization: `Bearer ${validTokenWithoutScopes}` } }, {}, mockNext);
-	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
+	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.insufficientScope());
 	// });
 
 	// test('should not validate a request with a valid token but the token is not active', async () => {
 	// 	nock(introspection_endpoint).post('/').reply(200, { active: false, no_scope: true });
 
 	// 	await validateFn({ headers: { authorization: `Bearer ${validTokenWithoutScopes}` } }, {}, mockNext);
-	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(401, 'invalid_token'));
+	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.unauthorized('Invalid token'));
 	// });
 
 	// test('should not validate a request with a valid token but introspection endpoint does not return scope', async () => {
 	// 	nock(introspection_endpoint).post('/').reply(200, { active: true, no_scope: true });
 
 	// 	await validateFn({ headers: { authorization: `Bearer ${validTokenWithoutScopes}` } }, {}, mockNext);
-	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
+	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.insufficientScope());
 	// });
 
 	// test('should not validate a request with a valid token but introspection endpoint returns insufficient scope', async () => {
 	// 	nock(introspection_endpoint).post('/').reply(200, { active: true, scope: 'badscope' });
 
 	// 	await validateFn({ headers: { authorization: `Bearer ${validTokenWithoutScopes}` } }, {}, mockNext);
-	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.custom(403, 'insufficient_scope'));
+	// 	expect(mockNext.mock.calls[0][0]).toEqual(errors.insufficientScope());
 	// });
 
 	// test('should validate a request with a valid token and introspection endpoint returns a valid scope', async () => {

@@ -273,12 +273,14 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 - **Description:** Return the number of patients in your data store.
 - **Required:** Yes
 - **Return:** `Promise.<number, Error>`
+- **Routes:** Required for metadata and capability statement
 
 #### `getPatientById`
 
 - **Description:** Get the patient given an id in the req.params.
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
+- **Routes:** Enables `dstu2/patient/:id` via GET
 
 #### `getPatient`
 
@@ -290,6 +292,7 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 	- given + gender
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
+- **Routes:** Enables `/dstu2/patient` via GET and `/dstu2/patient/_search` via POST
 
 ### Observation
 
@@ -298,18 +301,21 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 - **Description:** Get the count of the number of observations.
 - **Required:** Yes
 - **Return:** `Promise.<number, Error>`
+- **Routes:** Required for metadata and capability statement
 
 #### `getObservation`
 
 - **Description:** TODO
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
+- **Routes:** Enables `/dstu2/observation` via GET and `/dstu2/observation/_search` via POST
 
 #### `getObservationById`
 
 - **Description:** TODO
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
+- **Routes:** Enables `dstu2/observation/:id` via GET
 
 ## Examples
 

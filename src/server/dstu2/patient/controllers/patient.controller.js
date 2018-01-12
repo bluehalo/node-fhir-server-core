@@ -1,4 +1,4 @@
-const { ServerError } = require('../../../utils/error.utils');
+const errors = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
 
 module.exports.getPatient = (profile, logger) => {
@@ -42,10 +42,10 @@ module.exports.getPatient = (profile, logger) => {
 					}
 				}
 
-				res.send(searchResults);
+				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 
@@ -71,13 +71,13 @@ module.exports.getPatientById = (profile, logger) => {
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
-					res.send(patient);
+					res.status(200).json(patient);
 				} else {
-					res.status(404).end();
+					next(errors.notFound('Patient not found'));
 				}
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 };

@@ -1,5 +1,3 @@
-const Extension = require('./Extension');
-
 class Element {
 	constructor(obj) {
 		Object.assign(this, obj);
@@ -16,6 +14,7 @@ class Element {
 
 	// extension		0..*	Extension	Additional Content defined by implementations
 	set extension(extension) {
+		const Extension = require('./Extension');
 		if (Array.isArray(extension)) {
 			this._extension = extension.map((x) => new Extension(x));
 		} else {

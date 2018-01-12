@@ -2,6 +2,7 @@ const moment = require('moment');
 const path = require('path');
 const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize.utils'));
 const errors = require(path.resolve('./src/server/utils/error.utils'));
+const OperationOutcome = require('../server/resources/OperationOutcome');
 
 const ARGS = [
 	{
@@ -137,7 +138,7 @@ describe('Sanitize Utils Tests', () => {
 		let nextArg = next.mock.calls[0][0];
 
 		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(errors.ServerError);
+		expect(nextArg).toBeInstanceOf(OperationOutcome);
 		expect(nextArg.message).toEqual('Invalid parameter');
 	});
 
@@ -168,7 +169,7 @@ describe('Sanitize Utils Tests', () => {
 		let nextArg = next.mock.calls[0][0];
 
 		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(errors.ServerError);
+		expect(nextArg).toBeInstanceOf(OperationOutcome);
 		expect(nextArg.message).toEqual('Invalid parameter');
 	});
 
@@ -184,7 +185,7 @@ describe('Sanitize Utils Tests', () => {
 		let nextArg = next.mock.calls[0][0];
 
 		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(errors.ServerError);
+		expect(nextArg).toBeInstanceOf(OperationOutcome);
 		expect(nextArg.message).toEqual('Invalid parameter');
 	});
 
@@ -203,7 +204,7 @@ describe('Sanitize Utils Tests', () => {
 		let nextArg = next.mock.calls[0][0];
 
 		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(errors.ServerError);
+		expect(nextArg).toBeInstanceOf(OperationOutcome);
 		expect(nextArg.message).toEqual('Invalid parameter');
 	});
 
