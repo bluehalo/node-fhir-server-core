@@ -44,7 +44,7 @@ function parseBearerToken(req) {
  */
 function getValidScopes(scopes, allowedScopes) {
 	const tokenScope = scopes;
-	const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(' ') : [];
+	const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(/[, ]/) : [];
 	const intersection = _.intersection(scopeArray, allowedScopes);
 
 	return intersection;
@@ -88,9 +88,9 @@ async function introspect(token, config) {
 async function verifyToken(decodedToken, token, client, issuer) {
 
 	// validates the aud, issuer
-	const baseOptions = { 
-		audience: client.clientId, 
-		issuer: issuer 
+	const baseOptions = {
+		audience: client.clientId,
+		issuer: issuer
 	};
 
 	// check for algorithm
@@ -104,9 +104,9 @@ async function verifyToken(decodedToken, token, client, issuer) {
 
 		} else if (decodedToken.header.alg.startsWith('RS')) {
 			// IF RS*** algorithm, validate signature based on certificate
-	
+
 			// add algorithm to options
-			const options = Object.assign(options, { algorithms: [decodedToken.header.alg] });
+			const options = Object.assign(baseOptions, { algorithms: [decodedToken.header.alg] });
 
 			// use public key
 			// update this to point to where public key should be if not in the client
@@ -125,9 +125,7 @@ async function verifyToken(decodedToken, token, client, issuer) {
 		// invalid bearer token
 		throw new Error('Unable to validate token');
 	}
-};
-
-
+}
 
 /**
  * @name validate
@@ -157,7 +155,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					let validToken;
 
 					// get client
-					let client = await service.getClient(decodedToken.aud);
+					let client = await service.getClient(decodedToken.payload.aud);
 					if (client) {
 						// verify token and signature
 						let [error, token] = await handler(verifyToken(decodedToken, bearerToken, client, config.auth.resourceServer));
@@ -189,7 +187,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					} else if (client.scope) {
 						// let's look at the scopes of the client
 						scopes = getValidScopes(client.scope, allowedScopes);
-					} 
+					}
 
 					// verify if token has one of the required scopes
 					if (scopes && scopes.length > 0) {
@@ -208,10 +206,8 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						return next(errors.unauthorized());
 					}
 				} else {
-					return next(errors.unauthorized()); 
+					return next(errors.unauthorized());
 				}
-				
-
 			} else {
 				// did not pass checks, return 401 message
 				logger.error('Could not find bearer token in request headers');

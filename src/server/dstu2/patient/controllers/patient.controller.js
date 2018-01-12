@@ -1,7 +1,7 @@
 const { ServerError } = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
 
-module.exports.getPatient = (profile, logger) => {
+module.exports.getPatient = (profile, logger, config) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
@@ -36,7 +36,7 @@ module.exports.getPatient = (profile, logger) => {
 								'mode': 'match'
 							},
 							'resource': resource,
-							'fullUrl': `localhost:3000/Patient/${resource.id}`
+							'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
 						};
 						searchResults.entry.push(entry);
 					}

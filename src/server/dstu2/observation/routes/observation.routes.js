@@ -26,7 +26,7 @@ module.exports = (app, config, logger) => {
 				cors(corsOptions),
 				sanitizeMiddleware(route.args),
 				validate(route.scopes, logger, config),
-				route.controller(observationProfile, logger)
+				route.controller(observationProfile, logger, config)
 			);
 		});
 	}
