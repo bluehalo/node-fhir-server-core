@@ -44,7 +44,7 @@ function parseBearerToken(req) {
  */
 function getValidScopes(scopes, allowedScopes) {
 	const tokenScope = scopes;
-	const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(' ') : [];
+	const scopeArray = typeof tokenScope === 'string' ? tokenScope.split(/[, ]/) : [];
 	const intersection = _.intersection(scopeArray, allowedScopes);
 
 	return intersection;
@@ -100,13 +100,13 @@ async function verifyToken(decodedToken, token, client, issuer) {
 		if (decodedToken.header.alg.startsWith('HS')) {
 
 			// IF HS*** algorith, validate signature based on secret key
-			validToken = jwt.verify(token, client.secret, baseOptions);
+			validToken = jwt.verify(token, client.clientSecret, baseOptions);
 
 		} else if (decodedToken.header.alg.startsWith('RS')) {
 			// IF RS*** algorithm, validate signature based on certificate
 
 			// add algorithm to options
-			const options = Object.assign(options, { algorithms: [decodedToken.header.alg] });
+			const options = Object.assign(baseOptions, { algorithms: [decodedToken.header.alg] });
 
 			// use public key
 			// update this to point to where public key should be if not in the client
@@ -125,9 +125,7 @@ async function verifyToken(decodedToken, token, client, issuer) {
 		// invalid bearer token
 		throw new Error('Unable to validate token');
 	}
-};
-
-
+}
 
 /**
  * @name validate
@@ -157,7 +155,13 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					let validToken;
 
 					// get client
-					let client = await service.getClient(decodedToken.aud);
+					let [clientErr, client] = await handler(service.getClient(decodedToken.payload.aud));
+					if (clientErr) {
+						return next(errors.unauthorized(clientErr.message));
+
+					}
+
+
 					if (client) {
 						// verify token and signature
 						let [error, token] = await handler(verifyToken(decodedToken, bearerToken, client, config.auth.resourceServer));
