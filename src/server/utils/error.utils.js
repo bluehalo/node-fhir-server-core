@@ -81,12 +81,12 @@ let isServerError = err => err instanceof OperationOutcome;
  * @summary Error Configurations
  */
 module.exports = {
-  invalidParameter,
-  unauthorized,
-  insufficientScope,
-  notFound,
-  deleted,
+	invalidParameter,
+	unauthorized,
+	insufficientScope,
+	notFound,
+	deleted,
 	internal,
-  isServerError
+	isServerError
 	// ServerError
 };
