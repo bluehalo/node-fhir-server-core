@@ -1,6 +1,8 @@
 const Code = require('./Code');
 const Element = require('./Element');
 
+console.log(Element);
+
 // Attachment	Σ I		Element	Content in a format defined elsewhere
 // It the Attachment has data, it SHALL have a contentType
 class Attachment extends Element {

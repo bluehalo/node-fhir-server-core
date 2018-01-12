@@ -1,4 +1,4 @@
-const { ServerError } = require('../../../utils/error.utils');
+const errors = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
 
 module.exports.getObservations = (profile, logger) => {
@@ -45,7 +45,7 @@ module.exports.getObservations = (profile, logger) => {
 				res.send(searchResults);
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 };
@@ -75,7 +75,7 @@ module.exports.getObservationByID = (profile, logger) => {
 				}
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 };

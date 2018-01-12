@@ -1,18 +1,79 @@
-/**
- * @class ServerError
- * @summary Extends error to add additional code property
- */
-class ServerError extends Error {
-  constructor (code, message) {
-    super(message);
+const OperationOutcome = require('../resources/OperationOutcome');
+const { ISSUE } = require('../../constants');
 
-    if (Error.captureStackStrace) {
-      Error.captureStackStrace(this, ServerError);
-    }
+// /**
+//  * @class ServerError
+//  * @summary Extends error to add additional code property
+//  */
+// class ServerError extends Error {
+//   constructor (code, message) {
+//     super(message);
+//
+//     if (Error.captureStackStrace) {
+//       Error.captureStackStrace(this, ServerError);
+//     }
+//
+//     this.code = code;
+//   }
+// }
 
-    this.code = code;
-  }
-}
+// Invalid or Missing parameter from request
+let invalidParameter = message =>
+	new OperationOutcome({
+		statusCode: 400,
+		code: ISSUE.CODE.INVALID,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message,
+		message
+	});
+
+// Unauthorized request of some resource
+let unauthorized = message =>
+	new OperationOutcome({
+		statusCode: 401,
+		code: ISSUE.CODE.FORBIDDEN,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message || 'Unauthorized request',
+		message: message || 'Unauthorized request'
+	});
+
+let insufficientScope = message =>
+	new OperationOutcome({
+		statusCode: 403,
+		code: ISSUE.CODE.FORBIDDEN,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message || 'Insufficient scope',
+		message: message || 'Insufficient scope'
+	});
+
+let notFound = message =>
+	new OperationOutcome({
+		statusCode: 404,
+		code: ISSUE.CODE.NOT_FOUND,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message || 'Not found',
+		message: message || 'Not found'
+	});
+
+let deleted = message =>
+	new OperationOutcome({
+		statusCode: 410,
+		code: ISSUE.CODE.NOT_FOUND,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message || 'Resource deleted',
+		message: message || 'Resource deleted'
+	});
+
+let internal = message =>
+	new OperationOutcome({
+		statusCode: 500,
+		code: ISSUE.CODE.EXCEPTION,
+		severity: ISSUE.SEVERITY.ERROR,
+		diagnostics: message || 'Internal server error',
+		message: message || 'Internal server error'
+	});
+
+let isServerError = err => err instanceof OperationOutcome;
 
 /**
  * @name exports
@@ -20,12 +81,12 @@ class ServerError extends Error {
  * @summary Error Configurations
  */
 module.exports = {
-  invalidParameter: () => new ServerError(400, 'Invalid parameter'),
-  unauthorized: () => new ServerError(401, 'Unauthorized request'),
-  insufficientScope: () => new ServerError(403, 'Insufficient scope'),
-  notFound: () => new ServerError(404, 'Not found'),
-  deleted: () => new ServerError(410, 'Resource deleted'),
-  custom: (code, message) => new ServerError(code, message),
-  isServerError: (err) => err instanceof ServerError,
-	ServerError: ServerError
+  invalidParameter,
+  unauthorized,
+  insufficientScope,
+  notFound,
+  deleted,
+	internal,
+  isServerError
+	// ServerError
 };

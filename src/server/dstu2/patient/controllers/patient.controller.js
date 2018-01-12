@@ -1,4 +1,4 @@
-const { ServerError } = require('../../../utils/error.utils');
+const errors = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
 
 module.exports.getPatient = (profile, logger) => {
@@ -45,7 +45,7 @@ module.exports.getPatient = (profile, logger) => {
 				res.send(searchResults);
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 
@@ -77,7 +77,7 @@ module.exports.getPatientById = (profile, logger) => {
 				}
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 };

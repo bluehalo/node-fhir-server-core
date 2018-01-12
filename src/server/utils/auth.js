@@ -80,13 +80,13 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 	} catch (err) {
 		// log error return 401 with error message;
 		logger.error(err, err.message);
-		return next(errors.custom(401, 'invalid_token'));
+		return next(errors.unauthorized('Invalid token'));
 	}
 
 	logger.debug('Token has been verified. Searching for scope ...');
 
 	if (typeof decoded.scope === 'string') {
-		return _hasCorrectScope(decoded, validScopes) ? next() : next(errors.custom(403, 'insufficient_scope'));
+		return _hasCorrectScope(decoded, validScopes) ? next() : next(errors.insufficientScope());
 	} else if (oauthConfig.introspection_endpoint) {
 		logger.debug('Attempting to introspect token');
 
@@ -105,21 +105,21 @@ async function _verifyToken(token, secretOrPublicKey, options = {}, validScopes,
 			logger.debug('Successfully introspected token');
 			if (!introspection.active) {
 				logger.error('Access token is not active');
-				return next(errors.custom(401, 'invalid_token'));
+				return next(errors.unauthorized('Invalid token'));
 			} else if (!_hasCorrectScope(introspection, validScopes)) {
 				logger.error('Access token has insufficient scope');
-				return next(errors.custom(403, 'insufficient_scope'));
+				return next(errors.insufficientScope());
 			} else {
 				logger.info('Access token and scope have been verified');
 				return next();
 			}
 		} catch (error) {
 			logger.error(`Failed to introspect token ${error}`);
-			return next(errors.custom(403, 'insufficient_scope'));
+			return next(errors.insufficientScope());
 		}
 	} else {
 		logger.error('The scope of the token is insufficient or the token cannot be introspected');
-		return next(errors.custom(403, 'insufficient_scope'));
+		return next(errors.insufficientScope());
 	}
 }
 
@@ -161,7 +161,7 @@ module.exports.validate = (validScopes, loggerUtil, config) => {
 					}
 				} else {
 					// invalid bearer token
-					return next(errors.custom(401, 'invalid_token'));
+					return next(errors.unauthorized('Invalid token'));
 				}
 			} else {
 				// did not pass checks, return 401 message
@@ -171,5 +171,3 @@ module.exports.validate = (validScopes, loggerUtil, config) => {
 		}
 	};
 };
-
-

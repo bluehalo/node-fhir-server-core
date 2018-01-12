@@ -131,8 +131,8 @@ let setupErrorHandler = function (app, logger) {
 	app.use((err, req, res, next) => {
 		// If there is an error and it is our error type
 		if (err && errors.isServerError(err)) {
-			logger.error(err.code, err.message);
-			res.status(err.code).end(err.message);
+			logger.error(err.statusCode, err.message);
+			res.status(err.statusCode).end(err.message);
 		}
 		// If there is still an error, throw a 500 and pass the message through
 		else if (err) {
@@ -148,8 +148,8 @@ let setupErrorHandler = function (app, logger) {
 	// Nothing has responded by now, respond with 404
 	app.use((req, res) => {
 		let error = errors.notFound();
-		logger.error(error.code, error.message);
-		res.status(error.code).end(error.message);
+		logger.error(error.statusCode, error.message);
+		res.status(error.statusCode).end(error.message);
 	});
 };
 
