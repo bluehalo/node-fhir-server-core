@@ -2,14 +2,8 @@ const fhirServer = require('./index.js');
 
 const CONFIG = {
 	auth: {
-		clientId: 'client id',
-		secret: 'secret',
-		discoveryUrl: 'https://sb-auth.smarthealthit.org/.well-known/openid-configuration',
-
-		protectedResourceClientId: 'my resource id',
-		protectedResourceClientSecret: 'my resource secret',
-
-		service: './src/server/utils/auth.validator.mock.js'
+		resourceServer: 'http://myserver.com',
+		service: './src/server/utils/auth.validator.mock.js',
 	},
 	server: {
 		port: 3000,

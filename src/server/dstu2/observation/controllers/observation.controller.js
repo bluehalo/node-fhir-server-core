@@ -1,7 +1,9 @@
 const errors = require('../../../utils/error.utils');
 const { VERSIONS } = require('../../../../constants');
+const { Observation } = require('../../resources');
 
-module.exports.getObservations = (profile, logger) => {
+
+module.exports.getObservations = (profile, logger, config) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
@@ -35,8 +37,8 @@ module.exports.getObservations = (profile, logger) => {
 							'search': {
 								'mode': 'match'
 							},
-							'resource': resource,
-							'fullUrl': `localhost:3000/Observation/${resource.id}`
+							'resource': new Observation(resource),
+							'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
 						};
 						searchResults.entry.push(entry);
 					}
@@ -69,7 +71,7 @@ module.exports.getObservationById = (profile, logger) => {
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
-					res.status(200).json(observation);
+					res.status(200).json(new Observation(observation));
 				} else {
 					next(errors.notFound('Observation not found'));
 				}

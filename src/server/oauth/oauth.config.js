@@ -3,45 +3,42 @@ const controller = require('./controllers/oauth.controller');
 let routes = [
 	{
 		type: 'get',
-		path: '/dstu2/authorize',
+		path: '/authorize',
 		args: [{
-			name: 'aud',
+			name: 'client_id',
 			type: 'string',
 			required: true
 		}, {
-			name: 'launch',
+			name: 'redirect_uri',
 			type: 'string',
 			required: true
 		}, {
-			name: 'clientId',
+			name: 'response_type',
+			type: 'string',
+			required: true
+		}, {
+			name: 'state',
 			type: 'string',
 			required: true
 		}, {
 			name: 'scope',
 			type: 'string',
 			required: true
+		}, {
+			name: 'aud',
+			type: 'string',
+			required: true
 		}],
-		scopes: [],
+		scopes: [{
+			name: 'code',
+			type: 'string'
+		}],
 		controller: controller.authorize
 	},
 	{
 		type: 'post',
-		path: '/dstu2/token',
-		args: [{
-			name: 'grant_type',
-			type: 'string',
-			required: true
-		}, {
-			name: 'code',
-			type: 'string',
-			required: true
-		}, {
-			name: 'refresh_token',
-			type: 'string'
-		}, {
-			name: 'secret',
-			type: 'string'
-		}],
+		path: '/token',
+		args: [],
 		scopes: [],
 		controller: controller.token
 	}

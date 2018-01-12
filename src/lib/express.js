@@ -92,25 +92,26 @@ let initAuthConfig = async function (config) {
 		const discoveryResponse = await request.get(discoveryUrl).then(res => res.body);
 		discoveryResponse.jwkSet = await request.get(discoveryResponse.jwks_uri).then(res => res.body);
 		Object.assign(oauthConfig, discoveryResponse);
+
+		Object.assign(oauthConfig, config);
+
+		if (typeof oauthConfig.jwkSet.keys === 'undefined') {
+			throw new Error('keys are not defined');
+		}
+		if (typeof oauthConfig.authorization_endpoint !== 'string') {
+			throw new Error('authorization_endpoint is not a string');
+		}
+		if (typeof oauthConfig.token_endpoint !== 'string') {
+			throw new Error('token_endpoint is not a string');
+		}
+		if (typeof oauthConfig.registration_endpoint !== 'string') {
+			throw new Error('token_endpoint is not a string');
+		}
+		if (typeof oauthConfig.issuer !== 'string') {
+			throw new Error('issuer is not a string');
+		}
 	}
 
-	Object.assign(oauthConfig, config);
-
-	if (typeof oauthConfig.jwkSet.keys === 'undefined') {
-		throw new Error('keys are not defined');
-	}
-	if (typeof oauthConfig.authorization_endpoint !== 'string') {
-		throw new Error('authorization_endpoint is not a string');
-	}
-	if (typeof oauthConfig.token_endpoint !== 'string') {
-		throw new Error('token_endpoint is not a string');
-	}
-	if (typeof oauthConfig.registration_endpoint !== 'string') {
-		throw new Error('token_endpoint is not a string');
-	}
-	if (typeof oauthConfig.issuer !== 'string') {
-		throw new Error('issuer is not a string');
-	}
 
 	// Introspection is not required depending on the oauth2 implementation (required for openid)
 	if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {

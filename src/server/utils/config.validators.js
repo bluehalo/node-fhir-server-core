@@ -16,6 +16,8 @@ let loadProfile = (key, profile = {}) => {
 		try {
 			profile.serviceModule = require(path.resolve(profile.service));
 		} catch (err) {
+			console.error(err);
+
 			// Let's throw a more informative error than the default
 			throw new Error(
 				`Unable to load service for ${key} profile.`
