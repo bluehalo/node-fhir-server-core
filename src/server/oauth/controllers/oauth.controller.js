@@ -1,4 +1,4 @@
-const { ServerError } = require('../../utils/error.utils');
+const errors = require('../../utils/error.utils');
 
 /**
  * This is a stub for oauth.
@@ -28,11 +28,11 @@ module.exports.authorize = (profile, config, logger) => {
 				res.redirect(req.query.redirect_uri + ('?code=' + signedCode + '&state=' + req.query.state));
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 		} else if (req.query.response_type === 'token') {
 			// TODO: authorize token
-			next(new ServerError(500, 'not supported'));
+			next(errors.internal('Not yet supported'));
 		}
 	};
 };
@@ -64,7 +64,7 @@ module.exports.token = (profile, config, logger) => {
 				res.json(token);
 			})
 			.catch((err) => {
-				next(new ServerError(500, err.message));
+				next(errors.internal(err.message));
 			});
 	};
 
