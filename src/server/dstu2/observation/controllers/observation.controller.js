@@ -51,7 +51,7 @@ module.exports.getObservations = (profile, logger) => {
 };
 
 
-module.exports.getObservationByID = (profile, logger) => {
+module.exports.getObservationById = (profile, logger) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
@@ -66,7 +66,7 @@ module.exports.getObservationByID = (profile, logger) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getObservationByID(req, logger, context)
+		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
 					res.send(observation);

@@ -88,7 +88,7 @@ class Issue {
 		if (this._diagnostics) { response.diagnostics = this._diagnostics; }
 		if (this._expression) { response.expression = this._expression; }
 		if (this._location) { response.location = this._location; }
-		if (this._details) { response.details = this._details; }
+		if (Object.keys(this._details).length) { response.details = this._details; }
 
 		return response;
 	}

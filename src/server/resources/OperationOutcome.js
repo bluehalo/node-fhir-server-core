@@ -2,10 +2,10 @@ const Issue = require('./types/Issue');
 const { DSTU2 } = require('../../constants');
 
 /* eslint-disable no-useless-escape */
-let div_content = (severity, message, diagnostics) =>
+let div_content = (severity, diagnostics) =>
 	'<div xmlns=\"http://www.w3.org/1999/xhtml\"><h1>Operation Outcome</h1><table border=\"0\">'
 	+ `<table border=\"0\"><tr><td style=\"font-weight: bold;\">${severity}</td>`
-	+ `<td>${message}</td><td><pre>${diagnostics}</pre></td></tr></table></div>`;
+	+ `<td><pre>${diagnostics}</pre></td></tr></table></div>`;
 /* eslint-enable no-useless-escape */
 
 class OperationOutcome extends Error {
@@ -42,11 +42,14 @@ class OperationOutcome extends Error {
 	}
 
 	toJSON() {
+		let severity = this._issue.severity;
+		let diagnostics = this._issue.diagnostics || this._message;
+
 		return {
 			resourceType: this._resourceType,
 			text: {
 				status: 'generated',
-				div: div_content(this._severity, this._message, this._diagnostics)
+				div: div_content(severity, diagnostics)
 			},
 			issue: [this._issue]
 		};

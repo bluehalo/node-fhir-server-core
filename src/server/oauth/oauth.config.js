@@ -27,7 +27,21 @@ let routes = [
 	{
 		type: 'post',
 		path: '/dstu2/token',
-		args: [],
+		args: [{
+			name: 'grant_type',
+			type: 'string',
+			required: true
+		}, {
+			name: 'code',
+			type: 'string',
+			required: true
+		}, {
+			name: 'refresh_token',
+			type: 'string'
+		}, {
+			name: 'secret',
+			type: 'string'
+		}],
 		scopes: [],
 		controller: controller.token
 	}
