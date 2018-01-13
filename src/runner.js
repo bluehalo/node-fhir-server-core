@@ -6,7 +6,7 @@ const CONFIG = {
 		service: './src/server/utils/auth.validator.mock.js',
 	},
 	server: {
-		port: 3000,
+		port: process.env.PORT || 3000,
 		corsOptions: {
 			maxAge: 86400
 		},
