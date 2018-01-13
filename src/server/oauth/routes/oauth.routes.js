@@ -24,6 +24,7 @@ module.exports = (app, config, logger) => {
 			// Enable route
 			app[route.type](
 				route.path,
+				cors(corsOptions),
 				route.controller(oauth, config, logger)
 			);
 		});
