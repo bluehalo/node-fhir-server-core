@@ -66,7 +66,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 			// Generate the resources conformance statement and add these to the main Capability Statement
 			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
 
-			if (config.server && config.server.mode === DSTU2.MODE.CONFIDENTIAL && security) {
+			if (config.server && security) {
 				server.security = securityStatement(security);
 			}
 

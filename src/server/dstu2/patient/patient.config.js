@@ -30,6 +30,9 @@ let routes = [
 		}, {
 			name: 'given',
 			type: 'string'
+		}, {
+			name: 'family',
+			type: 'string'
 		}],
 		scopes: scopes,
 		controller: controller.getPatient
@@ -51,6 +54,9 @@ let routes = [
 			type: 'string'
 		}, {
 			name: 'given',
+			type: 'string'
+		}, {
+			name: 'family',
 			type: 'string'
 		}],
 		scopes: scopes,

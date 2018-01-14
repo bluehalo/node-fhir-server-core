@@ -235,7 +235,7 @@ const fhirConfig = {
 - **Default:** `none`
 
 ### Profiles
-Currently we are only supporting profiles listed in the table below. As we add support for more profiles, we will update the documentation below with the necessary methods to support those profiles.
+Currently we are only supporting profiles listed in the table below. As we add support for more profiles, we will update the documentation below with the necessary methods to support those profiles. You will also see which routes each method will enable in your implementation.
 
 | Profile      | Config Key     | Interface                   |
 |--------------|----------------|-----------------------------|
@@ -273,14 +273,15 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 - **Description:** Return the number of patients in your data store.
 - **Required:** Yes
 - **Return:** `Promise.<number, Error>`
-- **Routes:** Required for metadata and capability statement
+- **Routes:** Required for metadata. Count will show up in the capability statement under `[spec]/metadata`.
 
 #### `getPatientById`
 
 - **Description:** Get the patient given an id in the req.params.
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `dstu2/patient/:id` via GET
+- **Routes:** Enables `[spec]/patient/:id` via GET
+	- Example: `dstu2/patient/2`
 
 #### `getPatient`
 
@@ -292,7 +293,8 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 	- given + gender
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `/dstu2/patient` via GET and `/dstu2/patient/_search` via POST
+- **Routes:** Enables `/[spec]/patient` via GET and `/[spec]/patient/_search` via POST
+	- Example: `dstu2/patient/?foo=bar` or `dstu2/patient/_search?foo=bar`
 
 ### Observation
 
@@ -301,21 +303,23 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 - **Description:** Get the count of the number of observations.
 - **Required:** Yes
 - **Return:** `Promise.<number, Error>`
-- **Routes:** Required for metadata and capability statement
-
-#### `getObservation`
-
-- **Description:** TODO
-- **Required:** Yes
-- **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `/dstu2/observation` via GET and `/dstu2/observation/_search` via POST
+- **Routes:** Required for metadata. Count will show up in the capability statement under `[spec]/metadata`.
 
 #### `getObservationById`
 
 - **Description:** TODO
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `dstu2/observation/:id` via GET
+- **Routes:** Enables `[spec]/observation/:id` via GET
+	- Example: `dstu2/observation/2`
+
+#### `getObservation`
+
+- **Description:** TODO
+- **Required:** Yes
+- **Return:** `Promise.<object, Error>`
+- **Routes:** Enables `/[spec]/observation` via GET and `/[spec]/observation/_search` via POST
+	- Example: `dstu2/observation/?foo=bar` or `dstu2/observation/_search?foo=bar`
 
 ## Examples
 
