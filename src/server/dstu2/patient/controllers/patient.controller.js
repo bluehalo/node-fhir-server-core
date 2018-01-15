@@ -21,7 +21,7 @@ module.exports.getPatient = (profile, logger, config) => {
 		return service.getPatient(req, logger, context)
 			.then((patients) => {
 				const searchResults = {
-					'total': patients ? patients.length : 0,
+					'total': 0,
 					'resourceType': 'Bundle',
 					'type': 'searchset',
 					'entry': []
@@ -29,18 +29,21 @@ module.exports.getPatient = (profile, logger, config) => {
 
 				if (patients) {
 					for (let resource of patients) {
-						// Modes:
-						// match - This resource matched the search specification.
-						// include - This resource is returned because it is referred to from another resource in the search set.
-						// outcome - An OperationOutcome that provides additional information about the processing of a search.
-						const entry = {
-							'search': {
-								'mode': 'match'
-							},
-							'resource': new Patient(resource),
-							'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
-						};
-						searchResults.entry.push(entry);
+						if (!req.patient || req.patient === resource.patientId) {
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							const entry = {
+								'search': {
+									'mode': 'match'
+								},
+								'resource': new Patient(resource),
+								'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
+							};
+							searchResults.entry.push(entry);
+						}
+						searchResults.total = searchResults.entry.length;
 					}
 				}
 
@@ -64,12 +67,18 @@ module.exports.getPatientById = (profile, logger) => {
 	};
 
 	return (req, res, next) => {
-		// @TODO Validate arguments and response
-		/**
-		* return service.getPatientById(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
+
+		// If we have req.patient, then we need to validate that this patient
+		// is only accessing resources with his id, he is not allowed to access others
+		if (
+			req.patient
+			&& req.body
+			&& req.body.id
+			&& req.patient !== req.body.id
+		) {
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`));
+		}
+
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {

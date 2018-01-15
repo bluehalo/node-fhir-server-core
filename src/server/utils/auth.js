@@ -199,12 +199,12 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					if (scopes && scopes.length > 0) {
 						// attach patient id to req or validate request and patient
 						// TODO: verify this as it could be done in different ways
-						// if (validToken.context && validToken.context.patient) {
-						// 	req.patientId = validToken.context.patient;
-						// }
+						if (validToken.context && validToken.context.patient) {
+							req.patient = validToken.context.patient;
+						}
 
-						// req.patient is a signed or hash that the resource server knows
-						// how to validate to get the real patient id
+						// or req.patient could be a signed or hash that the resource server knows
+						// Conform to OAUTH spec here
 
 						// validation complete
 						return next();

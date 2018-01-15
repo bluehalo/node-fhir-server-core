@@ -12,16 +12,12 @@ module.exports.getObservations = (profile, logger, config) => {
 	};
 
 	return (req, res, next) => {
-		/**
-		* return service.getObservation(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
+
 		return service.getObservation(req, logger, context)
 			.then((observations) => {
 
 				const searchResults = {
-					'total': observations ? observations.length : 0,
+					'total': 0,
 					'resourceType': 'Bundle',
 					'type': 'searchset',
 					'entry': []
@@ -29,19 +25,27 @@ module.exports.getObservations = (profile, logger, config) => {
 
 				if (observations) {
 					for (let resource of observations) {
-						// Modes:
-						// match - This resource matched the search specification.
-						// include - This resource is returned because it is referred to from another resource in the search set.
-						// outcome - An OperationOutcome that provides additional information about the processing of a search.
-						const entry = {
-							'search': {
-								'mode': 'match'
-							},
-							'resource': new Observation(resource),
-							'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
-						};
-						searchResults.entry.push(entry);
+						// if req.patient is present, they are only allowed to access observations
+						// which reference a patient with their id, so if any resource.id
+						// does not equal the req.patient, then they are attempting to access
+						// a patients records that they are not allowed to access
+						if (!req.patient || req.patient === resource.patientId) {
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							const entry = {
+								'search': {
+									'mode': 'match'
+								},
+								'resource': new Observation(resource),
+								'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
+							};
+							searchResults.entry.push(entry);
+						}
 					}
+
+					searchResults.total = searchResults.entry.length;
 				}
 
 				res.status(200).json(searchResults);
@@ -63,15 +67,20 @@ module.exports.getObservationById = (profile, logger) => {
 
 	return (req, res, next) => {
 		logger.info('Get observation by id');
-		/**
-		* return service.getObservation(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
+
 		return service.getObservationById(req, logger, context)
-			.then((observation) => {
-				if (observation) {
-					res.status(200).json(new Observation(observation));
+			.then((patientObservation) => {
+				if (patientObservation) {
+					let observation = new Observation(patientObservation);
+					// If we have req.patient, then we need to validate that this patient
+					// is only accessing Observations referencing his patient Id
+					// he is not allowed to access others
+					if (req.patient && observation.patientId && req.patient !== observation.patientId) {
+						next(errors.unauthorized(`You are not allowed to access Observations referencing ${observation.patientId}.`));
+					}
+					else {
+						res.status(200).json(observation);
+					}
 				} else {
 					next(errors.notFound('Observation not found'));
 				}
