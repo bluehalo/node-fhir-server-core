@@ -27,41 +27,26 @@ module.exports.getPatient = (profile, logger, config) => {
 					'entry': []
 				};
 
-				let unauthorizedAccesses = [];
-
 				if (patients) {
 					for (let resource of patients) {
-						// Modes:
-						// match - This resource matched the search specification.
-						// include - This resource is returned because it is referred to from another resource in the search set.
-						// outcome - An OperationOutcome that provides additional information about the processing of a search.
-						const entry = {
-							'search': {
-								'mode': 'match'
-							},
-							'resource': new Patient(resource),
-							'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
-						};
-						searchResults.entry.push(entry);
-						// if req.patient is present, they are only allowed
-						// to access patient records with their id, so if any resource.id
-						// does not equal the req.patient, then they are attempting to access
-						// a patients records that they are not allowed to access
-						if (req.patient && req.patient !== resource.id) {
-							unauthorizedAccesses.push(resource.id);
+						if (!req.patient || req.patient === resource.patientId) {
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							const entry = {
+								'search': {
+									'mode': 'match'
+								},
+								'resource': new Patient(resource),
+								'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
+							};
+							searchResults.entry.push(entry);
 						}
-
 					}
 				}
 
-				if (unauthorizedAccesses.length) {
-					let message = `You are not allowed to access patiet(s) with id(s) ${unauthorizedAccesses.join(',')}.`;
-					message += `  You are only allowed to access records with patient id ${req.patient}.`;
-					next(errors.unauthorized(message));
-				}
-				else {
-					res.status(200).json(searchResults);
-				}
+				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message));
