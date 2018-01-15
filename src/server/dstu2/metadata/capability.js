@@ -1,5 +1,5 @@
 const moment = require('moment-timezone');
-const { DSTU2 } = require('../../constants');
+const { DSTU2 } = require('../../../constants');
 
 /**
  * @name exports
@@ -46,4 +46,3 @@ module.exports.securityStatement = securityUrls => ({
 		}
 	}]
 });
-

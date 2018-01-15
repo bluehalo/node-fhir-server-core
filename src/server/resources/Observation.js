@@ -78,6 +78,16 @@ class Observation extends DomainResource {
 		return this._subject;
 	}
 
+	// Retrieve the patient id from the reference
+	get patientId() {
+		// subject.reference = 'Patient/{patientId}'
+		return (
+			this._subject
+			&& this._subject.reference
+			&& this._subject.reference.split('/')[1]
+		);
+	}
+
 	// 0..1 Reference(Encounter) Healthcare event during which this observation is made
 	set encounter(encounter) {
 		this._encounter = new Reference(encounter);

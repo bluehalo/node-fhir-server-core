@@ -1,15 +1,13 @@
 const path = require('path');
 const glob = require('glob');
-const { files } = require('../../../config');
-const { DSTU2 } = require('../../../constants');
+const { DSTU2, VERSIONS } = require('../../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
-// Make base relative to src
-const base = path.resolve(__dirname, '../../../..');
+// Glob for discovering all dstu2 conformance statements
+const files = path.resolve(__dirname, '../../*/conformance.js');
 
 // Load all the conformance documents ahead of time
-const RESOURCES = glob
-	.sync(path.resolve(base, files.conformanceStatements))
+const RESOURCES = glob.sync(files)
 	.map(resource_path => {
 		// Resource is a function that returns the conformance statement for this resource
 		// and takes the number of that particular resource
@@ -49,13 +47,18 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles))
+		.map(mapResources(profiles.dstu2))
 		.filter(filterResources);
+
+	// Create a context I can pass some data through
+	let context = {
+		version: VERSIONS.DSTU2
+	};
 
 	// Iterate over the active_resources and execute getCount for each one.
 	// req and logger are by no means necessary, but pass them in so the service can
 	// access the logger and see information in the request if necessary for any validation etc.
-	return Promise.all(active_resources.map(resource => resource.getCount(req, logger)))
+	return Promise.all(active_resources.map(resource => resource.getCount(req, logger, context)))
 		.then((results) => {
 
 			// Our server statment
@@ -63,7 +66,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 			// Generate the resources conformance statement and add these to the main Capability Statement
 			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
 
-			if (config.server && config.server.mode === DSTU2.MODE.CONFIDENTIAL && security) {
+			if (config.server && security) {
 				server.security = securityStatement(security);
 			}
 

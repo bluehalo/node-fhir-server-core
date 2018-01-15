@@ -38,6 +38,32 @@ let routes = [
 		}],
     scopes: scopes,
     controller: controller.getObservations
+	},
+	{
+    type: 'post',
+		path: '/dstu2/observation/_search',
+		corsOptions: {
+			methods: ['POST']
+		},
+    args: [{
+      name: 'patient',
+			type: 'string',
+			required: true
+    }, {
+      name: 'category',
+      type: 'string'
+    }, {
+      name: 'code',
+      type: 'string'
+    }, {
+      name: 'date',
+      type: 'string'
+    }, {
+			name: '_format',
+			type: 'string'
+		}],
+    scopes: scopes,
+    controller: controller.getObservations
   },
   {
     type: 'get',
@@ -51,7 +77,7 @@ let routes = [
       required: true
     }],
     scopes: scopes,
-    controller: controller.getObservationByID
+    controller: controller.getObservationById
   }
 ];
 

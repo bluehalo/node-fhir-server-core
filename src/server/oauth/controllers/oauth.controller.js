@@ -1,20 +1,40 @@
+const errors = require('../../utils/error.utils');
+
 /**
  * This is a stub for oauth.
+ * Example ?client_id=client%20id&redirect_uri=https://fhir.sitenv.org/fhirconformance/&response_type=code&state=43220320&scope=launch,patient/*.read,openid&aud=https://lit-lake-71789.herokuapp.com
  *
  * @name exports
  * @summary Authorizes the request and return a signed code to be exchanged for a token.
  */
-module.exports.authorize = (profile, logger) => {
+module.exports.authorize = (profile, config, logger) => {
 	let { serviceModule: service } = profile;
 
-	return (req, res) => {
+	return (req, res, next) => {
 		logger.info('Authorizing Code');
 
-		const signedCode = service.generateCode(req.query.aud, req.query.launch, req.query.clientId, req.query.scope);
-		res.redirect(req.query.redirect_uri + ('?code=' + signedCode + '&state=' + req.query.state));
+		const options = {
+			iss: req.query.aud,
+			launch: req.query.launch,
+			clientId: req.query.client_id,
+			scope: req.query.scope
+		};
+
+		if (req.query.response_type === 'code') {
+			return service.authorization(req, logger, config, options)
+			.then((signedCode) => {
+
+
+				res.redirect(req.query.redirect_uri + ('?code=' + signedCode + '&state=' + req.query.state));
+			})
+			.catch((err) => {
+				next(errors.internal(err.message));
+			});
+		} else if (req.query.response_type === 'token') {
+			// TODO: authorize token
+			next(errors.internal('Not yet supported'));
+		}
 	};
-
-
 };
 
 
@@ -22,12 +42,12 @@ module.exports.authorize = (profile, logger) => {
  * @name exports
  * @summary Returns a JWT token from signed code in authorize endpoint.
  */
-module.exports.token = (profile, logger) => {
+module.exports.token = (profile, config, logger) => {
 
 
 	let { serviceModule: service } = profile;
 
-	return (req, res) => {
+	return (req, res, next) => {
 		logger.info('Authorizing Token');
 
 		const grantType = req.body.grant_type;
@@ -38,10 +58,14 @@ module.exports.token = (profile, logger) => {
 			code = req.body.refresh_token;
 		}
 
-		const token = service.generateToken(code);
-		res.json(token);
+
+		return service.token(req, logger, config, code, req.body.secret)
+			.then((token) => {
+				res.json(token);
+			})
+			.catch((err) => {
+				next(errors.internal(err.message));
+			});
 	};
-
-
 
 };

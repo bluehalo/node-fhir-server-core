@@ -92,25 +92,26 @@ let initAuthConfig = async function (config) {
 		const discoveryResponse = await request.get(discoveryUrl).then(res => res.body);
 		discoveryResponse.jwkSet = await request.get(discoveryResponse.jwks_uri).then(res => res.body);
 		Object.assign(oauthConfig, discoveryResponse);
+
+		Object.assign(oauthConfig, config);
+
+		if (typeof oauthConfig.jwkSet.keys === 'undefined') {
+			throw new Error('keys are not defined');
+		}
+		if (typeof oauthConfig.authorization_endpoint !== 'string') {
+			throw new Error('authorization_endpoint is not a string');
+		}
+		if (typeof oauthConfig.token_endpoint !== 'string') {
+			throw new Error('token_endpoint is not a string');
+		}
+		if (typeof oauthConfig.registration_endpoint !== 'string') {
+			throw new Error('token_endpoint is not a string');
+		}
+		if (typeof oauthConfig.issuer !== 'string') {
+			throw new Error('issuer is not a string');
+		}
 	}
 
-	Object.assign(oauthConfig, config);
-
-	if (typeof oauthConfig.jwkSet.keys === 'undefined') {
-		throw new Error('keys are not defined');
-	}
-	if (typeof oauthConfig.authorization_endpoint !== 'string') {
-		throw new Error('authorization_endpoint is not a string');
-	}
-	if (typeof oauthConfig.token_endpoint !== 'string') {
-		throw new Error('token_endpoint is not a string');
-	}
-	if (typeof oauthConfig.registration_endpoint !== 'string') {
-		throw new Error('token_endpoint is not a string');
-	}
-	if (typeof oauthConfig.issuer !== 'string') {
-		throw new Error('issuer is not a string');
-	}
 
 	// Introspection is not required depending on the oauth2 implementation (required for openid)
 	if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
@@ -131,13 +132,14 @@ let setupErrorHandler = function (app, logger) {
 	app.use((err, req, res, next) => {
 		// If there is an error and it is our error type
 		if (err && errors.isServerError(err)) {
-			logger.error(err.code, err.message);
-			res.status(err.code).end(err.message);
+			logger.error(err.statusCode, err.message);
+			res.status(err.statusCode).json(err);
 		}
 		// If there is still an error, throw a 500 and pass the message through
 		else if (err) {
-			logger.error(500, err.message);
-			res.status(500).end(err.message);
+			let error = errors.internal();
+			logger.error(error.statusCode, error.message);
+			res.status(error.statusCode).json(error);
 		}
 		// No error
 		else {
@@ -148,8 +150,8 @@ let setupErrorHandler = function (app, logger) {
 	// Nothing has responded by now, respond with 404
 	app.use((req, res) => {
 		let error = errors.notFound();
-		logger.error(error.code, error.message);
-		res.status(error.code).end(error.message);
+		logger.error(error.statusCode, error.message);
+		res.status(error.statusCode).json(error);
 	});
 };
 
