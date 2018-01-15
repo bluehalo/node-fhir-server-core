@@ -21,7 +21,7 @@ module.exports.getPatient = (profile, logger, config) => {
 		return service.getPatient(req, logger, context)
 			.then((patients) => {
 				const searchResults = {
-					'total': patients ? patients.length : 0,
+					'total': 0,
 					'resourceType': 'Bundle',
 					'type': 'searchset',
 					'entry': []
@@ -43,6 +43,7 @@ module.exports.getPatient = (profile, logger, config) => {
 							};
 							searchResults.entry.push(entry);
 						}
+						searchResults.total = searchResults.entry.length;
 					}
 				}
 

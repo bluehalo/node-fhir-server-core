@@ -17,7 +17,7 @@ module.exports.getObservations = (profile, logger, config) => {
 			.then((observations) => {
 
 				const searchResults = {
-					'total': observations ? observations.length : 0,
+					'total': 0,
 					'resourceType': 'Bundle',
 					'type': 'searchset',
 					'entry': []
@@ -25,6 +25,10 @@ module.exports.getObservations = (profile, logger, config) => {
 
 				if (observations) {
 					for (let resource of observations) {
+						// if req.patient is present, they are only allowed to access observations
+						// which reference a patient with their id, so if any resource.id
+						// does not equal the req.patient, then they are attempting to access
+						// a patients records that they are not allowed to access
 						if (!req.patient || req.patient === resource.patientId) {
 							// Modes:
 							// match - This resource matched the search specification.
@@ -38,12 +42,10 @@ module.exports.getObservations = (profile, logger, config) => {
 								'fullUrl': `${config.auth.resourceServer}/dstu2/Observation/${resource.id}`
 							};
 							searchResults.entry.push(entry);
-							// if req.patient is present, they are only allowed to access observations
-							// which reference a patient with their id, so if any resource.id
-							// does not equal the req.patient, then they are attempting to access
-							// a patients records that they are not allowed to access
 						}
 					}
+
+					searchResults.total = searchResults.entry.length;
 				}
 
 				res.status(200).json(searchResults);
