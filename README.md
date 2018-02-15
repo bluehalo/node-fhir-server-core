@@ -52,7 +52,8 @@ Here is an example config with all the currently supported options. See descript
 		ssl: {
 			key: 'path/to/key.pem',
 			cert: 'path/to.cert.pem'
-		}
+		},
+		publicDirectory: '/path/to/public'
 	},
 	logging: {
 		level: 'debug'
@@ -208,6 +209,13 @@ const fhirConfig = {
 - **Type:** `string`
 - **Description:** Path to your certificate. See [Contributor's guide](./.github/CONTRIBUTING.md#generate-self-signed-certs) for how to generate a self-signed cert for local development.
 - **Required:** No. If you want to setup express to use ssl, you need both a key and cert.
+- **Default:** `none`
+
+#### `server.publicDirectory`
+
+- **Type:** `string`
+- **Description:** Path to your public directory. Some certificate authorities need to validate your server, for example, Let's Encrypt. You can use this to enable a public directory to serve the challenge file from `/.well-known/acme-challenge`.
+- **Required:** No.
 - **Default:** `none`
 
 #### `logging.level`
