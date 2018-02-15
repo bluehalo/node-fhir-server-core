@@ -74,6 +74,11 @@ let secureHeaders = function (app, USE_HTTPS) {
  * @param {Express.app} app
  */
 let setupRoutes = function (app, config, logger) {
+	// Setup a static directory in case one is needed
+	if (config.server && config.server.publicDirectory) {
+		app.use(express.static(config.server.publicDirectory));
+	}
+
 	let routePaths = path.resolve(__dirname, '../..', appConfig.files.routes);
 	let routes = glob.sync(routePaths);
 	routes.forEach(route => require(route)(app, config, logger));
