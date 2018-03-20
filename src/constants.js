@@ -16,6 +16,25 @@ exports.DSTU2 = {
 	}
 };
 
+exports.STU3 = {
+	RESOURCE_TYPES: {
+		OPERATIONOUTCOME: 'OperationOutcome',
+		CONFORMANCE: 'CapabilityStatement',
+		OBSERVATION: 'Observation',
+		PATIENT: 'Patient'
+	},
+	STATUSES: {
+		DRAFT: 'draft',
+		ACTIVE: 'active',
+		RETIRED: 'retired'
+	},
+	MODE: {
+		CONFIDENTIAL: 'confidential',
+		PUBLIC: 'public'
+	}
+};
+
+
 exports.ISSUE = {
 	SEVERITY: {
 		FATAL: 'fatal',
