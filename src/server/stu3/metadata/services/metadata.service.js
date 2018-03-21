@@ -3,7 +3,7 @@ const glob = require('glob');
 const { VERSIONS } = require('../../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
-// Glob for discovering all dstu2 conformance statements
+// Glob for discovering all stu3 conformance statements
 const files = path.resolve(__dirname, '../../*/conformance.js');
 
 // Load all the conformance documents ahead of time
@@ -47,12 +47,12 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles.dstu2))
+		.map(mapResources(profiles.stu3))
 		.filter(filterResources);
 
 	// Create a context I can pass some data through
 	let context = {
-		version: VERSIONS.DSTU2
+		version: VERSIONS.STU3
 	};
 
 	// Iterate over the active_resources and execute getCount for each one.
@@ -62,7 +62,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		.then((results) => {
 
 			// Our server statment
-			const server = {mode: 'server'};
+			const server = { mode: 'server' };
 			// Generate the resources conformance statement and add these to the main Capability Statement
 			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
 
