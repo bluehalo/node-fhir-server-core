@@ -16,7 +16,7 @@ module.exports.makeStatement = resources => ({
 		version: '0.0.1'
 	},
 	implementation: {
-		description: 'FHIR Test Server (STU#)'
+		description: 'FHIR Test Server (STU3)'
 	},
 	fhirVersion: '3.0.1',
 	acceptUnknown: 'extensions',
