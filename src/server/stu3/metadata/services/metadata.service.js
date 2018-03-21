@@ -3,7 +3,7 @@ const glob = require('glob');
 const { VERSIONS } = require('../../../../constants');
 const { makeStatement, securityStatement } = require('../capability');
 
-// Glob for discovering all dstu2 conformance statements
+// Glob for discovering all stu3 conformance statements
 const files = path.resolve(__dirname, '../../*/conformance.js');
 
 // Load all the conformance documents ahead of time
