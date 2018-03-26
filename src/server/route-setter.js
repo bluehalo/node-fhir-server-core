@@ -64,7 +64,7 @@ const setter = (options = {}) => {
 				route.path,
 				cors(cors_options),
 				sanitizeMiddleware(route.args),
-				// validate(route.scopes, logger, config),
+				validate(route.scopes, logger, config),
 				route.controller({
 					profile: user_provided_profile,
 					logger,
