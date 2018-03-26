@@ -5,7 +5,7 @@
 module.exports.files = {
 	swaggerHelperDefinitions: 'src/server/*/definitions/*.json',
 	swaggerRootDefinitions: 'src/server/*/*.swagger.json',
-	routes: 'src/server/**/*.routes.js'
+	configs: 'src/server/**/*.config.js'
 };
 
 /**

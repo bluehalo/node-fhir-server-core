@@ -7,7 +7,7 @@ const errors = require('../../utils/error.utils');
  * @name exports
  * @summary Authorizes the request and return a signed code to be exchanged for a token.
  */
-module.exports.authorize = (profile, config, logger) => {
+module.exports.authorize = ({ profile, config, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

@@ -1,5 +1,5 @@
 const controller = require('./controllers/metadata.controller');
-
+const { VERSIONS } = require('../../../constants');
 
 let routes = [
 	{
@@ -19,5 +19,9 @@ let routes = [
  * @summary Metadata config
  */
 module.exports = {
+	routeOptions: {
+		version: VERSIONS.STU3,
+		required: true
+	},
 	routes
 };

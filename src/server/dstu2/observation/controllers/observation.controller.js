@@ -3,7 +3,7 @@ const { VERSIONS } = require('../../../../constants');
 const { Observation } = require('../../resources');
 
 
-module.exports.getObservations = (profile, logger, config) => {
+module.exports.getObservations = ({ profile, logger, config }) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
@@ -57,7 +57,7 @@ module.exports.getObservations = (profile, logger, config) => {
 };
 
 
-module.exports.getObservationById = (profile, logger) => {
+module.exports.getObservationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
