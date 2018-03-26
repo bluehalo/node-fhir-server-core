@@ -1,5 +1,4 @@
 const controller = require('./controllers/oauth.controller');
-const { CONFIG_KEYS } = require('../../constants');
 
 let routes = [
 	{
@@ -52,8 +51,5 @@ let routes = [
  * @summary OAUTH config
  */
 module.exports = {
-	routeOptions: {
-		profileKey: CONFIG_KEYS.OAUTH
-	},
 	routes
 };

@@ -33,7 +33,7 @@ const setter = (options = {}) => {
 
 	// Iterate over our config files and configure any valid routes
 	for (let i = 0; i < config_files.length; i++) {
-		let { routes, routeOptions } = config_files[i];
+		let { routes, routeOptions = {}} = config_files[i];
 		// If the route is required, it is probably a metadata route which should always be loaded.
 		// If the route has a profileKey, that means the consumer of node-fhir-server-core must
 		// opt in to the route for it to be loaded. If they provided configurations for that
