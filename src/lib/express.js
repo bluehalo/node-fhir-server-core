@@ -78,10 +78,6 @@ let setupRoutes = function (app, config, logger) {
 	}
 
 	routeSetter.setRoutes({ logger, config, app });
-
-	// let routePaths = path.resolve(__dirname, '../..', appConfig.files.routes);
-	// let routes = glob.sync(routePaths);
-	// routes.forEach(route => require(route)(app, config, logger));
 };
 
 /**
