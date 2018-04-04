@@ -72,11 +72,11 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		// is only accessing resources with his id, he is not allowed to access others
 		if (
 			req.patient
-			&& req.body
-			&& req.body.id
-			&& req.patient !== req.body.id
+			&& req.params
+			&& req.params.id
+			&& req.patient !== req.params.id
 		) {
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`));
 		}
 
 		return service.getPatientById(req, logger, context)
