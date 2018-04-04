@@ -46,6 +46,10 @@ const setter = (options = {}) => {
 			continue;
 		}
 
+		// The user can provider default cors options to be provided on all routes
+		// They can also configure route specific cors options as well as profile
+		// specific options. Here we are setting up the default + profile options.
+		// We will mix in the route specific ones later.
 		let default_cors_options = Object.assign(
 			{},
 			server.corsOptions,
@@ -61,10 +65,15 @@ const setter = (options = {}) => {
 			app.options(route.path, cors(cors_options));
 			// Setup the route with all the appropriate middleware
 			app[route.type](
-				route.path,
+				// Actual path for the route
+				path.join('/', route.base, route.path),
+				// Cors middleware
 				cors(cors_options),
+				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
+				// Authentication middleware
 				validate(route.scopes, logger, config),
+				// Finally our controller function
 				route.controller({
 					profile: user_provided_profile,
 					logger,
