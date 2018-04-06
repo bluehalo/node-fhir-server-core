@@ -1,4 +1,4 @@
-const controller = require('./controllers/observation.controller');
+const controller = require('./observation.controller');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 
 const scopes = [

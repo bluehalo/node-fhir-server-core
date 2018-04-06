@@ -1,6 +1,6 @@
-const errors = require('../../../utils/error.utils');
-const { VERSIONS } = require('../../../../constants');
-const { Observation } = require('../../resources');
+const { Observation } = require('../../resources/Observation');
+const { VERSIONS } = require('../../../constants');
+const errors = require('../../utils/error.utils');
 
 
 module.exports.getObservations = ({ profile, logger, config }) => {

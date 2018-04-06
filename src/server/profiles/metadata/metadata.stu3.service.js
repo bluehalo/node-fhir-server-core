@@ -1,10 +1,10 @@
 const path = require('path');
 const glob = require('glob');
-const { VERSIONS } = require('../../../../constants');
-const { makeStatement, securityStatement } = require('../capability');
+const { VERSIONS } = require('../../../constants');
+const { makeStatement, securityStatement } = require('./capability.stu3');
 
-// Glob for discovering all dstu2 conformance statements
-const files = path.resolve(__dirname, '../../*/conformance.js');
+// Glob for discovering all stu3 conformance statements
+const files = path.resolve(__dirname, '../*/conformance.js');
 
 // Load all the conformance documents ahead of time
 const RESOURCES = glob.sync(files)
@@ -17,7 +17,7 @@ const RESOURCES = glob.sync(files)
 
 // Find the associated getCount method for the resource, any resource that does not
 // have an associated getCount method will be filtered out later
-let mapResources = profiles => {
+let mapResources = (profiles = {}) => {
 	return ({ Profile, Resource }) => {
 		const profile_name = Object.keys(profiles).find(name => name === Profile);
 		return {
@@ -47,12 +47,12 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles.dstu2))
+		.map(mapResources(profiles.stu3))
 		.filter(filterResources);
 
 	// Create a context I can pass some data through
 	let context = {
-		version: VERSIONS.DSTU2
+		version: VERSIONS.STU3
 	};
 
 	// Iterate over the active_resources and execute getCount for each one.
