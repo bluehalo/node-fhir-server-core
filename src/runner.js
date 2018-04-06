@@ -28,18 +28,17 @@ const CONFIG = {
 			url: 'token',
 			valueUri: 'https://lit-lake-71789.herokuapp.com/token'
 		}
-		// optional - registration
 	],
 	profiles: {
 		patient: {
-			service: './src/server/dstu2/patient/service.mock.js',
+			service: './src/server/profiles/patient/patient.service.js',
 			versions: [VERSIONS.DSTU2, VERSIONS.STU3],
 			corsOptions: {
 				maxAge: 3600
 			}
 		},
 		observation: {
-			service: './src/server/dstu2/observation/service.mock.js',
+			service: './src/server/profiles/observation/observation.service.js',
 			versions: [VERSIONS.DSTU2],
 			corsOptions: {
 				maxAge: 3600

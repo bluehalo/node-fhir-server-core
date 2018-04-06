@@ -21,6 +21,7 @@ let mapResources = (profiles = {}) => {
 	return ({ Profile, Resource }) => {
 		const profile_name = Object.keys(profiles).find(name => name === Profile);
 		return {
+			versions: profiles[profile_name].versions,
 			makeResource: Resource,
 			getCount: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
@@ -31,7 +32,13 @@ let mapResources = (profiles = {}) => {
 
 // If we don't have a getCount method for the profile, then remove it because
 // each conformance statement MUST have a count
-let filterResources = (resource) => resource.makeResource && resource.getCount;
+let filterResources = (resource) => {
+	return (
+		resource.getCount
+		&& resource.makeResource
+		&& resource.versions.indexOf(VERSIONS.STU3) > -1
+	);
+};
 
 /**
  * @function generateCapabilityStatement
@@ -47,7 +54,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles.stu3))
+		.map(mapResources(profiles))
 		.filter(filterResources);
 
 	// Create a context I can pass some data through

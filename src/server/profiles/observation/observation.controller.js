@@ -1,17 +1,15 @@
 const { Observation } = require('../../resources/Observation');
-const { VERSIONS } = require('../../../constants');
 const errors = require('../../utils/error.utils');
 
 
 module.exports.getObservations = ({ profile, logger, config }) => {
 	let { serviceModule: service } = profile;
 
-	// Create a context I can pass some data through
-	let context = {
-		version: VERSIONS.DSTU2
-	};
-
 	return (req, res, next) => {
+		// Create a context I can pass some data through
+		let context = {
+			version: req.params.version
+		};
 
 		return service.getObservation(req, logger, context)
 			.then((observations) => {
@@ -60,13 +58,11 @@ module.exports.getObservations = ({ profile, logger, config }) => {
 module.exports.getObservationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
-	// Create a context I can pass some data through
-	let context = {
-		version: VERSIONS.DSTU2
-	};
-
 	return (req, res, next) => {
-		logger.info('Get observation by id');
+
+		let context = {
+			version: req.params.version
+		};
 
 		return service.getObservationById(req, logger, context)
 			.then((patientObservation) => {

@@ -1,5 +1,5 @@
 const controller = require('./patient.controller');
-const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
+const { CONFIG_KEYS } = require('../../../constants');
 
 const scopes = [
   'user/*.*',
@@ -15,12 +15,14 @@ const scopes = [
 let routes = [
 	{
 		type: 'get',
-		base: VERSIONS.DSTU2,
-		path: '/patient',
+		path: '/:version/patient',
 		corsOptions: {
 			methods: ['GET']
 		},
 		args: [{
+			name: 'version',
+			type: 'string'
+		}, {
 			name: 'name',
 			type: 'string'
 		}, {
@@ -41,12 +43,14 @@ let routes = [
 	},
 	{
 		type: 'post',
-		base: VERSIONS.DSTU2,
-		path: '/patient/_search',
+		path: '/:version/patient/_search',
 		corsOptions: {
 			methods: ['POST']
 		},
 		args: [{
+			name: 'version',
+			type: 'string'
+		}, {
 			name: 'name',
 			type: 'string'
 		}, {
@@ -67,12 +71,14 @@ let routes = [
 	},
 	{
 		type: 'get',
-		base: VERSIONS.DSTU2,
-		path: '/patient/:id',
+		path: '/:version/patient/:id',
 		corsOptions: {
 			methods: ['GET']
 		},
 		args: [{
+			name: 'version',
+			type: 'string'
+		}, {
 			name: 'id',
 			type: 'string',
 			required: true
@@ -92,8 +98,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT,
-		version: VERSIONS.DSTU2
+		profileKey: CONFIG_KEYS.PATIENT
 	},
 	routes,
 	codes

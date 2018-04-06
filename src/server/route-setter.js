@@ -58,17 +58,6 @@ const setter = (options = {}) => {
 	// Iterate over our config files and configure any valid routes
 	for (let i = 0; i < config_files.length; i++) {
 		let { routes, routeOptions = {}} = config_files[i];
-		// If the route is required, it is probably a metadata route which should always be loaded.
-		// If the route has a profileKey, that means the consumer of node-fhir-server-core must
-		// opt in to the route for it to be loaded. If they provided configurations for that
-		// profile, then let's load the route.
-		// let user_provided_profile = profiles[routeOptions.version]
-		// 	&& profiles[routeOptions.version][routeOptions.profileKey];
-
-		// Bail if not required and no user provided profile
-		// if (!routeOptions.required && !user_provided_profile) {
-		// 	continue;
-		// }
 
 		// The user can provider default cors options to be provided on all routes
 		let default_cors_options = Object.assign({}, server.corsOptions);
@@ -110,7 +99,7 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				// validate(route.scopes, logger, config),
+				validate(route.scopes, logger, config),
 				// Finally our controller function
 				route.controller({ profile, logger, config })
 			);
