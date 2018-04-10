@@ -1,0 +1,51 @@
+Main
+Event
+identifier	Σ	0..*	Identifier	Business Identifier for event
+
+definition	Σ	0..*	Reference(Definition)	Instantiates protocol or definition
+
+basedOn	Σ	0..*	Reference(Request)	Fulfills plan, proposal or order
+
+partOf	Σ	0..*	Reference(Event)	Part of referenced event
+
+status	?!Σ	1..1	code	preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
+EventStatus (Required)
+
+notDone	?!Σ	0..1	boolean	{{title}} did not occur
+
+notDoneReason	ΣI	0..1	CodeableConcept	Why {{title}} did not occur
+
+code	Σ	0..1	CodeableConcept	What was done
+
+subject	Σ	1..1	Reference(Patient | Group)	Individual service was done for/to
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter / Episode associated with event
+
+occurrence[x]	Σ	0..1		When event occurred
+
+occurrenceDateTime			dateTime
+
+occurrencePeriod			Period
+
+occurrenceTiming			Timing
+
+reasonCode	Σ	0..*	CodeableConcept	Why was event performed?
+
+reasonReference	Σ	0..*	Reference(Condition | Observation)	Why was event performed?
+
+note		0..*	Annotation	Comments made about the event
+
+performer	Σ	0..*	BackboneElement	Who performed event
+
+
+Backbone
+performer
+role	Σ	0..1	CodeableConcept	What type of performance was done
+Procedure Performer Role Codes (Example)
+
+actor	Σ	1..1	Reference(Practitioner | Organization | Patient | Device | RelatedPerson)	Individual who was performing
+
+onBehalfOf		0..1	Reference(Organization)	Organization organization was acting for
+
+
+eof

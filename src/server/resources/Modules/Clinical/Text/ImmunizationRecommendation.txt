@@ -1,0 +1,54 @@
+Main
+ImmunizationRecommendation
+identifier	Σ	0..*	Identifier	Business identifier
+
+patient	Σ	1..1	Reference(Patient)	Who this profile is for
+
+recommendation	ΣI	1..*	BackboneElement	Vaccine administration recommendations
++ One of vaccineCode or targetDisease SHALL be present
+
+
+Backbone
+recommendation
+date	Σ	1..1	dateTime	Date recommendation created
+
+vaccineCode	Σ	0..1	CodeableConcept	Vaccine recommendation applies to
+Vaccine Administered Value Set (Example)
+
+targetDisease	Σ	0..1	CodeableConcept	Disease to be immunized against
+Immunization Recommendation Target Disease Codes (Example)
+
+doseNumber	Σ	0..1	positiveInt	Recommended dose number
+
+forecastStatus	Σ	1..1	CodeableConcept	Vaccine administration status
+Immunization Recommendation Status Codes (Example)
+
+supportingImmunization		0..*	Reference(Immunization)	Past immunizations supporting recommendation
+
+supportingPatientInformation		0..*	Reference(Observation | AllergyIntolerance)	Patient observations supporting recommendation
+
+dateCriterion		0..*	BackboneElement	Dates governing proposed immunization
+
+protocol		0..1	BackboneElement	Protocol used by recommendation
+
+
+Backbone
+dateCriterion
+code		1..1	CodeableConcept	Type of date
+Immunization Recommendation Date Criterion Codes (Example)
+
+value		1..1	dateTime	Recommended date
+
+
+Backbone
+protocol
+doseSequence		0..1	positiveInt	Dose number within sequence
+
+description		0..1	string	Protocol details
+
+authority		0..1	Reference(Organization)	Who is responsible for protocol
+
+series		0..1	string	Name of vaccination series
+
+
+eof

@@ -1,0 +1,24 @@
+
+... identifier		0..*	Identifier	Business identifier
+... status	?!Σ	1..1	code	current | retired | entered-in-error
+ListStatus (Required)
+... mode	?!Σ	1..1	code	working | snapshot | changes
+ListMode (Required)
+... title	Σ	0..1	string	Descriptive name for the list
+... code	Σ	0..1	CodeableConcept	What the purpose of this list is
+Example Use Codes for List (Example)
+... subject	Σ	0..1	Reference(Patient | Group | Device | Location)	If all resources have the same subject
+... encounter		0..1	Reference(Encounter)	Context in which list created
+... date	Σ	0..1	dateTime	When the list was prepared
+... source	Σ	0..1	Reference(Practitioner | Patient | Device)	Who and/or what defined the list contents (aka Author)
+... orderedBy		0..1	CodeableConcept	What order the list has
+List Order Codes (Preferred)
+... note		0..*	Annotation	Comments about the list
+... entry	I	0..*	BackboneElement	Entries in the list
+.... flag		0..1	CodeableConcept	Status/Workflow information about this item
+Patient Medicine Change Types (Example)
+.... deleted	?!I	0..1	boolean	If this item is actually marked as deleted
+.... date		0..1	dateTime	When item added to list
+.... item		1..1	Reference(Any)	Actual entry
+... emptyReason	I	0..1	CodeableConcept	Why list is empty
+List Empty Reasons (Preferred)

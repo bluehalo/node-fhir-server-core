@@ -88,3 +88,23 @@ module.exports.getPatientById = ({ profile, logger }) => {
 			});
 	};
 };
+
+
+module.exports.getPatientByFriend = ({ profile, logger }) => {
+	let { serviceModule: service } = profile;
+	
+	return (req, res, next) => {
+		
+		// Create a context I can pass some data through
+		let context = {
+			version: req.params.version
+		};
+		
+		
+		return service.getPatientByFriend(req,  logger,  context)
+			.then()
+			.catch(err => next(errors.internal(err.message)))
+		
+	};
+	
+};

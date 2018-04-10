@@ -1,0 +1,54 @@
+Main
+Definition
+url	Σ	0..1	uri	Logical uri to reference this {{title}} (globally unique)
+
+identifier	Σ	0..1	Identifier	Business Identifier for {{title}}
+
+version	Σ	0..1	string	Business version of the {{title}}
+
+title	Σ	0..1	string	Name for this {{title}} (Human friendly)
+
+definition	Σ	0..*	Reference(Definition)	Instantiates protocol or definition
+
+partOf	Σ	0..*	Reference(Definition)	Part of referenced definition
+
+replaces	Σ	0..*	Reference(Definition)	Request(s) replaced by this request
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	If for testing purposes, not real usage
+
+subject[x]	Σ	0..1		Type of individual the defined service is for
+
+subjectCodeableConcept			CodeableConcept
+
+subjectReference			Reference(Group)
+
+date	Σ	0..1	dateTime	Date status first applied
+
+publisher	Σ	0..1	Reference(Practitioner | Organization)	The name of the individual or organization that published the {{title}}
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+useContext	Σ	0..*	UsageContext	Content intends to support these contexts
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for {{title}} (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+description		0..1	markdown	Natural language description of the {{title}}
+
+purpose		0..1	markdown	Why this {{title}} is defined
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+approvalDate		0..1	date	When {{title}} approved by publisher
+
+lastReviewDate		0..1	date	Last review date for the {{title}}
+
+effectivePeriod	Σ	0..1	Period	The effective date range for the {{title}}
+
+performerType	Σ	0..1	CodeableConcept	Desired kind of service performer
+
+
+eof

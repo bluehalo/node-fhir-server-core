@@ -1,0 +1,66 @@
+Main
+Medication
+code	Σ	0..1	CodeableConcept	Codes that identify this medication
+SNOMED CT Medication Codes (Example)
+
+status	Σ	0..1	code	active | inactive | entered-in-error
+MedicationStatus (Required)
+
+isBrand	Σ	0..1	boolean	True if a brand
+
+isOverTheCounter	Σ	0..1	boolean	True if medication does not require a prescription
+
+manufacturer	Σ	0..1	Reference(Organization)	Manufacturer of the item
+
+form		0..1	CodeableConcept	powder | tablets | capsule +
+SNOMED CT Form Codes (Example)
+
+ingredient		0..*	BackboneElement	Active or inactive ingredient
+
+package		0..1	BackboneElement	Details about packaged medications
+
+image		0..*	Attachment	Picture of the medication
+
+
+Backbone
+ingredient
+item[x]		1..1		The product contained
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Substance | Medication)
+
+isActive		0..1	boolean	Active ingredient indicator
+
+amount		0..1	Ratio	Quantity of ingredient present
+
+
+Backbone
+package
+container		0..1	CodeableConcept	E.g. box, vial, blister-pack
+MedicationContainer (Example)
+
+content		0..*	BackboneElement	What is in the package
+
+batch		0..*	BackboneElement	Identifies a single production run
+
+
+Backbone
+content
+item[x]		1..1		The item in the package
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Medication)
+
+amount		0..1	SimpleQuantity	Quantity present in the package
+
+
+Backbone
+batch
+lotNumber		0..1	string	Identifier assigned to batch
+
+expirationDate		0..1	dateTime	When batch will expire
+
+
+eof

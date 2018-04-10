@@ -1,0 +1,61 @@
+Main
+AdverseEvent
+identifier	Σ	0..1	Identifier	Business identifier for the event
+
+category	Σ	0..1	code	AE | PAE An adverse event is an event that caused harm to a patient, an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
+AdverseEventCategory (Required)
+
+type	Σ	0..1	CodeableConcept	actual | potential
+SNOMED CT Clinical Findings (Example)
+
+subject	Σ	0..1	Reference(Patient | ResearchSubject | Medication | Device)	Subject or group impacted by event
+
+date	Σ	0..1	dateTime	When the event occurred
+
+reaction	Σ	0..*	Reference(Condition)	Adverse Reaction Events linked to exposure to substance
+
+location	Σ	0..1	Reference(Location)	Location where adverse event occurred
+
+seriousness	Σ	0..1	CodeableConcept	Mild | Moderate | Severe
+AdverseEventSeriousness (Example)
+
+outcome	Σ	0..1	CodeableConcept	resolved | recovering | ongoing | resolvedWithSequelae | fatal | unknown
+AdverseEventOutcome (Required)
+
+recorder	Σ	0..1	Reference(Patient | Practitioner | RelatedPerson)	Who recorded the adverse event
+
+eventParticipant	Σ	0..1	Reference(Practitioner | Device)	Who was involved in the adverse event or the potential adverse event
+
+description	Σ	0..1	string	Description of the adverse event
+
+subjectMedicalHistory	Σ	0..*	Reference(Condition | Observation | AllergyIntolerance | FamilyMemberHistory | Immunization | Procedure)	AdverseEvent.subjectMedicalHistory
+
+referenceDocument	Σ	0..*	Reference(DocumentReference)	AdverseEvent.referenceDocument
+
+study	Σ	0..*	Reference(ResearchStudy)	AdverseEvent.study
+
+suspectEntity	Σ	0..*	BackboneElement	The suspected agent causing the adverse event
+
+
+Backbone
+suspectEntity
+instance	Σ	1..1	Reference(Substance | Medication | MedicationAdministration | MedicationStatement | Device)	Refers to the specific entity that caused the adverse event
+
+causality	Σ	0..1	code	causality1 | causality2
+AdverseEventCausality (Required)
+
+causalityAssessment	Σ	0..1	CodeableConcept	assess1 | assess2
+AdverseEventCausalityAssessment (Example)
+
+causalityProductRelatedness	Σ	0..1	string	AdverseEvent.suspectEntity.causalityProductRelatedness
+
+causalityMethod	Σ	0..1	CodeableConcept	method1 | method2
+AdverseEventCausalityMethod (Example)
+
+causalityAuthor	Σ	0..1	Reference(Practitioner | PractitionerRole)	AdverseEvent.suspectEntity.causalityAuthor
+
+causalityResult	Σ	0..1	CodeableConcept	result1 | result2
+AdverseEventCausalityResult (Example)
+
+
+eof

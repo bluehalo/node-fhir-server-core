@@ -1,0 +1,82 @@
+Main
+ProcedureRequest
+identifier	Σ	0..*	Identifier	Identifiers assigned to this order
+
+definition	Σ	0..*	Reference(ActivityDefinition | PlanDefinition)	Protocol or definition
+
+basedOn	Σ	0..*	Reference(Any)	What request fulfills
+
+replaces	Σ	0..*	Reference(Any)	What request replaces
+
+requisition	Σ	0..1	Identifier	Composite Request ID
+
+status	?!Σ	1..1	code	draft | active | suspended | completed | entered-in-error | cancelled
+RequestStatus (Required)
+
+intent	?!Σ	1..1	code	proposal | plan | order +
+RequestIntent (Required)
+
+priority	Σ	0..1	code	routine | urgent | asap | stat
+RequestPriority (Required)
+
+doNotPerform	?!Σ	0..1	boolean	True if procedure should not be performed
+
+category	Σ	0..*	CodeableConcept	Classification of procedure
+Procedure Category Codes (SNOMED CT) (Example)
+
+code	Σ	1..1	CodeableConcept	What is being requested/ordered
+Procedure Codes (SNOMED CT) (Example)
+
+subject	Σ	1..1	Reference(Patient | Group | Location | Device)	Individual the service is ordered for
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or Episode during which request was created
+
+occurrence[x]	Σ	0..1		When procedure should occur
+
+occurrenceDateTime			dateTime
+
+occurrencePeriod			Period
+
+occurrenceTiming			Timing
+
+asNeeded[x]	Σ	0..1		Preconditions for procedure or diagnostic
+SNOMED CT Medication As Needed Reason Codes (Example)
+
+asNeededBoolean			boolean
+
+asNeededCodeableConcept			CodeableConcept
+
+authoredOn	Σ	0..1	dateTime	Date request signed
+
+requester	Σ	0..1	BackboneElement	Who/what is requesting procedure or diagnostic
+
+performerType	Σ	0..1	CodeableConcept	Performer role
+Participant Roles (Example)
+
+performer	Σ	0..1	Reference(Practitioner | Organization | Patient | Device | RelatedPerson | HealthcareService)	Requested perfomer
+
+reasonCode	Σ	0..*	CodeableConcept	Explanation/Justification for test
+Procedure Reason Codes (Example)
+
+reasonReference	Σ	0..*	Reference(Condition | Observation)	Explanation/Justification for test
+
+supportingInfo		0..*	Reference(Any)	Additional clinical information
+
+specimen	Σ	0..*	Reference(Specimen)	Procedure Samples
+
+bodySite	Σ	0..*	CodeableConcept	Location on Body
+SNOMED CT Body Structures (Example)
+
+note		0..*	Annotation	Comments
+
+relevantHistory		0..*	Reference(Provenance)	Request provenance
+
+
+Backbone
+requester
+agent	Σ	1..1	Reference(Device | Practitioner | Organization)	Individual making the request
+
+onBehalfOf	Σ	0..1	Reference(Organization)	Organization agent is acting for
+
+
+eof

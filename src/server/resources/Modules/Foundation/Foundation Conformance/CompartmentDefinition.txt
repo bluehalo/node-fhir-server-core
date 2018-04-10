@@ -1,0 +1,23 @@
+
+... url	Σ	1..1	uri	Logical URI to reference this compartment definition (globally unique)
+... name	Σ	1..1	string	Name for this compartment definition (computer friendly)
+... title	Σ	0..1	string	Name for this compartment definition (human friendly)
+... status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+... experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+... date	Σ	0..1	dateTime	Date this was last changed
+... publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+... contact	Σ	0..*	ContactDetail	Contact details for the publisher
+... description		0..1	markdown	Natural language description of the compartment definition
+... purpose		0..1	markdown	Why this compartment definition is defined
+... useContext	Σ	0..*	UsageContext	Context the content is intended to support
+... jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for compartment definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+... code	Σ	1..1	code	Patient | Encounter | RelatedPerson | Practitioner | Device
+CompartmentType (Required)
+... search	Σ	1..1	boolean	Whether the search syntax is supported
+... resource	Σ	0..*	BackboneElement	How a resource is related to the compartment
+.... code	Σ	1..1	code	Name of resource type
+ResourceType (Required)
+.... param	Σ	0..*	string	Search Parameter Name, or chained parameters
+.... documentation		0..1	string	Additional documentation about the resource and compartment

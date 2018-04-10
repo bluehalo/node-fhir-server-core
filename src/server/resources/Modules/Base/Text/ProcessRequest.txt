@@ -1,0 +1,41 @@
+Main
+ProcessRequest
+identifier		0..*	Identifier	Business Identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+action		0..1	code	cancel | poll | reprocess | status
+ActionList (Required)
+
+target		0..1	Reference(Organization)	Party which is the target of the request
+
+created		0..1	dateTime	Creation date
+
+provider		0..1	Reference(Practitioner)	Responsible practitioner
+
+organization		0..1	Reference(Organization)	Responsible organization
+
+request		0..1	Reference(Any)	Reference to the Request resource
+
+response		0..1	Reference(Any)	Reference to the Response resource
+
+nullify		0..1	boolean	Remove history
+
+reference		0..1	string	Reference number/string
+
+include		0..*	string	Resource type(s) to include
+
+exclude		0..*	string	Resource type(s) to exclude
+
+period		0..1	Period	Selection period
+
+item		0..*	BackboneElement	Items to re-adjudicate
+
+
+Backbone
+item
+sequenceLinkId		1..1	integer	Service instance
+
+
+eof

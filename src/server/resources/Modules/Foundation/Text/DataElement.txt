@@ -1,0 +1,53 @@
+Main
+DataElement
+url	Σ	0..1	uri	Logical URI to reference this data element (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the data element
+
+version	Σ	0..1	string	Business version of the data element
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+name	Σ	0..1	string	Name for this data element (computer friendly)
+
+title	Σ	0..1	string	Name for this data element (human friendly)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for data element (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+stringency	Σ	0..1	code	comparable | fully-specified | equivalent | convertable | scaleable | flexible
+DataElementStringency (Required)
+
+element	ΣI	1..*	ElementDefinition	Definition of element
++ No base allowed
++ No slicing allowed
+
+mapping	I	0..*	BackboneElement	External specification mapped to
++ At least one of name or uri SHALL be present
+
+
+Backbone
+mapping
+identity		1..1	id	Internal id when this mapping is used
+
+uri		0..1	uri	Identifies what this mapping refers to
+
+name		0..1	string	Names what this mapping refers to
+
+comment		0..1	string	Versions, issues, scope limitations, etc.
+
+
+eof

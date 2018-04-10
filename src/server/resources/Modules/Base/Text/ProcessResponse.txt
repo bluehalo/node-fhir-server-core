@@ -1,0 +1,42 @@
+Main
+ProcessResponse
+identifier		0..*	Identifier	Business Identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+created		0..1	dateTime	Creation date
+
+organization		0..1	Reference(Organization)	Authoring Organization
+
+request		0..1	Reference(Any)	Request reference
+
+outcome		0..1	CodeableConcept	Processing outcome
+Process Outcome Codes (Example)
+
+disposition		0..1	string	Disposition Message
+
+requestProvider		0..1	Reference(Practitioner)	Responsible Practitioner
+
+requestOrganization		0..1	Reference(Organization)	Responsible organization
+
+form		0..1	CodeableConcept	Printed Form Identifier
+Form Codes (Example)
+
+error		0..*	CodeableConcept	Error code
+Adjudication Error Codes (Example)
+
+communicationRequest		0..*	Reference(CommunicationRequest)	Request for additional information
+
+processNote		0..*	BackboneElement	Processing comments or additional requirements
+
+
+Backbone
+processNote
+type		0..1	CodeableConcept	display | print | printoper
+NoteType (Required)
+
+text		0..1	string	Comment on the processing
+
+
+eof

@@ -1,0 +1,36 @@
+
+... url	Σ	0..1	uri	Logical URI to reference this message definition (globally unique)
+... identifier	Σ	0..1	Identifier	Additional identifier for the message definition
+... version	Σ	0..1	string	Business version of the message definition
+... name	Σ	0..1	string	Name for this message definition (computer friendly)
+... title	Σ	0..1	string	Name for this message definition (human friendly)
+... status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+... experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+... date	Σ	1..1	dateTime	Date this was last changed
+... publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+... contact	Σ	0..*	ContactDetail	Contact details for the publisher
+... description	Σ	0..1	markdown	Natural language description of the message definition
+... useContext	Σ	0..*	UsageContext	Context the content is intended to support
+... jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for message definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+... purpose	Σ	0..1	markdown	Why this message definition is defined
+... copyright		0..1	markdown	Use and/or publishing restrictions
+... base	Σ	0..1	Reference(MessageDefinition)	Definition this one is based on
+... parent	Σ	0..*	Reference(ActivityDefinition | PlanDefinition)	Protocol/workflow this is part of
+... replaces	Σ	0..*	Reference(MessageDefinition)	Takes the place of
+... event	Σ	1..1	Coding	Event type
+MessageEvent (Example)
+... category	Σ	0..1	code	Consequence | Currency | Notification
+MessageSignificanceCategory (Required)
+... focus	ΣI	0..*	BackboneElement	Resource(s) that are the subject of the event
++ Max must be postive int or *
+.... code	Σ	1..1	code	Type of resource
+ResourceType (Required)
+.... profile		0..1	Reference(StructureDefinition)	Profile that must be adhered to by focus
+.... min		0..1	unsignedInt	Minimum number of focuses of this type
+.... max	I	0..1	string	Maximum number of focuses of this type
+... responseRequired		0..1	boolean	Is a response required?
+... allowedResponse		0..*	BackboneElement	Responses to this message
+.... message		1..1	Reference(MessageDefinition)	Reference to allowed message definition response
+.... situation		0..1	markdown	When should this response be used

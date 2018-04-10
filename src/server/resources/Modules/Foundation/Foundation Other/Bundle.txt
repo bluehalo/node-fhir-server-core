@@ -1,0 +1,33 @@
+
+... identifier	Σ	0..1	Identifier	Persistent identifier for the bundle
+... type	Σ	1..1	code	document | message | transaction | transaction-response | batch | batch-response | history | searchset | collection
+BundleType (Required)
+... total	ΣI	0..1	unsignedInt	If search, the total number of matches
+... link	Σ	0..*	BackboneElement	Links related to this Bundle
+.... relation	Σ	1..1	string	See http://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1
+.... url	Σ	1..1	uri	Reference details for the link
+... entry	ΣI	0..*	BackboneElement	Entry in the bundle - will have a resource, or information
++ fullUrl cannot be a version specific reference
++ must be a resource unless there's a request or response
+.... link	Σ	0..*	see link	Links related to this entry
+.... fullUrl	Σ	0..1	uri	Absolute URL for resource (server address, or UUID/OID)
+.... resource	Σ	0..1	Resource	A resource in the bundle
+.... search	ΣI	0..1	BackboneElement	Search related information
+..... mode	Σ	0..1	code	match | include | outcome - why this is in the result set
+SearchEntryMode (Required)
+..... score	Σ	0..1	decimal	Search ranking (between 0 and 1)
+.... request	ΣI	0..1	BackboneElement	Transaction Related Information
+..... method	Σ	1..1	code	GET | POST | PUT | DELETE
+HTTPVerb (Required)
+..... url	Σ	1..1	uri	URL for HTTP equivalent of this entry
+..... ifNoneMatch	Σ	0..1	string	For managing cache currency
+..... ifModifiedSince	Σ	0..1	instant	For managing update contention
+..... ifMatch	Σ	0..1	string	For managing update contention
+..... ifNoneExist	Σ	0..1	string	For conditional creates
+.... response	ΣI	0..1	BackboneElement	Transaction Related Information
+..... status	Σ	1..1	string	Status response code (text optional)
+..... location	Σ	0..1	uri	The location, if the operation returns a location
+..... etag	Σ	0..1	string	The etag for the resource (if relevant)
+..... lastModified	Σ	0..1	instant	Server's date time modified
+..... outcome	Σ	0..1	Resource	OperationOutcome with hints and warnings (for batch/transaction)
+... signature	Σ	0..1	Signature	Digital Signature

@@ -1,0 +1,46 @@
+Main
+Account
+identifier	Σ	0..*	Identifier	Account number
+
+status	?!Σ	0..1	code	active | inactive | entered-in-error
+AccountStatus (Required)
+
+type	Σ	0..1	CodeableConcept	E.g. patient, expense, depreciation
+Account Types (Example)
+
+name	Σ	0..1	string	Human-readable label
+
+subject	Σ	0..1	Reference(Patient | Device | Practitioner | Location | HealthcareService | Organization)	What is account tied to?
+
+period	Σ	0..1	Period	Transaction window
+
+active	Σ	0..1	Period	Time window that transactions may be posted to this account
+
+balance		0..1	Money	How much is in account?
+
+owner	Σ	0..1	Reference(Organization)	Who is responsible?
+
+description	Σ	0..1	string	Explanation of purpose/use
+
+coverage	Σ	0..*	BackboneElement	The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account
+
+guarantor		0..*	BackboneElement	Responsible for the account
+
+
+Backbone
+coverage
+coverage	Σ	1..1	Reference(Coverage)	The party(s) that are responsible for covering the payment of this account
+
+priority	Σ	0..1	positiveInt	The priority of the coverage in the context of this account
+
+
+Backbone
+guarantor
+party		1..1	Reference(Patient | RelatedPerson | Organization)	Responsible entity
+
+onHold		0..1	boolean	Credit or other hold applied
+
+period		0..1	Period	Guarrantee account during
+
+
+eof

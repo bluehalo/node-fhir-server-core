@@ -1,0 +1,54 @@
+Main
+MedicationStatement
+identifier	Σ	0..*	Identifier	External identifier
+
+basedOn	Σ	0..*	Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)	Fulfils plan, proposal or order
+
+partOf	Σ	0..*	Reference(MedicationAdministration | MedicationDispense | MedicationStatement | Procedure | Observation)	Part of referenced event
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter / Episode associated with MedicationStatement
+
+status	?!Σ	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
+MedicationStatementStatus (Required)
+
+category	Σ	0..1	CodeableConcept	Type of medication usage
+MedicationStatementCategory (Preferred)
+
+medication[x]	Σ	1..1		What medication was taken
+SNOMED CT Medication Codes (Example)
+
+medicationCodeableConcept			CodeableConcept
+
+medicationReference			Reference(Medication)
+
+effective[x]	Σ	0..1		The date/time or interval when the medication was taken
+
+effectiveDateTime			dateTime
+
+effectivePeriod			Period
+
+dateAsserted	Σ	0..1	dateTime	When the statement was asserted?
+
+informationSource		0..1	Reference(Patient | Practitioner | RelatedPerson | Organization)	Person or organization that provided the information about the taking of this medication
+
+subject	Σ	1..1	Reference(Patient | Group)	Who is/was taking the medication
+
+derivedFrom		0..*	Reference(Any)	Additional supporting information
+
+taken	?!Σ	1..1	code	y | n | unk | na
+MedicationStatementTaken (Required)
+
+reasonNotTaken	I	0..*	CodeableConcept	True if asserting medication was not given
+SNOMED CT Drugs not taken/completed Codes (Example)
+
+reasonCode		0..*	CodeableConcept	Reason for why the medication is being/was taken
+Condition/Problem/Diagnosis Codes (Example)
+
+reasonReference		0..*	Reference(Condition | Observation)	Condition or observation that supports why the medication is being/was taken
+
+note		0..*	Annotation	Further information about the statement
+
+dosage		0..*	Dosage	Details of how medication is/was taken or should be taken
+
+
+eof

@@ -1,0 +1,88 @@
+Main
+FamilyMemberHistory
+identifier	Σ	0..*	Identifier	External Id(s) for this record
+
+definition	Σ	0..*	Reference(PlanDefinition | Questionnaire)	Instantiates protocol or definition
+
+status	?!Σ	1..1	code	partial | completed | entered-in-error | health-unknown
+FamilyHistoryStatus (Required)
+
+notDone	?!Σ	0..1	boolean	The taking of a family member's history did not occur
+
+notDoneReason	ΣI	0..1	CodeableConcept	subject-unknown | withheld | unable-to-obtain | deferred
+FamilyHistoryNotDoneReason (Example)
+
+patient	Σ	1..1	Reference(Patient)	Patient history is about
+
+date	Σ	0..1	dateTime	When history was captured/updated
+
+name	Σ	0..1	string	The family member described
+
+relationship	Σ	1..1	CodeableConcept	Relationship to the subject
+FamilyMember (Example)
+
+gender	Σ	0..1	code	male | female | other | unknown
+AdministrativeGender (Required)
+
+born[x]	I	0..1		(approximate) date of birth
+
+bornPeriod			Period
+
+bornDate			date
+
+bornString			string
+
+age[x]	ΣI	0..1		(approximate) age
+
+ageAge			Age
+
+ageRange			Range
+
+ageString			string
+
+estimatedAge	?!ΣI	0..1	boolean	Age is estimated?
+
+deceased[x]	Σ	0..1		Dead? How old/when?
+
+deceasedBoolean			boolean
+
+deceasedAge			Age
+
+deceasedRange			Range
+
+deceasedDate			date
+
+deceasedString			string
+
+reasonCode	Σ	0..*	CodeableConcept	Why was family member history performed?
+SNOMED CT Clinical Findings (Example)
+
+reasonReference	Σ	0..*	Reference(Condition | Observation | AllergyIntolerance | QuestionnaireResponse)	Why was family member history performed?
+
+note		0..*	Annotation	General note about related person
+
+condition		0..*	BackboneElement	Condition that the related person had
+
+
+Backbone
+condition
+code		1..1	CodeableConcept	Condition suffered by relation
+Condition/Problem/Diagnosis Codes (Example)
+
+outcome		0..1	CodeableConcept	deceased | permanent disability | etc.
+Condition Outcome Codes (Example)
+
+onset[x]		0..1		When condition first manifested
+
+onsetAge			Age
+
+onsetRange			Range
+
+onsetPeriod			Period
+
+onsetString			string
+
+note		0..*	Annotation	Extra information about condition
+
+
+eof

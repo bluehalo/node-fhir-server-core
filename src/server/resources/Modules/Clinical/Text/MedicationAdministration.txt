@@ -1,0 +1,87 @@
+Main
+MedicationAdministration
+identifier		0..*	Identifier	External identifier
+
+definition	Σ	0..*	Reference(PlanDefinition | ActivityDefinition)	Instantiates protocol or definition
+
+partOf	Σ	0..*	Reference(MedicationAdministration | Procedure)	Part of referenced event
+
+status	?!Σ	1..1	code	in-progress | on-hold | completed | entered-in-error | stopped | unknown
+MedicationAdministrationStatus (Required)
+
+category		0..1	CodeableConcept	Type of medication usage
+MedicationAdministrationCategory (Preferred)
+
+medication[x]	Σ	1..1		What was administered
+SNOMED CT Medication Codes (Example)
+
+medicationCodeableConcept			CodeableConcept
+
+medicationReference			Reference(Medication)
+
+subject	Σ	1..1	Reference(Patient | Group)	Who received medication
+
+context		0..1	Reference(Encounter | EpisodeOfCare)	Encounter or Episode of Care administered as part of
+
+supportingInformation		0..*	Reference(Any)	Additional information to support administration
+
+effective[x]	Σ	1..1		Start and end time of administration
+
+effectiveDateTime			dateTime
+
+effectivePeriod			Period
+
+notGiven	?!Σ	0..1	boolean	True if medication not administered
+
+reasonNotGiven	I	0..*	CodeableConcept	Reason administration not performed
+SNOMED CT Reason Medication Not Given Codes (Example)
+
+reasonCode	I	0..*	CodeableConcept	Reason administration performed
+Reason Medication Given Codes (Example)
+
+reasonReference		0..*	Reference(Condition | Observation)	Condition or Observation that supports why the medication was administered
+
+prescription		0..1	Reference(MedicationRequest)	Request administration performed against
+
+device		0..*	Reference(Device)	Device used to administer
+
+note		0..*	Annotation	Information about the administration
+
+eventHistory		0..*	Reference(Provenance)	A list of events of interest in the lifecycle
+
+dosage	I	0..1	BackboneElement	Details of how medication was taken
++ SHALL have at least one of dosage.dose or dosage.rate[x]
+
+performer	Σ	0..*	BackboneElement	Who administered substance
+
+
+Backbone
+dosage
+text		0..1	string	Free text dosage instructions e.g. SIG
+
+site		0..1	CodeableConcept	Body site administered to
+SNOMED CT Anatomical Structure for Administration Site Codes (Example)
+
+route		0..1	CodeableConcept	Path of substance into body
+SNOMED CT Route Codes (Example)
+
+method		0..1	CodeableConcept	How drug was administered
+SNOMED CT Administration Method Codes (Example)
+
+dose		0..1	SimpleQuantity	Amount of medication per dose
+
+rate[x]		0..1		Dose quantity per unit of time
+
+rateRatio			Ratio
+
+rateQuantity			SimpleQuantity
+
+
+Backbone
+performer
+actor	Σ	1..1	Reference(Practitioner | Patient | RelatedPerson | Device)	Individual who was performing
+
+onBehalfOf		0..1	Reference(Organization)	Organization organization was acting for
+
+
+eof
