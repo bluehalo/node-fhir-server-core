@@ -1,7 +1,11 @@
 const DomainResource = require('./types/DomainResource');
+const Meta = require('./types/Meta');
+const Code = require('./types/Code');
+const Narrative = require('./types/Narrative');
+const Resource = require('./types/Resource');
+const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
 const Reference = require('./types/Reference');
-const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Period = require('./types/Period');
 const Annotation = require('./types/Annotation');
@@ -11,8 +15,43 @@ class FocalDevice {
 		Object.assign(this, obj);
 	}
 
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// action		0..1	CodeableConcept	Kind of change to device
-	// Procedure Device Action Codes (Preferred)
+	// Binding: Procedure Device Action Codes (preferred)
 	set action(action) {
 		this._action = new CodeableConcept(action);
 	}
@@ -32,6 +71,9 @@ class FocalDevice {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			action: this._action,
 			manipulated: this._manipulated,
 		};
@@ -43,8 +85,43 @@ class Performer {
 		Object.assign(this, obj);
 	}
 
-	// role	Σ	0..1	CodeableConcept	The role the actor was in
-	// Procedure Performer Role Codes (Example)
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// role	Î£	0..1	CodeableConcept	The role the actor was in
+	// Binding: Procedure Performer Role Codes (example)
 	set role(role) {
 		this._role = new CodeableConcept(role);
 	}
@@ -53,7 +130,7 @@ class Performer {
 		return this._role;
 	}
 
-	// actor	Σ	1..1	Reference(Practitioner | Organization | Patient | RelatedPerson | Device)	The reference to the practitioner
+	// actor	Î£	1..1	Reference(Practitioner), Reference(Organization), Reference(Patient), Reference(RelatedPerson), Reference(Device)	The reference to the practitioner
 	set actor(actor) {
 		this._actor = new Reference(actor);
 	}
@@ -73,6 +150,9 @@ class Performer {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			role: this._role,
 			actor: this._actor,
 			onBehalfOf: this._onBehalfOf,
@@ -95,7 +175,92 @@ class Procedure extends DomainResource {
 		return this._resourceType;
 	}
 
-	// identifier	Σ	0..*	Identifier	External Identifiers for this procedure
+	// id	Î£	0..1	id	Logical id of this artifact
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// meta	Î£	0..1	Meta	Metadata about the resource
+	set meta(meta) {
+		this._meta = new Meta(meta);
+	}
+
+	get meta() {
+		return this._meta;
+	}
+
+	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+	set implicitRules(implicitRules) {
+		this._implicitRules = implicitRules;
+	}
+
+	get implicitRules() {
+		return this._implicitRules;
+	}
+
+	// language		0..1	code	Language of the resource content
+	// Binding: Common Languages (extensible)
+	set language(language) {
+		this._language = new Code(language);
+	}
+
+	get language() {
+		return this._language;
+	}
+
+	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+	set text(text) {
+		this._text = new Narrative(text);
+	}
+
+	get text() {
+		return this._text;
+	}
+
+	// contained		0..*	Resource	Contained, inline Resources
+	set contained(contained) {
+		if (Array.isArray(contained)) {
+			this._contained = contained.map((i) => new Resource(i));
+		} else {
+			this._contained = [new Resource(contained)];
+		}
+	}
+
+	get contained() {
+		return this._contained;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// identifier	Î£	0..*	Identifier	External Identifiers for this procedure
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -108,7 +273,7 @@ class Procedure extends DomainResource {
 		return this._identifier;
 	}
 
-	// definition	Σ	0..*	Reference(PlanDefinition | ActivityDefinition | HealthcareService)	Instantiates protocol or definition
+	// definition	Î£	0..*	Reference(PlanDefinition), Reference(ActivityDefinition), Reference(HealthcareService)	Instantiates protocol or definition
 	set definition(definition) {
 		if (Array.isArray(definition)) {
 			this._definition = definition.map((i) => new Reference(i));
@@ -121,7 +286,7 @@ class Procedure extends DomainResource {
 		return this._definition;
 	}
 
-	// basedOn	Σ	0..*	Reference(CarePlan | ProcedureRequest | ReferralRequest)	A request for this procedure
+	// basedOn	Î£	0..*	Reference(CarePlan), Reference(ProcedureRequest), Reference(ReferralRequest)	A request for this procedure
 	set basedOn(basedOn) {
 		if (Array.isArray(basedOn)) {
 			this._basedOn = basedOn.map((i) => new Reference(i));
@@ -134,7 +299,7 @@ class Procedure extends DomainResource {
 		return this._basedOn;
 	}
 
-	// partOf	Σ	0..*	Reference(Procedure | Observation | MedicationAdministration)	Part of referenced event
+	// partOf	Î£	0..*	Reference(Procedure), Reference(Observation), Reference(MedicationAdministration)	Part of referenced event
 	set partOf(partOf) {
 		if (Array.isArray(partOf)) {
 			this._partOf = partOf.map((i) => new Reference(i));
@@ -147,8 +312,8 @@ class Procedure extends DomainResource {
 		return this._partOf;
 	}
 
-	// status	?!Σ	1..1	code	preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
-	// EventStatus (Required)
+	// status	?!SÎ£	1..1	code	preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
+	// Binding: EventStatus (required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -157,7 +322,7 @@ class Procedure extends DomainResource {
 		return this._status;
 	}
 
-	// notDone	?!Σ	0..1	boolean	True if procedure was not performed as scheduled
+	// notDone	?!Î£	0..1	boolean	True if procedure was not performed as scheduled
 	set notDone(notDone) {
 		this._notDone = notDone;
 	}
@@ -166,8 +331,8 @@ class Procedure extends DomainResource {
 		return this._notDone;
 	}
 
-	// notDoneReason	ΣI	0..1	CodeableConcept	Reason procedure was not performed
-	// Procedure Not Performed Reason (SNOMED-CT) (Example)
+	// notDoneReason	Î£I	0..1	CodeableConcept	Reason procedure was not performed
+	// Binding: Procedure Not Performed Reason (SNOMED-CT) (example)
 	set notDoneReason(notDoneReason) {
 		this._notDoneReason = new CodeableConcept(notDoneReason);
 	}
@@ -176,8 +341,8 @@ class Procedure extends DomainResource {
 		return this._notDoneReason;
 	}
 
-	// category	Σ	0..1	CodeableConcept	Classification of the procedure
-	// Procedure Category Codes (SNOMED CT) (Example)
+	// category	Î£	0..1	CodeableConcept	Classification of the procedure
+	// Binding: Procedure Category Codes (SNOMED CT) (example)
 	set category(category) {
 		this._category = new CodeableConcept(category);
 	}
@@ -186,8 +351,8 @@ class Procedure extends DomainResource {
 		return this._category;
 	}
 
-	// code	Σ	0..1	CodeableConcept	Identification of the procedure
-	// Procedure Codes (SNOMED CT) (Example)
+	// code	SÎ£	1..1	CodeableConcept	SNOMED-CT | ICD-10 | CPT-4
+	// Binding: US Core Procedure Codes (extensible)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -196,7 +361,7 @@ class Procedure extends DomainResource {
 		return this._code;
 	}
 
-	// subject	Σ	1..1	Reference(Patient | Group)	Who the procedure was performed on
+	// subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who the procedure was performed on
 	set subject(subject) {
 		this._subject = new Reference(subject);
 	}
@@ -205,7 +370,7 @@ class Procedure extends DomainResource {
 		return this._subject;
 	}
 
-	// context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or episode associated with the procedure
+	// context	Î£	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Encounter or episode associated with the procedure
 	set context(context) {
 		this._context = new Reference(context);
 	}
@@ -233,7 +398,7 @@ class Procedure extends DomainResource {
 		return this._performedPeriod;
 	}
 
-	// performer	Σ	0..*	BackboneElement	The people who performed the procedure
+	// performer	Î£I	0..*	BackboneElement	The people who performed the procedure
 	set performer(performer) {
 		if (Array.isArray(performer)) {
 			this._performer = performer.map((i) => new Performer(i));
@@ -246,20 +411,7 @@ class Procedure extends DomainResource {
 		return this._performer;
 	}
 
-	// focalDevice		0..*	BackboneElement	Device changed in procedure
-	set focalDevice(focalDevice) {
-		if (Array.isArray(focalDevice)) {
-			this._focalDevice = focalDevice.map((i) => new FocalDevice(i));
-		} else {
-			this._focalDevice = [new FocalDevice(focalDevice)];
-		}
-	}
-
-	get focalDevice() {
-		return this._focalDevice;
-	}
-
-	// location	Σ	0..1	Reference(Location)	Where the procedure happened
+	// location	Î£	0..1	Reference(Location)	Where the procedure happened
 	set location(location) {
 		this._location = new Reference(location);
 	}
@@ -268,8 +420,8 @@ class Procedure extends DomainResource {
 		return this._location;
 	}
 
-	// reasonCode	Σ	0..*	CodeableConcept	Coded reason procedure performed
-	// Procedure Reason Codes (Example)
+	// reasonCode	Î£	0..*	CodeableConcept	Coded reason procedure performed
+	// Binding: Procedure Reason Codes (example)
 	set reasonCode(reasonCode) {
 		if (Array.isArray(reasonCode)) {
 			this._reasonCode = reasonCode.map((i) => new CodeableConcept(i));
@@ -282,7 +434,7 @@ class Procedure extends DomainResource {
 		return this._reasonCode;
 	}
 
-	// reasonReference	Σ	0..*	Reference(Condition | Observation)	Condition that is the reason the procedure performed
+	// reasonReference	Î£	0..*	Reference(Condition), Reference(Observation)	Condition that is the reason the procedure performed
 	set reasonReference(reasonReference) {
 		if (Array.isArray(reasonReference)) {
 			this._reasonReference = reasonReference.map((i) => new Reference(i));
@@ -295,8 +447,8 @@ class Procedure extends DomainResource {
 		return this._reasonReference;
 	}
 
-	// bodySite	Σ	0..*	CodeableConcept	Target body sites
-	// SNOMED CT Body Structures (Example)
+	// bodySite	Î£	0..*	CodeableConcept	Target body sites
+	// Binding: SNOMED CT Body Structures (example)
 	set bodySite(bodySite) {
 		if (Array.isArray(bodySite)) {
 			this._bodySite = bodySite.map((i) => new CodeableConcept(i));
@@ -309,8 +461,8 @@ class Procedure extends DomainResource {
 		return this._bodySite;
 	}
 
-	// outcome	Σ	0..1	CodeableConcept	The result of procedure
-	// Procedure Outcome Codes (SNOMED CT) (Example)
+	// outcome	Î£	0..1	CodeableConcept	The result of procedure
+	// Binding: Procedure Outcome Codes (SNOMED CT) (example)
 	set outcome(outcome) {
 		this._outcome = new CodeableConcept(outcome);
 	}
@@ -333,7 +485,7 @@ class Procedure extends DomainResource {
 	}
 
 	// complication		0..*	CodeableConcept	Complication following the procedure
-	// Condition/Problem/Diagnosis Codes (Example)
+	// Binding: Condition/Problem/Diagnosis Codes (example)
 	set complication(complication) {
 		if (Array.isArray(complication)) {
 			this._complication = complication.map((i) => new CodeableConcept(i));
@@ -360,7 +512,7 @@ class Procedure extends DomainResource {
 	}
 
 	// followUp		0..*	CodeableConcept	Instructions for follow up
-	// Procedure Follow up Codes (SNOMED CT) (Example)
+	// Binding: Procedure Follow up Codes (SNOMED CT) (example)
 	set followUp(followUp) {
 		if (Array.isArray(followUp)) {
 			this._followUp = followUp.map((i) => new CodeableConcept(i));
@@ -386,7 +538,20 @@ class Procedure extends DomainResource {
 		return this._note;
 	}
 
-	// usedReference		0..*	Reference(Device | Medication | Substance)	Items used during procedure
+	// focalDevice	I	0..*	BackboneElement	Device changed in procedure
+	set focalDevice(focalDevice) {
+		if (Array.isArray(focalDevice)) {
+			this._focalDevice = focalDevice.map((i) => new FocalDevice(i));
+		} else {
+			this._focalDevice = [new FocalDevice(focalDevice)];
+		}
+	}
+
+	get focalDevice() {
+		return this._focalDevice;
+	}
+
+	// usedReference		0..*	Reference(Device), Reference(Medication), Reference(Substance)	Items used during procedure
 	set usedReference(usedReference) {
 		if (Array.isArray(usedReference)) {
 			this._usedReference = usedReference.map((i) => new Reference(i));
@@ -400,7 +565,7 @@ class Procedure extends DomainResource {
 	}
 
 	// usedCode		0..*	CodeableConcept	Coded items used during the procedure
-	// FHIR Device Types (Example)
+	// Binding: FHIR Device Types (example)
 	set usedCode(usedCode) {
 		if (Array.isArray(usedCode)) {
 			this._usedCode = usedCode.map((i) => new CodeableConcept(i));
@@ -415,6 +580,14 @@ class Procedure extends DomainResource {
 
 	toJSON() {
 		const json = {
+			id: this._id,
+			meta: this._meta,
+			implicitRules: this._implicitRules,
+			language: this._language,
+			text: this._text,
+			contained: this._contained,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			definition: this._definition,
 			basedOn: this._basedOn,
@@ -429,7 +602,6 @@ class Procedure extends DomainResource {
 			performedDateTime: this._performedDateTime,
 			performedPeriod: this._performedPeriod,
 			performer: this._performer,
-			focalDevice: this._focalDevice,
 			location: this._location,
 			reasonCode: this._reasonCode,
 			reasonReference: this._reasonReference,
@@ -440,6 +612,7 @@ class Procedure extends DomainResource {
 			complicationDetail: this._complicationDetail,
 			followUp: this._followUp,
 			note: this._note,
+			focalDevice: this._focalDevice,
 			usedReference: this._usedReference,
 			usedCode: this._usedCode,
 		};

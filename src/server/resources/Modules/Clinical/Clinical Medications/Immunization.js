@@ -1,6 +1,10 @@
 const DomainResource = require('./types/DomainResource');
-const Identifier = require('./types/Identifier');
+const Meta = require('./types/Meta');
 const Code = require('./types/Code');
+const Narrative = require('./types/Narrative');
+const Resource = require('./types/Resource');
+const Extension = require('./types/Extension');
+const Identifier = require('./types/Identifier');
 const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
 const Annotation = require('./types/Annotation');
@@ -8,6 +12,41 @@ const Annotation = require('./types/Annotation');
 class VaccinationProtocol {
 	constructor(obj) {
 		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
 	}
 
 	// doseSequence		0..1	positiveInt	Dose number within series
@@ -56,7 +95,7 @@ class VaccinationProtocol {
 	}
 
 	// targetDisease		1..*	CodeableConcept	Disease immunized against
-	// Vaccination Protocol Dose Target Codes (Example)
+	// Binding: Vaccination Protocol Dose Target Codes (example)
 	set targetDisease(targetDisease) {
 		if (Array.isArray(targetDisease)) {
 			this._targetDisease = targetDisease.map((i) => new CodeableConcept(i));
@@ -70,7 +109,7 @@ class VaccinationProtocol {
 	}
 
 	// doseStatus		1..1	CodeableConcept	Indicates if dose counts towards immunity
-	// Vaccination Protocol Dose Status codes (Example)
+	// Binding: Vaccination Protocol Dose Status codes (example)
 	set doseStatus(doseStatus) {
 		this._doseStatus = new CodeableConcept(doseStatus);
 	}
@@ -80,7 +119,7 @@ class VaccinationProtocol {
 	}
 
 	// doseStatusReason		0..1	CodeableConcept	Why dose does (not) count
-	// Vaccination Protocol Dose Status Reason codes (Example)
+	// Binding: Vaccination Protocol Dose Status Reason codes (example)
 	set doseStatusReason(doseStatusReason) {
 		this._doseStatusReason = new CodeableConcept(doseStatusReason);
 	}
@@ -91,6 +130,9 @@ class VaccinationProtocol {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			doseSequence: this._doseSequence,
 			description: this._description,
 			authority: this._authority,
@@ -106,6 +148,41 @@ class VaccinationProtocol {
 class Reaction {
 	constructor(obj) {
 		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
 	}
 
 	// date		0..1	dateTime	When reaction started
@@ -137,6 +214,9 @@ class Reaction {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			date: this._date,
 			detail: this._detail,
 			reported: this._reported,
@@ -149,8 +229,43 @@ class Explanation {
 		Object.assign(this, obj);
 	}
 
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// reason		0..*	CodeableConcept	Why immunization occurred
-	// Immunization Reason Codes (Example)
+	// Binding: Immunization Reason Codes (example)
 	set reason(reason) {
 		if (Array.isArray(reason)) {
 			this._reason = reason.map((i) => new CodeableConcept(i));
@@ -164,7 +279,7 @@ class Explanation {
 	}
 
 	// reasonNotGiven		0..*	CodeableConcept	Why immunization did not occur
-	// Immunization Reasons for Not Immunizing Codes (Example)
+	// Binding: Immunization Reasons for Not Immunizing Codes (example)
 	set reasonNotGiven(reasonNotGiven) {
 		if (Array.isArray(reasonNotGiven)) {
 			this._reasonNotGiven = reasonNotGiven.map((i) => new CodeableConcept(i));
@@ -179,40 +294,11 @@ class Explanation {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			reason: this._reason,
 			reasonNotGiven: this._reasonNotGiven,
-		};
-	}
-}
-
-class Practitioner {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// role	Σ	0..1	CodeableConcept	What type of performance was done
-	// Immunization Role Codes (Extensible)
-	set role(role) {
-		this._role = new CodeableConcept(role);
-	}
-
-	get role() {
-		return this._role;
-	}
-
-	// actor	Σ	1..1	Reference(Practitioner)	Individual who was performing
-	set actor(actor) {
-		this._actor = new Reference(actor);
-	}
-
-	get actor() {
-		return this._actor;
-	}
-
-	toJSON() {
-		return {
-			role: this._role,
-			actor: this._actor,
 		};
 	}
 }
@@ -232,6 +318,91 @@ class Immunization extends DomainResource {
 		return this._resourceType;
 	}
 
+	// id	*	0..1	id	Logical id of this artifact
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// meta	*	0..1	Meta	Metadata about the resource
+	set meta(meta) {
+		this._meta = new Meta(meta);
+	}
+
+	get meta() {
+		return this._meta;
+	}
+
+	// implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+	set implicitRules(implicitRules) {
+		this._implicitRules = implicitRules;
+	}
+
+	get implicitRules() {
+		return this._implicitRules;
+	}
+
+	// language		0..1	code	Language of the resource content
+	// Binding: Common Languages (extensible)
+	set language(language) {
+		this._language = new Code(language);
+	}
+
+	get language() {
+		return this._language;
+	}
+
+	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+	set text(text) {
+		this._text = new Narrative(text);
+	}
+
+	get text() {
+		return this._text;
+	}
+
+	// contained		0..*	Resource	Contained, inline Resources
+	set contained(contained) {
+		if (Array.isArray(contained)) {
+			this._contained = contained.map((i) => new Resource(i));
+		} else {
+			this._contained = [new Resource(contained)];
+		}
+	}
+
+	get contained() {
+		return this._contained;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// identifier		0..*	Identifier	Business identifier
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
@@ -245,8 +416,8 @@ class Immunization extends DomainResource {
 		return this._identifier;
 	}
 
-	// status	?!Σ	1..1	code	completed | entered-in-error
-	// Immunization Status Codes (Required)
+	// status	?!S	1..1	code	completed | entered-in-error
+	// Binding: Immunization Status (required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -255,17 +426,17 @@ class Immunization extends DomainResource {
 		return this._status;
 	}
 
-	// notGiven	?!Σ	1..1	boolean	Flag for whether immunization was given
-	set notGiven(notGiven) {
-		this._notGiven = notGiven;
+	// date	S	1..1	dateTime	Vaccination administration date
+	set date(date) {
+		this._date = date;
 	}
 
-	get notGiven() {
-		return this._notGiven;
+	get date() {
+		return this._date;
 	}
 
-	// vaccineCode		1..1	CodeableConcept	Vaccine product administered
-	// Vaccine Administered Value Set (Example)
+	// vaccineCode	S	1..1	CodeableConcept	Vaccine Product Type (bind to CVX)
+	// Binding: Vaccine Administered Value Set (example)
 	set vaccineCode(vaccineCode) {
 		this._vaccineCode = new CodeableConcept(vaccineCode);
 	}
@@ -274,13 +445,59 @@ class Immunization extends DomainResource {
 		return this._vaccineCode;
 	}
 
-	// patient		1..1	Reference(Patient)	Who was immunized
+	// patient	S	1..1	Reference(US Core Patient Profile)	Who was immunized
 	set patient(patient) {
 		this._patient = new Reference(patient);
 	}
 
 	get patient() {
 		return this._patient;
+	}
+
+	// wasNotGiven	?!S	1..1	boolean	Flag for whether immunization was given
+	set wasNotGiven(wasNotGiven) {
+		this._wasNotGiven = wasNotGiven;
+	}
+
+	get wasNotGiven() {
+		return this._wasNotGiven;
+	}
+
+	// primarySource	S	1..1	boolean	Indicates context the data was recorded in
+	set primarySource(primarySource) {
+		this._primarySource = primarySource;
+	}
+
+	get primarySource() {
+		return this._primarySource;
+	}
+
+	// reportOrigin		0..1	CodeableConcept	Indicates the source of a secondarily reported record
+	// Binding: ImmunizationOrigin (example)
+	set reportOrigin(reportOrigin) {
+		this._reportOrigin = new CodeableConcept(reportOrigin);
+	}
+
+	get reportOrigin() {
+		return this._reportOrigin;
+	}
+
+	// performer		0..1	Reference(Practitioner)	Who administered vaccine
+	set performer(performer) {
+		this._performer = new Reference(performer);
+	}
+
+	get performer() {
+		return this._performer;
+	}
+
+	// requester		0..1	Reference(Practitioner)	Who ordered vaccination
+	set requester(requester) {
+		this._requester = new Reference(requester);
+	}
+
+	get requester() {
+		return this._requester;
 	}
 
 	// encounter		0..1	Reference(Encounter)	Encounter administered as part of
@@ -292,32 +509,13 @@ class Immunization extends DomainResource {
 		return this._encounter;
 	}
 
-	// date		0..1	dateTime	Vaccination administration date
-	set date(date) {
-		this._date = date;
+	// manufacturer		0..1	Reference(Organization)	Vaccine manufacturer
+	set manufacturer(manufacturer) {
+		this._manufacturer = new Reference(manufacturer);
 	}
 
-	get date() {
-		return this._date;
-	}
-
-	// primarySource		1..1	boolean	Indicates context the data was recorded in
-	set primarySource(primarySource) {
-		this._primarySource = primarySource;
-	}
-
-	get primarySource() {
-		return this._primarySource;
-	}
-
-	// reportOrigin		0..1	CodeableConcept	Indicates the source of a secondarily reported record
-	// Immunization Origin Codes (Example)
-	set reportOrigin(reportOrigin) {
-		this._reportOrigin = new CodeableConcept(reportOrigin);
-	}
-
-	get reportOrigin() {
-		return this._reportOrigin;
+	get manufacturer() {
+		return this._manufacturer;
 	}
 
 	// location		0..1	Reference(Location)	Where vaccination occurred
@@ -327,15 +525,6 @@ class Immunization extends DomainResource {
 
 	get location() {
 		return this._location;
-	}
-
-	// manufacturer		0..1	Reference(Organization)	Vaccine manufacturer
-	set manufacturer(manufacturer) {
-		this._manufacturer = new Reference(manufacturer);
-	}
-
-	get manufacturer() {
-		return this._manufacturer;
 	}
 
 	// lotNumber		0..1	string	Vaccine lot number
@@ -357,7 +546,7 @@ class Immunization extends DomainResource {
 	}
 
 	// site		0..1	CodeableConcept	Body site vaccine was administered
-	// Codes for Immunization Site of Administration (Example)
+	// Binding: Codes for Immunization Site of Administration (example)
 	set site(site) {
 		this._site = new CodeableConcept(site);
 	}
@@ -367,7 +556,7 @@ class Immunization extends DomainResource {
 	}
 
 	// route		0..1	CodeableConcept	How vaccine entered body
-	// Immunization Route Codes (Example)
+	// Binding: Immunization Route Codes (example)
 	set route(route) {
 		this._route = new CodeableConcept(route);
 	}
@@ -385,7 +574,7 @@ class Immunization extends DomainResource {
 		return this._doseQuantity;
 	}
 
-	// note	Σ	0..*	Annotation	Vaccination notes
+	// note	*	0..*	Annotation	Vaccination notes
 	set note(note) {
 		if (Array.isArray(note)) {
 			this._note = note.map((i) => new Annotation(i));
@@ -398,20 +587,7 @@ class Immunization extends DomainResource {
 		return this._note;
 	}
 
-	// practitioner	Σ	0..*	BackboneElement	Who performed event
-	set practitioner(practitioner) {
-		if (Array.isArray(practitioner)) {
-			this._practitioner = practitioner.map((i) => new Practitioner(i));
-		} else {
-			this._practitioner = [new Practitioner(practitioner)];
-		}
-	}
-
-	get practitioner() {
-		return this._practitioner;
-	}
-
-	// explanation		0..1	BackboneElement	Administration/non-administration reasons
+	// explanation	I	0..1	BackboneElement	Administration/non-administration reasons
 	set explanation(explanation) {
 		this._explanation = new Explanation(explanation);
 	}
@@ -420,7 +596,7 @@ class Immunization extends DomainResource {
 		return this._explanation;
 	}
 
-	// reaction		0..*	BackboneElement	Details of a reaction that follows immunization
+	// reaction	I	0..*	BackboneElement	Details of a reaction that follows immunization
 	set reaction(reaction) {
 		if (Array.isArray(reaction)) {
 			this._reaction = reaction.map((i) => new Reaction(i));
@@ -433,7 +609,7 @@ class Immunization extends DomainResource {
 		return this._reaction;
 	}
 
-	// vaccinationProtocol		0..*	BackboneElement	What protocol was followed
+	// vaccinationProtocol	I	0..*	BackboneElement	What protocol was followed
 	set vaccinationProtocol(vaccinationProtocol) {
 		if (Array.isArray(vaccinationProtocol)) {
 			this._vaccinationProtocol = vaccinationProtocol.map((i) => new VaccinationProtocol(i));
@@ -448,24 +624,33 @@ class Immunization extends DomainResource {
 
 	toJSON() {
 		const json = {
+			id: this._id,
+			meta: this._meta,
+			implicitRules: this._implicitRules,
+			language: this._language,
+			text: this._text,
+			contained: this._contained,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			status: this._status,
-			notGiven: this._notGiven,
+			date: this._date,
 			vaccineCode: this._vaccineCode,
 			patient: this._patient,
-			encounter: this._encounter,
-			date: this._date,
+			wasNotGiven: this._wasNotGiven,
 			primarySource: this._primarySource,
 			reportOrigin: this._reportOrigin,
-			location: this._location,
+			performer: this._performer,
+			requester: this._requester,
+			encounter: this._encounter,
 			manufacturer: this._manufacturer,
+			location: this._location,
 			lotNumber: this._lotNumber,
 			expirationDate: this._expirationDate,
 			site: this._site,
 			route: this._route,
 			doseQuantity: this._doseQuantity,
 			note: this._note,
-			practitioner: this._practitioner,
 			explanation: this._explanation,
 			reaction: this._reaction,
 			vaccinationProtocol: this._vaccinationProtocol,
@@ -476,7 +661,6 @@ class Immunization extends DomainResource {
 }
 
 module.exports.Immunization = Immunization;
-module.exports.Practitioner = Practitioner;
 module.exports.Explanation = Explanation;
 module.exports.Reaction = Reaction;
 module.exports.VaccinationProtocol = VaccinationProtocol;

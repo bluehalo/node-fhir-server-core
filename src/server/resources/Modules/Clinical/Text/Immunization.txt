@@ -1,72 +1,95 @@
 Main
 Immunization
+id	*	0..1	id	Logical id of this artifact
+
+meta	*	0..1	Meta	Metadata about the resource
+
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
 identifier		0..*	Identifier	Business identifier
 
-status	?!Σ	1..1	code	completed | entered-in-error
-Immunization Status Codes (Required)
+status	?!S	1..1	code	completed | entered-in-error
+Binding: Immunization Status (required)
 
-notGiven	?!Σ	1..1	boolean	Flag for whether immunization was given
+date	S	1..1	dateTime	Vaccination administration date
 
-vaccineCode		1..1	CodeableConcept	Vaccine product administered
-Vaccine Administered Value Set (Example)
+vaccineCode	S	1..1	CodeableConcept	Vaccine Product Type (bind to CVX)
+Binding: Vaccine Administered Value Set (example)
 
-patient		1..1	Reference(Patient)	Who was immunized
+patient	S	1..1	Reference(US Core Patient Profile)	Who was immunized
+
+wasNotGiven	?!S	1..1	boolean	Flag for whether immunization was given
+
+primarySource	S	1..1	boolean	Indicates context the data was recorded in
+
+reportOrigin		0..1	CodeableConcept	Indicates the source of a secondarily reported record
+Binding: ImmunizationOrigin (example)
+
+performer		0..1	Reference(Practitioner)	Who administered vaccine
+
+requester		0..1	Reference(Practitioner)	Who ordered vaccination
 
 encounter		0..1	Reference(Encounter)	Encounter administered as part of
 
-date		0..1	dateTime	Vaccination administration date
-
-primarySource		1..1	boolean	Indicates context the data was recorded in
-
-reportOrigin		0..1	CodeableConcept	Indicates the source of a secondarily reported record
-Immunization Origin Codes (Example)
+manufacturer		0..1	Reference(Organization)	Vaccine manufacturer
 
 location		0..1	Reference(Location)	Where vaccination occurred
-
-manufacturer		0..1	Reference(Organization)	Vaccine manufacturer
 
 lotNumber		0..1	string	Vaccine lot number
 
 expirationDate		0..1	date	Vaccine expiration date
 
 site		0..1	CodeableConcept	Body site vaccine was administered
-Codes for Immunization Site of Administration (Example)
+Binding: Codes for Immunization Site of Administration (example)
 
 route		0..1	CodeableConcept	How vaccine entered body
-Immunization Route Codes (Example)
+Binding: Immunization Route Codes (example)
 
 doseQuantity		0..1	SimpleQuantity	Amount of vaccine administered
 
-note	Σ	0..*	Annotation	Vaccination notes
+note	*	0..*	Annotation	Vaccination notes
 
-practitioner	Σ	0..*	BackboneElement	Who performed event
+explanation	I	0..1	BackboneElement	Administration/non-administration reasons
 
-explanation		0..1	BackboneElement	Administration/non-administration reasons
+reaction	I	0..*	BackboneElement	Details of a reaction that follows immunization
 
-reaction		0..*	BackboneElement	Details of a reaction that follows immunization
-
-vaccinationProtocol		0..*	BackboneElement	What protocol was followed
-
-
-Backbone
-practitioner
-role	Σ	0..1	CodeableConcept	What type of performance was done
-Immunization Role Codes (Extensible)
-
-actor	Σ	1..1	Reference(Practitioner)	Individual who was performing
+vaccinationProtocol	I	0..*	BackboneElement	What protocol was followed
 
 
 Backbone
 explanation
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 reason		0..*	CodeableConcept	Why immunization occurred
-Immunization Reason Codes (Example)
+Binding: Immunization Reason Codes (example)
 
 reasonNotGiven		0..*	CodeableConcept	Why immunization did not occur
-Immunization Reasons for Not Immunizing Codes (Example)
+Binding: Immunization Reasons for Not Immunizing Codes (example)
 
 
 Backbone
 reaction
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 date		0..1	dateTime	When reaction started
 
 detail		0..1	Reference(Observation)	Additional information on reaction
@@ -76,6 +99,12 @@ reported		0..1	boolean	Indicates self-reported reaction
 
 Backbone
 vaccinationProtocol
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 doseSequence		0..1	positiveInt	Dose number within series
 
 description		0..1	string	Details of vaccine protocol
@@ -87,13 +116,13 @@ series		0..1	string	Name of vaccine series
 seriesDoses		0..1	positiveInt	Recommended number of doses for immunity
 
 targetDisease		1..*	CodeableConcept	Disease immunized against
-Vaccination Protocol Dose Target Codes (Example)
+Binding: Vaccination Protocol Dose Target Codes (example)
 
 doseStatus		1..1	CodeableConcept	Indicates if dose counts towards immunity
-Vaccination Protocol Dose Status codes (Example)
+Binding: Vaccination Protocol Dose Status codes (example)
 
 doseStatusReason		0..1	CodeableConcept	Why dose does (not) count
-Vaccination Protocol Dose Status Reason codes (Example)
+Binding: Vaccination Protocol Dose Status Reason codes (example)
 
 
 eof

@@ -12,7 +12,6 @@ const scopes = [
   'patient/*.read'
 ];
 
-
 let routes = [
   {
     type: 'get',

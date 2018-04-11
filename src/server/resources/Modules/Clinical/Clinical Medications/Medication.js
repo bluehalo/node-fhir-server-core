@@ -1,44 +1,51 @@
 const DomainResource = require('./types/DomainResource');
-const CodeableConcept = require('./types/CodeableConcept');
+const Meta = require('./types/Meta');
 const Code = require('./types/Code');
+const Narrative = require('./types/Narrative');
+const Resource = require('./types/Resource');
+const Extension = require('./types/Extension');
+const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
-const Attachment = require('./types/Attachment');
 const Ratio = require('./types/Ratio');
-
-class Batch {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// lotNumber		0..1	string	Identifier assigned to batch
-	set lotNumber(lotNumber) {
-		this._lotNumber = lotNumber;
-	}
-
-	get lotNumber() {
-		return this._lotNumber;
-	}
-
-	// expirationDate		0..1	dateTime	When batch will expire
-	set expirationDate(expirationDate) {
-		this._expirationDate = expirationDate;
-	}
-
-	get expirationDate() {
-		return this._expirationDate;
-	}
-
-	toJSON() {
-		return {
-			lotNumber: this._lotNumber,
-			expirationDate: this._expirationDate,
-		};
-	}
-}
 
 class Content {
 	constructor(obj) {
 		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
 	}
 
 	// item[x]		1..1		The item in the package
@@ -71,6 +78,9 @@ class Content {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			itemCodeableConcept: this._itemCodeableConcept,
 			itemReference: this._itemReference,
 			amount: this._amount,
@@ -83,8 +93,43 @@ class MedicationPackage {
 		Object.assign(this, obj);
 	}
 
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// container		0..1	CodeableConcept	E.g. box, vial, blister-pack
-	// MedicationContainer (Example)
+	// Binding: SNOMED CT Form Codes (example)
 	set container(container) {
 		this._container = new CodeableConcept(container);
 	}
@@ -93,7 +138,7 @@ class MedicationPackage {
 		return this._container;
 	}
 
-	// content		0..*	BackboneElement	What is in the package
+	// content	I	0..*	BackboneElement	What is in the package
 	set content(content) {
 		if (Array.isArray(content)) {
 			this._content = content.map((i) => new Content(i));
@@ -106,24 +151,82 @@ class MedicationPackage {
 		return this._content;
 	}
 
-	// batch		0..*	BackboneElement	Identifies a single production run
-	set batch(batch) {
-		if (Array.isArray(batch)) {
-			this._batch = batch.map((i) => new Batch(i));
+	toJSON() {
+		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
+			container: this._container,
+			content: this._content,
+		};
+	}
+}
+
+class Batch {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
 		} else {
-			this._batch = [new Batch(batch)];
+			this._extension = [new Extension(extension)];
 		}
 	}
 
-	get batch() {
-		return this._batch;
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// lotNumber		0..1	string	Identifier assigned to batch
+	set lotNumber(lotNumber) {
+		this._lotNumber = lotNumber;
+	}
+
+	get lotNumber() {
+		return this._lotNumber;
+	}
+
+	// expirationDate		0..1	dateTime	When batch will expire
+	set expirationDate(expirationDate) {
+		this._expirationDate = expirationDate;
+	}
+
+	get expirationDate() {
+		return this._expirationDate;
 	}
 
 	toJSON() {
 		return {
-			container: this._container,
-			content: this._content,
-			batch: this._batch,
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
+			lotNumber: this._lotNumber,
+			expirationDate: this._expirationDate,
 		};
 	}
 }
@@ -131,6 +234,41 @@ class MedicationPackage {
 class Ingredient {
 	constructor(obj) {
 		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
 	}
 
 	// item[x]		1..1		The product contained
@@ -152,15 +290,6 @@ class Ingredient {
 		return this._itemReference;
 	}
 
-	// isActive		0..1	boolean	Active ingredient indicator
-	set isActive(isActive) {
-		this._isActive = isActive;
-	}
-
-	get isActive() {
-		return this._isActive;
-	}
-
 	// amount		0..1	Ratio	Quantity of ingredient present
 	set amount(amount) {
 		this._amount = new Ratio(amount);
@@ -172,10 +301,100 @@ class Ingredient {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			itemCodeableConcept: this._itemCodeableConcept,
 			itemReference: this._itemReference,
-			isActive: this._isActive,
 			amount: this._amount,
+		};
+	}
+}
+
+class Product {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// form		0..1	CodeableConcept	powder | tablets | capsule +
+	// Binding: SNOMED CT Form Codes (example)
+	set form(form) {
+		this._form = new CodeableConcept(form);
+	}
+
+	get form() {
+		return this._form;
+	}
+
+	// ingredient	I	0..*	BackboneElement	Active or inactive ingredient
+	set ingredient(ingredient) {
+		if (Array.isArray(ingredient)) {
+			this._ingredient = ingredient.map((i) => new Ingredient(i));
+		} else {
+			this._ingredient = [new Ingredient(ingredient)];
+		}
+	}
+
+	get ingredient() {
+		return this._ingredient;
+	}
+
+	// batch	I	0..*	BackboneElement	Identifies a single production run
+	set batch(batch) {
+		if (Array.isArray(batch)) {
+			this._batch = batch.map((i) => new Batch(i));
+		} else {
+			this._batch = [new Batch(batch)];
+		}
+	}
+
+	get batch() {
+		return this._batch;
+	}
+
+	toJSON() {
+		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
+			form: this._form,
+			ingredient: this._ingredient,
+			batch: this._batch,
 		};
 	}
 }
@@ -195,8 +414,93 @@ class Medication extends DomainResource {
 		return this._resourceType;
 	}
 
-	// code	Σ	0..1	CodeableConcept	Codes that identify this medication
-	// SNOMED CT Medication Codes (Example)
+	// id	*	0..1	id	Logical id of this artifact
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// meta	*	0..1	Meta	Metadata about the resource
+	set meta(meta) {
+		this._meta = new Meta(meta);
+	}
+
+	get meta() {
+		return this._meta;
+	}
+
+	// implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+	set implicitRules(implicitRules) {
+		this._implicitRules = implicitRules;
+	}
+
+	get implicitRules() {
+		return this._implicitRules;
+	}
+
+	// language		0..1	code	Language of the resource content
+	// Binding: Common Languages (extensible)
+	set language(language) {
+		this._language = new Code(language);
+	}
+
+	get language() {
+		return this._language;
+	}
+
+	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+	set text(text) {
+		this._text = new Narrative(text);
+	}
+
+	get text() {
+		return this._text;
+	}
+
+	// contained		0..*	Resource	Contained, inline Resources
+	set contained(contained) {
+		if (Array.isArray(contained)) {
+			this._contained = contained.map((i) => new Resource(i));
+		} else {
+			this._contained = [new Resource(contained)];
+		}
+	}
+
+	get contained() {
+		return this._contained;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// code	S	1..1	CodeableConcept	Codes that identify this medication
+	// Binding: Medication Clinical Drug (RxNorm) (extensible)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -205,17 +509,7 @@ class Medication extends DomainResource {
 		return this._code;
 	}
 
-	// status	Σ	0..1	code	active | inactive | entered-in-error
-	// MedicationStatus (Required)
-	set status(status) {
-		this._status = new Code(status);
-	}
-
-	get status() {
-		return this._status;
-	}
-
-	// isBrand	Σ	0..1	boolean	True if a brand
+	// isBrand	*	0..1	boolean	True if a brand
 	set isBrand(isBrand) {
 		this._isBrand = isBrand;
 	}
@@ -224,16 +518,7 @@ class Medication extends DomainResource {
 		return this._isBrand;
 	}
 
-	// isOverTheCounter	Σ	0..1	boolean	True if medication does not require a prescription
-	set isOverTheCounter(isOverTheCounter) {
-		this._isOverTheCounter = isOverTheCounter;
-	}
-
-	get isOverTheCounter() {
-		return this._isOverTheCounter;
-	}
-
-	// manufacturer	Σ	0..1	Reference(Organization)	Manufacturer of the item
+	// manufacturer	*	0..1	Reference(Organization)	Manufacturer of the item
 	set manufacturer(manufacturer) {
 		this._manufacturer = new Reference(manufacturer);
 	}
@@ -242,30 +527,7 @@ class Medication extends DomainResource {
 		return this._manufacturer;
 	}
 
-	// form		0..1	CodeableConcept	powder | tablets | capsule +
-	// SNOMED CT Form Codes (Example)
-	set form(form) {
-		this._form = new CodeableConcept(form);
-	}
-
-	get form() {
-		return this._form;
-	}
-
-	// ingredient		0..*	BackboneElement	Active or inactive ingredient
-	set ingredient(ingredient) {
-		if (Array.isArray(ingredient)) {
-			this._ingredient = ingredient.map((i) => new Ingredient(i));
-		} else {
-			this._ingredient = [new Ingredient(ingredient)];
-		}
-	}
-
-	get ingredient() {
-		return this._ingredient;
-	}
-
-	// package		0..1	BackboneElement	Details about packaged medications
+	// package	I	0..1	BackboneElement	Details about packaged medications
 	set medicationPackage(medicationPackage) {
 		this._medicationPackage = new MedicationPackage(medicationPackage);
 	}
@@ -274,30 +536,30 @@ class Medication extends DomainResource {
 		return this._medicationPackage;
 	}
 
-	// image		0..*	Attachment	Picture of the medication
-	set image(image) {
-		if (Array.isArray(image)) {
-			this._image = image.map((i) => new Attachment(i));
-		} else {
-			this._image = [new Attachment(image)];
-		}
+	// product	I	0..1	BackboneElement	Administrable medication details
+	set product(product) {
+		this._product = new Product(product);
 	}
 
-	get image() {
-		return this._image;
+	get product() {
+		return this._product;
 	}
 
 	toJSON() {
 		const json = {
+			id: this._id,
+			meta: this._meta,
+			implicitRules: this._implicitRules,
+			language: this._language,
+			text: this._text,
+			contained: this._contained,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			code: this._code,
-			status: this._status,
 			isBrand: this._isBrand,
-			isOverTheCounter: this._isOverTheCounter,
 			manufacturer: this._manufacturer,
-			form: this._form,
-			ingredient: this._ingredient,
 			medicationPackage: this._medicationPackage,
-			image: this._image,
+			product: this._product,
 		};
 
 		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);
@@ -305,7 +567,8 @@ class Medication extends DomainResource {
 }
 
 module.exports.Medication = Medication;
+module.exports.Product = Product;
 module.exports.Ingredient = Ingredient;
+module.exports.Batch = Batch;
 module.exports.MedicationPackage = MedicationPackage;
 module.exports.Content = Content;
-module.exports.Batch = Batch;

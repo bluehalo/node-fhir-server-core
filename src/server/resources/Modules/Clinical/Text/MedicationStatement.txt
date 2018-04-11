@@ -1,18 +1,26 @@
 Main
 MedicationStatement
-identifier	Σ	0..*	Identifier	External identifier
+id	*	0..1	id	Logical id of this artifact
 
-basedOn	Σ	0..*	Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)	Fulfils plan, proposal or order
+meta	*	0..1	Meta	Metadata about the resource
 
-partOf	Σ	0..*	Reference(MedicationAdministration | MedicationDispense | MedicationStatement | Procedure | Observation)	Part of referenced event
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
 
-context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter / Episode associated with MedicationStatement
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
 
-status	?!Σ	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
-MedicationStatementStatus (Required)
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
 
-category	Σ	0..1	CodeableConcept	Type of medication usage
-MedicationStatementCategory (Preferred)
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier		0..*	Identifier	External identifier
+
+status	?!S	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
+Binding: MedicationStatementStatus (required)
 
 medication[x]	Σ	1..1		What medication was taken
 SNOMED CT Medication Codes (Example)
@@ -21,34 +29,37 @@ medicationCodeableConcept			CodeableConcept
 
 medicationReference			Reference(Medication)
 
+subject	S	1..1	Reference(US Core Patient Profile)	Who is/was taking the medication
+
 effective[x]	Σ	0..1		The date/time or interval when the medication was taken
 
 effectiveDateTime			dateTime
 
 effectivePeriod			Period
 
-dateAsserted	Σ	0..1	dateTime	When the statement was asserted?
+informationSource		0..1	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson), Reference(Organization)	Person or organization that provided the information about the taking of this medication
 
-informationSource		0..1	Reference(Patient | Practitioner | RelatedPerson | Organization)	Person or organization that provided the information about the taking of this medication
+derivedFrom		0..*	Reference(Resource)	Additional supporting information
 
-subject	Σ	1..1	Reference(Patient | Group)	Who is/was taking the medication
+dateAsserted	S	1..1	dateTime	When the statement was asserted?
 
-derivedFrom		0..*	Reference(Any)	Additional supporting information
-
-taken	?!Σ	1..1	code	y | n | unk | na
-MedicationStatementTaken (Required)
+notTaken	?!*	0..1	code	y | n | unk
+Binding: MedicationStatementNotTaken (required)
 
 reasonNotTaken	I	0..*	CodeableConcept	True if asserting medication was not given
-SNOMED CT Drugs not taken/completed Codes (Example)
+Binding: SNOMED CT Drugs not taken/completed Codes (example)
 
-reasonCode		0..*	CodeableConcept	Reason for why the medication is being/was taken
-Condition/Problem/Diagnosis Codes (Example)
+reasonForUseCodeableConcept		0..*	CodeableConcept	Reason for why the medication is being/was taken
+Binding: Condition/Problem/Diagnosis Codes (example)
 
-reasonReference		0..*	Reference(Condition | Observation)	Condition or observation that supports why the medication is being/was taken
+reasonForUseReference		0..*	Reference(Condition), Reference(Observation)	Condition or observation that supports why the medication is being/was taken
 
 note		0..*	Annotation	Further information about the statement
 
-dosage		0..*	Dosage	Details of how medication is/was taken or should be taken
+category		0..1	code	Type of medication usage
+Binding: MedicationStatementCategory (example)
+
+dosage		0..*	DosageInstruction	Details of how medication was taken
 
 
 eof

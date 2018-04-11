@@ -1,7 +1,11 @@
 const DomainResource = require('./types/DomainResource');
+const Meta = require('./types/Meta');
+const Code = require('./types/Code');
+const Narrative = require('./types/Narrative');
+const Resource = require('./types/Resource');
+const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
 const Reference = require('./types/Reference');
-const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Period = require('./types/Period');
 const Annotation = require('./types/Annotation');
@@ -12,8 +16,43 @@ class Detail {
 		Object.assign(this, obj);
 	}
 
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// category		0..1	CodeableConcept	diet | drug | encounter | observation | procedure | supply | other
-	// CarePlanActivityCategory (Example)
+	// Binding: CarePlanActivityCategory (example)
 	set category(category) {
 		this._category = new CodeableConcept(category);
 	}
@@ -22,7 +61,7 @@ class Detail {
 		return this._category;
 	}
 
-	// definition		0..1	Reference(PlanDefinition | ActivityDefinition | Questionnaire)	Protocol or definition
+	// definition		0..1	Reference(PlanDefinition), Reference(ActivityDefinition), Reference(Questionnaire)	Protocol or definition
 	set definition(definition) {
 		this._definition = new Reference(definition);
 	}
@@ -32,7 +71,7 @@ class Detail {
 	}
 
 	// code		0..1	CodeableConcept	Detail type of activity
-	// Care Plan Activity (Example)
+	// Binding: Care Plan Activity (example)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -42,7 +81,7 @@ class Detail {
 	}
 
 	// reasonCode		0..*	CodeableConcept	Why activity should be done or why activity was prohibited
-	// Activity Reason (Example)
+	// Binding: Activity Reason (example)
 	set reasonCode(reasonCode) {
 		if (Array.isArray(reasonCode)) {
 			this._reasonCode = reasonCode.map((i) => new CodeableConcept(i));
@@ -82,7 +121,7 @@ class Detail {
 	}
 
 	// status	?!	1..1	code	not-started | scheduled | in-progress | on-hold | completed | cancelled | unknown
-	// CarePlanActivityStatus (Required)
+	// Binding: CarePlanActivityStatus (required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -146,7 +185,7 @@ class Detail {
 		return this._location;
 	}
 
-	// performer		0..*	Reference(Practitioner | Organization | RelatedPerson | Patient | CareTeam)	Who will be responsible?
+	// performer		0..*	Reference(Practitioner), Reference(Organization), Reference(RelatedPerson), Reference(Patient), Reference(CareTeam)	Who will be responsible?
 	set performer(performer) {
 		if (Array.isArray(performer)) {
 			this._performer = performer.map((i) => new Reference(i));
@@ -171,6 +210,7 @@ class Detail {
 	}
 
 	// productReference			Reference
+	// Binding: SNOMED CT Medication Codes (example)
 	set productReference(productReference) {
 		this._productReference = new Reference(productReference);
 	}
@@ -208,6 +248,9 @@ class Detail {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			category: this._category,
 			definition: this._definition,
 			code: this._code,
@@ -236,8 +279,43 @@ class Activity {
 		Object.assign(this, obj);
 	}
 
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
 	// outcomeCodeableConcept		0..*	CodeableConcept	Results of the activity
-	// Care Plan Activity Outcome (Example)
+	// Binding: Care Plan Activity Outcome (example)
 	set outcomeCodeableConcept(outcomeCodeableConcept) {
 		if (Array.isArray(outcomeCodeableConcept)) {
 			this._outcomeCodeableConcept = outcomeCodeableConcept.map((i) => new CodeableConcept(i));
@@ -250,7 +328,7 @@ class Activity {
 		return this._outcomeCodeableConcept;
 	}
 
-	// outcomeReference		0..*	Reference(Any)	Appointment, Encounter, Procedure, etc.
+	// outcomeReference		0..*	Reference(Resource)	Appointment, Encounter, Procedure, etc.
 	set outcomeReference(outcomeReference) {
 		if (Array.isArray(outcomeReference)) {
 			this._outcomeReference = outcomeReference.map((i) => new Reference(i));
@@ -276,7 +354,7 @@ class Activity {
 		return this._progress;
 	}
 
-	// reference	I	0..1	Reference(Appointment | CommunicationRequest | DeviceRequest | MedicationRequest | NutritionOrder | Task | ProcedureRequest | ReferralRequest | VisionPrescription | RequestGroup)	Activity details defined in specific resource
+	// reference	I	0..1	Reference(Appointment), Reference(CommunicationRequest), Reference(DeviceRequest), Reference(MedicationRequest), Reference(NutritionOrder), Reference(Task), Reference(ProcedureRequest), Reference(ReferralRequest), Reference(VisionPrescription), Reference(RequestGroup)	Activity details defined in specific resource
 	set reference(reference) {
 		this._reference = new Reference(reference);
 	}
@@ -296,6 +374,9 @@ class Activity {
 
 	toJSON() {
 		return {
+			id: this._id,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			outcomeCodeableConcept: this._outcomeCodeableConcept,
 			outcomeReference: this._outcomeReference,
 			progress: this._progress,
@@ -320,7 +401,122 @@ class CarePlan extends DomainResource {
 		return this._resourceType;
 	}
 
-	// identifier	Σ	0..*	Identifier	External Ids for this plan
+	// id	Î£	0..1	id	Logical id of this artifact
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// meta	Î£	0..1	Meta	Metadata about the resource
+	set meta(meta) {
+		this._meta = new Meta(meta);
+	}
+
+	get meta() {
+		return this._meta;
+	}
+
+	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+	set implicitRules(implicitRules) {
+		this._implicitRules = implicitRules;
+	}
+
+	get implicitRules() {
+		return this._implicitRules;
+	}
+
+	// language		0..1	code	Language of the resource content
+	// Binding: Common Languages (extensible)
+	set language(language) {
+		this._language = new Code(language);
+	}
+
+	get language() {
+		return this._language;
+	}
+
+	// text	SI	1..1	Narrative	Text summary of the resource, for human interpretation
+	set text(text) {
+		this._text = new Narrative(text);
+	}
+
+	get text() {
+		return this._text;
+	}
+
+	// id		0..1	string	xml:id (or equivalent in JSON)
+	set id(id) {
+		this._id = id;
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	// status	S	1..1	code	generated | extensions | additional | empty
+	// Binding: Narrative Status (required)
+	set status(status) {
+		this._status = new Code(status);
+	}
+
+	get status() {
+		return this._status;
+	}
+
+	// div	I	1..1	xhtml	Limited xhtml content
+	// txt-1: The narrative SHALL contain only the basic html formatting elements and attributes described in chapters 7-11 (except section 4 of chapter 9) and 15 of the HTML 4.0 standard, <a> elements (either name or href), images and internally contained style attributes
+	// txt-2: The narrative SHALL have some non-whitespace content
+	set div(div) {
+		this._div = div;
+	}
+
+	get div() {
+		return this._div;
+	}
+
+	// contained		0..*	Resource	Contained, inline Resources
+	set contained(contained) {
+		if (Array.isArray(contained)) {
+			this._contained = contained.map((i) => new Resource(i));
+		} else {
+			this._contained = [new Resource(contained)];
+		}
+	}
+
+	get contained() {
+		return this._contained;
+	}
+
+	// extension		0..*	Extension	Additional Content defined by implementations
+	set extension(extension) {
+		if (Array.isArray(extension)) {
+			this._extension = extension.map((i) => new Extension(i));
+		} else {
+			this._extension = [new Extension(extension)];
+		}
+	}
+
+	get extension() {
+		return this._extension;
+	}
+
+	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+	set modifierExtension(modifierExtension) {
+		if (Array.isArray(modifierExtension)) {
+			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
+		} else {
+			this._modifierExtension = [new Extension(modifierExtension)];
+		}
+	}
+
+	get modifierExtension() {
+		return this._modifierExtension;
+	}
+
+	// identifier	Î£	0..*	Identifier	External Ids for this plan
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -333,7 +529,7 @@ class CarePlan extends DomainResource {
 		return this._identifier;
 	}
 
-	// definition	Σ	0..*	Reference(PlanDefinition | Questionnaire)	Protocol or definition
+	// definition	Î£	0..*	Reference(PlanDefinition), Reference(Questionnaire)	Protocol or definition
 	set definition(definition) {
 		if (Array.isArray(definition)) {
 			this._definition = definition.map((i) => new Reference(i));
@@ -346,7 +542,7 @@ class CarePlan extends DomainResource {
 		return this._definition;
 	}
 
-	// basedOn	Σ	0..*	Reference(CarePlan)	Fulfills care plan
+	// basedOn	Î£	0..*	Reference(CarePlan)	Fulfills care plan
 	set basedOn(basedOn) {
 		if (Array.isArray(basedOn)) {
 			this._basedOn = basedOn.map((i) => new Reference(i));
@@ -359,7 +555,7 @@ class CarePlan extends DomainResource {
 		return this._basedOn;
 	}
 
-	// replaces	Σ	0..*	Reference(CarePlan)	CarePlan replaced by this CarePlan
+	// replaces	Î£	0..*	Reference(CarePlan)	CarePlan replaced by this CarePlan
 	set replaces(replaces) {
 		if (Array.isArray(replaces)) {
 			this._replaces = replaces.map((i) => new Reference(i));
@@ -372,7 +568,7 @@ class CarePlan extends DomainResource {
 		return this._replaces;
 	}
 
-	// partOf	Σ	0..*	Reference(CarePlan)	Part of referenced CarePlan
+	// partOf	Î£	0..*	Reference(CarePlan)	Part of referenced CarePlan
 	set partOf(partOf) {
 		if (Array.isArray(partOf)) {
 			this._partOf = partOf.map((i) => new Reference(i));
@@ -385,8 +581,8 @@ class CarePlan extends DomainResource {
 		return this._partOf;
 	}
 
-	// status	?!Σ	1..1	code	draft | active | suspended | completed | entered-in-error | cancelled | unknown
-	// CarePlanStatus (Required)
+	// status	?!SÎ£	1..1	code	draft | active | suspended | completed | entered-in-error | cancelled | unknown
+	// Binding: CarePlanStatus (required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -395,8 +591,8 @@ class CarePlan extends DomainResource {
 		return this._status;
 	}
 
-	// intent	?!Σ	1..1	code	proposal | plan | order | option
-	// CarePlanIntent (Required)
+	// intent	?!SÎ£	1..1	code	proposal | plan | order | option
+	// Binding: CarePlanIntent (required)
 	set intent(intent) {
 		this._intent = new Code(intent);
 	}
@@ -405,8 +601,9 @@ class CarePlan extends DomainResource {
 		return this._intent;
 	}
 
-	// category	Σ	0..*	CodeableConcept	Type of plan
-	// Care Plan Category (Example)
+	// category	SÎ£I	1..*	CodeableConcept	Type of plan
+	// Binding: Care Plan Category (example)
+	// us-core-1: Must have a category of 'assess-plan' and a code system 'http://hl7.org/fhir/us/core/CodeSystem/careplan-category'
 	set category(category) {
 		if (Array.isArray(category)) {
 			this._category = category.map((i) => new CodeableConcept(i));
@@ -419,7 +616,7 @@ class CarePlan extends DomainResource {
 		return this._category;
 	}
 
-	// title	Σ	0..1	string	Human-friendly name for the CarePlan
+	// title	Î£	0..1	string	Human-friendly name for the CarePlan
 	set title(title) {
 		this._title = title;
 	}
@@ -428,7 +625,7 @@ class CarePlan extends DomainResource {
 		return this._title;
 	}
 
-	// description	Σ	0..1	string	Summary of nature of plan
+	// description	Î£	0..1	string	Summary of nature of plan
 	set description(description) {
 		this._description = description;
 	}
@@ -437,7 +634,7 @@ class CarePlan extends DomainResource {
 		return this._description;
 	}
 
-	// subject	Σ	1..1	Reference(Patient | Group)	Who care plan is for
+	// subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who care plan is for
 	set subject(subject) {
 		this._subject = new Reference(subject);
 	}
@@ -446,7 +643,7 @@ class CarePlan extends DomainResource {
 		return this._subject;
 	}
 
-	// context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Created in context of
+	// context	Î£	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Created in context of
 	set context(context) {
 		this._context = new Reference(context);
 	}
@@ -455,7 +652,7 @@ class CarePlan extends DomainResource {
 		return this._context;
 	}
 
-	// period	Σ	0..1	Period	Time period plan covers
+	// period	Î£	0..1	Period	Time period plan covers
 	set period(period) {
 		this._period = new Period(period);
 	}
@@ -464,7 +661,7 @@ class CarePlan extends DomainResource {
 		return this._period;
 	}
 
-	// author	Σ	0..*	Reference(Patient | Practitioner | RelatedPerson | Organization | CareTeam)	Who is responsible for contents of the plan
+	// author	Î£	0..*	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson), Reference(Organization), Reference(CareTeam)	Who is responsible for contents of the plan
 	set author(author) {
 		if (Array.isArray(author)) {
 			this._author = author.map((i) => new Reference(i));
@@ -490,7 +687,7 @@ class CarePlan extends DomainResource {
 		return this._careTeam;
 	}
 
-	// addresses	Σ	0..*	Reference(Condition)	Health issues this plan addresses
+	// addresses	Î£	0..*	Reference(Condition)	Health issues this plan addresses
 	set addresses(addresses) {
 		if (Array.isArray(addresses)) {
 			this._addresses = addresses.map((i) => new Reference(i));
@@ -503,7 +700,7 @@ class CarePlan extends DomainResource {
 		return this._addresses;
 	}
 
-	// supportingInfo		0..*	Reference(Any)	Information considered as part of plan
+	// supportingInfo		0..*	Reference(Resource)	Information considered as part of plan
 	set supportingInfo(supportingInfo) {
 		if (Array.isArray(supportingInfo)) {
 			this._supportingInfo = supportingInfo.map((i) => new Reference(i));
@@ -529,6 +726,20 @@ class CarePlan extends DomainResource {
 		return this._goal;
 	}
 
+	// activity	I	0..*	BackboneElement	Action to occur as part of plan
+	// cpl-3: Provide a reference or detail, not both
+	set activity(activity) {
+		if (Array.isArray(activity)) {
+			this._activity = activity.map((i) => new Activity(i));
+		} else {
+			this._activity = [new Activity(activity)];
+		}
+	}
+
+	get activity() {
+		return this._activity;
+	}
+
 	// note		0..*	Annotation	Comments about the plan
 	set note(note) {
 		if (Array.isArray(note)) {
@@ -542,22 +753,19 @@ class CarePlan extends DomainResource {
 		return this._note;
 	}
 
-	// activity	I	0..*	BackboneElement	Action to occur as part of plan
-	// + Provide a reference or detail, not both
-	set activity(activity) {
-		if (Array.isArray(activity)) {
-			this._activity = activity.map((i) => new Activity(i));
-		} else {
-			this._activity = [new Activity(activity)];
-		}
-	}
-
-	get activity() {
-		return this._activity;
-	}
-
 	toJSON() {
 		const json = {
+			id: this._id,
+			meta: this._meta,
+			implicitRules: this._implicitRules,
+			language: this._language,
+			text: this._text,
+			id: this._id,
+			status: this._status,
+			div: this._div,
+			contained: this._contained,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			definition: this._definition,
 			basedOn: this._basedOn,
@@ -576,8 +784,8 @@ class CarePlan extends DomainResource {
 			addresses: this._addresses,
 			supportingInfo: this._supportingInfo,
 			goal: this._goal,
-			note: this._note,
 			activity: this._activity,
+			note: this._note,
 		};
 
 		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);

@@ -1,28 +1,45 @@
 Main
 Condition
-identifier	Σ	0..*	Identifier	External Ids for this condition
+id	Î£	0..1	id	Logical id of this artifact
 
-clinicalStatus	?!ΣI	0..1	code	active | recurrence | inactive | remission | resolved
-Condition Clinical Status Codes (Required)
+meta	Î£	0..1	Meta	Metadata about the resource
 
-verificationStatus	?!ΣI	0..1	code	provisional | differential | confirmed | refuted | entered-in-error | unknown
-ConditionVerificationStatus (Required)
+implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
 
-category		0..*	CodeableConcept	problem-list-item | encounter-diagnosis
-Condition Category Codes (Example)
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier	Î£	0..*	Identifier	External Ids for this condition
+
+clinicalStatus	?!Î£I	0..1	code	active | recurrence | inactive | remission | resolved
+Binding: Condition Clinical Status Codes (required)
+
+verificationStatus	?!Î£I	1..1	code	provisional | differential | confirmed | refuted | entered-in-error | unknown
+Binding: ConditionVerificationStatus (required)
+
+category	S	1..*	CodeableConcept	problem-list-item | encounter-diagnosis
+Binding: US Core Condition Category Codes (preferred)
 
 severity		0..1	CodeableConcept	Subjective severity of condition
-Condition/Diagnosis Severity (Preferred)
+Binding: Condition/Diagnosis Severity (preferred)
 
-code	Σ	0..1	CodeableConcept	Identification of the condition, problem or diagnosis
-Condition/Problem/Diagnosis Codes (Example)
+code	SÎ£	1..1	CodeableConcept	Identification of the condition, problem or diagnosis
+Binding: Problem Value Set (extensible)
 
-bodySite	Σ	0..*	CodeableConcept	Anatomical location, if relevant
-SNOMED CT Body Structures (Example)
+bodySite	Î£	0..*	CodeableConcept	Anatomical location, if relevant
+Binding: SNOMED CT Body Structures (example)
 
-subject	Σ	1..1	Reference(Patient | Group)	Who has the condition?
+subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who has the condition?
 
-context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or episode when condition first asserted
+context	Î£	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Encounter or episode when condition first asserted
 
 onset[x]	Σ	0..1		Estimated or actual date, date-time, or age
 
@@ -50,31 +67,45 @@ abatementRange			Range
 
 abatementString			string
 
-assertedDate	Σ	0..1	dateTime	Date record was believed accurate
+assertedDate	Î£	0..1	dateTime	Date record was believed accurate
 
-asserter	Σ	0..1	Reference(Practitioner | Patient | RelatedPerson)	Person who asserts this condition
-
-note		0..*	Annotation	Additional information about the Condition
+asserter	Î£	0..1	Reference(Practitioner), Reference(Patient), Reference(RelatedPerson)	Person who asserts this condition
 
 stage	I	0..1	BackboneElement	Stage/grade, usually assessed formally
+con-1: Stage SHALL have summary or assessment
 
 evidence	I	0..*	BackboneElement	Supporting evidence
+con-2: evidence SHALL have code or details
 
-
-Backbone
-stage
-summary	I	0..1	CodeableConcept	Simple summary (disease specific)
-Condition Stage (Example)
-
-assessment	I	0..*	Reference(ClinicalImpression | DiagnosticReport | Observation)	Formal record of assessment
+note		0..*	Annotation	Additional information about the Condition
 
 
 Backbone
 evidence
-code	ΣI	0..*	CodeableConcept	Manifestation/symptom
-Manifestation and Symptom Codes (Example)
+id		0..1	string	xml:id (or equivalent in JSON)
 
-detail	ΣI	0..*	Reference(Any)	Supporting information found elsewhere
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+
+code	Î£I	0..*	CodeableConcept	Manifestation/symptom
+Binding: Manifestation and Symptom Codes (example)
+
+detail	Î£I	0..*	Reference(Resource)	Supporting information found elsewhere
+
+
+Backbone
+stage
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+
+summary	I	0..1	CodeableConcept	Simple summary (disease specific)
+Binding: Condition Stage (example)
+
+assessment	I	0..*	Reference(ClinicalImpression), Reference(DiagnosticReport), Reference(Observation)	Formal record of assessment
 
 
 eof

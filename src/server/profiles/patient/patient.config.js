@@ -96,23 +96,24 @@ let routes = [
 		}],
 		scopes: scopes,
 		controller: controller.getPatientById
-	}, {
-		type: 'get',
-		path: '/:version/patient/friend/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
-		scopes: scopes,
-		controller: controller.getPatientByFriend
 	}
+	// ,	{
+	// 	type: 'get',
+	// 	path: '/:version/patient/friend/:id',
+	// 	corsOptions: {
+	// 		methods: ['GET']
+	// 	},
+	// 	args: [{
+	// 		name: 'version',
+	// 		type: 'string'
+	// 	}, {
+	// 		name: 'id',
+	// 		type: 'string',
+	// 		required: true
+	// 	}],
+	// 	scopes: scopes,
+	// 	controller: controller.getPatientByFriend
+	// }
 ];
 
 let codes = {

@@ -1,52 +1,102 @@
 Main
 Medication
-code	Σ	0..1	CodeableConcept	Codes that identify this medication
-SNOMED CT Medication Codes (Example)
+id	*	0..1	id	Logical id of this artifact
 
-status	Σ	0..1	code	active | inactive | entered-in-error
-MedicationStatus (Required)
+meta	*	0..1	Meta	Metadata about the resource
 
-isBrand	Σ	0..1	boolean	True if a brand
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
 
-isOverTheCounter	Σ	0..1	boolean	True if medication does not require a prescription
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
 
-manufacturer	Σ	0..1	Reference(Organization)	Manufacturer of the item
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+code	S	1..1	CodeableConcept	Codes that identify this medication
+Binding: Medication Clinical Drug (RxNorm) (extensible)
+
+isBrand	*	0..1	boolean	True if a brand
+
+manufacturer	*	0..1	Reference(Organization)	Manufacturer of the item
+
+package	I	0..1	BackboneElement	Details about packaged medications
+
+product	I	0..1	BackboneElement	Administrable medication details
+
+
+Backbone
+product
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
 
 form		0..1	CodeableConcept	powder | tablets | capsule +
-SNOMED CT Form Codes (Example)
+Binding: SNOMED CT Form Codes (example)
 
-ingredient		0..*	BackboneElement	Active or inactive ingredient
+ingredient	I	0..*	BackboneElement	Active or inactive ingredient
 
-package		0..1	BackboneElement	Details about packaged medications
-
-image		0..*	Attachment	Picture of the medication
+batch	I	0..*	BackboneElement	Identifies a single production run
 
 
 Backbone
 ingredient
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 item[x]		1..1		The product contained
 
 itemCodeableConcept			CodeableConcept
 
 itemReference			Reference(Substance | Medication)
 
-isActive		0..1	boolean	Active ingredient indicator
-
 amount		0..1	Ratio	Quantity of ingredient present
 
 
 Backbone
+batch
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+lotNumber		0..1	string	Identifier assigned to batch
+
+expirationDate		0..1	dateTime	When batch will expire
+
+
+Backbone
 package
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 container		0..1	CodeableConcept	E.g. box, vial, blister-pack
-MedicationContainer (Example)
+Binding: SNOMED CT Form Codes (example)
 
-content		0..*	BackboneElement	What is in the package
-
-batch		0..*	BackboneElement	Identifies a single production run
+content	I	0..*	BackboneElement	What is in the package
 
 
 Backbone
 content
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
 item[x]		1..1		The item in the package
 
 itemCodeableConcept			CodeableConcept
@@ -54,13 +104,6 @@ itemCodeableConcept			CodeableConcept
 itemReference			Reference(Medication)
 
 amount		0..1	SimpleQuantity	Quantity present in the package
-
-
-Backbone
-batch
-lotNumber		0..1	string	Identifier assigned to batch
-
-expirationDate		0..1	dateTime	When batch will expire
 
 
 eof
