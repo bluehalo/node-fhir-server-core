@@ -89,84 +89,84 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'activity-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'activity-date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'activity-reference',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'based-on',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'care-team',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'category',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'condition',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'context',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'definition',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'encounter',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'goal',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'identifier',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'intent',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'part-of',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'patient',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'performer',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'replaces',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'status',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'subject',
+			type: 'reference',
 		}],
 		scopes: scopes,
 		controller: controller.getCarePlan
@@ -190,10 +190,6 @@ let routes = [
 	}
 ];
 
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
-
 /**
  * @name exports
  * @summary CarePlan config
@@ -202,6 +198,5 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.PATIENT
 	},
-	routes,
-	codes
+	routes
 };

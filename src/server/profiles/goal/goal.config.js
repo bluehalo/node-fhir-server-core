@@ -89,84 +89,32 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'category',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'identifier',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'patient',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'start-date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'status',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'subject',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'target-date',
+			type: 'date'
 		}],
 		scopes: scopes,
 		controller: controller.getGoal

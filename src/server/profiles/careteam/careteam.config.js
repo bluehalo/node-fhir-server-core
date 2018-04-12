@@ -89,84 +89,40 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'category',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'context',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'encounter',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'identifier',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'participant',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'patient',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'status',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'subject',
+			type: 'reference',
 		}],
 		scopes: scopes,
 		controller: controller.getCareTeam
@@ -190,10 +146,6 @@ let routes = [
 	}
 ];
 
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
-
 /**
  * @name exports
  * @summary CareTeam config
@@ -202,6 +154,5 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.PATIENT
 	},
-	routes,
-	codes
+	routes
 };

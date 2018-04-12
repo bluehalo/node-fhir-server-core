@@ -90,99 +90,99 @@ let routes = [
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'active',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-city',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-country',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-postalcode',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-state',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-use',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'animal-breed',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'animal-species',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'birthdate',
-			type: 'date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'death-date',
-			type: 'date',
+			type: 'date'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'deceased',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'email',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'family',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'gender',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'general-practitioner',
-			type: 'reference',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'given',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'identifier',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'language',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'link',
-			type: 'reference',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'name',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'organization',
-			type: 'reference',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'phone',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'phonetic',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'telecom',

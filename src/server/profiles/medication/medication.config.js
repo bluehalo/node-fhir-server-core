@@ -89,84 +89,44 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'container',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'form',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'ingredient',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'ingredient-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'manufacturer',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'over-the-counter',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'package-item',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'package-item-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'status',
+			type: 'token'
 		}],
 		scopes: scopes,
 		controller: controller.getMedication

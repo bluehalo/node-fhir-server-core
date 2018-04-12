@@ -89,84 +89,56 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'active',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address-city',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address-country',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address-postalcode',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address-state',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'address-use',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'endpoint',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'identifier',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'name',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'partof',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'phonetic',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'type',
+			type: 'token'
 		}],
 		scopes: scopes,
 		controller: controller.getOrganization

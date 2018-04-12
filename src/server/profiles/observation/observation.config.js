@@ -89,104 +89,156 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'active',
-			type: 'token',
+			name: 'based-on',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string',
+			name: 'category',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string',
+			name: 'code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string',
+			name: 'code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string',
+			name: 'code-value-date',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string',
+			name: 'code-value-quantity',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token',
+			name: 'code-value-string',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'animal-breed',
-			type: 'token',
+			name: 'combo-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'animal-species',
-			type: 'token',
+			name: 'combo-code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'birthdate',
-			type: 'date',
+			name: 'combo-code-value-quantity',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'death-date',
-			type: 'date',
+			name: 'combo-data-absent-reason',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'deceased',
-			type: 'token',
+			name: 'combo-value-concept',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'email',
-			type: 'token',
+			name: 'combo-value-quantity',
+			type: 'quantity'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'family',
-			type: 'string',
+			name: 'component-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'gender',
-			type: 'token',
+			name: 'component-code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'general-practitioner',
+			name: 'component-code-value-quantity',
+			type: 'composite'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'component-data-absent-reason',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'component-value-concept',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'component-value-quantity',
+			type: 'quantity'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'context',
 			type: 'reference',
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'given',
-			type: 'string',
+			name: 'data-absent-reason',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'device',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'encounter',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'identifier',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'language',
-			type: 'token',
+			name: 'method',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'link',
-			type: 'reference',
+			name: 'patient',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string',
+			name: 'performer',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'organization',
-			type: 'reference',
+			name: 'related',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'phone',
-			type: 'token',
+			name: 'related-target',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'phonetic',
-			type: 'string',
+			name: 'related-type',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: 'telecom',
-			type: 'token',
+			name: 'specimen',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'subject',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-concept',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-quantity',
+			type: 'quantity'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-string',
+			type: 'string'
 		}],
 		scopes: scopes,
 		controller: controller.getObservation

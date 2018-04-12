@@ -90,67 +90,67 @@ let routes = [
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'active',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-city',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-country',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-postalcode',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-state',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'address-use',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'communication',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'email',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'family',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'gender',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'given',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'identifier',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'name',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'phone',
-			type: 'token',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'phonetic',
-			type: 'string',
+			type: 'string'
 		}, {
 			versions: [VERSIONS.STU3],
 			name: 'telecom',

@@ -89,84 +89,156 @@ let routes = [
 			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'based-on',
+			type: 'reference'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'category',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code-value-date',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code-value-quantity',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'code-value-string',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-code-value-quantity',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-data-absent-reason',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-value-concept',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'combo-value-quantity',
+			type: 'quantity'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-code',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-code-value-concept',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-code-value-quantity',
+			type: 'composite'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-data-absent-reason',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-value-concept',
+			type: 'token'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'component-value-quantity',
+			type: 'quantity'
 		}, {
 			versions: [VERSIONS.STU3],
-			name: '',
-			type: '',
+			name: 'context',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'data-absent-reason',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'device',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'encounter',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'method',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'patient',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'performer',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'related',
+			type: 'composite'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'related-target',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'related-type',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'specimen',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'subject',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-concept',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-quantity',
+			type: 'quantity'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'value-string',
+			type: 'string'
 		}],
 		scopes: scopes,
 		controller: controller.getObservationSmokingStatus
