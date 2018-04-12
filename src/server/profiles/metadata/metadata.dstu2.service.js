@@ -1,10 +1,10 @@
 const path = require('path');
 const glob = require('glob');
-const { VERSIONS } = require('../../../../constants');
-const { makeStatement, securityStatement } = require('../capability');
+const { VERSIONS } = require('../../../constants');
+const { makeStatement, securityStatement } = require('./capability.dstu2');
 
 // Glob for discovering all dstu2 conformance statements
-const files = path.resolve(__dirname, '../../*/conformance.js');
+const files = path.resolve(__dirname, '../*/conformance.js');
 
 // Load all the conformance documents ahead of time
 const RESOURCES = glob.sync(files)
@@ -17,10 +17,11 @@ const RESOURCES = glob.sync(files)
 
 // Find the associated getCount method for the resource, any resource that does not
 // have an associated getCount method will be filtered out later
-let mapResources = profiles => {
+let mapResources = (profiles = {}) => {
 	return ({ Profile, Resource }) => {
 		const profile_name = Object.keys(profiles).find(name => name === Profile);
 		return {
+			versions: profiles[profile_name].versions,
 			makeResource: Resource,
 			getCount: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
@@ -31,7 +32,13 @@ let mapResources = profiles => {
 
 // If we don't have a getCount method for the profile, then remove it because
 // each conformance statement MUST have a count
-let filterResources = (resource) => resource.makeResource && resource.getCount;
+let filterResources = (resource) => {
+	return (
+		resource.getCount
+		&& resource.makeResource
+		&& resource.versions.indexOf(VERSIONS.DSTU2) > -1
+	);
+};
 
 /**
  * @function generateCapabilityStatement
@@ -47,7 +54,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 	// Map all the active resources
 	let active_resources = RESOURCES
-		.map(mapResources(profiles.dstu2))
+		.map(mapResources(profiles))
 		.filter(filterResources);
 
 	// Create a context I can pass some data through
@@ -62,7 +69,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		.then((results) => {
 
 			// Our server statment
-			const server = {mode: 'server'};
+			const server = { mode: 'server' };
 			// Generate the resources conformance statement and add these to the main Capability Statement
 			server.resource = active_resources.map((resource, i) => resource.makeResource(results[i]));
 

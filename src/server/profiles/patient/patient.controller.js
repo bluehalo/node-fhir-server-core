@@ -1,18 +1,14 @@
-const errors = require('../../../utils/error.utils');
-const { VERSIONS } = require('../../../../constants');
-const { Patient } = require('../../resources');
+const Patient = require('../../resources/Patient');
+const errors = require('../../utils/error.utils');
 
-
-module.exports.getPatient = (profile, logger, config) => {
+module.exports.getPatient = ({ profile, logger, config }) => {
 	let { serviceModule: service } = profile;
 
-	// Create a context I can pass some data through
-	let context = {
-		version: VERSIONS.DSTU2
-	};
-
 	return (req, res, next) => {
-		// @TODO Validate arguments and response
+		let version = req.params.version;
+		// Create a context I can pass some data through
+		let context = { version };
+
 		/**
 		* return service.getPatient(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
@@ -39,7 +35,7 @@ module.exports.getPatient = (profile, logger, config) => {
 									'mode': 'match'
 								},
 								'resource': new Patient(resource),
-								'fullUrl': `${config.auth.resourceServer}/dstu2/Patient/${resource.id}`
+								'fullUrl': `${config.auth.resourceServer}/${version}/Patient/${resource.id}`
 							};
 							searchResults.entry.push(entry);
 						}
@@ -58,25 +54,25 @@ module.exports.getPatient = (profile, logger, config) => {
 };
 
 
-module.exports.getPatientById = (profile, logger) => {
+module.exports.getPatientById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
-	// Create a context I can pass some data through
-	let context = {
-		version: VERSIONS.DSTU2
-	};
-
 	return (req, res, next) => {
+
+		// Create a context I can pass some data through
+		let context = {
+			version: req.params.version
+		};
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
 		if (
 			req.patient
-			&& req.params
-			&& req.params.id
-			&& req.patient !== req.params.id
+			&& req.body
+			&& req.body.id
+			&& req.patient !== req.body.id
 		) {
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`));
 		}
 
 		return service.getPatientById(req, logger, context)

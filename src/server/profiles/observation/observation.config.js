@@ -1,4 +1,5 @@
-const controller = require('./controllers/observation.controller');
+const controller = require('./observation.controller');
+const { CONFIG_KEYS } = require('../../../constants');
 
 const scopes = [
   'user/*.*',
@@ -15,11 +16,14 @@ const scopes = [
 let routes = [
   {
     type: 'get',
-		path: '/dstu2/observation',
+		path: '/:version/observation',
 		corsOptions: {
 			methods: ['GET']
 		},
     args: [{
+			name: 'version',
+			type: 'string'
+		}, {
       name: 'patient',
 			type: 'string',
 			required: true
@@ -41,11 +45,14 @@ let routes = [
 	},
 	{
     type: 'post',
-		path: '/dstu2/observation/_search',
+		path: '/:version/observation/_search',
 		corsOptions: {
 			methods: ['POST']
 		},
     args: [{
+			name: 'version',
+			type: 'string'
+		}, {
       name: 'patient',
 			type: 'string',
 			required: true
@@ -67,11 +74,14 @@ let routes = [
   },
   {
     type: 'get',
-		path: '/dstu2/observation/:id',
+		path: '/:version/observation/:id',
 		corsOptions: {
 			methods: ['GET']
 		},
     args: [{
+			name: 'version',
+			type: 'string'
+		}, {
       name: 'id',
       type: 'number',
       required: true
@@ -88,5 +98,8 @@ let routes = [
  * @summary Observations config
  */
 module.exports = {
-	routes
+	routes,
+	routeOptions: {
+		profileKey: CONFIG_KEYS.OBSERVATION
+	}
 };

@@ -1,14 +1,16 @@
-const controller = require('./controllers/metadata.controller');
-
+const controller = require('./metadata.controller');
 
 let routes = [
 	{
 		type: 'get',
-		path: '/stu3/metadata',
+		path: '/:version/metadata',
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [],
+		args: [{
+			name: 'version',
+			type: 'string'
+		}],
 		scopes: [],
 		controller: controller.getCapabilityStatement
 	}
@@ -19,5 +21,8 @@ let routes = [
  * @summary Metadata config
  */
 module.exports = {
-	routes
+	routes,
+	routeOptions: {
+		isMetadata: true
+	}
 };

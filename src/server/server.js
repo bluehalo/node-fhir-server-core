@@ -44,16 +44,12 @@ class Server {
 		// Validate auth validator
 		config.auth = loadAuthValidator('auth', config.auth);
 
-		// Validate profiles for any spec provided
-		let dstu2ProfileKeys = config.profiles.dstu2 ? Object.keys(config.profiles.dstu2) : [];
-		let stu3ProfileKeys = config.profiles.stu3 ? Object.keys(config.profiles.stu3) : [];
+		// Grab all the profile keys
+		let profileKeys = Object.keys(config.profiles);
 
-		let hasValidDSTU2ProfileConfiguration = dstu2ProfileKeys.every(profileKey => {
-			return loadProfile(profileKey, config.profiles.dstu2[profileKey]);
-		});
-
-		let hasValidSTU3ProfileConfiguration = stu3ProfileKeys.every(profileKey => {
-			return loadProfile(profileKey, config.profiles.stu3[profileKey]);
+		// Verify that each profile has a service and that it can be loaded
+		let profileHasServicesConfigured = profileKeys.every(profileKey => {
+			return loadProfile(profileKey, config.profiles[profileKey]);
 		});
 
 		// Throw errors if any of these conditions have failed
@@ -64,20 +60,24 @@ class Server {
 			);
 		}
 
-		if (dstu2ProfileKeys.length === 0 && stu3ProfileKeys.length === 0) {
+		// If we have no profile keys, then they did not setup any profiles for the server
+		// and we can't start
+		if (profileKeys.length === 0) {
 			throw new Error(
 				'No profiles configured. You must configure atleast 1 profile to run this server.'
 				+ ' Please review the README.md section on Configuring Profiles.'
 			);
 		}
 
-		// We can proceed if either of these are valid
-		if (!(hasValidDSTU2ProfileConfiguration || hasValidSTU3ProfileConfiguration)) {
+		// Does the profile have services configured. Without services, we cannot get data
+		// so these must be valid and loaded.
+		if (!profileHasServicesConfigured) {
 			throw new Error(
 				'No valid profile configurations found.'
 				+ ' Please review the README.md section on Configuring Profiles.'
 			);
 		}
+
 	}
 
 	start () {

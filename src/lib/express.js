@@ -6,11 +6,9 @@ const helmet = require('helmet');
 const request = require('superagent');
 const https = require('https');
 const http = require('http');
-const path = require('path');
-const glob = require('glob');
 const fs = require('fs');
+const routeSetter = require('../server/route-setter');
 const errors = require('../server/utils/error.utils');
-const appConfig = require('../config');
 
 /**
  * @function configureMiddleware
@@ -79,9 +77,7 @@ let setupRoutes = function (app, config, logger) {
 		app.use(express.static(config.server.publicDirectory));
 	}
 
-	let routePaths = path.resolve(__dirname, '../..', appConfig.files.routes);
-	let routes = glob.sync(routePaths);
-	routes.forEach(route => require(route)(app, config, logger));
+	routeSetter.setRoutes({ logger, config, app });
 };
 
 /**
