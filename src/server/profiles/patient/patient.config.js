@@ -1,15 +1,15 @@
 const controller = require('./patient.controller');
-const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
+const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
 
 const scopes = [
-  'user/*.*',
-  'user/Patient.*',
-  'user/Patient.read',
-  'user/*.read',
-  'patient/*.*',
-  'patient/Patient.*',
-  'patient/Patient.read',
-  'patient/*.read'
+	'user/*.*',
+	'user/Patient.*',
+	'user/Patient.read',
+	'user/*.read',
+	'patient/*.*',
+	'patient/Patient.*',
+	'patient/Patient.read',
+	'patient/*.read'
 ];
 
 let routes = [
@@ -22,33 +22,38 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		}, {
-			name: 'name',
-			type: 'string'
-		}, {
-			name: 'birthdate',
-			type: 'string'
-		}, {
-			// This supports all specs, omitting versions by default will be treated as
-			// this route is available in all specs
-			name: 'gender',
-			type: 'string'
-		}, {
-			// This example explicitly declares support for DSTU2 Only
-			versions: [ VERSIONS.DSTU2 ],
-			name: 'given',
-			type: 'code'
-		}, {
-			// This example explicitly declares support for STU3 Only
-			versions: [ VERSIONS.STU3 ],
-			name: 'given',
-			type: 'string'
-		}, {
-			// This example explicitly declares it supports these versions
-			versions: [ VERSIONS.DSTU2, VERSIONS.STU3 ],
-			name: 'family',
-			type: 'string'
-		}],
+		},
+			{
+				name: '_content',
+				type: 'string'
+			},
+			{
+				name: '_id',
+				type: 'token'
+			},
+			{
+				name: '_lastUpdated',
+				type: 'date'
+			},
+			{
+				name: '_profile',
+				type: 'uri'
+			},
+			{
+				name: '_query',
+				type: 'token'
+			},
+			{
+				name: '_security',
+				type: 'token'
+			},
+			{
+				name: '_tag',
+				type: 'token'
+			},
+		
+		
+		],
 		scopes: scopes,
 		controller: controller.getPatient
 	},
@@ -62,20 +67,126 @@ let routes = [
 			name: 'version',
 			type: 'string'
 		}, {
-			name: 'name',
+			name: '_content',
 			type: 'string'
 		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'active',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-city',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-country',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-postalcode',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-state',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-use',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'animal-breed',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'animal-species',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
 			name: 'birthdate',
-			type: 'string'
+			type: 'date',
 		}, {
-			name: 'gender',
-			type: 'string'
+			versions: [VERSIONS.STU3],
+			name: 'death-date',
+			type: 'date',
 		}, {
-			name: 'given',
-			type: 'string'
+			versions: [VERSIONS.STU3],
+			name: 'deceased',
+			type: 'token',
 		}, {
+			versions: [VERSIONS.STU3],
+			name: 'email',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
 			name: 'family',
-			type: 'string'
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'gender',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'general-practitioner',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'given',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'language',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'link',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'name',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'organization',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'phone',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'phonetic',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'telecom',
+			type: 'token',
 		}],
 		scopes: scopes,
 		controller: controller.getPatient
@@ -97,23 +208,6 @@ let routes = [
 		scopes: scopes,
 		controller: controller.getPatientById
 	}
-	// ,	{
-	// 	type: 'get',
-	// 	path: '/:version/patient/friend/:id',
-	// 	corsOptions: {
-	// 		methods: ['GET']
-	// 	},
-	// 	args: [{
-	// 		name: 'version',
-	// 		type: 'string'
-	// 	}, {
-	// 		name: 'id',
-	// 		type: 'string',
-	// 		required: true
-	// 	}],
-	// 	scopes: scopes,
-	// 	controller: controller.getPatientByFriend
-	// }
 ];
 
 let codes = {

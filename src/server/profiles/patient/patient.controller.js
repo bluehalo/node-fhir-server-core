@@ -8,6 +8,8 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		
+		logger.info("gvybhbuhbjhbjhbjhbhjbj")
 
 		/**
 		* return service.getPatient(req, logger)
@@ -50,7 +52,6 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 			});
 	};
 
-
 };
 
 
@@ -78,7 +79,12 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
-					res.status(200).json(new Patient(patient));
+					res.status(200).json(patient);
+						
+						
+						
+						
+						//new Patient(patient));
 				} else {
 					next(errors.notFound('Patient not found'));
 				}

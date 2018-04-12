@@ -3,7 +3,8 @@ exports.DSTU2 = {
 		OPERATIONOUTCOME: 'OperationOutcome',
 		CONFORMANCE: 'Conformance',
 		OBSERVATION: 'Observation',
-		PATIENT: 'Patient'
+		PATIENT: 'Patient',
+		PRACTITIONER: 'Practitioner'
 	},
 	STATUSES: {
 		DRAFT: 'draft',
@@ -21,7 +22,8 @@ exports.STU3 = {
 		OPERATIONOUTCOME: 'OperationOutcome',
 		CONFORMANCE: 'CapabilityStatement',
 		OBSERVATION: 'Observation',
-		PATIENT: 'Patient'
+		PATIENT: 'Patient',
+		PRACTITIONER: 'Practitioner'
 	},
 	STATUSES: {
 		DRAFT: 'draft',
@@ -37,6 +39,7 @@ exports.STU3 = {
 exports.CONFIG_KEYS = {
 	OBSERVATION: 'observation',
 	PATIENT: 'patient',
+	PRACTITIONER: 'practitioner',
 	OAUTH: 'oauth'
 };
 
