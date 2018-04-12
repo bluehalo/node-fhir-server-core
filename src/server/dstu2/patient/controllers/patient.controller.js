@@ -3,7 +3,7 @@ const { VERSIONS } = require('../../../../constants');
 const { Patient } = require('../../resources');
 
 
-module.exports.getPatient = (profile, logger, config) => {
+module.exports.getPatient = ({ profile, logger, config }) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through
@@ -58,7 +58,7 @@ module.exports.getPatient = (profile, logger, config) => {
 };
 
 
-module.exports.getPatientById = (profile, logger) => {
+module.exports.getPatientById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	// Create a context I can pass some data through

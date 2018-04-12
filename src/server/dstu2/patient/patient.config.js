@@ -1,4 +1,5 @@
 const controller = require('./controllers/patient.controller');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 
 const scopes = [
   'user/*.*',
@@ -87,6 +88,10 @@ let codes = {
  * @summary Patient config
  */
 module.exports = {
+	routeOptions: {
+		profileKey: CONFIG_KEYS.PATIENT,
+		version: VERSIONS.DSTU2
+	},
 	routes,
 	codes
 };

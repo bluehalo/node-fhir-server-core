@@ -34,6 +34,11 @@ exports.STU3 = {
 	}
 };
 
+exports.CONFIG_KEYS = {
+	OBSERVATION: 'observation',
+	PATIENT: 'patient',
+	OAUTH: 'oauth'
+};
 
 exports.ISSUE = {
 	SEVERITY: {

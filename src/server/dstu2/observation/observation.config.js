@@ -1,4 +1,5 @@
 const controller = require('./controllers/observation.controller');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 
 const scopes = [
   'user/*.*',
@@ -88,5 +89,9 @@ let routes = [
  * @summary Observations config
  */
 module.exports = {
-	routes
+	routes,
+	routeOptions: {
+		profileKey: CONFIG_KEYS.OBSERVATION,
+		version: VERSIONS.DSTU2
+	}
 };
