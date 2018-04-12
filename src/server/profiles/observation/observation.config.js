@@ -1,104 +1,222 @@
 const controller = require('./observation.controller');
-const { CONFIG_KEYS } = require('../../../constants');
+const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
 
 const scopes = [
-  'user/*.*',
-  'user/Observation.*',
-  'user/Observation.read',
-  'user/*.read',
-  'patient/*.*',
-  'patient/Observation.*',
-  'patient/Observation.read',
-  'patient/*.read'
+	'user/*.*',
+	'user/Observation.*',
+	'user/Observation.read',
+	'user/*.read',
+	'observation/*.*',
+	'observation/Observation.*',
+	'observation/Observation.read',
+	'observation/*.read'
 ];
 
 let routes = [
-  {
-    type: 'get',
+	{
+		type: 'get',
 		path: '/:version/observation',
 		corsOptions: {
 			methods: ['GET']
 		},
-    args: [{
+		args: [{
 			name: 'version',
 			type: 'string'
-		}, {
-      name: 'patient',
-			type: 'string',
-			required: true
-    }, {
-      name: 'category',
-      type: 'string'
-    }, {
-      name: 'code',
-      type: 'string'
-    }, {
-      name: 'date',
-      type: 'string'
-    }, {
-			name: '_format',
-			type: 'string'
-		}],
-    scopes: scopes,
-    controller: controller.getObservations
+		},
+			{
+				name: '_content',
+				type: 'string'
+			},
+			{
+				name: '_id',
+				type: 'token'
+			},
+			{
+				name: '_lastUpdated',
+				type: 'date'
+			},
+			{
+				name: '_profile',
+				type: 'uri'
+			},
+			{
+				name: '_query',
+				type: 'token'
+			},
+			{
+				name: '_security',
+				type: 'token'
+			},
+			{
+				name: '_tag',
+				type: 'token'
+			},
+		
+		
+		],
+		scopes: scopes,
+		controller: controller.getObservation
 	},
 	{
-    type: 'post',
+		type: 'post',
 		path: '/:version/observation/_search',
 		corsOptions: {
 			methods: ['POST']
 		},
-    args: [{
+		args: [{
 			name: 'version',
 			type: 'string'
 		}, {
-      name: 'patient',
-			type: 'string',
-			required: true
-    }, {
-      name: 'category',
-      type: 'string'
-    }, {
-      name: 'code',
-      type: 'string'
-    }, {
-      name: 'date',
-      type: 'string'
-    }, {
-			name: '_format',
+			name: '_content',
 			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'active',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-city',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-country',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-postalcode',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-state',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-use',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'animal-breed',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'animal-species',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'birthdate',
+			type: 'date',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'death-date',
+			type: 'date',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'deceased',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'email',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'family',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'gender',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'general-practitioner',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'given',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'language',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'link',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'name',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'organization',
+			type: 'reference',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'phone',
+			type: 'token',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'phonetic',
+			type: 'string',
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'telecom',
+			type: 'token',
 		}],
-    scopes: scopes,
-    controller: controller.getObservations
-  },
-  {
-    type: 'get',
+		scopes: scopes,
+		controller: controller.getObservation
+	},
+	{
+		type: 'get',
 		path: '/:version/observation/:id',
 		corsOptions: {
 			methods: ['GET']
 		},
-    args: [{
+		args: [{
 			name: 'version',
 			type: 'string'
 		}, {
-      name: 'id',
-      type: 'number',
-      required: true
-    }],
-    scopes: scopes,
-    controller: controller.getObservationById
-  }
+			name: 'id',
+			type: 'string',
+			required: true
+		}],
+		scopes: scopes,
+		controller: controller.getObservationById
+	}
 ];
-
-
 
 /**
  * @name exports
- * @summary Observations config
+ * @summary Observation config
  */
 module.exports = {
-	routes,
 	routeOptions: {
-		profileKey: CONFIG_KEYS.OBSERVATION
-	}
+		profileKey: CONFIG_KEYS.PATIENT
+	},
+	routes,
 };

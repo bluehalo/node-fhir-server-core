@@ -9,8 +9,6 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		
-		logger.info("gvybhbuhbjhbjhbjhbhjbj")
-
 		/**
 		* return service.getPatient(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
@@ -59,7 +57,7 @@ module.exports.getPatientById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		
 		// Create a context I can pass some data through
 		let context = {
 			version: req.params.version
@@ -79,12 +77,9 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
-					res.status(200).json(patient);
-						
-						
-						
-						
-						//new Patient(patient));
+					//res.status(200).json(patient);
+
+						res.status(200).json(new Patient(patient));
 				} else {
 					next(errors.notFound('Patient not found'));
 				}
@@ -94,23 +89,3 @@ module.exports.getPatientById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getPatientByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getPatientByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

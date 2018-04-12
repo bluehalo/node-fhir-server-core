@@ -2,9 +2,24 @@ exports.DSTU2 = {
 	RESOURCE_TYPES: {
 		OPERATIONOUTCOME: 'OperationOutcome',
 		CONFORMANCE: 'Conformance',
+		ALLERGYINTOLERANCE: 'AllergyIntolerance',
+		CAREPLAN: 'CarePlan',
+		CARETEAM: 'CareTeam',
+		CONDITION: 'Condition',
+		DEVICE: 'Device',
+		DIAGNOSTICREPORT: 'DiagnosticReport',
+		GOAL: 'Goal',
+		IMMUNIZATION: 'Immunization',
+		LOCATION: 'Location',
+		MEDICATION: 'Medication',
+		MEDICATIONREQUEST: 'MedicationRequest',
+		MEDICATIONSTATEMENT: 'MedicationStatement',
 		OBSERVATION: 'Observation',
+		ORGANIZATION: 'Organization',
 		PATIENT: 'Patient',
-		PRACTITIONER: 'Practitioner'
+		PRACTITIONER: 'Practitioner',
+		RESULTS: 'Results',
+		SMOKINGSTATUS: 'SmokingStatus'
 	},
 	STATUSES: {
 		DRAFT: 'draft',
@@ -21,9 +36,24 @@ exports.STU3 = {
 	RESOURCE_TYPES: {
 		OPERATIONOUTCOME: 'OperationOutcome',
 		CONFORMANCE: 'CapabilityStatement',
+		ALLERGYINTOLERANCE: 'AllergyIntolerance',
+		CAREPLAN: 'CarePlan',
+		CARETEAM: 'CareTeam',
+		CONDITION: 'Condition',
+		DEVICE: 'Device',
+		DIAGNOSTICREPORT: 'DiagnosticReport',
+		GOAL: 'Goal',
+		IMMUNIZATION: 'Immunization',
+		LOCATION: 'Location',
+		MEDICATION: 'Medication',
+		MEDICATIONREQUEST: 'MedicationRequest',
+		MEDICATIONSTATEMENT: 'MedicationStatement',
 		OBSERVATION: 'Observation',
+		ORGANIZATION: 'Organization',
 		PATIENT: 'Patient',
-		PRACTITIONER: 'Practitioner'
+		PRACTITIONER: 'Practitioner',
+		RESULTS: 'Results',
+		SMOKINGSTATUS: 'SmokingStatus'
 	},
 	STATUSES: {
 		DRAFT: 'draft',

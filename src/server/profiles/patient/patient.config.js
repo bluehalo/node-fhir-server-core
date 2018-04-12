@@ -210,10 +210,6 @@ let routes = [
 	}
 ];
 
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
-
 /**
  * @name exports
  * @summary Patient config
@@ -223,5 +219,4 @@ module.exports = {
 		profileKey: CONFIG_KEYS.PATIENT
 	},
 	routes,
-	codes
 };

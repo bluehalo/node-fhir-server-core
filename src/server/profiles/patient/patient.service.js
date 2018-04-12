@@ -15,108 +15,44 @@ module.exports.getPatient = (req, logger, context) => new Promise((resolve, reje
 module.exports.getPatientById = (req, logger, context) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'getPatientById\'';
 	logger.info(message);
-	resolve({
-		"resourceType": "Patient",
-		"id": "1",
-		"meta": {
-			"versionId": "2.0"
-		},
-		"text": {
-			"status": "generated",
-			"div": "Doe JOHN\nIdentifier 211 - 778 - 2345\nAddress 425 West Side dr\nApt #101\nGaithersburg MD US\nDate of birth\n01 January 1980"
-		},
-		"extension": [{
-			"url": "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
-			"valueString": "Jane"
-		},
-			{
-				"url": "http://hl7.org/fhir/StructureDefinition/birthPlace",
-				"valueAddress": {
-					"use": "home",
-					"line": [
-						"2110 Silverspring Rd",
-						"Block # 2 "
-					],
-					"city": "New York",
-					"state": "NY",
-					"postalCode": "07882",
-					"country": "US"
-				}
-			}, {
-				"url": "http://hl7.org/fhir/StructureDefinition/us-core-race",
-				"valueCodeableConcept": {
-					"coding": [{
-						"system": "http://hl7.org/fhir/v3/vs/Race",
-						"code": "1002-5",
-						"display": "American Indian or Alaska Native"
-					}]
-				}
-			}, {
-				"url": "http://hl7.org/fhir/StructureDefinition/us-core-ethnicity",
-				"valueCodeableConcept": {
-					"coding": [{
-						"system": "http://hl7.org/fhir/v3/Ethnicity",
-						"code": "2135-2",
-						"display": "Hispanic or Latino"
-					}]
-				}
-			}, {
-				"url": "http://hl7.org/fhir/StructureDefinition/us-core-religion",
-				"valueCodeableConcept": {
-					"coding": [{
-						"system": "http://hl7.org/fhir/v3/vs/ReligiousAffiliation",
-						"code": "1001",
-						"display": "Adventist"
-					}]
-				}
-			}
-		],
-		"identifier": [{
-			"use": "official",
-			"system": "https://sitenv.org",
-			"value": "211-778-2345"
-		}],
-		"active": true,
-		"name": [{
-			"family": [
-				"John"
-			],
-			"given": [
-				"Doe"
-			]
-		}],
-		"telecom": [{
-			"system": "phone",
-			"value": "301-889-8767",
-			"use": "home"
-		}],
-		"gender": "male",
-		"birthDate": "1980-01-01",
-		"address": [{
-			"line": [
-				"425 West Side dr",
-				"Apt #101"
-			],
-			"city": "Gaithersburg",
-			"state": "MD",
-			"postalCode": "20878",
-			"country": "US"
-		}],
-		"maritalStatus": {
-			"coding": [{
-				"system": "http://hl7.org/fhir/v3/MaritalStatus",
-				"code": "M"
-			}]
-		},
-		"communication": [{
-			"language": {
-				"coding": [{
-					"system": "http://tools.ietf.org/html/bcp47",
-					"display": "English"
-				}]
-			}
-		}]
-	})
-//
-// 	reject(new Error(message));
+	// resolve({
+	// 	"resourceType": "Patient",
+	// 	"id": "1",
+	// 	"meta": {
+	// 		"versionId": "2.0"
+	// 	},
+	// 	"text": {
+	// 		"status": "generated",
+	// 		"div": "Doe JOHN\nIdentifier 211 - 778 - 2345\nAddress 425 West Side dr\nApt #101\nGaithersburg MD US\nDate of birth\n01 January 1980"
+	// 	},
+	// 	"extension": [{
+	// 		"url": "http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName",
+	// 		"valueString": "Jane"
+	// 	},
+	// 		{
+	// 			"url": "http://hl7.org/fhir/StructureDefinition/birthPlace",
+	// 			"valueAddress": {
+	// 				"use": "home",
+	// 				"line": [
+	// 					"2110 Silverspring Rd",
+	// 					"Block # 2 "
+	// 				],
+	// 				"city": "New York",
+	// 				"state": "NY",
+	// 				"postalCode": "07882",
+	// 				"country": "US"
+	// 			}
+	// 		}, {
+	// 			"url": "http://hl7.org/fhir/StructureDefinition/us-core-ethnicity",
+	// 			"valueCodeableConcept": {
+	// 				"coding": [{
+	// 					"system": "http://hl7.org/fhir/v3/Ethnicity",
+	// 					"code": "2135-2",
+	// 					"display": "Hispanic or Latino"
+	// 				}]
+	// 			}
+	// 		}]
+	// })
+
+ 	reject(new Error(message));
 });
