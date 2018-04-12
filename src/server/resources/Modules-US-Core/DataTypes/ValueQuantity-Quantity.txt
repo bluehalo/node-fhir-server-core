@@ -1,0 +1,11 @@
+.... valueQuantity	S	0..1	Quantity	Vital Sign Value recorded with UCUM
+Binding: Vital Signs Units (extensible)
+..... id		0..1	string	xml:id (or equivalent in JSON)
+..... extension		0..*	Extension	Additional Content defined by implementations
+..... value	S	1..1	decimal	Numerical value (with implicit precision)
+..... comparator	?!*	0..1	code	< | <= | >= | > - how to understand the value
+Binding: QuantityComparator (required)
+..... unit	S	1..1	string	Unit representation
+..... system	SI	1..1	uri	System that defines coded unit form
+Fixed Value: http://unitsofmeasure.org
+..... code	S	1..1	code	Coded responses from the common UCUM units for vital signs value set.

@@ -1,0 +1,88 @@
+Main
+Goal
+id	Î£	0..1	id	Logical id of this artifact
+
+meta	Î£	0..1	Meta	Metadata about the resource
+
+implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier		0..*	Identifier	External Ids for this goal
+
+status	?!SÎ£	1..1	code	proposed | accepted | planned | in-progress | on-target | ahead-of-target | behind-target | sustaining | achieved | on-hold | cancelled | entered-in-error | rejected
+Binding: GoalStatus (required)
+
+category	Î£	0..*	CodeableConcept	E.g. Treatment, dietary, behavioral, etc.
+Binding: GoalCategory (example)
+
+priority	Î£	0..1	CodeableConcept	high-priority | medium-priority | low-priority
+Binding: GoalPriority (preferred)
+
+description	SÎ£	1..1	CodeableConcept	Code or text describing goal
+Binding: SNOMED CT Clinical Findings (example)
+
+subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who this goal is intended for
+
+start[x]	Σ	0..1		When goal pursuit begins
+GoalStartEvent (Example)
+
+startDate			date
+
+startCodeableConcept			CodeableConcept
+
+target	I	0..1	BackboneElement	Target outcome for the goal
+gol-1: Goal.target.measure is required if Goal.target.detail is populated
+
+statusDate	Î£	0..1	date	When goal status took effect
+
+statusReason		0..1	string	Reason for current status
+
+expressedBy	Î£	0..1	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson)	Who's responsible for creating Goal?
+
+addresses		0..*	Reference(Condition), Reference(Observation), Reference(MedicationStatement), Reference(NutritionOrder), Reference(ProcedureRequest), Reference(RiskAssessment)	Issues addressed by this goal
+
+note		0..*	Annotation	Comments about the goal
+
+outcomeCode		0..*	CodeableConcept	What result was achieved regarding the goal?
+Binding: SNOMED CT Clinical Findings (example)
+
+outcomeReference		0..*	Reference(Observation)	Observation that resulted from goal
+
+
+Backbone
+target
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+
+measure	Î£I	0..1	CodeableConcept	The parameter whose value is being tracked
+Binding: LOINC Codes (example)
+
+detail[x]	ΣI	0..1		The target value to be achieved
+
+detailQuantity			Quantity
+
+detailRange			Range
+
+detailCodeableConcept			CodeableConcept
+
+due[x]	Σ	0..1		Reach goal on or before
+
+dueDate			date
+
+dueDuration			Duration
+
+
+eof

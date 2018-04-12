@@ -1,0 +1,11 @@
+... vaccineCode	S	1..1	CodeableConcept	Vaccine Product Type (bind to CVX)
+Binding: Vaccine Administered Value Set (example)
+.... id		0..1	string	xml:id (or equivalent in JSON)
+.... extension		0..*	Extension	Additional Content defined by implementations
+.... coding	âˆ‘		Coding	Code defined by a terminology system
+Slice: Unordered, Open, by code
+.... coding	S	1..1	Coding	Code defined by a terminology system
+Binding: Vaccine Administered Value Set (CVX) (required)
+.... coding	S	0..1	Coding	Code defined by a terminology system
+Binding: Vaccine National Drug Code (NDC) (required)
+.... text	âˆ‘	0..1	string	Plain text representation of the concept

@@ -1,0 +1,88 @@
+Main
+Procedure
+identifier	Σ	0..*	Identifier	External Identifiers for this procedure
+
+definition	Σ	0..*	Reference(PlanDefinition | ActivityDefinition | HealthcareService)	Instantiates protocol or definition
+
+basedOn	Σ	0..*	Reference(CarePlan | ProcedureRequest | ReferralRequest)	A request for this procedure
+
+partOf	Σ	0..*	Reference(Procedure | Observation | MedicationAdministration)	Part of referenced event
+
+status	?!Σ	1..1	code	preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
+EventStatus (Required)
+
+notDone	?!Σ	0..1	boolean	True if procedure was not performed as scheduled
+
+notDoneReason	ΣI	0..1	CodeableConcept	Reason procedure was not performed
+Procedure Not Performed Reason (SNOMED-CT) (Example)
+
+category	Σ	0..1	CodeableConcept	Classification of the procedure
+Procedure Category Codes (SNOMED CT) (Example)
+
+code	Σ	0..1	CodeableConcept	Identification of the procedure
+Procedure Codes (SNOMED CT) (Example)
+
+subject	Σ	1..1	Reference(Patient | Group)	Who the procedure was performed on
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or episode associated with the procedure
+
+performed[x]	Σ	0..1		Date/Period the procedure was performed
+
+performedDateTime			dateTime
+
+performedPeriod			Period
+
+performer	Σ	0..*	BackboneElement	The people who performed the procedure
+
+focalDevice		0..*	BackboneElement	Device changed in procedure
+
+location	Σ	0..1	Reference(Location)	Where the procedure happened
+
+reasonCode	Σ	0..*	CodeableConcept	Coded reason procedure performed
+Procedure Reason Codes (Example)
+
+reasonReference	Σ	0..*	Reference(Condition | Observation)	Condition that is the reason the procedure performed
+
+bodySite	Σ	0..*	CodeableConcept	Target body sites
+SNOMED CT Body Structures (Example)
+
+outcome	Σ	0..1	CodeableConcept	The result of procedure
+Procedure Outcome Codes (SNOMED CT) (Example)
+
+report		0..*	Reference(DiagnosticReport)	Any report resulting from the procedure
+
+complication		0..*	CodeableConcept	Complication following the procedure
+Condition/Problem/Diagnosis Codes (Example)
+
+complicationDetail		0..*	Reference(Condition)	A condition that is a result of the procedure
+
+followUp		0..*	CodeableConcept	Instructions for follow up
+Procedure Follow up Codes (SNOMED CT) (Example)
+
+note		0..*	Annotation	Additional information about the procedure
+
+usedReference		0..*	Reference(Device | Medication | Substance)	Items used during procedure
+
+usedCode		0..*	CodeableConcept	Coded items used during the procedure
+FHIR Device Types (Example)
+
+
+Backbone
+performer
+role	Σ	0..1	CodeableConcept	The role the actor was in
+Procedure Performer Role Codes (Example)
+
+actor	Σ	1..1	Reference(Practitioner | Organization | Patient | RelatedPerson | Device)	The reference to the practitioner
+
+onBehalfOf		0..1	Reference(Organization)	Organization the device or practitioner was acting for
+
+
+Backbone
+focalDevice
+action		0..1	CodeableConcept	Kind of change to device
+Procedure Device Action Codes (Preferred)
+
+manipulated		1..1	Reference(Device)	Device that was changed
+
+
+eof

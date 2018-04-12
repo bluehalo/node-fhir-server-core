@@ -1,0 +1,91 @@
+Main
+MedicationRequest
+identifier		0..*	Identifier	External ids for this request
+
+definition	Σ	0..*	Reference(ActivityDefinition | PlanDefinition)	Protocol or definition
+
+basedOn	Σ	0..*	Reference(CarePlan | MedicationRequest | ProcedureRequest | ReferralRequest)	What request fulfills
+
+groupIdentifier	Σ	0..1	Identifier	Composite request this is part of
+
+status	?!Σ	0..1	code	active | on-hold | cancelled | completed | entered-in-error | stopped | draft | unknown
+MedicationRequestStatus (Required)
+
+intent	?!Σ	1..1	code	proposal | plan | order | instance-order
+MedicationRequestIntent (Required)
+
+category		0..1	CodeableConcept	Type of medication usage
+MedicationRequestCategory (Preferred)
+
+priority	Σ	0..1	code	routine | urgent | stat | asap
+MedicationRequestPriority (Required)
+
+medication[x]	Σ	1..1		Medication to be taken
+SNOMED CT Medication Codes (Example)
+
+medicationCodeableConcept			CodeableConcept
+
+medicationReference			Reference(Medication)
+
+subject	Σ	1..1	Reference(Patient | Group)	Who or group medication request is for
+
+context		0..1	Reference(Encounter | EpisodeOfCare)	Created during encounter/admission/stay
+
+supportingInformation		0..*	Reference(Any)	Information to support ordering of the medication
+
+authoredOn	Σ	0..1	dateTime	When request was initially authored
+
+recorder		0..1	Reference(Practitioner)	Person who entered the request
+
+reasonCode		0..*	CodeableConcept	Reason or indication for writing the prescription
+Condition/Problem/Diagnosis Codes (Example)
+
+reasonReference		0..*	Reference(Condition | Observation)	Condition or Observation that supports why the prescription is being written
+
+note		0..*	Annotation	Information about the prescription
+
+dosageInstruction		0..*	Dosage	How the medication should be taken
+
+priorPrescription		0..1	Reference(MedicationRequest)	An order/prescription that is being replaced
+
+detectedIssue		0..*	Reference(DetectedIssue)	Clinical Issue with action
+
+eventHistory		0..*	Reference(Provenance)	A list of events of interest in the lifecycle
+
+requester	ΣI	0..1	BackboneElement	Who/What requested the Request
++ onBehalfOf can only be specified if agent is practitioner or device
+
+dispenseRequest		0..1	BackboneElement	Medication supply authorization
+
+substitution		0..1	BackboneElement	Any restrictions on medication substitution
+
+
+Backbone
+requester
+agent	Σ	1..1	Reference(Practitioner | Organization | Patient | RelatedPerson | Device)	Who ordered the initial medication(s)
+
+onBehalfOf	ΣI	0..1	Reference(Organization)	Organization agent is acting for
+
+
+Backbone
+dispenseRequest
+validityPeriod		0..1	Period	Time period supply is authorized for
+
+numberOfRepeatsAllowed		0..1	positiveInt	Number of refills authorized
+
+quantity		0..1	SimpleQuantity	Amount of medication to supply per dispense
+
+expectedSupplyDuration		0..1	Duration	Number of days supply per dispense
+
+performer		0..1	Reference(Organization)	Intended dispenser
+
+
+Backbone
+substitution
+allowed	?!	1..1	boolean	Whether substitution is allowed or not
+
+reason		0..1	CodeableConcept	Why should (not) substitution be made
+SubstanceAdminSubstitutionReason (Example)
+
+
+eof

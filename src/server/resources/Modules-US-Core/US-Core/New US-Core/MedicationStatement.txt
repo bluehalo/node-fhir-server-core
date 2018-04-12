@@ -1,0 +1,65 @@
+Main
+MedicationStatement
+id	*	0..1	id	Logical id of this artifact
+
+meta	*	0..1	Meta	Metadata about the resource
+
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier		0..*	Identifier	External identifier
+
+status	?!S	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
+Binding: MedicationStatementStatus (required)
+
+medication[x]	Σ	1..1		What medication was taken
+SNOMED CT Medication Codes (Example)
+
+medicationCodeableConcept			CodeableConcept
+
+medicationReference			Reference(Medication)
+
+subject	S	1..1	Reference(US Core Patient Profile)	Who is/was taking the medication
+
+effective[x]	Σ	0..1		The date/time or interval when the medication was taken
+
+effectiveDateTime			dateTime
+
+effectivePeriod			Period
+
+informationSource		0..1	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson), Reference(Organization)	Person or organization that provided the information about the taking of this medication
+
+derivedFrom		0..*	Reference(Resource)	Additional supporting information
+
+dateAsserted	S	1..1	dateTime	When the statement was asserted?
+
+notTaken	?!*	0..1	code	y | n | unk
+Binding: MedicationStatementNotTaken (required)
+
+reasonNotTaken	I	0..*	CodeableConcept	True if asserting medication was not given
+Binding: SNOMED CT Drugs not taken/completed Codes (example)
+
+reasonForUseCodeableConcept		0..*	CodeableConcept	Reason for why the medication is being/was taken
+Binding: Condition/Problem/Diagnosis Codes (example)
+
+reasonForUseReference		0..*	Reference(Condition), Reference(Observation)	Condition or observation that supports why the medication is being/was taken
+
+note		0..*	Annotation	Further information about the statement
+
+category		0..1	code	Type of medication usage
+Binding: MedicationStatementCategory (example)
+
+dosage		0..*	DosageInstruction	Details of how medication was taken
+
+
+eof

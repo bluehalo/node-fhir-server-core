@@ -1,0 +1,105 @@
+Main
+MedicationRequest
+id	*	0..1	id	Logical id of this artifact
+
+meta	*	0..1	Meta	Metadata about the resource
+
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier		0..*	Identifier	External identifier
+
+definition	*	0..*	Reference(ActivityDefinition), Reference(PlanDefinition)	Protocol or definition
+
+basedOn	*	0..*	Reference(CarePlan), Reference(DiagnosticRequest), Reference(MedicationRequest), Reference(ProcedureRequest), Reference(ReferralRequest)	What request fulfills
+
+requisition	*	0..1	Identifier	Identifier of composite
+
+status	?!S	1..1	code	active | on-hold | cancelled | completed | entered-in-error | stopped | draft
+Binding: medication-order-status (required)
+
+stage	?!*	1..1	CodeableConcept	proposal | plan | original-order
+Binding: MedicationRequestStage (example)
+
+medication[x]	Σ	1..1		Medication to be taken
+SNOMED CT Medication Codes (Example)
+
+medicationCodeableConcept			CodeableConcept
+
+medicationReference			Reference(Medication)
+
+patient	S	1..1	Reference(US Core Patient Profile)	Who prescription is for
+
+context		0..1	Reference(Encounter), Reference(EpisodeOfCare)	Created during encounter/admission/stay
+
+supportingInformation		0..*	Reference(Resource)	Information to support ordering of the medication
+
+dateWritten	S	1..1	dateTime	When prescription was initially authorized
+
+requester	S	1..1	Reference(US Core Practitioner)	Who ordered the initial medication(s)
+
+reasonCode		0..*	CodeableConcept	Reason or indication for writing the prescription
+Binding: Condition/Problem/Diagnosis Codes (example)
+
+reasonReference		0..*	Reference(Condition), Reference(Observation)	Condition or Observation that supports why the prescription is being written
+
+note		0..*	Annotation	Information about the prescription
+
+category		0..1	CodeableConcept	Type of medication usage
+Binding: MedicationRequestCategory (example)
+
+dosageInstruction		0..*	DosageInstruction	How the medication should be taken
+
+dispenseRequest	I	0..1	BackboneElement	Medication supply authorization
+
+substitution	I	0..1	BackboneElement	Any restrictions on medication substitution
+
+priorPrescription		0..1	Reference(MedicationRequest)	An order/prescription that this supersedes
+
+eventHistory		0..*	Reference(Provenance)	A list of events of interest in the lifecycle
+
+
+Backbone
+dispenseRequest
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+validityPeriod		0..1	Period	Time period supply is authorized for
+
+numberOfRepeatsAllowed		0..1	positiveInt	Number of refills authorized
+
+quantity		0..1	SimpleQuantity	Amount of medication to supply per dispense
+
+expectedSupplyDuration		0..1	Duration	Number of days supply per dispense
+
+performer		0..1	Reference(Organization)	Intended dispenser
+
+
+Backbone
+substitution
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+allowed	?!	1..1	boolean	Whether substitution is allowed or not
+
+reason		0..1	CodeableConcept	Why should (not) substitution be made
+Binding: SubstanceAdminSubstitutionReason (example)
+
+
+eof

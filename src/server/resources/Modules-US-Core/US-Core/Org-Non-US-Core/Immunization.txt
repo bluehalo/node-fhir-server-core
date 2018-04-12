@@ -1,0 +1,99 @@
+Main
+Immunization
+identifier		0..*	Identifier	Business identifier
+
+status	?!Σ	1..1	code	completed | entered-in-error
+Immunization Status Codes (Required)
+
+notGiven	?!Σ	1..1	boolean	Flag for whether immunization was given
+
+vaccineCode		1..1	CodeableConcept	Vaccine product administered
+Vaccine Administered Value Set (Example)
+
+patient		1..1	Reference(Patient)	Who was immunized
+
+encounter		0..1	Reference(Encounter)	Encounter administered as part of
+
+date		0..1	dateTime	Vaccination administration date
+
+primarySource		1..1	boolean	Indicates context the data was recorded in
+
+reportOrigin		0..1	CodeableConcept	Indicates the source of a secondarily reported record
+Immunization Origin Codes (Example)
+
+location		0..1	Reference(Location)	Where vaccination occurred
+
+manufacturer		0..1	Reference(Organization)	Vaccine manufacturer
+
+lotNumber		0..1	string	Vaccine lot number
+
+expirationDate		0..1	date	Vaccine expiration date
+
+site		0..1	CodeableConcept	Body site vaccine was administered
+Codes for Immunization Site of Administration (Example)
+
+route		0..1	CodeableConcept	How vaccine entered body
+Immunization Route Codes (Example)
+
+doseQuantity		0..1	SimpleQuantity	Amount of vaccine administered
+
+note	Σ	0..*	Annotation	Vaccination notes
+
+practitioner	Σ	0..*	BackboneElement	Who performed event
+
+explanation		0..1	BackboneElement	Administration/non-administration reasons
+
+reaction		0..*	BackboneElement	Details of a reaction that follows immunization
+
+vaccinationProtocol		0..*	BackboneElement	What protocol was followed
+
+
+Backbone
+practitioner
+role	Σ	0..1	CodeableConcept	What type of performance was done
+Immunization Role Codes (Extensible)
+
+actor	Σ	1..1	Reference(Practitioner)	Individual who was performing
+
+
+Backbone
+explanation
+reason		0..*	CodeableConcept	Why immunization occurred
+Immunization Reason Codes (Example)
+
+reasonNotGiven		0..*	CodeableConcept	Why immunization did not occur
+Immunization Reasons for Not Immunizing Codes (Example)
+
+
+Backbone
+reaction
+date		0..1	dateTime	When reaction started
+
+detail		0..1	Reference(Observation)	Additional information on reaction
+
+reported		0..1	boolean	Indicates self-reported reaction
+
+
+Backbone
+vaccinationProtocol
+doseSequence		0..1	positiveInt	Dose number within series
+
+description		0..1	string	Details of vaccine protocol
+
+authority		0..1	Reference(Organization)	Who is responsible for protocol
+
+series		0..1	string	Name of vaccine series
+
+seriesDoses		0..1	positiveInt	Recommended number of doses for immunity
+
+targetDisease		1..*	CodeableConcept	Disease immunized against
+Vaccination Protocol Dose Target Codes (Example)
+
+doseStatus		1..1	CodeableConcept	Indicates if dose counts towards immunity
+Vaccination Protocol Dose Status codes (Example)
+
+doseStatusReason		0..1	CodeableConcept	Why dose does (not) count
+Vaccination Protocol Dose Status Reason codes (Example)
+
+
+eof
