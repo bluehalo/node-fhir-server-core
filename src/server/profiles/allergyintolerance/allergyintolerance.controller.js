@@ -1,4 +1,4 @@
-const AllergyIntolerance = require('../../resources/AllergyIntolerance');
+const AllergyIntolerance = require('../../resources/uscore/resources/AllergyIntolerance');
 const errors = require('../../utils/error.utils');
 
 module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {

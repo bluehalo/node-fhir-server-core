@@ -1,4 +1,4 @@
-const Location = require('../../resources/Location');
+const Location = require('../../resources/uscore/resources/Location');
 const errors = require('../../utils/error.utils');
 
 module.exports.getLocation = ({ profile, logger, config }) => {

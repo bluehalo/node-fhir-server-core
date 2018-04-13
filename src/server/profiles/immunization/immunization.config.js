@@ -22,38 +22,88 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			},
-		
-		
-		],
+		}, {
+			name: '_content',
+			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'dose-sequence',
+			type: 'number'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'location',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'lot-number',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'manufacturer',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'notgiven',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'patient',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'practitioner',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'reaction',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'reaction-date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'reason',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'reason-not-given',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'vaccine-code',
+			type: 'token'
+		}],
 		scopes: scopes,
 		controller: controller.getImmunization
 	},

@@ -1,4 +1,4 @@
-const Practitioner = require('../../resources/Practitioner');
+const Practitioner = require('../../resources/uscore/resources/Practitioner');
 const errors = require('../../utils/error.utils');
 
 module.exports.getPractitioner = ({ profile, logger, config }) => {

@@ -22,38 +22,84 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			},
-		
-		
-		],
+		}, {
+			name: '_content',
+			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'authoredon',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'category',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'code',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'context',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'intended-dispenser',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'intent',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'medication',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'patient',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'priority',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'requestor',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'subject',
+			type: 'reference'
+		}],
 		scopes: scopes,
 		controller: controller.getMedicationRequest
 	},

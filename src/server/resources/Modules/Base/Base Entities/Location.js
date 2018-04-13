@@ -1,10 +1,6 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
 const Coding = require('./types/Coding');
 const CodeableConcept = require('./types/CodeableConcept');
 const ContactPoint = require('./types/ContactPoint');
@@ -14,41 +10,6 @@ const Reference = require('./types/Reference');
 class Position {
 	constructor(obj) {
 		Object.assign(this, obj);
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
 	}
 
 	// longitude		1..1	decimal	Longitude with WGS84 datum
@@ -80,9 +41,6 @@ class Position {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			longitude: this._longitude,
 			latitude: this._latitude,
 			altitude: this._altitude,
@@ -105,92 +63,7 @@ class Location extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// identifier	Î£	0..*	Identifier	Unique code or number identifying the location to its users
+	// identifier	Σ	0..*	Identifier	Unique code or number identifying the location to its users
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -203,8 +76,8 @@ class Location extends DomainResource {
 		return this._identifier;
 	}
 
-	// status	?!Î£	0..1	code	active | suspended | inactive
-	// Binding: LocationStatus (required)
+	// status	?!Σ	0..1	code	active | suspended | inactive
+	// LocationStatus (Required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -213,8 +86,8 @@ class Location extends DomainResource {
 		return this._status;
 	}
 
-	// operationalStatus	Î£	0..1	Coding	The Operational status of the location (typically only for a bed/room)
-	// Binding: v2 Bed Status (preferred)
+	// operationalStatus	Σ	0..1	Coding	The Operational status of the location (typically only for a bed/room)
+	// v2 Bed Status (Preferred)
 	set operationalStatus(operationalStatus) {
 		this._operationalStatus = new Coding(operationalStatus);
 	}
@@ -223,7 +96,7 @@ class Location extends DomainResource {
 		return this._operationalStatus;
 	}
 
-	// name	SÎ£	1..1	string	Name of the location as used by humans
+	// name	Σ	0..1	string	Name of the location as used by humans
 	set name(name) {
 		this._name = name;
 	}
@@ -241,7 +114,7 @@ class Location extends DomainResource {
 		return this._alias;
 	}
 
-	// description	Î£	0..1	string	Additional details about the location that could be displayed as further information to identify the location beyond its name
+	// description	Σ	0..1	string	Additional details about the location that could be displayed as further information to identify the location beyond its name
 	set description(description) {
 		this._description = description;
 	}
@@ -250,8 +123,8 @@ class Location extends DomainResource {
 		return this._description;
 	}
 
-	// mode	?!Î£	0..1	code	instance | kind
-	// Binding: LocationMode (required)
+	// mode	?!Σ	0..1	code	instance | kind
+	// LocationMode (Required)
 	set mode(mode) {
 		this._mode = new Code(mode);
 	}
@@ -260,8 +133,8 @@ class Location extends DomainResource {
 		return this._mode;
 	}
 
-	// type	Î£	0..1	CodeableConcept	Type of function performed
-	// Binding: ServiceDeliveryLocationRoleType (extensible)
+	// type	Σ	0..1	CodeableConcept	Type of function performed
+	// ServiceDeliveryLocationRoleType (Extensible)
 	set type(type) {
 		this._type = new CodeableConcept(type);
 	}
@@ -270,7 +143,7 @@ class Location extends DomainResource {
 		return this._type;
 	}
 
-	// telecom	S	0..*	ContactPoint	Contact details of the location
+	// telecom		0..*	ContactPoint	Contact details of the location
 	set telecom(telecom) {
 		if (Array.isArray(telecom)) {
 			this._telecom = telecom.map((i) => new ContactPoint(i));
@@ -283,7 +156,7 @@ class Location extends DomainResource {
 		return this._telecom;
 	}
 
-	// address	S	0..1	Address	Physical location
+	// address		0..1	Address	Physical location
 	set address(address) {
 		this._address = new Address(address);
 	}
@@ -292,8 +165,8 @@ class Location extends DomainResource {
 		return this._address;
 	}
 
-	// physicalType	Î£	0..1	CodeableConcept	Physical form of the location
-	// Binding: LocationType (example)
+	// physicalType	Σ	0..1	CodeableConcept	Physical form of the location
+	// LocationType (Example)
 	set physicalType(physicalType) {
 		this._physicalType = new CodeableConcept(physicalType);
 	}
@@ -302,7 +175,7 @@ class Location extends DomainResource {
 		return this._physicalType;
 	}
 
-	// position	I	0..1	BackboneElement	The absolute geographic location
+	// position		0..1	BackboneElement	The absolute geographic location
 	set position(position) {
 		this._position = new Position(position);
 	}
@@ -311,7 +184,7 @@ class Location extends DomainResource {
 		return this._position;
 	}
 
-	// managingOrganization	SÎ£	0..1	Reference(US Core Organization Profile)	Organization responsible for provisioning and upkeep
+	// managingOrganization	Σ	0..1	Reference(Organization)	Organization responsible for provisioning and upkeep
 	set managingOrganization(managingOrganization) {
 		this._managingOrganization = new Reference(managingOrganization);
 	}
@@ -344,14 +217,6 @@ class Location extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			status: this._status,
 			operationalStatus: this._operationalStatus,

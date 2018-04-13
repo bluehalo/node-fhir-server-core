@@ -1,4 +1,4 @@
-const DiagnosticReport = require('../../resources/DiagnosticReport');
+const DiagnosticReport = require('../../resources/uscore/resources/DiagnosticReport');
 const errors = require('../../utils/error.utils');
 
 module.exports.getDiagnosticReport = ({ profile, logger, config }) => {

@@ -50,10 +50,63 @@ let routes = [
 			{
 				name: '_tag',
 				type: 'token'
-			},
-		
-		
-		],
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'based-on',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'category',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'code',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'context',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'date',
+				type: 'date'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'definition',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'encounter',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'identifier',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'location',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'part-of',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'patient',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'performer',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'status',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'subject',
+				type: 'reference'
+			}],
 		scopes: scopes,
 		controller: controller.getProcedure
 	},

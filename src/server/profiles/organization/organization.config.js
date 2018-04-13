@@ -50,10 +50,59 @@ let routes = [
 			{
 				name: '_tag',
 				type: 'token'
-			},
-		
-		
-		],
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'active',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-city',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-country',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-postalcode',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-state',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-use',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'endpoint',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'identifier',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'name',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'partof',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'phonetic',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'type',
+				type: 'token'
+			}],
 		scopes: scopes,
 		controller: controller.getOrganization
 	},

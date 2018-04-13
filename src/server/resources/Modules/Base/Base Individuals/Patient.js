@@ -1,12 +1,8 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
 const HumanName = require('./types/HumanName');
 const ContactPoint = require('./types/ContactPoint');
+const Code = require('./types/Code');
 const Address = require('./types/Address');
 const CodeableConcept = require('./types/CodeableConcept');
 const Attachment = require('./types/Attachment');
@@ -18,42 +14,7 @@ class Link {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// other	Î£	1..1	Reference(Patient), Reference(RelatedPerson)	The other patient or related person resource that the link refers to
+	// other	Σ	1..1	Reference(Patient | RelatedPerson)	The other patient or related person resource that the link refers to
 	set other(other) {
 		this._other = new Reference(other);
 	}
@@ -62,8 +23,8 @@ class Link {
 		return this._other;
 	}
 
-	// type	Î£	1..1	code	replaced-by | replaces | refer | seealso - type of link
-	// Binding: LinkType (required)
+	// type	Σ	1..1	code	replaced-by | replaces | refer | seealso - type of link
+	// LinkType (Required)
 	set type(type) {
 		this._type = new Code(type);
 	}
@@ -74,9 +35,6 @@ class Link {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			other: this._other,
 			type: this._type,
 		};
@@ -88,43 +46,8 @@ class Communication {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// language	S	1..1	CodeableConcept	The language which can be used to communicate with the patient about his or her health
-	// Binding: Language codes with language and optionally a region modifier (extensible)
+	// language		1..1	CodeableConcept	The language which can be used to communicate with the patient about his or her health
+	// Common Languages (Extensible but limited to All Languages)
 	set language(language) {
 		this._language = new CodeableConcept(language);
 	}
@@ -144,11 +67,52 @@ class Communication {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			language: this._language,
 			preferred: this._preferred,
+		};
+	}
+}
+
+class Animal {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// species	Σ	1..1	CodeableConcept	E.g. Dog, Cow
+	// AnimalSpecies (Example)
+	set species(species) {
+		this._species = new CodeableConcept(species);
+	}
+
+	get species() {
+		return this._species;
+	}
+
+	// breed	Σ	0..1	CodeableConcept	E.g. Poodle, Angus
+	// AnimalBreeds (Example)
+	set breed(breed) {
+		this._breed = new CodeableConcept(breed);
+	}
+
+	get breed() {
+		return this._breed;
+	}
+
+	// genderStatus	Σ	0..1	CodeableConcept	E.g. Neutered, Intact
+	// GenderStatus (Example)
+	set genderStatus(genderStatus) {
+		this._genderStatus = new CodeableConcept(genderStatus);
+	}
+
+	get genderStatus() {
+		return this._genderStatus;
+	}
+
+	toJSON() {
+		return {
+			species: this._species,
+			breed: this._breed,
+			genderStatus: this._genderStatus,
 		};
 	}
 }
@@ -158,43 +122,8 @@ class Contact {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// relationship		0..*	CodeableConcept	The kind of relationship
-	// Binding: v2 Contact Role (extensible)
+	// v2 Contact Role (Extensible)
 	set relationship(relationship) {
 		if (Array.isArray(relationship)) {
 			this._relationship = relationship.map((i) => new CodeableConcept(i));
@@ -239,7 +168,7 @@ class Contact {
 	}
 
 	// gender		0..1	code	male | female | other | unknown
-	// Binding: AdministrativeGender (required)
+	// AdministrativeGender (Required)
 	set gender(gender) {
 		this._gender = new Code(gender);
 	}
@@ -268,9 +197,6 @@ class Contact {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			relationship: this._relationship,
 			name: this._name,
 			telecom: this._telecom,
@@ -297,110 +223,7 @@ class Patient extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// uscorerace	S	0..1	(Complex)	Extension
-	// URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-race
-	set uscorerace(uscorerace) {
-		this._uscorerace = uscorerace;
-	}
-
-	get uscorerace() {
-		return this._uscorerace;
-	}
-
-	// uscoreethnicity	S	0..1	(Complex)	Extension
-	// URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity
-	set uscoreethnicity(uscoreethnicity) {
-		this._uscoreethnicity = uscoreethnicity;
-	}
-
-	get uscoreethnicity() {
-		return this._uscoreethnicity;
-	}
-
-	// uscorebirthsex	S	0..1	code	Extension
-	// URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
-	// Binding: US Core Birth Sex Value Set (required)
-	set uscorebirthsex(uscorebirthsex) {
-		this._uscorebirthsex = new Code(uscorebirthsex);
-	}
-
-	get uscorebirthsex() {
-		return this._uscorebirthsex;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// identifier	SÎ£	1..*	Identifier	An identifier for this patient
+	// identifier	Σ	0..*	Identifier	An identifier for this patient
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -413,7 +236,7 @@ class Patient extends DomainResource {
 		return this._identifier;
 	}
 
-	// active	?!Î£	0..1	boolean	Whether this patient's record is in active use
+	// active	?!Σ	0..1	boolean	Whether this patient's record is in active use
 	set active(active) {
 		this._active = active;
 	}
@@ -422,7 +245,7 @@ class Patient extends DomainResource {
 		return this._active;
 	}
 
-	// name	SÎ£	1..*	HumanName	A name associated with the patient
+	// name	Σ	0..*	HumanName	A name associated with the patient
 	set name(name) {
 		if (Array.isArray(name)) {
 			this._name = name.map((i) => new HumanName(i));
@@ -435,7 +258,7 @@ class Patient extends DomainResource {
 		return this._name;
 	}
 
-	// telecom	Î£	0..*	ContactPoint	A contact detail for the individual
+	// telecom	Σ	0..*	ContactPoint	A contact detail for the individual
 	set telecom(telecom) {
 		if (Array.isArray(telecom)) {
 			this._telecom = telecom.map((i) => new ContactPoint(i));
@@ -448,8 +271,8 @@ class Patient extends DomainResource {
 		return this._telecom;
 	}
 
-	// gender	SÎ£	1..1	code	male | female | other | unknown
-	// Binding: AdministrativeGender (required)
+	// gender	Σ	0..1	code	male | female | other | unknown
+	// AdministrativeGender (Required)
 	set gender(gender) {
 		this._gender = new Code(gender);
 	}
@@ -458,7 +281,7 @@ class Patient extends DomainResource {
 		return this._gender;
 	}
 
-	// birthDate	SÎ£	0..1	date	The date of birth for the individual
+	// birthDate	Σ	0..1	date	The date of birth for the individual
 	set birthDate(birthDate) {
 		this._birthDate = birthDate;
 	}
@@ -467,8 +290,26 @@ class Patient extends DomainResource {
 		return this._birthDate;
 	}
 
-	// deceased[x]	?!Î£	0..1	boolean, dateTime	Indicates if the individual is deceased or not
-	// address	Î£	0..*	Address	Addresses for the individual
+	// deceased[x]	?!Σ	0..1		Indicates if the individual is deceased or not
+	// deceasedBoolean			boolean
+	set deceasedBoolean(deceasedBoolean) {
+		this._deceasedBoolean = deceasedBoolean;
+	}
+
+	get deceasedBoolean() {
+		return this._deceasedBoolean;
+	}
+
+	// deceasedDateTime			dateTime
+	set deceasedDateTime(deceasedDateTime) {
+		this._deceasedDateTime = deceasedDateTime;
+	}
+
+	get deceasedDateTime() {
+		return this._deceasedDateTime;
+	}
+
+	// address	Σ	0..*	Address	Addresses for the individual
 	set address(address) {
 		if (Array.isArray(address)) {
 			this._address = address.map((i) => new Address(i));
@@ -482,7 +323,7 @@ class Patient extends DomainResource {
 	}
 
 	// maritalStatus		0..1	CodeableConcept	Marital (civil) status of a patient
-	// Binding: Marital Status Codes (extensible)
+	// Marital Status Codes (Extensible)
 	set maritalStatus(maritalStatus) {
 		this._maritalStatus = new CodeableConcept(maritalStatus);
 	}
@@ -491,7 +332,25 @@ class Patient extends DomainResource {
 		return this._maritalStatus;
 	}
 
-	// multipleBirth[x]		0..1	boolean, integer	Whether patient is part of a multiple birth
+	// multipleBirth[x]		0..1		Whether patient is part of a multiple birth
+	// multipleBirthBoolean			boolean
+	set multipleBirthBoolean(multipleBirthBoolean) {
+		this._multipleBirthBoolean = multipleBirthBoolean;
+	}
+
+	get multipleBirthBoolean() {
+		return this._multipleBirthBoolean;
+	}
+
+	// multipleBirthInteger			integer
+	set multipleBirthInteger(multipleBirthInteger) {
+		this._multipleBirthInteger = multipleBirthInteger;
+	}
+
+	get multipleBirthInteger() {
+		return this._multipleBirthInteger;
+	}
+
 	// photo		0..*	Attachment	Image of the patient
 	set photo(photo) {
 		if (Array.isArray(photo)) {
@@ -506,7 +365,7 @@ class Patient extends DomainResource {
 	}
 
 	// contact	I	0..*	BackboneElement	A contact party (e.g. guardian, partner, friend) for the patient
-	// pat-1: SHALL at least contain a contact's details or a reference to an organization
+	// + SHALL at least contain a contact's details or a reference to an organization
 	set contact(contact) {
 		if (Array.isArray(contact)) {
 			this._contact = contact.map((i) => new Contact(i));
@@ -519,7 +378,16 @@ class Patient extends DomainResource {
 		return this._contact;
 	}
 
-	// communication	SI	0..*	BackboneElement	A list of Languages which may be used to communicate with the patient about his or her health
+	// animal	?!Σ	0..1	BackboneElement	This patient is known to be an animal (non-human)
+	set animal(animal) {
+		this._animal = new Animal(animal);
+	}
+
+	get animal() {
+		return this._animal;
+	}
+
+	// communication		0..*	BackboneElement	A list of Languages which may be used to communicate with the patient about his or her health
 	set communication(communication) {
 		if (Array.isArray(communication)) {
 			this._communication = communication.map((i) => new Communication(i));
@@ -532,7 +400,7 @@ class Patient extends DomainResource {
 		return this._communication;
 	}
 
-	// generalPractitioner		0..*	Reference(Organization), Reference(Practitioner)	Patient's nominated primary care provider
+	// generalPractitioner		0..*	Reference(Organization | Practitioner)	Patient's nominated primary care provider
 	set generalPractitioner(generalPractitioner) {
 		if (Array.isArray(generalPractitioner)) {
 			this._generalPractitioner = generalPractitioner.map((i) => new Reference(i));
@@ -545,7 +413,7 @@ class Patient extends DomainResource {
 		return this._generalPractitioner;
 	}
 
-	// managingOrganization	Î£	0..1	Reference(Organization)	Organization that is the custodian of the patient record
+	// managingOrganization	Σ	0..1	Reference(Organization)	Organization that is the custodian of the patient record
 	set managingOrganization(managingOrganization) {
 		this._managingOrganization = new Reference(managingOrganization);
 	}
@@ -554,7 +422,7 @@ class Patient extends DomainResource {
 		return this._managingOrganization;
 	}
 
-	// link	?!Î£I	0..*	BackboneElement	Link to another patient resource that concerns the same actual person
+	// link	?!Σ	0..*	BackboneElement	Link to another patient resource that concerns the same actual person
 	set link(link) {
 		if (Array.isArray(link)) {
 			this._link = link.map((i) => new Link(i));
@@ -569,26 +437,21 @@ class Patient extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			uscorerace: this._uscorerace,
-			uscoreethnicity: this._uscoreethnicity,
-			uscorebirthsex: this._uscorebirthsex,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			active: this._active,
 			name: this._name,
 			telecom: this._telecom,
 			gender: this._gender,
 			birthDate: this._birthDate,
+			deceasedBoolean: this._deceasedBoolean,
+			deceasedDateTime: this._deceasedDateTime,
 			address: this._address,
 			maritalStatus: this._maritalStatus,
+			multipleBirthBoolean: this._multipleBirthBoolean,
+			multipleBirthInteger: this._multipleBirthInteger,
 			photo: this._photo,
 			contact: this._contact,
+			animal: this._animal,
 			communication: this._communication,
 			generalPractitioner: this._generalPractitioner,
 			managingOrganization: this._managingOrganization,
@@ -601,5 +464,6 @@ class Patient extends DomainResource {
 
 module.exports.Patient = Patient;
 module.exports.Contact = Contact;
+module.exports.Animal = Animal;
 module.exports.Communication = Communication;
 module.exports.Link = Link;

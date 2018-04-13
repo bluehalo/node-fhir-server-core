@@ -1,39 +1,21 @@
 Main
 DiagnosticReport
-id	Σ	0..1	id	Logical id of this artifact
-
-meta	Σ	0..1	Meta	Metadata about the resource
-
-implicitRules	?!Σ	0..1	uri	A set of rules under which this content was created
-
-language		0..1	code	Language of the resource content
-Binding: Common Languages (extensible)
-
-text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-
-contained		0..*	Resource	Contained, inline Resources
-
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-
 identifier	Σ	0..*	Identifier	Business identifier for report
 
-basedOn		0..*	Reference(CarePlan), Reference(ImmunizationRecommendation), Reference(MedicationRequest), Reference(NutritionOrder), Reference(ProcedureRequest), Reference(ReferralRequest)	What was requested
+basedOn		0..*	Reference(CarePlan | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)	What was requested
 
-status	?!SΣ	1..1	code	registered | partial | preliminary | final +
-Binding: DiagnosticReportStatus (required)
+status	?!Σ	1..1	code	registered | partial | preliminary | final +
+DiagnosticReportStatus (Required)
 
-category	SΣ	1..1	CodeableConcept	Service category
-Binding: Diagnostic Service Section Codes (example)
-Required Pattern: {"coding":[{"system":"http://hl7.org/fhir/v2/0074","code":"LAB"}]}
+category	Σ	0..1	CodeableConcept	Service category
+Diagnostic Service Section Codes (Example)
 
-code	SΣ	1..1	CodeableConcept	US Core Laboratory Report Order Code
-Binding: LOINC Diagnostic Report Codes (extensible)
+code	Σ	1..1	CodeableConcept	Name/Code for this diagnostic report
+LOINC Diagnostic Report Codes (Preferred)
 
-subject	SΣ	1..1	Reference(US Core Patient Profile)	The subject of the report - usually, but not always, the patient
+subject	Σ	0..1	Reference(Patient | Group | Device | Location)	The subject of the report - usually, but not always, the patient
 
-context	Σ	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Health care event when test ordered
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Health care event when test ordered
 
 effective[x]	Σ	0..1		Clinically relevant time/time-period for report
 
@@ -41,48 +23,36 @@ effectiveDateTime			dateTime
 
 effectivePeriod			Period
 
-issued	SΣ	1..1	instant	DateTime this version was released
+issued	Σ	0..1	instant	DateTime this version was released
 
-performer	SΣI	0..*	BackboneElement	Participants in producing the report
+performer	Σ	0..*	BackboneElement	Participants in producing the report
 
 specimen		0..*	Reference(Specimen)	Specimens this report is based on
 
-result	S	0..*	Reference(US Core Results Profile)	Observations - simple, or complex nested groups
+result		0..*	Reference(Observation)	Observations - simple, or complex nested groups
 
-imagingStudy		0..*	Reference(ImagingStudy), Reference(ImagingManifest)	Reference to full details of imaging associated with the diagnostic report
+imagingStudy		0..*	Reference(ImagingStudy | ImagingManifest)	Reference to full details of imaging associated with the diagnostic report
 
-image	SΣI	0..*	BackboneElement	Key images associated with this report
+image	Σ	0..*	BackboneElement	Key images associated with this report
 
 conclusion		0..1	string	Clinical Interpretation of test results
 
 codedDiagnosis		0..*	CodeableConcept	Codes for the conclusion
-Binding: SNOMED CT Clinical Findings (example)
+SNOMED CT Clinical Findings (Example)
 
-presentedForm	S	0..*	Attachment	Entire report as issued
+presentedForm		0..*	Attachment	Entire report as issued
 
 
 Backbone
 performer
-id		0..1	string	xml:id (or equivalent in JSON)
-
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
-
 role	Σ	0..1	CodeableConcept	Type of performer
-Binding: Procedure Performer Role Codes (example)
+Procedure Performer Role Codes (Example)
 
-actor	SΣ	1..1	Reference(US Core Practitioner Profile), Reference(US Core Organization Core Profile)	Practitioner or Organization participant
+actor	Σ	1..1	Reference(Practitioner | Organization)	Practitioner or Organization participant
 
 
 Backbone
 image
-id		0..1	string	xml:id (or equivalent in JSON)
-
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
-
 comment		0..1	string	Comment about the image (e.g. explanation)
 
 link	Σ	1..1	Reference(Media)	Reference to the image source

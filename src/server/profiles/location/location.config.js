@@ -22,38 +22,92 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			},
-		
-		
-		],
+		}, {
+			name: '_content',
+			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-city',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-country',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-postalcode',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-state',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'address-use',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'endpoint',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'name',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'near',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'near-distance',
+			type: 'quantity'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'operational-status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'organization',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'partof',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'type',
+			type: 'token'
+		}],
 		scopes: scopes,
 		controller: controller.getLocation
 	},

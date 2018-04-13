@@ -1,12 +1,10 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
+const Period = require('./types/Period');
+const Range = require('./types/Range');
 const Annotation = require('./types/Annotation');
 
 class Reaction {
@@ -14,43 +12,8 @@ class Reaction {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// substance		0..1	CodeableConcept	Specific substance or pharmaceutical product considered to be responsible for event
-	// Binding: Substance Code (example)
+	// Substance Code (Example)
 	set substance(substance) {
 		this._substance = new CodeableConcept(substance);
 	}
@@ -60,7 +23,7 @@ class Reaction {
 	}
 
 	// manifestation		1..*	CodeableConcept	Clinical symptoms/signs associated with the Event
-	// Binding: SNOMED CT Clinical Findings (example)
+	// SNOMED CT Clinical Findings (Example)
 	set manifestation(manifestation) {
 		if (Array.isArray(manifestation)) {
 			this._manifestation = manifestation.map((i) => new CodeableConcept(i));
@@ -92,7 +55,7 @@ class Reaction {
 	}
 
 	// severity		0..1	code	mild | moderate | severe (of event as a whole)
-	// Binding: AllergyIntoleranceSeverity (required)
+	// AllergyIntoleranceSeverity (Required)
 	set severity(severity) {
 		this._severity = new Code(severity);
 	}
@@ -102,7 +65,7 @@ class Reaction {
 	}
 
 	// exposureRoute		0..1	CodeableConcept	How the subject was exposed to the substance
-	// Binding: SNOMED CT Route Codes (example)
+	// SNOMED CT Route Codes (Example)
 	set exposureRoute(exposureRoute) {
 		this._exposureRoute = new CodeableConcept(exposureRoute);
 	}
@@ -126,9 +89,6 @@ class Reaction {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			substance: this._substance,
 			manifestation: this._manifestation,
 			description: this._description,
@@ -155,92 +115,7 @@ class AllergyIntolerance extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// identifier	Î£	0..*	Identifier	External ids for this item
+	// identifier	Σ	0..*	Identifier	External ids for this item
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -273,8 +148,8 @@ class AllergyIntolerance extends DomainResource {
 		return this._verificationStatus;
 	}
 
-	// type	Î£	0..1	code	allergy | intolerance - Underlying mechanism (if known)
-	// Binding: AllergyIntoleranceType (required)
+	// type	Σ	0..1	code	allergy | intolerance - Underlying mechanism (if known)
+	// AllergyIntoleranceType (Required)
 	set type(type) {
 		this._type = new Code(type);
 	}
@@ -283,8 +158,8 @@ class AllergyIntolerance extends DomainResource {
 		return this._type;
 	}
 
-	// category	Î£	0..*	code	food | medication | environment | biologic
-	// Binding: AllergyIntoleranceCategory (required)
+	// category	Σ	0..*	code	food | medication | environment | biologic
+	// AllergyIntoleranceCategory (Required)
 	set category(category) {
 		if (Array.isArray(category)) {
 			this._category = category.map((i) => new Code(i));
@@ -297,8 +172,8 @@ class AllergyIntolerance extends DomainResource {
 		return this._category;
 	}
 
-	// criticality	Î£	0..1	code	low | high | unable-to-assess
-	// Binding: AllergyIntoleranceCriticality (required)
+	// criticality	Σ	0..1	code	low | high | unable-to-assess
+	// AllergyIntoleranceCriticality (Required)
 	set criticality(criticality) {
 		this._criticality = new Code(criticality);
 	}
@@ -307,8 +182,8 @@ class AllergyIntolerance extends DomainResource {
 		return this._criticality;
 	}
 
-	// code	SÎ£	1..1	CodeableConcept	Code that identifies the allergy or intolerance
-	// Binding: US Core Substance-Reactant for Intolerance and Negation Codes (extensible)
+	// code	Σ	0..1	CodeableConcept	Code that identifies the allergy or intolerance
+	// AllergyIntolerance Substance/Product, Condition and Negation Codes (Example)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -317,7 +192,7 @@ class AllergyIntolerance extends DomainResource {
 		return this._code;
 	}
 
-	// patient	SÎ£	1..1	Reference(US Core Patient Profile)	Who the sensitivity is for
+	// patient	Σ	1..1	Reference(Patient)	Who the sensitivity is for
 	set patient(patient) {
 		this._patient = new Reference(patient);
 	}
@@ -326,7 +201,52 @@ class AllergyIntolerance extends DomainResource {
 		return this._patient;
 	}
 
-	// onset[x]		0..1	dateTime, Age, Period, Range, string	When allergy or intolerance was identified
+	// onset[x]		0..1		When allergy or intolerance was identified
+	// onsetDateTime			dateTime
+	set onsetDateTime(onsetDateTime) {
+		this._onsetDateTime = onsetDateTime;
+	}
+
+	get onsetDateTime() {
+		return this._onsetDateTime;
+	}
+
+	// onsetAge			Age
+	set onsetAge(onsetAge) {
+		this._onsetAge = onsetAge;
+	}
+
+	get onsetAge() {
+		return this._onsetAge;
+	}
+
+	// onsetPeriod			Period
+	set onsetPeriod(onsetPeriod) {
+		this._onsetPeriod = new Period(onsetPeriod);
+	}
+
+	get onsetPeriod() {
+		return this._onsetPeriod;
+	}
+
+	// onsetRange			Range
+	set onsetRange(onsetRange) {
+		this._onsetRange = new Range(onsetRange);
+	}
+
+	get onsetRange() {
+		return this._onsetRange;
+	}
+
+	// onsetString			string
+	set onsetString(onsetString) {
+		this._onsetString = onsetString;
+	}
+
+	get onsetString() {
+		return this._onsetString;
+	}
+
 	// assertedDate		0..1	dateTime	Date record was believed accurate
 	set assertedDate(assertedDate) {
 		this._assertedDate = assertedDate;
@@ -336,7 +256,7 @@ class AllergyIntolerance extends DomainResource {
 		return this._assertedDate;
 	}
 
-	// recorder		0..1	Reference(Practitioner), Reference(Patient)	Who recorded the sensitivity
+	// recorder		0..1	Reference(Practitioner | Patient)	Who recorded the sensitivity
 	set recorder(recorder) {
 		this._recorder = new Reference(recorder);
 	}
@@ -345,7 +265,7 @@ class AllergyIntolerance extends DomainResource {
 		return this._recorder;
 	}
 
-	// asserter	Î£	0..1	Reference(Patient), Reference(RelatedPerson), Reference(Practitioner)	Source of the information about the allergy
+	// asserter	Σ	0..1	Reference(Patient | RelatedPerson | Practitioner)	Source of the information about the allergy
 	set asserter(asserter) {
 		this._asserter = new Reference(asserter);
 	}
@@ -376,7 +296,7 @@ class AllergyIntolerance extends DomainResource {
 		return this._note;
 	}
 
-	// reaction	I	0..*	BackboneElement	Adverse Reaction Events linked to exposure to substance
+	// reaction		0..*	BackboneElement	Adverse Reaction Events linked to exposure to substance
 	set reaction(reaction) {
 		if (Array.isArray(reaction)) {
 			this._reaction = reaction.map((i) => new Reaction(i));
@@ -391,14 +311,6 @@ class AllergyIntolerance extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			clinicalStatus: this._clinicalStatus,
 			verificationStatus: this._verificationStatus,
@@ -407,6 +319,11 @@ class AllergyIntolerance extends DomainResource {
 			criticality: this._criticality,
 			code: this._code,
 			patient: this._patient,
+			onsetDateTime: this._onsetDateTime,
+			onsetAge: this._onsetAge,
+			onsetPeriod: this._onsetPeriod,
+			onsetRange: this._onsetRange,
+			onsetString: this._onsetString,
 			assertedDate: this._assertedDate,
 			recorder: this._recorder,
 			asserter: this._asserter,

@@ -1,132 +1,19 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
 const Period = require('./types/Period');
 const Range = require('./types/Range');
 const Annotation = require('./types/Annotation');
 
-class Stage {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// summary	I	0..1	CodeableConcept	Simple summary (disease specific)
-	// Binding: Condition Stage (example)
-	set summary(summary) {
-		this._summary = new CodeableConcept(summary);
-	}
-
-	get summary() {
-		return this._summary;
-	}
-
-	// assessment	I	0..*	Reference(ClinicalImpression), Reference(DiagnosticReport), Reference(Observation)	Formal record of assessment
-	set assessment(assessment) {
-		if (Array.isArray(assessment)) {
-			this._assessment = assessment.map((i) => new Reference(i));
-		} else {
-			this._assessment = [new Reference(assessment)];
-		}
-	}
-
-	get assessment() {
-		return this._assessment;
-	}
-
-	toJSON() {
-		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
-			summary: this._summary,
-			assessment: this._assessment,
-		};
-	}
-}
-
 class Evidence {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// code	Î£I	0..*	CodeableConcept	Manifestation/symptom
-	// Binding: Manifestation and Symptom Codes (example)
+	// code	ΣI	0..*	CodeableConcept	Manifestation/symptom
+	// Manifestation and Symptom Codes (Example)
 	set code(code) {
 		if (Array.isArray(code)) {
 			this._code = code.map((i) => new CodeableConcept(i));
@@ -139,7 +26,7 @@ class Evidence {
 		return this._code;
 	}
 
-	// detail	Î£I	0..*	Reference(Resource)	Supporting information found elsewhere
+	// detail	ΣI	0..*	Reference(Any)	Supporting information found elsewhere
 	set detail(detail) {
 		if (Array.isArray(detail)) {
 			this._detail = detail.map((i) => new Reference(i));
@@ -154,11 +41,44 @@ class Evidence {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			code: this._code,
 			detail: this._detail,
+		};
+	}
+}
+
+class Stage {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// summary	I	0..1	CodeableConcept	Simple summary (disease specific)
+	// Condition Stage (Example)
+	set summary(summary) {
+		this._summary = new CodeableConcept(summary);
+	}
+
+	get summary() {
+		return this._summary;
+	}
+
+	// assessment	I	0..*	Reference(ClinicalImpression | DiagnosticReport | Observation)	Formal record of assessment
+	set assessment(assessment) {
+		if (Array.isArray(assessment)) {
+			this._assessment = assessment.map((i) => new Reference(i));
+		} else {
+			this._assessment = [new Reference(assessment)];
+		}
+	}
+
+	get assessment() {
+		return this._assessment;
+	}
+
+	toJSON() {
+		return {
+			summary: this._summary,
+			assessment: this._assessment,
 		};
 	}
 }
@@ -178,92 +98,7 @@ class Condition extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// identifier	Î£	0..*	Identifier	External Ids for this condition
+	// identifier	Σ	0..*	Identifier	External Ids for this condition
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -276,8 +111,8 @@ class Condition extends DomainResource {
 		return this._identifier;
 	}
 
-	// clinicalStatus	?!Î£I	0..1	code	active | recurrence | inactive | remission | resolved
-	// Binding: Condition Clinical Status Codes (required)
+	// clinicalStatus	?!ΣI	0..1	code	active | recurrence | inactive | remission | resolved
+	// Condition Clinical Status Codes (Required)
 	set clinicalStatus(clinicalStatus) {
 		this._clinicalStatus = new Code(clinicalStatus);
 	}
@@ -286,8 +121,8 @@ class Condition extends DomainResource {
 		return this._clinicalStatus;
 	}
 
-	// verificationStatus	?!Î£I	1..1	code	provisional | differential | confirmed | refuted | entered-in-error | unknown
-	// Binding: ConditionVerificationStatus (required)
+	// verificationStatus	?!ΣI	0..1	code	provisional | differential | confirmed | refuted | entered-in-error | unknown
+	// ConditionVerificationStatus (Required)
 	set verificationStatus(verificationStatus) {
 		this._verificationStatus = new Code(verificationStatus);
 	}
@@ -296,8 +131,8 @@ class Condition extends DomainResource {
 		return this._verificationStatus;
 	}
 
-	// category	S	1..*	CodeableConcept	problem-list-item | encounter-diagnosis
-	// Binding: US Core Condition Category Codes (preferred)
+	// category		0..*	CodeableConcept	problem-list-item | encounter-diagnosis
+	// Condition Category Codes (Example)
 	set category(category) {
 		if (Array.isArray(category)) {
 			this._category = category.map((i) => new CodeableConcept(i));
@@ -311,7 +146,7 @@ class Condition extends DomainResource {
 	}
 
 	// severity		0..1	CodeableConcept	Subjective severity of condition
-	// Binding: Condition/Diagnosis Severity (preferred)
+	// Condition/Diagnosis Severity (Preferred)
 	set severity(severity) {
 		this._severity = new CodeableConcept(severity);
 	}
@@ -320,8 +155,8 @@ class Condition extends DomainResource {
 		return this._severity;
 	}
 
-	// code	SÎ£	1..1	CodeableConcept	Identification of the condition, problem or diagnosis
-	// Binding: Problem Value Set (extensible)
+	// code	Σ	0..1	CodeableConcept	Identification of the condition, problem or diagnosis
+	// Condition/Problem/Diagnosis Codes (Example)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -330,8 +165,8 @@ class Condition extends DomainResource {
 		return this._code;
 	}
 
-	// bodySite	Î£	0..*	CodeableConcept	Anatomical location, if relevant
-	// Binding: SNOMED CT Body Structures (example)
+	// bodySite	Σ	0..*	CodeableConcept	Anatomical location, if relevant
+	// SNOMED CT Body Structures (Example)
 	set bodySite(bodySite) {
 		if (Array.isArray(bodySite)) {
 			this._bodySite = bodySite.map((i) => new CodeableConcept(i));
@@ -344,7 +179,7 @@ class Condition extends DomainResource {
 		return this._bodySite;
 	}
 
-	// subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who has the condition?
+	// subject	Σ	1..1	Reference(Patient | Group)	Who has the condition?
 	set subject(subject) {
 		this._subject = new Reference(subject);
 	}
@@ -353,7 +188,7 @@ class Condition extends DomainResource {
 		return this._subject;
 	}
 
-	// context	Î£	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Encounter or episode when condition first asserted
+	// context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or episode when condition first asserted
 	set context(context) {
 		this._context = new Reference(context);
 	}
@@ -463,7 +298,7 @@ class Condition extends DomainResource {
 		return this._abatementString;
 	}
 
-	// assertedDate	Î£	0..1	dateTime	Date record was believed accurate
+	// assertedDate	Σ	0..1	dateTime	Date record was believed accurate
 	set assertedDate(assertedDate) {
 		this._assertedDate = assertedDate;
 	}
@@ -472,37 +307,13 @@ class Condition extends DomainResource {
 		return this._assertedDate;
 	}
 
-	// asserter	Î£	0..1	Reference(Practitioner), Reference(Patient), Reference(RelatedPerson)	Person who asserts this condition
+	// asserter	Σ	0..1	Reference(Practitioner | Patient | RelatedPerson)	Person who asserts this condition
 	set asserter(asserter) {
 		this._asserter = new Reference(asserter);
 	}
 
 	get asserter() {
 		return this._asserter;
-	}
-
-	// stage	I	0..1	BackboneElement	Stage/grade, usually assessed formally
-	// con-1: Stage SHALL have summary or assessment
-	set stage(stage) {
-		this._stage = new Stage(stage);
-	}
-
-	get stage() {
-		return this._stage;
-	}
-
-	// evidence	I	0..*	BackboneElement	Supporting evidence
-	// con-2: evidence SHALL have code or details
-	set evidence(evidence) {
-		if (Array.isArray(evidence)) {
-			this._evidence = evidence.map((i) => new Evidence(i));
-		} else {
-			this._evidence = [new Evidence(evidence)];
-		}
-	}
-
-	get evidence() {
-		return this._evidence;
 	}
 
 	// note		0..*	Annotation	Additional information about the Condition
@@ -518,16 +329,30 @@ class Condition extends DomainResource {
 		return this._note;
 	}
 
+	// stage	I	0..1	BackboneElement	Stage/grade, usually assessed formally
+	set stage(stage) {
+		this._stage = new Stage(stage);
+	}
+
+	get stage() {
+		return this._stage;
+	}
+
+	// evidence	I	0..*	BackboneElement	Supporting evidence
+	set evidence(evidence) {
+		if (Array.isArray(evidence)) {
+			this._evidence = evidence.map((i) => new Evidence(i));
+		} else {
+			this._evidence = [new Evidence(evidence)];
+		}
+	}
+
+	get evidence() {
+		return this._evidence;
+	}
+
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			clinicalStatus: this._clinicalStatus,
 			verificationStatus: this._verificationStatus,
@@ -550,9 +375,9 @@ class Condition extends DomainResource {
 			abatementString: this._abatementString,
 			assertedDate: this._assertedDate,
 			asserter: this._asserter,
+			note: this._note,
 			stage: this._stage,
 			evidence: this._evidence,
-			note: this._note,
 		};
 
 		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);
@@ -560,5 +385,5 @@ class Condition extends DomainResource {
 }
 
 module.exports.Condition = Condition;
-module.exports.Evidence = Evidence;
 module.exports.Stage = Stage;
+module.exports.Evidence = Evidence;

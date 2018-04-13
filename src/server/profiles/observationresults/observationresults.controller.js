@@ -1,4 +1,4 @@
-const ObservationResults = require('../../resources/ObservationResults');
+const ObservationResults = require('../../resources/uscore/resources/ObservationResults');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservationResults = ({ profile, logger, config }) => {

@@ -22,38 +22,76 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			},
-		
-		
-		],
+		}, {
+			name: '_content',
+			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'device-name',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'location',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'manufacturer',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'model',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'organization',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'patient',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'type',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'udi-carrier',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'udi-di',
+			type: 'string'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'url',
+			type: 'uri'
+		}],
 		scopes: scopes,
 		controller: controller.getDevice
 	},

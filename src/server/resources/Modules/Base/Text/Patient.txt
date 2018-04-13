@@ -1,76 +1,55 @@
 Main
 Patient
-id	Î£	0..1	id	Logical id of this artifact
+identifier	Σ	0..*	Identifier	An identifier for this patient
 
-meta	Î£	0..1	Meta	Metadata about the resource
+active	?!Σ	0..1	boolean	Whether this patient's record is in active use
 
-implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+name	Σ	0..*	HumanName	A name associated with the patient
 
-language		0..1	code	Language of the resource content
-Binding: Common Languages (extensible)
+telecom	Σ	0..*	ContactPoint	A contact detail for the individual
 
-text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+gender	Σ	0..1	code	male | female | other | unknown
+AdministrativeGender (Required)
 
-contained		0..*	Resource	Contained, inline Resources
+birthDate	Σ	0..1	date	The date of birth for the individual
 
-uscorerace	S	0..1	(Complex)	Extension
-URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-race
+deceased[x]	?!Σ	0..1		Indicates if the individual is deceased or not
 
-uscoreethnicity	S	0..1	(Complex)	Extension
-URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity
+deceasedBoolean			boolean
 
-uscorebirthsex	S	0..1	code	Extension
-URL: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
-Binding: US Core Birth Sex Value Set (required)
+deceasedDateTime			dateTime
 
-modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-
-identifier	SÎ£	1..*	Identifier	An identifier for this patient
-
-active	?!Î£	0..1	boolean	Whether this patient's record is in active use
-
-name	SÎ£	1..*	HumanName	A name associated with the patient
-
-telecom	Î£	0..*	ContactPoint	A contact detail for the individual
-
-gender	SÎ£	1..1	code	male | female | other | unknown
-Binding: AdministrativeGender (required)
-
-birthDate	SÎ£	0..1	date	The date of birth for the individual
-
-deceased[x]	?!Î£	0..1	boolean, dateTime	Indicates if the individual is deceased or not
-
-address	Î£	0..*	Address	Addresses for the individual
+address	Σ	0..*	Address	Addresses for the individual
 
 maritalStatus		0..1	CodeableConcept	Marital (civil) status of a patient
-Binding: Marital Status Codes (extensible)
+Marital Status Codes (Extensible)
 
-multipleBirth[x]		0..1	boolean, integer	Whether patient is part of a multiple birth
+multipleBirth[x]		0..1		Whether patient is part of a multiple birth
+
+multipleBirthBoolean			boolean
+
+multipleBirthInteger			integer
 
 photo		0..*	Attachment	Image of the patient
 
 contact	I	0..*	BackboneElement	A contact party (e.g. guardian, partner, friend) for the patient
-pat-1: SHALL at least contain a contact's details or a reference to an organization
++ SHALL at least contain a contact's details or a reference to an organization
 
-communication	SI	0..*	BackboneElement	A list of Languages which may be used to communicate with the patient about his or her health
+animal	?!Σ	0..1	BackboneElement	This patient is known to be an animal (non-human)
 
-generalPractitioner		0..*	Reference(Organization), Reference(Practitioner)	Patient's nominated primary care provider
+communication		0..*	BackboneElement	A list of Languages which may be used to communicate with the patient about his or her health
 
-managingOrganization	Î£	0..1	Reference(Organization)	Organization that is the custodian of the patient record
+generalPractitioner		0..*	Reference(Organization | Practitioner)	Patient's nominated primary care provider
 
-link	?!Î£I	0..*	BackboneElement	Link to another patient resource that concerns the same actual person
+managingOrganization	Σ	0..1	Reference(Organization)	Organization that is the custodian of the patient record
+
+link	?!Σ	0..*	BackboneElement	Link to another patient resource that concerns the same actual person
 
 
 Backbone
 contact
-id		0..1	string	xml:id (or equivalent in JSON)
-
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-
 relationship		0..*	CodeableConcept	The kind of relationship
-Binding: v2 Contact Role (extensible)
+v2 Contact Role (Extensible)
 
 name		0..1	HumanName	A name associated with the contact person
 
@@ -79,7 +58,7 @@ telecom		0..*	ContactPoint	A contact detail for the person
 address		0..1	Address	Address for the contact person
 
 gender		0..1	code	male | female | other | unknown
-Binding: AdministrativeGender (required)
+AdministrativeGender (Required)
 
 organization	I	0..1	Reference(Organization)	Organization that is associated with the contact
 
@@ -87,31 +66,31 @@ period		0..1	Period	The period during which this contact person or organization 
 
 
 Backbone
+animal
+species	Σ	1..1	CodeableConcept	E.g. Dog, Cow
+AnimalSpecies (Example)
+
+breed	Σ	0..1	CodeableConcept	E.g. Poodle, Angus
+AnimalBreeds (Example)
+
+genderStatus	Σ	0..1	CodeableConcept	E.g. Neutered, Intact
+GenderStatus (Example)
+
+
+Backbone
 communication
-id		0..1	string	xml:id (or equivalent in JSON)
-
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-
-language	S	1..1	CodeableConcept	The language which can be used to communicate with the patient about his or her health
-Binding: Language codes with language and optionally a region modifier (extensible)
+language		1..1	CodeableConcept	The language which can be used to communicate with the patient about his or her health
+Common Languages (Extensible but limited to All Languages)
 
 preferred		0..1	boolean	Language preference indicator
 
 
 Backbone
 link
-id		0..1	string	xml:id (or equivalent in JSON)
+other	Σ	1..1	Reference(Patient | RelatedPerson)	The other patient or related person resource that the link refers to
 
-extension		0..*	Extension	Additional Content defined by implementations
-
-modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-
-other	Î£	1..1	Reference(Patient), Reference(RelatedPerson)	The other patient or related person resource that the link refers to
-
-type	Î£	1..1	code	replaced-by | replaces | refer | seealso - type of link
-Binding: LinkType (required)
+type	Σ	1..1	code	replaced-by | replaces | refer | seealso - type of link
+LinkType (Required)
 
 
 eof

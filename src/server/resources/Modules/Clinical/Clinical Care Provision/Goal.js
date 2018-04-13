@@ -1,10 +1,6 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
 const Annotation = require('./types/Annotation');
@@ -16,43 +12,8 @@ class Target {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// measure	Î£I	0..1	CodeableConcept	The parameter whose value is being tracked
-	// Binding: LOINC Codes (example)
+	// measure	ΣI	0..1	CodeableConcept	The parameter whose value is being tracked
+	// LOINC Codes (Example)
 	set measure(measure) {
 		this._measure = new CodeableConcept(measure);
 	}
@@ -110,9 +71,6 @@ class Target {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			measure: this._measure,
 			detailQuantity: this._detailQuantity,
 			detailRange: this._detailRange,
@@ -138,91 +96,6 @@ class Goal extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// identifier		0..*	Identifier	External Ids for this goal
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
@@ -236,8 +109,8 @@ class Goal extends DomainResource {
 		return this._identifier;
 	}
 
-	// status	?!SÎ£	1..1	code	proposed | accepted | planned | in-progress | on-target | ahead-of-target | behind-target | sustaining | achieved | on-hold | cancelled | entered-in-error | rejected
-	// Binding: GoalStatus (required)
+	// status	?!Σ	1..1	code	proposed | accepted | planned | in-progress | on-target | ahead-of-target | behind-target | sustaining | achieved | on-hold | cancelled | entered-in-error | rejected
+	// GoalStatus (Required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -246,8 +119,8 @@ class Goal extends DomainResource {
 		return this._status;
 	}
 
-	// category	Î£	0..*	CodeableConcept	E.g. Treatment, dietary, behavioral, etc.
-	// Binding: GoalCategory (example)
+	// category	Σ	0..*	CodeableConcept	E.g. Treatment, dietary, behavioral, etc.
+	// GoalCategory (Example)
 	set category(category) {
 		if (Array.isArray(category)) {
 			this._category = category.map((i) => new CodeableConcept(i));
@@ -260,8 +133,8 @@ class Goal extends DomainResource {
 		return this._category;
 	}
 
-	// priority	Î£	0..1	CodeableConcept	high-priority | medium-priority | low-priority
-	// Binding: GoalPriority (preferred)
+	// priority	Σ	0..1	CodeableConcept	high-priority | medium-priority | low-priority
+	// GoalPriority (Preferred)
 	set priority(priority) {
 		this._priority = new CodeableConcept(priority);
 	}
@@ -270,8 +143,8 @@ class Goal extends DomainResource {
 		return this._priority;
 	}
 
-	// description	SÎ£	1..1	CodeableConcept	Code or text describing goal
-	// Binding: SNOMED CT Clinical Findings (example)
+	// description	Σ	1..1	CodeableConcept	Code or text describing goal
+	// SNOMED CT Clinical Findings (Example)
 	set description(description) {
 		this._description = new CodeableConcept(description);
 	}
@@ -280,7 +153,7 @@ class Goal extends DomainResource {
 		return this._description;
 	}
 
-	// subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who this goal is intended for
+	// subject	Σ	0..1	Reference(Patient | Group | Organization)	Who this goal is intended for
 	set subject(subject) {
 		this._subject = new Reference(subject);
 	}
@@ -309,17 +182,7 @@ class Goal extends DomainResource {
 		return this._startCodeableConcept;
 	}
 
-	// target	I	0..1	BackboneElement	Target outcome for the goal
-	// gol-1: Goal.target.measure is required if Goal.target.detail is populated
-	set target(target) {
-		this._target = new Target(target);
-	}
-
-	get target() {
-		return this._target;
-	}
-
-	// statusDate	Î£	0..1	date	When goal status took effect
+	// statusDate	Σ	0..1	date	When goal status took effect
 	set statusDate(statusDate) {
 		this._statusDate = statusDate;
 	}
@@ -337,7 +200,7 @@ class Goal extends DomainResource {
 		return this._statusReason;
 	}
 
-	// expressedBy	Î£	0..1	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson)	Who's responsible for creating Goal?
+	// expressedBy	Σ	0..1	Reference(Patient | Practitioner | RelatedPerson)	Who's responsible for creating Goal?
 	set expressedBy(expressedBy) {
 		this._expressedBy = new Reference(expressedBy);
 	}
@@ -346,7 +209,7 @@ class Goal extends DomainResource {
 		return this._expressedBy;
 	}
 
-	// addresses		0..*	Reference(Condition), Reference(Observation), Reference(MedicationStatement), Reference(NutritionOrder), Reference(ProcedureRequest), Reference(RiskAssessment)	Issues addressed by this goal
+	// addresses		0..*	Reference(Condition | Observation | MedicationStatement | NutritionOrder | ProcedureRequest | RiskAssessment)	Issues addressed by this goal
 	set addresses(addresses) {
 		if (Array.isArray(addresses)) {
 			this._addresses = addresses.map((i) => new Reference(i));
@@ -373,7 +236,7 @@ class Goal extends DomainResource {
 	}
 
 	// outcomeCode		0..*	CodeableConcept	What result was achieved regarding the goal?
-	// Binding: SNOMED CT Clinical Findings (example)
+	// SNOMED CT Clinical Findings (Example)
 	set outcomeCode(outcomeCode) {
 		if (Array.isArray(outcomeCode)) {
 			this._outcomeCode = outcomeCode.map((i) => new CodeableConcept(i));
@@ -399,16 +262,18 @@ class Goal extends DomainResource {
 		return this._outcomeReference;
 	}
 
+	// target	I	0..1	BackboneElement	Target outcome for the goal
+	// + Goal.target.measure is required if Goal.target.detail is populated
+	set target(target) {
+		this._target = new Target(target);
+	}
+
+	get target() {
+		return this._target;
+	}
+
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			status: this._status,
 			category: this._category,
@@ -417,7 +282,6 @@ class Goal extends DomainResource {
 			subject: this._subject,
 			startDate: this._startDate,
 			startCodeableConcept: this._startCodeableConcept,
-			target: this._target,
 			statusDate: this._statusDate,
 			statusReason: this._statusReason,
 			expressedBy: this._expressedBy,
@@ -425,6 +289,7 @@ class Goal extends DomainResource {
 			note: this._note,
 			outcomeCode: this._outcomeCode,
 			outcomeReference: this._outcomeReference,
+			target: this._target,
 		};
 
 		return Object.assign({ resourceType: this._resourceType }, super.toJSON(), json);

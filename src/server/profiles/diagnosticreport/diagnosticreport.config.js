@@ -22,38 +22,92 @@ let routes = [
 		args: [{
 			name: 'version',
 			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			},
-		
-		
-		],
+		}, {
+			name: '_content',
+			type: 'string'
+		}, {
+			name: '_id',
+			type: 'token'
+		}, {
+			name: '_lastUpdated',
+			type: 'date'
+		}, {
+			name: '_profile',
+			type: 'uri'
+		}, {
+			name: '_query',
+			type: 'token'
+		}, {
+			name: '_security',
+			type: 'token'
+		}, {
+			name: '_tag',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'based-on',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'category',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'code',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'context',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'date',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'diagnosis',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'encounter',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'identifier',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'image',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'issued',
+			type: 'date'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'patient',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'performer',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'result',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'specimen',
+			type: 'reference'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'status',
+			type: 'token'
+		}, {
+			versions: [VERSIONS.STU3],
+			name: 'subject',
+			type: 'reference'
+		}],
 		scopes: scopes,
 		controller: controller.getDiagnosticReport
 	},

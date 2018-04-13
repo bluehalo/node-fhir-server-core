@@ -1,4 +1,4 @@
-const Patient = require('../../resources/Patient');
+const Patient = require('../../resources/uscore/resources/Patient');
 const errors = require('../../utils/error.utils');
 
 module.exports.getPatient = ({ profile, logger, config }) => {

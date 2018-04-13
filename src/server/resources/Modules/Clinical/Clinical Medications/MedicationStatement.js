@@ -1,14 +1,11 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
-const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
+const Code = require('./types/Code');
+const CodeableConcept = require('./types/CodeableConcept');
 const Period = require('./types/Period');
 const Annotation = require('./types/Annotation');
+const Dosage = require('./types/Dosage');
 
 class MedicationStatement extends DomainResource {
 	constructor(obj) {
@@ -25,92 +22,7 @@ class MedicationStatement extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	*	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	*	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!*	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// identifier		0..*	Identifier	External identifier
+	// identifier	Σ	0..*	Identifier	External identifier
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -123,14 +35,59 @@ class MedicationStatement extends DomainResource {
 		return this._identifier;
 	}
 
-	// status	?!S	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
-	// Binding: MedicationStatementStatus (required)
+	// basedOn	Σ	0..*	Reference(MedicationRequest | CarePlan | ProcedureRequest | ReferralRequest)	Fulfils plan, proposal or order
+	set basedOn(basedOn) {
+		if (Array.isArray(basedOn)) {
+			this._basedOn = basedOn.map((i) => new Reference(i));
+		} else {
+			this._basedOn = [new Reference(basedOn)];
+		}
+	}
+
+	get basedOn() {
+		return this._basedOn;
+	}
+
+	// partOf	Σ	0..*	Reference(MedicationAdministration | MedicationDispense | MedicationStatement | Procedure | Observation)	Part of referenced event
+	set partOf(partOf) {
+		if (Array.isArray(partOf)) {
+			this._partOf = partOf.map((i) => new Reference(i));
+		} else {
+			this._partOf = [new Reference(partOf)];
+		}
+	}
+
+	get partOf() {
+		return this._partOf;
+	}
+
+	// context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter / Episode associated with MedicationStatement
+	set context(context) {
+		this._context = new Reference(context);
+	}
+
+	get context() {
+		return this._context;
+	}
+
+	// status	?!Σ	1..1	code	active | completed | entered-in-error | intended | stopped | on-hold
+	// MedicationStatementStatus (Required)
 	set status(status) {
 		this._status = new Code(status);
 	}
 
 	get status() {
 		return this._status;
+	}
+
+	// category	Σ	0..1	CodeableConcept	Type of medication usage
+	// MedicationStatementCategory (Preferred)
+	set category(category) {
+		this._category = new CodeableConcept(category);
+	}
+
+	get category() {
+		return this._category;
 	}
 
 	// medication[x]	Σ	1..1		What medication was taken
@@ -153,15 +110,6 @@ class MedicationStatement extends DomainResource {
 		return this._medicationReference;
 	}
 
-	// subject	S	1..1	Reference(US Core Patient Profile)	Who is/was taking the medication
-	set subject(subject) {
-		this._subject = new Reference(subject);
-	}
-
-	get subject() {
-		return this._subject;
-	}
-
 	// effective[x]	Σ	0..1		The date/time or interval when the medication was taken
 	// effectiveDateTime			dateTime
 	set effectiveDateTime(effectiveDateTime) {
@@ -181,7 +129,16 @@ class MedicationStatement extends DomainResource {
 		return this._effectivePeriod;
 	}
 
-	// informationSource		0..1	Reference(Patient), Reference(Practitioner), Reference(RelatedPerson), Reference(Organization)	Person or organization that provided the information about the taking of this medication
+	// dateAsserted	Σ	0..1	dateTime	When the statement was asserted?
+	set dateAsserted(dateAsserted) {
+		this._dateAsserted = dateAsserted;
+	}
+
+	get dateAsserted() {
+		return this._dateAsserted;
+	}
+
+	// informationSource		0..1	Reference(Patient | Practitioner | RelatedPerson | Organization)	Person or organization that provided the information about the taking of this medication
 	set informationSource(informationSource) {
 		this._informationSource = new Reference(informationSource);
 	}
@@ -190,7 +147,16 @@ class MedicationStatement extends DomainResource {
 		return this._informationSource;
 	}
 
-	// derivedFrom		0..*	Reference(Resource)	Additional supporting information
+	// subject	Σ	1..1	Reference(Patient | Group)	Who is/was taking the medication
+	set subject(subject) {
+		this._subject = new Reference(subject);
+	}
+
+	get subject() {
+		return this._subject;
+	}
+
+	// derivedFrom		0..*	Reference(Any)	Additional supporting information
 	set derivedFrom(derivedFrom) {
 		if (Array.isArray(derivedFrom)) {
 			this._derivedFrom = derivedFrom.map((i) => new Reference(i));
@@ -203,27 +169,18 @@ class MedicationStatement extends DomainResource {
 		return this._derivedFrom;
 	}
 
-	// dateAsserted	S	1..1	dateTime	When the statement was asserted?
-	set dateAsserted(dateAsserted) {
-		this._dateAsserted = dateAsserted;
+	// taken	?!Σ	1..1	code	y | n | unk | na
+	// MedicationStatementTaken (Required)
+	set taken(taken) {
+		this._taken = new Code(taken);
 	}
 
-	get dateAsserted() {
-		return this._dateAsserted;
-	}
-
-	// notTaken	?!*	0..1	code	y | n | unk
-	// Binding: MedicationStatementNotTaken (required)
-	set notTaken(notTaken) {
-		this._notTaken = new Code(notTaken);
-	}
-
-	get notTaken() {
-		return this._notTaken;
+	get taken() {
+		return this._taken;
 	}
 
 	// reasonNotTaken	I	0..*	CodeableConcept	True if asserting medication was not given
-	// Binding: SNOMED CT Drugs not taken/completed Codes (example)
+	// SNOMED CT Drugs not taken/completed Codes (Example)
 	set reasonNotTaken(reasonNotTaken) {
 		if (Array.isArray(reasonNotTaken)) {
 			this._reasonNotTaken = reasonNotTaken.map((i) => new CodeableConcept(i));
@@ -236,31 +193,31 @@ class MedicationStatement extends DomainResource {
 		return this._reasonNotTaken;
 	}
 
-	// reasonForUseCodeableConcept		0..*	CodeableConcept	Reason for why the medication is being/was taken
-	// Binding: Condition/Problem/Diagnosis Codes (example)
-	set reasonForUseCodeableConcept(reasonForUseCodeableConcept) {
-		if (Array.isArray(reasonForUseCodeableConcept)) {
-			this._reasonForUseCodeableConcept = reasonForUseCodeableConcept.map((i) => new CodeableConcept(i));
+	// reasonCode		0..*	CodeableConcept	Reason for why the medication is being/was taken
+	// Condition/Problem/Diagnosis Codes (Example)
+	set reasonCode(reasonCode) {
+		if (Array.isArray(reasonCode)) {
+			this._reasonCode = reasonCode.map((i) => new CodeableConcept(i));
 		} else {
-			this._reasonForUseCodeableConcept = [new CodeableConcept(reasonForUseCodeableConcept)];
+			this._reasonCode = [new CodeableConcept(reasonCode)];
 		}
 	}
 
-	get reasonForUseCodeableConcept() {
-		return this._reasonForUseCodeableConcept;
+	get reasonCode() {
+		return this._reasonCode;
 	}
 
-	// reasonForUseReference		0..*	Reference(Condition), Reference(Observation)	Condition or observation that supports why the medication is being/was taken
-	set reasonForUseReference(reasonForUseReference) {
-		if (Array.isArray(reasonForUseReference)) {
-			this._reasonForUseReference = reasonForUseReference.map((i) => new Reference(i));
+	// reasonReference		0..*	Reference(Condition | Observation)	Condition or observation that supports why the medication is being/was taken
+	set reasonReference(reasonReference) {
+		if (Array.isArray(reasonReference)) {
+			this._reasonReference = reasonReference.map((i) => new Reference(i));
 		} else {
-			this._reasonForUseReference = [new Reference(reasonForUseReference)];
+			this._reasonReference = [new Reference(reasonReference)];
 		}
 	}
 
-	get reasonForUseReference() {
-		return this._reasonForUseReference;
+	get reasonReference() {
+		return this._reasonReference;
 	}
 
 	// note		0..*	Annotation	Further information about the statement
@@ -276,19 +233,13 @@ class MedicationStatement extends DomainResource {
 		return this._note;
 	}
 
-	// category		0..1	code	Type of medication usage
-	// Binding: MedicationStatementCategory (example)
-	set category(category) {
-		this._category = new Code(category);
-	}
-
-	get category() {
-		return this._category;
-	}
-
-	// dosage		0..*	DosageInstruction	Details of how medication was taken
+	// dosage		0..*	Dosage	Details of how medication is/was taken or should be taken
 	set dosage(dosage) {
-		this._dosage = [].concat(dosage);
+		if (Array.isArray(dosage)) {
+			this._dosage = dosage.map((i) => new Dosage(i));
+		} else {
+			this._dosage = [new Dosage(dosage)];
+		}
 	}
 
 	get dosage() {
@@ -297,30 +248,25 @@ class MedicationStatement extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
+			basedOn: this._basedOn,
+			partOf: this._partOf,
+			context: this._context,
 			status: this._status,
+			category: this._category,
 			medicationCodeableConcept: this._medicationCodeableConcept,
 			medicationReference: this._medicationReference,
-			subject: this._subject,
 			effectiveDateTime: this._effectiveDateTime,
 			effectivePeriod: this._effectivePeriod,
-			informationSource: this._informationSource,
-			derivedFrom: this._derivedFrom,
 			dateAsserted: this._dateAsserted,
-			notTaken: this._notTaken,
+			informationSource: this._informationSource,
+			subject: this._subject,
+			derivedFrom: this._derivedFrom,
+			taken: this._taken,
 			reasonNotTaken: this._reasonNotTaken,
-			reasonForUseCodeableConcept: this._reasonForUseCodeableConcept,
-			reasonForUseReference: this._reasonForUseReference,
+			reasonCode: this._reasonCode,
+			reasonReference: this._reasonReference,
 			note: this._note,
-			category: this._category,
 			dosage: this._dosage,
 		};
 

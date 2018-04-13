@@ -1,11 +1,7 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
 const Reference = require('./types/Reference');
+const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Period = require('./types/Period');
 const Attachment = require('./types/Attachment');
@@ -13,41 +9,6 @@ const Attachment = require('./types/Attachment');
 class Image {
 	constructor(obj) {
 		Object.assign(this, obj);
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
 	}
 
 	// comment		0..1	string	Comment about the image (e.g. explanation)
@@ -70,9 +31,6 @@ class Image {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			comment: this._comment,
 			link: this._link,
 		};
@@ -84,43 +42,8 @@ class Performer {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// role	Σ	0..1	CodeableConcept	Type of performer
-	// Binding: Procedure Performer Role Codes (example)
+	// Procedure Performer Role Codes (Example)
 	set role(role) {
 		this._role = new CodeableConcept(role);
 	}
@@ -129,7 +52,7 @@ class Performer {
 		return this._role;
 	}
 
-	// actor	SΣ	1..1	Reference(US Core Practitioner Profile), Reference(US Core Organization Core Profile)	Practitioner or Organization participant
+	// actor	Σ	1..1	Reference(Practitioner | Organization)	Practitioner or Organization participant
 	set actor(actor) {
 		this._actor = new Reference(actor);
 	}
@@ -140,9 +63,6 @@ class Performer {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			role: this._role,
 			actor: this._actor,
 		};
@@ -164,91 +84,6 @@ class DiagnosticReport extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Σ	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Σ	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Σ	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// identifier	Σ	0..*	Identifier	Business identifier for report
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
@@ -262,7 +97,7 @@ class DiagnosticReport extends DomainResource {
 		return this._identifier;
 	}
 
-	// basedOn		0..*	Reference(CarePlan), Reference(ImmunizationRecommendation), Reference(MedicationRequest), Reference(NutritionOrder), Reference(ProcedureRequest), Reference(ReferralRequest)	What was requested
+	// basedOn		0..*	Reference(CarePlan | ImmunizationRecommendation | MedicationRequest | NutritionOrder | ProcedureRequest | ReferralRequest)	What was requested
 	set basedOn(basedOn) {
 		if (Array.isArray(basedOn)) {
 			this._basedOn = basedOn.map((i) => new Reference(i));
@@ -275,8 +110,8 @@ class DiagnosticReport extends DomainResource {
 		return this._basedOn;
 	}
 
-	// status	?!SΣ	1..1	code	registered | partial | preliminary | final +
-	// Binding: DiagnosticReportStatus (required)
+	// status	?!Σ	1..1	code	registered | partial | preliminary | final +
+	// DiagnosticReportStatus (Required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -285,9 +120,8 @@ class DiagnosticReport extends DomainResource {
 		return this._status;
 	}
 
-	// category	SΣ	1..1	CodeableConcept	Service category
-	// Binding: Diagnostic Service Section Codes (example)
-	// Required Pattern: {"coding":[{"system":"http://hl7.org/fhir/v2/0074","code":"LAB"}]}
+	// category	Σ	0..1	CodeableConcept	Service category
+	// Diagnostic Service Section Codes (Example)
 	set category(category) {
 		this._category = new CodeableConcept(category);
 	}
@@ -296,8 +130,8 @@ class DiagnosticReport extends DomainResource {
 		return this._category;
 	}
 
-	// code	SΣ	1..1	CodeableConcept	US Core Laboratory Report Order Code
-	// Binding: LOINC Diagnostic Report Codes (extensible)
+	// code	Σ	1..1	CodeableConcept	Name/Code for this diagnostic report
+	// LOINC Diagnostic Report Codes (Preferred)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -306,7 +140,7 @@ class DiagnosticReport extends DomainResource {
 		return this._code;
 	}
 
-	// subject	SΣ	1..1	Reference(US Core Patient Profile)	The subject of the report - usually, but not always, the patient
+	// subject	Σ	0..1	Reference(Patient | Group | Device | Location)	The subject of the report - usually, but not always, the patient
 	set subject(subject) {
 		this._subject = new Reference(subject);
 	}
@@ -315,7 +149,7 @@ class DiagnosticReport extends DomainResource {
 		return this._subject;
 	}
 
-	// context	Σ	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Health care event when test ordered
+	// context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Health care event when test ordered
 	set context(context) {
 		this._context = new Reference(context);
 	}
@@ -343,7 +177,7 @@ class DiagnosticReport extends DomainResource {
 		return this._effectivePeriod;
 	}
 
-	// issued	SΣ	1..1	instant	DateTime this version was released
+	// issued	Σ	0..1	instant	DateTime this version was released
 	set issued(issued) {
 		this._issued = issued;
 	}
@@ -352,7 +186,7 @@ class DiagnosticReport extends DomainResource {
 		return this._issued;
 	}
 
-	// performer	SΣI	0..*	BackboneElement	Participants in producing the report
+	// performer	Σ	0..*	BackboneElement	Participants in producing the report
 	set performer(performer) {
 		if (Array.isArray(performer)) {
 			this._performer = performer.map((i) => new Performer(i));
@@ -378,7 +212,7 @@ class DiagnosticReport extends DomainResource {
 		return this._specimen;
 	}
 
-	// result	S	0..*	Reference(US Core Results Profile)	Observations - simple, or complex nested groups
+	// result		0..*	Reference(Observation)	Observations - simple, or complex nested groups
 	set result(result) {
 		if (Array.isArray(result)) {
 			this._result = result.map((i) => new Reference(i));
@@ -391,7 +225,7 @@ class DiagnosticReport extends DomainResource {
 		return this._result;
 	}
 
-	// imagingStudy		0..*	Reference(ImagingStudy), Reference(ImagingManifest)	Reference to full details of imaging associated with the diagnostic report
+	// imagingStudy		0..*	Reference(ImagingStudy | ImagingManifest)	Reference to full details of imaging associated with the diagnostic report
 	set imagingStudy(imagingStudy) {
 		if (Array.isArray(imagingStudy)) {
 			this._imagingStudy = imagingStudy.map((i) => new Reference(i));
@@ -404,7 +238,7 @@ class DiagnosticReport extends DomainResource {
 		return this._imagingStudy;
 	}
 
-	// image	SΣI	0..*	BackboneElement	Key images associated with this report
+	// image	Σ	0..*	BackboneElement	Key images associated with this report
 	set image(image) {
 		if (Array.isArray(image)) {
 			this._image = image.map((i) => new Image(i));
@@ -427,7 +261,7 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	// codedDiagnosis		0..*	CodeableConcept	Codes for the conclusion
-	// Binding: SNOMED CT Clinical Findings (example)
+	// SNOMED CT Clinical Findings (Example)
 	set codedDiagnosis(codedDiagnosis) {
 		if (Array.isArray(codedDiagnosis)) {
 			this._codedDiagnosis = codedDiagnosis.map((i) => new CodeableConcept(i));
@@ -440,7 +274,7 @@ class DiagnosticReport extends DomainResource {
 		return this._codedDiagnosis;
 	}
 
-	// presentedForm	S	0..*	Attachment	Entire report as issued
+	// presentedForm		0..*	Attachment	Entire report as issued
 	set presentedForm(presentedForm) {
 		if (Array.isArray(presentedForm)) {
 			this._presentedForm = presentedForm.map((i) => new Attachment(i));
@@ -455,14 +289,6 @@ class DiagnosticReport extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			basedOn: this._basedOn,
 			status: this._status,

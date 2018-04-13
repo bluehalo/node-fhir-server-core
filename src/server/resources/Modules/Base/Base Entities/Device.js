@@ -1,10 +1,6 @@
 const DomainResource = require('./types/DomainResource');
-const Meta = require('./types/Meta');
-const Code = require('./types/Code');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
 const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
 const CodeableConcept = require('./types/CodeableConcept');
 const Reference = require('./types/Reference');
 const ContactPoint = require('./types/ContactPoint');
@@ -15,42 +11,7 @@ class Udi {
 		Object.assign(this, obj);
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
-	// deviceIdentifier	Î£	0..1	string	Mandatory fixed portion of UDI
+	// deviceIdentifier	Σ	0..1	string	Mandatory fixed portion of UDI
 	set deviceIdentifier(deviceIdentifier) {
 		this._deviceIdentifier = deviceIdentifier;
 	}
@@ -59,7 +20,7 @@ class Udi {
 		return this._deviceIdentifier;
 	}
 
-	// name	Î£	0..1	string	Device Name as appears on UDI label
+	// name	Σ	0..1	string	Device Name as appears on UDI label
 	set name(name) {
 		this._name = name;
 	}
@@ -77,7 +38,7 @@ class Udi {
 		return this._jurisdiction;
 	}
 
-	// carrierHRF	Î£	0..1	string	UDI Human Readable Barcode String
+	// carrierHRF	Σ	0..1	string	UDI Human Readable Barcode String
 	set carrierHRF(carrierHRF) {
 		this._carrierHRF = carrierHRF;
 	}
@@ -86,7 +47,7 @@ class Udi {
 		return this._carrierHRF;
 	}
 
-	// carrierAIDC	Î£	0..1	base64Binary	UDI Machine Readable Barcode String
+	// carrierAIDC	Σ	0..1	base64Binary	UDI Machine Readable Barcode String
 	set carrierAIDC(carrierAIDC) {
 		this._carrierAIDC = carrierAIDC;
 	}
@@ -105,7 +66,7 @@ class Udi {
 	}
 
 	// entryType		0..1	code	barcode | rfid | manual +
-	// Binding: UDIEntryType (required)
+	// UDIEntryType (Required)
 	set entryType(entryType) {
 		this._entryType = new Code(entryType);
 	}
@@ -116,9 +77,6 @@ class Udi {
 
 	toJSON() {
 		return {
-			id: this._id,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			deviceIdentifier: this._deviceIdentifier,
 			name: this._name,
 			jurisdiction: this._jurisdiction,
@@ -145,91 +103,6 @@ class Device extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// meta	Î£	0..1	Meta	Metadata about the resource
-	set meta(meta) {
-		this._meta = new Meta(meta);
-	}
-
-	get meta() {
-		return this._meta;
-	}
-
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
-	set implicitRules(implicitRules) {
-		this._implicitRules = implicitRules;
-	}
-
-	get implicitRules() {
-		return this._implicitRules;
-	}
-
-	// language		0..1	code	Language of the resource content
-	// Binding: Common Languages (extensible)
-	set language(language) {
-		this._language = new Code(language);
-	}
-
-	get language() {
-		return this._language;
-	}
-
-	// text	I	0..1	Narrative	Text summary of the resource, for human interpretation
-	set text(text) {
-		this._text = new Narrative(text);
-	}
-
-	get text() {
-		return this._text;
-	}
-
-	// contained		0..*	Resource	Contained, inline Resources
-	set contained(contained) {
-		if (Array.isArray(contained)) {
-			this._contained = contained.map((i) => new Resource(i));
-		} else {
-			this._contained = [new Resource(contained)];
-		}
-	}
-
-	get contained() {
-		return this._contained;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
-	set modifierExtension(modifierExtension) {
-		if (Array.isArray(modifierExtension)) {
-			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
-		} else {
-			this._modifierExtension = [new Extension(modifierExtension)];
-		}
-	}
-
-	get modifierExtension() {
-		return this._modifierExtension;
-	}
-
 	// identifier		0..*	Identifier	Instance identifier
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
@@ -243,7 +116,7 @@ class Device extends DomainResource {
 		return this._identifier;
 	}
 
-	// udi	SÎ£I	1..1	BackboneElement	Unique Device Identifier (UDI) Barcode string
+	// udi	Σ	0..1	BackboneElement	Unique Device Identifier (UDI) Barcode string
 	set udi(udi) {
 		this._udi = new Udi(udi);
 	}
@@ -252,8 +125,8 @@ class Device extends DomainResource {
 		return this._udi;
 	}
 
-	// status	?!Î£	0..1	code	active | inactive | entered-in-error | unknown
-	// Binding: FHIRDeviceStatus (required)
+	// status	?!Σ	0..1	code	active | inactive | entered-in-error | unknown
+	// FHIRDeviceStatus (Required)
 	set status(status) {
 		this._status = new Code(status);
 	}
@@ -262,8 +135,8 @@ class Device extends DomainResource {
 		return this._status;
 	}
 
-	// type	S	1..1	CodeableConcept	What kind of device this is
-	// Binding: FHIR Device Types (extensible)
+	// type		0..1	CodeableConcept	What kind of device this is
+	// FHIR Device Types (Example)
 	set type(type) {
 		this._type = new CodeableConcept(type);
 	}
@@ -326,7 +199,7 @@ class Device extends DomainResource {
 		return this._version;
 	}
 
-	// patient	S	1..1	Reference(US Core Patient Profile)	Patient to whom Device is affixed
+	// patient		0..1	Reference(Patient)	Patient to whom Device is affixed
 	set patient(patient) {
 		this._patient = new Reference(patient);
 	}
@@ -388,8 +261,8 @@ class Device extends DomainResource {
 		return this._note;
 	}
 
-	// safety	Î£	0..*	CodeableConcept	Safety Characteristics of Device
-	// Binding: DeviceSafety (example)
+	// safety	Σ	0..*	CodeableConcept	Safety Characteristics of Device
+	// DeviceSafety (Example)
 	set safety(safety) {
 		if (Array.isArray(safety)) {
 			this._safety = safety.map((i) => new CodeableConcept(i));
@@ -404,14 +277,6 @@ class Device extends DomainResource {
 
 	toJSON() {
 		const json = {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language,
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
 			udi: this._udi,
 			status: this._status,

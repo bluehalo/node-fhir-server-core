@@ -50,10 +50,107 @@ let routes = [
 			{
 				name: '_tag',
 				type: 'token'
-			},
-		
-		
-		],
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'active',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-city',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-country',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-postalcode',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-state',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-use',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'animal-breed',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'animal-species',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'birthdate',
+				type: 'date'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'death-date',
+				type: 'date'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'deceased',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'email',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'family',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'gender',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'general-practitioner',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'given',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'identifier',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'language',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'link',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'name',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'organization',
+				type: 'reference'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'phone',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'phonetic',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'telecom',
+				type: 'token',
+			}],
 		scopes: scopes,
 		controller: controller.getPatient
 	},

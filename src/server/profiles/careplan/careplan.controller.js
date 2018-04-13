@@ -1,4 +1,4 @@
-const CarePlan = require('../../resources/CarePlan');
+const CarePlan = require('../../resources/uscore/resources/CarePlan');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCarePlan = ({ profile, logger, config }) => {

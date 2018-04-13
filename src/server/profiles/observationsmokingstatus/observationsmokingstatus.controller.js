@@ -1,4 +1,4 @@
-const ObservationSmokingStatus = require('../../resources/ObservationSmokingStatus');
+const ObservationSmokingStatus = require('../../resources/uscore/resources/ObservationSmokingStatus');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {

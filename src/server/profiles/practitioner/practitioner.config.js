@@ -50,10 +50,75 @@ let routes = [
 			{
 				name: '_tag',
 				type: 'token'
-			},
-		
-		
-		],
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'active',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-city',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-country',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-postalcode',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-state',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'address-use',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'communication',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'email',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'family',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'gender',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'given',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'identifier',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'name',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'phone',
+				type: 'token'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'phonetic',
+				type: 'string'
+			}, {
+				versions: [VERSIONS.STU3],
+				name: 'telecom',
+				type: 'token',
+			}],
 		scopes: scopes,
 		controller: controller.getPractitioner
 	},
