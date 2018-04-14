@@ -6,8 +6,8 @@ const { DSTU2 } = require('../../../constants');
  */
 
 module.exports = {
-	Profile: 'patient',
-	Resource: (count) => ({
+	profile: 'patient',
+	resourcedocumentation: (version, count) => ({
 		extension: [{
 			url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
 			// This will be resolved dynamically by the service methods
@@ -22,34 +22,37 @@ module.exports = {
 		}, {
 			code: 'search'
 		}],
+		// TODO: These need a definition for each one which is a URL to the definition of
+		// search parameters. We should investigate the best way to configure this so there
+		// is not a lot of repeat information.
 		searchParam: [{
 			name: 'id',
 			type: 'token',
-			definition: 'Id of the patient'
+			documentation: 'Id of the patient'
 		}, {
 			name: 'name',
 			type: 'string',
-			definition: 'Name of the patient'
+			documentation: 'Name of the patient'
 		}, {
 			name: 'birthdate',
 			type: 'date',
-			definition: 'Birthdate of the patient'
+			documentation: 'Birthdate of the patient'
 		}, {
 			name: 'gender',
 			type: 'token',
-			definition: 'Gender of the patient'
+			documentation: 'Gender of the patient'
 		}, {
 			name: 'given',
 			type: 'string',
-			definition: 'A portion of the given name of the patient'
+			documentation: 'A portion of the given name of the patient'
 		}, {
 			name: 'family',
 			type: 'string',
-			definition: 'A portion of the family name of the patient'
+			documentation: 'A portion of the family name of the patient'
 		}, {
 			name: 'identifier',
 			type: 'token',
-			definition: 'A patient identifier'
+			documentation: 'A patient identifier'
 		}]
 	})
 };

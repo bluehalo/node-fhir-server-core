@@ -1,7 +1,20 @@
 const errors = require('./error.utils');
 
 /**
-* Middleware for validating the correct spec version is being accessed
+* @description Filter out the arguments based on whether of not they are
+* intended for use in the given spec version
+* @param {string} version - What version are we on
+* @param {Array<Object>} args arguments for a particular route to filter
+*/
+let versionArgumentFilter = (version, args = []) => {
+	return args.filter((arg = {}) => {
+		let { versions = [] } = arg;
+		return versions.indexOf(version) > -1;
+	});
+};
+
+/**
+* @description Middleware for validating the correct spec version is being accessed
 * If the user is trying to access R4 but the server is route is only supposed
 * to allow STU3, then we need to trigger a 404 error. Otherwise, we can continue.
 * @param {Object} profile - Configurations for the profile from the wrapping library
@@ -22,5 +35,6 @@ let versionValidationMiddleware = ( profile = {}) => {
 };
 
 module.exports = {
-	versionValidationMiddleware
+	versionValidationMiddleware,
+	versionArgumentFilter
 };
