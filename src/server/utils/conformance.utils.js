@@ -20,13 +20,16 @@ let conformanceSearchParamsReduce = (collection, route_arg) => {
 * @return {function} filter function for array.filter
 */
 let conformanceSearchParamsFilter = (version) => (route_arg) => {
-	return (
-		// Flag to make sure certain arguments are hidden from conformance statements
-		// And if no versions are provided, it is available for all versions
-		(!route_arg.conformance_hide && !route_arg.versions)
-		// Or if versions are provided, make sure this arg is meant for this version
-		|| (route_arg.versions && route_arg.versions.indexOf(version) > -1)
-	);
+	return route_arg.conformance_hide
+		// If the conformance_hide property is true, always remove this element
+		? false
+		// Else check our versions property, there are two possible cases
+		: (
+			// If no versions are provided, it is available for all versions
+			!route_arg.versions
+			// If versions are provided, make sure this arg is meant for this version
+			|| (route_arg.versions && route_arg.versions.indexOf(version) > -1)
+		);
 };
 
 /**
