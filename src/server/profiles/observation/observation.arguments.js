@@ -1,6 +1,6 @@
 /**
 * @name exports
-* @description All the possible patient arguments defined in one place
+* @description All the possible observation arguments defined in one place
 */
 module.exports = {
 	BASED_ON: {
