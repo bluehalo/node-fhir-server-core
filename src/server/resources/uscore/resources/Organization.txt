@@ -1,0 +1,60 @@
+Main
+Organization
+id	Σ	0..1	id	Logical id of this artifact
+
+meta	Σ	0..1	Meta	Metadata about the resource
+
+implicitRules	?!Σ	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier	SΣI	1..*	Identifier	Identifies this organization across multiple systems
+
+active	?!SΣ	1..1	boolean	Whether the organization's record is still in active use
+
+type	Σ	0..*	CodeableConcept	Kind of organization
+Binding: OrganizationType (example)
+
+name	SΣI	1..1	string	Name used for the organization
+
+alias		0..*	string	A list of alternate names that the organization is known as, or was known as in the past
+
+telecom	SI	1..*	ContactPoint	A contact detail for the organization
+
+address	SI	1..*	Address	An address for the organization
+
+partOf	Σ	0..1	Reference(Organization)	The organization of which this organization forms a part
+
+contact	I	0..*	BackboneElement	Contact for the organization for a certain purpose
+
+endpoint	S	0..*	Reference(Endpoint)	Technical endpoints providing access to services operated for the organization
+
+
+Backbone
+contact
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
+
+purpose		0..1	CodeableConcept	The type of contact
+Binding: ContactEntityType (extensible)
+
+name		0..1	HumanName	A name associated with the contact
+
+telecom		0..*	ContactPoint	Contact details (telephone, email, etc.) for a contact
+
+address		0..1	Address	Visiting or postal addresses for the contact
+
+
+eof

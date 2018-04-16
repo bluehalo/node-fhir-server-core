@@ -1,0 +1,109 @@
+Main
+Medication
+id	*	0..1	id	Logical id of this artifact
+
+meta	*	0..1	Meta	Metadata about the resource
+
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+code	S	1..1	CodeableConcept	Codes that identify this medication
+Binding: Medication Clinical Drug (RxNorm) (extensible)
+
+isBrand	*	0..1	boolean	True if a brand
+
+manufacturer	*	0..1	Reference(Organization)	Manufacturer of the item
+
+package	I	0..1	BackboneElement	Details about packaged medications
+
+product	I	0..1	BackboneElement	Administrable medication details
+
+
+Backbone
+product
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+form		0..1	CodeableConcept	powder | tablets | capsule +
+Binding: SNOMED CT Form Codes (example)
+
+ingredient	I	0..*	BackboneElement	Active or inactive ingredient
+
+batch	I	0..*	BackboneElement	Identifies a single production run
+
+
+Backbone
+ingredient
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+item[x]		1..1		The product contained
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Substance | Medication)
+
+amount		0..1	Ratio	Quantity of ingredient present
+
+
+Backbone
+batch
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+lotNumber		0..1	string	Identifier assigned to batch
+
+expirationDate		0..1	dateTime	When batch will expire
+
+
+Backbone
+package
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+container		0..1	CodeableConcept	E.g. box, vial, blister-pack
+Binding: SNOMED CT Form Codes (example)
+
+content	I	0..*	BackboneElement	What is in the package
+
+
+Backbone
+content
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+item[x]		1..1		The item in the package
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Medication)
+
+amount		0..1	SimpleQuantity	Quantity present in the package
+
+
+eof

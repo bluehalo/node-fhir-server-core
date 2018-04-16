@@ -1,0 +1,135 @@
+Main
+ObservationVitalSigns
+id	*	0..1	id	Logical id of this artifact
+
+meta	*	0..1	Meta	Metadata about the resource
+
+implicitRules	?!*	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier		0..*	Identifier	Unique Id for this particular observation
+
+status	?!S	1..1	code	registered | preliminary | final | amended +
+Binding: ObservationStatus (required)
+
+category	S	1..1	CodeableConcept	Classification of type of observation
+Binding: Observation Category Codes (example)
+Required Pattern: {"coding":[{"system":"http://hl7.org/fhir/observation-category","code":"vital-signs"}]}
+
+code	S	1..1	CodeableConcept	Coded Responses from C-CDA Vital Sign Results
+Binding: US Core Vital Sign Codes (extensible)
+
+subject	S	1..1	Reference(US Core Patient Profile)	Who and/or what this is about
+
+encounter		0..1	Reference(Encounter)	Healthcare event during which this observation is made
+
+effective[x]	Σ	0..1		Clinically relevant time/time-period for observation
+
+effectiveDateTime			dateTime
+
+effectivePeriod			Period
+
+issued	*	0..1	instant	Date/Time this was made available
+
+performer	*	0..*	Reference(Practitioner), Reference(Organization), Reference(Patient), Reference(RelatedPerson)	Who is responsible for the observation
+
+valueQuantity	SI	0..1	Quantity	Vital Sign Value recorded with UCUM
+Binding: Vital Signs Units (extensible)
+
+dataAbsentReason	SI	0..1	CodeableConcept	Why the result is missing
+Binding: Observation Value Absent Reason (extensible)
+
+interpretation		0..1	CodeableConcept	High, low, normal, etc.
+Binding: Observation Interpretation Codes (extensible)
+
+comment		0..1	string	Comments about result
+
+bodySite		0..1	CodeableConcept	Observed body part
+Binding: SNOMED CT Body Structures (example)
+
+method		0..1	CodeableConcept	How it was done
+Binding: Observation Methods (example)
+
+specimen		0..1	Reference(Specimen)	Specimen used for this observation
+
+device		0..1	Reference(Device), Reference(DeviceMetric)	(Measurement) Device
+
+referenceRange	I	0..*	BackboneElement	Provides guide for interpretation
+obs-3: Must have at least a low or a high or text
+
+related	SI	0..1	BackboneElement	Used when reporting systolic and diastolic blood pressure.
+
+component	SI	0..1	BackboneElement	Used when reporting systolic and diastolic blood pressure.
+us-core-3: If there is no a value a data absent reason must be present
+
+
+Backbone
+referenceRange
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+low	I	0..1	SimpleQuantity	Low Range, if relevant
+
+high	I	0..1	SimpleQuantity	High Range, if relevant
+
+meaning		0..*	CodeableConcept	Reference range qualifier
+Binding: Observation Reference Range Meaning Codes (example)
+
+age		0..1	Range	Applicable age range, if relevant
+
+text		0..1	string	Text based reference range in an observation
+
+
+Backbone
+related
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+type	S	1..1	code	has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by
+Binding: ObservationRelationshipType (required)
+Fixed Value: has-member
+
+target	S	1..1	Reference(US Core Vital Signs Profile)	Resource that is related to this one
+
+
+Backbone
+component
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!*	0..*	Extension	Extensions that cannot be ignored
+
+code	S	1..1	CodeableConcept	Type of component observation (code / type)
+Binding: US Core Vital Sign Codes (extensible)
+
+valueQuantity	S	0..1	Quantity	Vital Sign Value recorded with UCUM
+Binding: Vital Signs Units (extensible)
+
+dataAbsentReason	SI	0..1	CodeableConcept	Why the component result is missing
+Binding: Observation Value Absent Reason (extensible)
+
+interpretation		0..1	CodeableConcept	High, low, normal, etc.
+Binding: Observation Interpretation Codes (extensible)
+
+referenceRange		0..*		Unknown reference to #Observation:uscorevitalsigns.referenceRange
+Provides guide for interpretation of component result
+
+
+eof

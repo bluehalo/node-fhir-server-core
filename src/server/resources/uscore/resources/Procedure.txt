@@ -1,0 +1,117 @@
+Main
+Procedure
+id	Î£	0..1	id	Logical id of this artifact
+
+meta	Î£	0..1	Meta	Metadata about the resource
+
+implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+
+language		0..1	code	Language of the resource content
+Binding: Common Languages (extensible)
+
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+identifier	Î£	0..*	Identifier	External Identifiers for this procedure
+
+definition	Î£	0..*	Reference(PlanDefinition), Reference(ActivityDefinition), Reference(HealthcareService)	Instantiates protocol or definition
+
+basedOn	Î£	0..*	Reference(CarePlan), Reference(ProcedureRequest), Reference(ReferralRequest)	A request for this procedure
+
+partOf	Î£	0..*	Reference(Procedure), Reference(Observation), Reference(MedicationAdministration)	Part of referenced event
+
+status	?!SÎ£	1..1	code	preparation | in-progress | suspended | aborted | completed | entered-in-error | unknown
+Binding: EventStatus (required)
+
+notDone	?!Î£	0..1	boolean	True if procedure was not performed as scheduled
+
+notDoneReason	Î£I	0..1	CodeableConcept	Reason procedure was not performed
+Binding: Procedure Not Performed Reason (SNOMED-CT) (example)
+
+category	Î£	0..1	CodeableConcept	Classification of the procedure
+Binding: Procedure Category Codes (SNOMED CT) (example)
+
+code	SÎ£	1..1	CodeableConcept	SNOMED-CT | ICD-10 | CPT-4
+Binding: US Core Procedure Codes (extensible)
+
+subject	SÎ£	1..1	Reference(US Core Patient Profile)	Who the procedure was performed on
+
+context	Î£	0..1	Reference(Encounter), Reference(EpisodeOfCare)	Encounter or episode associated with the procedure
+
+performed[x]	Σ	0..1		Date/Period the procedure was performed
+
+performedDateTime			dateTime
+
+performedPeriod			Period
+
+performer	Î£I	0..*	BackboneElement	The people who performed the procedure
+
+location	Î£	0..1	Reference(Location)	Where the procedure happened
+
+reasonCode	Î£	0..*	CodeableConcept	Coded reason procedure performed
+Binding: Procedure Reason Codes (example)
+
+reasonReference	Î£	0..*	Reference(Condition), Reference(Observation)	Condition that is the reason the procedure performed
+
+bodySite	Î£	0..*	CodeableConcept	Target body sites
+Binding: SNOMED CT Body Structures (example)
+
+outcome	Î£	0..1	CodeableConcept	The result of procedure
+Binding: Procedure Outcome Codes (SNOMED CT) (example)
+
+report		0..*	Reference(DiagnosticReport)	Any report resulting from the procedure
+
+complication		0..*	CodeableConcept	Complication following the procedure
+Binding: Condition/Problem/Diagnosis Codes (example)
+
+complicationDetail		0..*	Reference(Condition)	A condition that is a result of the procedure
+
+followUp		0..*	CodeableConcept	Instructions for follow up
+Binding: Procedure Follow up Codes (SNOMED CT) (example)
+
+note		0..*	Annotation	Additional information about the procedure
+
+focalDevice	I	0..*	BackboneElement	Device changed in procedure
+
+usedReference		0..*	Reference(Device), Reference(Medication), Reference(Substance)	Items used during procedure
+
+usedCode		0..*	CodeableConcept	Coded items used during the procedure
+Binding: FHIR Device Types (example)
+
+
+Backbone
+performer
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+
+role	Î£	0..1	CodeableConcept	The role the actor was in
+Binding: Procedure Performer Role Codes (example)
+
+actor	Î£	1..1	Reference(Practitioner), Reference(Organization), Reference(Patient), Reference(RelatedPerson), Reference(Device)	The reference to the practitioner
+
+onBehalfOf		0..1	Reference(Organization)	Organization the device or practitioner was acting for
+
+
+Backbone
+focalDevice
+id		0..1	string	xml:id (or equivalent in JSON)
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+
+action		0..1	CodeableConcept	Kind of change to device
+Binding: Procedure Device Action Codes (preferred)
+
+manipulated		1..1	Reference(Device)	Device that was changed
+
+
+eof
