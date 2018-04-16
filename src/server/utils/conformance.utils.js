@@ -60,12 +60,12 @@ let generateSearchParamsForConformance = (routes, version) => {
 	return routes
 		// Get a flat list of all of our router arguments
 		.reduce((all, route) => all.concat(route.args), [])
-		// Remove any duplicates from the array based on their name
-		.reduce(conformanceSearchParamsReduce, [])
 		// Filter parameters that should be excluded from this conformance
 		// statement based on version or if it is a route parameter (e.g. version or id)
 		// route parameters will have a conformance_hide property
 		.filter(conformanceSearchParamsFilter(version))
+		// Remove any duplicates from the array based on their name
+		.reduce(conformanceSearchParamsReduce, [])
 		// Route arguments have additional parameters necessary for generating routes
 		// map over the routes and remove those parameters
 		.map(conformanceSearchParamsMap(version));
