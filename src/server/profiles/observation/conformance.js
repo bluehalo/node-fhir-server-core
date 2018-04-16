@@ -1,3 +1,5 @@
+const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
+const { routes } = require('./observation.config');
 const { DSTU2 } = require('../../../constants');
 
 /**
@@ -6,37 +8,25 @@ const { DSTU2 } = require('../../../constants');
  */
 module.exports = {
 	profile: 'observation',
-	resource: (version, count) => ({
-		extension: [{
-			url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
-			// This will be resolved dynamically by the service methods
-			valueDecimal: count
-		}],
-		type: DSTU2.RESOURCE_TYPES.OBSERVATION,
-		profile: {
-			reference: 'http://hl7.org/fhir/Profile/Observation'
-		},
-		interaction: [{
-			code: 'read'
-		}, {
-			code: 'search'
-		}],
-		searchParam: [{
-			name: 'category',
-			type: 'token',
-			documentation: 'The classification of the type of observation'
-		}, {
-			name: 'code',
-			type: 'token',
-			documentation: 'The code of the observation type'
-		}, {
-			name: 'date',
-			type: 'date',
-			documentation: 'Obtained date/time. If the obtained element is a period, a date that falls in the period'
-		}, {
-			name: 'patient',
-			type: 'reference',
-			documentation: 'The subject that the observation is about (if patient)'
-		}]
-	})
+	resource: (version, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, version);
+		// Return our conformance statement
+		return {
+			extension: [{
+				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				// This will be resolved dynamically by the service methods
+				valueDecimal: count
+			}],
+			type: DSTU2.RESOURCE_TYPES.OBSERVATION,
+			profile: {
+				reference: 'http://hl7.org/fhir/Profile/Observation'
+			},
+			interaction: [{
+				code: 'read'
+			}, {
+				code: 'search'
+			}],
+			searchParam: searchParams
+		};
+	}
 };

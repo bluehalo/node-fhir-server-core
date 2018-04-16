@@ -98,7 +98,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 			.map((profile, i) => profile.makeResource(context.version, counts[i]));
 
 		// Add the server statement to the main statement
-		return makeStatement(server_statement);
+		return resolve(makeStatement(server_statement));
 	});
 
 });

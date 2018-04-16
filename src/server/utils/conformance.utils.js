@@ -1,0 +1,73 @@
+/**
+* @description Reduce function for removing duplicates from the search params array
+* @param {Object} collection - Cumulutaive array for reduce function
+* @param {Object} route_arg - route argument
+* @return {Object} collection
+*/
+let conformanceSearchParamsReduce = (collection, route_arg) => {
+	// Use the name to find duplicates, we should not have arguments with the same name
+	if (!collection.find(item => item.name === route_arg.name)) {
+		collection.push(route_arg);
+	}
+	return collection;
+};
+
+/**
+* @description Filter function for determining which searchParam fields are needed
+* for conformance/capability statements
+* @param {Object} route_arg - route argument
+* @param {string} version - which version (not necessary now, but may be in the future)
+* @return {function} filter function for array.filter
+*/
+let conformanceSearchParamsFilter = (version) => (route_arg) => {
+	return (
+		// Flag to make sure certain arguments are hidden from conformance statements
+		// And if no versions are provided, it is available for all versions
+		(!route_arg.conformance_hide && !route_arg.versions)
+		// Or if versions are provided, make sure this arg is meant for this version
+		|| (route_arg.versions && route_arg.versions.indexOf(version) > -1)
+	);
+};
+
+/**
+* @description Map function for taking a router argument and mapping it
+* into the searchParam field needed for conformance/capability statements
+* @param {string} version - which version (not necessary now, but may be in the future)
+* @return {function} map function for array.map
+*/
+/* eslint-disable no-unused-vars */
+let conformanceSearchParamsMap = (version) => (route_arg) => {
+	// The router adds extra arguments and those need to be discarded
+	// these are the only fields we currently care about
+	return {
+		name: route_arg.name,
+		type: route_arg.type,
+		definition: route_arg.definition,
+		documentation: route_arg.documentation
+	};
+};
+
+/**
+* Function to take the routes and the FHIR version and return an array of search parameters
+* @param {Array<Object>} routes - an array of routes from the profile config files
+* @param {string} version - Which FHIR version was hit
+* @return {Array<Object>} an array of filtered and mapped routes to show in the conformance statement
+*/
+let generateSearchParamsForConformance = (routes, version) => {
+	return routes
+		// Get a flat list of all of our router arguments
+		.reduce((all, route) => all.concat(route.args), [])
+		// Remove any duplicates from the array based on their name
+		.reduce(conformanceSearchParamsReduce, [])
+		// Filter parameters that should be excluded from this conformance
+		// statement based on version or if it is a route parameter (e.g. version or id)
+		// route parameters will have a conformance_hide property
+		.filter(conformanceSearchParamsFilter(version))
+		// Route arguments have additional parameters necessary for generating routes
+		// map over the routes and remove those parameters
+		.map(conformanceSearchParamsMap(version));
+};
+
+module.exports = {
+	generateSearchParamsForConformance
+};
