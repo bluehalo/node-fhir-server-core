@@ -1,3 +1,5 @@
+const { route_args, common_args } = require('../common.arguments');
+const observation_args = require('./observation.arguments');
 const controller = require('./observation.controller');
 const { CONFIG_KEYS } = require('../../../constants');
 
@@ -20,26 +22,14 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-    args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-      name: 'patient',
-			type: 'string',
-			required: true
-    }, {
-      name: 'category',
-      type: 'string'
-    }, {
-      name: 'code',
-      type: 'string'
-    }, {
-      name: 'date',
-      type: 'string'
-    }, {
-			name: '_format',
-			type: 'string'
-		}],
+    args: [
+			route_args.VERSION,
+			Object.assign({ required: true }, observation_args.PATIENT),
+			observation_args.CATEGORY,
+			observation_args.CODE,
+			observation_args.DATE,
+			common_args._FORMAT
+		],
     scopes: scopes,
     controller: controller.getObservations
 	},
@@ -49,26 +39,14 @@ let routes = [
 		corsOptions: {
 			methods: ['POST']
 		},
-    args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-      name: 'patient',
-			type: 'string',
-			required: true
-    }, {
-      name: 'category',
-      type: 'string'
-    }, {
-      name: 'code',
-      type: 'string'
-    }, {
-      name: 'date',
-      type: 'string'
-    }, {
-			name: '_format',
-			type: 'string'
-		}],
+    args: [
+			route_args.VERSION,
+			Object.assign({ required: true }, observation_args.PATIENT),
+			observation_args.CATEGORY,
+			observation_args.CODE,
+			observation_args.DATE,
+			common_args._FORMAT
+		],
     scopes: scopes,
     controller: controller.getObservations
   },
@@ -78,14 +56,10 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-    args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-      name: 'id',
-      type: 'number',
-      required: true
-    }],
+    args: [
+			route_args.VERSION,
+			route_args.ID
+		],
     scopes: scopes,
     controller: controller.getObservationById
   }

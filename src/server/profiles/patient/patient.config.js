@@ -1,5 +1,7 @@
-const controller = require('./patient.controller');
+const { route_args, common_args } = require('../common.arguments');
 const { CONFIG_KEYS } = require('../../../constants');
+const patient_args = require('./patient.arguments');
+const controller = require('./patient.controller');
 
 const scopes = [
   'user/*.*',
@@ -19,25 +21,15 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'name',
-			type: 'string'
-		}, {
-			name: 'birthdate',
-			type: 'string'
-		}, {
-			name: 'gender',
-			type: 'string'
-		}, {
-			name: 'given',
-			type: 'string'
-		}, {
-			name: 'family',
-			type: 'string'
-		}],
+		args: [
+			route_args.VERSION,
+			patient_args.NAME,
+			patient_args.BIRTHDATE,
+			patient_args.GENDER,
+			patient_args.GIVEN,
+			patient_args.FAMILY,
+			common_args._FORMAT
+		],
 		scopes: scopes,
 		controller: controller.getPatient
 	},
@@ -47,25 +39,15 @@ let routes = [
 		corsOptions: {
 			methods: ['POST']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'name',
-			type: 'string'
-		}, {
-			name: 'birthdate',
-			type: 'string'
-		}, {
-			name: 'gender',
-			type: 'string'
-		}, {
-			name: 'given',
-			type: 'string'
-		}, {
-			name: 'family',
-			type: 'string'
-		}],
+		args: [
+			route_args.VERSION,
+			patient_args.NAME,
+			patient_args.BIRTHDATE,
+			patient_args.GENDER,
+			patient_args.GIVEN,
+			patient_args.FAMILY,
+			common_args._FORMAT
+		],
 		scopes: scopes,
 		controller: controller.getPatient
 	},
@@ -75,22 +57,14 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getPatientById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -100,6 +74,5 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.PATIENT
 	},
-	routes,
-	codes
+	routes
 };
