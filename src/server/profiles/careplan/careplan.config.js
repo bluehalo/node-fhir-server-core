@@ -1,5 +1,7 @@
-const controller = require('./careplan.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const careplan_args = require('./careplan.arguments');
+const controller = require('./careplan.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,245 +18,87 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/careplan',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-reference',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'based-on',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'care-team',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'condition',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'context',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'definition',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'encounter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'goal',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'intent',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'part-of',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'performer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'replaces',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference',
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_CODE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_DATE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_REFERENCE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CARE_TEAM),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CONDITION),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.DEFINITION),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.GOAL),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.INTENT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PART_OF),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.REPLACES),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.SUBJECT)
+		],
 		scopes: scopes,
 		controller: controller.getCarePlan
 	},
 	{
 		type: 'post',
 		path: '/:version/careplan/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'activity-reference',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'based-on',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'care-team',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'condition',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'context',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'definition',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'encounter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'goal',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'intent',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'part-of',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'performer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'replaces',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference',
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_CODE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_DATE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ACTIVITY_REFERENCE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CARE_TEAM),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CONDITION),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.DEFINITION),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.GOAL),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.INTENT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PART_OF),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.REPLACES),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, careplan_args.SUBJECT)
+		],
 		scopes: scopes,
 		controller: controller.getCarePlan
 	},
 	{
 		type: 'get',
 		path: '/:version/careplan/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getCarePlanById
 	}
@@ -266,7 +110,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.CAREPLAN
 	},
 	routes
 };

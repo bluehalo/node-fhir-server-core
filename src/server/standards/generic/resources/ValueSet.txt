@@ -1,0 +1,157 @@
+Main
+ValueSet
+url	Σ	0..1	uri	Logical URI to reference this value set (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the value set
+
+version	Σ	0..1	string	Business version of the value set
+
+name	Σ	0..1	string	Name for this value set (computer friendly)
+
+title	Σ	0..1	string	Name for this value set (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description		0..1	markdown	Natural language description of the value set
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for value set (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+immutable	Σ	0..1	boolean	Indicates whether or not any change to the content logical definition may occur
+
+purpose		0..1	markdown	Why this value set is defined
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+extensible	Σ	0..1	boolean	Whether this is intended to be used with an extensible binding
+
+compose	I	0..1	BackboneElement	Definition of the content of the value set (CLD)
+
+expansion	I	0..1	BackboneElement	Used when the value set is "expanded"
+
+
+Backbone
+compose
+lockedDate	Σ	0..1	date	Fixed date for version-less references (transitive)
+
+inactive	Σ	0..1	boolean	Whether inactive codes are in the value set
+
+include	ΣI	1..*	BackboneElement	Include one or more codes from a code system or other value set(s)
++ A value set with concepts or filters SHALL include a system
++ Cannot have both concept and filter
++ A value set include/exclude SHALL have a value set or a system
+
+exclude	I	0..*	see include	Explicitly exclude codes from a code system or other value sets
+
+
+Backbone
+include
+system	ΣI	0..1	uri	The system the codes come from
+
+version	Σ	0..1	string	Specific version of the code system referred to
+
+concept	I	0..*	BackboneElement	A concept defined in the system
+
+filter	?!ΣI	0..*	BackboneElement	Select codes/concepts by their properties (including relationships)
+
+valueSet	ΣI	0..*	uri	Select only contents included in this value set
+
+
+Backbone
+filter
+property	Σ	1..1	code	A property defined by the code system
+
+op	Σ	1..1	code	= | is-a | descendent-of | is-not-a | regex | in | not-in | generalizes | exists
+FilterOperator (Required)
+
+value	Σ	1..1	code	Code from the system, or regex criteria, or boolean value for exists
+
+
+Backbone
+concept
+code		1..1	code	Code or expression from system
+
+display		0..1	string	Text to display for this code for this value set in this valueset
+
+designation		0..*	BackboneElement	Additional representations for this concept
+
+
+Backbone
+designation
+language		0..1	code	Human language of the designation
+Common Languages (Extensible but limited to All Languages)
+
+use		0..1	Coding	Details how this designation would be used
+Designation Use (Extensible)
+
+value		1..1	string	The text value for this designation
+
+
+Backbone
+expansion
+identifier		1..1	uri	Uniquely identifies this expansion
+
+timestamp		1..1	dateTime	Time ValueSet expansion happened
+
+total		0..1	integer	Total number of codes in the expansion
+
+offset		0..1	integer	Offset at which this resource starts
+
+parameter		0..*	BackboneElement	Parameter that controlled the expansion process
+
+contains	I	0..*	BackboneElement	Codes in the value set
++ SHALL have a code or a display
++ Must have a code if not abstract
++ Must have a system if a code is present
+
+
+Backbone
+parameter
+name		1..1	string	Name as assigned by the server
+
+value[x]		0..1		Value of the named parameter
+
+valueString			string
+
+valueBoolean			boolean
+
+valueInteger			integer
+
+valueDecimal			decimal
+
+valueUri			uri
+
+valueCode			code
+
+
+Backbone
+contains
+system		0..1	uri	System value for the code
+
+abstract		0..1	boolean	If user cannot select this entry
+
+inactive		0..1	boolean	If concept is inactive in the code system
+
+version		0..1	string	Version in which this code/display is defined
+
+code	I	0..1	code	Code - if blank, this is not a selectable code
+
+display	I	0..1	string	User display for the concept
+
+designation		0..*	see designation	Additional representations for this item
+
+contains		0..*	see contains	Codes contained under this entry
+
+
+eof

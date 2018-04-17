@@ -1,0 +1,42 @@
+Main
+Substance
+identifier	Σ	0..*	Identifier	Unique identifier
+
+status	Σ	0..1	code	active | inactive | entered-in-error
+FHIRSubstanceStatus (Required)
+
+category	Σ	0..*	CodeableConcept	What class/type of substance this is
+Substance Category Codes (Extensible)
+
+code	Σ	1..1	CodeableConcept	What substance this is
+Substance Code (Example)
+
+description	Σ	0..1	string	Textual description of the substance, comments
+
+instance	Σ	0..*	BackboneElement	If this describes a specific package/container of the substance
+
+ingredient	Σ	0..*	BackboneElement	Composition information about the substance
+
+
+Backbone
+instance
+identifier	Σ	0..1	Identifier	Identifier of the package/container
+
+expiry	Σ	0..1	dateTime	When no longer valid to use
+
+quantity	Σ	0..1	SimpleQuantity	Amount of substance in the package
+
+
+Backbone
+ingredient
+quantity	Σ	0..1	Ratio	Optional amount (concentration)
+
+substance[x]	Σ	1..1		A component of the substance
+Substance Code (Example)
+
+substanceCodeableConcept			CodeableConcept
+
+substanceReference			Reference(Substance)
+
+
+eof

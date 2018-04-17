@@ -1,0 +1,50 @@
+Main
+NamingSystem
+name	Σ	1..1	string	Name for this naming system (computer friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+kind		1..1	code	codesystem | identifier | root
+NamingSystemType (Required)
+
+date	Σ	1..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+responsible		0..1	string	Who maintains system namespace?
+
+type		0..1	CodeableConcept	e.g. driver, provider, patient, bank etc.
+Identifier Type Codes (Extensible)
+
+description		0..1	markdown	Natural language description of the naming system
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for naming system (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+usage		0..1	string	How/where is it used
+
+uniqueId		1..*	BackboneElement	Unique identifiers used for system
+
+replacedBy	I	0..1	Reference(NamingSystem)	Use this instead
+
+
+Backbone
+uniqueId
+type		1..1	code	oid | uuid | uri | other
+NamingSystemIdentifierType (Required)
+
+value		1..1	string	The unique identifier
+
+preferred		0..1	boolean	Is this the id that should be used for this type
+
+comment		0..1	string	Notes about identifier usage
+
+period		0..1	Period	When is identifier valid?
+
+
+eof

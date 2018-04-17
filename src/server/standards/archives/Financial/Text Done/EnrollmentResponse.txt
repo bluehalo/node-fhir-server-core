@@ -1,0 +1,24 @@
+Main
+EnrollmentResponse
+identifier		0..*	Identifier	Business Identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+request		0..1	Reference(EnrollmentRequest)	Claim reference
+
+outcome		0..1	CodeableConcept	complete | error | partial
+RemittanceOutcome (Required)
+
+disposition		0..1	string	Disposition Message
+
+created		0..1	dateTime	Creation date
+
+organization		0..1	Reference(Organization)	Insurer
+
+requestProvider		0..1	Reference(Practitioner)	Responsible practitioner
+
+requestOrganization		0..1	Reference(Organization)	Responsible organization
+
+
+eof

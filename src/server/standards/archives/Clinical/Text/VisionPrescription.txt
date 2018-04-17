@@ -1,0 +1,61 @@
+Main
+VisionPrescription
+identifier		0..*	Identifier	Business identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+patient		0..1	Reference(Patient)	Who prescription is for
+
+encounter		0..1	Reference(Encounter)	Created during encounter / admission / stay
+
+dateWritten		0..1	dateTime	When prescription was authorized
+
+prescriber		0..1	Reference(Practitioner)	Who authorizes the vision product
+
+reason[x]		0..1		Reason or indication for writing the prescription
+
+reasonCodeableConcept			CodeableConcept
+
+reasonReference			Reference(Condition)
+
+dispense		0..*	BackboneElement	Vision supply authorization
+
+
+Backbone
+dispense
+product		0..1	CodeableConcept	Product to be supplied
+Example Vision Prescription Product Codes (Example)
+
+eye		0..1	code	right | left
+VisionEyes (Required)
+
+sphere		0..1	decimal	Lens sphere
+
+cylinder		0..1	decimal	Lens cylinder
+
+axis		0..1	integer	Lens axis
+
+prism		0..1	decimal	Lens prism
+
+base		0..1	code	up | down | in | out
+VisionBase (Required)
+
+add		0..1	decimal	Lens add
+
+power		0..1	decimal	Contact lens power
+
+backCurve		0..1	decimal	Contact lens back curvature
+
+diameter		0..1	decimal	Contact lens diameter
+
+duration		0..1	SimpleQuantity	Lens wear duration
+
+color		0..1	string	Color required
+
+brand		0..1	string	Brand required
+
+note		0..*	Annotation	Notes for coatings
+
+
+eof

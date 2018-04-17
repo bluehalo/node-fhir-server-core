@@ -1,0 +1,48 @@
+Main
+Location
+identifier	Σ	0..*	Identifier	Unique code or number identifying the location to its users
+
+status	?!Σ	0..1	code	active | suspended | inactive
+LocationStatus (Required)
+
+operationalStatus	Σ	0..1	Coding	The Operational status of the location (typically only for a bed/room)
+v2 Bed Status (Preferred)
+
+name	Σ	0..1	string	Name of the location as used by humans
+
+alias		0..*	string	A list of alternate names that the location is known as, or was known as in the past
+
+description	Σ	0..1	string	Additional details about the location that could be displayed as further information to identify the location beyond its name
+
+mode	?!Σ	0..1	code	instance | kind
+LocationMode (Required)
+
+type	Σ	0..1	CodeableConcept	Type of function performed
+ServiceDeliveryLocationRoleType (Extensible)
+
+telecom		0..*	ContactPoint	Contact details of the location
+
+address		0..1	Address	Physical location
+
+physicalType	Σ	0..1	CodeableConcept	Physical form of the location
+LocationType (Example)
+
+position		0..1	BackboneElement	The absolute geographic location
+
+managingOrganization	Σ	0..1	Reference(Organization)	Organization responsible for provisioning and upkeep
+
+partOf		0..1	Reference(Location)	Another Location this one is physically part of
+
+endpoint		0..*	Reference(Endpoint)	Technical endpoints providing access to services operated for the location
+
+
+Backbone
+position
+longitude		1..1	decimal	Longitude with WGS84 datum
+
+latitude		1..1	decimal	Latitude with WGS84 datum
+
+altitude		0..1	decimal	Altitude with WGS84 datum
+
+
+eof

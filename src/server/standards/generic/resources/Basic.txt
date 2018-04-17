@@ -1,0 +1,15 @@
+Main
+Basic
+identifier	Σ	0..*	Identifier	Business identifier
+
+code	?!Σ	1..1	CodeableConcept	Kind of Resource
+Basic Resource Types (Example)
+
+subject	Σ	0..1	Reference(Any)	Identifies the focus of this resource
+
+created	Σ	0..1	date	When created
+
+author	Σ	0..1	Reference(Practitioner | Patient | RelatedPerson)	Who created
+
+
+eof

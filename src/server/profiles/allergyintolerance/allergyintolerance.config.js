@@ -1,5 +1,7 @@
-const controller = require('./allergyintolerance.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const allergyintolerance_args = require('./allergyintolerance.arguments');
+const controller = require('./allergyintolerance.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,213 +18,79 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/allergyintolerance',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'asserter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'clinical-status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'criticality',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'last-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manifestation',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'onset',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'recorder',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'route',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'severity',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'type',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'verification-status',
-			type: 'token',
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ASSERTER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CLINICAL_STATUS),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CRITICALITY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.LAST_DATE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.MANIFESTATION),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ONSET),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.RECORDER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ROUTE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.SEVERITY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
+		],
 		scopes: scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'post',
 		path: '/:version/allergyintolerance/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'asserter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'clinical-status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'criticality',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'last-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manifestation',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'onset',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'recorder',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'route',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'severity',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'type',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'verification-status',
-			type: 'token',
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ASSERTER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CLINICAL_STATUS),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CRITICALITY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.LAST_DATE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.MANIFESTATION),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ONSET),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.RECORDER),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ROUTE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.SEVERITY),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
+			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
+		],
 		scopes: scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'get',
 		path: '/:version/allergyintolerance/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getAllergyIntoleranceById
 	}
@@ -234,7 +102,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.ALLERGYINTOLERANCE
 	},
 	routes
 };

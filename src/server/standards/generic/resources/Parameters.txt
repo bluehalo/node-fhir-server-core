@@ -1,0 +1,18 @@
+Main
+Parameters
+parameter	ΣI	0..*	BackboneElement	Operation Parameter
++ A parameter must have only one of (value, resource, part)
+
+
+Backbone
+parameter
+name	Σ	1..1	string	Name from the definition
+
+value[x]	ΣI	0..1	*	If parameter is a data type
+
+resource	ΣI	0..1	Resource	If parameter is a whole resource
+
+part	Σ	0..*	see parameter	Named part of a multi-part parameter
+
+
+eof

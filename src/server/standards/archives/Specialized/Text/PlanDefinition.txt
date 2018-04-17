@@ -1,0 +1,213 @@
+Main
+PlanDefinition
+url	Σ	0..1	uri	Logical URI to reference this plan definition (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the plan definition
+
+version	Σ	0..1	string	Business version of the plan definition
+
+name	Σ	0..1	string	Name for this plan definition (computer friendly)
+
+title	Σ	0..1	string	Name for this plan definition (human friendly)
+
+type	Σ	0..1	CodeableConcept	order-set | protocol | eca-rule
+PlanDefinitionType (Extensible)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+description	Σ	0..1	markdown	Natural language description of the plan definition
+
+purpose		0..1	markdown	Why this plan definition is defined
+
+usage		0..1	string	Describes the clinical usage of the asset
+
+approvalDate		0..1	date	When the plan definition was approved by publisher
+
+lastReviewDate		0..1	date	When the plan definition was last reviewed
+
+effectivePeriod	Σ	0..1	Period	When the plan definition is expected to be used
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for plan definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+topic		0..*	CodeableConcept	E.g. Education, Treatment, Assessment, etc
+DefinitionTopic (Example)
+
+contributor		0..*	Contributor	A content contributor
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+relatedArtifact		0..*	RelatedArtifact	Related artifacts for the asset
+
+library		0..*	Reference(Library)	Logic used by the plan definition
+
+goal		0..*	BackboneElement	What the plan is trying to accomplish
+
+action		0..*	BackboneElement	Action defined by the plan
+
+
+Backbone
+goal
+category		0..1	CodeableConcept	E.g. Treatment, dietary, behavioral, etc
+GoalCategory (Example)
+
+description		1..1	CodeableConcept	Code or text describing the goal
+SNOMED CT Clinical Findings (Example)
+
+priority		0..1	CodeableConcept	high-priority | medium-priority | low-priority
+GoalPriority (Preferred)
+
+start		0..1	CodeableConcept	When goal pursuit begins
+GoalStartEvent (Example)
+
+addresses		0..*	CodeableConcept	What does the goal address
+Condition/Problem/Diagnosis Codes (Example)
+
+documentation		0..*	RelatedArtifact	Supporting documentation for the goal
+
+target		0..*	BackboneElement	Target outcome for the goal
+
+
+Backbone
+target
+measure		0..1	CodeableConcept	The parameter whose value is to be tracked
+LOINC Codes (Example)
+
+detail[x]		0..1		The target value to be achieved
+
+detailQuantity			Quantity
+
+detailRange			Range
+
+detailCodeableConcept			CodeableConcept
+
+due		0..1	Duration	Reach goal within
+
+
+Backbone
+action
+label		0..1	string	User-visible label for the action (e.g. 1. or A.)
+
+title		0..1	string	User-visible title
+
+description		0..1	string	Short description of the action
+
+textEquivalent		0..1	string	Static text equivalent of the action, used if the dynamic aspects cannot be interpreted by the receiving system
+
+code		0..*	CodeableConcept	Code representing the meaning of the action or sub-actions
+
+reason		0..*	CodeableConcept	Why the action should be performed
+
+documentation		0..*	RelatedArtifact	Supporting documentation for the intended performer of the action
+
+goalId		0..*	id	What goals this action supports
+
+triggerDefinition		0..*	TriggerDefinition	When the action should be triggered
+
+input		0..*	DataRequirement	Input data requirements
+
+output		0..*	DataRequirement	Output data definition
+
+timing[x]		0..1		When the action should take place
+
+timingDateTime			dateTime
+
+timingPeriod			Period
+
+timingDuration			Duration
+
+timingRange			Range
+
+timingTiming			Timing
+
+type		0..1	Coding	create | update | remove | fire-event
+ActionType (Required)
+
+groupingBehavior		0..1	code	visual-group | logical-group | sentence-group
+ActionGroupingBehavior (Required)
+
+selectionBehavior		0..1	code	any | all | all-or-none | exactly-one | at-most-one | one-or-more
+ActionSelectionBehavior (Required)
+
+requiredBehavior		0..1	code	must | could | must-unless-documented
+ActionRequiredBehavior (Required)
+
+precheckBehavior		0..1	code	yes | no
+ActionPrecheckBehavior (Required)
+
+cardinalityBehavior		0..1	code	single | multiple
+ActionCardinalityBehavior (Required)
+
+definition		0..1	Reference(ActivityDefinition | PlanDefinition)	Description of the activity to be performed
+
+transform		0..1	Reference(StructureMap)	Transform to apply the template
+
+action		0..*	see action	A sub-action
+
+condition		0..*	BackboneElement	Whether or not the action is applicable
+
+relatedAction		0..*	BackboneElement	Relationship to another action
+
+participant		0..*	BackboneElement	Who should participate in the action
+
+dynamicValue		0..*	BackboneElement	Dynamic aspects of the definition
+
+
+Backbone
+condition
+kind		1..1	code	applicability | start | stop
+ActionConditionKind (Required)
+
+description		0..1	string	Natural language description of the condition
+
+language		0..1	string	Language of the expression
+
+expression		0..1	string	Boolean-valued expression
+
+
+Backbone
+relatedAction
+actionId		1..1	id	What action is this related to
+
+relationship		1..1	code	before-start | before | before-end | concurrent-with-start | concurrent | concurrent-with-end | after-start | after | after-end
+ActionRelationshipType (Required)
+
+offset[x]		0..1		Time offset for the relationship
+
+offsetDuration			Duration
+
+offsetRange			Range
+
+
+Backbone
+participant
+type		1..1	code	patient | practitioner | related-person
+ActionParticipantType (Required)
+
+role		0..1	CodeableConcept	E.g. Nurse, Surgeon, Parent, etc
+ActionParticipantRole (Example)
+
+
+Backbone
+dynamicValue
+description		0..1	string	Natural language description of the dynamic value
+
+path		0..1	string	The path to the element to be set dynamically
+
+language		0..1	string	Language of the expression
+
+expression		0..1	string	An expression that provides the dynamic value for the customization
+
+
+eof

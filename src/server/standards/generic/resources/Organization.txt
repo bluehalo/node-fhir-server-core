@@ -1,0 +1,39 @@
+Main
+Organization
+identifier	ΣI	0..*	Identifier	Identifies this organization across multiple systems
+
+active	?!Σ	0..1	boolean	Whether the organization's record is still in active use
+
+type	Σ	0..*	CodeableConcept	Kind of organization
+OrganizationType (Example)
+
+name	ΣI	0..1	string	Name used for the organization
+
+alias		0..*	string	A list of alternate names that the organization is known as, or was known as in the past
+
+telecom	I	0..*	ContactPoint	A contact detail for the organization
++ The telecom of an organization can never be of use 'home'
+
+address	I	0..*	Address	An address for the organization
++ An address of an organization can never be of use 'home'
+
+partOf	Σ	0..1	Reference(Organization)	The organization of which this organization forms a part
+
+contact		0..*	BackboneElement	Contact for the organization for a certain purpose
+
+endpoint		0..*	Reference(Endpoint)	Technical endpoints providing access to services operated for the organization
+
+
+Backbone
+contact
+purpose		0..1	CodeableConcept	The type of contact
+ContactEntityType (Extensible)
+
+name		0..1	HumanName	A name associated with the contact
+
+telecom		0..*	ContactPoint	Contact details (telephone, email, etc.) for a contact
+
+address		0..1	Address	Visiting or postal addresses for the contact
+
+
+eof

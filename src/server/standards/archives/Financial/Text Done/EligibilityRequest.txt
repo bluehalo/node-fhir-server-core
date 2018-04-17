@@ -1,0 +1,42 @@
+Main
+EligibilityRequest
+identifier		0..*	Identifier	Business Identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+priority		0..1	CodeableConcept	Desired processing priority
+Process Priority Codes (Example)
+
+patient		0..1	Reference(Patient)	The subject of the Products and Services
+
+serviced[x]		0..1		Estimated date or dates of Service
+
+servicedDate			date
+
+servicedPeriod			Period
+
+created		0..1	dateTime	Creation date
+
+enterer		0..1	Reference(Practitioner)	Author
+
+provider		0..1	Reference(Practitioner)	Responsible practitioner
+
+organization		0..1	Reference(Organization)	Responsible organization
+
+insurer		0..1	Reference(Organization)	Target
+
+facility		0..1	Reference(Location)	Servicing Facility
+
+coverage		0..1	Reference(Coverage)	Insurance or medical plan
+
+businessArrangement		0..1	string	Business agreement
+
+benefitCategory		0..1	CodeableConcept	Type of services covered
+Benefit Category Codes (Example)
+
+benefitSubCategory		0..1	CodeableConcept	Detailed services covered within the type
+Benefit SubCategory Codes (Example)
+
+
+eof

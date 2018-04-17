@@ -1,0 +1,18 @@
+Main
+Linkage
+active	Σ	0..1	boolean	Whether this linkage assertion is active or not
+
+author	Σ	0..1	Reference(Practitioner | Organization)	Who is responsible for linkages
+
+item	ΣI	1..*	BackboneElement	Item to be linked
+
+
+Backbone
+item
+type	Σ	1..1	code	source | alternate | historical
+LinkageType (Required)
+
+resource	Σ	1..1	Reference()	Resource being linked
+
+
+eof

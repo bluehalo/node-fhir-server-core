@@ -1,0 +1,48 @@
+Main
+EpisodeOfCare
+identifier		0..*	Identifier	Business Identifier(s) relevant for this EpisodeOfCare
+
+status	?!Σ	1..1	code	planned | waitlist | active | onhold | finished | cancelled | entered-in-error
+EpisodeOfCareStatus (Required)
+
+type	Σ	0..*	CodeableConcept	Type/class - e.g. specialist referral, disease management
+EpisodeOfCareType (Example)
+
+patient	Σ	1..1	Reference(Patient)	The patient who is the focus of this episode of care
+
+managingOrganization	Σ	0..1	Reference(Organization)	Organization that assumes care
+
+period	Σ	0..1	Period	Interval during responsibility is assumed
+
+referralRequest		0..*	Reference(ReferralRequest)	Originating Referral Request(s)
+
+careManager		0..1	Reference(Practitioner)	Care manager/care co-ordinator for the patient
+
+team		0..*	Reference(CareTeam)	Other practitioners facilitating this episode of care
+
+account		0..*	Reference(Account)	The set of accounts that may be used for billing for this EpisodeOfCare
+
+statusHistory		0..*	BackboneElement	Past list of status codes (the current status may be included to cover the start date of the status)
+
+diagnosis	Σ	0..*	BackboneElement	The list of diagnosis relevant to this episode of care
+
+
+Backbone
+statusHistory
+status		1..1	code	planned | waitlist | active | onhold | finished | cancelled | entered-in-error
+EpisodeOfCareStatus (Required)
+
+period		1..1	Period	Duration the EpisodeOfCare was in the specified status
+
+
+Backbone
+diagnosis
+condition	Σ	1..1	Reference(Condition)	Conditions/problems/diagnoses this episode of care is for
+
+role	Σ	0..1	CodeableConcept	Role that this diagnosis has within the episode of care (e.g. admission, billing, discharge …)
+DiagnosisRole (Preferred)
+
+rank	Σ	0..1	positiveInt	Ranking of the diagnosis (for each role type)
+
+
+eof

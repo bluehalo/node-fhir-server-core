@@ -1,4 +1,4 @@
-const Condition = require('../../resources/uscore/resources/Condition');
+const Condition = require('../../standards/uscore/resources/Condition');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCondition = ({ profile, logger, config }) => {

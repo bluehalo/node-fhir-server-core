@@ -1,0 +1,124 @@
+Main
+Sequence
+identifier	Σ	0..*	Identifier	Unique ID for this particular sequence. This is a FHIR-defined id
+
+type	Σ	0..1	code	aa | dna | rna
+sequenceType (Example)
+
+coordinateSystem	Σ	1..1	integer	Base number of coordinate system (0 for 0-based numbering or coordinates, inclusive start, exclusive end, 1 for 1-based numbering, inclusive start, inclusive end)
+
+patient	Σ	0..1	Reference(Patient)	Who and/or what this is about
+
+specimen	Σ	0..1	Reference(Specimen)	Specimen used for sequencing
+
+device	Σ	0..1	Reference(Device)	The method for sequencing
+
+performer	Σ	0..1	Reference(Organization)	Who should be responsible for test result
+
+quantity	Σ	0..1	Quantity	The number of copies of the seqeunce of interest. (RNASeq)
+
+observedSeq	Σ	0..1	string	Sequence that was observed
+
+readCoverage	Σ	0..1	integer	Average number of reads representing a given nucleotide in the reconstructed sequence
+
+pointer	Σ	0..*	Reference(Sequence)	Pointer to next atomic sequence
+
+referenceSeq	ΣI	0..1	BackboneElement	A sequence used as reference
++ Only +1 and -1 are valid for strand
++ GenomeBuild and chromosome must be both contained if either one of them is contained
++ Have and only have one of the following elements in referenceSeq : 1. genomeBuild ; 2 referenceSeqId; 3. referenceSeqPointer; 4. referenceSeqString;
+
+variant	Σ	0..*	BackboneElement	Variant in sequence
+
+quality	Σ	0..*	BackboneElement	An set of value as quality of sequence
+
+repository	Σ	0..*	BackboneElement	External repository which contains detailed report related with observedSeq in this resource
+
+
+Backbone
+referenceSeq
+chromosome	Σ	0..1	CodeableConcept	Chromosome containing genetic finding
+chromosome-human (Example)
+
+genomeBuild	Σ	0..1	string	The Genome Build used for reference, following GRCh build versions e.g. 'GRCh 37'
+
+referenceSeqId	Σ	0..1	CodeableConcept	Reference identifier
+ENSEMBL (Example)
+
+referenceSeqPointer	Σ	0..1	Reference(Sequence)	A Pointer to another Sequence entity as reference sequence
+
+referenceSeqString	Σ	0..1	string	A string to represent reference sequence
+
+strand	Σ	0..1	integer	Directionality of DNA ( +1/-1)
+
+windowStart	Σ	1..1	integer	Start position of the window on the reference sequence
+
+windowEnd	Σ	1..1	integer	End position of the window on the reference sequence
+
+
+Backbone
+variant
+start	Σ	0..1	integer	Start position of the variant on the reference sequence
+
+end	Σ	0..1	integer	End position of the variant on the reference sequence
+
+observedAllele	Σ	0..1	string	Allele that was observed
+
+referenceAllele	Σ	0..1	string	Allele in the reference sequence
+
+cigar	Σ	0..1	string	Extended CIGAR string for aligning the sequence with reference bases
+
+variantPointer	Σ	0..1	Reference(Observation)	Pointer to observed variant information
+
+
+Backbone
+quality
+type	Σ	1..1	code	indel | snp | unknown
+qualityType (Required)
+
+standardSequence	Σ	0..1	CodeableConcept	Standard sequence for comparison
+FDA-StandardSequence (Example)
+
+start	Σ	0..1	integer	Start position of the sequence
+
+end	Σ	0..1	integer	End position of the sequence
+
+score	Σ	0..1	Quantity	Quality score for the comparison
+
+method	Σ	0..1	CodeableConcept	Method to get quality
+FDA-Method (Example)
+
+truthTP	Σ	0..1	decimal	True positives from the perspective of the truth data
+
+queryTP	Σ	0..1	decimal	True positives from the perspective of the query data
+
+truthFN	Σ	0..1	decimal	False negatives
+
+queryFP	Σ	0..1	decimal	False positives
+
+gtFP	Σ	0..1	decimal	False positives where the non-REF alleles in the Truth and Query Call Sets match
+
+precision	Σ	0..1	decimal	Precision of comparison
+
+recall	Σ	0..1	decimal	Recall of comparison
+
+fScore	Σ	0..1	decimal	F-score
+
+
+Backbone
+repository
+type	Σ	1..1	code	directlink | openapi | login | oauth | other
+repositoryType (Required)
+
+url	Σ	0..1	uri	URI of the repository
+
+name	Σ	0..1	string	Repository's name
+
+datasetId	Σ	0..1	string	Id of the dataset that used to call for dataset in repository
+
+variantsetId	Σ	0..1	string	Id of the variantset that used to call for variantset in repository
+
+readsetId	Σ	0..1	string	Id of the read
+
+
+eof

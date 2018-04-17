@@ -1,4 +1,4 @@
-const ObservationVitalSigns = require('../../resources/uscore/resources/ObservationVitalSigns');
+const ObservationVitalSigns = require('../../standards/uscore/resources/ObservationVitalSigns');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservationVitalSigns = ({ profile, logger, config }) => {

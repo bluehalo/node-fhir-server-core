@@ -1,0 +1,39 @@
+Main
+DeviceComponent
+identifier	Σ	1..1	Identifier	Instance id assigned by the software stack
+
+type	Σ	1..1	CodeableConcept	What kind of component it is
+FHIR Device Types (Preferred)
+
+lastSystemChange	Σ	0..1	instant	Recent system change timestamp
+
+source	Σ	0..1	Reference(Device)	Top-level device resource link
+
+parent	Σ	0..1	Reference(DeviceComponent)	Parent resource link
+
+operationalStatus	Σ	0..*	CodeableConcept	Current operational status of the component, for example On, Off or Standby
+DeviceComponentOperationalStatus (Extensible)
+
+parameterGroup	Σ	0..1	CodeableConcept	Current supported parameter group
+DeviceComponentParameterGroup (Extensible)
+
+measurementPrinciple	Σ	0..1	code	other | chemical | electrical | impedance | nuclear | optical | thermal | biological | mechanical | acoustical | manual+
+MeasmntPrinciple (Required)
+
+productionSpecification	Σ	0..*	BackboneElement	Specification details such as Component Revisions, or Serial Numbers
+
+languageCode	Σ	0..1	CodeableConcept	Language code for the human-readable text strings produced by the device
+Common Languages (Extensible but limited to All Languages)
+
+
+Backbone
+productionSpecification
+specType	Σ	0..1	CodeableConcept	Type or kind of production specification, for example serial number or software revision
+DeviceSpecificationSpecType (Extensible)
+
+componentId	Σ	0..1	Identifier	Internal component unique identification
+
+productionSpec	Σ	0..1	string	A printable string defining the component
+
+
+eof

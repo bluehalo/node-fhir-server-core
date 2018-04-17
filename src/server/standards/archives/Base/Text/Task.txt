@@ -1,0 +1,96 @@
+Main
+Task
+identifier		0..*	Identifier	Task Instance Identifier
+
+definition[x]	Σ	0..1		Formal definition of task
+
+definitionUri			uri
+
+definitionReference			Reference(ActivityDefinition)
+
+basedOn	Σ	0..*	Reference(Any)	Request fulfilled by this task
+
+groupIdentifier	Σ	0..1	Identifier	Requisition or grouper id
+
+partOf	Σ	0..*	Reference(Task)	Composite task
+
+status	Σ	1..1	code	draft | requested | received | accepted | +
+TaskStatus (Required)
+
+statusReason	Σ	0..1	CodeableConcept	Reason for current status
+
+businessStatus	Σ	0..1	CodeableConcept	E.g. "Specimen collected", "IV prepped"
+
+intent	Σ	1..1	code	proposal | plan | order +
+RequestIntent (Required)
+
+priority		0..1	code	normal | urgent | asap | stat
+RequestPriority (Required)
+
+code	Σ	0..1	CodeableConcept	Task Type
+
+description	Σ	0..1	string	Human-readable explanation of task
+
+focus	Σ	0..1	Reference(Any)	What task is acting on
+
+for	Σ	0..1	Reference(Any)	Beneficiary of the Task
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Healthcare event during which this task originated
+
+executionPeriod	Σ	0..1	Period	Start and end time of execution
+
+authoredOn	I	0..1	dateTime	Task Creation Date
+
+lastModified	ΣI	0..1	dateTime	Task Last Modified Date
+
+performerType		0..*	CodeableConcept	requester | dispatcher | scheduler | performer | monitor | manager | acquirer | reviewer
+TaskPerformerType (Preferred)
+
+owner	Σ	0..1	Reference(Device | Organization | Patient | Practitioner | RelatedPerson)	Responsible individual
+
+reason		0..1	CodeableConcept	Why task is needed
+
+note		0..*	Annotation	Comments made about the task
+
+relevantHistory		0..*	Reference(Provenance)	Key events in history of the Task
+
+requester	Σ	0..1	BackboneElement	Who is asking for task to be done
+
+restriction		0..1	BackboneElement	Constraints on fulfillment tasks
+
+input		0..*	BackboneElement	Information used to perform task
+
+output		0..*	BackboneElement	Information produced as part of task
+
+
+Backbone
+requester
+agent	Σ	1..1	Reference(Device | Organization | Patient | Practitioner | RelatedPerson)	Individual asking for task
+
+onBehalfOf		0..1	Reference(Organization)	Organization individual is acting for
+
+
+Backbone
+restriction
+repetitions		0..1	positiveInt	How many times to repeat
+
+period		0..1	Period	When fulfillment sought
+
+recipient		0..*	Reference(Patient | Practitioner | RelatedPerson | Group | Organization)	For whom is fulfillment sought?
+
+
+Backbone
+input
+type		1..1	CodeableConcept	Label for the input
+
+value[x]		1..1	*	Content to use in performing the task
+
+
+Backbone
+output
+type		1..1	CodeableConcept	Label for output
+
+value[x]		1..1	*	Result of output
+
+
+eof

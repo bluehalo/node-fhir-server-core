@@ -1,0 +1,22 @@
+Main
+AppointmentResponse
+identifier	Σ	0..*	Identifier	External Ids for this item
+
+appointment	Σ	1..1	Reference(Appointment)	Appointment this response relates to
+
+start		0..1	instant	Time from appointment, or requested new start time
+
+end		0..1	instant	Time from appointment, or requested new end time
+
+participantType	Σ	0..*	CodeableConcept	Role of participant in the appointment
+ParticipantType (Extensible)
+
+actor	Σ	0..1	Reference(Patient | Practitioner | RelatedPerson | Device | HealthcareService | Location)	Person, Location/HealthcareService or Device
+
+participantStatus	?!Σ	1..1	code	accepted | declined | tentative | in-process | completed | needs-action | entered-in-error
+ParticipationStatus (Required)
+
+comment		0..1	string	Additional comments
+
+
+eof

@@ -1,0 +1,61 @@
+Main
+PaymentReconciliation
+identifier		0..*	Identifier	Business Identifier
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+period		0..1	Period	Period covered
+
+created		0..1	dateTime	Creation date
+
+organization		0..1	Reference(Organization)	Insurer
+
+request		0..1	Reference(ProcessRequest)	Claim reference
+
+outcome		0..1	CodeableConcept	complete | error | partial
+RemittanceOutcome (Required)
+
+disposition		0..1	string	Disposition Message
+
+requestProvider		0..1	Reference(Practitioner)	Responsible practitioner
+
+requestOrganization		0..1	Reference(Organization)	Responsible organization
+
+form		0..1	CodeableConcept	Printed Form Identifier
+Form Codes (Example)
+
+total		0..1	Money	Total amount of Payment
+
+detail		0..*	BackboneElement	List of settlements
+
+processNote		0..*	BackboneElement	Processing comments
+
+
+Backbone
+detail
+type		1..1	CodeableConcept	Type code
+Payment Type Codes (Example)
+
+request		0..1	Reference(Any)	Claim
+
+response		0..1	Reference(Any)	Claim Response
+
+submitter		0..1	Reference(Organization)	Organization which submitted the claim
+
+payee		0..1	Reference(Organization)	Organization which is receiving the payment
+
+date		0..1	date	Invoice date
+
+amount		0..1	Money	Amount being paid
+
+
+Backbone
+processNote
+type		0..1	CodeableConcept	display | print | printoper
+NoteType (Required)
+
+text		0..1	string	Comment on the processing
+
+
+eof

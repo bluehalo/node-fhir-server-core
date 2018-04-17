@@ -1,0 +1,322 @@
+Main
+Claim
+identifier		0..*	Identifier	Claim number
+
+status	?!Σ	0..1	code	active | cancelled | draft | entered-in-error
+Financial Resource Status Codes (Required)
+
+type		0..1	CodeableConcept	Type or discipline
+Example Claim Type Codes (Required)
+
+subType		0..*	CodeableConcept	Finer grained claim type information
+Example Claim SubType Codes (Example)
+
+use		0..1	code	complete | proposed | exploratory | other
+Use (Required)
+
+patient		0..1	Reference(Patient)	The subject of the Products and Services
+
+billablePeriod		0..1	Period	Period for charge submission
+
+created		0..1	dateTime	Creation date
+
+enterer		0..1	Reference(Practitioner)	Author
+
+insurer		0..1	Reference(Organization)	Target
+
+provider		0..1	Reference(Practitioner)	Responsible provider
+
+organization		0..1	Reference(Organization)	Responsible organization
+
+priority		0..1	CodeableConcept	Desired processing priority
+Process Priority Codes (Example)
+
+fundsReserve		0..1	CodeableConcept	Funds requested to be reserved
+Funds Reservation Codes (Example)
+
+prescription		0..1	Reference(MedicationRequest | VisionPrescription)	Prescription authorizing services or products
+
+originalPrescription		0..1	Reference(MedicationRequest)	Original prescription if superceded by fulfiller
+
+referral		0..1	Reference(ReferralRequest)	Treatment Referral
+
+facility		0..1	Reference(Location)	Servicing Facility
+
+employmentImpacted		0..1	Period	Period unable to work
+
+hospitalization		0..1	Period	Period in hospital
+
+total		0..1	Money	Total claim cost
+
+related		0..*	BackboneElement	Related Claims which may be revelant to processing this claimn
+
+payee		0..1	BackboneElement	Party to be paid any benefits payable
+
+careTeam		0..*	BackboneElement	Members of the care team
+
+information		0..*	BackboneElement	Exceptions, special considerations, the condition, situation, prior or concurrent issues
+
+diagnosis		0..*	BackboneElement	List of Diagnosis
+
+procedure		0..*	BackboneElement	Procedures performed
+
+insurance		0..*	BackboneElement	Insurance or medical plan
+
+accident		0..1	BackboneElement	Details about an accident
+
+item		0..*	BackboneElement	Goods and Services
+
+
+Backbone
+related
+claim		0..1	Reference(Claim)	Reference to the related claim
+
+relationship		0..1	CodeableConcept	How the reference claim is related
+Example Related Claim Relationship Codes (Example)
+
+reference		0..1	Identifier	Related file or case reference
+
+
+Backbone
+payee
+type		1..1	CodeableConcept	Type of party: Subscriber, Provider, other
+Claim Payee Type Codes (Example)
+
+resourceType		0..1	Coding	organization | patient | practitioner | relatedperson
+ClaimPayeeResourceType (Example)
+
+party		0..1	Reference(Practitioner | Organization | Patient | RelatedPerson)	Party to receive the payable
+
+
+Backbone
+careTeam
+sequence		1..1	positiveInt	Number to covey order of careTeam
+
+provider		1..1	Reference(Practitioner | Organization)	Provider individual or organization
+
+responsible		0..1	boolean	Billing provider
+
+role		0..1	CodeableConcept	Role on the team
+Claim Care Team Role Codes (Example)
+
+qualification		0..1	CodeableConcept	Type, classification or Specialization
+Example Provider Qualification Codes (Example)
+
+
+Backbone
+information
+sequence		1..1	positiveInt	Information instance identifier
+
+category		1..1	CodeableConcept	General class of information
+Claim Information Category Codes (Example)
+
+code		0..1	CodeableConcept	Type of information
+Exception Codes (Example)
+
+timing[x]		0..1		When it occurred
+
+timingDate			date
+
+timingPeriod			Period
+
+value[x]		0..1		Additional Data or supporting information
+
+valueString			string
+
+valueQuantity			Quantity
+
+valueAttachment			Attachment
+
+valueReference			Reference(Any)
+
+reason		0..1	CodeableConcept	Reason associated with the information
+Missing Tooth Reason Codes (Example)
+
+
+Backbone
+diagnosis
+sequence		1..1	positiveInt	Number to covey order of diagnosis
+
+diagnosis[x]		1..1		Patient's diagnosis
+ICD-10 Codes (Example)
+
+diagnosisCodeableConcept			CodeableConcept
+
+diagnosisReference			Reference(Condition)
+
+type		0..*	CodeableConcept	Timing or nature of the diagnosis
+Example Diagnosis Type Codes (Example)
+
+packageCode		0..1	CodeableConcept	Package billing code
+Example Diagnosis Related Group Codes (Example)
+
+
+Backbone
+procedure
+sequence		1..1	positiveInt	Procedure sequence for reference
+
+date		0..1	dateTime	When the procedure was performed
+
+procedure[x]		1..1		Patient's list of procedures performed
+ICD-10 Procedure Codes (Example)
+
+procedureCodeableConcept			CodeableConcept
+
+procedureReference			Reference(Procedure)
+
+
+Backbone
+insurance
+sequence		1..1	positiveInt	Service instance identifier
+
+focal		1..1	boolean	Is the focal Coverage
+
+coverage		1..1	Reference(Coverage)	Insurance information
+
+businessArrangement		0..1	string	Business agreement
+
+preAuthRef		0..*	string	Pre-Authorization/Determination Reference
+
+claimResponse		0..1	Reference(ClaimResponse)	Adjudication results
+
+
+Backbone
+accident
+date		1..1	date	When the accident occurred see information codes see information codes
+
+type		0..1	CodeableConcept	The nature of the accident
+ActIncidentCode (Required)
+
+location[x]		0..1		Accident Place
+
+locationAddress			Address
+
+locationReference			Reference(Location)
+
+
+Backbone
+item
+sequence		1..1	positiveInt	Service instance
+
+careTeamLinkId		0..*	positiveInt	Applicable careTeam members
+
+diagnosisLinkId		0..*	positiveInt	Applicable diagnoses
+
+procedureLinkId		0..*	positiveInt	Applicable procedures
+
+informationLinkId		0..*	positiveInt	Applicable exception and supporting information
+
+revenue		0..1	CodeableConcept	Revenue or cost center code
+Example Revenue Center Codes (Example)
+
+category		0..1	CodeableConcept	Type of service or product
+Benefit SubCategory Codes (Example)
+
+service		0..1	CodeableConcept	Billing Code
+USCLS Codes (Example)
+
+modifier		0..*	CodeableConcept	Service/Product billing modifiers
+Modifier type Codes (Example)
+
+programCode		0..*	CodeableConcept	Program specific reason for item inclusion
+Example Program Reason Codes (Example)
+
+serviced[x]		0..1		Date or dates of Service
+
+servicedDate			date
+
+servicedPeriod			Period
+
+location[x]		0..1		Place of service
+Example Service Place Codes (Example)
+
+locationCodeableConcept			CodeableConcept
+
+locationAddress			Address
+
+locationReference			Reference(Location)
+
+quantity		0..1	SimpleQuantity	Count of Products or Services
+
+unitPrice		0..1	Money	Fee, charge or cost per point
+
+factor		0..1	decimal	Price scaling factor
+
+net		0..1	Money	Total item cost
+
+udi		0..*	Reference(Device)	Unique Device Identifier
+
+bodySite		0..1	CodeableConcept	Service Location
+Oral Site Codes (Example)
+
+subSite		0..*	CodeableConcept	Service Sub-location
+Surface Codes (Example)
+
+encounter		0..*	Reference(Encounter)	Encounters related to this billed item
+
+detail		0..*	BackboneElement	Additional items
+
+
+Backbone
+detail
+sequence		1..1	positiveInt	Service instance
+
+revenue		0..1	CodeableConcept	Revenue or cost center code
+Example Revenue Center Codes (Example)
+
+category		0..1	CodeableConcept	Type of service or product
+Benefit SubCategory Codes (Example)
+
+service		0..1	CodeableConcept	Billing Code
+USCLS Codes (Example)
+
+modifier		0..*	CodeableConcept	Service/Product billing modifiers
+Modifier type Codes (Example)
+
+programCode		0..*	CodeableConcept	Program specific reason for item inclusion
+Example Program Reason Codes (Example)
+
+quantity		0..1	SimpleQuantity	Count of Products or Services
+
+unitPrice		0..1	Money	Fee, charge or cost per point
+
+factor		0..1	decimal	Price scaling factor
+
+net		0..1	Money	Total additional item cost
+
+udi		0..*	Reference(Device)	Unique Device Identifier
+
+subDetail		0..*	BackboneElement	Additional items
+
+
+Backbone
+subDetail
+sequence		1..1	positiveInt	Service instance
+
+revenue		0..1	CodeableConcept	Revenue or cost center code
+Example Revenue Center Codes (Example)
+
+category		0..1	CodeableConcept	Type of service or product
+Benefit SubCategory Codes (Example)
+
+service		0..1	CodeableConcept	Billing Code
+USCLS Codes (Example)
+
+modifier		0..*	CodeableConcept	Service/Product billing modifiers
+Modifier type Codes (Example)
+
+programCode		0..*	CodeableConcept	Program specific reason for item inclusion
+Example Program Reason Codes (Example)
+
+quantity		0..1	SimpleQuantity	Count of Products or Services
+
+unitPrice		0..1	Money	Fee, charge or cost per point
+
+factor		0..1	decimal	Price scaling factor
+
+net		0..1	Money	Net additional item cost
+
+udi		0..*	Reference(Device)	Unique Device Identifier
+
+
+eof

@@ -1,0 +1,55 @@
+Main
+ResearchStudy
+identifier	S	0..*	Identifier	Business Identifier for study
+
+title	S	0..1	string	Name for this study
+
+protocol	S	0..*	Reference(PlanDefinition)	Steps followed in executing study
+
+partOf	S	0..*	Reference(ResearchStudy)	Part of larger study
+
+status	?!S	1..1	code	draft | in-progress | suspended | stopped | completed | entered-in-error
+ResearchStudyStatus (Required)
+
+category	S	0..*	CodeableConcept	Classifications for the study
+
+focus	S	0..*	CodeableConcept	Drugs, devices, conditions, etc. under study
+
+contact	S	0..*	ContactDetail	Contact details for the study
+
+relatedArtifact		0..*	RelatedArtifact	References and dependencies
+
+keyword	S	0..*	CodeableConcept	Used to search for the study
+
+jurisdiction	S	0..*	CodeableConcept	Geographic region(s) for study
+Jurisdiction ValueSet (Extensible)
+
+description		0..1	markdown	What this is study doing
+
+enrollment	S	0..*	Reference(Group)	Inclusion & exclusion criteria
+
+period	S	0..1	Period	When the study began and ended
+
+sponsor	S	0..1	Reference(Organization)	Organization responsible for the study
+
+principalInvestigator	S	0..1	Reference(Practitioner)	The individual responsible for the study
+
+site	S	0..*	Reference(Location)	Location involved in study execution
+
+reasonStopped	S	0..1	CodeableConcept	Reason for terminating study early
+
+note		0..*	Annotation	Comments made about the event
+
+arm		0..*	BackboneElement	Defined path through the study for a subject
+
+
+Backbone
+arm
+name		1..1	string	Label for study arm
+
+code		0..1	CodeableConcept	Categorization of study arm
+
+description		0..1	string	Short explanation of study path
+
+
+eof

@@ -1,0 +1,164 @@
+Main
+Contract
+identifier	Σ	0..1	Identifier	Contract number
+
+status	?!Σ	0..1	code	amended | appended | cancelled | disputed | entered-in-error | executable | executed | negotiable | offered | policy | rejected | renewed | revoked | resolved | terminated
+Contract Resource Status Codes (Required)
+
+issued	Σ	0..1	dateTime	When this Contract was issued
+
+applies	Σ	0..1	Period	Effective time
+
+subject	Σ	0..*	Reference(Any)	Contract Target Entity
+
+topic	Σ	0..*	Reference(Any)	Context of the Contract
+
+authority		0..*	Reference(Organization)	Authority under which this Contract has standing
+
+domain		0..*	Reference(Location)	Domain in which this Contract applies
+
+type	Σ	0..1	CodeableConcept	Type or form
+Contract Type Codes (Example)
+
+subType	Σ	0..*	CodeableConcept	Subtype within the context of type
+Contract Subtype Codes (Example)
+
+action		0..*	CodeableConcept	Action stipulated by this Contract
+Contract Action Codes (Example)
+
+actionReason		0..*	CodeableConcept	Rationale for the stiplulated action
+PurposeOfUse (Example)
+
+decisionType		0..1	CodeableConcept	Decision by Grantor
+ActConsentDirective (Extensible)
+
+contentDerivative		0..1	CodeableConcept	Content derived from the basal information
+Contract Content Derivation Codes (Example)
+
+securityLabel	Σ	0..*	Coding	Security Labels that define affected resources
+All Security Labels (Extensible)
+
+binding[x]		0..1		Binding Contract
+
+bindingAttachment			Attachment
+
+bindingReference			Reference(Composition | DocumentReference | QuestionnaireResponse)
+
+agent		0..*	BackboneElement	Entity being ascribed responsibility
+
+signer		0..*	BackboneElement	Contract Signatory
+
+valuedItem		0..*	BackboneElement	Contract Valued Item List
+
+term		0..*	BackboneElement	Contract Term List
+
+friendly		0..*	BackboneElement	Contract Friendly Language
+
+legal		0..*	BackboneElement	Contract Legal Language
+
+rule		0..*	BackboneElement	Computable Contract Language
+
+
+Backbone
+agent
+actor		1..1	Reference(Contract | Device | Group | Location | Organization | Patient | Practitioner | RelatedPerson | Substance)	Contract Agent Type
+
+role		0..*	CodeableConcept	Role type of the agent
+Contract Actor Role Codes (Example)
+
+
+Backbone
+signer
+type		1..1	Coding	Contract Signatory Role
+Contract Signer Type Codes (Preferred)
+
+party		1..1	Reference(Organization | Patient | Practitioner | RelatedPerson)	Contract Signatory Party
+
+signature		1..*	Signature	Contract Documentation Signature
+
+
+Backbone
+valuedItem
+entity[x]		0..1		Contract Valued Item Type
+
+entityCodeableConcept			CodeableConcept
+
+entityReference			Reference(Any)
+
+identifier		0..1	Identifier	Contract Valued Item Number
+
+effectiveTime		0..1	dateTime	Contract Valued Item Effective Tiem
+
+quantity		0..1	SimpleQuantity	Count of Contract Valued Items
+
+unitPrice		0..1	Money	Contract Valued Item fee, charge, or cost
+
+factor		0..1	decimal	Contract Valued Item Price Scaling Factor
+
+points		0..1	decimal	Contract Valued Item Difficulty Scaling Factor
+
+net		0..1	Money	Total Contract Valued Item Value
+
+
+Backbone
+term
+identifier	Σ	0..1	Identifier	Contract Term Number
+
+issued	Σ	0..1	dateTime	Contract Term Issue Date Time
+
+applies	Σ	0..1	Period	Contract Term Effective Time
+
+type		0..1	CodeableConcept	Contract Term Type or Form
+Contract Term Type Codes (Example)
+
+subType		0..1	CodeableConcept	Contract Term Type specific classification
+Contract Term Subtype Codes (Example)
+
+topic	Σ	0..*	Reference(Any)	Context of the Contract term
+
+action		0..*	CodeableConcept	Contract Term Activity
+Contract Action Codes (Example)
+
+actionReason		0..*	CodeableConcept	Purpose for the Contract Term Action
+PurposeOfUse (Example)
+
+securityLabel	Σ	0..*	Coding	Security Labels that define affected terms
+All Security Labels (Extensible)
+
+text		0..1	string	Human readable Contract term text
+
+group		0..*	see term	Nested Contract Term Group
+
+agent		0..*	BackboneElement	Contract Term Agent List
+
+valuedItem		0..*	BackboneElement	Contract Term Valued Item List
+
+
+Backbone
+friendly
+content[x]		1..1		Easily comprehended representation of this Contract
+
+contentAttachment			Attachment
+
+contentReference			Reference(Composition | DocumentReference | QuestionnaireResponse)
+
+
+Backbone
+legal
+content[x]		1..1		Contract Legal Text
+
+contentAttachment			Attachment
+
+contentReference			Reference(Composition | DocumentReference | QuestionnaireResponse)
+
+
+Backbone
+rule
+content[x]		1..1		Computable Contract Rules
+
+contentAttachment			Attachment
+
+contentReference			Reference(DocumentReference)
+
+
+eof

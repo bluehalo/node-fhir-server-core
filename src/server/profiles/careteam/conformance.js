@@ -1,48 +1,32 @@
-const { STU3 } = require('../../../constants');
+const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
+const { DSTU2 } = require('../../../constants');
+const { routes } = require('./careteam.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
-
 module.exports = {
-	Profile: 'Careteam',
-	Resource: (count) => ({
-		extension: [{
-			url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
-			// This will be resolved dynamically by the service methods
-			valueDecimal: count
-		}],
-		type: STU3.RESOURCE_TYPES.CARETEAM,
-		profile: {
-			reference: 'http://hl7.org/fhir/Profile/Careteam'
-		},
-		interaction: [{
-			code: 'read'
-		}, {
-			code: 'search'
-		}],
-		searchParam: [ {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}]
-	})
+	profile: 'careteam',
+	resource: (version, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, version);
+		// Return our conformance statement
+		return {
+			extension: [{
+				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				// This will be resolved dynamically by the service methods
+				valueDecimal: count
+			}],
+			type: DSTU2.RESOURCE_TYPES.CARETEAM,
+			profile: {
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-careteam.html'
+			},
+			interaction: [{
+				code: 'read'
+			}, {
+				code: 'search'
+			}],
+			searchParam: searchParams
+		};
+	}
 };

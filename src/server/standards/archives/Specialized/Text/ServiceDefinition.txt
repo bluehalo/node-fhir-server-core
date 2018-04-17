@@ -1,0 +1,57 @@
+Main
+ServiceDefinition
+url	Σ	0..1	uri	Logical URI to reference this service definition (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the service definition
+
+version	Σ	0..1	string	Business version of the service definition
+
+name	Σ	0..1	string	Name for this service definition (computer friendly)
+
+title	Σ	0..1	string	Name for this service definition (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+description		0..1	markdown	Natural language description of the service definition
+
+purpose		0..1	markdown	Why this service definition is defined
+
+usage		0..1	string	Describes the clinical usage of the module
+
+approvalDate		0..1	date	When the service definition was approved by publisher
+
+lastReviewDate		0..1	date	When the service definition was last reviewed
+
+effectivePeriod	Σ	0..1	Period	When the service definition is expected to be used
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for service definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+topic		0..*	CodeableConcept	E.g. Education, Treatment, Assessment, etc
+DefinitionTopic (Example)
+
+contributor		0..*	Contributor	A content contributor
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+relatedArtifact		0..*	RelatedArtifact	Additional documentation, citations, etc
+
+trigger		0..*	TriggerDefinition	"when" the module should be invoked
+
+dataRequirement		0..*	DataRequirement	What data is used by the module
+
+operationDefinition		0..1	Reference(OperationDefinition)	Operation to invoke
+
+
+eof

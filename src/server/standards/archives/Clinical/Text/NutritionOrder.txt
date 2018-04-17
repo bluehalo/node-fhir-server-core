@@ -1,0 +1,116 @@
+Main
+NutritionOrder
+identifier		0..*	Identifier	Identifiers assigned to this order
+
+status	?!Σ	0..1	code	proposed | draft | planned | requested | active | on-hold | completed | cancelled | entered-in-error
+NutritionOrderStatus (Required)
+
+patient	Σ	1..1	Reference(Patient)	The person who requires the diet, formula or nutritional supplement
+
+encounter		0..1	Reference(Encounter)	The encounter associated with this nutrition order
+
+dateTime	Σ	1..1	dateTime	Date and time the nutrition order was requested
+
+orderer	Σ	0..1	Reference(Practitioner)	Who ordered the diet, formula or nutritional supplement
+
+allergyIntolerance		0..*	Reference(AllergyIntolerance)	List of the patient's food and nutrition-related allergies and intolerances
+
+foodPreferenceModifier		0..*	CodeableConcept	Order-specific modifier about the type of food that should be given
+Diet (Example)
+
+excludeFoodModifier		0..*	CodeableConcept	Order-specific modifier about the type of food that should not be given
+Food Type Codes (Example)
+
+oralDiet	I	0..1	BackboneElement	Oral diet components
+
+supplement	I	0..*	BackboneElement	Supplement components
+
+enteralFormula	I	0..1	BackboneElement	Enteral formula components
+
+
+Backbone
+oralDiet
+type	Σ	0..*	CodeableConcept	Type of oral diet or diet restrictions that describe what can be consumed orally
+Diet Codes (Example)
+
+schedule		0..*	Timing	Scheduled frequency of diet
+
+fluidConsistencyType		0..*	CodeableConcept	The required consistency of fluids and liquids provided to the patient
+Fluid Consistency Type Codes (Example)
+
+instruction	Σ	0..1	string	Instructions or additional information about the oral diet
+
+nutrient		0..*	BackboneElement	Required nutrient modifications
+
+texture		0..*	BackboneElement	Required texture modifications
+
+
+Backbone
+nutrient
+modifier		0..1	CodeableConcept	Type of nutrient that is being modified
+Nutrient Modifier Codes (Example)
+
+amount		0..1	SimpleQuantity	Quantity of the specified nutrient
+
+
+Backbone
+texture
+modifier		0..1	CodeableConcept	Code to indicate how to alter the texture of the foods, e.g. pureed
+Texture Modifier Codes (Example)
+
+foodType		0..1	CodeableConcept	Concepts that are used to identify an entity that is ingested for nutritional purposes
+Texture Modified Food Type Codes (Example)
+
+
+Backbone
+supplement
+type	Σ	0..1	CodeableConcept	Type of supplement product requested
+Supplement Type Codes (Example)
+
+productName		0..1	string	Product or brand name of the nutritional supplement
+
+schedule		0..*	Timing	Scheduled frequency of supplement
+
+quantity		0..1	SimpleQuantity	Amount of the nutritional supplement
+
+instruction	Σ	0..1	string	Instructions or additional information about the oral supplement
+
+
+Backbone
+enteralFormula
+baseFormulaType	Σ	0..1	CodeableConcept	Type of enteral or infant formula
+Enteral Formula Type Codes (Example)
+
+baseFormulaProductName		0..1	string	Product or brand name of the enteral or infant formula
+
+additiveType		0..1	CodeableConcept	Type of modular component to add to the feeding
+Enteral Formula Additive Type Code (Example)
+
+additiveProductName		0..1	string	Product or brand name of the modular additive
+
+caloricDensity		0..1	SimpleQuantity	Amount of energy per specified volume that is required
+
+routeofAdministration		0..1	CodeableConcept	How the formula should enter the patient's gastrointestinal tract
+Enteral Route Codes (Extensible)
+
+maxVolumeToDeliver		0..1	SimpleQuantity	Upper limit on formula volume per unit of time
+
+administrationInstruction	Σ	0..1	string	Formula feeding instructions expressed as text
+
+administration		0..*	BackboneElement	Formula feeding instruction as structured data
+
+
+Backbone
+administration
+schedule		0..1	Timing	Scheduled frequency of enteral feeding
+
+quantity		0..1	SimpleQuantity	The volume of formula to provide
+
+rate[x]		0..1		Speed with which the formula is provided per period of time
+
+rateQuantity			SimpleQuantity
+
+rateRatio			Ratio
+
+
+eof

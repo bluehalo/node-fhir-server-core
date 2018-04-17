@@ -1,4 +1,4 @@
-const Goal = require('../../resources/uscore/resources/Goal');
+const Goal = require('../../standards/uscore/resources/Goal');
 const errors = require('../../utils/error.utils');
 
 module.exports.getGoal = ({ profile, logger, config }) => {

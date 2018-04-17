@@ -1,0 +1,167 @@
+Main
+StructureMap
+url	Σ	1..1	uri	Logical URI to reference this structure map (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the structure map
+
+version	Σ	0..1	string	Business version of the structure map
+
+name	Σ	1..1	string	Name for this structure map (computer friendly)
+
+title	Σ	0..1	string	Name for this structure map (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description		0..1	markdown	Natural language description of the structure map
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for structure map (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+purpose		0..1	markdown	Why this structure map is defined
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+structure	Σ	0..*	BackboneElement	Structure Definition used by this map
+
+import	Σ	0..*	uri	Other maps used by this map (canonical URLs)
+
+group	Σ	1..*	BackboneElement	Named sections for reader convenience
+
+
+Backbone
+structure
+url	Σ	1..1	uri	Canonical URL for structure definition
+
+mode	Σ	1..1	code	source | queried | target | produced
+StructureMapModelMode (Required)
+
+alias	Σ	0..1	string	Name for type in this map
+
+documentation		0..1	string	Documentation on use of structure
+
+
+Backbone
+group
+name	Σ	1..1	id	Human-readable label
+
+extends	Σ	0..1	id	Another group that this group adds rules to
+
+typeMode	Σ	1..1	code	none | types | type-and-types
+StructureMapGroupTypeMode (Required)
+
+documentation	Σ	0..1	string	Additional description/explaination for group
+
+input	Σ	1..*	BackboneElement	Named instance provided when invoking the map
+
+rule	Σ	1..*	BackboneElement	Transform Rule from source to target
+
+
+Backbone
+input
+name	Σ	1..1	id	Name for this instance of data
+
+type	Σ	0..1	string	Type for this instance of data
+
+mode	Σ	1..1	code	source | target
+StructureMapInputMode (Required)
+
+documentation		0..1	string	Documentation for this instance of data
+
+
+Backbone
+rule
+name	Σ	1..1	id	Name of the rule for internal references
+
+source	Σ	1..*	BackboneElement	Source inputs to the mapping
+
+target	ΣI	0..*	BackboneElement	Content to create because of this mapping rule
++ Must have a contextType if you have a context
++ Can only have a element if you have a context
+
+rule	Σ	0..*	see rule	Rules contained in this rule
+
+dependent	Σ	0..*	BackboneElement	Which other rules to apply in the context of this rule
+
+documentation		0..1	string	Documentation for this instance of data
+
+
+Backbone
+source
+context	Σ	1..1	id	Type or variable this rule applies to
+
+min	Σ	0..1	integer	Specified minimum cardinality
+
+max	Σ	0..1	string	Specified maximum cardinality (number or *)
+
+type	Σ	0..1	string	Rule only applies if source has this type
+
+defaultValue[x]	Σ	0..1	*	Default value if no value exists
+
+element	Σ	0..1	string	Optional field for this source
+
+listMode	Σ	0..1	code	first | not_first | last | not_last | only_one
+StructureMapSourceListMode (Required)
+
+variable	Σ	0..1	id	Named context for field, if a field is specified
+
+condition	Σ	0..1	string	FHIRPath expression - must be true or the rule does not apply
+
+check	Σ	0..1	string	FHIRPath expression - must be true or the mapping engine throws an error instead of completing
+
+
+Backbone
+target
+context	Σ	0..1	id	Type or variable this rule applies to
+
+contextType	Σ	0..1	code	type | variable
+StructureMapContextType (Required)
+
+element	Σ	0..1	string	Field to create in the context
+
+variable	Σ	0..1	id	Named context for field, if desired, and a field is specified
+
+listMode	Σ	0..*	code	first | share | last | collate
+StructureMapTargetListMode (Required)
+
+listRuleId	Σ	0..1	id	Internal rule reference for shared list items
+
+transform	Σ	0..1	code	create | copy +
+StructureMapTransform (Required)
+
+parameter	Σ	0..*	BackboneElement	Parameters to the transform
+
+
+Backbone
+parameter
+value[x]	Σ	1..1		Parameter value - variable or literal
+
+valueId			id
+
+valueString			string
+
+valueBoolean			boolean
+
+valueInteger			integer
+
+valueDecimal			decimal
+
+
+Backbone
+dependent
+name	Σ	1..1	id	Name of a rule or group to apply
+
+variable	Σ	1..*	string	Variable to pass to the rule or group
+
+
+eof

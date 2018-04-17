@@ -1,0 +1,77 @@
+Main
+GraphDefinition
+url	Σ	0..1	uri	Logical URI to reference this graph definition (globally unique)
+
+version	Σ	0..1	string	Business version of the graph definition
+
+name	Σ	1..1	string	Name for this graph definition (computer friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description		0..1	markdown	Natural language description of the graph definition
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for graph definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+purpose		0..1	markdown	Why this graph definition is defined
+
+start		1..1	code	Type of resource at which the graph starts
+ResourceType (Required)
+
+profile		0..1	uri	Profile on base resource
+
+link		0..*	BackboneElement	Links this graph makes rules about
+
+
+Backbone
+link
+path		1..1	string	Path in the resource that contains the link
+
+sliceName		0..1	string	Which slice (if profiled)
+
+min		0..1	integer	Minimum occurrences for this link
+
+max		0..1	string	Maximum occurrences for this link
+
+description		0..1	string	Why this link is specified
+
+target		1..*	BackboneElement	Potential target for the link
+
+
+Backbone
+target
+type		1..1	code	Type of resource this link refers to
+ResourceType (Required)
+
+profile		0..1	uri	Profile for the target resource
+
+compartment		0..*	BackboneElement	Compartment Consistency Rules
+
+link		0..*	see link	Additional links from target resource
+
+
+Backbone
+compartment
+code		1..1	code	Identifies the compartment
+CompartmentType (Required)
+
+rule		1..1	code	identical | matching | different | custom
+GraphCompartmentRule (Required)
+
+expression		0..1	string	Custom rule, as a FHIRPath expression
+
+description		0..1	string	Documentation for FHIRPath expression
+
+
+eof

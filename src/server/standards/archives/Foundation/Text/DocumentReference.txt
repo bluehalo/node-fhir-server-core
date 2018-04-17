@@ -1,0 +1,86 @@
+Main
+DocumentReference
+masterIdentifier	Σ	0..1	Identifier	Master Version Specific Identifier
+
+identifier	Σ	0..*	Identifier	Other identifiers for the document
+
+status	?!Σ	1..1	code	current | superseded | entered-in-error
+DocumentReferenceStatus (Required)
+
+docStatus	Σ	0..1	code	preliminary | final | appended | amended | entered-in-error
+CompositionStatus (Required)
+
+type	Σ	1..1	CodeableConcept	Kind of document (LOINC if possible)
+Document Type Value Set (Preferred)
+
+class	Σ	0..1	CodeableConcept	Categorization of document
+Document Class Value Set (Example)
+
+subject	Σ	0..1	Reference(Patient | Practitioner | Group | Device)	Who/what is the subject of the document
+
+created	Σ	0..1	dateTime	Document creation time
+
+indexed	Σ	1..1	instant	When this document reference was created
+
+author	Σ	0..*	Reference(Practitioner | Organization | Device | Patient | RelatedPerson)	Who and/or what authored the document
+
+authenticator	Σ	0..1	Reference(Practitioner | Organization)	Who/what authenticated the document
+
+custodian	Σ	0..1	Reference(Organization)	Organization which maintains the document
+
+description	Σ	0..1	string	Human-readable description (title)
+
+securityLabel	Σ	0..*	CodeableConcept	Document security-tags
+All Security Labels (Extensible)
+
+relatesTo	?!Σ	0..*	BackboneElement	Relationships to other documents
+
+content	Σ	1..*	BackboneElement	Document referenced
+
+context	Σ	0..1	BackboneElement	Clinical context of document
+
+
+Backbone
+relatesTo
+code	Σ	1..1	code	replaces | transforms | signs | appends
+DocumentRelationshipType (Required)
+
+target	Σ	1..1	Reference(DocumentReference)	Target of the relationship
+
+
+Backbone
+content
+attachment	Σ	1..1	Attachment	Where to access the document
+
+format	Σ	0..1	Coding	Format/content rules for the document
+DocumentReference Format Code Set (Preferred)
+
+
+Backbone
+context
+encounter	Σ	0..1	Reference(Encounter)	Context of the document content
+
+event	Σ	0..*	CodeableConcept	Main clinical acts documented
+v3 Code System ActCode (Example)
+
+period	Σ	0..1	Period	Time of service that is being documented
+
+facilityType	Σ	0..1	CodeableConcept	Kind of facility where patient was seen
+Facility Type Code Value Set (Example)
+
+practiceSetting	Σ	0..1	CodeableConcept	Additional details about where the content was created (e.g. clinical specialty)
+Practice Setting Code Value Set (Example)
+
+sourcePatientInfo	Σ	0..1	Reference(Patient)	Patient demographics from source
+
+related	Σ	0..*	BackboneElement	Related identifiers or resources
+
+
+Backbone
+related
+identifier	Σ	0..1	Identifier	Identifier of related objects or events
+
+ref	Σ	0..1	Reference(Any)	Related Resource
+
+
+eof

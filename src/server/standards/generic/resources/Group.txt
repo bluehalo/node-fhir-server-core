@@ -1,0 +1,51 @@
+Main
+Group
+identifier	Σ	0..*	Identifier	Unique id
+
+active	Σ	0..1	boolean	Whether this group's record is in active use
+
+type	Σ	1..1	code	person | animal | practitioner | device | medication | substance
+GroupType (Required)
+
+actual	ΣI	1..1	boolean	Descriptive or actual
+
+code	Σ	0..1	CodeableConcept	Kind of Group members
+
+name	Σ	0..1	string	Label for Group
+
+quantity	Σ	0..1	unsignedInt	Number of members
+
+characteristic		0..*	BackboneElement	Trait of group members
+
+member	I	0..*	BackboneElement	Who or what is in group
+
+
+Backbone
+characteristic
+code		1..1	CodeableConcept	Kind of characteristic
+
+value[x]		1..1		Value held by characteristic
+
+valueCodeableConcept			CodeableConcept
+
+valueBoolean			boolean
+
+valueQuantity			Quantity
+
+valueRange			Range
+
+exclude	?!	1..1	boolean	Group includes or excludes
+
+period		0..1	Period	Period over which characteristic is tested
+
+
+Backbone
+member
+entity		1..1	Reference(Patient | Practitioner | Device | Medication | Substance)	Reference to the group member
+
+period		0..1	Period	Period member belonged to the group
+
+inactive		0..1	boolean	If member is no longer in group
+
+
+eof

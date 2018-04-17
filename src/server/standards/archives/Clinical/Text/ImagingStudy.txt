@@ -1,0 +1,88 @@
+Main
+ImagingStudy
+uid	Σ	1..1	oid	Formal DICOM identifier for the study
+
+accession	Σ	0..1	Identifier	Related workflow identifier ("Accession Number")
+
+identifier	Σ	0..*	Identifier	Other identifiers for the study
+
+availability	Σ	0..1	code	ONLINE | OFFLINE | NEARLINE | UNAVAILABLE
+InstanceAvailability (Required)
+
+modalityList	Σ	0..*	Coding	All series modality if actual acquisition modalities
+Acquisition Modality Codes (Extensible)
+
+patient	Σ	1..1	Reference(Patient)	Who the images are of
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Originating context
+
+started	Σ	0..1	dateTime	When the study was started
+
+basedOn	Σ	0..*	Reference(ReferralRequest | CarePlan | ProcedureRequest)	Request fulfilled
+
+referrer	Σ	0..1	Reference(Practitioner)	Referring physician
+
+interpreter	Σ	0..*	Reference(Practitioner)	Who interpreted images
+
+endpoint	Σ	0..*	Reference(Endpoint)	Study access endpoint
+
+numberOfSeries	Σ	0..1	unsignedInt	Number of Study Related Series
+
+numberOfInstances	Σ	0..1	unsignedInt	Number of Study Related Instances
+
+procedureReference	Σ	0..*	Reference(Procedure)	The performed Procedure reference
+
+procedureCode	Σ	0..*	CodeableConcept	The performed procedure code
+Procedure Codes (SNOMED CT) (Example)
+
+reason	Σ	0..1	CodeableConcept	Why the study was requested
+Procedure Reason Codes (Example)
+
+description	Σ	0..1	string	Institution-generated description
+
+series	Σ	0..*	BackboneElement	Each study has one or more series of instances
+
+
+Backbone
+series
+uid	Σ	1..1	oid	Formal DICOM identifier for this series
+
+number	Σ	0..1	unsignedInt	Numeric identifier of this series
+
+modality	Σ	1..1	Coding	The modality of the instances in the series
+Acquisition Modality Codes (Extensible)
+
+description	Σ	0..1	string	A short human readable summary of the series
+
+numberOfInstances	Σ	0..1	unsignedInt	Number of Series Related Instances
+
+availability	Σ	0..1	code	ONLINE | OFFLINE | NEARLINE | UNAVAILABLE
+InstanceAvailability (Required)
+
+endpoint	Σ	0..*	Reference(Endpoint)	Series access endpoint
+
+bodySite	Σ	0..1	Coding	Body part examined
+SNOMED CT Body Structures (Example)
+
+laterality	Σ	0..1	Coding	Body part laterality
+Laterality (Example)
+
+started	Σ	0..1	dateTime	When the series started
+
+performer	Σ	0..*	Reference(Practitioner)	Who performed the series
+
+instance		0..*	BackboneElement	A single SOP instance from the series
+
+
+Backbone
+instance
+uid		1..1	oid	Formal DICOM identifier for this instance
+
+number		0..1	unsignedInt	The number of this instance in the series
+
+sopClass		1..1	oid	DICOM class type
+
+title		0..1	string	Description of instance
+
+
+eof

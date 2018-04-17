@@ -1,48 +1,32 @@
+const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { DSTU2 } = require('../../../constants');
+const { routes } = require('./procedure.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
-
 module.exports = {
-	Profile: 'patient',
-	Resource: (count) => ({
-		extension: [{
-			url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
-			// This will be resolved dynamically by the service methods
-			valueDecimal: count
-		}],
-		type: DSTU2.RESOURCE_TYPES.PATIENT,
-		profile: {
-			reference: 'http://hl7.org/fhir/Profile/Patient'
-		},
-		interaction: [{
-			code: 'read'
-		}, {
-			code: 'search'
-		}],
-		searchParam: [ {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}]
-	})
+	profile: 'procedure',
+	resource: (version, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, version);
+		// Return our conformance statement
+		return {
+			extension: [{
+				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				// This will be resolved dynamically by the service methods
+				valueDecimal: count
+			}],
+			type: DSTU2.RESOURCE_TYPES.PROCEDURE,
+			profile: {
+				reference: 'http://hl7.org/fhir/Profile/Procedure'
+			},
+			interaction: [{
+				code: 'read'
+			}, {
+				code: 'search'
+			}],
+			searchParam: searchParams
+		};
+	}
 };

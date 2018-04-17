@@ -1,0 +1,92 @@
+Main
+StructureDefinition
+url	Σ	1..1	uri	Logical URI to reference this structure definition (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the structure definition
+
+version	Σ	0..1	string	Business version of the structure definition
+
+name	Σ	1..1	string	Name for this structure definition (computer friendly)
+
+title	Σ	0..1	string	Name for this structure definition (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description		0..1	markdown	Natural language description of the structure definition
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for structure definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+purpose		0..1	markdown	Why this structure definition is defined
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+keyword	Σ	0..*	Coding	Assist with indexing and finding
+Structure Definition Codes (Example)
+
+fhirVersion	Σ	0..1	id	FHIR Version this StructureDefinition targets
+
+mapping	I	0..*	BackboneElement	External specification that the content is mapped to
++ Must have at least a name or a uri (or both)
+
+identity		1..1	id	Internal id when this mapping is used
+
+uri	I	0..1	uri	Identifies what this mapping refers to
+
+name	I	0..1	string	Names what this mapping refers to
+
+comment		0..1	string	Versions, Issues, Scope limitations etc.
+
+kind	Σ	1..1	code	primitive-type | complex-type | resource | logical
+StructureDefinitionKind (Required)
+
+abstract	Σ	1..1	boolean	Whether the structure is abstract
+
+contextType	ΣI	0..1	code	resource | datatype | extension
+ExtensionContext (Required)
+
+context	ΣI	0..*	string	Where the extension can be used in instances
+
+contextInvariant	ΣI	0..*	string	FHIRPath invariants - when the extension can be used
+
+type	ΣI	1..1	code	Type defined or constrained by this structure
+FHIRDefinedType (Extensible)
+
+baseDefinition	ΣI	0..1	uri	Definition that this type is constrained/specialized from
+
+derivation	ΣI	0..1	code	specialization | constraint - How relates to base definition
+TypeDerivationRule (Required)
+
+snapshot	I	0..1	BackboneElement	Snapshot view of the structure
++ The first element in a snapshot has no type
++ In any snapshot, all the elements must be in the specified type
++ Each element definition in a snapshot must have a formal definition and cardinalities
+
+differential	I	0..1	BackboneElement	Differential view of the structure
++ If the first element in a differential has no "." in the path, it has no type
++ No slicing on the root element
++ In any differential, all the elements must be in the specified type
+
+
+Backbone
+differential
+element		1..*	ElementDefinition	Definition of elements in the resource (if no StructureDefinition)
+
+
+Backbone
+snapshot
+element	I	1..*	ElementDefinition	Definition of elements in the resource (if no StructureDefinition)
+
+
+eof

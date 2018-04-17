@@ -1,0 +1,61 @@
+Main
+SupplyRequest
+identifier	Σ	0..1	Identifier	Unique identifier
+
+status	?!Σ	0..1	code	draft | active | suspended +
+SupplyRequestStatus (Required)
+
+category	Σ	0..1	CodeableConcept	The kind of supply (central, non-stock, etc.)
+Supply Type (Example)
+
+priority	Σ	0..1	code	routine | urgent | asap | stat
+RequestPriority (Required)
+
+occurrence[x]	Σ	0..1		When the request should be fulfilled
+
+occurrenceDateTime			dateTime
+
+occurrencePeriod			Period
+
+occurrenceTiming			Timing
+
+authoredOn	Σ	0..1	dateTime	When the request was made
+
+supplier	Σ	0..*	Reference(Organization)	Who is intended to fulfill the request
+
+reason[x]		0..1		Why the supply item was requested
+SupplyRequestReason (Example)
+
+reasonCodeableConcept			CodeableConcept
+
+reasonReference			Reference(Any)
+
+deliverFrom		0..1	Reference(Organization | Location)	The origin of the supply
+
+deliverTo		0..1	Reference(Organization | Location | Patient)	The destination of the supply
+
+orderedItem	Σ	0..1	BackboneElement	The item being requested
+
+requester	Σ	0..1	BackboneElement	Who/what is requesting service
+
+
+Backbone
+orderedItem
+quantity	Σ	1..1	Quantity	The requested amount of the item indicated
+
+item[x]	Σ	0..1		Medication, Substance, or Device requested to be supplied
+SNOMED CT Supply Item (Example)
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Medication | Substance | Device)
+
+
+Backbone
+requester
+agent	Σ	1..1	Reference(Practitioner | Organization | Patient | RelatedPerson | Device)	Individual making the request
+
+onBehalfOf		0..1	Reference(Organization)	Organization agent is acting for
+
+
+eof

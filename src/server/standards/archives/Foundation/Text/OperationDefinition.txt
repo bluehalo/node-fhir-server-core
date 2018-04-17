@@ -1,0 +1,101 @@
+Main
+OperationDefinition
+url	Σ	0..1	uri	Logical URI to reference this operation definition (globally unique)
+
+version	Σ	0..1	string	Business version of the operation definition
+
+name	Σ	1..1	string	Name for this operation definition (computer friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+kind		1..1	code	operation | query
+OperationKind (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description		0..1	markdown	Natural language description of the operation definition
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for operation definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+purpose		0..1	markdown	Why this operation definition is defined
+
+idempotent	Σ	0..1	boolean	Whether content is unchanged by the operation
+
+code	Σ	1..1	code	Name used to invoke the operation
+
+comment		0..1	string	Additional information about use
+
+base	Σ	0..1	Reference(OperationDefinition)	Marks this as a profile of the base
+
+resource	Σ	0..*	code	Types this operation applies to
+ResourceType (Required)
+
+system	Σ	1..1	boolean	Invoke at the system level?
+
+type	Σ	1..1	boolean	Invole at the type level?
+
+instance	Σ	1..1	boolean	Invoke on an instance?
+
+parameter	I	0..*	BackboneElement	Parameters for the operation/query
++ Either a type must be provided, or parts
++ A search type can only be specified for parameters of type string
+
+overload		0..*	BackboneElement	Define overloaded variants for when generating code
+
+
+Backbone
+parameter
+name		1..1	code	Name in Parameters.parameter.name or in URL
+
+use		1..1	code	in | out
+OperationParameterUse (Required)
+
+min		1..1	integer	Minimum Cardinality
+
+max		1..1	string	Maximum Cardinality (a number or *)
+
+documentation		0..1	string	Description of meaning/use
+
+type	I	0..1	code	What type this parameter has
+FHIRAllTypes (Required)
+
+searchType	I	0..1	code	number | date | string | token | reference | composite | quantity | uri
+SearchParamType (Required)
+
+profile		0..1	Reference(StructureDefinition)	Profile on the type
+
+part	I	0..*	see parameter	Parts of a nested Parameter
+
+binding		0..1	BackboneElement	ValueSet details if this is coded
+
+
+Backbone
+binding
+strength		1..1	code	required | extensible | preferred | example
+BindingStrength (Required)
+
+valueSet[x]		1..1		Source of value set
+
+valueSetUri			uri
+
+valueSetReference			Reference(ValueSet)
+
+
+Backbone
+overload
+parameterName		0..*	string	Name of parameter to include in overload
+
+comment		0..1	string	Comments to go on overload
+
+
+eof

@@ -18,9 +18,7 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/patient',
-		corsOptions: {
-			methods: ['GET']
-		},
+		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -62,9 +60,7 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/patient/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
+		corsOptions: {methods: ['POST']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -106,9 +102,7 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/patient/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
+		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID

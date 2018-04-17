@@ -1,0 +1,256 @@
+Main
+CapabilityStatement
+url	Σ	0..1	uri	Logical URI to reference this capability statement (globally unique)
+
+version	Σ	0..1	string	Business version of the capability statement
+
+name	Σ	0..1	string	Name for this capability statement (computer friendly)
+
+title	Σ	0..1	string	Name for this capability statement (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	1..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+description	I	0..1	markdown	Natural language description of the capability statement
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for capability statement (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+purpose		0..1	markdown	Why this capability statement is defined
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+kind	Σ	1..1	code	instance | capability | requirements
+CapabilityStatementKind (Required)
+
+instantiates	Σ	0..*	uri	Canonical URL of another capability statement this implements
+
+software	ΣI	0..1	BackboneElement	Software that is covered by this capability statement
+
+implementation	ΣI	0..1	BackboneElement	If this describes a specific instance
+
+fhirVersion	Σ	1..1	id	FHIR Version the system uses
+
+acceptUnknown	Σ	1..1	code	no | extensions | elements | both
+UnknownContentCode (Required)
+
+format	Σ	1..*	code	formats supported (xml | json | ttl | mime type)
+MimeType  (Required)
+
+patchFormat	Σ	0..*	code	Patch formats supported
+MimeType  (Required)
+
+implementationGuide	Σ	0..*	uri	Implementation guides supported
+
+profile	Σ	0..*	Reference(StructureDefinition)	Profiles for use cases supported
+
+rest	ΣI	0..*	BackboneElement	If the endpoint is a RESTful one
++ A given resource can only be described once per RESTful mode.
+
+messaging	ΣI	0..*	BackboneElement	If messaging is supported
++ A Capability Statement messaging element SHALL have either supportedMessage or event element, but not both.
+
+document	ΣI	0..*	BackboneElement	Document definition
+
+
+Backbone
+rest
+mode	Σ	1..1	code	client | server
+RestfulCapabilityMode (Required)
+
+documentation		0..1	string	General description of implementation
+
+security	Σ	0..1	BackboneElement	Information about security of implementation
+
+resource	ΣI	0..*	BackboneElement	Resource served on the REST interface
++ Search parameter names must be unique in the context of a resource.
+
+interaction		0..*	BackboneElement	What operations are supported?
+
+searchParam		0..*	see searchParam	Search parameters for searching all resources
+
+operation	Σ	0..*	BackboneElement	Definition of an operation or a custom query
+
+compartment		0..*	uri	Compartments served/used by system
+
+
+Backbone
+messaging
+endpoint		0..*	BackboneElement	Where messages should be sent
+
+reliableCache		0..1	unsignedInt	Reliable Message Cache Length (min)
+
+documentation		0..1	string	Messaging interface behavior details
+
+supportedMessage	Σ	0..*	BackboneElement	Messages supported by this system
+
+event	Σ	0..*	BackboneElement	Declare support for this event
+
+
+Backbone
+endpoint
+protocol		1..1	Coding	http | ftp | mllp +
+MessageTransport (Extensible)
+
+address		1..1	uri	Network address or identifier of the end-point
+
+
+Backbone
+supportedMessage
+mode	Σ	1..1	code	sender | receiver
+EventCapabilityMode (Required)
+
+definition	Σ	1..1	Reference(MessageDefinition)	Message supported by this system
+
+
+Backbone
+event
+code	Σ	1..1	Coding	Event type
+MessageEvent (Example)
+
+category		0..1	code	Consequence | Currency | Notification
+MessageSignificanceCategory (Required)
+
+mode		1..1	code	sender | receiver
+EventCapabilityMode (Required)
+
+focus		1..1	code	Resource that's focus of message
+ResourceType (Required)
+
+request	Σ	1..1	Reference(StructureDefinition)	Profile that describes the request
+
+response	Σ	1..1	Reference(StructureDefinition)	Profile that describes the response
+
+documentation		0..1	string	Endpoint-specific event documentation
+
+
+Backbone
+software
+name	Σ	1..1	string	A name the software is known by
+
+version	Σ	0..1	string	Version covered by this statement
+
+releaseDate	Σ	0..1	dateTime	Date this version released
+
+
+Backbone
+implementation
+description	Σ	1..1	string	Describes this specific instance
+
+url	Σ	0..1	uri	Base URL for the installation
+
+
+Backbone
+document
+mode		1..1	code	producer | consumer
+DocumentMode (Required)
+
+documentation		0..1	string	Description of document support
+
+profile	Σ	1..1	Reference(StructureDefinition)	Constraint on a resource used in the document
+
+
+Backbone
+certificate
+type		0..1	code	Mime type for certificates
+MimeType  (Required)
+
+blob		0..1	base64Binary	Actual certificate
+
+
+Backbone
+security
+cors	Σ	0..1	boolean	Adds CORS Headers (http://enable-cors.org/)
+
+service	Σ	0..*	CodeableConcept	OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
+RestfulSecurityService (Extensible)
+
+description		0..1	string	General description of how security works
+
+certificate		0..*	BackboneElement	Certificates associated with security profiles
+
+
+Backbone
+interaction
+code		1..1	code	read | vread | update | patch | delete | history-instance | history-type | create | search-type
+TypeRestfulInteraction (Required)
+
+documentation		0..1	string	Anything special about operation behavior
+
+
+Backbone
+operation
+name		1..1	string	Name by which the operation/query is invoked
+
+definition	Σ	1..1	Reference(OperationDefinition)	The defined operation/query
+
+
+Backbone
+interaction
+code		1..1	code	transaction | batch | search-system | history-system
+SystemRestfulInteraction (Required)
+
+documentation		0..1	string	Anything special about operation behavior
+
+
+Backbone
+searchParam
+name		1..1	string	Name of search parameter
+
+definition		0..1	uri	Source of definition for parameter
+
+type		1..1	code	number | date | string | token | reference | composite | quantity | uri
+SearchParamType (Required)
+
+documentation		0..1	string	Server-specific usage
+
+
+Backbone
+resource
+type	Σ	1..1	code	A resource type that is supported
+ResourceType (Required)
+
+profile	Σ	0..1	Reference(StructureDefinition)	Base System profile for all uses of resource
+
+documentation		0..1	markdown	Additional information about the use of the resource type
+
+interaction		1..*	BackboneElement	What operations are supported?
+
+versioning		0..1	code	no-version | versioned | versioned-update
+ResourceVersionPolicy (Required)
+
+readHistory		0..1	boolean	Whether vRead can return past versions
+
+updateCreate		0..1	boolean	If update can commit to a new identity
+
+conditionalCreate		0..1	boolean	If allows/uses conditional create
+
+conditionalRead		0..1	code	not-supported | modified-since | not-match | full-support
+ConditionalReadStatus (Required)
+
+conditionalUpdate		0..1	boolean	If allows/uses conditional update
+
+conditionalDelete		0..1	code	not-supported | single | multiple - how conditional delete is supported
+ConditionalDeleteStatus (Required)
+
+referencePolicy		0..*	code	literal | logical | resolves | enforced | local
+ReferenceHandlingPolicy (Required)
+
+searchInclude		0..*	string	_include values supported by the server
+
+searchRevInclude		0..*	string	_revinclude values supported by the server
+
+searchParam		0..*	BackboneElement	Search parameters supported by implementation
+
+
+eof

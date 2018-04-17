@@ -1,0 +1,43 @@
+Main
+ImagingManifest
+identifier	Σ	0..1	Identifier	SOP Instance UID
+
+patient	Σ	1..1	Reference(Patient)	Patient of the selected objects
+
+authoringTime	Σ	0..1	dateTime	Time when the selection of instances was made
+
+author	Σ	0..1	Reference(Practitioner | Device | Organization | Patient | RelatedPerson)	Author (human or machine)
+
+description	Σ	0..1	string	Description text
+
+study	Σ	1..*	BackboneElement	Study identity of the selected instances
+
+
+Backbone
+study
+uid	Σ	1..1	oid	Study instance UID
+
+imagingStudy	Σ	0..1	Reference(ImagingStudy)	Reference to ImagingStudy
+
+endpoint	Σ	0..*	Reference(Endpoint)	Study access service endpoint
+
+series	Σ	1..*	BackboneElement	Series identity of the selected instances
+
+
+Backbone
+series
+uid	Σ	1..1	oid	Series instance UID
+
+endpoint	Σ	0..*	Reference(Endpoint)	Series access endpoint
+
+instance	Σ	1..*	BackboneElement	The selected instance
+
+
+Backbone
+instance
+sopClass	Σ	1..1	oid	SOP class UID of instance
+
+uid	Σ	1..1	oid	Selected instance UID
+
+
+eof

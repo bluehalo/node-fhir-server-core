@@ -1,0 +1,86 @@
+Main
+Specimen
+identifier	Σ	0..*	Identifier	External Identifier
+
+accessionIdentifier	Σ	0..1	Identifier	Identifier assigned by the lab
+
+status	?!Σ	0..1	code	available | unavailable | unsatisfactory | entered-in-error
+SpecimenStatus (Required)
+
+type	Σ	0..1	CodeableConcept	Kind of material that forms the specimen
+v2 Specimen Type (Example)
+
+subject	Σ	1..1	Reference(Patient | Group | Device | Substance)	Where the specimen came from. This may be from the patient(s) or from the environment or a device
+
+receivedTime	Σ	0..1	dateTime	The time when specimen was received for processing
+
+parent		0..*	Reference(Specimen)	Specimen from which this specimen originated
+
+request		0..*	Reference(ProcedureRequest)	Why the specimen was collected
+
+collection		0..1	BackboneElement	Collection details
+
+processing		0..*	BackboneElement	Processing and processing step details
+
+container		0..*	BackboneElement	Direct container of specimen (tube/slide, etc.)
+
+note		0..*	Annotation	Comments
+
+
+Backbone
+collection
+collector	Σ	0..1	Reference(Practitioner)	Who collected the specimen
+
+collected[x]	Σ	0..1		Collection time
+
+collectedDateTime			dateTime
+
+collectedPeriod			Period
+
+quantity		0..1	SimpleQuantity	The quantity of specimen collected
+
+method		0..1	CodeableConcept	Technique used to perform collection
+FHIR Specimen Collection Method (Example)
+
+bodySite		0..1	CodeableConcept	Anatomical collection site
+SNOMED CT Body Structures (Example)
+
+
+Backbone
+processing
+description		0..1	string	Textual description of procedure
+
+procedure		0..1	CodeableConcept	Indicates the treatment step applied to the specimen
+SpecimenProcessingProcedure (Example)
+
+additive		0..*	Reference(Substance)	Material used in the processing step
+
+time[x]		0..1		Date and time of specimen processing
+
+timeDateTime			dateTime
+
+timePeriod			Period
+
+
+Backbone
+container
+identifier	Σ	0..*	Identifier	Id for the container
+
+description		0..1	string	Textual description of the container
+
+type		0..1	CodeableConcept	Kind of container directly associated with specimen
+SpecimenContainer (Example)
+
+capacity		0..1	SimpleQuantity	Container volume or size
+
+specimenQuantity		0..1	SimpleQuantity	Quantity of specimen within container
+
+additive[x]		0..1		Additive associated with container
+v2 Additive/Preservative (Example)
+
+additiveCodeableConcept			CodeableConcept
+
+additiveReference			Reference(Substance)
+
+
+eof

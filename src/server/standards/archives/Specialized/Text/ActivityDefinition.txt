@@ -1,0 +1,111 @@
+Main
+ActivityDefinition
+url	Σ	0..1	uri	Logical URI to reference this activity definition (globally unique)
+
+identifier	Σ	0..*	Identifier	Additional identifier for the activity definition
+
+version	Σ	0..1	string	Business version of the activity definition
+
+name	Σ	0..1	string	Name for this activity definition (computer friendly)
+
+title	Σ	0..1	string	Name for this activity definition (human friendly)
+
+status	?!Σ	1..1	code	draft | active | retired | unknown
+PublicationStatus (Required)
+
+experimental	?!Σ	0..1	boolean	For testing purposes, not real usage
+
+date	Σ	0..1	dateTime	Date this was last changed
+
+publisher	Σ	0..1	string	Name of the publisher (organization or individual)
+
+description	Σ	0..1	markdown	Natural language description of the activity definition
+
+purpose		0..1	markdown	Why this activity definition is defined
+
+usage		0..1	string	Describes the clinical usage of the asset
+
+approvalDate		0..1	date	When the activity definition was approved by publisher
+
+lastReviewDate		0..1	date	When the activity definition was last reviewed
+
+effectivePeriod	Σ	0..1	Period	When the activity definition is expected to be used
+
+useContext	Σ	0..*	UsageContext	Context the content is intended to support
+
+jurisdiction	Σ	0..*	CodeableConcept	Intended jurisdiction for activity definition (if applicable)
+Jurisdiction ValueSet (Extensible)
+
+topic		0..*	CodeableConcept	E.g. Education, Treatment, Assessment, etc
+DefinitionTopic (Example)
+
+contributor		0..*	Contributor	A content contributor
+
+contact	Σ	0..*	ContactDetail	Contact details for the publisher
+
+copyright		0..1	markdown	Use and/or publishing restrictions
+
+relatedArtifact		0..*	RelatedArtifact	Additional documentation, citations, etc
+
+library		0..*	Reference(Library)	Logic used by the asset
+
+kind		0..1	code	Kind of resource
+ResourceType (Required)
+
+code		0..1	CodeableConcept	Detail type of activity
+Procedure Codes (SNOMED CT) (Example)
+
+timing[x]		0..1		When activity is to occur
+
+timingTiming			Timing
+
+timingDateTime			dateTime
+
+timingPeriod			Period
+
+timingRange			Range
+
+location		0..1	Reference(Location)	Where it should happen
+
+product[x]		0..1		What's administered/supplied
+SNOMED CT Medication Codes (Example)
+
+productReference			Reference(Medication | Substance)
+
+productCodeableConcept			CodeableConcept
+
+quantity		0..1	SimpleQuantity	How much is administered/consumed/supplied
+
+dosage		0..*	Dosage	Detailed dosage instructions
+
+bodySite		0..*	CodeableConcept	What part of body to perform on
+SNOMED CT Body Structures (Example)
+
+transform		0..1	Reference(StructureMap)	Transform to apply the template
+
+participant		0..*	BackboneElement	Who should participate in the action
+
+dynamicValue		0..*	BackboneElement	Dynamic aspects of the definition
+
+
+Backbone
+participant
+type		1..1	code	patient | practitioner | related-person
+ActionParticipantType (Required)
+
+role		0..1	CodeableConcept	E.g. Nurse, Surgeon, Parent, etc
+ActionParticipantRole (Example)
+
+
+Backbone
+dynamicValue
+description		0..1	string	Natural language description of the dynamic value
+
+path		0..1	string	The path to the element to be set dynamically
+
+language		0..1	string	Language of the expression
+
+expression		0..1	string	An expression that provides the dynamic value for the customization
+
+
+eof

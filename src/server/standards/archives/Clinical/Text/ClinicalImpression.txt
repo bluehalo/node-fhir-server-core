@@ -1,0 +1,68 @@
+Main
+ClinicalImpression
+identifier	Σ	0..*	Identifier	Business identifier
+
+status	?!Σ	1..1	code	draft | completed | entered-in-error
+ClinicalImpressionStatus (Required)
+
+code	Σ	0..1	CodeableConcept	Kind of assessment performed
+
+description	Σ	0..1	string	Why/how the assessment was performed
+
+subject	Σ	1..1	Reference(Patient | Group)	Patient or group assessed
+
+context	Σ	0..1	Reference(Encounter | EpisodeOfCare)	Encounter or Episode created from
+
+effective[x]	Σ	0..1		Time of assessment
+
+effectiveDateTime			dateTime
+
+effectivePeriod			Period
+
+date	Σ	0..1	dateTime	When the assessment was documented
+
+assessor	Σ	0..1	Reference(Practitioner)	The clinician performing the assessment
+
+previous		0..1	Reference(ClinicalImpression)	Reference to last assessment
+
+problem	Σ	0..*	Reference(Condition | AllergyIntolerance)	Relevant impressions of patient state
+
+protocol		0..*	uri	Clinical Protocol followed
+
+summary		0..1	string	Summary of the assessment
+
+prognosisCodeableConcept		0..*	CodeableConcept	Estimate of likely outcome
+Clinical Impression Prognosis (Example)
+
+prognosisReference		0..*	Reference(RiskAssessment)	RiskAssessment expressing likely outcome
+
+action		0..*	Reference(ReferralRequest | ProcedureRequest | Procedure | MedicationRequest | Appointment)	Action taken as part of assessment procedure
+
+note		0..*	Annotation	Comments made about the ClinicalImpression
+
+investigation		0..*	BackboneElement	One or more sets of investigations (signs, symptions, etc.)
+
+finding		0..*	BackboneElement	Possible or likely findings and diagnoses
+
+
+Backbone
+investigation
+code		1..1	CodeableConcept	A name/code for the set
+Investigation Type (Example)
+
+item		0..*	Reference(Observation | QuestionnaireResponse | FamilyMemberHistory | DiagnosticReport | RiskAssessment | ImagingStudy)	Record of a specific investigation
+
+
+Backbone
+finding
+item[x]		1..1		What was found
+Condition/Problem/Diagnosis Codes (Example)
+
+itemCodeableConcept			CodeableConcept
+
+itemReference			Reference(Condition | Observation)
+
+basis		0..1	string	Which investigations support finding
+
+
+eof

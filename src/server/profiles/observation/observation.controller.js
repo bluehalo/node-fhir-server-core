@@ -1,4 +1,4 @@
-const Observation = require('../../resources/Observation');
+const Observation = require('../../standards/generic/resources/Observation');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservation = ({ profile, logger, config }) => {

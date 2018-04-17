@@ -1,0 +1,40 @@
+Main
+DeviceMetric
+identifier	Σ	1..1	Identifier	Unique identifier of this DeviceMetric
+
+type	Σ	1..1	CodeableConcept	Identity of metric, for example Heart Rate or PEEP Setting
+Device Metric and Component Types (Preferred)
+
+unit	Σ	0..1	CodeableConcept	Unit of Measure for the Metric
+Device Metric and Component Types (Preferred)
+
+source	Σ	0..1	Reference(Device)	Describes the link to the source Device
+
+parent	Σ	0..1	Reference(DeviceComponent)	Describes the link to the parent DeviceComponent
+
+operationalStatus	Σ	0..1	code	on | off | standby | entered-in-error
+DeviceMetricOperationalStatus (Required)
+
+color	Σ	0..1	code	black | red | green | yellow | blue | magenta | cyan | white
+DeviceMetricColor (Required)
+
+category	Σ	1..1	code	measurement | setting | calculation | unspecified
+DeviceMetricCategory (Required)
+
+measurementPeriod	Σ	0..1	Timing	Describes the measurement repetition time
+
+calibration	Σ	0..*	BackboneElement	Describes the calibrations that have been performed or that are required to be performed
+
+
+Backbone
+calibration
+type	Σ	0..1	code	unspecified | offset | gain | two-point
+DeviceMetricCalibrationType (Required)
+
+state	Σ	0..1	code	not-calibrated | calibration-required | calibrated | unspecified
+DeviceMetricCalibrationState (Required)
+
+time	Σ	0..1	instant	Describes the time last calibration has been performed
+
+
+eof

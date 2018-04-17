@@ -1,4 +1,4 @@
-const Patient = require('../../resources/uscore/resources/Patient');
+const Patient = require('../../standards/uscore/resources/Patient');
 const errors = require('../../utils/error.utils');
 
 module.exports.getPatient = ({ profile, logger, config }) => {
@@ -57,7 +57,6 @@ module.exports.getPatientById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		
 		// Create a context I can pass some data through
 		let context = {
 			version: req.params.version
@@ -77,8 +76,6 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		return service.getPatientById(req, logger, context)
 			.then((patient) => {
 				if (patient) {
-					//res.status(200).json(patient);
-
 						res.status(200).json(new Patient(patient));
 				} else {
 					next(errors.notFound('Patient not found'));

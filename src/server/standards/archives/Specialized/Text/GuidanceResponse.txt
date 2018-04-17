@@ -1,0 +1,37 @@
+Main
+GuidanceResponse
+requestId	Σ	0..1	id	The id of the request associated with this response, if any
+
+identifier	Σ	0..1	Identifier	Business identifier
+
+module	Σ	1..1	Reference(ServiceDefinition)	A reference to a knowledge module
+
+status	?!Σ	1..1	code	success | data-requested | data-required | in-progress | failure | entered-in-error
+GuidanceResponseStatus (Required)
+
+subject		0..1	Reference(Patient | Group)	Patient the request was performed for
+
+context		0..1	Reference(Encounter | EpisodeOfCare)	Encounter or Episode during which the response was returned
+
+occurrenceDateTime		0..1	dateTime	When the guidance response was processed
+
+performer		0..1	Reference(Device)	Device returning the guidance
+
+reason[x]		0..1		Reason for the response
+
+reasonCodeableConcept			CodeableConcept
+
+reasonReference			Reference(Any)
+
+note		0..*	Annotation	Additional notes about the response
+
+evaluationMessage		0..*	Reference(OperationOutcome)	Messages resulting from the evaluation of the artifact or artifacts
+
+outputParameters		0..1	Reference(Parameters)	The output parameters of the evaluation, if any
+
+result		0..1	Reference(CarePlan | RequestGroup)	Proposed actions, if any
+
+dataRequirement		0..*	DataRequirement	Additional required data
+
+
+eof
