@@ -1,5 +1,7 @@
-const controller = require('./patient.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const patient_args = require('./patient.arguments');
+const controller = require('./patient.controller');
 
 const scopes = [
 	'user/*.*',
@@ -19,138 +21,41 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'active',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-city',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-country',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-postalcode',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-state',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-use',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'animal-breed',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'animal-species',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'birthdate',
-				type: 'date'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'death-date',
-				type: 'date'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'deceased',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'email',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'family',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'gender',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'general-practitioner',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'given',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'identifier',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'language',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'link',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'name',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'organization',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'phone',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'phonetic',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'telecom',
-				type: 'token',
-			}],
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_BREED),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_SPECIES),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.BIRTHDATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.DEATH_DATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.DECEASED),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.EMAIL),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.FAMILY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GENDER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GENERAL_PRACTITIONER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.LANGUAGE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.LINK),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ORGANIZATION),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
+		],
 		scopes: scopes,
 		controller: controller.getPatient
 	},
@@ -160,131 +65,41 @@ let routes = [
 		corsOptions: {
 			methods: ['POST']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'active',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'animal-breed',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'animal-species',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'birthdate',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'death-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'deceased',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'email',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'family',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'gender',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'general-practitioner',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'given',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'language',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'link',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'organization',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'phone',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'phonetic',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'telecom',
-			type: 'token',
-		}],
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_BREED),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_SPECIES),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.BIRTHDATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.DEATH_DATE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.DECEASED),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.EMAIL),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.FAMILY),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GENDER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GENERAL_PRACTITIONER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.LANGUAGE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.LINK),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.ORGANIZATION),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
+			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
+		],
 		scopes: scopes,
 		controller: controller.getPatient
 	},
@@ -294,14 +109,10 @@ let routes = [
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getPatientById
 	}
@@ -315,5 +126,5 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.PATIENT
 	},
-	routes,
+	routes
 };
