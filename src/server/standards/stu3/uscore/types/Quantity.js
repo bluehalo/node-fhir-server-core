@@ -1,5 +1,5 @@
-const Element = require('../../generic/types/Element');
-const Code = require('../../generic/types/Code');
+const Element = require('../../base/types/Element');
+const Code = require('../../base/types/Code');
 
 class Quantity extends Element {
 	constructor(obj) {

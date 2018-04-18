@@ -1,4 +1,4 @@
-const CareTeam = require('../../standards/uscore/resources/CareTeam');
+const CareTeam = require('../../standards/stu3/uscore/resources/CareTeam');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCareTeam = ({ profile, logger, config }) => {

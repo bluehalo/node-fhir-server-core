@@ -1,18 +1,18 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
 const Identifier = require('../types/Identifier');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Reference = require('../../generic/types/Reference');
-const Period = require('../../generic/types/Period');
-const Range = require('../../generic/types/Range');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Reference = require('../../base/types/Reference');
+const Period = require('../../base/types/Period');
+const Range = require('../../base/types/Range');
 const Quantity = require('../types/Quantity');
-const Ratio = require('../../generic/types/Ratio');
-const SampledData = require('../../generic/types/SampledData');
-const Attachment = require('../../generic/types/Attachment');
+const Ratio = require('../../base/types/Ratio');
+const SampledData = require('../../base/types/SampledData');
+const Attachment = require('../../base/types/Attachment');
 
 class Component {
 	constructor(obj) {

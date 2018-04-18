@@ -1,8 +1,8 @@
-const Element = require('../../generic/types/Element');
-const Code = require('../../generic/types/Code');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Period = require('../../generic/types/Period');
-const Reference = require('../../generic/types/Reference');
+const Element = require('../../base/types/Element');
+const Code = require('../../base/types/Code');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Period = require('../../base/types/Period');
+const Reference = require('../../base/types/Reference');
 
 class Identifier extends Element {
 	constructor(obj) {

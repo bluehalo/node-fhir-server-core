@@ -1,4 +1,4 @@
-const Organization = require('../../standards/uscore/resources/Organization');
+const Organization = require('../../standards/stu3/uscore/resources/Organization');
 const errors = require('../../utils/error.utils');
 
 module.exports.getOrganization = ({ profile, logger, config }) => {

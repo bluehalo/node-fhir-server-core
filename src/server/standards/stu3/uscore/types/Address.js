@@ -1,6 +1,6 @@
-const Element = require('../../generic/types/Element');
-const Code = require('../../generic/types/Code');
-const Period = require('../../generic/types/Period');
+const Element = require('../../base/types/Element');
+const Code = require('../../base/types/Code');
+const Period = require('../../base/types/Period');
 
 class Address extends Element {
 	constructor(obj) {

@@ -1,4 +1,4 @@
-const Issue = require('./types/Issue');
+const Issue = require('./stu3/base/types/Issue');
 const { DSTU2 } = require('../../constants');
 
 /* eslint-disable no-useless-escape */

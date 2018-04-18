@@ -1,12 +1,12 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Reference = require('../../generic/types/Reference');
-const Ratio = require('../../generic/types/Ratio');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Reference = require('../../base/types/Reference');
+const Ratio = require('../../base/types/Ratio');
 
 class Content {
 	constructor(obj) {

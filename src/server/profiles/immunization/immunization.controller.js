@@ -1,4 +1,4 @@
-const Immunization = require('../../standards/uscore/resources/Immunization');
+const Immunization = require('../../standards/stu3/uscore/resources/Immunization');
 const errors = require('../../utils/error.utils');
 
 module.exports.getImmunization = ({ profile, logger, config }) => {

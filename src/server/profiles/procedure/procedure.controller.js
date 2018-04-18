@@ -1,4 +1,4 @@
-const Procedure = require('../../standards/uscore/resources/Procedure');
+const Procedure = require('../../standards/stu3/uscore/resources/Procedure');
 const errors = require('../../utils/error.utils');
 
 module.exports.getProcedure = ({ profile, logger, config }) => {

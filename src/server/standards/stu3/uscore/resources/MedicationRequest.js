@@ -1,14 +1,14 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
 const Identifier = require('../types/Identifier');
-const Reference = require('../../generic/types/Reference');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Annotation = require('../../generic/types/Annotation');
-const Period = require('../../generic/types/Period');
+const Reference = require('../../base/types/Reference');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Annotation = require('../../base/types/Annotation');
+const Period = require('../../base/types/Period');
 
 class Substitution {
 	constructor(obj) {

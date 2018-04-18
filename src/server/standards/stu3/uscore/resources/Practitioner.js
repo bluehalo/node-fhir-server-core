@@ -1,17 +1,17 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
 const Identifier = require('../types/Identifier');
 const HumanName = require('../types/HumanName');
-const ContactPoint = require('../../generic/types/ContactPoint');
+const ContactPoint = require('../../base/types/ContactPoint');
 const Address = require('../types/Address');
-const Attachment = require('../../generic/types/Attachment');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Period = require('../../generic/types/Period');
-const Reference = require('../../generic/types/Reference');
+const Attachment = require('../../base/types/Attachment');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Period = require('../../base/types/Period');
+const Reference = require('../../base/types/Reference');
 
 class Qualification {
 	constructor(obj) {

@@ -1,4 +1,4 @@
-const Medication = require('../../standards/uscore/resources/Medication');
+const Medication = require('../../standards/stu3/uscore/resources/Medication');
 const errors = require('../../utils/error.utils');
 
 module.exports.getMedication = ({ profile, logger, config }) => {

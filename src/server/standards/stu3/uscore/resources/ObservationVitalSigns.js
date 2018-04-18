@@ -1,19 +1,15 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
 const Identifier = require('../types/Identifier');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const Coding = require('../../generic/types/Coding');
-const Reference = require('../../generic/types/Reference');
-const Period = require('../../generic/types/Period');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const Reference = require('../../base/types/Reference');
+const Period = require('../../base/types/Period');
 const Quantity = require('../types/Quantity');
-const Range = require('../../generic/types/Range');
-const Ratio = require('../../generic/types/Ratio');
-const SampledData = require('../../generic/types/SampledData');
-const Attachment = require('../../generic/types/Attachment');
+const Range = require('../../base/types/Range');
 
 class Component {
 	constructor(obj) {
@@ -55,8 +51,8 @@ class Component {
 		return this._modifierExtension;
 	}
 
-	// code	*	1..1	CodeableConcept	Type of component observation (code / type)
-	// Binding: LOINC Codes (example)
+	// code	S	1..1	CodeableConcept	Type of component observation (code / type)
+	// Binding: US Core Vital Sign Codes (extensible)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
@@ -65,8 +61,8 @@ class Component {
 		return this._code;
 	}
 
-	// value[x]	Σ	0..1		Actual component result
-	// valueQuantity			Quantity
+	// valueQuantity	S	0..1	Quantity	Vital Sign Value recorded with UCUM
+	// Binding: Vital Signs Units (extensible)
 	set valueQuantity(valueQuantity) {
 		this._valueQuantity = new Quantity(valueQuantity);
 	}
@@ -75,88 +71,7 @@ class Component {
 		return this._valueQuantity;
 	}
 
-	// valueCodeableConcept			CodeableConcept
-	set valueCodeableConcept(valueCodeableConcept) {
-		this._valueCodeableConcept = new CodeableConcept(valueCodeableConcept);
-	}
-
-	get valueCodeableConcept() {
-		return this._valueCodeableConcept;
-	}
-
-	// valueString			string
-	set valueString(valueString) {
-		this._valueString = valueString;
-	}
-
-	get valueString() {
-		return this._valueString;
-	}
-
-	// valueRange			Range
-	set valueRange(valueRange) {
-		this._valueRange = new Range(valueRange);
-	}
-
-	get valueRange() {
-		return this._valueRange;
-	}
-
-	// valueRatio			Ratio
-	set valueRatio(valueRatio) {
-		this._valueRatio = new Ratio(valueRatio);
-	}
-
-	get valueRatio() {
-		return this._valueRatio;
-	}
-
-	// valueSampledData			SampledData
-	set valueSampledData(valueSampledData) {
-		this._valueSampledData = new SampledData(valueSampledData);
-	}
-
-	get valueSampledData() {
-		return this._valueSampledData;
-	}
-
-	// valueAttachment			Attachment
-	set valueAttachment(valueAttachment) {
-		this._valueAttachment = new Attachment(valueAttachment);
-	}
-
-	get valueAttachment() {
-		return this._valueAttachment;
-	}
-
-	// valueTime			time
-	set valueTime(valueTime) {
-		this._valueTime = valueTime;
-	}
-
-	get valueTime() {
-		return this._valueTime;
-	}
-
-	// valueDateTime			dateTime
-	set valueDateTime(valueDateTime) {
-		this._valueDateTime = valueDateTime;
-	}
-
-	get valueDateTime() {
-		return this._valueDateTime;
-	}
-
-	// valuePeriod			Period
-	set valuePeriod(valuePeriod) {
-		this._valuePeriod = new Period(valuePeriod);
-	}
-
-	get valuePeriod() {
-		return this._valuePeriod;
-	}
-
-	// dataAbsentReason	I	0..1	CodeableConcept	Why the component result is missing
+	// dataAbsentReason	SI	0..1	CodeableConcept	Why the component result is missing
 	// Binding: Observation Value Absent Reason (extensible)
 	set dataAbsentReason(dataAbsentReason) {
 		this._dataAbsentReason = new CodeableConcept(dataAbsentReason);
@@ -176,7 +91,7 @@ class Component {
 		return this._interpretation;
 	}
 
-	// referenceRange		0..*		Unknown reference to #Observation:uscoreobss.referenceRange
+	// referenceRange		0..*		Unknown reference to #Observation:uscorevitalsigns.referenceRange
 	// Provides guide for interpretation of component result
 	set referenceRange(referenceRange) {
 		this._referenceRange = [].concat(referenceRange);
@@ -193,15 +108,6 @@ class Component {
 			modifierExtension: this._modifierExtension,
 			code: this._code,
 			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueString: this._valueString,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
 			dataAbsentReason: this._dataAbsentReason,
 			interpretation: this._interpretation,
 			referenceRange: this._referenceRange,
@@ -249,8 +155,9 @@ class Related {
 		return this._modifierExtension;
 	}
 
-	// type		0..1	code	has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by
+	// type	S	1..1	code	has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by
 	// Binding: ObservationRelationshipType (required)
+	// Fixed Value: has-member
 	set type(type) {
 		this._type = new Code(type);
 	}
@@ -259,7 +166,7 @@ class Related {
 		return this._type;
 	}
 
-	// target		1..1	Reference(Observation), Reference(QuestionnaireResponse), Reference(Sequence)	Resource that is related to this one
+	// target	S	1..1	Reference(US Core Vital Signs Profile)	Resource that is related to this one
 	set target(target) {
 		this._target = new Reference(target);
 	}
@@ -383,10 +290,10 @@ class ReferenceRange {
 	}
 }
 
-class ObservationResults extends DomainResource {
+class ObservationVitalSigns extends DomainResource {
 	constructor(obj) {
 		super();
-		this._resourceType = 'ObservationResults';
+		this._resourceType = 'ObservationVitalSigns';
 		Object.assign(this, obj);
 	}
 
@@ -508,7 +415,7 @@ class ObservationResults extends DomainResource {
 
 	// category	S	1..1	CodeableConcept	Classification of type of observation
 	// Binding: Observation Category Codes (example)
-	// Required Pattern: {"coding":[{"system":"http://hl7.org/fhir/observation-category","code":"laboratory"}]}
+	// Required Pattern: {"coding":[{"system":"http://hl7.org/fhir/observation-category","code":"vital-signs"}]}
 	set category(category) {
 		this._category = new CodeableConcept(category);
 	}
@@ -517,125 +424,14 @@ class ObservationResults extends DomainResource {
 		return this._category;
 	}
 
-	// code	S	1..1	CodeableConcept	US Realm Laboratory Test Name
-	// Binding: LOINC Codes (extensible)
+	// code	S	1..1	CodeableConcept	Coded Responses from C-CDA Vital Sign Results
+	// Binding: US Core Vital Sign Codes (extensible)
 	set code(code) {
 		this._code = new CodeableConcept(code);
 	}
 
 	get code() {
 		return this._code;
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// coding	S	1..*	Coding	Standard and local codes may be included here by repeating the coding element with a different coding.system.
-	set coding(coding) {
-		if (Array.isArray(coding)) {
-			this._coding = coding.map((i) => new Coding(i));
-		} else {
-			this._coding = [new Coding(coding)];
-		}
-	}
-
-	get coding() {
-		return this._coding;
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
-	// system	S	1..1	uri	Identity of the terminology system
-	set system(system) {
-		this._system = system;
-	}
-
-	get system() {
-		return this._system;
-	}
-
-	// version	*	0..1	string	Version of the system - if relevant
-	set version(version) {
-		this._version = version;
-	}
-
-	get version() {
-		return this._version;
-	}
-
-	// code	S	1..1	code	Symbol in syntax defined by the system
-	set code(code) {
-		this._code = new Code(code);
-	}
-
-	get code() {
-		return this._code;
-	}
-
-	// display	S	0..1	string	Representation defined by the system
-	set display(display) {
-		this._display = display;
-	}
-
-	get display() {
-		return this._display;
-	}
-
-	// userSelected	*	0..1	boolean	If this coding was chosen directly by the user
-	set userSelected(userSelected) {
-		this._userSelected = userSelected;
-	}
-
-	get userSelected() {
-		return this._userSelected;
-	}
-
-	// text	S	0..1	string	Display text
-	set text(text) {
-		this._text = text;
-	}
-
-	get text() {
-		return this._text;
 	}
 
 	// subject	S	1..1	Reference(US Core Patient Profile)	Who and/or what this is about
@@ -697,198 +493,14 @@ class ObservationResults extends DomainResource {
 		return this._performer;
 	}
 
-	// value[x]	ΣI	0..1		Actual result
-	// Slice: Unordered, Open, by @type
-	// valueQuantity			Quantity
+	// valueQuantity	SI	0..1	Quantity	Vital Sign Value recorded with UCUM
+	// Binding: Vital Signs Units (extensible)
 	set valueQuantity(valueQuantity) {
 		this._valueQuantity = new Quantity(valueQuantity);
 	}
 
 	get valueQuantity() {
 		return this._valueQuantity;
-	}
-
-	// valueCodeableConcept			CodeableConcept
-	set valueCodeableConcept(valueCodeableConcept) {
-		this._valueCodeableConcept = new CodeableConcept(valueCodeableConcept);
-	}
-
-	get valueCodeableConcept() {
-		return this._valueCodeableConcept;
-	}
-
-	// valueString			string
-	set valueString(valueString) {
-		this._valueString = valueString;
-	}
-
-	get valueString() {
-		return this._valueString;
-	}
-
-	// valueBoolean			boolean
-	set valueBoolean(valueBoolean) {
-		this._valueBoolean = valueBoolean;
-	}
-
-	get valueBoolean() {
-		return this._valueBoolean;
-	}
-
-	// valueRange			Range
-	set valueRange(valueRange) {
-		this._valueRange = new Range(valueRange);
-	}
-
-	get valueRange() {
-		return this._valueRange;
-	}
-
-	// valueRatio			Ratio
-	set valueRatio(valueRatio) {
-		this._valueRatio = new Ratio(valueRatio);
-	}
-
-	get valueRatio() {
-		return this._valueRatio;
-	}
-
-	// valueSampledData			SampledData
-	set valueSampledData(valueSampledData) {
-		this._valueSampledData = new SampledData(valueSampledData);
-	}
-
-	get valueSampledData() {
-		return this._valueSampledData;
-	}
-
-	// valueAttachment			Attachment
-	set valueAttachment(valueAttachment) {
-		this._valueAttachment = new Attachment(valueAttachment);
-	}
-
-	get valueAttachment() {
-		return this._valueAttachment;
-	}
-
-	// valueTime			time
-	set valueTime(valueTime) {
-		this._valueTime = valueTime;
-	}
-
-	get valueTime() {
-		return this._valueTime;
-	}
-
-	// valueDateTime			dateTime
-	set valueDateTime(valueDateTime) {
-		this._valueDateTime = valueDateTime;
-	}
-
-	get valueDateTime() {
-		return this._valueDateTime;
-	}
-
-	// valuePeriod			Period
-	set valuePeriod(valuePeriod) {
-		this._valuePeriod = new Period(valuePeriod);
-	}
-
-	get valuePeriod() {
-		return this._valuePeriod;
-	}
-
-	// value[x]	SI	0..1	string, Range, Ratio, SampledData, Attachment, time, dateTime, Period	Actual result
-	// valueString			string
-	set valueString(valueString) {
-		this._valueString = valueString;
-	}
-
-	get valueString() {
-		return this._valueString;
-	}
-
-	// valueRange			Range
-	set valueRange(valueRange) {
-		this._valueRange = new Range(valueRange);
-	}
-
-	get valueRange() {
-		return this._valueRange;
-	}
-
-	// valueRatio			Ratio
-	set valueRatio(valueRatio) {
-		this._valueRatio = new Ratio(valueRatio);
-	}
-
-	get valueRatio() {
-		return this._valueRatio;
-	}
-
-	// valueSampledData			SampledData
-	set valueSampledData(valueSampledData) {
-		this._valueSampledData = new SampledData(valueSampledData);
-	}
-
-	get valueSampledData() {
-		return this._valueSampledData;
-	}
-
-	// valueAttachment			Attachment
-	set valueAttachment(valueAttachment) {
-		this._valueAttachment = new Attachment(valueAttachment);
-	}
-
-	get valueAttachment() {
-		return this._valueAttachment;
-	}
-
-	// valueTime			time
-	set valueTime(valueTime) {
-		this._valueTime = valueTime;
-	}
-
-	get valueTime() {
-		return this._valueTime;
-	}
-
-	// valueDateTime			dateTime
-	set valueDateTime(valueDateTime) {
-		this._valueDateTime = valueDateTime;
-	}
-
-	get valueDateTime() {
-		return this._valueDateTime;
-	}
-
-	// valuePeriod			Period
-	set valuePeriod(valuePeriod) {
-		this._valuePeriod = new Period(valuePeriod);
-	}
-
-	get valuePeriod() {
-		return this._valuePeriod;
-	}
-
-	// valueQuantity	SI	0..1	Quantity	Actual result
-	// Binding: UCUM units (required)
-	set valueQuantity(valueQuantity) {
-		this._valueQuantity = new Quantity(valueQuantity);
-	}
-
-	get valueQuantity() {
-		return this._valueQuantity;
-	}
-
-	// valueCodeableConcept	SI	0..1	CodeableConcept	Actual result
-	// Binding: Observation Value Codes (SNOMED-CT) (preferred)
-	set valueCodeableConcept(valueCodeableConcept) {
-		this._valueCodeableConcept = new CodeableConcept(valueCodeableConcept);
-	}
-
-	get valueCodeableConcept() {
-		return this._valueCodeableConcept;
 	}
 
 	// dataAbsentReason	SI	0..1	CodeableConcept	Why the result is missing
@@ -972,26 +584,19 @@ class ObservationResults extends DomainResource {
 		return this._referenceRange;
 	}
 
-	// related	*I	0..*	BackboneElement	Resource related to this observation
+	// related	SI	0..1	BackboneElement	Used when reporting systolic and diastolic blood pressure.
 	set related(related) {
-		if (Array.isArray(related)) {
-			this._related = related.map((i) => new Related(i));
-		} else {
-			this._related = [new Related(related)];
-		}
+		this._related = new Related(related);
 	}
 
 	get related() {
 		return this._related;
 	}
 
-	// component	*I	0..*	BackboneElement	Component results
+	// component	SI	0..1	BackboneElement	Used when reporting systolic and diastolic blood pressure.
+	// us-core-3: If there is no a value a data absent reason must be present
 	set component(component) {
-		if (Array.isArray(component)) {
-			this._component = component.map((i) => new Component(i));
-		} else {
-			this._component = [new Component(component)];
-		}
+		this._component = new Component(component);
 	}
 
 	get component() {
@@ -1012,17 +617,6 @@ class ObservationResults extends DomainResource {
 			status: this._status,
 			category: this._category,
 			code: this._code,
-			id: this._id,
-			extension: this._extension,
-			coding: this._coding,
-			id: this._id,
-			extension: this._extension,
-			system: this._system,
-			version: this._version,
-			code: this._code,
-			display: this._display,
-			userSelected: this._userSelected,
-			text: this._text,
 			subject: this._subject,
 			encounter: this._encounter,
 			effectiveDateTime: this._effectiveDateTime,
@@ -1030,26 +624,6 @@ class ObservationResults extends DomainResource {
 			issued: this._issued,
 			performer: this._performer,
 			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueString: this._valueString,
-			valueBoolean: this._valueBoolean,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			valueString: this._valueString,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
 			dataAbsentReason: this._dataAbsentReason,
 			interpretation: this._interpretation,
 			comment: this._comment,
@@ -1066,7 +640,7 @@ class ObservationResults extends DomainResource {
 	}
 }
 
-module.exports.ObservationResults = ObservationResults;
+module.exports.ObservationVitalSigns = ObservationVitalSigns;
 module.exports.ReferenceRange = ReferenceRange;
 module.exports.Related = Related;
 module.exports.Component = Component;

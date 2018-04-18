@@ -1,17 +1,17 @@
-const DomainResource = require('../../generic/types/DomainResource');
-const Meta = require('../../generic/types/Meta');
-const Code = require('../../generic/types/Code');
+const DomainResource = require('../../base/types/DomainResource');
+const Meta = require('../../base/types/Meta');
+const Code = require('../../base/types/Code');
 const Narrative = require('../types/Narrative');
-const Resource = require('../../generic/types/Resource');
-const Extension = require('../../generic/types/Extension');
+const Resource = require('../../base/types/Resource');
+const Extension = require('../../base/types/Extension');
 const Identifier = require('../types/Identifier');
-const Coding = require('../../generic/types/Coding');
-const CodeableConcept = require('../../generic/types/CodeableConcept');
-const ContactPoint = require('../../generic/types/ContactPoint');
+const CodeableConcept = require('../../base/types/CodeableConcept');
+const ContactPoint = require('../../base/types/ContactPoint');
 const Address = require('../types/Address');
-const Reference = require('../../generic/types/Reference');
+const Reference = require('../../base/types/Reference');
+const HumanName = require('../types/HumanName');
 
-class Position {
+class Contact {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
@@ -38,7 +38,7 @@ class Position {
 		return this._extension;
 	}
 
-	// modifierExtension	?!Î£	0..*	Extension	Extensions that cannot be ignored
+	// modifierExtension	?!Σ	0..*	Extension	Extensions that cannot be ignored
 	set modifierExtension(modifierExtension) {
 		if (Array.isArray(modifierExtension)) {
 			this._modifierExtension = modifierExtension.map((i) => new Extension(i));
@@ -51,31 +51,45 @@ class Position {
 		return this._modifierExtension;
 	}
 
-	// longitude		1..1	decimal	Longitude with WGS84 datum
-	set longitude(longitude) {
-		this._longitude = longitude;
+	// purpose		0..1	CodeableConcept	The type of contact
+	// Binding: ContactEntityType (extensible)
+	set purpose(purpose) {
+		this._purpose = new CodeableConcept(purpose);
 	}
 
-	get longitude() {
-		return this._longitude;
+	get purpose() {
+		return this._purpose;
 	}
 
-	// latitude		1..1	decimal	Latitude with WGS84 datum
-	set latitude(latitude) {
-		this._latitude = latitude;
+	// name		0..1	HumanName	A name associated with the contact
+	set name(name) {
+		this._name = new HumanName(name);
 	}
 
-	get latitude() {
-		return this._latitude;
+	get name() {
+		return this._name;
 	}
 
-	// altitude		0..1	decimal	Altitude with WGS84 datum
-	set altitude(altitude) {
-		this._altitude = altitude;
+	// telecom		0..*	ContactPoint	Contact details (telephone, email, etc.) for a contact
+	set telecom(telecom) {
+		if (Array.isArray(telecom)) {
+			this._telecom = telecom.map((i) => new ContactPoint(i));
+		} else {
+			this._telecom = [new ContactPoint(telecom)];
+		}
 	}
 
-	get altitude() {
-		return this._altitude;
+	get telecom() {
+		return this._telecom;
+	}
+
+	// address		0..1	Address	Visiting or postal addresses for the contact
+	set address(address) {
+		this._address = new Address(address);
+	}
+
+	get address() {
+		return this._address;
 	}
 
 	toJSON() {
@@ -83,17 +97,18 @@ class Position {
 			id: this._id,
 			extension: this._extension,
 			modifierExtension: this._modifierExtension,
-			longitude: this._longitude,
-			latitude: this._latitude,
-			altitude: this._altitude,
+			purpose: this._purpose,
+			name: this._name,
+			telecom: this._telecom,
+			address: this._address,
 		};
 	}
 }
 
-class Location extends DomainResource {
+class Organization extends DomainResource {
 	constructor(obj) {
 		super();
-		this._resourceType = 'Location';
+		this._resourceType = 'Organization';
 		Object.assign(this, obj);
 	}
 
@@ -105,7 +120,7 @@ class Location extends DomainResource {
 		return this._resourceType;
 	}
 
-	// id	Î£	0..1	id	Logical id of this artifact
+	// id	Σ	0..1	id	Logical id of this artifact
 	set id(id) {
 		this._id = id;
 	}
@@ -114,7 +129,7 @@ class Location extends DomainResource {
 		return this._id;
 	}
 
-	// meta	Î£	0..1	Meta	Metadata about the resource
+	// meta	Σ	0..1	Meta	Metadata about the resource
 	set meta(meta) {
 		this._meta = new Meta(meta);
 	}
@@ -123,7 +138,7 @@ class Location extends DomainResource {
 		return this._meta;
 	}
 
-	// implicitRules	?!Î£	0..1	uri	A set of rules under which this content was created
+	// implicitRules	?!Σ	0..1	uri	A set of rules under which this content was created
 	set implicitRules(implicitRules) {
 		this._implicitRules = implicitRules;
 	}
@@ -190,7 +205,7 @@ class Location extends DomainResource {
 		return this._modifierExtension;
 	}
 
-	// identifier	Î£	0..*	Identifier	Unique code or number identifying the location to its users
+	// identifier	SΣI	1..*	Identifier	Identifies this organization across multiple systems
 	set identifier(identifier) {
 		if (Array.isArray(identifier)) {
 			this._identifier = identifier.map((i) => new Identifier(i));
@@ -203,27 +218,30 @@ class Location extends DomainResource {
 		return this._identifier;
 	}
 
-	// status	?!Î£	0..1	code	active | suspended | inactive
-	// Binding: LocationStatus (required)
-	set status(status) {
-		this._status = new Code(status);
+	// active	?!SΣ	1..1	boolean	Whether the organization's record is still in active use
+	set active(active) {
+		this._active = active;
 	}
 
-	get status() {
-		return this._status;
+	get active() {
+		return this._active;
 	}
 
-	// operationalStatus	Î£	0..1	Coding	The Operational status of the location (typically only for a bed/room)
-	// Binding: v2 Bed Status (preferred)
-	set operationalStatus(operationalStatus) {
-		this._operationalStatus = new Coding(operationalStatus);
+	// type	Σ	0..*	CodeableConcept	Kind of organization
+	// Binding: OrganizationType (example)
+	set type(type) {
+		if (Array.isArray(type)) {
+			this._type = type.map((i) => new CodeableConcept(i));
+		} else {
+			this._type = [new CodeableConcept(type)];
+		}
 	}
 
-	get operationalStatus() {
-		return this._operationalStatus;
+	get type() {
+		return this._type;
 	}
 
-	// name	SÎ£	1..1	string	Name of the location as used by humans
+	// name	SΣI	1..1	string	Name used for the organization
 	set name(name) {
 		this._name = name;
 	}
@@ -232,7 +250,7 @@ class Location extends DomainResource {
 		return this._name;
 	}
 
-	// alias		0..*	string	A list of alternate names that the location is known as, or was known as in the past
+	// alias		0..*	string	A list of alternate names that the organization is known as, or was known as in the past
 	set alias(alias) {
 		this._alias = [].concat(alias);
 	}
@@ -241,36 +259,7 @@ class Location extends DomainResource {
 		return this._alias;
 	}
 
-	// description	Î£	0..1	string	Additional details about the location that could be displayed as further information to identify the location beyond its name
-	set description(description) {
-		this._description = description;
-	}
-
-	get description() {
-		return this._description;
-	}
-
-	// mode	?!Î£	0..1	code	instance | kind
-	// Binding: LocationMode (required)
-	set mode(mode) {
-		this._mode = new Code(mode);
-	}
-
-	get mode() {
-		return this._mode;
-	}
-
-	// type	Î£	0..1	CodeableConcept	Type of function performed
-	// Binding: ServiceDeliveryLocationRoleType (extensible)
-	set type(type) {
-		this._type = new CodeableConcept(type);
-	}
-
-	get type() {
-		return this._type;
-	}
-
-	// telecom	S	0..*	ContactPoint	Contact details of the location
+	// telecom	SI	1..*	ContactPoint	A contact detail for the organization
 	set telecom(telecom) {
 		if (Array.isArray(telecom)) {
 			this._telecom = telecom.map((i) => new ContactPoint(i));
@@ -283,44 +272,20 @@ class Location extends DomainResource {
 		return this._telecom;
 	}
 
-	// address	S	0..1	Address	Physical location
+	// address	SI	1..*	Address	An address for the organization
 	set address(address) {
-		this._address = new Address(address);
+		if (Array.isArray(address)) {
+			this._address = address.map((i) => new Address(i));
+		} else {
+			this._address = [new Address(address)];
+		}
 	}
 
 	get address() {
 		return this._address;
 	}
 
-	// physicalType	Î£	0..1	CodeableConcept	Physical form of the location
-	// Binding: LocationType (example)
-	set physicalType(physicalType) {
-		this._physicalType = new CodeableConcept(physicalType);
-	}
-
-	get physicalType() {
-		return this._physicalType;
-	}
-
-	// position	I	0..1	BackboneElement	The absolute geographic location
-	set position(position) {
-		this._position = new Position(position);
-	}
-
-	get position() {
-		return this._position;
-	}
-
-	// managingOrganization	SÎ£	0..1	Reference(US Core Organization Profile)	Organization responsible for provisioning and upkeep
-	set managingOrganization(managingOrganization) {
-		this._managingOrganization = new Reference(managingOrganization);
-	}
-
-	get managingOrganization() {
-		return this._managingOrganization;
-	}
-
-	// partOf		0..1	Reference(Location)	Another Location this one is physically part of
+	// partOf	Σ	0..1	Reference(Organization)	The organization of which this organization forms a part
 	set partOf(partOf) {
 		this._partOf = new Reference(partOf);
 	}
@@ -329,7 +294,20 @@ class Location extends DomainResource {
 		return this._partOf;
 	}
 
-	// endpoint		0..*	Reference(Endpoint)	Technical endpoints providing access to services operated for the location
+	// contact	I	0..*	BackboneElement	Contact for the organization for a certain purpose
+	set contact(contact) {
+		if (Array.isArray(contact)) {
+			this._contact = contact.map((i) => new Contact(i));
+		} else {
+			this._contact = [new Contact(contact)];
+		}
+	}
+
+	get contact() {
+		return this._contact;
+	}
+
+	// endpoint	S	0..*	Reference(Endpoint)	Technical endpoints providing access to services operated for the organization
 	set endpoint(endpoint) {
 		if (Array.isArray(endpoint)) {
 			this._endpoint = endpoint.map((i) => new Reference(i));
@@ -353,19 +331,14 @@ class Location extends DomainResource {
 			extension: this._extension,
 			modifierExtension: this._modifierExtension,
 			identifier: this._identifier,
-			status: this._status,
-			operationalStatus: this._operationalStatus,
+			active: this._active,
+			type: this._type,
 			name: this._name,
 			alias: this._alias,
-			description: this._description,
-			mode: this._mode,
-			type: this._type,
 			telecom: this._telecom,
 			address: this._address,
-			physicalType: this._physicalType,
-			position: this._position,
-			managingOrganization: this._managingOrganization,
 			partOf: this._partOf,
+			contact: this._contact,
 			endpoint: this._endpoint,
 		};
 
@@ -373,5 +346,5 @@ class Location extends DomainResource {
 	}
 }
 
-module.exports.Location = Location;
-module.exports.Position = Position;
+module.exports.Organization = Organization;
+module.exports.Contact = Contact;

@@ -1,4 +1,4 @@
-const Location = require('../../standards/uscore/resources/Location');
+const Location = require('../../standards/stu3/uscore/resources/Location');
 const errors = require('../../utils/error.utils');
 
 module.exports.getLocation = ({ profile, logger, config }) => {

@@ -1,4 +1,4 @@
-const Device = require('../../standards/uscore/resources/Device');
+const Device = require('../../standards/stu3/uscore/resources/Device');
 const errors = require('../../utils/error.utils');
 
 module.exports.getDevice = ({ profile, logger, config }) => {
