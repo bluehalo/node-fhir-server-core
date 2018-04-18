@@ -1,5 +1,7 @@
-const controller = require('./goal.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const goal_args = require('./goal.arguments');
+const controller = require('./goal.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,149 +18,65 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/goal',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'start-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'target-date',
-			type: 'date'
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, goal_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.START_DATE),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.SUBJECT),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.TARGET_DATE)
+		],
 		scopes: scopes,
 		controller: controller.getGoal
 	},
 	{
 		type: 'post',
 		path: '/:version/goal/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'start-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'target-date',
-			type: 'date'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, goal_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.START_DATE),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.SUBJECT),
+			Object.assign({versions: VERSIONS.STU3}, goal_args.TARGET_DATE)
+		],
 		scopes: scopes,
 		controller: controller.getGoal
 	},
 	{
 		type: 'get',
 		path: '/:version/goal/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getGoalById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -166,8 +84,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.GOAL
 	},
-	routes,
-	codes
+	routes
 };

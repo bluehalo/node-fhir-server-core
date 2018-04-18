@@ -1,260 +1,110 @@
-const controller = require('./practitioner.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const practitioner_args = require('./practitioner.arguments');
+const controller = require('./practitioner.controller');
 
 const scopes = [
 	'user/*.*',
 	'user/Practitioner.*',
 	'user/Practitioner.read',
 	'user/*.read',
-	'patient/*.*',
-	'patient/Practitioner.*',
-	'patient/Practitioner.read',
-	'patient/*.read'
+	'practitioner/*.*',
+	'practitioner/Practitioner.*',
+	'practitioner/Practitioner.read',
+	'practitioner/*.read'
 ];
 
 let routes = [
 	{
 		type: 'get',
 		path: '/:version/practitioner',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'active',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-city',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-country',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-postalcode',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-state',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-use',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'communication',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'email',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'family',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'gender',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'given',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'identifier',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'name',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'phone',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'phonetic',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'telecom',
-				type: 'token',
-			}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.COMMUNICATION),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.EMAIL),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.FAMILY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.GENDER),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONETIC),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.TELECOM)
+		],
 		scopes: scopes,
 		controller: controller.getPractitioner
 	},
 	{
 		type: 'post',
 		path: '/:version/practitioner/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'active',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'communication',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'email',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'family',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'gender',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'given',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'phone',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'phonetic',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'telecom',
-			type: 'token',
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.COMMUNICATION),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.EMAIL),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.FAMILY),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.GENDER),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONE),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONETIC),
+			Object.assign({versions: VERSIONS.STU3}, practitioner_args.TELECOM)
+		],
 		scopes: scopes,
-		controller: controller.getPatient
+		controller: controller.getPractitioner
 	},
 	{
 		type: 'get',
-		path: '/:version/patient/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		path: '/:version/practitioner/:id',
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
-		controller: controller.getPatientById
+		controller: controller.getPractitionerById
 	}
 ];
 
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
-
 /**
  * @name exports
- * @summary Patient config
+ * @summary Practitioner config
  */
 module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.PRACTITIONER
 	},
-	routes,
-	codes
+	routes
 };

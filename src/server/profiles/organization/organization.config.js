@@ -1,5 +1,7 @@
-const controller = require('./organization.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const organization_args = require('./organization.arguments');
+const controller = require('./organization.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,204 +18,77 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/organization',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'active',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-city',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-country',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-postalcode',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-state',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'address-use',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'endpoint',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'identifier',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'name',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'partof',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'phonetic',
-				type: 'string'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'type',
-				type: 'token'
-			}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ENDPOINT),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.PARTOF),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.PHONETIC),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.TYPE)
+		],
 		scopes: scopes,
 		controller: controller.getOrganization
 	},
 	{
 		type: 'post',
 		path: '/:version/organization/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'active',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'endpoint',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'partof',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'phonetic',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'type',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ACTIVE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.ENDPOINT),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.PARTOF),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.PHONETIC),
+			Object.assign({versions: VERSIONS.STU3}, organization_args.TYPE)
+		],
 		scopes: scopes,
 		controller: controller.getOrganization
 	},
 	{
 		type: 'get',
 		path: '/:version/organization/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getOrganizationById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -221,8 +96,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.ORGANIZATION
 	},
-	routes,
-	codes
+	routes
 };

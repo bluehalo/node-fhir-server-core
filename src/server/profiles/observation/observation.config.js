@@ -18,9 +18,7 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/observation',
-		corsOptions: {
-			methods: ['GET']
-		},
+		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -68,7 +66,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_CONCEPT),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_DATE),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_QUANTITY),
-			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING),
+			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING)
 		],
 		scopes: scopes,
 		controller: controller.getObservation
@@ -76,9 +74,7 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/observation/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
+		corsOptions: {methods: ['POST']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -126,7 +122,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_CONCEPT),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_DATE),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_QUANTITY),
-			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING),
+			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING)
 		],
 		scopes: scopes,
 		controller: controller.getObservation
@@ -134,9 +130,7 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/observation/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
+		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
@@ -152,7 +146,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.OBSERVATION
 	},
 	routes
 };

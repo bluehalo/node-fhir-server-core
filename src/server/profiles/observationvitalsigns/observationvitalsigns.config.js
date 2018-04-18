@@ -1,5 +1,7 @@
-const controller = require('./observationvitalsigns.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const observationvitalsigns_args = require('./observationvitalsigns.arguments');
+const controller = require('./observationvitalsigns.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,404 +18,127 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/observationvitalsigns',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		},
-			{
-				name: '_content',
-				type: 'string'
-			},
-			{
-				name: '_id',
-				type: 'token'
-			},
-			{
-				name: '_lastUpdated',
-				type: 'date'
-			},
-			{
-				name: '_profile',
-				type: 'uri'
-			},
-			{
-				name: '_query',
-				type: 'token'
-			},
-			{
-				name: '_security',
-				type: 'token'
-			},
-			{
-				name: '_tag',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'based-on',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'category',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'code',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'code-value-concept',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'code-value-date',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'code-value-quantity',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'code-value-string',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-code',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-code-value-concept',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-code-value-quantity',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-data-absent-reason',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-value-concept',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'combo-value-quantity',
-				type: 'quantity'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-code',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-code-value-concept',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-code-value-quantity',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-data-absent-reason',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-value-concept',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'component-value-quantity',
-				type: 'quantity'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'context',
-				type: 'reference',
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'data-absent-reason',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'date',
-				type: 'date'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'device',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'encounter',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'identifier',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'method',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'patient',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'performer',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'related',
-				type: 'composite'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'related-target',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'related-type',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'specimen',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'status',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'subject',
-				type: 'reference'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'value-concept',
-				type: 'token'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'value-date',
-				type: 'date'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'value-quantity',
-				type: 'quantity'
-			}, {
-				versions: [VERSIONS.STU3],
-				name: 'value-string',
-				type: 'string'
-			}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_STRING),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DEVICE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.METHOD),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED_TARGET),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED_TYPE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.SPECIMEN),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.SUBJECT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_STRING)
+		],
 		scopes: scopes,
 		controller: controller.getObservationVitalSigns
 	},
 	{
 		type: 'post',
 		path: '/:version/observationvitalsigns/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'based-on',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code-value-concept',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code-value-date',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code-value-quantity',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code-value-string',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-code-value-concept',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-code-value-quantity',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-data-absent-reason',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-value-concept',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'combo-value-quantity',
-			type: 'quantity'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-code-value-concept',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-code-value-quantity',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-data-absent-reason',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-value-concept',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'component-value-quantity',
-			type: 'quantity'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'context',
-			type: 'reference',
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'data-absent-reason',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'device',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'encounter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'method',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'performer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'related',
-			type: 'composite'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'related-target',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'related-type',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'specimen',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'value-concept',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'value-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'value-quantity',
-			type: 'quantity'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'value-string',
-			type: 'string'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CODE_VALUE_STRING),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMBO_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_CODE_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.COMPONENT_VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DATA_ABSENT_REASON),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.DEVICE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.METHOD),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED_TARGET),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.RELATED_TYPE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.SPECIMEN),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.SUBJECT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_CONCEPT),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_DATE),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_QUANTITY),
+			Object.assign({versions: VERSIONS.STU3}, observationvitalsigns_args.VALUE_STRING)
+		],
 		scopes: scopes,
 		controller: controller.getObservationVitalSigns
 	},
 	{
 		type: 'get',
 		path: '/:version/observationvitalsigns/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getObservationVitalSignsById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -421,8 +146,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.OBSERVATIONVITALSIGNS
 	},
-	routes,
-	codes
+	routes
 };

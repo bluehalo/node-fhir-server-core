@@ -1,5 +1,7 @@
-const controller = require('./medication.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const medication_args = require('./medication.arguments');
+const controller = require('./medication.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,173 +18,71 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/medication',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'container',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'form',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'ingredient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'ingredient-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manufacturer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'over-the-counter',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'package-item',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'package-item-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, medication_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.CONTAINER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.FORM),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.INGREDIENT),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.INGREDIENT_CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.MANUFACTURER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.OVER_THE_COUNTER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.PACKAGE_ITEM),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.PACKAGE_ITEM_CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.STATUS)
+		],
 		scopes: scopes,
 		controller: controller.getMedication
 	},
 	{
 		type: 'post',
 		path: '/:version/medication/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'container',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'form',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'ingredient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'ingredient-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manufacturer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'over-the-counter',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'package-item',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'package-item-code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, medication_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.CONTAINER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.FORM),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.INGREDIENT),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.INGREDIENT_CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.MANUFACTURER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.OVER_THE_COUNTER),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.PACKAGE_ITEM),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.PACKAGE_ITEM_CODE),
+			Object.assign({versions: VERSIONS.STU3}, medication_args.STATUS)
+		],
 		scopes: scopes,
 		controller: controller.getMedication
 	},
 	{
 		type: 'get',
 		path: '/:version/medication/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getMedicationById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -190,8 +90,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.MEDICATION
 	},
-	routes,
-	codes
+	routes
 };

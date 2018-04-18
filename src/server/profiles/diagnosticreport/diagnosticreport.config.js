@@ -1,5 +1,7 @@
-const controller = require('./diagnosticreport.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const diagnosticreport_args = require('./diagnosticreport.arguments');
+const controller = require('./diagnosticreport.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,221 +18,83 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/diagnosticreport',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'based-on',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'context',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'diagnosis',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'encounter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'image',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'issued',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'performer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'result',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'specimen',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference'
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.DIAGNOSIS),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.IMAGE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.ISSUED),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.RESULT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SPECIMEN),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
+		],
 		scopes: scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
 		type: 'post',
 		path: '/:version/diagnosticreport/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'based-on',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'category',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'code',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'context',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'diagnosis',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'encounter',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'image',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'issued',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'performer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'result',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'specimen',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'subject',
-			type: 'reference'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.BASED_ON),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CATEGORY),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CODE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.CONTEXT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.DIAGNOSIS),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.ENCOUNTER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.IMAGE),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.ISSUED),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.PERFORMER),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.RESULT),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SPECIMEN),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
+		],
 		scopes: scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
 		type: 'get',
 		path: '/:version/diagnosticreport/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getDiagnosticReportById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -238,8 +102,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.DIAGNOSTICREPORT
 	},
-	routes,
-	codes
+	routes
 };

@@ -1,5 +1,7 @@
-const controller = require('./location.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const location_args = require('./location.arguments');
+const controller = require('./location.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,221 +18,83 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/location',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'endpoint',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'near',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'near-distance',
-			type: 'quantity'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'operational-status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'organization',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'partof',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'type',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ENDPOINT),
+			Object.assign({versions: VERSIONS.STU3}, location_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR_DISTANCE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.OPERATIONAL_STATUS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ORGANIZATION),
+			Object.assign({versions: VERSIONS.STU3}, location_args.PARTOF),
+			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
+		],
 		scopes: scopes,
 		controller: controller.getLocation
 	},
 	{
 		type: 'post',
 		path: '/:version/location/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-city',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-country',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-postalcode',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-state',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'address-use',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'endpoint',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'name',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'near',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'near-distance',
-			type: 'quantity'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'operational-status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'organization',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'partof',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'type',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_CITY),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_COUNTRY),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_POSTALCODE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_STATE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_USE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ENDPOINT),
+			Object.assign({versions: VERSIONS.STU3}, location_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NAME),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR),
+			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR_DISTANCE),
+			Object.assign({versions: VERSIONS.STU3}, location_args.OPERATIONAL_STATUS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.ORGANIZATION),
+			Object.assign({versions: VERSIONS.STU3}, location_args.PARTOF),
+			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
+		],
 		scopes: scopes,
 		controller: controller.getLocation
 	},
 	{
 		type: 'get',
 		path: '/:version/location/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getLocationById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -238,8 +102,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.LOCATION
 	},
-	routes,
-	codes
+	routes
 };

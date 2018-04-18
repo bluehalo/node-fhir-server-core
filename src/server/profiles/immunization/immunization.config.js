@@ -1,5 +1,7 @@
-const controller = require('./immunization.controller');
+const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const immunization_args = require('./immunization.arguments');
+const controller = require('./immunization.controller');
 
 const scopes = [
 	'user/*.*',
@@ -16,213 +18,81 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/immunization',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'dose-sequence',
-			type: 'number'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'location',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'lot-number',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manufacturer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'notgiven',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'practitioner',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reaction',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reaction-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reason',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reason-not-given',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'vaccine-code',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.DOSE_SEQUENCE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.LOCATION),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.LOT_NUMBER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.MANUFACTURER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.NOTGIVEN),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.PRACTITIONER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REACTION),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REACTION_DATE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REASON),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REASON_NOT_GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.VACCINE_CODE)
+		],
 		scopes: scopes,
 		controller: controller.getImmunization
 	},
 	{
 		type: 'post',
 		path: '/:version/immunization/_search',
-		corsOptions: {
-			methods: ['POST']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: '_content',
-			type: 'string'
-		}, {
-			name: '_id',
-			type: 'token'
-		}, {
-			name: '_lastUpdated',
-			type: 'date'
-		}, {
-			name: '_profile',
-			type: 'uri'
-		}, {
-			name: '_query',
-			type: 'token'
-		}, {
-			name: '_security',
-			type: 'token'
-		}, {
-			name: '_tag',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'dose-sequence',
-			type: 'number'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'identifier',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'location',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'lot-number',
-			type: 'string'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'manufacturer',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'notgiven',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'patient',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'practitioner',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reaction',
-			type: 'reference'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reaction-date',
-			type: 'date'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reason',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'reason-not-given',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'status',
-			type: 'token'
-		}, {
-			versions: [VERSIONS.STU3],
-			name: 'vaccine-code',
-			type: 'token'
-		}],
+		corsOptions: {methods: ['POST']},
+		args: [
+			route_args.VERSION,
+			common_args._FORMAT,
+			common_args._CONTENT,
+			common_args._ID,
+			common_args._LASTUPDATED,
+			common_args._PROFILE,
+			common_args._QUERY,
+			common_args._SECURITY,
+			common_args._TAG,
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.DATE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.DOSE_SEQUENCE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.IDENTIFIER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.LOCATION),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.LOT_NUMBER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.MANUFACTURER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.NOTGIVEN),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.PATIENT),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.PRACTITIONER),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REACTION),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REACTION_DATE),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REASON),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.REASON_NOT_GIVEN),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.STATUS),
+			Object.assign({versions: VERSIONS.STU3}, immunization_args.VACCINE_CODE)
+		],
 		scopes: scopes,
 		controller: controller.getImmunization
 	},
 	{
 		type: 'get',
 		path: '/:version/immunization/:id',
-		corsOptions: {
-			methods: ['GET']
-		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}, {
-			name: 'id',
-			type: 'string',
-			required: true
-		}],
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
 		scopes: scopes,
 		controller: controller.getImmunizationById
 	}
 ];
-
-let codes = {
-	gender: ['male', 'female', 'other', 'unknown']
-};
 
 /**
  * @name exports
@@ -230,8 +100,7 @@ let codes = {
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PATIENT
+		profileKey: CONFIG_KEYS.IMMUNIZATION
 	},
-	routes,
-	codes
+	routes
 };
