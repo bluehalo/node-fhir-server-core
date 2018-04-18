@@ -15,11 +15,12 @@ exports.DSTU2 = {
 		MEDICATIONREQUEST: 'MedicationRequest',
 		MEDICATIONSTATEMENT: 'MedicationStatement',
 		OBSERVATION: 'Observation',
+		OBSERVATIONRESULTS: 'ObservationResults',
+		OBSERVATIONSMOKINGSTATUS: 'ObservationSmokingStatus',
+		OBSERVATIONVITALSIGNS: 'ObservationVitalSigns',
 		ORGANIZATION: 'Organization',
 		PATIENT: 'Patient',
 		PRACTITIONER: 'Practitioner',
-		RESULTS: 'Results',
-		SMOKINGSTATUS: 'SmokingStatus'
 	},
 	STATUSES: {
 		DRAFT: 'draft',
@@ -49,11 +50,12 @@ exports.STU3 = {
 		MEDICATIONREQUEST: 'MedicationRequest',
 		MEDICATIONSTATEMENT: 'MedicationStatement',
 		OBSERVATION: 'Observation',
+		OBSERVATIONRESULTS: 'ObservationResults',
+		OBSERVATIONSMOKINGSTATUS: 'ObservationSmokingStatus',
+		OBSERVATIONVITALSIGNS: 'ObservationVitalSigns',
 		ORGANIZATION: 'Organization',
 		PATIENT: 'Patient',
 		PRACTITIONER: 'Practitioner',
-		RESULTS: 'Results',
-		SMOKINGSTATUS: 'SmokingStatus'
 	},
 	STATUSES: {
 		DRAFT: 'draft',

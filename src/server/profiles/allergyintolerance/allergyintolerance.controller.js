@@ -50,7 +50,6 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
 			});
 	};
 
-
 };
 
 

@@ -56,17 +56,13 @@ module.exports.getObservation = ({ profile, logger, config }) => {
 module.exports.getObservationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 	
-	console.log('message1');
-	
 	return (req, res, next) => {
-		
-		console.log('message2');
 		
 		// Create a context I can pass some data through
 		let context = {
 			version: req.params.version
 		};
-		console.log('message3');
+
 		// If we have req.observation, then we need to validate that this observation
 		// is only accessing resources with his id, he is not allowed to access others
 		if (
@@ -77,7 +73,7 @@ module.exports.getObservationById = ({ profile, logger }) => {
 		) {
 			return next(errors.unauthorized(`You are not allowed to access observation ${req.body.id}.`));
 		}
-		console.log('message4');
+
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
