@@ -1,5 +1,5 @@
 const CodeableConcept = require('./CodeableConcept');
-const { ISSUE } = require('../../../constants');
+const { ISSUE } = require('../../../../../constants');
 
 // If we do not understand the error severity, it's more than likely
 // an unexpected error and we will give it the highest severity
