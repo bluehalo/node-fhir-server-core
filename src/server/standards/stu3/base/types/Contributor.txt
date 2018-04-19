@@ -1,0 +1,11 @@
+Main
+Contributor
+type	Σ	1..1	code	author | editor | reviewer | endorser
+ContributorType (Required)
+
+name	Σ	1..1	string	Who contributed the content
+
+contact	Σ	0..*	ContactDetail	Contact details of the contributor
+
+
+eof

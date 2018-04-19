@@ -1,7 +1,6 @@
-const Element = require('./Element');
-const Coding = require('./Coding');
+const Element = require('./types/Element');
+const Coding = require('./types/Coding');
 
-//	Σ		Element	Concept - reference to a terminology or just text
 class CodeableConcept extends Element {
 	constructor(obj) {
 		super();
@@ -11,7 +10,7 @@ class CodeableConcept extends Element {
 	// coding	Σ	0..*	Coding	Code defined by a terminology system
 	set coding(coding) {
 		if (Array.isArray(coding)) {
-			this._coding = coding.map((x) => new Coding(x));
+			this._coding = coding.map((i) => new Coding(i));
 		} else {
 			this._coding = [new Coding(coding)];
 		}
@@ -33,7 +32,7 @@ class CodeableConcept extends Element {
 	toJSON() {
 		const json = {
 			coding: this._coding,
-			text: this._text
+			text: this._text,
 		};
 
 		return Object.assign(super.toJSON(), json);

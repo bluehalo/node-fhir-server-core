@@ -1,17 +1,16 @@
-const Element = require('./Element');
-const Code = require('./Code');
-const Period = require('./Period');
+const Element = require('./types/Element');
+const Code = require('./types/Code');
+const Period = require('./types/Period');
 
-
-// Address	Σ		Element	A postal address
 class Address extends Element {
 	constructor(obj) {
 		super();
 		Object.assign(this, obj);
 	}
 
-	// use	?! Σ	0..1	code	home | work | temp | old - purpose of this address
-	// AddressUse (Required)
+	// use	?!Σ	0..1	code	home | work | temp | old - purpose of this address
+	// Binding: AddressUse (required)
+	// Example General': home
 	set use(use) {
 		this._use = new Code(use);
 	}
@@ -21,7 +20,8 @@ class Address extends Element {
 	}
 
 	// type	Σ	0..1	code	postal | physical | both
-	// AddressType (Required)
+	// Binding: AddressType (required)
+	// Example General': both
 	set type(type) {
 		this._type = new Code(type);
 	}
@@ -31,6 +31,7 @@ class Address extends Element {
 	}
 
 	// text	Σ	0..1	string	Text representation of the address
+	// Example General': 137 Nowhere Street, Erewhon 9132
 	set text(text) {
 		this._text = text;
 	}
@@ -39,7 +40,9 @@ class Address extends Element {
 		return this._text;
 	}
 
-	// line	Σ	0..*	string	Street name, number, direction & P.O. Box etc.
+	// line	SΣ	0..*	string	Street name, number, direction & P.O. Box etc.
+	// This repeating element order: The order in which lines should appear in an address label
+	// Example General': 137 Nowhere Street
 	set line(line) {
 		this._line = [].concat(line);
 	}
@@ -48,7 +51,8 @@ class Address extends Element {
 		return this._line;
 	}
 
-	// city	Σ	0..1	string	Name of city, town etc.
+	// city	SΣ	0..1	string	Name of city, town etc.
+	// Example General': Erewhon
 	set city(city) {
 		this._city = city;
 	}
@@ -58,6 +62,7 @@ class Address extends Element {
 	}
 
 	// district	Σ	0..1	string	District name (aka county)
+	// Example General': Madison
 	set district(district) {
 		this._district = district;
 	}
@@ -66,7 +71,8 @@ class Address extends Element {
 		return this._district;
 	}
 
-	// state	Σ	0..1	string	Sub-unit of country (abbreviations ok)
+	// state	SΣ	0..1	string	Sub-unit of country (abbreviations ok)
+	// Binding: USPS Two Letter Alphabetic Codes (extensible)
 	set state(state) {
 		this._state = state;
 	}
@@ -75,7 +81,8 @@ class Address extends Element {
 		return this._state;
 	}
 
-	// postalCode	Σ	0..1	string	Postal code for area
+	// postalCode	SΣ	0..1	string	US Zip Codes
+	// Example General': 9132
 	set postalCode(postalCode) {
 		this._postalCode = postalCode;
 	}
@@ -84,7 +91,7 @@ class Address extends Element {
 		return this._postalCode;
 	}
 
-	// country	Σ	0..1	string	Country (can be ISO 3166 3 letter code)
+	// country	Σ	0..1	string	Country (e.g. can be ISO 3166 2 or 3 letter code)
 	set country(country) {
 		this._country = country;
 	}
@@ -94,6 +101,7 @@ class Address extends Element {
 	}
 
 	// period	Σ	0..1	Period	Time period when address was/is in use
+	// Example General': {"start":"2010-03-23","end":"2010-07-01"}
 	set period(period) {
 		this._period = new Period(period);
 	}
@@ -113,7 +121,7 @@ class Address extends Element {
 			state: this._state,
 			postalCode: this._postalCode,
 			country: this._country,
-			period: this._period
+			period: this._period,
 		};
 
 		return Object.assign(super.toJSON(), json);

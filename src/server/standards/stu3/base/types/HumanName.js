@@ -1,16 +1,15 @@
-const Element = require('./Element');
-const Code = require('./Code');
-const Period = require('./Period');
+const Element = require('./types/Element');
+const Code = require('./types/Code');
+const Period = require('./types/Period');
 
-// HumanName	Σ		Element	Name of a human - parts and usage
 class HumanName extends Element {
 	constructor(obj) {
 		super();
 		Object.assign(this, obj);
 	}
 
-	// use	?! Σ	0..1	code	usual | official | temp | nickname | anonymous | old | maiden
-	// NameUse (Required)
+	// use	?!Σ	0..1	code	usual | official | temp | nickname | anonymous | old | maiden
+	// Binding: NameUse (required)
 	set use(use) {
 		this._use = new Code(use);
 	}
@@ -28,18 +27,19 @@ class HumanName extends Element {
 		return this._text;
 	}
 
-	// family	Σ	0..*	string	Family name (often called 'Surname')
+	// family	SΣ	1..1	string	Family name (often called 'Surname')
 	set family(family) {
-		this._family = [].concat(family);
+		this._family = family;
 	}
 
 	get family() {
 		return this._family;
 	}
 
-	// given	Σ	0..*	string	Given names (not always 'first'). Includes middle names
+	// given	SΣ	1..*	string	Given names (not always 'first'). Includes middle names
+	// This repeating element order: Given Names appear in the correct order for presenting the name
 	set given(given) {
-			this._given = [].concat(given);
+		this._given = [].concat(given);
 	}
 
 	get given() {
@@ -47,8 +47,9 @@ class HumanName extends Element {
 	}
 
 	// prefix	Σ	0..*	string	Parts that come before the name
+	// This repeating element order: Prefixes appear in the correct order for presenting the name
 	set prefix(prefix) {
-			this._prefix = [].concat(prefix);
+		this._prefix = [].concat(prefix);
 	}
 
 	get prefix() {
@@ -56,8 +57,9 @@ class HumanName extends Element {
 	}
 
 	// suffix	Σ	0..*	string	Parts that come after the name
+	// This repeating element order: Suffixes appear in the correct order for presenting the name
 	set suffix(suffix) {
-			this._suffix = [].concat(suffix);
+		this._suffix = [].concat(suffix);
 	}
 
 	get suffix() {
@@ -81,12 +83,11 @@ class HumanName extends Element {
 			given: this._given,
 			prefix: this._prefix,
 			suffix: this._suffix,
-			period: this._period
+			period: this._period,
 		};
 
 		return Object.assign(super.toJSON(), json);
 	}
-
 }
 
 module.exports = HumanName;

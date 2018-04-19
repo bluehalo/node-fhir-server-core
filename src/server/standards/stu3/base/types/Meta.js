@@ -1,11 +1,10 @@
-const Element = require('./Element');
-const Coding = require('./Coding');
+const Element = require('./types/Element');
+const Coding = require('./types/Coding');
 
 class Meta extends Element {
 	constructor(obj) {
 		super();
 		Object.assign(this, obj);
-		
 	}
 
 	// versionId	Σ	0..1	id	Version specific identifier
@@ -71,7 +70,7 @@ class Meta extends Element {
 			security: this._security,
 			tag: this._tag,
 		};
-		
+
 		return Object.assign(super.toJSON(), json);
 	}
 }

@@ -1,5 +1,5 @@
-const Element = require('./Element');
-const Reference = require('./Reference');
+const Element = require('./types/Element');
+const Reference = require('./types/Reference');
 
 class Annotation extends Element {
 	constructor(obj) {

@@ -1,4 +1,4 @@
-const Element = require('./Element');
+const Element = require('./types/Element');
 
 class Range extends Element {
 	constructor(obj) {
@@ -6,8 +6,8 @@ class Range extends Element {
 		Object.assign(this, obj);
 	}
 
-	// I	0..1	SimpleQuantity	Low Range, if relevant
-	set low(low){
+	// low	ΣI	0..1	SimpleQuantity	Low limit
+	set low(low) {
 		this._low = low;
 	}
 
@@ -15,7 +15,7 @@ class Range extends Element {
 		return this._low;
 	}
 
-	// high	I	0..1	SimpleQuantity	High Range, if relevant
+	// high	ΣI	0..1	SimpleQuantity	High limit
 	set high(high) {
 		this._high = high;
 	}
@@ -27,12 +27,11 @@ class Range extends Element {
 	toJSON() {
 		const json = {
 			low: this._low,
-			high: this._high
+			high: this._high,
 		};
 
 		return Object.assign(super.toJSON(), json);
 	}
-
 }
 
 module.exports = Range;

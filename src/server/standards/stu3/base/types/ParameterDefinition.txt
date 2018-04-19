@@ -1,0 +1,20 @@
+Main
+ParameterDefinition
+name	Σ	0..1	code	Name used to access the parameter value
+
+use	Σ	1..1	code	in | out
+OperationParameterUse (Required)
+
+min	Σ	0..1	integer	Minimum cardinality
+
+max	Σ	0..1	string	Maximum cardinality (a number of *)
+
+documentation	Σ	0..1	string	A brief description of the parameter
+
+type	Σ	1..1	code	What type of value
+FHIRAllTypes (Required)
+
+profile	Σ	0..1	Reference(StructureDefinition)	What profile the value is expected to be
+
+
+eof

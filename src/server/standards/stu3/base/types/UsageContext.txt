@@ -1,0 +1,16 @@
+Main
+UsageContext
+code	Σ	1..1	Coding	Type of context being specified
+UsageContextType (Extensible)
+
+value[x]	Σ	1..1		Value that defines the context
+Context of Use ValueSet (Example)
+
+valueCodeableConcept			CodeableConcept
+
+valueQuantity			Quantity
+
+valueRange			Range
+
+
+eof

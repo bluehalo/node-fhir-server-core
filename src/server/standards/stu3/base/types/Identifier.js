@@ -1,10 +1,8 @@
-const Element = require('./Element');
-const Code = require('./Code');
-const CodeableConcept = require('./CodeableConcept');
-const Period = require('./Period');
-const Reference = require('./Reference');
-
-
+const Element = require('./types/Element');
+const Code = require('./types/Code');
+const CodeableConcept = require('./types/CodeableConcept');
+const Period = require('./types/Period');
+const Reference = require('./types/Reference');
 
 class Identifier extends Element {
 	constructor(obj) {
@@ -12,8 +10,8 @@ class Identifier extends Element {
 		Object.assign(this, obj);
 	}
 
-	// use	code	usual | official | temp | secondary (If known)
-	// Identifier Use (Required)
+	// use	?!Σ	0..1	code	usual | official | temp | secondary (If known)
+	// Binding: IdentifierUse (required)
 	set use(use) {
 		this._use = new Code(use);
 	}
@@ -23,7 +21,7 @@ class Identifier extends Element {
 	}
 
 	// type	Σ	0..1	CodeableConcept	Description of identifier
-	// Identifier Type Codes (Extensible)
+	// Binding: Identifier Type Codes (extensible)
 	set type(type) {
 		this._type = new CodeableConcept(type);
 	}
@@ -32,7 +30,8 @@ class Identifier extends Element {
 		return this._type;
 	}
 
-	// system	Σ	0..1	uri	The namespace for the identifier
+	// system	SΣ	1..1	uri	The namespace for the identifier value
+	// Example General': http://www.acme.com/identifiers/patient or urn:ietf:rfc:3986 if the Identifier.value itself is a full uri
 	set system(system) {
 		this._system = system;
 	}
@@ -41,7 +40,8 @@ class Identifier extends Element {
 		return this._system;
 	}
 
-	// value	Σ	0..1	string	The value that is unique
+	// value	SΣ	1..1	string	The value that is unique within the system.
+	// Example General': 123456
 	set value(value) {
 		this._value = value;
 	}
@@ -75,7 +75,7 @@ class Identifier extends Element {
 			system: this._system,
 			value: this._value,
 			period: this._period,
-			assigner: this._assigner
+			assigner: this._assigner,
 		};
 
 		return Object.assign(super.toJSON(), json);

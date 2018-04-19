@@ -1,16 +1,16 @@
-const DomainResource = require('../types/DomainResource');
-const Identifier = require('../types/Identifier');
-const Code = require('../types/Code');
-const Period = require('../types/Period');
-const UsageContext = require('../types/UsageContext');
-const CodeableConcept = require('../types/CodeableConcept');
-const Contributor = require('../types/Contributor');
-const ContactDetail = require('../types/ContactDetail');
-const RelatedArtifact = require('../types/RelatedArtifact');
-const Reference = require('../types/Reference');
-const Timing = require('../types/Timing');
-const Range = require('../types/Range');
-const Dosage = require('../types/Dosage');
+const DomainResource = require('./types/DomainResource');
+const Identifier = require('./types/Identifier');
+const Code = require('./types/Code');
+const Period = require('./types/Period');
+const UsageContext = require('./types/UsageContext');
+const CodeableConcept = require('./types/CodeableConcept');
+const Contributor = require('./types/Contributor');
+const ContactDetail = require('./types/ContactDetail');
+const RelatedArtifact = require('./types/RelatedArtifact');
+const Reference = require('./types/Reference');
+const Timing = require('./types/Timing');
+const Range = require('./types/Range');
+const Dosage = require('./types/Dosage');
 
 class DynamicValue {
 	constructor(obj) {

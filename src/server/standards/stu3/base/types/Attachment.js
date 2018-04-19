@@ -1,8 +1,6 @@
-const Code = require('./Code');
-const Element = require('./Element');
+const Element = require('./types/Element');
+const Code = require('./types/Code');
 
-// Attachment	Σ I		Element	Content in a format defined elsewhere
-// It the Attachment has data, it SHALL have a contentType
 class Attachment extends Element {
 	constructor(obj) {
 		super();
@@ -20,7 +18,7 @@ class Attachment extends Element {
 	}
 
 	// language	Σ	0..1	code	Human language of the content (BCP-47)
-	// Language  (Required)
+	// Common Languages (Extensible but limited to All Languages)
 	set language(language) {
 		this._language = new Code(language);
 	}
@@ -29,7 +27,7 @@ class Attachment extends Element {
 		return this._language;
 	}
 
-	// data	Σ	0..1	base64Binary	Data inline, base64ed
+	// data		0..1	base64Binary	Data inline, base64ed
 	set data(data) {
 		this._data = data;
 	}
@@ -52,9 +50,17 @@ class Attachment extends Element {
 		this._size = size;
 	}
 
+	get size() {
+		return this._size;
+	}
+
 	// hash	Σ	0..1	base64Binary	Hash of the data (sha-1, base64ed)
 	set hash(hash) {
 		this._hash = hash;
+	}
+
+	get hash() {
+		return this._hash;
 	}
 
 	// title	Σ	0..1	string	Label to display in place of the data
@@ -72,7 +78,7 @@ class Attachment extends Element {
 	}
 
 	get creation() {
-		return this.creation;
+		return this._creation;
 	}
 
 	toJSON() {
@@ -82,8 +88,9 @@ class Attachment extends Element {
 			data: this._data,
 			url: this._url,
 			size: this._size,
+			hash: this._hash,
 			title: this._title,
-			creation: this._creation
+			creation: this._creation,
 		};
 
 		return Object.assign(super.toJSON(), json);

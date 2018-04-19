@@ -1,9 +1,6 @@
-const Element = require('./Element');
-const Quantity = require('./Quantity');
+const Element = require('./types/Element');
+const Quantity = require('./types/Quantity');
 
-
-// Ratio	Σ I		Element	A ratio of two Quantity values - a numerator and a denominator
-// Numerator and denominator SHALL both be present, or both are absent. If both are absent, there SHALL be some extension present
 class Ratio extends Element {
 	constructor(obj) {
 		super();
@@ -19,7 +16,7 @@ class Ratio extends Element {
 		return this._numerator;
 	}
 
-	// denominator	Σ	0..1	Quantityclass Ratio extends Element {
+	// denominator	Σ	0..1	Quantity	Denominator value
 	set denominator(denominator) {
 		this._denominator = new Quantity(denominator);
 	}
@@ -31,7 +28,7 @@ class Ratio extends Element {
 	toJSON() {
 		const json = {
 			numerator: this._numerator,
-			denominator: this._denominator
+			denominator: this._denominator,
 		};
 
 		return Object.assign(super.toJSON(), json);

@@ -1,0 +1,63 @@
+Main
+Timing
+event	Σ	0..*	dateTime	When the event occurs
+
+repeat	ΣI	0..1	TimingRepeat	When the event is to occur
++ If there's an offset, there must be a when (and not C, CM, CD, CV)
++ period SHALL be a non-negative value
++ If there's a periodMax, there must be a period
++ If there's a durationMax, there must be a duration
++ If there's a countMax, there must be a count
++ if there's a duration, there needs to be duration units
++ If there's a timeOfDay, there cannot be be a when, or vice versa
++ if there's a period, there needs to be period units
++ duration SHALL be a non-negative value
+
+code	Σ	0..1	CodeableConcept	BID | TID | QID | AM | PM | QD | QOD | Q4H | Q6H +
+TimingAbbreviation (Preferred)
+
+
+Element
+TimingRepeat
+bounds[x]	Σ	0..1		Length/Range of lengths, or (Start and/or end) limits
+
+boundsDuration			Duration
+
+boundsRange			Range
+
+boundsPeriod			Period
+
+count	Σ	0..1	integer	Number of times to repeat
+
+countMax	Σ	0..1	integer	Maximum number of times to repeat
+
+duration	Σ	0..1	decimal	How long when it happens
+
+durationMax	Σ	0..1	decimal	How long when it happens (Max)
+
+durationUnit	Σ	0..1	code	s | min | h | d | wk | mo | a - unit of time (UCUM)
+UnitsOfTime (Required)
+
+frequency	Σ	0..1	integer	Event occurs frequency times per period
+
+frequencyMax	Σ	0..1	integer	Event occurs up to frequencyMax times per period
+
+period	Σ	0..1	decimal	Event occurs frequency times per period
+
+periodMax	Σ	0..1	decimal	Upper limit of period (3-4 hours)
+
+periodUnit	Σ	0..1	code	s | min | h | d | wk | mo | a - unit of time (UCUM)
+UnitsOfTime (Required)
+
+dayOfWeek	Σ	0..*	code	mon | tue | wed | thu | fri | sat | sun
+DaysOfWeek (Required)
+
+timeOfDay	Σ	0..*	time	Time of day for action
+
+when	Σ	0..*	code	Regular life events the event is tied to
+EventTiming (Required)
+
+offset	Σ	0..1	unsignedInt	Minutes from event (before or after)
+
+
+eof

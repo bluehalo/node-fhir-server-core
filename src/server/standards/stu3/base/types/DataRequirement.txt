@@ -1,0 +1,45 @@
+Main
+DataRequirement
+type	Σ	1..1	code	The type of the required data
+FHIRAllTypes (Required)
+
+profile	Σ	0..*	uri	The profile of the required data
+
+mustSupport	Σ	0..*	string	Indicates that specific structure elements are referenced by the knowledge module
+
+codeFilter	Σ	0..*	Element	What codes are expected
+
+dateFilter	Σ	0..*	Element	What dates/date ranges are expected
+
+
+Element
+dateFilter
+path	Σ	1..1	string	The date-valued attribute of the filter
+
+value[x]	Σ	0..1		The value of the filter, as a Period, DateTime, or Duration value
+
+valueDateTime			dateTime
+
+valuePeriod			Period
+
+valueDuration			Duration
+
+
+Element
+codeFilter
+path	Σ	1..1	string	The code-valued attribute of the filter
+
+valueSet[x]	Σ	0..1		Valueset for the filter
+
+valueSetString			string
+
+valueSetReference			Reference(ValueSet)
+
+valueCode	Σ	0..*	code	What code is expected
+
+valueCoding	Σ	0..*	Coding	What Coding is expected
+
+valueCodeableConcept	Σ	0..*	CodeableConcept	What CodeableConcept is expected
+
+
+eof

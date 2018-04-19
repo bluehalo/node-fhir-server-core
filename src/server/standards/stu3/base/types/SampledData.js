@@ -1,16 +1,14 @@
-const Element = require('./Element');
+const Element = require('./types/Element');
 
-// SampledData	Σ		Element	A series of measurements taken by a device
 class SampledData extends Element {
 	constructor(obj) {
 		super();
 		Object.assign(this, obj);
 	}
 
-
 	// origin	Σ	1..1	SimpleQuantity	Zero value and units
 	set origin(origin) {
-			this._origin = origin;
+		this._origin = origin;
 	}
 
 	get origin() {
@@ -25,7 +23,6 @@ class SampledData extends Element {
 	get period() {
 		return this._period;
 	}
-
 
 	// factor	Σ	0..1	decimal	Multiply data by this before adding to origin
 	set factor(factor) {
@@ -63,7 +60,7 @@ class SampledData extends Element {
 		return this._dimensions;
 	}
 
-	// data	Σ	1..1	string	Decimal values with spaces, or "E" | "U" | "L"
+	// data		1..1	string	Decimal values with spaces, or "E" | "U" | "L"
 	set data(data) {
 		this._data = data;
 	}
@@ -80,7 +77,7 @@ class SampledData extends Element {
 			lowerLimit: this._lowerLimit,
 			upperLimit: this._upperLimit,
 			dimensions: this._dimensions,
-			data: this._data
+			data: this._data,
 		};
 
 		return Object.assign(super.toJSON(), json);
@@ -88,5 +85,3 @@ class SampledData extends Element {
 }
 
 module.exports = SampledData;
-
-

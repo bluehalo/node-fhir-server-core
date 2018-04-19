@@ -1,18 +1,21 @@
-const Code = require('./Code');
+const Element = require('./types/Element');
+const Code = require('./types/Code');
 
-class Coding {
+class Coding extends Element {
 	constructor(obj) {
+		super();
 		Object.assign(this, obj);
 	}
 
-	//system	Σ	0..1	uri	Identity of the terminology system
+	// system	Σ	0..1	uri	Identity of the terminology system
 	set system(system) {
 		this._system = system;
 	}
 
 	get system() {
-		return this.system_system;
+		return this._system;
 	}
+
 	// version	Σ	0..1	string	Version of the system - if relevant
 	set version(version) {
 		this._version = version;
@@ -40,7 +43,7 @@ class Coding {
 		return this._display;
 	}
 
-	// userSelected	Σ	0..1	boolean
+	// userSelected	Σ	0..1	boolean	If this coding was chosen directly by the user
 	set userSelected(userSelected) {
 		this._userSelected = userSelected;
 	}
@@ -50,13 +53,15 @@ class Coding {
 	}
 
 	toJSON() {
-		return {
+		const json = {
 			system: this._system,
 			version: this._version,
 			code: this._code,
 			display: this._display,
-			userSelected: this._userSelected
+			userSelected: this._userSelected,
 		};
+
+		return Object.assign(super.toJSON(), json);
 	}
 }
 

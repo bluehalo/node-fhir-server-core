@@ -1,0 +1,8 @@
+Main
+Period
+start	ΣI	0..1	dateTime	Starting time with inclusive boundary
+
+end	ΣI	0..1	dateTime	End time with inclusive boundary, if not ongoing
+
+
+eof

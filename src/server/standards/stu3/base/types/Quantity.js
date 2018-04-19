@@ -1,8 +1,6 @@
-const Code = require('./Code');
-const Element = require('./Element');
+const Element = require('./types/Element');
+const Code = require('./types/Code');
 
-// Quantity	Σ I		Element	A measured or measurable amount
-// If a code for the unit is present, the system SHALL also be present
 class Quantity extends Element {
 	constructor(obj) {
 		super();
@@ -18,16 +16,10 @@ class Quantity extends Element {
 		return this._value;
 	}
 
-	// comparator	?! Σ	0..1	code	< | <= | >= | > - how to understand the value
+	// comparator	?!Σ	0..1	code	< | <= | >= | > - how to understand the value
 	// QuantityComparator (Required)
 	set comparator(comparator) {
-		const regex = /^(<=|<|>=|>)(\w+)/;
-
-		if (regex.test(comparator)) {
-			this._comparator = new Code(comparator);
-		} else {
-			throw new Error('Invalid comparator');
-		}
+		this._comparator = new Code(comparator);
 	}
 
 	get comparator() {
@@ -35,15 +27,15 @@ class Quantity extends Element {
 	}
 
 	// unit	Σ	0..1	string	Unit representation
-	set unit(unit) {
-		this._unit = unit;
+	set quantityUnit(quantityUnit) {
+		this._quantityUnit = quantityUnit;
 	}
 
-	get unit() {
-		return this._unit;
+	get quantityUnit() {
+		return this._quantityUnit;
 	}
 
-	// system	Σ I	0..1	uri	System that defines coded unit form
+	// system	ΣI	0..1	uri	System that defines coded unit form
 	set system(system) {
 		this._system = system;
 	}
@@ -65,14 +57,13 @@ class Quantity extends Element {
 		const json = {
 			value: this._value,
 			comparator: this._comparator,
-			unit: this._unit,
+			quantityUnit: this._quantityUnit,
 			system: this._system,
-			code: this._code
+			code: this._code,
 		};
 
 		return Object.assign(super.toJSON(), json);
 	}
-
 }
 
 module.exports = Quantity;

@@ -1,0 +1,14 @@
+Main
+Coding
+system	Σ	0..1	uri	Identity of the terminology system
+
+version	Σ	0..1	string	Version of the system - if relevant
+
+code	Σ	0..1	code	Symbol in syntax defined by the system
+
+display	Σ	0..1	string	Representation defined by the system
+
+userSelected	Σ	0..1	boolean	If this coding was chosen directly by the user
+
+
+eof

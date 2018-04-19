@@ -1,0 +1,18 @@
+Main
+SampledData
+origin	Σ	1..1	SimpleQuantity	Zero value and units
+
+period	Σ	1..1	decimal	Number of milliseconds between samples
+
+factor	Σ	0..1	decimal	Multiply data by this before adding to origin
+
+lowerLimit	Σ	0..1	decimal	Lower limit of detection
+
+upperLimit	Σ	0..1	decimal	Upper limit of detection
+
+dimensions	Σ	1..1	positiveInt	Number of sample points at each time point
+
+data		1..1	string	Decimal values with spaces, or "E" | "U" | "L"
+
+
+eof

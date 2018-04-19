@@ -1,0 +1,26 @@
+Main
+Signature
+type	Σ	1..*	Coding	Indication of the reason the entity signed the object(s)
+Signature Type Codes (Preferred)
+
+when	Σ	1..1	instant	When the signature was created
+
+who[x]	Σ	1..1		Who signed
+
+whoUri			uri
+
+whoReference			Reference(Practitioner | RelatedPerson | Patient | Device | Organization)
+
+onBehalfOf[x]	Σ	0..1		The party represented
+
+onBehalfOfUri			uri
+
+onBehalfOfReference			Reference(Practitioner | RelatedPerson | Patient | Device | Organization)
+
+contentType	Σ	0..1	code	The technical format of the signature
+MimeType  (Required)
+
+blob		0..1	base64Binary	The actual signature content (XML DigSig. JWT, picture, etc.)
+
+
+eof

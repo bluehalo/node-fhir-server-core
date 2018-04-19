@@ -1,0 +1,12 @@
+Main
+DomainResource
+text	I	0..1	Narrative	Text summary of the resource, for human interpretation
+
+contained		0..*	Resource	Contained, inline Resources
+
+extension		0..*	Extension	Additional Content defined by implementations
+
+modifierExtension	?!	0..*	Extension	Extensions that cannot be ignored
+
+
+eof

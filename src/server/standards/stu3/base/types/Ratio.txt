@@ -1,0 +1,8 @@
+Main
+Ratio
+numerator	Σ	0..1	Quantity	Numerator value
+
+denominator	Σ	0..1	Quantity	Denominator value
+
+
+eof

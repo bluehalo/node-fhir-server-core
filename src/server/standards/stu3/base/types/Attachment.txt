@@ -1,0 +1,22 @@
+Main
+Attachment
+contentType	Σ	0..1	code	Mime type of the content, with charset etc.
+MimeType  (Required)
+
+language	Σ	0..1	code	Human language of the content (BCP-47)
+Common Languages (Extensible but limited to All Languages)
+
+data		0..1	base64Binary	Data inline, base64ed
+
+url	Σ	0..1	uri	Uri where the data can be found
+
+size	Σ	0..1	unsignedInt	Number of bytes of content (if url provided)
+
+hash	Σ	0..1	base64Binary	Hash of the data (sha-1, base64ed)
+
+title	Σ	0..1	string	Label to display in place of the data
+
+creation	Σ	0..1	dateTime	Date attachment was first created
+
+
+eof

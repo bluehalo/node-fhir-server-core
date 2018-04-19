@@ -1,0 +1,21 @@
+Main
+TriggerDefinition
+type	Σ	1..1	code	named-event | periodic | data-added | data-modified | data-removed | data-accessed | data-access-ended
+TriggerType (Required)
+
+eventName	Σ	0..1	string	Triggering event name
+
+eventTiming[x]	Σ	0..1		Timing of the event
+
+eventTimingTiming			Timing
+
+eventTimingReference			Reference(Schedule)
+
+eventTimingDate			date
+
+eventTimingDateTime			dateTime
+
+eventData	Σ	0..1	DataRequirement	Triggering data of the event
+
+
+eof
