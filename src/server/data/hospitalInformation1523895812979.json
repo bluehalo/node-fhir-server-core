@@ -1,0 +1,48 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:b482ef72-e5d5-4ca0-9675-ee944cd4eb71",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "b482ef72-e5d5-4ca0-9675-ee944cd4eb71",
+        "extension": [
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+            "valueInteger": 19576
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+            "valueInteger": 11749
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+            "valueInteger": 1255
+          },
+          {
+            "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+            "valueInteger": 1765
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://github.com/synthetichealth/synthea",
+            "value": "b482ef72-e5d5-4ca0-9675-ee944cd4eb71"
+          }
+        ],
+        "name": "KENNEDY KRIEGER INSTITUTE",
+        "address": [
+          {
+            "line": [
+              "707 NORTH  BROADWAY"
+            ],
+            "city": "BALTIMORE",
+            "state": "MD",
+            "postalCode": "21205"
+          }
+        ]
+      }
+    }
+  ]
+}
