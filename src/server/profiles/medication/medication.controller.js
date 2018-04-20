@@ -9,7 +9,7 @@ module.exports.getMedication = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific medication
-		let Medication = require(resolveFromVersion(version, 'uscore/resources/Medication'));
+		let { Medication } = require(resolveFromVersion(version, 'uscore/resources/Medication'));
 
 		/**
 		* return service.getMedication(req, logger)
@@ -64,7 +64,7 @@ module.exports.getMedicationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific medication
-		let Medication = require(resolveFromVersion(version, 'uscore/resources/Medication'));
+		let { Medication } = require(resolveFromVersion(version, 'uscore/resources/Medication'));
 
 		return service.getMedicationById(req, logger, context)
 			.then((medication) => {

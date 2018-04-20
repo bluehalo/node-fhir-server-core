@@ -9,7 +9,7 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific location
-		let Location = require(resolveFromVersion(version, 'uscore/resources/Location'));
+		let { Location } = require(resolveFromVersion(version, 'uscore/resources/Location'));
 
 		/**
 		* return service.getLocation(req, logger)
@@ -64,7 +64,7 @@ module.exports.getLocationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific location
-		let Location = require(resolveFromVersion(version, 'uscore/resources/Location'));
+		let { Location } = require(resolveFromVersion(version, 'uscore/resources/Location'));
 
 		return service.getLocationById(req, logger, context)
 			.then((location) => {

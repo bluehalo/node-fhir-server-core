@@ -9,7 +9,7 @@ module.exports.getCondition = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific condition
-		let Condition = require(resolveFromVersion(version, 'uscore/resources/Condition'));
+		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
 
 		/**
 		* return service.getCondition(req, logger)
@@ -64,7 +64,7 @@ module.exports.getConditionById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific condition
-		let Condition = require(resolveFromVersion(version, 'uscore/resources/Condition'));
+		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
 
 		return service.getConditionById(req, logger, context)
 			.then((condition) => {

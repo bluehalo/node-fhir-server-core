@@ -9,7 +9,7 @@ module.exports.getCareTeam = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific careteam
-		let CareTeam = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
+		let { CareTeam } = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
 
 		/**
 		* return service.getCareTeam(req, logger)
@@ -64,7 +64,7 @@ module.exports.getCareTeamById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific careteam
-		let CareTeam = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
+		let { CareTeam } = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
 
 		return service.getCareTeamById(req, logger, context)
 			.then((careteam) => {

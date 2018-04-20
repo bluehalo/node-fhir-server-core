@@ -9,7 +9,7 @@ module.exports.getPractitioner = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific practitioner
-		let Practitioner = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
+		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
 
 		/**
 		* return service.getPractitioner(req, logger)
@@ -64,7 +64,7 @@ module.exports.getPractitionerById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific practitioner
-		let Practitioner = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
+		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
 
 		return service.getPractitionerById(req, logger, context)
 			.then((practitioner) => {

@@ -9,7 +9,7 @@ module.exports.getImmunization = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific immunization
-		let Immunization = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
+		let { Immunization } = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
 
 		/**
 		* return service.getImmunization(req, logger)
@@ -64,7 +64,7 @@ module.exports.getImmunizationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific immunization
-		let Immunization = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
+		let { Immunization } = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
 
 		return service.getImmunizationById(req, logger, context)
 			.then((immunization) => {

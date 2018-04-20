@@ -9,7 +9,7 @@ module.exports.getProcedure = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific procedure
-		let Procedure = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
+		let { Procedure } = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
 
 		/**
 		* return service.getProcedure(req, logger)
@@ -64,7 +64,7 @@ module.exports.getProcedureById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific procedure
-		let Procedure = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
+		let { Procedure } = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
 
 		return service.getProcedureById(req, logger, context)
 			.then((procedure) => {

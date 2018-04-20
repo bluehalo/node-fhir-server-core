@@ -9,7 +9,7 @@ module.exports.getGoal = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific goal
-		let Goal = require(resolveFromVersion(version, 'uscore/resources/Goal'));
+		let { Goal } = require(resolveFromVersion(version, 'uscore/resources/Goal'));
 
 		/**
 		* return service.getGoal(req, logger)
@@ -64,7 +64,7 @@ module.exports.getGoalById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific goal
-		let Goal = require(resolveFromVersion(version, 'uscore/resources/Goal'));
+		let { Goal } = require(resolveFromVersion(version, 'uscore/resources/Goal'));
 
 		return service.getGoalById(req, logger, context)
 			.then((goal) => {

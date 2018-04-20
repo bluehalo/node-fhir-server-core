@@ -9,7 +9,7 @@ module.exports.getObservation = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observation
-		let Observation = require(resolveFromVersion(version, 'uscore/resources/Observation'));
+		let { Observation } = require(resolveFromVersion(version, 'uscore/resources/Observation'));
 
 		/**
 		 * return service.getObservation(req, logger)
@@ -63,7 +63,7 @@ module.exports.getObservationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observation
-		let Observation = require(resolveFromVersion(version, 'uscore/resources/Observation'));
+		let { Observation } = require(resolveFromVersion(version, 'uscore/resources/Observation'));
 
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {

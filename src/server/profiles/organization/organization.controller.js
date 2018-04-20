@@ -9,7 +9,7 @@ module.exports.getOrganization = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific organization
-		let Organization = require(resolveFromVersion(version, 'uscore/resources/Organization'));
+		let { Organization } = require(resolveFromVersion(version, 'uscore/resources/Organization'));
 
 		/**
 		* return service.getOrganization(req, logger)
@@ -64,7 +64,7 @@ module.exports.getOrganizationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific organization
-		let Organization = require(resolveFromVersion(version, 'uscore/resources/Organization'));
+		let { Organization } = require(resolveFromVersion(version, 'uscore/resources/Organization'));
 
 		return service.getOrganizationById(req, logger, context)
 			.then((organization) => {

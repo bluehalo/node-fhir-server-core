@@ -9,7 +9,7 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/resources/Patient'));
+		let { Patient } = require(resolveFromVersion(version, 'uscore/resources/Patient'));
 
 		/**
 		* return service.getPatient(req, logger)
@@ -63,7 +63,7 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/resources/Patient'));
+		let { Patient } = require(resolveFromVersion(version, 'uscore/resources/Patient'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others

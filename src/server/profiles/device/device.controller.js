@@ -9,7 +9,7 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific device
-		let Device = require(resolveFromVersion(version, 'uscore/resources/Device'));
+		let { Device } = require(resolveFromVersion(version, 'uscore/resources/Device'));
 
 		/**
 		* return service.getDevice(req, logger)
@@ -64,7 +64,7 @@ module.exports.getDeviceById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific device
-		let Device = require(resolveFromVersion(version, 'uscore/resources/Device'));
+		let { Device } = require(resolveFromVersion(version, 'uscore/resources/Device'));
 
 		return service.getDeviceById(req, logger, context)
 			.then((device) => {

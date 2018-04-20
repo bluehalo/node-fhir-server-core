@@ -9,7 +9,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific diagnosticreport
-		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
+		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
 
 		/**
 		* return service.getDiagnosticReport(req, logger)
@@ -64,7 +64,7 @@ module.exports.getDiagnosticReportById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific diagnosticreport
-		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
+		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
 
 		return service.getDiagnosticReportById(req, logger, context)
 			.then((diagnosticreport) => {

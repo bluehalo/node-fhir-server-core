@@ -9,7 +9,7 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationresults
-		let ObservationResults = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
+		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
 		/**
 		* return service.getObservationResults(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
@@ -63,7 +63,7 @@ module.exports.getObservationResultsById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationresults
-		let ObservationResults = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
+		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
 
 		return service.getObservationResultsById(req, logger, context)
 			.then((observationresults) => {

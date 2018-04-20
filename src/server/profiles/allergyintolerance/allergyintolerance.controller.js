@@ -9,7 +9,7 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific allergyintolerance
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
+		let { AllergyIntolerance } = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
 
 		/**
 		* return service.getAllergyIntolerance(req, logger)
@@ -63,7 +63,7 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific allergyintolerance
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
+		let { AllergyIntolerance } = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
 
 		return service.getAllergyIntoleranceById(req, logger, context)
 			.then((allergyintolerance) => {

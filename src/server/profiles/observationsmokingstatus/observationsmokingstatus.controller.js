@@ -9,7 +9,7 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationsmokingstatus
-		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
+		let { ObservationSmokingStatus } = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
 
 		/**
 		* return service.getObservationSmokingStatus(req, logger)
@@ -64,7 +64,7 @@ module.exports.getObservationSmokingStatusById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationsmokingstatus
-		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
+		let { ObservationSmokingStatus } = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
 
 		return service.getObservationSmokingStatusById(req, logger, context)
 			.then((observationsmokingstatus) => {
