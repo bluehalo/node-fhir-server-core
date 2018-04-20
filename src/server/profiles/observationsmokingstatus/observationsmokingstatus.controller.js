@@ -1,4 +1,4 @@
-const ObservationSmokingStatus = require('../../standards/stu3/uscore/resources/ObservationSmokingStatus');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific observationsmokingstatus
+		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
 
 		/**
 		* return service.getObservationSmokingStatus(req, logger)
@@ -58,24 +60,11 @@ module.exports.getObservationSmokingStatusById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.observationsmokingstatus, then we need to validate that this observationsmokingstatus
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.observationsmokingstatus
-			&& req.body
-			&& req.body.id
-			&& req.observationsmokingstatus !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access observationsmokingstatus ${req.body.id}.`));
-		}
-		
-		console.log('message from observationsmokingstatus');
+		let context = { version };
+		// Get a resource specific observationsmokingstatus
+		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
 
 		return service.getObservationSmokingStatusById(req, logger, context)
 			.then((observationsmokingstatus) => {
@@ -90,23 +79,3 @@ module.exports.getObservationSmokingStatusById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getObservationSmokingStatusByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getObservationSmokingStatusByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

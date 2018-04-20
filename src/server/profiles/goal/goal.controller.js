@@ -1,4 +1,4 @@
-const Goal = require('../../standards/stu3/uscore/resources/Goal');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getGoal = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getGoal = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/resources/Goal'));
 
 		/**
 		* return service.getGoal(req, logger)
@@ -58,22 +60,11 @@ module.exports.getGoalById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.goal, then we need to validate that this goal
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.goal
-			&& req.body
-			&& req.body.id
-			&& req.goal !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access goal ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/resources/Goal'));
 
 		return service.getGoalById(req, logger, context)
 			.then((goal) => {
@@ -88,23 +79,3 @@ module.exports.getGoalById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getGoalByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getGoalByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

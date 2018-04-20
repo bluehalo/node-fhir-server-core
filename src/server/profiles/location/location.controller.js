@@ -1,4 +1,4 @@
-const Location = require('../../standards/stu3/uscore/resources/Location');
+const { resolveFromVersion } = require('../../utils/error.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getLocation = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific location
+		let Location = require(resolveFromVersion(version, 'uscore/resources/Location'));
 
 		/**
 		* return service.getLocation(req, logger)
@@ -58,22 +60,11 @@ module.exports.getLocationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.location, then we need to validate that this location
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.location
-			&& req.body
-			&& req.body.id
-			&& req.location !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access location ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific location
+		let Location = require(resolveFromVersion(version, 'uscore/resources/Location'));
 
 		return service.getLocationById(req, logger, context)
 			.then((location) => {
@@ -88,23 +79,3 @@ module.exports.getLocationById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getLocationByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getLocationByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

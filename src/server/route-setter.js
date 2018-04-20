@@ -99,7 +99,7 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-//				validate(route.scopes, logger, config),
+				validate(route.scopes, logger, config),
 				// Finally our controller function
 				route.controller({ profile, logger, config })
 			);

@@ -1,4 +1,4 @@
-const Organization = require('../../standards/stu3/uscore/resources/Organization');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getOrganization = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getOrganization = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific organization
+		let Organization = require(resolveFromVersion(version, 'uscore/resources/Organization'));
 
 		/**
 		* return service.getOrganization(req, logger)
@@ -58,22 +60,11 @@ module.exports.getOrganizationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.organization, then we need to validate that this organization
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.organization
-			&& req.body
-			&& req.body.id
-			&& req.organization !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access organization ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific organization
+		let Organization = require(resolveFromVersion(version, 'uscore/resources/Organization'));
 
 		return service.getOrganizationById(req, logger, context)
 			.then((organization) => {
@@ -88,23 +79,3 @@ module.exports.getOrganizationById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getOrganizationByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getOrganizationByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

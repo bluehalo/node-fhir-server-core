@@ -1,4 +1,4 @@
-const Immunization = require('../../standards/stu3/uscore/resources/Immunization');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getImmunization = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getImmunization = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific immunization
+		let Immunization = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
 
 		/**
 		* return service.getImmunization(req, logger)
@@ -58,22 +60,11 @@ module.exports.getImmunizationById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.immunization, then we need to validate that this immunization
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.immunization
-			&& req.body
-			&& req.body.id
-			&& req.immunization !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access immunization ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific immunization
+		let Immunization = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
 
 		return service.getImmunizationById(req, logger, context)
 			.then((immunization) => {
@@ -88,23 +79,3 @@ module.exports.getImmunizationById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getImmunizationByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getImmunizationByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

@@ -1,4 +1,4 @@
-const Procedure = require('../../standards/stu3/uscore/resources/Procedure');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getProcedure = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getProcedure = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific procedure
+		let Procedure = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
 
 		/**
 		* return service.getProcedure(req, logger)
@@ -58,22 +60,11 @@ module.exports.getProcedureById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.procedure, then we need to validate that this procedure
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.procedure
-			&& req.body
-			&& req.body.id
-			&& req.procedure !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access procedure ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific procedure
+		let Procedure = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
 
 		return service.getProcedureById(req, logger, context)
 			.then((procedure) => {
@@ -88,23 +79,3 @@ module.exports.getProcedureById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getProcedureByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getProcedureByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

@@ -1,4 +1,4 @@
-const AllergyIntolerance = require('../../standards/stu3/uscore/resources/AllergyIntolerance');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific allergyintolerance
+		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
 
 		/**
 		* return service.getAllergyIntolerance(req, logger)
@@ -57,22 +59,11 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		console.log('message from allergy');
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.allergyintolerance, then we need to validate that this allergyintolerance
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.allergyintolerance
-			&& req.body
-			&& req.body.id
-			&& req.allergyintolerance !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access allergyintolerance ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific allergyintolerance
+		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
 
 		return service.getAllergyIntoleranceById(req, logger, context)
 			.then((allergyintolerance) => {
@@ -87,23 +78,3 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getAllergyIntoleranceByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getAllergyIntoleranceByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };
