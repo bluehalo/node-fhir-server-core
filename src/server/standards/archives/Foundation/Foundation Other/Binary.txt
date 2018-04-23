@@ -1,5 +1,0 @@
-
-... contentType	Σ	1..1	code	MimeType of the binary content
-MimeType  (Required)
-... securityContext	Σ	0..1	Reference(Any)	Access Control Management
-... content		1..1	base64Binary	The actual content
