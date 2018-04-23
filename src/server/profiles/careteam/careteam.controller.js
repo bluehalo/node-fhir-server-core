@@ -1,4 +1,4 @@
-const CareTeam = require('../../standards/stu3/uscore/resources/CareTeam');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCareTeam = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getCareTeam = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific careteam
+		let { CareTeam } = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
 
 		/**
 		* return service.getCareTeam(req, logger)
@@ -58,22 +60,11 @@ module.exports.getCareTeamById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.careteam, then we need to validate that this careteam
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.careteam
-			&& req.body
-			&& req.body.id
-			&& req.careteam !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access careteam ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific careteam
+		let { CareTeam } = require(resolveFromVersion(version, 'uscore/resources/CareTeam'));
 
 		return service.getCareTeamById(req, logger, context)
 			.then((careteam) => {
@@ -88,23 +79,3 @@ module.exports.getCareTeamById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getCareTeamByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getCareTeamByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

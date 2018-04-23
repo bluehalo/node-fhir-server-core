@@ -1,4 +1,4 @@
-const MedicationStatement = require('../../standards/stu3/uscore/resources/MedicationStatement');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getMedicationStatement = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getMedicationStatement = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific medicationstatement
+		let { MedicationStatement } = require(resolveFromVersion(version, 'uscore/resources/MedicationStatement'));
 
 		/**
 		* return service.getMedicationStatement(req, logger)
@@ -58,22 +60,11 @@ module.exports.getMedicationStatementById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.medicationstatement, then we need to validate that this medicationstatement
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.medicationstatement
-			&& req.body
-			&& req.body.id
-			&& req.medicationstatement !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access medicationstatement ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific medicationstatement
+		let { MedicationStatement } = require(resolveFromVersion(version, 'uscore/resources/MedicationStatement'));
 
 		return service.getMedicationStatementById(req, logger, context)
 			.then((medicationstatement) => {
@@ -88,23 +79,3 @@ module.exports.getMedicationStatementById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getMedicationStatementByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getMedicationStatementByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

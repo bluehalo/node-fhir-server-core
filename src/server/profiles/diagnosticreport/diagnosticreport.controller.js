@@ -1,4 +1,4 @@
-const DiagnosticReport = require('../../standards/stu3/uscore/resources/DiagnosticReport');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getDiagnosticReport = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getDiagnosticReport = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific diagnosticreport
+		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
 
 		/**
 		* return service.getDiagnosticReport(req, logger)
@@ -58,22 +60,11 @@ module.exports.getDiagnosticReportById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.diagnosticreport, then we need to validate that this diagnosticreport
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.diagnosticreport
-			&& req.body
-			&& req.body.id
-			&& req.diagnosticreport !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access diagnosticreport ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific diagnosticreport
+		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
 
 		return service.getDiagnosticReportById(req, logger, context)
 			.then((diagnosticreport) => {
@@ -88,23 +79,3 @@ module.exports.getDiagnosticReportById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getDiagnosticReportByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getDiagnosticReportByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

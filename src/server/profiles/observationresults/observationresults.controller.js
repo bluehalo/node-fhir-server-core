@@ -1,4 +1,4 @@
-const ObservationResults = require('../../standards/stu3/uscore/resources/ObservationResults');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getObservationResults = ({ profile, logger, config }) => {
@@ -8,7 +8,8 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-
+		// Get a resource specific observationresults
+		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
 		/**
 		* return service.getObservationResults(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
@@ -58,22 +59,11 @@ module.exports.getObservationResultsById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.observationresults, then we need to validate that this observationresults
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.observationresults
-			&& req.body
-			&& req.body.id
-			&& req.observationresults !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access observationresults ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific observationresults
+		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
 
 		return service.getObservationResultsById(req, logger, context)
 			.then((observationresults) => {
@@ -88,23 +78,3 @@ module.exports.getObservationResultsById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getObservationResultsByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getObservationResultsByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

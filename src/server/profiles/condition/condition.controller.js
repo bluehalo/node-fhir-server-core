@@ -1,4 +1,4 @@
-const Condition = require('../../standards/stu3/uscore/resources/Condition');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCondition = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getCondition = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific condition
+		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
 
 		/**
 		* return service.getCondition(req, logger)
@@ -58,22 +60,11 @@ module.exports.getConditionById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.condition, then we need to validate that this condition
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.condition
-			&& req.body
-			&& req.body.id
-			&& req.condition !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access condition ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific condition
+		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
 
 		return service.getConditionById(req, logger, context)
 			.then((condition) => {
@@ -88,23 +79,3 @@ module.exports.getConditionById = ({ profile, logger }) => {
 			});
 	};
 };
-
-
-// module.exports.getConditionByFriend = ({ profile, logger }) => {
-// 	let { serviceModule: service } = profile;
-//
-// 	return (req, res, next) => {
-//
-// 		// Create a context I can pass some data through
-// 		let context = {
-// 			version: req.params.version
-// 		};
-//
-//
-// 		return service.getConditionByFriend(req,  logger,  context)
-// 			.then()
-// 			.catch(err => next(errors.internal(err.message)))
-//
-// 	};
-//
-// };

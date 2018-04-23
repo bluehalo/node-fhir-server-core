@@ -1,4 +1,4 @@
-const Practitioner = require('../../standards/stu3/uscore/resources/Practitioner');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getPractitioner = ({ profile, logger, config }) => {
@@ -8,6 +8,8 @@ module.exports.getPractitioner = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
+		// Get a resource specific practitioner
+		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
 
 		/**
 		* return service.getPractitioner(req, logger)
@@ -58,22 +60,11 @@ module.exports.getPractitionerById = ({ profile, logger }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-
+		let version = req.params.version;
 		// Create a context I can pass some data through
-		let context = {
-			version: req.params.version
-		};
-
-		// If we have req.practitioner, then we need to validate that this practitioner
-		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.practitioner
-			&& req.body
-			&& req.body.id
-			&& req.practitioner !== req.body.id
-		) {
-			return next(errors.unauthorized(`You are not allowed to access practitioner ${req.body.id}.`));
-		}
+		let context = { version };
+		// Get a resource specific practitioner
+		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
 
 		return service.getPractitionerById(req, logger, context)
 			.then((practitioner) => {
