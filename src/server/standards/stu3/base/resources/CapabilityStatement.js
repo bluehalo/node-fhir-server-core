@@ -6,184 +6,6 @@ const CodeableConcept = require('../types/CodeableConcept');
 const Reference = require('../types/Reference');
 const Coding = require('../types/Coding');
 
-class Resource {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// type	Σ	1..1	code	A resource type that is supported
-	// ResourceType (Required)
-	set type(type) {
-		this._type = new Code(type);
-	}
-
-	get type() {
-		return this._type;
-	}
-
-	// profile	Σ	0..1	Reference(StructureDefinition)	Base System profile for all uses of resource
-	set profile(profile) {
-		this._profile = new Reference(profile);
-	}
-
-	get profile() {
-		return this._profile;
-	}
-
-	// documentation		0..1	markdown	Additional information about the use of the resource type
-	set documentation(documentation) {
-		this._documentation = documentation;
-	}
-
-	get documentation() {
-		return this._documentation;
-	}
-
-	// interaction		1..*	BackboneElement	What operations are supported?
-	set interaction(interaction) {
-		if (Array.isArray(interaction)) {
-			this._interaction = interaction.map((i) => new Interaction(i));
-		} else {
-			this._interaction = [new Interaction(interaction)];
-		}
-	}
-
-	get interaction() {
-		return this._interaction;
-	}
-
-	// versioning		0..1	code	no-version | versioned | versioned-update
-	// ResourceVersionPolicy (Required)
-	set versioning(versioning) {
-		this._versioning = new Code(versioning);
-	}
-
-	get versioning() {
-		return this._versioning;
-	}
-
-	// readHistory		0..1	boolean	Whether vRead can return past versions
-	set readHistory(readHistory) {
-		this._readHistory = readHistory;
-	}
-
-	get readHistory() {
-		return this._readHistory;
-	}
-
-	// updateCreate		0..1	boolean	If update can commit to a new identity
-	set updateCreate(updateCreate) {
-		this._updateCreate = updateCreate;
-	}
-
-	get updateCreate() {
-		return this._updateCreate;
-	}
-
-	// conditionalCreate		0..1	boolean	If allows/uses conditional create
-	set conditionalCreate(conditionalCreate) {
-		this._conditionalCreate = conditionalCreate;
-	}
-
-	get conditionalCreate() {
-		return this._conditionalCreate;
-	}
-
-	// conditionalRead		0..1	code	not-supported | modified-since | not-match | full-support
-	// ConditionalReadStatus (Required)
-	set conditionalRead(conditionalRead) {
-		this._conditionalRead = new Code(conditionalRead);
-	}
-
-	get conditionalRead() {
-		return this._conditionalRead;
-	}
-
-	// conditionalUpdate		0..1	boolean	If allows/uses conditional update
-	set conditionalUpdate(conditionalUpdate) {
-		this._conditionalUpdate = conditionalUpdate;
-	}
-
-	get conditionalUpdate() {
-		return this._conditionalUpdate;
-	}
-
-	// conditionalDelete		0..1	code	not-supported | single | multiple - how conditional delete is supported
-	// ConditionalDeleteStatus (Required)
-	set conditionalDelete(conditionalDelete) {
-		this._conditionalDelete = new Code(conditionalDelete);
-	}
-
-	get conditionalDelete() {
-		return this._conditionalDelete;
-	}
-
-	// referencePolicy		0..*	code	literal | logical | resolves | enforced | local
-	// ReferenceHandlingPolicy (Required)
-	set referencePolicy(referencePolicy) {
-		if (Array.isArray(referencePolicy)) {
-			this._referencePolicy = referencePolicy.map((i) => new Code(i));
-		} else {
-			this._referencePolicy = [new Code(referencePolicy)];
-		}
-	}
-
-	get referencePolicy() {
-		return this._referencePolicy;
-	}
-
-	// searchInclude		0..*	string	_include values supported by the server
-	set searchInclude(searchInclude) {
-		this._searchInclude = [].concat(searchInclude);
-	}
-
-	get searchInclude() {
-		return this._searchInclude;
-	}
-
-	// searchRevInclude		0..*	string	_revinclude values supported by the server
-	set searchRevInclude(searchRevInclude) {
-		this._searchRevInclude = [].concat(searchRevInclude);
-	}
-
-	get searchRevInclude() {
-		return this._searchRevInclude;
-	}
-
-	// searchParam		0..*	BackboneElement	Search parameters supported by implementation
-	set searchParam(searchParam) {
-		if (Array.isArray(searchParam)) {
-			this._searchParam = searchParam.map((i) => new SearchParam(i));
-		} else {
-			this._searchParam = [new SearchParam(searchParam)];
-		}
-	}
-
-	get searchParam() {
-		return this._searchParam;
-	}
-
-	toJSON() {
-		return {
-			type: this._type,
-			profile: this._profile,
-			documentation: this._documentation,
-			interaction: this._interaction,
-			versioning: this._versioning,
-			readHistory: this._readHistory,
-			updateCreate: this._updateCreate,
-			conditionalCreate: this._conditionalCreate,
-			conditionalRead: this._conditionalRead,
-			conditionalUpdate: this._conditionalUpdate,
-			conditionalDelete: this._conditionalDelete,
-			referencePolicy: this._referencePolicy,
-			searchInclude: this._searchInclude,
-			searchRevInclude: this._searchRevInclude,
-			searchParam: this._searchParam,
-		};
-	}
-}
-
 class SearchParam {
 	constructor(obj) {
 		Object.assign(this, obj);
@@ -264,129 +86,6 @@ class Interaction {
 		return {
 			code: this._code,
 			documentation: this._documentation,
-		};
-	}
-}
-
-class Operation {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// name		1..1	string	Name by which the operation/query is invoked
-	set name(name) {
-		this._name = name;
-	}
-
-	get name() {
-		return this._name;
-	}
-
-	// definition	Σ	1..1	Reference(OperationDefinition)	The defined operation/query
-	set definition(definition) {
-		this._definition = new Reference(definition);
-	}
-
-	get definition() {
-		return this._definition;
-	}
-
-	toJSON() {
-		return {
-			name: this._name,
-			definition: this._definition,
-		};
-	}
-}
-
-class Interaction {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// code		1..1	code	read | vread | update | patch | delete | history-instance | history-type | create | search-type
-	// TypeRestfulInteraction (Required)
-	set code(code) {
-		this._code = new Code(code);
-	}
-
-	get code() {
-		return this._code;
-	}
-
-	// documentation		0..1	string	Anything special about operation behavior
-	set documentation(documentation) {
-		this._documentation = documentation;
-	}
-
-	get documentation() {
-		return this._documentation;
-	}
-
-	toJSON() {
-		return {
-			code: this._code,
-			documentation: this._documentation,
-		};
-	}
-}
-
-class Security {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// cors	Σ	0..1	boolean	Adds CORS Headers (http://enable-cors.org/)
-	set cors(cors) {
-		this._cors = cors;
-	}
-
-	get cors() {
-		return this._cors;
-	}
-
-	// service	Σ	0..*	CodeableConcept	OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
-	// RestfulSecurityService (Extensible)
-	set service(service) {
-		if (Array.isArray(service)) {
-			this._service = service.map((i) => new CodeableConcept(i));
-		} else {
-			this._service = [new CodeableConcept(service)];
-		}
-	}
-
-	get service() {
-		return this._service;
-	}
-
-	// description		0..1	string	General description of how security works
-	set description(description) {
-		this._description = description;
-	}
-
-	get description() {
-		return this._description;
-	}
-
-	// certificate		0..*	BackboneElement	Certificates associated with security profiles
-	set certificate(certificate) {
-		if (Array.isArray(certificate)) {
-			this._certificate = certificate.map((i) => new Certificate(i));
-		} else {
-			this._certificate = [new Certificate(certificate)];
-		}
-	}
-
-	get certificate() {
-		return this._certificate;
-	}
-
-	toJSON() {
-		return {
-			cors: this._cors,
-			service: this._service,
-			description: this._description,
-			certificate: this._certificate,
 		};
 	}
 }
@@ -755,6 +454,275 @@ class Messaging {
 			documentation: this._documentation,
 			supportedMessage: this._supportedMessage,
 			event: this._event,
+		};
+	}
+}
+
+class Resource {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// type	Σ	1..1	code	A resource type that is supported
+	// ResourceType (Required)
+	set type(type) {
+		this._type = new Code(type);
+	}
+
+	get type() {
+		return this._type;
+	}
+
+	// profile	Σ	0..1	Reference(StructureDefinition)	Base System profile for all uses of resource
+	set profile(profile) {
+		this._profile = new Reference(profile);
+	}
+
+	get profile() {
+		return this._profile;
+	}
+
+	// documentation		0..1	markdown	Additional information about the use of the resource type
+	set documentation(documentation) {
+		this._documentation = documentation;
+	}
+
+	get documentation() {
+		return this._documentation;
+	}
+
+	// interaction		1..*	BackboneElement	What operations are supported?
+	set interaction(interaction) {
+		if (Array.isArray(interaction)) {
+			this._interaction = interaction.map((i) => new Interaction(i));
+		} else {
+			this._interaction = [new Interaction(interaction)];
+		}
+	}
+
+	get interaction() {
+		return this._interaction;
+	}
+
+	// versioning		0..1	code	no-version | versioned | versioned-update
+	// ResourceVersionPolicy (Required)
+	set versioning(versioning) {
+		this._versioning = new Code(versioning);
+	}
+
+	get versioning() {
+		return this._versioning;
+	}
+
+	// readHistory		0..1	boolean	Whether vRead can return past versions
+	set readHistory(readHistory) {
+		this._readHistory = readHistory;
+	}
+
+	get readHistory() {
+		return this._readHistory;
+	}
+
+	// updateCreate		0..1	boolean	If update can commit to a new identity
+	set updateCreate(updateCreate) {
+		this._updateCreate = updateCreate;
+	}
+
+	get updateCreate() {
+		return this._updateCreate;
+	}
+
+	// conditionalCreate		0..1	boolean	If allows/uses conditional create
+	set conditionalCreate(conditionalCreate) {
+		this._conditionalCreate = conditionalCreate;
+	}
+
+	get conditionalCreate() {
+		return this._conditionalCreate;
+	}
+
+	// conditionalRead		0..1	code	not-supported | modified-since | not-match | full-support
+	// ConditionalReadStatus (Required)
+	set conditionalRead(conditionalRead) {
+		this._conditionalRead = new Code(conditionalRead);
+	}
+
+	get conditionalRead() {
+		return this._conditionalRead;
+	}
+
+	// conditionalUpdate		0..1	boolean	If allows/uses conditional update
+	set conditionalUpdate(conditionalUpdate) {
+		this._conditionalUpdate = conditionalUpdate;
+	}
+
+	get conditionalUpdate() {
+		return this._conditionalUpdate;
+	}
+
+	// conditionalDelete		0..1	code	not-supported | single | multiple - how conditional delete is supported
+	// ConditionalDeleteStatus (Required)
+	set conditionalDelete(conditionalDelete) {
+		this._conditionalDelete = new Code(conditionalDelete);
+	}
+
+	get conditionalDelete() {
+		return this._conditionalDelete;
+	}
+
+	// referencePolicy		0..*	code	literal | logical | resolves | enforced | local
+	// ReferenceHandlingPolicy (Required)
+	set referencePolicy(referencePolicy) {
+		if (Array.isArray(referencePolicy)) {
+			this._referencePolicy = referencePolicy.map((i) => new Code(i));
+		} else {
+			this._referencePolicy = [new Code(referencePolicy)];
+		}
+	}
+
+	get referencePolicy() {
+		return this._referencePolicy;
+	}
+
+	// searchInclude		0..*	string	_include values supported by the server
+	set searchInclude(searchInclude) {
+		this._searchInclude = [].concat(searchInclude);
+	}
+
+	get searchInclude() {
+		return this._searchInclude;
+	}
+
+	// searchRevInclude		0..*	string	_revinclude values supported by the server
+	set searchRevInclude(searchRevInclude) {
+		this._searchRevInclude = [].concat(searchRevInclude);
+	}
+
+	get searchRevInclude() {
+		return this._searchRevInclude;
+	}
+
+	// searchParam		0..*	BackboneElement	Search parameters supported by implementation
+	set searchParam(searchParam) {
+		if (Array.isArray(searchParam)) {
+			this._searchParam = searchParam.map((i) => new SearchParam(i));
+		} else {
+			this._searchParam = [new SearchParam(searchParam)];
+		}
+	}
+
+	get searchParam() {
+		return this._searchParam;
+	}
+
+	toJSON() {
+		return {
+			type: this._type,
+			profile: this._profile,
+			documentation: this._documentation,
+			interaction: this._interaction,
+			versioning: this._versioning,
+			readHistory: this._readHistory,
+			updateCreate: this._updateCreate,
+			conditionalCreate: this._conditionalCreate,
+			conditionalRead: this._conditionalRead,
+			conditionalUpdate: this._conditionalUpdate,
+			conditionalDelete: this._conditionalDelete,
+			referencePolicy: this._referencePolicy,
+			searchInclude: this._searchInclude,
+			searchRevInclude: this._searchRevInclude,
+			searchParam: this._searchParam,
+		};
+	}
+}
+
+class Operation {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// name		1..1	string	Name by which the operation/query is invoked
+	set name(name) {
+		this._name = name;
+	}
+
+	get name() {
+		return this._name;
+	}
+
+	// definition	Σ	1..1	Reference(OperationDefinition)	The defined operation/query
+	set definition(definition) {
+		this._definition = new Reference(definition);
+	}
+
+	get definition() {
+		return this._definition;
+	}
+
+	toJSON() {
+		return {
+			name: this._name,
+			definition: this._definition,
+		};
+	}
+}
+
+class Security {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// cors	Σ	0..1	boolean	Adds CORS Headers (http://enable-cors.org/)
+	set cors(cors) {
+		this._cors = cors;
+	}
+
+	get cors() {
+		return this._cors;
+	}
+
+	// service	Σ	0..*	CodeableConcept	OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
+	// RestfulSecurityService (Extensible)
+	set service(service) {
+		if (Array.isArray(service)) {
+			this._service = service.map((i) => new CodeableConcept(i));
+		} else {
+			this._service = [new CodeableConcept(service)];
+		}
+	}
+
+	get service() {
+		return this._service;
+	}
+
+	// description		0..1	string	General description of how security works
+	set description(description) {
+		this._description = description;
+	}
+
+	get description() {
+		return this._description;
+	}
+
+	// certificate		0..*	BackboneElement	Certificates associated with security profiles
+	set certificate(certificate) {
+		if (Array.isArray(certificate)) {
+			this._certificate = certificate.map((i) => new Certificate(i));
+		} else {
+			this._certificate = [new Certificate(certificate)];
+		}
+	}
+
+	get certificate() {
+		return this._certificate;
+	}
+
+	toJSON() {
+		return {
+			cors: this._cors,
+			service: this._service,
+			description: this._description,
+			certificate: this._certificate,
 		};
 	}
 }

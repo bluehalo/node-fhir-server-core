@@ -83,7 +83,7 @@ let sanitizeMiddleware = function (config) {
 
 			// If the argument is required but not present
 			if (!currentArgs[conf.name] && conf.required) {
-				return next(errors.invalidParameter(conf.name + ' is required.'));
+				return next(errors.invalidParameter(conf.name + ' is required'));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
@@ -93,12 +93,12 @@ let sanitizeMiddleware = function (config) {
 					cleanArgs[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
 				}
 			} catch (err) {
-				return next(errors.invalidParameter(conf.name + ' is invalid.'));
+				return next(errors.invalidParameter(conf.name + ' is invalid'));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
 			if (cleanArgs[conf.name] !== undefined && !validateType(conf.type, cleanArgs[conf.name])) {
-				return next(errors.invalidParameter(conf.name));
+				return next(errors.invalidParameter('Invalid parameter: ' + conf.name));
 			}
 		}
 

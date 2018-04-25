@@ -1,8 +1,0 @@
-Main
-Range
-low	ΣI	0..1	SimpleQuantity	Low limit
-
-high	ΣI	0..1	SimpleQuantity	High limit
-
-
-eof

@@ -7,47 +7,33 @@ const CodeableConcept = require('../types/CodeableConcept');
 const Reference = require('../types/Reference');
 const Coding = require('../types/Coding');
 
-class Ruleset {
+class Param {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
 
-	// rulesetId		1..1	id	Id of the TestScript.ruleset
-	set rulesetId(rulesetId) {
-		this._rulesetId = rulesetId;
+	// name		1..1	string	Parameter name matching external assert rule parameter
+	set name(name) {
+		this._name = name;
 	}
 
-	get rulesetId() {
-		return this._rulesetId;
+	get name() {
+		return this._name;
 	}
 
-	// resource		1..1	Reference(Any)	Assert ruleset resource reference
-	set resource(resource) {
-		this._resource = new Reference(resource);
+	// value		0..1	string	Parameter value defined either explicitly or dynamically
+	set value(value) {
+		this._value = value;
 	}
 
-	get resource() {
-		return this._resource;
-	}
-
-	// rule		1..*	BackboneElement	The referenced rule within the ruleset
-	set rule(rule) {
-		if (Array.isArray(rule)) {
-			this._rule = rule.map((i) => new Rule(i));
-		} else {
-			this._rule = [new Rule(rule)];
-		}
-	}
-
-	get rule() {
-		return this._rule;
+	get value() {
+		return this._value;
 	}
 
 	toJSON() {
 		return {
-			rulesetId: this._rulesetId,
-			resource: this._resource,
-			rule: this._rule,
+			name: this._name,
+			value: this._value,
 		};
 	}
 }
@@ -97,33 +83,47 @@ class Rule {
 	}
 }
 
-class Param {
+class Ruleset {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
 
-	// name		1..1	string	Parameter name matching external assert rule parameter
-	set name(name) {
-		this._name = name;
+	// rulesetId		1..1	id	Id of the TestScript.ruleset
+	set rulesetId(rulesetId) {
+		this._rulesetId = rulesetId;
 	}
 
-	get name() {
-		return this._name;
+	get rulesetId() {
+		return this._rulesetId;
 	}
 
-	// value		0..1	string	Parameter value defined either explicitly or dynamically
-	set value(value) {
-		this._value = value;
+	// resource		1..1	Reference(Any)	Assert ruleset resource reference
+	set resource(resource) {
+		this._resource = new Reference(resource);
 	}
 
-	get value() {
-		return this._value;
+	get resource() {
+		return this._resource;
+	}
+
+	// rule		1..*	BackboneElement	The referenced rule within the ruleset
+	set rule(rule) {
+		if (Array.isArray(rule)) {
+			this._rule = rule.map((i) => new Rule(i));
+		} else {
+			this._rule = [new Rule(rule)];
+		}
+	}
+
+	get rule() {
+		return this._rule;
 	}
 
 	toJSON() {
 		return {
-			name: this._name,
-			value: this._value,
+			rulesetId: this._rulesetId,
+			resource: this._resource,
+			rule: this._rule,
 		};
 	}
 }
@@ -219,85 +219,37 @@ class Variable {
 	}
 }
 
-class Fixture {
+class Link {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
 
-	// autocreate		0..1	boolean	Whether or not to implicitly create the fixture during setup
-	set autocreate(autocreate) {
-		this._autocreate = autocreate;
+	// url		1..1	uri	URL to the specification
+	set url(url) {
+		this._url = url;
 	}
 
-	get autocreate() {
-		return this._autocreate;
+	get url() {
+		return this._url;
 	}
 
-	// autodelete		0..1	boolean	Whether or not to implicitly delete the fixture during teardown
-	set autodelete(autodelete) {
-		this._autodelete = autodelete;
+	// description		0..1	string	Short description
+	set description(description) {
+		this._description = description;
 	}
 
-	get autodelete() {
-		return this._autodelete;
-	}
-
-	// resource		0..1	Reference(Any)	Reference of the resource
-	set resource(resource) {
-		this._resource = new Reference(resource);
-	}
-
-	get resource() {
-		return this._resource;
+	get description() {
+		return this._description;
 	}
 
 	toJSON() {
 		return {
-			autocreate: this._autocreate,
-			autodelete: this._autodelete,
-			resource: this._resource,
+			url: this._url,
+			description: this._description,
 		};
 	}
 }
 
-class Metadata {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// link		0..*	BackboneElement	Links to the FHIR specification
-	set link(link) {
-		if (Array.isArray(link)) {
-			this._link = link.map((i) => new Link(i));
-		} else {
-			this._link = [new Link(link)];
-		}
-	}
-
-	get link() {
-		return this._link;
-	}
-
-	// capability		1..*	BackboneElement	Capabilities that are assumed to function correctly on the FHIR server being tested
-	set capability(capability) {
-		if (Array.isArray(capability)) {
-			this._capability = capability.map((i) => new Capability(i));
-		} else {
-			this._capability = [new Capability(capability)];
-		}
-	}
-
-	get capability() {
-		return this._capability;
-	}
-
-	toJSON() {
-		return {
-			link: this._link,
-			capability: this._capability,
-		};
-	}
-}
 
 class Capability {
 	constructor(obj) {
@@ -380,33 +332,82 @@ class Capability {
 	}
 }
 
-class Link {
+class Fixture {
 	constructor(obj) {
 		Object.assign(this, obj);
 	}
 
-	// url		1..1	uri	URL to the specification
-	set url(url) {
-		this._url = url;
+	// autocreate		0..1	boolean	Whether or not to implicitly create the fixture during setup
+	set autocreate(autocreate) {
+		this._autocreate = autocreate;
 	}
 
-	get url() {
-		return this._url;
+	get autocreate() {
+		return this._autocreate;
 	}
 
-	// description		0..1	string	Short description
-	set description(description) {
-		this._description = description;
+	// autodelete		0..1	boolean	Whether or not to implicitly delete the fixture during teardown
+	set autodelete(autodelete) {
+		this._autodelete = autodelete;
 	}
 
-	get description() {
-		return this._description;
+	get autodelete() {
+		return this._autodelete;
+	}
+
+	// resource		0..1	Reference(Any)	Reference of the resource
+	set resource(resource) {
+		this._resource = new Reference(resource);
+	}
+
+	get resource() {
+		return this._resource;
 	}
 
 	toJSON() {
 		return {
-			url: this._url,
-			description: this._description,
+			autocreate: this._autocreate,
+			autodelete: this._autodelete,
+			resource: this._resource,
+		};
+	}
+}
+
+class Metadata {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// link		0..*	BackboneElement	Links to the FHIR specification
+	set link(link) {
+		if (Array.isArray(link)) {
+			this._link = link.map((i) => new Link(i));
+		} else {
+			this._link = [new Link(link)];
+		}
+	}
+
+	get link() {
+		return this._link;
+	}
+
+	// capability		1..*	BackboneElement	Capabilities that are assumed to function correctly on the FHIR server being tested
+	set capability(capability) {
+		if (Array.isArray(capability)) {
+			this._capability = capability.map((i) => new Capability(i));
+		} else {
+			this._capability = [new Capability(capability)];
+		}
+	}
+
+	get capability() {
+		return this._capability;
+	}
+
+	toJSON() {
+		return {
+			link: this._link,
+			capability: this._capability,
 		};
 	}
 }
@@ -439,6 +440,41 @@ class Destination {
 		return {
 			index: this._index,
 			profile: this._profile,
+		};
+	}
+}
+
+class Action {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// operation	I	0..1	see operation	The setup operation to perform
+	// + Test operation SHALL contain either sourceId or targetId or params or url.
+	set operation(operation) {
+		this._operation = operation;
+	}
+
+	get operation() {
+		return this._operation;
+	}
+
+	// assert	I	0..1	see assert	The setup assertion to perform
+	// + Only a single assertion SHALL be present within test action assert element.
+	// + Test action assert SHALL contain either compareToSourceId and compareToSourceExpression, compareToSourceId and compareToSourcePath or neither.
+	// + Test action assert response and response and responseCode SHALL be empty when direction equals request
+	set assert(assert) {
+		this._assert = assert;
+	}
+
+	get assert() {
+		return this._assert;
+	}
+
+	toJSON() {
+		return {
+			operation: this._operation,
+			assert: this._assert,
 		};
 	}
 }
@@ -496,41 +532,6 @@ class Teardown {
 	toJSON() {
 		return {
 			action: this._action,
-		};
-	}
-}
-
-class Action {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// operation	I	0..1	see operation	The setup operation to perform
-	// + Test operation SHALL contain either sourceId or targetId or params or url.
-	set operation(operation) {
-		this._operation = operation;
-	}
-
-	get operation() {
-		return this._operation;
-	}
-
-	// assert	I	0..1	see assert	The setup assertion to perform
-	// + Only a single assertion SHALL be present within test action assert element.
-	// + Test action assert SHALL contain either compareToSourceId and compareToSourceExpression, compareToSourceId and compareToSourcePath or neither.
-	// + Test action assert response and response and responseCode SHALL be empty when direction equals request
-	set assert(assert) {
-		this._assert = assert;
-	}
-
-	get assert() {
-		return this._assert;
-	}
-
-	toJSON() {
-		return {
-			operation: this._operation,
-			assert: this._assert,
 		};
 	}
 }
@@ -1044,41 +1045,6 @@ class Operation {
 			sourceId: this._sourceId,
 			targetId: this._targetId,
 			url: this._url,
-		};
-	}
-}
-
-class Action {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// operation	I	0..1	BackboneElement	The setup operation to perform
-	// + Setup operation SHALL contain either sourceId or targetId or params or url.
-	set operation(operation) {
-		this._operation = new Operation(operation);
-	}
-
-	get operation() {
-		return this._operation;
-	}
-
-	// assert	I	0..1	BackboneElement	The assertion to perform
-	// + Only a single assertion SHALL be present within setup action assert element.
-	// + Setup action assert SHALL contain either compareToSourceId and compareToSourceExpression, compareToSourceId and compareToSourcePath or neither.
-	// + Setup action assert response and responseCode SHALL be empty when direction equals request
-	set assert(assert) {
-		this._assert = new Assert(assert);
-	}
-
-	get assert() {
-		return this._assert;
-	}
-
-	toJSON() {
-		return {
-			operation: this._operation,
-			assert: this._assert,
 		};
 	}
 }

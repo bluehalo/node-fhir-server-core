@@ -44,7 +44,6 @@ let filterProfiles = (version) => {
 */
 let getStatementGenerators = (version) => {
 	switch (version) {
-		case VERSIONS.DSTU2: return require('./capability.dstu2');
 		case VERSIONS.STU3: return require('./capability.stu3');
 		default: return {};
 	}

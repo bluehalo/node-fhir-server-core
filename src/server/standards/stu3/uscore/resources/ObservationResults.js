@@ -527,28 +527,6 @@ class ObservationResults extends DomainResource {
 		return this._code;
 	}
 
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
-	}
-
 	// coding	S	1..*	Coding	Standard and local codes may be included here by repeating the coding element with a different coding.system.
 	set coding(coding) {
 		if (Array.isArray(coding)) {
@@ -560,28 +538,6 @@ class ObservationResults extends DomainResource {
 
 	get coding() {
 		return this._coding;
-	}
-
-	// id		0..1	string	xml:id (or equivalent in JSON)
-	set id(id) {
-		this._id = id;
-	}
-
-	get id() {
-		return this._id;
-	}
-
-	// extension		0..*	Extension	Additional Content defined by implementations
-	set extension(extension) {
-		if (Array.isArray(extension)) {
-			this._extension = extension.map((i) => new Extension(i));
-		} else {
-			this._extension = [new Extension(extension)];
-		}
-	}
-
-	get extension() {
-		return this._extension;
 	}
 
 	// system	S	1..1	uri	Identity of the terminology system
@@ -602,15 +558,6 @@ class ObservationResults extends DomainResource {
 		return this._version;
 	}
 
-	// code	S	1..1	code	Symbol in syntax defined by the system
-	set code(code) {
-		this._code = new Code(code);
-	}
-
-	get code() {
-		return this._code;
-	}
-
 	// display	S	0..1	string	Representation defined by the system
 	set display(display) {
 		this._display = display;
@@ -627,15 +574,6 @@ class ObservationResults extends DomainResource {
 
 	get userSelected() {
 		return this._userSelected;
-	}
-
-	// text	S	0..1	string	Display text
-	set text(text) {
-		this._text = text;
-	}
-
-	get text() {
-		return this._text;
 	}
 
 	// subject	S	1..1	Reference(US Core Patient Profile)	Who and/or what this is about
@@ -798,99 +736,6 @@ class ObservationResults extends DomainResource {
 		return this._valuePeriod;
 	}
 
-	// value[x]	SI	0..1	string, Range, Ratio, SampledData, Attachment, time, dateTime, Period	Actual result
-	// valueString			string
-	set valueString(valueString) {
-		this._valueString = valueString;
-	}
-
-	get valueString() {
-		return this._valueString;
-	}
-
-	// valueRange			Range
-	set valueRange(valueRange) {
-		this._valueRange = new Range(valueRange);
-	}
-
-	get valueRange() {
-		return this._valueRange;
-	}
-
-	// valueRatio			Ratio
-	set valueRatio(valueRatio) {
-		this._valueRatio = new Ratio(valueRatio);
-	}
-
-	get valueRatio() {
-		return this._valueRatio;
-	}
-
-	// valueSampledData			SampledData
-	set valueSampledData(valueSampledData) {
-		this._valueSampledData = new SampledData(valueSampledData);
-	}
-
-	get valueSampledData() {
-		return this._valueSampledData;
-	}
-
-	// valueAttachment			Attachment
-	set valueAttachment(valueAttachment) {
-		this._valueAttachment = new Attachment(valueAttachment);
-	}
-
-	get valueAttachment() {
-		return this._valueAttachment;
-	}
-
-	// valueTime			time
-	set valueTime(valueTime) {
-		this._valueTime = valueTime;
-	}
-
-	get valueTime() {
-		return this._valueTime;
-	}
-
-	// valueDateTime			dateTime
-	set valueDateTime(valueDateTime) {
-		this._valueDateTime = valueDateTime;
-	}
-
-	get valueDateTime() {
-		return this._valueDateTime;
-	}
-
-	// valuePeriod			Period
-	set valuePeriod(valuePeriod) {
-		this._valuePeriod = new Period(valuePeriod);
-	}
-
-	get valuePeriod() {
-		return this._valuePeriod;
-	}
-
-	// valueQuantity	SI	0..1	Quantity	Actual result
-	// Binding: UCUM units (required)
-	set valueQuantity(valueQuantity) {
-		this._valueQuantity = new Quantity(valueQuantity);
-	}
-
-	get valueQuantity() {
-		return this._valueQuantity;
-	}
-
-	// valueCodeableConcept	SI	0..1	CodeableConcept	Actual result
-	// Binding: Observation Value Codes (SNOMED-CT) (preferred)
-	set valueCodeableConcept(valueCodeableConcept) {
-		this._valueCodeableConcept = new CodeableConcept(valueCodeableConcept);
-	}
-
-	get valueCodeableConcept() {
-		return this._valueCodeableConcept;
-	}
-
 	// dataAbsentReason	SI	0..1	CodeableConcept	Why the result is missing
 	// Binding: Observation Value Absent Reason (extensible)
 	set dataAbsentReason(dataAbsentReason) {
@@ -1012,17 +857,11 @@ class ObservationResults extends DomainResource {
 			status: this._status,
 			category: this._category,
 			code: this._code,
-			id: this._id,
-			extension: this._extension,
 			coding: this._coding,
-			id: this._id,
-			extension: this._extension,
 			system: this._system,
 			version: this._version,
-			code: this._code,
 			display: this._display,
 			userSelected: this._userSelected,
-			text: this._text,
 			subject: this._subject,
 			encounter: this._encounter,
 			effectiveDateTime: this._effectiveDateTime,
@@ -1040,16 +879,6 @@ class ObservationResults extends DomainResource {
 			valueTime: this._valueTime,
 			valueDateTime: this._valueDateTime,
 			valuePeriod: this._valuePeriod,
-			valueString: this._valueString,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
 			dataAbsentReason: this._dataAbsentReason,
 			interpretation: this._interpretation,
 			comment: this._comment,

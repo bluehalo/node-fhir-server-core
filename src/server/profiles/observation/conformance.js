@@ -1,6 +1,6 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { routes } = require('./observation.config');
-const { DSTU2 } = require('../../../constants');
+const { STU3 } = require('../../../constants');
 
 /**
  * @name exports
@@ -17,7 +17,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: DSTU2.RESOURCE_TYPES.OBSERVATION,
+			type: STU3.RESOURCE_TYPES.OBSERVATION,
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Observation'
 			},

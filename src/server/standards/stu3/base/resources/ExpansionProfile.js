@@ -13,7 +13,9 @@ class Designation {
 
 	// include	Σ	0..1	BackboneElement	Designations to be included
 	set include(include) {
+		/* eslint-disable no-use-before-define */
 		this._include = new Include(include);
+		/* eslint-enable no-use-before-define */
 	}
 
 	get include() {
@@ -23,7 +25,9 @@ class Designation {
 	// exclude	Σ	0..1	BackboneElement	Designations to be excluded
 	// + SHALL have at least one of language or use
 	set exclude(exclude) {
+		/* eslint-disable no-use-before-define */
 		this._exclude = new Exclude(exclude);
+		/* eslint-enable no-use-before-define */
 	}
 
 	get exclude() {

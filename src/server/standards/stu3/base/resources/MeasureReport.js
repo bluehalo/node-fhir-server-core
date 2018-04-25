@@ -164,15 +164,6 @@ class Group {
 		return this._population;
 	}
 
-	// identifier	Σ	0..1	Identifier	Population identifier as defined in the measure
-	set identifier(identifier) {
-		this._identifier = new Identifier(identifier);
-	}
-
-	get identifier() {
-		return this._identifier;
-	}
-
 	// code	Σ	0..1	CodeableConcept	initial-population | numerator | numerator-exclusion | denominator | denominator-exclusion | denominator-exception | measure-population | measure-population-exclusion | measure-score
 	// MeasurePopulationType (Extensible)
 	set code(code) {
@@ -227,7 +218,6 @@ class Group {
 		return {
 			identifier: this._identifier,
 			population: this._population,
-			identifier: this._identifier,
 			code: this._code,
 			count: this._count,
 			patients: this._patients,

@@ -104,6 +104,144 @@ class Friendly {
 	}
 }
 
+class Agent {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// actor		1..1	Reference(Contract | Device | Group | Location | Organization | Patient | Practitioner | RelatedPerson | Substance)	Contract Agent Type
+	set actor(actor) {
+		this._actor = new Reference(actor);
+	}
+
+	get actor() {
+		return this._actor;
+	}
+
+	// role		0..*	CodeableConcept	Role type of the agent
+	// Contract Actor Role Codes (Example)
+	set role(role) {
+		if (Array.isArray(role)) {
+			this._role = role.map((i) => new CodeableConcept(i));
+		} else {
+			this._role = [new CodeableConcept(role)];
+		}
+	}
+
+	get role() {
+		return this._role;
+	}
+
+	toJSON() {
+		return {
+			actor: this._actor,
+			role: this._role,
+		};
+	}
+}
+
+class ValuedItem {
+	constructor(obj) {
+		Object.assign(this, obj);
+	}
+
+	// entity[x]		0..1		Contract Valued Item Type
+	// entityCodeableConcept			CodeableConcept
+	set entityCodeableConcept(entityCodeableConcept) {
+		this._entityCodeableConcept = new CodeableConcept(entityCodeableConcept);
+	}
+
+	get entityCodeableConcept() {
+		return this._entityCodeableConcept;
+	}
+
+	// entityReference			Reference
+	set entityReference(entityReference) {
+		this._entityReference = new Reference(entityReference);
+	}
+
+	get entityReference() {
+		return this._entityReference;
+	}
+
+	// identifier		0..1	Identifier	Contract Valued Item Number
+	set identifier(identifier) {
+		this._identifier = new Identifier(identifier);
+	}
+
+	get identifier() {
+		return this._identifier;
+	}
+
+	// effectiveTime		0..1	dateTime	Contract Valued Item Effective Tiem
+	set effectiveTime(effectiveTime) {
+		this._effectiveTime = effectiveTime;
+	}
+
+	get effectiveTime() {
+		return this._effectiveTime;
+	}
+
+	// quantity		0..1	SimpleQuantity	Count of Contract Valued Items
+	set quantity(quantity) {
+		this._quantity = quantity;
+	}
+
+	get quantity() {
+		return this._quantity;
+	}
+
+	// unitPrice		0..1	Money	Contract Valued Item fee, charge, or cost
+	set unitPrice(unitPrice) {
+		this._unitPrice = unitPrice;
+	}
+
+	get unitPrice() {
+		return this._unitPrice;
+	}
+
+	// factor		0..1	decimal	Contract Valued Item Price Scaling Factor
+	set factor(factor) {
+		this._factor = factor;
+	}
+
+	get factor() {
+		return this._factor;
+	}
+
+	// points		0..1	decimal	Contract Valued Item Difficulty Scaling Factor
+	set points(points) {
+		this._points = points;
+	}
+
+	get points() {
+		return this._points;
+	}
+
+	// net		0..1	Money	Total Contract Valued Item Value
+	set net(net) {
+		this._net = net;
+	}
+
+	get net() {
+		return this._net;
+	}
+
+	toJSON() {
+		return {
+			entityCodeableConcept: this._entityCodeableConcept,
+			entityReference: this._entityReference,
+			identifier: this._identifier,
+			effectiveTime: this._effectiveTime,
+			quantity: this._quantity,
+			unitPrice: this._unitPrice,
+			factor: this._factor,
+			points: this._points,
+			net: this._net,
+		};
+	}
+}
+
 class Term {
 	constructor(obj) {
 		Object.assign(this, obj);
@@ -274,108 +412,6 @@ class Term {
 	}
 }
 
-class ValuedItem {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// entity[x]		0..1		Contract Valued Item Type
-	// entityCodeableConcept			CodeableConcept
-	set entityCodeableConcept(entityCodeableConcept) {
-		this._entityCodeableConcept = new CodeableConcept(entityCodeableConcept);
-	}
-
-	get entityCodeableConcept() {
-		return this._entityCodeableConcept;
-	}
-
-	// entityReference			Reference
-	set entityReference(entityReference) {
-		this._entityReference = new Reference(entityReference);
-	}
-
-	get entityReference() {
-		return this._entityReference;
-	}
-
-	// identifier		0..1	Identifier	Contract Valued Item Number
-	set identifier(identifier) {
-		this._identifier = new Identifier(identifier);
-	}
-
-	get identifier() {
-		return this._identifier;
-	}
-
-	// effectiveTime		0..1	dateTime	Contract Valued Item Effective Tiem
-	set effectiveTime(effectiveTime) {
-		this._effectiveTime = effectiveTime;
-	}
-
-	get effectiveTime() {
-		return this._effectiveTime;
-	}
-
-	// quantity		0..1	SimpleQuantity	Count of Contract Valued Items
-	set quantity(quantity) {
-		this._quantity = quantity;
-	}
-
-	get quantity() {
-		return this._quantity;
-	}
-
-	// unitPrice		0..1	Money	Contract Valued Item fee, charge, or cost
-	set unitPrice(unitPrice) {
-		this._unitPrice = unitPrice;
-	}
-
-	get unitPrice() {
-		return this._unitPrice;
-	}
-
-	// factor		0..1	decimal	Contract Valued Item Price Scaling Factor
-	set factor(factor) {
-		this._factor = factor;
-	}
-
-	get factor() {
-		return this._factor;
-	}
-
-	// points		0..1	decimal	Contract Valued Item Difficulty Scaling Factor
-	set points(points) {
-		this._points = points;
-	}
-
-	get points() {
-		return this._points;
-	}
-
-	// net		0..1	Money	Total Contract Valued Item Value
-	set net(net) {
-		this._net = net;
-	}
-
-	get net() {
-		return this._net;
-	}
-
-	toJSON() {
-		return {
-			entityCodeableConcept: this._entityCodeableConcept,
-			entityReference: this._entityReference,
-			identifier: this._identifier,
-			effectiveTime: this._effectiveTime,
-			quantity: this._quantity,
-			unitPrice: this._unitPrice,
-			factor: this._factor,
-			points: this._points,
-			net: this._net,
-		};
-	}
-}
-
 class Signer {
 	constructor(obj) {
 		Object.assign(this, obj);
@@ -418,42 +454,6 @@ class Signer {
 			type: this._type,
 			party: this._party,
 			signature: this._signature,
-		};
-	}
-}
-
-class Agent {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// actor		1..1	Reference(Contract | Device | Group | Location | Organization | Patient | Practitioner | RelatedPerson | Substance)	Contract Agent Type
-	set actor(actor) {
-		this._actor = new Reference(actor);
-	}
-
-	get actor() {
-		return this._actor;
-	}
-
-	// role		0..*	CodeableConcept	Role type of the agent
-	// Contract Actor Role Codes (Example)
-	set role(role) {
-		if (Array.isArray(role)) {
-			this._role = role.map((i) => new CodeableConcept(i));
-		} else {
-			this._role = [new CodeableConcept(role)];
-		}
-	}
-
-	get role() {
-		return this._role;
-	}
-
-	toJSON() {
-		return {
-			actor: this._actor,
-			role: this._role,
 		};
 	}
 }

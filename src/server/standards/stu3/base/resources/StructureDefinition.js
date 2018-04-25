@@ -4,6 +4,7 @@ const Code = require('../types/Code');
 const ContactDetail = require('../types/ContactDetail');
 const UsageContext = require('../types/UsageContext');
 const CodeableConcept = require('../types/CodeableConcept');
+const { Mapping } = require('./DataElement');
 const Coding = require('../types/Coding');
 
 class Snapshot {
@@ -271,15 +272,6 @@ class StructureDefinition extends DomainResource {
 		return this._uri;
 	}
 
-	// name	I	0..1	string	Names what this mapping refers to
-	set name(name) {
-		this._name = name;
-	}
-
-	get name() {
-		return this._name;
-	}
-
 	// comment		0..1	string	Versions, Issues, Scope limitations etc.
 	set comment(comment) {
 		this._comment = comment;
@@ -411,7 +403,6 @@ class StructureDefinition extends DomainResource {
 			mapping: this._mapping,
 			identity: this._identity,
 			uri: this._uri,
-			name: this._name,
 			comment: this._comment,
 			kind: this._kind,
 			structureDefinitionAbstract: this._structureDefinitionAbstract,

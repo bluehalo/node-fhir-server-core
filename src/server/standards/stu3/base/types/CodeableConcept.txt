@@ -1,8 +1,0 @@
-Main
-CodeableConcept
-coding	Σ	0..*	Coding	Code defined by a terminology system
-
-text	Σ	0..1	string	Plain text representation of the concept
-
-
-eof

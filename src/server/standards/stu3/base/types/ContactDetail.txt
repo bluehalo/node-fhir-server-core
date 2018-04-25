@@ -1,8 +1,0 @@
-Main
-ContactDetail
-name	Σ	0..1	string	Name of an individual to contact
-
-telecom	Σ	0..*	ContactPoint	Contact details for individual or organization
-
-
-eof

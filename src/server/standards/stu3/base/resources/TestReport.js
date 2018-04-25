@@ -49,37 +49,6 @@ class Teardown {
 	}
 }
 
-class Action {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// operation		0..1	see operation	The operation performed
-	set operation(operation) {
-		this._operation = operation;
-	}
-
-	get operation() {
-		return this._operation;
-	}
-
-	// assert		0..1	see assert	The assertion performed
-	set assert(assert) {
-		this._assert = assert;
-	}
-
-	get assert() {
-		return this._assert;
-	}
-
-	toJSON() {
-		return {
-			operation: this._operation,
-			assert: this._assert,
-		};
-	}
-}
-
 class Test {
 	constructor(obj) {
 		Object.assign(this, obj);

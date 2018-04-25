@@ -1,5 +1,5 @@
 const Issue = require('./stu3/base/types/Issue');
-const { DSTU2 } = require('../../constants');
+const { STU3 } = require('../../constants');
 
 /* eslint-disable no-useless-escape */
 let div_content = (severity, diagnostics) =>
@@ -15,7 +15,7 @@ class OperationOutcome extends Error {
 
 		this._statusCode = options.statusCode || 500;
 		this._message = options.message || 'HTTP 500 Internal Server Error';
-		this._resourceType = DSTU2.RESOURCE_TYPES.OPERATIONOUTCOME;
+		this._resourceType = STU3.RESOURCE_TYPES.OPERATIONOUTCOME;
 
 		// if the options are provided, pass them in to create a new issue
 		this._issue = options.code && options.severity ? new Issue(options) : {};

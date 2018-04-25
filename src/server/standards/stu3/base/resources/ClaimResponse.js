@@ -550,61 +550,6 @@ class SubDetail {
 	}
 }
 
-class Detail {
-	constructor(obj) {
-		Object.assign(this, obj);
-	}
-
-	// sequenceLinkId		1..1	positiveInt	Service instance
-	set sequenceLinkId(sequenceLinkId) {
-		this._sequenceLinkId = sequenceLinkId;
-	}
-
-	get sequenceLinkId() {
-		return this._sequenceLinkId;
-	}
-
-	// noteNumber		0..*	positiveInt	List of note numbers which apply
-	set noteNumber(noteNumber) {
-		this._noteNumber = [].concat(noteNumber);
-	}
-
-	get noteNumber() {
-		return this._noteNumber;
-	}
-
-	// adjudication		0..*	see adjudication	Detail level adjudication details
-	set adjudication(adjudication) {
-		this._adjudication = [].concat(adjudication);
-	}
-
-	get adjudication() {
-		return this._adjudication;
-	}
-
-	// subDetail		0..*	BackboneElement	Subdetail line items
-	set subDetail(subDetail) {
-		if (Array.isArray(subDetail)) {
-			this._subDetail = subDetail.map((i) => new SubDetail(i));
-		} else {
-			this._subDetail = [new SubDetail(subDetail)];
-		}
-	}
-
-	get subDetail() {
-		return this._subDetail;
-	}
-
-	toJSON() {
-		return {
-			sequenceLinkId: this._sequenceLinkId,
-			noteNumber: this._noteNumber,
-			adjudication: this._adjudication,
-			subDetail: this._subDetail,
-		};
-	}
-}
-
 class Item {
 	constructor(obj) {
 		Object.assign(this, obj);

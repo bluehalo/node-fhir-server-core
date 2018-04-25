@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { DSTU2 } = require('../../../constants');
+const { STU3 } = require('../../../constants');
 const { routes } = require('./procedure.config');
 
 /**
@@ -17,7 +17,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: DSTU2.RESOURCE_TYPES.PROCEDURE,
+			type: STU3.RESOURCE_TYPES.PROCEDURE,
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Procedure'
 			},

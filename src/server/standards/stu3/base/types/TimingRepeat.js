@@ -136,19 +136,19 @@ class TimingRepeat extends Element {
 
 	toJSON() {
 		const json = {
-		boundsQuantity: this._boundsQuantity,
-		boundsRange: this._boundsRange,
-		boundsPeriod: this._boundsPeriod,
-		count: this._count,
-		duration: this._duration,
-		durationMax: this._durationMax,
-		durationUnits: this._durationUnits,
-		frequency: this._frequency,
-		frequencyMax: this._frequencyMax,
-		period: this._period,
-		periodMax: this._periodMax,
-		periodUnits: this._periodUnits,
-		when: this._when
+			boundsQuantity: this._boundsQuantity,
+			boundsRange: this._boundsRange,
+			boundsPeriod: this._boundsPeriod,
+			count: this._count,
+			duration: this._duration,
+			durationMax: this._durationMax,
+			durationUnits: this._durationUnits,
+			frequency: this._frequency,
+			frequencyMax: this._frequencyMax,
+			period: this._period,
+			periodMax: this._periodMax,
+			periodUnits: this._periodUnits,
+			when: this._when
 		};
 
 		return Object.assign(super.toJSON(), json);
