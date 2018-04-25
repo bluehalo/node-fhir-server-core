@@ -1,6 +1,6 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const ContactDetail = require('./types/ContactDetail');
+const Element = require('./Element');
+const Code = require('./Code');
+const ContactDetail = require('./ContactDetail');
 
 class Contributor extends Element {
 	constructor(obj) {

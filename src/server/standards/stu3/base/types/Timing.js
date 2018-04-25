@@ -1,9 +1,9 @@
-const Element = require('./types/Element');
-const TimingRepeat = require('./types/TimingRepeat');
-const CodeableConcept = require('./types/CodeableConcept');
-const Range = require('./types/Range');
-const Period = require('./types/Period');
-const Code = require('./types/Code');
+const Element = require('./Element');
+const TimingRepeat = require('./TimingRepeat');
+const CodeableConcept = require('./CodeableConcept');
+const Range = require('./Range');
+const Period = require('./Period');
+const Code = require('./Code');
 
 class TimingRepeat extends Element {
 	constructor(obj) {

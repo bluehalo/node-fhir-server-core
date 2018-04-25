@@ -1,7 +1,7 @@
-const Element = require('./types/Element');
-const Coding = require('./types/Coding');
-const Reference = require('./types/Reference');
-const Code = require('./types/Code');
+const Element = require('./Element');
+const Coding = require('./Coding');
+const Reference = require('./Reference');
+const Code = require('./Code');
 
 class Signature extends Element {
 	constructor(obj) {

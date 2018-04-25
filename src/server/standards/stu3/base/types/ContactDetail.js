@@ -1,5 +1,5 @@
-const Element = require('./types/Element');
-const ContactPoint = require('./types/ContactPoint');
+const Element = require('./Element');
+const ContactPoint = require('./ContactPoint');
 
 class ContactDetail extends Element {
 	constructor(obj) {

@@ -1,6 +1,6 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const Reference = require('./types/Reference');
+const Element = require('./Element');
+const Code = require('./Code');
+const Reference = require('./Reference');
 
 class ParameterDefinition extends Element {
 	constructor(obj) {

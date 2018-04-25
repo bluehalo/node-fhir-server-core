@@ -1,5 +1,5 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
+const Element = require('./Element');
+const Code = require('./Code');
 
 class Coding extends Element {
 	constructor(obj) {

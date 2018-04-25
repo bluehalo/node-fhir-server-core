@@ -1,8 +1,8 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const Timing = require('./types/Timing');
-const Reference = require('./types/Reference');
-const DataRequirement = require('./types/DataRequirement');
+const Element = require('./Element');
+const Code = require('./Code');
+const Timing = require('./Timing');
+const Reference = require('./Reference');
+const DataRequirement = require('./DataRequirement');
 
 class TriggerDefinition extends Element {
 	constructor(obj) {

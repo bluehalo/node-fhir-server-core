@@ -1,7 +1,7 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const Attachment = require('./types/Attachment');
-const Reference = require('./types/Reference');
+const Element = require('./Element');
+const Code = require('./Code');
+const Attachment = require('./Attachment');
+const Reference = require('./Reference');
 
 class RelatedArtifact extends Element {
 	constructor(obj) {

@@ -1,7 +1,7 @@
-const Element = require('./types/Element');
-const Narrative = require('./types/Narrative');
-const Resource = require('./types/Resource');
-const Extension = require('./types/Extension');
+const Element = require('./Element');
+const Narrative = require('./Narrative');
+const Resource = require('./Resource');
+const Extension = require('./Extension');
 
 class DomainResource extends Element {
 	constructor(obj) {

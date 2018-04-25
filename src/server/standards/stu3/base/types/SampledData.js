@@ -1,4 +1,4 @@
-const Element = require('./types/Element');
+const Element = require('./Element');
 
 class SampledData extends Element {
 	constructor(obj) {

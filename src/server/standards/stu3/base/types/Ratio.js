@@ -1,5 +1,5 @@
-const Element = require('./types/Element');
-const Quantity = require('./types/Quantity');
+const Element = require('./Element');
+const Quantity = require('./Quantity');
 
 class Ratio extends Element {
 	constructor(obj) {

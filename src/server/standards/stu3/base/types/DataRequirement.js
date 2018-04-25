@@ -1,9 +1,9 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const Period = require('./types/Period');
-const Reference = require('./types/Reference');
-const Coding = require('./types/Coding');
-const CodeableConcept = require('./types/CodeableConcept');
+const Element = require('./Element');
+const Code = require('./Code');
+const Period = require('./Period');
+const Reference = require('./Reference');
+const Coding = require('./Coding');
+const CodeableConcept = require('./CodeableConcept');
 
 class CodeFilter extends Element {
 	constructor(obj) {

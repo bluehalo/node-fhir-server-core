@@ -1,4 +1,4 @@
-const Element = require('./types/Element');
+const Element = require('./Element');
 
 class Period extends Element {
 	constructor(obj) {

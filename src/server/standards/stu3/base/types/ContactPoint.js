@@ -1,6 +1,6 @@
-const Element = require('./types/Element');
-const Code = require('./types/Code');
-const Period = require('./types/Period');
+const Element = require('./Element');
+const Code = require('./Code');
+const Period = require('./Period');
 
 class ContactPoint extends Element {
 	constructor(obj) {

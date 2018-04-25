@@ -1,8 +1,8 @@
-const Element = require('./types/Element');
-const Coding = require('./types/Coding');
-const CodeableConcept = require('./types/CodeableConcept');
-const Quantity = require('./types/Quantity');
-const Range = require('./types/Range');
+const Element = require('./Element');
+const Coding = require('./Coding');
+const CodeableConcept = require('./CodeableConcept');
+const Quantity = require('./Quantity');
+const Range = require('./Range');
 
 class UsageContext extends Element {
 	constructor(obj) {
