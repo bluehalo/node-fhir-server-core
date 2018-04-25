@@ -1,4 +1,4 @@
-//const OperationOutcome = require('../standards/generic/resources/OperationOutcome');
+//const OperationOutcome = require('../standards/base/resources/OperationOutcome');
 const OperationOutcome = require('../standards/OperationOutcome');
 
 const { ISSUE } = require('../../constants');
