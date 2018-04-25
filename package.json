@@ -16,11 +16,11 @@
 		"node": ">=8.6"
 	},
 	"scripts": {
-		"start": "export NODE_ENV=production; node src/runner;",
-		"nodemon": "export NODE_ENV=development; node src/scripts/nodemon",
+		"start": "cross-env NODE_ENV=production; node src/runner;",
+		"nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
 		"serve-docs": "npm run build-docs;node docs/server",
-		"build-docs": "export NODE_ENV=production;node docs/build;",
-		"watch-docs": "export NODE_ENV=development;node docs/build;",
+		"build-docs": "cross-env NODE_ENV=production;node docs/build;",
+		"watch-docs": "cross-env NODE_ENV=development;node docs/build;",
 		"test:lint": "eslint \"src/**/*.js\"",
 		"test:src": "jest src",
 		"test": "set -e; npm run test:lint; npm run test:src;"
@@ -35,6 +35,7 @@
 		]
 	},
 	"dependencies": {
+		"cross-env": "^5.1.4",
 		"body-parser": "^1.18.2",
 		"compression": "^1.7.1",
 		"cors": "^2.8.4",
