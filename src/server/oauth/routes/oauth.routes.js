@@ -1,5 +1,7 @@
 const cors = require('cors');
 const { routes } = require('../oauth.config');
+const { sanitizeMiddleware } = require('../../utils/sanitize.utils');
+
 
 /**
  * @name exports
@@ -25,6 +27,7 @@ module.exports = (app, config, logger) => {
 			app[route.type](
 				route.path,
 				cors(corsOptions),
+				sanitizeMiddleware(route.args),
 				route.controller(oauth, config, logger)
 			);
 		});

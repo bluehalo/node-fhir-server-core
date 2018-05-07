@@ -28,17 +28,39 @@ let routes = [
 			name: 'aud',
 			type: 'string',
 			required: true
+		},
+		{
+			name: 'launch',
+			type: 'string'
 		}],
 		scopes: [{
 			name: 'code',
 			type: 'string'
-		}],
+		},
+	],
 		controller: controller.authorize
 	},
 	{
 		type: 'post',
 		path: '/token',
-		args: [],
+		args: [{
+			name: 'grant_type',
+			type: 'string',
+			required: true
+		},
+		{
+			name: 'code',
+			type: 'string',
+			required: true
+		},
+		{
+			name: 'secret',
+			type: 'string'
+		},
+		{
+			name: 'refresh_token',
+			type: 'string'
+		}],
 		scopes: [],
 		controller: controller.token
 	}
