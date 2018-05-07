@@ -10,6 +10,6 @@ module.exports.getCapabilityStatement = ({ config, logger }) => {
 		// Use our service to generate the capability statement
 		return service.generateCapabilityStatement(req, config, logger)
 			.then((statement) => res.status(200).json(statement))
-			.catch((err) => next(errors.internal(err.message)));
+			.catch((err) => next(errors.internal(err.message, req.params.version)));
 	};
 };

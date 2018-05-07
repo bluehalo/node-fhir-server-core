@@ -157,7 +157,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 					// get client
 					let [clientErr, client] = await handler(service.getClient(decodedToken.payload.aud));
 					if (clientErr) {
-						return next(errors.unauthorized(clientErr.message));
+						return next(errors.unauthorized(clientErr.message, req.params.version));
 
 					}
 
@@ -167,7 +167,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						let [error, token] = await handler(verifyToken(decodedToken, bearerToken, client, config.auth.resourceServer));
 						if (error) {
 							logger.error(error);
-							return next(errors.unauthorized());
+							return next(errors.unauthorized('', req.params.version));
 						}
 						validToken = token;
 
@@ -178,7 +178,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 							let [ introspectionError, introspection ] = await handler(introspect(bearerToken, config));
 							if (introspectionError) {
 								logger.error(introspectionError);
-								return next(errors.unauthorized());
+								return next(errors.unauthorized('', req.params.version));
 							}
 							validToken = introspection;
 						}
@@ -209,18 +209,18 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						// validation complete
 						return next();
 					} else {
-						return next(errors.unauthorized('Invalid token'));
+						return next(errors.unauthorized('Invalid token', req.params.version));
 					}
 				} else {
 					// invalid bearer token
-					return next(errors.unauthorized('Invalid token'));
+					return next(errors.unauthorized('Invalid token', req.params.version));
 				}
 
 
 			} else {
 				// did not pass checks, return 401 message
 				logger.error('Could not find bearer token in request headers');
-				return next(errors.unauthorized('Invalid token'));
+				return next(errors.unauthorized('Invalid token', req.params.version));
 			}
 	};
 };

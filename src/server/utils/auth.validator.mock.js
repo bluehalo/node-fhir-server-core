@@ -1,7 +1,6 @@
 /**
  * @name getClient
- *
- * @description Gets the client object used to help validate the signature 
+ * @description Gets the client object used to help validate the signature
  * and token.  This depends on how your oauth is set up.  This could be an
  * introspection endpoint, shares DB access with oauth server, a private
  * endpoint, etc.
@@ -10,7 +9,7 @@
  * @param {Winston} logger - Winston logger
  * @return {Promise}
  */
-module.exports.getClient = (req, logger) => new Promise((resolve, reject) => {
+module.exports.getClient = (_req, _logger) => new Promise((resolve, _reject) => {
 	resolve({
 		id: 1,
 		clientId: 'xyz123',

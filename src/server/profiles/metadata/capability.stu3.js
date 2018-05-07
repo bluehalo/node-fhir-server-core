@@ -1,13 +1,12 @@
 const moment = require('moment-timezone');
-const { STU3 } = require('../../../constants');
 
 /**
  * @name exports
  * @summary Capability statement shell
  */
 module.exports.makeStatement = resources => ({
-	resourceType: STU3.RESOURCE_TYPES.CONFORMANCE,
-	status: STU3.STATUSES.DRAFT,
+	resourceType: 'CapabilityStatement',
+	status: 'draft',
 	date: moment().tz('America/New_York').format(),
 	publisher: 'Not provided',
 	kind: 'instance',
