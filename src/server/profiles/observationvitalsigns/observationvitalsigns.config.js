@@ -148,5 +148,7 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.OBSERVATIONVITALSIGNS
 	},
-	routes
+	// TODO: VitalSigns is in draft phase, setting routes to an empty array
+	// will omit it from our server, we can add this back in when it is in the spec
+	routes: []
 };
