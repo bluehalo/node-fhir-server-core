@@ -9,7 +9,7 @@ module.exports.getCarePlan = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific careplan
-		let { CarePlan } = require(resolveFromVersion(version, 'uscore/resources/CarePlan'));
+		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 
 		/**
 		* return service.getCarePlan(req, logger)
@@ -48,7 +48,7 @@ module.exports.getCarePlan = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getCarePlanById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific careplan
-		let { CarePlan } = require(resolveFromVersion(version, 'uscore/resources/CarePlan'));
+		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 
 		return service.getCarePlanById(req, logger, context)
 			.then((careplan) => {
 				if (careplan) {
 					res.status(200).json(new CarePlan(careplan));
 				} else {
-					next(errors.notFound('CarePlan not found'));
+					next(errors.notFound('CarePlan not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

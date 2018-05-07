@@ -9,7 +9,7 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific allergyintolerance
-		let { AllergyIntolerance } = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
+		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
 		/**
 		* return service.getAllergyIntolerance(req, logger)
@@ -48,7 +48,7 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -63,18 +63,18 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific allergyintolerance
-		let { AllergyIntolerance } = require(resolveFromVersion(version, 'uscore/resources/AllergyIntolerance'));
+		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
 		return service.getAllergyIntoleranceById(req, logger, context)
 			.then((allergyintolerance) => {
 				if (allergyintolerance) {
 					res.status(200).json(new AllergyIntolerance(allergyintolerance));
 				} else {
-					next(errors.notFound('AllergyIntolerance not found'));
+					next(errors.notFound('AllergyIntolerance not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

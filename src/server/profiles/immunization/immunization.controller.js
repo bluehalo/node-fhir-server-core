@@ -9,7 +9,7 @@ module.exports.getImmunization = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific immunization
-		let { Immunization } = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
+		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 
 		/**
 		* return service.getImmunization(req, logger)
@@ -48,7 +48,7 @@ module.exports.getImmunization = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getImmunizationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific immunization
-		let { Immunization } = require(resolveFromVersion(version, 'uscore/resources/Immunization'));
+		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 
 		return service.getImmunizationById(req, logger, context)
 			.then((immunization) => {
 				if (immunization) {
 					res.status(200).json(new Immunization(immunization));
 				} else {
-					next(errors.notFound('Immunization not found'));
+					next(errors.notFound('Immunization not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

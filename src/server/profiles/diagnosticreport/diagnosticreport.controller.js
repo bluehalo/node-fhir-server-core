@@ -9,7 +9,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific diagnosticreport
-		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
+		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 
 		/**
 		* return service.getDiagnosticReport(req, logger)
@@ -48,7 +48,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getDiagnosticReportById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific diagnosticreport
-		let { DiagnosticReport } = require(resolveFromVersion(version, 'uscore/resources/DiagnosticReport'));
+		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 
 		return service.getDiagnosticReportById(req, logger, context)
 			.then((diagnosticreport) => {
 				if (diagnosticreport) {
 					res.status(200).json(new DiagnosticReport(diagnosticreport));
 				} else {
-					next(errors.notFound('DiagnosticReport not found'));
+					next(errors.notFound('DiagnosticReport not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

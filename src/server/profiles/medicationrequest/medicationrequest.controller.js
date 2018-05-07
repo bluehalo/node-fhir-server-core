@@ -9,7 +9,7 @@ module.exports.getMedicationRequest = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific medicationrequest
-		let { MedicationRequest } = require(resolveFromVersion(version, 'uscore/resources/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 
 		/**
 		* return service.getMedicationRequest(req, logger)
@@ -48,7 +48,7 @@ module.exports.getMedicationRequest = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getMedicationRequestById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific medicationrequest
-		let { MedicationRequest } = require(resolveFromVersion(version, 'uscore/resources/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 
 		return service.getMedicationRequestById(req, logger, context)
 			.then((medicationrequest) => {
 				if (medicationrequest) {
 					res.status(200).json(new MedicationRequest(medicationrequest));
 				} else {
-					next(errors.notFound('MedicationRequest not found'));
+					next(errors.notFound('MedicationRequest not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

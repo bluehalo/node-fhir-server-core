@@ -9,7 +9,7 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationresults
-		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
+		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
 		/**
 		* return service.getObservationResults(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
@@ -36,7 +36,7 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 									'mode': 'match'
 								},
 								'resource': new ObservationResults(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/ObservationResults/${resource.id}`
+								'fullUrl': `${config.auth.resourceServer}/${version}/Results/${resource.id}`
 							};
 							searchObservationResults.entry.push(entry);
 						}
@@ -47,7 +47,7 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 				res.status(200).json(searchObservationResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -63,18 +63,18 @@ module.exports.getObservationResultsById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationresults
-		let { ObservationResults } = require(resolveFromVersion(version, 'uscore/resources/ObservationResults'));
+		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
 
 		return service.getObservationResultsById(req, logger, context)
 			.then((observationresults) => {
 				if (observationresults) {
 					res.status(200).json(new ObservationResults(observationresults));
 				} else {
-					next(errors.notFound('ObservationResults not found'));
+					next(errors.notFound('Results not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

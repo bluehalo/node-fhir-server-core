@@ -9,7 +9,7 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific location
-		let { Location } = require(resolveFromVersion(version, 'uscore/resources/Location'));
+		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
 		/**
 		* return service.getLocation(req, logger)
@@ -48,7 +48,7 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getLocationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific location
-		let { Location } = require(resolveFromVersion(version, 'uscore/resources/Location'));
+		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
 		return service.getLocationById(req, logger, context)
 			.then((location) => {
 				if (location) {
 					res.status(200).json(new Location(location));
 				} else {
-					next(errors.notFound('Location not found'));
+					next(errors.notFound('Location not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

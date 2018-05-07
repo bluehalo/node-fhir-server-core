@@ -9,7 +9,7 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationsmokingstatus
-		let { ObservationSmokingStatus } = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
+		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
 
 		/**
 		* return service.getObservationSmokingStatus(req, logger)
@@ -37,7 +37,7 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
 									'mode': 'match'
 								},
 								'resource': new ObservationSmokingStatus(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/ObservationSmokingStatus/${resource.id}`
+								'fullUrl': `${config.auth.resourceServer}/${version}/SmokingStatus/${resource.id}`
 							};
 							searchResults.entry.push(entry);
 						}
@@ -48,7 +48,7 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getObservationSmokingStatusById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific observationsmokingstatus
-		let { ObservationSmokingStatus } = require(resolveFromVersion(version, 'uscore/resources/ObservationSmokingStatus'));
+		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
 
 		return service.getObservationSmokingStatusById(req, logger, context)
 			.then((observationsmokingstatus) => {
 				if (observationsmokingstatus) {
 					res.status(200).json(new ObservationSmokingStatus(observationsmokingstatus));
 				} else {
-					next(errors.notFound('ObservationSmokingStatus not found'));
+					next(errors.notFound('SmokingStatus not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

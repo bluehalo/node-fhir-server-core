@@ -56,10 +56,11 @@ let validateType = function (type, value) {
 };
 
 let parseParams = req => {
-	if (req.params && Object.keys(req.params).length) { return req.params; }
-	if (req.query && Object.keys(req.query).length) { return req.query; }
-	if (req.body && Object.keys(req.body).length) { return req.body; }
-	return {};
+	let params = {};
+	if (req.query && Object.keys(req.query).length) { Object.assign(params, req.query); }
+	if (req.body && Object.keys(req.body).length) { Object.assign(params, req.body); }
+	if (req.params && Object.keys(req.params).length) { Object.assign(params, req.params); }
+	return params;
 };
 
 /**
@@ -83,7 +84,7 @@ let sanitizeMiddleware = function (config) {
 
 			// If the argument is required but not present
 			if (!currentArgs[conf.name] && conf.required) {
-				return next(errors.invalidParameter(conf.name + ' is required'));
+				return next(errors.invalidParameter(conf.name + ' is required', req.params.version));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
@@ -93,12 +94,12 @@ let sanitizeMiddleware = function (config) {
 					cleanArgs[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
 				}
 			} catch (err) {
-				return next(errors.invalidParameter(conf.name + ' is invalid'));
+				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.version));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
 			if (cleanArgs[conf.name] !== undefined && !validateType(conf.type, cleanArgs[conf.name])) {
-				return next(errors.invalidParameter('Invalid parameter: ' + conf.name));
+				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.version));
 			}
 		}
 

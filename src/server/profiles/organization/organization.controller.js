@@ -9,7 +9,7 @@ module.exports.getOrganization = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific organization
-		let { Organization } = require(resolveFromVersion(version, 'uscore/resources/Organization'));
+		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 
 		/**
 		* return service.getOrganization(req, logger)
@@ -48,7 +48,7 @@ module.exports.getOrganization = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getOrganizationById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific organization
-		let { Organization } = require(resolveFromVersion(version, 'uscore/resources/Organization'));
+		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 
 		return service.getOrganizationById(req, logger, context)
 			.then((organization) => {
 				if (organization) {
 					res.status(200).json(new Organization(organization));
 				} else {
-					next(errors.notFound('Organization not found'));
+					next(errors.notFound('Organization not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

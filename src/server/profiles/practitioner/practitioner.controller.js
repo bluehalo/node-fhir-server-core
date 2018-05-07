@@ -9,7 +9,7 @@ module.exports.getPractitioner = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific practitioner
-		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
+		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 
 		/**
 		* return service.getPractitioner(req, logger)
@@ -48,7 +48,7 @@ module.exports.getPractitioner = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getPractitionerById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific practitioner
-		let { Practitioner } = require(resolveFromVersion(version, 'uscore/resources/Practitioner'));
+		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 
 		return service.getPractitionerById(req, logger, context)
 			.then((practitioner) => {
 				if (practitioner) {
 					res.status(200).json(new Practitioner(practitioner));
 				} else {
-					next(errors.notFound('Practitioner not found'));
+					next(errors.notFound('Practitioner not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

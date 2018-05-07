@@ -9,7 +9,7 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific patient
-		let { Patient } = require(resolveFromVersion(version, 'uscore/resources/Patient'));
+		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 
 		/**
 		* return service.getPatient(req, logger)
@@ -48,7 +48,7 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -63,7 +63,7 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific patient
-		let { Patient } = require(resolveFromVersion(version, 'uscore/resources/Patient'));
+		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
@@ -73,7 +73,7 @@ module.exports.getPatientById = ({ profile, logger }) => {
 			&& req.body.id
 			&& req.patient !== req.body.id
 		) {
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`, version));
 		}
 
 		return service.getPatientById(req, logger, context)
@@ -81,11 +81,11 @@ module.exports.getPatientById = ({ profile, logger }) => {
 				if (patient) {
 						res.status(200).json(new Patient(patient));
 				} else {
-					next(errors.notFound('Patient not found'));
+					next(errors.notFound('Patient not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

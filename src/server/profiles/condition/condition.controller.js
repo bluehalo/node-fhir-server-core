@@ -9,7 +9,7 @@ module.exports.getCondition = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific condition
-		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
+		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 
 		/**
 		* return service.getCondition(req, logger)
@@ -48,7 +48,7 @@ module.exports.getCondition = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getConditionById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific condition
-		let { Condition } = require(resolveFromVersion(version, 'uscore/resources/Condition'));
+		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 
 		return service.getConditionById(req, logger, context)
 			.then((condition) => {
 				if (condition) {
 					res.status(200).json(new Condition(condition));
 				} else {
-					next(errors.notFound('Condition not found'));
+					next(errors.notFound('Condition not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

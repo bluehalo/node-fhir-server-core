@@ -9,7 +9,7 @@ module.exports.getObservationVitalSigns = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific obervationvitalsigns
-		let { ObservationVitalSigns } = require(resolveFromVersion(version, 'uscore/resources/ObservationVitalSigns'));
+		let ObservationVitalSigns = require(resolveFromVersion(version, 'uscore/VitalSigns'));
 
 		/**
 		* return service.getObservationVitalSigns(req, logger)
@@ -37,7 +37,7 @@ module.exports.getObservationVitalSigns = ({ profile, logger, config }) => {
 									'mode': 'match'
 								},
 								'resource': new ObservationVitalSigns(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/ObservationVitalSigns/${resource.id}`
+								'fullUrl': `${config.auth.resourceServer}/${version}/VitalSigns/${resource.id}`
 							};
 							searchResults.entry.push(entry);
 						}
@@ -48,7 +48,7 @@ module.exports.getObservationVitalSigns = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getObservationVitalSignsById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific obervationvitalsigns
-		let { ObservationVitalSigns } = require(resolveFromVersion(version, 'uscore/resources/ObservationVitalSigns'));
+		let ObservationVitalSigns = require(resolveFromVersion(version, 'uscore/VitalSigns'));
 
 		return service.getObservationVitalSignsById(req, logger, context)
 			.then((observationvitalsigns) => {
 				if (observationvitalsigns) {
 					res.status(200).json(new ObservationVitalSigns(observationvitalsigns));
 				} else {
-					next(errors.notFound('ObservationVitalSigns not found'));
+					next(errors.notFound('VitalSigns not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

@@ -9,7 +9,7 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific device
-		let { Device } = require(resolveFromVersion(version, 'uscore/resources/Device'));
+		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
 		/**
 		* return service.getDevice(req, logger)
@@ -48,7 +48,7 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getDeviceById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific device
-		let { Device } = require(resolveFromVersion(version, 'uscore/resources/Device'));
+		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
 		return service.getDeviceById(req, logger, context)
 			.then((device) => {
 				if (device) {
 					res.status(200).json(new Device(device));
 				} else {
-					next(errors.notFound('Device not found'));
+					next(errors.notFound('Device not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

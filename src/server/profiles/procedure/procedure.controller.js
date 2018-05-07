@@ -9,7 +9,7 @@ module.exports.getProcedure = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific procedure
-		let { Procedure } = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
+		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 
 		/**
 		* return service.getProcedure(req, logger)
@@ -48,7 +48,7 @@ module.exports.getProcedure = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getProcedureById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific procedure
-		let { Procedure } = require(resolveFromVersion(version, 'uscore/resources/Procedure'));
+		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 
 		return service.getProcedureById(req, logger, context)
 			.then((procedure) => {
 				if (procedure) {
 					res.status(200).json(new Procedure(procedure));
 				} else {
-					next(errors.notFound('Procedure not found'));
+					next(errors.notFound('Procedure not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

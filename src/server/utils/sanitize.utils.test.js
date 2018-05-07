@@ -1,7 +1,11 @@
 const moment = require('moment');
 const path = require('path');
 const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize.utils'));
-const OperationOutcome = require('../standards/OperationOutcome');
+const { VERSIONS } = require(path.resolve('./src/constants'));
+
+const ARGS_PARAM = {
+	version: VERSIONS.STU3
+};
 
 const ARGS = [
 	{
@@ -45,7 +49,7 @@ describe('Sanitize Utils Tests', () => {
 
 	test('should not pass an error if no args are provided and none are required', () => {
 		let middleware = sanitizeMiddleware(ARGS);
-		let req = {};
+		let req = { params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -59,7 +63,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should coerce the arguments into the correct type', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let params = { first_name: 'Joe', age: '24', birthdate: '740088404220', isAlive: 'true' };
-		let req = { params };
+		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -83,7 +87,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should accept a different format for date types', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let query = { birthdate: '2017-03-01T13:10:00' };
-		let req = { query };
+		let req = { query, params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -96,7 +100,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should filter out extra arguments that do not belong', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
 		let body = { id: 'john-doe', age: '24', birthdate: '740088404220', isAlive: 'true' };
-		let req = { body };
+		let req = { body, params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -116,7 +120,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should allow a valid identifier to be passed without stripping characters', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let params = { identifier: 'http://www.example.com|2334567' };
-		let req = { params };
+		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -128,17 +132,18 @@ describe('Sanitize Utils Tests', () => {
 	test('should not validate non-configured types', () => {
 		let middleware = sanitizeMiddleware(INVALID_TYPE_ARGS);
 		let params = { age: 32 };
-		let req = { params };
+		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
 
 		// invoke our middleware
 		middleware(req, null, next);
+		expect(next).toHaveBeenCalled();
 
 		let nextArg = next.mock.calls[0][0];
+		expect(nextArg.issue).toHaveLength(1);
 
-		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(OperationOutcome);
-		expect(nextArg.message).toEqual('Invalid parameter: age');
+		let issue = nextArg.issue[0];
+		expect(issue.diagnostics).toEqual('Invalid parameter: age');
 	});
 
 	test('should strip out characters that might cause xss', () => {
@@ -147,7 +152,7 @@ describe('Sanitize Utils Tests', () => {
 			identifier: '<script>alert(2+2);</script>',
 			first_name: '<script>hello</script>world!'
 		};
-		let req = { params };
+		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -159,33 +164,35 @@ describe('Sanitize Utils Tests', () => {
 
 	test('should pass an error to next if a required argument is missing', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
-		let req = { body: { name: 'joe' }};
+		let req = { body: { name: 'joe' }, params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
 		middleware(req, null, next);
+		expect(next).toHaveBeenCalled();
 
 		let nextArg = next.mock.calls[0][0];
+		expect(nextArg.issue).toHaveLength(1);
 
-		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(OperationOutcome);
-		expect(nextArg.message).toEqual('id is required');
+		let issue = nextArg.issue[0];
+		expect(issue.diagnostics).toEqual('id is required');
 	});
 
 	test('should pass an error to next if an argument is not the correct type', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let query = { age: 'Johnson' };
-		let req = { query };
+		let req = { query, params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
 		middleware(req, null, next);
+		expect(next).toHaveBeenCalled();
 
 		let nextArg = next.mock.calls[0][0];
+		expect(nextArg.issue).toHaveLength(1);
 
-		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(OperationOutcome);
-		expect(nextArg.message).toEqual('Invalid parameter: age');
+		let issue = nextArg.issue[0];
+		expect(issue.diagnostics).toEqual('Invalid parameter: age');
 	});
 
 	test('should pass an error to next if something other than a string is passed in', () => {
@@ -194,17 +201,18 @@ describe('Sanitize Utils Tests', () => {
 		// if it is a number going in, someone might have got something past express
 		// and we should never allow the query to happen, it should trigger an error
 		let query = { age: 24 };
-		let req = { query };
+		let req = { query, params: ARGS_PARAM };
 		let next = jest.fn();
 
 		// invoke our middleware
 		middleware(req, null, next);
+		expect(next).toHaveBeenCalled();
 
 		let nextArg = next.mock.calls[0][0];
+		expect(nextArg.issue).toHaveLength(1);
 
-		expect(next).toHaveBeenCalled();
-		expect(nextArg).toBeInstanceOf(OperationOutcome);
-		expect(nextArg.message).toEqual('age is invalid');
+		let issue = nextArg.issue[0];
+		expect(issue.diagnostics).toEqual('age is invalid');
 	});
 
 });

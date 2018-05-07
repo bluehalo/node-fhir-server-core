@@ -9,7 +9,7 @@ module.exports.getGoal = ({ profile, logger, config }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific goal
-		let { Goal } = require(resolveFromVersion(version, 'uscore/resources/Goal'));
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
 		/**
 		* return service.getGoal(req, logger)
@@ -48,7 +48,7 @@ module.exports.getGoal = ({ profile, logger, config }) => {
 				res.status(200).json(searchResults);
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 
@@ -64,18 +64,18 @@ module.exports.getGoalById = ({ profile, logger }) => {
 		// Create a context I can pass some data through
 		let context = { version };
 		// Get a resource specific goal
-		let { Goal } = require(resolveFromVersion(version, 'uscore/resources/Goal'));
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
 		return service.getGoalById(req, logger, context)
 			.then((goal) => {
 				if (goal) {
 					res.status(200).json(new Goal(goal));
 				} else {
-					next(errors.notFound('Goal not found'));
+					next(errors.notFound('Goal not found', version));
 				}
 			})
 			.catch((err) => {
-				next(errors.internal(err.message));
+				next(errors.internal(err.message, version));
 			});
 	};
 };

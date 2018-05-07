@@ -32,6 +32,9 @@
 			"text",
 			"lcov",
 			"json"
+		],
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/src/server/standards/"
 		]
 	},
 	"dependencies": {

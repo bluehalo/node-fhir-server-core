@@ -47,6 +47,7 @@
     "no-unused-expressions": 2,
     "no-unused-vars": [2, {"vars": "all", "args": "after-used", "argsIgnorePattern": "^_"}],
     "no-use-before-define": 2,
+    "no-useless-escape": 0,
     "no-with": 2,
     "comma-spacing": 2,
     "curly": [2, "all"],
