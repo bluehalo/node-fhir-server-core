@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
 const observationvitalsigns_args = require('./observationvitalsigns.arguments');
