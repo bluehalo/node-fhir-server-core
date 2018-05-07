@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./observationvitalsigns.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'observationvitalsigns',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let ObservationVitalSigns = require(resolveFromVersion(version, 'uscore/VitalSigns'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.OBSERVATIONVITALSIGNS,
+			type: ObservationVitalSigns.__resourceType,
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Observationvitalsigns'
 			},

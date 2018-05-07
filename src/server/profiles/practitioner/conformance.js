@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./practitioner.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'practitioner',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.PRACTITIONER,
+			type: Practitioner.__resourceType,
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Practitioner'
 			},

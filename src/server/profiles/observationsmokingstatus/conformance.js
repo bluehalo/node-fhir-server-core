@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./observationsmokingstatus.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'observationsmokingstatus',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.OBSERVATIONSMOKINGSTATUS,
+			type: ObservationSmokingStatus.__resourceType,
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Observationsmokingstatus'
 			},

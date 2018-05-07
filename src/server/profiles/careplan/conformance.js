@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./careplan.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'careplan',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.CAREPLAN,
+			type: CarePlan.__resourceType,
 			profile: {
 				reference: 'http://www.hl7.org/fhir/us/core/capstmnts.html#careplan'
 			},

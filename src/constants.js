@@ -1,38 +1,3 @@
-exports.STU3 = {
-	RESOURCE_TYPES: {
-		OPERATIONOUTCOME: 'OperationOutcome',
-		CONFORMANCE: 'CapabilityStatement',
-		ALLERGYINTOLERANCE: 'AllergyIntolerance',
-		CAREPLAN: 'CarePlan',
-		CARETEAM: 'CareTeam',
-		CONDITION: 'Condition',
-		DEVICE: 'Device',
-		DIAGNOSTICREPORT: 'DiagnosticReport',
-		GOAL: 'Goal',
-		IMMUNIZATION: 'Immunization',
-		LOCATION: 'Location',
-		MEDICATION: 'Medication',
-		MEDICATIONREQUEST: 'MedicationRequest',
-		MEDICATIONSTATEMENT: 'MedicationStatement',
-		OBSERVATION: 'Observation',
-		OBSERVATIONRESULTS: 'ObservationResults',
-		OBSERVATIONSMOKINGSTATUS: 'ObservationSmokingStatus',
-		OBSERVATIONVITALSIGNS: 'ObservationVitalSigns',
-		ORGANIZATION: 'Organization',
-		PATIENT: 'Patient',
-		PRACTITIONER: 'Practitioner',
-	},
-	STATUSES: {
-		DRAFT: 'draft',
-		ACTIVE: 'active',
-		RETIRED: 'retired'
-	},
-	MODE: {
-		CONFIDENTIAL: 'confidential',
-		PUBLIC: 'public'
-	}
-};
-
 exports.CONFIG_KEYS = {
 	ALLERGYINTOLERANCE: 'allergyintolerance',
 	CAREPLAN: 'careplan',

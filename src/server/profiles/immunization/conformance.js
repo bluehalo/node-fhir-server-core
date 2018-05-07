@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./immunization.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'immunization',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.IMMUNIZATION,
+			type: Immunization.__resourceType,
 			profile: {
 				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-immunization.html'
 			},

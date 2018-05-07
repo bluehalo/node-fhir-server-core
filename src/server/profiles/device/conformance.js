@@ -1,5 +1,5 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
-const { STU3 } = require('../../../constants');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const { routes } = require('./device.config');
 
 /**
@@ -10,6 +10,7 @@ module.exports = {
 	profile: 'device',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
+		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -17,7 +18,7 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: STU3.RESOURCE_TYPES.DEVICE,
+			type: Device.__resourceType,
 			profile: {
 				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-device.html'
 			},
