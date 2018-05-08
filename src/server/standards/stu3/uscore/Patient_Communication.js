@@ -5,6 +5,7 @@ class Patient_Communication extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Patient_Communication';
 		Object.assign(this, opts);
 	}
 

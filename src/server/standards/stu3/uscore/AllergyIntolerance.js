@@ -12,6 +12,7 @@ class AllergyIntolerance extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'AllergyIntolerance';
 		Object.assign(this, opts);
 	}
 

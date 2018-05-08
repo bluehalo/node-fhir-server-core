@@ -5,6 +5,7 @@ class ContactPoint extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ContactPoint';
 		Object.assign(this, opts);
 	}
 

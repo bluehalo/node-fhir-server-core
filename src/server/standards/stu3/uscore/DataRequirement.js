@@ -6,6 +6,7 @@ class DataRequirement extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DataRequirement';
 		Object.assign(this, opts);
 	}
 

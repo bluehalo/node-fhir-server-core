@@ -22,7 +22,6 @@ let div_content = (severity, diagnostics) =>
 let invalidParameter = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 400,
 		text: {
 			status: 'generated',
@@ -40,7 +39,6 @@ let invalidParameter = (message, version) => {
 let unauthorized = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 401,
 		text: {
 			status: 'generated',
@@ -57,7 +55,6 @@ let unauthorized = (message, version) => {
 let insufficientScope = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 403,
 		text: {
 			status: 'generated',
@@ -74,7 +71,6 @@ let insufficientScope = (message, version) => {
 let notFound = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 404,
 		text: {
 			status: 'generated',
@@ -91,7 +87,6 @@ let notFound = (message, version) => {
 let deleted = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 410,
 		text: {
 			status: 'generated',
@@ -108,7 +103,6 @@ let deleted = (message, version) => {
 let internal = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
-		resourceType: 'OperationOutcome',
 		statusCode: 500,
 		text: {
 			status: 'generated',

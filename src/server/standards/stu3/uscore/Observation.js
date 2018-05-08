@@ -16,6 +16,7 @@ class Observation extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Observation';
 		Object.assign(this, opts);
 	}
 

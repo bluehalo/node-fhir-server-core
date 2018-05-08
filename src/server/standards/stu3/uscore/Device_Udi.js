@@ -4,6 +4,7 @@ class Device_Udi extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Device_Udi';
 		Object.assign(this, opts);
 	}
 

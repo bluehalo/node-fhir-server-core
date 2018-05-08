@@ -5,6 +5,7 @@ class Immunization_Explanation extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Immunization_Explanation';
 		Object.assign(this, opts);
 	}
 

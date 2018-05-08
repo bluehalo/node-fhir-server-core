@@ -6,6 +6,7 @@ class DataRequirement_DateFilter extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DataRequirement_DateFilter';
 		Object.assign(this, opts);
 	}
 

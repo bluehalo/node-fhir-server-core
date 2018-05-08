@@ -9,6 +9,7 @@ class Medication extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Medication';
 		Object.assign(this, opts);
 	}
 

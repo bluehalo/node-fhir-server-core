@@ -5,6 +5,7 @@ class Meta extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Meta';
 		Object.assign(this, opts);
 	}
 

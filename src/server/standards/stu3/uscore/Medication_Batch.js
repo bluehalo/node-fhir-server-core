@@ -4,6 +4,7 @@ class Medication_Batch extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Medication_Batch';
 		Object.assign(this, opts);
 	}
 

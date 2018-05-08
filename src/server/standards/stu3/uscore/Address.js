@@ -5,6 +5,7 @@ class Address extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Address';
 		Object.assign(this, opts);
 	}
 

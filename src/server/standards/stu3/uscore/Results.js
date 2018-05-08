@@ -16,6 +16,7 @@ class Results extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Results';
 		Object.assign(this, opts);
 	}
 

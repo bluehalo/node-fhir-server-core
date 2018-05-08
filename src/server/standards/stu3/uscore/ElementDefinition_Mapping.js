@@ -4,6 +4,7 @@ class ElementDefinition_Mapping extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Mapping';
 		Object.assign(this, opts);
 	}
 

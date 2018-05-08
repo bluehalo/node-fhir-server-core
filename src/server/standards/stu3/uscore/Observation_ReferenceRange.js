@@ -7,6 +7,7 @@ class Observation_ReferenceRange extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Observation_ReferenceRange';
 		Object.assign(this, opts);
 	}
 

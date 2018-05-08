@@ -6,6 +6,7 @@ class Signature extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Signature';
 		Object.assign(this, opts);
 	}
 

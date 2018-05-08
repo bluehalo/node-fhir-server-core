@@ -8,6 +8,7 @@ class UsageContext extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'UsageContext';
 		Object.assign(this, opts);
 	}
 

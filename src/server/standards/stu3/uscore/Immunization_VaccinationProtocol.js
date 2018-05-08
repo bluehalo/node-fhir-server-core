@@ -6,6 +6,7 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Immunization_VaccinationProtocol';
 		Object.assign(this, opts);
 	}
 

@@ -5,6 +5,7 @@ class HumanName extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'HumanName';
 		Object.assign(this, opts);
 	}
 

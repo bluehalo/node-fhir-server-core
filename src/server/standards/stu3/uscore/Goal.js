@@ -9,6 +9,7 @@ class Goal extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Goal';
 		Object.assign(this, opts);
 	}
 

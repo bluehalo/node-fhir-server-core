@@ -5,6 +5,7 @@ class ElementDefinition_Slicing extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Slicing';
 		Object.assign(this, opts);
 	}
 

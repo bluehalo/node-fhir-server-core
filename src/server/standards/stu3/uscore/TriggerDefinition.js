@@ -7,6 +7,7 @@ class TriggerDefinition extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'TriggerDefinition';
 		Object.assign(this, opts);
 	}
 

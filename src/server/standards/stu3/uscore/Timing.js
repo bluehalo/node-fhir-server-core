@@ -6,6 +6,7 @@ class Timing extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Timing';
 		Object.assign(this, opts);
 	}
 

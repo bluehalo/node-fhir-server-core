@@ -5,6 +5,7 @@ class CodeableConcept extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'CodeableConcept';
 		Object.assign(this, opts);
 	}
 

@@ -11,6 +11,7 @@ class Procedure extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Procedure';
 		Object.assign(this, opts);
 	}
 

@@ -5,6 +5,7 @@ class Contributor extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Contributor';
 		Object.assign(this, opts);
 	}
 

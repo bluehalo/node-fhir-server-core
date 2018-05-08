@@ -8,7 +8,8 @@ module.exports.getMedication = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific medication
+		// Get a version specific medication & bundle
+		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 
 		/**
@@ -18,12 +19,8 @@ module.exports.getMedication = ({ profile, logger, config }) => {
 		*/
 		return service.getMedication(req, logger, context)
 			.then((medications) => {
-				const searchResults = {
-					'total': 0,
-					'resourceType': 'Bundle',
-					'type': 'searchset',
-					'entry': []
-				};
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
 
 				if (medications) {
 					for (let resource of medications) {
@@ -32,20 +29,19 @@ module.exports.getMedication = ({ profile, logger, config }) => {
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							const entry = {
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new Medication(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Medication/${resource.id}`
-							};
-							searchResults.entry.push(entry);
+							entries.push({
+								search: { mode: 'match' },
+								resource: new Medication(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/Medication/${resource.id}`
+							});
 						}
-						searchResults.total = searchResults.entry.length;
 					}
 				}
 
-				res.status(200).json(searchResults);
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message, version));
@@ -63,7 +59,7 @@ module.exports.getMedicationById = ({ profile, logger }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific medication
+		// Get a version specific medication
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 
 		return service.getMedicationById(req, logger, context)

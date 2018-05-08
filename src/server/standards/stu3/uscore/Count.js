@@ -4,6 +4,7 @@ class Count extends Quantity {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Count';
 		Object.assign(this, opts);
 	}
 

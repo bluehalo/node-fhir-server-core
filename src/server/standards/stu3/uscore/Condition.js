@@ -13,6 +13,7 @@ class Condition extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Condition';
 		Object.assign(this, opts);
 	}
 

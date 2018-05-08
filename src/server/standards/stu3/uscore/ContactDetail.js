@@ -5,6 +5,7 @@ class ContactDetail extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ContactDetail';
 		Object.assign(this, opts);
 	}
 

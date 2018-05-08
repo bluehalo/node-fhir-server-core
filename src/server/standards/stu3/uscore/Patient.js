@@ -15,6 +15,7 @@ class Patient extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Patient';
 		Object.assign(this, opts);
 	}
 

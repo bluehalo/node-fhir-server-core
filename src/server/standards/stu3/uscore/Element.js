@@ -1,6 +1,7 @@
 class Element {
 
 	constructor ( opts ) {
+		this._resourceType = 'Element';
 		Object.assign(this, opts);
 	}
 

@@ -10,6 +10,7 @@ class CareTeam extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'CareTeam';
 		Object.assign(this, opts);
 	}
 
