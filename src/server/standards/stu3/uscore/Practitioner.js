@@ -11,6 +11,7 @@ class Practitioner extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Practitioner';
 		Object.assign(this, opts);
 	}
 

@@ -11,6 +11,7 @@ class DiagnosticReport extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DiagnosticReport';
 		Object.assign(this, opts);
 	}
 

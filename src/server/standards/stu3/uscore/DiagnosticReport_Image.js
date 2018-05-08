@@ -5,6 +5,7 @@ class DiagnosticReport_Image extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DiagnosticReport_Image';
 		Object.assign(this, opts);
 	}
 

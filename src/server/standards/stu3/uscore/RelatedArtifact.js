@@ -6,6 +6,7 @@ class RelatedArtifact extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'RelatedArtifact';
 		Object.assign(this, opts);
 	}
 

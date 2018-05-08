@@ -6,6 +6,7 @@ class DiagnosticReport_Performer extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DiagnosticReport_Performer';
 		Object.assign(this, opts);
 	}
 

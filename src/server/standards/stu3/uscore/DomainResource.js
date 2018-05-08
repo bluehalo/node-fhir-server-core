@@ -6,6 +6,7 @@ class DomainResource extends Resource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DomainResource';
 		Object.assign(this, opts);
 	}
 

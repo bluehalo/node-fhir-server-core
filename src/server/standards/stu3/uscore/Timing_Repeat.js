@@ -7,6 +7,7 @@ class Timing_Repeat extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Timing_Repeat';
 		Object.assign(this, opts);
 	}
 

@@ -44,6 +44,7 @@ class ElementDefinition extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition';
 		Object.assign(this, opts);
 	}
 

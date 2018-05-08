@@ -5,6 +5,7 @@ class ParameterDefinition extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ParameterDefinition';
 		Object.assign(this, opts);
 	}
 

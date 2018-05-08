@@ -4,6 +4,7 @@ class Coding extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Coding';
 		Object.assign(this, opts);
 	}
 

@@ -4,6 +4,7 @@ class ElementDefinition_Discriminator extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Discriminator';
 		Object.assign(this, opts);
 	}
 

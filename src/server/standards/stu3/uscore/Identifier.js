@@ -7,6 +7,7 @@ class Identifier extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Identifier';
 		Object.assign(this, opts);
 	}
 

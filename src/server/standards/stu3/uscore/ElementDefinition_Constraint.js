@@ -4,6 +4,7 @@ class ElementDefinition_Constraint extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Constraint';
 		Object.assign(this, opts);
 	}
 

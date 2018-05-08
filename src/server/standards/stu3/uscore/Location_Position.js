@@ -4,6 +4,7 @@ class Location_Position extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Location_Position';
 		Object.assign(this, opts);
 	}
 

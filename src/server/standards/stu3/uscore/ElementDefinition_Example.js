@@ -38,6 +38,7 @@ class ElementDefinition_Example extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Example';
 		Object.assign(this, opts);
 	}
 

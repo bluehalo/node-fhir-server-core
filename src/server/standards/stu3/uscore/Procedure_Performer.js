@@ -6,6 +6,7 @@ class Procedure_Performer extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Procedure_Performer';
 		Object.assign(this, opts);
 	}
 

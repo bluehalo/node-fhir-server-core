@@ -8,6 +8,7 @@ class Organization_Contact extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Organization_Contact';
 		Object.assign(this, opts);
 	}
 

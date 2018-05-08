@@ -8,6 +8,7 @@ class Practitioner_Qualification extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Practitioner_Qualification';
 		Object.assign(this, opts);
 	}
 

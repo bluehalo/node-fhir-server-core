@@ -5,6 +5,7 @@ class SampledData extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'SampledData';
 		Object.assign(this, opts);
 	}
 

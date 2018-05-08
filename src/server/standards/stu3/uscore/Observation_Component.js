@@ -12,6 +12,7 @@ class Observation_Component extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Observation_Component';
 		Object.assign(this, opts);
 	}
 

@@ -10,6 +10,7 @@ class Device extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Device';
 		Object.assign(this, opts);
 	}
 

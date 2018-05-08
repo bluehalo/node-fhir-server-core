@@ -4,6 +4,7 @@ class Narrative extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Narrative';
 		Object.assign(this, opts);
 	}
 

@@ -4,6 +4,7 @@ class Age extends Quantity {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Age';
 		Object.assign(this, opts);
 	}
 

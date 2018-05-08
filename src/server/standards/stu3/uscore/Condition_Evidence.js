@@ -6,6 +6,7 @@ class Condition_Evidence extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Condition_Evidence';
 		Object.assign(this, opts);
 	}
 

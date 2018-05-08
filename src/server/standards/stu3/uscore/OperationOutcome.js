@@ -5,6 +5,7 @@ class OperationOutcome extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'OperationOutcome';
 		Object.assign(this, opts);
 	}
 

@@ -4,6 +4,7 @@ class BackboneElement extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'BackboneElement';
 		Object.assign(this, opts);
 	}
 

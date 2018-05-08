@@ -5,6 +5,7 @@ class Annotation extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Annotation';
 		Object.assign(this, opts);
 	}
 

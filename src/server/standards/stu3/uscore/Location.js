@@ -11,6 +11,7 @@ class Location extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Location';
 		Object.assign(this, opts);
 	}
 

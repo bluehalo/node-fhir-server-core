@@ -11,6 +11,7 @@ class CarePlan extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'CarePlan';
 		Object.assign(this, opts);
 	}
 

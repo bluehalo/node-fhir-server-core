@@ -4,6 +4,7 @@ class Attachment extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Attachment';
 		Object.assign(this, opts);
 	}
 

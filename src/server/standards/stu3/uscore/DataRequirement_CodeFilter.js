@@ -7,6 +7,7 @@ class DataRequirement_CodeFilter extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'DataRequirement_CodeFilter';
 		Object.assign(this, opts);
 	}
 

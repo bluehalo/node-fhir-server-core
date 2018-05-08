@@ -9,6 +9,7 @@ class Dosage extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Dosage';
 		Object.assign(this, opts);
 	}
 

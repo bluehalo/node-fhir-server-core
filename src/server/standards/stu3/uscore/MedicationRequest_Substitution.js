@@ -5,6 +5,7 @@ class MedicationRequest_Substitution extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'MedicationRequest_Substitution';
 		Object.assign(this, opts);
 	}
 

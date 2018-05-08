@@ -7,6 +7,7 @@ class CareTeam_Participant extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'CareTeam_Participant';
 		Object.assign(this, opts);
 	}
 

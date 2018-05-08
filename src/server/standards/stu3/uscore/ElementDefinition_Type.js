@@ -4,6 +4,7 @@ class ElementDefinition_Type extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Type';
 		Object.assign(this, opts);
 	}
 

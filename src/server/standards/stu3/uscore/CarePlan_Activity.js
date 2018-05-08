@@ -8,6 +8,7 @@ class CarePlan_Activity extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'CarePlan_Activity';
 		Object.assign(this, opts);
 	}
 

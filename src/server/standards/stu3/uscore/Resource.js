@@ -5,6 +5,7 @@ class Resource extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Resource';
 		Object.assign(this, opts);
 	}
 

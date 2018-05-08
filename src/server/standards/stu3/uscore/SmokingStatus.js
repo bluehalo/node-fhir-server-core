@@ -16,6 +16,7 @@ class SmokingStatus extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'SmokingStatus';
 		Object.assign(this, opts);
 	}
 

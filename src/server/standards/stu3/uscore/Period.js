@@ -4,6 +4,7 @@ class Period extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Period';
 		Object.assign(this, opts);
 	}
 

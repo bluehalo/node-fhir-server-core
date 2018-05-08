@@ -5,6 +5,7 @@ class OperationOutcome_Issue extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'OperationOutcome_Issue';
 		Object.assign(this, opts);
 	}
 

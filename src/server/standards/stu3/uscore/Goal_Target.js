@@ -8,6 +8,7 @@ class Goal_Target extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Goal_Target';
 		Object.assign(this, opts);
 	}
 

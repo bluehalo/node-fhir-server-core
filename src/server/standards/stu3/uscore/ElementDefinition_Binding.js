@@ -5,6 +5,7 @@ class ElementDefinition_Binding extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'ElementDefinition_Binding';
 		Object.assign(this, opts);
 	}
 

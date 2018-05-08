@@ -5,6 +5,7 @@ class Range extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Range';
 		Object.assign(this, opts);
 	}
 

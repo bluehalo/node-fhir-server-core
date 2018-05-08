@@ -10,6 +10,7 @@ class Organization extends DomainResource {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Organization';
 		Object.assign(this, opts);
 	}
 

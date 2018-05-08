@@ -4,6 +4,7 @@ class Distance extends Quantity {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Distance';
 		Object.assign(this, opts);
 	}
 

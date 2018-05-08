@@ -5,6 +5,7 @@ class Reference extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Reference';
 		Object.assign(this, opts);
 	}
 

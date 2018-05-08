@@ -37,6 +37,7 @@ class Extension extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Extension';
 		Object.assign(this, opts);
 	}
 

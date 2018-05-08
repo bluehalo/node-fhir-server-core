@@ -4,6 +4,7 @@ class Money extends Quantity {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Money';
 		Object.assign(this, opts);
 	}
 

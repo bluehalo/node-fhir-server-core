@@ -5,6 +5,7 @@ class Ratio extends Element {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Ratio';
 		Object.assign(this, opts);
 	}
 

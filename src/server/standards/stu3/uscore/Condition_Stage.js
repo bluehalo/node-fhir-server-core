@@ -6,6 +6,7 @@ class Condition_Stage extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Condition_Stage';
 		Object.assign(this, opts);
 	}
 

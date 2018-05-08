@@ -6,6 +6,7 @@ class Procedure_FocalDevice extends BackboneElement {
 
 	constructor ( opts ) {
 		super();
+		this._resourceType = 'Procedure_FocalDevice';
 		Object.assign(this, opts);
 	}
 
