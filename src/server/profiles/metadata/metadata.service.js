@@ -98,7 +98,8 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 
 		// Add the server statement to the main statement
 		return resolve(makeStatement(server_statement));
-	});
+	})
+	.catch(reject);
 
 });
 

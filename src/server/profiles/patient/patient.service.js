@@ -52,5 +52,5 @@ module.exports.getPatientById = (req, logger, context) => new Promise((resolve, 
 	// 				}]
 	// 			}
 	// 		}]
-	// })
+	// });
 });

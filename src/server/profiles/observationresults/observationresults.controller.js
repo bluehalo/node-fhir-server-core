@@ -8,7 +8,8 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific observationresults
+		// Get a version specific observationresults & bundle
+		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
 		/**
 		* return service.getObservationResults(req, logger)
@@ -17,12 +18,8 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 		*/
 		return service.getObservationResults(req, logger, context)
 			.then((observationresultss) => {
-				const searchObservationResults = {
-					'total': 0,
-					'resourceType': 'Bundle',
-					'type': 'searchset',
-					'entry': []
-				};
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
 
 				if (observationresultss) {
 					for (let resource of observationresultss) {
@@ -31,20 +28,19 @@ module.exports.getObservationResults = ({ profile, logger, config }) => {
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							const entry = {
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new ObservationResults(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Results/${resource.id}`
-							};
-							searchObservationResults.entry.push(entry);
+							entries.push({
+								search: { mode: 'match' },
+								resource: new ObservationResults(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/Results/${resource.id}`
+							});
 						}
-						searchObservationResults.total = searchObservationResults.entry.length;
 					}
 				}
 
-				res.status(200).json(searchObservationResults);
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message, version));
@@ -62,7 +58,7 @@ module.exports.getObservationResultsById = ({ profile, logger }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific observationresults
+		// Get a version specific observationresults
 		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
 
 		return service.getObservationResultsById(req, logger, context)

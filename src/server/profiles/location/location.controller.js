@@ -8,7 +8,8 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific location
+		// Get a version specific location & bundle
+		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
 		/**
@@ -18,12 +19,8 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 		*/
 		return service.getLocation(req, logger, context)
 			.then((locations) => {
-				const searchResults = {
-					'total': 0,
-					'resourceType': 'Bundle',
-					'type': 'searchset',
-					'entry': []
-				};
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
 
 				if (locations) {
 					for (let resource of locations) {
@@ -32,20 +29,19 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							const entry = {
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new Location(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Location/${resource.id}`
-							};
-							searchResults.entry.push(entry);
+							entries.push({
+								search: { mode: 'match' },
+								resource: new Location(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/Location/${resource.id}`
+							});
 						}
-						searchResults.total = searchResults.entry.length;
 					}
 				}
 
-				res.status(200).json(searchResults);
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message, version));
@@ -63,7 +59,7 @@ module.exports.getLocationById = ({ profile, logger }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific location
+		// Get a version specific location
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
 		return service.getLocationById(req, logger, context)

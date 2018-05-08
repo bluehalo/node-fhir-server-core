@@ -8,7 +8,8 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific device
+		// Get a version specific device & bundle
+		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
 		/**
@@ -18,12 +19,8 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 		*/
 		return service.getDevice(req, logger, context)
 			.then((devices) => {
-				const searchResults = {
-					'total': 0,
-					'resourceType': 'Bundle',
-					'type': 'searchset',
-					'entry': []
-				};
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
 
 				if (devices) {
 					for (let resource of devices) {
@@ -32,20 +29,19 @@ module.exports.getDevice = ({ profile, logger, config }) => {
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							const entry = {
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new Device(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Device/${resource.id}`
-							};
-							searchResults.entry.push(entry);
+							entries.push({
+								search: { mode: 'match' },
+								resource: new Device(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/Device/${resource.id}`
+							});
 						}
-						searchResults.total = searchResults.entry.length;
 					}
 				}
 
-				res.status(200).json(searchResults);
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
 			})
 			.catch((err) => {
 				next(errors.internal(err.message, version));
@@ -63,7 +59,7 @@ module.exports.getDeviceById = ({ profile, logger }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a resource specific device
+		// Get a version specific device
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
 		return service.getDeviceById(req, logger, context)
