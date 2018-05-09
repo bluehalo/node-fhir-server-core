@@ -2,7 +2,7 @@
 
 Asymmetrik FHIR API Server
 ==========================
-> A Rest implementation for the [ONC FHIR Challenge](https://www.cccinnovationcenter.com/challenges/secure-api-server-showdown-challenge/).
+> A Secure Rest implementation for the [HL7 FHIR Specification](https://www.hl7.org/fhir/).
 
 ## Install
 
@@ -334,12 +334,7 @@ module.exports.getPatientById = (req, logger, context) => new Promise((resolve, 
 
 ##### `get<profile>`
 
-- **Description:** Get the patient given an one of several valid argument combinations in the req.query. Valid argument combinations include:
-	- identifier
-	- name + birthdate
-	- name + gender
-	- family + gender
-	- given + gender
+- **Description:** Get the resource given one of several valid argument(s) and/or  combination(s) of arguments in the req.query.
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
 - **Routes:** Enables `/[version]/<profile>` via GET and `/[version]/<profile>/_search` via POST
@@ -364,7 +359,7 @@ module.exports.getObservation = (req, logger, context) => new Promise((resolve, 
 ```
 
 #### AllergyIntolerance
-AllergyIntolerance profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/allergyintolerance/allergyintolerance.arguments.js](./src/server/profiles/allergyintolerance/aallergyintolerance.arguments.js).
+AllergyIntolerance profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/allergyintolerance/allergyintolerance.arguments.js](./src/server/profiles/allergyintolerance/allergyintolerance.arguments.js).
 
 #### CarePlan
 CarePlan profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/careplan/careplan.arguments.js](./src/server/profiles/careplan/careplan.arguments.js).
