@@ -7,17 +7,17 @@ Asymmetrik FHIR API Server
 ## Install
 
 ```shell
-# npm
-npm install @asymmetrik/node-fhir-server-core --save
-
 # yarn
 yarn add @asymmetrik/node-fhir-server-core
+
+# npm
+npm install @asymmetrik/node-fhir-server-core --save
 ```
 
 ## Usage
-`@asymmetrik/node-fhir-server-core` exposes a single function which takes a   and returns a promise. You can give it server, auth, logging, and profile configurations. The full list of possible configurations is listed below under [Config](#config). At minimum, your config must include a `server.port` and one profile. Profiles must contain a service and each service must contain certain functions. You can view the requirements for each profile under [Profiles](#profiles).
+`@asymmetrik/node-fhir-server-core` exposes a setup function which takes a config and returns a promise. The full list of possible configurations is listed below under [Config](#config). At minimum, your config must include a `server.port` and one profile. Profiles must contain a service and each service must contain certain functions. You can view the available profiles and their requirements under [Profiles](#profiles). We are currently aiming to be fully compliant with [USCore](http://www.hl7.org/fhir/us/core/).
 
-You can see a fully built example that utilizes MongoDB for the backend at [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo). Also see [Examples](#Examples) below.
+You can see an example implementation that utilizes MongoDB for the backend at [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo). Also see [Examples](#Examples) below.
 
 ### Config
 Here is an example config with all the currently supported options. See descriptions below.
@@ -61,20 +61,20 @@ Here is an example config with all the currently supported options. See descript
 		level: 'debug'
 	},
 	profiles: {
-		dstu2: {
-			patient: {
-				service: './patient/patient.controller',
-				corsOptions: {
-					// Have a different max age for all the routes in the patient profile
-					maxAge: 3600
-				}
-			},
-			observation: {
-				service: require('./observation/observation.controller'),
-				corsOptions: {
-					// Disable cors on this profile, maybe this is for internal use only
-					origin: false
-				}
+		patient: {
+			service: './patient/patient.controller',
+			versions: [ VERSIONS.STU3 ],
+			corsOptions: {
+				// Have a different max age for all the routes in the patient profile
+				maxAge: 3600
+			}
+		},
+		observation: {
+			service: require('./observation/observation.controller'),
+			versions: [ VERSIONS.STU3 ],
+			corsOptions: {
+				// Disable cors on this profile, maybe this is for internal use only
+				origin: false
 			}
 		}
 	}
@@ -228,43 +228,74 @@ const fhirConfig = {
 - **Required:** No
 - **Default:** `error`
 
-#### `profiles[spec][key]service`
-> Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
+#### `profiles[key]service`
+> Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
 
 - **Type:** `string` | `object`
-- **Description:** Path to a service or the actual module itself. Each service must conform to the profiles requirement.
-- **Required:** Yes. You must provide a service on a profile object. There must be at least one valid profile configuration for the server to run, otherwise it will throw an error stating the profiles configuration is invalid.
+- **Description:** Path to a service or the actual module itself. Each service must conform to the profiles requirement. This will enable the API for this particular service.
+- **Required:** Yes. You must provide a service on a profile object if a profile object is configured. Otherwise, this profile configuration will be ignored.
 - **Default:** `none`
 
-#### `profiles[spec][key]corsOptions`
-> Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
+#### `profiles[key]corsOptions`
+> Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
 
 - **Type:** `object`
 - **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
+#### `profiles[key]versions`
+> Supported `key` values are the config keys in the [Profiles](./#profiles) section below.
+
+- **Type:** `Array<string>`
+- **Description:** Which versions this API endpoint should be available on. When we support more versions, you can specify different versions for each profile so you can slowly upgrade/deprecate profiles one at a time if needed.
+- **Required:** Yes
+- **Default:** `none`
+
 ### Profiles
 Currently we are only supporting profiles listed in the table below. As we add support for more profiles, we will update the documentation below with the necessary methods to support those profiles. You will also see which routes each method will enable in your implementation.
 
-| Profile      | Config Key     | Interface                   |
-|--------------|----------------|-----------------------------|
-| Patient      | `patient`      | [patient](#patient)         |
-| Observation  | `observation`  | [observation](#observation) |
+| Profile              | Profile Key            | Interface                                   |
+|----------------------|------------------------|---------------------------------------------|
+| AllergyIntolerance   | `allergyintolerance`   | [allergyintolerance](#allergyintolerance)   |
+| CarePlan             | `careplan`             | [careplan](#careplan)                       |
+| CareTeam             | `careteam`             | [careteam](#careteam)                       |
+| Condition            | `condition`            | [condition](#condition)                     |
+| Device               | `device`               | [device](#device)                           |
+| DiagnosticReport     | `diagnosticreport`     | [diagnosticreport](#diagnosticreport)       |
+| Goal                 | `goal`                 | [goal](#goal)                               |
+| Immunization         | `immunization`         | [immunization](#immunization)               |
+| Location             | `location`             | [location](#location)                       |
+| Medication           | `medication`           | [medication](#medication)                   |
+| MedicationRequest    | `medicationrequest`    | [medicationrequest](#medicationrequest)     |
+| MedicationStatement  | `medicationstatement`  | [medicationstatement](#medicationstatement) |
+| Observation          | `observation`          | [observation](#observation)                 |
+| Organization         | `organization`         | [organization](#organization)               |
+| Patient              | `patient`              | [patient](#patient)                         |
+| Practitioner         | `practitioner`         | [practitioner](#practitioner)               |
+| Procedure            | `procedure`            | [procedure](#procedure)                     |
 
 Each method in your profile service will receive the following arguments:
 - `req` - The request object from Express
 - `logger` - A Winston logger instance
 - `context` - An object containing some additional contextual information. This currently only contains a version, which can be useful if you use the same service for multiple specs.
 
-Here is an example implementation for a service method, in particular, `patient.getCount`:
+#### Common Methods
+These following three methods are similar on every profile. If a profile has a one off method that is not shared across them all you will find it's explanation under the individual profile configuration.
 
+##### `getCount`
+
+- **Description:** Return the number of resources of this type in your data store.
+- **Required:** Yes
+- **Return:** `Promise.<number, Error>`
+- **Routes:** Required for metadata. Count will show up in the capability statement under `[version]/metadata`.
+**Example Implementation:**
 ```javascript
 // In patient service
 module.exports.getCount = (req, logger, context) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> getCount');
 	logger.info(`Version >>> ${context.version}`);
-	// Logs 'Version >>> dstu2' if this is from a dstu2 route
+	// Logs 'Version >>> stu3' if this is from a stu3 route
 	// Do some async query to your data source here
 	db.patients.count((err, count) => {
 		if (err) {
@@ -276,24 +307,32 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 });
 ```
 
-### Patient
-
-#### `getCount`
-
-- **Description:** Return the number of patients in your data store.
-- **Required:** Yes
-- **Return:** `Promise.<number, Error>`
-- **Routes:** Required for metadata. Count will show up in the capability statement under `[spec]/metadata`.
-
-#### `getPatientById`
+##### `get<profile>ById`
 
 - **Description:** Get the patient given an id in the req.params.
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `[spec]/patient/:id` via GET
-	- Example: `dstu2/patient/2`
+- **Routes:** Enables `[version]/<profile>/:id` via GET
+- **Example Route:** `stu3/patient/2`
+- **Example Implementation:**
+```javascript
+// In patient service
+module.exports.getPatientById = (req, logger, context) => new Promise((resolve, reject) => {
+	logger.info('Patient >>> getPatientById');
+	logger.info(`Version >>> ${context.version}`);
+	// Logs 'Version >>> stu3' if this is from a stu3 route
+	// Do some async query to your data source here
+	db.patients.find({ _id: req.params.id }, (err, patient) => {
+		if (err) {
+			logger.error('Error with Patient.getPatientById');
+			return reject(err);
+		}
+		return resolve(patient);
+	});
+});
+```
 
-#### `getPatient`
+##### `get<profile>`
 
 - **Description:** Get the patient given an one of several valid argument combinations in the req.query. Valid argument combinations include:
 	- identifier
@@ -303,40 +342,86 @@ module.exports.getCount = (req, logger, context) => new Promise((resolve, reject
 	- given + gender
 - **Required:** Yes
 - **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `/[spec]/patient` via GET and `/[spec]/patient/_search` via POST
-	- Example: `dstu2/patient/?foo=bar` or `dstu2/patient/_search?foo=bar`
+- **Routes:** Enables `/[version]/<profile>` via GET and `/[version]/<profile>/_search` via POST
+- **Example Route:** `stu3/observation/?foo=bar` or `stu3/observation/_search?foo=bar`
+- **Example Implementation:**
+```javascript
+// In observation service
+module.exports.getObservation = (req, logger, context) => new Promise((resolve, reject) => {
+	logger.info('Observation >>> getObservation');
+	logger.info(`Version >>> ${context.version}`);
+	// Logs 'Version >>> stu3' if this is from a stu3 route
+	// Do some async query to your data source here
+	let query = buildQuery(req.query);
+	db.observations.find(query, (err, observations) => {
+		if (err) {
+			logger.error('Error with Observation.getObservation');
+			return reject(err);
+		}
+		return resolve(observations);
+	});
+});
+```
 
-### Observation
+#### AllergyIntolerance
+AllergyIntolerance profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/allergyintolerance/allergyintolerance.arguments.js](./src/server/profiles/allergyintolerance/aallergyintolerance.arguments.js).
 
-#### `getCount`
+#### CarePlan
+CarePlan profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/careplan/careplan.arguments.js](./src/server/profiles/careplan/careplan.arguments.js).
 
-- **Description:** Get the count of the number of observations.
-- **Required:** Yes
-- **Return:** `Promise.<number, Error>`
-- **Routes:** Required for metadata. Count will show up in the capability statement under `[spec]/metadata`.
+#### CareTeam
+CareTeam profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/careteam/careteam.arguments.js](./src/server/profiles/careteam/careteam.arguments.js).
 
-#### `getObservationById`
+#### Condition
+Condition profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/condition/condition.arguments.js](./src/server/profiles/condition/condition.arguments.js).
 
-- **Description:** TODO
-- **Required:** Yes
-- **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `[spec]/observation/:id` via GET
-	- Example: `dstu2/observation/2`
+#### Device
+Device profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/device/device.arguments.js](./src/server/profiles/device/device.arguments.js).
 
-#### `getObservation`
+#### DiagnosticReport
+DiagnosticReport profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/diagnosticreport/diagnosticreport.arguments.js](./src/server/profiles/diagnosticreport/diagnosticreport.arguments.js).
 
-- **Description:** TODO
-- **Required:** Yes
-- **Return:** `Promise.<object, Error>`
-- **Routes:** Enables `/[spec]/observation` via GET and `/[spec]/observation/_search` via POST
-	- Example: `dstu2/observation/?foo=bar` or `dstu2/observation/_search?foo=bar`
+#### Goal
+Goal profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/goal/goal.arguments.js](./src/server/profiles/goal/goal.arguments.js).
 
-## Examples
+#### Immunization
+Immunization profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/immunization/immunization.arguments.js](./src/server/profiles/immunization/immunization.arguments.js).
+
+#### Location
+Location profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/location/location.arguments.js](./src/server/profiles/location/location.arguments.js).
+
+#### Medication
+Medication profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medication/medication.arguments.js](./src/server/profiles/medication/medication.arguments.js).
+
+#### MedicationRequest
+MedicationRequest profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medicationrequest/medicationrequest.arguments.js](./src/server/profiles/medicationrequest/medicationrequest.arguments.js).
+
+#### MedicationStatement
+MedicationStatement profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medicationstatement/medicationstatement.arguments.js](./src/server/profiles/medicationstatement/medicationstatement.arguments.js).
+
+#### Observation
+Observation profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/observation/observation.arguments.js](./src/server/profiles/observation/observation.arguments.js).
+
+#### Organization
+Organization profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/organization/organization.arguments.js](./src/server/profiles/organization/organization.arguments.js).
+
+#### Patient
+Patient profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/patient/patient.arguments.js](./src/server/profiles/patient/patient.arguments.js).
+
+#### Practitioner
+Practitioner profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/practitioner/practitioner.arguments.js](./src/server/profiles/practitioner/practitioner.arguments.js).
+
+#### Procedure
+Procedure profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/procedure/procedure.arguments.js](./src/server/profiles/procedure/procedure.arguments.js).
+
+### Examples
 
 #### Setting up a https server with my own patient service
 
 ```javascript
+const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/constants');
 const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
+
 const config = {
 	server: {
 		port: 3000,
@@ -351,7 +436,9 @@ const config = {
 	profiles: {
 		patient: {
 			// Path to a service or the actual module
-			service: require(path.resolve('./profiles/patient/patient.service'))
+			service: require(path.resolve('./profiles/patient/patient.service')),
+			// set the supported version to stu3 only
+			versions: [ VERSIONS.STU3 ]
 		}
 	}
 };
@@ -372,18 +459,18 @@ main();
 #### Setting up a minimal dev server with my own patient service
 
 ```javascript
+const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/constants');
 const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
+
 const config = {
 	server: {
 		port: 3000
 	},
-	logging: {
-		level: 'debug'
-	},
 	profiles: {
 		patient: {
 			// Path to a service or the actual module
-			service: require(path.resolve('./profiles/patient/patient.service'))
+			service: require(path.resolve('./profiles/patient/patient.service')),
+			versions: [ VERSIONS.STU3 ]
 		}
 	}
 };
