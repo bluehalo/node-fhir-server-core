@@ -1,6 +1,24 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
+/**
+* Helper for getting the correct constructor for the various observation types
+*/
+let getResourceConstructor = (version, resourceType) => {
+	let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
+	let Results = require(resolveFromVersion(version, 'uscore/Results'));
+	let SmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
+
+	switch (resourceType) {
+		case Results.__resourceType:
+			return Results;
+		case SmokingStatus.__resourceType:
+			return SmokingStatus;
+		default:
+			return Observation;
+	}
+};
+
 module.exports.getObservation = ({ profile, logger, config }) => {
 	let { serviceModule: service } = profile;
 
@@ -8,9 +26,8 @@ module.exports.getObservation = ({ profile, logger, config }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific observation & bundle
+		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
 
 		/**
 		 * return service.getObservation(req, logger)
@@ -25,6 +42,8 @@ module.exports.getObservation = ({ profile, logger, config }) => {
 				if (observations) {
 					for (let resource of observations) {
 						if (!req.observation || req.observation === resource.observationId) {
+							// Get a version specific observation for the correct type of observation
+							let Observation = getResourceConstructor(version, resource.resourceType);
 							// Modes:
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
@@ -58,12 +77,12 @@ module.exports.getObservationById = ({ profile, logger }) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific observation
-		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
 
 		return service.getObservationById(req, logger, context)
 			.then((observation) => {
 				if (observation) {
+					// Get a version specific observation for the correct type of observation
+					let Observation = getResourceConstructor(version, observation.resourceType);
 					res.status(200).json(new Observation(observation));
 				} else {
 					next(errors.notFound('Observation not found', version));

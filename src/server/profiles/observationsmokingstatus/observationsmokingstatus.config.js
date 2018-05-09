@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
 const observationsmokingstatus_args = require('./observationsmokingstatus.arguments');
@@ -148,5 +149,5 @@ module.exports = {
 	routeOptions: {
 		profileKey: CONFIG_KEYS.OBSERVATIONSMOKINGSTATUS
 	},
-	routes
+	routes: []
 };
