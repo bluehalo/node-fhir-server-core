@@ -45,6 +45,20 @@ let configureSession = function (app, serverConfig) {
 };
 
 /**
+ * @function configureEvents
+ * @summary Setup subscriptions for various events
+ * @param {Express.app} app
+ */
+let configureEvents = function (app, events = {}) {
+	// Audit events. These will trigger when their is a
+	// security/privacy related event
+	if (events.auditEvent) { app.on('audit-event', events.auditEvent); }
+	// provenance events occur when a resource changes
+	// "how it came to be", meaning updates, creates, and deletes
+	if (events.provenance) { app.on('provenance', events.provenance); }
+};
+
+/**
  * @function secureHeaders
  * @summary Add helmet to secure headers
  * @param {Express.app} app
@@ -163,7 +177,7 @@ let setupErrorHandler = function (app, logger) {
 module.exports.initialize = async ({ config, logger }) => {
 	logger.info('Initializing express');
 
-	const { auth, server } = config;
+	const { auth, server, events } = config;
 	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -176,6 +190,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	// Add some configurations to our app
 	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
+	configureEvents(app, events);
 	secureHeaders(app, USE_HTTPS);
 	setupRoutes(app, config, logger);
 	setupErrorHandler(app, logger);
