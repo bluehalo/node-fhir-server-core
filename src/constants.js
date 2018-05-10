@@ -77,3 +77,11 @@ exports.ISSUE = {
 exports.VERSIONS = {
 	STU3: 'stu3'
 };
+
+/**
+* Custom events we support
+*/
+exports.EVENTS = {
+	AUDIT: 'audit-event',
+	PROVENANCE: 'provenance'
+};

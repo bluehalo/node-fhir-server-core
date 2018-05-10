@@ -9,6 +9,9 @@ const http = require('http');
 const fs = require('fs');
 const routeSetter = require('../server/route-setter');
 const errors = require('../server/utils/error.utils');
+const {
+	EVENTS
+} = require('../constants');
 
 /**
  * @function configureMiddleware
@@ -52,10 +55,10 @@ let configureSession = function (app, serverConfig) {
 let configureEvents = function (app, events = {}) {
 	// Audit events. These will trigger when their is a
 	// security/privacy related event
-	if (events.auditEvent) { app.on('audit-event', events.auditEvent); }
+	if (events.auditEvent) { app.on(EVENTS.AUDIT, events.auditEvent); }
 	// provenance events occur when a resource changes
 	// "how it came to be", meaning updates, creates, and deletes
-	if (events.provenance) { app.on('provenance', events.provenance); }
+	if (events.provenance) { app.on(EVENTS.PROVENANCE, events.provenance); }
 };
 
 /**
