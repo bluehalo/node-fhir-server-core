@@ -101,7 +101,7 @@ const setter = (options = {}) => {
 				// Authentication middleware
 				// validate(route.scopes, logger, config),
 				// Finally our controller function
-				route.controller({ profile, logger, config })
+				route.controller({ profile, logger, config, app })
 			);
 		}
 

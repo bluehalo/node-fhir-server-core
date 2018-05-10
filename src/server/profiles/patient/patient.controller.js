@@ -1,7 +1,8 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getPatient = ({ profile, logger, config }) => {
+module.exports.getPatient = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -51,7 +52,7 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 };
 
 
-module.exports.getPatientById = ({ profile, logger }) => {
+module.exports.getPatientById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

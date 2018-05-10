@@ -1,7 +1,8 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/error.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getLocation = ({ profile, logger, config }) => {
+module.exports.getLocation = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -52,7 +53,7 @@ module.exports.getLocation = ({ profile, logger, config }) => {
 };
 
 
-module.exports.getLocationById = ({ profile, logger }) => {
+module.exports.getLocationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

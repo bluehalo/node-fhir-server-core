@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
@@ -19,7 +20,7 @@ let getResourceConstructor = (version, resourceType) => {
 	}
 };
 
-module.exports.getObservation = ({ profile, logger, config }) => {
+module.exports.getObservation = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -70,7 +71,7 @@ module.exports.getObservation = ({ profile, logger, config }) => {
 };
 
 
-module.exports.getObservationById = ({ profile, logger }) => {
+module.exports.getObservationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
