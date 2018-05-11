@@ -255,25 +255,25 @@ const fhirConfig = {
 ### Profiles
 Currently we are only supporting profiles listed in the table below. As we add support for more profiles, we will update the documentation below with the necessary methods to support those profiles. You will also see which routes each method will enable in your implementation.
 
-| Profile              | Profile Key            | Interface                                   |
-|----------------------|------------------------|---------------------------------------------|
-| AllergyIntolerance   | `allergyintolerance`   | [allergyintolerance](#allergyintolerance)   |
-| CarePlan             | `careplan`             | [careplan](#careplan)                       |
-| CareTeam             | `careteam`             | [careteam](#careteam)                       |
-| Condition            | `condition`            | [condition](#condition)                     |
-| Device               | `device`               | [device](#device)                           |
-| DiagnosticReport     | `diagnosticreport`     | [diagnosticreport](#diagnosticreport)       |
-| Goal                 | `goal`                 | [goal](#goal)                               |
-| Immunization         | `immunization`         | [immunization](#immunization)               |
-| Location             | `location`             | [location](#location)                       |
-| Medication           | `medication`           | [medication](#medication)                   |
-| MedicationRequest    | `medicationrequest`    | [medicationrequest](#medicationrequest)     |
-| MedicationStatement  | `medicationstatement`  | [medicationstatement](#medicationstatement) |
-| Observation          | `observation`          | [observation](#observation)                 |
-| Organization         | `organization`         | [organization](#organization)               |
-| Patient              | `patient`              | [patient](#patient)                         |
-| Practitioner         | `practitioner`         | [practitioner](#practitioner)               |
-| Procedure            | `procedure`            | [procedure](#procedure)                     |
+| Profile              | Profile Key            | Interface                              |
+|----------------------|------------------------|----------------------------------------|
+| AllergyIntolerance   | `allergyintolerance`   | See [Common Methods](##common-methods) |
+| CarePlan             | `careplan`             | See [Common Methods](##common-methods) |
+| CareTeam             | `careteam`             | See [Common Methods](##common-methods) |
+| Condition            | `condition`            | See [Common Methods](##common-methods) |
+| Device               | `device`               | See [Common Methods](##common-methods) |
+| DiagnosticReport     | `diagnosticreport`     | See [Common Methods](##common-methods) |
+| Goal                 | `goal`                 | See [Common Methods](##common-methods) |
+| Immunization         | `immunization`         | See [Common Methods](##common-methods) |
+| Location             | `location`             | See [Common Methods](##common-methods) |
+| Medication           | `medication`           | See [Common Methods](##common-methods) |
+| MedicationRequest    | `medicationrequest`    | See [Common Methods](##common-methods) |
+| MedicationStatement  | `medicationstatement`  | See [Common Methods](##common-methods) |
+| Observation          | `observation`          | See [Common Methods](##common-methods) |
+| Organization         | `organization`         | See [Common Methods](##common-methods) |
+| Patient              | `patient`              | See [Common Methods](##common-methods) |
+| Practitioner         | `practitioner`         | See [Common Methods](##common-methods) |
+| Procedure            | `procedure`            | See [Common Methods](##common-methods) |
 
 Each method in your profile service will receive the following arguments:
 - `req` - The request object from Express
@@ -281,7 +281,7 @@ Each method in your profile service will receive the following arguments:
 - `context` - An object containing some additional contextual information. This currently only contains a version, which can be useful if you use the same service for multiple specs.
 
 #### Common Methods
-These following three methods are similar on every profile. If a profile has a one off method that is not shared across them all you will find it's explanation under the individual profile configuration.
+These following three methods are similar on every profile. If a profile has a one off method that is not shared across them all, we will add a section below with the profile's name and some documentation (currently there are none).
 
 ##### `getCount`
 
