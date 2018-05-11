@@ -71,9 +71,9 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 		// is only accessing resources with his id, he is not allowed to access others
 		if (
 			req.patient
-			&& req.body
-			&& req.body.id
-			&& req.patient !== req.body.id
+			&& req.params
+			&& req.params.id
+			&& req.patient !== req.params.id
 		) {
 			// Create an audit event
 			let resource = new AuditEvent({
@@ -91,10 +91,10 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 				// The outcome was a minor failure, according to https://www.hl7.org/fhir/valueset-audit-event-outcome.html
 				outcome: '4',
 				// Description of the outcome
-				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.body.id} and is not allowed to access this patient.`
+				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
 			});
 			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`, version));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
 		}
 
 		return service.getPatientById(req, logger, context)

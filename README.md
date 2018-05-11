@@ -60,6 +60,10 @@ Here is an example config with all the currently supported options. See descript
 	logging: {
 		level: 'debug'
 	},
+	events: {
+		auditEvent: logger.auditLogger,
+		provenance: service.writeProvenanceRecords,
+	},
 	profiles: {
 		dstu2: {
 			patient: {
@@ -227,6 +231,27 @@ const fhirConfig = {
 - **Description:** Logging level to use for Winston. Logging level can be anything supported by Winston. See https://github.com/winstonjs/winston#using-logging-levels.
 - **Required:** No
 - **Default:** `error`
+
+#### `events.auditEvent`
+> Subscribe to incidents that create audit events.
+
+- **Type:** `string`
+- **Description:** Occasionally certain security/privacy related events occur on the server and those events need to be recorded. You can subscribe to audit events with any function that will receive an AuditEvent resource anytime these events occur. The scope of these events may increase over time so it is up to you to decide what to do with them based on their internal values.
+- **Required:** No. However we strongly advise you use this.
+- **Default:** `none`
+
+#### `events.provenance`
+> Subscribe to incidents that create provenance resources.
+
+- **Type:** `string`
+- **Description:** Provenance resources are created when a resource changes "how it came to be". This means on updates, creates, and deletes. These are useful for tracking these kinds of changes. When the server adds write support, this will be very useful. Until then, we are not emitting these events.
+- **Required:** No. However we strongly advise you use this.
+- **Default:** `none`
+
+- **Type:** `string`
+- **Description:** Occasionally certain security/privacy related events occur on the server and those events need to be recorded. You can subscribe to audit events with any function that will receive an AuditEvent resource anytime these events occur. The scope of these events may increase over time so it is up to you to decide what to do with them based on their internal values.
+- **Required:** No. However we strongly advise you use this.
+- **Default:** `none`
 
 #### `profiles[spec][key]service`
 > Supported `spec` values at the moment are `dstu2`, with more coming soon. Supported `key` values are the config keys in the [Profiles](./#profiles) section below.

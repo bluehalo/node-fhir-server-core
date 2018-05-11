@@ -55,10 +55,14 @@ let configureSession = function (app, serverConfig) {
 let configureEvents = function (app, events = {}) {
 	// Audit events. These will trigger when their is a
 	// security/privacy related event
-	if (events.auditEvent) { app.on(EVENTS.AUDIT, events.auditEvent); }
+	if (typeof events.auditEvent === 'function') {
+		app.on(EVENTS.AUDIT, events.auditEvent);
+	}
 	// provenance events occur when a resource changes
 	// "how it came to be", meaning updates, creates, and deletes
-	if (events.provenance) { app.on(EVENTS.PROVENANCE, events.provenance); }
+	if (typeof events.provenance === 'function') {
+		app.on(EVENTS.PROVENANCE, events.provenance);
+	}
 };
 
 /**
