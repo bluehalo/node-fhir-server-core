@@ -358,56 +358,31 @@ module.exports.getObservation = (req, logger, context) => new Promise((resolve, 
 });
 ```
 
-#### AllergyIntolerance
-AllergyIntolerance profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/allergyintolerance/allergyintolerance.arguments.js](./src/server/profiles/allergyintolerance/allergyintolerance.arguments.js).
 
-#### CarePlan
-CarePlan profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/careplan/careplan.arguments.js](./src/server/profiles/careplan/careplan.arguments.js).
+### Profile Arguments
 
-#### CareTeam
-CareTeam profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/careteam/careteam.arguments.js](./src/server/profiles/careteam/careteam.arguments.js).
+Profiles should support the above common methods and receive any of the arguments defined in: 
 
-#### Condition
-Condition profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/condition/condition.arguments.js](./src/server/profiles/condition/condition.arguments.js).
+| Profile              | Profile Arguments            |
+|----------------------|------------------------------|
+| AllergyIntolerance   | [src/server/profiles/allergyintolerance/allergyintolerance.arguments.js](./src/server/profiles/allergyintolerance/allergyintolerance.arguments.js)|
+| CarePlan             | [src/server/profiles/careplan/careplan.arguments.js](./src/server/profiles/careplan/careplan.arguments.js)|
+| CareTeam             | [src/server/profiles/careteam/careteam.arguments.js](./src/server/profiles/careteam/careteam.arguments.js)|
+| Condition            | [src/server/profiles/condition/condition.arguments.js](./src/server/profiles/condition/condition.arguments.js)|
+| Device               | [src/server/profiles/device/device.arguments.js](./src/server/profiles/device/device.arguments.js)|
+| DiagnosticReport     | [src/server/profiles/diagnosticreport/diagnosticreport.arguments.js](./src/server/profiles/diagnosticreport/diagnosticreport.arguments.js)|
+| Goal                 | [src/server/profiles/goal/goal.arguments.js](./src/server/profiles/goal/goal.arguments.js)|
+| Immunization         | [src/server/profiles/immunization/immunization.arguments.js](./src/server/profiles/immunization/immunization.arguments.js)             |
+| Location             | [src/server/profiles/location/location.arguments.js](./src/server/profiles/location/location.arguments.js)|
+| Medication           | [src/server/profiles/medication/medication.arguments.js](./src/server/profiles/medication/medication.arguments.js)|
+| MedicationRequest    | [src/server/profiles/medicationrequest/medicationrequest.arguments.js](./src/server/profiles/medicationrequest/medicationrequest.arguments.js)|
+| MedicationStatement  | [src/server/profiles/medicationstatement/medicationstatement.arguments.js](./src/server/profiles/medicationstatement/medicationstatement.arguments.js) |
+| Observation          | [src/server/profiles/observation/observation.arguments.js](./src/server/profiles/observation/observation.arguments.js)|
+| Organization         | [src/server/profiles/organization/organization.arguments.js](./src/server/profiles/organization/organization.arguments.js)|
+| Patient              | [src/server/profiles/patient/patient.arguments.js](./src/server/profiles/patient/patient.arguments.js)| 
+| Practitioner         | [src/server/profiles/practitioner/practitioner.arguments.js](./src/server/profiles/practitioner/practitioner.arguments.js)|
+| Procedure            | [src/server/profiles/procedure/procedure.arguments.js](./src/server/profiles/procedure/procedure.arguments.js)   |
 
-#### Device
-Device profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/device/device.arguments.js](./src/server/profiles/device/device.arguments.js).
-
-#### DiagnosticReport
-DiagnosticReport profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/diagnosticreport/diagnosticreport.arguments.js](./src/server/profiles/diagnosticreport/diagnosticreport.arguments.js).
-
-#### Goal
-Goal profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/goal/goal.arguments.js](./src/server/profiles/goal/goal.arguments.js).
-
-#### Immunization
-Immunization profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/immunization/immunization.arguments.js](./src/server/profiles/immunization/immunization.arguments.js).
-
-#### Location
-Location profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/location/location.arguments.js](./src/server/profiles/location/location.arguments.js).
-
-#### Medication
-Medication profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medication/medication.arguments.js](./src/server/profiles/medication/medication.arguments.js).
-
-#### MedicationRequest
-MedicationRequest profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medicationrequest/medicationrequest.arguments.js](./src/server/profiles/medicationrequest/medicationrequest.arguments.js).
-
-#### MedicationStatement
-MedicationStatement profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/medicationstatement/medicationstatement.arguments.js](./src/server/profiles/medicationstatement/medicationstatement.arguments.js).
-
-#### Observation
-Observation profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/observation/observation.arguments.js](./src/server/profiles/observation/observation.arguments.js).
-
-#### Organization
-Organization profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/organization/organization.arguments.js](./src/server/profiles/organization/organization.arguments.js).
-
-#### Patient
-Patient profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/patient/patient.arguments.js](./src/server/profiles/patient/patient.arguments.js).
-
-#### Practitioner
-Practitioner profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/practitioner/practitioner.arguments.js](./src/server/profiles/practitioner/practitioner.arguments.js).
-
-#### Procedure
-Procedure profile's should support all the above common methods and can receive any of the arguments defined in [src/server/profiles/procedure/procedure.arguments.js](./src/server/profiles/procedure/procedure.arguments.js).
 
 ### Examples
 
@@ -484,7 +459,7 @@ main();
 ```
 
 ## Contributing
-Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) if interested in contributing.
+Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for more details regarding contributing issues or code.
 
 ## Attention
 
