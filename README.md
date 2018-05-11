@@ -257,23 +257,23 @@ Currently we are only supporting profiles listed in the table below. As we add s
 
 | Profile              | Profile Key            | Interface                              |
 |----------------------|------------------------|----------------------------------------|
-| AllergyIntolerance   | `allergyintolerance`   | See [Common Methods](##common-methods) |
-| CarePlan             | `careplan`             | See [Common Methods](##common-methods) |
-| CareTeam             | `careteam`             | See [Common Methods](##common-methods) |
-| Condition            | `condition`            | See [Common Methods](##common-methods) |
-| Device               | `device`               | See [Common Methods](##common-methods) |
-| DiagnosticReport     | `diagnosticreport`     | See [Common Methods](##common-methods) |
-| Goal                 | `goal`                 | See [Common Methods](##common-methods) |
-| Immunization         | `immunization`         | See [Common Methods](##common-methods) |
-| Location             | `location`             | See [Common Methods](##common-methods) |
-| Medication           | `medication`           | See [Common Methods](##common-methods) |
-| MedicationRequest    | `medicationrequest`    | See [Common Methods](##common-methods) |
-| MedicationStatement  | `medicationstatement`  | See [Common Methods](##common-methods) |
-| Observation          | `observation`          | See [Common Methods](##common-methods) |
-| Organization         | `organization`         | See [Common Methods](##common-methods) |
-| Patient              | `patient`              | See [Common Methods](##common-methods) |
-| Practitioner         | `practitioner`         | See [Common Methods](##common-methods) |
-| Procedure            | `procedure`            | See [Common Methods](##common-methods) |
+| AllergyIntolerance   | `allergyintolerance`   | See [Common Methods](#common-methods) |
+| CarePlan             | `careplan`             | See [Common Methods](#common-methods) |
+| CareTeam             | `careteam`             | See [Common Methods](#common-methods) |
+| Condition            | `condition`            | See [Common Methods](#common-methods) |
+| Device               | `device`               | See [Common Methods](#common-methods) |
+| DiagnosticReport     | `diagnosticreport`     | See [Common Methods](#common-methods) |
+| Goal                 | `goal`                 | See [Common Methods](#common-methods) |
+| Immunization         | `immunization`         | See [Common Methods](#common-methods) |
+| Location             | `location`             | See [Common Methods](#common-methods) |
+| Medication           | `medication`           | See [Common Methods](#common-methods) |
+| MedicationRequest    | `medicationrequest`    | See [Common Methods](#common-methods) |
+| MedicationStatement  | `medicationstatement`  | See [Common Methods](#common-methods) |
+| Observation          | `observation`          | See [Common Methods](#common-methods) |
+| Organization         | `organization`         | See [Common Methods](#common-methods) |
+| Patient              | `patient`              | See [Common Methods](#common-methods) |
+| Practitioner         | `practitioner`         | See [Common Methods](#common-methods) |
+| Procedure            | `procedure`            | See [Common Methods](#common-methods) |
 
 Each method in your profile service will receive the following arguments:
 - `req` - The request object from Express
