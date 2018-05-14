@@ -4,13 +4,23 @@ Asymmetrik FHIR API Server
 
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
-`node-fhir-server-core` is a simple Node.js module aiming to be a secure and simple to setup server built to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
+The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.
+
+The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
+
+
+[Asymmetrik FHIR Server Architecture](https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png)
+
+
+
 
 ## Prerequisites
-Before you can get started you need to have [Node.js](https://nodejs.org/en/) installed. You should have a good understanding of working with Node.js and how [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) work.  You should also be familiar with the FHIR specification and whatever database contains your resources since you will need to query them and return them in a format that conforms to the FHIR specification.
+[Node.js](https://nodejs.org/en/) version 7.6, but no later than 8.5, and an understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) usage are required. 
+
+Familiarity of the FHIR specification and whatever database containing the resources will assist in querying data and returning them in a format conforming to specification.
 
 ## Getting Started
-You can get a local FHIR server up and running fairly easily. First thing you need to do is install `node-fhir-server-core`.
+Install `node-fhir-server-core` as followed:
 
 ```shell
 # For yarn users
@@ -20,7 +30,7 @@ yarn add git+https://github.com/Asymmetrik/node-fhir-server-core.git
 npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
 ```
 
-Once you have it installed, you can require it in your app and set it up like so:
+Once installed, the server can be required in the application.
 
 ```javascript
 const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/src/constants');
