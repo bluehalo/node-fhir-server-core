@@ -9,9 +9,7 @@ The Asymmetrik Extensible Server Framework for Healthcare allows organizations t
 The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
 
 
-[Asymmetrik FHIR Server Architecture](https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png)
-
-
+<img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
 
 ## Prerequisites
