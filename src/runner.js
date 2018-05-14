@@ -5,6 +5,10 @@ const CONFIG = {
 	auth: {
 		resourceServer: 'http://myserver.com',
 		service: './src/server/utils/auth.validator.mock.js',
+		protectedResourceClientId: 'client',
+		protectedResourceClientSecret: 'secret',
+		discoveryUrl: '',
+		introspectionUrl: 'https://afternoon-springs-39948.herokuapp.com/introspect'
 	},
 	server: {
 		port: 3000,
@@ -22,11 +26,11 @@ const CONFIG = {
 	security: [
 		{
 			url: 'authorize',
-			valueUri: 'https://lit-lake-71789.herokuapp.com/authorize'
+			valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize'
 		},
 		{
 			url: 'token',
-			valueUri: 'https://lit-lake-71789.herokuapp.com/token'
+			valueUri: 'https://afternoon-springs-39948.herokuapp.com/token'
 		}
 	],
 	profiles: {
