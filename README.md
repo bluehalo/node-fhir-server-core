@@ -23,7 +23,7 @@ npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
 Once you have it installed, you can require it in your app and set it up like so:
 
 ```javascript
-const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/constants');
+const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/src/constants');
 const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
 
 /**
