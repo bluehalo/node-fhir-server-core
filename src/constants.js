@@ -1,19 +1,24 @@
-exports.DSTU2 = {
-	RESOURCE_TYPES: {
-		OPERATIONOUTCOME: 'OperationOutcome',
-		CONFORMANCE: 'Conformance',
-		OBSERVATION: 'Observation',
-		PATIENT: 'Patient'
-	},
-	STATUSES: {
-		DRAFT: 'draft',
-		ACTIVE: 'active',
-		RETIRED: 'retired'
-	},
-	MODE: {
-		CONFIDENTIAL: 'confidential',
-		PUBLIC: 'public'
-	}
+exports.CONFIG_KEYS = {
+	ALLERGYINTOLERANCE: 'allergyintolerance',
+	CAREPLAN: 'careplan',
+	CARETEAM: 'careteam',
+	CONDITION: 'condition',
+	DEVICE: 'device',
+	DIAGNOSTICREPORT: 'diagnosticreport',
+	GOAL: 'goal',
+	IMMUNIZATION: 'immunization',
+	LOCATION: 'location',
+	MEDICATION: 'medication',
+	MEDICATIONREQUEST: 'medicationrequest',
+	MEDICATIONSTATEMENT: 'medicationstatement',
+	OBSERVATION: 'observation',
+	OBSERVATIONRESULTS: 'observationresults',
+	OBSERVATIONSMOKINGSTATUS: 'observationsmokingstatus',
+	OBSERVATIONVITALSIGNS: 'observationvitalsigns',
+	ORGANIZATION: 'organization',
+	PATIENT: 'patient',
+	PRACTITIONER: 'practitioner',
+	PROCEDURE: 'procedure'
 };
 
 exports.ISSUE = {
@@ -66,7 +71,9 @@ exports.ISSUE = {
 	}
 };
 
+/**
+* These are currently the only versions we support
+*/
 exports.VERSIONS = {
-	DSTU2: 'dstu2',
 	STU3: 'stu3'
 };

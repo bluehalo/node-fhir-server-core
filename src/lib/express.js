@@ -6,11 +6,9 @@ const helmet = require('helmet');
 const request = require('superagent');
 const https = require('https');
 const http = require('http');
-const path = require('path');
-const glob = require('glob');
 const fs = require('fs');
+const routeSetter = require('../server/route-setter');
 const errors = require('../server/utils/error.utils');
-const appConfig = require('../config');
 
 /**
  * @function configureMiddleware
@@ -79,9 +77,7 @@ let setupRoutes = function (app, config, logger) {
 		app.use(express.static(config.server.publicDirectory));
 	}
 
-	let routePaths = path.resolve(__dirname, '../..', appConfig.files.routes);
-	let routes = glob.sync(routePaths);
-	routes.forEach(route => require(route)(app, config, logger));
+	routeSetter.setRoutes({ logger, config, app });
 };
 
 /**
@@ -136,13 +132,13 @@ let setupErrorHandler = function (app, logger) {
 	// Errors should be thrown with next and passed through
 	app.use((err, req, res, next) => {
 		// If there is an error and it is our error type
-		if (err && errors.isServerError(err)) {
+		if (err && errors.isServerError(err, req.params.version)) {
 			logger.error(err.statusCode, err.message);
 			res.status(err.statusCode).json(err);
 		}
 		// If there is still an error, throw a 500 and pass the message through
 		else if (err) {
-			let error = errors.internal();
+			let error = errors.internal(req.params.version);
 			logger.error(error.statusCode, error.message);
 			res.status(error.statusCode).json(error);
 		}
@@ -154,7 +150,7 @@ let setupErrorHandler = function (app, logger) {
 
 	// Nothing has responded by now, respond with 404
 	app.use((req, res) => {
-		let error = errors.notFound();
+		let error = errors.notFound(req.params.version);
 		logger.error(error.statusCode, error.message);
 		res.status(error.statusCode).json(error);
 	});

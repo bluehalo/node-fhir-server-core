@@ -1,3 +1,4 @@
+const {VERSIONS} = require('./constants');
 const fhirServer = require('./index.js');
 
 const CONFIG = {
@@ -27,25 +28,87 @@ const CONFIG = {
 			url: 'token',
 			valueUri: 'https://lit-lake-71789.herokuapp.com/token'
 		}
-		// optional - registration
 	],
 	profiles: {
-		dstu2: {
-			patient: {
-				service: './src/server/dstu2/patient/service.mock.js',
-				corsOptions: {
-					maxAge: 3600
-				}
-			},
-			observation: {
-				service: './src/server/dstu2/observation/service.mock.js',
-				corsOptions: {
-					maxAge: 3600
-				}
-			},
-			oauth: {
-				service: './src/server/oauth/service.mock.js' // optional if you plan to implement oauth in the same project
-			}
+		allergyintolerance: {
+			service: './src/server/profiles/allergyintolerance/allergyintolerance.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		careplan: {
+			service: './src/server/profiles/careplan/careplan.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		careteam: {
+			service: './src/server/profiles/careteam/careteam.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		condition: {
+			service: './src/server/profiles/condition/condition.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		device: {
+			service: './src/server/profiles/device/device.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		diagnosticreport: {
+			service: './src/server/profiles/diagnosticreport/diagnosticreport.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		goal: {
+			service: './src/server/profiles/goal/goal.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		immunization: {
+			service: './src/server/profiles/immunization/immunization.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		location: {
+			service: './src/server/profiles/location/location.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		medication: {
+			service: './src/server/profiles/medication/medication.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		medicationrequest: {
+			service: './src/server/profiles/medicationrequest/medicationrequest.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		medicationstatement: {
+			service: './src/server/profiles/medicationstatement/medicationstatement.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		observation: {
+			service: './src/server/profiles/observation/observation.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		observationresults: {
+			service: './src/server/profiles/observationresults/observationresults.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		observationsmokingstatus: {
+			service: './src/server/profiles/observationsmokingstatus/observationsmokingstatus.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		observationvitalsigns: {
+			service: './src/server/profiles/observationvitalsigns/observationvitalsigns.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		organization: {
+			service: './src/server/profiles/organization/organization.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		patient: {
+			service: './src/server/profiles/patient/patient.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		practitioner: {
+			service: './src/server/profiles/practitioner/practitioner.service.js',
+			versions: [VERSIONS.STU3]
+		},
+		procedure: {
+			service: './src/server/profiles/procedure/procedure.service.js',
+			versions: [VERSIONS.STU3]
 		}
 	}
 };
@@ -55,9 +118,7 @@ let handler = promise => promise
 	.catch(err => [err]);
 
 let main = async function () {
-
 	const [err, server] = await handler(fhirServer(CONFIG));
-
 	// If something happened on initialization, handle it here
 	if (err) {
 		console.error(err.message);
@@ -65,7 +126,6 @@ let main = async function () {
 	} else {
 		server.logger.info('FHIR Server started successfully');
 	}
-
 };
 
 main();
