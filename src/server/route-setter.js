@@ -104,7 +104,6 @@ const setter = (options = {}) => {
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);
-			
 		}
 	}
 };
