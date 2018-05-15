@@ -14,7 +14,7 @@ The framework defines a core server, `node-fhir-server-core`, a simple, secure N
 
 
 ## Prerequisites
-[Node.js](https://nodejs.org/en/) version 7.6, but no later than 8.5, and an understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) usage are required. 
+[Node.js](https://nodejs.org/en/) version later than 7.6, but no later than 8.5, and an understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) usage are required. 
 
 Familiarity of the FHIR specification and whatever database containing the resources will assist in querying data and returning them in a format conforming to specification.
 
