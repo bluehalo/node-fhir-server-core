@@ -1,8 +1,8 @@
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
+const { validate } = require('./utils/auth.openid.validator');
 const { resolve } = require('./utils/resolve.utils');
 const { VERSIONS } = require('../constants');
-// const { validate } = require('./utils/auth');
 const appConfig = require('../config');
 const glob = require('glob');
 const cors = require('cors');
@@ -99,9 +99,9 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				// validate(route.scopes, logger, config),
+				validate(route.scopes, logger, config),
 				// Finally our controller function
-				route.controller({ profile, logger, config })
+				route.controller({ profile, logger, config, app })
 			);
 		}
 
