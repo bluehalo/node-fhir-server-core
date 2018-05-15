@@ -1,7 +1,12 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
+const moment = require('moment');
+const {
+	EVENTS
+} = require('../../../constants');
 
-module.exports.getPatient = ({ profile, logger, config }) => {
+module.exports.getPatient = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -51,7 +56,7 @@ module.exports.getPatient = ({ profile, logger, config }) => {
 };
 
 
-module.exports.getPatientById = ({ profile, logger }) => {
+module.exports.getPatientById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -60,16 +65,36 @@ module.exports.getPatientById = ({ profile, logger }) => {
 		let context = { version };
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
 		if (
 			req.patient
-			&& req.body
-			&& req.body.id
-			&& req.patient !== req.body.id
+			&& req.params
+			&& req.params.id
+			&& req.patient !== req.params.id
 		) {
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.body.id}.`, version));
+			// Create an audit event
+			let resource = new AuditEvent({
+				// the type is a coding of the type of incident
+				type: {
+					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
+					code: '110113',
+					display: 'Security Alert',
+					userSelected: false
+				},
+				// Time of the event
+				recorded: moment().toISOString(),
+				// The attempted action is a read, according to https://www.hl7.org/fhir/valueset-audit-event-action.html
+				action: 'R',
+				// The outcome was a minor failure, according to https://www.hl7.org/fhir/valueset-audit-event-outcome.html
+				outcome: '4',
+				// Description of the outcome
+				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
+			});
+			app.emit(EVENTS.AUDIT, resource);
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
 		}
 
 		return service.getPatientById(req, logger, context)

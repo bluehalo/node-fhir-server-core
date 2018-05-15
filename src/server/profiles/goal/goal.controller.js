@@ -1,7 +1,8 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getGoal = ({ profile, logger, config }) => {
+module.exports.getGoal = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -54,7 +55,7 @@ module.exports.getGoal = ({ profile, logger, config }) => {
 };
 
 
-module.exports.getGoalById = ({ profile, logger }) => {
+module.exports.getGoalById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
