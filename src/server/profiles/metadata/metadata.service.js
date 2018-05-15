@@ -17,8 +17,9 @@ let mapProfiles = (profiles = {}) => {
 	return ({ profile, resource }) => {
 		const profile_name = Object.keys(profiles).find(name => name === profile);
 		return {
-			versions: profiles[profile_name].versions,
 			makeResource: resource,
+			versions: profiles[profile_name]
+				&& profiles[profile_name].versions,
 			getCount: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
 				&& profiles[profile_name].serviceModule.getCount

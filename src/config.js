@@ -3,7 +3,5 @@
  * @description Export file locations for the FHIR server
  */
 module.exports.files = {
-	swaggerHelperDefinitions: 'src/server/*/definitions/*.json',
-	swaggerRootDefinitions: 'src/server/*/*.swagger.json',
-	configs: 'src/server/profiles/**/*.config.js'
+	configs: 'server/profiles/**/*.config.js'
 };
