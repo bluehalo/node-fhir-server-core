@@ -81,13 +81,14 @@ const setter = (options = {}) => {
 				route.corsOptions
 			);
 
+			// Enable cors with preflight options
+			app.options(route.path, cors(cors_options));
+
 			// We need a profile for metadata so we know which versions we need to support
 			if (routeOptions.isMetadata) {
 				profile = { versions: getAllConfiguredVersions(profiles) };
 			}
 
-			// Enable cors with preflight options
-			app.options(route.path, cors(cors_options));
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
@@ -99,16 +100,12 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				validate(route.scopes, logger, config),
+				routeOptions.isMetadata ? function(req, res, next) { return next(); } : validate(route.scopes, logger, config),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);
 		}
-
-
 	}
-
-
 };
 
 module.exports = {
