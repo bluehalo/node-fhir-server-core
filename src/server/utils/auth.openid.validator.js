@@ -58,6 +58,7 @@ function getValidScopes(scopes, allowedScopes) {
 module.exports.validate = (allowedScopes, logger, config) => {
 
 	return async (req, res, next) => {
+		let version = req.params.version;
 
 		// get bearer token
 		const bearerToken = parseBearerToken(req);
@@ -98,14 +99,14 @@ module.exports.validate = (allowedScopes, logger, config) => {
 						}
 					}
 					// default return unauthorized
-					return next(errors.unauthorized('Invalid token'));
+					return next(errors.unauthorized('Invalid token', version));
 				})
 				.catch((err) => {
 					logger.error(err);
-					return next(errors.unauthorized('Invalid token'));
+					return next(errors.unauthorized('Invalid token', version));
 				});
 			}
 
-		return next(errors.unauthorized('Invalid token'));
+		return next(errors.unauthorized('Invalid token', version));
 	};
 };
