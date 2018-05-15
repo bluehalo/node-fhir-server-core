@@ -1,8 +1,8 @@
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
+const { validate } = require('./utils/auth.openid.validator');
 const { resolve } = require('./utils/resolve.utils');
 const { VERSIONS } = require('../constants');
-const { validate } = require('./utils/auth');
 const appConfig = require('../config');
 const glob = require('glob');
 const cors = require('cors');
