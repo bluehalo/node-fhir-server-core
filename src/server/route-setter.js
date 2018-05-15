@@ -1,9 +1,9 @@
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
+const { resolve } = require('./utils/resolve.utils');
 const { VERSIONS } = require('../constants');
 // const { validate } = require('./utils/auth');
 const appConfig = require('../config');
-const path = require('path');
 const glob = require('glob');
 const cors = require('cors');
 
@@ -52,7 +52,7 @@ const setter = (options = {}) => {
 	let { profiles, server } = config;
 
 	// Find and load all of our config files
-	let config_filepaths = glob.sync(path.join(process.cwd(), appConfig.files.configs));
+	let config_filepaths = glob.sync(resolve(appConfig.files.configs));
 	let config_files = config_filepaths.map(filepath => require(filepath));
 
 	// Iterate over our config files and configure any valid routes
