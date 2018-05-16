@@ -60,18 +60,9 @@
 		"xss": "^0.3.4"
 	},
 	"devDependencies": {
-		"copy-webpack-plugin": "^4.2.1",
-		"css-loader": "^0.28.7",
-		"extract-text-webpack-plugin": "^3.0.2",
-		"html-webpack-plugin": "^2.30.1",
 		"jest": "^21.2.1",
 		"nock": "^9.1.5",
 		"nodemon": "^1.12.1",
-		"node-sass": "^4.7.2",
-		"sass-loader": "^6.0.6",
-		"style-loader": "^0.19.0",
-		"supertest": "^3.0.0",
-		"swagger-ui-dist": "^3.4.5",
-		"webpack": "^3.8.1"
+		"supertest": "^3.0.0"
 	}
 }
