@@ -6,19 +6,12 @@ module.exports.getImmunization = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific immunization & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 
-		/**
-		* return service.getImmunization(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getImmunization(req, logger, context)
+		return service.getImmunization(req.sanitized_args, logger)
 			.then((immunizations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getImmunizationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific immunization
 		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 
-		return service.getImmunizationById(req, logger, context)
+		return service.getImmunizationById(req.sanitized_args, logger)
 			.then((immunization) => {
 				if (immunization) {
 					res.status(200).json(new Immunization(immunization));

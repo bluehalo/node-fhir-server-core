@@ -10,19 +10,12 @@ module.exports.getPatient = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific patient & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 
-		/**
-		* return service.getPatient(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getPatient(req, logger, context)
+		return service.getPatient(req.sanitized_args, logger)
 			.then((patients) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -60,21 +53,14 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version, id } = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
-		if (
-			req.patient
-			&& req.params
-			&& req.params.id
-			&& req.patient !== req.params.id
-		) {
+		if ( req.patient && id && req.patient !== id ) {
 			// Create an audit event
 			let resource = new AuditEvent({
 				// the type is a coding of the type of incident
@@ -97,7 +83,7 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
 		}
 
-		return service.getPatientById(req, logger, context)
+		return service.getPatientById(req.sanitized_args, logger)
 			.then((patient) => {
 				if (patient) {
 						res.status(200).json(new Patient(patient));

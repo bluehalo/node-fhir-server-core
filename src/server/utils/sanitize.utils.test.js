@@ -26,7 +26,7 @@ const ARGS = [
 	},
 	{
 		name: 'identifier',
-		type: 'string'
+		type: 'token'
 	}
 ];
 
@@ -70,7 +70,7 @@ describe('Sanitize Utils Tests', () => {
 		middleware(req, null, next);
 
 		// Inspect params and make sure they are the correct type
-		let { first_name, age, birthdate, isAlive } = req.params;
+		let { first_name, age, birthdate, isAlive } = req.sanitized_args;
 		expect(typeof first_name).toEqual('string');
 		expect(typeof isAlive).toEqual('boolean');
 		expect(typeof age).toEqual('number');
@@ -93,8 +93,8 @@ describe('Sanitize Utils Tests', () => {
 		// invoke our middleware
 		middleware(req, null, next);
 
-		expect(req.query.birthdate.isValid()).toBeTruthy();
-		expect(req.query.birthdate).toBeInstanceOf(moment);
+		expect(req.sanitized_args.birthdate.isValid()).toBeTruthy();
+		expect(req.sanitized_args.birthdate).toBeInstanceOf(moment);
 	});
 
 	test('should filter out extra arguments that do not belong', () => {
@@ -107,11 +107,11 @@ describe('Sanitize Utils Tests', () => {
 		middleware(req, null, next);
 
 		// only id should be passed through
-		expect(typeof req.body.id).toEqual('string');
-		expect(req.body.id).toEqual('john-doe');
-		expect(req.body.birthdate).toBeUndefined();
-		expect(req.body.isAlive).toBeUndefined();
-		expect(req.body.age).toBeUndefined();
+		expect(typeof req.sanitized_args.id).toEqual('string');
+		expect(req.sanitized_args.id).toEqual('john-doe');
+		expect(req.sanitized_args.birthdate).toBeUndefined();
+		expect(req.sanitized_args.isAlive).toBeUndefined();
+		expect(req.sanitized_args.age).toBeUndefined();
 		// Make sure next was called but without an error
 		expect(next).toHaveBeenCalled();
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -158,8 +158,8 @@ describe('Sanitize Utils Tests', () => {
 		// invoke our middleware
 		middleware(req, null, next);
 
-		expect(req.params.identifier).toEqual('');
-		expect(req.params.first_name).toEqual('world!');
+		expect(req.sanitized_args.identifier).toEqual('');
+		expect(req.sanitized_args.first_name).toEqual('world!');
 	});
 
 	test('should pass an error to next if a required argument is missing', () => {

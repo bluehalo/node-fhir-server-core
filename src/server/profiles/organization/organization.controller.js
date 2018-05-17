@@ -6,19 +6,12 @@ module.exports.getOrganization = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific organization & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 
-		/**
-		* return service.getOrganization(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getOrganization(req, logger, context)
+		return service.getOrganization(req.sanitized_args, logger)
 			.then((organizations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getOrganizationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific organization
 		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 
-		return service.getOrganizationById(req, logger, context)
+		return service.getOrganizationById(req.sanitized_args, logger)
 			.then((organization) => {
 				if (organization) {
 					res.status(200).json(new Organization(organization));

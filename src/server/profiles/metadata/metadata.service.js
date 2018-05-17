@@ -79,7 +79,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 	}
 
 	// Generate a list of promises
-	let count_promises = active_profiles.map(profile => profile.getCount(req, logger, context));
+	let count_promises = active_profiles.map(profile => profile.getCount(req.sanitized_args, logger, context));
 
 	// Iterate over active resources and invoke get count on each
 	return Promise.all(count_promises).then(counts => {

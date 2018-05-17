@@ -6,19 +6,12 @@ module.exports.getMedicationStatement = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific medicationstatement & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
 
-		/**
-		* return service.getMedicationStatement(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getMedicationStatement(req, logger, context)
+		return service.getMedicationStatement(req.sanitized_args, logger)
 			.then((medicationstatements) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getMedicationStatementById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific medicationstatement
 		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
 
-		return service.getMedicationStatementById(req, logger, context)
+		return service.getMedicationStatementById(req.sanitized_args, logger)
 			.then((medicationstatement) => {
 				if (medicationstatement) {
 					res.status(200).json(new MedicationStatement(medicationstatement));

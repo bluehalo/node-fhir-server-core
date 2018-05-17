@@ -6,19 +6,12 @@ module.exports.getLocation = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific location & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
-		/**
-		* return service.getLocation(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getLocation(req, logger, context)
+		return service.getLocation(req.sanitized_args, logger)
 			.then((locations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getLocationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific location
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 
-		return service.getLocationById(req, logger, context)
+		return service.getLocationById(req.sanitized_args, logger)
 			.then((location) => {
 				if (location) {
 					res.status(200).json(new Location(location));
