@@ -4,13 +4,13 @@ const { routes } = require('./procedure.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'procedure',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
+		let Procedure = require(resolveFromVersion(version, 'base/Procedure'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Procedure.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Procedure'
+				reference: 'http://hl7.org/fhir/procedure.html'
 			},
 			interaction: [{
 				code: 'read'

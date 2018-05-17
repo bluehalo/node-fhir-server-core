@@ -4,13 +4,13 @@ const { routes } = require('./observation.config');
 
 /**
  * @name exports
- * @summary Observation conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'observation',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
+		let Observation = require(resolveFromVersion(version, 'base/Observation'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Observation.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Observation'
+				reference: 'http://hl7.org/fhir/observation.html'
 			},
 			interaction: [{
 				code: 'read'

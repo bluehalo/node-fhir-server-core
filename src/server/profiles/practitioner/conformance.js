@@ -4,13 +4,13 @@ const { routes } = require('./practitioner.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'practitioner',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
+		let Practitioner = require(resolveFromVersion(version, 'base/Practitioner'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Practitioner.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Practitioner'
+				reference: 'http://hl7.org/fhir/practitioner.html'
 			},
 			interaction: [{
 				code: 'read'

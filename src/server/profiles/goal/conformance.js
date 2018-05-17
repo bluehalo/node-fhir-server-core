@@ -4,13 +4,13 @@ const { routes } = require('./goal.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'goal',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+		let Goal = require(resolveFromVersion(version, 'base/Goal'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Goal.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-goal.html'
+				reference: 'http://hl7.org/fhir/goal.html'
 			},
 			interaction: [{
 				code: 'read'

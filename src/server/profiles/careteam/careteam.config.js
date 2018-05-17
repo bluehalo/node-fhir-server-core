@@ -14,31 +14,22 @@ const scopes = [
 	'careteam/*.read'
 ];
 
+let commonArgsArray = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resourceArgsArray = Object.getOwnPropertyNames(careteam_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, careteam_args[arg_name]));
+
+const resourceAllArguments = [
+	route_args.VERSION,	...commonArgsArray, ...resourceArgsArray,
+];
+
 let routes = [
 	{
 		type: 'get',
 		path: '/:version/careteam',
 		corsOptions: {methods: ['GET']},
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.ENCOUNTER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PARTICIPANT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
-		],
+		args: resourceAllArguments,
 		scopes: scopes,
 		controller: controller.getCareTeam
 	},
@@ -46,26 +37,7 @@ let routes = [
 		type: 'post',
 		path: '/:version/careteam/_search',
 		corsOptions: {methods: ['POST']},
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.ENCOUNTER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PARTICIPANT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
-		],
+		args: resourceAllArguments,
 		scopes: scopes,
 		controller: controller.getCareTeam
 	},

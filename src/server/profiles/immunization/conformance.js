@@ -4,13 +4,13 @@ const { routes } = require('./immunization.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'immunization',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
+		let Immunization = require(resolveFromVersion(version, 'base/Immunization'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Immunization.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-immunization.html'
+				reference: 'http://hl7.org/fhir/immunization.html'
 			},
 			interaction: [{
 				code: 'read'

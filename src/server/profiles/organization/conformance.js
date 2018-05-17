@@ -4,13 +4,13 @@ const { routes } = require('./organization.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'organization',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
+		let Organization = require(resolveFromVersion(version, 'base/Organization'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Organization.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Organization'
+				reference: 'http://hl7.org/fhir/organization.html'
 			},
 			interaction: [{
 				code: 'read'

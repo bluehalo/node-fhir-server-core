@@ -1,6 +1,6 @@
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
-const allergyintolerance_args = require('./allergyintolerance.arguments');
+const resource_args = require('./allergyintolerance.arguments');
 const controller = require('./allergyintolerance.controller');
 
 const scopes = [
@@ -14,38 +14,22 @@ const scopes = [
 	'allergyintolerance/*.read'
 ];
 
+let commonArgsArray = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resourceArgsArray = Object.getOwnPropertyNames(resource_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_args[arg_name]));
+
+const resourceAllArguments = [
+	route_args.VERSION,	...commonArgsArray, ...resourceArgsArray,
+];
+
 let routes = [
 	{
 		type: 'get',
 		path: '/:version/allergyintolerance',
 		corsOptions: {methods: ['GET']},
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ASSERTER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CLINICAL_STATUS),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CODE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CRITICALITY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.LAST_DATE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.MANIFESTATION),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ONSET),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.RECORDER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ROUTE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.SEVERITY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
-		],
+		args: resourceAllArguments,
 		scopes: scopes,
 		controller: controller.getAllergyIntolerance
 	},
@@ -53,33 +37,7 @@ let routes = [
 		type: 'post',
 		path: '/:version/allergyintolerance/_search',
 		corsOptions: {methods: ['POST']},
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ASSERTER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CLINICAL_STATUS),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CODE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.CRITICALITY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.LAST_DATE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.MANIFESTATION),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ONSET),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.RECORDER),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.ROUTE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.SEVERITY),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
-			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
-		],
+		args: resourceAllArguments,
 		scopes: scopes,
 		controller: controller.getAllergyIntolerance
 	},

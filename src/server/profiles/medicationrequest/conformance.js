@@ -4,13 +4,13 @@ const { routes } = require('./medicationrequest.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'medicationrequest',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(version, 'base/MedicationRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: MedicationRequest.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medicationrequest.html'
+				reference: 'http://hl7.org/fhir/medicationrequest.html'
 			},
 			interaction: [{
 				code: 'read'

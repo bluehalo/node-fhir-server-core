@@ -4,13 +4,13 @@ const { routes } = require('./careteam.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'careteam',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
+		let CareTeam = require(resolveFromVersion(version, 'base/CareTeam'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: CareTeam.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-careteam.html'
+				reference: 'http://hl7.org/fhir/careteam.html'
 			},
 			interaction: [{
 				code: 'read'

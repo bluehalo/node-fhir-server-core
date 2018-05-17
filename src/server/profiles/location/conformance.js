@@ -4,13 +4,13 @@ const { routes } = require('./location.config');
 
 /**
  * @name exports
- * @summary Conformance statement
+ * @summary Patient conformance statement
  */
 module.exports = {
 	profile: 'location',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+		let Location = require(resolveFromVersion(version, 'base/Location'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Location.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-location.html'
+				reference: 'http://hl7.org/fhir/location.html'
 			},
 			interaction: [{
 				code: 'read'
