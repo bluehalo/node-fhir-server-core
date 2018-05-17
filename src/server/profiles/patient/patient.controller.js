@@ -1,5 +1,4 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
-const { RESOURCE_BODY, RESOURCE_ID } = require('../common.arguments').write_args;
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
@@ -8,44 +7,36 @@ const {
 	EVENTS
 } = require('../../../constants');
 
+
+/**
+* @description Filter function for only allowing a certain patient to be
+* accessed if a patient id is present on the req object. user_id is req.patient
+* currently so if that value is present, they should only see patients whose
+* id matches.
+*/
+let patient_filter = function (user_id) {
+	// TODO: Is this ever going to work, user_id is from them logging in
+	// with SMART and since we do not know if that id matches whatever id
+	// the EHR has, how can we verify they are the same
+	return (patient) => !user_id || user_id === patient.id;
+};
+
 module.exports.getPatient = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific patient & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 
 		return service.getPatient(req.sanitized_args, logger)
-			.then((patients) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (patients) {
-					for (let resource of patients) {
-						if (!req.patient || req.patient === resource.patientId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Patient(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Patient/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Patient, results, {
+					resourceUrl: config.auth.resourceServer,
+					filter: patient_filter(req.patient)
+				})
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 
 };
@@ -86,16 +77,10 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 		}
 
 		return service.getPatientById(req.sanitized_args, logger)
-			.then((patient) => {
-				if (patient) {
-						res.status(200).json(new Patient(patient));
-				} else {
-					next(errors.notFound('Patient not found', version));
-				}
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(req, next, version, Patient, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };
 
@@ -106,18 +91,13 @@ module.exports.createPatient = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
-		// Grab the resource content for creating the patient so we can validate it
-		let resource_body = req.body[RESOURCE_BODY.name];
-		let resource_id = req.body[RESOURCE_ID.name];
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				'\'resourceType\' expected to have value of \'Patient\', received ' + resource_body.resourceType,
+				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
 				version
 			));
 		}
@@ -125,13 +105,11 @@ module.exports.createPatient = ({ profile, logger, app }) => {
 		let patient = new Patient(resource_body);
 		let args = { id: resource_id, resource: patient };
 		// Pass any new information to the underlying service
-		return service.createPatient(args, logger, context)
+		return service.createPatient(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Patient.__resourceType, results)
 			)
-			.catch((err) =>
-				next(errors.internal(err.message, version))
-			);
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };
 
@@ -142,18 +120,13 @@ module.exports.updatePatient = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
-		// Grab the resource content for creating the patient so we can validate it
-		let resource_body = req.body[RESOURCE_BODY.name];
-		let resource_id = req.params.id;
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				'\'resourceType\' expected to have value of \'Patient\', received ' + resource_body.resourceType,
+				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
 				version
 			));
 		}
@@ -165,8 +138,6 @@ module.exports.updatePatient = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Patient.__resourceType, results)
 			)
-			.catch((err) =>
-				next(errors.internal(err.message, version))
-			);
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };

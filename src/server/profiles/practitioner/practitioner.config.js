@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const practitioner_args = require('./practitioner.arguments');
 const controller = require('./practitioner.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Practitioner.*',
 	'user/Practitioner.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'practitioner/Practitioner.*',
 	'practitioner/Practitioner.read',
 	'practitioner/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Practitioner.*',
+	'user/Practitioner.write',
+	'user/*.write',
+	'practitioner/*.*',
+	'practitioner/Practitioner.*',
+	'practitioner/Practitioner.write',
+	'practitioner/*.write'
 ];
 
 let routes = [
@@ -47,7 +58,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONETIC),
 			Object.assign({versions: VERSIONS.STU3}, practitioner_args.TELECOM)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPractitioner
 	},
 	{
@@ -82,7 +93,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, practitioner_args.PHONETIC),
 			Object.assign({versions: VERSIONS.STU3}, practitioner_args.TELECOM)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPractitioner
 	},
 	{
@@ -93,8 +104,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPractitionerById
+	},
+	{
+		type: 'post',
+		path: '/:version/practitioner',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createPractitioner
+	},
+	{
+		type: 'put',
+		path: '/:version/practitioner/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updatePractitioner
 	}
 ];
 

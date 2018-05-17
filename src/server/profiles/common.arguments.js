@@ -27,7 +27,7 @@ module.exports.write_args = {
 	},
 	RESOURCE_BODY: {
 		name: 'resource_body',
-		type: 'string',
+		type: 'json_string',
 		conformance_hide: true
 	}
 };

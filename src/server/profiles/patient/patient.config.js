@@ -1,9 +1,9 @@
-const {route_args, common_args, write_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const patient_args = require('./patient.arguments');
 const controller = require('./patient.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Patient.*',
 	'user/Patient.read',
@@ -65,7 +65,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -107,7 +107,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -118,7 +118,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getPatientById
 	},
 	{
