@@ -25,6 +25,13 @@ let parseValue = function (type, value) {
 			// replace any non word characters
 			result = validator.stripLow(xss(sanitize(value)));
 			break;
+		case 'token':
+			// strip any html tags from the query
+			// xss helps prevent html from slipping in
+			// strip a certain range of unicode characters
+			// replace any non word characters
+			result = validator.stripLow(xss(sanitize(value)));
+			break;
 		default:
 			// Pass the value through, unknown types will fail when being validated
 			result = value;
@@ -43,6 +50,9 @@ let validateType = function (type, value) {
 			result = typeof value === 'boolean';
 			break;
 		case 'string':
+			result = typeof value === 'string';
+			break;
+		case 'token':
 			result = typeof value === 'string';
 			break;
 		case 'date':
