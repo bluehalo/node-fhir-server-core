@@ -1,4 +1,4 @@
-const {route_args, common_args} = require('../common.arguments');
+const {route_args, common_args, write_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
 const patient_args = require('./patient.arguments');
 const controller = require('./patient.controller');
@@ -12,6 +12,17 @@ const scopes = [
 	'patient/Patient.*',
 	'patient/Patient.read',
 	'patient/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Patient.*',
+	'user/Patient.write',
+	'user/*.write',
+	'patient/*.*',
+	'patient/Patient.*',
+	'patient/Patient.write',
+	'patient/*.write'
 ];
 
 let routes = [
@@ -109,6 +120,30 @@ let routes = [
 		],
 		scopes: scopes,
 		controller: controller.getPatientById
+	},
+	{
+		type: 'post',
+		path: '/:version/patient',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createPatient
+	},
+	{
+		type: 'put',
+		path: '/:version/patient/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updatePatient
 	}
 ];
 

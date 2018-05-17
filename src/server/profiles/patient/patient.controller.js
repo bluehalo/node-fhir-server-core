@@ -1,5 +1,7 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
+const { RESOURCE_BODY, RESOURCE_ID } = require('../common.arguments').write_args;
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 const moment = require('moment');
 const {
@@ -108,5 +110,77 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 			.catch((err) => {
 				next(errors.internal(err.message, version));
 			});
+	};
+};
+
+/**
+* @description Controller for creating a patient
+*/
+module.exports.createPatient = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let version = req.params.version;
+		// Create a context I can pass some data through
+		let context = { version };
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		// Grab the resource content for creating the patient so we can validate it
+		let resource_body = req.body[RESOURCE_BODY.name];
+		let resource_id = req.body[RESOURCE_ID.name];
+		// Validate the resource type before creating it
+		if (Patient.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				'\'resourceType\' expected to have value of \'Patient\', received ' + resource_body.resourceType,
+				version
+			));
+		}
+		// Create a new patient resource and pass it to the service
+		let patient = new Patient(resource_body);
+		let args = { id: resource_id, resource: patient };
+		// Pass any new information to the underlying service
+		return service.createPatient(args, logger, context)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Patient.__resourceType, results)
+			)
+			.catch((err) =>
+				next(errors.internal(err.message, version))
+			);
+	};
+};
+
+/**
+* @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
+*/
+module.exports.updatePatient = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let version = req.params.version;
+		// Create a context I can pass some data through
+		let context = { version };
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		// Grab the resource content for creating the patient so we can validate it
+		let resource_body = req.body[RESOURCE_BODY.name];
+		let resource_id = req.params.id;
+		// Validate the resource type before creating it
+		if (Patient.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				'\'resourceType\' expected to have value of \'Patient\', received ' + resource_body.resourceType,
+				version
+			));
+		}
+		// Create a new patient resource and pass it to the service
+		let patient = new Patient(resource_body);
+		let args = { id: resource_id, resource: patient };
+		// Pass any new information to the underlying service
+		return service.createPatient(args, logger, context)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Patient.__resourceType, results)
+			)
+			.catch((err) =>
+				next(errors.internal(err.message, version))
+			);
 	};
 };
