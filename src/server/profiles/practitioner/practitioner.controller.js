@@ -6,19 +6,12 @@ module.exports.getPractitioner = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific practitioner & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 
-		/**
-		* return service.getPractitioner(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getPractitioner(req, logger, context)
+		return service.getPractitioner(req.sanitized_args, logger)
 			.then((practitioners) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getPractitionerById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific practitioner
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 
-		return service.getPractitionerById(req, logger, context)
+		return service.getPractitionerById(req.sanitized_args, logger)
 			.then((practitioner) => {
 				if (practitioner) {
 					res.status(200).json(new Practitioner(practitioner));

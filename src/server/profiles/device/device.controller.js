@@ -6,19 +6,12 @@ module.exports.getDevice = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific device & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
-		/**
-		* return service.getDevice(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getDevice(req, logger, context)
+		return service.getDevice(req.sanitized_args, logger)
 			.then((devices) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getDeviceById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific device
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
-		return service.getDeviceById(req, logger, context)
+		return service.getDeviceById(req.sanitized_args, logger)
 			.then((device) => {
 				if (device) {
 					res.status(200).json(new Device(device));

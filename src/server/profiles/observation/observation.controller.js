@@ -24,18 +24,11 @@ module.exports.getObservation = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 
-		/**
-		 * return service.getObservation(req, logger)
-		 *		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		 *		.then(validateResponse); // Make sure the response data conforms to the spec
-		 */
-		return service.getObservation(req, logger, context)
+		return service.getObservation(req.sanitized_args, logger, context)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -75,11 +68,9 @@ module.exports.getObservationById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 
-		return service.getObservationById(req, logger, context)
+		return service.getObservationById(req.sanitized_args, logger)
 			.then((observation) => {
 				if (observation) {
 					// Get a version specific observation for the correct type of observation

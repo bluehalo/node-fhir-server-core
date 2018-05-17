@@ -6,9 +6,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific diagnosticreport & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
@@ -18,7 +16,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config, app }) => {
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getDiagnosticReport(req, logger, context)
+		return service.getDiagnosticReport(req.sanitized_args, logger)
 			.then((diagnosticreports) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +55,11 @@ module.exports.getDiagnosticReportById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific diagnosticreport
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 
-		return service.getDiagnosticReportById(req, logger, context)
+		return service.getDiagnosticReportById(req.sanitized_args, logger)
 			.then((diagnosticreport) => {
 				if (diagnosticreport) {
 					res.status(200).json(new DiagnosticReport(diagnosticreport));

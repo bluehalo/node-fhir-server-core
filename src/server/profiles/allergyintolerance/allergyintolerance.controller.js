@@ -6,19 +6,12 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific allergyintolerance & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
-		/**
-		* return service.getAllergyIntolerance(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getAllergyIntolerance(req, logger, context)
+		return service.getAllergyIntolerance(req.sanitized_args, logger)
 			.then((allergyintolerances) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -56,13 +49,11 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific allergyintolerance
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
-		return service.getAllergyIntoleranceById(req, logger, context)
+		return service.getAllergyIntoleranceById(req.sanitized_args, logger)
 			.then((allergyintolerance) => {
 				if (allergyintolerance) {
 					res.status(200).json(new AllergyIntolerance(allergyintolerance));

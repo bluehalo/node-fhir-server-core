@@ -6,19 +6,12 @@ module.exports.getCareTeam = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific careteam & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
-		/**
-		* return service.getCareTeam(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getCareTeam(req, logger, context)
+		return service.getCareTeam(req.sanitized_args, logger)
 			.then((careteams) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getCareTeamById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific careteam
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
-		return service.getCareTeamById(req, logger, context)
+		return service.getCareTeamById(req.sanitized_args, logger)
 			.then((careteam) => {
 				if (careteam) {
 					res.status(200).json(new CareTeam(careteam));

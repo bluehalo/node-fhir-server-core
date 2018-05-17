@@ -6,19 +6,12 @@ module.exports.getProcedure = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific procedure & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 
-		/**
-		* return service.getProcedure(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getProcedure(req, logger, context)
+		return service.getProcedure(req.sanitized_args, logger)
 			.then((procedures) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getProcedureById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific procedure
 		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 
-		return service.getProcedureById(req, logger, context)
+		return service.getProcedureById(req.sanitized_args, logger)
 			.then((procedure) => {
 				if (procedure) {
 					res.status(200).json(new Procedure(procedure));
