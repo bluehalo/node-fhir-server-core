@@ -22,7 +22,7 @@ function parseBearerToken(req) {
 	}
 
 	// get schema and token from array
-	const schema = parts.shift().toLowerCase();
+	const schema = parts.shift();
 	const token = parts.join(' ');
 
 	// validate that it is a bearer
