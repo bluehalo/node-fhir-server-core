@@ -6,19 +6,12 @@ module.exports.getObservationSmokingStatus = ({ profile, logger, config, app }) 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific observationsmokingstatus & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
 
-		/**
-		* return service.getObservationSmokingStatus(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getObservationSmokingStatus(req, logger, context)
+		return service.getObservationSmokingStatus(req.sanitized_args, logger)
 			.then((observationsmokingstatuss) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getObservationSmokingStatusById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific observationsmokingstatus
 		let ObservationSmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
 
-		return service.getObservationSmokingStatusById(req, logger, context)
+		return service.getObservationSmokingStatusById(req.sanitized_args, logger)
 			.then((observationsmokingstatus) => {
 				if (observationsmokingstatus) {
 					res.status(200).json(new ObservationSmokingStatus(observationsmokingstatus));

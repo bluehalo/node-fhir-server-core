@@ -103,10 +103,8 @@ let sanitizeMiddleware = function (config) {
 			}
 		}
 
-		// All is well, update params, query, or body, and move on to the next middleware/function
-		if (req.params && Object.keys(req.params).length) { req.params = cleanArgs; }
-		if (req.query && Object.keys(req.query).length) { req.query = cleanArgs; }
-		if (req.body && Object.keys(req.body).length) { req.body = cleanArgs; }
+		// Save the cleaned arguments on the request for later use, we must only use these later on
+		req.sanitized_args = cleanArgs;
 		next();
 	};
 };

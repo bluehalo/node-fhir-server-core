@@ -6,18 +6,12 @@ module.exports.getObservationResults = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific observationresults & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
-		/**
-		* return service.getObservationResults(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getObservationResults(req, logger, context)
+
+		return service.getObservationResults(req.sanitized_args, logger)
 			.then((observationresultss) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -56,13 +50,11 @@ module.exports.getObservationResultsById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific observationresults
 		let ObservationResults = require(resolveFromVersion(version, 'uscore/Results'));
 
-		return service.getObservationResultsById(req, logger, context)
+		return service.getObservationResultsById(req.sanitized_args, logger)
 			.then((observationresults) => {
 				if (observationresults) {
 					res.status(200).json(new ObservationResults(observationresults));

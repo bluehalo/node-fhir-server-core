@@ -6,19 +6,12 @@ module.exports.getCondition = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific condition & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 
-		/**
-		* return service.getCondition(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getCondition(req, logger, context)
+		return service.getCondition(req.sanitized_args, logger)
 			.then((conditions) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -57,13 +50,11 @@ module.exports.getConditionById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific condition
 		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 
-		return service.getConditionById(req, logger, context)
+		return service.getConditionById(req.sanitized_args, logger)
 			.then((condition) => {
 				if (condition) {
 					res.status(200).json(new Condition(condition));
