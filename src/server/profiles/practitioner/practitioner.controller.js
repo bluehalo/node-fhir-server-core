@@ -48,7 +48,7 @@ module.exports.createPractitioner = ({ profile, logger, app }) => {
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific patient
+		// Get a version specific practitioner
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Validate the resource type before creating it
 		if (Practitioner.__resourceType !== resource_body.resourceType) {
@@ -57,11 +57,11 @@ module.exports.createPractitioner = ({ profile, logger, app }) => {
 				version
 			));
 		}
-		// Create a new patient resource and pass it to the service
-		let patient = new Practitioner(resource_body);
-		let args = { id: resource_id, resource: patient };
+		// Create a new practitioner resource and pass it to the service
+		let practitioner = new Practitioner(resource_body);
+		let args = { id: resource_id, resource: practitioner };
 		// Pass any new information to the underlying service
-		return service.createPatient(args, logger)
+		return service.createPractitioner(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Practitioner.__resourceType, results)
 			)
@@ -70,14 +70,14 @@ module.exports.createPractitioner = ({ profile, logger, app }) => {
 };
 
 /**
-* @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
+* @description Controller for updating/creating a practitioner. If the practitioner does not exist, it should be updated
 */
 module.exports.updatePractitioner = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific patient
+		// Get a version specific practitioner
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Validate the resource type before creating it
 		if (Practitioner.__resourceType !== resource_body.resourceType) {
@@ -86,11 +86,11 @@ module.exports.updatePractitioner = ({ profile, logger, app }) => {
 				version
 			));
 		}
-		// Create a new patient resource and pass it to the service
-		let patient = new Practitioner(resource_body);
-		let args = { id: resource_id, resource: patient };
+		// Create a new practitioner resource and pass it to the service
+		let practitioner = new Practitioner(resource_body);
+		let args = { id: resource_id, resource: practitioner };
 		// Pass any new information to the underlying service
-		return service.createPatient(args, logger, context)
+		return service.updatePractitioner(args, logger, context)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Practitioner.__resourceType, results)
 			)

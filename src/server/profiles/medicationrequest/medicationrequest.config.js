@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const medicationrequest_args = require('./medicationrequest.arguments');
 const controller = require('./medicationrequest.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/MedicationRequest.*',
 	'user/MedicationRequest.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'medicationrequest/MedicationRequest.*',
 	'medicationrequest/MedicationRequest.read',
 	'medicationrequest/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/MedicationRequest.*',
+	'user/MedicationRequest.write',
+	'user/*.write',
+	'medicationrequest/*.*',
+	'medicationrequest/MedicationRequest.*',
+	'medicationrequest/MedicationRequest.write',
+	'medicationrequest/*.write'
 ];
 
 let routes = [
@@ -44,7 +55,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
@@ -76,7 +87,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
@@ -87,8 +98,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getMedicationRequestById
+	},
+	{
+		type: 'post',
+		path: '/:version/medicationrequest',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createMedicationRequest
+	},
+	{
+		type: 'put',
+		path: '/:version/medicationrequest/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateMedicationRequest
 	}
 ];
 

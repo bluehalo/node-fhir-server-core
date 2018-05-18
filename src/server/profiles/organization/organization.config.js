@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const organization_args = require('./organization.arguments');
 const controller = require('./organization.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Organization.*',
 	'user/Organization.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'organization/Organization.*',
 	'organization/Organization.read',
 	'organization/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Organization.*',
+	'user/Organization.write',
+	'user/*.write',
+	'organization/*.*',
+	'organization/Organization.*',
+	'organization/Organization.write',
+	'organization/*.write'
 ];
 
 let routes = [
@@ -43,7 +54,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, organization_args.PHONETIC),
 			Object.assign({versions: VERSIONS.STU3}, organization_args.TYPE)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getOrganization
 	},
 	{
@@ -74,7 +85,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, organization_args.PHONETIC),
 			Object.assign({versions: VERSIONS.STU3}, organization_args.TYPE)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getOrganization
 	},
 	{
@@ -85,8 +96,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getOrganizationById
+	},
+	{
+		type: 'post',
+		path: '/:version/organization',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createOrganization
+	},
+	{
+		type: 'put',
+		path: '/:version/organization/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateOrganization
 	}
 ];
 

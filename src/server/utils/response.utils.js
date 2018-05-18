@@ -8,14 +8,14 @@ const errors = require('./error.utils');
 * @param {Express.response} res - Express response object
 * @param {function} next - next function from express middleware
 * @param {string} version - Which spec version is this request coming from
-* @param {T} ResourceContructor - Resource class to use for the results
+* @param {T} Resource - Resource class to use for the results
 * @param {object} resource_json - resulting json to be passed in to the class
 */
-let handleSingleReadResponse = (res, next, version, ResourceConstructor, resource_json) => {
+let handleSingleReadResponse = (res, next, version, Resource, resource_json) => {
 	if (resource_json) {
-			res.status(200).json(new ResourceConstructor(resource_json));
+		res.status(200).json(new Resource(resource_json));
 	} else {
-		next(errors.notFound(`${ResourceConstructor.__resourceType} not found.`, version));
+		next(errors.notFound(`${Resource.__resourceType} not found.`, version));
 	}
 };
 

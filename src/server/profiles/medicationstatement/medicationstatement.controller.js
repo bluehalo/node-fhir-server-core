@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getMedicationStatement = ({ profile, logger, config, app }) => {
@@ -8,38 +9,15 @@ module.exports.getMedicationStatement = ({ profile, logger, config, app }) => {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific medicationstatement & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
 
 		return service.getMedicationStatement(req.sanitized_args, logger)
-			.then((medicationstatements) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (medicationstatements) {
-					for (let resource of medicationstatements) {
-						if (!req.medicationstatement || req.medicationstatement === resource.medicationstatementId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new MedicationStatement(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/MedicationStatement/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, MedicationStatement, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 
 
@@ -55,15 +33,67 @@ module.exports.getMedicationStatementById = ({ profile, logger, app }) => {
 		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
 
 		return service.getMedicationStatementById(req.sanitized_args, logger)
-			.then((medicationstatement) => {
-				if (medicationstatement) {
-					res.status(200).json(new MedicationStatement(medicationstatement));
-				} else {
-					next(errors.notFound('MedicationStatement not found', version));
-				}
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(req, next, version, MedicationStatement, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for creating a medication_statement
+*/
+module.exports.createMedicationStatement = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific medication_statement
+		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
+		// Validate the resource type before creating it
+		if (MedicationStatement.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationStatement.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new medication_statement resource and pass it to the service
+		let medication_statement = new MedicationStatement(resource_body);
+		let args = { id: resource_id, resource: medication_statement };
+		// Pass any new information to the underlying service
+		return service.createMedicationStatement(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, MedicationStatement.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for updating/creating a medication_statement. If the medication_statement does not exist, it should be updated
+*/
+module.exports.updateMedicationStatement = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific medication_statement
+		let MedicationStatement = require(resolveFromVersion(version, 'uscore/MedicationStatement'));
+		// Validate the resource type before creating it
+		if (MedicationStatement.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationStatement.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new medication_statement resource and pass it to the service
+		let medication_statement = new MedicationStatement(resource_body);
+		let args = { id: resource_id, resource: medication_statement };
+		// Pass any new information to the underlying service
+		return service.updateMedicationStatement(args, logger, context)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, MedicationStatement.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };

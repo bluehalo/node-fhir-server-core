@@ -16,3 +16,15 @@ module.exports.getGoalById = (args, logger, context) => new Promise((resolve, re
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createGoal = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createGoal\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateGoal = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateGoal\'';
+	logger.info(message);
+	reject(new Error(message));
+});

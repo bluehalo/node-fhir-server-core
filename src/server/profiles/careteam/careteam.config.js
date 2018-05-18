@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const careteam_args = require('./careteam.arguments');
 const controller = require('./careteam.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/CareTeam.*',
 	'user/CareTeam.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'careteam/CareTeam.*',
 	'careteam/CareTeam.read',
 	'careteam/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/CareTeam.*',
+	'user/CareTeam.write',
+	'user/*.write',
+	'careteam/*.*',
+	'careteam/CareTeam.*',
+	'careteam/CareTeam.write',
+	'careteam/*.write'
 ];
 
 let routes = [
@@ -39,7 +50,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getCareTeam
 	},
 	{
@@ -66,7 +77,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getCareTeam
 	},
 	{
@@ -77,8 +88,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getCareTeamById
+	},
+	{
+		type: 'post',
+		path: '/:version/careteam',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createCareTeam
+	},
+	{
+		type: 'put',
+		path: '/:version/careteam/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateCareTeam
 	}
 ];
 

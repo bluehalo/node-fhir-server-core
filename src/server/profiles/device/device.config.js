@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const device_args = require('./device.arguments');
 const controller = require('./device.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Device.*',
 	'user/Device.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'device/Device.*',
 	'device/Device.read',
 	'device/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Device.*',
+	'user/Device.write',
+	'user/*.write',
+	'device/*.*',
+	'device/Device.*',
+	'device/Device.write',
+	'device/*.write'
 ];
 
 let routes = [
@@ -42,7 +53,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, device_args.UDI_DI),
 			Object.assign({versions: VERSIONS.STU3}, device_args.URL)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDevice
 	},
 	{
@@ -72,7 +83,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, device_args.UDI_DI),
 			Object.assign({versions: VERSIONS.STU3}, device_args.URL)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDevice
 	},
 	{
@@ -83,8 +94,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDeviceById
+	},
+	{
+		type: 'post',
+		path: '/:version/device',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createDevice
+	},
+	{
+		type: 'put',
+		path: '/:version/device/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateDevice
 	}
 ];
 

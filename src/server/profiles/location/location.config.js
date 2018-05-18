@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const location_args = require('./location.arguments');
 const controller = require('./location.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Location.*',
 	'user/Location.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'location/Location.*',
 	'location/Location.read',
 	'location/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Organization.*',
+	'user/Organization.write',
+	'user/*.write',
+	'organization/*.*',
+	'organization/Organization.*',
+	'organization/Organization.write',
+	'organization/*.write'
 ];
 
 let routes = [
@@ -46,7 +57,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getLocation
 	},
 	{
@@ -80,7 +91,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getLocation
 	},
 	{
@@ -91,8 +102,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getLocationById
+	},
+	{
+		type: 'post',
+		path: '/:version/location',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createLocation
+	},
+	{
+		type: 'put',
+		path: '/:version/location/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateLocation
 	}
 ];
 

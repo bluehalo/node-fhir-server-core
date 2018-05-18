@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getGoal = ({ profile, logger, config, app }) => {
@@ -7,41 +8,16 @@ module.exports.getGoal = ({ profile, logger, config, app }) => {
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific goal & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+		// Get a version specific goal
 		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
 		return service.getGoal(req.sanitized_args, logger)
-			.then((goals) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (goals) {
-					for (let resource of goals) {
-						if (!req.goal || req.goal === resource.goalId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new Goal(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Goal/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Goal, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 
 
@@ -57,15 +33,67 @@ module.exports.getGoalById = ({ profile, logger, app }) => {
 		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
 		return service.getGoalById(req.sanitized_args, logger)
-			.then((goal) => {
-				if (goal) {
-					res.status(200).json(new Goal(goal));
-				} else {
-					next(errors.notFound('Goal not found', version));
-				}
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(req, next, version, Goal, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for creating a goal
+*/
+module.exports.createGoal = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+		// Validate the resource type before creating it
+		if (Goal.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Goal.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new goal resource and pass it to the service
+		let goal = new Goal(resource_body);
+		let args = { id: resource_id, resource: goal };
+		// Pass any new information to the underlying service
+		return service.createGoal(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Goal.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for updating/creating a goal. If the goal does not exist, it should be updated
+*/
+module.exports.updateGoal = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+		// Validate the resource type before creating it
+		if (Goal.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Goal.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new goal resource and pass it to the service
+		let goal = new Goal(resource_body);
+		let args = { id: resource_id, resource: goal };
+		// Pass any new information to the underlying service
+		return service.updateGoal(args, logger, context)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Goal.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };

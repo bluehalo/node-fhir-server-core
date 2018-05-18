@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const condition_args = require('./condition.arguments');
 const controller = require('./condition.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/Condition.*',
 	'user/Condition.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'condition/Condition.*',
 	'condition/Condition.read',
 	'condition/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/Condition.*',
+	'user/Condition.write',
+	'user/*.write',
+	'condition/*.*',
+	'condition/Condition.*',
+	'condition/Condition.write',
+	'condition/*.write'
 ];
 
 let routes = [
@@ -53,7 +64,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, condition_args.SUBJECT),
 			Object.assign({versions: VERSIONS.STU3}, condition_args.VERIFICATION_STATUS)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getCondition
 	},
 	{
@@ -94,7 +105,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, condition_args.SUBJECT),
 			Object.assign({versions: VERSIONS.STU3}, condition_args.VERIFICATION_STATUS)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getCondition
 	},
 	{
@@ -105,8 +116,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getConditionById
+	},
+	{
+		type: 'post',
+		path: '/:version/condition',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createCondition
+	},
+	{
+		type: 'put',
+		path: '/:version/condition/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateCondition
 	}
 ];
 

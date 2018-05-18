@@ -16,3 +16,15 @@ module.exports.getImmunizationById = (args, logger, context) => new Promise((res
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createImmunization\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateImmunization\'';
+	logger.info(message);
+	reject(new Error(message));
+});

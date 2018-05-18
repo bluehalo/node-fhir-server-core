@@ -1,9 +1,9 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const diagnosticreport_args = require('./diagnosticreport.arguments');
 const controller = require('./diagnosticreport.controller');
 
-const scopes = [
+const read_scopes = [
 	'user/*.*',
 	'user/DiagnosticReport.*',
 	'user/DiagnosticReport.read',
@@ -12,6 +12,17 @@ const scopes = [
 	'diagnosticreport/DiagnosticReport.*',
 	'diagnosticreport/DiagnosticReport.read',
 	'diagnosticreport/*.read'
+];
+
+const write_scopes = [
+	'user/*.*',
+	'user/DiagnosticReport.*',
+	'user/DiagnosticReport.write',
+	'user/*.write',
+	'diagnosticreport/*.*',
+	'diagnosticreport/DiagnosticReport.*',
+	'diagnosticreport/DiagnosticReport.write',
+	'diagnosticreport/*.write'
 ];
 
 let routes = [
@@ -46,7 +57,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
@@ -80,7 +91,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
@@ -91,8 +102,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_scopes,
 		controller: controller.getDiagnosticReportById
+	},
+	{
+		type: 'post',
+		path: '/:version/diagnosticreport',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.createDiagnosticReport
+	},
+	{
+		type: 'put',
+		path: '/:version/diagnosticreport/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_scopes,
+		controller: controller.updateDiagnosticReport
 	}
 ];
 

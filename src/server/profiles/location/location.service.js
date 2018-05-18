@@ -16,3 +16,15 @@ module.exports.getLocationById = (args, logger, context) => new Promise((resolve
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createLocation = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createLocation\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateLocation = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateLocation\'';
+	logger.info(message);
+	reject(new Error(message));
+});

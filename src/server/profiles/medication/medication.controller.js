@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getMedication = ({ profile, logger, config, app }) => {
@@ -8,38 +9,15 @@ module.exports.getMedication = ({ profile, logger, config, app }) => {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific medication & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 
 		return service.getMedication(req.sanitized_args, logger)
-			.then((medications) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (medications) {
-					for (let resource of medications) {
-						if (!req.medication || req.medication === resource.medicationId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Medication(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Medication/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Medication, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 
 
@@ -55,15 +33,67 @@ module.exports.getMedicationById = ({ profile, logger, app }) => {
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 
 		return service.getMedicationById(req.sanitized_args, logger)
-			.then((medication) => {
-				if (medication) {
-					res.status(200).json(new Medication(medication));
-				} else {
-					next(errors.notFound('Medication not found', version));
-				}
-			})
-			.catch((err) => {
-				next(errors.internal(err.message, version));
-			});
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(req, next, version, Medication, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for creating a medication
+*/
+module.exports.createMedication = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific medication
+		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
+		// Validate the resource type before creating it
+		if (Medication.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Medication.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new medication resource and pass it to the service
+		let medication = new Medication(resource_body);
+		let args = { id: resource_id, resource: medication };
+		// Pass any new information to the underlying service
+		return service.createMedication(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Medication.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
+	};
+};
+
+/**
+* @description Controller for updating/creating a medication. If the medication does not exist, it should be updated
+*/
+module.exports.updateMedication = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific medication
+		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
+		// Validate the resource type before creating it
+		if (Medication.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Medication.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new medication resource and pass it to the service
+		let medication = new Medication(resource_body);
+		let args = { id: resource_id, resource: medication };
+		// Pass any new information to the underlying service
+		return service.updateMedication(args, logger, context)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Medication.__resourceType, results)
+			)
+			.catch((err) => next(errors.internal(err.message, version)));
 	};
 };
