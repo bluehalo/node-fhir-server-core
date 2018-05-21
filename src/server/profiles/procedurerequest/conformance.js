@@ -1,16 +1,16 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { routes } = require('./activitydefinition.config');
+const { routes } = require('./procedurerequest.config');
 
 /**
  * @name exports
  * @summary Patient conformance statement
  */
 module.exports = {
-	profile: 'activitydefinition',
+	profile: 'procedurerequest',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -18,9 +18,9 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: ActivityDefinition.__resourceType,
+			type: ProcedureRequest.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/activitydefinition.html'
+				reference: 'http://hl7.org/fhir/procedurerequest.html'
 			},
 			interaction: [{
 				code: 'read'

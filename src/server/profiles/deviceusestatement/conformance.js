@@ -1,16 +1,16 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { routes } = require('./devicestatement.config');
+const { routes } = require('./deviceusestatement.config');
 
 /**
  * @name exports
  * @summary Patient conformance statement
  */
 module.exports = {
-	profile: 'devicestatement',
+	profile: 'deviceusestatement',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DeviceStatement = require(resolveFromVersion(version, 'base/DeviceStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -18,9 +18,9 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: DeviceStatement.__resourceType,
+			type: DeviceUseStatement.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/devicestatement.html'
+				reference: 'http://hl7.org/fhir/deviceusestatement.html'
 			},
 			interaction: [{
 				code: 'read'

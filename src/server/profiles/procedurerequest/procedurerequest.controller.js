@@ -2,38 +2,38 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getActivityDefinition = ({ profile, logger, config, app }) => {
+module.exports.getProcedureRequest = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific activitydefinition & bundle
+		// Get a version specific procedurerequest & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 
 		/**
-		* return service.getActivityDefinition(req, logger)
+		* return service.getProcedureRequest(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getActivityDefinition(req, logger, context)
-			.then((activitydefinitions) => {
+		return service.getProcedureRequest(req, logger, context)
+			.then((procedurerequests) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
 
-				if (activitydefinitions) {
-					for (let resource of activitydefinitions) {
-						if (!req.activitydefinition || req.activitydefinition === resource.activitydefinitionId) {
+				if (procedurerequests) {
+					for (let resource of procedurerequests) {
+						if (!req.procedurerequest || req.procedurerequest === resource.procedurerequestId) {
 							// Modes:
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
 							entries.push({
 								search: { mode: 'match' },
-								resource: new ActivityDefinition(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ActivityDefinition/${resource.id}`
+								resource: new ProcedureRequest(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/ProcedureRequest/${resource.id}`
 							});
 						}
 					}
@@ -52,22 +52,22 @@ module.exports.getActivityDefinition = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getActivityDefinitionById = ({ profile, logger, app }) => {
+module.exports.getProcedureRequestById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific activitydefinition
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+		// Get a version specific procedurerequest
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 
-		return service.getActivityDefinitionById(req, logger, context)
-			.then((activitydefinition) => {
-				if (activitydefinition) {
-					res.status(200).json(new ActivityDefinition(activitydefinition));
+		return service.getProcedureRequestById(req, logger, context)
+			.then((procedurerequest) => {
+				if (procedurerequest) {
+					res.status(200).json(new ProcedureRequest(procedurerequest));
 				} else {
-					next(errors.notFound('ActivityDefinition not found', version));
+					next(errors.notFound('ProcedureRequest not found', version));
 				}
 			})
 			.catch((err) => {

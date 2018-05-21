@@ -2,38 +2,38 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDeviceStatement = ({ profile, logger, config, app }) => {
+module.exports.getDeviceUseStatement = ({ profile, logger, config, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific devicestatement & bundle
+		// Get a version specific deviceusestatement & bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let DeviceStatement = require(resolveFromVersion(version, 'base/DeviceStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 
 		/**
-		* return service.getDeviceStatement(req, logger)
+		* return service.getDeviceUseStatement(req, logger)
 		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
 		*		.then(validateResponse); // Make sure the response data conforms to the spec
 		*/
-		return service.getDeviceStatement(req, logger, context)
-			.then((devicestatements) => {
+		return service.getDeviceUseStatement(req, logger, context)
+			.then((deviceusestatements) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
 
-				if (devicestatements) {
-					for (let resource of devicestatements) {
-						if (!req.devicestatement || req.devicestatement === resource.devicestatementId) {
+				if (deviceusestatements) {
+					for (let resource of deviceusestatements) {
+						if (!req.deviceusestatement || req.deviceusestatement === resource.deviceusestatementId) {
 							// Modes:
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
 							// outcome - An OperationOutcome that provides additional information about the processing of a search.
 							entries.push({
 								search: { mode: 'match' },
-								resource: new DeviceStatement(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/DeviceStatement/${resource.id}`
+								resource: new DeviceUseStatement(resource),
+								fullUrl: `${config.auth.resourceServer}/${version}/DeviceUseStatement/${resource.id}`
 							});
 						}
 					}
@@ -52,22 +52,22 @@ module.exports.getDeviceStatement = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getDeviceStatementById = ({ profile, logger, app }) => {
+module.exports.getDeviceUseStatementById = ({ profile, logger, app }) => {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let version = req.params.version;
 		// Create a context I can pass some data through
 		let context = { version };
-		// Get a version specific devicestatement
-		let DeviceStatement = require(resolveFromVersion(version, 'base/DeviceStatement'));
+		// Get a version specific deviceusestatement
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 
-		return service.getDeviceStatementById(req, logger, context)
-			.then((devicestatement) => {
-				if (devicestatement) {
-					res.status(200).json(new DeviceStatement(devicestatement));
+		return service.getDeviceUseStatementById(req, logger, context)
+			.then((deviceusestatement) => {
+				if (deviceusestatement) {
+					res.status(200).json(new DeviceUseStatement(deviceusestatement));
 				} else {
-					next(errors.notFound('DeviceStatement not found', version));
+					next(errors.notFound('DeviceUseStatement not found', version));
 				}
 			})
 			.catch((err) => {

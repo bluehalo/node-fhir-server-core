@@ -1,17 +1,17 @@
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
-const resource_args = require('./activitydefinition.arguments');
-const controller = require('./activitydefinition.controller');
+const resource_args = require('./procedurerequest.arguments');
+const controller = require('./procedurerequest.controller');
 
 const scopes = [
 	'user/*.*',
-	'user/ActivityDefinition.*',
-	'user/ActivityDefinition.read',
+	'user/ProcedureRequest.*',
+	'user/ProcedureRequest.read',
 	'user/*.read',
-	'activitydefinition/*.*',
-	'activitydefinition/ActivityDefinition.*',
-	'activitydefinition/ActivityDefinition.read',
-	'activitydefinition/*.read'
+	'procedurerequest/*.*',
+	'procedurerequest/ProcedureRequest.*',
+	'procedurerequest/ProcedureRequest.read',
+	'procedurerequest/*.read'
 ];
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
@@ -27,40 +27,40 @@ const resourceAllArguments = [
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/activitydefinition',
+		path: '/:version/procedurerequest',
 		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getActivityDefinition
+		controller: controller.getProcedureRequest
 	},
 	{
 		type: 'post',
-		path: '/:version/activitydefinition/_search',
+		path: '/:version/procedurerequest/_search',
 		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getActivityDefinition
+		controller: controller.getProcedureRequest
 	},
 	{
 		type: 'get',
-		path: '/:version/activitydefinition/:id',
+		path: '/:version/procedurerequest/:id',
 		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
 		scopes: scopes,
-		controller: controller.getActivityDefinitionById
+		controller: controller.getProcedureRequestById
 	}
 ];
 
 /**
  * @name exports
- * @summary ActivityDefinition config
+ * @summary ProcedureRequest config
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.ACTIVITYDEFINITION
+		profileKey: CONFIG_KEYS.PROCEDUREREQUEST
 	},
 	routes
 };

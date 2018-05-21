@@ -1,16 +1,16 @@
 const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { routes } = require('./procedurerequest.config');
+const { routes } = require('./processrequest.config');
 
 /**
  * @name exports
  * @summary Patient conformance statement
  */
 module.exports = {
-	profile: 'procedurerequest',
+	profile: 'processrequest',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
+		let ProcessRequest = require(resolveFromVersion(version, 'base/ProcessRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -18,9 +18,9 @@ module.exports = {
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
-			type: ProcedureRequest.__resourceType,
+			type: ProcessRequest.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/procedurerequest.html'
+				reference: 'http://hl7.org/fhir/processrequest.html'
 			},
 			interaction: [{
 				code: 'read'

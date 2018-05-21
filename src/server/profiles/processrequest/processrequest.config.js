@@ -1,17 +1,17 @@
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
-const resource_args = require('./procedurerequest.arguments');
-const controller = require('./procedurerequest.controller');
+const resource_args = require('./processrequest.arguments');
+const controller = require('./processrequest.controller');
 
 const scopes = [
 	'user/*.*',
-	'user/ProcedureRequest.*',
-	'user/ProcedureRequest.read',
+	'user/ProcessRequest.*',
+	'user/ProcessRequest.read',
 	'user/*.read',
-	'procedurerequest/*.*',
-	'procedurerequest/ProcedureRequest.*',
-	'procedurerequest/ProcedureRequest.read',
-	'procedurerequest/*.read'
+	'processrequest/*.*',
+	'processrequest/ProcessRequest.*',
+	'processrequest/ProcessRequest.read',
+	'processrequest/*.read'
 ];
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
@@ -27,40 +27,40 @@ const resourceAllArguments = [
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/procedurerequest',
+		path: '/:version/processrequest',
 		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getProcedureRequest
+		controller: controller.getProcessRequest
 	},
 	{
 		type: 'post',
-		path: '/:version/procedurerequest/_search',
+		path: '/:version/processrequest/_search',
 		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getProcedureRequest
+		controller: controller.getProcessRequest
 	},
 	{
 		type: 'get',
-		path: '/:version/procedurerequest/:id',
+		path: '/:version/processrequest/:id',
 		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
 		scopes: scopes,
-		controller: controller.getProcedureRequestById
+		controller: controller.getProcessRequestById
 	}
 ];
 
 /**
  * @name exports
- * @summary ProcedureRequest config
+ * @summary ProcessRequest config
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.PROCEDUREREQUEST
+		profileKey: CONFIG_KEYS.PROCESSREQUEST
 	},
 	routes
 };

@@ -1,17 +1,17 @@
 const {route_args, common_args} = require('../common.arguments');
 const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
-const resource_args = require('./devicestatement.arguments');
-const controller = require('./devicestatement.controller');
+const resource_args = require('./deviceusestatement.arguments');
+const controller = require('./deviceusestatement.controller');
 
 const scopes = [
 	'user/*.*',
-	'user/DeviceStatement.*',
-	'user/DeviceStatement.read',
+	'user/DeviceUseStatement.*',
+	'user/DeviceUseStatement.read',
 	'user/*.read',
-	'devicestatement/*.*',
-	'devicestatement/DeviceStatement.*',
-	'devicestatement/DeviceStatement.read',
-	'devicestatement/*.read'
+	'deviceusestatement/*.*',
+	'deviceusestatement/DeviceUseStatement.*',
+	'deviceusestatement/DeviceUseStatement.read',
+	'deviceusestatement/*.read'
 ];
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
@@ -27,36 +27,36 @@ const resourceAllArguments = [
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/devicestatement',
+		path: '/:version/deviceusestatement',
 		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getDeviceStatement
+		controller: controller.getDeviceUseStatement
 	},
 	{
 		type: 'post',
-		path: '/:version/devicestatement/_search',
+		path: '/:version/deviceusestatement/_search',
 		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
 		scopes: scopes,
-		controller: controller.getDeviceStatement
+		controller: controller.getDeviceUseStatement
 	},
 	{
 		type: 'get',
-		path: '/:version/devicestatement/:id',
+		path: '/:version/deviceusestatement/:id',
 		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
 		scopes: scopes,
-		controller: controller.getDeviceStatementById
+		controller: controller.getDeviceUseStatementById
 	}
 ];
 
 /**
  * @name exports
- * @summary DeviceStatement config
+ * @summary DeviceUseStatement config
  */
 module.exports = {
 	routeOptions: {
