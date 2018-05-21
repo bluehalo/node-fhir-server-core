@@ -1,0 +1,66 @@
+const {route_args, common_args} = require('../common.arguments');
+const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const resource_args = require('./episodeofcare.arguments');
+const controller = require('./episodeofcare.controller');
+
+const scopes = [
+	'user/*.*',
+	'user/EpisodeOfCare.*',
+	'user/EpisodeOfCare.read',
+	'user/*.read',
+	'episodeofcare/*.*',
+	'episodeofcare/EpisodeOfCare.*',
+	'episodeofcare/EpisodeOfCare.read',
+	'episodeofcare/*.read'
+];
+
+let commonArgsArray = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resourceArgsArray = Object.getOwnPropertyNames(resource_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_args[arg_name]));
+
+const resourceAllArguments = [
+	route_args.VERSION,	...commonArgsArray, ...resourceArgsArray,
+];
+
+let routes = [
+	{
+		type: 'get',
+		path: '/:version/episodeofcare',
+		corsOptions: {methods: ['GET']},
+		args: resourceAllArguments,
+		scopes: scopes,
+		controller: controller.getEpisodeOfCare
+	},
+	{
+		type: 'post',
+		path: '/:version/episodeofcare/_search',
+		corsOptions: {methods: ['POST']},
+		args: resourceAllArguments,
+		scopes: scopes,
+		controller: controller.getEpisodeOfCare
+	},
+	{
+		type: 'get',
+		path: '/:version/episodeofcare/:id',
+		corsOptions: {methods: ['GET']},
+		args: [
+			route_args.VERSION,
+			route_args.ID
+		],
+		scopes: scopes,
+		controller: controller.getEpisodeOfCareById
+	}
+];
+
+/**
+ * @name exports
+ * @summary EpisodeOfCare config
+ */
+module.exports = {
+	routeOptions: {
+		profileKey: CONFIG_KEYS.EPISODEOFCARE
+	},
+	routes
+};
