@@ -88,7 +88,7 @@ const setter = (options = {}) => {
 			if (routeOptions.isMetadata) {
 				profile = { versions: getAllConfiguredVersions(profiles) };
 			}
-
+			// console.log(route);
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
