@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'practitioner',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Practitioner = require(resolveFromVersion(version, 'base/Practitioner'));
+		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Practitioner.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/practitioner.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-practitioner.html'
 			},
 			interaction: [{
 				code: 'read'

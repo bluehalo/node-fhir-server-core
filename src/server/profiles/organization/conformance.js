@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'organization',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Organization = require(resolveFromVersion(version, 'base/Organization'));
+		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Organization.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/organization.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-organization.html'
 			},
 			interaction: [{
 				code: 'read'

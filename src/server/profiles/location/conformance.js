@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'location',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Location = require(resolveFromVersion(version, 'base/Location'));
+		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'procedure',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Procedure = require(resolveFromVersion(version, 'base/Procedure'));
+		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Procedure.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/procedure.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-procedure.html'
 			},
 			interaction: [{
 				code: 'read'

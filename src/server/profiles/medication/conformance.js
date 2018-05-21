@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'medication',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Medication = require(resolveFromVersion(version, 'base/Medication'));
+		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Medication.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/medication.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-medication.html'
 			},
 			interaction: [{
 				code: 'read'

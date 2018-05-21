@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'careplan',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CarePlan = require(resolveFromVersion(version, 'base/CarePlan'));
+		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: CarePlan.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/careplan.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-careplan.html'
 			},
 			interaction: [{
 				code: 'read'

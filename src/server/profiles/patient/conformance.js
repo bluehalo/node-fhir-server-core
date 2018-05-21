@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'patient',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Patient = require(resolveFromVersion(version, 'base/Patient'));
+		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 		// Return our conformance statement
 		return {
 			extension: [{
@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: Patient.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/patient.html'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html'
 			},
 			interaction: [{
 				code: 'read'
