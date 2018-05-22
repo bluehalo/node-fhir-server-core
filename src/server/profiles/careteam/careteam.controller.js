@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.getCareTeam = ({ profile, logger, config, app }) => {
@@ -7,37 +8,17 @@ module.exports.getCareTeam = ({ profile, logger, config, app }) => {
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific careteam & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+		// Get a version specific careteam
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
 		return service.getCareTeam(req.sanitized_args, logger)
-			.then((careteams) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (careteams) {
-					for (let resource of careteams) {
-						if (!req.careteam || req.careteam === resource.careteamId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new CareTeam(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/CareTeam/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, CareTeam, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -55,14 +36,75 @@ module.exports.getCareTeamById = ({ profile, logger, app }) => {
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
 		return service.getCareTeamById(req.sanitized_args, logger)
-			.then((careteam) => {
-				if (careteam) {
-					res.status(200).json(new CareTeam(careteam));
-				} else {
-					next(errors.notFound('CareTeam not found', version));
-				}
-			})
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(req, next, version, CareTeam, results)
+			)
 			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for creating a care_team
+*/
+module.exports.createCareTeam = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific care_team
+		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
+		// Validate the resource type before creating it
+		if (CareTeam.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CareTeam.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new care_team resource and pass it to the service
+		let care_team = new CareTeam(resource_body);
+		let args = { id: resource_id, resource: care_team };
+		// Pass any new information to the underlying service
+		return service.createCareTeam(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, CareTeam.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for updating/creating a care_team. If the care_team does not exist, it should be updated
+*/
+module.exports.updateCareTeam = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific care_team
+		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
+		// Validate the resource type before creating it
+		if (CareTeam.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CareTeam.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new care_team resource and pass it to the service
+		let care_team = new CareTeam(resource_body);
+		let args = { id: resource_id, resource: care_team };
+		// Pass any new information to the underlying service
+		return service.updateCareTeam(args, logger, context)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, CareTeam.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

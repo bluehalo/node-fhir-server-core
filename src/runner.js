@@ -86,18 +86,6 @@ const CONFIG = {
 			service: './src/server/profiles/observation/observation.service.js',
 			versions: [VERSIONS.STU3]
 		},
-		observationresults: {
-			service: './src/server/profiles/observationresults/observationresults.service.js',
-			versions: [VERSIONS.STU3]
-		},
-		observationsmokingstatus: {
-			service: './src/server/profiles/observationsmokingstatus/observationsmokingstatus.service.js',
-			versions: [VERSIONS.STU3]
-		},
-		observationvitalsigns: {
-			service: './src/server/profiles/observationvitalsigns/observationvitalsigns.service.js',
-			versions: [VERSIONS.STU3]
-		},
 		organization: {
 			service: './src/server/profiles/organization/organization.service.js',
 			versions: [VERSIONS.STU3]

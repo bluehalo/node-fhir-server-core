@@ -16,3 +16,15 @@ module.exports.getAllergyIntoleranceById = (args, logger, context) => new Promis
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createAllergyIntolerance = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createAllergyIntolerance\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateAllergyIntolerance = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateAllergyIntolerance\'';
+	logger.info(message);
+	reject(new Error(message));
+});

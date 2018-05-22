@@ -16,3 +16,15 @@ module.exports.getMedicationById = (args, logger, context) => new Promise((resol
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createMedication = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createMedication\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateMedication = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateMedication\'';
+	logger.info(message);
+	reject(new Error(message));
+});

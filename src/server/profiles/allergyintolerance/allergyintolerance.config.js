@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const allergyintolerance_args = require('./allergyintolerance.arguments');
 const controller = require('./allergyintolerance.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/AllergyIntolerance.*',
-	'user/AllergyIntolerance.read',
-	'user/*.read',
-	'allergyintolerance/*.*',
-	'allergyintolerance/AllergyIntolerance.*',
-	'allergyintolerance/AllergyIntolerance.read',
-	'allergyintolerance/*.read'
-];
+let write_only_scopes = write_scopes('AllergyIntolerance');
+let read_only_scopes = read_scopes('AllergyIntolerance');
 
 let routes = [
 	{
@@ -46,7 +39,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
@@ -80,7 +73,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
@@ -91,8 +84,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntoleranceById
+	},
+	{
+		type: 'post',
+		path: '/:version/allergyintolerance',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createAllergyIntolerance
+	},
+	{
+		type: 'put',
+		path: '/:version/allergyintolerance/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateAllergyIntolerance
 	}
 ];
 

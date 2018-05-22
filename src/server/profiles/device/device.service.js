@@ -16,3 +16,15 @@ module.exports.getDeviceById = (args, logger, context) => new Promise((resolve, 
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createDevice = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createDevice\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateDevice = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateDevice\'';
+	logger.info(message);
+	reject(new Error(message));
+});

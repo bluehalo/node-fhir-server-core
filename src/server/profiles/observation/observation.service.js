@@ -12,8 +12,19 @@ module.exports.getObservation = (args, logger, context) => new Promise((resolve,
 });
 
 module.exports.getObservationById = (args, logger, context) => new Promise((resolve, reject) => {
-	console.log(context);
 	let message = 'Calling mock service. Did you forget to implement \'getObservationById\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.createObservation = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createObservation\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateObservation = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateObservation\'';
 	logger.info(message);
 	reject(new Error(message));
 });

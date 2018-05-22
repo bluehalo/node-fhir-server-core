@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const procedure_args = require('./procedure.arguments');
 const controller = require('./procedure.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Procedure.*',
-	'user/Procedure.read',
-	'user/*.read',
-	'procedure/*.*',
-	'procedure/Procedure.*',
-	'procedure/Procedure.read',
-	'procedure/*.read'
-];
+let write_only_scopes = write_scopes('Procedure');
+let read_only_scopes = read_scopes('Procedure');
 
 let routes = [
 	{
@@ -44,7 +37,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedure
 	},
 	{
@@ -76,7 +69,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedure
 	},
 	{
@@ -87,8 +80,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedureById
+	},
+	{
+		type: 'post',
+		path: '/:version/procedure',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createProcedure
+	},
+	{
+		type: 'put',
+		path: '/:version/procedure/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateProcedure
 	}
 ];
 

@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const careplan_args = require('./careplan.arguments');
 const controller = require('./careplan.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/CarePlan.*',
-	'user/CarePlan.read',
-	'user/*.read',
-	'careplan/*.*',
-	'careplan/CarePlan.*',
-	'careplan/CarePlan.read',
-	'careplan/*.read'
-];
+let write_only_scopes = write_scopes('CarePlan');
+let read_only_scopes = read_scopes('CarePlan');
 
 let routes = [
 	{
@@ -50,7 +43,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, careplan_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, careplan_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCarePlan
 	},
 	{
@@ -88,7 +81,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, careplan_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, careplan_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCarePlan
 	},
 	{
@@ -99,8 +92,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCarePlanById
+	},
+	{
+		type: 'post',
+		path: '/:version/careplan',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createCarePlan
+	},
+	{
+		type: 'put',
+		path: '/:version/careplan/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateCarePlan
 	}
 ];
 

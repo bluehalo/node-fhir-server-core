@@ -54,3 +54,15 @@ module.exports.getPatientById = (args, logger, context) => new Promise((resolve,
 	// 		}]
 	// });
 });
+
+module.exports.createPatient = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createPatient\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updatePatient = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updatePatient\'';
+	logger.info(message);
+	reject(new Error(message));
+});

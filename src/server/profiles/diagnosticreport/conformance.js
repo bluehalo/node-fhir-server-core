@@ -26,6 +26,10 @@ module.exports = {
 				code: 'read'
 			}, {
 				code: 'search'
+			}, {
+				code: 'update'
+			}, {
+				code: 'create'
 			}],
 			searchParam: searchParams
 		};

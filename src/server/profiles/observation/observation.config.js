@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const observation_args = require('./observation.arguments');
 const controller = require('./observation.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Observation.*',
-	'user/Observation.read',
-	'user/*.read',
-	'observation/*.*',
-	'observation/Observation.*',
-	'observation/Observation.read',
-	'observation/*.read'
-];
+let write_only_scopes = write_scopes('Observation');
+let read_only_scopes = read_scopes('Observation');
 
 let routes = [
 	{
@@ -68,7 +61,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_QUANTITY),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservation
 	},
 	{
@@ -124,7 +117,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_QUANTITY),
 			Object.assign({versions: VERSIONS.STU3}, observation_args.VALUE_STRING)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservation
 	},
 	{
@@ -135,8 +128,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservationById
+	},
+	{
+		type: 'post',
+		path: '/:version/observation',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createObservation
+	},
+	{
+		type: 'put',
+		path: '/:version/observation/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateObservation
 	}
 ];
 

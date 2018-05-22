@@ -1,18 +1,13 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const diagnosticreport_args = require('./diagnosticreport.arguments');
 const controller = require('./diagnosticreport.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/DiagnosticReport.*',
-	'user/DiagnosticReport.read',
-	'user/*.read',
-	'diagnosticreport/*.*',
-	'diagnosticreport/DiagnosticReport.*',
-	'diagnosticreport/DiagnosticReport.read',
-	'diagnosticreport/*.read'
-];
+
+let write_only_scopes = write_scopes('DiagnosticReport');
+let read_only_scopes = read_scopes('DiagnosticReport');
+
 
 let routes = [
 	{
@@ -46,7 +41,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
@@ -80,7 +75,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, diagnosticreport_args.SUBJECT)
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
@@ -91,8 +86,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReportById
+	},
+	{
+		type: 'post',
+		path: '/:version/diagnosticreport',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createDiagnosticReport
+	},
+	{
+		type: 'put',
+		path: '/:version/diagnosticreport/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateDiagnosticReport
 	}
 ];
 

@@ -16,3 +16,15 @@ module.exports.getConditionById = (args, logger, context) => new Promise((resolv
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.createCondition = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createCondition\'';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.updateCondition = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateCondition\'';
+	logger.info(message);
+	reject(new Error(message));
+});

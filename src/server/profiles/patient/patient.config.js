@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const patient_args = require('./patient.arguments');
 const controller = require('./patient.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Patient.*',
-	'user/Patient.read',
-	'user/*.read',
-	'patient/*.*',
-	'patient/Patient.*',
-	'patient/Patient.read',
-	'patient/*.read'
-];
+let write_only_scopes = write_scopes('Patient');
+let read_only_scopes = read_scopes('Patient');
 
 let routes = [
 	{
@@ -54,7 +47,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -96,7 +89,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -107,8 +100,32 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatientById
+	},
+	{
+		type: 'post',
+		path: '/:version/patient',
+		corsOptions: { methods: ['POST'] },
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createPatient
+	},
+	{
+		type: 'put',
+		path: '/:version/patient/:id',
+		corsOptions: { methods: ['PUT'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updatePatient
 	}
 ];
 
