@@ -18,6 +18,7 @@ module.exports.getCondition = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
+				logger.error('Internal Error: ', err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -38,7 +39,10 @@ module.exports.getConditionById = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(req, next, version, Condition, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -67,7 +71,10 @@ module.exports.createCondition = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Condition.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -96,6 +103,9 @@ module.exports.updateCondition = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Condition.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };

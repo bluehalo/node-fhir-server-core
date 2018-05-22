@@ -36,7 +36,10 @@ module.exports.getPatient = ({ profile, logger, config, app }) => {
 					filter: patient_filter(req.patient)
 				})
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 
 };
@@ -80,7 +83,10 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(req, next, version, Patient, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -109,7 +115,10 @@ module.exports.createPatient = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Patient.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -138,6 +147,9 @@ module.exports.updatePatient = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Patient.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };

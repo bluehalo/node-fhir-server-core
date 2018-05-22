@@ -17,7 +17,10 @@ module.exports.getCareTeam = ({ profile, logger, config, app }) => {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 
 
@@ -36,7 +39,10 @@ module.exports.getCareTeamById = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(req, next, version, CareTeam, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -65,7 +71,10 @@ module.exports.createCareTeam = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, CareTeam.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -94,6 +103,9 @@ module.exports.updateCareTeam = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, CareTeam.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };

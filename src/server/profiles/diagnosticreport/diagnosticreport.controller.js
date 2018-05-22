@@ -18,6 +18,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
+				logger.error('Internal Error: ', err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -38,7 +39,10 @@ module.exports.getDiagnosticReportById = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(req, next, version, DiagnosticReport, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -67,7 +71,10 @@ module.exports.createDiagnosticReport = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, DiagnosticReport.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
 
@@ -96,6 +103,9 @@ module.exports.updateDiagnosticReport = ({ profile, logger, app }) => {
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DiagnosticReport.__resourceType, results)
 			)
-			.catch((err) => next(errors.internal(err.message, version)));
+			.catch((err) => {
+				logger.error('Internal Error: ', err);
+				next(errors.internal(err.message, version));
+			});
 	};
 };
