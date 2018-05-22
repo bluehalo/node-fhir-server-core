@@ -1,29 +1,11 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const allergyintolerance_args = require('./allergyintolerance.arguments');
 const controller = require('./allergyintolerance.controller');
 
-const read_scopes = [
-	'user/*.*',
-	'user/AllergyIntolerance.*',
-	'user/AllergyIntolerance.read',
-	'user/*.read',
-	'allergyintolerance/*.*',
-	'allergyintolerance/AllergyIntolerance.*',
-	'allergyintolerance/AllergyIntolerance.read',
-	'allergyintolerance/*.read'
-];
-
-const write_scopes = [
-	'user/*.*',
-	'user/AllergyIntolerance.*',
-	'user/AllergyIntolerance.write',
-	'user/*.write',
-	'allergyintolerance/*.*',
-	'allergyintolerance/AllergyIntolerance.*',
-	'allergyintolerance/AllergyIntolerance.write',
-	'allergyintolerance/*.write'
-];
+let write_only_scopes = write_scopes('AllergyIntolerance');
+let read_only_scopes = read_scopes('AllergyIntolerance');
 
 let routes = [
 	{
@@ -57,7 +39,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
@@ -91,7 +73,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.TYPE),
 			Object.assign({versions: VERSIONS.STU3}, allergyintolerance_args.VERIFICATION_STATUS)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
@@ -102,7 +84,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntoleranceById
 	},
 	{
@@ -114,7 +96,7 @@ let routes = [
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.createAllergyIntolerance
 	},
 	{
@@ -126,7 +108,7 @@ let routes = [
 			route_args.VERSION,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.updateAllergyIntolerance
 	}
 ];

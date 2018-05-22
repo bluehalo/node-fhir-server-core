@@ -1,29 +1,11 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const patient_args = require('./patient.arguments');
 const controller = require('./patient.controller');
 
-const read_scopes = [
-	'user/*.*',
-	'user/Patient.*',
-	'user/Patient.read',
-	'user/*.read',
-	'patient/*.*',
-	'patient/Patient.*',
-	'patient/Patient.read',
-	'patient/*.read'
-];
-
-const write_scopes = [
-	'user/*.*',
-	'user/Patient.*',
-	'user/Patient.write',
-	'user/*.write',
-	'patient/*.*',
-	'patient/Patient.*',
-	'patient/Patient.write',
-	'patient/*.write'
-];
+let write_only_scopes = write_scopes('Patient');
+let read_only_scopes = read_scopes('Patient');
 
 let routes = [
 	{
@@ -65,7 +47,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -107,7 +89,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
 			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatient
 	},
 	{
@@ -118,7 +100,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getPatientById
 	},
 	{
@@ -130,7 +112,7 @@ let routes = [
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.createPatient
 	},
 	{
@@ -142,7 +124,7 @@ let routes = [
 			route_args.VERSION,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.updatePatient
 	}
 ];

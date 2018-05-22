@@ -1,29 +1,11 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const condition_args = require('./condition.arguments');
 const controller = require('./condition.controller');
 
-const read_scopes = [
-	'user/*.*',
-	'user/Condition.*',
-	'user/Condition.read',
-	'user/*.read',
-	'condition/*.*',
-	'condition/Condition.*',
-	'condition/Condition.read',
-	'condition/*.read'
-];
-
-const write_scopes = [
-	'user/*.*',
-	'user/Condition.*',
-	'user/Condition.write',
-	'user/*.write',
-	'condition/*.*',
-	'condition/Condition.*',
-	'condition/Condition.write',
-	'condition/*.write'
-];
+let write_only_scopes = write_scopes('Condition');
+let read_only_scopes = read_scopes('Condition');
 
 let routes = [
 	{
@@ -64,7 +46,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, condition_args.SUBJECT),
 			Object.assign({versions: VERSIONS.STU3}, condition_args.VERIFICATION_STATUS)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCondition
 	},
 	{
@@ -105,7 +87,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, condition_args.SUBJECT),
 			Object.assign({versions: VERSIONS.STU3}, condition_args.VERIFICATION_STATUS)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCondition
 	},
 	{
@@ -116,7 +98,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConditionById
 	},
 	{
@@ -128,7 +110,7 @@ let routes = [
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.createCondition
 	},
 	{
@@ -140,7 +122,7 @@ let routes = [
 			route_args.VERSION,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.updateCondition
 	}
 ];

@@ -1,29 +1,11 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const medicationrequest_args = require('./medicationrequest.arguments');
 const controller = require('./medicationrequest.controller');
 
-const read_scopes = [
-	'user/*.*',
-	'user/MedicationRequest.*',
-	'user/MedicationRequest.read',
-	'user/*.read',
-	'medicationrequest/*.*',
-	'medicationrequest/MedicationRequest.*',
-	'medicationrequest/MedicationRequest.read',
-	'medicationrequest/*.read'
-];
-
-const write_scopes = [
-	'user/*.*',
-	'user/MedicationRequest.*',
-	'user/MedicationRequest.write',
-	'user/*.write',
-	'medicationrequest/*.*',
-	'medicationrequest/MedicationRequest.*',
-	'medicationrequest/MedicationRequest.write',
-	'medicationrequest/*.write'
-];
+let write_only_scopes = write_scopes('MedicationRequest');
+let read_only_scopes = read_scopes('MedicationRequest');
 
 let routes = [
 	{
@@ -55,7 +37,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.SUBJECT)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
@@ -87,7 +69,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, medicationrequest_args.SUBJECT)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
@@ -98,7 +80,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequestById
 	},
 	{
@@ -110,7 +92,7 @@ let routes = [
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.createMedicationRequest
 	},
 	{
@@ -122,7 +104,7 @@ let routes = [
 			route_args.VERSION,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.updateMedicationRequest
 	}
 ];

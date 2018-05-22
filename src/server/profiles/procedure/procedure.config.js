@@ -1,29 +1,11 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const procedure_args = require('./procedure.arguments');
 const controller = require('./procedure.controller');
 
-const read_scopes = [
-	'user/*.*',
-	'user/Procedure.*',
-	'user/Procedure.read',
-	'user/*.read',
-	'procedure/*.*',
-	'procedure/Procedure.*',
-	'procedure/Procedure.read',
-	'procedure/*.read'
-];
-
-const write_scopes = [
-	'user/*.*',
-	'user/Procedure.*',
-	'user/Procedure.write',
-	'user/*.write',
-	'procedure/*.*',
-	'procedure/Procedure.*',
-	'procedure/Procedure.write',
-	'procedure/*.write'
-];
+let write_only_scopes = write_scopes('Procedure');
+let read_only_scopes = read_scopes('Procedure');
 
 let routes = [
 	{
@@ -55,7 +37,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.SUBJECT)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedure
 	},
 	{
@@ -87,7 +69,7 @@ let routes = [
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.STATUS),
 			Object.assign({versions: VERSIONS.STU3}, procedure_args.SUBJECT)
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedure
 	},
 	{
@@ -98,7 +80,7 @@ let routes = [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: read_scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProcedureById
 	},
 	{
@@ -110,7 +92,7 @@ let routes = [
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.createProcedure
 	},
 	{
@@ -122,7 +104,7 @@ let routes = [
 			route_args.VERSION,
 			write_args.RESOURCE_BODY
 		],
-		scopes: write_scopes,
+		scopes: write_only_scopes,
 		controller: controller.updateProcedure
 	}
 ];
