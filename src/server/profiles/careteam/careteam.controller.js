@@ -18,7 +18,7 @@ module.exports.getCareTeam = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getCareTeamById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, CareTeam, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createCareTeam = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, CareTeam.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateCareTeam = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, CareTeam.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

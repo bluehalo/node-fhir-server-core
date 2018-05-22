@@ -18,7 +18,7 @@ module.exports.getGoal = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getGoalById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Goal, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createGoal = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Goal.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateGoal = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Goal.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

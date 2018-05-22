@@ -18,7 +18,7 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -39,7 +39,7 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, AllergyIntolerance, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -71,7 +71,7 @@ module.exports.createAllergyIntolerance = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, AllergyIntolerance.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -103,7 +103,7 @@ module.exports.updateAllergyIntolerance = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, AllergyIntolerance.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

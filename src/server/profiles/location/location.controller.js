@@ -18,7 +18,7 @@ module.exports.getLocation = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getLocationById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Location, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createLocation = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Location.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateLocation = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Location.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

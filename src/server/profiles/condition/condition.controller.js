@@ -18,7 +18,7 @@ module.exports.getCondition = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getConditionById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Condition, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createCondition = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Condition.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateCondition = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Condition.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

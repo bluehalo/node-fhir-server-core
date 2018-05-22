@@ -18,7 +18,7 @@ module.exports.getImmunization = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getImmunizationById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Immunization, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createImmunization = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Immunization.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateImmunization = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Immunization.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

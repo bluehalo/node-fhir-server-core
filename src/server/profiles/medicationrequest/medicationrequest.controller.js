@@ -18,7 +18,7 @@ module.exports.getMedicationRequest = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getMedicationRequestById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, MedicationRequest, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createMedicationRequest = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, MedicationRequest.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateMedicationRequest = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, MedicationRequest.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

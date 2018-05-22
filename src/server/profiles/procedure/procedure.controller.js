@@ -18,7 +18,7 @@ module.exports.getProcedure = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getProcedureById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Procedure, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createProcedure = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Procedure.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateProcedure = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Procedure.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

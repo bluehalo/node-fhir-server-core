@@ -100,7 +100,7 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				routeOptions.isMetadata ? function(req, res, next) { return next(); } : validate(route.scopes, logger, config),
+				// routeOptions.isMetadata ? function(req, res, next) { return next(); } : validate(route.scopes, logger, config),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);

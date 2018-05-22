@@ -18,7 +18,7 @@ module.exports.getCarePlan = ({ profile, logger, config, app }) => {
 				})
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -40,7 +40,7 @@ module.exports.getCarePlanById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, CarePlan, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -72,7 +72,7 @@ module.exports.createCarePlan = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, CarePlan.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -104,7 +104,7 @@ module.exports.updateCarePlan = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, CarePlan.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};

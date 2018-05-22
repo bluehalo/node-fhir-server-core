@@ -58,7 +58,7 @@ module.exports.getObservation = ({ profile, logger, config, app }) => {
 				res.status(200).json(results);
 			})
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -78,7 +78,7 @@ module.exports.getObservationById = ({ profile, logger, app }) => {
 				responseUtils.handleSingleReadResponse(req, next, version, Resource, observation);
 			})
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -110,7 +110,7 @@ module.exports.createObservation = ({ profile, logger, app }) => {
 				responseUtils.handleCreateResponse(res, version, Resource.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -142,7 +142,7 @@ module.exports.updateObservation = ({ profile, logger, app }) => {
 				responseUtils.handleUpdateResponse(res, version, Resource.__resourceType, results)
 			)
 			.catch((err) => {
-				logger.error('Internal Error: ', err);
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
