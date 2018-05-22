@@ -98,13 +98,33 @@ module.exports.updateAllergyIntolerance = ({ profile, logger, app }) => {
 		let allergy_intolerance = new AllergyIntolerance(resource_body);
 		let args = { id: resource_id, resource: allergy_intolerance };
 		// Pass any new information to the underlying service
-		return service.updateAllergyIntolerance(args, logger, context)
+		return service.updateAllergyIntolerance(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, AllergyIntolerance.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for deleting an allergy_intolerance.
+*/
+module.exports.deleteAllergyIntolerance = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteAllergyIntolerance(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(new Error(err));
+				// Pass the error back
+				errors.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

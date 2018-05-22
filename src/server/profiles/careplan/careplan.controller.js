@@ -109,3 +109,23 @@ module.exports.updateCarePlan = ({ profile, logger, app }) => {
 			});
 	};
 };
+
+/**
+* @description Controller for deleting an care plan resource.
+*/
+module.exports.deleteCarePlan = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteCarePlan(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(new Error(err));
+				// Pass the error back
+				errors.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};

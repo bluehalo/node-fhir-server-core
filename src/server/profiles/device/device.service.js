@@ -28,3 +28,9 @@ module.exports.updateDevice = (args, logger, context) => new Promise((resolve, r
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deleteDevice = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteDevice\'';
+	logger.info(message);
+	reject(new Error(message));
+});

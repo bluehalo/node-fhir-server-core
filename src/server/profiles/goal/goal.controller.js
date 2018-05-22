@@ -109,3 +109,23 @@ module.exports.updateGoal = ({ profile, logger, app }) => {
 			});
 	};
 };
+
+/**
+* @description Controller for deleting a goal resource.
+*/
+module.exports.deleteGoal = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteGoal(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(new Error(err));
+				// Pass the error back
+				errors.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};

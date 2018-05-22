@@ -28,3 +28,9 @@ module.exports.updateObservation = (args, logger, context) => new Promise((resol
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deleteObservation = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteObservation\'';
+	logger.info(message);
+	reject(new Error(message));
+});

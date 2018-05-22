@@ -28,3 +28,9 @@ module.exports.updateProcedure = (args, logger, context) => new Promise((resolve
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deleteProcedure = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteProcedure\'';
+	logger.info(message);
+	reject(new Error(message));
+});

@@ -22,6 +22,7 @@ module.exports = {
 			profile: {
 				reference: 'http://hl7.org/fhir/Profile/Observation'
 			},
+			conditionalDelete: 'not-supported',
 			interaction: [{
 				code: 'read'
 			}, {
@@ -30,6 +31,8 @@ module.exports = {
 				code: 'update'
 			}, {
 				code: 'create'
+			}, {
+				code: 'delete'
 			}],
 			searchParam: searchParams
 		};
