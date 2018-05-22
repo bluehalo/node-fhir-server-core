@@ -72,7 +72,7 @@ module.exports.validate = (allowedScopes, logger, config) => {
 
 					const token = introspectionResponse.body;
 					if (token.active) {
-						const { scope, context, aud = '' } = token;
+						const { scope, context, aud, sub, user_id } = token;
 
 						// make sure the token is intended for our server
 						if (aud && aud === config.auth.resourceServer) {
@@ -93,6 +93,11 @@ module.exports.validate = (allowedScopes, logger, config) => {
 								if (context && context.encounter) {
 									req.encounter = context.encounter;
 								}
+
+								// attach user information to request
+								// this may change based on Auth impl
+								req.user = { user_id, sub };
+
 								// validation complete
 								return next();
 							}
