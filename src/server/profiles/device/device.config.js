@@ -12,7 +12,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/device',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -42,7 +41,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/device/_search',
-		corsOptions: {methods: ['POST']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -72,7 +70,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/device/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
@@ -83,7 +80,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/device',
-		corsOptions: { methods: ['POST'] },
 		args: [
 			route_args.VERSION,
 			write_args.RESOURCE_ID,
@@ -95,7 +91,6 @@ let routes = [
 	{
 		type: 'put',
 		path: '/:version/device/:id',
-		corsOptions: { methods: ['PUT'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,
@@ -107,7 +102,6 @@ let routes = [
 	{
 		type: 'delete',
 		path: '/:version/device/:id',
-		corsOptions: { methods: ['DELETE'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getGoal = ({ profile, logger, config, app }) => {
+module.exports.getGoal = function getGoal ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getGoal = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getGoalById = ({ profile, logger, app }) => {
+module.exports.getGoalById = function getGoalById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getGoalById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a goal
 */
-module.exports.createGoal = ({ profile, logger, app }) => {
+module.exports.createGoal = function createGoal ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createGoal = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a goal. If the goal does not exist, it should be updated
 */
-module.exports.updateGoal = ({ profile, logger, app }) => {
+module.exports.updateGoal = function updateGoal ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateGoal = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a goal resource.
 */
-module.exports.deleteGoal = ({ profile, logger, app }) => {
+module.exports.deleteGoal = function deleteGoal ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

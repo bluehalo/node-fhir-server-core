@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/error.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getLocation = ({ profile, logger, config, app }) => {
+module.exports.getLocation = function getLocation ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getLocation = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getLocationById = ({ profile, logger, app }) => {
+module.exports.getLocationById = function getLocationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getLocationById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a location
 */
-module.exports.createLocation = ({ profile, logger, app }) => {
+module.exports.createLocation = function createLocation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createLocation = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a location. If the location does not exist, it should be updated
 */
-module.exports.updateLocation = ({ profile, logger, app }) => {
+module.exports.updateLocation = function updateLocation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateLocation = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a location resource.
 */
-module.exports.deleteLocation = ({ profile, logger, app }) => {
+module.exports.deleteLocation = function deleteLocation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

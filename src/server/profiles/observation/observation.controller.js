@@ -21,7 +21,7 @@ let getResourceConstructor = (version, resourceType) => {
 	}
 };
 
-module.exports.getObservation = ({ profile, logger, config, app }) => {
+module.exports.getObservation = function getObservation ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.getObservation = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getObservationById = ({ profile, logger, app }) => {
+module.exports.getObservationById = function getObservationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -87,7 +87,7 @@ module.exports.getObservationById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a observation
 */
-module.exports.createObservation = ({ profile, logger, app }) => {
+module.exports.createObservation = function createObservation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -119,7 +119,7 @@ module.exports.createObservation = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a observation. If the observation does not exist, it should be updated
 */
-module.exports.updateObservation = ({ profile, logger, app }) => {
+module.exports.updateObservation = function updateObservation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -151,7 +151,7 @@ module.exports.updateObservation = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an observation resource.
 */
-module.exports.deleteObservation = ({ profile, logger, app }) => {
+module.exports.deleteObservation = function deleteObservation ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

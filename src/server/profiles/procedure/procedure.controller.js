@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getProcedure = ({ profile, logger, config, app }) => {
+module.exports.getProcedure = function getProcedure ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getProcedure = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getProcedureById = ({ profile, logger, app }) => {
+module.exports.getProcedureById = function getProcedureById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getProcedureById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a procedure
 */
-module.exports.createProcedure = ({ profile, logger, app }) => {
+module.exports.createProcedure = function createProcedure ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createProcedure = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a procedure. If the procedure does not exist, it should be updated
 */
-module.exports.updateProcedure = ({ profile, logger, app }) => {
+module.exports.updateProcedure = function updateProcedure ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateProcedure = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a procedure resource.
 */
-module.exports.deleteProcedure = ({ profile, logger, app }) => {
+module.exports.deleteProcedure = function deleteProcedure ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

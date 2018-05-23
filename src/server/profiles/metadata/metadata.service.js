@@ -20,6 +20,8 @@ let mapProfiles = (profiles = {}) => {
 			makeResource: resource,
 			versions: profiles[profile_name]
 				&& profiles[profile_name].versions,
+			service: profiles[profile_name]
+				&& profiles[profile_name].serviceModule,
 			getCount: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
 				&& profiles[profile_name].serviceModule.getCount
@@ -48,6 +50,46 @@ let getStatementGenerators = (version) => {
 		case VERSIONS.STU3: return require('./capability.stu3');
 		default: return {};
 	}
+};
+
+/**
+* Generate a list of interactions a particular profile can support
+* keep a local copy of interactions so this does not need to happen each time
+*/
+let resourceInteractions = {};
+let generateInteractions = (service, resourceType) => {
+	// return from cache if it exists
+	if (resourceInteractions[resourceType]) {
+		return resourceInteractions[resourceType];
+	}
+
+	let interactions = [];
+
+	// Test for the existence of a service method
+	if (service[`get${resourceType}`]) {
+		interactions.push({ code: 'search' });
+	}
+
+	if (service[`get${resourceType}ById`]) {
+		interactions.push({ code: 'read' });
+	}
+
+	if (service[`create${resourceType}`]) {
+		interactions.push({ code: 'create' });
+	}
+
+	if (service[`update${resourceType}`]) {
+		interactions.push({ code: 'update' });
+	}
+
+	if (service[`delete${resourceType}`]) {
+		interactions.push({ code: 'delete' });
+	}
+
+	// Save these interactions so we don't need to do this again
+	resourceInteractions[resourceType] = interactions;
+
+	return interactions;
 };
 
 /**
@@ -94,8 +136,12 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		}
 
 		// Make the resource and give it the version so it can only include valid search params
-		server_statement.resource = active_profiles
-			.map((profile, i) => profile.makeResource(context.version, counts[i]));
+		server_statement.resource = active_profiles.map((profile, i) => {
+			let resource = profile.makeResource(context.version, counts[i]);
+			// Determine the interactions we need to list for this profile
+			resource.interaction = generateInteractions(profile.service, resource.type);
+			return resource;
+		});
 
 		// Add the server statement to the main statement
 		return resolve(makeStatement(server_statement));

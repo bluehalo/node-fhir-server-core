@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCondition = ({ profile, logger, config, app }) => {
+module.exports.getCondition = function getCondition ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getCondition = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getConditionById = ({ profile, logger, app }) => {
+module.exports.getConditionById = function getConditionById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getConditionById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a condition
 */
-module.exports.createCondition = ({ profile, logger, app }) => {
+module.exports.createCondition = function createCondition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createCondition = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a condition. If the condition does not exist, it should be updated
 */
-module.exports.updateCondition = ({ profile, logger, app }) => {
+module.exports.updateCondition = function updateCondition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateCondition = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an condition resource.
 */
-module.exports.deleteCondition = ({ profile, logger, app }) => {
+module.exports.deleteCondition = function deleteCondition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

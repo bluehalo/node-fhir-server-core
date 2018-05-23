@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getPractitioner = ({ profile, logger, config, app }) => {
+module.exports.getPractitioner = function getPractitioner ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getPractitioner = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getPractitionerById = ({ profile, logger, app }) => {
+module.exports.getPractitionerById = function getPractitionerById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getPractitionerById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a practitioner
 */
-module.exports.createPractitioner = ({ profile, logger, app }) => {
+module.exports.createPractitioner = function createPractitioner ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createPractitioner = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a practitioner. If the practitioner does not exist, it should be updated
 */
-module.exports.updatePractitioner = ({ profile, logger, app }) => {
+module.exports.updatePractitioner = function updatePractitioner ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updatePractitioner = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a practitioner resource.
 */
-module.exports.deletePractitioner = ({ profile, logger, app }) => {
+module.exports.deletePractitioner = function deletePractitioner ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

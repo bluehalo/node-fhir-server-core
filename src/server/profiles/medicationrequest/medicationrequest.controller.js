@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationRequest = ({ profile, logger, config, app }) => {
+module.exports.getMedicationRequest = function getMedicationRequest ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getMedicationRequest = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getMedicationRequestById = ({ profile, logger, app }) => {
+module.exports.getMedicationRequestById = function getMedicationRequestById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getMedicationRequestById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a medication_request
 */
-module.exports.createMedicationRequest = ({ profile, logger, app }) => {
+module.exports.createMedicationRequest = function createMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createMedicationRequest = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a medication_request. If the medication_request does not exist, it should be updated
 */
-module.exports.updateMedicationRequest = ({ profile, logger, app }) => {
+module.exports.updateMedicationRequest = function updateMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateMedicationRequest = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a medication request resource.
 */
-module.exports.deleteMedicationRequest = ({ profile, logger, app }) => {
+module.exports.deleteMedicationRequest = function deleteMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

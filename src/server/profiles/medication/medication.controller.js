@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedication = ({ profile, logger, config, app }) => {
+module.exports.getMedication = function getMedication ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getMedication = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getMedicationById = ({ profile, logger, app }) => {
+module.exports.getMedicationById = function getMedicationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getMedicationById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a medication
 */
-module.exports.createMedication = ({ profile, logger, app }) => {
+module.exports.createMedication = function createMedication ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createMedication = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a medication. If the medication does not exist, it should be updated
 */
-module.exports.updateMedication = ({ profile, logger, app }) => {
+module.exports.updateMedication = function updateMedication ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateMedication = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a medication resource.
 */
-module.exports.deleteMedication = ({ profile, logger, app }) => {
+module.exports.deleteMedication = function deleteMedication ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
