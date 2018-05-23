@@ -131,8 +131,8 @@ let handleDeleteResponse = (res) => {
 let handleDeleteRejection = (res, next, version, err) => {
 	// Make sure the error code is valid
 	if (err.code !== 405 || err.code !== 409) {
-		let error = new Error('Invalid return code, error code must be one of 405, or 409. Did you forget to return an object with a valid code?');
-		throw error;
+		let error = new Error('Invalid response code. Expected service to return an error code of either 405 or 409.');
+		return next(error);
 	}
 	// pass the error through
 	let error = err.code === 405

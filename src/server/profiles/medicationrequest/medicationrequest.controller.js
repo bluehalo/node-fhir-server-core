@@ -123,9 +123,9 @@ module.exports.deleteMedicationRequest = ({ profile, logger, app }) => {
 			.then(() => responseUtils.handleDeleteResponse(req))
 			.catch((err = {}) => {
 				// Log the error
-				logger.error(new Error(err));
+				logger.error(err);
 				// Pass the error back
-				errors.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };
