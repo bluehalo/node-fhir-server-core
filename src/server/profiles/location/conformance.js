@@ -23,17 +23,6 @@ module.exports = {
 				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-location.html'
 			},
 			conditionalDelete: 'not-supported',
-			interaction: [{
-				code: 'read'
-			}, {
-				code: 'search'
-			}, {
-				code: 'update'
-			}, {
-				code: 'create'
-			}, {
-				code: 'delete'
-			}],
 			searchParam: searchParams
 		};
 	}

@@ -23,17 +23,6 @@ module.exports = {
 				reference: 'http://hl7.org/fhir/Profile/Procedure'
 			},
 			conditionalDelete: 'not-supported',
-			interaction: [{
-				code: 'read'
-			}, {
-				code: 'search'
-			}, {
-				code: 'update'
-			}, {
-				code: 'create'
-			}, {
-				code: 'delete'
-			}],
 			searchParam: searchParams
 		};
 	}
