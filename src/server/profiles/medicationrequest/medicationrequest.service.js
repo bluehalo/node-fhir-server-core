@@ -28,3 +28,9 @@ module.exports.updateMedicationRequest = (args, logger, context) => new Promise(
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deleteMedicationRequest = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteMedicationRequest\'';
+	logger.info(message);
+	reject(new Error(message));
+});

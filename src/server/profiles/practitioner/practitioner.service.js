@@ -28,3 +28,9 @@ module.exports.updatePractitioner = (args, logger, context) => new Promise((reso
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deletePractitioner = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deletePractitioner\'';
+	logger.info(message);
+	reject(new Error(message));
+});

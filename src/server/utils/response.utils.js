@@ -113,6 +113,36 @@ let handleUpdateResponse = (res, version, type, results) => {
 };
 
 /**
+* @description When resources are passed to the delete[resource] controller functions
+* they all need to respond in a similar manner
+* @function handleUpdateResponse
+* @param {Express.response} res - Express response object
+*/
+let handleDeleteResponse = (res) => {
+	res.status(204).end();
+};
+
+/**
+* @description When resources are passed to the delete[resource] controller functions
+* they all need to respond in a similar manner with the correct error types
+* @function handleUpdateResponse
+* @param {Express.response} res - Express response object
+*/
+let handleDeleteRejection = (res, next, version, err) => {
+	// Make sure the error code is valid
+	if (err.code !== 405 || err.code !== 409) {
+		let error = new Error('Invalid response code. Expected service to return an error code of either 405 or 409.');
+		return next(error);
+	}
+	// pass the error through
+	let error = err.code === 405
+		? errors.methodNotAllowed(err.message, version)
+		: errors.deleteConflict(err.message, version);
+
+	next(error);
+};
+
+/**
  * @name exports
  * @static
  * @summary Various express response utils
@@ -121,5 +151,7 @@ module.exports = {
 	handleSingleReadResponse,
 	handleBundleReadResponse,
 	handleCreateResponse,
-	handleUpdateResponse
+	handleUpdateResponse,
+	handleDeleteResponse,
+	handleDeleteRejection
 };

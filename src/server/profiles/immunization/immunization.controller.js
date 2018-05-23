@@ -109,3 +109,23 @@ module.exports.updateImmunization = ({ profile, logger, app }) => {
 			});
 	};
 };
+
+/**
+* @description Controller for deleting an immunization resource.
+*/
+module.exports.deleteImmunization = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteImmunization(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};

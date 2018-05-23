@@ -28,3 +28,9 @@ module.exports.updateOrganization = (args, logger, context) => new Promise((reso
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.deleteOrganization = (args, logger, context) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteOrganization\'';
+	logger.info(message);
+	reject(new Error(message));
+});

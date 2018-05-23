@@ -158,8 +158,8 @@ let setupErrorHandler = function (app, logger) {
 		}
 		// If there is still an error, throw a 500 and pass the message through
 		else if (err) {
-			let error = errors.internal(req.params.version);
-			logger.error(error.statusCode, error.message);
+			let error = errors.internal(err.message, req.params.version);
+			logger.error(error.statusCode, err.message);
 			res.status(error.statusCode).json(error);
 		}
 		// No error

@@ -112,6 +112,18 @@ let routes = [
 		],
 		scopes: write_only_scopes,
 		controller: controller.updatePractitioner
+	},
+	{
+		type: 'delete',
+		path: '/:version/practitioner/:id',
+		corsOptions: { methods: ['DELETE'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deletePractitioner
 	}
 ];
 

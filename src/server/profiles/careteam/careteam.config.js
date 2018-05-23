@@ -96,6 +96,18 @@ let routes = [
 		],
 		scopes: write_only_scopes,
 		controller: controller.updateCareTeam
+	},
+	{
+		type: 'delete',
+		path: '/:version/careteam/:id',
+		corsOptions: { methods: ['DELETE'] },
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteCareTeam
 	}
 ];
 

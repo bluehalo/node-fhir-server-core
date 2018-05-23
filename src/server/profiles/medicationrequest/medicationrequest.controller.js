@@ -109,3 +109,23 @@ module.exports.updateMedicationRequest = ({ profile, logger, app }) => {
 			});
 	};
 };
+
+/**
+* @description Controller for deleting a medication request resource.
+*/
+module.exports.deleteMedicationRequest = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteMedicationRequest(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};

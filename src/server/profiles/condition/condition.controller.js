@@ -109,3 +109,23 @@ module.exports.updateCondition = ({ profile, logger, app }) => {
 			});
 	};
 };
+
+/**
+* @description Controller for deleting an condition resource.
+*/
+module.exports.deleteCondition = ({ profile, logger, app }) => {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteCondition(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(req))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};
