@@ -11,7 +11,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/medicationrequest',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -43,7 +42,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/medicationrequest/_search',
-		corsOptions: {methods: ['POST']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -75,7 +73,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/medicationrequest/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
@@ -86,7 +83,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/medicationrequest',
-		corsOptions: { methods: ['POST'] },
 		args: [
 			route_args.VERSION,
 			write_args.RESOURCE_ID,
@@ -98,7 +94,6 @@ let routes = [
 	{
 		type: 'put',
 		path: '/:version/medicationrequest/:id',
-		corsOptions: { methods: ['PUT'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,
@@ -110,7 +105,6 @@ let routes = [
 	{
 		type: 'delete',
 		path: '/:version/medicationrequest/:id',
-		corsOptions: { methods: ['DELETE'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,

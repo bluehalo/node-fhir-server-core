@@ -21,7 +21,7 @@ let patient_filter = function (user_id) {
 	return (patient) => !user_id || user_id === patient.id;
 };
 
-module.exports.getPatient = ({ profile, logger, config, app }) => {
+module.exports.getPatient = function getPatient ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -45,7 +45,7 @@ module.exports.getPatient = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getPatientById = ({ profile, logger, app }) => {
+module.exports.getPatientById = function getPatientById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -93,7 +93,7 @@ module.exports.getPatientById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a patient
 */
-module.exports.createPatient = ({ profile, logger, app }) => {
+module.exports.createPatient = function createPatient ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -125,7 +125,7 @@ module.exports.createPatient = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
 */
-module.exports.updatePatient = ({ profile, logger, app }) => {
+module.exports.updatePatient = function updatePatient ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -157,7 +157,7 @@ module.exports.updatePatient = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a patient resource.
 */
-module.exports.deletePatient = ({ profile, logger, app }) => {
+module.exports.deletePatient = function deletePatient ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCareTeam = ({ profile, logger, config, app }) => {
+module.exports.getCareTeam = function getCareTeam ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getCareTeam = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getCareTeamById = ({ profile, logger, app }) => {
+module.exports.getCareTeamById = function getCareTeamById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getCareTeamById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a care_team
 */
-module.exports.createCareTeam = ({ profile, logger, app }) => {
+module.exports.createCareTeam = function createCareTeam ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createCareTeam = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a care_team. If the care_team does not exist, it should be updated
 */
-module.exports.updateCareTeam = ({ profile, logger, app }) => {
+module.exports.updateCareTeam = function updateCareTeam ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateCareTeam = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an care team resource.
 */
-module.exports.deleteCareTeam = ({ profile, logger, app }) => {
+module.exports.deleteCareTeam = function deleteCareTeam ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

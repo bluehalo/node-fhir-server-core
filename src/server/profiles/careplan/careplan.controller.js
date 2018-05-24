@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCarePlan = ({ profile, logger, config, app }) => {
+module.exports.getCarePlan = function getCarePlan ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getCarePlan = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getCarePlanById = ({ profile, logger, app }) => {
+module.exports.getCarePlanById = function getCarePlanById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getCarePlanById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a care_plan
 */
-module.exports.createCarePlan = ({ profile, logger, app }) => {
+module.exports.createCarePlan = function createCarePlan ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createCarePlan = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a care_plan. If the care_plan does not exist, it should be updated
 */
-module.exports.updateCarePlan = ({ profile, logger, app }) => {
+module.exports.updateCarePlan = function updateCarePlan ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateCarePlan = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an care plan resource.
 */
-module.exports.deleteCarePlan = ({ profile, logger, app }) => {
+module.exports.deleteCarePlan = function deleteCarePlan ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getImmunization = ({ profile, logger, config, app }) => {
+module.exports.getImmunization = function getImmunization ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getImmunization = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getImmunizationById = ({ profile, logger, app }) => {
+module.exports.getImmunizationById = function getImmunizationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getImmunizationById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a immunization
 */
-module.exports.createImmunization = ({ profile, logger, app }) => {
+module.exports.createImmunization = function createImmunization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createImmunization = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a immunization. If the immunization does not exist, it should be updated
 */
-module.exports.updateImmunization = ({ profile, logger, app }) => {
+module.exports.updateImmunization = function updateImmunization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateImmunization = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an immunization resource.
 */
-module.exports.deleteImmunization = ({ profile, logger, app }) => {
+module.exports.deleteImmunization = function deleteImmunization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

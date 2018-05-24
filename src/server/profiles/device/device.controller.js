@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDevice = ({ profile, logger, config, app }) => {
+module.exports.getDevice = function getDevice ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getDevice = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getDeviceById = ({ profile, logger, app }) => {
+module.exports.getDeviceById = function getDeviceById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getDeviceById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a device
 */
-module.exports.createDevice = ({ profile, logger, app }) => {
+module.exports.createDevice = function createDevice ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createDevice = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a device. If the device does not exist, it should be updated
 */
-module.exports.updateDevice = ({ profile, logger, app }) => {
+module.exports.updateDevice = function updateDevice ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateDevice = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting a device resource.
 */
-module.exports.deleteDevice = ({ profile, logger, app }) => {
+module.exports.deleteDevice = function deleteDevice ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

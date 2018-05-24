@@ -1,3 +1,4 @@
+const generateInteractions = require('./metadata.interactions');
 const { VERSIONS } = require('../../../constants');
 const errors = require('../../utils/error.utils');
 const path = require('path');
@@ -20,6 +21,8 @@ let mapProfiles = (profiles = {}) => {
 			makeResource: resource,
 			versions: profiles[profile_name]
 				&& profiles[profile_name].versions,
+			service: profiles[profile_name]
+				&& profiles[profile_name].serviceModule,
 			getCount: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
 				&& profiles[profile_name].serviceModule.getCount
@@ -94,8 +97,12 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		}
 
 		// Make the resource and give it the version so it can only include valid search params
-		server_statement.resource = active_profiles
-			.map((profile, i) => profile.makeResource(context.version, counts[i]));
+		server_statement.resource = active_profiles.map((profile, i) => {
+			let resource = profile.makeResource(context.version, counts[i]);
+			// Determine the interactions we need to list for this profile
+			resource.interaction = generateInteractions(profile.service, resource.type);
+			return resource;
+		});
 
 		// Add the server statement to the main statement
 		return resolve(makeStatement(server_statement));

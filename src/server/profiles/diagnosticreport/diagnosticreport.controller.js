@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDiagnosticReport = ({ profile, logger, config, app }) => {
+module.exports.getDiagnosticReport = function getDiagnosticReport ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getDiagnosticReport = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getDiagnosticReportById = ({ profile, logger, app }) => {
+module.exports.getDiagnosticReportById = function getDiagnosticReportById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getDiagnosticReportById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a diagnostic_report
 */
-module.exports.createDiagnosticReport = ({ profile, logger, app }) => {
+module.exports.createDiagnosticReport = function createDiagnosticReport ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createDiagnosticReport = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a diagnostic_report. If the diagnostic_report does not exist, it should be updated
 */
-module.exports.updateDiagnosticReport = ({ profile, logger, app }) => {
+module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateDiagnosticReport = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an DiagnosticReport resource.
 */
-module.exports.deleteDiagnosticReport = ({ profile, logger, app }) => {
+module.exports.deleteDiagnosticReport = function deleteDiagnosticReport ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

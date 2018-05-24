@@ -11,7 +11,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/organization',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -42,7 +41,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/organization/_search',
-		corsOptions: {methods: ['POST']},
 		args: [
 			route_args.VERSION,
 			common_args._FORMAT,
@@ -73,7 +71,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/organization/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
@@ -84,7 +81,6 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/organization',
-		corsOptions: { methods: ['POST'] },
 		args: [
 			route_args.VERSION,
 			write_args.RESOURCE_ID,
@@ -96,7 +92,6 @@ let routes = [
 	{
 		type: 'put',
 		path: '/:version/organization/:id',
-		corsOptions: { methods: ['PUT'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,
@@ -108,7 +103,6 @@ let routes = [
 	{
 		type: 'delete',
 		path: '/:version/organization/:id',
-		corsOptions: { methods: ['DELETE'] },
 		args: [
 			route_args.ID,
 			route_args.VERSION,

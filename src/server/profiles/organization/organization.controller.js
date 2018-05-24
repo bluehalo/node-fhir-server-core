@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getOrganization = ({ profile, logger, config, app }) => {
+module.exports.getOrganization = function getOrganization ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getOrganization = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getOrganizationById = ({ profile, logger, app }) => {
+module.exports.getOrganizationById = function getOrganizationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getOrganizationById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a organization
 */
-module.exports.createOrganization = ({ profile, logger, app }) => {
+module.exports.createOrganization = function createOrganization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createOrganization = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a organization. If the organization does not exist, it should be updated
 */
-module.exports.updateOrganization = ({ profile, logger, app }) => {
+module.exports.updateOrganization = function updateOrganization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateOrganization = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an organization resource.
 */
-module.exports.deleteOrganization = ({ profile, logger, app }) => {
+module.exports.deleteOrganization = function deleteOrganization ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

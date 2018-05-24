@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getAllergyIntolerance = ({ profile, logger, config, app }) => {
+module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -26,7 +26,7 @@ module.exports.getAllergyIntolerance = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getAllergyIntoleranceById = ({ profile, logger, app }) => {
+module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -48,7 +48,7 @@ module.exports.getAllergyIntoleranceById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a allergy_intolerance
 */
-module.exports.createAllergyIntolerance = ({ profile, logger, app }) => {
+module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -80,7 +80,7 @@ module.exports.createAllergyIntolerance = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a allergy_intolerance. If the allergy_intolerance does not exist, it should be updated
 */
-module.exports.updateAllergyIntolerance = ({ profile, logger, app }) => {
+module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -112,7 +112,7 @@ module.exports.updateAllergyIntolerance = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an allergy_intolerance.
 */
-module.exports.deleteAllergyIntolerance = ({ profile, logger, app }) => {
+module.exports.deleteAllergyIntolerance = function deleteAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

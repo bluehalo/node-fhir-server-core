@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationStatement = ({ profile, logger, config, app }) => {
+module.exports.getMedicationStatement = function getMedicationStatement ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -27,7 +27,7 @@ module.exports.getMedicationStatement = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getMedicationStatementById = ({ profile, logger, app }) => {
+module.exports.getMedicationStatementById = function getMedicationStatementById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports.getMedicationStatementById = ({ profile, logger, app }) => {
 /**
 * @description Controller for creating a medication_statement
 */
-module.exports.createMedicationStatement = ({ profile, logger, app }) => {
+module.exports.createMedicationStatement = function createMedicationStatement ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -81,7 +81,7 @@ module.exports.createMedicationStatement = ({ profile, logger, app }) => {
 /**
 * @description Controller for updating/creating a medication_statement. If the medication_statement does not exist, it should be updated
 */
-module.exports.updateMedicationStatement = ({ profile, logger, app }) => {
+module.exports.updateMedicationStatement = function updateMedicationStatement ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -113,7 +113,7 @@ module.exports.updateMedicationStatement = ({ profile, logger, app }) => {
 /**
 * @description Controller for deleting an medication statement resource.
 */
-module.exports.deleteMedicationStatement = ({ profile, logger, app }) => {
+module.exports.deleteMedicationStatement = function deleteMedicationStatement ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
