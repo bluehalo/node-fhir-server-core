@@ -53,12 +53,12 @@ describe('Route Config Tests', () => {
 
 	test('should have a function name for all route.controllers except for metadata', () => {
 		routeConfigs.forEach((config) => {
-      // Routes must be an array
-      let { routes } = config;
+			// Routes must be an array
+			let { routes } = config;
 			// We use these to make sure each provided service module has the necessary service
 			// to enable a route, the service must have a method that matches the controller's name
 			// if the controller does not have a name, we have no way to make that determination
-      routes.forEach(route => {
+			routes.forEach(route => {
 				// Ignore metadata
 				if (route.isMetadata) {
 					return;

@@ -1,3 +1,4 @@
+const generateInteractions = require('./metadata.interactions');
 const { VERSIONS } = require('../../../constants');
 const errors = require('../../utils/error.utils');
 const path = require('path');
@@ -50,46 +51,6 @@ let getStatementGenerators = (version) => {
 		case VERSIONS.STU3: return require('./capability.stu3');
 		default: return {};
 	}
-};
-
-/**
-* Generate a list of interactions a particular profile can support
-* keep a local copy of interactions so this does not need to happen each time
-*/
-let resourceInteractions = {};
-let generateInteractions = (service, resourceType) => {
-	// return from cache if it exists
-	if (resourceInteractions[resourceType]) {
-		return resourceInteractions[resourceType];
-	}
-
-	let interactions = [];
-
-	// Test for the existence of a service method
-	if (service[`get${resourceType}`]) {
-		interactions.push({ code: 'search' });
-	}
-
-	if (service[`get${resourceType}ById`]) {
-		interactions.push({ code: 'read' });
-	}
-
-	if (service[`create${resourceType}`]) {
-		interactions.push({ code: 'create' });
-	}
-
-	if (service[`update${resourceType}`]) {
-		interactions.push({ code: 'update' });
-	}
-
-	if (service[`delete${resourceType}`]) {
-		interactions.push({ code: 'delete' });
-	}
-
-	// Save these interactions so we don't need to do this again
-	resourceInteractions[resourceType] = interactions;
-
-	return interactions;
 };
 
 /**
