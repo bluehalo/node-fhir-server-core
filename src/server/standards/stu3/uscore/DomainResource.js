@@ -5,7 +5,7 @@ const Extension = require('./Extension');
 class DomainResource extends Resource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DomainResource';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class DomainResource extends Resource {
 	}
 
 	set text ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._text = new Narrative(new_value);
 	}
 
@@ -30,6 +34,10 @@ class DomainResource extends Resource {
 
 	set contained ( new_value ) {
 		const ResourceList = require('./ResourceList');
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._contained = Array.isArray(new_value) ? new_value.map(val => new ResourceList(val)) : [new ResourceList(new_value)];
 	}
 
@@ -39,6 +47,10 @@ class DomainResource extends Resource {
 	}
 
 	set extension ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._extension = Array.isArray(new_value) ? new_value.map(val => new Extension(val)) : [new Extension(new_value)];
 	}
 
@@ -48,15 +60,19 @@ class DomainResource extends Resource {
 	}
 
 	set modifierExtension ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._modifierExtension = Array.isArray(new_value) ? new_value.map(val => new Extension(val)) : [new Extension(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			text: this._text,
-			contained: this._contained,
-			extension: this._extension,
-			modifierExtension: this._modifierExtension
+			text: this.text && this.text.toJSON(),
+			contained: this.contained && this.contained.toJSON(),
+			extension: this.extension && this.extension.toJSON(),
+			modifierExtension: this.modifierExtension && this.modifierExtension.toJSON()
 		});
 	}
 

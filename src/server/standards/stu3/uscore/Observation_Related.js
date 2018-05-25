@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Observation_Related extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Observation_Related';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Observation_Related extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['has-member', 'derived-from', 'sequel-to', 'replaces', 'qualified-by', 'interfered-by'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,13 +37,17 @@ class Observation_Related extends BackboneElement {
 	}
 
 	set target ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._target = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			target: this._target
+			type: this.type,
+			target: this.target && this.target.toJSON()
 		});
 	}
 

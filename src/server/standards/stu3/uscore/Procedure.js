@@ -10,7 +10,7 @@ const Procedure_FocalDevice = require('./Procedure_FocalDevice');
 class Procedure extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Procedure';
 		Object.assign(this, opts);
 	}
@@ -25,6 +25,10 @@ class Procedure extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Procedure'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -39,6 +43,10 @@ class Procedure extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -48,6 +56,10 @@ class Procedure extends DomainResource {
 	}
 
 	set definition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -57,6 +69,10 @@ class Procedure extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -66,6 +82,10 @@ class Procedure extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -75,6 +95,10 @@ class Procedure extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -89,6 +113,10 @@ class Procedure extends DomainResource {
 	}
 
 	set notDone ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._notDone = new_value;
 	}
 
@@ -98,6 +126,10 @@ class Procedure extends DomainResource {
 	}
 
 	set notDoneReason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._notDoneReason = new CodeableConcept(new_value);
 	}
 
@@ -107,6 +139,10 @@ class Procedure extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -116,6 +152,10 @@ class Procedure extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -125,6 +165,10 @@ class Procedure extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -134,6 +178,10 @@ class Procedure extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -143,6 +191,10 @@ class Procedure extends DomainResource {
 	}
 
 	set performedDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -157,6 +209,10 @@ class Procedure extends DomainResource {
 	}
 
 	set performedPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._performedPeriod = new Period(new_value);
 	}
 
@@ -166,6 +222,10 @@ class Procedure extends DomainResource {
 	}
 
 	set performer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new Procedure_Performer(val)) : [new Procedure_Performer(new_value)];
 	}
 
@@ -175,6 +235,10 @@ class Procedure extends DomainResource {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new Reference(new_value);
 	}
 
@@ -184,6 +248,10 @@ class Procedure extends DomainResource {
 	}
 
 	set reasonCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -193,6 +261,10 @@ class Procedure extends DomainResource {
 	}
 
 	set reasonReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -202,6 +274,10 @@ class Procedure extends DomainResource {
 	}
 
 	set bodySite ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._bodySite = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -211,6 +287,10 @@ class Procedure extends DomainResource {
 	}
 
 	set outcome ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._outcome = new CodeableConcept(new_value);
 	}
 
@@ -220,6 +300,10 @@ class Procedure extends DomainResource {
 	}
 
 	set report ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._report = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -229,6 +313,10 @@ class Procedure extends DomainResource {
 	}
 
 	set complication ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._complication = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -238,6 +326,10 @@ class Procedure extends DomainResource {
 	}
 
 	set complicationDetail ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._complicationDetail = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -247,6 +339,10 @@ class Procedure extends DomainResource {
 	}
 
 	set followUp ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._followUp = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -256,6 +352,10 @@ class Procedure extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -265,6 +365,10 @@ class Procedure extends DomainResource {
 	}
 
 	set focalDevice ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._focalDevice = Array.isArray(new_value) ? new_value.map(val => new Procedure_FocalDevice(val)) : [new Procedure_FocalDevice(new_value)];
 	}
 
@@ -274,6 +378,10 @@ class Procedure extends DomainResource {
 	}
 
 	set usedReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._usedReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -283,39 +391,43 @@ class Procedure extends DomainResource {
 	}
 
 	set usedCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._usedCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			definition: this._definition,
-			basedOn: this._basedOn,
-			partOf: this._partOf,
-			status: this._status,
-			notDone: this._notDone,
-			notDoneReason: this._notDoneReason,
-			category: this._category,
-			code: this._code,
-			subject: this._subject,
-			context: this._context,
-			performedDateTime: this._performedDateTime,
-			performedPeriod: this._performedPeriod,
-			performer: this._performer,
-			location: this._location,
-			reasonCode: this._reasonCode,
-			reasonReference: this._reasonReference,
-			bodySite: this._bodySite,
-			outcome: this._outcome,
-			report: this._report,
-			complication: this._complication,
-			complicationDetail: this._complicationDetail,
-			followUp: this._followUp,
-			note: this._note,
-			focalDevice: this._focalDevice,
-			usedReference: this._usedReference,
-			usedCode: this._usedCode
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			definition: this.definition && this.definition.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			partOf: this.partOf && this.partOf.toJSON(),
+			status: this.status,
+			notDone: this.notDone,
+			notDoneReason: this.notDoneReason && this.notDoneReason.toJSON(),
+			category: this.category && this.category.toJSON(),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			performedDateTime: this.performedDateTime,
+			performedPeriod: this.performedPeriod && this.performedPeriod.toJSON(),
+			performer: this.performer && this.performer.toJSON(),
+			location: this.location && this.location.toJSON(),
+			reasonCode: this.reasonCode && this.reasonCode.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			outcome: this.outcome && this.outcome.toJSON(),
+			report: this.report && this.report.toJSON(),
+			complication: this.complication && this.complication.toJSON(),
+			complicationDetail: this.complicationDetail && this.complicationDetail.toJSON(),
+			followUp: this.followUp && this.followUp.toJSON(),
+			note: this.note && this.note.toJSON(),
+			focalDevice: this.focalDevice && this.focalDevice.toJSON(),
+			usedReference: this.usedReference && this.usedReference.toJSON(),
+			usedCode: this.usedCode && this.usedCode.toJSON()
 		});
 	}
 

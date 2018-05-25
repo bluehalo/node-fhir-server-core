@@ -9,7 +9,7 @@ const Signature = require('./Signature');
 class Provenance extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Provenance';
 		Object.assign(this, opts);
 	}
@@ -24,6 +24,10 @@ class Provenance extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Provenance'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -38,6 +42,10 @@ class Provenance extends DomainResource {
 	}
 
 	set target ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._target = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -47,6 +55,10 @@ class Provenance extends DomainResource {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
@@ -56,6 +68,10 @@ class Provenance extends DomainResource {
 	}
 
 	set recorded ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._recorded = new_value;
 	}
 
@@ -65,6 +81,10 @@ class Provenance extends DomainResource {
 	}
 
 	set policy ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -74,6 +94,10 @@ class Provenance extends DomainResource {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new Reference(new_value);
 	}
 
@@ -83,6 +107,10 @@ class Provenance extends DomainResource {
 	}
 
 	set reason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reason = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -92,6 +120,10 @@ class Provenance extends DomainResource {
 	}
 
 	set activity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._activity = new Coding(new_value);
 	}
 
@@ -101,6 +133,10 @@ class Provenance extends DomainResource {
 	}
 
 	set agent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new Provenance_Agent(val)) : [new Provenance_Agent(new_value)];
 	}
 
@@ -110,6 +146,10 @@ class Provenance extends DomainResource {
 	}
 
 	set entity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._entity = Array.isArray(new_value) ? new_value.map(val => new Provenance_Entity(val)) : [new Provenance_Entity(new_value)];
 	}
 
@@ -119,22 +159,26 @@ class Provenance extends DomainResource {
 	}
 
 	set signature ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._signature = Array.isArray(new_value) ? new_value.map(val => new Signature(val)) : [new Signature(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			target: this._target,
-			period: this._period,
-			recorded: this._recorded,
-			policy: this._policy,
-			location: this._location,
-			reason: this._reason,
-			activity: this._activity,
-			agent: this._agent,
-			entity: this._entity,
-			signature: this._signature
+			resourceType: this.resourceType,
+			target: this.target && this.target.toJSON(),
+			period: this.period && this.period.toJSON(),
+			recorded: this.recorded,
+			policy: this.policy,
+			location: this.location && this.location.toJSON(),
+			reason: this.reason && this.reason.toJSON(),
+			activity: this.activity && this.activity.toJSON(),
+			agent: this.agent && this.agent.toJSON(),
+			entity: this.entity && this.entity.toJSON(),
+			signature: this.signature && this.signature.toJSON()
 		});
 	}
 

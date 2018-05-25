@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Immunization_Explanation extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization_Explanation';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Immunization_Explanation extends BackboneElement {
 	}
 
 	set reason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reason = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -28,13 +32,17 @@ class Immunization_Explanation extends BackboneElement {
 	}
 
 	set reasonNotGiven ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonNotGiven = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			reason: this._reason,
-			reasonNotGiven: this._reasonNotGiven
+			reason: this.reason && this.reason.toJSON(),
+			reasonNotGiven: this.reasonNotGiven && this.reasonNotGiven.toJSON()
 		});
 	}
 

@@ -11,7 +11,7 @@ const Observation_ReferenceRange = require('./Observation_ReferenceRange');
 class Observation_Component extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Observation_Component';
 		Object.assign(this, opts);
 	}
@@ -26,6 +26,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -35,6 +39,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -44,6 +52,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -53,6 +65,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueString = new_value;
 	}
 
@@ -62,6 +78,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRange = new Range(new_value);
 	}
 
@@ -71,6 +91,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueRatio ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRatio = new Ratio(new_value);
 	}
 
@@ -80,6 +104,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueSampledData ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSampledData = new SampledData(new_value);
 	}
 
@@ -89,6 +117,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueAttachment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAttachment = new Attachment(new_value);
 	}
 
@@ -98,6 +130,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -112,6 +148,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valueDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -126,6 +166,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set valuePeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valuePeriod = new Period(new_value);
 	}
 
@@ -135,6 +179,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set dataAbsentReason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dataAbsentReason = new CodeableConcept(new_value);
 	}
 
@@ -144,6 +192,10 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set interpretation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._interpretation = new CodeableConcept(new_value);
 	}
 
@@ -153,25 +205,29 @@ class Observation_Component extends BackboneElement {
 	}
 
 	set referenceRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._referenceRange = Array.isArray(new_value) ? new_value.map(val => new Observation_ReferenceRange(val)) : [new Observation_ReferenceRange(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code,
-			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueString: this._valueString,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			dataAbsentReason: this._dataAbsentReason,
-			interpretation: this._interpretation,
-			referenceRange: this._referenceRange
+			code: this.code && this.code.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueString: this.valueString,
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
+			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			valueTime: this.valueTime,
+			valueDateTime: this.valueDateTime,
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
+			interpretation: this.interpretation && this.interpretation.toJSON(),
+			referenceRange: this.referenceRange && this.referenceRange.toJSON()
 		});
 	}
 

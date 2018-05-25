@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Patient_Link extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Patient_Link';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Patient_Link extends BackboneElement {
 	}
 
 	set other ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._other = new Reference(new_value);
 	}
 
@@ -28,6 +32,10 @@ class Patient_Link extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['replaced-by', 'replaces', 'refer', 'seealso'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -38,8 +46,8 @@ class Patient_Link extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			other: this._other,
-			type: this._type
+			other: this.other && this.other.toJSON(),
+			type: this.type
 		});
 	}
 

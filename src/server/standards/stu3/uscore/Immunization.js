@@ -12,7 +12,7 @@ const Immunization_VaccinationProtocol = require('./Immunization_VaccinationProt
 class Immunization extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization';
 		Object.assign(this, opts);
 	}
@@ -27,6 +27,10 @@ class Immunization extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Immunization'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -41,6 +45,10 @@ class Immunization extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -50,6 +58,10 @@ class Immunization extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -64,6 +76,10 @@ class Immunization extends DomainResource {
 	}
 
 	set notGiven ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._notGiven = new_value;
 	}
 
@@ -73,6 +89,10 @@ class Immunization extends DomainResource {
 	}
 
 	set vaccineCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._vaccineCode = new CodeableConcept(new_value);
 	}
 
@@ -82,6 +102,10 @@ class Immunization extends DomainResource {
 	}
 
 	set patient ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -91,6 +115,10 @@ class Immunization extends DomainResource {
 	}
 
 	set encounter ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._encounter = new Reference(new_value);
 	}
 
@@ -100,6 +128,10 @@ class Immunization extends DomainResource {
 	}
 
 	set date ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -114,6 +146,10 @@ class Immunization extends DomainResource {
 	}
 
 	set primarySource ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._primarySource = new_value;
 	}
 
@@ -123,6 +159,10 @@ class Immunization extends DomainResource {
 	}
 
 	set reportOrigin ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reportOrigin = new CodeableConcept(new_value);
 	}
 
@@ -132,6 +172,10 @@ class Immunization extends DomainResource {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new Reference(new_value);
 	}
 
@@ -141,6 +185,10 @@ class Immunization extends DomainResource {
 	}
 
 	set manufacturer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._manufacturer = new Reference(new_value);
 	}
 
@@ -150,6 +198,10 @@ class Immunization extends DomainResource {
 	}
 
 	set lotNumber ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._lotNumber = new_value;
 	}
 
@@ -159,6 +211,10 @@ class Immunization extends DomainResource {
 	}
 
 	set expirationDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -173,6 +229,10 @@ class Immunization extends DomainResource {
 	}
 
 	set site ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._site = new CodeableConcept(new_value);
 	}
 
@@ -182,6 +242,10 @@ class Immunization extends DomainResource {
 	}
 
 	set route ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._route = new CodeableConcept(new_value);
 	}
 
@@ -191,6 +255,10 @@ class Immunization extends DomainResource {
 	}
 
 	set doseQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._doseQuantity = new Quantity(new_value);
 	}
 
@@ -200,6 +268,10 @@ class Immunization extends DomainResource {
 	}
 
 	set practitioner ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._practitioner = Array.isArray(new_value) ? new_value.map(val => new Immunization_Practitioner(val)) : [new Immunization_Practitioner(new_value)];
 	}
 
@@ -209,6 +281,10 @@ class Immunization extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -218,6 +294,10 @@ class Immunization extends DomainResource {
 	}
 
 	set explanation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._explanation = new Immunization_Explanation(new_value);
 	}
 
@@ -227,6 +307,10 @@ class Immunization extends DomainResource {
 	}
 
 	set reaction ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reaction = Array.isArray(new_value) ? new_value.map(val => new Immunization_Reaction(val)) : [new Immunization_Reaction(new_value)];
 	}
 
@@ -236,33 +320,37 @@ class Immunization extends DomainResource {
 	}
 
 	set vaccinationProtocol ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._vaccinationProtocol = Array.isArray(new_value) ? new_value.map(val => new Immunization_VaccinationProtocol(val)) : [new Immunization_VaccinationProtocol(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			status: this._status,
-			notGiven: this._notGiven,
-			vaccineCode: this._vaccineCode,
-			patient: this._patient,
-			encounter: this._encounter,
-			date: this._date,
-			primarySource: this._primarySource,
-			reportOrigin: this._reportOrigin,
-			location: this._location,
-			manufacturer: this._manufacturer,
-			lotNumber: this._lotNumber,
-			expirationDate: this._expirationDate,
-			site: this._site,
-			route: this._route,
-			doseQuantity: this._doseQuantity,
-			practitioner: this._practitioner,
-			note: this._note,
-			explanation: this._explanation,
-			reaction: this._reaction,
-			vaccinationProtocol: this._vaccinationProtocol
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			status: this.status,
+			notGiven: this.notGiven,
+			vaccineCode: this.vaccineCode && this.vaccineCode.toJSON(),
+			patient: this.patient && this.patient.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			date: this.date,
+			primarySource: this.primarySource,
+			reportOrigin: this.reportOrigin && this.reportOrigin.toJSON(),
+			location: this.location && this.location.toJSON(),
+			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
+			lotNumber: this.lotNumber,
+			expirationDate: this.expirationDate,
+			site: this.site && this.site.toJSON(),
+			route: this.route && this.route.toJSON(),
+			doseQuantity: this.doseQuantity && this.doseQuantity.toJSON(),
+			practitioner: this.practitioner && this.practitioner.toJSON(),
+			note: this.note && this.note.toJSON(),
+			explanation: this.explanation && this.explanation.toJSON(),
+			reaction: this.reaction && this.reaction.toJSON(),
+			vaccinationProtocol: this.vaccinationProtocol && this.vaccinationProtocol.toJSON()
 		});
 	}
 

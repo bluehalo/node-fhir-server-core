@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Provenance_Agent extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Provenance_Agent';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -29,6 +33,10 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set whoUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whoUri = new_value;
 	}
 
@@ -38,6 +46,10 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set whoReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whoReference = new Reference(new_value);
 	}
 
@@ -47,6 +59,10 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set onBehalfOfUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOfUri = new_value;
 	}
 
@@ -56,6 +72,10 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set onBehalfOfReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOfReference = new Reference(new_value);
 	}
 
@@ -65,17 +85,21 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set relatedAgentType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._relatedAgentType = new CodeableConcept(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			whoUri: this._whoUri,
-			whoReference: this._whoReference,
-			onBehalfOfUri: this._onBehalfOfUri,
-			onBehalfOfReference: this._onBehalfOfReference,
-			relatedAgentType: this._relatedAgentType
+			role: this.role && this.role.toJSON(),
+			whoUri: this.whoUri,
+			whoReference: this.whoReference && this.whoReference.toJSON(),
+			onBehalfOfUri: this.onBehalfOfUri,
+			onBehalfOfReference: this.onBehalfOfReference && this.onBehalfOfReference.toJSON(),
+			relatedAgentType: this.relatedAgentType && this.relatedAgentType.toJSON()
 		});
 	}
 

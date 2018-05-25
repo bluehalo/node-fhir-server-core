@@ -5,7 +5,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Immunization_VaccinationProtocol extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization_VaccinationProtocol';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseSequence ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -34,6 +38,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -43,6 +51,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set authority ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._authority = new Reference(new_value);
 	}
 
@@ -52,6 +64,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set series ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._series = new_value;
 	}
 
@@ -61,6 +77,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set seriesDoses ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -75,6 +95,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set targetDisease ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._targetDisease = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -84,6 +108,10 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._doseStatus = new CodeableConcept(new_value);
 	}
 
@@ -93,19 +121,23 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseStatusReason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._doseStatusReason = new CodeableConcept(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			doseSequence: this._doseSequence,
-			description: this._description,
-			authority: this._authority,
-			series: this._series,
-			seriesDoses: this._seriesDoses,
-			targetDisease: this._targetDisease,
-			doseStatus: this._doseStatus,
-			doseStatusReason: this._doseStatusReason
+			doseSequence: this.doseSequence,
+			description: this.description,
+			authority: this.authority && this.authority.toJSON(),
+			series: this.series,
+			seriesDoses: this.seriesDoses,
+			targetDisease: this.targetDisease && this.targetDisease.toJSON(),
+			doseStatus: this.doseStatus && this.doseStatus.toJSON(),
+			doseStatusReason: this.doseStatusReason && this.doseStatusReason.toJSON()
 		});
 	}
 

@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Mapping extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Mapping';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set identity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
 		if ( !pattern.test(new_value) ) {
@@ -32,6 +36,10 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set language ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -46,6 +54,10 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set map ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._map = new_value;
 	}
 
@@ -55,15 +67,19 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set comment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._comment = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identity: this._identity,
-			language: this._language,
-			map: this._map,
-			comment: this._comment
+			identity: this.identity,
+			language: this.language,
+			map: this.map,
+			comment: this.comment
 		});
 	}
 

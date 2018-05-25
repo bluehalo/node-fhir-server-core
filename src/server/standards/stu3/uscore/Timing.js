@@ -5,7 +5,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Timing extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Timing';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Timing extends Element {
 	}
 
 	set event ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._event = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -29,6 +33,10 @@ class Timing extends Element {
 	}
 
 	set repeat ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._repeat = new Timing_Repeat(new_value);
 	}
 
@@ -38,14 +46,18 @@ class Timing extends Element {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			event: this._event,
-			repeat: this._repeat,
-			code: this._code
+			event: this.event,
+			repeat: this.repeat && this.repeat.toJSON(),
+			code: this.code && this.code.toJSON()
 		});
 	}
 

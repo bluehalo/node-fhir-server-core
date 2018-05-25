@@ -15,7 +15,7 @@ const Observation_Component = require('./Observation_Component');
 class Observation extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Observation';
 		Object.assign(this, opts);
 	}
@@ -30,6 +30,10 @@ class Observation extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Observation'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -44,6 +48,10 @@ class Observation extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -53,6 +61,10 @@ class Observation extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -62,6 +74,10 @@ class Observation extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['registered', 'preliminary', 'final', 'amended', 'corrected', 'cancelled', 'entered-in-error', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -76,6 +92,10 @@ class Observation extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -85,6 +105,10 @@ class Observation extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -94,6 +118,10 @@ class Observation extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -103,6 +131,10 @@ class Observation extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -112,6 +144,10 @@ class Observation extends DomainResource {
 	}
 
 	set effectiveDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -126,6 +162,10 @@ class Observation extends DomainResource {
 	}
 
 	set effectivePeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._effectivePeriod = new Period(new_value);
 	}
 
@@ -135,6 +175,10 @@ class Observation extends DomainResource {
 	}
 
 	set issued ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._issued = new_value;
 	}
 
@@ -144,6 +188,10 @@ class Observation extends DomainResource {
 	}
 
 	set performer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -153,6 +201,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -162,6 +214,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -171,6 +227,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueString = new_value;
 	}
 
@@ -180,6 +240,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueBoolean ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueBoolean = new_value;
 	}
 
@@ -189,6 +253,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRange = new Range(new_value);
 	}
 
@@ -198,6 +266,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueRatio ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRatio = new Ratio(new_value);
 	}
 
@@ -207,6 +279,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueSampledData ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSampledData = new SampledData(new_value);
 	}
 
@@ -216,6 +292,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueAttachment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAttachment = new Attachment(new_value);
 	}
 
@@ -225,6 +305,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -239,6 +323,10 @@ class Observation extends DomainResource {
 	}
 
 	set valueDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -253,6 +341,10 @@ class Observation extends DomainResource {
 	}
 
 	set valuePeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valuePeriod = new Period(new_value);
 	}
 
@@ -262,6 +354,10 @@ class Observation extends DomainResource {
 	}
 
 	set dataAbsentReason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dataAbsentReason = new CodeableConcept(new_value);
 	}
 
@@ -271,6 +367,10 @@ class Observation extends DomainResource {
 	}
 
 	set interpretation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._interpretation = new CodeableConcept(new_value);
 	}
 
@@ -280,6 +380,10 @@ class Observation extends DomainResource {
 	}
 
 	set comment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._comment = new_value;
 	}
 
@@ -289,6 +393,10 @@ class Observation extends DomainResource {
 	}
 
 	set bodySite ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._bodySite = new CodeableConcept(new_value);
 	}
 
@@ -298,6 +406,10 @@ class Observation extends DomainResource {
 	}
 
 	set method ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._method = new CodeableConcept(new_value);
 	}
 
@@ -307,6 +419,10 @@ class Observation extends DomainResource {
 	}
 
 	set specimen ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._specimen = new Reference(new_value);
 	}
 
@@ -316,6 +432,10 @@ class Observation extends DomainResource {
 	}
 
 	set device ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._device = new Reference(new_value);
 	}
 
@@ -325,6 +445,10 @@ class Observation extends DomainResource {
 	}
 
 	set referenceRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._referenceRange = Array.isArray(new_value) ? new_value.map(val => new Observation_ReferenceRange(val)) : [new Observation_ReferenceRange(new_value)];
 	}
 
@@ -334,6 +458,10 @@ class Observation extends DomainResource {
 	}
 
 	set related ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._related = Array.isArray(new_value) ? new_value.map(val => new Observation_Related(val)) : [new Observation_Related(new_value)];
 	}
 
@@ -343,44 +471,48 @@ class Observation extends DomainResource {
 	}
 
 	set component ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._component = Array.isArray(new_value) ? new_value.map(val => new Observation_Component(val)) : [new Observation_Component(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			basedOn: this._basedOn,
-			status: this._status,
-			category: this._category,
-			code: this._code,
-			subject: this._subject,
-			context: this._context,
-			effectiveDateTime: this._effectiveDateTime,
-			effectivePeriod: this._effectivePeriod,
-			issued: this._issued,
-			performer: this._performer,
-			valueQuantity: this._valueQuantity,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueString: this._valueString,
-			valueBoolean: this._valueBoolean,
-			valueRange: this._valueRange,
-			valueRatio: this._valueRatio,
-			valueSampledData: this._valueSampledData,
-			valueAttachment: this._valueAttachment,
-			valueTime: this._valueTime,
-			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			dataAbsentReason: this._dataAbsentReason,
-			interpretation: this._interpretation,
-			comment: this._comment,
-			bodySite: this._bodySite,
-			method: this._method,
-			specimen: this._specimen,
-			device: this._device,
-			referenceRange: this._referenceRange,
-			related: this._related,
-			component: this._component
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			status: this.status,
+			category: this.category && this.category.toJSON(),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			effectiveDateTime: this.effectiveDateTime,
+			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
+			issued: this.issued,
+			performer: this.performer && this.performer.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueString: this.valueString,
+			valueBoolean: this.valueBoolean,
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
+			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			valueTime: this.valueTime,
+			valueDateTime: this.valueDateTime,
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
+			interpretation: this.interpretation && this.interpretation.toJSON(),
+			comment: this.comment,
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			method: this.method && this.method.toJSON(),
+			specimen: this.specimen && this.specimen.toJSON(),
+			device: this.device && this.device.toJSON(),
+			referenceRange: this.referenceRange && this.referenceRange.toJSON(),
+			related: this.related && this.related.toJSON(),
+			component: this.component && this.component.toJSON()
 		});
 	}
 

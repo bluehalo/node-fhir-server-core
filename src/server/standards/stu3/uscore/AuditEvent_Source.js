@@ -5,7 +5,7 @@ const Coding = require('./Coding');
 class AuditEvent_Source extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent_Source';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set site ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._site = new_value;
 	}
 
@@ -29,6 +33,10 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -38,14 +46,18 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			site: this._site,
-			identifier: this._identifier,
-			type: this._type
+			site: this.site,
+			identifier: this.identifier && this.identifier.toJSON(),
+			type: this.type && this.type.toJSON()
 		});
 	}
 

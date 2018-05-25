@@ -9,7 +9,7 @@ const Annotation = require('./Annotation');
 class Device extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Device';
 		Object.assign(this, opts);
 	}
@@ -24,6 +24,10 @@ class Device extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Device'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -38,6 +42,10 @@ class Device extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -47,6 +55,10 @@ class Device extends DomainResource {
 	}
 
 	set udi ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._udi = new Device_Udi(new_value);
 	}
 
@@ -56,6 +68,10 @@ class Device extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -70,6 +86,10 @@ class Device extends DomainResource {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -79,6 +99,10 @@ class Device extends DomainResource {
 	}
 
 	set lotNumber ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._lotNumber = new_value;
 	}
 
@@ -88,6 +112,10 @@ class Device extends DomainResource {
 	}
 
 	set manufacturer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._manufacturer = new_value;
 	}
 
@@ -97,6 +125,10 @@ class Device extends DomainResource {
 	}
 
 	set manufactureDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -111,6 +143,10 @@ class Device extends DomainResource {
 	}
 
 	set expirationDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -125,6 +161,10 @@ class Device extends DomainResource {
 	}
 
 	set model ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._model = new_value;
 	}
 
@@ -134,6 +174,10 @@ class Device extends DomainResource {
 	}
 
 	set version ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._version = new_value;
 	}
 
@@ -143,6 +187,10 @@ class Device extends DomainResource {
 	}
 
 	set patient ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -152,6 +200,10 @@ class Device extends DomainResource {
 	}
 
 	set owner ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._owner = new Reference(new_value);
 	}
 
@@ -161,6 +213,10 @@ class Device extends DomainResource {
 	}
 
 	set contact ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -170,6 +226,10 @@ class Device extends DomainResource {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new Reference(new_value);
 	}
 
@@ -179,6 +239,10 @@ class Device extends DomainResource {
 	}
 
 	set url ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._url = new_value;
 	}
 
@@ -188,6 +252,10 @@ class Device extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -197,29 +265,33 @@ class Device extends DomainResource {
 	}
 
 	set safety ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._safety = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			udi: this._udi,
-			status: this._status,
-			type: this._type,
-			lotNumber: this._lotNumber,
-			manufacturer: this._manufacturer,
-			manufactureDate: this._manufactureDate,
-			expirationDate: this._expirationDate,
-			model: this._model,
-			version: this._version,
-			patient: this._patient,
-			owner: this._owner,
-			contact: this._contact,
-			location: this._location,
-			url: this._url,
-			note: this._note,
-			safety: this._safety
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			udi: this.udi && this.udi.toJSON(),
+			status: this.status,
+			type: this.type && this.type.toJSON(),
+			lotNumber: this.lotNumber,
+			manufacturer: this.manufacturer,
+			manufactureDate: this.manufactureDate,
+			expirationDate: this.expirationDate,
+			model: this.model,
+			version: this.version,
+			patient: this.patient && this.patient.toJSON(),
+			owner: this.owner && this.owner.toJSON(),
+			contact: this.contact && this.contact.toJSON(),
+			location: this.location && this.location.toJSON(),
+			url: this.url,
+			note: this.note && this.note.toJSON(),
+			safety: this.safety && this.safety.toJSON()
 		});
 	}
 

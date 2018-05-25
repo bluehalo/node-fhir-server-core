@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Constraint extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Constraint';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set key ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
 		if ( !pattern.test(new_value) ) {
@@ -32,6 +36,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set requirements ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._requirements = new_value;
 	}
 
@@ -41,6 +49,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set severity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['error', 'warning'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -55,6 +67,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set human ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._human = new_value;
 	}
 
@@ -64,6 +80,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set expression ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._expression = new_value;
 	}
 
@@ -73,6 +93,10 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set xpath ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._xpath = new_value;
 	}
 
@@ -82,18 +106,22 @@ class ElementDefinition_Constraint extends BackboneElement {
 	}
 
 	set source ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._source = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			key: this._key,
-			requirements: this._requirements,
-			severity: this._severity,
-			human: this._human,
-			expression: this._expression,
-			xpath: this._xpath,
-			source: this._source
+			key: this.key,
+			requirements: this.requirements,
+			severity: this.severity,
+			human: this.human,
+			expression: this.expression,
+			xpath: this.xpath,
+			source: this.source
 		});
 	}
 

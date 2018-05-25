@@ -12,7 +12,7 @@ const Annotation = require('./Annotation');
 class Condition extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Condition';
 		Object.assign(this, opts);
 	}
@@ -27,6 +27,10 @@ class Condition extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Condition'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -41,6 +45,10 @@ class Condition extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -50,6 +58,10 @@ class Condition extends DomainResource {
 	}
 
 	set clinicalStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'recurrence', 'inactive', 'remission', 'resolved'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -64,6 +76,10 @@ class Condition extends DomainResource {
 	}
 
 	set verificationStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['provisional', 'differential', 'confirmed', 'refuted', 'entered-in-error', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -78,6 +94,10 @@ class Condition extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -87,6 +107,10 @@ class Condition extends DomainResource {
 	}
 
 	set severity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._severity = new CodeableConcept(new_value);
 	}
 
@@ -96,6 +120,10 @@ class Condition extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -105,6 +133,10 @@ class Condition extends DomainResource {
 	}
 
 	set bodySite ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._bodySite = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -114,6 +146,10 @@ class Condition extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -123,6 +159,10 @@ class Condition extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -132,6 +172,10 @@ class Condition extends DomainResource {
 	}
 
 	set onsetDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -146,6 +190,10 @@ class Condition extends DomainResource {
 	}
 
 	set onsetAge ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetAge = new Age(new_value);
 	}
 
@@ -155,6 +203,10 @@ class Condition extends DomainResource {
 	}
 
 	set onsetPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetPeriod = new Period(new_value);
 	}
 
@@ -164,6 +216,10 @@ class Condition extends DomainResource {
 	}
 
 	set onsetRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetRange = new Range(new_value);
 	}
 
@@ -173,6 +229,10 @@ class Condition extends DomainResource {
 	}
 
 	set onsetString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetString = new_value;
 	}
 
@@ -182,6 +242,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -196,6 +260,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementAge ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._abatementAge = new Age(new_value);
 	}
 
@@ -205,6 +273,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementBoolean ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._abatementBoolean = new_value;
 	}
 
@@ -214,6 +286,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._abatementPeriod = new Period(new_value);
 	}
 
@@ -223,6 +299,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._abatementRange = new Range(new_value);
 	}
 
@@ -232,6 +312,10 @@ class Condition extends DomainResource {
 	}
 
 	set abatementString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._abatementString = new_value;
 	}
 
@@ -241,6 +325,10 @@ class Condition extends DomainResource {
 	}
 
 	set assertedDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -255,6 +343,10 @@ class Condition extends DomainResource {
 	}
 
 	set asserter ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._asserter = new Reference(new_value);
 	}
 
@@ -264,6 +356,10 @@ class Condition extends DomainResource {
 	}
 
 	set stage ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._stage = new Condition_Stage(new_value);
 	}
 
@@ -273,6 +369,10 @@ class Condition extends DomainResource {
 	}
 
 	set evidence ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._evidence = Array.isArray(new_value) ? new_value.map(val => new Condition_Evidence(val)) : [new Condition_Evidence(new_value)];
 	}
 
@@ -282,37 +382,41 @@ class Condition extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			clinicalStatus: this._clinicalStatus,
-			verificationStatus: this._verificationStatus,
-			category: this._category,
-			severity: this._severity,
-			code: this._code,
-			bodySite: this._bodySite,
-			subject: this._subject,
-			context: this._context,
-			onsetDateTime: this._onsetDateTime,
-			onsetAge: this._onsetAge,
-			onsetPeriod: this._onsetPeriod,
-			onsetRange: this._onsetRange,
-			onsetString: this._onsetString,
-			abatementDateTime: this._abatementDateTime,
-			abatementAge: this._abatementAge,
-			abatementBoolean: this._abatementBoolean,
-			abatementPeriod: this._abatementPeriod,
-			abatementRange: this._abatementRange,
-			abatementString: this._abatementString,
-			assertedDate: this._assertedDate,
-			asserter: this._asserter,
-			stage: this._stage,
-			evidence: this._evidence,
-			note: this._note
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			clinicalStatus: this.clinicalStatus,
+			verificationStatus: this.verificationStatus,
+			category: this.category && this.category.toJSON(),
+			severity: this.severity && this.severity.toJSON(),
+			code: this.code && this.code.toJSON(),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			onsetDateTime: this.onsetDateTime,
+			onsetAge: this.onsetAge && this.onsetAge.toJSON(),
+			onsetPeriod: this.onsetPeriod && this.onsetPeriod.toJSON(),
+			onsetRange: this.onsetRange && this.onsetRange.toJSON(),
+			onsetString: this.onsetString,
+			abatementDateTime: this.abatementDateTime,
+			abatementAge: this.abatementAge && this.abatementAge.toJSON(),
+			abatementBoolean: this.abatementBoolean,
+			abatementPeriod: this.abatementPeriod && this.abatementPeriod.toJSON(),
+			abatementRange: this.abatementRange && this.abatementRange.toJSON(),
+			abatementString: this.abatementString,
+			assertedDate: this.assertedDate,
+			asserter: this.asserter && this.asserter.toJSON(),
+			stage: this.stage && this.stage.toJSON(),
+			evidence: this.evidence && this.evidence.toJSON(),
+			note: this.note && this.note.toJSON()
 		});
 	}
 

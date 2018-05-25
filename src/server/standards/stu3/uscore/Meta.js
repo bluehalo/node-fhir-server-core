@@ -4,7 +4,7 @@ const Coding = require('./Coding');
 class Meta extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Meta';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Meta extends Element {
 	}
 
 	set versionId ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
 		if ( !pattern.test(new_value) ) {
@@ -33,6 +37,10 @@ class Meta extends Element {
 	}
 
 	set lastUpdated ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._lastUpdated = new_value;
 	}
 
@@ -42,6 +50,10 @@ class Meta extends Element {
 	}
 
 	set profile ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._profile = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -51,6 +63,10 @@ class Meta extends Element {
 	}
 
 	set security ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._security = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -60,16 +76,20 @@ class Meta extends Element {
 	}
 
 	set tag ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._tag = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			versionId: this._versionId,
-			lastUpdated: this._lastUpdated,
-			profile: this._profile,
-			security: this._security,
-			tag: this._tag
+			versionId: this.versionId,
+			lastUpdated: this.lastUpdated,
+			profile: this.profile,
+			security: this.security && this.security.toJSON(),
+			tag: this.tag && this.tag.toJSON()
 		});
 	}
 

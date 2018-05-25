@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Annotation extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Annotation';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Annotation extends Element {
 	}
 
 	set authorReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._authorReference = new Reference(new_value);
 	}
 
@@ -28,6 +32,10 @@ class Annotation extends Element {
 	}
 
 	set authorString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._authorString = new_value;
 	}
 
@@ -37,6 +45,10 @@ class Annotation extends Element {
 	}
 
 	set time ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -51,15 +63,19 @@ class Annotation extends Element {
 	}
 
 	set text ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._text = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			authorReference: this._authorReference,
-			authorString: this._authorString,
-			time: this._time,
-			text: this._text
+			authorReference: this.authorReference && this.authorReference.toJSON(),
+			authorString: this.authorString,
+			time: this.time,
+			text: this.text
 		});
 	}
 

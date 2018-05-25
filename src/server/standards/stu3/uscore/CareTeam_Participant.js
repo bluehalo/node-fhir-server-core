@@ -6,7 +6,7 @@ const Period = require('./Period');
 class CareTeam_Participant extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CareTeam_Participant';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -30,6 +34,10 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set member ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._member = new Reference(new_value);
 	}
 
@@ -39,6 +47,10 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 
@@ -48,15 +60,19 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			member: this._member,
-			onBehalfOf: this._onBehalfOf,
-			period: this._period
+			role: this.role && this.role.toJSON(),
+			member: this.member && this.member.toJSON(),
+			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON(),
+			period: this.period && this.period.toJSON()
 		});
 	}
 

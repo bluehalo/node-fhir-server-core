@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class AuditEvent_Detail extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent_Detail';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class AuditEvent_Detail extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = new_value;
 	}
 
@@ -27,13 +31,17 @@ class AuditEvent_Detail extends BackboneElement {
 	}
 
 	set value ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._value = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			value: this._value
+			type: this.type,
+			value: this.value
 		});
 	}
 

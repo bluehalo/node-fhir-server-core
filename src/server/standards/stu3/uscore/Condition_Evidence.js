@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Condition_Evidence extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Condition_Evidence';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Condition_Evidence extends BackboneElement {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -29,13 +33,17 @@ class Condition_Evidence extends BackboneElement {
 	}
 
 	set detail ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._detail = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code,
-			detail: this._detail
+			code: this.code && this.code.toJSON(),
+			detail: this.detail && this.detail.toJSON()
 		});
 	}
 

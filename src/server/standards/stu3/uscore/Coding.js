@@ -3,7 +3,7 @@ const Element = require('./Element');
 class Coding extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Coding';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Coding extends Element {
 	}
 
 	set system ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._system = new_value;
 	}
 
@@ -27,6 +31,10 @@ class Coding extends Element {
 	}
 
 	set version ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._version = new_value;
 	}
 
@@ -36,6 +44,10 @@ class Coding extends Element {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -50,6 +62,10 @@ class Coding extends Element {
 	}
 
 	set display ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._display = new_value;
 	}
 
@@ -59,16 +75,20 @@ class Coding extends Element {
 	}
 
 	set userSelected ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._userSelected = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			system: this._system,
-			version: this._version,
-			code: this._code,
-			display: this._display,
-			userSelected: this._userSelected
+			system: this.system,
+			version: this.version,
+			code: this.code,
+			display: this.display,
+			userSelected: this.userSelected
 		});
 	}
 

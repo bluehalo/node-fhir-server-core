@@ -7,7 +7,7 @@ const Address = require('./Address');
 class Organization_Contact extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Organization_Contact';
 		Object.assign(this, opts);
 	}
@@ -22,6 +22,10 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set purpose ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._purpose = new CodeableConcept(new_value);
 	}
 
@@ -31,6 +35,10 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new HumanName(new_value);
 	}
 
@@ -40,6 +48,10 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -49,15 +61,19 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = new Address(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			purpose: this._purpose,
-			name: this._name,
-			telecom: this._telecom,
-			address: this._address
+			purpose: this.purpose && this.purpose.toJSON(),
+			name: this.name && this.name.toJSON(),
+			telecom: this.telecom && this.telecom.toJSON(),
+			address: this.address && this.address.toJSON()
 		});
 	}
 

@@ -14,7 +14,7 @@ const Patient_Link = require('./Patient_Link');
 class Patient extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Patient';
 		Object.assign(this, opts);
 	}
@@ -29,6 +29,10 @@ class Patient extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Patient'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -43,6 +47,10 @@ class Patient extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -52,6 +60,10 @@ class Patient extends DomainResource {
 	}
 
 	set active ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._active = new_value;
 	}
 
@@ -61,6 +73,10 @@ class Patient extends DomainResource {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = Array.isArray(new_value) ? new_value.map(val => new HumanName(val)) : [new HumanName(new_value)];
 	}
 
@@ -70,6 +86,10 @@ class Patient extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -79,6 +99,10 @@ class Patient extends DomainResource {
 	}
 
 	set gender ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -93,6 +117,10 @@ class Patient extends DomainResource {
 	}
 
 	set birthDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -107,6 +135,10 @@ class Patient extends DomainResource {
 	}
 
 	set deceasedBoolean ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._deceasedBoolean = new_value;
 	}
 
@@ -116,6 +148,10 @@ class Patient extends DomainResource {
 	}
 
 	set deceasedDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -130,6 +166,10 @@ class Patient extends DomainResource {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
 	}
 
@@ -139,6 +179,10 @@ class Patient extends DomainResource {
 	}
 
 	set maritalStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._maritalStatus = new CodeableConcept(new_value);
 	}
 
@@ -148,6 +192,10 @@ class Patient extends DomainResource {
 	}
 
 	set multipleBirthBoolean ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._multipleBirthBoolean = new_value;
 	}
 
@@ -157,6 +205,10 @@ class Patient extends DomainResource {
 	}
 
 	set multipleBirthInteger ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -171,6 +223,10 @@ class Patient extends DomainResource {
 	}
 
 	set photo ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
@@ -180,6 +236,10 @@ class Patient extends DomainResource {
 	}
 
 	set contact ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new Patient_Contact(val)) : [new Patient_Contact(new_value)];
 	}
 
@@ -189,6 +249,10 @@ class Patient extends DomainResource {
 	}
 
 	set animal ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._animal = new Patient_Animal(new_value);
 	}
 
@@ -198,6 +262,10 @@ class Patient extends DomainResource {
 	}
 
 	set communication ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._communication = Array.isArray(new_value) ? new_value.map(val => new Patient_Communication(val)) : [new Patient_Communication(new_value)];
 	}
 
@@ -207,6 +275,10 @@ class Patient extends DomainResource {
 	}
 
 	set generalPractitioner ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._generalPractitioner = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -216,6 +288,10 @@ class Patient extends DomainResource {
 	}
 
 	set managingOrganization ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._managingOrganization = new Reference(new_value);
 	}
 
@@ -225,6 +301,10 @@ class Patient extends DomainResource {
 	}
 
 	set link ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._link = Array.isArray(new_value) ? new_value.map(val => new Patient_Link(val)) : [new Patient_Link(new_value)];
 	}
 
@@ -234,6 +314,10 @@ class Patient extends DomainResource {
 	}
 
 	set race ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._race = new_value;
 	}
 
@@ -243,6 +327,10 @@ class Patient extends DomainResource {
 	}
 
 	set ethnicity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ethnicity = new_value;
 	}
 
@@ -252,6 +340,10 @@ class Patient extends DomainResource {
 	}
 
 	set birthSex ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['M', 'F', 'UNK'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -262,29 +354,29 @@ class Patient extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			active: this._active,
-			name: this._name,
-			telecom: this._telecom,
-			gender: this._gender,
-			birthDate: this._birthDate,
-			deceasedBoolean: this._deceasedBoolean,
-			deceasedDateTime: this._deceasedDateTime,
-			address: this._address,
-			maritalStatus: this._maritalStatus,
-			multipleBirthBoolean: this._multipleBirthBoolean,
-			multipleBirthInteger: this._multipleBirthInteger,
-			photo: this._photo,
-			contact: this._contact,
-			animal: this._animal,
-			communication: this._communication,
-			generalPractitioner: this._generalPractitioner,
-			managingOrganization: this._managingOrganization,
-			link: this._link,
-			race: this._race,
-			ethnicity: this._ethnicity,
-			birthSex: this._birthSex
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			active: this.active,
+			name: this.name && this.name.toJSON(),
+			telecom: this.telecom && this.telecom.toJSON(),
+			gender: this.gender,
+			birthDate: this.birthDate,
+			deceasedBoolean: this.deceasedBoolean,
+			deceasedDateTime: this.deceasedDateTime,
+			address: this.address && this.address.toJSON(),
+			maritalStatus: this.maritalStatus && this.maritalStatus.toJSON(),
+			multipleBirthBoolean: this.multipleBirthBoolean,
+			multipleBirthInteger: this.multipleBirthInteger,
+			photo: this.photo && this.photo.toJSON(),
+			contact: this.contact && this.contact.toJSON(),
+			animal: this.animal && this.animal.toJSON(),
+			communication: this.communication && this.communication.toJSON(),
+			generalPractitioner: this.generalPractitioner && this.generalPractitioner.toJSON(),
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			link: this.link && this.link.toJSON(),
+			race: this.race,
+			ethnicity: this.ethnicity,
+			birthSex: this.birthSex
 		});
 	}
 

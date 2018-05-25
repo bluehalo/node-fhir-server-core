@@ -7,7 +7,7 @@ const Reference = require('./Reference');
 class MedicationRequest_DispenseRequest extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest_DispenseRequest';
 		Object.assign(this, opts);
 	}
@@ -22,6 +22,10 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set validityPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._validityPeriod = new Period(new_value);
 	}
 
@@ -31,6 +35,10 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set numberOfRepeatsAllowed ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -45,6 +53,10 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set quantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._quantity = new Quantity(new_value);
 	}
 
@@ -54,6 +66,10 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set expectedSupplyDuration ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._expectedSupplyDuration = new Duration(new_value);
 	}
 
@@ -63,16 +79,20 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set performer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._performer = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			validityPeriod: this._validityPeriod,
-			numberOfRepeatsAllowed: this._numberOfRepeatsAllowed,
-			quantity: this._quantity,
-			expectedSupplyDuration: this._expectedSupplyDuration,
-			performer: this._performer
+			validityPeriod: this.validityPeriod && this.validityPeriod.toJSON(),
+			numberOfRepeatsAllowed: this.numberOfRepeatsAllowed,
+			quantity: this.quantity && this.quantity.toJSON(),
+			expectedSupplyDuration: this.expectedSupplyDuration && this.expectedSupplyDuration.toJSON(),
+			performer: this.performer && this.performer.toJSON()
 		});
 	}
 

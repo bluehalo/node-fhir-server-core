@@ -7,7 +7,7 @@ const CarePlan_Detail = require('./CarePlan_Detail');
 class CarePlan_Activity extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CarePlan_Activity';
 		Object.assign(this, opts);
 	}
@@ -22,6 +22,10 @@ class CarePlan_Activity extends BackboneElement {
 	}
 
 	set outcomeCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._outcomeCodeableConcept = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -31,6 +35,10 @@ class CarePlan_Activity extends BackboneElement {
 	}
 
 	set outcomeReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._outcomeReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -40,6 +48,10 @@ class CarePlan_Activity extends BackboneElement {
 	}
 
 	set progress ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._progress = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -49,6 +61,10 @@ class CarePlan_Activity extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reference = new Reference(new_value);
 	}
 
@@ -58,16 +74,20 @@ class CarePlan_Activity extends BackboneElement {
 	}
 
 	set detail ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._detail = new CarePlan_Detail(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			outcomeCodeableConcept: this._outcomeCodeableConcept,
-			outcomeReference: this._outcomeReference,
-			progress: this._progress,
-			reference: this._reference,
-			detail: this._detail
+			outcomeCodeableConcept: this.outcomeCodeableConcept && this.outcomeCodeableConcept.toJSON(),
+			outcomeReference: this.outcomeReference && this.outcomeReference.toJSON(),
+			progress: this.progress && this.progress.toJSON(),
+			reference: this.reference && this.reference.toJSON(),
+			detail: this.detail && this.detail.toJSON()
 		});
 	}
 

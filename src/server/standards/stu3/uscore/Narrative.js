@@ -3,7 +3,7 @@ const Element = require('./Element');
 class Narrative extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Narrative';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Narrative extends Element {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['generated', 'extensions', 'additional', 'empty'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -32,13 +36,17 @@ class Narrative extends Element {
 	}
 
 	set div ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._div = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			status: this._status,
-			div: this._div
+			status: this.status,
+			div: this.div
 		});
 	}
 

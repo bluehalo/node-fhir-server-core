@@ -4,7 +4,7 @@ const ContactPoint = require('./ContactPoint');
 class ContactDetail extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ContactDetail';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class ContactDetail extends Element {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -28,13 +32,17 @@ class ContactDetail extends Element {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			name: this._name,
-			telecom: this._telecom
+			name: this.name,
+			telecom: this.telecom && this.telecom.toJSON()
 		});
 	}
 

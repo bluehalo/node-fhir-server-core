@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class MedicationRequest_Substitution extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest_Substitution';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class MedicationRequest_Substitution extends BackboneElement {
 	}
 
 	set allowed ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._allowed = new_value;
 	}
 
@@ -28,13 +32,17 @@ class MedicationRequest_Substitution extends BackboneElement {
 	}
 
 	set reason ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reason = new CodeableConcept(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			allowed: this._allowed,
-			reason: this._reason
+			allowed: this.allowed,
+			reason: this.reason && this.reason.toJSON()
 		});
 	}
 

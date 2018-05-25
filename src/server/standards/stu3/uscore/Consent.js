@@ -13,7 +13,7 @@ const Consent_Except = require('./Consent_Except');
 class Consent extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent';
 		Object.assign(this, opts);
 	}
@@ -28,6 +28,10 @@ class Consent extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Consent'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -42,6 +46,10 @@ class Consent extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -51,6 +59,10 @@ class Consent extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['draft', 'proposed', 'active', 'rejected', 'inactive', 'entered-in-error'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -65,6 +77,10 @@ class Consent extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -74,6 +90,10 @@ class Consent extends DomainResource {
 	}
 
 	set patient ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -83,6 +103,10 @@ class Consent extends DomainResource {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
@@ -92,6 +116,10 @@ class Consent extends DomainResource {
 	}
 
 	set dateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -106,6 +134,10 @@ class Consent extends DomainResource {
 	}
 
 	set consentingParty ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._consentingParty = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -115,6 +147,10 @@ class Consent extends DomainResource {
 	}
 
 	set actor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._actor = Array.isArray(new_value) ? new_value.map(val => new Consent_Actor(val)) : [new Consent_Actor(new_value)];
 	}
 
@@ -124,6 +160,10 @@ class Consent extends DomainResource {
 	}
 
 	set action ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._action = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -133,6 +173,10 @@ class Consent extends DomainResource {
 	}
 
 	set organization ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._organization = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -142,6 +186,10 @@ class Consent extends DomainResource {
 	}
 
 	set sourceAttachment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._sourceAttachment = new Attachment(new_value);
 	}
 
@@ -151,6 +199,10 @@ class Consent extends DomainResource {
 	}
 
 	set sourceIdentifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._sourceIdentifier = new Identifier(new_value);
 	}
 
@@ -160,6 +212,10 @@ class Consent extends DomainResource {
 	}
 
 	set sourceReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._sourceReference = new Reference(new_value);
 	}
 
@@ -169,6 +225,10 @@ class Consent extends DomainResource {
 	}
 
 	set policy ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => new Consent_Policy(val)) : [new Consent_Policy(new_value)];
 	}
 
@@ -178,6 +238,10 @@ class Consent extends DomainResource {
 	}
 
 	set policyRule ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._policyRule = new_value;
 	}
 
@@ -187,6 +251,10 @@ class Consent extends DomainResource {
 	}
 
 	set securityLabel ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -196,6 +264,10 @@ class Consent extends DomainResource {
 	}
 
 	set purpose ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._purpose = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -205,6 +277,10 @@ class Consent extends DomainResource {
 	}
 
 	set dataPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dataPeriod = new Period(new_value);
 	}
 
@@ -214,6 +290,10 @@ class Consent extends DomainResource {
 	}
 
 	set data ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._data = Array.isArray(new_value) ? new_value.map(val => new Consent_Data(val)) : [new Consent_Data(new_value)];
 	}
 
@@ -223,32 +303,36 @@ class Consent extends DomainResource {
 	}
 
 	set except ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._except = Array.isArray(new_value) ? new_value.map(val => new Consent_Except(val)) : [new Consent_Except(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			status: this._status,
-			category: this._category,
-			patient: this._patient,
-			period: this._period,
-			dateTime: this._dateTime,
-			consentingParty: this._consentingParty,
-			actor: this._actor,
-			action: this._action,
-			organization: this._organization,
-			sourceAttachment: this._sourceAttachment,
-			sourceIdentifier: this._sourceIdentifier,
-			sourceReference: this._sourceReference,
-			policy: this._policy,
-			policyRule: this._policyRule,
-			securityLabel: this._securityLabel,
-			purpose: this._purpose,
-			dataPeriod: this._dataPeriod,
-			data: this._data,
-			except: this._except
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			status: this.status,
+			category: this.category && this.category.toJSON(),
+			patient: this.patient && this.patient.toJSON(),
+			period: this.period && this.period.toJSON(),
+			dateTime: this.dateTime,
+			consentingParty: this.consentingParty && this.consentingParty.toJSON(),
+			actor: this.actor && this.actor.toJSON(),
+			action: this.action && this.action.toJSON(),
+			organization: this.organization && this.organization.toJSON(),
+			sourceAttachment: this.sourceAttachment && this.sourceAttachment.toJSON(),
+			sourceIdentifier: this.sourceIdentifier && this.sourceIdentifier.toJSON(),
+			sourceReference: this.sourceReference && this.sourceReference.toJSON(),
+			policy: this.policy && this.policy.toJSON(),
+			policyRule: this.policyRule,
+			securityLabel: this.securityLabel && this.securityLabel.toJSON(),
+			purpose: this.purpose && this.purpose.toJSON(),
+			dataPeriod: this.dataPeriod && this.dataPeriod.toJSON(),
+			data: this.data && this.data.toJSON(),
+			except: this.except && this.except.toJSON()
 		});
 	}
 

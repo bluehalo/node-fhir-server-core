@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Procedure_Performer extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Procedure_Performer';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -29,6 +33,10 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set actor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._actor = new Reference(new_value);
 	}
 
@@ -38,14 +46,18 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			actor: this._actor,
-			onBehalfOf: this._onBehalfOf
+			role: this.role && this.role.toJSON(),
+			actor: this.actor && this.actor.toJSON(),
+			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON()
 		});
 	}
 

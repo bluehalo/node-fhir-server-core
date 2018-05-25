@@ -7,7 +7,7 @@ const Reference = require('./Reference');
 class Practitioner_Qualification extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Practitioner_Qualification';
 		Object.assign(this, opts);
 	}
@@ -22,6 +22,10 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -31,6 +35,10 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -40,6 +48,10 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
@@ -49,15 +61,19 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set issuer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._issuer = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identifier: this._identifier,
-			code: this._code,
-			period: this._period,
-			issuer: this._issuer
+			identifier: this.identifier && this.identifier.toJSON(),
+			code: this.code && this.code.toJSON(),
+			period: this.period && this.period.toJSON(),
+			issuer: this.issuer && this.issuer.toJSON()
 		});
 	}
 

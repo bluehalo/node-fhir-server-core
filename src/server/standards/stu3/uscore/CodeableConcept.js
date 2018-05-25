@@ -4,7 +4,7 @@ const Coding = require('./Coding');
 class CodeableConcept extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CodeableConcept';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class CodeableConcept extends Element {
 	}
 
 	set coding ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._coding = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -28,13 +32,17 @@ class CodeableConcept extends Element {
 	}
 
 	set text ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._text = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			coding: this._coding,
-			text: this._text
+			coding: this.coding && this.coding.toJSON(),
+			text: this.text
 		});
 	}
 

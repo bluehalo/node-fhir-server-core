@@ -4,7 +4,7 @@ const ResourceList = require('./ResourceList');
 class Bundle_Response extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Response';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._status = new_value;
 	}
 
@@ -28,6 +32,10 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new_value;
 	}
 
@@ -37,6 +45,10 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set etag ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._etag = new_value;
 	}
 
@@ -46,6 +58,10 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set lastModified ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._lastModified = new_value;
 	}
 
@@ -55,16 +71,20 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set outcome ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._outcome = new ResourceList(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			status: this._status,
-			location: this._location,
-			etag: this._etag,
-			lastModified: this._lastModified,
-			outcome: this._outcome
+			status: this.status,
+			location: this.location,
+			etag: this.etag,
+			lastModified: this.lastModified,
+			outcome: this.outcome && this.outcome.toJSON()
 		});
 	}
 

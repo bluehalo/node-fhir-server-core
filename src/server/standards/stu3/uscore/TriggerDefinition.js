@@ -6,7 +6,7 @@ const DataRequirement = require('./DataRequirement');
 class TriggerDefinition extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'TriggerDefinition';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['named-event', 'periodic', 'data-added', 'data-modified', 'data-removed', 'data-accessed', 'data-access-ended'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -35,6 +39,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventName ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._eventName = new_value;
 	}
 
@@ -44,6 +52,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingTiming ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._eventTimingTiming = new Timing(new_value);
 	}
 
@@ -53,6 +65,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._eventTimingReference = new Reference(new_value);
 	}
 
@@ -62,6 +78,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -76,6 +96,10 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -90,18 +114,22 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventData ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._eventData = new DataRequirement(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			eventName: this._eventName,
-			eventTimingTiming: this._eventTimingTiming,
-			eventTimingReference: this._eventTimingReference,
-			eventTimingDate: this._eventTimingDate,
-			eventTimingDateTime: this._eventTimingDateTime,
-			eventData: this._eventData
+			type: this.type,
+			eventName: this.eventName,
+			eventTimingTiming: this.eventTimingTiming && this.eventTimingTiming.toJSON(),
+			eventTimingReference: this.eventTimingReference && this.eventTimingReference.toJSON(),
+			eventTimingDate: this.eventTimingDate,
+			eventTimingDateTime: this.eventTimingDateTime,
+			eventData: this.eventData && this.eventData.toJSON()
 		});
 	}
 

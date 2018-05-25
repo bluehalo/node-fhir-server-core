@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Base extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Base';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class ElementDefinition_Base extends BackboneElement {
 	}
 
 	set path ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._path = new_value;
 	}
 
@@ -27,6 +31,10 @@ class ElementDefinition_Base extends BackboneElement {
 	}
 
 	set min ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
 		if ( !pattern.test(new_value) ) {
@@ -41,14 +49,18 @@ class ElementDefinition_Base extends BackboneElement {
 	}
 
 	set max ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._max = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			path: this._path,
-			min: this._min,
-			max: this._max
+			path: this.path,
+			min: this.min,
+			max: this.max
 		});
 	}
 

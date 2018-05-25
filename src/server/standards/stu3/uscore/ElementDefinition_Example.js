@@ -37,7 +37,7 @@ const TriggerDefinition = require('./TriggerDefinition');
 class ElementDefinition_Example extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Example';
 		Object.assign(this, opts);
 	}
@@ -52,6 +52,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set label ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._label = new_value;
 	}
 
@@ -61,6 +65,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBoolean ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueBoolean = new_value;
 	}
 
@@ -70,6 +78,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueInteger ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -84,6 +96,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDecimal ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -98,6 +114,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBase64Binary ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueBase64Binary = new_value;
 	}
 
@@ -107,6 +127,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueInstant ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueInstant = new_value;
 	}
 
@@ -116,6 +140,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueString = new_value;
 	}
 
@@ -125,6 +153,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueUri = new_value;
 	}
 
@@ -134,6 +166,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -148,6 +184,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -162,6 +202,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -176,6 +220,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -190,6 +238,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueOid ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
 		if ( !pattern.test(new_value) ) {
@@ -204,6 +256,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUuid ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 		if ( !pattern.test(new_value) ) {
@@ -218,6 +274,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueId ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
 		if ( !pattern.test(new_value) ) {
@@ -232,6 +292,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUnsignedInt ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
 		if ( !pattern.test(new_value) ) {
@@ -246,6 +310,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valuePositiveInt ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -260,6 +328,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMarkdown ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueMarkdown = new_value;
 	}
 
@@ -269,6 +341,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueElement ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueElement = new Element(new_value);
 	}
 
@@ -278,6 +354,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueExtension ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueExtension = new Extension(new_value);
 	}
 
@@ -287,6 +367,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBackboneElement ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueBackboneElement = new BackboneElement(new_value);
 	}
 
@@ -296,6 +380,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueNarrative ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueNarrative = new Narrative(new_value);
 	}
 
@@ -305,6 +393,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAnnotation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAnnotation = new Annotation(new_value);
 	}
 
@@ -314,6 +406,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAttachment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAttachment = new Attachment(new_value);
 	}
 
@@ -323,6 +419,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueIdentifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueIdentifier = new Identifier(new_value);
 	}
 
@@ -332,6 +432,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -341,6 +445,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCoding ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCoding = new Coding(new_value);
 	}
 
@@ -350,6 +458,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -359,6 +471,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDuration ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueDuration = new Duration(new_value);
 	}
 
@@ -368,6 +484,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSimpleQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -377,6 +497,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDistance ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueDistance = new Distance(new_value);
 	}
 
@@ -386,6 +510,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCount ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCount = new Count(new_value);
 	}
 
@@ -395,6 +523,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMoney ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueMoney = new Money(new_value);
 	}
 
@@ -404,6 +536,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAge ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAge = new Age(new_value);
 	}
 
@@ -413,6 +549,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRange = new Range(new_value);
 	}
 
@@ -422,6 +562,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valuePeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valuePeriod = new Period(new_value);
 	}
 
@@ -431,6 +575,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRatio ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRatio = new Ratio(new_value);
 	}
 
@@ -440,6 +588,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueReference = new Reference(new_value);
 	}
 
@@ -449,6 +601,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSampledData ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSampledData = new SampledData(new_value);
 	}
 
@@ -458,6 +614,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSignature ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSignature = new Signature(new_value);
 	}
 
@@ -467,6 +627,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueHumanName ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueHumanName = new HumanName(new_value);
 	}
 
@@ -476,6 +640,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAddress ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueAddress = new Address(new_value);
 	}
 
@@ -485,6 +653,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContactPoint ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueContactPoint = new ContactPoint(new_value);
 	}
 
@@ -494,6 +666,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTiming ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueTiming = new Timing(new_value);
 	}
 
@@ -503,6 +679,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMeta ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueMeta = new Meta(new_value);
 	}
 
@@ -512,6 +692,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueElementDefinition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueElementDefinition = new ElementDefinition(new_value);
 	}
 
@@ -521,6 +705,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContactDetail ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueContactDetail = new ContactDetail(new_value);
 	}
 
@@ -530,6 +718,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContributor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueContributor = new Contributor(new_value);
 	}
 
@@ -539,6 +731,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDosage ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueDosage = new Dosage(new_value);
 	}
 
@@ -548,6 +744,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRelatedArtifact ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRelatedArtifact = new RelatedArtifact(new_value);
 	}
 
@@ -557,6 +757,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUsageContext ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueUsageContext = new UsageContext(new_value);
 	}
 
@@ -566,6 +770,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDataRequirement ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueDataRequirement = new DataRequirement(new_value);
 	}
 
@@ -575,6 +783,10 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueParameterDefinition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueParameterDefinition = new ParameterDefinition(new_value);
 	}
 
@@ -584,65 +796,69 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTriggerDefinition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueTriggerDefinition = new TriggerDefinition(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			label: this._label,
-			valueBoolean: this._valueBoolean,
-			valueInteger: this._valueInteger,
-			valueDecimal: this._valueDecimal,
-			valueBase64Binary: this._valueBase64Binary,
-			valueInstant: this._valueInstant,
-			valueString: this._valueString,
-			valueUri: this._valueUri,
-			valueDate: this._valueDate,
-			valueDateTime: this._valueDateTime,
-			valueTime: this._valueTime,
-			valueCode: this._valueCode,
-			valueOid: this._valueOid,
-			valueUuid: this._valueUuid,
-			valueId: this._valueId,
-			valueUnsignedInt: this._valueUnsignedInt,
-			valuePositiveInt: this._valuePositiveInt,
-			valueMarkdown: this._valueMarkdown,
-			valueElement: this._valueElement,
-			valueExtension: this._valueExtension,
-			valueBackboneElement: this._valueBackboneElement,
-			valueNarrative: this._valueNarrative,
-			valueAnnotation: this._valueAnnotation,
-			valueAttachment: this._valueAttachment,
-			valueIdentifier: this._valueIdentifier,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueCoding: this._valueCoding,
-			valueQuantity: this._valueQuantity,
-			valueDuration: this._valueDuration,
-			valueSimpleQuantity: this._valueSimpleQuantity,
-			valueDistance: this._valueDistance,
-			valueCount: this._valueCount,
-			valueMoney: this._valueMoney,
-			valueAge: this._valueAge,
-			valueRange: this._valueRange,
-			valuePeriod: this._valuePeriod,
-			valueRatio: this._valueRatio,
-			valueReference: this._valueReference,
-			valueSampledData: this._valueSampledData,
-			valueSignature: this._valueSignature,
-			valueHumanName: this._valueHumanName,
-			valueAddress: this._valueAddress,
-			valueContactPoint: this._valueContactPoint,
-			valueTiming: this._valueTiming,
-			valueMeta: this._valueMeta,
-			valueElementDefinition: this._valueElementDefinition,
-			valueContactDetail: this._valueContactDetail,
-			valueContributor: this._valueContributor,
-			valueDosage: this._valueDosage,
-			valueRelatedArtifact: this._valueRelatedArtifact,
-			valueUsageContext: this._valueUsageContext,
-			valueDataRequirement: this._valueDataRequirement,
-			valueParameterDefinition: this._valueParameterDefinition,
-			valueTriggerDefinition: this._valueTriggerDefinition
+			label: this.label,
+			valueBoolean: this.valueBoolean,
+			valueInteger: this.valueInteger,
+			valueDecimal: this.valueDecimal,
+			valueBase64Binary: this.valueBase64Binary,
+			valueInstant: this.valueInstant,
+			valueString: this.valueString,
+			valueUri: this.valueUri,
+			valueDate: this.valueDate,
+			valueDateTime: this.valueDateTime,
+			valueTime: this.valueTime,
+			valueCode: this.valueCode,
+			valueOid: this.valueOid,
+			valueUuid: this.valueUuid,
+			valueId: this.valueId,
+			valueUnsignedInt: this.valueUnsignedInt,
+			valuePositiveInt: this.valuePositiveInt,
+			valueMarkdown: this.valueMarkdown,
+			valueElement: this.valueElement && this.valueElement.toJSON(),
+			valueExtension: this.valueExtension && this.valueExtension.toJSON(),
+			valueBackboneElement: this.valueBackboneElement && this.valueBackboneElement.toJSON(),
+			valueNarrative: this.valueNarrative && this.valueNarrative.toJSON(),
+			valueAnnotation: this.valueAnnotation && this.valueAnnotation.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			valueIdentifier: this.valueIdentifier && this.valueIdentifier.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueCoding: this.valueCoding && this.valueCoding.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueDuration: this.valueDuration && this.valueDuration.toJSON(),
+			valueSimpleQuantity: this.valueSimpleQuantity && this.valueSimpleQuantity.toJSON(),
+			valueDistance: this.valueDistance && this.valueDistance.toJSON(),
+			valueCount: this.valueCount && this.valueCount.toJSON(),
+			valueMoney: this.valueMoney && this.valueMoney.toJSON(),
+			valueAge: this.valueAge && this.valueAge.toJSON(),
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
+			valueReference: this.valueReference && this.valueReference.toJSON(),
+			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
+			valueSignature: this.valueSignature && this.valueSignature.toJSON(),
+			valueHumanName: this.valueHumanName && this.valueHumanName.toJSON(),
+			valueAddress: this.valueAddress && this.valueAddress.toJSON(),
+			valueContactPoint: this.valueContactPoint && this.valueContactPoint.toJSON(),
+			valueTiming: this.valueTiming && this.valueTiming.toJSON(),
+			valueMeta: this.valueMeta && this.valueMeta.toJSON(),
+			valueElementDefinition: this.valueElementDefinition && this.valueElementDefinition.toJSON(),
+			valueContactDetail: this.valueContactDetail && this.valueContactDetail.toJSON(),
+			valueContributor: this.valueContributor && this.valueContributor.toJSON(),
+			valueDosage: this.valueDosage && this.valueDosage.toJSON(),
+			valueRelatedArtifact: this.valueRelatedArtifact && this.valueRelatedArtifact.toJSON(),
+			valueUsageContext: this.valueUsageContext && this.valueUsageContext.toJSON(),
+			valueDataRequirement: this.valueDataRequirement && this.valueDataRequirement.toJSON(),
+			valueParameterDefinition: this.valueParameterDefinition && this.valueParameterDefinition.toJSON(),
+			valueTriggerDefinition: this.valueTriggerDefinition && this.valueTriggerDefinition.toJSON()
 		});
 	}
 

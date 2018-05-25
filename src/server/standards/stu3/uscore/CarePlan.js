@@ -10,7 +10,7 @@ const Annotation = require('./Annotation');
 class CarePlan extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CarePlan';
 		Object.assign(this, opts);
 	}
@@ -25,6 +25,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['CarePlan'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -39,6 +43,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -48,6 +56,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set definition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -57,6 +69,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -66,6 +82,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set replaces ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -75,6 +95,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -84,6 +108,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set text ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._text = new Narrative(new_value);
 	}
 
@@ -93,6 +121,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['draft', 'active', 'suspended', 'completed', 'entered-in-error', 'cancelled', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -107,6 +139,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set intent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposal', 'plan', 'order', 'option'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -121,6 +157,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -130,6 +170,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set title ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._title = new_value;
 	}
 
@@ -139,6 +183,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -148,6 +196,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -157,6 +209,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -166,6 +222,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
@@ -175,6 +235,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set author ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -184,6 +248,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set careTeam ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._careTeam = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -193,6 +261,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set addresses ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._addresses = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -202,6 +274,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set supportingInfo ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._supportingInfo = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -211,6 +287,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set goal ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._goal = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -220,6 +300,10 @@ class CarePlan extends DomainResource {
 	}
 
 	set activity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._activity = Array.isArray(new_value) ? new_value.map(val => new CarePlan_Activity(val)) : [new CarePlan_Activity(new_value)];
 	}
 
@@ -229,33 +313,37 @@ class CarePlan extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			definition: this._definition,
-			basedOn: this._basedOn,
-			replaces: this._replaces,
-			partOf: this._partOf,
-			text: this._text,
-			status: this._status,
-			intent: this._intent,
-			category: this._category,
-			title: this._title,
-			description: this._description,
-			subject: this._subject,
-			context: this._context,
-			period: this._period,
-			author: this._author,
-			careTeam: this._careTeam,
-			addresses: this._addresses,
-			supportingInfo: this._supportingInfo,
-			goal: this._goal,
-			activity: this._activity,
-			note: this._note
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			definition: this.definition && this.definition.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			replaces: this.replaces && this.replaces.toJSON(),
+			partOf: this.partOf && this.partOf.toJSON(),
+			text: this.text && this.text.toJSON(),
+			status: this.status,
+			intent: this.intent,
+			category: this.category && this.category.toJSON(),
+			title: this.title,
+			description: this.description,
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			period: this.period && this.period.toJSON(),
+			author: this.author && this.author.toJSON(),
+			careTeam: this.careTeam && this.careTeam.toJSON(),
+			addresses: this.addresses && this.addresses.toJSON(),
+			supportingInfo: this.supportingInfo && this.supportingInfo.toJSON(),
+			goal: this.goal && this.goal.toJSON(),
+			activity: this.activity && this.activity.toJSON(),
+			note: this.note && this.note.toJSON()
 		});
 	}
 

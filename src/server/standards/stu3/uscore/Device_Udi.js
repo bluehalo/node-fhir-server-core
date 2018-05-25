@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Device_Udi extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Device_Udi';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set deviceIdentifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._deviceIdentifier = new_value;
 	}
 
@@ -27,6 +31,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -36,6 +44,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set jurisdiction ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._jurisdiction = new_value;
 	}
 
@@ -45,6 +57,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set carrierHRF ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._carrierHRF = new_value;
 	}
 
@@ -54,6 +70,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set carrierAIDC ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._carrierAIDC = new_value;
 	}
 
@@ -63,6 +83,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set issuer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._issuer = new_value;
 	}
 
@@ -72,6 +96,10 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set entryType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['barcode', 'rfid', 'manual', 'card', 'self-reported', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -82,13 +110,13 @@ class Device_Udi extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			deviceIdentifier: this._deviceIdentifier,
-			name: this._name,
-			jurisdiction: this._jurisdiction,
-			carrierHRF: this._carrierHRF,
-			carrierAIDC: this._carrierAIDC,
-			issuer: this._issuer,
-			entryType: this._entryType
+			deviceIdentifier: this.deviceIdentifier,
+			name: this.name,
+			jurisdiction: this.jurisdiction,
+			carrierHRF: this.carrierHRF,
+			carrierAIDC: this.carrierAIDC,
+			issuer: this.issuer,
+			entryType: this.entryType
 		});
 	}
 

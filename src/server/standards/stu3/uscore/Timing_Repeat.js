@@ -6,7 +6,7 @@ const Period = require('./Period');
 class Timing_Repeat extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Timing_Repeat';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set boundsDuration ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._boundsDuration = new Duration(new_value);
 	}
 
@@ -30,6 +34,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set boundsRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._boundsRange = new Range(new_value);
 	}
 
@@ -39,6 +47,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set boundsPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._boundsPeriod = new Period(new_value);
 	}
 
@@ -48,6 +60,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set count ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -62,6 +78,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set countMax ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -76,6 +96,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set duration ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -90,6 +114,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set durationMax ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -104,6 +132,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set durationUnit ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['s', 'min', 'h', 'd', 'wk', 'mo', 'a'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -118,6 +150,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set frequency ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -132,6 +168,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set frequencyMax ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -146,6 +186,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -160,6 +204,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set periodMax ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -174,6 +222,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set periodUnit ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['s', 'min', 'h', 'd', 'wk', 'mo', 'a'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -188,6 +240,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set dayOfWeek ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dayOfWeek = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -197,6 +253,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set timeOfDay ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._timeOfDay = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -206,6 +266,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set when ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['MORN', 'AFT', 'EVE', 'NIGHT', 'PHS', 'HS', 'WAKE', 'C', 'CM', 'CD', 'CV', 'AC', 'ACM', 'ACD', 'ACV', 'PC', 'PCM', 'PCD', 'PCV'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -220,6 +284,10 @@ class Timing_Repeat extends BackboneElement {
 	}
 
 	set offset ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
 		if ( !pattern.test(new_value) ) {
@@ -230,23 +298,23 @@ class Timing_Repeat extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			boundsDuration: this._boundsDuration,
-			boundsRange: this._boundsRange,
-			boundsPeriod: this._boundsPeriod,
-			count: this._count,
-			countMax: this._countMax,
-			duration: this._duration,
-			durationMax: this._durationMax,
-			durationUnit: this._durationUnit,
-			frequency: this._frequency,
-			frequencyMax: this._frequencyMax,
-			period: this._period,
-			periodMax: this._periodMax,
-			periodUnit: this._periodUnit,
-			dayOfWeek: this._dayOfWeek,
-			timeOfDay: this._timeOfDay,
-			when: this._when,
-			offset: this._offset
+			boundsDuration: this.boundsDuration && this.boundsDuration.toJSON(),
+			boundsRange: this.boundsRange && this.boundsRange.toJSON(),
+			boundsPeriod: this.boundsPeriod && this.boundsPeriod.toJSON(),
+			count: this.count,
+			countMax: this.countMax,
+			duration: this.duration,
+			durationMax: this.durationMax,
+			durationUnit: this.durationUnit,
+			frequency: this.frequency,
+			frequencyMax: this.frequencyMax,
+			period: this.period,
+			periodMax: this.periodMax,
+			periodUnit: this.periodUnit,
+			dayOfWeek: this.dayOfWeek,
+			timeOfDay: this.timeOfDay,
+			when: this.when,
+			offset: this.offset
 		});
 	}
 

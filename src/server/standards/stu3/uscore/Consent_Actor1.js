@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Consent_Actor1 extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent_Actor1';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Consent_Actor1 extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -29,13 +33,17 @@ class Consent_Actor1 extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reference = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			reference: this._reference
+			role: this.role && this.role.toJSON(),
+			reference: this.reference && this.reference.toJSON()
 		});
 	}
 

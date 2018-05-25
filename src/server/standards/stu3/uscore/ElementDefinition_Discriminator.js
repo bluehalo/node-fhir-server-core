@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Discriminator extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Discriminator';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class ElementDefinition_Discriminator extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['value', 'exists', 'pattern', 'type', 'profile'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -32,13 +36,17 @@ class ElementDefinition_Discriminator extends BackboneElement {
 	}
 
 	set path ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._path = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			path: this._path
+			type: this.type,
+			path: this.path
 		});
 	}
 

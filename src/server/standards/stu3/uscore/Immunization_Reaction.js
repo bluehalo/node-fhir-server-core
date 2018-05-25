@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Immunization_Reaction extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization_Reaction';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Immunization_Reaction extends BackboneElement {
 	}
 
 	set date ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -33,6 +37,10 @@ class Immunization_Reaction extends BackboneElement {
 	}
 
 	set detail ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._detail = new Reference(new_value);
 	}
 
@@ -42,14 +50,18 @@ class Immunization_Reaction extends BackboneElement {
 	}
 
 	set reported ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reported = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			date: this._date,
-			detail: this._detail,
-			reported: this._reported
+			date: this.date,
+			detail: this.detail && this.detail.toJSON(),
+			reported: this.reported
 		});
 	}
 

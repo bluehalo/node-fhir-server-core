@@ -11,7 +11,7 @@ const AllergyIntolerance_Reaction = require('./AllergyIntolerance_Reaction');
 class AllergyIntolerance extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AllergyIntolerance';
 		Object.assign(this, opts);
 	}
@@ -26,6 +26,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AllergyIntolerance'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -40,6 +44,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -49,6 +57,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set clinicalStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'resolved'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -63,6 +75,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set verificationStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['unconfirmed', 'confirmed', 'refuted', 'entered-in-error'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -77,6 +93,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['allergy', 'intolerance'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -91,6 +111,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['food', 'medication', 'environment', 'biologic'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -105,6 +129,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set criticality ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['low', 'high', 'unable-to-assess'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -119,6 +147,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -128,6 +160,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set patient ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -137,6 +173,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -151,6 +191,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetAge ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetAge = new Age(new_value);
 	}
 
@@ -160,6 +204,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetPeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetPeriod = new Period(new_value);
 	}
 
@@ -169,6 +217,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetRange = new Range(new_value);
 	}
 
@@ -178,6 +230,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetString ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onsetString = new_value;
 	}
 
@@ -187,6 +243,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set assertedDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -201,6 +261,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set recorder ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._recorder = new Reference(new_value);
 	}
 
@@ -210,6 +274,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set asserter ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._asserter = new Reference(new_value);
 	}
 
@@ -219,6 +287,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set lastOccurrence ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -233,6 +305,10 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -242,31 +318,35 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set reaction ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reaction = Array.isArray(new_value) ? new_value.map(val => new AllergyIntolerance_Reaction(val)) : [new AllergyIntolerance_Reaction(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			clinicalStatus: this._clinicalStatus,
-			verificationStatus: this._verificationStatus,
-			type: this._type,
-			category: this._category,
-			criticality: this._criticality,
-			code: this._code,
-			patient: this._patient,
-			onsetDateTime: this._onsetDateTime,
-			onsetAge: this._onsetAge,
-			onsetPeriod: this._onsetPeriod,
-			onsetRange: this._onsetRange,
-			onsetString: this._onsetString,
-			assertedDate: this._assertedDate,
-			recorder: this._recorder,
-			asserter: this._asserter,
-			lastOccurrence: this._lastOccurrence,
-			note: this._note,
-			reaction: this._reaction
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			clinicalStatus: this.clinicalStatus,
+			verificationStatus: this.verificationStatus,
+			type: this.type,
+			category: this.category,
+			criticality: this.criticality,
+			code: this.code && this.code.toJSON(),
+			patient: this.patient && this.patient.toJSON(),
+			onsetDateTime: this.onsetDateTime,
+			onsetAge: this.onsetAge && this.onsetAge.toJSON(),
+			onsetPeriod: this.onsetPeriod && this.onsetPeriod.toJSON(),
+			onsetRange: this.onsetRange && this.onsetRange.toJSON(),
+			onsetString: this.onsetString,
+			assertedDate: this.assertedDate,
+			recorder: this.recorder && this.recorder.toJSON(),
+			asserter: this.asserter && this.asserter.toJSON(),
+			lastOccurrence: this.lastOccurrence,
+			note: this.note && this.note.toJSON(),
+			reaction: this.reaction && this.reaction.toJSON()
 		});
 	}
 

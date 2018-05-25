@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class ParameterDefinition extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ParameterDefinition';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -33,6 +37,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set use ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -47,6 +55,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set min ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
 		if ( !pattern.test(new_value) ) {
@@ -61,6 +73,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set max ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._max = new_value;
 	}
 
@@ -70,6 +86,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set documentation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._documentation = new_value;
 	}
 
@@ -79,6 +99,10 @@ class ParameterDefinition extends Element {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -93,18 +117,22 @@ class ParameterDefinition extends Element {
 	}
 
 	set profile ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._profile = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			name: this._name,
-			use: this._use,
-			min: this._min,
-			max: this._max,
-			documentation: this._documentation,
-			type: this._type,
-			profile: this._profile
+			name: this.name,
+			use: this.use,
+			min: this.min,
+			max: this.max,
+			documentation: this.documentation,
+			type: this.type,
+			profile: this.profile && this.profile.toJSON()
 		});
 	}
 

@@ -6,7 +6,7 @@ const Quantity = require('./Quantity');
 class Medication_Content extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Medication_Content';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class Medication_Content extends BackboneElement {
 	}
 
 	set itemCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._itemCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -30,6 +34,10 @@ class Medication_Content extends BackboneElement {
 	}
 
 	set itemReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._itemReference = new Reference(new_value);
 	}
 
@@ -39,14 +47,18 @@ class Medication_Content extends BackboneElement {
 	}
 
 	set amount ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._amount = new Quantity(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			itemCodeableConcept: this._itemCodeableConcept,
-			itemReference: this._itemReference,
-			amount: this._amount
+			itemCodeableConcept: this.itemCodeableConcept && this.itemCodeableConcept.toJSON(),
+			itemReference: this.itemReference && this.itemReference.toJSON(),
+			amount: this.amount && this.amount.toJSON()
 		});
 	}
 

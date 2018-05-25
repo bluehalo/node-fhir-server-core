@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class AuditEvent_Network extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent_Network';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class AuditEvent_Network extends BackboneElement {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = new_value;
 	}
 
@@ -27,6 +31,10 @@ class AuditEvent_Network extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['1', '2', '3', '4', '5'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -37,8 +45,8 @@ class AuditEvent_Network extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			address: this._address,
-			type: this._type
+			address: this.address,
+			type: this.type
 		});
 	}
 

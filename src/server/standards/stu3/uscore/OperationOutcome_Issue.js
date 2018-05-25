@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class OperationOutcome_Issue extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'OperationOutcome_Issue';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set severity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['fatal', 'error', 'warning', 'information'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,6 +37,10 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['invalid', 'structure', 'required', 'value', 'invariant', 'security', 'login', 'unknown', 'expired', 'forbidden', 'suppressed', 'processing', 'not-supported', 'duplicate', 'not-found', 'too-long', 'code-invalid', 'extension', 'too-costly', 'business-rule', 'conflict', 'incomplete', 'transient', 'lock-error', 'no-store', 'exception', 'timeout', 'throttled', 'informational'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -47,6 +55,10 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set details ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._details = new CodeableConcept(new_value);
 	}
 
@@ -56,6 +68,10 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set diagnostics ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._diagnostics = new_value;
 	}
 
@@ -65,6 +81,10 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -74,17 +94,21 @@ class OperationOutcome_Issue extends BackboneElement {
 	}
 
 	set expression ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._expression = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			severity: this._severity,
-			code: this._code,
-			details: this._details,
-			diagnostics: this._diagnostics,
-			location: this._location,
-			expression: this._expression
+			severity: this.severity,
+			code: this.code,
+			details: this.details && this.details.toJSON(),
+			diagnostics: this.diagnostics,
+			location: this.location,
+			expression: this.expression
 		});
 	}
 

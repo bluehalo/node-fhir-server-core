@@ -11,7 +11,7 @@ const MedicationRequest_Substitution = require('./MedicationRequest_Substitution
 class MedicationRequest extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest';
 		Object.assign(this, opts);
 	}
@@ -26,6 +26,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['MedicationRequest'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -40,6 +44,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -49,6 +57,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set definition ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -58,6 +70,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -67,6 +83,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set groupIdentifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._groupIdentifier = new Identifier(new_value);
 	}
 
@@ -76,6 +96,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'on-hold', 'cancelled', 'completed', 'entered-in-error', 'stopped', 'draft', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -90,6 +114,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set intent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposal', 'plan', 'order', 'instance-order'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -104,6 +132,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -113,6 +145,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set priority ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['routine', 'urgent', 'stat', 'asap'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -127,6 +163,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set medicationCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._medicationCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -136,6 +176,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set medicationReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._medicationReference = new Reference(new_value);
 	}
 
@@ -145,6 +189,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -154,6 +202,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -163,6 +215,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set supportingInformation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._supportingInformation = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -172,6 +228,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set authoredOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -186,6 +246,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set requester ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._requester = new MedicationRequest_Requester(new_value);
 	}
 
@@ -195,6 +259,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set recorder ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._recorder = new Reference(new_value);
 	}
 
@@ -204,6 +272,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set reasonCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -213,6 +285,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set reasonReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -222,6 +298,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -231,6 +311,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set dosageInstruction ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dosageInstruction = Array.isArray(new_value) ? new_value.map(val => new Dosage(val)) : [new Dosage(new_value)];
 	}
 
@@ -240,6 +324,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set dispenseRequest ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._dispenseRequest = new MedicationRequest_DispenseRequest(new_value);
 	}
 
@@ -249,6 +337,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set substitution ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._substitution = new MedicationRequest_Substitution(new_value);
 	}
 
@@ -258,6 +350,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set priorPrescription ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._priorPrescription = new Reference(new_value);
 	}
 
@@ -267,6 +363,10 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set detectedIssue ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._detectedIssue = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -276,37 +376,41 @@ class MedicationRequest extends DomainResource {
 	}
 
 	set eventHistory ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._eventHistory = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			definition: this._definition,
-			basedOn: this._basedOn,
-			groupIdentifier: this._groupIdentifier,
-			status: this._status,
-			intent: this._intent,
-			category: this._category,
-			priority: this._priority,
-			medicationCodeableConcept: this._medicationCodeableConcept,
-			medicationReference: this._medicationReference,
-			subject: this._subject,
-			context: this._context,
-			supportingInformation: this._supportingInformation,
-			authoredOn: this._authoredOn,
-			requester: this._requester,
-			recorder: this._recorder,
-			reasonCode: this._reasonCode,
-			reasonReference: this._reasonReference,
-			note: this._note,
-			dosageInstruction: this._dosageInstruction,
-			dispenseRequest: this._dispenseRequest,
-			substitution: this._substitution,
-			priorPrescription: this._priorPrescription,
-			detectedIssue: this._detectedIssue,
-			eventHistory: this._eventHistory
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			definition: this.definition && this.definition.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			groupIdentifier: this.groupIdentifier && this.groupIdentifier.toJSON(),
+			status: this.status,
+			intent: this.intent,
+			category: this.category && this.category.toJSON(),
+			priority: this.priority,
+			medicationCodeableConcept: this.medicationCodeableConcept && this.medicationCodeableConcept.toJSON(),
+			medicationReference: this.medicationReference && this.medicationReference.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			supportingInformation: this.supportingInformation && this.supportingInformation.toJSON(),
+			authoredOn: this.authoredOn,
+			requester: this.requester && this.requester.toJSON(),
+			recorder: this.recorder && this.recorder.toJSON(),
+			reasonCode: this.reasonCode && this.reasonCode.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			note: this.note && this.note.toJSON(),
+			dosageInstruction: this.dosageInstruction && this.dosageInstruction.toJSON(),
+			dispenseRequest: this.dispenseRequest && this.dispenseRequest.toJSON(),
+			substitution: this.substitution && this.substitution.toJSON(),
+			priorPrescription: this.priorPrescription && this.priorPrescription.toJSON(),
+			detectedIssue: this.detectedIssue && this.detectedIssue.toJSON(),
+			eventHistory: this.eventHistory && this.eventHistory.toJSON()
 		});
 	}
 

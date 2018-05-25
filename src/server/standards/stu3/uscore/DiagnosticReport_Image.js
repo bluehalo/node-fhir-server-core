@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class DiagnosticReport_Image extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DiagnosticReport_Image';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class DiagnosticReport_Image extends BackboneElement {
 	}
 
 	set comment ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._comment = new_value;
 	}
 
@@ -28,13 +32,17 @@ class DiagnosticReport_Image extends BackboneElement {
 	}
 
 	set link ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._link = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			comment: this._comment,
-			link: this._link
+			comment: this.comment,
+			link: this.link && this.link.toJSON()
 		});
 	}
 

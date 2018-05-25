@@ -8,7 +8,7 @@ const AuditEvent_Network = require('./AuditEvent_Network');
 class AuditEvent_Agent extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent_Agent';
 		Object.assign(this, opts);
 	}
@@ -23,6 +23,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -32,6 +36,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reference = new Reference(new_value);
 	}
 
@@ -41,6 +49,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set userId ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._userId = new Identifier(new_value);
 	}
 
@@ -50,6 +62,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set altId ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._altId = new_value;
 	}
 
@@ -59,6 +75,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -68,6 +88,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set requestor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._requestor = new_value;
 	}
 
@@ -77,6 +101,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set location ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._location = new Reference(new_value);
 	}
 
@@ -86,6 +114,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set policy ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -95,6 +127,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set media ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._media = new Coding(new_value);
 	}
 
@@ -104,6 +140,10 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set network ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._network = new AuditEvent_Network(new_value);
 	}
 
@@ -113,22 +153,26 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set purposeOfUse ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._purposeOfUse = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			reference: this._reference,
-			userId: this._userId,
-			altId: this._altId,
-			name: this._name,
-			requestor: this._requestor,
-			location: this._location,
-			policy: this._policy,
-			media: this._media,
-			network: this._network,
-			purposeOfUse: this._purposeOfUse
+			role: this.role && this.role.toJSON(),
+			reference: this.reference && this.reference.toJSON(),
+			userId: this.userId && this.userId.toJSON(),
+			altId: this.altId,
+			name: this.name,
+			requestor: this.requestor,
+			location: this.location && this.location.toJSON(),
+			policy: this.policy,
+			media: this.media && this.media.toJSON(),
+			network: this.network && this.network.toJSON(),
+			purposeOfUse: this.purposeOfUse && this.purposeOfUse.toJSON()
 		});
 	}
 

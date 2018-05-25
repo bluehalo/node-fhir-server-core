@@ -10,7 +10,7 @@ const Reference = require('./Reference');
 class Location extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Location';
 		Object.assign(this, opts);
 	}
@@ -25,6 +25,10 @@ class Location extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Location'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -39,6 +43,10 @@ class Location extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -48,6 +56,10 @@ class Location extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'suspended', 'inactive'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -62,6 +74,10 @@ class Location extends DomainResource {
 	}
 
 	set operationalStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._operationalStatus = new Coding(new_value);
 	}
 
@@ -71,6 +87,10 @@ class Location extends DomainResource {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -80,6 +100,10 @@ class Location extends DomainResource {
 	}
 
 	set alias ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -89,6 +113,10 @@ class Location extends DomainResource {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -98,6 +126,10 @@ class Location extends DomainResource {
 	}
 
 	set mode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['instance', 'kind'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -112,6 +144,10 @@ class Location extends DomainResource {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -121,6 +157,10 @@ class Location extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -130,6 +170,10 @@ class Location extends DomainResource {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = new Address(new_value);
 	}
 
@@ -139,6 +183,10 @@ class Location extends DomainResource {
 	}
 
 	set physicalType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._physicalType = new CodeableConcept(new_value);
 	}
 
@@ -148,6 +196,10 @@ class Location extends DomainResource {
 	}
 
 	set position ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._position = new Location_Position(new_value);
 	}
 
@@ -157,6 +209,10 @@ class Location extends DomainResource {
 	}
 
 	set managingOrganization ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._managingOrganization = new Reference(new_value);
 	}
 
@@ -166,6 +222,10 @@ class Location extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._partOf = new Reference(new_value);
 	}
 
@@ -175,27 +235,31 @@ class Location extends DomainResource {
 	}
 
 	set endpoint ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			status: this._status,
-			operationalStatus: this._operationalStatus,
-			name: this._name,
-			alias: this._alias,
-			description: this._description,
-			mode: this._mode,
-			type: this._type,
-			telecom: this._telecom,
-			address: this._address,
-			physicalType: this._physicalType,
-			position: this._position,
-			managingOrganization: this._managingOrganization,
-			partOf: this._partOf,
-			endpoint: this._endpoint
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			status: this.status,
+			operationalStatus: this.operationalStatus && this.operationalStatus.toJSON(),
+			name: this.name,
+			alias: this.alias,
+			description: this.description,
+			mode: this.mode,
+			type: this.type && this.type.toJSON(),
+			telecom: this.telecom && this.telecom.toJSON(),
+			address: this.address && this.address.toJSON(),
+			physicalType: this.physicalType && this.physicalType.toJSON(),
+			position: this.position && this.position.toJSON(),
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			partOf: this.partOf && this.partOf.toJSON(),
+			endpoint: this.endpoint && this.endpoint.toJSON()
 		});
 	}
 

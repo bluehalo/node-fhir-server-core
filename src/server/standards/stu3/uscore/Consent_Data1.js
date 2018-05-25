@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Consent_Data1 extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent_Data1';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Consent_Data1 extends BackboneElement {
 	}
 
 	set meaning ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['instance', 'related', 'dependents', 'authoredby'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,13 +37,17 @@ class Consent_Data1 extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reference = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			meaning: this._meaning,
-			reference: this._reference
+			meaning: this.meaning,
+			reference: this.reference && this.reference.toJSON()
 		});
 	}
 

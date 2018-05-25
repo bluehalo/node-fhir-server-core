@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class ElementDefinition_Binding extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Binding';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class ElementDefinition_Binding extends BackboneElement {
 	}
 
 	set strength ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['required', 'extensible', 'preferred', 'example'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,6 +37,10 @@ class ElementDefinition_Binding extends BackboneElement {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -42,6 +50,10 @@ class ElementDefinition_Binding extends BackboneElement {
 	}
 
 	set valueSetUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSetUri = new_value;
 	}
 
@@ -51,15 +63,19 @@ class ElementDefinition_Binding extends BackboneElement {
 	}
 
 	set valueSetReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueSetReference = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			strength: this._strength,
-			description: this._description,
-			valueSetUri: this._valueSetUri,
-			valueSetReference: this._valueSetReference
+			strength: this.strength,
+			description: this.description,
+			valueSetUri: this.valueSetUri,
+			valueSetReference: this.valueSetReference && this.valueSetReference.toJSON()
 		});
 	}
 

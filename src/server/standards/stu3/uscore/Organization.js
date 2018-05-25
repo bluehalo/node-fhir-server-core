@@ -9,7 +9,7 @@ const Organization_Contact = require('./Organization_Contact');
 class Organization extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Organization';
 		Object.assign(this, opts);
 	}
@@ -24,6 +24,10 @@ class Organization extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Organization'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -38,6 +42,10 @@ class Organization extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -47,6 +55,10 @@ class Organization extends DomainResource {
 	}
 
 	set active ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._active = new_value;
 	}
 
@@ -56,6 +68,10 @@ class Organization extends DomainResource {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -65,6 +81,10 @@ class Organization extends DomainResource {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -74,6 +94,10 @@ class Organization extends DomainResource {
 	}
 
 	set alias ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -83,6 +107,10 @@ class Organization extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -92,6 +120,10 @@ class Organization extends DomainResource {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
 	}
 
@@ -101,6 +133,10 @@ class Organization extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._partOf = new Reference(new_value);
 	}
 
@@ -110,6 +146,10 @@ class Organization extends DomainResource {
 	}
 
 	set contact ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new Organization_Contact(val)) : [new Organization_Contact(new_value)];
 	}
 
@@ -119,22 +159,26 @@ class Organization extends DomainResource {
 	}
 
 	set endpoint ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			active: this._active,
-			type: this._type,
-			name: this._name,
-			alias: this._alias,
-			telecom: this._telecom,
-			address: this._address,
-			partOf: this._partOf,
-			contact: this._contact,
-			endpoint: this._endpoint
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			active: this.active,
+			type: this.type && this.type.toJSON(),
+			name: this.name,
+			alias: this.alias,
+			telecom: this.telecom && this.telecom.toJSON(),
+			address: this.address && this.address.toJSON(),
+			partOf: this.partOf && this.partOf.toJSON(),
+			contact: this.contact && this.contact.toJSON(),
+			endpoint: this.endpoint && this.endpoint.toJSON()
 		});
 	}
 

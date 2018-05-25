@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Medication_Batch extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Medication_Batch';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Medication_Batch extends BackboneElement {
 	}
 
 	set lotNumber ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._lotNumber = new_value;
 	}
 
@@ -27,6 +31,10 @@ class Medication_Batch extends BackboneElement {
 	}
 
 	set expirationDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -37,8 +45,8 @@ class Medication_Batch extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			lotNumber: this._lotNumber,
-			expirationDate: this._expirationDate
+			lotNumber: this.lotNumber,
+			expirationDate: this.expirationDate
 		});
 	}
 

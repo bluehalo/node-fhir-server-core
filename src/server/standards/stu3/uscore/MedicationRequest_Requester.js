@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class MedicationRequest_Requester extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest_Requester';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class MedicationRequest_Requester extends BackboneElement {
 	}
 
 	set agent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._agent = new Reference(new_value);
 	}
 
@@ -28,13 +32,17 @@ class MedicationRequest_Requester extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			agent: this._agent,
-			onBehalfOf: this._onBehalfOf
+			agent: this.agent && this.agent.toJSON(),
+			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON()
 		});
 	}
 

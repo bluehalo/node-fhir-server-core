@@ -10,7 +10,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Practitioner extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Practitioner';
 		Object.assign(this, opts);
 	}
@@ -25,6 +25,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Practitioner'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -39,6 +43,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -48,6 +56,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set active ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._active = new_value;
 	}
 
@@ -57,6 +69,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = Array.isArray(new_value) ? new_value.map(val => new HumanName(val)) : [new HumanName(new_value)];
 	}
 
@@ -66,6 +82,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -75,6 +95,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set address ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
 	}
 
@@ -84,6 +108,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set gender ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -98,6 +126,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set birthDate ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -112,6 +144,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set photo ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
@@ -121,6 +157,10 @@ class Practitioner extends DomainResource {
 	}
 
 	set qualification ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._qualification = Array.isArray(new_value) ? new_value.map(val => new Practitioner_Qualification(val)) : [new Practitioner_Qualification(new_value)];
 	}
 
@@ -130,22 +170,26 @@ class Practitioner extends DomainResource {
 	}
 
 	set communication ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._communication = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			active: this._active,
-			name: this._name,
-			telecom: this._telecom,
-			address: this._address,
-			gender: this._gender,
-			birthDate: this._birthDate,
-			photo: this._photo,
-			qualification: this._qualification,
-			communication: this._communication
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			active: this.active,
+			name: this.name && this.name.toJSON(),
+			telecom: this.telecom && this.telecom.toJSON(),
+			address: this.address && this.address.toJSON(),
+			gender: this.gender,
+			birthDate: this.birthDate,
+			photo: this.photo && this.photo.toJSON(),
+			qualification: this.qualification && this.qualification.toJSON(),
+			communication: this.communication && this.communication.toJSON()
 		});
 	}
 

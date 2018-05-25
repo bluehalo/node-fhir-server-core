@@ -10,7 +10,7 @@ const Attachment = require('./Attachment');
 class DiagnosticReport extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DiagnosticReport';
 		Object.assign(this, opts);
 	}
@@ -25,6 +25,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['DiagnosticReport'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -39,6 +43,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -48,6 +56,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -57,6 +69,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['registered', 'partial', 'preliminary', 'final', 'amended', 'corrected', 'appended', 'cancelled', 'entered-in-error', 'unknown'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -71,6 +87,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -80,6 +100,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -89,6 +113,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -98,6 +126,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -107,6 +139,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set effectiveDateTime ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -121,6 +157,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set effectivePeriod ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._effectivePeriod = new Period(new_value);
 	}
 
@@ -130,6 +170,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set issued ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._issued = new_value;
 	}
 
@@ -139,6 +183,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set performer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new DiagnosticReport_Performer(val)) : [new DiagnosticReport_Performer(new_value)];
 	}
 
@@ -148,6 +196,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set specimen ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._specimen = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -157,6 +209,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set result ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._result = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -166,6 +222,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set imagingStudy ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._imagingStudy = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -175,6 +235,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set image ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._image = Array.isArray(new_value) ? new_value.map(val => new DiagnosticReport_Image(val)) : [new DiagnosticReport_Image(new_value)];
 	}
 
@@ -184,6 +248,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set conclusion ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._conclusion = new_value;
 	}
 
@@ -193,6 +261,10 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set codedDiagnosis ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._codedDiagnosis = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -202,30 +274,34 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set presentedForm ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._presentedForm = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			basedOn: this._basedOn,
-			status: this._status,
-			category: this._category,
-			code: this._code,
-			subject: this._subject,
-			context: this._context,
-			effectiveDateTime: this._effectiveDateTime,
-			effectivePeriod: this._effectivePeriod,
-			issued: this._issued,
-			performer: this._performer,
-			specimen: this._specimen,
-			result: this._result,
-			imagingStudy: this._imagingStudy,
-			image: this._image,
-			conclusion: this._conclusion,
-			codedDiagnosis: this._codedDiagnosis,
-			presentedForm: this._presentedForm
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			status: this.status,
+			category: this.category && this.category.toJSON(),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			effectiveDateTime: this.effectiveDateTime,
+			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
+			issued: this.issued,
+			performer: this.performer && this.performer.toJSON(),
+			specimen: this.specimen && this.specimen.toJSON(),
+			result: this.result && this.result.toJSON(),
+			imagingStudy: this.imagingStudy && this.imagingStudy.toJSON(),
+			image: this.image && this.image.toJSON(),
+			conclusion: this.conclusion,
+			codedDiagnosis: this.codedDiagnosis && this.codedDiagnosis.toJSON(),
+			presentedForm: this.presentedForm && this.presentedForm.toJSON()
 		});
 	}
 

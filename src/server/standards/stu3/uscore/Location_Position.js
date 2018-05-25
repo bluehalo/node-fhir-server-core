@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Location_Position extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Location_Position';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Location_Position extends BackboneElement {
 	}
 
 	set longitude ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -32,6 +36,10 @@ class Location_Position extends BackboneElement {
 	}
 
 	set latitude ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -46,6 +54,10 @@ class Location_Position extends BackboneElement {
 	}
 
 	set altitude ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -56,9 +68,9 @@ class Location_Position extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			longitude: this._longitude,
-			latitude: this._latitude,
-			altitude: this._altitude
+			longitude: this.longitude,
+			latitude: this.latitude,
+			altitude: this.altitude
 		});
 	}
 

@@ -9,7 +9,7 @@ const Annotation = require('./Annotation');
 class CareTeam extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CareTeam';
 		Object.assign(this, opts);
 	}
@@ -24,6 +24,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['CareTeam'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -38,6 +42,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -47,6 +55,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposed', 'active', 'suspended', 'inactive', 'entered-in-error'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -61,6 +73,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set category ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -70,6 +86,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set name ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._name = new_value;
 	}
 
@@ -79,6 +99,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set subject ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -88,6 +112,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set context ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._context = new Reference(new_value);
 	}
 
@@ -97,6 +125,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
@@ -106,6 +138,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set participant ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._participant = Array.isArray(new_value) ? new_value.map(val => new CareTeam_Participant(val)) : [new CareTeam_Participant(new_value)];
 	}
 
@@ -115,6 +151,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set reasonCode ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -124,6 +164,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set reasonReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -133,6 +177,10 @@ class CareTeam extends DomainResource {
 	}
 
 	set managingOrganization ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._managingOrganization = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -142,24 +190,28 @@ class CareTeam extends DomainResource {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier,
-			status: this._status,
-			category: this._category,
-			name: this._name,
-			subject: this._subject,
-			context: this._context,
-			period: this._period,
-			participant: this._participant,
-			reasonCode: this._reasonCode,
-			reasonReference: this._reasonReference,
-			managingOrganization: this._managingOrganization,
-			note: this._note
+			resourceType: this.resourceType,
+			identifier: this.identifier && this.identifier.toJSON(),
+			status: this.status,
+			category: this.category && this.category.toJSON(),
+			name: this.name,
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			period: this.period && this.period.toJSON(),
+			participant: this.participant && this.participant.toJSON(),
+			reasonCode: this.reasonCode && this.reasonCode.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			note: this.note && this.note.toJSON()
 		});
 	}
 

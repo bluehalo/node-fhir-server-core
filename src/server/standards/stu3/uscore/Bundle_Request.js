@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Bundle_Request extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Request';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set method ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['GET', 'POST', 'PUT', 'DELETE'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -32,6 +36,10 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set url ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._url = new_value;
 	}
 
@@ -41,6 +49,10 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifNoneMatch ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ifNoneMatch = new_value;
 	}
 
@@ -50,6 +62,10 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifModifiedSince ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ifModifiedSince = new_value;
 	}
 
@@ -59,6 +75,10 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifMatch ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ifMatch = new_value;
 	}
 
@@ -68,17 +88,21 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifNoneExist ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ifNoneExist = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			method: this._method,
-			url: this._url,
-			ifNoneMatch: this._ifNoneMatch,
-			ifModifiedSince: this._ifModifiedSince,
-			ifMatch: this._ifMatch,
-			ifNoneExist: this._ifNoneExist
+			method: this.method,
+			url: this.url,
+			ifNoneMatch: this.ifNoneMatch,
+			ifModifiedSince: this.ifModifiedSince,
+			ifMatch: this.ifMatch,
+			ifNoneExist: this.ifNoneExist
 		});
 	}
 

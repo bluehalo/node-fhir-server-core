@@ -3,7 +3,7 @@ const Element = require('./Element');
 class Attachment extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Attachment';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Attachment extends Element {
 	}
 
 	set contentType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -32,6 +36,10 @@ class Attachment extends Element {
 	}
 
 	set language ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -46,6 +54,10 @@ class Attachment extends Element {
 	}
 
 	set data ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._data = new_value;
 	}
 
@@ -55,6 +67,10 @@ class Attachment extends Element {
 	}
 
 	set url ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._url = new_value;
 	}
 
@@ -64,6 +80,10 @@ class Attachment extends Element {
 	}
 
 	set size ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
 		if ( !pattern.test(new_value) ) {
@@ -78,6 +98,10 @@ class Attachment extends Element {
 	}
 
 	set hash ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._hash = new_value;
 	}
 
@@ -87,6 +111,10 @@ class Attachment extends Element {
 	}
 
 	set title ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._title = new_value;
 	}
 
@@ -96,6 +124,10 @@ class Attachment extends Element {
 	}
 
 	set creation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -106,14 +138,14 @@ class Attachment extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			contentType: this._contentType,
-			language: this._language,
-			data: this._data,
-			url: this._url,
-			size: this._size,
-			hash: this._hash,
-			title: this._title,
-			creation: this._creation
+			contentType: this.contentType,
+			language: this.language,
+			data: this.data,
+			url: this.url,
+			size: this.size,
+			hash: this.hash,
+			title: this.title,
+			creation: this.creation
 		});
 	}
 

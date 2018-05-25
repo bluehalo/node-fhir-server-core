@@ -4,7 +4,7 @@ const ElementDefinition_Discriminator = require('./ElementDefinition_Discriminat
 class ElementDefinition_Slicing extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Slicing';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set discriminator ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._discriminator = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Discriminator(val)) : [new ElementDefinition_Discriminator(new_value)];
 	}
 
@@ -28,6 +32,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -37,6 +45,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set ordered ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ordered = new_value;
 	}
 
@@ -46,6 +58,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set rules ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['closed', 'open', 'openAtEnd'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -56,10 +72,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			discriminator: this._discriminator,
-			description: this._description,
-			ordered: this._ordered,
-			rules: this._rules
+			discriminator: this.discriminator && this.discriminator.toJSON(),
+			description: this.description,
+			ordered: this.ordered,
+			rules: this.rules
 		});
 	}
 

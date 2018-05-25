@@ -6,7 +6,7 @@ const Range = require('./Range');
 class Observation_ReferenceRange extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Observation_ReferenceRange';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set low ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._low = new Quantity(new_value);
 	}
 
@@ -30,6 +34,10 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set high ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._high = new Quantity(new_value);
 	}
 
@@ -39,6 +47,10 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -48,6 +60,10 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set appliesTo ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._appliesTo = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -57,6 +73,10 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set age ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._age = new Range(new_value);
 	}
 
@@ -66,17 +86,21 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set text ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._text = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			low: this._low,
-			high: this._high,
-			type: this._type,
-			appliesTo: this._appliesTo,
-			age: this._age,
-			text: this._text
+			low: this.low && this.low.toJSON(),
+			high: this.high && this.high.toJSON(),
+			type: this.type && this.type.toJSON(),
+			appliesTo: this.appliesTo && this.appliesTo.toJSON(),
+			age: this.age && this.age.toJSON(),
+			text: this.text
 		});
 	}
 

@@ -8,7 +8,7 @@ const AuditEvent_Entity = require('./AuditEvent_Entity');
 class AuditEvent extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent';
 		Object.assign(this, opts);
 	}
@@ -23,6 +23,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AuditEvent'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -37,6 +41,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = new Coding(new_value);
 	}
 
@@ -46,6 +54,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set subtype ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._subtype = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -55,6 +67,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set action ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['C', 'R', 'U', 'D', 'E'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -69,6 +85,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set recorded ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._recorded = new_value;
 	}
 
@@ -78,6 +98,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set outcome ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['0', '4', '8', '12'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -92,6 +116,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set outcomeDesc ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._outcomeDesc = new_value;
 	}
 
@@ -101,6 +129,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set purposeOfEvent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._purposeOfEvent = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -110,6 +142,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set agent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new AuditEvent_Agent(val)) : [new AuditEvent_Agent(new_value)];
 	}
 
@@ -119,6 +155,10 @@ class AuditEvent extends DomainResource {
 	}
 
 	set source ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._source = new AuditEvent_Source(new_value);
 	}
 
@@ -128,22 +168,26 @@ class AuditEvent extends DomainResource {
 	}
 
 	set entity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._entity = Array.isArray(new_value) ? new_value.map(val => new AuditEvent_Entity(val)) : [new AuditEvent_Entity(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			type: this._type,
-			subtype: this._subtype,
-			action: this._action,
-			recorded: this._recorded,
-			outcome: this._outcome,
-			outcomeDesc: this._outcomeDesc,
-			purposeOfEvent: this._purposeOfEvent,
-			agent: this._agent,
-			source: this._source,
-			entity: this._entity
+			resourceType: this.resourceType,
+			type: this.type && this.type.toJSON(),
+			subtype: this.subtype && this.subtype.toJSON(),
+			action: this.action,
+			recorded: this.recorded,
+			outcome: this.outcome,
+			outcomeDesc: this.outcomeDesc,
+			purposeOfEvent: this.purposeOfEvent && this.purposeOfEvent.toJSON(),
+			agent: this.agent && this.agent.toJSON(),
+			source: this.source && this.source.toJSON(),
+			entity: this.entity && this.entity.toJSON()
 		});
 	}
 

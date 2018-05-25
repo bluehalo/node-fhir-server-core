@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class RelatedArtifact extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'RelatedArtifact';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class RelatedArtifact extends Element {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['documentation', 'justification', 'citation', 'predecessor', 'successor', 'derived-from', 'depends-on', 'composed-of'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -34,6 +38,10 @@ class RelatedArtifact extends Element {
 	}
 
 	set display ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._display = new_value;
 	}
 
@@ -43,6 +51,10 @@ class RelatedArtifact extends Element {
 	}
 
 	set citation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._citation = new_value;
 	}
 
@@ -52,6 +64,10 @@ class RelatedArtifact extends Element {
 	}
 
 	set url ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._url = new_value;
 	}
 
@@ -61,6 +77,10 @@ class RelatedArtifact extends Element {
 	}
 
 	set document ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._document = new Attachment(new_value);
 	}
 
@@ -70,17 +90,21 @@ class RelatedArtifact extends Element {
 	}
 
 	set resource ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._resource = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			display: this._display,
-			citation: this._citation,
-			url: this._url,
-			document: this._document,
-			resource: this._resource
+			type: this.type,
+			display: this.display,
+			citation: this.citation,
+			url: this.url,
+			document: this.document && this.document.toJSON(),
+			resource: this.resource && this.resource.toJSON()
 		});
 	}
 

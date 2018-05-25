@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Procedure_FocalDevice extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Procedure_FocalDevice';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Procedure_FocalDevice extends BackboneElement {
 	}
 
 	set action ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._action = new CodeableConcept(new_value);
 	}
 
@@ -29,13 +33,17 @@ class Procedure_FocalDevice extends BackboneElement {
 	}
 
 	set manipulated ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._manipulated = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			action: this._action,
-			manipulated: this._manipulated
+			action: this.action && this.action.toJSON(),
+			manipulated: this.manipulated && this.manipulated.toJSON()
 		});
 	}
 

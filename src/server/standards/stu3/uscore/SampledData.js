@@ -4,7 +4,7 @@ const Quantity = require('./Quantity');
 class SampledData extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'SampledData';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class SampledData extends Element {
 	}
 
 	set origin ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._origin = new Quantity(new_value);
 	}
 
@@ -28,6 +32,10 @@ class SampledData extends Element {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -42,6 +50,10 @@ class SampledData extends Element {
 	}
 
 	set factor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -56,6 +68,10 @@ class SampledData extends Element {
 	}
 
 	set lowerLimit ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -70,6 +86,10 @@ class SampledData extends Element {
 	}
 
 	set upperLimit ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
 		if ( !pattern.test(new_value) ) {
@@ -84,6 +104,10 @@ class SampledData extends Element {
 	}
 
 	set dimensions ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -98,18 +122,22 @@ class SampledData extends Element {
 	}
 
 	set data ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._data = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			origin: this._origin,
-			period: this._period,
-			factor: this._factor,
-			lowerLimit: this._lowerLimit,
-			upperLimit: this._upperLimit,
-			dimensions: this._dimensions,
-			data: this._data
+			origin: this.origin && this.origin.toJSON(),
+			period: this.period,
+			factor: this.factor,
+			lowerLimit: this.lowerLimit,
+			upperLimit: this.upperLimit,
+			dimensions: this.dimensions,
+			data: this.data
 		});
 	}
 

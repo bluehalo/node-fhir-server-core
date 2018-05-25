@@ -4,7 +4,7 @@ const Identifier = require('./Identifier');
 class Reference extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Reference';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Reference extends Element {
 	}
 
 	set reference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._reference = new_value;
 	}
 
@@ -28,6 +32,10 @@ class Reference extends Element {
 	}
 
 	set identifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -37,14 +45,18 @@ class Reference extends Element {
 	}
 
 	set display ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._display = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			reference: this._reference,
-			identifier: this._identifier,
-			display: this._display
+			reference: this.reference,
+			identifier: this.identifier && this.identifier.toJSON(),
+			display: this.display
 		});
 	}
 

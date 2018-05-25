@@ -4,7 +4,7 @@ const OperationOutcome_Issue = require('./OperationOutcome_Issue');
 class OperationOutcome extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'OperationOutcome';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class OperationOutcome extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['OperationOutcome'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,13 +37,17 @@ class OperationOutcome extends DomainResource {
 	}
 
 	set issue ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._issue = Array.isArray(new_value) ? new_value.map(val => new OperationOutcome_Issue(val)) : [new OperationOutcome_Issue(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			issue: this._issue
+			resourceType: this.resourceType,
+			issue: this.issue && this.issue.toJSON()
 		});
 	}
 

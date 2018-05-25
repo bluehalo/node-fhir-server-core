@@ -4,7 +4,7 @@ const Meta = require('./Meta');
 class Resource extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Resource';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Resource extends Element {
 	}
 
 	set id ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
 		if ( !pattern.test(new_value) ) {
@@ -33,6 +37,10 @@ class Resource extends Element {
 	}
 
 	set meta ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._meta = new Meta(new_value);
 	}
 
@@ -42,6 +50,10 @@ class Resource extends Element {
 	}
 
 	set implicitRules ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._implicitRules = new_value;
 	}
 
@@ -51,6 +63,10 @@ class Resource extends Element {
 	}
 
 	set language ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -61,10 +77,10 @@ class Resource extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			id: this._id,
-			meta: this._meta,
-			implicitRules: this._implicitRules,
-			language: this._language
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			implicitRules: this.implicitRules,
+			language: this.language
 		});
 	}
 

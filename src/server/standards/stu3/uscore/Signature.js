@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Signature extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Signature';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Signature extends Element {
 	}
 
 	set type ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -29,6 +33,10 @@ class Signature extends Element {
 	}
 
 	set when ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._when = new_value;
 	}
 
@@ -38,6 +46,10 @@ class Signature extends Element {
 	}
 
 	set whoUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whoUri = new_value;
 	}
 
@@ -47,6 +59,10 @@ class Signature extends Element {
 	}
 
 	set whoReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whoReference = new Reference(new_value);
 	}
 
@@ -56,6 +72,10 @@ class Signature extends Element {
 	}
 
 	set onBehalfOfUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOfUri = new_value;
 	}
 
@@ -65,6 +85,10 @@ class Signature extends Element {
 	}
 
 	set onBehalfOfReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._onBehalfOfReference = new Reference(new_value);
 	}
 
@@ -74,6 +98,10 @@ class Signature extends Element {
 	}
 
 	set contentType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
 		if ( !pattern.test(new_value) ) {
@@ -88,19 +116,23 @@ class Signature extends Element {
 	}
 
 	set blob ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._blob = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			when: this._when,
-			whoUri: this._whoUri,
-			whoReference: this._whoReference,
-			onBehalfOfUri: this._onBehalfOfUri,
-			onBehalfOfReference: this._onBehalfOfReference,
-			contentType: this._contentType,
-			blob: this._blob
+			type: this.type && this.type.toJSON(),
+			when: this.when,
+			whoUri: this.whoUri,
+			whoReference: this.whoReference && this.whoReference.toJSON(),
+			onBehalfOfUri: this.onBehalfOfUri,
+			onBehalfOfReference: this.onBehalfOfReference && this.onBehalfOfReference.toJSON(),
+			contentType: this.contentType,
+			blob: this.blob
 		});
 	}
 

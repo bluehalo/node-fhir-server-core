@@ -7,7 +7,7 @@ const Range = require('./Range');
 class UsageContext extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'UsageContext';
 		Object.assign(this, opts);
 	}
@@ -22,6 +22,10 @@ class UsageContext extends Element {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new Coding(new_value);
 	}
 
@@ -31,6 +35,10 @@ class UsageContext extends Element {
 	}
 
 	set valueCodeableConcept ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -40,6 +48,10 @@ class UsageContext extends Element {
 	}
 
 	set valueQuantity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -49,15 +61,19 @@ class UsageContext extends Element {
 	}
 
 	set valueRange ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._valueRange = new Range(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueQuantity: this._valueQuantity,
-			valueRange: this._valueRange
+			code: this.code && this.code.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueRange: this.valueRange && this.valueRange.toJSON()
 		});
 	}
 

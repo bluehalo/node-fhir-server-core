@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Type extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Type';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class ElementDefinition_Type extends BackboneElement {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new_value;
 	}
 
@@ -27,6 +31,10 @@ class ElementDefinition_Type extends BackboneElement {
 	}
 
 	set profile ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._profile = new_value;
 	}
 
@@ -36,6 +44,10 @@ class ElementDefinition_Type extends BackboneElement {
 	}
 
 	set targetProfile ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._targetProfile = new_value;
 	}
 
@@ -45,6 +57,10 @@ class ElementDefinition_Type extends BackboneElement {
 	}
 
 	set aggregation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['contained', 'referenced', 'bundled'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -59,6 +75,10 @@ class ElementDefinition_Type extends BackboneElement {
 	}
 
 	set versioning ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['either', 'independent', 'specific'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -69,11 +89,11 @@ class ElementDefinition_Type extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code,
-			profile: this._profile,
-			targetProfile: this._targetProfile,
-			aggregation: this._aggregation,
-			versioning: this._versioning
+			code: this.code,
+			profile: this.profile,
+			targetProfile: this.targetProfile,
+			aggregation: this.aggregation,
+			versioning: this.versioning
 		});
 	}
 

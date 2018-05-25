@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Consent_Policy extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent_Policy';
 		Object.assign(this, opts);
 	}
@@ -18,6 +18,10 @@ class Consent_Policy extends BackboneElement {
 	}
 
 	set authority ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._authority = new_value;
 	}
 
@@ -27,13 +31,17 @@ class Consent_Policy extends BackboneElement {
 	}
 
 	set uri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._uri = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			authority: this._authority,
-			uri: this._uri
+			authority: this.authority,
+			uri: this.uri
 		});
 	}
 

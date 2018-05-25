@@ -5,7 +5,7 @@ const Annotation = require('./Annotation');
 class AllergyIntolerance_Reaction extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AllergyIntolerance_Reaction';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set substance ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._substance = new CodeableConcept(new_value);
 	}
 
@@ -29,6 +33,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set manifestation ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._manifestation = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -38,6 +46,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set description ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._description = new_value;
 	}
 
@@ -47,6 +59,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set onset ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
 		if ( !pattern.test(new_value) ) {
@@ -61,6 +77,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set severity ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['mild', 'moderate', 'severe'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -75,6 +95,10 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set exposureRoute ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._exposureRoute = new CodeableConcept(new_value);
 	}
 
@@ -84,18 +108,22 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 	}
 
 	set note ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			substance: this._substance,
-			manifestation: this._manifestation,
-			description: this._description,
-			onset: this._onset,
-			severity: this._severity,
-			exposureRoute: this._exposureRoute,
-			note: this._note
+			substance: this.substance && this.substance.toJSON(),
+			manifestation: this.manifestation && this.manifestation.toJSON(),
+			description: this.description,
+			onset: this.onset,
+			severity: this.severity,
+			exposureRoute: this.exposureRoute && this.exposureRoute.toJSON(),
+			note: this.note && this.note.toJSON()
 		});
 	}
 

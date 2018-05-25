@@ -8,7 +8,7 @@ const Attachment = require('./Attachment');
 class Medication extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Medication';
 		Object.assign(this, opts);
 	}
@@ -23,6 +23,10 @@ class Medication extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Medication'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -37,6 +41,10 @@ class Medication extends DomainResource {
 	}
 
 	set code ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -46,6 +54,10 @@ class Medication extends DomainResource {
 	}
 
 	set status ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -60,6 +72,10 @@ class Medication extends DomainResource {
 	}
 
 	set isBrand ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._isBrand = new_value;
 	}
 
@@ -69,6 +85,10 @@ class Medication extends DomainResource {
 	}
 
 	set isOverTheCounter ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._isOverTheCounter = new_value;
 	}
 
@@ -78,6 +98,10 @@ class Medication extends DomainResource {
 	}
 
 	set manufacturer ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._manufacturer = new Reference(new_value);
 	}
 
@@ -87,6 +111,10 @@ class Medication extends DomainResource {
 	}
 
 	set form ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._form = new CodeableConcept(new_value);
 	}
 
@@ -96,6 +124,10 @@ class Medication extends DomainResource {
 	}
 
 	set ingredient ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._ingredient = Array.isArray(new_value) ? new_value.map(val => new Medication_Ingredient(val)) : [new Medication_Ingredient(new_value)];
 	}
 
@@ -105,6 +137,10 @@ class Medication extends DomainResource {
 	}
 
 	set package ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._package = new Medication_Package(new_value);
 	}
 
@@ -114,21 +150,25 @@ class Medication extends DomainResource {
 	}
 
 	set image ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._image = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			code: this._code,
-			status: this._status,
-			isBrand: this._isBrand,
-			isOverTheCounter: this._isOverTheCounter,
-			manufacturer: this._manufacturer,
-			form: this._form,
-			ingredient: this._ingredient,
-			package: this._package,
-			image: this._image
+			resourceType: this.resourceType,
+			code: this.code && this.code.toJSON(),
+			status: this.status,
+			isBrand: this.isBrand,
+			isOverTheCounter: this.isOverTheCounter,
+			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
+			form: this.form && this.form.toJSON(),
+			ingredient: this.ingredient && this.ingredient.toJSON(),
+			package: this.package && this.package.toJSON(),
+			image: this.image && this.image.toJSON()
 		});
 	}
 

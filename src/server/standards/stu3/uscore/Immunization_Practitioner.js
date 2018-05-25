@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Immunization_Practitioner extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization_Practitioner';
 		Object.assign(this, opts);
 	}
@@ -20,6 +20,10 @@ class Immunization_Practitioner extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -29,13 +33,17 @@ class Immunization_Practitioner extends BackboneElement {
 	}
 
 	set actor ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._actor = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			actor: this._actor
+			role: this.role && this.role.toJSON(),
+			actor: this.actor && this.actor.toJSON()
 		});
 	}
 

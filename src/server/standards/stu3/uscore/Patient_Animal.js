@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Patient_Animal extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Patient_Animal';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set species ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._species = new CodeableConcept(new_value);
 	}
 
@@ -28,6 +32,10 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set breed ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._breed = new CodeableConcept(new_value);
 	}
 
@@ -37,14 +45,18 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set genderStatus ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._genderStatus = new CodeableConcept(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			species: this._species,
-			breed: this._breed,
-			genderStatus: this._genderStatus
+			species: this.species && this.species.toJSON(),
+			breed: this.breed && this.breed.toJSON(),
+			genderStatus: this.genderStatus && this.genderStatus.toJSON()
 		});
 	}
 

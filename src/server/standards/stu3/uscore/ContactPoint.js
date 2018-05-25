@@ -4,7 +4,7 @@ const Period = require('./Period');
 class ContactPoint extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ContactPoint';
 		Object.assign(this, opts);
 	}
@@ -19,6 +19,10 @@ class ContactPoint extends Element {
 	}
 
 	set system ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['phone', 'fax', 'email', 'pager', 'url', 'sms', 'other'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -33,6 +37,10 @@ class ContactPoint extends Element {
 	}
 
 	set value ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._value = new_value;
 	}
 
@@ -42,6 +50,10 @@ class ContactPoint extends Element {
 	}
 
 	set use ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['home', 'work', 'temp', 'old', 'mobile'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -56,6 +68,10 @@ class ContactPoint extends Element {
 	}
 
 	set rank ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
 		if ( !pattern.test(new_value) ) {
@@ -70,16 +86,20 @@ class ContactPoint extends Element {
 	}
 
 	set period ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._period = new Period(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			system: this._system,
-			value: this._value,
-			use: this._use,
-			rank: this._rank,
-			period: this._period
+			system: this.system,
+			value: this.value,
+			use: this.use,
+			rank: this.rank,
+			period: this.period && this.period.toJSON()
 		});
 	}
 

@@ -6,7 +6,7 @@ const Provenance_Agent = require('./Provenance_Agent');
 class Provenance_Entity extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Provenance_Entity';
 		Object.assign(this, opts);
 	}
@@ -21,6 +21,10 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set role ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['derivation', 'revision', 'quotation', 'source', 'removal'];
 		if ( allowed_values.indexOf(new_value) === -1 ) {
@@ -35,6 +39,10 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatUri ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whatUri = new_value;
 	}
 
@@ -44,6 +52,10 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatReference ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whatReference = new Reference(new_value);
 	}
 
@@ -53,6 +65,10 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatIdentifier ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._whatIdentifier = new Identifier(new_value);
 	}
 
@@ -62,16 +78,20 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set agent ( new_value ) {
+		// Do not set the value if new value is null or undefined
+		if ( new_value === null || new_value === undefined) {
+			return;
+		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new Provenance_Agent(val)) : [new Provenance_Agent(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			whatUri: this._whatUri,
-			whatReference: this._whatReference,
-			whatIdentifier: this._whatIdentifier,
-			agent: this._agent
+			role: this.role,
+			whatUri: this.whatUri,
+			whatReference: this.whatReference && this.whatReference.toJSON(),
+			whatIdentifier: this.whatIdentifier && this.whatIdentifier.toJSON(),
+			agent: this.agent && this.agent.toJSON()
 		});
 	}
 
