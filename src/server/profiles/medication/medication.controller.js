@@ -37,7 +37,7 @@ module.exports.getMedicationById = function getMedicationById ({ profile, logger
 
 		return service.getMedicationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Medication, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Medication, results)
 			)
 			.catch((err) => {
 				logger.error(err);

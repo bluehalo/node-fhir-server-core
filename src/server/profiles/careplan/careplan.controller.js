@@ -37,7 +37,7 @@ module.exports.getCarePlanById = function getCarePlanById ({ profile, logger, ap
 
 		return service.getCarePlanById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, CarePlan, results)
+				responseUtils.handleSingleReadResponse(res, next, version, CarePlan, results)
 			)
 			.catch((err) => {
 				logger.error(err);

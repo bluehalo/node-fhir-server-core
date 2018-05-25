@@ -37,7 +37,7 @@ module.exports.getConditionById = function getConditionById ({ profile, logger, 
 
 		return service.getConditionById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Condition, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Condition, results)
 			)
 			.catch((err) => {
 				logger.error(err);

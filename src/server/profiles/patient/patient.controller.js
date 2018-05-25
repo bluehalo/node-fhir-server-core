@@ -81,7 +81,7 @@ module.exports.getPatientById = function getPatientById ({ profile, logger, app 
 
 		return service.getPatientById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Patient, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Patient, results)
 			)
 			.catch((err) => {
 				logger.error(err);

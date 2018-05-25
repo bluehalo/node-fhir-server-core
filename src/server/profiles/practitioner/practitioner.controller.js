@@ -37,7 +37,7 @@ module.exports.getPractitionerById = function getPractitionerById ({ profile, lo
 
 		return service.getPractitionerById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Practitioner, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Practitioner, results)
 			)
 			.catch((err) => {
 				logger.error(err);

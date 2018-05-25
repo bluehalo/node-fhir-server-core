@@ -37,7 +37,7 @@ module.exports.getOrganizationById = function getOrganizationById ({ profile, lo
 
 		return service.getOrganizationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Organization, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Organization, results)
 			)
 			.catch((err) => {
 				logger.error(err);

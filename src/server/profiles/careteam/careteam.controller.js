@@ -37,7 +37,7 @@ module.exports.getCareTeamById = function getCareTeamById ({ profile, logger, ap
 
 		return service.getCareTeamById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, CareTeam, results)
+				responseUtils.handleSingleReadResponse(res, next, version, CareTeam, results)
 			)
 			.catch((err) => {
 				logger.error(err);

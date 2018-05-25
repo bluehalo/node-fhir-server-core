@@ -37,7 +37,7 @@ module.exports.getProcedureById = function getProcedureById ({ profile, logger, 
 
 		return service.getProcedureById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Procedure, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Procedure, results)
 			)
 			.catch((err) => {
 				logger.error(err);

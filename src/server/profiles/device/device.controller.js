@@ -37,7 +37,7 @@ module.exports.getDeviceById = function getDeviceById ({ profile, logger, app })
 
 		return service.getDeviceById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Device, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Device, results)
 			)
 			.catch((err) => {
 				logger.error(err);

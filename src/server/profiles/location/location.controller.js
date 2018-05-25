@@ -37,7 +37,7 @@ module.exports.getLocationById = function getLocationById ({ profile, logger, ap
 
 		return service.getLocationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Location, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Location, results)
 			)
 			.catch((err) => {
 				logger.error(err);

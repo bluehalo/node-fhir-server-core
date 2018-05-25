@@ -37,7 +37,7 @@ module.exports.getGoalById = function getGoalById ({ profile, logger, app }) {
 
 		return service.getGoalById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Goal, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Goal, results)
 			)
 			.catch((err) => {
 				logger.error(err);

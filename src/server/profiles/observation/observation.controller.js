@@ -75,7 +75,7 @@ module.exports.getObservationById = function getObservationById ({ profile, logg
 		return service.getObservationById(req.sanitized_args, logger)
 			.then((observation) => {
 				let Resource = getResourceConstructor(version, observation.resourceType);
-				responseUtils.handleSingleReadResponse(req, next, version, Resource, observation);
+				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
 			})
 			.catch((err) => {
 				logger.error(err);

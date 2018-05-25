@@ -37,7 +37,7 @@ module.exports.getImmunizationById = function getImmunizationById ({ profile, lo
 
 		return service.getImmunizationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Immunization, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Immunization, results)
 			)
 			.catch((err) => {
 				logger.error(err);

@@ -37,7 +37,7 @@ module.exports.getDiagnosticReportById = function getDiagnosticReportById ({ pro
 
 		return service.getDiagnosticReportById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, DiagnosticReport, results)
+				responseUtils.handleSingleReadResponse(res, next, version, DiagnosticReport, results)
 			)
 			.catch((err) => {
 				logger.error(err);
