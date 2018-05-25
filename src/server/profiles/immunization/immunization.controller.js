@@ -99,7 +99,7 @@ module.exports.updateImmunization = function updateImmunization ({ profile, logg
 		let immunization = new Immunization(resource_body);
 		let args = { id: resource_id, resource: immunization };
 		// Pass any new information to the underlying service
-		return service.updateImmunization(args, logger, context)
+		return service.updateImmunization(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Immunization.__resourceType, results)
 			)

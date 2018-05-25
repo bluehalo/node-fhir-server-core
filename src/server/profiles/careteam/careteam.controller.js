@@ -99,7 +99,7 @@ module.exports.updateCareTeam = function updateCareTeam ({ profile, logger, app 
 		let care_team = new CareTeam(resource_body);
 		let args = { id: resource_id, resource: care_team };
 		// Pass any new information to the underlying service
-		return service.updateCareTeam(args, logger, context)
+		return service.updateCareTeam(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, CareTeam.__resourceType, results)
 			)

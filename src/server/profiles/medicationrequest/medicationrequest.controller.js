@@ -99,7 +99,7 @@ module.exports.updateMedicationRequest = function updateMedicationRequest ({ pro
 		let medication_request = new MedicationRequest(resource_body);
 		let args = { id: resource_id, resource: medication_request };
 		// Pass any new information to the underlying service
-		return service.updateMedicationRequest(args, logger, context)
+		return service.updateMedicationRequest(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, MedicationRequest.__resourceType, results)
 			)

@@ -99,7 +99,7 @@ module.exports.updateLocation = function updateLocation ({ profile, logger, app 
 		let location = new Location(resource_body);
 		let args = { id: resource_id, resource: location };
 		// Pass any new information to the underlying service
-		return service.updateLocation(args, logger, context)
+		return service.updateLocation(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Location.__resourceType, results)
 			)

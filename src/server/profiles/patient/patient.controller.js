@@ -143,7 +143,7 @@ module.exports.updatePatient = function updatePatient ({ profile, logger, app })
 		let patient = new Patient(resource_body);
 		let args = { id: resource_id, resource: patient };
 		// Pass any new information to the underlying service
-		return service.updatePatient(args, logger, context)
+		return service.updatePatient(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Patient.__resourceType, results)
 			)

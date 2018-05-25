@@ -99,7 +99,7 @@ module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profi
 		let diagnostic_report = new DiagnosticReport(resource_body);
 		let args = { id: resource_id, resource: diagnostic_report };
 		// Pass any new information to the underlying service
-		return service.updateDiagnosticReport(args, logger, context)
+		return service.updateDiagnosticReport(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DiagnosticReport.__resourceType, results)
 			)

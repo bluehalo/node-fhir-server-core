@@ -99,7 +99,7 @@ module.exports.updateCarePlan = function updateCarePlan ({ profile, logger, app 
 		let care_plan = new CarePlan(resource_body);
 		let args = { id: resource_id, resource: care_plan };
 		// Pass any new information to the underlying service
-		return service.updateCarePlan(args, logger, context)
+		return service.updateCarePlan(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, CarePlan.__resourceType, results)
 			)
