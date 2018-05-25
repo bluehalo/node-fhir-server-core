@@ -284,8 +284,8 @@ class DiagnosticReport extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
-			basedOn: this.basedOn.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
 			status: this.status,
 			category: this.category && this.category.toJSON(),
 			code: this.code && this.code.toJSON(),
@@ -294,14 +294,14 @@ class DiagnosticReport extends DomainResource {
 			effectiveDateTime: this.effectiveDateTime,
 			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
 			issued: this.issued,
-			performer: this.performer.map(v => v.toJSON()),
-			specimen: this.specimen.map(v => v.toJSON()),
-			result: this.result.map(v => v.toJSON()),
-			imagingStudy: this.imagingStudy.map(v => v.toJSON()),
-			image: this.image.map(v => v.toJSON()),
+			performer: this.performer && this.performer.map(v => v.toJSON()),
+			specimen: this.specimen && this.specimen.map(v => v.toJSON()),
+			result: this.result && this.result.map(v => v.toJSON()),
+			imagingStudy: this.imagingStudy && this.imagingStudy.map(v => v.toJSON()),
+			image: this.image && this.image.map(v => v.toJSON()),
 			conclusion: this.conclusion,
-			codedDiagnosis: this.codedDiagnosis.map(v => v.toJSON()),
-			presentedForm: this.presentedForm.map(v => v.toJSON())
+			codedDiagnosis: this.codedDiagnosis && this.codedDiagnosis.map(v => v.toJSON()),
+			presentedForm: this.presentedForm && this.presentedForm.map(v => v.toJSON())
 		});
 	}
 

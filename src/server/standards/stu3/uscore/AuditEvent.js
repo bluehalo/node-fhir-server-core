@@ -179,15 +179,15 @@ class AuditEvent extends DomainResource {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
 			type: this.type && this.type.toJSON(),
-			subtype: this.subtype.map(v => v.toJSON()),
+			subtype: this.subtype && this.subtype.map(v => v.toJSON()),
 			action: this.action,
 			recorded: this.recorded,
 			outcome: this.outcome,
 			outcomeDesc: this.outcomeDesc,
-			purposeOfEvent: this.purposeOfEvent.map(v => v.toJSON()),
-			agent: this.agent.map(v => v.toJSON()),
+			purposeOfEvent: this.purposeOfEvent && this.purposeOfEvent.map(v => v.toJSON()),
+			agent: this.agent && this.agent.map(v => v.toJSON()),
 			source: this.source && this.source.toJSON(),
-			entity: this.entity.map(v => v.toJSON())
+			entity: this.entity && this.entity.map(v => v.toJSON())
 		});
 	}
 

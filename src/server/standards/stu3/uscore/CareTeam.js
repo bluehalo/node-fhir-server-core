@@ -200,18 +200,18 @@ class CareTeam extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
 			status: this.status,
-			category: this.category.map(v => v.toJSON()),
+			category: this.category && this.category.map(v => v.toJSON()),
 			name: this.name,
 			subject: this.subject && this.subject.toJSON(),
 			context: this.context && this.context.toJSON(),
 			period: this.period && this.period.toJSON(),
-			participant: this.participant.map(v => v.toJSON()),
-			reasonCode: this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference.map(v => v.toJSON()),
-			managingOrganization: this.managingOrganization.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON())
+			participant: this.participant && this.participant.map(v => v.toJSON()),
+			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
+			managingOrganization: this.managingOrganization && this.managingOrganization.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON())
 		});
 	}
 

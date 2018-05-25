@@ -43,7 +43,7 @@ class Condition_Stage extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			summary: this.summary && this.summary.toJSON(),
-			assessment: this.assessment.map(v => v.toJSON())
+			assessment: this.assessment && this.assessment.map(v => v.toJSON())
 		});
 	}
 

@@ -323,27 +323,27 @@ class CarePlan extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
-			definition: this.definition.map(v => v.toJSON()),
-			basedOn: this.basedOn.map(v => v.toJSON()),
-			replaces: this.replaces.map(v => v.toJSON()),
-			partOf: this.partOf.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			definition: this.definition && this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			replaces: this.replaces && this.replaces.map(v => v.toJSON()),
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
 			text: this.text && this.text.toJSON(),
 			status: this.status,
 			intent: this.intent,
-			category: this.category.map(v => v.toJSON()),
+			category: this.category && this.category.map(v => v.toJSON()),
 			title: this.title,
 			description: this.description,
 			subject: this.subject && this.subject.toJSON(),
 			context: this.context && this.context.toJSON(),
 			period: this.period && this.period.toJSON(),
-			author: this.author.map(v => v.toJSON()),
-			careTeam: this.careTeam.map(v => v.toJSON()),
-			addresses: this.addresses.map(v => v.toJSON()),
-			supportingInfo: this.supportingInfo.map(v => v.toJSON()),
-			goal: this.goal.map(v => v.toJSON()),
-			activity: this.activity.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON())
+			author: this.author && this.author.map(v => v.toJSON()),
+			careTeam: this.careTeam && this.careTeam.map(v => v.toJSON()),
+			addresses: this.addresses && this.addresses.map(v => v.toJSON()),
+			supportingInfo: this.supportingInfo && this.supportingInfo.map(v => v.toJSON()),
+			goal: this.goal && this.goal.map(v => v.toJSON()),
+			activity: this.activity && this.activity.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON())
 		});
 	}
 

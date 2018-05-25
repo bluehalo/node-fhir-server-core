@@ -88,8 +88,8 @@ class Meta extends Element {
 			versionId: this.versionId,
 			lastUpdated: this.lastUpdated,
 			profile: this.profile,
-			security: this.security.map(v => v.toJSON()),
-			tag: this.tag.map(v => v.toJSON())
+			security: this.security && this.security.map(v => v.toJSON()),
+			tag: this.tag && this.tag.map(v => v.toJSON())
 		});
 	}
 

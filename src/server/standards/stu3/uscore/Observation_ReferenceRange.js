@@ -98,7 +98,7 @@ class Observation_ReferenceRange extends BackboneElement {
 			low: this.low && this.low.toJSON(),
 			high: this.high && this.high.toJSON(),
 			type: this.type && this.type.toJSON(),
-			appliesTo: this.appliesTo.map(v => v.toJSON()),
+			appliesTo: this.appliesTo && this.appliesTo.map(v => v.toJSON()),
 			age: this.age && this.age.toJSON(),
 			text: this.text
 		});

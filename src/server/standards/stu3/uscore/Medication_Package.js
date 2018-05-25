@@ -57,8 +57,8 @@ class Medication_Package extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			container: this.container && this.container.toJSON(),
-			content: this.content.map(v => v.toJSON()),
-			batch: this.batch.map(v => v.toJSON())
+			content: this.content && this.content.map(v => v.toJSON()),
+			batch: this.batch && this.batch.map(v => v.toJSON())
 		});
 	}
 

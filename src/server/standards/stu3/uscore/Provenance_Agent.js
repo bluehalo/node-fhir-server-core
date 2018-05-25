@@ -94,7 +94,7 @@ class Provenance_Agent extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role.map(v => v.toJSON()),
+			role: this.role && this.role.map(v => v.toJSON()),
 			whoUri: this.whoUri,
 			whoReference: this.whoReference && this.whoReference.toJSON(),
 			onBehalfOfUri: this.onBehalfOfUri,

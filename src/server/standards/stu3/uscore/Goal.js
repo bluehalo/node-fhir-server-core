@@ -261,9 +261,9 @@ class Goal extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
 			status: this.status,
-			category: this.category.map(v => v.toJSON()),
+			category: this.category && this.category.map(v => v.toJSON()),
 			priority: this.priority && this.priority.toJSON(),
 			description: this.description && this.description.toJSON(),
 			subject: this.subject && this.subject.toJSON(),
@@ -273,10 +273,10 @@ class Goal extends DomainResource {
 			statusDate: this.statusDate,
 			statusReason: this.statusReason,
 			expressedBy: this.expressedBy && this.expressedBy.toJSON(),
-			addresses: this.addresses.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON()),
-			outcomeCode: this.outcomeCode.map(v => v.toJSON()),
-			outcomeReference: this.outcomeReference.map(v => v.toJSON())
+			addresses: this.addresses && this.addresses.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			outcomeCode: this.outcomeCode && this.outcomeCode.map(v => v.toJSON()),
+			outcomeReference: this.outcomeReference && this.outcomeReference.map(v => v.toJSON())
 		});
 	}
 

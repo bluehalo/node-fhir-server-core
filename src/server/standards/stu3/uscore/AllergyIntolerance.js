@@ -328,7 +328,7 @@ class AllergyIntolerance extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
 			clinicalStatus: this.clinicalStatus,
 			verificationStatus: this.verificationStatus,
 			type: this.type,
@@ -345,8 +345,8 @@ class AllergyIntolerance extends DomainResource {
 			recorder: this.recorder && this.recorder.toJSON(),
 			asserter: this.asserter && this.asserter.toJSON(),
 			lastOccurrence: this.lastOccurrence,
-			note: this.note.map(v => v.toJSON()),
-			reaction: this.reaction.map(v => v.toJSON())
+			note: this.note && this.note.map(v => v.toJSON()),
+			reaction: this.reaction && this.reaction.map(v => v.toJSON())
 		});
 	}
 

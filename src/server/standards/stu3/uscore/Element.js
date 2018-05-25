@@ -39,7 +39,7 @@ class Element {
 	toJSON () {
 		return {
 			id: this.id,
-			extension: this.extension.map(v => v.toJSON())
+			extension: this.extension && this.extension.map(v => v.toJSON())
 		};
 	}
 

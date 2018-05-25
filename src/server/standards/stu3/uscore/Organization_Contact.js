@@ -72,7 +72,7 @@ class Organization_Contact extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			purpose: this.purpose && this.purpose.toJSON(),
 			name: this.name && this.name.toJSON(),
-			telecom: this.telecom.map(v => v.toJSON()),
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
 			address: this.address && this.address.toJSON()
 		});
 	}

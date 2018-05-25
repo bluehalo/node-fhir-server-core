@@ -180,16 +180,16 @@ class Practitioner extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
 			active: this.active,
-			name: this.name.map(v => v.toJSON()),
-			telecom: this.telecom.map(v => v.toJSON()),
-			address: this.address.map(v => v.toJSON()),
+			name: this.name && this.name.map(v => v.toJSON()),
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
+			address: this.address && this.address.map(v => v.toJSON()),
 			gender: this.gender,
 			birthDate: this.birthDate,
-			photo: this.photo.map(v => v.toJSON()),
-			qualification: this.qualification.map(v => v.toJSON()),
-			communication: this.communication.map(v => v.toJSON())
+			photo: this.photo && this.photo.map(v => v.toJSON()),
+			qualification: this.qualification && this.qualification.map(v => v.toJSON()),
+			communication: this.communication && this.communication.map(v => v.toJSON())
 		});
 	}
 

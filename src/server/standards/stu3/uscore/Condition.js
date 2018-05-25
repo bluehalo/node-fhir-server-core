@@ -392,13 +392,13 @@ class Condition extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
 			clinicalStatus: this.clinicalStatus,
 			verificationStatus: this.verificationStatus,
-			category: this.category.map(v => v.toJSON()),
+			category: this.category && this.category.map(v => v.toJSON()),
 			severity: this.severity && this.severity.toJSON(),
 			code: this.code && this.code.toJSON(),
-			bodySite: this.bodySite.map(v => v.toJSON()),
+			bodySite: this.bodySite && this.bodySite.map(v => v.toJSON()),
 			subject: this.subject && this.subject.toJSON(),
 			context: this.context && this.context.toJSON(),
 			onsetDateTime: this.onsetDateTime,
@@ -415,8 +415,8 @@ class Condition extends DomainResource {
 			assertedDate: this.assertedDate,
 			asserter: this.asserter && this.asserter.toJSON(),
 			stage: this.stage && this.stage.toJSON(),
-			evidence: this.evidence.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON())
+			evidence: this.evidence && this.evidence.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON())
 		});
 	}
 

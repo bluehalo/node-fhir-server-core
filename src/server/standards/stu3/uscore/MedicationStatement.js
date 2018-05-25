@@ -319,9 +319,9 @@ class MedicationStatement extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
-			basedOn: this.basedOn.map(v => v.toJSON()),
-			partOf: this.partOf.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
 			context: this.context && this.context.toJSON(),
 			status: this.status,
 			category: this.category && this.category.toJSON(),
@@ -332,13 +332,13 @@ class MedicationStatement extends DomainResource {
 			dateAsserted: this.dateAsserted,
 			informationSource: this.informationSource && this.informationSource.toJSON(),
 			subject: this.subject && this.subject.toJSON(),
-			derivedFrom: this.derivedFrom.map(v => v.toJSON()),
+			derivedFrom: this.derivedFrom && this.derivedFrom.map(v => v.toJSON()),
 			taken: this.taken,
-			reasonNotTaken: this.reasonNotTaken.map(v => v.toJSON()),
-			reasonCode: this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON()),
-			dosage: this.dosage.map(v => v.toJSON())
+			reasonNotTaken: this.reasonNotTaken && this.reasonNotTaken.map(v => v.toJSON()),
+			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			dosage: this.dosage && this.dosage.map(v => v.toJSON())
 		});
 	}
 

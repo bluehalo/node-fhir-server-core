@@ -91,7 +91,7 @@ class Provenance_Entity extends BackboneElement {
 			whatUri: this.whatUri,
 			whatReference: this.whatReference && this.whatReference.toJSON(),
 			whatIdentifier: this.whatIdentifier && this.whatIdentifier.toJSON(),
-			agent: this.agent.map(v => v.toJSON())
+			agent: this.agent && this.agent.map(v => v.toJSON())
 		});
 	}
 

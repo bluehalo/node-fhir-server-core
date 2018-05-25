@@ -386,9 +386,9 @@ class MedicationRequest extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier.map(v => v.toJSON()),
-			definition: this.definition.map(v => v.toJSON()),
-			basedOn: this.basedOn.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			definition: this.definition && this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
 			groupIdentifier: this.groupIdentifier && this.groupIdentifier.toJSON(),
 			status: this.status,
 			intent: this.intent,
@@ -398,19 +398,19 @@ class MedicationRequest extends DomainResource {
 			medicationReference: this.medicationReference && this.medicationReference.toJSON(),
 			subject: this.subject && this.subject.toJSON(),
 			context: this.context && this.context.toJSON(),
-			supportingInformation: this.supportingInformation.map(v => v.toJSON()),
+			supportingInformation: this.supportingInformation && this.supportingInformation.map(v => v.toJSON()),
 			authoredOn: this.authoredOn,
 			requester: this.requester && this.requester.toJSON(),
 			recorder: this.recorder && this.recorder.toJSON(),
-			reasonCode: this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference.map(v => v.toJSON()),
-			note: this.note.map(v => v.toJSON()),
-			dosageInstruction: this.dosageInstruction.map(v => v.toJSON()),
+			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			dosageInstruction: this.dosageInstruction && this.dosageInstruction.map(v => v.toJSON()),
 			dispenseRequest: this.dispenseRequest && this.dispenseRequest.toJSON(),
 			substitution: this.substitution && this.substitution.toJSON(),
 			priorPrescription: this.priorPrescription && this.priorPrescription.toJSON(),
-			detectedIssue: this.detectedIssue.map(v => v.toJSON()),
-			eventHistory: this.eventHistory.map(v => v.toJSON())
+			detectedIssue: this.detectedIssue && this.detectedIssue.map(v => v.toJSON()),
+			eventHistory: this.eventHistory && this.eventHistory.map(v => v.toJSON())
 		});
 	}
 
