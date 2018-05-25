@@ -97,7 +97,7 @@ class Bundle_Entry extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			link: this.link && this.link.toJSON(),
+			link: this.link.map(v => v.toJSON()),
 			fullUrl: this.fullUrl,
 			resource: this.resource && this.resource.toJSON(),
 			search: this.search && this.search.toJSON(),

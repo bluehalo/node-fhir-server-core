@@ -99,8 +99,8 @@ class DataRequirement_CodeFilter extends BackboneElement {
 			valueSetString: this.valueSetString,
 			valueSetReference: this.valueSetReference && this.valueSetReference.toJSON(),
 			valueCode: this.valueCode,
-			valueCoding: this.valueCoding && this.valueCoding.toJSON(),
-			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON()
+			valueCoding: this.valueCoding.map(v => v.toJSON()),
+			valueCodeableConcept: this.valueCodeableConcept.map(v => v.toJSON())
 		});
 	}
 

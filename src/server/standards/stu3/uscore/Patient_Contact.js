@@ -116,9 +116,9 @@ class Patient_Contact extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			relationship: this.relationship && this.relationship.toJSON(),
+			relationship: this.relationship.map(v => v.toJSON()),
 			name: this.name && this.name.toJSON(),
-			telecom: this.telecom && this.telecom.toJSON(),
+			telecom: this.telecom.map(v => v.toJSON()),
 			address: this.address && this.address.toJSON(),
 			gender: this.gender,
 			organization: this.organization && this.organization.toJSON(),

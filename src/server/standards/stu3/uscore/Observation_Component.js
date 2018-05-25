@@ -227,7 +227,7 @@ class Observation_Component extends BackboneElement {
 			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
 			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
 			interpretation: this.interpretation && this.interpretation.toJSON(),
-			referenceRange: this.referenceRange && this.referenceRange.toJSON()
+			referenceRange: this.referenceRange.map(v => v.toJSON())
 		});
 	}
 

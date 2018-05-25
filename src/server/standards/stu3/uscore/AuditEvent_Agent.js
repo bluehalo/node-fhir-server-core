@@ -162,7 +162,7 @@ class AuditEvent_Agent extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.toJSON(),
+			role: this.role.map(v => v.toJSON()),
 			reference: this.reference && this.reference.toJSON(),
 			userId: this.userId && this.userId.toJSON(),
 			altId: this.altId,
@@ -172,7 +172,7 @@ class AuditEvent_Agent extends BackboneElement {
 			policy: this.policy,
 			media: this.media && this.media.toJSON(),
 			network: this.network && this.network.toJSON(),
-			purposeOfUse: this.purposeOfUse && this.purposeOfUse.toJSON()
+			purposeOfUse: this.purposeOfUse.map(v => v.toJSON())
 		});
 	}
 

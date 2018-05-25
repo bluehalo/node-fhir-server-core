@@ -42,7 +42,7 @@ class ContactDetail extends Element {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			name: this.name,
-			telecom: this.telecom && this.telecom.toJSON()
+			telecom: this.telecom.map(v => v.toJSON())
 		});
 	}
 

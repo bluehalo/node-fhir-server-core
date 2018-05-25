@@ -169,16 +169,16 @@ class Organization extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
 			active: this.active,
-			type: this.type && this.type.toJSON(),
+			type: this.type.map(v => v.toJSON()),
 			name: this.name,
 			alias: this.alias,
-			telecom: this.telecom && this.telecom.toJSON(),
-			address: this.address && this.address.toJSON(),
+			telecom: this.telecom.map(v => v.toJSON()),
+			address: this.address.map(v => v.toJSON()),
 			partOf: this.partOf && this.partOf.toJSON(),
-			contact: this.contact && this.contact.toJSON(),
-			endpoint: this.endpoint && this.endpoint.toJSON()
+			contact: this.contact.map(v => v.toJSON()),
+			endpoint: this.endpoint.map(v => v.toJSON())
 		});
 	}
 

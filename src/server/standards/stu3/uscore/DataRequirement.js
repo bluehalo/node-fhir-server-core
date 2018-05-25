@@ -89,8 +89,8 @@ class DataRequirement extends Element {
 			type: this.type,
 			profile: this.profile,
 			mustSupport: this.mustSupport,
-			codeFilter: this.codeFilter && this.codeFilter.toJSON(),
-			dateFilter: this.dateFilter && this.dateFilter.toJSON()
+			codeFilter: this.codeFilter.map(v => v.toJSON()),
+			dateFilter: this.dateFilter.map(v => v.toJSON())
 		});
 	}
 

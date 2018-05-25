@@ -401,10 +401,10 @@ class Procedure extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
-			definition: this.definition && this.definition.toJSON(),
-			basedOn: this.basedOn && this.basedOn.toJSON(),
-			partOf: this.partOf && this.partOf.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
+			definition: this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn.map(v => v.toJSON()),
+			partOf: this.partOf.map(v => v.toJSON()),
 			status: this.status,
 			notDone: this.notDone,
 			notDoneReason: this.notDoneReason && this.notDoneReason.toJSON(),
@@ -414,20 +414,20 @@ class Procedure extends DomainResource {
 			context: this.context && this.context.toJSON(),
 			performedDateTime: this.performedDateTime,
 			performedPeriod: this.performedPeriod && this.performedPeriod.toJSON(),
-			performer: this.performer && this.performer.toJSON(),
+			performer: this.performer.map(v => v.toJSON()),
 			location: this.location && this.location.toJSON(),
-			reasonCode: this.reasonCode && this.reasonCode.toJSON(),
-			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
-			bodySite: this.bodySite && this.bodySite.toJSON(),
+			reasonCode: this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference.map(v => v.toJSON()),
+			bodySite: this.bodySite.map(v => v.toJSON()),
 			outcome: this.outcome && this.outcome.toJSON(),
-			report: this.report && this.report.toJSON(),
-			complication: this.complication && this.complication.toJSON(),
-			complicationDetail: this.complicationDetail && this.complicationDetail.toJSON(),
-			followUp: this.followUp && this.followUp.toJSON(),
-			note: this.note && this.note.toJSON(),
-			focalDevice: this.focalDevice && this.focalDevice.toJSON(),
-			usedReference: this.usedReference && this.usedReference.toJSON(),
-			usedCode: this.usedCode && this.usedCode.toJSON()
+			report: this.report.map(v => v.toJSON()),
+			complication: this.complication.map(v => v.toJSON()),
+			complicationDetail: this.complicationDetail.map(v => v.toJSON()),
+			followUp: this.followUp.map(v => v.toJSON()),
+			note: this.note.map(v => v.toJSON()),
+			focalDevice: this.focalDevice.map(v => v.toJSON()),
+			usedReference: this.usedReference.map(v => v.toJSON()),
+			usedCode: this.usedCode.map(v => v.toJSON())
 		});
 	}
 

@@ -41,7 +41,7 @@ class CodeableConcept extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			coding: this.coding && this.coding.toJSON(),
+			coding: this.coding.map(v => v.toJSON()),
 			text: this.text
 		});
 	}

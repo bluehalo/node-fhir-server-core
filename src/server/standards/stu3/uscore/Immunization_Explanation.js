@@ -41,8 +41,8 @@ class Immunization_Explanation extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			reason: this.reason && this.reason.toJSON(),
-			reasonNotGiven: this.reasonNotGiven && this.reasonNotGiven.toJSON()
+			reason: this.reason.map(v => v.toJSON()),
+			reasonNotGiven: this.reasonNotGiven.map(v => v.toJSON())
 		});
 	}
 

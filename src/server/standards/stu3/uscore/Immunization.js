@@ -330,7 +330,7 @@ class Immunization extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
 			status: this.status,
 			notGiven: this.notGiven,
 			vaccineCode: this.vaccineCode && this.vaccineCode.toJSON(),
@@ -346,11 +346,11 @@ class Immunization extends DomainResource {
 			site: this.site && this.site.toJSON(),
 			route: this.route && this.route.toJSON(),
 			doseQuantity: this.doseQuantity && this.doseQuantity.toJSON(),
-			practitioner: this.practitioner && this.practitioner.toJSON(),
-			note: this.note && this.note.toJSON(),
+			practitioner: this.practitioner.map(v => v.toJSON()),
+			note: this.note.map(v => v.toJSON()),
 			explanation: this.explanation && this.explanation.toJSON(),
-			reaction: this.reaction && this.reaction.toJSON(),
-			vaccinationProtocol: this.vaccinationProtocol && this.vaccinationProtocol.toJSON()
+			reaction: this.reaction.map(v => v.toJSON()),
+			vaccinationProtocol: this.vaccinationProtocol.map(v => v.toJSON())
 		});
 	}
 

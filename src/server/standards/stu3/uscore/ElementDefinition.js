@@ -2960,7 +2960,7 @@ class ElementDefinition extends Element {
 			representation: this.representation,
 			sliceName: this.sliceName,
 			label: this.label,
-			code: this.code && this.code.toJSON(),
+			code: this.code.map(v => v.toJSON()),
 			slicing: this.slicing && this.slicing.toJSON(),
 			short: this.short,
 			definition: this.definition,
@@ -2971,7 +2971,7 @@ class ElementDefinition extends Element {
 			max: this.max,
 			base: this.base && this.base.toJSON(),
 			contentReference: this.contentReference,
-			type: this.type && this.type.toJSON(),
+			type: this.type.map(v => v.toJSON()),
 			defaultValueBoolean: this.defaultValueBoolean,
 			defaultValueInteger: this.defaultValueInteger,
 			defaultValueDecimal: this.defaultValueDecimal,
@@ -3133,7 +3133,7 @@ class ElementDefinition extends Element {
 			patternDataRequirement: this.patternDataRequirement && this.patternDataRequirement.toJSON(),
 			patternParameterDefinition: this.patternParameterDefinition && this.patternParameterDefinition.toJSON(),
 			patternTriggerDefinition: this.patternTriggerDefinition && this.patternTriggerDefinition.toJSON(),
-			example: this.example && this.example.toJSON(),
+			example: this.example.map(v => v.toJSON()),
 			minValueDate: this.minValueDate,
 			minValueDateTime: this.minValueDateTime,
 			minValueInstant: this.minValueInstant,
@@ -3154,12 +3154,12 @@ class ElementDefinition extends Element {
 			maxValueQuantity: this.maxValueQuantity && this.maxValueQuantity.toJSON(),
 			maxLength: this.maxLength,
 			condition: this.condition,
-			constraint: this.constraint && this.constraint.toJSON(),
+			constraint: this.constraint.map(v => v.toJSON()),
 			mustSupport: this.mustSupport,
 			isModifier: this.isModifier,
 			isSummary: this.isSummary,
 			binding: this.binding && this.binding.toJSON(),
-			mapping: this.mapping && this.mapping.toJSON()
+			mapping: this.mapping.map(v => v.toJSON())
 		});
 	}
 

@@ -275,7 +275,7 @@ class Device extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
 			udi: this.udi && this.udi.toJSON(),
 			status: this.status,
 			type: this.type && this.type.toJSON(),
@@ -287,11 +287,11 @@ class Device extends DomainResource {
 			version: this.version,
 			patient: this.patient && this.patient.toJSON(),
 			owner: this.owner && this.owner.toJSON(),
-			contact: this.contact && this.contact.toJSON(),
+			contact: this.contact.map(v => v.toJSON()),
 			location: this.location && this.location.toJSON(),
 			url: this.url,
-			note: this.note && this.note.toJSON(),
-			safety: this.safety && this.safety.toJSON()
+			note: this.note.map(v => v.toJSON()),
+			safety: this.safety.map(v => v.toJSON())
 		});
 	}
 

@@ -260,7 +260,7 @@ class Dosage extends Element {
 		return Object.assign(super.toJSON(), {
 			sequence: this.sequence,
 			text: this.text,
-			additionalInstruction: this.additionalInstruction && this.additionalInstruction.toJSON(),
+			additionalInstruction: this.additionalInstruction.map(v => v.toJSON()),
 			patientInstruction: this.patientInstruction,
 			timing: this.timing && this.timing.toJSON(),
 			asNeededBoolean: this.asNeededBoolean,

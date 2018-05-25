@@ -169,16 +169,16 @@ class Provenance extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			target: this.target && this.target.toJSON(),
+			target: this.target.map(v => v.toJSON()),
 			period: this.period && this.period.toJSON(),
 			recorded: this.recorded,
 			policy: this.policy,
 			location: this.location && this.location.toJSON(),
-			reason: this.reason && this.reason.toJSON(),
+			reason: this.reason.map(v => v.toJSON()),
 			activity: this.activity && this.activity.toJSON(),
-			agent: this.agent && this.agent.toJSON(),
-			entity: this.entity && this.entity.toJSON(),
-			signature: this.signature && this.signature.toJSON()
+			agent: this.agent.map(v => v.toJSON()),
+			entity: this.entity.map(v => v.toJSON()),
+			signature: this.signature.map(v => v.toJSON())
 		});
 	}
 

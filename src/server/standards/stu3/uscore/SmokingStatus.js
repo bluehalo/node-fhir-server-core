@@ -481,17 +481,17 @@ class SmokingStatus extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
-			basedOn: this.basedOn && this.basedOn.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
+			basedOn: this.basedOn.map(v => v.toJSON()),
 			status: this.status,
-			category: this.category && this.category.toJSON(),
+			category: this.category.map(v => v.toJSON()),
 			code: this.code && this.code.toJSON(),
 			subject: this.subject && this.subject.toJSON(),
 			context: this.context && this.context.toJSON(),
 			effectiveDateTime: this.effectiveDateTime,
 			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
 			issued: this.issued,
-			performer: this.performer && this.performer.toJSON(),
+			performer: this.performer.map(v => v.toJSON()),
 			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
 			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
 			valueString: this.valueString,
@@ -510,9 +510,9 @@ class SmokingStatus extends DomainResource {
 			method: this.method && this.method.toJSON(),
 			specimen: this.specimen && this.specimen.toJSON(),
 			device: this.device && this.device.toJSON(),
-			referenceRange: this.referenceRange && this.referenceRange.toJSON(),
-			related: this.related && this.related.toJSON(),
-			component: this.component && this.component.toJSON()
+			referenceRange: this.referenceRange.map(v => v.toJSON()),
+			related: this.related.map(v => v.toJSON()),
+			component: this.component.map(v => v.toJSON())
 		});
 	}
 

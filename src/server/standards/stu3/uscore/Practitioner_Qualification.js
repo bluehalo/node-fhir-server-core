@@ -70,7 +70,7 @@ class Practitioner_Qualification extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identifier: this.identifier && this.identifier.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
 			code: this.code && this.code.toJSON(),
 			period: this.period && this.period.toJSON(),
 			issuer: this.issuer && this.issuer.toJSON()

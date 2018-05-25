@@ -28,7 +28,7 @@ class BackboneElement extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			modifierExtension: this.modifierExtension && this.modifierExtension.toJSON()
+			modifierExtension: this.modifierExtension.map(v => v.toJSON())
 		});
 	}
 

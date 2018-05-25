@@ -128,8 +128,8 @@ class Bundle extends Resource {
 			identifier: this.identifier && this.identifier.toJSON(),
 			type: this.type,
 			total: this.total,
-			link: this.link && this.link.toJSON(),
-			entry: this.entry && this.entry.toJSON(),
+			link: this.link.map(v => v.toJSON()),
+			entry: this.entry.map(v => v.toJSON()),
 			signature: this.signature && this.signature.toJSON()
 		});
 	}

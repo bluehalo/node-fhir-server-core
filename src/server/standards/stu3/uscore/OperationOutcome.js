@@ -47,7 +47,7 @@ class OperationOutcome extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			issue: this.issue && this.issue.toJSON()
+			issue: this.issue.map(v => v.toJSON())
 		});
 	}
 

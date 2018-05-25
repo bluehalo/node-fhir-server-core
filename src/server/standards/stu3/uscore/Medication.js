@@ -166,9 +166,9 @@ class Medication extends DomainResource {
 			isOverTheCounter: this.isOverTheCounter,
 			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
 			form: this.form && this.form.toJSON(),
-			ingredient: this.ingredient && this.ingredient.toJSON(),
+			ingredient: this.ingredient.map(v => v.toJSON()),
 			package: this.package && this.package.toJSON(),
-			image: this.image && this.image.toJSON()
+			image: this.image.map(v => v.toJSON())
 		});
 	}
 

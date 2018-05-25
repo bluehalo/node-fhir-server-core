@@ -245,7 +245,7 @@ class Location extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
+			identifier: this.identifier.map(v => v.toJSON()),
 			status: this.status,
 			operationalStatus: this.operationalStatus && this.operationalStatus.toJSON(),
 			name: this.name,
@@ -253,13 +253,13 @@ class Location extends DomainResource {
 			description: this.description,
 			mode: this.mode,
 			type: this.type && this.type.toJSON(),
-			telecom: this.telecom && this.telecom.toJSON(),
+			telecom: this.telecom.map(v => v.toJSON()),
 			address: this.address && this.address.toJSON(),
 			physicalType: this.physicalType && this.physicalType.toJSON(),
 			position: this.position && this.position.toJSON(),
 			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
 			partOf: this.partOf && this.partOf.toJSON(),
-			endpoint: this.endpoint && this.endpoint.toJSON()
+			endpoint: this.endpoint.map(v => v.toJSON())
 		});
 	}
 
