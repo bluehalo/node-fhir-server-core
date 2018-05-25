@@ -164,7 +164,7 @@ module.exports.deletePatient = function deletePatient ({ profile, logger, app })
 		let { version } = req.sanitized_args;
 
 		return service.deletePatient(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(req))
+			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);

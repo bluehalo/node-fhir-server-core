@@ -120,7 +120,7 @@ module.exports.deleteDiagnosticReport = function deleteDiagnosticReport ({ profi
 		let { version } = req.sanitized_args;
 
 		return service.deleteDiagnosticReport(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(req))
+			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);

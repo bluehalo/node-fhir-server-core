@@ -120,7 +120,7 @@ module.exports.deleteCondition = function deleteCondition ({ profile, logger, ap
 		let { version } = req.sanitized_args;
 
 		return service.deleteCondition(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(req))
+			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);

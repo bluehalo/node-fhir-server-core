@@ -120,7 +120,7 @@ module.exports.deleteMedication = function deleteMedication ({ profile, logger, 
 		let { version } = req.sanitized_args;
 
 		return service.deleteMedication(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(req))
+			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);

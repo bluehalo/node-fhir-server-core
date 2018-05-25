@@ -120,7 +120,7 @@ module.exports.deleteCarePlan = function deleteCarePlan ({ profile, logger, app 
 		let { version } = req.sanitized_args;
 
 		return service.deleteCarePlan(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(req))
+			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
