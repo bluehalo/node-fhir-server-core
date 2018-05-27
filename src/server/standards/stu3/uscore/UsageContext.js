@@ -22,10 +22,6 @@ class UsageContext extends Element {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new Coding(new_value);
 	}
 
@@ -35,10 +31,6 @@ class UsageContext extends Element {
 	}
 
 	set valueCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -48,10 +40,6 @@ class UsageContext extends Element {
 	}
 
 	set valueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -61,10 +49,6 @@ class UsageContext extends Element {
 	}
 
 	set valueRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRange = new Range(new_value);
 	}
 

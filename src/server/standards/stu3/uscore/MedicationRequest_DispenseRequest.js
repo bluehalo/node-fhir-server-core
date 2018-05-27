@@ -22,10 +22,6 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set validityPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._validityPeriod = new Period(new_value);
 	}
 
@@ -35,13 +31,9 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set numberOfRepeatsAllowed ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field numberOfRepeatsAllowed`);
 		}
 		this._numberOfRepeatsAllowed = new_value;
@@ -53,10 +45,6 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set quantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._quantity = new Quantity(new_value);
 	}
 
@@ -66,10 +54,6 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set expectedSupplyDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._expectedSupplyDuration = new Duration(new_value);
 	}
 
@@ -79,10 +63,6 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	}
 
 	set performer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._performer = new Reference(new_value);
 	}
 

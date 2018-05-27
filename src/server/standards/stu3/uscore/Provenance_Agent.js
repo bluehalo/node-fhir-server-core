@@ -20,10 +20,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -33,10 +29,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set whoUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whoUri = new_value;
 	}
 
@@ -46,10 +38,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set whoReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whoReference = new Reference(new_value);
 	}
 
@@ -59,10 +47,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set onBehalfOfUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOfUri = new_value;
 	}
 
@@ -72,10 +56,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set onBehalfOfReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOfReference = new Reference(new_value);
 	}
 
@@ -85,10 +65,6 @@ class Provenance_Agent extends BackboneElement {
 	}
 
 	set relatedAgentType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._relatedAgentType = new CodeableConcept(new_value);
 	}
 

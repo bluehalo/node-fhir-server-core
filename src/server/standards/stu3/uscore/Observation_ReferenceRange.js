@@ -21,10 +21,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set low ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._low = new Quantity(new_value);
 	}
 
@@ -34,10 +30,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set high ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._high = new Quantity(new_value);
 	}
 
@@ -47,10 +39,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -60,10 +48,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set appliesTo ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._appliesTo = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -73,10 +57,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set age ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._age = new Range(new_value);
 	}
 
@@ -86,10 +66,6 @@ class Observation_ReferenceRange extends BackboneElement {
 	}
 
 	set text ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._text = new_value;
 	}
 

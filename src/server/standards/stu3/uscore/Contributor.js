@@ -19,13 +19,9 @@ class Contributor extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['author', 'editor', 'reviewer', 'endorser'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -37,10 +33,6 @@ class Contributor extends Element {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -50,10 +42,6 @@ class Contributor extends Element {
 	}
 
 	set contact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactDetail(val)) : [new ContactDetail(new_value)];
 	}
 

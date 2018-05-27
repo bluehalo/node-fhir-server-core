@@ -18,10 +18,6 @@ class AuditEvent_Detail extends BackboneElement {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new_value;
 	}
 
@@ -31,10 +27,6 @@ class AuditEvent_Detail extends BackboneElement {
 	}
 
 	set value ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._value = new_value;
 	}
 

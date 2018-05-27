@@ -19,10 +19,6 @@ class BackboneElement extends Element {
 
 	set modifierExtension ( new_value ) {
 		const Extension = require('./Extension');
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._modifierExtension = Array.isArray(new_value) ? new_value.map(val => new Extension(val)) : [new Extension(new_value)];
 	}
 

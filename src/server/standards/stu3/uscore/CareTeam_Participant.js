@@ -21,10 +21,6 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -34,10 +30,6 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set member ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._member = new Reference(new_value);
 	}
 
@@ -47,10 +39,6 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 
@@ -60,10 +48,6 @@ class CareTeam_Participant extends BackboneElement {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 

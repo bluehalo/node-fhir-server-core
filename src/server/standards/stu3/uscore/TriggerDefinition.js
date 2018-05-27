@@ -21,13 +21,9 @@ class TriggerDefinition extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['named-event', 'periodic', 'data-added', 'data-modified', 'data-removed', 'data-accessed', 'data-access-ended'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -39,10 +35,6 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._eventName = new_value;
 	}
 
@@ -52,10 +44,6 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._eventTimingTiming = new Timing(new_value);
 	}
 
@@ -65,10 +53,6 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._eventTimingReference = new Reference(new_value);
 	}
 
@@ -78,13 +62,9 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field eventTimingDate`);
 		}
 		this._eventTimingDate = new_value;
@@ -96,13 +76,9 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventTimingDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field eventTimingDateTime`);
 		}
 		this._eventTimingDateTime = new_value;
@@ -114,10 +90,6 @@ class TriggerDefinition extends Element {
 	}
 
 	set eventData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._eventData = new DataRequirement(new_value);
 	}
 

@@ -23,13 +23,9 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['deny', 'permit'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -41,10 +37,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 
@@ -54,10 +46,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set actor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._actor = Array.isArray(new_value) ? new_value.map(val => new Consent_Actor1(val)) : [new Consent_Actor1(new_value)];
 	}
 
@@ -67,10 +55,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set action ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._action = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -80,10 +64,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set securityLabel ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -93,10 +73,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set purpose ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._purpose = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -106,10 +82,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set class ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._class = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -119,10 +91,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -132,10 +100,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set dataPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dataPeriod = new Period(new_value);
 	}
 
@@ -145,10 +109,6 @@ class Consent_Except extends BackboneElement {
 	}
 
 	set data ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._data = Array.isArray(new_value) ? new_value.map(val => new Consent_Data1(val)) : [new Consent_Data1(new_value)];
 	}
 

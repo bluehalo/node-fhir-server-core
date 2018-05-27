@@ -20,13 +20,9 @@ class RelatedArtifact extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['documentation', 'justification', 'citation', 'predecessor', 'successor', 'derived-from', 'depends-on', 'composed-of'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -38,10 +34,6 @@ class RelatedArtifact extends Element {
 	}
 
 	set display ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._display = new_value;
 	}
 
@@ -51,10 +43,6 @@ class RelatedArtifact extends Element {
 	}
 
 	set citation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._citation = new_value;
 	}
 
@@ -64,10 +52,6 @@ class RelatedArtifact extends Element {
 	}
 
 	set url ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._url = new_value;
 	}
 
@@ -77,10 +61,6 @@ class RelatedArtifact extends Element {
 	}
 
 	set document ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._document = new Attachment(new_value);
 	}
 
@@ -90,10 +70,6 @@ class RelatedArtifact extends Element {
 	}
 
 	set resource ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._resource = new Reference(new_value);
 	}
 

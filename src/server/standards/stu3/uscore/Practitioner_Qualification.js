@@ -22,10 +22,6 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -35,10 +31,6 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -48,10 +40,6 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 
@@ -61,10 +49,6 @@ class Practitioner_Qualification extends BackboneElement {
 	}
 
 	set issuer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._issuer = new Reference(new_value);
 	}
 

@@ -19,10 +19,6 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._status = new_value;
 	}
 
@@ -32,10 +28,6 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set location ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._location = new_value;
 	}
 
@@ -45,10 +37,6 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set etag ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._etag = new_value;
 	}
 
@@ -58,10 +46,6 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set lastModified ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._lastModified = new_value;
 	}
 
@@ -71,10 +55,6 @@ class Bundle_Response extends BackboneElement {
 	}
 
 	set outcome ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._outcome = new ResourceList(new_value);
 	}
 

@@ -20,10 +20,6 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -33,10 +29,6 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set actor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._actor = new Reference(new_value);
 	}
 
@@ -46,10 +38,6 @@ class Procedure_Performer extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 

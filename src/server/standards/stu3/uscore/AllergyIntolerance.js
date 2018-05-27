@@ -26,13 +26,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AllergyIntolerance'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -44,10 +40,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -57,13 +49,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set clinicalStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'resolved'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field clinicalStatus`);
 		}
 		this._clinicalStatus = new_value;
@@ -75,13 +63,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set verificationStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['unconfirmed', 'confirmed', 'refuted', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field verificationStatus`);
 		}
 		this._verificationStatus = new_value;
@@ -93,13 +77,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['allergy', 'intolerance'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -111,13 +91,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['food', 'medication', 'environment', 'biologic'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field category`);
 		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -129,13 +105,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set criticality ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['low', 'high', 'unable-to-assess'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field criticality`);
 		}
 		this._criticality = new_value;
@@ -147,10 +119,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -160,10 +128,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set patient ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -173,13 +137,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
 		this._onsetDateTime = new_value;
@@ -191,10 +151,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetAge = new Age(new_value);
 	}
 
@@ -204,10 +160,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetPeriod = new Period(new_value);
 	}
 
@@ -217,10 +169,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetRange = new Range(new_value);
 	}
 
@@ -230,10 +178,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set onsetString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetString = new_value;
 	}
 
@@ -243,13 +187,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set assertedDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
 		this._assertedDate = new_value;
@@ -261,10 +201,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set recorder ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._recorder = new Reference(new_value);
 	}
 
@@ -274,10 +210,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set asserter ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._asserter = new Reference(new_value);
 	}
 
@@ -287,13 +219,9 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set lastOccurrence ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field lastOccurrence`);
 		}
 		this._lastOccurrence = new_value;
@@ -305,10 +233,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set note ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -318,10 +242,6 @@ class AllergyIntolerance extends DomainResource {
 	}
 
 	set reaction ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reaction = Array.isArray(new_value) ? new_value.map(val => new AllergyIntolerance_Reaction(val)) : [new AllergyIntolerance_Reaction(new_value)];
 	}
 

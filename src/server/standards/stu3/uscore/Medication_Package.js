@@ -21,10 +21,6 @@ class Medication_Package extends BackboneElement {
 	}
 
 	set container ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._container = new CodeableConcept(new_value);
 	}
 
@@ -34,10 +30,6 @@ class Medication_Package extends BackboneElement {
 	}
 
 	set content ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._content = Array.isArray(new_value) ? new_value.map(val => new Medication_Content(val)) : [new Medication_Content(new_value)];
 	}
 
@@ -47,10 +39,6 @@ class Medication_Package extends BackboneElement {
 	}
 
 	set batch ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._batch = Array.isArray(new_value) ? new_value.map(val => new Medication_Batch(val)) : [new Medication_Batch(new_value)];
 	}
 

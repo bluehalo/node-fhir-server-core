@@ -19,10 +19,6 @@ class ContactDetail extends Element {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -32,10 +28,6 @@ class ContactDetail extends Element {
 	}
 
 	set telecom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 

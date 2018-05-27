@@ -19,10 +19,6 @@ class CodeableConcept extends Element {
 	}
 
 	set coding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._coding = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -32,10 +28,6 @@ class CodeableConcept extends Element {
 	}
 
 	set text ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._text = new_value;
 	}
 

@@ -18,10 +18,6 @@ class Bundle_Link extends BackboneElement {
 	}
 
 	set relation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._relation = new_value;
 	}
 
@@ -31,10 +27,6 @@ class Bundle_Link extends BackboneElement {
 	}
 
 	set url ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._url = new_value;
 	}
 

@@ -19,13 +19,9 @@ class Resource extends Element {
 	}
 
 	set id ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field id`);
 		}
 		this._id = new_value;
@@ -37,10 +33,6 @@ class Resource extends Element {
 	}
 
 	set meta ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._meta = new Meta(new_value);
 	}
 
@@ -50,10 +42,6 @@ class Resource extends Element {
 	}
 
 	set implicitRules ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._implicitRules = new_value;
 	}
 
@@ -63,13 +51,9 @@ class Resource extends Element {
 	}
 
 	set language ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field language`);
 		}
 		this._language = new_value;

@@ -20,10 +20,6 @@ class Procedure_FocalDevice extends BackboneElement {
 	}
 
 	set action ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._action = new CodeableConcept(new_value);
 	}
 
@@ -33,10 +29,6 @@ class Procedure_FocalDevice extends BackboneElement {
 	}
 
 	set manipulated ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._manipulated = new Reference(new_value);
 	}
 

@@ -20,10 +20,6 @@ class Consent_Actor extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = new CodeableConcept(new_value);
 	}
 
@@ -33,10 +29,6 @@ class Consent_Actor extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reference = new Reference(new_value);
 	}
 

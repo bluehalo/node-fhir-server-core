@@ -19,10 +19,6 @@ class Reference extends Element {
 	}
 
 	set reference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reference = new_value;
 	}
 
@@ -32,10 +28,6 @@ class Reference extends Element {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -45,10 +37,6 @@ class Reference extends Element {
 	}
 
 	set display ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._display = new_value;
 	}
 

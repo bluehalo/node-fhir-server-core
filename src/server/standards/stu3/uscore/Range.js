@@ -19,10 +19,6 @@ class Range extends Element {
 	}
 
 	set low ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._low = new Quantity(new_value);
 	}
 
@@ -32,10 +28,6 @@ class Range extends Element {
 	}
 
 	set high ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._high = new Quantity(new_value);
 	}
 

@@ -23,13 +23,9 @@ class AuditEvent extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AuditEvent'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -41,10 +37,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new Coding(new_value);
 	}
 
@@ -54,10 +46,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set subtype ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subtype = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -67,13 +55,9 @@ class AuditEvent extends DomainResource {
 	}
 
 	set action ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['C', 'R', 'U', 'D', 'E'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field action`);
 		}
 		this._action = new_value;
@@ -85,10 +69,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set recorded ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._recorded = new_value;
 	}
 
@@ -98,13 +78,9 @@ class AuditEvent extends DomainResource {
 	}
 
 	set outcome ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['0', '4', '8', '12'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field outcome`);
 		}
 		this._outcome = new_value;
@@ -116,10 +92,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set outcomeDesc ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._outcomeDesc = new_value;
 	}
 
@@ -129,10 +101,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set purposeOfEvent ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._purposeOfEvent = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -142,10 +110,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set agent ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new AuditEvent_Agent(val)) : [new AuditEvent_Agent(new_value)];
 	}
 
@@ -155,10 +119,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set source ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._source = new AuditEvent_Source(new_value);
 	}
 
@@ -168,10 +128,6 @@ class AuditEvent extends DomainResource {
 	}
 
 	set entity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._entity = Array.isArray(new_value) ? new_value.map(val => new AuditEvent_Entity(val)) : [new AuditEvent_Entity(new_value)];
 	}
 

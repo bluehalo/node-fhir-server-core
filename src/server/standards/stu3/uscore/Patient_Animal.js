@@ -19,10 +19,6 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set species ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._species = new CodeableConcept(new_value);
 	}
 
@@ -32,10 +28,6 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set breed ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._breed = new CodeableConcept(new_value);
 	}
 
@@ -45,10 +37,6 @@ class Patient_Animal extends BackboneElement {
 	}
 
 	set genderStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._genderStatus = new CodeableConcept(new_value);
 	}
 

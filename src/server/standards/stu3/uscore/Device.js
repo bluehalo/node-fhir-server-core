@@ -24,13 +24,9 @@ class Device extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Device'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -42,10 +38,6 @@ class Device extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -55,10 +47,6 @@ class Device extends DomainResource {
 	}
 
 	set udi ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._udi = new Device_Udi(new_value);
 	}
 
@@ -68,13 +56,9 @@ class Device extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -86,10 +70,6 @@ class Device extends DomainResource {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -99,10 +79,6 @@ class Device extends DomainResource {
 	}
 
 	set lotNumber ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._lotNumber = new_value;
 	}
 
@@ -112,10 +88,6 @@ class Device extends DomainResource {
 	}
 
 	set manufacturer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._manufacturer = new_value;
 	}
 
@@ -125,13 +97,9 @@ class Device extends DomainResource {
 	}
 
 	set manufactureDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field manufactureDate`);
 		}
 		this._manufactureDate = new_value;
@@ -143,13 +111,9 @@ class Device extends DomainResource {
 	}
 
 	set expirationDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field expirationDate`);
 		}
 		this._expirationDate = new_value;
@@ -161,10 +125,6 @@ class Device extends DomainResource {
 	}
 
 	set model ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._model = new_value;
 	}
 
@@ -174,10 +134,6 @@ class Device extends DomainResource {
 	}
 
 	set version ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._version = new_value;
 	}
 
@@ -187,10 +143,6 @@ class Device extends DomainResource {
 	}
 
 	set patient ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -200,10 +152,6 @@ class Device extends DomainResource {
 	}
 
 	set owner ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._owner = new Reference(new_value);
 	}
 
@@ -213,10 +161,6 @@ class Device extends DomainResource {
 	}
 
 	set contact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -226,10 +170,6 @@ class Device extends DomainResource {
 	}
 
 	set location ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._location = new Reference(new_value);
 	}
 
@@ -239,10 +179,6 @@ class Device extends DomainResource {
 	}
 
 	set url ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._url = new_value;
 	}
 
@@ -252,10 +188,6 @@ class Device extends DomainResource {
 	}
 
 	set note ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -265,10 +197,6 @@ class Device extends DomainResource {
 	}
 
 	set safety ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._safety = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 

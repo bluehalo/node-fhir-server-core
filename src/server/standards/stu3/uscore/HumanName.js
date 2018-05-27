@@ -19,13 +19,9 @@ class HumanName extends Element {
 	}
 
 	set use ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['usual', 'official', 'temp', 'nickname', 'anonymous', 'old', 'maiden'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field use`);
 		}
 		this._use = new_value;
@@ -37,10 +33,6 @@ class HumanName extends Element {
 	}
 
 	set text ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._text = new_value;
 	}
 
@@ -50,10 +42,6 @@ class HumanName extends Element {
 	}
 
 	set family ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._family = new_value;
 	}
 
@@ -63,10 +51,6 @@ class HumanName extends Element {
 	}
 
 	set given ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._given = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -76,10 +60,6 @@ class HumanName extends Element {
 	}
 
 	set prefix ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._prefix = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -89,10 +69,6 @@ class HumanName extends Element {
 	}
 
 	set suffix ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._suffix = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -102,10 +78,6 @@ class HumanName extends Element {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 

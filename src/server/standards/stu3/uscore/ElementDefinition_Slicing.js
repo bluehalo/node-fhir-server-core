@@ -19,10 +19,6 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set discriminator ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._discriminator = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Discriminator(val)) : [new ElementDefinition_Discriminator(new_value)];
 	}
 
@@ -32,10 +28,6 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new_value;
 	}
 
@@ -45,10 +37,6 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set ordered ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ordered = new_value;
 	}
 
@@ -58,13 +46,9 @@ class ElementDefinition_Slicing extends BackboneElement {
 	}
 
 	set rules ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['closed', 'open', 'openAtEnd'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field rules`);
 		}
 		this._rules = new_value;

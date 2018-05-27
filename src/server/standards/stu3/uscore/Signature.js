@@ -20,10 +20,6 @@ class Signature extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -33,10 +29,6 @@ class Signature extends Element {
 	}
 
 	set when ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._when = new_value;
 	}
 
@@ -46,10 +38,6 @@ class Signature extends Element {
 	}
 
 	set whoUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whoUri = new_value;
 	}
 
@@ -59,10 +47,6 @@ class Signature extends Element {
 	}
 
 	set whoReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whoReference = new Reference(new_value);
 	}
 
@@ -72,10 +56,6 @@ class Signature extends Element {
 	}
 
 	set onBehalfOfUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOfUri = new_value;
 	}
 
@@ -85,10 +65,6 @@ class Signature extends Element {
 	}
 
 	set onBehalfOfReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOfReference = new Reference(new_value);
 	}
 
@@ -98,13 +74,9 @@ class Signature extends Element {
 	}
 
 	set contentType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field contentType`);
 		}
 		this._contentType = new_value;
@@ -116,10 +88,6 @@ class Signature extends Element {
 	}
 
 	set blob ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._blob = new_value;
 	}
 

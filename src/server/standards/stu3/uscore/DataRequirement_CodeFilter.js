@@ -21,10 +21,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set path ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._path = new_value;
 	}
 
@@ -34,10 +30,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set valueSetString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSetString = new_value;
 	}
 
@@ -47,10 +39,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set valueSetReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSetReference = new Reference(new_value);
 	}
 
@@ -60,10 +48,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set valueCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCode = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -73,10 +57,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set valueCoding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCoding = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -86,10 +66,6 @@ class DataRequirement_CodeFilter extends BackboneElement {
 	}
 
 	set valueCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCodeableConcept = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 

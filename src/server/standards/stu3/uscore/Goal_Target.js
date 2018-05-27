@@ -22,10 +22,6 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set measure ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._measure = new CodeableConcept(new_value);
 	}
 
@@ -35,10 +31,6 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set detailQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._detailQuantity = new Quantity(new_value);
 	}
 
@@ -48,10 +40,6 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set detailRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._detailRange = new Range(new_value);
 	}
 
@@ -61,10 +49,6 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set detailCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._detailCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -74,13 +58,9 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set dueDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dueDate`);
 		}
 		this._dueDate = new_value;
@@ -92,10 +72,6 @@ class Goal_Target extends BackboneElement {
 	}
 
 	set dueDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dueDuration = new Duration(new_value);
 	}
 

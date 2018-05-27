@@ -58,10 +58,6 @@ class ElementDefinition extends Element {
 	}
 
 	set path ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._path = new_value;
 	}
 
@@ -71,13 +67,9 @@ class ElementDefinition extends Element {
 	}
 
 	set representation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['xmlAttr', 'xmlText', 'typeAttr', 'cdaText', 'xhtml'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field representation`);
 		}
 		this._representation = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -89,10 +81,6 @@ class ElementDefinition extends Element {
 	}
 
 	set sliceName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._sliceName = new_value;
 	}
 
@@ -102,10 +90,6 @@ class ElementDefinition extends Element {
 	}
 
 	set label ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._label = new_value;
 	}
 
@@ -115,10 +99,6 @@ class ElementDefinition extends Element {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -128,10 +108,6 @@ class ElementDefinition extends Element {
 	}
 
 	set slicing ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._slicing = new ElementDefinition_Slicing(new_value);
 	}
 
@@ -141,10 +117,6 @@ class ElementDefinition extends Element {
 	}
 
 	set short ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._short = new_value;
 	}
 
@@ -154,10 +126,6 @@ class ElementDefinition extends Element {
 	}
 
 	set definition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._definition = new_value;
 	}
 
@@ -167,10 +135,6 @@ class ElementDefinition extends Element {
 	}
 
 	set comment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._comment = new_value;
 	}
 
@@ -180,10 +144,6 @@ class ElementDefinition extends Element {
 	}
 
 	set requirements ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._requirements = new_value;
 	}
 
@@ -193,10 +153,6 @@ class ElementDefinition extends Element {
 	}
 
 	set alias ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -206,13 +162,9 @@ class ElementDefinition extends Element {
 	}
 
 	set min ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
 		this._min = new_value;
@@ -224,10 +176,6 @@ class ElementDefinition extends Element {
 	}
 
 	set max ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._max = new_value;
 	}
 
@@ -237,10 +185,6 @@ class ElementDefinition extends Element {
 	}
 
 	set base ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._base = new ElementDefinition_Base(new_value);
 	}
 
@@ -250,10 +194,6 @@ class ElementDefinition extends Element {
 	}
 
 	set contentReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._contentReference = new_value;
 	}
 
@@ -263,10 +203,6 @@ class ElementDefinition extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Type(val)) : [new ElementDefinition_Type(new_value)];
 	}
 
@@ -276,10 +212,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueBoolean = new_value;
 	}
 
@@ -289,13 +221,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueInteger`);
 		}
 		this._defaultValueInteger = new_value;
@@ -307,13 +235,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDecimal`);
 		}
 		this._defaultValueDecimal = new_value;
@@ -325,10 +249,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueBase64Binary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueBase64Binary = new_value;
 	}
 
@@ -338,10 +258,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueInstant = new_value;
 	}
 
@@ -351,10 +267,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueString = new_value;
 	}
 
@@ -364,10 +276,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueUri = new_value;
 	}
 
@@ -377,13 +285,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDate`);
 		}
 		this._defaultValueDate = new_value;
@@ -395,13 +299,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDateTime`);
 		}
 		this._defaultValueDateTime = new_value;
@@ -413,13 +313,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueTime`);
 		}
 		this._defaultValueTime = new_value;
@@ -431,13 +327,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueCode`);
 		}
 		this._defaultValueCode = new_value;
@@ -449,13 +341,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueOid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueOid`);
 		}
 		this._defaultValueOid = new_value;
@@ -467,13 +355,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueUuid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueUuid`);
 		}
 		this._defaultValueUuid = new_value;
@@ -485,13 +369,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueId`);
 		}
 		this._defaultValueId = new_value;
@@ -503,13 +383,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueUnsignedInt`);
 		}
 		this._defaultValueUnsignedInt = new_value;
@@ -521,13 +397,9 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValuePositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValuePositiveInt`);
 		}
 		this._defaultValuePositiveInt = new_value;
@@ -539,10 +411,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueMarkdown ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueMarkdown = new_value;
 	}
 
@@ -552,10 +420,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueElement = new Element(new_value);
 	}
 
@@ -565,10 +429,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueExtension ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueExtension = new Extension(new_value);
 	}
 
@@ -578,10 +438,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueBackboneElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueBackboneElement = new BackboneElement(new_value);
 	}
 
@@ -591,10 +447,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueNarrative ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueNarrative = new Narrative(new_value);
 	}
 
@@ -604,10 +456,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueAnnotation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueAnnotation = new Annotation(new_value);
 	}
 
@@ -617,10 +465,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueAttachment = new Attachment(new_value);
 	}
 
@@ -630,10 +474,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueIdentifier = new Identifier(new_value);
 	}
 
@@ -643,10 +483,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -656,10 +492,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueCoding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueCoding = new Coding(new_value);
 	}
 
@@ -669,10 +501,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueQuantity = new Quantity(new_value);
 	}
 
@@ -682,10 +510,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueDuration = new Duration(new_value);
 	}
 
@@ -695,10 +519,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -708,10 +528,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDistance ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueDistance = new Distance(new_value);
 	}
 
@@ -721,10 +537,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueCount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueCount = new Count(new_value);
 	}
 
@@ -734,10 +546,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueMoney ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueMoney = new Money(new_value);
 	}
 
@@ -747,10 +555,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueAge = new Age(new_value);
 	}
 
@@ -760,10 +564,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueRange = new Range(new_value);
 	}
 
@@ -773,10 +573,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValuePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValuePeriod = new Period(new_value);
 	}
 
@@ -786,10 +582,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueRatio = new Ratio(new_value);
 	}
 
@@ -799,10 +591,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueReference = new Reference(new_value);
 	}
 
@@ -812,10 +600,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueSampledData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueSampledData = new SampledData(new_value);
 	}
 
@@ -825,10 +609,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueSignature ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueSignature = new Signature(new_value);
 	}
 
@@ -838,10 +618,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueHumanName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueHumanName = new HumanName(new_value);
 	}
 
@@ -851,10 +627,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueAddress ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueAddress = new Address(new_value);
 	}
 
@@ -864,10 +636,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueContactPoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueContactPoint = new ContactPoint(new_value);
 	}
 
@@ -877,10 +645,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueTiming = new Timing(new_value);
 	}
 
@@ -890,10 +654,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueMeta ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueMeta = new Meta(new_value);
 	}
 
@@ -903,10 +663,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueElementDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueElementDefinition = new ElementDefinition(new_value);
 	}
 
@@ -916,10 +672,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueContactDetail ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueContactDetail = new ContactDetail(new_value);
 	}
 
@@ -929,10 +681,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueContributor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueContributor = new Contributor(new_value);
 	}
 
@@ -942,10 +690,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDosage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueDosage = new Dosage(new_value);
 	}
 
@@ -955,10 +699,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueRelatedArtifact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueRelatedArtifact = new RelatedArtifact(new_value);
 	}
 
@@ -968,10 +708,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueUsageContext ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueUsageContext = new UsageContext(new_value);
 	}
 
@@ -981,10 +717,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueDataRequirement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueDataRequirement = new DataRequirement(new_value);
 	}
 
@@ -994,10 +726,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueParameterDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueParameterDefinition = new ParameterDefinition(new_value);
 	}
 
@@ -1007,10 +735,6 @@ class ElementDefinition extends Element {
 	}
 
 	set defaultValueTriggerDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._defaultValueTriggerDefinition = new TriggerDefinition(new_value);
 	}
 
@@ -1020,10 +744,6 @@ class ElementDefinition extends Element {
 	}
 
 	set meaningWhenMissing ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._meaningWhenMissing = new_value;
 	}
 
@@ -1033,10 +753,6 @@ class ElementDefinition extends Element {
 	}
 
 	set orderMeaning ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._orderMeaning = new_value;
 	}
 
@@ -1046,10 +762,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedBoolean = new_value;
 	}
 
@@ -1059,13 +771,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedInteger`);
 		}
 		this._fixedInteger = new_value;
@@ -1077,13 +785,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDecimal`);
 		}
 		this._fixedDecimal = new_value;
@@ -1095,10 +799,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedBase64Binary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedBase64Binary = new_value;
 	}
 
@@ -1108,10 +808,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedInstant = new_value;
 	}
 
@@ -1121,10 +817,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedString = new_value;
 	}
 
@@ -1134,10 +826,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedUri = new_value;
 	}
 
@@ -1147,13 +835,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDate`);
 		}
 		this._fixedDate = new_value;
@@ -1165,13 +849,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDateTime`);
 		}
 		this._fixedDateTime = new_value;
@@ -1183,13 +863,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedTime`);
 		}
 		this._fixedTime = new_value;
@@ -1201,13 +877,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedCode`);
 		}
 		this._fixedCode = new_value;
@@ -1219,13 +891,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedOid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedOid`);
 		}
 		this._fixedOid = new_value;
@@ -1237,13 +905,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedUuid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedUuid`);
 		}
 		this._fixedUuid = new_value;
@@ -1255,13 +919,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedId`);
 		}
 		this._fixedId = new_value;
@@ -1273,13 +933,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedUnsignedInt`);
 		}
 		this._fixedUnsignedInt = new_value;
@@ -1291,13 +947,9 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedPositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedPositiveInt`);
 		}
 		this._fixedPositiveInt = new_value;
@@ -1309,10 +961,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedMarkdown ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedMarkdown = new_value;
 	}
 
@@ -1322,10 +970,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedElement = new Element(new_value);
 	}
 
@@ -1335,10 +979,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedExtension ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedExtension = new Extension(new_value);
 	}
 
@@ -1348,10 +988,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedBackboneElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedBackboneElement = new BackboneElement(new_value);
 	}
 
@@ -1361,10 +997,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedNarrative ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedNarrative = new Narrative(new_value);
 	}
 
@@ -1374,10 +1006,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedAnnotation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedAnnotation = new Annotation(new_value);
 	}
 
@@ -1387,10 +1015,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedAttachment = new Attachment(new_value);
 	}
 
@@ -1400,10 +1024,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedIdentifier = new Identifier(new_value);
 	}
 
@@ -1413,10 +1033,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -1426,10 +1042,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedCoding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedCoding = new Coding(new_value);
 	}
 
@@ -1439,10 +1051,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedQuantity = new Quantity(new_value);
 	}
 
@@ -1452,10 +1060,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedDuration = new Duration(new_value);
 	}
 
@@ -1465,10 +1069,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -1478,10 +1078,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDistance ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedDistance = new Distance(new_value);
 	}
 
@@ -1491,10 +1087,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedCount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedCount = new Count(new_value);
 	}
 
@@ -1504,10 +1096,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedMoney ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedMoney = new Money(new_value);
 	}
 
@@ -1517,10 +1105,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedAge = new Age(new_value);
 	}
 
@@ -1530,10 +1114,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedRange = new Range(new_value);
 	}
 
@@ -1543,10 +1123,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedPeriod = new Period(new_value);
 	}
 
@@ -1556,10 +1132,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedRatio = new Ratio(new_value);
 	}
 
@@ -1569,10 +1141,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedReference = new Reference(new_value);
 	}
 
@@ -1582,10 +1150,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedSampledData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedSampledData = new SampledData(new_value);
 	}
 
@@ -1595,10 +1159,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedSignature ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedSignature = new Signature(new_value);
 	}
 
@@ -1608,10 +1168,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedHumanName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedHumanName = new HumanName(new_value);
 	}
 
@@ -1621,10 +1177,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedAddress ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedAddress = new Address(new_value);
 	}
 
@@ -1634,10 +1186,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedContactPoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedContactPoint = new ContactPoint(new_value);
 	}
 
@@ -1647,10 +1195,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedTiming = new Timing(new_value);
 	}
 
@@ -1660,10 +1204,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedMeta ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedMeta = new Meta(new_value);
 	}
 
@@ -1673,10 +1213,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedElementDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedElementDefinition = new ElementDefinition(new_value);
 	}
 
@@ -1686,10 +1222,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedContactDetail ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedContactDetail = new ContactDetail(new_value);
 	}
 
@@ -1699,10 +1231,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedContributor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedContributor = new Contributor(new_value);
 	}
 
@@ -1712,10 +1240,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDosage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedDosage = new Dosage(new_value);
 	}
 
@@ -1725,10 +1249,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedRelatedArtifact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedRelatedArtifact = new RelatedArtifact(new_value);
 	}
 
@@ -1738,10 +1258,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedUsageContext ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedUsageContext = new UsageContext(new_value);
 	}
 
@@ -1751,10 +1267,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedDataRequirement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedDataRequirement = new DataRequirement(new_value);
 	}
 
@@ -1764,10 +1276,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedParameterDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedParameterDefinition = new ParameterDefinition(new_value);
 	}
 
@@ -1777,10 +1285,6 @@ class ElementDefinition extends Element {
 	}
 
 	set fixedTriggerDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fixedTriggerDefinition = new TriggerDefinition(new_value);
 	}
 
@@ -1790,10 +1294,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternBoolean = new_value;
 	}
 
@@ -1803,13 +1303,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternInteger`);
 		}
 		this._patternInteger = new_value;
@@ -1821,13 +1317,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDecimal`);
 		}
 		this._patternDecimal = new_value;
@@ -1839,10 +1331,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternBase64Binary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternBase64Binary = new_value;
 	}
 
@@ -1852,10 +1340,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternInstant = new_value;
 	}
 
@@ -1865,10 +1349,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternString = new_value;
 	}
 
@@ -1878,10 +1358,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternUri = new_value;
 	}
 
@@ -1891,13 +1367,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDate`);
 		}
 		this._patternDate = new_value;
@@ -1909,13 +1381,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDateTime`);
 		}
 		this._patternDateTime = new_value;
@@ -1927,13 +1395,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternTime`);
 		}
 		this._patternTime = new_value;
@@ -1945,13 +1409,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternCode`);
 		}
 		this._patternCode = new_value;
@@ -1963,13 +1423,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternOid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternOid`);
 		}
 		this._patternOid = new_value;
@@ -1981,13 +1437,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternUuid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternUuid`);
 		}
 		this._patternUuid = new_value;
@@ -1999,13 +1451,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternId`);
 		}
 		this._patternId = new_value;
@@ -2017,13 +1465,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternUnsignedInt`);
 		}
 		this._patternUnsignedInt = new_value;
@@ -2035,13 +1479,9 @@ class ElementDefinition extends Element {
 	}
 
 	set patternPositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternPositiveInt`);
 		}
 		this._patternPositiveInt = new_value;
@@ -2053,10 +1493,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternMarkdown ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternMarkdown = new_value;
 	}
 
@@ -2066,10 +1502,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternElement = new Element(new_value);
 	}
 
@@ -2079,10 +1511,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternExtension ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternExtension = new Extension(new_value);
 	}
 
@@ -2092,10 +1520,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternBackboneElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternBackboneElement = new BackboneElement(new_value);
 	}
 
@@ -2105,10 +1529,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternNarrative ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternNarrative = new Narrative(new_value);
 	}
 
@@ -2118,10 +1538,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternAnnotation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternAnnotation = new Annotation(new_value);
 	}
 
@@ -2131,10 +1547,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternAttachment = new Attachment(new_value);
 	}
 
@@ -2144,10 +1556,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternIdentifier = new Identifier(new_value);
 	}
 
@@ -2157,10 +1565,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -2170,10 +1574,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternCoding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternCoding = new Coding(new_value);
 	}
 
@@ -2183,10 +1583,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternQuantity = new Quantity(new_value);
 	}
 
@@ -2196,10 +1592,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternDuration = new Duration(new_value);
 	}
 
@@ -2209,10 +1601,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -2222,10 +1610,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDistance ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternDistance = new Distance(new_value);
 	}
 
@@ -2235,10 +1619,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternCount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternCount = new Count(new_value);
 	}
 
@@ -2248,10 +1628,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternMoney ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternMoney = new Money(new_value);
 	}
 
@@ -2261,10 +1637,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternAge = new Age(new_value);
 	}
 
@@ -2274,10 +1646,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternRange = new Range(new_value);
 	}
 
@@ -2287,10 +1655,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternPeriod = new Period(new_value);
 	}
 
@@ -2300,10 +1664,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternRatio = new Ratio(new_value);
 	}
 
@@ -2313,10 +1673,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternReference = new Reference(new_value);
 	}
 
@@ -2326,10 +1682,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternSampledData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternSampledData = new SampledData(new_value);
 	}
 
@@ -2339,10 +1691,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternSignature ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternSignature = new Signature(new_value);
 	}
 
@@ -2352,10 +1700,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternHumanName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternHumanName = new HumanName(new_value);
 	}
 
@@ -2365,10 +1709,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternAddress ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternAddress = new Address(new_value);
 	}
 
@@ -2378,10 +1718,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternContactPoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternContactPoint = new ContactPoint(new_value);
 	}
 
@@ -2391,10 +1727,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternTiming = new Timing(new_value);
 	}
 
@@ -2404,10 +1736,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternMeta ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternMeta = new Meta(new_value);
 	}
 
@@ -2417,10 +1745,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternElementDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternElementDefinition = new ElementDefinition(new_value);
 	}
 
@@ -2430,10 +1754,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternContactDetail ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternContactDetail = new ContactDetail(new_value);
 	}
 
@@ -2443,10 +1763,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternContributor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternContributor = new Contributor(new_value);
 	}
 
@@ -2456,10 +1772,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDosage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternDosage = new Dosage(new_value);
 	}
 
@@ -2469,10 +1781,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternRelatedArtifact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternRelatedArtifact = new RelatedArtifact(new_value);
 	}
 
@@ -2482,10 +1790,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternUsageContext ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternUsageContext = new UsageContext(new_value);
 	}
 
@@ -2495,10 +1799,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternDataRequirement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternDataRequirement = new DataRequirement(new_value);
 	}
 
@@ -2508,10 +1808,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternParameterDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternParameterDefinition = new ParameterDefinition(new_value);
 	}
 
@@ -2521,10 +1817,6 @@ class ElementDefinition extends Element {
 	}
 
 	set patternTriggerDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patternTriggerDefinition = new TriggerDefinition(new_value);
 	}
 
@@ -2534,10 +1826,6 @@ class ElementDefinition extends Element {
 	}
 
 	set example ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._example = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Example(val)) : [new ElementDefinition_Example(new_value)];
 	}
 
@@ -2547,13 +1835,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDate`);
 		}
 		this._minValueDate = new_value;
@@ -2565,13 +1849,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDateTime`);
 		}
 		this._minValueDateTime = new_value;
@@ -2583,10 +1863,6 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._minValueInstant = new_value;
 	}
 
@@ -2596,13 +1872,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueTime`);
 		}
 		this._minValueTime = new_value;
@@ -2614,13 +1886,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDecimal`);
 		}
 		this._minValueDecimal = new_value;
@@ -2632,13 +1900,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueInteger`);
 		}
 		this._minValueInteger = new_value;
@@ -2650,13 +1914,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValuePositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValuePositiveInt`);
 		}
 		this._minValuePositiveInt = new_value;
@@ -2668,13 +1928,9 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueUnsignedInt`);
 		}
 		this._minValueUnsignedInt = new_value;
@@ -2686,10 +1942,6 @@ class ElementDefinition extends Element {
 	}
 
 	set minValueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._minValueQuantity = new Quantity(new_value);
 	}
 
@@ -2699,13 +1951,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDate`);
 		}
 		this._maxValueDate = new_value;
@@ -2717,13 +1965,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDateTime`);
 		}
 		this._maxValueDateTime = new_value;
@@ -2735,10 +1979,6 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._maxValueInstant = new_value;
 	}
 
@@ -2748,13 +1988,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueTime`);
 		}
 		this._maxValueTime = new_value;
@@ -2766,13 +2002,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDecimal`);
 		}
 		this._maxValueDecimal = new_value;
@@ -2784,13 +2016,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueInteger`);
 		}
 		this._maxValueInteger = new_value;
@@ -2802,13 +2030,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValuePositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValuePositiveInt`);
 		}
 		this._maxValuePositiveInt = new_value;
@@ -2820,13 +2044,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueUnsignedInt`);
 		}
 		this._maxValueUnsignedInt = new_value;
@@ -2838,10 +2058,6 @@ class ElementDefinition extends Element {
 	}
 
 	set maxValueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._maxValueQuantity = new Quantity(new_value);
 	}
 
@@ -2851,13 +2067,9 @@ class ElementDefinition extends Element {
 	}
 
 	set maxLength ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxLength`);
 		}
 		this._maxLength = new_value;
@@ -2869,10 +2081,6 @@ class ElementDefinition extends Element {
 	}
 
 	set condition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._condition = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -2882,10 +2090,6 @@ class ElementDefinition extends Element {
 	}
 
 	set constraint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._constraint = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Constraint(val)) : [new ElementDefinition_Constraint(new_value)];
 	}
 
@@ -2895,10 +2099,6 @@ class ElementDefinition extends Element {
 	}
 
 	set mustSupport ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._mustSupport = new_value;
 	}
 
@@ -2908,10 +2108,6 @@ class ElementDefinition extends Element {
 	}
 
 	set isModifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._isModifier = new_value;
 	}
 
@@ -2921,10 +2117,6 @@ class ElementDefinition extends Element {
 	}
 
 	set isSummary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._isSummary = new_value;
 	}
 
@@ -2934,10 +2126,6 @@ class ElementDefinition extends Element {
 	}
 
 	set binding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._binding = new ElementDefinition_Binding(new_value);
 	}
 
@@ -2947,10 +2135,6 @@ class ElementDefinition extends Element {
 	}
 
 	set mapping ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._mapping = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Mapping(val)) : [new ElementDefinition_Mapping(new_value)];
 	}
 

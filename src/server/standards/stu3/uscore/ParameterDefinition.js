@@ -19,13 +19,9 @@ class ParameterDefinition extends Element {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field name`);
 		}
 		this._name = new_value;
@@ -37,13 +33,9 @@ class ParameterDefinition extends Element {
 	}
 
 	set use ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field use`);
 		}
 		this._use = new_value;
@@ -55,13 +47,9 @@ class ParameterDefinition extends Element {
 	}
 
 	set min ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
 		this._min = new_value;
@@ -73,10 +61,6 @@ class ParameterDefinition extends Element {
 	}
 
 	set max ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._max = new_value;
 	}
 
@@ -86,10 +70,6 @@ class ParameterDefinition extends Element {
 	}
 
 	set documentation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._documentation = new_value;
 	}
 
@@ -99,13 +79,9 @@ class ParameterDefinition extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field type`);
 		}
 		this._type = new_value;
@@ -117,10 +93,6 @@ class ParameterDefinition extends Element {
 	}
 
 	set profile ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._profile = new Reference(new_value);
 	}
 

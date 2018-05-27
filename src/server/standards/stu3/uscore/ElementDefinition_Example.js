@@ -52,10 +52,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set label ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._label = new_value;
 	}
 
@@ -65,10 +61,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueBoolean = new_value;
 	}
 
@@ -78,13 +70,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueInteger ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueInteger`);
 		}
 		this._valueInteger = new_value;
@@ -96,13 +84,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDecimal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDecimal`);
 		}
 		this._valueDecimal = new_value;
@@ -114,10 +98,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBase64Binary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueBase64Binary = new_value;
 	}
 
@@ -127,10 +107,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueInstant ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueInstant = new_value;
 	}
 
@@ -140,10 +116,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueString = new_value;
 	}
 
@@ -153,10 +125,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueUri = new_value;
 	}
 
@@ -166,13 +134,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDate`);
 		}
 		this._valueDate = new_value;
@@ -184,13 +148,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this._valueDateTime = new_value;
@@ -202,13 +162,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueTime`);
 		}
 		this._valueTime = new_value;
@@ -220,13 +176,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueCode`);
 		}
 		this._valueCode = new_value;
@@ -238,13 +190,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueOid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueOid`);
 		}
 		this._valueOid = new_value;
@@ -256,13 +204,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUuid ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueUuid`);
 		}
 		this._valueUuid = new_value;
@@ -274,13 +218,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueId`);
 		}
 		this._valueId = new_value;
@@ -292,13 +232,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUnsignedInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
 		}
 		this._valueUnsignedInt = new_value;
@@ -310,13 +246,9 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valuePositiveInt ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
 		}
 		this._valuePositiveInt = new_value;
@@ -328,10 +260,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMarkdown ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueMarkdown = new_value;
 	}
 
@@ -341,10 +269,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueElement = new Element(new_value);
 	}
 
@@ -354,10 +278,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueExtension ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueExtension = new Extension(new_value);
 	}
 
@@ -367,10 +287,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueBackboneElement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueBackboneElement = new BackboneElement(new_value);
 	}
 
@@ -380,10 +296,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueNarrative ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueNarrative = new Narrative(new_value);
 	}
 
@@ -393,10 +305,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAnnotation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueAnnotation = new Annotation(new_value);
 	}
 
@@ -406,10 +314,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueAttachment = new Attachment(new_value);
 	}
 
@@ -419,10 +323,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueIdentifier = new Identifier(new_value);
 	}
 
@@ -432,10 +332,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -445,10 +341,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCoding ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCoding = new Coding(new_value);
 	}
 
@@ -458,10 +350,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -471,10 +359,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDuration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueDuration = new Duration(new_value);
 	}
 
@@ -484,10 +368,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -497,10 +377,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDistance ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueDistance = new Distance(new_value);
 	}
 
@@ -510,10 +386,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueCount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCount = new Count(new_value);
 	}
 
@@ -523,10 +395,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMoney ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueMoney = new Money(new_value);
 	}
 
@@ -536,10 +404,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueAge = new Age(new_value);
 	}
 
@@ -549,10 +413,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRange = new Range(new_value);
 	}
 
@@ -562,10 +422,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valuePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valuePeriod = new Period(new_value);
 	}
 
@@ -575,10 +431,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRatio = new Ratio(new_value);
 	}
 
@@ -588,10 +440,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueReference = new Reference(new_value);
 	}
 
@@ -601,10 +449,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSampledData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSampledData = new SampledData(new_value);
 	}
 
@@ -614,10 +458,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueSignature ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSignature = new Signature(new_value);
 	}
 
@@ -627,10 +467,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueHumanName ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueHumanName = new HumanName(new_value);
 	}
 
@@ -640,10 +476,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueAddress ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueAddress = new Address(new_value);
 	}
 
@@ -653,10 +485,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContactPoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueContactPoint = new ContactPoint(new_value);
 	}
 
@@ -666,10 +494,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueTiming = new Timing(new_value);
 	}
 
@@ -679,10 +503,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueMeta ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueMeta = new Meta(new_value);
 	}
 
@@ -692,10 +512,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueElementDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueElementDefinition = new ElementDefinition(new_value);
 	}
 
@@ -705,10 +521,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContactDetail ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueContactDetail = new ContactDetail(new_value);
 	}
 
@@ -718,10 +530,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueContributor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueContributor = new Contributor(new_value);
 	}
 
@@ -731,10 +539,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDosage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueDosage = new Dosage(new_value);
 	}
 
@@ -744,10 +548,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueRelatedArtifact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRelatedArtifact = new RelatedArtifact(new_value);
 	}
 
@@ -757,10 +557,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueUsageContext ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueUsageContext = new UsageContext(new_value);
 	}
 
@@ -770,10 +566,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueDataRequirement ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueDataRequirement = new DataRequirement(new_value);
 	}
 
@@ -783,10 +575,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueParameterDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueParameterDefinition = new ParameterDefinition(new_value);
 	}
 
@@ -796,10 +584,6 @@ class ElementDefinition_Example extends BackboneElement {
 	}
 
 	set valueTriggerDefinition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueTriggerDefinition = new TriggerDefinition(new_value);
 	}
 

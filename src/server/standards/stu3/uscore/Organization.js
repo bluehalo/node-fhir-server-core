@@ -24,13 +24,9 @@ class Organization extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Organization'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -42,10 +38,6 @@ class Organization extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -55,10 +47,6 @@ class Organization extends DomainResource {
 	}
 
 	set active ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._active = new_value;
 	}
 
@@ -68,10 +56,6 @@ class Organization extends DomainResource {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -81,10 +65,6 @@ class Organization extends DomainResource {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -94,10 +74,6 @@ class Organization extends DomainResource {
 	}
 
 	set alias ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -107,10 +83,6 @@ class Organization extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -120,10 +92,6 @@ class Organization extends DomainResource {
 	}
 
 	set address ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
 	}
 
@@ -133,10 +101,6 @@ class Organization extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._partOf = new Reference(new_value);
 	}
 
@@ -146,10 +110,6 @@ class Organization extends DomainResource {
 	}
 
 	set contact ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._contact = Array.isArray(new_value) ? new_value.map(val => new Organization_Contact(val)) : [new Organization_Contact(new_value)];
 	}
 
@@ -159,10 +119,6 @@ class Organization extends DomainResource {
 	}
 
 	set endpoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 

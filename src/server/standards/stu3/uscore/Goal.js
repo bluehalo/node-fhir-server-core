@@ -23,13 +23,9 @@ class Goal extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Goal'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -41,10 +37,6 @@ class Goal extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -54,13 +46,9 @@ class Goal extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposed', 'accepted', 'planned', 'in-progress', 'on-target', 'ahead-of-target', 'behind-target', 'sustaining', 'achieved', 'on-hold', 'cancelled', 'entered-in-error', 'rejected'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -72,10 +60,6 @@ class Goal extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -85,10 +69,6 @@ class Goal extends DomainResource {
 	}
 
 	set priority ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._priority = new CodeableConcept(new_value);
 	}
 
@@ -98,10 +78,6 @@ class Goal extends DomainResource {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new CodeableConcept(new_value);
 	}
 
@@ -111,10 +87,6 @@ class Goal extends DomainResource {
 	}
 
 	set subject ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -124,13 +96,9 @@ class Goal extends DomainResource {
 	}
 
 	set startDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field startDate`);
 		}
 		this._startDate = new_value;
@@ -142,10 +110,6 @@ class Goal extends DomainResource {
 	}
 
 	set startCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._startCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -155,10 +119,6 @@ class Goal extends DomainResource {
 	}
 
 	set target ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._target = new Goal_Target(new_value);
 	}
 
@@ -168,13 +128,9 @@ class Goal extends DomainResource {
 	}
 
 	set statusDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field statusDate`);
 		}
 		this._statusDate = new_value;
@@ -186,10 +142,6 @@ class Goal extends DomainResource {
 	}
 
 	set statusReason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._statusReason = new_value;
 	}
 
@@ -199,10 +151,6 @@ class Goal extends DomainResource {
 	}
 
 	set expressedBy ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._expressedBy = new Reference(new_value);
 	}
 
@@ -212,10 +160,6 @@ class Goal extends DomainResource {
 	}
 
 	set addresses ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._addresses = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -225,10 +169,6 @@ class Goal extends DomainResource {
 	}
 
 	set note ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -238,10 +178,6 @@ class Goal extends DomainResource {
 	}
 
 	set outcomeCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._outcomeCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -251,10 +187,6 @@ class Goal extends DomainResource {
 	}
 
 	set outcomeReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._outcomeReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 

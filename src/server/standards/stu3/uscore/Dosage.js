@@ -23,13 +23,9 @@ class Dosage extends Element {
 	}
 
 	set sequence ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field sequence`);
 		}
 		this._sequence = new_value;
@@ -41,10 +37,6 @@ class Dosage extends Element {
 	}
 
 	set text ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._text = new_value;
 	}
 
@@ -54,10 +46,6 @@ class Dosage extends Element {
 	}
 
 	set additionalInstruction ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._additionalInstruction = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -67,10 +55,6 @@ class Dosage extends Element {
 	}
 
 	set patientInstruction ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patientInstruction = new_value;
 	}
 
@@ -80,10 +64,6 @@ class Dosage extends Element {
 	}
 
 	set timing ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._timing = new Timing(new_value);
 	}
 
@@ -93,10 +73,6 @@ class Dosage extends Element {
 	}
 
 	set asNeededBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._asNeededBoolean = new_value;
 	}
 
@@ -106,10 +82,6 @@ class Dosage extends Element {
 	}
 
 	set asNeededCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._asNeededCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -119,10 +91,6 @@ class Dosage extends Element {
 	}
 
 	set site ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._site = new CodeableConcept(new_value);
 	}
 
@@ -132,10 +100,6 @@ class Dosage extends Element {
 	}
 
 	set route ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._route = new CodeableConcept(new_value);
 	}
 
@@ -145,10 +109,6 @@ class Dosage extends Element {
 	}
 
 	set method ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._method = new CodeableConcept(new_value);
 	}
 
@@ -158,10 +118,6 @@ class Dosage extends Element {
 	}
 
 	set doseRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._doseRange = new Range(new_value);
 	}
 
@@ -171,10 +127,6 @@ class Dosage extends Element {
 	}
 
 	set doseSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._doseSimpleQuantity = new Quantity(new_value);
 	}
 
@@ -184,10 +136,6 @@ class Dosage extends Element {
 	}
 
 	set maxDosePerPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._maxDosePerPeriod = new Ratio(new_value);
 	}
 
@@ -197,10 +145,6 @@ class Dosage extends Element {
 	}
 
 	set maxDosePerAdministration ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._maxDosePerAdministration = new Quantity(new_value);
 	}
 
@@ -210,10 +154,6 @@ class Dosage extends Element {
 	}
 
 	set maxDosePerLifetime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._maxDosePerLifetime = new Quantity(new_value);
 	}
 
@@ -223,10 +163,6 @@ class Dosage extends Element {
 	}
 
 	set rateRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._rateRatio = new Ratio(new_value);
 	}
 
@@ -236,10 +172,6 @@ class Dosage extends Element {
 	}
 
 	set rateRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._rateRange = new Range(new_value);
 	}
 
@@ -249,10 +181,6 @@ class Dosage extends Element {
 	}
 
 	set rateSimpleQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._rateSimpleQuantity = new Quantity(new_value);
 	}
 

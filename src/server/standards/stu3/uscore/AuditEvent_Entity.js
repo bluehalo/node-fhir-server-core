@@ -22,10 +22,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -35,10 +31,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reference = new Reference(new_value);
 	}
 
@@ -48,10 +40,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new Coding(new_value);
 	}
 
@@ -61,10 +49,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = new Coding(new_value);
 	}
 
@@ -74,10 +58,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set lifecycle ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._lifecycle = new Coding(new_value);
 	}
 
@@ -87,10 +67,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set securityLabel ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -100,10 +76,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -113,10 +85,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new_value;
 	}
 
@@ -126,10 +94,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set query ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._query = new_value;
 	}
 
@@ -139,10 +103,6 @@ class AuditEvent_Entity extends BackboneElement {
 	}
 
 	set detail ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._detail = Array.isArray(new_value) ? new_value.map(val => new AuditEvent_Detail(val)) : [new AuditEvent_Detail(new_value)];
 	}
 

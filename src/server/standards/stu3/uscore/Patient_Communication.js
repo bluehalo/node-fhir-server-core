@@ -19,10 +19,6 @@ class Patient_Communication extends BackboneElement {
 	}
 
 	set language ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._language = new CodeableConcept(new_value);
 	}
 
@@ -32,10 +28,6 @@ class Patient_Communication extends BackboneElement {
 	}
 
 	set preferred ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._preferred = new_value;
 	}
 

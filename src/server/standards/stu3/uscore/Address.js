@@ -19,13 +19,9 @@ class Address extends Element {
 	}
 
 	set use ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['home', 'work', 'temp', 'old'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field use`);
 		}
 		this._use = new_value;
@@ -37,13 +33,9 @@ class Address extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['postal', 'physical', 'both'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -55,10 +47,6 @@ class Address extends Element {
 	}
 
 	set text ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._text = new_value;
 	}
 
@@ -68,10 +56,6 @@ class Address extends Element {
 	}
 
 	set line ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._line = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -81,10 +65,6 @@ class Address extends Element {
 	}
 
 	set city ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._city = new_value;
 	}
 
@@ -94,10 +74,6 @@ class Address extends Element {
 	}
 
 	set district ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._district = new_value;
 	}
 
@@ -107,10 +83,6 @@ class Address extends Element {
 	}
 
 	set state ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._state = new_value;
 	}
 
@@ -120,10 +92,6 @@ class Address extends Element {
 	}
 
 	set postalCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._postalCode = new_value;
 	}
 
@@ -133,10 +101,6 @@ class Address extends Element {
 	}
 
 	set country ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._country = new_value;
 	}
 
@@ -146,10 +110,6 @@ class Address extends Element {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 

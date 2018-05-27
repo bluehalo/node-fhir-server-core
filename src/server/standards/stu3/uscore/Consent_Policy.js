@@ -18,10 +18,6 @@ class Consent_Policy extends BackboneElement {
 	}
 
 	set authority ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._authority = new_value;
 	}
 
@@ -31,10 +27,6 @@ class Consent_Policy extends BackboneElement {
 	}
 
 	set uri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._uri = new_value;
 	}
 

@@ -25,13 +25,9 @@ class Location extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Location'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -43,10 +39,6 @@ class Location extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -56,13 +48,9 @@ class Location extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'suspended', 'inactive'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -74,10 +62,6 @@ class Location extends DomainResource {
 	}
 
 	set operationalStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._operationalStatus = new Coding(new_value);
 	}
 
@@ -87,10 +71,6 @@ class Location extends DomainResource {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -100,10 +80,6 @@ class Location extends DomainResource {
 	}
 
 	set alias ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -113,10 +89,6 @@ class Location extends DomainResource {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new_value;
 	}
 
@@ -126,13 +98,9 @@ class Location extends DomainResource {
 	}
 
 	set mode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['instance', 'kind'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field mode`);
 		}
 		this._mode = new_value;
@@ -144,10 +112,6 @@ class Location extends DomainResource {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -157,10 +121,6 @@ class Location extends DomainResource {
 	}
 
 	set telecom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -170,10 +130,6 @@ class Location extends DomainResource {
 	}
 
 	set address ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._address = new Address(new_value);
 	}
 
@@ -183,10 +139,6 @@ class Location extends DomainResource {
 	}
 
 	set physicalType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._physicalType = new CodeableConcept(new_value);
 	}
 
@@ -196,10 +148,6 @@ class Location extends DomainResource {
 	}
 
 	set position ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._position = new Location_Position(new_value);
 	}
 
@@ -209,10 +157,6 @@ class Location extends DomainResource {
 	}
 
 	set managingOrganization ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._managingOrganization = new Reference(new_value);
 	}
 
@@ -222,10 +166,6 @@ class Location extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._partOf = new Reference(new_value);
 	}
 
@@ -235,10 +175,6 @@ class Location extends DomainResource {
 	}
 
 	set endpoint ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 

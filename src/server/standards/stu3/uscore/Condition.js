@@ -27,13 +27,9 @@ class Condition extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Condition'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -45,10 +41,6 @@ class Condition extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -58,13 +50,9 @@ class Condition extends DomainResource {
 	}
 
 	set clinicalStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'recurrence', 'inactive', 'remission', 'resolved'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field clinicalStatus`);
 		}
 		this._clinicalStatus = new_value;
@@ -76,13 +64,9 @@ class Condition extends DomainResource {
 	}
 
 	set verificationStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['provisional', 'differential', 'confirmed', 'refuted', 'entered-in-error', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field verificationStatus`);
 		}
 		this._verificationStatus = new_value;
@@ -94,10 +78,6 @@ class Condition extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -107,10 +87,6 @@ class Condition extends DomainResource {
 	}
 
 	set severity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._severity = new CodeableConcept(new_value);
 	}
 
@@ -120,10 +96,6 @@ class Condition extends DomainResource {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -133,10 +105,6 @@ class Condition extends DomainResource {
 	}
 
 	set bodySite ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._bodySite = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -146,10 +114,6 @@ class Condition extends DomainResource {
 	}
 
 	set subject ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -159,10 +123,6 @@ class Condition extends DomainResource {
 	}
 
 	set context ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._context = new Reference(new_value);
 	}
 
@@ -172,13 +132,9 @@ class Condition extends DomainResource {
 	}
 
 	set onsetDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
 		this._onsetDateTime = new_value;
@@ -190,10 +146,6 @@ class Condition extends DomainResource {
 	}
 
 	set onsetAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetAge = new Age(new_value);
 	}
 
@@ -203,10 +155,6 @@ class Condition extends DomainResource {
 	}
 
 	set onsetPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetPeriod = new Period(new_value);
 	}
 
@@ -216,10 +164,6 @@ class Condition extends DomainResource {
 	}
 
 	set onsetRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetRange = new Range(new_value);
 	}
 
@@ -229,10 +173,6 @@ class Condition extends DomainResource {
 	}
 
 	set onsetString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onsetString = new_value;
 	}
 
@@ -242,13 +182,9 @@ class Condition extends DomainResource {
 	}
 
 	set abatementDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field abatementDateTime`);
 		}
 		this._abatementDateTime = new_value;
@@ -260,10 +196,6 @@ class Condition extends DomainResource {
 	}
 
 	set abatementAge ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._abatementAge = new Age(new_value);
 	}
 
@@ -273,10 +205,6 @@ class Condition extends DomainResource {
 	}
 
 	set abatementBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._abatementBoolean = new_value;
 	}
 
@@ -286,10 +214,6 @@ class Condition extends DomainResource {
 	}
 
 	set abatementPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._abatementPeriod = new Period(new_value);
 	}
 
@@ -299,10 +223,6 @@ class Condition extends DomainResource {
 	}
 
 	set abatementRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._abatementRange = new Range(new_value);
 	}
 
@@ -312,10 +232,6 @@ class Condition extends DomainResource {
 	}
 
 	set abatementString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._abatementString = new_value;
 	}
 
@@ -325,13 +241,9 @@ class Condition extends DomainResource {
 	}
 
 	set assertedDate ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
 		this._assertedDate = new_value;
@@ -343,10 +255,6 @@ class Condition extends DomainResource {
 	}
 
 	set asserter ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._asserter = new Reference(new_value);
 	}
 
@@ -356,10 +264,6 @@ class Condition extends DomainResource {
 	}
 
 	set stage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._stage = new Condition_Stage(new_value);
 	}
 
@@ -369,10 +273,6 @@ class Condition extends DomainResource {
 	}
 
 	set evidence ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._evidence = Array.isArray(new_value) ? new_value.map(val => new Condition_Evidence(val)) : [new Condition_Evidence(new_value)];
 	}
 
@@ -382,10 +282,6 @@ class Condition extends DomainResource {
 	}
 
 	set note ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 

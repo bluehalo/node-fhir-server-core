@@ -19,13 +19,9 @@ class Meta extends Element {
 	}
 
 	set versionId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field versionId`);
 		}
 		this._versionId = new_value;
@@ -37,10 +33,6 @@ class Meta extends Element {
 	}
 
 	set lastUpdated ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._lastUpdated = new_value;
 	}
 
@@ -50,10 +42,6 @@ class Meta extends Element {
 	}
 
 	set profile ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._profile = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -63,10 +51,6 @@ class Meta extends Element {
 	}
 
 	set security ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._security = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -76,10 +60,6 @@ class Meta extends Element {
 	}
 
 	set tag ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._tag = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 

@@ -19,10 +19,6 @@ class MedicationRequest_Requester extends BackboneElement {
 	}
 
 	set agent ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._agent = new Reference(new_value);
 	}
 
@@ -32,10 +28,6 @@ class MedicationRequest_Requester extends BackboneElement {
 	}
 
 	set onBehalfOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._onBehalfOf = new Reference(new_value);
 	}
 

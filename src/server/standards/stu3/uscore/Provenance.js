@@ -24,13 +24,9 @@ class Provenance extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Provenance'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -42,10 +38,6 @@ class Provenance extends DomainResource {
 	}
 
 	set target ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._target = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -55,10 +47,6 @@ class Provenance extends DomainResource {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 
@@ -68,10 +56,6 @@ class Provenance extends DomainResource {
 	}
 
 	set recorded ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._recorded = new_value;
 	}
 
@@ -81,10 +65,6 @@ class Provenance extends DomainResource {
 	}
 
 	set policy ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -94,10 +74,6 @@ class Provenance extends DomainResource {
 	}
 
 	set location ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._location = new Reference(new_value);
 	}
 
@@ -107,10 +83,6 @@ class Provenance extends DomainResource {
 	}
 
 	set reason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reason = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -120,10 +92,6 @@ class Provenance extends DomainResource {
 	}
 
 	set activity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._activity = new Coding(new_value);
 	}
 
@@ -133,10 +101,6 @@ class Provenance extends DomainResource {
 	}
 
 	set agent ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new Provenance_Agent(val)) : [new Provenance_Agent(new_value)];
 	}
 
@@ -146,10 +110,6 @@ class Provenance extends DomainResource {
 	}
 
 	set entity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._entity = Array.isArray(new_value) ? new_value.map(val => new Provenance_Entity(val)) : [new Provenance_Entity(new_value)];
 	}
 
@@ -159,10 +119,6 @@ class Provenance extends DomainResource {
 	}
 
 	set signature ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._signature = Array.isArray(new_value) ? new_value.map(val => new Signature(val)) : [new Signature(new_value)];
 	}
 

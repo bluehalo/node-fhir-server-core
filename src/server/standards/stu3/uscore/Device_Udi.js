@@ -18,10 +18,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set deviceIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._deviceIdentifier = new_value;
 	}
 
@@ -31,10 +27,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -44,10 +36,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set jurisdiction ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._jurisdiction = new_value;
 	}
 
@@ -57,10 +45,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set carrierHRF ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._carrierHRF = new_value;
 	}
 
@@ -70,10 +54,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set carrierAIDC ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._carrierAIDC = new_value;
 	}
 
@@ -83,10 +63,6 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set issuer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._issuer = new_value;
 	}
 
@@ -96,13 +72,9 @@ class Device_Udi extends BackboneElement {
 	}
 
 	set entryType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['barcode', 'rfid', 'manual', 'card', 'self-reported', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field entryType`);
 		}
 		this._entryType = new_value;

@@ -22,10 +22,6 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set purpose ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._purpose = new CodeableConcept(new_value);
 	}
 
@@ -35,10 +31,6 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new HumanName(new_value);
 	}
 
@@ -48,10 +40,6 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set telecom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -61,10 +49,6 @@ class Organization_Contact extends BackboneElement {
 	}
 
 	set address ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._address = new Address(new_value);
 	}
 

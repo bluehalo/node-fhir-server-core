@@ -21,13 +21,9 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['derivation', 'revision', 'quotation', 'source', 'removal'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field role`);
 		}
 		this._role = new_value;
@@ -39,10 +35,6 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatUri ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whatUri = new_value;
 	}
 
@@ -52,10 +44,6 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whatReference = new Reference(new_value);
 	}
 
@@ -65,10 +53,6 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set whatIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._whatIdentifier = new Identifier(new_value);
 	}
 
@@ -78,10 +62,6 @@ class Provenance_Entity extends BackboneElement {
 	}
 
 	set agent ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._agent = Array.isArray(new_value) ? new_value.map(val => new Provenance_Agent(val)) : [new Provenance_Agent(new_value)];
 	}
 

@@ -24,13 +24,9 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['MedicationStatement'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -42,10 +38,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -55,10 +47,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -68,10 +56,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set partOf ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -81,10 +65,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set context ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._context = new Reference(new_value);
 	}
 
@@ -94,13 +74,9 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'completed', 'entered-in-error', 'intended', 'stopped', 'on-hold'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -112,10 +88,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -125,10 +97,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set medicationCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._medicationCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -138,10 +106,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set medicationReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._medicationReference = new Reference(new_value);
 	}
 
@@ -151,13 +115,9 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set effectiveDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
 		this._effectiveDateTime = new_value;
@@ -169,10 +129,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set effectivePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._effectivePeriod = new Period(new_value);
 	}
 
@@ -182,13 +138,9 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set dateAsserted ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dateAsserted`);
 		}
 		this._dateAsserted = new_value;
@@ -200,10 +152,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set informationSource ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._informationSource = new Reference(new_value);
 	}
 
@@ -213,10 +161,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set subject ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -226,10 +170,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set derivedFrom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._derivedFrom = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -239,13 +179,9 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set taken ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['y', 'n', 'unk', 'na'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field taken`);
 		}
 		this._taken = new_value;
@@ -257,10 +193,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set reasonNotTaken ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reasonNotTaken = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -270,10 +202,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set reasonCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -283,10 +211,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set reasonReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -296,10 +220,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set note ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
@@ -309,10 +229,6 @@ class MedicationStatement extends DomainResource {
 	}
 
 	set dosage ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dosage = Array.isArray(new_value) ? new_value.map(val => new Dosage(val)) : [new Dosage(new_value)];
 	}
 

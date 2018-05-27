@@ -20,10 +20,6 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set site ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._site = new_value;
 	}
 
@@ -33,10 +29,6 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -46,10 +38,6 @@ class AuditEvent_Source extends BackboneElement {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 

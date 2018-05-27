@@ -18,13 +18,9 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set method ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['GET', 'POST', 'PUT', 'DELETE'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field method`);
 		}
 		this._method = new_value;
@@ -36,10 +32,6 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set url ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._url = new_value;
 	}
 
@@ -49,10 +41,6 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifNoneMatch ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ifNoneMatch = new_value;
 	}
 
@@ -62,10 +50,6 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifModifiedSince ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ifModifiedSince = new_value;
 	}
 
@@ -75,10 +59,6 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifMatch ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ifMatch = new_value;
 	}
 
@@ -88,10 +68,6 @@ class Bundle_Request extends BackboneElement {
 	}
 
 	set ifNoneExist ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ifNoneExist = new_value;
 	}
 

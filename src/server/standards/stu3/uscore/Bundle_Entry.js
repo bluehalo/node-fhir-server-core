@@ -23,10 +23,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set link ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._link = Array.isArray(new_value) ? new_value.map(val => new Bundle_Link(val)) : [new Bundle_Link(new_value)];
 	}
 
@@ -36,10 +32,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set fullUrl ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._fullUrl = new_value;
 	}
 
@@ -49,10 +41,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set resource ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._resource = new ResourceList(new_value);
 	}
 
@@ -62,10 +50,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set search ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._search = new Bundle_Search(new_value);
 	}
 
@@ -75,10 +59,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set request ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._request = new Bundle_Request(new_value);
 	}
 
@@ -88,10 +68,6 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set response ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._response = new Bundle_Response(new_value);
 	}
 

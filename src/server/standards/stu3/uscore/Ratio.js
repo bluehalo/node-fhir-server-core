@@ -19,10 +19,6 @@ class Ratio extends Element {
 	}
 
 	set numerator ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._numerator = new Quantity(new_value);
 	}
 
@@ -32,10 +28,6 @@ class Ratio extends Element {
 	}
 
 	set denominator ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._denominator = new Quantity(new_value);
 	}
 

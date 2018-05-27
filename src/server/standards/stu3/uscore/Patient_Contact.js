@@ -24,10 +24,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set relationship ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._relationship = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -37,10 +33,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new HumanName(new_value);
 	}
 
@@ -50,10 +42,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set telecom ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
@@ -63,10 +51,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set address ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._address = new Address(new_value);
 	}
 
@@ -76,13 +60,9 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set gender ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
 		}
 		this._gender = new_value;
@@ -94,10 +74,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set organization ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._organization = new Reference(new_value);
 	}
 
@@ -107,10 +83,6 @@ class Patient_Contact extends BackboneElement {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 

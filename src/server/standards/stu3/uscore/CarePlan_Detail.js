@@ -23,10 +23,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -36,10 +32,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set definition ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._definition = new Reference(new_value);
 	}
 
@@ -49,10 +41,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -62,10 +50,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set reasonCode ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -75,10 +59,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set reasonReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -88,10 +68,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set goal ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._goal = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -101,13 +77,9 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['not-started', 'scheduled', 'in-progress', 'on-hold', 'completed', 'cancelled', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -119,10 +91,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set statusReason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._statusReason = new_value;
 	}
 
@@ -132,10 +100,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set prohibited ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._prohibited = new_value;
 	}
 
@@ -145,10 +109,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set scheduledTiming ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._scheduledTiming = new Timing(new_value);
 	}
 
@@ -158,10 +118,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set scheduledPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._scheduledPeriod = new Period(new_value);
 	}
 
@@ -171,10 +127,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set scheduledString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._scheduledString = new_value;
 	}
 
@@ -184,10 +136,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set location ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._location = new Reference(new_value);
 	}
 
@@ -197,10 +145,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set performer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -210,10 +154,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set productCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._productCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -223,10 +163,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set productReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._productReference = new Reference(new_value);
 	}
 
@@ -236,10 +172,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set dailyAmount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dailyAmount = new Quantity(new_value);
 	}
 
@@ -249,10 +181,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set quantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._quantity = new Quantity(new_value);
 	}
 
@@ -262,10 +190,6 @@ class CarePlan_Detail extends BackboneElement {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new_value;
 	}
 

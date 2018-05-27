@@ -23,10 +23,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set role ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._role = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -36,10 +32,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set reference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reference = new Reference(new_value);
 	}
 
@@ -49,10 +41,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set userId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._userId = new Identifier(new_value);
 	}
 
@@ -62,10 +50,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set altId ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._altId = new_value;
 	}
 
@@ -75,10 +59,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set name ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._name = new_value;
 	}
 
@@ -88,10 +68,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set requestor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._requestor = new_value;
 	}
 
@@ -101,10 +77,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set location ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._location = new Reference(new_value);
 	}
 
@@ -114,10 +86,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set policy ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -127,10 +95,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set media ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._media = new Coding(new_value);
 	}
 
@@ -140,10 +104,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set network ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._network = new AuditEvent_Network(new_value);
 	}
 
@@ -153,10 +113,6 @@ class AuditEvent_Agent extends BackboneElement {
 	}
 
 	set purposeOfUse ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._purposeOfUse = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 

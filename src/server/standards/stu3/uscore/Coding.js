@@ -18,10 +18,6 @@ class Coding extends Element {
 	}
 
 	set system ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._system = new_value;
 	}
 
@@ -31,10 +27,6 @@ class Coding extends Element {
 	}
 
 	set version ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._version = new_value;
 	}
 
@@ -44,13 +36,9 @@ class Coding extends Element {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field code`);
 		}
 		this._code = new_value;
@@ -62,10 +50,6 @@ class Coding extends Element {
 	}
 
 	set display ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._display = new_value;
 	}
 
@@ -75,10 +59,6 @@ class Coding extends Element {
 	}
 
 	set userSelected ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._userSelected = new_value;
 	}
 

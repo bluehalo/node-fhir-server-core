@@ -19,10 +19,6 @@ class SampledData extends Element {
 	}
 
 	set origin ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._origin = new Quantity(new_value);
 	}
 
@@ -32,13 +28,9 @@ class SampledData extends Element {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field period`);
 		}
 		this._period = new_value;
@@ -50,13 +42,9 @@ class SampledData extends Element {
 	}
 
 	set factor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field factor`);
 		}
 		this._factor = new_value;
@@ -68,13 +56,9 @@ class SampledData extends Element {
 	}
 
 	set lowerLimit ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field lowerLimit`);
 		}
 		this._lowerLimit = new_value;
@@ -86,13 +70,9 @@ class SampledData extends Element {
 	}
 
 	set upperLimit ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field upperLimit`);
 		}
 		this._upperLimit = new_value;
@@ -104,13 +84,9 @@ class SampledData extends Element {
 	}
 
 	set dimensions ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dimensions`);
 		}
 		this._dimensions = new_value;
@@ -122,10 +98,6 @@ class SampledData extends Element {
 	}
 
 	set data ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._data = new_value;
 	}
 

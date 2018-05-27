@@ -18,13 +18,9 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set identity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field identity`);
 		}
 		this._identity = new_value;
@@ -36,13 +32,9 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set language ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field language`);
 		}
 		this._language = new_value;
@@ -54,10 +46,6 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set map ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._map = new_value;
 	}
 
@@ -67,10 +55,6 @@ class ElementDefinition_Mapping extends BackboneElement {
 	}
 
 	set comment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._comment = new_value;
 	}
 

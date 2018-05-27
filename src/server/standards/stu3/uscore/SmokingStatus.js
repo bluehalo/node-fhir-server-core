@@ -30,13 +30,9 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['SmokingStatus'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -48,10 +44,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -61,10 +53,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -74,13 +62,9 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['registered', 'preliminary', 'final', 'amended', 'corrected', 'cancelled', 'entered-in-error', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -92,10 +76,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -105,10 +85,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -118,10 +94,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set subject ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -131,10 +103,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set context ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._context = new Reference(new_value);
 	}
 
@@ -144,13 +112,9 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set effectiveDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
 		this._effectiveDateTime = new_value;
@@ -162,10 +126,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set effectivePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._effectivePeriod = new Period(new_value);
 	}
 
@@ -175,10 +135,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set issued ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._issued = new_value;
 	}
 
@@ -188,10 +144,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set performer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -201,10 +153,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueQuantity ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueQuantity = new Quantity(new_value);
 	}
 
@@ -214,10 +162,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -227,10 +171,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueString ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueString = new_value;
 	}
 
@@ -240,10 +180,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueBoolean ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueBoolean = new_value;
 	}
 
@@ -253,10 +189,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRange = new Range(new_value);
 	}
 
@@ -266,10 +198,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueRatio ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueRatio = new Ratio(new_value);
 	}
 
@@ -279,10 +207,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueSampledData ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueSampledData = new SampledData(new_value);
 	}
 
@@ -292,10 +216,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valueAttachment = new Attachment(new_value);
 	}
 
@@ -305,13 +225,9 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueTime`);
 		}
 		this._valueTime = new_value;
@@ -323,13 +239,9 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valueDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this._valueDateTime = new_value;
@@ -341,10 +253,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set valuePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._valuePeriod = new Period(new_value);
 	}
 
@@ -354,10 +262,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set dataAbsentReason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dataAbsentReason = new CodeableConcept(new_value);
 	}
 
@@ -367,10 +271,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set interpretation ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._interpretation = new CodeableConcept(new_value);
 	}
 
@@ -380,10 +280,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set comment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._comment = new_value;
 	}
 
@@ -393,10 +289,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set bodySite ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._bodySite = new CodeableConcept(new_value);
 	}
 
@@ -406,10 +298,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set method ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._method = new CodeableConcept(new_value);
 	}
 
@@ -419,10 +307,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set specimen ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._specimen = new Reference(new_value);
 	}
 
@@ -432,10 +316,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set device ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._device = new Reference(new_value);
 	}
 
@@ -445,10 +325,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set referenceRange ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._referenceRange = Array.isArray(new_value) ? new_value.map(val => new Observation_ReferenceRange(val)) : [new Observation_ReferenceRange(new_value)];
 	}
 
@@ -458,10 +334,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set related ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._related = Array.isArray(new_value) ? new_value.map(val => new Observation_Related(val)) : [new Observation_Related(new_value)];
 	}
 
@@ -471,10 +343,6 @@ class SmokingStatus extends DomainResource {
 	}
 
 	set component ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._component = Array.isArray(new_value) ? new_value.map(val => new Observation_Component(val)) : [new Observation_Component(new_value)];
 	}
 

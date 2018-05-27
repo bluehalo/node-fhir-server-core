@@ -23,13 +23,9 @@ class Medication extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Medication'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -41,10 +37,6 @@ class Medication extends DomainResource {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -54,13 +46,9 @@ class Medication extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -72,10 +60,6 @@ class Medication extends DomainResource {
 	}
 
 	set isBrand ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._isBrand = new_value;
 	}
 
@@ -85,10 +69,6 @@ class Medication extends DomainResource {
 	}
 
 	set isOverTheCounter ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._isOverTheCounter = new_value;
 	}
 
@@ -98,10 +78,6 @@ class Medication extends DomainResource {
 	}
 
 	set manufacturer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._manufacturer = new Reference(new_value);
 	}
 
@@ -111,10 +87,6 @@ class Medication extends DomainResource {
 	}
 
 	set form ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._form = new CodeableConcept(new_value);
 	}
 
@@ -124,10 +96,6 @@ class Medication extends DomainResource {
 	}
 
 	set ingredient ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._ingredient = Array.isArray(new_value) ? new_value.map(val => new Medication_Ingredient(val)) : [new Medication_Ingredient(new_value)];
 	}
 
@@ -137,10 +105,6 @@ class Medication extends DomainResource {
 	}
 
 	set package ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._package = new Medication_Package(new_value);
 	}
 
@@ -150,10 +114,6 @@ class Medication extends DomainResource {
 	}
 
 	set image ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._image = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 

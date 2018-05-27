@@ -20,13 +20,9 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseSequence ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field doseSequence`);
 		}
 		this._doseSequence = new_value;
@@ -38,10 +34,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set description ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._description = new_value;
 	}
 
@@ -51,10 +43,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set authority ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._authority = new Reference(new_value);
 	}
 
@@ -64,10 +52,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set series ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._series = new_value;
 	}
 
@@ -77,13 +61,9 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set seriesDoses ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field seriesDoses`);
 		}
 		this._seriesDoses = new_value;
@@ -95,10 +75,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set targetDisease ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._targetDisease = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -108,10 +84,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseStatus ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._doseStatus = new CodeableConcept(new_value);
 	}
 
@@ -121,10 +93,6 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	}
 
 	set doseStatusReason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._doseStatusReason = new CodeableConcept(new_value);
 	}
 

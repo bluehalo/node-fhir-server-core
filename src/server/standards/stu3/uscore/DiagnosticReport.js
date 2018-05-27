@@ -25,13 +25,9 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['DiagnosticReport'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -43,10 +39,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
@@ -56,10 +48,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set basedOn ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -69,13 +57,9 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['registered', 'partial', 'preliminary', 'final', 'amended', 'corrected', 'appended', 'cancelled', 'entered-in-error', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -87,10 +71,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = new CodeableConcept(new_value);
 	}
 
@@ -100,10 +80,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 
@@ -113,10 +89,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set subject ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._subject = new Reference(new_value);
 	}
 
@@ -126,10 +98,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set context ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._context = new Reference(new_value);
 	}
 
@@ -139,13 +107,9 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set effectiveDateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
 		this._effectiveDateTime = new_value;
@@ -157,10 +121,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set effectivePeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._effectivePeriod = new Period(new_value);
 	}
 
@@ -170,10 +130,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set issued ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._issued = new_value;
 	}
 
@@ -183,10 +139,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set performer ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._performer = Array.isArray(new_value) ? new_value.map(val => new DiagnosticReport_Performer(val)) : [new DiagnosticReport_Performer(new_value)];
 	}
 
@@ -196,10 +148,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set specimen ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._specimen = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -209,10 +157,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set result ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._result = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -222,10 +166,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set imagingStudy ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._imagingStudy = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -235,10 +175,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set image ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._image = Array.isArray(new_value) ? new_value.map(val => new DiagnosticReport_Image(val)) : [new DiagnosticReport_Image(new_value)];
 	}
 
@@ -248,10 +184,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set conclusion ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._conclusion = new_value;
 	}
 
@@ -261,10 +193,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set codedDiagnosis ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._codedDiagnosis = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -274,10 +202,6 @@ class DiagnosticReport extends DomainResource {
 	}
 
 	set presentedForm ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._presentedForm = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 

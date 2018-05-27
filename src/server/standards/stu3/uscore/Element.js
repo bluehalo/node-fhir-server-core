@@ -15,10 +15,6 @@ class Element {
 	}
 
 	set id ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._id = new_value;
 	}
 
@@ -29,10 +25,6 @@ class Element {
 
 	set extension ( new_value ) {
 		const Extension = require('./Extension');
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._extension = Array.isArray(new_value) ? new_value.map(val => new Extension(val)) : [new Extension(new_value)];
 	}
 

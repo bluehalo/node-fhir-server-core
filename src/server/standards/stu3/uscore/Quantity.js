@@ -18,13 +18,9 @@ class Quantity extends Element {
 	}
 
 	set value ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field value`);
 		}
 		this._value = new_value;
@@ -36,13 +32,9 @@ class Quantity extends Element {
 	}
 
 	set comparator ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['<', '<=', '>=', '>'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field comparator`);
 		}
 		this._comparator = new_value;
@@ -54,10 +46,6 @@ class Quantity extends Element {
 	}
 
 	set unit ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._unit = new_value;
 	}
 
@@ -67,10 +55,6 @@ class Quantity extends Element {
 	}
 
 	set system ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._system = new_value;
 	}
 
@@ -80,13 +64,9 @@ class Quantity extends Element {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field code`);
 		}
 		this._code = new_value;

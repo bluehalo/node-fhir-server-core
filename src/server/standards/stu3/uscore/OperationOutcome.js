@@ -19,13 +19,9 @@ class OperationOutcome extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['OperationOutcome'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -37,10 +33,6 @@ class OperationOutcome extends DomainResource {
 	}
 
 	set issue ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._issue = Array.isArray(new_value) ? new_value.map(val => new OperationOutcome_Issue(val)) : [new OperationOutcome_Issue(new_value)];
 	}
 

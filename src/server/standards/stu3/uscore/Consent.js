@@ -28,13 +28,9 @@ class Consent extends DomainResource {
 	}
 
 	set resourceType ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Consent'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -46,10 +42,6 @@ class Consent extends DomainResource {
 	}
 
 	set identifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._identifier = new Identifier(new_value);
 	}
 
@@ -59,13 +51,9 @@ class Consent extends DomainResource {
 	}
 
 	set status ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['draft', 'proposed', 'active', 'rejected', 'inactive', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -77,10 +65,6 @@ class Consent extends DomainResource {
 	}
 
 	set category ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -90,10 +74,6 @@ class Consent extends DomainResource {
 	}
 
 	set patient ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._patient = new Reference(new_value);
 	}
 
@@ -103,10 +83,6 @@ class Consent extends DomainResource {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 
@@ -116,13 +92,9 @@ class Consent extends DomainResource {
 	}
 
 	set dateTime ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dateTime`);
 		}
 		this._dateTime = new_value;
@@ -134,10 +106,6 @@ class Consent extends DomainResource {
 	}
 
 	set consentingParty ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._consentingParty = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -147,10 +115,6 @@ class Consent extends DomainResource {
 	}
 
 	set actor ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._actor = Array.isArray(new_value) ? new_value.map(val => new Consent_Actor(val)) : [new Consent_Actor(new_value)];
 	}
 
@@ -160,10 +124,6 @@ class Consent extends DomainResource {
 	}
 
 	set action ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._action = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
@@ -173,10 +133,6 @@ class Consent extends DomainResource {
 	}
 
 	set organization ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._organization = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
@@ -186,10 +142,6 @@ class Consent extends DomainResource {
 	}
 
 	set sourceAttachment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._sourceAttachment = new Attachment(new_value);
 	}
 
@@ -199,10 +151,6 @@ class Consent extends DomainResource {
 	}
 
 	set sourceIdentifier ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._sourceIdentifier = new Identifier(new_value);
 	}
 
@@ -212,10 +160,6 @@ class Consent extends DomainResource {
 	}
 
 	set sourceReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._sourceReference = new Reference(new_value);
 	}
 
@@ -225,10 +169,6 @@ class Consent extends DomainResource {
 	}
 
 	set policy ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._policy = Array.isArray(new_value) ? new_value.map(val => new Consent_Policy(val)) : [new Consent_Policy(new_value)];
 	}
 
@@ -238,10 +178,6 @@ class Consent extends DomainResource {
 	}
 
 	set policyRule ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._policyRule = new_value;
 	}
 
@@ -251,10 +187,6 @@ class Consent extends DomainResource {
 	}
 
 	set securityLabel ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -264,10 +196,6 @@ class Consent extends DomainResource {
 	}
 
 	set purpose ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._purpose = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
@@ -277,10 +205,6 @@ class Consent extends DomainResource {
 	}
 
 	set dataPeriod ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dataPeriod = new Period(new_value);
 	}
 
@@ -290,10 +214,6 @@ class Consent extends DomainResource {
 	}
 
 	set data ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._data = Array.isArray(new_value) ? new_value.map(val => new Consent_Data(val)) : [new Consent_Data(new_value)];
 	}
 
@@ -303,10 +223,6 @@ class Consent extends DomainResource {
 	}
 
 	set except ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._except = Array.isArray(new_value) ? new_value.map(val => new Consent_Except(val)) : [new Consent_Except(new_value)];
 	}
 

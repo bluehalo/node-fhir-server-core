@@ -19,10 +19,6 @@ class DiagnosticReport_Image extends BackboneElement {
 	}
 
 	set comment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._comment = new_value;
 	}
 
@@ -32,10 +28,6 @@ class DiagnosticReport_Image extends BackboneElement {
 	}
 
 	set link ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._link = new Reference(new_value);
 	}
 

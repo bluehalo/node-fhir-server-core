@@ -20,10 +20,6 @@ class Timing extends Element {
 	}
 
 	set event ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._event = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -33,10 +29,6 @@ class Timing extends Element {
 	}
 
 	set repeat ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._repeat = new Timing_Repeat(new_value);
 	}
 
@@ -46,10 +38,6 @@ class Timing extends Element {
 	}
 
 	set code ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._code = new CodeableConcept(new_value);
 	}
 

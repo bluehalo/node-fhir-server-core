@@ -21,10 +21,6 @@ class Medication_Ingredient extends BackboneElement {
 	}
 
 	set itemCodeableConcept ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._itemCodeableConcept = new CodeableConcept(new_value);
 	}
 
@@ -34,10 +30,6 @@ class Medication_Ingredient extends BackboneElement {
 	}
 
 	set itemReference ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._itemReference = new Reference(new_value);
 	}
 
@@ -47,10 +39,6 @@ class Medication_Ingredient extends BackboneElement {
 	}
 
 	set isActive ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._isActive = new_value;
 	}
 
@@ -60,10 +48,6 @@ class Medication_Ingredient extends BackboneElement {
 	}
 
 	set amount ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._amount = new Ratio(new_value);
 	}
 

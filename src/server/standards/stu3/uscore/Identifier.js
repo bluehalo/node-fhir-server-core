@@ -21,13 +21,9 @@ class Identifier extends Element {
 	}
 
 	set use ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['usual', 'official', 'temp', 'secondary'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field use`);
 		}
 		this._use = new_value;
@@ -39,10 +35,6 @@ class Identifier extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._type = new CodeableConcept(new_value);
 	}
 
@@ -52,10 +44,6 @@ class Identifier extends Element {
 	}
 
 	set system ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._system = new_value;
 	}
 
@@ -65,10 +53,6 @@ class Identifier extends Element {
 	}
 
 	set value ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._value = new_value;
 	}
 
@@ -78,10 +62,6 @@ class Identifier extends Element {
 	}
 
 	set period ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._period = new Period(new_value);
 	}
 
@@ -91,10 +71,6 @@ class Identifier extends Element {
 	}
 
 	set assigner ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._assigner = new Reference(new_value);
 	}
 

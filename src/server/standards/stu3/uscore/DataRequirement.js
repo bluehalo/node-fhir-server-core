@@ -20,13 +20,9 @@ class DataRequirement extends Element {
 	}
 
 	set type ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field type`);
 		}
 		this._type = new_value;
@@ -38,10 +34,6 @@ class DataRequirement extends Element {
 	}
 
 	set profile ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._profile = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -51,10 +43,6 @@ class DataRequirement extends Element {
 	}
 
 	set mustSupport ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._mustSupport = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
@@ -64,10 +52,6 @@ class DataRequirement extends Element {
 	}
 
 	set codeFilter ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._codeFilter = Array.isArray(new_value) ? new_value.map(val => new DataRequirement_CodeFilter(val)) : [new DataRequirement_CodeFilter(new_value)];
 	}
 
@@ -77,10 +61,6 @@ class DataRequirement extends Element {
 	}
 
 	set dateFilter ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._dateFilter = Array.isArray(new_value) ? new_value.map(val => new DataRequirement_DateFilter(val)) : [new DataRequirement_DateFilter(new_value)];
 	}
 

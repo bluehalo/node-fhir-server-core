@@ -19,10 +19,6 @@ class MedicationRequest_Substitution extends BackboneElement {
 	}
 
 	set allowed ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._allowed = new_value;
 	}
 
@@ -32,10 +28,6 @@ class MedicationRequest_Substitution extends BackboneElement {
 	}
 
 	set reason ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._reason = new CodeableConcept(new_value);
 	}
 

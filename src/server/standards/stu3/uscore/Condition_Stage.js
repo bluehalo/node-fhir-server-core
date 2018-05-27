@@ -20,10 +20,6 @@ class Condition_Stage extends BackboneElement {
 	}
 
 	set summary ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._summary = new CodeableConcept(new_value);
 	}
 
@@ -33,10 +29,6 @@ class Condition_Stage extends BackboneElement {
 	}
 
 	set assessment ( new_value ) {
-		// Do not set the value if new value is null or undefined
-		if ( new_value === null || new_value === undefined) {
-			return;
-		}
 		this._assessment = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
