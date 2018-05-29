@@ -186,24 +186,24 @@ class Dosage extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			sequence: this.sequence,
-			text: this.text,
-			additionalInstruction: this.additionalInstruction && this.additionalInstruction.map(v => v.toJSON()),
-			patientInstruction: this.patientInstruction,
-			timing: this.timing && this.timing.toJSON(),
-			asNeededBoolean: this.asNeededBoolean,
-			asNeededCodeableConcept: this.asNeededCodeableConcept && this.asNeededCodeableConcept.toJSON(),
-			site: this.site && this.site.toJSON(),
-			route: this.route && this.route.toJSON(),
-			method: this.method && this.method.toJSON(),
-			doseRange: this.doseRange && this.doseRange.toJSON(),
-			doseSimpleQuantity: this.doseSimpleQuantity && this.doseSimpleQuantity.toJSON(),
-			maxDosePerPeriod: this.maxDosePerPeriod && this.maxDosePerPeriod.toJSON(),
-			maxDosePerAdministration: this.maxDosePerAdministration && this.maxDosePerAdministration.toJSON(),
-			maxDosePerLifetime: this.maxDosePerLifetime && this.maxDosePerLifetime.toJSON(),
-			rateRatio: this.rateRatio && this.rateRatio.toJSON(),
-			rateRange: this.rateRange && this.rateRange.toJSON(),
-			rateSimpleQuantity: this.rateSimpleQuantity && this.rateSimpleQuantity.toJSON()
+			sequence: this._sequence,
+			text: this._text,
+			additionalInstruction: this._additionalInstruction && this._additionalInstruction.map(v => v.toJSON()),
+			patientInstruction: this._patientInstruction,
+			timing: this._timing && this._timing.toJSON(),
+			asNeededBoolean: this._asNeededBoolean,
+			asNeededCodeableConcept: this._asNeededCodeableConcept && this._asNeededCodeableConcept.toJSON(),
+			site: this._site && this._site.toJSON(),
+			route: this._route && this._route.toJSON(),
+			method: this._method && this._method.toJSON(),
+			doseRange: this._doseRange && this._doseRange.toJSON(),
+			doseSimpleQuantity: this._doseSimpleQuantity && this._doseSimpleQuantity.toJSON(),
+			maxDosePerPeriod: this._maxDosePerPeriod && this._maxDosePerPeriod.toJSON(),
+			maxDosePerAdministration: this._maxDosePerAdministration && this._maxDosePerAdministration.toJSON(),
+			maxDosePerLifetime: this._maxDosePerLifetime && this._maxDosePerLifetime.toJSON(),
+			rateRatio: this._rateRatio && this._rateRatio.toJSON(),
+			rateRange: this._rateRange && this._rateRange.toJSON(),
+			rateSimpleQuantity: this._rateSimpleQuantity && this._rateSimpleQuantity.toJSON()
 		});
 	}
 

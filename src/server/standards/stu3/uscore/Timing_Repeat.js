@@ -230,23 +230,23 @@ class Timing_Repeat extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			boundsDuration: this.boundsDuration && this.boundsDuration.toJSON(),
-			boundsRange: this.boundsRange && this.boundsRange.toJSON(),
-			boundsPeriod: this.boundsPeriod && this.boundsPeriod.toJSON(),
-			count: this.count,
-			countMax: this.countMax,
-			duration: this.duration,
-			durationMax: this.durationMax,
-			durationUnit: this.durationUnit,
-			frequency: this.frequency,
-			frequencyMax: this.frequencyMax,
-			period: this.period,
-			periodMax: this.periodMax,
-			periodUnit: this.periodUnit,
-			dayOfWeek: this.dayOfWeek,
-			timeOfDay: this.timeOfDay,
-			when: this.when,
-			offset: this.offset
+			boundsDuration: this._boundsDuration && this._boundsDuration.toJSON(),
+			boundsRange: this._boundsRange && this._boundsRange.toJSON(),
+			boundsPeriod: this._boundsPeriod && this._boundsPeriod.toJSON(),
+			count: this._count,
+			countMax: this._countMax,
+			duration: this._duration,
+			durationMax: this._durationMax,
+			durationUnit: this._durationUnit,
+			frequency: this._frequency,
+			frequencyMax: this._frequencyMax,
+			period: this._period,
+			periodMax: this._periodMax,
+			periodUnit: this._periodUnit,
+			dayOfWeek: this._dayOfWeek,
+			timeOfDay: this._timeOfDay,
+			when: this._when,
+			offset: this._offset
 		});
 	}
 

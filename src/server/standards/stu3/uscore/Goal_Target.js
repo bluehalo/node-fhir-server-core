@@ -77,12 +77,12 @@ class Goal_Target extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			measure: this.measure && this.measure.toJSON(),
-			detailQuantity: this.detailQuantity && this.detailQuantity.toJSON(),
-			detailRange: this.detailRange && this.detailRange.toJSON(),
-			detailCodeableConcept: this.detailCodeableConcept && this.detailCodeableConcept.toJSON(),
-			dueDate: this.dueDate,
-			dueDuration: this.dueDuration && this.dueDuration.toJSON()
+			measure: this._measure && this._measure.toJSON(),
+			detailQuantity: this._detailQuantity && this._detailQuantity.toJSON(),
+			detailRange: this._detailRange && this._detailRange.toJSON(),
+			detailCodeableConcept: this._detailCodeableConcept && this._detailCodeableConcept.toJSON(),
+			dueDate: this._dueDate,
+			dueDuration: this._dueDuration && this._dueDuration.toJSON()
 		});
 	}
 

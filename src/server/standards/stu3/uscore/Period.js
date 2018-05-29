@@ -42,8 +42,8 @@ class Period extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			start: this.start,
-			end: this.end
+			start: this._start,
+			end: this._end
 		});
 	}
 

@@ -114,16 +114,16 @@ class Consent_Except extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			period: this.period && this.period.toJSON(),
-			actor: this.actor && this.actor.map(v => v.toJSON()),
-			action: this.action && this.action.map(v => v.toJSON()),
-			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
-			purpose: this.purpose && this.purpose.map(v => v.toJSON()),
-			class: this.class && this.class.map(v => v.toJSON()),
-			code: this.code && this.code.map(v => v.toJSON()),
-			dataPeriod: this.dataPeriod && this.dataPeriod.toJSON(),
-			data: this.data && this.data.map(v => v.toJSON())
+			type: this._type,
+			period: this._period && this._period.toJSON(),
+			actor: this._actor && this._actor.map(v => v.toJSON()),
+			action: this._action && this._action.map(v => v.toJSON()),
+			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			purpose: this._purpose && this._purpose.map(v => v.toJSON()),
+			class: this._class && this._class.map(v => v.toJSON()),
+			code: this._code && this._code.map(v => v.toJSON()),
+			dataPeriod: this._dataPeriod && this._dataPeriod.toJSON(),
+			data: this._data && this._data.map(v => v.toJSON())
 		});
 	}
 

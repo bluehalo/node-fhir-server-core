@@ -42,8 +42,8 @@ class Bundle_Search extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			mode: this.mode,
-			score: this.score
+			mode: this._mode,
+			score: this._score
 		});
 	}
 

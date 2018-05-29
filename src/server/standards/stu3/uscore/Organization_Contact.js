@@ -54,10 +54,10 @@ class Organization_Contact extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			purpose: this.purpose && this.purpose.toJSON(),
-			name: this.name && this.name.toJSON(),
-			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
-			address: this.address && this.address.toJSON()
+			purpose: this._purpose && this._purpose.toJSON(),
+			name: this._name && this._name.toJSON(),
+			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
+			address: this._address && this._address.toJSON()
 		});
 	}
 

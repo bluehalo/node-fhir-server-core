@@ -158,20 +158,20 @@ class Observation_Component extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this.code && this.code.toJSON(),
-			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
-			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
-			valueString: this.valueString,
-			valueRange: this.valueRange && this.valueRange.toJSON(),
-			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
-			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
-			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
-			valueTime: this.valueTime,
-			valueDateTime: this.valueDateTime,
-			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
-			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
-			interpretation: this.interpretation && this.interpretation.toJSON(),
-			referenceRange: this.referenceRange && this.referenceRange.map(v => v.toJSON())
+			code: this._code && this._code.toJSON(),
+			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
+			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
+			valueString: this._valueString,
+			valueRange: this._valueRange && this._valueRange.toJSON(),
+			valueRatio: this._valueRatio && this._valueRatio.toJSON(),
+			valueSampledData: this._valueSampledData && this._valueSampledData.toJSON(),
+			valueAttachment: this._valueAttachment && this._valueAttachment.toJSON(),
+			valueTime: this._valueTime,
+			valueDateTime: this._valueDateTime,
+			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
+			dataAbsentReason: this._dataAbsentReason && this._dataAbsentReason.toJSON(),
+			interpretation: this._interpretation && this._interpretation.toJSON(),
+			referenceRange: this._referenceRange && this._referenceRange.map(v => v.toJSON())
 		});
 	}
 

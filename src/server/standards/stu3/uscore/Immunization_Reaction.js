@@ -47,9 +47,9 @@ class Immunization_Reaction extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			date: this.date,
-			detail: this.detail && this.detail.toJSON(),
-			reported: this.reported
+			date: this._date,
+			detail: this._detail && this._detail.toJSON(),
+			reported: this._reported
 		});
 	}
 

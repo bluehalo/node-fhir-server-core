@@ -195,25 +195,25 @@ class CarePlan_Detail extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			category: this.category && this.category.toJSON(),
-			definition: this.definition && this.definition.toJSON(),
-			code: this.code && this.code.toJSON(),
-			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
-			goal: this.goal && this.goal.map(v => v.toJSON()),
-			status: this.status,
-			statusReason: this.statusReason,
-			prohibited: this.prohibited,
-			scheduledTiming: this.scheduledTiming && this.scheduledTiming.toJSON(),
-			scheduledPeriod: this.scheduledPeriod && this.scheduledPeriod.toJSON(),
-			scheduledString: this.scheduledString,
-			location: this.location && this.location.toJSON(),
-			performer: this.performer && this.performer.map(v => v.toJSON()),
-			productCodeableConcept: this.productCodeableConcept && this.productCodeableConcept.toJSON(),
-			productReference: this.productReference && this.productReference.toJSON(),
-			dailyAmount: this.dailyAmount && this.dailyAmount.toJSON(),
-			quantity: this.quantity && this.quantity.toJSON(),
-			description: this.description
+			category: this._category && this._category.toJSON(),
+			definition: this._definition && this._definition.toJSON(),
+			code: this._code && this._code.toJSON(),
+			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
+			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
+			goal: this._goal && this._goal.map(v => v.toJSON()),
+			status: this._status,
+			statusReason: this._statusReason,
+			prohibited: this._prohibited,
+			scheduledTiming: this._scheduledTiming && this._scheduledTiming.toJSON(),
+			scheduledPeriod: this._scheduledPeriod && this._scheduledPeriod.toJSON(),
+			scheduledString: this._scheduledString,
+			location: this._location && this._location.toJSON(),
+			performer: this._performer && this._performer.map(v => v.toJSON()),
+			productCodeableConcept: this._productCodeableConcept && this._productCodeableConcept.toJSON(),
+			productReference: this._productReference && this._productReference.toJSON(),
+			dailyAmount: this._dailyAmount && this._dailyAmount.toJSON(),
+			quantity: this._quantity && this._quantity.toJSON(),
+			description: this._description
 		});
 	}
 

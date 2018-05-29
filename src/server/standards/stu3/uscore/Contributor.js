@@ -47,9 +47,9 @@ class Contributor extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			name: this.name,
-			contact: this.contact && this.contact.map(v => v.toJSON())
+			type: this._type,
+			name: this._name,
+			contact: this._contact && this._contact.map(v => v.toJSON())
 		});
 	}
 

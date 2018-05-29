@@ -32,8 +32,8 @@ class Consent_Policy extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			authority: this.authority,
-			uri: this.uri
+			authority: this._authority,
+			uri: this._uri
 		});
 	}
 

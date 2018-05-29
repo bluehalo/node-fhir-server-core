@@ -115,16 +115,16 @@ class Address extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			use: this.use,
-			type: this.type,
-			text: this.text,
-			line: this.line,
-			city: this.city,
-			district: this.district,
-			state: this.state,
-			postalCode: this.postalCode,
-			country: this.country,
-			period: this.period && this.period.toJSON()
+			use: this._use,
+			type: this._type,
+			text: this._text,
+			line: this._line,
+			city: this._city,
+			district: this._district,
+			state: this._state,
+			postalCode: this._postalCode,
+			country: this._country,
+			period: this._period && this._period.toJSON()
 		});
 	}
 

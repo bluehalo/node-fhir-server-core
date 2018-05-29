@@ -56,10 +56,10 @@ class ElementDefinition_Slicing extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			discriminator: this.discriminator && this.discriminator.map(v => v.toJSON()),
-			description: this.description,
-			ordered: this.ordered,
-			rules: this.rules
+			discriminator: this._discriminator && this._discriminator.map(v => v.toJSON()),
+			description: this._description,
+			ordered: this._ordered,
+			rules: this._rules
 		});
 	}
 

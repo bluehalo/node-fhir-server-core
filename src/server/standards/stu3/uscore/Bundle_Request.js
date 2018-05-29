@@ -73,12 +73,12 @@ class Bundle_Request extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			method: this.method,
-			url: this.url,
-			ifNoneMatch: this.ifNoneMatch,
-			ifModifiedSince: this.ifModifiedSince,
-			ifMatch: this.ifMatch,
-			ifNoneExist: this.ifNoneExist
+			method: this._method,
+			url: this._url,
+			ifNoneMatch: this._ifNoneMatch,
+			ifModifiedSince: this._ifModifiedSince,
+			ifMatch: this._ifMatch,
+			ifNoneExist: this._ifNoneExist
 		});
 	}
 

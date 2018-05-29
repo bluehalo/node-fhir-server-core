@@ -38,8 +38,8 @@ class Patient_Link extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			other: this.other && this.other.toJSON(),
-			type: this.type
+			other: this._other && this._other.toJSON(),
+			type: this._type
 		});
 	}
 

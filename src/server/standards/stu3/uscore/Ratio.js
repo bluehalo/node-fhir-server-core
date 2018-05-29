@@ -33,8 +33,8 @@ class Ratio extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			numerator: this.numerator && this.numerator.toJSON(),
-			denominator: this.denominator && this.denominator.toJSON()
+			numerator: this._numerator && this._numerator.toJSON(),
+			denominator: this._denominator && this._denominator.toJSON()
 		});
 	}
 

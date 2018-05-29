@@ -234,27 +234,27 @@ class MedicationStatement extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
-			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
-			context: this.context && this.context.toJSON(),
-			status: this.status,
-			category: this.category && this.category.toJSON(),
-			medicationCodeableConcept: this.medicationCodeableConcept && this.medicationCodeableConcept.toJSON(),
-			medicationReference: this.medicationReference && this.medicationReference.toJSON(),
-			effectiveDateTime: this.effectiveDateTime,
-			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
-			dateAsserted: this.dateAsserted,
-			informationSource: this.informationSource && this.informationSource.toJSON(),
-			subject: this.subject && this.subject.toJSON(),
-			derivedFrom: this.derivedFrom && this.derivedFrom.map(v => v.toJSON()),
-			taken: this.taken,
-			reasonNotTaken: this.reasonNotTaken && this.reasonNotTaken.map(v => v.toJSON()),
-			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
-			note: this.note && this.note.map(v => v.toJSON()),
-			dosage: this.dosage && this.dosage.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
+			partOf: this._partOf && this._partOf.map(v => v.toJSON()),
+			context: this._context && this._context.toJSON(),
+			status: this._status,
+			category: this._category && this._category.toJSON(),
+			medicationCodeableConcept: this._medicationCodeableConcept && this._medicationCodeableConcept.toJSON(),
+			medicationReference: this._medicationReference && this._medicationReference.toJSON(),
+			effectiveDateTime: this._effectiveDateTime,
+			effectivePeriod: this._effectivePeriod && this._effectivePeriod.toJSON(),
+			dateAsserted: this._dateAsserted,
+			informationSource: this._informationSource && this._informationSource.toJSON(),
+			subject: this._subject && this._subject.toJSON(),
+			derivedFrom: this._derivedFrom && this._derivedFrom.map(v => v.toJSON()),
+			taken: this._taken,
+			reasonNotTaken: this._reasonNotTaken && this._reasonNotTaken.map(v => v.toJSON()),
+			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
+			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON()),
+			dosage: this._dosage && this._dosage.map(v => v.toJSON())
 		});
 	}
 

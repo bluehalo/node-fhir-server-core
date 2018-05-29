@@ -56,10 +56,10 @@ class Annotation extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			authorReference: this.authorReference && this.authorReference.toJSON(),
-			authorString: this.authorString,
-			time: this.time,
-			text: this.text
+			authorReference: this._authorReference && this._authorReference.toJSON(),
+			authorString: this._authorString,
+			time: this._time,
+			text: this._text
 		});
 	}
 

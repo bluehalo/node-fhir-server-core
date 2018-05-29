@@ -75,12 +75,12 @@ class RelatedArtifact extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			display: this.display,
-			citation: this.citation,
-			url: this.url,
-			document: this.document && this.document.toJSON(),
-			resource: this.resource && this.resource.toJSON()
+			type: this._type,
+			display: this._display,
+			citation: this._citation,
+			url: this._url,
+			document: this._document && this._document.toJSON(),
+			resource: this._resource && this._resource.toJSON()
 		});
 	}
 

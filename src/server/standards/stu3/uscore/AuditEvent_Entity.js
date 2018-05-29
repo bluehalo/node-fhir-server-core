@@ -108,16 +108,16 @@ class AuditEvent_Entity extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identifier: this.identifier && this.identifier.toJSON(),
-			reference: this.reference && this.reference.toJSON(),
-			type: this.type && this.type.toJSON(),
-			role: this.role && this.role.toJSON(),
-			lifecycle: this.lifecycle && this.lifecycle.toJSON(),
-			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
-			name: this.name,
-			description: this.description,
-			query: this.query,
-			detail: this.detail && this.detail.map(v => v.toJSON())
+			identifier: this._identifier && this._identifier.toJSON(),
+			reference: this._reference && this._reference.toJSON(),
+			type: this._type && this._type.toJSON(),
+			role: this._role && this._role.toJSON(),
+			lifecycle: this._lifecycle && this._lifecycle.toJSON(),
+			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			name: this._name,
+			description: this._description,
+			query: this._query,
+			detail: this._detail && this._detail.map(v => v.toJSON())
 		});
 	}
 

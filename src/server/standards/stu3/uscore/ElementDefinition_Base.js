@@ -46,9 +46,9 @@ class ElementDefinition_Base extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			path: this.path,
-			min: this.min,
-			max: this.max
+			path: this._path,
+			min: this._min,
+			max: this._max
 		});
 	}
 

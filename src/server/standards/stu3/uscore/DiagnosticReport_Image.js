@@ -33,8 +33,8 @@ class DiagnosticReport_Image extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			comment: this.comment,
-			link: this.link && this.link.toJSON()
+			comment: this._comment,
+			link: this._link && this._link.toJSON()
 		});
 	}
 

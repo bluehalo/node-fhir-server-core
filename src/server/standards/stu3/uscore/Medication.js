@@ -119,16 +119,16 @@ class Medication extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			code: this.code && this.code.toJSON(),
-			status: this.status,
-			isBrand: this.isBrand,
-			isOverTheCounter: this.isOverTheCounter,
-			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
-			form: this.form && this.form.toJSON(),
-			ingredient: this.ingredient && this.ingredient.map(v => v.toJSON()),
-			package: this.package && this.package.toJSON(),
-			image: this.image && this.image.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			code: this._code && this._code.toJSON(),
+			status: this._status,
+			isBrand: this._isBrand,
+			isOverTheCounter: this._isOverTheCounter,
+			manufacturer: this._manufacturer && this._manufacturer.toJSON(),
+			form: this._form && this._form.toJSON(),
+			ingredient: this._ingredient && this._ingredient.map(v => v.toJSON()),
+			package: this._package && this._package.toJSON(),
+			image: this._image && this._image.map(v => v.toJSON())
 		});
 	}
 

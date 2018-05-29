@@ -56,9 +56,9 @@ class Location_Position extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			longitude: this.longitude,
-			latitude: this.latitude,
-			altitude: this.altitude
+			longitude: this._longitude,
+			latitude: this._latitude,
+			altitude: this._altitude
 		});
 	}
 

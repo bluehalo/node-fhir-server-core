@@ -82,13 +82,13 @@ class Device_Udi extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			deviceIdentifier: this.deviceIdentifier,
-			name: this.name,
-			jurisdiction: this.jurisdiction,
-			carrierHRF: this.carrierHRF,
-			carrierAIDC: this.carrierAIDC,
-			issuer: this.issuer,
-			entryType: this.entryType
+			deviceIdentifier: this._deviceIdentifier,
+			name: this._name,
+			jurisdiction: this._jurisdiction,
+			carrierHRF: this._carrierHRF,
+			carrierAIDC: this._carrierAIDC,
+			issuer: this._issuer,
+			entryType: this._entryType
 		});
 	}
 

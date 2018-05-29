@@ -65,11 +65,11 @@ class Meta extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			versionId: this.versionId,
-			lastUpdated: this.lastUpdated,
-			profile: this.profile,
-			security: this.security && this.security.map(v => v.toJSON()),
-			tag: this.tag && this.tag.map(v => v.toJSON())
+			versionId: this._versionId,
+			lastUpdated: this._lastUpdated,
+			profile: this._profile,
+			security: this._security && this._security.map(v => v.toJSON()),
+			tag: this._tag && this._tag.map(v => v.toJSON())
 		});
 	}
 

@@ -68,11 +68,11 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			validityPeriod: this.validityPeriod && this.validityPeriod.toJSON(),
-			numberOfRepeatsAllowed: this.numberOfRepeatsAllowed,
-			quantity: this.quantity && this.quantity.toJSON(),
-			expectedSupplyDuration: this.expectedSupplyDuration && this.expectedSupplyDuration.toJSON(),
-			performer: this.performer && this.performer.toJSON()
+			validityPeriod: this._validityPeriod && this._validityPeriod.toJSON(),
+			numberOfRepeatsAllowed: this._numberOfRepeatsAllowed,
+			quantity: this._quantity && this._quantity.toJSON(),
+			expectedSupplyDuration: this._expectedSupplyDuration && this._expectedSupplyDuration.toJSON(),
+			performer: this._performer && this._performer.toJSON()
 		});
 	}
 

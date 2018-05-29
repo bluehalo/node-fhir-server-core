@@ -37,8 +37,8 @@ class AuditEvent_Network extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			address: this.address,
-			type: this.type
+			address: this._address,
+			type: this._type
 		});
 	}
 

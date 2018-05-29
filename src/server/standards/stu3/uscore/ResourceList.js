@@ -28,7 +28,7 @@ class ResourceList extends Resource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType
+			resourceType: this._resourceType
 		});
 	}
 

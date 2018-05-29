@@ -38,8 +38,8 @@ class Consent_Data1 extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			meaning: this.meaning,
-			reference: this.reference && this.reference.toJSON()
+			meaning: this._meaning,
+			reference: this._reference && this._reference.toJSON()
 		});
 	}
 

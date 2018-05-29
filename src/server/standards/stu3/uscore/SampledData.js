@@ -103,13 +103,13 @@ class SampledData extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			origin: this.origin && this.origin.toJSON(),
-			period: this.period,
-			factor: this.factor,
-			lowerLimit: this.lowerLimit,
-			upperLimit: this.upperLimit,
-			dimensions: this.dimensions,
-			data: this.data
+			origin: this._origin && this._origin.toJSON(),
+			period: this._period,
+			factor: this._factor,
+			lowerLimit: this._lowerLimit,
+			upperLimit: this._upperLimit,
+			dimensions: this._dimensions,
+			data: this._data
 		});
 	}
 

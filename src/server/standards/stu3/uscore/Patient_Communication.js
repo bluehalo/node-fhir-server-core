@@ -33,8 +33,8 @@ class Patient_Communication extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			language: this.language && this.language.toJSON(),
-			preferred: this.preferred
+			language: this._language && this._language.toJSON(),
+			preferred: this._preferred
 		});
 	}
 

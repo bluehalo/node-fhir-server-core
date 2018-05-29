@@ -98,14 +98,14 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			doseSequence: this.doseSequence,
-			description: this.description,
-			authority: this.authority && this.authority.toJSON(),
-			series: this.series,
-			seriesDoses: this.seriesDoses,
-			targetDisease: this.targetDisease && this.targetDisease.map(v => v.toJSON()),
-			doseStatus: this.doseStatus && this.doseStatus.toJSON(),
-			doseStatusReason: this.doseStatusReason && this.doseStatusReason.toJSON()
+			doseSequence: this._doseSequence,
+			description: this._description,
+			authority: this._authority && this._authority.toJSON(),
+			series: this._series,
+			seriesDoses: this._seriesDoses,
+			targetDisease: this._targetDisease && this._targetDisease.map(v => v.toJSON()),
+			doseStatus: this._doseStatus && this._doseStatus.toJSON(),
+			doseStatusReason: this._doseStatusReason && this._doseStatusReason.toJSON()
 		});
 	}
 

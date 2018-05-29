@@ -53,10 +53,10 @@ class DomainResource extends Resource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			text: this.text && this.text.toJSON(),
-			contained: this.contained && this.contained.map(v => v.toJSON()),
-			extension: this.extension && this.extension.map(v => v.toJSON()),
-			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON())
+			text: this._text && this._text.toJSON(),
+			contained: this._contained && this._contained.map(v => v.toJSON()),
+			extension: this._extension && this._extension.map(v => v.toJSON()),
+			modifierExtension: this._modifierExtension && this._modifierExtension.map(v => v.toJSON())
 		});
 	}
 

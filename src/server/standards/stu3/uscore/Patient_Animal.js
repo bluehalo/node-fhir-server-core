@@ -42,9 +42,9 @@ class Patient_Animal extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			species: this.species && this.species.toJSON(),
-			breed: this.breed && this.breed.toJSON(),
-			genderStatus: this.genderStatus && this.genderStatus.toJSON()
+			species: this._species && this._species.toJSON(),
+			breed: this._breed && this._breed.toJSON(),
+			genderStatus: this._genderStatus && this._genderStatus.toJSON()
 		});
 	}
 

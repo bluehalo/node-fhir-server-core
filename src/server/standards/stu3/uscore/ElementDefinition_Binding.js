@@ -56,10 +56,10 @@ class ElementDefinition_Binding extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			strength: this.strength,
-			description: this.description,
-			valueSetUri: this.valueSetUri,
-			valueSetReference: this.valueSetReference && this.valueSetReference.toJSON()
+			strength: this._strength,
+			description: this._description,
+			valueSetUri: this._valueSetUri,
+			valueSetReference: this._valueSetReference && this._valueSetReference.toJSON()
 		});
 	}
 

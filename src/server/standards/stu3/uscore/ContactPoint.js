@@ -75,11 +75,11 @@ class ContactPoint extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			system: this.system,
-			value: this.value,
-			use: this.use,
-			rank: this.rank,
-			period: this.period && this.period.toJSON()
+			system: this._system,
+			value: this._value,
+			use: this._use,
+			rank: this._rank,
+			period: this._period && this._period.toJSON()
 		});
 	}
 

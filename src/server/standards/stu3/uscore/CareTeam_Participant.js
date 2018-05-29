@@ -53,10 +53,10 @@ class CareTeam_Participant extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.toJSON(),
-			member: this.member && this.member.toJSON(),
-			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON(),
-			period: this.period && this.period.toJSON()
+			role: this._role && this._role.toJSON(),
+			member: this._member && this._member.toJSON(),
+			onBehalfOf: this._onBehalfOf && this._onBehalfOf.toJSON(),
+			period: this._period && this._period.toJSON()
 		});
 	}
 

@@ -63,11 +63,11 @@ class CarePlan_Activity extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			outcomeCodeableConcept: this.outcomeCodeableConcept && this.outcomeCodeableConcept.map(v => v.toJSON()),
-			outcomeReference: this.outcomeReference && this.outcomeReference.map(v => v.toJSON()),
-			progress: this.progress && this.progress.map(v => v.toJSON()),
-			reference: this.reference && this.reference.toJSON(),
-			detail: this.detail && this.detail.toJSON()
+			outcomeCodeableConcept: this._outcomeCodeableConcept && this._outcomeCodeableConcept.map(v => v.toJSON()),
+			outcomeReference: this._outcomeReference && this._outcomeReference.map(v => v.toJSON()),
+			progress: this._progress && this._progress.map(v => v.toJSON()),
+			reference: this._reference && this._reference.toJSON(),
+			detail: this._detail && this._detail.toJSON()
 		});
 	}
 

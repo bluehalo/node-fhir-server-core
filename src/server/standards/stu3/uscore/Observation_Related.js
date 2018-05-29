@@ -38,8 +38,8 @@ class Observation_Related extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			target: this.target && this.target.toJSON()
+			type: this._type,
+			target: this._target && this._target.toJSON()
 		});
 	}
 

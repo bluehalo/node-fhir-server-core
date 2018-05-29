@@ -83,13 +83,13 @@ class HumanName extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			use: this.use,
-			text: this.text,
-			family: this.family,
-			given: this.given,
-			prefix: this.prefix,
-			suffix: this.suffix,
-			period: this.period && this.period.toJSON()
+			use: this._use,
+			text: this._text,
+			family: this._family,
+			given: this._given,
+			prefix: this._prefix,
+			suffix: this._suffix,
+			period: this._period && this._period.toJSON()
 		});
 	}
 

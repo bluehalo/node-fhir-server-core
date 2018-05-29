@@ -60,11 +60,11 @@ class Bundle_Response extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			status: this.status,
-			location: this.location,
-			etag: this.etag,
-			lastModified: this.lastModified,
-			outcome: this.outcome && this.outcome.toJSON()
+			status: this._status,
+			location: this._location,
+			etag: this._etag,
+			lastModified: this._lastModified,
+			outcome: this._outcome && this._outcome.toJSON()
 		});
 	}
 

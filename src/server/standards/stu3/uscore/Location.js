@@ -180,22 +180,22 @@ class Location extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			status: this.status,
-			operationalStatus: this.operationalStatus && this.operationalStatus.toJSON(),
-			name: this.name,
-			alias: this.alias,
-			description: this.description,
-			mode: this.mode,
-			type: this.type && this.type.toJSON(),
-			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
-			address: this.address && this.address.toJSON(),
-			physicalType: this.physicalType && this.physicalType.toJSON(),
-			position: this.position && this.position.toJSON(),
-			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
-			partOf: this.partOf && this.partOf.toJSON(),
-			endpoint: this.endpoint && this.endpoint.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			status: this._status,
+			operationalStatus: this._operationalStatus && this._operationalStatus.toJSON(),
+			name: this._name,
+			alias: this._alias,
+			description: this._description,
+			mode: this._mode,
+			type: this._type && this._type.toJSON(),
+			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
+			address: this._address && this._address.toJSON(),
+			physicalType: this._physicalType && this._physicalType.toJSON(),
+			position: this._position && this._position.toJSON(),
+			managingOrganization: this._managingOrganization && this._managingOrganization.toJSON(),
+			partOf: this._partOf && this._partOf.toJSON(),
+			endpoint: this._endpoint && this._endpoint.map(v => v.toJSON())
 		});
 	}
 

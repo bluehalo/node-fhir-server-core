@@ -44,9 +44,9 @@ class Medication_Content extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			itemCodeableConcept: this.itemCodeableConcept && this.itemCodeableConcept.toJSON(),
-			itemReference: this.itemReference && this.itemReference.toJSON(),
-			amount: this.amount && this.amount.toJSON()
+			itemCodeableConcept: this._itemCodeableConcept && this._itemCodeableConcept.toJSON(),
+			itemReference: this._itemReference && this._itemReference.toJSON(),
+			amount: this._amount && this._amount.toJSON()
 		});
 	}
 

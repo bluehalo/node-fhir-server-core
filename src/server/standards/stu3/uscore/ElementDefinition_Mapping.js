@@ -60,10 +60,10 @@ class ElementDefinition_Mapping extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identity: this.identity,
-			language: this.language,
-			map: this.map,
-			comment: this.comment
+			identity: this._identity,
+			language: this._language,
+			map: this._map,
+			comment: this._comment
 		});
 	}
 

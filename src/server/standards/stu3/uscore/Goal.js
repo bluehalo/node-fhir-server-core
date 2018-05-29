@@ -192,23 +192,23 @@ class Goal extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			status: this.status,
-			category: this.category && this.category.map(v => v.toJSON()),
-			priority: this.priority && this.priority.toJSON(),
-			description: this.description && this.description.toJSON(),
-			subject: this.subject && this.subject.toJSON(),
-			startDate: this.startDate,
-			startCodeableConcept: this.startCodeableConcept && this.startCodeableConcept.toJSON(),
-			target: this.target && this.target.toJSON(),
-			statusDate: this.statusDate,
-			statusReason: this.statusReason,
-			expressedBy: this.expressedBy && this.expressedBy.toJSON(),
-			addresses: this.addresses && this.addresses.map(v => v.toJSON()),
-			note: this.note && this.note.map(v => v.toJSON()),
-			outcomeCode: this.outcomeCode && this.outcomeCode.map(v => v.toJSON()),
-			outcomeReference: this.outcomeReference && this.outcomeReference.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			status: this._status,
+			category: this._category && this._category.map(v => v.toJSON()),
+			priority: this._priority && this._priority.toJSON(),
+			description: this._description && this._description.toJSON(),
+			subject: this._subject && this._subject.toJSON(),
+			startDate: this._startDate,
+			startCodeableConcept: this._startCodeableConcept && this._startCodeableConcept.toJSON(),
+			target: this._target && this._target.toJSON(),
+			statusDate: this._statusDate,
+			statusReason: this._statusReason,
+			expressedBy: this._expressedBy && this._expressedBy.toJSON(),
+			addresses: this._addresses && this._addresses.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON()),
+			outcomeCode: this._outcomeCode && this._outcomeCode.map(v => v.toJSON()),
+			outcomeReference: this._outcomeReference && this._outcomeReference.map(v => v.toJSON())
 		});
 	}
 

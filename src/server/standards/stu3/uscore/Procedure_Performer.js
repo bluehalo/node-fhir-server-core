@@ -43,9 +43,9 @@ class Procedure_Performer extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.toJSON(),
-			actor: this.actor && this.actor.toJSON(),
-			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON()
+			role: this._role && this._role.toJSON(),
+			actor: this._actor && this._actor.toJSON(),
+			onBehalfOf: this._onBehalfOf && this._onBehalfOf.toJSON()
 		});
 	}
 

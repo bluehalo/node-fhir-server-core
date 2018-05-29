@@ -98,13 +98,13 @@ class ParameterDefinition extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			name: this.name,
-			use: this.use,
-			min: this.min,
-			max: this.max,
-			documentation: this.documentation,
-			type: this.type,
-			profile: this.profile && this.profile.toJSON()
+			name: this._name,
+			use: this._use,
+			min: this._min,
+			max: this._max,
+			documentation: this._documentation,
+			type: this._type,
+			profile: this._profile && this._profile.toJSON()
 		});
 	}
 

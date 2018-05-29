@@ -95,13 +95,13 @@ class TriggerDefinition extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			eventName: this.eventName,
-			eventTimingTiming: this.eventTimingTiming && this.eventTimingTiming.toJSON(),
-			eventTimingReference: this.eventTimingReference && this.eventTimingReference.toJSON(),
-			eventTimingDate: this.eventTimingDate,
-			eventTimingDateTime: this.eventTimingDateTime,
-			eventData: this.eventData && this.eventData.toJSON()
+			type: this._type,
+			eventName: this._eventName,
+			eventTimingTiming: this._eventTimingTiming && this._eventTimingTiming.toJSON(),
+			eventTimingReference: this._eventTimingReference && this._eventTimingReference.toJSON(),
+			eventTimingDate: this._eventTimingDate,
+			eventTimingDateTime: this._eventTimingDateTime,
+			eventData: this._eventData && this._eventData.toJSON()
 		});
 	}
 

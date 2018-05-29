@@ -37,8 +37,8 @@ class ElementDefinition_Discriminator extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			path: this.path
+			type: this._type,
+			path: this._path
 		});
 	}
 

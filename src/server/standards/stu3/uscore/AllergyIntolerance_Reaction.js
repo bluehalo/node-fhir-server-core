@@ -89,13 +89,13 @@ class AllergyIntolerance_Reaction extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			substance: this.substance && this.substance.toJSON(),
-			manifestation: this.manifestation && this.manifestation.map(v => v.toJSON()),
-			description: this.description,
-			onset: this.onset,
-			severity: this.severity,
-			exposureRoute: this.exposureRoute && this.exposureRoute.toJSON(),
-			note: this.note && this.note.map(v => v.toJSON())
+			substance: this._substance && this._substance.toJSON(),
+			manifestation: this._manifestation && this._manifestation.map(v => v.toJSON()),
+			description: this._description,
+			onset: this._onset,
+			severity: this._severity,
+			exposureRoute: this._exposureRoute && this._exposureRoute.toJSON(),
+			note: this._note && this._note.map(v => v.toJSON())
 		});
 	}
 

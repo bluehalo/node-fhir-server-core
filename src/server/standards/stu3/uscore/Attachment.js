@@ -106,14 +106,14 @@ class Attachment extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			contentType: this.contentType,
-			language: this.language,
-			data: this.data,
-			url: this.url,
-			size: this.size,
-			hash: this.hash,
-			title: this.title,
-			creation: this.creation
+			contentType: this._contentType,
+			language: this._language,
+			data: this._data,
+			url: this._url,
+			size: this._size,
+			hash: this._hash,
+			title: this._title,
+			creation: this._creation
 		});
 	}
 

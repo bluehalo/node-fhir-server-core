@@ -228,27 +228,27 @@ class Consent extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
-			status: this.status,
-			category: this.category && this.category.map(v => v.toJSON()),
-			patient: this.patient && this.patient.toJSON(),
-			period: this.period && this.period.toJSON(),
-			dateTime: this.dateTime,
-			consentingParty: this.consentingParty && this.consentingParty.map(v => v.toJSON()),
-			actor: this.actor && this.actor.map(v => v.toJSON()),
-			action: this.action && this.action.map(v => v.toJSON()),
-			organization: this.organization && this.organization.map(v => v.toJSON()),
-			sourceAttachment: this.sourceAttachment && this.sourceAttachment.toJSON(),
-			sourceIdentifier: this.sourceIdentifier && this.sourceIdentifier.toJSON(),
-			sourceReference: this.sourceReference && this.sourceReference.toJSON(),
-			policy: this.policy && this.policy.map(v => v.toJSON()),
-			policyRule: this.policyRule,
-			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
-			purpose: this.purpose && this.purpose.map(v => v.toJSON()),
-			dataPeriod: this.dataPeriod && this.dataPeriod.toJSON(),
-			data: this.data && this.data.map(v => v.toJSON()),
-			except: this.except && this.except.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.toJSON(),
+			status: this._status,
+			category: this._category && this._category.map(v => v.toJSON()),
+			patient: this._patient && this._patient.toJSON(),
+			period: this._period && this._period.toJSON(),
+			dateTime: this._dateTime,
+			consentingParty: this._consentingParty && this._consentingParty.map(v => v.toJSON()),
+			actor: this._actor && this._actor.map(v => v.toJSON()),
+			action: this._action && this._action.map(v => v.toJSON()),
+			organization: this._organization && this._organization.map(v => v.toJSON()),
+			sourceAttachment: this._sourceAttachment && this._sourceAttachment.toJSON(),
+			sourceIdentifier: this._sourceIdentifier && this._sourceIdentifier.toJSON(),
+			sourceReference: this._sourceReference && this._sourceReference.toJSON(),
+			policy: this._policy && this._policy.map(v => v.toJSON()),
+			policyRule: this._policyRule,
+			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			purpose: this._purpose && this._purpose.map(v => v.toJSON()),
+			dataPeriod: this._dataPeriod && this._dataPeriod.toJSON(),
+			data: this._data && this._data.map(v => v.toJSON()),
+			except: this._except && this._except.map(v => v.toJSON())
 		});
 	}
 

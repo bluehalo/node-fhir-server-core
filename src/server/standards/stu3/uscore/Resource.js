@@ -61,10 +61,10 @@ class Resource extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			id: this.id,
-			meta: this.meta && this.meta.toJSON(),
-			implicitRules: this.implicitRules,
-			language: this.language
+			id: this._id,
+			meta: this._meta && this._meta.toJSON(),
+			implicitRules: this._implicitRules,
+			language: this._language
 		});
 	}
 

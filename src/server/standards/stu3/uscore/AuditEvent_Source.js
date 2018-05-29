@@ -43,9 +43,9 @@ class AuditEvent_Source extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			site: this.site,
-			identifier: this.identifier && this.identifier.toJSON(),
-			type: this.type && this.type.map(v => v.toJSON())
+			site: this._site,
+			identifier: this._identifier && this._identifier.toJSON(),
+			type: this._type && this._type.map(v => v.toJSON())
 		});
 	}
 

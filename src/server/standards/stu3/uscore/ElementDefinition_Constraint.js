@@ -87,13 +87,13 @@ class ElementDefinition_Constraint extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			key: this.key,
-			requirements: this.requirements,
-			severity: this.severity,
-			human: this.human,
-			expression: this.expression,
-			xpath: this.xpath,
-			source: this.source
+			key: this._key,
+			requirements: this._requirements,
+			severity: this._severity,
+			human: this._human,
+			expression: this._expression,
+			xpath: this._xpath,
+			source: this._source
 		});
 	}
 

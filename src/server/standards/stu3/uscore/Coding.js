@@ -64,11 +64,11 @@ class Coding extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			system: this.system,
-			version: this.version,
-			code: this.code,
-			display: this.display,
-			userSelected: this.userSelected
+			system: this._system,
+			version: this._version,
+			code: this._code,
+			display: this._display,
+			userSelected: this._userSelected
 		});
 	}
 

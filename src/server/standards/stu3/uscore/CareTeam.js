@@ -147,19 +147,19 @@ class CareTeam extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			status: this.status,
-			category: this.category && this.category.map(v => v.toJSON()),
-			name: this.name,
-			subject: this.subject && this.subject.toJSON(),
-			context: this.context && this.context.toJSON(),
-			period: this.period && this.period.toJSON(),
-			participant: this.participant && this.participant.map(v => v.toJSON()),
-			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
-			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
-			managingOrganization: this.managingOrganization && this.managingOrganization.map(v => v.toJSON()),
-			note: this.note && this.note.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			status: this._status,
+			category: this._category && this._category.map(v => v.toJSON()),
+			name: this._name,
+			subject: this._subject && this._subject.toJSON(),
+			context: this._context && this._context.toJSON(),
+			period: this._period && this._period.toJSON(),
+			participant: this._participant && this._participant.map(v => v.toJSON()),
+			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
+			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
+			managingOrganization: this._managingOrganization && this._managingOrganization.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON())
 		});
 	}
 

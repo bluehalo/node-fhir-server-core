@@ -76,12 +76,12 @@ class Identifier extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			use: this.use,
-			type: this.type && this.type.toJSON(),
-			system: this.system,
-			value: this.value,
-			period: this.period && this.period.toJSON(),
-			assigner: this.assigner && this.assigner.toJSON()
+			use: this._use,
+			type: this._type && this._type.toJSON(),
+			system: this._system,
+			value: this._value,
+			period: this._period && this._period.toJSON(),
+			assigner: this._assigner && this._assigner.toJSON()
 		});
 	}
 

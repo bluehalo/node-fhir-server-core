@@ -42,9 +42,9 @@ class Reference extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			reference: this.reference,
-			identifier: this.identifier && this.identifier.toJSON(),
-			display: this.display
+			reference: this._reference,
+			identifier: this._identifier && this._identifier.toJSON(),
+			display: this._display
 		});
 	}
 

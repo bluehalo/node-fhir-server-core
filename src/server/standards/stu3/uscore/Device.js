@@ -202,24 +202,24 @@ class Device extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			udi: this.udi && this.udi.toJSON(),
-			status: this.status,
-			type: this.type && this.type.toJSON(),
-			lotNumber: this.lotNumber,
-			manufacturer: this.manufacturer,
-			manufactureDate: this.manufactureDate,
-			expirationDate: this.expirationDate,
-			model: this.model,
-			version: this.version,
-			patient: this.patient && this.patient.toJSON(),
-			owner: this.owner && this.owner.toJSON(),
-			contact: this.contact && this.contact.map(v => v.toJSON()),
-			location: this.location && this.location.toJSON(),
-			url: this.url,
-			note: this.note && this.note.map(v => v.toJSON()),
-			safety: this.safety && this.safety.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			udi: this._udi && this._udi.toJSON(),
+			status: this._status,
+			type: this._type && this._type.toJSON(),
+			lotNumber: this._lotNumber,
+			manufacturer: this._manufacturer,
+			manufactureDate: this._manufactureDate,
+			expirationDate: this._expirationDate,
+			model: this._model,
+			version: this._version,
+			patient: this._patient && this._patient.toJSON(),
+			owner: this._owner && this._owner.toJSON(),
+			contact: this._contact && this._contact.map(v => v.toJSON()),
+			location: this._location && this._location.toJSON(),
+			url: this._url,
+			note: this._note && this._note.map(v => v.toJSON()),
+			safety: this._safety && this._safety.map(v => v.toJSON())
 		});
 	}
 

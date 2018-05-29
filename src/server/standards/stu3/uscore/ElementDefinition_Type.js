@@ -69,11 +69,11 @@ class ElementDefinition_Type extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this.code,
-			profile: this.profile,
-			targetProfile: this.targetProfile,
-			aggregation: this.aggregation,
-			versioning: this.versioning
+			code: this._code,
+			profile: this._profile,
+			targetProfile: this._targetProfile,
+			aggregation: this._aggregation,
+			versioning: this._versioning
 		});
 	}
 

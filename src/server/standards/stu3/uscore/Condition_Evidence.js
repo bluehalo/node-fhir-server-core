@@ -34,8 +34,8 @@ class Condition_Evidence extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this.code && this.code.map(v => v.toJSON()),
-			detail: this.detail && this.detail.map(v => v.toJSON())
+			code: this._code && this._code.map(v => v.toJSON()),
+			detail: this._detail && this._detail.map(v => v.toJSON())
 		});
 	}
 

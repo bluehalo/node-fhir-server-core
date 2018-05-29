@@ -43,9 +43,9 @@ class Timing extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			event: this.event,
-			repeat: this.repeat && this.repeat.toJSON(),
-			code: this.code && this.code.toJSON()
+			event: this._event,
+			repeat: this._repeat && this._repeat.toJSON(),
+			code: this._code && this._code.toJSON()
 		});
 	}
 

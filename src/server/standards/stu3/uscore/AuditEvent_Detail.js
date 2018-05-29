@@ -32,8 +32,8 @@ class AuditEvent_Detail extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			value: this.value
+			type: this._type,
+			value: this._value
 		});
 	}
 

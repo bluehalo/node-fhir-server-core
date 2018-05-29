@@ -33,8 +33,8 @@ class MedicationRequest_Requester extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			agent: this.agent && this.agent.toJSON(),
-			onBehalfOf: this.onBehalfOf && this.onBehalfOf.toJSON()
+			agent: this._agent && this._agent.toJSON(),
+			onBehalfOf: this._onBehalfOf && this._onBehalfOf.toJSON()
 		});
 	}
 

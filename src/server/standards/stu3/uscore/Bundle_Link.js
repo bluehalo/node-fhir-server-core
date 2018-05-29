@@ -32,8 +32,8 @@ class Bundle_Link extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			relation: this.relation,
-			url: this.url
+			relation: this._relation,
+			url: this._url
 		});
 	}
 

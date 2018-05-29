@@ -33,8 +33,8 @@ class Range extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			low: this.low && this.low.toJSON(),
-			high: this.high && this.high.toJSON()
+			low: this._low && this._low.toJSON(),
+			high: this._high && this._high.toJSON()
 		});
 	}
 

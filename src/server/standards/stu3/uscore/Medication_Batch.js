@@ -37,8 +37,8 @@ class Medication_Batch extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			lotNumber: this.lotNumber,
-			expirationDate: this.expirationDate
+			lotNumber: this._lotNumber,
+			expirationDate: this._expirationDate
 		});
 	}
 

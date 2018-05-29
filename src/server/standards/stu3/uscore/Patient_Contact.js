@@ -88,13 +88,13 @@ class Patient_Contact extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			relationship: this.relationship && this.relationship.map(v => v.toJSON()),
-			name: this.name && this.name.toJSON(),
-			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
-			address: this.address && this.address.toJSON(),
-			gender: this.gender,
-			organization: this.organization && this.organization.toJSON(),
-			period: this.period && this.period.toJSON()
+			relationship: this._relationship && this._relationship.map(v => v.toJSON()),
+			name: this._name && this._name.toJSON(),
+			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
+			address: this._address && this._address.toJSON(),
+			gender: this._gender,
+			organization: this._organization && this._organization.toJSON(),
+			period: this._period && this._period.toJSON()
 		});
 	}
 

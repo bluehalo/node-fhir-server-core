@@ -66,11 +66,11 @@ class DataRequirement extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type,
-			profile: this.profile,
-			mustSupport: this.mustSupport,
-			codeFilter: this.codeFilter && this.codeFilter.map(v => v.toJSON()),
-			dateFilter: this.dateFilter && this.dateFilter.map(v => v.toJSON())
+			type: this._type,
+			profile: this._profile,
+			mustSupport: this._mustSupport,
+			codeFilter: this._codeFilter && this._codeFilter.map(v => v.toJSON()),
+			dateFilter: this._dateFilter && this._dateFilter.map(v => v.toJSON())
 		});
 	}
 

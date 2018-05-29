@@ -57,10 +57,10 @@ class DataRequirement_DateFilter extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			path: this.path,
-			valueDateTime: this.valueDateTime,
-			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
-			valueDuration: this.valueDuration && this.valueDuration.toJSON()
+			path: this._path,
+			valueDateTime: this._valueDateTime,
+			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
+			valueDuration: this._valueDuration && this._valueDuration.toJSON()
 		});
 	}
 

@@ -118,17 +118,17 @@ class AuditEvent_Agent extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.map(v => v.toJSON()),
-			reference: this.reference && this.reference.toJSON(),
-			userId: this.userId && this.userId.toJSON(),
-			altId: this.altId,
-			name: this.name,
-			requestor: this.requestor,
-			location: this.location && this.location.toJSON(),
-			policy: this.policy,
-			media: this.media && this.media.toJSON(),
-			network: this.network && this.network.toJSON(),
-			purposeOfUse: this.purposeOfUse && this.purposeOfUse.map(v => v.toJSON())
+			role: this._role && this._role.map(v => v.toJSON()),
+			reference: this._reference && this._reference.toJSON(),
+			userId: this._userId && this._userId.toJSON(),
+			altId: this._altId,
+			name: this._name,
+			requestor: this._requestor,
+			location: this._location && this._location.toJSON(),
+			policy: this._policy,
+			media: this._media && this._media.toJSON(),
+			network: this._network && this._network.toJSON(),
+			purposeOfUse: this._purposeOfUse && this._purposeOfUse.map(v => v.toJSON())
 		});
 	}
 

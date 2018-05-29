@@ -34,8 +34,8 @@ class Procedure_FocalDevice extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			action: this.action && this.action.toJSON(),
-			manipulated: this.manipulated && this.manipulated.toJSON()
+			action: this._action && this._action.toJSON(),
+			manipulated: this._manipulated && this._manipulated.toJSON()
 		});
 	}
 

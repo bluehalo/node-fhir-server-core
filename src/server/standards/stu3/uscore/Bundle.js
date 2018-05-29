@@ -96,13 +96,13 @@ class Bundle extends Resource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.toJSON(),
-			type: this.type,
-			total: this.total,
-			link: this.link && this.link.map(v => v.toJSON()),
-			entry: this.entry && this.entry.map(v => v.toJSON()),
-			signature: this.signature && this.signature.toJSON()
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.toJSON(),
+			type: this._type,
+			total: this._total,
+			link: this._link && this._link.map(v => v.toJSON()),
+			entry: this._entry && this._entry.map(v => v.toJSON()),
+			signature: this._signature && this._signature.toJSON()
 		});
 	}
 

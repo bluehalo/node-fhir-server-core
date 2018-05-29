@@ -247,26 +247,26 @@ class AllergyIntolerance extends DomainResource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this.resourceType,
-			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
-			clinicalStatus: this.clinicalStatus,
-			verificationStatus: this.verificationStatus,
-			type: this.type,
-			category: this.category,
-			criticality: this.criticality,
-			code: this.code && this.code.toJSON(),
-			patient: this.patient && this.patient.toJSON(),
-			onsetDateTime: this.onsetDateTime,
-			onsetAge: this.onsetAge && this.onsetAge.toJSON(),
-			onsetPeriod: this.onsetPeriod && this.onsetPeriod.toJSON(),
-			onsetRange: this.onsetRange && this.onsetRange.toJSON(),
-			onsetString: this.onsetString,
-			assertedDate: this.assertedDate,
-			recorder: this.recorder && this.recorder.toJSON(),
-			asserter: this.asserter && this.asserter.toJSON(),
-			lastOccurrence: this.lastOccurrence,
-			note: this.note && this.note.map(v => v.toJSON()),
-			reaction: this.reaction && this.reaction.map(v => v.toJSON())
+			resourceType: this._resourceType,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			clinicalStatus: this._clinicalStatus,
+			verificationStatus: this._verificationStatus,
+			type: this._type,
+			category: this._category,
+			criticality: this._criticality,
+			code: this._code && this._code.toJSON(),
+			patient: this._patient && this._patient.toJSON(),
+			onsetDateTime: this._onsetDateTime,
+			onsetAge: this._onsetAge && this._onsetAge.toJSON(),
+			onsetPeriod: this._onsetPeriod && this._onsetPeriod.toJSON(),
+			onsetRange: this._onsetRange && this._onsetRange.toJSON(),
+			onsetString: this._onsetString,
+			assertedDate: this._assertedDate,
+			recorder: this._recorder && this._recorder.toJSON(),
+			asserter: this._asserter && this._asserter.toJSON(),
+			lastOccurrence: this._lastOccurrence,
+			note: this._note && this._note.map(v => v.toJSON()),
+			reaction: this._reaction && this._reaction.map(v => v.toJSON())
 		});
 	}
 

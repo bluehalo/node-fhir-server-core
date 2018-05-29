@@ -93,14 +93,14 @@ class Signature extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this.type && this.type.map(v => v.toJSON()),
-			when: this.when,
-			whoUri: this.whoUri,
-			whoReference: this.whoReference && this.whoReference.toJSON(),
-			onBehalfOfUri: this.onBehalfOfUri,
-			onBehalfOfReference: this.onBehalfOfReference && this.onBehalfOfReference.toJSON(),
-			contentType: this.contentType,
-			blob: this.blob
+			type: this._type && this._type.map(v => v.toJSON()),
+			when: this._when,
+			whoUri: this._whoUri,
+			whoReference: this._whoReference && this._whoReference.toJSON(),
+			onBehalfOfUri: this._onBehalfOfUri,
+			onBehalfOfReference: this._onBehalfOfReference && this._onBehalfOfReference.toJSON(),
+			contentType: this._contentType,
+			blob: this._blob
 		});
 	}
 

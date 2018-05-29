@@ -34,8 +34,8 @@ class DiagnosticReport_Performer extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.toJSON(),
-			actor: this.actor && this.actor.toJSON()
+			role: this._role && this._role.toJSON(),
+			actor: this._actor && this._actor.toJSON()
 		});
 	}
 

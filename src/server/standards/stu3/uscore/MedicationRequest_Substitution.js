@@ -33,8 +33,8 @@ class MedicationRequest_Substitution extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			allowed: this.allowed,
-			reason: this.reason && this.reason.toJSON()
+			allowed: this._allowed,
+			reason: this._reason && this._reason.toJSON()
 		});
 	}
 

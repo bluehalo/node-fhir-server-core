@@ -34,8 +34,8 @@ class Consent_Actor extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this.role && this.role.toJSON(),
-			reference: this.reference && this.reference.toJSON()
+			role: this._role && this._role.toJSON(),
+			reference: this._reference && this._reference.toJSON()
 		});
 	}
 

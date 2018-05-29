@@ -54,10 +54,10 @@ class UsageContext extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this.code && this.code.toJSON(),
-			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
-			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
-			valueRange: this.valueRange && this.valueRange.toJSON()
+			code: this._code && this._code.toJSON(),
+			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
+			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
+			valueRange: this._valueRange && this._valueRange.toJSON()
 		});
 	}
 

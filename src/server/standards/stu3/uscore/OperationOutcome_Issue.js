@@ -79,12 +79,12 @@ class OperationOutcome_Issue extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			severity: this.severity,
-			code: this.code,
-			details: this.details && this.details.toJSON(),
-			diagnostics: this.diagnostics,
-			location: this.location,
-			expression: this.expression
+			severity: this._severity,
+			code: this._code,
+			details: this._details && this._details.toJSON(),
+			diagnostics: this._diagnostics,
+			location: this._location,
+			expression: this._expression
 		});
 	}
 
