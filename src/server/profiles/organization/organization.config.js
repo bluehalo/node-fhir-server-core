@@ -23,7 +23,7 @@ let routes = [
 		path: '/:version/organization',
 		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getOrganization
 	},
 	{
@@ -31,7 +31,7 @@ let routes = [
 		path: '/:version/organization/_search',
 		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getOrganization
 	},
 	{

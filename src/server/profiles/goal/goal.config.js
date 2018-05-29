@@ -22,14 +22,14 @@ let routes = [
 		type: 'get',
 		path: '/:version/goal',
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getGoal
 	},
 	{
 		type: 'post',
 		path: '/:version/goal/_search',
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getGoal
 	},
 	{

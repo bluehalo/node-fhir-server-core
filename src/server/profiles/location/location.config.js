@@ -23,7 +23,7 @@ let routes = [
 		path: '/:version/location',
 		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getLocation
 	},
 	{
@@ -31,7 +31,7 @@ let routes = [
 		path: '/:version/location/_search',
 		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getLocation
 	},
 	{

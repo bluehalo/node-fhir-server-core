@@ -10,7 +10,7 @@ let read_only_scopes = read_scopes('CareTeam');
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
 
-let resourceArgsArray = Object.getOwnPropertyNames(careteam_args)
+let resourceArgsArray = Object.getOwnPropertyNames(resource_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_args[arg_name]));
 
 const resourceAllArguments = [
@@ -22,14 +22,14 @@ let routes = [
 		type: 'get',
 		path: '/:version/careteam',
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCareTeam
 	},
 	{
 		type: 'post',
 		path: '/:version/careteam/_search',
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCareTeam
 	},
 	{

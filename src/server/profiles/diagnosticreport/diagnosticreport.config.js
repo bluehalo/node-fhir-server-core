@@ -24,7 +24,7 @@ let routes = [
 		type: 'get',
 		path: '/:version/diagnosticreport',
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
