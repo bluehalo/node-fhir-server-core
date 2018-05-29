@@ -3,7 +3,7 @@ const Element = require('./Element');
 class BackboneElement extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'BackboneElement';
 		Object.assign(this, opts);
 	}
@@ -24,7 +24,7 @@ class BackboneElement extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			modifierExtension: this._modifierExtension
+			modifierExtension: this._modifierExtension && this._modifierExtension.map(v => v.toJSON())
 		});
 	}
 

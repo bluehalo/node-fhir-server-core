@@ -17,6 +17,23 @@ module.exports.route_args = {
 
 /**
 * @name exports
+* @description Common arguments used for writing new reousrces
+*/
+module.exports.write_args = {
+	RESOURCE_ID: {
+		name: 'resource_id',
+		type: 'string',
+		conformance_hide: true
+	},
+	RESOURCE_BODY: {
+		name: 'resource_body',
+		type: 'json_string',
+		conformance_hide: true
+	}
+};
+
+/**
+* @name exports
 * @description All the common arguments defined in one place
 */
 module.exports.common_args = {

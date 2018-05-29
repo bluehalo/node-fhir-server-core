@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Bundle_Request extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Request';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class Bundle_Request extends BackboneElement {
 	set method ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['GET', 'POST', 'PUT', 'DELETE'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field method`);
 		}
 		this._method = new_value;

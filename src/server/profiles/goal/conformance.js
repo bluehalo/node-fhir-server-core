@@ -22,11 +22,7 @@ module.exports = {
 			profile: {
 				reference: 'http://hl7.org/fhir/goal.html'
 			},
-			interaction: [{
-				code: 'read'
-			}, {
-				code: 'search'
-			}],
+			conditionalDelete: 'not-supported',
 			searchParam: searchParams
 		};
 	}

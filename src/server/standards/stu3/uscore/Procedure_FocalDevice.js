@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Procedure_FocalDevice extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Procedure_FocalDevice';
 		Object.assign(this, opts);
 	}
@@ -34,8 +34,8 @@ class Procedure_FocalDevice extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			action: this._action,
-			manipulated: this._manipulated
+			action: this._action && this._action.toJSON(),
+			manipulated: this._manipulated && this._manipulated.toJSON()
 		});
 	}
 

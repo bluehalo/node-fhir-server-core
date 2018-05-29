@@ -25,6 +25,16 @@ let parseValue = function (type, value) {
 			// replace any non word characters
 			result = validator.stripLow(xss(sanitize(value)));
 			break;
+		case 'token':
+			// strip any html tags from the query
+			// xss helps prevent html from slipping in
+			// strip a certain range of unicode characters
+			// replace any non word characters
+			result = validator.stripLow(xss(sanitize(value)));
+			break;
+		case 'json_string':
+			result = JSON.parse(value);
+			break;
 		default:
 			// Pass the value through, unknown types will fail when being validated
 			result = value;
@@ -44,6 +54,12 @@ let validateType = function (type, value) {
 			break;
 		case 'string':
 			result = typeof value === 'string';
+			break;
+		case 'token':
+			result = typeof value === 'string';
+			break;
+		case 'json_string':
+			result = typeof value === 'object';
 			break;
 		case 'date':
 			result = moment(value).isValid();
@@ -103,10 +119,8 @@ let sanitizeMiddleware = function (config) {
 			}
 		}
 
-		// All is well, update params, query, or body, and move on to the next middleware/function
-		if (req.params && Object.keys(req.params).length) { req.params = cleanArgs; }
-		if (req.query && Object.keys(req.query).length) { req.query = cleanArgs; }
-		if (req.body && Object.keys(req.body).length) { req.body = cleanArgs; }
+		// Save the cleaned arguments on the request for later use, we must only use these later on
+		req.sanitized_args = cleanArgs;
 		next();
 	};
 };

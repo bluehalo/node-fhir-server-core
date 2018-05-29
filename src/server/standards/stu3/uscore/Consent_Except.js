@@ -8,7 +8,7 @@ const Consent_Data1 = require('./Consent_Data1');
 class Consent_Except extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent_Except';
 		Object.assign(this, opts);
 	}
@@ -25,7 +25,7 @@ class Consent_Except extends BackboneElement {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['deny', 'permit'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -115,15 +115,15 @@ class Consent_Except extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			type: this._type,
-			period: this._period,
-			actor: this._actor,
-			action: this._action,
-			securityLabel: this._securityLabel,
-			purpose: this._purpose,
-			class: this._class,
-			code: this._code,
-			dataPeriod: this._dataPeriod,
-			data: this._data
+			period: this._period && this._period.toJSON(),
+			actor: this._actor && this._actor.map(v => v.toJSON()),
+			action: this._action && this._action.map(v => v.toJSON()),
+			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			purpose: this._purpose && this._purpose.map(v => v.toJSON()),
+			class: this._class && this._class.map(v => v.toJSON()),
+			code: this._code && this._code.map(v => v.toJSON()),
+			dataPeriod: this._dataPeriod && this._dataPeriod.toJSON(),
+			data: this._data && this._data.map(v => v.toJSON())
 		});
 	}
 

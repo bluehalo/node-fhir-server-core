@@ -13,7 +13,7 @@ const Consent_Except = require('./Consent_Except');
 class Consent extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Consent';
 		Object.assign(this, opts);
 	}
@@ -30,7 +30,7 @@ class Consent extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Consent'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -53,7 +53,7 @@ class Consent extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['draft', 'proposed', 'active', 'rejected', 'inactive', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -94,7 +94,7 @@ class Consent extends DomainResource {
 	set dateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dateTime`);
 		}
 		this._dateTime = new_value;
@@ -229,26 +229,26 @@ class Consent extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.toJSON(),
 			status: this._status,
-			category: this._category,
-			patient: this._patient,
-			period: this._period,
+			category: this._category && this._category.map(v => v.toJSON()),
+			patient: this._patient && this._patient.toJSON(),
+			period: this._period && this._period.toJSON(),
 			dateTime: this._dateTime,
-			consentingParty: this._consentingParty,
-			actor: this._actor,
-			action: this._action,
-			organization: this._organization,
-			sourceAttachment: this._sourceAttachment,
-			sourceIdentifier: this._sourceIdentifier,
-			sourceReference: this._sourceReference,
-			policy: this._policy,
+			consentingParty: this._consentingParty && this._consentingParty.map(v => v.toJSON()),
+			actor: this._actor && this._actor.map(v => v.toJSON()),
+			action: this._action && this._action.map(v => v.toJSON()),
+			organization: this._organization && this._organization.map(v => v.toJSON()),
+			sourceAttachment: this._sourceAttachment && this._sourceAttachment.toJSON(),
+			sourceIdentifier: this._sourceIdentifier && this._sourceIdentifier.toJSON(),
+			sourceReference: this._sourceReference && this._sourceReference.toJSON(),
+			policy: this._policy && this._policy.map(v => v.toJSON()),
 			policyRule: this._policyRule,
-			securityLabel: this._securityLabel,
-			purpose: this._purpose,
-			dataPeriod: this._dataPeriod,
-			data: this._data,
-			except: this._except
+			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			purpose: this._purpose && this._purpose.map(v => v.toJSON()),
+			dataPeriod: this._dataPeriod && this._dataPeriod.toJSON(),
+			data: this._data && this._data.map(v => v.toJSON()),
+			except: this._except && this._except.map(v => v.toJSON())
 		});
 	}
 

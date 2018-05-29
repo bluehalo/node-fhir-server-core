@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./allergyintolerance.arguments');
 const controller = require('./allergyintolerance.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/AllergyIntolerance.*',
-	'user/AllergyIntolerance.read',
-	'user/*.read',
-	'allergyintolerance/*.*',
-	'allergyintolerance/AllergyIntolerance.*',
-	'allergyintolerance/AllergyIntolerance.read',
-	'allergyintolerance/*.read'
-];
+let write_only_scopes = write_scopes('AllergyIntolerance');
+let read_only_scopes = read_scopes('AllergyIntolerance');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/allergyintolerance',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'post',
 		path: '/:version/allergyintolerance/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'get',
 		path: '/:version/allergyintolerance/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAllergyIntoleranceById
+	},
+	{
+		type: 'post',
+		path: '/:version/allergyintolerance',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createAllergyIntolerance
+	},
+	{
+		type: 'put',
+		path: '/:version/allergyintolerance/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateAllergyIntolerance
+	},
+	{
+		type: 'delete',
+		path: '/:version/allergyintolerance/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteAllergyIntolerance
 	}
 ];
 

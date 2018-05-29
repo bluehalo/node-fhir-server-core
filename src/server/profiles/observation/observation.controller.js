@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 /**
@@ -20,22 +21,15 @@ let getResourceConstructor = (version, resourceType) => {
 	}
 };
 
-module.exports.getObservation = ({ profile, logger, config, app }) => {
+module.exports.getObservation = function getObservation ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 
-		/**
-		 * return service.getObservation(req, logger)
-		 *		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		 *		.then(validateResponse); // Make sure the response data conforms to the spec
-		 */
-		return service.getObservation(req, logger, context)
+		return service.getObservation(req.sanitized_args, logger)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -64,6 +58,7 @@ module.exports.getObservation = ({ profile, logger, config, app }) => {
 				res.status(200).json(results);
 			})
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -71,26 +66,104 @@ module.exports.getObservation = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getObservationById = ({ profile, logger, app }) => {
+module.exports.getObservationById = function getObservationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 
-		return service.getObservationById(req, logger, context)
+		return service.getObservationById(req.sanitized_args, logger)
 			.then((observation) => {
-				if (observation) {
-					// Get a version specific observation for the correct type of observation
-					let Observation = getResourceConstructor(version, observation.resourceType);
-					res.status(200).json(new Observation(observation));
-				} else {
-					next(errors.notFound('Observation not found', version));
-				}
+				let Resource = getResourceConstructor(version, observation.resourceType);
+				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
 			})
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for creating a observation
+*/
+module.exports.createObservation = function createObservation ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific observation
+		let Resource = getResourceConstructor(version, resource_body.resourceType);
+		// Validate the resource type before creating it
+		if (Resource.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new observation resource and pass it to the service
+		let observation = new Resource(resource_body);
+		let args = { id: resource_id, resource: observation };
+		// Pass any new information to the underlying service
+		return service.createObservation(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Resource.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for updating/creating a observation. If the observation does not exist, it should be updated
+*/
+module.exports.updateObservation = function updateObservation ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific observation
+		let Resource = getResourceConstructor(version, resource_body.resourceType);
+		// Validate the resource type before creating it
+		if (Resource.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new observation resource and pass it to the service
+		let observation = new Resource(resource_body);
+		let args = { id: resource_id, resource: observation };
+		// Pass any new information to the underlying service
+		return service.updateObservation(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Resource.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for deleting an observation resource.
+*/
+module.exports.deleteObservation = function deleteObservation ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteObservation(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

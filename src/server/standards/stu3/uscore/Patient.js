@@ -14,7 +14,7 @@ const Patient_Link = require('./Patient_Link');
 class Patient extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Patient';
 		Object.assign(this, opts);
 	}
@@ -31,7 +31,7 @@ class Patient extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Patient'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -81,7 +81,7 @@ class Patient extends DomainResource {
 	set gender ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
 		}
 		this._gender = new_value;
@@ -95,7 +95,7 @@ class Patient extends DomainResource {
 	set birthDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field birthDate`);
 		}
 		this._birthDate = new_value;
@@ -118,7 +118,7 @@ class Patient extends DomainResource {
 	set deceasedDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field deceasedDateTime`);
 		}
 		this._deceasedDateTime = new_value;
@@ -159,7 +159,7 @@ class Patient extends DomainResource {
 	set multipleBirthInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field multipleBirthInteger`);
 		}
 		this._multipleBirthInteger = new_value;
@@ -254,7 +254,7 @@ class Patient extends DomainResource {
 	set birthSex ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['M', 'F', 'UNK'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field birthSex`);
 		}
 		this._birthSex = new_value;
@@ -263,25 +263,25 @@ class Patient extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
 			active: this._active,
-			name: this._name,
-			telecom: this._telecom,
+			name: this._name && this._name.map(v => v.toJSON()),
+			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
 			gender: this._gender,
 			birthDate: this._birthDate,
 			deceasedBoolean: this._deceasedBoolean,
 			deceasedDateTime: this._deceasedDateTime,
-			address: this._address,
-			maritalStatus: this._maritalStatus,
+			address: this._address && this._address.map(v => v.toJSON()),
+			maritalStatus: this._maritalStatus && this._maritalStatus.toJSON(),
 			multipleBirthBoolean: this._multipleBirthBoolean,
 			multipleBirthInteger: this._multipleBirthInteger,
-			photo: this._photo,
-			contact: this._contact,
-			animal: this._animal,
-			communication: this._communication,
-			generalPractitioner: this._generalPractitioner,
-			managingOrganization: this._managingOrganization,
-			link: this._link,
+			photo: this._photo && this._photo.map(v => v.toJSON()),
+			contact: this._contact && this._contact.map(v => v.toJSON()),
+			animal: this._animal && this._animal.toJSON(),
+			communication: this._communication && this._communication.map(v => v.toJSON()),
+			generalPractitioner: this._generalPractitioner && this._generalPractitioner.map(v => v.toJSON()),
+			managingOrganization: this._managingOrganization && this._managingOrganization.toJSON(),
+			link: this._link && this._link.map(v => v.toJSON()),
 			race: this._race,
 			ethnicity: this._ethnicity,
 			birthSex: this._birthSex

@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Type extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Type';
 		Object.assign(this, opts);
 	}
@@ -47,7 +47,7 @@ class ElementDefinition_Type extends BackboneElement {
 	set aggregation ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['contained', 'referenced', 'bundled'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field aggregation`);
 		}
 		this._aggregation = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -61,7 +61,7 @@ class ElementDefinition_Type extends BackboneElement {
 	set versioning ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['either', 'independent', 'specific'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field versioning`);
 		}
 		this._versioning = new_value;

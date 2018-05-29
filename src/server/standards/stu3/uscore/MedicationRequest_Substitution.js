@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class MedicationRequest_Substitution extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest_Substitution';
 		Object.assign(this, opts);
 	}
@@ -34,7 +34,7 @@ class MedicationRequest_Substitution extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			allowed: this._allowed,
-			reason: this._reason
+			reason: this._reason && this._reason.toJSON()
 		});
 	}
 

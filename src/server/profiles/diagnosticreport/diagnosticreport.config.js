@@ -1,18 +1,13 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./diagnosticreport.arguments');
 const controller = require('./diagnosticreport.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/DiagnosticReport.*',
-	'user/DiagnosticReport.read',
-	'user/*.read',
-	'diagnosticreport/*.*',
-	'diagnosticreport/DiagnosticReport.*',
-	'diagnosticreport/DiagnosticReport.read',
-	'diagnosticreport/*.read'
-];
+
+let write_only_scopes = write_scopes('DiagnosticReport');
+let read_only_scopes = read_scopes('DiagnosticReport');
+
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,7 +23,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/diagnosticreport',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
 		scopes: scopes,
 		controller: controller.getDiagnosticReport
@@ -36,21 +30,52 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:version/diagnosticreport/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReport
 	},
 	{
 		type: 'get',
 		path: '/:version/diagnosticreport/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDiagnosticReportById
+	},
+	{
+		type: 'post',
+		path: '/:version/diagnosticreport',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createDiagnosticReport
+	},
+	{
+		type: 'put',
+		path: '/:version/diagnosticreport/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateDiagnosticReport
+	},
+	{
+		type: 'delete',
+		path: '/:version/diagnosticreport/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteDiagnosticReport
 	}
 ];
 

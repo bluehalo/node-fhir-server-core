@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./medicationrequest.arguments');
 const controller = require('./medicationrequest.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/MedicationRequest.*',
-	'user/MedicationRequest.read',
-	'user/*.read',
-	'medicationrequest/*.*',
-	'medicationrequest/MedicationRequest.*',
-	'medicationrequest/MedicationRequest.read',
-	'medicationrequest/*.read'
-];
+let write_only_scopes = write_scopes('MedicationRequest');
+let read_only_scopes = read_scopes('MedicationRequest');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/medicationrequest',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
 		type: 'post',
 		path: '/:version/medicationrequest/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequest
 	},
 	{
 		type: 'get',
 		path: '/:version/medicationrequest/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getMedicationRequestById
+	},
+	{
+		type: 'post',
+		path: '/:version/medicationrequest',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createMedicationRequest
+	},
+	{
+		type: 'put',
+		path: '/:version/medicationrequest/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateMedicationRequest
+	},
+	{
+		type: 'delete',
+		path: '/:version/medicationrequest/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteMedicationRequest
 	}
 ];
 

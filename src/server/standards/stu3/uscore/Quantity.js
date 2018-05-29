@@ -3,7 +3,7 @@ const Element = require('./Element');
 class Quantity extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Quantity';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class Quantity extends Element {
 	set value ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field value`);
 		}
 		this._value = new_value;
@@ -34,7 +34,7 @@ class Quantity extends Element {
 	set comparator ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['<', '<=', '>=', '>'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field comparator`);
 		}
 		this._comparator = new_value;
@@ -66,7 +66,7 @@ class Quantity extends Element {
 	set code ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field code`);
 		}
 		this._code = new_value;

@@ -36,7 +36,7 @@ const TriggerDefinition = require('./TriggerDefinition');
 class Extension extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Extension';
 		Object.assign(this, opts);
 	}
@@ -71,7 +71,7 @@ class Extension extends Element {
 	set valueInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueInteger`);
 		}
 		this._valueInteger = new_value;
@@ -85,7 +85,7 @@ class Extension extends Element {
 	set valueDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDecimal`);
 		}
 		this._valueDecimal = new_value;
@@ -135,7 +135,7 @@ class Extension extends Element {
 	set valueDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDate`);
 		}
 		this._valueDate = new_value;
@@ -149,7 +149,7 @@ class Extension extends Element {
 	set valueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this._valueDateTime = new_value;
@@ -163,7 +163,7 @@ class Extension extends Element {
 	set valueTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueTime`);
 		}
 		this._valueTime = new_value;
@@ -177,7 +177,7 @@ class Extension extends Element {
 	set valueCode ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueCode`);
 		}
 		this._valueCode = new_value;
@@ -191,7 +191,7 @@ class Extension extends Element {
 	set valueOid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueOid`);
 		}
 		this._valueOid = new_value;
@@ -205,7 +205,7 @@ class Extension extends Element {
 	set valueUuid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueUuid`);
 		}
 		this._valueUuid = new_value;
@@ -219,7 +219,7 @@ class Extension extends Element {
 	set valueId ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueId`);
 		}
 		this._valueId = new_value;
@@ -233,7 +233,7 @@ class Extension extends Element {
 	set valueUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
 		}
 		this._valueUnsignedInt = new_value;
@@ -247,7 +247,7 @@ class Extension extends Element {
 	set valuePositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
 		}
 		this._valuePositiveInt = new_value;
@@ -606,42 +606,42 @@ class Extension extends Element {
 			valueUnsignedInt: this._valueUnsignedInt,
 			valuePositiveInt: this._valuePositiveInt,
 			valueMarkdown: this._valueMarkdown,
-			valueElement: this._valueElement,
-			valueExtension: this._valueExtension,
-			valueBackboneElement: this._valueBackboneElement,
-			valueNarrative: this._valueNarrative,
-			valueAnnotation: this._valueAnnotation,
-			valueAttachment: this._valueAttachment,
-			valueIdentifier: this._valueIdentifier,
-			valueCodeableConcept: this._valueCodeableConcept,
-			valueCoding: this._valueCoding,
-			valueQuantity: this._valueQuantity,
-			valueDuration: this._valueDuration,
-			valueSimpleQuantity: this._valueSimpleQuantity,
-			valueDistance: this._valueDistance,
-			valueCount: this._valueCount,
-			valueMoney: this._valueMoney,
-			valueAge: this._valueAge,
-			valueRange: this._valueRange,
-			valuePeriod: this._valuePeriod,
-			valueRatio: this._valueRatio,
-			valueReference: this._valueReference,
-			valueSampledData: this._valueSampledData,
-			valueSignature: this._valueSignature,
-			valueHumanName: this._valueHumanName,
-			valueAddress: this._valueAddress,
-			valueContactPoint: this._valueContactPoint,
-			valueTiming: this._valueTiming,
-			valueMeta: this._valueMeta,
-			valueElementDefinition: this._valueElementDefinition,
-			valueContactDetail: this._valueContactDetail,
-			valueContributor: this._valueContributor,
-			valueDosage: this._valueDosage,
-			valueRelatedArtifact: this._valueRelatedArtifact,
-			valueUsageContext: this._valueUsageContext,
-			valueDataRequirement: this._valueDataRequirement,
-			valueParameterDefinition: this._valueParameterDefinition,
-			valueTriggerDefinition: this._valueTriggerDefinition
+			valueElement: this._valueElement && this._valueElement.toJSON(),
+			valueExtension: this._valueExtension && this._valueExtension.toJSON(),
+			valueBackboneElement: this._valueBackboneElement && this._valueBackboneElement.toJSON(),
+			valueNarrative: this._valueNarrative && this._valueNarrative.toJSON(),
+			valueAnnotation: this._valueAnnotation && this._valueAnnotation.toJSON(),
+			valueAttachment: this._valueAttachment && this._valueAttachment.toJSON(),
+			valueIdentifier: this._valueIdentifier && this._valueIdentifier.toJSON(),
+			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
+			valueCoding: this._valueCoding && this._valueCoding.toJSON(),
+			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
+			valueDuration: this._valueDuration && this._valueDuration.toJSON(),
+			valueSimpleQuantity: this._valueSimpleQuantity && this._valueSimpleQuantity.toJSON(),
+			valueDistance: this._valueDistance && this._valueDistance.toJSON(),
+			valueCount: this._valueCount && this._valueCount.toJSON(),
+			valueMoney: this._valueMoney && this._valueMoney.toJSON(),
+			valueAge: this._valueAge && this._valueAge.toJSON(),
+			valueRange: this._valueRange && this._valueRange.toJSON(),
+			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
+			valueRatio: this._valueRatio && this._valueRatio.toJSON(),
+			valueReference: this._valueReference && this._valueReference.toJSON(),
+			valueSampledData: this._valueSampledData && this._valueSampledData.toJSON(),
+			valueSignature: this._valueSignature && this._valueSignature.toJSON(),
+			valueHumanName: this._valueHumanName && this._valueHumanName.toJSON(),
+			valueAddress: this._valueAddress && this._valueAddress.toJSON(),
+			valueContactPoint: this._valueContactPoint && this._valueContactPoint.toJSON(),
+			valueTiming: this._valueTiming && this._valueTiming.toJSON(),
+			valueMeta: this._valueMeta && this._valueMeta.toJSON(),
+			valueElementDefinition: this._valueElementDefinition && this._valueElementDefinition.toJSON(),
+			valueContactDetail: this._valueContactDetail && this._valueContactDetail.toJSON(),
+			valueContributor: this._valueContributor && this._valueContributor.toJSON(),
+			valueDosage: this._valueDosage && this._valueDosage.toJSON(),
+			valueRelatedArtifact: this._valueRelatedArtifact && this._valueRelatedArtifact.toJSON(),
+			valueUsageContext: this._valueUsageContext && this._valueUsageContext.toJSON(),
+			valueDataRequirement: this._valueDataRequirement && this._valueDataRequirement.toJSON(),
+			valueParameterDefinition: this._valueParameterDefinition && this._valueParameterDefinition.toJSON(),
+			valueTriggerDefinition: this._valueTriggerDefinition && this._valueTriggerDefinition.toJSON()
 		});
 	}
 

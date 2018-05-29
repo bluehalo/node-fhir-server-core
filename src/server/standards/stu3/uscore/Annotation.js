@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class Annotation extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Annotation';
 		Object.assign(this, opts);
 	}
@@ -39,7 +39,7 @@ class Annotation extends Element {
 	set time ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field time`);
 		}
 		this._time = new_value;
@@ -56,7 +56,7 @@ class Annotation extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			authorReference: this._authorReference,
+			authorReference: this._authorReference && this._authorReference.toJSON(),
 			authorString: this._authorString,
 			time: this._time,
 			text: this._text

@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./observation.arguments');
 const controller = require('./observation.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Observation.*',
-	'user/Observation.read',
-	'user/*.read',
-	'observation/*.*',
-	'observation/Observation.*',
-	'observation/Observation.read',
-	'observation/*.read'
-];
+let write_only_scopes = write_scopes('Observation');
+let read_only_scopes = read_scopes('Observation');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/observation',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservation
 	},
 	{
 		type: 'post',
 		path: '/:version/observation/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservation
 	},
 	{
 		type: 'get',
 		path: '/:version/observation/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getObservationById
+	},
+	{
+		type: 'post',
+		path: '/:version/observation',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createObservation
+	},
+	{
+		type: 'put',
+		path: '/:version/observation/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateObservation
+	},
+	{
+		type: 'delete',
+		path: '/:version/observation/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteObservation
 	}
 ];
 

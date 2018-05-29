@@ -22,11 +22,7 @@ module.exports = {
 			profile: {
 				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-careteam.html'
 			},
-			interaction: [{
-				code: 'read'
-			}, {
-				code: 'search'
-			}],
+			conditionalDelete: 'not-supported',
 			searchParam: searchParams
 		};
 	}

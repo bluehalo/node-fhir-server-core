@@ -84,6 +84,38 @@ let notFound = (message, version) => {
 	});
 };
 
+let methodNotAllowed = (message, version) => {
+	let ErrorConstructor = getErrorConstructor(version);
+	return new ErrorConstructor({
+		statusCode: 405,
+		text: {
+			status: 'generated',
+			div: div_content(ISSUE.SEVERITY.ERROR, message || 'Method not allowed')
+		},
+		issue: {
+			code: ISSUE.CODE.NOT_SUPPORTED,
+			severity: ISSUE.SEVERITY.ERROR,
+			diagnostics: message || '405: Method not allowed'
+		}
+	});
+};
+
+let deleteConflict = (message, version) => {
+	let ErrorConstructor = getErrorConstructor(version);
+	return new ErrorConstructor({
+		statusCode: 409,
+		text: {
+			status: 'generated',
+			div: div_content(ISSUE.SEVERITY.ERROR, message || 'Conflict')
+		},
+		issue: {
+			code: ISSUE.CODE.CONFLICT,
+			severity: ISSUE.SEVERITY.ERROR,
+			diagnostics: message || '409: Conflict'
+		}
+	});
+};
+
 let deleted = (message, version) => {
 	let ErrorConstructor = getErrorConstructor(version);
 	return new ErrorConstructor({
@@ -127,6 +159,8 @@ module.exports = {
 	invalidParameter,
 	unauthorized,
 	insufficientScope,
+	methodNotAllowed,
+	deleteConflict,
 	notFound,
 	deleted,
 	internal,

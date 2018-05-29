@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Patient_Communication extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Patient_Communication';
 		Object.assign(this, opts);
 	}
@@ -33,7 +33,7 @@ class Patient_Communication extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			language: this._language,
+			language: this._language && this._language.toJSON(),
 			preferred: this._preferred
 		});
 	}

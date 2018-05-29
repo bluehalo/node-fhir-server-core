@@ -1,52 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getGoal = ({ profile, logger, config, app }) => {
+module.exports.getGoal = function getGoal ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific goal & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+		let { version } = req.sanitized_args;
+		// Get a version specific goal
 		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
-		/**
-		* return service.getGoal(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getGoal(req, logger, context)
-			.then((goals) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (goals) {
-					for (let resource of goals) {
-						if (!req.goal || req.goal === resource.goalId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								'search': {
-									'mode': 'match'
-								},
-								'resource': new Goal(resource),
-								'fullUrl': `${config.auth.resourceServer}/${version}/Goal/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getGoal(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Goal, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -55,26 +27,105 @@ module.exports.getGoal = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getGoalById = ({ profile, logger, app }) => {
+module.exports.getGoalById = function getGoalById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
+		let { version } = req.sanitized_args;
 		// Get a version specific goal
 		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
 
-		return service.getGoalById(req, logger, context)
-			.then((goal) => {
-				if (goal) {
-					res.status(200).json(new Goal(goal));
-				} else {
-					next(errors.notFound('Goal not found', version));
-				}
-			})
+		return service.getGoalById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, Goal, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for creating a goal
+*/
+module.exports.createGoal = function createGoal ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+		// Validate the resource type before creating it
+		if (Goal.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Goal.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new goal resource and pass it to the service
+		let goal = new Goal(resource_body);
+		let args = { id: resource_id, resource: goal };
+		// Pass any new information to the underlying service
+		return service.createGoal(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Goal.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for updating/creating a goal. If the goal does not exist, it should be updated
+*/
+module.exports.updateGoal = function updateGoal ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific goal
+		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+		// Validate the resource type before creating it
+		if (Goal.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Goal.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new goal resource and pass it to the service
+		let goal = new Goal(resource_body);
+		let args = { id: resource_id, resource: goal };
+		// Pass any new information to the underlying service
+		return service.updateGoal(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Goal.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for deleting a goal resource.
+*/
+module.exports.deleteGoal = function deleteGoal ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteGoal(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Constraint extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Constraint';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class ElementDefinition_Constraint extends BackboneElement {
 	set key ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field key`);
 		}
 		this._key = new_value;
@@ -43,7 +43,7 @@ class ElementDefinition_Constraint extends BackboneElement {
 	set severity ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['error', 'warning'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field severity`);
 		}
 		this._severity = new_value;
