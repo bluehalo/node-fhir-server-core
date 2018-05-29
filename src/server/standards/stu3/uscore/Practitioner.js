@@ -10,7 +10,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Practitioner extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Practitioner';
 		Object.assign(this, opts);
 	}
@@ -27,7 +27,7 @@ class Practitioner extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Practitioner'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -86,7 +86,7 @@ class Practitioner extends DomainResource {
 	set gender ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
 		}
 		this._gender = new_value;
@@ -100,7 +100,7 @@ class Practitioner extends DomainResource {
 	set birthDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field birthDate`);
 		}
 		this._birthDate = new_value;
@@ -136,16 +136,16 @@ class Practitioner extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
 			active: this._active,
-			name: this._name,
-			telecom: this._telecom,
-			address: this._address,
+			name: this._name && this._name.map(v => v.toJSON()),
+			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
+			address: this._address && this._address.map(v => v.toJSON()),
 			gender: this._gender,
 			birthDate: this._birthDate,
-			photo: this._photo,
-			qualification: this._qualification,
-			communication: this._communication
+			photo: this._photo && this._photo.map(v => v.toJSON()),
+			qualification: this._qualification && this._qualification.map(v => v.toJSON()),
+			communication: this._communication && this._communication.map(v => v.toJSON())
 		});
 	}
 

@@ -4,7 +4,7 @@ const Quantity = require('./Quantity');
 class Ratio extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Ratio';
 		Object.assign(this, opts);
 	}
@@ -33,8 +33,8 @@ class Ratio extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			numerator: this._numerator,
-			denominator: this._denominator
+			numerator: this._numerator && this._numerator.toJSON(),
+			denominator: this._denominator && this._denominator.toJSON()
 		});
 	}
 

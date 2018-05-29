@@ -5,7 +5,7 @@ const Duration = require('./Duration');
 class DataRequirement_DateFilter extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DataRequirement_DateFilter';
 		Object.assign(this, opts);
 	}
@@ -31,7 +31,7 @@ class DataRequirement_DateFilter extends BackboneElement {
 	set valueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this._valueDateTime = new_value;
@@ -59,8 +59,8 @@ class DataRequirement_DateFilter extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			path: this._path,
 			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod,
-			valueDuration: this._valueDuration
+			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
+			valueDuration: this._valueDuration && this._valueDuration.toJSON()
 		});
 	}
 

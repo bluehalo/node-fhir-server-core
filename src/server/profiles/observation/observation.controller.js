@@ -29,7 +29,7 @@ module.exports.getObservation = function getObservation ({ profile, logger, conf
 		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
 
-		return service.getObservation(req.sanitized_args, logger, context)
+		return service.getObservation(req.sanitized_args, logger)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -75,7 +75,7 @@ module.exports.getObservationById = function getObservationById ({ profile, logg
 		return service.getObservationById(req.sanitized_args, logger)
 			.then((observation) => {
 				let Resource = getResourceConstructor(version, observation.resourceType);
-				responseUtils.handleSingleReadResponse(req, next, version, Resource, observation);
+				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
 			})
 			.catch((err) => {
 				logger.error(err);
@@ -137,7 +137,7 @@ module.exports.updateObservation = function updateObservation ({ profile, logger
 		let observation = new Resource(resource_body);
 		let args = { id: resource_id, resource: observation };
 		// Pass any new information to the underlying service
-		return service.updateObservation(args, logger, context)
+		return service.updateObservation(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Resource.__resourceType, results)
 			)

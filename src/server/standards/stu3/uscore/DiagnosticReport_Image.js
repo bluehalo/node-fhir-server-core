@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class DiagnosticReport_Image extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DiagnosticReport_Image';
 		Object.assign(this, opts);
 	}
@@ -34,7 +34,7 @@ class DiagnosticReport_Image extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			comment: this._comment,
-			link: this._link
+			link: this._link && this._link.toJSON()
 		});
 	}
 

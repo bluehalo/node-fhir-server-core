@@ -36,7 +36,7 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 
 		return service.getAllergyIntoleranceById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, AllergyIntolerance, results)
+				responseUtils.handleSingleReadResponse(res, next, version, AllergyIntolerance, results)
 			)
 			.catch((err) => {
 				logger.error(err);

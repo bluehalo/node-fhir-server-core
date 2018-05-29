@@ -4,7 +4,7 @@ const ElementDefinition_Discriminator = require('./ElementDefinition_Discriminat
 class ElementDefinition_Slicing extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Slicing';
 		Object.assign(this, opts);
 	}
@@ -48,7 +48,7 @@ class ElementDefinition_Slicing extends BackboneElement {
 	set rules ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['closed', 'open', 'openAtEnd'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field rules`);
 		}
 		this._rules = new_value;
@@ -56,7 +56,7 @@ class ElementDefinition_Slicing extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			discriminator: this._discriminator,
+			discriminator: this._discriminator && this._discriminator.map(v => v.toJSON()),
 			description: this._description,
 			ordered: this._ordered,
 			rules: this._rules

@@ -37,7 +37,7 @@ module.exports.getProcedureById = function getProcedureById ({ profile, logger, 
 
 		return service.getProcedureById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Procedure, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Procedure, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateProcedure = function updateProcedure ({ profile, logger, ap
 		let procedure = new Procedure(resource_body);
 		let args = { id: resource_id, resource: procedure };
 		// Pass any new information to the underlying service
-		return service.updateProcedure(args, logger, context)
+		return service.updateProcedure(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Procedure.__resourceType, results)
 			)

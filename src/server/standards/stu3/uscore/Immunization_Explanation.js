@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Immunization_Explanation extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization_Explanation';
 		Object.assign(this, opts);
 	}
@@ -33,8 +33,8 @@ class Immunization_Explanation extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			reason: this._reason,
-			reasonNotGiven: this._reasonNotGiven
+			reason: this._reason && this._reason.map(v => v.toJSON()),
+			reasonNotGiven: this._reasonNotGiven && this._reasonNotGiven.map(v => v.toJSON())
 		});
 	}
 

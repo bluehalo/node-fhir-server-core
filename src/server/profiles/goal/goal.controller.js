@@ -37,7 +37,7 @@ module.exports.getGoalById = function getGoalById ({ profile, logger, app }) {
 
 		return service.getGoalById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Goal, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Goal, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateGoal = function updateGoal ({ profile, logger, app }) {
 		let goal = new Goal(resource_body);
 		let args = { id: resource_id, resource: goal };
 		// Pass any new information to the underlying service
-		return service.updateGoal(args, logger, context)
+		return service.updateGoal(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Goal.__resourceType, results)
 			)

@@ -8,7 +8,7 @@ const Bundle_Response = require('./Bundle_Response');
 class Bundle_Entry extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Entry';
 		Object.assign(this, opts);
 	}
@@ -73,12 +73,12 @@ class Bundle_Entry extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			link: this._link,
+			link: this._link && this._link.map(v => v.toJSON()),
 			fullUrl: this._fullUrl,
-			resource: this._resource,
-			search: this._search,
-			request: this._request,
-			response: this._response
+			resource: this._resource && this._resource.toJSON(),
+			search: this._search && this._search.toJSON(),
+			request: this._request && this._request.toJSON(),
+			response: this._response && this._response.toJSON()
 		});
 	}
 

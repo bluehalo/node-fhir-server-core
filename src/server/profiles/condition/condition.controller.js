@@ -37,7 +37,7 @@ module.exports.getConditionById = function getConditionById ({ profile, logger, 
 
 		return service.getConditionById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Condition, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Condition, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateCondition = function updateCondition ({ profile, logger, ap
 		let condition = new Condition(resource_body);
 		let args = { id: resource_id, resource: condition };
 		// Pass any new information to the underlying service
-		return service.updateCondition(args, logger, context)
+		return service.updateCondition(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Condition.__resourceType, results)
 			)

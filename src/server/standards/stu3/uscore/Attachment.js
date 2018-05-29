@@ -3,7 +3,7 @@ const Element = require('./Element');
 class Attachment extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Attachment';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class Attachment extends Element {
 	set contentType ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field contentType`);
 		}
 		this._contentType = new_value;
@@ -34,7 +34,7 @@ class Attachment extends Element {
 	set language ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field language`);
 		}
 		this._language = new_value;
@@ -66,7 +66,7 @@ class Attachment extends Element {
 	set size ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field size`);
 		}
 		this._size = new_value;
@@ -98,7 +98,7 @@ class Attachment extends Element {
 	set creation ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field creation`);
 		}
 		this._creation = new_value;

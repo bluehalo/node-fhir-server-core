@@ -4,7 +4,7 @@ const ResourceList = require('./ResourceList');
 class Bundle_Response extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Response';
 		Object.assign(this, opts);
 	}
@@ -64,7 +64,7 @@ class Bundle_Response extends BackboneElement {
 			location: this._location,
 			etag: this._etag,
 			lastModified: this._lastModified,
-			outcome: this._outcome
+			outcome: this._outcome && this._outcome.toJSON()
 		});
 	}
 

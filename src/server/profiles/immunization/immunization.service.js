@@ -1,35 +1,35 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.getImmunization = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'getImmunization\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getImmunizationById = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.getImmunizationById = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'getImmunizationById\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.createImmunization = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'createImmunization\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.updateImmunization = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'updateImmunization\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteImmunization = (args, logger, context) => new Promise((resolve, reject) => {
+module.exports.deleteImmunization = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'deleteImmunization\'';
 	logger.info(message);
 	reject(new Error(message));

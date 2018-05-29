@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class RelatedArtifact extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'RelatedArtifact';
 		Object.assign(this, opts);
 	}
@@ -22,7 +22,7 @@ class RelatedArtifact extends Element {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['documentation', 'justification', 'citation', 'predecessor', 'successor', 'derived-from', 'depends-on', 'composed-of'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -79,8 +79,8 @@ class RelatedArtifact extends Element {
 			display: this._display,
 			citation: this._citation,
 			url: this._url,
-			document: this._document,
-			resource: this._resource
+			document: this._document && this._document.toJSON(),
+			resource: this._resource && this._resource.toJSON()
 		});
 	}
 

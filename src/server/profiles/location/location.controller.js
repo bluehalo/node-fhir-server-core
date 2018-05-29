@@ -37,7 +37,7 @@ module.exports.getLocationById = function getLocationById ({ profile, logger, ap
 
 		return service.getLocationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Location, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Location, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateLocation = function updateLocation ({ profile, logger, app 
 		let location = new Location(resource_body);
 		let args = { id: resource_id, resource: location };
 		// Pass any new information to the underlying service
-		return service.updateLocation(args, logger, context)
+		return service.updateLocation(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Location.__resourceType, results)
 			)

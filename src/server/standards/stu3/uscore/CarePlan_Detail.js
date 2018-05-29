@@ -8,7 +8,7 @@ const Quantity = require('./Quantity');
 class CarePlan_Detail extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CarePlan_Detail';
 		Object.assign(this, opts);
 	}
@@ -79,7 +79,7 @@ class CarePlan_Detail extends BackboneElement {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['not-started', 'scheduled', 'in-progress', 'on-hold', 'completed', 'cancelled', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -195,24 +195,24 @@ class CarePlan_Detail extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			category: this._category,
-			definition: this._definition,
-			code: this._code,
-			reasonCode: this._reasonCode,
-			reasonReference: this._reasonReference,
-			goal: this._goal,
+			category: this._category && this._category.toJSON(),
+			definition: this._definition && this._definition.toJSON(),
+			code: this._code && this._code.toJSON(),
+			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
+			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
+			goal: this._goal && this._goal.map(v => v.toJSON()),
 			status: this._status,
 			statusReason: this._statusReason,
 			prohibited: this._prohibited,
-			scheduledTiming: this._scheduledTiming,
-			scheduledPeriod: this._scheduledPeriod,
+			scheduledTiming: this._scheduledTiming && this._scheduledTiming.toJSON(),
+			scheduledPeriod: this._scheduledPeriod && this._scheduledPeriod.toJSON(),
 			scheduledString: this._scheduledString,
-			location: this._location,
-			performer: this._performer,
-			productCodeableConcept: this._productCodeableConcept,
-			productReference: this._productReference,
-			dailyAmount: this._dailyAmount,
-			quantity: this._quantity,
+			location: this._location && this._location.toJSON(),
+			performer: this._performer && this._performer.map(v => v.toJSON()),
+			productCodeableConcept: this._productCodeableConcept && this._productCodeableConcept.toJSON(),
+			productReference: this._productReference && this._productReference.toJSON(),
+			dailyAmount: this._dailyAmount && this._dailyAmount.toJSON(),
+			quantity: this._quantity && this._quantity.toJSON(),
 			description: this._description
 		});
 	}

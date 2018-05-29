@@ -37,7 +37,7 @@ module.exports.getOrganizationById = function getOrganizationById ({ profile, lo
 
 		return service.getOrganizationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Organization, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Organization, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateOrganization = function updateOrganization ({ profile, logg
 		let organization = new Organization(resource_body);
 		let args = { id: resource_id, resource: organization };
 		// Pass any new information to the underlying service
-		return service.updateOrganization(args, logger, context)
+		return service.updateOrganization(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Organization.__resourceType, results)
 			)

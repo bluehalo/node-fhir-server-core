@@ -3,7 +3,7 @@ const Quantity = require('./Quantity');
 class Distance extends Quantity {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Distance';
 		Object.assign(this, opts);
 	}

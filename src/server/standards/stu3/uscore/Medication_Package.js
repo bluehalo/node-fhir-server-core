@@ -6,7 +6,7 @@ const Medication_Batch = require('./Medication_Batch');
 class Medication_Package extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Medication_Package';
 		Object.assign(this, opts);
 	}
@@ -44,9 +44,9 @@ class Medication_Package extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			container: this._container,
-			content: this._content,
-			batch: this._batch
+			container: this._container && this._container.toJSON(),
+			content: this._content && this._content.map(v => v.toJSON()),
+			batch: this._batch && this._batch.map(v => v.toJSON())
 		});
 	}
 

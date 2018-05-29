@@ -7,7 +7,7 @@ const Reference = require('./Reference');
 class Practitioner_Qualification extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Practitioner_Qualification';
 		Object.assign(this, opts);
 	}
@@ -54,10 +54,10 @@ class Practitioner_Qualification extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identifier: this._identifier,
-			code: this._code,
-			period: this._period,
-			issuer: this._issuer
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			code: this._code && this._code.toJSON(),
+			period: this._period && this._period.toJSON(),
+			issuer: this._issuer && this._issuer.toJSON()
 		});
 	}
 

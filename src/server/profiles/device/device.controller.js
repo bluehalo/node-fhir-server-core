@@ -37,7 +37,7 @@ module.exports.getDeviceById = function getDeviceById ({ profile, logger, app })
 
 		return service.getDeviceById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Device, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Device, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateDevice = function updateDevice ({ profile, logger, app }) {
 		let device = new Device(resource_body);
 		let args = { id: resource_id, resource: device };
 		// Pass any new information to the underlying service
-		return service.updateDevice(args, logger, context)
+		return service.updateDevice(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Device.__resourceType, results)
 			)

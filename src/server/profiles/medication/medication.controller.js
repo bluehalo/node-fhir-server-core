@@ -37,7 +37,7 @@ module.exports.getMedicationById = function getMedicationById ({ profile, logger
 
 		return service.getMedicationById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Medication, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Medication, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updateMedication = function updateMedication ({ profile, logger, 
 		let medication = new Medication(resource_body);
 		let args = { id: resource_id, resource: medication };
 		// Pass any new information to the underlying service
-		return service.updateMedication(args, logger, context)
+		return service.updateMedication(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Medication.__resourceType, results)
 			)

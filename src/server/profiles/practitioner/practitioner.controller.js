@@ -37,7 +37,7 @@ module.exports.getPractitionerById = function getPractitionerById ({ profile, lo
 
 		return service.getPractitionerById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(req, next, version, Practitioner, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Practitioner, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -99,7 +99,7 @@ module.exports.updatePractitioner = function updatePractitioner ({ profile, logg
 		let practitioner = new Practitioner(resource_body);
 		let args = { id: resource_id, resource: practitioner };
 		// Pass any new information to the underlying service
-		return service.updatePractitioner(args, logger, context)
+		return service.updatePractitioner(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Practitioner.__resourceType, results)
 			)

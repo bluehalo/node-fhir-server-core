@@ -10,7 +10,7 @@ const Annotation = require('./Annotation');
 class CarePlan extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CarePlan';
 		Object.assign(this, opts);
 	}
@@ -27,7 +27,7 @@ class CarePlan extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['CarePlan'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -95,7 +95,7 @@ class CarePlan extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['draft', 'active', 'suspended', 'completed', 'entered-in-error', 'cancelled', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -109,7 +109,7 @@ class CarePlan extends DomainResource {
 	set intent ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposal', 'plan', 'order', 'option'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field intent`);
 		}
 		this._intent = new_value;
@@ -235,27 +235,27 @@ class CarePlan extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
-			definition: this._definition,
-			basedOn: this._basedOn,
-			replaces: this._replaces,
-			partOf: this._partOf,
-			text: this._text,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			definition: this._definition && this._definition.map(v => v.toJSON()),
+			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
+			replaces: this._replaces && this._replaces.map(v => v.toJSON()),
+			partOf: this._partOf && this._partOf.map(v => v.toJSON()),
+			text: this._text && this._text.toJSON(),
 			status: this._status,
 			intent: this._intent,
-			category: this._category,
+			category: this._category && this._category.map(v => v.toJSON()),
 			title: this._title,
 			description: this._description,
-			subject: this._subject,
-			context: this._context,
-			period: this._period,
-			author: this._author,
-			careTeam: this._careTeam,
-			addresses: this._addresses,
-			supportingInfo: this._supportingInfo,
-			goal: this._goal,
-			activity: this._activity,
-			note: this._note
+			subject: this._subject && this._subject.toJSON(),
+			context: this._context && this._context.toJSON(),
+			period: this._period && this._period.toJSON(),
+			author: this._author && this._author.map(v => v.toJSON()),
+			careTeam: this._careTeam && this._careTeam.map(v => v.toJSON()),
+			addresses: this._addresses && this._addresses.map(v => v.toJSON()),
+			supportingInfo: this._supportingInfo && this._supportingInfo.map(v => v.toJSON()),
+			goal: this._goal && this._goal.map(v => v.toJSON()),
+			activity: this._activity && this._activity.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON())
 		});
 	}
 

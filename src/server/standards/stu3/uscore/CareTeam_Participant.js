@@ -6,7 +6,7 @@ const Period = require('./Period');
 class CareTeam_Participant extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CareTeam_Participant';
 		Object.assign(this, opts);
 	}
@@ -53,10 +53,10 @@ class CareTeam_Participant extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			member: this._member,
-			onBehalfOf: this._onBehalfOf,
-			period: this._period
+			role: this._role && this._role.toJSON(),
+			member: this._member && this._member.toJSON(),
+			onBehalfOf: this._onBehalfOf && this._onBehalfOf.toJSON(),
+			period: this._period && this._period.toJSON()
 		});
 	}
 
