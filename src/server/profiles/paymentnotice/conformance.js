@@ -4,7 +4,7 @@ const { routes } = require('./paymentnotice.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
 module.exports = {
 	profile: 'paymentnotice',

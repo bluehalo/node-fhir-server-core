@@ -4,7 +4,7 @@ const { routes } = require('./namingsystem.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
 module.exports = {
 	profile: 'namingsystem',

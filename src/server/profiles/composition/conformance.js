@@ -4,7 +4,7 @@ const { routes } = require('./composition.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
 module.exports = {
 	profile: 'composition',

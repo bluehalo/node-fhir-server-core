@@ -4,7 +4,7 @@ const { routes } = require('./communication.config');
 
 /**
  * @name exports
- * @summary Patient conformance statement
+ * @summary Conformance statement
  */
 module.exports = {
 	profile: 'communication',
