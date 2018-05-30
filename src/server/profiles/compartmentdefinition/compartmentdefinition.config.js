@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./compartmentdefinition.arguments');
 const controller = require('./compartmentdefinition.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/CompartmentDefinition.*',
-	'user/CompartmentDefinition.read',
-	'user/*.read',
-	'compartmentdefinition/*.*',
-	'compartmentdefinition/CompartmentDefinition.*',
-	'compartmentdefinition/CompartmentDefinition.read',
-	'compartmentdefinition/*.read'
-];
+let write_only_scopes = write_scopes('AllergyIntolerance');
+let read_only_scopes = read_scopes('AllergyIntolerance');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,39 +21,69 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/compartmentdefinition',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
-		controller: controller.getCompartmentDefinition
+		scopes: read_only_scopes,
+		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'post',
 		path: '/:version/compartmentdefinition/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
-		controller: controller.getCompartmentDefinition
+		scopes: read_only_scopes,
+		controller: controller.getAllergyIntolerance
 	},
 	{
 		type: 'get',
 		path: '/:version/compartmentdefinition/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
-		controller: controller.getCompartmentDefinitionById
+		scopes: read_only_scopes,
+		controller: controller.getAllergyIntoleranceById
+	},
+	{
+		type: 'post',
+		path: '/:version/compartmentdefinition',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createAllergyIntolerance
+	},
+	{
+		type: 'put',
+		path: '/:version/compartmentdefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateAllergyIntolerance
+	},
+	{
+		type: 'delete',
+		path: '/:version/compartmentdefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteAllergyIntolerance
 	}
 ];
 
 /**
  * @name exports
- * @summary CompartmentDefinition config
+ * @summary AllergyIntolerance config
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.COMPARTMENTDEFINITION
+		profileKey: CONFIG_KEYS.ALLERGYINTOLERANCE
 	},
 	routes
 };

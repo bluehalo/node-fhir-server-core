@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getGroup = ({ profile, logger, config, app }) => {
+module.exports.getGroup = function getGroup ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific group & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let Group = require(resolveFromVersion(version, 'base/Group'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Group = require(resolveFromVersion(version, 'uscore/Group'));
 
-		/**
-		* return service.getGroup(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getGroup(req, logger, context)
-			.then((groups) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (groups) {
-					for (let resource of groups) {
-						if (!req.group || req.group === resource.groupId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Group(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Group/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getGroup(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Group, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getGroup = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getGroupById = ({ profile, logger, app }) => {
+module.exports.getGroupById = function getGroupById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific group
-		let Group = require(resolveFromVersion(version, 'base/Group'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Group = require(resolveFromVersion(version, 'uscore/Group'));
 
-		return service.getGroupById(req, logger, context)
-			.then((group) => {
-				if (group) {
-					res.status(200).json(new Group(group));
-				} else {
-					next(errors.notFound('Group not found', version));
-				}
-			})
+		return service.getGroupById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, Group, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating Group
+ */
+module.exports.createGroup = function createGroup ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		// Validate the resource type before creating it
+		if (Group.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Group.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Group(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createGroup(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Group.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating Group. If the Group does not exist, it should be updated
+ */
+module.exports.updateGroup = function updateGroup ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		// Validate the resource type before creating it
+		if (Group.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Group.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Group(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateGroup(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Group.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an Group.
+ */
+module.exports.deleteGroup = function deleteGroup ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteGroup(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

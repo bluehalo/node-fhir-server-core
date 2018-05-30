@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getNamingSystem = ({ profile, logger, config, app }) => {
+module.exports.getNamingSystem = function getNamingSystem ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific namingsystem & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
 
-		/**
-		* return service.getNamingSystem(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getNamingSystem(req, logger, context)
-			.then((namingsystems) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (namingsystems) {
-					for (let resource of namingsystems) {
-						if (!req.namingsystem || req.namingsystem === resource.namingsystemId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new NamingSystem(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/NamingSystem/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getNamingSystem(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, NamingSystem, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getNamingSystem = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getNamingSystemById = ({ profile, logger, app }) => {
+module.exports.getNamingSystemById = function getNamingSystemById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific namingsystem
-		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
 
-		return service.getNamingSystemById(req, logger, context)
-			.then((namingsystem) => {
-				if (namingsystem) {
-					res.status(200).json(new NamingSystem(namingsystem));
-				} else {
-					next(errors.notFound('NamingSystem not found', version));
-				}
-			})
+		return service.getNamingSystemById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, NamingSystem, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating NamingSystem
+ */
+module.exports.createNamingSystem = function createNamingSystem ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		// Validate the resource type before creating it
+		if (NamingSystem.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${NamingSystem.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new NamingSystem(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createNamingSystem(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, NamingSystem.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating NamingSystem. If the NamingSystem does not exist, it should be updated
+ */
+module.exports.updateNamingSystem = function updateNamingSystem ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		// Validate the resource type before creating it
+		if (NamingSystem.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${NamingSystem.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new NamingSystem(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateNamingSystem(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, NamingSystem.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an NamingSystem.
+ */
+module.exports.deleteNamingSystem = function deleteNamingSystem ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteNamingSystem(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

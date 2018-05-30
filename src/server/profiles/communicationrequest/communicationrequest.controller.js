@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCommunicationRequest = ({ profile, logger, config, app }) => {
+module.exports.getCommunicationRequest = function getCommunicationRequest ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific communicationrequest & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
 
-		/**
-		* return service.getCommunicationRequest(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getCommunicationRequest(req, logger, context)
-			.then((communicationrequests) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (communicationrequests) {
-					for (let resource of communicationrequests) {
-						if (!req.communicationrequest || req.communicationrequest === resource.communicationrequestId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new CommunicationRequest(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/CommunicationRequest/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getCommunicationRequest(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, CommunicationRequest, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getCommunicationRequest = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getCommunicationRequestById = ({ profile, logger, app }) => {
+module.exports.getCommunicationRequestById = function getCommunicationRequestById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific communicationrequest
-		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
 
-		return service.getCommunicationRequestById(req, logger, context)
-			.then((communicationrequest) => {
-				if (communicationrequest) {
-					res.status(200).json(new CommunicationRequest(communicationrequest));
-				} else {
-					next(errors.notFound('CommunicationRequest not found', version));
-				}
-			})
+		return service.getCommunicationRequestById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, CommunicationRequest, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating CommunicationRequest
+ */
+module.exports.createCommunicationRequest = function createCommunicationRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		// Validate the resource type before creating it
+		if (CommunicationRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CommunicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new CommunicationRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createCommunicationRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, CommunicationRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating CommunicationRequest. If the CommunicationRequest does not exist, it should be updated
+ */
+module.exports.updateCommunicationRequest = function updateCommunicationRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		// Validate the resource type before creating it
+		if (CommunicationRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CommunicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new CommunicationRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateCommunicationRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, CommunicationRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an CommunicationRequest.
+ */
+module.exports.deleteCommunicationRequest = function deleteCommunicationRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteCommunicationRequest(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

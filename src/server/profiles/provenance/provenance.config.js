@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./provenance.arguments');
 const controller = require('./provenance.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Provenance.*',
-	'user/Provenance.read',
-	'user/*.read',
-	'provenance/*.*',
-	'provenance/Provenance.*',
-	'provenance/Provenance.read',
-	'provenance/*.read'
-];
+let write_only_scopes = write_scopes('Provenance');
+let read_only_scopes = read_scopes('Provenance');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/provenance',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProvenance
 	},
 	{
 		type: 'post',
 		path: '/:version/provenance/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProvenance
 	},
 	{
 		type: 'get',
 		path: '/:version/provenance/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getProvenanceById
+	},
+	{
+		type: 'post',
+		path: '/:version/provenance',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createProvenance
+	},
+	{
+		type: 'put',
+		path: '/:version/provenance/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateProvenance
+	},
+	{
+		type: 'delete',
+		path: '/:version/provenance/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteProvenance
 	}
 ];
 

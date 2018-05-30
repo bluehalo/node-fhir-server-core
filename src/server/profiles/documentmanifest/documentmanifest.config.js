@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./documentmanifest.arguments');
 const controller = require('./documentmanifest.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/DocumentManifest.*',
-	'user/DocumentManifest.read',
-	'user/*.read',
-	'documentmanifest/*.*',
-	'documentmanifest/DocumentManifest.*',
-	'documentmanifest/DocumentManifest.read',
-	'documentmanifest/*.read'
-];
+let write_only_scopes = write_scopes('DocumentManifest');
+let read_only_scopes = read_scopes('DocumentManifest');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/documentmanifest',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDocumentManifest
 	},
 	{
 		type: 'post',
 		path: '/:version/documentmanifest/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDocumentManifest
 	},
 	{
 		type: 'get',
 		path: '/:version/documentmanifest/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDocumentManifestById
+	},
+	{
+		type: 'post',
+		path: '/:version/documentmanifest',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createDocumentManifest
+	},
+	{
+		type: 'put',
+		path: '/:version/documentmanifest/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateDocumentManifest
+	},
+	{
+		type: 'delete',
+		path: '/:version/documentmanifest/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteDocumentManifest
 	}
 ];
 

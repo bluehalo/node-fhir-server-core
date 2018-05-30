@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getImagingManifest = ({ profile, logger, config, app }) => {
+module.exports.getImagingManifest = function getImagingManifest ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific imagingmanifest & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
 
-		/**
-		* return service.getImagingManifest(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getImagingManifest(req, logger, context)
-			.then((imagingmanifests) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (imagingmanifests) {
-					for (let resource of imagingmanifests) {
-						if (!req.imagingmanifest || req.imagingmanifest === resource.imagingmanifestId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new ImagingManifest(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ImagingManifest/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getImagingManifest(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, ImagingManifest, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getImagingManifest = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getImagingManifestById = ({ profile, logger, app }) => {
+module.exports.getImagingManifestById = function getImagingManifestById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific imagingmanifest
-		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
 
-		return service.getImagingManifestById(req, logger, context)
-			.then((imagingmanifest) => {
-				if (imagingmanifest) {
-					res.status(200).json(new ImagingManifest(imagingmanifest));
-				} else {
-					next(errors.notFound('ImagingManifest not found', version));
-				}
-			})
+		return service.getImagingManifestById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, ImagingManifest, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating ImagingManifest
+ */
+module.exports.createImagingManifest = function createImagingManifest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		// Validate the resource type before creating it
+		if (ImagingManifest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ImagingManifest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ImagingManifest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createImagingManifest(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, ImagingManifest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating ImagingManifest. If the ImagingManifest does not exist, it should be updated
+ */
+module.exports.updateImagingManifest = function updateImagingManifest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		// Validate the resource type before creating it
+		if (ImagingManifest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ImagingManifest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ImagingManifest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateImagingManifest(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, ImagingManifest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an ImagingManifest.
+ */
+module.exports.deleteImagingManifest = function deleteImagingManifest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteImagingManifest(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

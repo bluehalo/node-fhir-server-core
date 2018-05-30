@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getConsent = ({ profile, logger, config, app }) => {
+module.exports.getConsent = function getConsent ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific consent & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let Consent = require(resolveFromVersion(version, 'base/Consent'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
 
-		/**
-		* return service.getConsent(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getConsent(req, logger, context)
-			.then((consents) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (consents) {
-					for (let resource of consents) {
-						if (!req.consent || req.consent === resource.consentId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Consent(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Consent/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getConsent(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Consent, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getConsent = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getConsentById = ({ profile, logger, app }) => {
+module.exports.getConsentById = function getConsentById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific consent
-		let Consent = require(resolveFromVersion(version, 'base/Consent'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
 
-		return service.getConsentById(req, logger, context)
-			.then((consent) => {
-				if (consent) {
-					res.status(200).json(new Consent(consent));
-				} else {
-					next(errors.notFound('Consent not found', version));
-				}
-			})
+		return service.getConsentById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, Consent, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating Consent
+ */
+module.exports.createConsent = function createConsent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
+		// Validate the resource type before creating it
+		if (Consent.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Consent.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Consent(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createConsent(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Consent.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating Consent. If the Consent does not exist, it should be updated
+ */
+module.exports.updateConsent = function updateConsent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
+		// Validate the resource type before creating it
+		if (Consent.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Consent.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Consent(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateConsent(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Consent.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an Consent.
+ */
+module.exports.deleteConsent = function deleteConsent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteConsent(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./endpoint.arguments');
 const controller = require('./endpoint.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Endpoint.*',
-	'user/Endpoint.read',
-	'user/*.read',
-	'endpoint/*.*',
-	'endpoint/Endpoint.*',
-	'endpoint/Endpoint.read',
-	'endpoint/*.read'
-];
+let write_only_scopes = write_scopes('EndPoint');
+let read_only_scopes = read_scopes('EndPoint');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,35 +21,65 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/endpoint',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
-		controller: controller.getEndpoint
+		scopes: read_only_scopes,
+		controller: controller.getEndPoint
 	},
 	{
 		type: 'post',
 		path: '/:version/endpoint/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
-		controller: controller.getEndpoint
+		scopes: read_only_scopes,
+		controller: controller.getEndPoint
 	},
 	{
 		type: 'get',
 		path: '/:version/endpoint/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
-		controller: controller.getEndpointById
+		scopes: read_only_scopes,
+		controller: controller.getEndPointById
+	},
+	{
+		type: 'post',
+		path: '/:version/endpoint',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createEndPoint
+	},
+	{
+		type: 'put',
+		path: '/:version/endpoint/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateEndPoint
+	},
+	{
+		type: 'delete',
+		path: '/:version/endpoint/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteEndPoint
 	}
 ];
 
 /**
  * @name exports
- * @summary Endpoint config
+ * @summary EndPoint config
  */
 module.exports = {
 	routeOptions: {

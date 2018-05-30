@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./appointmentresponse.arguments');
 const controller = require('./appointmentresponse.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/AppointmentResponse.*',
-	'user/AppointmentResponse.read',
-	'user/*.read',
-	'appointmentresponse/*.*',
-	'appointmentresponse/AppointmentResponse.*',
-	'appointmentresponse/AppointmentResponse.read',
-	'appointmentresponse/*.read'
-];
+let write_only_scopes = write_scopes('AppointmentResponse');
+let read_only_scopes = read_scopes('AppointmentResponse');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/appointmentresponse',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAppointmentResponse
 	},
 	{
 		type: 'post',
 		path: '/:version/appointmentresponse/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAppointmentResponse
 	},
 	{
 		type: 'get',
 		path: '/:version/appointmentresponse/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getAppointmentResponseById
+	},
+	{
+		type: 'post',
+		path: '/:version/appointmentresponse',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createAppointmentResponse
+	},
+	{
+		type: 'put',
+		path: '/:version/appointmentresponse/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateAppointmentResponse
+	},
+	{
+		type: 'delete',
+		path: '/:version/appointmentresponse/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteAppointmentResponse
 	}
 ];
 

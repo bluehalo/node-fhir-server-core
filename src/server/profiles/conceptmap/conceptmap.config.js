@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./conceptmap.arguments');
 const controller = require('./conceptmap.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/ConceptMap.*',
-	'user/ConceptMap.read',
-	'user/*.read',
-	'conceptmap/*.*',
-	'conceptmap/ConceptMap.*',
-	'conceptmap/ConceptMap.read',
-	'conceptmap/*.read'
-];
+let write_only_scopes = write_scopes('ConceptMap');
+let read_only_scopes = read_scopes('ConceptMap');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/conceptmap',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConceptMap
 	},
 	{
 		type: 'post',
 		path: '/:version/conceptmap/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConceptMap
 	},
 	{
 		type: 'get',
 		path: '/:version/conceptmap/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConceptMapById
+	},
+	{
+		type: 'post',
+		path: '/:version/conceptmap',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createConceptMap
+	},
+	{
+		type: 'put',
+		path: '/:version/conceptmap/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateConceptMap
+	},
+	{
+		type: 'delete',
+		path: '/:version/conceptmap/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteConceptMap
 	}
 ];
 

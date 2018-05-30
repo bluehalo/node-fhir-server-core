@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./explanationofbenefit.arguments');
 const controller = require('./explanationofbenefit.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/ExplanationOfBenefit.*',
-	'user/ExplanationOfBenefit.read',
-	'user/*.read',
-	'explanationofbenefit/*.*',
-	'explanationofbenefit/ExplanationOfBenefit.*',
-	'explanationofbenefit/ExplanationOfBenefit.read',
-	'explanationofbenefit/*.read'
-];
+let write_only_scopes = write_scopes('ExplanationOfBenefit');
+let read_only_scopes = read_scopes('ExplanationOfBenefit');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/explanationofbenefit',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getExplanationOfBenefit
 	},
 	{
 		type: 'post',
 		path: '/:version/explanationofbenefit/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getExplanationOfBenefit
 	},
 	{
 		type: 'get',
 		path: '/:version/explanationofbenefit/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getExplanationOfBenefitById
+	},
+	{
+		type: 'post',
+		path: '/:version/explanationofbenefit',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createExplanationOfBenefit
+	},
+	{
+		type: 'put',
+		path: '/:version/explanationofbenefit/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateExplanationOfBenefit
+	},
+	{
+		type: 'delete',
+		path: '/:version/explanationofbenefit/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteExplanationOfBenefit
 	}
 ];
 

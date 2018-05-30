@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./specimen.arguments');
 const controller = require('./specimen.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Specimen.*',
-	'user/Specimen.read',
-	'user/*.read',
-	'specimen/*.*',
-	'specimen/Specimen.*',
-	'specimen/Specimen.read',
-	'specimen/*.read'
-];
+let write_only_scopes = write_scopes('Specimen');
+let read_only_scopes = read_scopes('Specimen');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/specimen',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getSpecimen
 	},
 	{
 		type: 'post',
 		path: '/:version/specimen/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getSpecimen
 	},
 	{
 		type: 'get',
 		path: '/:version/specimen/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getSpecimenById
+	},
+	{
+		type: 'post',
+		path: '/:version/specimen',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createSpecimen
+	},
+	{
+		type: 'put',
+		path: '/:version/specimen/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateSpecimen
+	},
+	{
+		type: 'delete',
+		path: '/:version/specimen/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteSpecimen
 	}
 ];
 

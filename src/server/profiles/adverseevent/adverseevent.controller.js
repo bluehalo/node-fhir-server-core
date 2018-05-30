@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getAdverseEvent = ({ profile, logger, config, app }) => {
+module.exports.getAdverseEvent = function getAdverseEvent ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific adverseevent & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
 
-		/**
-		* return service.getAdverseEvent(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getAdverseEvent(req, logger, context)
-			.then((adverseevents) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (adverseevents) {
-					for (let resource of adverseevents) {
-						if (!req.adverseevent || req.adverseevent === resource.adverseeventId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new AdverseEvent(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/AdverseEvent/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getAdverseEvent(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, AdverseEvent, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getAdverseEvent = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getAdverseEventById = ({ profile, logger, app }) => {
+module.exports.getAdverseEventById = function getAdverseEventById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific adverseevent
-		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
 
-		return service.getAdverseEventById(req, logger, context)
-			.then((adverseevent) => {
-				if (adverseevent) {
-					res.status(200).json(new AdverseEvent(adverseevent));
-				} else {
-					next(errors.notFound('AdverseEvent not found', version));
-				}
-			})
+		return service.getAdverseEventById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, AdverseEvent, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating AdverseEvent
+ */
+module.exports.createAdverseEvent = function createAdverseEvent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		// Validate the resource type before creating it
+		if (AdverseEvent.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${AdverseEvent.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new AdverseEvent(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createAdverseEvent(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, AdverseEvent.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating AdverseEvent. If the AdverseEvent does not exist, it should be updated
+ */
+module.exports.updateAdverseEvent = function updateAdverseEvent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		// Validate the resource type before creating it
+		if (AdverseEvent.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${AdverseEvent.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new AdverseEvent(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateAdverseEvent(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, AdverseEvent.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an AdverseEvent.
+ */
+module.exports.deleteAdverseEvent = function deleteAdverseEvent ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteAdverseEvent(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

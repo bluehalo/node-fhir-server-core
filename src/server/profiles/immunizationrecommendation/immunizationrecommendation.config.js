@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./immunizationrecommendation.arguments');
 const controller = require('./immunizationrecommendation.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/ImmunizationRecommendation.*',
-	'user/ImmunizationRecommendation.read',
-	'user/*.read',
-	'immunizationrecommendation/*.*',
-	'immunizationrecommendation/ImmunizationRecommendation.*',
-	'immunizationrecommendation/ImmunizationRecommendation.read',
-	'immunizationrecommendation/*.read'
-];
+let write_only_scopes = write_scopes('ImmunizationRecommendation');
+let read_only_scopes = read_scopes('ImmunizationRecommendation');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/immunizationrecommendation',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getImmunizationRecommendation
 	},
 	{
 		type: 'post',
 		path: '/:version/immunizationrecommendation/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getImmunizationRecommendation
 	},
 	{
 		type: 'get',
 		path: '/:version/immunizationrecommendation/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getImmunizationRecommendationById
+	},
+	{
+		type: 'post',
+		path: '/:version/immunizationrecommendation',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createImmunizationRecommendation
+	},
+	{
+		type: 'put',
+		path: '/:version/immunizationrecommendation/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateImmunizationRecommendation
+	},
+	{
+		type: 'delete',
+		path: '/:version/immunizationrecommendation/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteImmunizationRecommendation
 	}
 ];
 

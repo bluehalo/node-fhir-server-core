@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./deviceusestatement.arguments');
 const controller = require('./deviceusestatement.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/DeviceUseStatement.*',
-	'user/DeviceUseStatement.read',
-	'user/*.read',
-	'deviceusestatement/*.*',
-	'deviceusestatement/DeviceUseStatement.*',
-	'deviceusestatement/DeviceUseStatement.read',
-	'deviceusestatement/*.read'
-];
+let write_only_scopes = write_scopes('DeviceUseStatement');
+let read_only_scopes = read_scopes('DeviceUseStatement');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/deviceusestatement',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDeviceUseStatement
 	},
 	{
 		type: 'post',
 		path: '/:version/deviceusestatement/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDeviceUseStatement
 	},
 	{
 		type: 'get',
 		path: '/:version/deviceusestatement/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getDeviceUseStatementById
+	},
+	{
+		type: 'post',
+		path: '/:version/deviceusestatement',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createDeviceUseStatement
+	},
+	{
+		type: 'put',
+		path: '/:version/deviceusestatement/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateDeviceUseStatement
+	},
+	{
+		type: 'delete',
+		path: '/:version/deviceusestatement/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteDeviceUseStatement
 	}
 ];
 
@@ -60,7 +83,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.DEVICESTATEMENT
+		profileKey: CONFIG_KEYS.DEVICEUSESTATEMENT
 	},
 	routes
 };

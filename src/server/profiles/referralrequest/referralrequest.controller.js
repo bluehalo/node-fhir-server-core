@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getReferralRequest = ({ profile, logger, config, app }) => {
+module.exports.getReferralRequest = function getReferralRequest ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific referralrequest & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ReferralRequest = require(resolveFromVersion(version, 'base/ReferralRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ReferralRequest = require(resolveFromVersion(version, 'uscore/ReferralRequest'));
 
-		/**
-		* return service.getReferralRequest(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getReferralRequest(req, logger, context)
-			.then((referralrequests) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (referralrequests) {
-					for (let resource of referralrequests) {
-						if (!req.referralrequest || req.referralrequest === resource.referralrequestId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new ReferralRequest(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ReferralRequest/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getReferralRequest(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, ReferralRequest, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getReferralRequest = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getReferralRequestById = ({ profile, logger, app }) => {
+module.exports.getReferralRequestById = function getReferralRequestById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific referralrequest
-		let ReferralRequest = require(resolveFromVersion(version, 'base/ReferralRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ReferralRequest = require(resolveFromVersion(version, 'uscore/ReferralRequest'));
 
-		return service.getReferralRequestById(req, logger, context)
-			.then((referralrequest) => {
-				if (referralrequest) {
-					res.status(200).json(new ReferralRequest(referralrequest));
-				} else {
-					next(errors.notFound('ReferralRequest not found', version));
-				}
-			})
+		return service.getReferralRequestById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, ReferralRequest, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating ReferralRequest
+ */
+module.exports.createReferralRequest = function createReferralRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ReferralRequest = require(resolveFromVersion(version, 'uscore/ReferralRequest'));
+		// Validate the resource type before creating it
+		if (ReferralRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ReferralRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ReferralRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createReferralRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, ReferralRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating ReferralRequest. If the ReferralRequest does not exist, it should be updated
+ */
+module.exports.updateReferralRequest = function updateReferralRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ReferralRequest = require(resolveFromVersion(version, 'uscore/ReferralRequest'));
+		// Validate the resource type before creating it
+		if (ReferralRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ReferralRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ReferralRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateReferralRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, ReferralRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an ReferralRequest.
+ */
+module.exports.deleteReferralRequest = function deleteReferralRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteReferralRequest(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getValueSet = ({ profile, logger, config, app }) => {
+module.exports.getValueSet = function getValueSet ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific valueset & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
 
-		/**
-		* return service.getValueSet(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getValueSet(req, logger, context)
-			.then((valuesets) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (valuesets) {
-					for (let resource of valuesets) {
-						if (!req.valueset || req.valueset === resource.valuesetId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new ValueSet(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ValueSet/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getValueSet(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, ValueSet, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getValueSet = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getValueSetById = ({ profile, logger, app }) => {
+module.exports.getValueSetById = function getValueSetById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific valueset
-		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
 
-		return service.getValueSetById(req, logger, context)
-			.then((valueset) => {
-				if (valueset) {
-					res.status(200).json(new ValueSet(valueset));
-				} else {
-					next(errors.notFound('ValueSet not found', version));
-				}
-			})
+		return service.getValueSetById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, ValueSet, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating ValueSet
+ */
+module.exports.createValueSet = function createValueSet ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		// Validate the resource type before creating it
+		if (ValueSet.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ValueSet.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ValueSet(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createValueSet(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, ValueSet.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating ValueSet. If the ValueSet does not exist, it should be updated
+ */
+module.exports.updateValueSet = function updateValueSet ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		// Validate the resource type before creating it
+		if (ValueSet.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ValueSet.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ValueSet(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateValueSet(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, ValueSet.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an ValueSet.
+ */
+module.exports.deleteValueSet = function deleteValueSet ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteValueSet(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

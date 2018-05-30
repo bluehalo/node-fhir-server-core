@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./library.arguments');
 const controller = require('./library.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Library.*',
-	'user/Library.read',
-	'user/*.read',
-	'library/*.*',
-	'library/Library.*',
-	'library/Library.read',
-	'library/*.read'
-];
+let write_only_scopes = write_scopes('Library');
+let read_only_scopes = read_scopes('Library');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/library',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getLibrary
 	},
 	{
 		type: 'post',
 		path: '/:version/library/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getLibrary
 	},
 	{
 		type: 'get',
 		path: '/:version/library/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getLibraryById
+	},
+	{
+		type: 'post',
+		path: '/:version/library',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createLibrary
+	},
+	{
+		type: 'put',
+		path: '/:version/library/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateLibrary
+	},
+	{
+		type: 'delete',
+		path: '/:version/library/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteLibrary
 	}
 ];
 

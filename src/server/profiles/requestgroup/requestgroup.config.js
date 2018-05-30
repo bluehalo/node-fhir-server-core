@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./requestgroup.arguments');
 const controller = require('./requestgroup.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/RequestGroup.*',
-	'user/RequestGroup.read',
-	'user/*.read',
-	'requestgroup/*.*',
-	'requestgroup/RequestGroup.*',
-	'requestgroup/RequestGroup.read',
-	'requestgroup/*.read'
-];
+let write_only_scopes = write_scopes('RequestGroup');
+let read_only_scopes = read_scopes('RequestGroup');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/requestgroup',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getRequestGroup
 	},
 	{
 		type: 'post',
 		path: '/:version/requestgroup/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getRequestGroup
 	},
 	{
 		type: 'get',
 		path: '/:version/requestgroup/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getRequestGroupById
+	},
+	{
+		type: 'post',
+		path: '/:version/requestgroup',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createRequestGroup
+	},
+	{
+		type: 'put',
+		path: '/:version/requestgroup/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateRequestGroup
+	},
+	{
+		type: 'delete',
+		path: '/:version/requestgroup/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteRequestGroup
 	}
 ];
 

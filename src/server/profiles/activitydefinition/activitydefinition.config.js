@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./activitydefinition.arguments');
 const controller = require('./activitydefinition.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/ActivityDefinition.*',
-	'user/ActivityDefinition.read',
-	'user/*.read',
-	'activitydefinition/*.*',
-	'activitydefinition/ActivityDefinition.*',
-	'activitydefinition/ActivityDefinition.read',
-	'activitydefinition/*.read'
-];
+let write_only_scopes = write_scopes('ActivityDefinition');
+let read_only_scopes = read_scopes('ActivityDefinition');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/activitydefinition',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getActivityDefinition
 	},
 	{
 		type: 'post',
 		path: '/:version/activitydefinition/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getActivityDefinition
 	},
 	{
 		type: 'get',
 		path: '/:version/activitydefinition/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getActivityDefinitionById
+	},
+	{
+		type: 'post',
+		path: '/:version/activitydefinition',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createActivityDefinition
+	},
+	{
+		type: 'put',
+		path: '/:version/activitydefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateActivityDefinition
+	},
+	{
+		type: 'delete',
+		path: '/:version/activitydefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteActivityDefinition
 	}
 ];
 

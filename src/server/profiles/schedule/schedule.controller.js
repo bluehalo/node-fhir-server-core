@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getSchedule = ({ profile, logger, config, app }) => {
+module.exports.getSchedule = function getSchedule ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific schedule & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
 
-		/**
-		* return service.getSchedule(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getSchedule(req, logger, context)
-			.then((schedules) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (schedules) {
-					for (let resource of schedules) {
-						if (!req.schedule || req.schedule === resource.scheduleId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Schedule(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Schedule/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getSchedule(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Schedule, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getSchedule = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getScheduleById = ({ profile, logger, app }) => {
+module.exports.getScheduleById = function getScheduleById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific schedule
-		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
 
-		return service.getScheduleById(req, logger, context)
-			.then((schedule) => {
-				if (schedule) {
-					res.status(200).json(new Schedule(schedule));
-				} else {
-					next(errors.notFound('Schedule not found', version));
-				}
-			})
+		return service.getScheduleById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, Schedule, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating Schedule
+ */
+module.exports.createSchedule = function createSchedule ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		// Validate the resource type before creating it
+		if (Schedule.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Schedule.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Schedule(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createSchedule(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, Schedule.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating Schedule. If the Schedule does not exist, it should be updated
+ */
+module.exports.updateSchedule = function updateSchedule ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		// Validate the resource type before creating it
+		if (Schedule.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${Schedule.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new Schedule(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateSchedule(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, Schedule.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an Schedule.
+ */
+module.exports.deleteSchedule = function deleteSchedule ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteSchedule(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

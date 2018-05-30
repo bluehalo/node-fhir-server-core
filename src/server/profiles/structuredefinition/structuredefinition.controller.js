@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getStructureDefinition = ({ profile, logger, config, app }) => {
+module.exports.getStructureDefinition = function getStructureDefinition ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific structuredefinition & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
 
-		/**
-		* return service.getStructureDefinition(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getStructureDefinition(req, logger, context)
-			.then((structuredefinitions) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (structuredefinitions) {
-					for (let resource of structuredefinitions) {
-						if (!req.structuredefinition || req.structuredefinition === resource.structuredefinitionId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new StructureDefinition(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/StructureDefinition/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getStructureDefinition(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, StructureDefinition, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getStructureDefinition = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getStructureDefinitionById = ({ profile, logger, app }) => {
+module.exports.getStructureDefinitionById = function getStructureDefinitionById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific structuredefinition
-		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
 
-		return service.getStructureDefinitionById(req, logger, context)
-			.then((structuredefinition) => {
-				if (structuredefinition) {
-					res.status(200).json(new StructureDefinition(structuredefinition));
-				} else {
-					next(errors.notFound('StructureDefinition not found', version));
-				}
-			})
+		return service.getStructureDefinitionById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, StructureDefinition, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating StructureDefinition
+ */
+module.exports.createStructureDefinition = function createStructureDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		// Validate the resource type before creating it
+		if (StructureDefinition.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${StructureDefinition.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new StructureDefinition(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createStructureDefinition(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, StructureDefinition.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating StructureDefinition. If the StructureDefinition does not exist, it should be updated
+ */
+module.exports.updateStructureDefinition = function updateStructureDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		// Validate the resource type before creating it
+		if (StructureDefinition.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${StructureDefinition.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new StructureDefinition(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateStructureDefinition(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, StructureDefinition.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an StructureDefinition.
+ */
+module.exports.deleteStructureDefinition = function deleteStructureDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteStructureDefinition(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

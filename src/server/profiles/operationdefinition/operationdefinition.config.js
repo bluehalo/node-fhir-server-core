@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./operationdefinition.arguments');
 const controller = require('./operationdefinition.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/OperationDefinition.*',
-	'user/OperationDefinition.read',
-	'user/*.read',
-	'operationdefinition/*.*',
-	'operationdefinition/OperationDefinition.*',
-	'operationdefinition/OperationDefinition.read',
-	'operationdefinition/*.read'
-];
+let write_only_scopes = write_scopes('OperationDefinition');
+let read_only_scopes = read_scopes('OperationDefinition');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/operationdefinition',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getOperationDefinition
 	},
 	{
 		type: 'post',
 		path: '/:version/operationdefinition/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getOperationDefinition
 	},
 	{
 		type: 'get',
 		path: '/:version/operationdefinition/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getOperationDefinitionById
+	},
+	{
+		type: 'post',
+		path: '/:version/operationdefinition',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createOperationDefinition
+	},
+	{
+		type: 'put',
+		path: '/:version/operationdefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateOperationDefinition
+	},
+	{
+		type: 'delete',
+		path: '/:version/operationdefinition/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteOperationDefinition
 	}
 ];
 

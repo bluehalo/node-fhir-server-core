@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getRiskAssessment = ({ profile, logger, config, app }) => {
+module.exports.getRiskAssessment = function getRiskAssessment ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific riskassessment & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
 
-		/**
-		* return service.getRiskAssessment(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getRiskAssessment(req, logger, context)
-			.then((riskassessments) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (riskassessments) {
-					for (let resource of riskassessments) {
-						if (!req.riskassessment || req.riskassessment === resource.riskassessmentId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new RiskAssessment(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/RiskAssessment/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getRiskAssessment(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, RiskAssessment, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getRiskAssessment = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getRiskAssessmentById = ({ profile, logger, app }) => {
+module.exports.getRiskAssessmentById = function getRiskAssessmentById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific riskassessment
-		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
 
-		return service.getRiskAssessmentById(req, logger, context)
-			.then((riskassessment) => {
-				if (riskassessment) {
-					res.status(200).json(new RiskAssessment(riskassessment));
-				} else {
-					next(errors.notFound('RiskAssessment not found', version));
-				}
-			})
+		return service.getRiskAssessmentById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, RiskAssessment, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating RiskAssessment
+ */
+module.exports.createRiskAssessment = function createRiskAssessment ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		// Validate the resource type before creating it
+		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new RiskAssessment(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createRiskAssessment(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, RiskAssessment.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating RiskAssessment. If the RiskAssessment does not exist, it should be updated
+ */
+module.exports.updateRiskAssessment = function updateRiskAssessment ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		// Validate the resource type before creating it
+		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new RiskAssessment(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateRiskAssessment(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, RiskAssessment.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an RiskAssessment.
+ */
+module.exports.deleteRiskAssessment = function deleteRiskAssessment ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteRiskAssessment(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

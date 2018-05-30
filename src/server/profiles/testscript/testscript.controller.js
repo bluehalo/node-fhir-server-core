@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getTestScript = ({ profile, logger, config, app }) => {
+module.exports.getTestScript = function getTestScript ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific testscript & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
 
-		/**
-		* return service.getTestScript(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getTestScript(req, logger, context)
-			.then((testscripts) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (testscripts) {
-					for (let resource of testscripts) {
-						if (!req.testscript || req.testscript === resource.testscriptId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new TestScript(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/TestScript/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getTestScript(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, TestScript, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getTestScript = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getTestScriptById = ({ profile, logger, app }) => {
+module.exports.getTestScriptById = function getTestScriptById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific testscript
-		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
 
-		return service.getTestScriptById(req, logger, context)
-			.then((testscript) => {
-				if (testscript) {
-					res.status(200).json(new TestScript(testscript));
-				} else {
-					next(errors.notFound('TestScript not found', version));
-				}
-			})
+		return service.getTestScriptById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, TestScript, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating TestScript
+ */
+module.exports.createTestScript = function createTestScript ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		// Validate the resource type before creating it
+		if (TestScript.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${TestScript.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new TestScript(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createTestScript(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, TestScript.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating TestScript. If the TestScript does not exist, it should be updated
+ */
+module.exports.updateTestScript = function updateTestScript ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		// Validate the resource type before creating it
+		if (TestScript.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${TestScript.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new TestScript(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateTestScript(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, TestScript.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an TestScript.
+ */
+module.exports.deleteTestScript = function deleteTestScript ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteTestScript(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

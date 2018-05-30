@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationAdministration = ({ profile, logger, config, app }) => {
+module.exports.getMedicationAdministration = function getMedicationAdministration ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationadministration & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
 
-		/**
-		* return service.getMedicationAdministration(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getMedicationAdministration(req, logger, context)
-			.then((medicationadministrations) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (medicationadministrations) {
-					for (let resource of medicationadministrations) {
-						if (!req.medicationadministration || req.medicationadministration === resource.medicationadministrationId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new MedicationAdministration(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/MedicationAdministration/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getMedicationAdministration(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, MedicationAdministration, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getMedicationAdministration = ({ profile, logger, config, app }) 
 };
 
 
-module.exports.getMedicationAdministrationById = ({ profile, logger, app }) => {
+module.exports.getMedicationAdministrationById = function getMedicationAdministrationById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationadministration
-		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
 
-		return service.getMedicationAdministrationById(req, logger, context)
-			.then((medicationadministration) => {
-				if (medicationadministration) {
-					res.status(200).json(new MedicationAdministration(medicationadministration));
-				} else {
-					next(errors.notFound('MedicationAdministration not found', version));
-				}
-			})
+		return service.getMedicationAdministrationById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, MedicationAdministration, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating MedicationAdministration
+ */
+module.exports.createMedicationAdministration = function createMedicationAdministration ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		// Validate the resource type before creating it
+		if (MedicationAdministration.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationAdministration.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new MedicationAdministration(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createMedicationAdministration(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, MedicationAdministration.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating MedicationAdministration. If the MedicationAdministration does not exist, it should be updated
+ */
+module.exports.updateMedicationAdministration = function updateMedicationAdministration ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		// Validate the resource type before creating it
+		if (MedicationAdministration.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationAdministration.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new MedicationAdministration(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateMedicationAdministration(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, MedicationAdministration.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an MedicationAdministration.
+ */
+module.exports.deleteMedicationAdministration = function deleteMedicationAdministration ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteMedicationAdministration(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

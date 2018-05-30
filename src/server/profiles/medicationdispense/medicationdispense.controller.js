@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationDispense = ({ profile, logger, config, app }) => {
+module.exports.getMedicationDispense = function getMedicationDispense ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationdispense & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
 
-		/**
-		* return service.getMedicationDispense(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getMedicationDispense(req, logger, context)
-			.then((medicationdispenses) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (medicationdispenses) {
-					for (let resource of medicationdispenses) {
-						if (!req.medicationdispense || req.medicationdispense === resource.medicationdispenseId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new MedicationDispense(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/MedicationDispense/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getMedicationDispense(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, MedicationDispense, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getMedicationDispense = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getMedicationDispenseById = ({ profile, logger, app }) => {
+module.exports.getMedicationDispenseById = function getMedicationDispenseById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationdispense
-		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
 
-		return service.getMedicationDispenseById(req, logger, context)
-			.then((medicationdispense) => {
-				if (medicationdispense) {
-					res.status(200).json(new MedicationDispense(medicationdispense));
-				} else {
-					next(errors.notFound('MedicationDispense not found', version));
-				}
-			})
+		return service.getMedicationDispenseById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, MedicationDispense, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating MedicationDispense
+ */
+module.exports.createMedicationDispense = function createMedicationDispense ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		// Validate the resource type before creating it
+		if (MedicationDispense.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationDispense.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new MedicationDispense(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createMedicationDispense(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, MedicationDispense.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating MedicationDispense. If the MedicationDispense does not exist, it should be updated
+ */
+module.exports.updateMedicationDispense = function updateMedicationDispense ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		// Validate the resource type before creating it
+		if (MedicationDispense.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationDispense.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new MedicationDispense(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateMedicationDispense(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, MedicationDispense.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an MedicationDispense.
+ */
+module.exports.deleteMedicationDispense = function deleteMedicationDispense ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteMedicationDispense(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

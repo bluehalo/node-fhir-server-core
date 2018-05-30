@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getSupplyRequest = ({ profile, logger, config, app }) => {
+module.exports.getSupplyRequest = function getSupplyRequest ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific supplyrequest & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let SupplyRequest = require(resolveFromVersion(version, 'base/SupplyRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let SupplyRequest = require(resolveFromVersion(version, 'uscore/SupplyRequest'));
 
-		/**
-		* return service.getSupplyRequest(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getSupplyRequest(req, logger, context)
-			.then((supplyrequests) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (supplyrequests) {
-					for (let resource of supplyrequests) {
-						if (!req.supplyrequest || req.supplyrequest === resource.supplyrequestId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new SupplyRequest(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/SupplyRequest/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getSupplyRequest(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, SupplyRequest, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getSupplyRequest = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getSupplyRequestById = ({ profile, logger, app }) => {
+module.exports.getSupplyRequestById = function getSupplyRequestById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific supplyrequest
-		let SupplyRequest = require(resolveFromVersion(version, 'base/SupplyRequest'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let SupplyRequest = require(resolveFromVersion(version, 'uscore/SupplyRequest'));
 
-		return service.getSupplyRequestById(req, logger, context)
-			.then((supplyrequest) => {
-				if (supplyrequest) {
-					res.status(200).json(new SupplyRequest(supplyrequest));
-				} else {
-					next(errors.notFound('SupplyRequest not found', version));
-				}
-			})
+		return service.getSupplyRequestById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, SupplyRequest, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating SupplyRequest
+ */
+module.exports.createSupplyRequest = function createSupplyRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let SupplyRequest = require(resolveFromVersion(version, 'uscore/SupplyRequest'));
+		// Validate the resource type before creating it
+		if (SupplyRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${SupplyRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new SupplyRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createSupplyRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, SupplyRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating SupplyRequest. If the SupplyRequest does not exist, it should be updated
+ */
+module.exports.updateSupplyRequest = function updateSupplyRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let SupplyRequest = require(resolveFromVersion(version, 'uscore/SupplyRequest'));
+		// Validate the resource type before creating it
+		if (SupplyRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${SupplyRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new SupplyRequest(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateSupplyRequest(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, SupplyRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an SupplyRequest.
+ */
+module.exports.deleteSupplyRequest = function deleteSupplyRequest ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteSupplyRequest(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

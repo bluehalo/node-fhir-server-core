@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./coverage.arguments');
 const controller = require('./coverage.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Coverage.*',
-	'user/Coverage.read',
-	'user/*.read',
-	'coverage/*.*',
-	'coverage/Coverage.*',
-	'coverage/Coverage.read',
-	'coverage/*.read'
-];
+let write_only_scopes = write_scopes('Coverage');
+let read_only_scopes = read_scopes('Coverage');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/coverage',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCoverage
 	},
 	{
 		type: 'post',
 		path: '/:version/coverage/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCoverage
 	},
 	{
 		type: 'get',
 		path: '/:version/coverage/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getCoverageById
+	},
+	{
+		type: 'post',
+		path: '/:version/coverage',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createCoverage
+	},
+	{
+		type: 'put',
+		path: '/:version/coverage/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateCoverage
+	},
+	{
+		type: 'delete',
+		path: '/:version/coverage/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteCoverage
 	}
 ];
 

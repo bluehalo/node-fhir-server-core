@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCapabilityStatement = ({ profile, logger, config, app }) => {
+module.exports.getCapabilityStatement = function getCapabilityStatement ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific capabilitystatement & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
 
-		/**
-		* return service.getCapabilityStatement(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getCapabilityStatement(req, logger, context)
-			.then((capabilitystatements) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (capabilitystatements) {
-					for (let resource of capabilitystatements) {
-						if (!req.capabilitystatement || req.capabilitystatement === resource.capabilitystatementId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new CapabilityStatement(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/CapabilityStatement/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getCapabilityStatement(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, CapabilityStatement, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getCapabilityStatement = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getCapabilityStatementById = ({ profile, logger, app }) => {
+module.exports.getCapabilityStatementById = function getCapabilityStatementById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific capabilitystatement
-		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
 
-		return service.getCapabilityStatementById(req, logger, context)
-			.then((capabilitystatement) => {
-				if (capabilitystatement) {
-					res.status(200).json(new CapabilityStatement(capabilitystatement));
-				} else {
-					next(errors.notFound('CapabilityStatement not found', version));
-				}
-			})
+		return service.getCapabilityStatementById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, CapabilityStatement, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating CapabilityStatement
+ */
+module.exports.createCapabilityStatement = function createCapabilityStatement ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		// Validate the resource type before creating it
+		if (CapabilityStatement.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CapabilityStatement.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new CapabilityStatement(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createCapabilityStatement(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, CapabilityStatement.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating CapabilityStatement. If the CapabilityStatement does not exist, it should be updated
+ */
+module.exports.updateCapabilityStatement = function updateCapabilityStatement ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		// Validate the resource type before creating it
+		if (CapabilityStatement.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${CapabilityStatement.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new CapabilityStatement(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateCapabilityStatement(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, CapabilityStatement.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an CapabilityStatement.
+ */
+module.exports.deleteCapabilityStatement = function deleteCapabilityStatement ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteCapabilityStatement(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

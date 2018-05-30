@@ -1,18 +1,11 @@
-const {route_args, common_args} = require('../common.arguments');
-const {CONFIG_KEYS, VERSIONS} = require('../../../constants');
+const { route_args, common_args, write_args } = require('../common.arguments');
+const { read_scopes, write_scopes } = require('../common.scopes');
+const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_args = require('./consent.arguments');
 const controller = require('./consent.controller');
 
-const scopes = [
-	'user/*.*',
-	'user/Consent.*',
-	'user/Consent.read',
-	'user/*.read',
-	'consent/*.*',
-	'consent/Consent.*',
-	'consent/Consent.read',
-	'consent/*.read'
-];
+let write_only_scopes = write_scopes('Consent');
+let read_only_scopes = read_scopes('Consent');
 
 let commonArgsArray = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -28,29 +21,59 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/consent',
-		corsOptions: {methods: ['GET']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConsent
 	},
 	{
 		type: 'post',
 		path: '/:version/consent/_search',
-		corsOptions: {methods: ['POST']},
 		args: resourceAllArguments,
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConsent
 	},
 	{
 		type: 'get',
 		path: '/:version/consent/:id',
-		corsOptions: {methods: ['GET']},
 		args: [
 			route_args.VERSION,
 			route_args.ID
 		],
-		scopes: scopes,
+		scopes: read_only_scopes,
 		controller: controller.getConsentById
+	},
+	{
+		type: 'post',
+		path: '/:version/consent',
+		args: [
+			route_args.VERSION,
+			write_args.RESOURCE_ID,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.createConsent
+	},
+	{
+		type: 'put',
+		path: '/:version/consent/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.updateConsent
+	},
+	{
+		type: 'delete',
+		path: '/:version/consent/:id',
+		args: [
+			route_args.ID,
+			route_args.VERSION,
+			write_args.RESOURCE_BODY
+		],
+		scopes: write_only_scopes,
+		controller: controller.deleteConsent
 	}
 ];
 

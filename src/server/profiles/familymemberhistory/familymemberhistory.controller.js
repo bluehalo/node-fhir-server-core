@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getFamilyMemberHistory = ({ profile, logger, config, app }) => {
+module.exports.getFamilyMemberHistory = function getFamilyMemberHistory ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific familymemberhistory & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
 
-		/**
-		* return service.getFamilyMemberHistory(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getFamilyMemberHistory(req, logger, context)
-			.then((familymemberhistorys) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (familymemberhistorys) {
-					for (let resource of familymemberhistorys) {
-						if (!req.familymemberhistory || req.familymemberhistory === resource.familymemberhistoryId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new FamilyMemberHistory(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/FamilyMemberHistory/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getFamilyMemberHistory(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, FamilyMemberHistory, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getFamilyMemberHistory = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getFamilyMemberHistoryById = ({ profile, logger, app }) => {
+module.exports.getFamilyMemberHistoryById = function getFamilyMemberHistoryById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific familymemberhistory
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
 
-		return service.getFamilyMemberHistoryById(req, logger, context)
-			.then((familymemberhistory) => {
-				if (familymemberhistory) {
-					res.status(200).json(new FamilyMemberHistory(familymemberhistory));
-				} else {
-					next(errors.notFound('FamilyMemberHistory not found', version));
-				}
-			})
+		return service.getFamilyMemberHistoryById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, FamilyMemberHistory, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating FamilyMemberHistory
+ */
+module.exports.createFamilyMemberHistory = function createFamilyMemberHistory ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		// Validate the resource type before creating it
+		if (FamilyMemberHistory.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${FamilyMemberHistory.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new FamilyMemberHistory(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createFamilyMemberHistory(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, FamilyMemberHistory.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating FamilyMemberHistory. If the FamilyMemberHistory does not exist, it should be updated
+ */
+module.exports.updateFamilyMemberHistory = function updateFamilyMemberHistory ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		// Validate the resource type before creating it
+		if (FamilyMemberHistory.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${FamilyMemberHistory.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new FamilyMemberHistory(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateFamilyMemberHistory(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, FamilyMemberHistory.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an FamilyMemberHistory.
+ */
+module.exports.deleteFamilyMemberHistory = function deleteFamilyMemberHistory ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteFamilyMemberHistory(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

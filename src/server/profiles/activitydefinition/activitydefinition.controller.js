@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getActivityDefinition = ({ profile, logger, config, app }) => {
+module.exports.getActivityDefinition = function getActivityDefinition ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific activitydefinition & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
 
-		/**
-		* return service.getActivityDefinition(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getActivityDefinition(req, logger, context)
-			.then((activitydefinitions) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (activitydefinitions) {
-					for (let resource of activitydefinitions) {
-						if (!req.activitydefinition || req.activitydefinition === resource.activitydefinitionId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new ActivityDefinition(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ActivityDefinition/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getActivityDefinition(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, ActivityDefinition, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getActivityDefinition = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getActivityDefinitionById = ({ profile, logger, app }) => {
+module.exports.getActivityDefinitionById = function getActivityDefinitionById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific activitydefinition
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
 
-		return service.getActivityDefinitionById(req, logger, context)
-			.then((activitydefinition) => {
-				if (activitydefinition) {
-					res.status(200).json(new ActivityDefinition(activitydefinition));
-				} else {
-					next(errors.notFound('ActivityDefinition not found', version));
-				}
-			})
+		return service.getActivityDefinitionById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, ActivityDefinition, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating ActivityDefinition
+ */
+module.exports.createActivityDefinition = function createActivityDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		// Validate the resource type before creating it
+		if (ActivityDefinition.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ActivityDefinition.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ActivityDefinition(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createActivityDefinition(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, ActivityDefinition.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating ActivityDefinition. If the ActivityDefinition does not exist, it should be updated
+ */
+module.exports.updateActivityDefinition = function updateActivityDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		// Validate the resource type before creating it
+		if (ActivityDefinition.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ActivityDefinition.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ActivityDefinition(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateActivityDefinition(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, ActivityDefinition.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an ActivityDefinition.
+ */
+module.exports.deleteActivityDefinition = function deleteActivityDefinition ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteActivityDefinition(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

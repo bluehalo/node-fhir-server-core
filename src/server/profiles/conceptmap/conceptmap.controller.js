@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getConceptMap = ({ profile, logger, config, app }) => {
+module.exports.getConceptMap = function getConceptMap ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific conceptmap & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
 
-		/**
-		* return service.getConceptMap(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getConceptMap(req, logger, context)
-			.then((conceptmaps) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (conceptmaps) {
-					for (let resource of conceptmaps) {
-						if (!req.conceptmap || req.conceptmap === resource.conceptmapId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new ConceptMap(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/ConceptMap/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getConceptMap(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, ConceptMap, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getConceptMap = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getConceptMapById = ({ profile, logger, app }) => {
+module.exports.getConceptMapById = function getConceptMapById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific conceptmap
-		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
 
-		return service.getConceptMapById(req, logger, context)
-			.then((conceptmap) => {
-				if (conceptmap) {
-					res.status(200).json(new ConceptMap(conceptmap));
-				} else {
-					next(errors.notFound('ConceptMap not found', version));
-				}
-			})
+		return service.getConceptMapById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, ConceptMap, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating ConceptMap
+ */
+module.exports.createConceptMap = function createConceptMap ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		// Validate the resource type before creating it
+		if (ConceptMap.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ConceptMap.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ConceptMap(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createConceptMap(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, ConceptMap.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating ConceptMap. If the ConceptMap does not exist, it should be updated
+ */
+module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		// Validate the resource type before creating it
+		if (ConceptMap.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${ConceptMap.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new ConceptMap(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateConceptMap(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, ConceptMap.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an ConceptMap.
+ */
+module.exports.deleteConceptMap = function deleteConceptMap ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteConceptMap(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

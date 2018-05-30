@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getQuestionnaireResponse = ({ profile, logger, config, app }) => {
+module.exports.getQuestionnaireResponse = function getQuestionnaireResponse ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific questionnaireresponse & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
 
-		/**
-		* return service.getQuestionnaireResponse(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getQuestionnaireResponse(req, logger, context)
-			.then((questionnaireresponses) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (questionnaireresponses) {
-					for (let resource of questionnaireresponses) {
-						if (!req.questionnaireresponse || req.questionnaireresponse === resource.questionnaireresponseId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new QuestionnaireResponse(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/QuestionnaireResponse/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getQuestionnaireResponse(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, QuestionnaireResponse, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getQuestionnaireResponse = ({ profile, logger, config, app }) => 
 };
 
 
-module.exports.getQuestionnaireResponseById = ({ profile, logger, app }) => {
+module.exports.getQuestionnaireResponseById = function getQuestionnaireResponseById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific questionnaireresponse
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
 
-		return service.getQuestionnaireResponseById(req, logger, context)
-			.then((questionnaireresponse) => {
-				if (questionnaireresponse) {
-					res.status(200).json(new QuestionnaireResponse(questionnaireresponse));
-				} else {
-					next(errors.notFound('QuestionnaireResponse not found', version));
-				}
-			})
+		return service.getQuestionnaireResponseById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, QuestionnaireResponse, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating QuestionnaireResponse
+ */
+module.exports.createQuestionnaireResponse = function createQuestionnaireResponse ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		// Validate the resource type before creating it
+		if (QuestionnaireResponse.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${QuestionnaireResponse.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new QuestionnaireResponse(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createQuestionnaireResponse(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, QuestionnaireResponse.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating QuestionnaireResponse. If the QuestionnaireResponse does not exist, it should be updated
+ */
+module.exports.updateQuestionnaireResponse = function updateQuestionnaireResponse ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		// Validate the resource type before creating it
+		if (QuestionnaireResponse.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${QuestionnaireResponse.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new QuestionnaireResponse(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateQuestionnaireResponse(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, QuestionnaireResponse.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an QuestionnaireResponse.
+ */
+module.exports.deleteQuestionnaireResponse = function deleteQuestionnaireResponse ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteQuestionnaireResponse(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };

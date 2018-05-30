@@ -1,50 +1,24 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getList = ({ profile, logger, config, app }) => {
+module.exports.getList = function getList ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific list & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let List = require(resolveFromVersion(version, 'base/List'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let List = require(resolveFromVersion(version, 'uscore/List'));
 
-		/**
-		* return service.getList(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getList(req, logger, context)
-			.then((lists) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (lists) {
-					for (let resource of lists) {
-						if (!req.list || req.list === resource.listId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new List(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/List/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.getList(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, List, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
 			});
 	};
@@ -52,26 +26,105 @@ module.exports.getList = ({ profile, logger, config, app }) => {
 };
 
 
-module.exports.getListById = ({ profile, logger, app }) => {
+module.exports.getListById = function getListById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific list
-		let List = require(resolveFromVersion(version, 'base/List'));
+		let { version } = req.sanitized_args;
+		// Get a version specific resource
+		let List = require(resolveFromVersion(version, 'uscore/List'));
 
-		return service.getListById(req, logger, context)
-			.then((list) => {
-				if (list) {
-					res.status(200).json(new List(list));
-				} else {
-					next(errors.notFound('List not found', version));
-				}
-			})
+		return service.getListById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, List, results)
+			)
 			.catch((err) => {
+				logger.error(err);
 				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating List
+ */
+module.exports.createList = function createList ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let List = require(resolveFromVersion(version, 'uscore/List'));
+		// Validate the resource type before creating it
+		if (List.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${List.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new List(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.createList(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, version, List.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating List. If the List does not exist, it should be updated
+ */
+module.exports.updateList = function updateList ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, resource_body, resource_id } = req.sanitized_args;
+		// Get a version specific resource
+		let List = require(resolveFromVersion(version, 'uscore/List'));
+		// Validate the resource type before creating it
+		if (List.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${List.__resourceType}', received '${resource_body.resourceType}'`,
+				version
+			));
+		}
+		// Create a new resource and pass it to the service
+		let newResource = new List(resource_body);
+		let args = { id: resource_id, resource: newResource };
+		// Pass any new information to the underlying service
+		return service.updateList(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, version, List.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an List.
+ */
+module.exports.deleteList = function deleteList ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+
+		return service.deleteList(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, version, err);
 			});
 	};
 };
