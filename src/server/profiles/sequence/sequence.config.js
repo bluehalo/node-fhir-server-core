@@ -1,20 +1,20 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
-const resource_args = require('./sequence.arguments');
+const resource_specific_args = require('./sequence.arguments');
 const controller = require('./sequence.controller');
 
 let write_only_scopes = write_scopes('Sequence');
 let read_only_scopes = read_scopes('Sequence');
 
-let commonArgsArray = Object.getOwnPropertyNames(common_args)
+let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
 
-let resourceArgsArray = Object.getOwnPropertyNames(resource_args)
-	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_args[arg_name]));
+let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resourceAllArguments = [
-	route_args.VERSION,	...commonArgsArray, ...resourceArgsArray,
+	route_args.VERSION,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
