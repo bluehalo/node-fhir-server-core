@@ -63,8 +63,8 @@ module.exports.createActivityDefinition = function createActivityDefinition ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ActivityDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ActivityDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createActivityDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateActivityDefinition = function updateActivityDefinition ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ActivityDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ActivityDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateActivityDefinition(args, logger)
 			.then((results) =>

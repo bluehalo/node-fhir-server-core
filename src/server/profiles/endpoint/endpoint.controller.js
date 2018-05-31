@@ -63,8 +63,8 @@ module.exports.createEndPoint = function createEndPoint ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EndPoint(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EndPoint(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createEndPoint(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateEndPoint = function updateEndPoint ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EndPoint(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EndPoint(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateEndPoint(args, logger)
 			.then((results) =>

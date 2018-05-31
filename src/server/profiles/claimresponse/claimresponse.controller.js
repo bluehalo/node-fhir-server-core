@@ -63,8 +63,8 @@ module.exports.createClaimResponse = function createClaimResponse ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ClaimResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ClaimResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createClaimResponse(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateClaimResponse = function updateClaimResponse ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ClaimResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ClaimResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateClaimResponse(args, logger)
 			.then((results) =>

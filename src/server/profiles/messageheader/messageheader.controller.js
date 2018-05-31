@@ -63,8 +63,8 @@ module.exports.createMessageHeader = function createMessageHeader ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MessageHeader(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MessageHeader(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMessageHeader(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMessageHeader = function updateMessageHeader ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MessageHeader(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MessageHeader(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMessageHeader(args, logger)
 			.then((results) =>

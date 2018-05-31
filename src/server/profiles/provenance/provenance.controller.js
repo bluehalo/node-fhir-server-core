@@ -63,8 +63,8 @@ module.exports.createProvenance = function createProvenance ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Provenance(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Provenance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createProvenance(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateProvenance = function updateProvenance ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Provenance(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Provenance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateProvenance(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createExplanationOfBenefit = function createExplanationOfBenefit 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ExplanationOfBenefit(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ExplanationOfBenefit(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createExplanationOfBenefit(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateExplanationOfBenefit = function updateExplanationOfBenefit 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ExplanationOfBenefit(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ExplanationOfBenefit(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateExplanationOfBenefit(args, logger)
 			.then((results) =>

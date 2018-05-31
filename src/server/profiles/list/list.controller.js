@@ -63,8 +63,8 @@ module.exports.createList = function createList ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new List(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new List(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createList(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateList = function updateList ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new List(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new List(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateList(args, logger)
 			.then((results) =>

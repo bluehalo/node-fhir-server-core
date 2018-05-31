@@ -63,8 +63,8 @@ module.exports.createChargeItem = function createChargeItem ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ChargeItem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ChargeItem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createChargeItem(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateChargeItem = function updateChargeItem ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ChargeItem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ChargeItem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateChargeItem(args, logger)
 			.then((results) =>

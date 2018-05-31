@@ -63,8 +63,8 @@ module.exports.createSlot = function createSlot ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Slot(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Slot(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSlot(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSlot = function updateSlot ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Slot(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Slot(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSlot(args, logger)
 			.then((results) =>

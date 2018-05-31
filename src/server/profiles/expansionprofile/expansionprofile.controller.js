@@ -63,8 +63,8 @@ module.exports.createExpansionProfile = function createExpansionProfile ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ExpansionProfile(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ExpansionProfile(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createExpansionProfile(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateExpansionProfile = function updateExpansionProfile ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ExpansionProfile(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ExpansionProfile(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateExpansionProfile(args, logger)
 			.then((results) =>

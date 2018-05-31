@@ -63,8 +63,8 @@ module.exports.createCommunication = function createCommunication ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Communication(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Communication(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createCommunication(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateCommunication = function updateCommunication ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Communication(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Communication(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateCommunication(args, logger)
 			.then((results) =>

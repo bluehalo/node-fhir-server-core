@@ -63,8 +63,8 @@ module.exports.createGraphDefinition = function createGraphDefinition ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new GraphDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new GraphDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createGraphDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateGraphDefinition = function updateGraphDefinition ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new GraphDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new GraphDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateGraphDefinition(args, logger)
 			.then((results) =>

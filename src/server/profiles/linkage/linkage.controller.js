@@ -63,8 +63,8 @@ module.exports.createLinkage = function createLinkage ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Linkage(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Linkage(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createLinkage(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateLinkage = function updateLinkage ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Linkage(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Linkage(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateLinkage(args, logger)
 			.then((results) =>

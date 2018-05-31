@@ -63,8 +63,8 @@ module.exports.createComposition = function createComposition ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Composition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Composition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createComposition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateComposition = function updateComposition ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Composition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Composition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateComposition(args, logger)
 			.then((results) =>

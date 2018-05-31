@@ -63,8 +63,8 @@ module.exports.createSpecimen = function createSpecimen ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Specimen(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Specimen(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSpecimen(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSpecimen = function updateSpecimen ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Specimen(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Specimen(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSpecimen(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createNutritionOrder = function createNutritionOrder ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new NutritionOrder(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new NutritionOrder(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createNutritionOrder(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateNutritionOrder = function updateNutritionOrder ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new NutritionOrder(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new NutritionOrder(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateNutritionOrder(args, logger)
 			.then((results) =>

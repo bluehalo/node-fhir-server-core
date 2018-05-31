@@ -63,8 +63,8 @@ module.exports.createVisionPrescription = function createVisionPrescription ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new VisionPrescription(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new VisionPrescription(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createVisionPrescription(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateVisionPrescription = function updateVisionPrescription ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new VisionPrescription(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new VisionPrescription(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateVisionPrescription(args, logger)
 			.then((results) =>

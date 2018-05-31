@@ -63,8 +63,8 @@ module.exports.createMessageDefinition = function createMessageDefinition ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MessageDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MessageDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMessageDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMessageDefinition = function updateMessageDefinition ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MessageDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MessageDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMessageDefinition(args, logger)
 			.then((results) =>

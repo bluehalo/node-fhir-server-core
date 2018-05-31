@@ -63,8 +63,8 @@ module.exports.createCoverage = function createCoverage ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Coverage(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Coverage(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createCoverage(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateCoverage = function updateCoverage ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Coverage(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Coverage(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateCoverage(args, logger)
 			.then((results) =>

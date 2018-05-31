@@ -63,8 +63,8 @@ module.exports.createStructureMap = function createStructureMap ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new StructureMap(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new StructureMap(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createStructureMap(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateStructureMap = function updateStructureMap ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new StructureMap(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new StructureMap(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateStructureMap(args, logger)
 			.then((results) =>

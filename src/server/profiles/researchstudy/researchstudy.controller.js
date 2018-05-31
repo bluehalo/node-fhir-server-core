@@ -63,8 +63,8 @@ module.exports.createResearchStudy = function createResearchStudy ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ResearchStudy(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ResearchStudy(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createResearchStudy(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateResearchStudy = function updateResearchStudy ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ResearchStudy(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ResearchStudy(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateResearchStudy(args, logger)
 			.then((results) =>

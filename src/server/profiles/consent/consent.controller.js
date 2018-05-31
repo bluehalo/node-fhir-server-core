@@ -63,8 +63,8 @@ module.exports.createConsent = function createConsent ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Consent(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Consent(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createConsent(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateConsent = function updateConsent ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Consent(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Consent(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateConsent(args, logger)
 			.then((results) =>

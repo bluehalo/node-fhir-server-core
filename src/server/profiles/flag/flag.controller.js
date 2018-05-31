@@ -63,8 +63,8 @@ module.exports.createFlag = function createFlag ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Flag(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Flag(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createFlag(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateFlag = function updateFlag ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Flag(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Flag(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateFlag(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createMeasureReport = function createMeasureReport ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MeasureReport(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MeasureReport(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMeasureReport(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMeasureReport = function updateMeasureReport ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MeasureReport(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MeasureReport(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMeasureReport(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createMedicationRequest = function createMedicationRequest ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MedicationRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMedicationRequest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMedicationRequest = function updateMedicationRequest ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MedicationRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMedicationRequest(args, logger)
 			.then((results) =>

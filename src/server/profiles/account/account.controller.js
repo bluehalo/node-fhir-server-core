@@ -63,8 +63,8 @@ module.exports.createAccount = function createAccount ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Account(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Account(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createAccount(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateAccount = function updateAccount ({ profile, logger, app })
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Account(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Account(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateAccount(args, logger)
 			.then((results) =>

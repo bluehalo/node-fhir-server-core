@@ -63,8 +63,8 @@ module.exports.createContract = function createContract ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Contract(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Contract(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createContract(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateContract = function updateContract ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Contract(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Contract(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateContract(args, logger)
 			.then((results) =>

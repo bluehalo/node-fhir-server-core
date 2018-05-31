@@ -63,8 +63,8 @@ module.exports.createServiceDefinition = function createServiceDefinition ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ServiceDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ServiceDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createServiceDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateServiceDefinition = function updateServiceDefinition ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ServiceDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ServiceDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateServiceDefinition(args, logger)
 			.then((results) =>

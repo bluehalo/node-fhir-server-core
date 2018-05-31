@@ -63,8 +63,8 @@ module.exports.createDeviceUseStatement = function createDeviceUseStatement ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceUseStatement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceUseStatement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDeviceUseStatement(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDeviceUseStatement = function updateDeviceUseStatement ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceUseStatement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceUseStatement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDeviceUseStatement(args, logger)
 			.then((results) =>

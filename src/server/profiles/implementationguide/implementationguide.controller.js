@@ -63,8 +63,8 @@ module.exports.createImplementationGuide = function createImplementationGuide ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImplementationGuide(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImplementationGuide(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createImplementationGuide(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateImplementationGuide = function updateImplementationGuide ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImplementationGuide(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImplementationGuide(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateImplementationGuide(args, logger)
 			.then((results) =>

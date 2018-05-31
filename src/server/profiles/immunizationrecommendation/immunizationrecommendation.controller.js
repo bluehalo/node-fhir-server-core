@@ -63,8 +63,8 @@ module.exports.createImmunizationRecommendation = function createImmunizationRec
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImmunizationRecommendation(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImmunizationRecommendation(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createImmunizationRecommendation(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateImmunizationRecommendation = function updateImmunizationRec
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImmunizationRecommendation(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImmunizationRecommendation(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateImmunizationRecommendation(args, logger)
 			.then((results) =>

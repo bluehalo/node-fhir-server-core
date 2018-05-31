@@ -63,8 +63,8 @@ module.exports.createClinicalImpression = function createClinicalImpression ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ClinicalImpression(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ClinicalImpression(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createClinicalImpression(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateClinicalImpression = function updateClinicalImpression ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ClinicalImpression(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ClinicalImpression(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateClinicalImpression(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createImagingManifest = function createImagingManifest ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImagingManifest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImagingManifest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createImagingManifest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateImagingManifest = function updateImagingManifest ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImagingManifest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImagingManifest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateImagingManifest(args, logger)
 			.then((results) =>

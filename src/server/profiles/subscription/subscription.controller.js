@@ -63,8 +63,8 @@ module.exports.createSubscription = function createSubscription ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Subscription(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Subscription(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSubscription(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSubscription = function updateSubscription ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Subscription(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Subscription(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSubscription(args, logger)
 			.then((results) =>

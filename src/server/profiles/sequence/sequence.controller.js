@@ -63,8 +63,8 @@ module.exports.createSequence = function createSequence ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Sequence(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Sequence(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSequence(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSequence = function updateSequence ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Sequence(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Sequence(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSequence(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createSearchParameter = function createSearchParameter ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new SearchParameter(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new SearchParameter(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSearchParameter(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSearchParameter = function updateSearchParameter ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new SearchParameter(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new SearchParameter(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSearchParameter(args, logger)
 			.then((results) =>

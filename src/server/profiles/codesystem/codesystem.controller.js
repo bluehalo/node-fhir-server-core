@@ -63,8 +63,8 @@ module.exports.createCodeSystem = function createCodeSystem ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new CodeSystem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new CodeSystem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createCodeSystem(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateCodeSystem = function updateCodeSystem ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new CodeSystem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new CodeSystem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateCodeSystem(args, logger)
 			.then((results) =>

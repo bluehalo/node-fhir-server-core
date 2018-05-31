@@ -63,8 +63,8 @@ module.exports.createPaymentNotice = function createPaymentNotice ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PaymentNotice(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PaymentNotice(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createPaymentNotice(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updatePaymentNotice = function updatePaymentNotice ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PaymentNotice(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PaymentNotice(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updatePaymentNotice(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createCapabilityStatement = function createCapabilityStatement ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new CapabilityStatement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new CapabilityStatement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createCapabilityStatement(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateCapabilityStatement = function updateCapabilityStatement ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new CapabilityStatement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new CapabilityStatement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateCapabilityStatement(args, logger)
 			.then((results) =>

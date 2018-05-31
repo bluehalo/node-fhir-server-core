@@ -63,8 +63,8 @@ module.exports.createGroup = function createGroup ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Group(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Group(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createGroup(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateGroup = function updateGroup ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Group(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Group(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateGroup(args, logger)
 			.then((results) =>

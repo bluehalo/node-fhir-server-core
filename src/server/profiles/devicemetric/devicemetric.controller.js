@@ -63,8 +63,8 @@ module.exports.createDeviceMetric = function createDeviceMetric ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceMetric(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceMetric(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDeviceMetric(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDeviceMetric = function updateDeviceMetric ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceMetric(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceMetric(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDeviceMetric(args, logger)
 			.then((results) =>

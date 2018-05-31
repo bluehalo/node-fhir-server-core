@@ -63,8 +63,8 @@ module.exports.createSubstance = function createSubstance ({ profile, logger, ap
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Substance(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Substance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSubstance(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSubstance = function updateSubstance ({ profile, logger, ap
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Substance(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Substance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSubstance(args, logger)
 			.then((results) =>

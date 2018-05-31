@@ -63,8 +63,8 @@ module.exports.createBasic = function createBasic ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Basic(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Basic(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createBasic(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateBasic = function updateBasic ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Basic(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Basic(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateBasic(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createProcessResponse = function createProcessResponse ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ProcessResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ProcessResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createProcessResponse(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateProcessResponse = function updateProcessResponse ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ProcessResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ProcessResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateProcessResponse(args, logger)
 			.then((results) =>

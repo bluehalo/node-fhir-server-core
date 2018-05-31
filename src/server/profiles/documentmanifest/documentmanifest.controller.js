@@ -63,8 +63,8 @@ module.exports.createDocumentManifest = function createDocumentManifest ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DocumentManifest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DocumentManifest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDocumentManifest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDocumentManifest = function updateDocumentManifest ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DocumentManifest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DocumentManifest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDocumentManifest(args, logger)
 			.then((results) =>

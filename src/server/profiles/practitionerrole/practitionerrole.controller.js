@@ -63,8 +63,8 @@ module.exports.createPractitionerRole = function createPractitionerRole ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PractitionerRole(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PractitionerRole(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createPractitionerRole(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updatePractitionerRole = function updatePractitionerRole ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PractitionerRole(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PractitionerRole(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updatePractitionerRole(args, logger)
 			.then((results) =>

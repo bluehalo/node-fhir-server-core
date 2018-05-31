@@ -63,8 +63,8 @@ module.exports.createTask = function createTask ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Task(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Task(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createTask(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateTask = function updateTask ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Task(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Task(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateTask(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createSchedule = function createSchedule ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Schedule(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Schedule(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSchedule(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSchedule = function updateSchedule ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Schedule(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Schedule(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSchedule(args, logger)
 			.then((results) =>

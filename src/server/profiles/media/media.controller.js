@@ -63,8 +63,8 @@ module.exports.createMedia = function createMedia ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Media(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Media(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMedia(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMedia = function updateMedia ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Media(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Media(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMedia(args, logger)
 			.then((results) =>

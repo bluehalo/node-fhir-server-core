@@ -63,8 +63,8 @@ module.exports.createPlanDefinition = function createPlanDefinition ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PlanDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PlanDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createPlanDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updatePlanDefinition = function updatePlanDefinition ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new PlanDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new PlanDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updatePlanDefinition(args, logger)
 			.then((results) =>

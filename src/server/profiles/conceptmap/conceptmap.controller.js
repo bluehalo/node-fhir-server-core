@@ -63,8 +63,8 @@ module.exports.createConceptMap = function createConceptMap ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ConceptMap(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ConceptMap(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createConceptMap(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ConceptMap(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ConceptMap(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateConceptMap(args, logger)
 			.then((results) =>

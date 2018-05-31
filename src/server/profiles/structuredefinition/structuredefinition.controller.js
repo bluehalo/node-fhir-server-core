@@ -63,8 +63,8 @@ module.exports.createStructureDefinition = function createStructureDefinition ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new StructureDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new StructureDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createStructureDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateStructureDefinition = function updateStructureDefinition ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new StructureDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new StructureDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateStructureDefinition(args, logger)
 			.then((results) =>

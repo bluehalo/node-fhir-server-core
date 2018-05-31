@@ -63,8 +63,8 @@ module.exports.createDataElement = function createDataElement ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DataElement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DataElement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDataElement(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDataElement = function updateDataElement ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DataElement(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DataElement(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDataElement(args, logger)
 			.then((results) =>

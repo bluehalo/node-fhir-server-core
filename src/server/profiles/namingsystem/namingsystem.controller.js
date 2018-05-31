@@ -63,8 +63,8 @@ module.exports.createNamingSystem = function createNamingSystem ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new NamingSystem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new NamingSystem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createNamingSystem(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateNamingSystem = function updateNamingSystem ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new NamingSystem(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new NamingSystem(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateNamingSystem(args, logger)
 			.then((results) =>

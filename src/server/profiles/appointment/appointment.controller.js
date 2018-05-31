@@ -63,8 +63,8 @@ module.exports.createAppointment = function createAppointment ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Appointment(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Appointment(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createAppointment(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateAppointment = function updateAppointment ({ profile, logger
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Appointment(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Appointment(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateAppointment(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createDeviceRequest = function createDeviceRequest ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDeviceRequest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDeviceRequest = function updateDeviceRequest ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DeviceRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DeviceRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDeviceRequest(args, logger)
 			.then((results) =>

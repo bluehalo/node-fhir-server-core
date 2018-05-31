@@ -63,8 +63,8 @@ module.exports.createOperationDefinition = function createOperationDefinition ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new OperationDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new OperationDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createOperationDefinition(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateOperationDefinition = function updateOperationDefinition ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new OperationDefinition(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new OperationDefinition(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateOperationDefinition(args, logger)
 			.then((results) =>

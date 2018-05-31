@@ -63,8 +63,8 @@ module.exports.createBodySite = function createBodySite ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new BodySite(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new BodySite(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createBodySite(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateBodySite = function updateBodySite ({ profile, logger, app 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new BodySite(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new BodySite(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateBodySite(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createEligibilityResponse = function createEligibilityResponse ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EligibilityResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EligibilityResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createEligibilityResponse(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateEligibilityResponse = function updateEligibilityResponse ({
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EligibilityResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EligibilityResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateEligibilityResponse(args, logger)
 			.then((results) =>

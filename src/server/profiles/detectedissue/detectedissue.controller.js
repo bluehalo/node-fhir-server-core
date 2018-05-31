@@ -63,8 +63,8 @@ module.exports.createDetectedIssue = function createDetectedIssue ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DetectedIssue(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DetectedIssue(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createDetectedIssue(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateDetectedIssue = function updateDetectedIssue ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new DetectedIssue(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new DetectedIssue(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDetectedIssue(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createHealthcareService = function createHealthcareService ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new HealthcareService(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new HealthcareService(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createHealthcareService(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateHealthcareService = function updateHealthcareService ({ pro
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new HealthcareService(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new HealthcareService(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateHealthcareService(args, logger)
 			.then((results) =>

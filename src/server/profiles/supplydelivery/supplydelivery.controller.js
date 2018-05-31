@@ -63,8 +63,8 @@ module.exports.createSupplyDelivery = function createSupplyDelivery ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new SupplyDelivery(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new SupplyDelivery(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createSupplyDelivery(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateSupplyDelivery = function updateSupplyDelivery ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new SupplyDelivery(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new SupplyDelivery(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSupplyDelivery(args, logger)
 			.then((results) =>

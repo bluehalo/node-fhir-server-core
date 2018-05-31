@@ -63,8 +63,8 @@ module.exports.createEpisodeOfCare = function createEpisodeOfCare ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EpisodeOfCare(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EpisodeOfCare(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createEpisodeOfCare(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateEpisodeOfCare = function updateEpisodeOfCare ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EpisodeOfCare(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EpisodeOfCare(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateEpisodeOfCare(args, logger)
 			.then((results) =>

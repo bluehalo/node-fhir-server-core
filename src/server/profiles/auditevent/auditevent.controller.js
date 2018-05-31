@@ -63,8 +63,8 @@ module.exports.createAuditEvent = function createAuditEvent ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new AuditEvent(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new AuditEvent(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createAuditEvent(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateAuditEvent = function updateAuditEvent ({ profile, logger, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new AuditEvent(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new AuditEvent(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateAuditEvent(args, logger)
 			.then((results) =>

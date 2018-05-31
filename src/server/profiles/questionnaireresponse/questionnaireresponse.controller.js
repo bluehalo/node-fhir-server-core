@@ -63,8 +63,8 @@ module.exports.createQuestionnaireResponse = function createQuestionnaireRespons
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new QuestionnaireResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new QuestionnaireResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createQuestionnaireResponse(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateQuestionnaireResponse = function updateQuestionnaireRespons
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new QuestionnaireResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new QuestionnaireResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateQuestionnaireResponse(args, logger)
 			.then((results) =>

@@ -63,8 +63,8 @@ module.exports.createEnrollmentResponse = function createEnrollmentResponse ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EnrollmentResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EnrollmentResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createEnrollmentResponse(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateEnrollmentResponse = function updateEnrollmentResponse ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new EnrollmentResponse(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new EnrollmentResponse(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateEnrollmentResponse(args, logger)
 			.then((results) =>

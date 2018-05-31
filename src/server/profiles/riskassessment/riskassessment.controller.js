@@ -63,8 +63,8 @@ module.exports.createRiskAssessment = function createRiskAssessment ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new RiskAssessment(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new RiskAssessment(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createRiskAssessment(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateRiskAssessment = function updateRiskAssessment ({ profile, 
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new RiskAssessment(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new RiskAssessment(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateRiskAssessment(args, logger)
 			.then((results) =>

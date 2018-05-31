@@ -63,8 +63,8 @@ module.exports.createImagingStudy = function createImagingStudy ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImagingStudy(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImagingStudy(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createImagingStudy(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateImagingStudy = function updateImagingStudy ({ profile, logg
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ImagingStudy(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ImagingStudy(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateImagingStudy(args, logger)
 			.then((results) =>

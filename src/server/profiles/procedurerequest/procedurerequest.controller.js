@@ -63,8 +63,8 @@ module.exports.createProcedureRequest = function createProcedureRequest ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ProcedureRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ProcedureRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createProcedureRequest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateProcedureRequest = function updateProcedureRequest ({ profi
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ProcedureRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ProcedureRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateProcedureRequest(args, logger)
 			.then((results) =>

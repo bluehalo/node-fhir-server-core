@@ -63,8 +63,8 @@ module.exports.createMedicationDispense = function createMedicationDispense ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MedicationDispense(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MedicationDispense(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMedicationDispense(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateMedicationDispense = function updateMedicationDispense ({ p
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new MedicationDispense(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new MedicationDispense(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMedicationDispense(args, logger)
 			.then((results) =>

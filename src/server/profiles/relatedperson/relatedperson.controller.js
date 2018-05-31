@@ -63,8 +63,8 @@ module.exports.createRelatedPerson = function createRelatedPerson ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new RelatedPerson(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new RelatedPerson(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createRelatedPerson(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateRelatedPerson = function updateRelatedPerson ({ profile, lo
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new RelatedPerson(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new RelatedPerson(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateRelatedPerson(args, logger)
 			.then((results) =>

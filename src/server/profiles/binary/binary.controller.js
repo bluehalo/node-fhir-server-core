@@ -63,8 +63,8 @@ module.exports.createBinary = function createBinary ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Binary(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Binary(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createBinary(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateBinary = function updateBinary ({ profile, logger, app }) {
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new Binary(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new Binary(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateBinary(args, logger)
 			.then((results) =>

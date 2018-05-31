@@ -63,8 +63,8 @@ module.exports.createReferralRequest = function createReferralRequest ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ReferralRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ReferralRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createReferralRequest(args, logger)
 			.then((results) =>
@@ -95,8 +95,8 @@ module.exports.updateReferralRequest = function updateReferralRequest ({ profile
 			));
 		}
 		// Create a new resource and pass it to the service
-		let newResource = new ReferralRequest(resource_body);
-		let args = { id: resource_id, resource: newResource };
+		let new_resource = new ReferralRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateReferralRequest(args, logger)
 			.then((results) =>
