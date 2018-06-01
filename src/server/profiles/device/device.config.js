@@ -14,7 +14,7 @@ let common_args_array = Object.getOwnPropertyNames(common_args)
 let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
-const resourceAllArguments = [
+const resource_all_arguments = [
 	route_args.VERSION,	...common_args_array, ...resource_args_array,
 ];
 
@@ -22,14 +22,14 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:version/device',
-		args: resourceAllArguments,
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getDevice
 	},
 	{
 		type: 'post',
 		path: '/:version/device/_search',
-		args: resourceAllArguments,
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getDevice
 	},
