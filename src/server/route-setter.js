@@ -48,6 +48,29 @@ function routeHasValidService (route, profile = {}) {
 	return true;
 }
 
+/**
+* @description Noop middleware for express
+*/
+function noOpMiddleware (req, res, next) {
+	return next();
+}
+
+/**
+* @description Validation Middleware Wrapper
+*/
+function authenticationMiddleware (options) {
+	let { routeOptions, scopes, logger, config } = options;
+	// Don't do any validation for testing
+	if (process.env.NODE_ENV === 'test') {
+		return noOpMiddleware;
+	}
+	// Don't validate the metadata route
+	if (routeOptions.isMetadata) {
+		return noOpMiddleware;
+	}
+	// Use the validation middleware
+	return validate(scopes, logger, config);
+}
 
 
 // Step 1
@@ -127,7 +150,7 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				routeOptions.isMetadata ? function(req, res, next) { return next(); } : validate(route.scopes, logger, config),
+				authenticationMiddleware({ routeOptions, config, logger, scopes: route.scopes }),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);
