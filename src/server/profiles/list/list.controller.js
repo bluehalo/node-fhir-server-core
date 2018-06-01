@@ -9,7 +9,7 @@ module.exports.getList = function getList ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let List = require(resolveFromVersion(version, 'uscore/List'));
+		let List = require(resolveFromVersion(version, 'base/List'));
 
 		return service.getList(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getListById = function getListById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let List = require(resolveFromVersion(version, 'uscore/List'));
+		let List = require(resolveFromVersion(version, 'base/List'));
 
 		return service.getListById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createList = function createList ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let List = require(resolveFromVersion(version, 'uscore/List'));
+		let List = require(resolveFromVersion(version, 'base/List'));
 		// Validate the resource type before creating it
 		if (List.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateList = function updateList ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let List = require(resolveFromVersion(version, 'uscore/List'));
+		let List = require(resolveFromVersion(version, 'base/List'));
 		// Validate the resource type before creating it
 		if (List.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

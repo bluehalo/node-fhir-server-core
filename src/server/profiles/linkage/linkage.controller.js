@@ -9,7 +9,7 @@ module.exports.getLinkage = function getLinkage ({ profile, logger, config, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Linkage = require(resolveFromVersion(version, 'uscore/Linkage'));
+		let Linkage = require(resolveFromVersion(version, 'base/Linkage'));
 
 		return service.getLinkage(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getLinkageById = function getLinkageById ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Linkage = require(resolveFromVersion(version, 'uscore/Linkage'));
+		let Linkage = require(resolveFromVersion(version, 'base/Linkage'));
 
 		return service.getLinkageById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createLinkage = function createLinkage ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Linkage = require(resolveFromVersion(version, 'uscore/Linkage'));
+		let Linkage = require(resolveFromVersion(version, 'base/Linkage'));
 		// Validate the resource type before creating it
 		if (Linkage.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateLinkage = function updateLinkage ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Linkage = require(resolveFromVersion(version, 'uscore/Linkage'));
+		let Linkage = require(resolveFromVersion(version, 'base/Linkage'));
 		// Validate the resource type before creating it
 		if (Linkage.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

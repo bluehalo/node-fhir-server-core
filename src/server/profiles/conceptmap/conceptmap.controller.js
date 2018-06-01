@@ -9,7 +9,7 @@ module.exports.getConceptMap = function getConceptMap ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 
 		return service.getConceptMap(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getConceptMapById = function getConceptMapById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 
 		return service.getConceptMapById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createConceptMap = function createConceptMap ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 		// Validate the resource type before creating it
 		if (ConceptMap.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ConceptMap = require(resolveFromVersion(version, 'uscore/ConceptMap'));
+		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 		// Validate the resource type before creating it
 		if (ConceptMap.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

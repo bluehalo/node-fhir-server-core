@@ -9,7 +9,7 @@ module.exports.getVisionPrescription = function getVisionPrescription ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let VisionPrescription = require(resolveFromVersion(version, 'uscore/VisionPrescription'));
+		let VisionPrescription = require(resolveFromVersion(version, 'base/VisionPrescription'));
 
 		return service.getVisionPrescription(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getVisionPrescriptionById = function getVisionPrescriptionById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let VisionPrescription = require(resolveFromVersion(version, 'uscore/VisionPrescription'));
+		let VisionPrescription = require(resolveFromVersion(version, 'base/VisionPrescription'));
 
 		return service.getVisionPrescriptionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createVisionPrescription = function createVisionPrescription ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let VisionPrescription = require(resolveFromVersion(version, 'uscore/VisionPrescription'));
+		let VisionPrescription = require(resolveFromVersion(version, 'base/VisionPrescription'));
 		// Validate the resource type before creating it
 		if (VisionPrescription.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateVisionPrescription = function updateVisionPrescription ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let VisionPrescription = require(resolveFromVersion(version, 'uscore/VisionPrescription'));
+		let VisionPrescription = require(resolveFromVersion(version, 'base/VisionPrescription'));
 		// Validate the resource type before creating it
 		if (VisionPrescription.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getAppointmentResponse = function getAppointmentResponse ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(version, 'base/AppointmentResponse'));
 
 		return service.getAppointmentResponse(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getAppointmentResponseById = function getAppointmentResponseById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(version, 'base/AppointmentResponse'));
 
 		return service.getAppointmentResponseById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createAppointmentResponse = function createAppointmentResponse ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(version, 'base/AppointmentResponse'));
 		// Validate the resource type before creating it
 		if (AppointmentResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateAppointmentResponse = function updateAppointmentResponse ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(version, 'base/AppointmentResponse'));
 		// Validate the resource type before creating it
 		if (AppointmentResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

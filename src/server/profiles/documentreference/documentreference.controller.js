@@ -9,7 +9,7 @@ module.exports.getDocumentReference = function getDocumentReference ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentReference = require(resolveFromVersion(version, 'uscore/DocumentReference'));
+		let DocumentReference = require(resolveFromVersion(version, 'base/DocumentReference'));
 
 		return service.getDocumentReference(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDocumentReferenceById = function getDocumentReferenceById ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentReference = require(resolveFromVersion(version, 'uscore/DocumentReference'));
+		let DocumentReference = require(resolveFromVersion(version, 'base/DocumentReference'));
 
 		return service.getDocumentReferenceById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDocumentReference = function createDocumentReference ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentReference = require(resolveFromVersion(version, 'uscore/DocumentReference'));
+		let DocumentReference = require(resolveFromVersion(version, 'base/DocumentReference'));
 		// Validate the resource type before creating it
 		if (DocumentReference.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDocumentReference = function updateDocumentReference ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentReference = require(resolveFromVersion(version, 'uscore/DocumentReference'));
+		let DocumentReference = require(resolveFromVersion(version, 'base/DocumentReference'));
 		// Validate the resource type before creating it
 		if (DocumentReference.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

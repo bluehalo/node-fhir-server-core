@@ -9,7 +9,7 @@ module.exports.getNamingSystem = function getNamingSystem ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
 
 		return service.getNamingSystem(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getNamingSystemById = function getNamingSystemById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
 
 		return service.getNamingSystemById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createNamingSystem = function createNamingSystem ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
 		// Validate the resource type before creating it
 		if (NamingSystem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateNamingSystem = function updateNamingSystem ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let NamingSystem = require(resolveFromVersion(version, 'uscore/NamingSystem'));
+		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
 		// Validate the resource type before creating it
 		if (NamingSystem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

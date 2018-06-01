@@ -9,7 +9,7 @@ module.exports.getFamilyMemberHistory = function getFamilyMemberHistory ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
 
 		return service.getFamilyMemberHistory(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getFamilyMemberHistoryById = function getFamilyMemberHistoryById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
 
 		return service.getFamilyMemberHistoryById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createFamilyMemberHistory = function createFamilyMemberHistory ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
 		// Validate the resource type before creating it
 		if (FamilyMemberHistory.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateFamilyMemberHistory = function updateFamilyMemberHistory ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'uscore/FamilyMemberHistory'));
+		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
 		// Validate the resource type before creating it
 		if (FamilyMemberHistory.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

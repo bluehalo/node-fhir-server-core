@@ -9,7 +9,7 @@ module.exports.getQuestionnaireResponse = function getQuestionnaireResponse ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
 
 		return service.getQuestionnaireResponse(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getQuestionnaireResponseById = function getQuestionnaireResponseB
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
 
 		return service.getQuestionnaireResponseById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createQuestionnaireResponse = function createQuestionnaireRespons
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
 		// Validate the resource type before creating it
 		if (QuestionnaireResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateQuestionnaireResponse = function updateQuestionnaireRespons
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let QuestionnaireResponse = require(resolveFromVersion(version, 'uscore/QuestionnaireResponse'));
+		let QuestionnaireResponse = require(resolveFromVersion(version, 'base/QuestionnaireResponse'));
 		// Validate the resource type before creating it
 		if (QuestionnaireResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

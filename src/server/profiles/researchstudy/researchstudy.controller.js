@@ -9,7 +9,7 @@ module.exports.getResearchStudy = function getResearchStudy ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ResearchStudy = require(resolveFromVersion(version, 'uscore/ResearchStudy'));
+		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 
 		return service.getResearchStudy(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getResearchStudyById = function getResearchStudyById ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ResearchStudy = require(resolveFromVersion(version, 'uscore/ResearchStudy'));
+		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 
 		return service.getResearchStudyById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createResearchStudy = function createResearchStudy ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ResearchStudy = require(resolveFromVersion(version, 'uscore/ResearchStudy'));
+		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 		// Validate the resource type before creating it
 		if (ResearchStudy.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateResearchStudy = function updateResearchStudy ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ResearchStudy = require(resolveFromVersion(version, 'uscore/ResearchStudy'));
+		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 		// Validate the resource type before creating it
 		if (ResearchStudy.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

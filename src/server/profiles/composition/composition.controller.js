@@ -9,7 +9,7 @@ module.exports.getComposition = function getComposition ({ profile, logger, conf
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Composition = require(resolveFromVersion(version, 'uscore/Composition'));
+		let Composition = require(resolveFromVersion(version, 'base/Composition'));
 
 		return service.getComposition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getCompositionById = function getCompositionById ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Composition = require(resolveFromVersion(version, 'uscore/Composition'));
+		let Composition = require(resolveFromVersion(version, 'base/Composition'));
 
 		return service.getCompositionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createComposition = function createComposition ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Composition = require(resolveFromVersion(version, 'uscore/Composition'));
+		let Composition = require(resolveFromVersion(version, 'base/Composition'));
 		// Validate the resource type before creating it
 		if (Composition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateComposition = function updateComposition ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Composition = require(resolveFromVersion(version, 'uscore/Composition'));
+		let Composition = require(resolveFromVersion(version, 'base/Composition'));
 		// Validate the resource type before creating it
 		if (Composition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getSpecimen = function getSpecimen ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Specimen = require(resolveFromVersion(version, 'uscore/Specimen'));
+		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 
 		return service.getSpecimen(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSpecimenById = function getSpecimenById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Specimen = require(resolveFromVersion(version, 'uscore/Specimen'));
+		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 
 		return service.getSpecimenById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSpecimen = function createSpecimen ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Specimen = require(resolveFromVersion(version, 'uscore/Specimen'));
+		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 		// Validate the resource type before creating it
 		if (Specimen.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSpecimen = function updateSpecimen ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Specimen = require(resolveFromVersion(version, 'uscore/Specimen'));
+		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 		// Validate the resource type before creating it
 		if (Specimen.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

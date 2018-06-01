@@ -9,7 +9,7 @@ module.exports.getLibrary = function getLibrary ({ profile, logger, config, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Library = require(resolveFromVersion(version, 'uscore/Library'));
+		let Library = require(resolveFromVersion(version, 'base/Library'));
 
 		return service.getLibrary(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getLibraryById = function getLibraryById ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Library = require(resolveFromVersion(version, 'uscore/Library'));
+		let Library = require(resolveFromVersion(version, 'base/Library'));
 
 		return service.getLibraryById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createLibrary = function createLibrary ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Library = require(resolveFromVersion(version, 'uscore/Library'));
+		let Library = require(resolveFromVersion(version, 'base/Library'));
 		// Validate the resource type before creating it
 		if (Library.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateLibrary = function updateLibrary ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Library = require(resolveFromVersion(version, 'uscore/Library'));
+		let Library = require(resolveFromVersion(version, 'base/Library'));
 		// Validate the resource type before creating it
 		if (Library.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

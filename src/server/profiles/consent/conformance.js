@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'consent',
 	resource: (version, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Consent = require(resolveFromVersion(version, 'base/Consent'));
+		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
 		// Return our conformance statement
 		return {
 			extension: [{

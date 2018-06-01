@@ -9,7 +9,7 @@ module.exports.getMedicationDispense = function getMedicationDispense ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 
 		return service.getMedicationDispense(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMedicationDispenseById = function getMedicationDispenseById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 
 		return service.getMedicationDispenseById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMedicationDispense = function createMedicationDispense ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 		// Validate the resource type before creating it
 		if (MedicationDispense.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMedicationDispense = function updateMedicationDispense ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationDispense = require(resolveFromVersion(version, 'uscore/MedicationDispense'));
+		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 		// Validate the resource type before creating it
 		if (MedicationDispense.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

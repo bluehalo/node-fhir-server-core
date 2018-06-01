@@ -9,7 +9,7 @@ module.exports.getSchedule = function getSchedule ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
 
 		return service.getSchedule(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getScheduleById = function getScheduleById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
 
 		return service.getScheduleById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSchedule = function createSchedule ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
 		// Validate the resource type before creating it
 		if (Schedule.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSchedule = function updateSchedule ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Schedule = require(resolveFromVersion(version, 'uscore/Schedule'));
+		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
 		// Validate the resource type before creating it
 		if (Schedule.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

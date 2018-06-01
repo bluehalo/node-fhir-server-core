@@ -9,7 +9,7 @@ module.exports.getGroup = function getGroup ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		let Group = require(resolveFromVersion(version, 'base/Group'));
 
 		return service.getGroup(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getGroupById = function getGroupById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		let Group = require(resolveFromVersion(version, 'base/Group'));
 
 		return service.getGroupById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createGroup = function createGroup ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		let Group = require(resolveFromVersion(version, 'base/Group'));
 		// Validate the resource type before creating it
 		if (Group.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateGroup = function updateGroup ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Group = require(resolveFromVersion(version, 'uscore/Group'));
+		let Group = require(resolveFromVersion(version, 'base/Group'));
 		// Validate the resource type before creating it
 		if (Group.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

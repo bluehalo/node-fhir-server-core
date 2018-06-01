@@ -9,7 +9,7 @@ module.exports.getStructureMap = function getStructureMap ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureMap = require(resolveFromVersion(version, 'uscore/StructureMap'));
+		let StructureMap = require(resolveFromVersion(version, 'base/StructureMap'));
 
 		return service.getStructureMap(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getStructureMapById = function getStructureMapById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureMap = require(resolveFromVersion(version, 'uscore/StructureMap'));
+		let StructureMap = require(resolveFromVersion(version, 'base/StructureMap'));
 
 		return service.getStructureMapById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createStructureMap = function createStructureMap ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureMap = require(resolveFromVersion(version, 'uscore/StructureMap'));
+		let StructureMap = require(resolveFromVersion(version, 'base/StructureMap'));
 		// Validate the resource type before creating it
 		if (StructureMap.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateStructureMap = function updateStructureMap ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureMap = require(resolveFromVersion(version, 'uscore/StructureMap'));
+		let StructureMap = require(resolveFromVersion(version, 'base/StructureMap'));
 		// Validate the resource type before creating it
 		if (StructureMap.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

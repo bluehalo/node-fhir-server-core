@@ -9,7 +9,7 @@ module.exports.getAppointment = function getAppointment ({ profile, logger, conf
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Appointment = require(resolveFromVersion(version, 'uscore/Appointment'));
+		let Appointment = require(resolveFromVersion(version, 'base/Appointment'));
 
 		return service.getAppointment(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getAppointmentById = function getAppointmentById ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Appointment = require(resolveFromVersion(version, 'uscore/Appointment'));
+		let Appointment = require(resolveFromVersion(version, 'base/Appointment'));
 
 		return service.getAppointmentById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createAppointment = function createAppointment ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Appointment = require(resolveFromVersion(version, 'uscore/Appointment'));
+		let Appointment = require(resolveFromVersion(version, 'base/Appointment'));
 		// Validate the resource type before creating it
 		if (Appointment.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateAppointment = function updateAppointment ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Appointment = require(resolveFromVersion(version, 'uscore/Appointment'));
+		let Appointment = require(resolveFromVersion(version, 'base/Appointment'));
 		// Validate the resource type before creating it
 		if (Appointment.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

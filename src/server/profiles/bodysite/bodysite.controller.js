@@ -9,7 +9,7 @@ module.exports.getBodySite = function getBodySite ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let BodySite = require(resolveFromVersion(version, 'uscore/BodySite'));
+		let BodySite = require(resolveFromVersion(version, 'base/BodySite'));
 
 		return service.getBodySite(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getBodySiteById = function getBodySiteById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let BodySite = require(resolveFromVersion(version, 'uscore/BodySite'));
+		let BodySite = require(resolveFromVersion(version, 'base/BodySite'));
 
 		return service.getBodySiteById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createBodySite = function createBodySite ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let BodySite = require(resolveFromVersion(version, 'uscore/BodySite'));
+		let BodySite = require(resolveFromVersion(version, 'base/BodySite'));
 		// Validate the resource type before creating it
 		if (BodySite.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateBodySite = function updateBodySite ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let BodySite = require(resolveFromVersion(version, 'uscore/BodySite'));
+		let BodySite = require(resolveFromVersion(version, 'base/BodySite'));
 		// Validate the resource type before creating it
 		if (BodySite.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

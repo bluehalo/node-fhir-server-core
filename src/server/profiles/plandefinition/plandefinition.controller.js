@@ -9,7 +9,7 @@ module.exports.getPlanDefinition = function getPlanDefinition ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(version, 'base/PlanDefinition'));
 
 		return service.getPlanDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getPlanDefinitionById = function getPlanDefinitionById ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(version, 'base/PlanDefinition'));
 
 		return service.getPlanDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createPlanDefinition = function createPlanDefinition ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(version, 'base/PlanDefinition'));
 		// Validate the resource type before creating it
 		if (PlanDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updatePlanDefinition = function updatePlanDefinition ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(version, 'base/PlanDefinition'));
 		// Validate the resource type before creating it
 		if (PlanDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

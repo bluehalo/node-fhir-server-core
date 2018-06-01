@@ -9,7 +9,7 @@ module.exports.getPractitionerRole = function getPractitionerRole ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PractitionerRole = require(resolveFromVersion(version, 'uscore/PractitionerRole'));
+		let PractitionerRole = require(resolveFromVersion(version, 'base/PractitionerRole'));
 
 		return service.getPractitionerRole(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getPractitionerRoleById = function getPractitionerRoleById ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PractitionerRole = require(resolveFromVersion(version, 'uscore/PractitionerRole'));
+		let PractitionerRole = require(resolveFromVersion(version, 'base/PractitionerRole'));
 
 		return service.getPractitionerRoleById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createPractitionerRole = function createPractitionerRole ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PractitionerRole = require(resolveFromVersion(version, 'uscore/PractitionerRole'));
+		let PractitionerRole = require(resolveFromVersion(version, 'base/PractitionerRole'));
 		// Validate the resource type before creating it
 		if (PractitionerRole.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updatePractitionerRole = function updatePractitionerRole ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PractitionerRole = require(resolveFromVersion(version, 'uscore/PractitionerRole'));
+		let PractitionerRole = require(resolveFromVersion(version, 'base/PractitionerRole'));
 		// Validate the resource type before creating it
 		if (PractitionerRole.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

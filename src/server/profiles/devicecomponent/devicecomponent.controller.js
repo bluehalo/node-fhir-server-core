@@ -9,7 +9,7 @@ module.exports.getDeviceComponent = function getDeviceComponent ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceComponent = require(resolveFromVersion(version, 'uscore/DeviceComponent'));
+		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 
 		return service.getDeviceComponent(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDeviceComponentById = function getDeviceComponentById ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceComponent = require(resolveFromVersion(version, 'uscore/DeviceComponent'));
+		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 
 		return service.getDeviceComponentById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDeviceComponent = function createDeviceComponent ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceComponent = require(resolveFromVersion(version, 'uscore/DeviceComponent'));
+		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 		// Validate the resource type before creating it
 		if (DeviceComponent.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDeviceComponent = function updateDeviceComponent ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceComponent = require(resolveFromVersion(version, 'uscore/DeviceComponent'));
+		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 		// Validate the resource type before creating it
 		if (DeviceComponent.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

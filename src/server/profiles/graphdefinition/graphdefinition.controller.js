@@ -9,7 +9,7 @@ module.exports.getGraphDefinition = function getGraphDefinition ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let GraphDefinition = require(resolveFromVersion(version, 'uscore/GraphDefinition'));
+		let GraphDefinition = require(resolveFromVersion(version, 'base/GraphDefinition'));
 
 		return service.getGraphDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getGraphDefinitionById = function getGraphDefinitionById ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let GraphDefinition = require(resolveFromVersion(version, 'uscore/GraphDefinition'));
+		let GraphDefinition = require(resolveFromVersion(version, 'base/GraphDefinition'));
 
 		return service.getGraphDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createGraphDefinition = function createGraphDefinition ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let GraphDefinition = require(resolveFromVersion(version, 'uscore/GraphDefinition'));
+		let GraphDefinition = require(resolveFromVersion(version, 'base/GraphDefinition'));
 		// Validate the resource type before creating it
 		if (GraphDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateGraphDefinition = function updateGraphDefinition ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let GraphDefinition = require(resolveFromVersion(version, 'uscore/GraphDefinition'));
+		let GraphDefinition = require(resolveFromVersion(version, 'base/GraphDefinition'));
 		// Validate the resource type before creating it
 		if (GraphDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

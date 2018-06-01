@@ -9,7 +9,7 @@ module.exports.getBinary = function getBinary ({ profile, logger, config, app })
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Binary = require(resolveFromVersion(version, 'uscore/Binary'));
+		let Binary = require(resolveFromVersion(version, 'base/Binary'));
 
 		return service.getBinary(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getBinaryById = function getBinaryById ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Binary = require(resolveFromVersion(version, 'uscore/Binary'));
+		let Binary = require(resolveFromVersion(version, 'base/Binary'));
 
 		return service.getBinaryById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createBinary = function createBinary ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Binary = require(resolveFromVersion(version, 'uscore/Binary'));
+		let Binary = require(resolveFromVersion(version, 'base/Binary'));
 		// Validate the resource type before creating it
 		if (Binary.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateBinary = function updateBinary ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Binary = require(resolveFromVersion(version, 'uscore/Binary'));
+		let Binary = require(resolveFromVersion(version, 'base/Binary'));
 		// Validate the resource type before creating it
 		if (Binary.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

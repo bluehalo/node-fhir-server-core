@@ -9,7 +9,7 @@ module.exports.getPaymentReconciliation = function getPaymentReconciliation ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentReconciliation = require(resolveFromVersion(version, 'uscore/PaymentReconciliation'));
+		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 
 		return service.getPaymentReconciliation(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getPaymentReconciliationById = function getPaymentReconciliationB
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentReconciliation = require(resolveFromVersion(version, 'uscore/PaymentReconciliation'));
+		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 
 		return service.getPaymentReconciliationById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createPaymentReconciliation = function createPaymentReconciliatio
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentReconciliation = require(resolveFromVersion(version, 'uscore/PaymentReconciliation'));
+		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 		// Validate the resource type before creating it
 		if (PaymentReconciliation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updatePaymentReconciliation = function updatePaymentReconciliatio
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentReconciliation = require(resolveFromVersion(version, 'uscore/PaymentReconciliation'));
+		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 		// Validate the resource type before creating it
 		if (PaymentReconciliation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

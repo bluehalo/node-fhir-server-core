@@ -9,7 +9,7 @@ module.exports.getActivityDefinition = function getActivityDefinition ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
 
 		return service.getActivityDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getActivityDefinitionById = function getActivityDefinitionById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
 
 		return service.getActivityDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createActivityDefinition = function createActivityDefinition ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
 		// Validate the resource type before creating it
 		if (ActivityDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateActivityDefinition = function updateActivityDefinition ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ActivityDefinition = require(resolveFromVersion(version, 'uscore/ActivityDefinition'));
+		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
 		// Validate the resource type before creating it
 		if (ActivityDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getAdverseEvent = function getAdverseEvent ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
 
 		return service.getAdverseEvent(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getAdverseEventById = function getAdverseEventById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
 
 		return service.getAdverseEventById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createAdverseEvent = function createAdverseEvent ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
 		// Validate the resource type before creating it
 		if (AdverseEvent.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateAdverseEvent = function updateAdverseEvent ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AdverseEvent = require(resolveFromVersion(version, 'uscore/AdverseEvent'));
+		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
 		// Validate the resource type before creating it
 		if (AdverseEvent.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getSlot = function getSlot ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Slot = require(resolveFromVersion(version, 'uscore/Slot'));
+		let Slot = require(resolveFromVersion(version, 'base/Slot'));
 
 		return service.getSlot(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSlotById = function getSlotById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Slot = require(resolveFromVersion(version, 'uscore/Slot'));
+		let Slot = require(resolveFromVersion(version, 'base/Slot'));
 
 		return service.getSlotById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSlot = function createSlot ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Slot = require(resolveFromVersion(version, 'uscore/Slot'));
+		let Slot = require(resolveFromVersion(version, 'base/Slot'));
 		// Validate the resource type before creating it
 		if (Slot.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSlot = function updateSlot ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Slot = require(resolveFromVersion(version, 'uscore/Slot'));
+		let Slot = require(resolveFromVersion(version, 'base/Slot'));
 		// Validate the resource type before creating it
 		if (Slot.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

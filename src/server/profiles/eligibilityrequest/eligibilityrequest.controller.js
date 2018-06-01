@@ -9,7 +9,7 @@ module.exports.getEligibilityRequest = function getEligibilityRequest ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityRequest = require(resolveFromVersion(version, 'uscore/EligibilityRequest'));
+		let EligibilityRequest = require(resolveFromVersion(version, 'base/EligibilityRequest'));
 
 		return service.getEligibilityRequest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getEligibilityRequestById = function getEligibilityRequestById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityRequest = require(resolveFromVersion(version, 'uscore/EligibilityRequest'));
+		let EligibilityRequest = require(resolveFromVersion(version, 'base/EligibilityRequest'));
 
 		return service.getEligibilityRequestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createEligibilityRequest = function createEligibilityRequest ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityRequest = require(resolveFromVersion(version, 'uscore/EligibilityRequest'));
+		let EligibilityRequest = require(resolveFromVersion(version, 'base/EligibilityRequest'));
 		// Validate the resource type before creating it
 		if (EligibilityRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateEligibilityRequest = function updateEligibilityRequest ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityRequest = require(resolveFromVersion(version, 'uscore/EligibilityRequest'));
+		let EligibilityRequest = require(resolveFromVersion(version, 'base/EligibilityRequest'));
 		// Validate the resource type before creating it
 		if (EligibilityRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

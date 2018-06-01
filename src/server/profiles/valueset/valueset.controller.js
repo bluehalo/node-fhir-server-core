@@ -9,7 +9,7 @@ module.exports.getValueSet = function getValueSet ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
 
 		return service.getValueSet(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getValueSetById = function getValueSetById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
 
 		return service.getValueSetById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createValueSet = function createValueSet ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
 		// Validate the resource type before creating it
 		if (ValueSet.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateValueSet = function updateValueSet ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ValueSet = require(resolveFromVersion(version, 'uscore/ValueSet'));
+		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
 		// Validate the resource type before creating it
 		if (ValueSet.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

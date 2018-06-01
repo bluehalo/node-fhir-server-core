@@ -9,7 +9,7 @@ module.exports.getDeviceUseStatement = function getDeviceUseStatement ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceUseStatement = require(resolveFromVersion(version, 'uscore/DeviceUseStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 
 		return service.getDeviceUseStatement(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDeviceUseStatementById = function getDeviceUseStatementById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceUseStatement = require(resolveFromVersion(version, 'uscore/DeviceUseStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 
 		return service.getDeviceUseStatementById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDeviceUseStatement = function createDeviceUseStatement ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceUseStatement = require(resolveFromVersion(version, 'uscore/DeviceUseStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 		// Validate the resource type before creating it
 		if (DeviceUseStatement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDeviceUseStatement = function updateDeviceUseStatement ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceUseStatement = require(resolveFromVersion(version, 'uscore/DeviceUseStatement'));
+		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 		// Validate the resource type before creating it
 		if (DeviceUseStatement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

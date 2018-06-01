@@ -9,7 +9,7 @@ module.exports.getHealthcareService = function getHealthcareService ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let HealthcareService = require(resolveFromVersion(version, 'uscore/HealthcareService'));
+		let HealthcareService = require(resolveFromVersion(version, 'base/HealthcareService'));
 
 		return service.getHealthcareService(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getHealthcareServiceById = function getHealthcareServiceById ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let HealthcareService = require(resolveFromVersion(version, 'uscore/HealthcareService'));
+		let HealthcareService = require(resolveFromVersion(version, 'base/HealthcareService'));
 
 		return service.getHealthcareServiceById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createHealthcareService = function createHealthcareService ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let HealthcareService = require(resolveFromVersion(version, 'uscore/HealthcareService'));
+		let HealthcareService = require(resolveFromVersion(version, 'base/HealthcareService'));
 		// Validate the resource type before creating it
 		if (HealthcareService.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateHealthcareService = function updateHealthcareService ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let HealthcareService = require(resolveFromVersion(version, 'uscore/HealthcareService'));
+		let HealthcareService = require(resolveFromVersion(version, 'base/HealthcareService'));
 		// Validate the resource type before creating it
 		if (HealthcareService.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

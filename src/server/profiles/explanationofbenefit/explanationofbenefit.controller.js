@@ -9,7 +9,7 @@ module.exports.getExplanationOfBenefit = function getExplanationOfBenefit ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ExplanationOfBenefit = require(resolveFromVersion(version, 'uscore/ExplanationOfBenefit'));
+		let ExplanationOfBenefit = require(resolveFromVersion(version, 'base/ExplanationOfBenefit'));
 
 		return service.getExplanationOfBenefit(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getExplanationOfBenefitById = function getExplanationOfBenefitByI
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ExplanationOfBenefit = require(resolveFromVersion(version, 'uscore/ExplanationOfBenefit'));
+		let ExplanationOfBenefit = require(resolveFromVersion(version, 'base/ExplanationOfBenefit'));
 
 		return service.getExplanationOfBenefitById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createExplanationOfBenefit = function createExplanationOfBenefit 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ExplanationOfBenefit = require(resolveFromVersion(version, 'uscore/ExplanationOfBenefit'));
+		let ExplanationOfBenefit = require(resolveFromVersion(version, 'base/ExplanationOfBenefit'));
 		// Validate the resource type before creating it
 		if (ExplanationOfBenefit.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateExplanationOfBenefit = function updateExplanationOfBenefit 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ExplanationOfBenefit = require(resolveFromVersion(version, 'uscore/ExplanationOfBenefit'));
+		let ExplanationOfBenefit = require(resolveFromVersion(version, 'base/ExplanationOfBenefit'));
 		// Validate the resource type before creating it
 		if (ExplanationOfBenefit.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

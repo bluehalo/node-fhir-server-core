@@ -4,8 +4,8 @@ const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./compartmentdefinition.arguments');
 const controller = require('./compartmentdefinition.controller');
 
-let write_only_scopes = write_scopes('AllergyIntolerance');
-let read_only_scopes = read_scopes('AllergyIntolerance');
+let write_only_scopes = write_scopes('CompartmentDefinition');
+let read_only_scopes = read_scopes('CompartmentDefinition');
 
 let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -23,14 +23,14 @@ let routes = [
 		path: '/:version/compartmentdefinition',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntolerance
+		controller: controller.getCompartmentDefinition
 	},
 	{
 		type: 'post',
 		path: '/:version/compartmentdefinition/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntolerance
+		controller: controller.getCompartmentDefinition
 	},
 	{
 		type: 'get',
@@ -40,7 +40,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntoleranceById
+		controller: controller.getCompartmentDefinitionById
 	},
 	{
 		type: 'post',
@@ -51,7 +51,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createAllergyIntolerance
+		controller: controller.createCompartmentDefinition
 	},
 	{
 		type: 'put',
@@ -62,7 +62,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateAllergyIntolerance
+		controller: controller.updateCompartmentDefinition
 	},
 	{
 		type: 'delete',
@@ -73,13 +73,13 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteAllergyIntolerance
+		controller: controller.deleteCompartmentDefinition
 	}
 ];
 
 /**
  * @name exports
- * @summary AllergyIntolerance config
+ * @summary CompartmentDefinition config
  */
 module.exports = {
 	routeOptions: {

@@ -9,7 +9,7 @@ module.exports.getServiceDefinition = function getServiceDefinition ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ServiceDefinition = require(resolveFromVersion(version, 'uscore/ServiceDefinition'));
+		let ServiceDefinition = require(resolveFromVersion(version, 'base/ServiceDefinition'));
 
 		return service.getServiceDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getServiceDefinitionById = function getServiceDefinitionById ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ServiceDefinition = require(resolveFromVersion(version, 'uscore/ServiceDefinition'));
+		let ServiceDefinition = require(resolveFromVersion(version, 'base/ServiceDefinition'));
 
 		return service.getServiceDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createServiceDefinition = function createServiceDefinition ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ServiceDefinition = require(resolveFromVersion(version, 'uscore/ServiceDefinition'));
+		let ServiceDefinition = require(resolveFromVersion(version, 'base/ServiceDefinition'));
 		// Validate the resource type before creating it
 		if (ServiceDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateServiceDefinition = function updateServiceDefinition ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ServiceDefinition = require(resolveFromVersion(version, 'uscore/ServiceDefinition'));
+		let ServiceDefinition = require(resolveFromVersion(version, 'base/ServiceDefinition'));
 		// Validate the resource type before creating it
 		if (ServiceDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

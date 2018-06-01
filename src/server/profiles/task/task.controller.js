@@ -9,7 +9,7 @@ module.exports.getTask = function getTask ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Task = require(resolveFromVersion(version, 'uscore/Task'));
+		let Task = require(resolveFromVersion(version, 'base/Task'));
 
 		return service.getTask(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getTaskById = function getTaskById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Task = require(resolveFromVersion(version, 'uscore/Task'));
+		let Task = require(resolveFromVersion(version, 'base/Task'));
 
 		return service.getTaskById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createTask = function createTask ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Task = require(resolveFromVersion(version, 'uscore/Task'));
+		let Task = require(resolveFromVersion(version, 'base/Task'));
 		// Validate the resource type before creating it
 		if (Task.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateTask = function updateTask ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Task = require(resolveFromVersion(version, 'uscore/Task'));
+		let Task = require(resolveFromVersion(version, 'base/Task'));
 		// Validate the resource type before creating it
 		if (Task.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

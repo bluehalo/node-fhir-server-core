@@ -9,7 +9,7 @@ module.exports.getMessageDefinition = function getMessageDefinition ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'uscore/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
 
 		return service.getMessageDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMessageDefinitionById = function getMessageDefinitionById ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'uscore/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
 
 		return service.getMessageDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMessageDefinition = function createMessageDefinition ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'uscore/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
 		// Validate the resource type before creating it
 		if (MessageDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMessageDefinition = function updateMessageDefinition ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'uscore/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
 		// Validate the resource type before creating it
 		if (MessageDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

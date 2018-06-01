@@ -9,7 +9,7 @@ module.exports.getMedia = function getMedia ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Media = require(resolveFromVersion(version, 'uscore/Media'));
+		let Media = require(resolveFromVersion(version, 'base/Media'));
 
 		return service.getMedia(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMediaById = function getMediaById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Media = require(resolveFromVersion(version, 'uscore/Media'));
+		let Media = require(resolveFromVersion(version, 'base/Media'));
 
 		return service.getMediaById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMedia = function createMedia ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Media = require(resolveFromVersion(version, 'uscore/Media'));
+		let Media = require(resolveFromVersion(version, 'base/Media'));
 		// Validate the resource type before creating it
 		if (Media.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMedia = function updateMedia ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Media = require(resolveFromVersion(version, 'uscore/Media'));
+		let Media = require(resolveFromVersion(version, 'base/Media'));
 		// Validate the resource type before creating it
 		if (Media.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getEnrollmentRequest = function getEnrollmentRequest ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentRequest = require(resolveFromVersion(version, 'uscore/EnrollmentRequest'));
+		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 
 		return service.getEnrollmentRequest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getEnrollmentRequestById = function getEnrollmentRequestById ({ p
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentRequest = require(resolveFromVersion(version, 'uscore/EnrollmentRequest'));
+		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 
 		return service.getEnrollmentRequestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createEnrollmentRequest = function createEnrollmentRequest ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentRequest = require(resolveFromVersion(version, 'uscore/EnrollmentRequest'));
+		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 		// Validate the resource type before creating it
 		if (EnrollmentRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateEnrollmentRequest = function updateEnrollmentRequest ({ pro
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentRequest = require(resolveFromVersion(version, 'uscore/EnrollmentRequest'));
+		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 		// Validate the resource type before creating it
 		if (EnrollmentRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

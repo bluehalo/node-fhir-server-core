@@ -9,7 +9,7 @@ module.exports.getImmunizationRecommendation = function getImmunizationRecommend
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImmunizationRecommendation = require(resolveFromVersion(version, 'uscore/ImmunizationRecommendation'));
+		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 
 		return service.getImmunizationRecommendation(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getImmunizationRecommendationById = function getImmunizationRecom
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImmunizationRecommendation = require(resolveFromVersion(version, 'uscore/ImmunizationRecommendation'));
+		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 
 		return service.getImmunizationRecommendationById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createImmunizationRecommendation = function createImmunizationRec
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImmunizationRecommendation = require(resolveFromVersion(version, 'uscore/ImmunizationRecommendation'));
+		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 		// Validate the resource type before creating it
 		if (ImmunizationRecommendation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateImmunizationRecommendation = function updateImmunizationRec
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImmunizationRecommendation = require(resolveFromVersion(version, 'uscore/ImmunizationRecommendation'));
+		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 		// Validate the resource type before creating it
 		if (ImmunizationRecommendation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

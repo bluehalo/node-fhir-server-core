@@ -9,7 +9,7 @@ module.exports.getDocumentManifest = function getDocumentManifest ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'uscore/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 
 		return service.getDocumentManifest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDocumentManifestById = function getDocumentManifestById ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'uscore/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 
 		return service.getDocumentManifestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDocumentManifest = function createDocumentManifest ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'uscore/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 		// Validate the resource type before creating it
 		if (DocumentManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDocumentManifest = function updateDocumentManifest ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'uscore/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 		// Validate the resource type before creating it
 		if (DocumentManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

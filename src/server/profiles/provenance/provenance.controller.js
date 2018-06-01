@@ -9,7 +9,7 @@ module.exports.getProvenance = function getProvenance ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Provenance = require(resolveFromVersion(version, 'uscore/Provenance'));
+		let Provenance = require(resolveFromVersion(version, 'base/Provenance'));
 
 		return service.getProvenance(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getProvenanceById = function getProvenanceById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Provenance = require(resolveFromVersion(version, 'uscore/Provenance'));
+		let Provenance = require(resolveFromVersion(version, 'base/Provenance'));
 
 		return service.getProvenanceById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createProvenance = function createProvenance ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Provenance = require(resolveFromVersion(version, 'uscore/Provenance'));
+		let Provenance = require(resolveFromVersion(version, 'base/Provenance'));
 		// Validate the resource type before creating it
 		if (Provenance.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateProvenance = function updateProvenance ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Provenance = require(resolveFromVersion(version, 'uscore/Provenance'));
+		let Provenance = require(resolveFromVersion(version, 'base/Provenance'));
 		// Validate the resource type before creating it
 		if (Provenance.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

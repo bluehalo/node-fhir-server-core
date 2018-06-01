@@ -9,7 +9,7 @@ module.exports.getTestScript = function getTestScript ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
 
 		return service.getTestScript(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getTestScriptById = function getTestScriptById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
 
 		return service.getTestScriptById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createTestScript = function createTestScript ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
 		// Validate the resource type before creating it
 		if (TestScript.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateTestScript = function updateTestScript ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let TestScript = require(resolveFromVersion(version, 'uscore/TestScript'));
+		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
 		// Validate the resource type before creating it
 		if (TestScript.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

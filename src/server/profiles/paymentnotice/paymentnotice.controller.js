@@ -9,7 +9,7 @@ module.exports.getPaymentNotice = function getPaymentNotice ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentNotice = require(resolveFromVersion(version, 'uscore/PaymentNotice'));
+		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 
 		return service.getPaymentNotice(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getPaymentNoticeById = function getPaymentNoticeById ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentNotice = require(resolveFromVersion(version, 'uscore/PaymentNotice'));
+		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 
 		return service.getPaymentNoticeById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createPaymentNotice = function createPaymentNotice ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentNotice = require(resolveFromVersion(version, 'uscore/PaymentNotice'));
+		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 		// Validate the resource type before creating it
 		if (PaymentNotice.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updatePaymentNotice = function updatePaymentNotice ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let PaymentNotice = require(resolveFromVersion(version, 'uscore/PaymentNotice'));
+		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 		// Validate the resource type before creating it
 		if (PaymentNotice.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

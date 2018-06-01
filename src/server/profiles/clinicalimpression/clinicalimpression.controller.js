@@ -9,7 +9,7 @@ module.exports.getClinicalImpression = function getClinicalImpression ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ClinicalImpression = require(resolveFromVersion(version, 'uscore/ClinicalImpression'));
+		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 
 		return service.getClinicalImpression(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getClinicalImpressionById = function getClinicalImpressionById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ClinicalImpression = require(resolveFromVersion(version, 'uscore/ClinicalImpression'));
+		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 
 		return service.getClinicalImpressionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createClinicalImpression = function createClinicalImpression ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ClinicalImpression = require(resolveFromVersion(version, 'uscore/ClinicalImpression'));
+		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 		// Validate the resource type before creating it
 		if (ClinicalImpression.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateClinicalImpression = function updateClinicalImpression ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ClinicalImpression = require(resolveFromVersion(version, 'uscore/ClinicalImpression'));
+		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 		// Validate the resource type before creating it
 		if (ClinicalImpression.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

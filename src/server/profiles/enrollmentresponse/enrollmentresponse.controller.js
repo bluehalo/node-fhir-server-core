@@ -9,7 +9,7 @@ module.exports.getEnrollmentResponse = function getEnrollmentResponse ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentResponse = require(resolveFromVersion(version, 'uscore/EnrollmentResponse'));
+		let EnrollmentResponse = require(resolveFromVersion(version, 'base/EnrollmentResponse'));
 
 		return service.getEnrollmentResponse(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getEnrollmentResponseById = function getEnrollmentResponseById ({
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentResponse = require(resolveFromVersion(version, 'uscore/EnrollmentResponse'));
+		let EnrollmentResponse = require(resolveFromVersion(version, 'base/EnrollmentResponse'));
 
 		return service.getEnrollmentResponseById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createEnrollmentResponse = function createEnrollmentResponse ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentResponse = require(resolveFromVersion(version, 'uscore/EnrollmentResponse'));
+		let EnrollmentResponse = require(resolveFromVersion(version, 'base/EnrollmentResponse'));
 		// Validate the resource type before creating it
 		if (EnrollmentResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateEnrollmentResponse = function updateEnrollmentResponse ({ p
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EnrollmentResponse = require(resolveFromVersion(version, 'uscore/EnrollmentResponse'));
+		let EnrollmentResponse = require(resolveFromVersion(version, 'base/EnrollmentResponse'));
 		// Validate the resource type before creating it
 		if (EnrollmentResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

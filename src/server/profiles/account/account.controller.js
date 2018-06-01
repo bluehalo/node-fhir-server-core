@@ -9,7 +9,7 @@ module.exports.getAccount = function getAccount ({ profile, logger, config, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Account = require(resolveFromVersion(version, 'uscore/Account'));
+		let Account = require(resolveFromVersion(version, 'base/Account'));
 
 		return service.getAccount(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getAccountById = function getAccountById ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Account = require(resolveFromVersion(version, 'uscore/Account'));
+		let Account = require(resolveFromVersion(version, 'base/Account'));
 
 		return service.getAccountById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createAccount = function createAccount ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Account = require(resolveFromVersion(version, 'uscore/Account'));
+		let Account = require(resolveFromVersion(version, 'base/Account'));
 		// Validate the resource type before creating it
 		if (Account.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateAccount = function updateAccount ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Account = require(resolveFromVersion(version, 'uscore/Account'));
+		let Account = require(resolveFromVersion(version, 'base/Account'));
 		// Validate the resource type before creating it
 		if (Account.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

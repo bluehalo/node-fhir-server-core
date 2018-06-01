@@ -9,7 +9,7 @@ module.exports.getMeasure = function getMeasure ({ profile, logger, config, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Measure = require(resolveFromVersion(version, 'uscore/Measure'));
+		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 
 		return service.getMeasure(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMeasureById = function getMeasureById ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Measure = require(resolveFromVersion(version, 'uscore/Measure'));
+		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 
 		return service.getMeasureById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMeasure = function createMeasure ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Measure = require(resolveFromVersion(version, 'uscore/Measure'));
+		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 		// Validate the resource type before creating it
 		if (Measure.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMeasure = function updateMeasure ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Measure = require(resolveFromVersion(version, 'uscore/Measure'));
+		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 		// Validate the resource type before creating it
 		if (Measure.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

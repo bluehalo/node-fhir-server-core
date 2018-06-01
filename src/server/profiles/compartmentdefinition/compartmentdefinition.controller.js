@@ -3,17 +3,17 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile, logger, config, app }) {
+module.exports.getCompartmentDefinition = function getCompartmentDefinition ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
+		let CompartmentDefinition = require(resolveFromVersion(version, 'base/CompartmentDefinition'));
 
-		return service.getAllergyIntolerance(req.sanitized_args, logger)
+		return service.getCompartmentDefinition(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, AllergyIntolerance, results, {
+				responseUtils.handleBundleReadResponse( res, version, CompartmentDefinition, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
@@ -26,17 +26,17 @@ module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile
 };
 
 
-module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({ profile, logger, app }) {
+module.exports.getCompartmentDefinitionById = function getCompartmentDefinitionById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
+		let CompartmentDefinition = require(resolveFromVersion(version, 'base/CompartmentDefinition'));
 
-		return service.getAllergyIntoleranceById(req.sanitized_args, logger)
+		return service.getCompartmentDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, AllergyIntolerance, results)
+				responseUtils.handleSingleReadResponse(res, next, version, CompartmentDefinition, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -46,29 +46,29 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 };
 
 /**
- * @description Controller for creating AllergyIntolerance
+ * @description Controller for creating CompartmentDefinition
  */
-module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ profile, logger, app }) {
+module.exports.createCompartmentDefinition = function createCompartmentDefinition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
+		let CompartmentDefinition = require(resolveFromVersion(version, 'base/CompartmentDefinition'));
 		// Validate the resource type before creating it
-		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
+		if (CompartmentDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${AllergyIntolerance.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${CompartmentDefinition.__resourceType}', received '${resource_body.resourceType}'`,
 				version
 			));
 		}
 		// Create a new resource and pass it to the service
-		let new_resource = new AllergyIntolerance(resource_body);
+		let new_resource = new CompartmentDefinition(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createAllergyIntolerance(args, logger)
+		return service.createCompartmentDefinition(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, AllergyIntolerance.__resourceType, results)
+				responseUtils.handleCreateResponse(res, version, CompartmentDefinition.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -78,29 +78,29 @@ module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ p
 };
 
 /**
- * @description Controller for updating/creating AllergyIntolerance. If the AllergyIntolerance does not exist, it should be updated
+ * @description Controller for updating/creating CompartmentDefinition. If the CompartmentDefinition does not exist, it should be updated
  */
-module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ profile, logger, app }) {
+module.exports.updateCompartmentDefinition = function updateCompartmentDefinition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
+		let CompartmentDefinition = require(resolveFromVersion(version, 'base/CompartmentDefinition'));
 		// Validate the resource type before creating it
-		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
+		if (CompartmentDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${AllergyIntolerance.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${CompartmentDefinition.__resourceType}', received '${resource_body.resourceType}'`,
 				version
 			));
 		}
 		// Create a new resource and pass it to the service
-		let new_resource = new AllergyIntolerance(resource_body);
+		let new_resource = new CompartmentDefinition(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateAllergyIntolerance(args, logger)
+		return service.updateCompartmentDefinition(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, AllergyIntolerance.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, version, CompartmentDefinition.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -110,15 +110,15 @@ module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ p
 };
 
 /**
- * @description Controller for deleting an AllergyIntolerance.
+ * @description Controller for deleting an CompartmentDefinition.
  */
-module.exports.deleteAllergyIntolerance = function deleteAllergyIntolerance ({ profile, logger, app }) {
+module.exports.deleteCompartmentDefinition = function deleteCompartmentDefinition ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteAllergyIntolerance(req.sanitized_args, logger)
+		return service.deleteCompartmentDefinition(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

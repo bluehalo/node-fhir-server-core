@@ -9,7 +9,7 @@ module.exports.getSubstance = function getSubstance ({ profile, logger, config, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Substance = require(resolveFromVersion(version, 'uscore/Substance'));
+		let Substance = require(resolveFromVersion(version, 'base/Substance'));
 
 		return service.getSubstance(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSubstanceById = function getSubstanceById ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Substance = require(resolveFromVersion(version, 'uscore/Substance'));
+		let Substance = require(resolveFromVersion(version, 'base/Substance'));
 
 		return service.getSubstanceById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSubstance = function createSubstance ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Substance = require(resolveFromVersion(version, 'uscore/Substance'));
+		let Substance = require(resolveFromVersion(version, 'base/Substance'));
 		// Validate the resource type before creating it
 		if (Substance.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSubstance = function updateSubstance ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Substance = require(resolveFromVersion(version, 'uscore/Substance'));
+		let Substance = require(resolveFromVersion(version, 'base/Substance'));
 		// Validate the resource type before creating it
 		if (Substance.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

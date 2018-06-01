@@ -9,7 +9,7 @@ module.exports.getEndPoint = function getEndPoint ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(version, 'uscore/EndPoint'));
+		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 
 		return service.getEndPoint(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getEndPointById = function getEndPointById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(version, 'uscore/EndPoint'));
+		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 
 		return service.getEndPointById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createEndPoint = function createEndPoint ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(version, 'uscore/EndPoint'));
+		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 		// Validate the resource type before creating it
 		if (EndPoint.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateEndPoint = function updateEndPoint ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(version, 'uscore/EndPoint'));
+		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 		// Validate the resource type before creating it
 		if (EndPoint.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

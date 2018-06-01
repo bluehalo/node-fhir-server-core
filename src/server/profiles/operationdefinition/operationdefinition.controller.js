@@ -9,7 +9,7 @@ module.exports.getOperationDefinition = function getOperationDefinition ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let OperationDefinition = require(resolveFromVersion(version, 'uscore/OperationDefinition'));
+		let OperationDefinition = require(resolveFromVersion(version, 'base/OperationDefinition'));
 
 		return service.getOperationDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getOperationDefinitionById = function getOperationDefinitionById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let OperationDefinition = require(resolveFromVersion(version, 'uscore/OperationDefinition'));
+		let OperationDefinition = require(resolveFromVersion(version, 'base/OperationDefinition'));
 
 		return service.getOperationDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createOperationDefinition = function createOperationDefinition ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let OperationDefinition = require(resolveFromVersion(version, 'uscore/OperationDefinition'));
+		let OperationDefinition = require(resolveFromVersion(version, 'base/OperationDefinition'));
 		// Validate the resource type before creating it
 		if (OperationDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateOperationDefinition = function updateOperationDefinition ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let OperationDefinition = require(resolveFromVersion(version, 'uscore/OperationDefinition'));
+		let OperationDefinition = require(resolveFromVersion(version, 'base/OperationDefinition'));
 		// Validate the resource type before creating it
 		if (OperationDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

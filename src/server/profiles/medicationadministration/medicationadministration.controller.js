@@ -9,7 +9,7 @@ module.exports.getMedicationAdministration = function getMedicationAdministratio
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
 
 		return service.getMedicationAdministration(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMedicationAdministrationById = function getMedicationAdministr
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
 
 		return service.getMedicationAdministrationById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMedicationAdministration = function createMedicationAdminis
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
 		// Validate the resource type before creating it
 		if (MedicationAdministration.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMedicationAdministration = function updateMedicationAdminis
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationAdministration = require(resolveFromVersion(version, 'uscore/MedicationAdministration'));
+		let MedicationAdministration = require(resolveFromVersion(version, 'base/MedicationAdministration'));
 		// Validate the resource type before creating it
 		if (MedicationAdministration.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

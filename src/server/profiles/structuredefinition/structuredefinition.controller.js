@@ -9,7 +9,7 @@ module.exports.getStructureDefinition = function getStructureDefinition ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
 
 		return service.getStructureDefinition(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getStructureDefinitionById = function getStructureDefinitionById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
 
 		return service.getStructureDefinitionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createStructureDefinition = function createStructureDefinition ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
 		// Validate the resource type before creating it
 		if (StructureDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateStructureDefinition = function updateStructureDefinition ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let StructureDefinition = require(resolveFromVersion(version, 'uscore/StructureDefinition'));
+		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
 		// Validate the resource type before creating it
 		if (StructureDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

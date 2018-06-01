@@ -9,7 +9,7 @@ module.exports.getExpansionProfile = function getExpansionProfile ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(version, 'uscore/ExpansionProfile'));
+		let ExpansionProfile = require(resolveFromVersion(version, 'base/ExpansionProfile'));
 
 		return service.getExpansionProfile(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getExpansionProfileById = function getExpansionProfileById ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(version, 'uscore/ExpansionProfile'));
+		let ExpansionProfile = require(resolveFromVersion(version, 'base/ExpansionProfile'));
 
 		return service.getExpansionProfileById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createExpansionProfile = function createExpansionProfile ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(version, 'uscore/ExpansionProfile'));
+		let ExpansionProfile = require(resolveFromVersion(version, 'base/ExpansionProfile'));
 		// Validate the resource type before creating it
 		if (ExpansionProfile.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateExpansionProfile = function updateExpansionProfile ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(version, 'uscore/ExpansionProfile'));
+		let ExpansionProfile = require(resolveFromVersion(version, 'base/ExpansionProfile'));
 		// Validate the resource type before creating it
 		if (ExpansionProfile.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

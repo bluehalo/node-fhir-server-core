@@ -9,7 +9,7 @@ module.exports.getPerson = function getPerson ({ profile, logger, config, app })
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+		let Person = require(resolveFromVersion(version, 'base/Person'));
 
 		return service.getPerson(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getPersonById = function getPersonById ({ profile, logger, app })
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+		let Person = require(resolveFromVersion(version, 'base/Person'));
 
 		return service.getPersonById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createPerson = function createPerson ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+		let Person = require(resolveFromVersion(version, 'base/Person'));
 		// Validate the resource type before creating it
 		if (Person.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updatePerson = function updatePerson ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+		let Person = require(resolveFromVersion(version, 'base/Person'));
 		// Validate the resource type before creating it
 		if (Person.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getTestReport = function getTestReport ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(version, 'uscore/TestReport'));
+		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 
 		return service.getTestReport(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getTestReportById = function getTestReportById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(version, 'uscore/TestReport'));
+		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 
 		return service.getTestReportById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createTestReport = function createTestReport ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(version, 'uscore/TestReport'));
+		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 		// Validate the resource type before creating it
 		if (TestReport.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateTestReport = function updateTestReport ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(version, 'uscore/TestReport'));
+		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 		// Validate the resource type before creating it
 		if (TestReport.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

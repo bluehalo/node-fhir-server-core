@@ -9,7 +9,7 @@ module.exports.getNutritionOrder = function getNutritionOrder ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let NutritionOrder = require(resolveFromVersion(version, 'uscore/NutritionOrder'));
+		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 
 		return service.getNutritionOrder(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getNutritionOrderById = function getNutritionOrderById ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let NutritionOrder = require(resolveFromVersion(version, 'uscore/NutritionOrder'));
+		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 
 		return service.getNutritionOrderById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createNutritionOrder = function createNutritionOrder ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let NutritionOrder = require(resolveFromVersion(version, 'uscore/NutritionOrder'));
+		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 		// Validate the resource type before creating it
 		if (NutritionOrder.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateNutritionOrder = function updateNutritionOrder ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let NutritionOrder = require(resolveFromVersion(version, 'uscore/NutritionOrder'));
+		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 		// Validate the resource type before creating it
 		if (NutritionOrder.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

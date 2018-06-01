@@ -9,7 +9,7 @@ module.exports.getCommunicationRequest = function getCommunicationRequest ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 
 		return service.getCommunicationRequest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getCommunicationRequestById = function getCommunicationRequestByI
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 
 		return service.getCommunicationRequestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createCommunicationRequest = function createCommunicationRequest 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 		// Validate the resource type before creating it
 		if (CommunicationRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateCommunicationRequest = function updateCommunicationRequest 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CommunicationRequest = require(resolveFromVersion(version, 'uscore/CommunicationRequest'));
+		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 		// Validate the resource type before creating it
 		if (CommunicationRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

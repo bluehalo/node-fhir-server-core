@@ -9,7 +9,7 @@ module.exports.getRequestGroup = function getRequestGroup ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let RequestGroup = require(resolveFromVersion(version, 'uscore/RequestGroup'));
+		let RequestGroup = require(resolveFromVersion(version, 'base/RequestGroup'));
 
 		return service.getRequestGroup(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getRequestGroupById = function getRequestGroupById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let RequestGroup = require(resolveFromVersion(version, 'uscore/RequestGroup'));
+		let RequestGroup = require(resolveFromVersion(version, 'base/RequestGroup'));
 
 		return service.getRequestGroupById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createRequestGroup = function createRequestGroup ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let RequestGroup = require(resolveFromVersion(version, 'uscore/RequestGroup'));
+		let RequestGroup = require(resolveFromVersion(version, 'base/RequestGroup'));
 		// Validate the resource type before creating it
 		if (RequestGroup.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateRequestGroup = function updateRequestGroup ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let RequestGroup = require(resolveFromVersion(version, 'uscore/RequestGroup'));
+		let RequestGroup = require(resolveFromVersion(version, 'base/RequestGroup'));
 		// Validate the resource type before creating it
 		if (RequestGroup.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

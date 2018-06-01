@@ -9,7 +9,7 @@ module.exports.getSubscription = function getSubscription ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Subscription = require(resolveFromVersion(version, 'uscore/Subscription'));
+		let Subscription = require(resolveFromVersion(version, 'base/Subscription'));
 
 		return service.getSubscription(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSubscriptionById = function getSubscriptionById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Subscription = require(resolveFromVersion(version, 'uscore/Subscription'));
+		let Subscription = require(resolveFromVersion(version, 'base/Subscription'));
 
 		return service.getSubscriptionById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSubscription = function createSubscription ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Subscription = require(resolveFromVersion(version, 'uscore/Subscription'));
+		let Subscription = require(resolveFromVersion(version, 'base/Subscription'));
 		// Validate the resource type before creating it
 		if (Subscription.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSubscription = function updateSubscription ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Subscription = require(resolveFromVersion(version, 'uscore/Subscription'));
+		let Subscription = require(resolveFromVersion(version, 'base/Subscription'));
 		// Validate the resource type before creating it
 		if (Subscription.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

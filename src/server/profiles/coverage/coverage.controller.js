@@ -9,7 +9,7 @@ module.exports.getCoverage = function getCoverage ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Coverage = require(resolveFromVersion(version, 'uscore/Coverage'));
+		let Coverage = require(resolveFromVersion(version, 'base/Coverage'));
 
 		return service.getCoverage(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getCoverageById = function getCoverageById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Coverage = require(resolveFromVersion(version, 'uscore/Coverage'));
+		let Coverage = require(resolveFromVersion(version, 'base/Coverage'));
 
 		return service.getCoverageById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createCoverage = function createCoverage ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Coverage = require(resolveFromVersion(version, 'uscore/Coverage'));
+		let Coverage = require(resolveFromVersion(version, 'base/Coverage'));
 		// Validate the resource type before creating it
 		if (Coverage.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateCoverage = function updateCoverage ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Coverage = require(resolveFromVersion(version, 'uscore/Coverage'));
+		let Coverage = require(resolveFromVersion(version, 'base/Coverage'));
 		// Validate the resource type before creating it
 		if (Coverage.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

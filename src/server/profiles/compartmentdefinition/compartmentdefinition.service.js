@@ -5,32 +5,32 @@ module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
 	reject(new Error(message));
 });
 
-module.exports.getAllergyIntolerance = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getAllergyIntolerance\'';
+module.exports.getCompartmentDefinition = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'getCompartmentDefinition\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getAllergyIntoleranceById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getAllergyIntoleranceById\'';
+module.exports.getCompartmentDefinitionById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'getCompartmentDefinitionById\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createAllergyIntolerance = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createAllergyIntolerance\'';
+module.exports.createCompartmentDefinition = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'createCompartmentDefinition\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateAllergyIntolerance = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateAllergyIntolerance\'';
+module.exports.updateCompartmentDefinition = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'updateCompartmentDefinition\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteAllergyIntolerance = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteAllergyIntolerance\'';
+module.exports.deleteCompartmentDefinition = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'deleteCompartmentDefinition\'';
 	logger.info(message);
 	reject(new Error(message));
 });

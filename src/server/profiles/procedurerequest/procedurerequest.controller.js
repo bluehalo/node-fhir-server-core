@@ -9,7 +9,7 @@ module.exports.getProcedureRequest = function getProcedureRequest ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcedureRequest = require(resolveFromVersion(version, 'uscore/ProcedureRequest'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 
 		return service.getProcedureRequest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getProcedureRequestById = function getProcedureRequestById ({ pro
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcedureRequest = require(resolveFromVersion(version, 'uscore/ProcedureRequest'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 
 		return service.getProcedureRequestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createProcedureRequest = function createProcedureRequest ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcedureRequest = require(resolveFromVersion(version, 'uscore/ProcedureRequest'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 		// Validate the resource type before creating it
 		if (ProcedureRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateProcedureRequest = function updateProcedureRequest ({ profi
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcedureRequest = require(resolveFromVersion(version, 'uscore/ProcedureRequest'));
+		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
 		// Validate the resource type before creating it
 		if (ProcedureRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

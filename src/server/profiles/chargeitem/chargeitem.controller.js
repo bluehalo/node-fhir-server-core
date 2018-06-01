@@ -9,7 +9,7 @@ module.exports.getChargeItem = function getChargeItem ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ChargeItem = require(resolveFromVersion(version, 'uscore/ChargeItem'));
+		let ChargeItem = require(resolveFromVersion(version, 'base/ChargeItem'));
 
 		return service.getChargeItem(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getChargeItemById = function getChargeItemById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ChargeItem = require(resolveFromVersion(version, 'uscore/ChargeItem'));
+		let ChargeItem = require(resolveFromVersion(version, 'base/ChargeItem'));
 
 		return service.getChargeItemById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createChargeItem = function createChargeItem ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ChargeItem = require(resolveFromVersion(version, 'uscore/ChargeItem'));
+		let ChargeItem = require(resolveFromVersion(version, 'base/ChargeItem'));
 		// Validate the resource type before creating it
 		if (ChargeItem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateChargeItem = function updateChargeItem ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ChargeItem = require(resolveFromVersion(version, 'uscore/ChargeItem'));
+		let ChargeItem = require(resolveFromVersion(version, 'base/ChargeItem'));
 		// Validate the resource type before creating it
 		if (ChargeItem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getMessageHeader = function getMessageHeader ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'uscore/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
 
 		return service.getMessageHeader(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getMessageHeaderById = function getMessageHeaderById ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'uscore/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
 
 		return service.getMessageHeaderById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createMessageHeader = function createMessageHeader ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'uscore/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
 		// Validate the resource type before creating it
 		if (MessageHeader.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateMessageHeader = function updateMessageHeader ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'uscore/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
 		// Validate the resource type before creating it
 		if (MessageHeader.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

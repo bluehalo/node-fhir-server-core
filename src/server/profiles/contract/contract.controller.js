@@ -9,7 +9,7 @@ module.exports.getContract = function getContract ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Contract = require(resolveFromVersion(version, 'uscore/Contract'));
+		let Contract = require(resolveFromVersion(version, 'base/Contract'));
 
 		return service.getContract(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getContractById = function getContractById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Contract = require(resolveFromVersion(version, 'uscore/Contract'));
+		let Contract = require(resolveFromVersion(version, 'base/Contract'));
 
 		return service.getContractById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createContract = function createContract ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Contract = require(resolveFromVersion(version, 'uscore/Contract'));
+		let Contract = require(resolveFromVersion(version, 'base/Contract'));
 		// Validate the resource type before creating it
 		if (Contract.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateContract = function updateContract ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Contract = require(resolveFromVersion(version, 'uscore/Contract'));
+		let Contract = require(resolveFromVersion(version, 'base/Contract'));
 		// Validate the resource type before creating it
 		if (Contract.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

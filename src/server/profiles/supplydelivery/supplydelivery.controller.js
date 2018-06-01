@@ -9,7 +9,7 @@ module.exports.getSupplyDelivery = function getSupplyDelivery ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let SupplyDelivery = require(resolveFromVersion(version, 'uscore/SupplyDelivery'));
+		let SupplyDelivery = require(resolveFromVersion(version, 'base/SupplyDelivery'));
 
 		return service.getSupplyDelivery(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSupplyDeliveryById = function getSupplyDeliveryById ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let SupplyDelivery = require(resolveFromVersion(version, 'uscore/SupplyDelivery'));
+		let SupplyDelivery = require(resolveFromVersion(version, 'base/SupplyDelivery'));
 
 		return service.getSupplyDeliveryById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSupplyDelivery = function createSupplyDelivery ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let SupplyDelivery = require(resolveFromVersion(version, 'uscore/SupplyDelivery'));
+		let SupplyDelivery = require(resolveFromVersion(version, 'base/SupplyDelivery'));
 		// Validate the resource type before creating it
 		if (SupplyDelivery.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSupplyDelivery = function updateSupplyDelivery ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let SupplyDelivery = require(resolveFromVersion(version, 'uscore/SupplyDelivery'));
+		let SupplyDelivery = require(resolveFromVersion(version, 'base/SupplyDelivery'));
 		// Validate the resource type before creating it
 		if (SupplyDelivery.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

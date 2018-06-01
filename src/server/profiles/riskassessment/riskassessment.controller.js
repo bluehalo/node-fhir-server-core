@@ -9,7 +9,7 @@ module.exports.getRiskAssessment = function getRiskAssessment ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
 
 		return service.getRiskAssessment(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getRiskAssessmentById = function getRiskAssessmentById ({ profile
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
 
 		return service.getRiskAssessmentById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createRiskAssessment = function createRiskAssessment ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
 		// Validate the resource type before creating it
 		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateRiskAssessment = function updateRiskAssessment ({ profile, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let RiskAssessment = require(resolveFromVersion(version, 'uscore/RiskAssessment'));
+		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
 		// Validate the resource type before creating it
 		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

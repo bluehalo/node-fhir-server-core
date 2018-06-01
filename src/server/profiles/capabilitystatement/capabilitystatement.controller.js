@@ -9,7 +9,7 @@ module.exports.getCapabilityStatement = function getCapabilityStatement ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
 
 		return service.getCapabilityStatement(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getCapabilityStatementById = function getCapabilityStatementById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
 
 		return service.getCapabilityStatementById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createCapabilityStatement = function createCapabilityStatement ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
 		// Validate the resource type before creating it
 		if (CapabilityStatement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateCapabilityStatement = function updateCapabilityStatement ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CapabilityStatement = require(resolveFromVersion(version, 'uscore/CapabilityStatement'));
+		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
 		// Validate the resource type before creating it
 		if (CapabilityStatement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

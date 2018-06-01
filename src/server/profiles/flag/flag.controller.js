@@ -9,7 +9,7 @@ module.exports.getFlag = function getFlag ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Flag = require(resolveFromVersion(version, 'uscore/Flag'));
+		let Flag = require(resolveFromVersion(version, 'base/Flag'));
 
 		return service.getFlag(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getFlagById = function getFlagById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Flag = require(resolveFromVersion(version, 'uscore/Flag'));
+		let Flag = require(resolveFromVersion(version, 'base/Flag'));
 
 		return service.getFlagById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createFlag = function createFlag ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Flag = require(resolveFromVersion(version, 'uscore/Flag'));
+		let Flag = require(resolveFromVersion(version, 'base/Flag'));
 		// Validate the resource type before creating it
 		if (Flag.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateFlag = function updateFlag ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Flag = require(resolveFromVersion(version, 'uscore/Flag'));
+		let Flag = require(resolveFromVersion(version, 'base/Flag'));
 		// Validate the resource type before creating it
 		if (Flag.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

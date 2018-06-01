@@ -9,7 +9,7 @@ module.exports.getDeviceRequest = function getDeviceRequest ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceRequest = require(resolveFromVersion(version, 'uscore/DeviceRequest'));
+		let DeviceRequest = require(resolveFromVersion(version, 'base/DeviceRequest'));
 
 		return service.getDeviceRequest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDeviceRequestById = function getDeviceRequestById ({ profile, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceRequest = require(resolveFromVersion(version, 'uscore/DeviceRequest'));
+		let DeviceRequest = require(resolveFromVersion(version, 'base/DeviceRequest'));
 
 		return service.getDeviceRequestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDeviceRequest = function createDeviceRequest ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceRequest = require(resolveFromVersion(version, 'uscore/DeviceRequest'));
+		let DeviceRequest = require(resolveFromVersion(version, 'base/DeviceRequest'));
 		// Validate the resource type before creating it
 		if (DeviceRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDeviceRequest = function updateDeviceRequest ({ profile, lo
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceRequest = require(resolveFromVersion(version, 'uscore/DeviceRequest'));
+		let DeviceRequest = require(resolveFromVersion(version, 'base/DeviceRequest'));
 		// Validate the resource type before creating it
 		if (DeviceRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

@@ -9,7 +9,7 @@ module.exports.getImplementationGuide = function getImplementationGuide ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImplementationGuide = require(resolveFromVersion(version, 'uscore/ImplementationGuide'));
+		let ImplementationGuide = require(resolveFromVersion(version, 'base/ImplementationGuide'));
 
 		return service.getImplementationGuide(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getImplementationGuideById = function getImplementationGuideById 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImplementationGuide = require(resolveFromVersion(version, 'uscore/ImplementationGuide'));
+		let ImplementationGuide = require(resolveFromVersion(version, 'base/ImplementationGuide'));
 
 		return service.getImplementationGuideById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createImplementationGuide = function createImplementationGuide ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImplementationGuide = require(resolveFromVersion(version, 'uscore/ImplementationGuide'));
+		let ImplementationGuide = require(resolveFromVersion(version, 'base/ImplementationGuide'));
 		// Validate the resource type before creating it
 		if (ImplementationGuide.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateImplementationGuide = function updateImplementationGuide ({
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImplementationGuide = require(resolveFromVersion(version, 'uscore/ImplementationGuide'));
+		let ImplementationGuide = require(resolveFromVersion(version, 'base/ImplementationGuide'));
 		// Validate the resource type before creating it
 		if (ImplementationGuide.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

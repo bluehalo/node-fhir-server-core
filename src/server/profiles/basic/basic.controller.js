@@ -9,7 +9,7 @@ module.exports.getBasic = function getBasic ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Basic = require(resolveFromVersion(version, 'uscore/Basic'));
+		let Basic = require(resolveFromVersion(version, 'base/Basic'));
 
 		return service.getBasic(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getBasicById = function getBasicById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Basic = require(resolveFromVersion(version, 'uscore/Basic'));
+		let Basic = require(resolveFromVersion(version, 'base/Basic'));
 
 		return service.getBasicById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createBasic = function createBasic ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Basic = require(resolveFromVersion(version, 'uscore/Basic'));
+		let Basic = require(resolveFromVersion(version, 'base/Basic'));
 		// Validate the resource type before creating it
 		if (Basic.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateBasic = function updateBasic ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Basic = require(resolveFromVersion(version, 'uscore/Basic'));
+		let Basic = require(resolveFromVersion(version, 'base/Basic'));
 		// Validate the resource type before creating it
 		if (Basic.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

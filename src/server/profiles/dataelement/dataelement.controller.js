@@ -9,7 +9,7 @@ module.exports.getDataElement = function getDataElement ({ profile, logger, conf
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DataElement = require(resolveFromVersion(version, 'uscore/DataElement'));
+		let DataElement = require(resolveFromVersion(version, 'base/DataElement'));
 
 		return service.getDataElement(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDataElementById = function getDataElementById ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DataElement = require(resolveFromVersion(version, 'uscore/DataElement'));
+		let DataElement = require(resolveFromVersion(version, 'base/DataElement'));
 
 		return service.getDataElementById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDataElement = function createDataElement ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DataElement = require(resolveFromVersion(version, 'uscore/DataElement'));
+		let DataElement = require(resolveFromVersion(version, 'base/DataElement'));
 		// Validate the resource type before creating it
 		if (DataElement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDataElement = function updateDataElement ({ profile, logger
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DataElement = require(resolveFromVersion(version, 'uscore/DataElement'));
+		let DataElement = require(resolveFromVersion(version, 'base/DataElement'));
 		// Validate the resource type before creating it
 		if (DataElement.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

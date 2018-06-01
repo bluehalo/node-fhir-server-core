@@ -9,7 +9,7 @@ module.exports.getCodeSystem = function getCodeSystem ({ profile, logger, config
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CodeSystem = require(resolveFromVersion(version, 'uscore/CodeSystem'));
+		let CodeSystem = require(resolveFromVersion(version, 'base/CodeSystem'));
 
 		return service.getCodeSystem(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getCodeSystemById = function getCodeSystemById ({ profile, logger
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let CodeSystem = require(resolveFromVersion(version, 'uscore/CodeSystem'));
+		let CodeSystem = require(resolveFromVersion(version, 'base/CodeSystem'));
 
 		return service.getCodeSystemById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createCodeSystem = function createCodeSystem ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CodeSystem = require(resolveFromVersion(version, 'uscore/CodeSystem'));
+		let CodeSystem = require(resolveFromVersion(version, 'base/CodeSystem'));
 		// Validate the resource type before creating it
 		if (CodeSystem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateCodeSystem = function updateCodeSystem ({ profile, logger, 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let CodeSystem = require(resolveFromVersion(version, 'uscore/CodeSystem'));
+		let CodeSystem = require(resolveFromVersion(version, 'base/CodeSystem'));
 		// Validate the resource type before creating it
 		if (CodeSystem.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

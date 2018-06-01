@@ -9,7 +9,7 @@ module.exports.getSequence = function getSequence ({ profile, logger, config, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(version, 'base/Sequence'));
 
 		return service.getSequence(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getSequenceById = function getSequenceById ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(version, 'base/Sequence'));
 
 		return service.getSequenceById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createSequence = function createSequence ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(version, 'base/Sequence'));
 		// Validate the resource type before creating it
 		if (Sequence.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateSequence = function updateSequence ({ profile, logger, app 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(version, 'base/Sequence'));
 		// Validate the resource type before creating it
 		if (Sequence.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

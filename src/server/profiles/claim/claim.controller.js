@@ -9,7 +9,7 @@ module.exports.getClaim = function getClaim ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Claim = require(resolveFromVersion(version, 'uscore/Claim'));
+		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 
 		return service.getClaim(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getClaimById = function getClaimById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Claim = require(resolveFromVersion(version, 'uscore/Claim'));
+		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 
 		return service.getClaimById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createClaim = function createClaim ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Claim = require(resolveFromVersion(version, 'uscore/Claim'));
+		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 		// Validate the resource type before creating it
 		if (Claim.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateClaim = function updateClaim ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Claim = require(resolveFromVersion(version, 'uscore/Claim'));
+		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 		// Validate the resource type before creating it
 		if (Claim.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

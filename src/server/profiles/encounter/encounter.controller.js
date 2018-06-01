@@ -9,7 +9,7 @@ module.exports.getEncounter = function getEncounter ({ profile, logger, config, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(version, 'uscore/Encounter'));
+		let Encounter = require(resolveFromVersion(version, 'base/Encounter'));
 
 		return service.getEncounter(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getEncounterById = function getEncounterById ({ profile, logger, 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(version, 'uscore/Encounter'));
+		let Encounter = require(resolveFromVersion(version, 'base/Encounter'));
 
 		return service.getEncounterById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createEncounter = function createEncounter ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(version, 'uscore/Encounter'));
+		let Encounter = require(resolveFromVersion(version, 'base/Encounter'));
 		// Validate the resource type before creating it
 		if (Encounter.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateEncounter = function updateEncounter ({ profile, logger, ap
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(version, 'uscore/Encounter'));
+		let Encounter = require(resolveFromVersion(version, 'base/Encounter'));
 		// Validate the resource type before creating it
 		if (Encounter.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

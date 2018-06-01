@@ -9,7 +9,7 @@ module.exports.getDeviceMetric = function getDeviceMetric ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceMetric = require(resolveFromVersion(version, 'uscore/DeviceMetric'));
+		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 
 		return service.getDeviceMetric(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getDeviceMetricById = function getDeviceMetricById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceMetric = require(resolveFromVersion(version, 'uscore/DeviceMetric'));
+		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 
 		return service.getDeviceMetricById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createDeviceMetric = function createDeviceMetric ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceMetric = require(resolveFromVersion(version, 'uscore/DeviceMetric'));
+		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 		// Validate the resource type before creating it
 		if (DeviceMetric.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateDeviceMetric = function updateDeviceMetric ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let DeviceMetric = require(resolveFromVersion(version, 'uscore/DeviceMetric'));
+		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 		// Validate the resource type before creating it
 		if (DeviceMetric.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

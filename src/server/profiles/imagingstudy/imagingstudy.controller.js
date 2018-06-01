@@ -9,7 +9,7 @@ module.exports.getImagingStudy = function getImagingStudy ({ profile, logger, co
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingStudy = require(resolveFromVersion(version, 'uscore/ImagingStudy'));
+		let ImagingStudy = require(resolveFromVersion(version, 'base/ImagingStudy'));
 
 		return service.getImagingStudy(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getImagingStudyById = function getImagingStudyById ({ profile, lo
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingStudy = require(resolveFromVersion(version, 'uscore/ImagingStudy'));
+		let ImagingStudy = require(resolveFromVersion(version, 'base/ImagingStudy'));
 
 		return service.getImagingStudyById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createImagingStudy = function createImagingStudy ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingStudy = require(resolveFromVersion(version, 'uscore/ImagingStudy'));
+		let ImagingStudy = require(resolveFromVersion(version, 'base/ImagingStudy'));
 		// Validate the resource type before creating it
 		if (ImagingStudy.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateImagingStudy = function updateImagingStudy ({ profile, logg
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingStudy = require(resolveFromVersion(version, 'uscore/ImagingStudy'));
+		let ImagingStudy = require(resolveFromVersion(version, 'base/ImagingStudy'));
 		// Validate the resource type before creating it
 		if (ImagingStudy.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(

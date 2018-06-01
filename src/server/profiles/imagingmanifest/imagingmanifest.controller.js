@@ -9,7 +9,7 @@ module.exports.getImagingManifest = function getImagingManifest ({ profile, logg
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 
 		return service.getImagingManifest(req.sanitized_args, logger)
 			.then((results) =>
@@ -32,7 +32,7 @@ module.exports.getImagingManifestById = function getImagingManifestById ({ profi
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 
 		return service.getImagingManifestById(req.sanitized_args, logger)
 			.then((results) =>
@@ -54,7 +54,7 @@ module.exports.createImagingManifest = function createImagingManifest ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 		// Validate the resource type before creating it
 		if (ImagingManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -86,7 +86,7 @@ module.exports.updateImagingManifest = function updateImagingManifest ({ profile
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
 		// Get a version specific resource
-		let ImagingManifest = require(resolveFromVersion(version, 'uscore/ImagingManifest'));
+		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 		// Validate the resource type before creating it
 		if (ImagingManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
