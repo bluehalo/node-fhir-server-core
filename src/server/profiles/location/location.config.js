@@ -1,76 +1,36 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
-const location_args = require('./location.arguments');
+const resource_specific_args = require('./location.arguments');
 const controller = require('./location.controller');
 
 let write_only_scopes = write_scopes('Location');
 let read_only_scopes = read_scopes('Location');
 
+let common_args_array = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
+
+const resource_all_arguments = [
+	route_args.VERSION,	...common_args_array, ...resource_args_array,
+];
+
 let routes = [
 	{
 		type: 'get',
 		path: '/:version/location',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_CITY),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_COUNTRY),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_POSTALCODE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_STATE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_USE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ENDPOINT),
-			Object.assign({versions: VERSIONS.STU3}, location_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NAME),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR_DISTANCE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.OPERATIONAL_STATUS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ORGANIZATION),
-			Object.assign({versions: VERSIONS.STU3}, location_args.PARTOF),
-			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
-		],
+		corsOptions: {methods: ['GET']},
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getLocation
 	},
 	{
 		type: 'post',
 		path: '/:version/location/_search',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_CITY),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_COUNTRY),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_POSTALCODE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_STATE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ADDRESS_USE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ENDPOINT),
-			Object.assign({versions: VERSIONS.STU3}, location_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NAME),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR),
-			Object.assign({versions: VERSIONS.STU3}, location_args.NEAR_DISTANCE),
-			Object.assign({versions: VERSIONS.STU3}, location_args.OPERATIONAL_STATUS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.ORGANIZATION),
-			Object.assign({versions: VERSIONS.STU3}, location_args.PARTOF),
-			Object.assign({versions: VERSIONS.STU3}, location_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, location_args.TYPE)
-		],
+		corsOptions: {methods: ['POST']},
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getLocation
 	},

@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
-const { resolveFromVersion } = require('../../utils/error.utils');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 

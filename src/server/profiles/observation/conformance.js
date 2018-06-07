@@ -4,7 +4,7 @@ const { routes } = require('./observation.config');
 
 /**
  * @name exports
- * @summary Observation conformance statement
+ * @summary Conformance statement
  */
 module.exports = {
 	profile: 'observation',
@@ -14,13 +14,13 @@ module.exports = {
 		// Return our conformance statement
 		return {
 			extension: [{
-				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				url: 'https://www.hl7.org/fhir/search.html#count',
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
 			type: Observation.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Observation'
+				reference: 'http://hl7.org/fhir/observation.html'
 			},
 			conditionalDelete: 'not-supported',
 			searchParam: searchParams
