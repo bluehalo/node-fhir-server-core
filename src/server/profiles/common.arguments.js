@@ -17,7 +17,7 @@ module.exports.route_args = {
 
 /**
 * @name exports
-* @description Common arguments used for writing new reousrces
+* @description Common arguments used for writing new resources
 */
 module.exports.write_args = {
 	RESOURCE_ID: {
@@ -29,6 +29,25 @@ module.exports.write_args = {
 		name: 'resource_body',
 		type: 'json_string',
 		conformance_hide: true
+	}
+};
+
+/**
+* @name search_args
+* @description Common arguments used for search
+*/
+module.exports.search_args = {
+	_INCLUDE: {
+		name: '_include',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: ''
+	},
+	_REVINCLUDE: {
+		name: '_revinclude',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: ''
 	}
 };
 
@@ -86,3 +105,4 @@ module.exports.common_args = {
 		documentation: ''
 	}
 };
+
