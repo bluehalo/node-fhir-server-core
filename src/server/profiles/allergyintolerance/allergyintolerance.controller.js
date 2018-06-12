@@ -8,7 +8,7 @@ module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific allergyintolerance
+		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
 		return service.getAllergyIntolerance(req.sanitized_args, logger)
@@ -31,7 +31,7 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific allergyintolerance
+		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
 		return service.getAllergyIntoleranceById(req.sanitized_args, logger)
@@ -46,14 +46,14 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 };
 
 /**
-* @description Controller for creating a allergy_intolerance
+* @description Controller for creating AllergyIntolerance
 */
 module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific allergy_intolerance
+		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 		// Validate the resource type before creating it
 		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
@@ -62,9 +62,9 @@ module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ p
 				version
 			));
 		}
-		// Create a new allergy_intolerance resource and pass it to the service
-		let allergy_intolerance = new AllergyIntolerance(resource_body);
-		let args = { id: resource_id, resource: allergy_intolerance };
+		// Create a new resource and pass it to the service
+		let new_resource = new AllergyIntolerance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createAllergyIntolerance(args, logger)
 			.then((results) =>
@@ -78,14 +78,14 @@ module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ p
 };
 
 /**
-* @description Controller for updating/creating a allergy_intolerance. If the allergy_intolerance does not exist, it should be updated
+* @description Controller for updating/creating AllergyIntolerance. If the AllergyIntolerance does not exist, it should be updated
 */
 module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific allergy_intolerance
+		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 		// Validate the resource type before creating it
 		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
@@ -94,9 +94,9 @@ module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ p
 				version
 			));
 		}
-		// Create a new allergy_intolerance resource and pass it to the service
-		let allergy_intolerance = new AllergyIntolerance(resource_body);
-		let args = { id: resource_id, resource: allergy_intolerance };
+		// Create a new resource and pass it to the service
+		let new_resource = new AllergyIntolerance(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateAllergyIntolerance(args, logger)
 			.then((results) =>
@@ -110,7 +110,7 @@ module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ p
 };
 
 /**
-* @description Controller for deleting an allergy_intolerance.
+* @description Controller for deleting an AllergyIntolerance.
 */
 module.exports.deleteAllergyIntolerance = function deleteAllergyIntolerance ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;

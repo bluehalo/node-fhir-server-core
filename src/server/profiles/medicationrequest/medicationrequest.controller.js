@@ -8,7 +8,7 @@ module.exports.getMedicationRequest = function getMedicationRequest ({ profile, 
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific medicationrequest
+		// Get a version specific resource
 		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 
 		return service.getMedicationRequest(req.sanitized_args, logger)
@@ -23,7 +23,6 @@ module.exports.getMedicationRequest = function getMedicationRequest ({ profile, 
 			});
 	};
 
-
 };
 
 
@@ -32,7 +31,7 @@ module.exports.getMedicationRequestById = function getMedicationRequestById ({ p
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
-		// Get a version specific medicationrequest
+		// Get a version specific resource
 		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 
 		return service.getMedicationRequestById(req.sanitized_args, logger)
@@ -47,14 +46,14 @@ module.exports.getMedicationRequestById = function getMedicationRequestById ({ p
 };
 
 /**
-* @description Controller for creating a medication_request
-*/
+ * @description Controller for creating MedicationRequest
+ */
 module.exports.createMedicationRequest = function createMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific medication_request
+		// Get a version specific resource
 		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 		// Validate the resource type before creating it
 		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
@@ -63,9 +62,9 @@ module.exports.createMedicationRequest = function createMedicationRequest ({ pro
 				version
 			));
 		}
-		// Create a new medication_request resource and pass it to the service
-		let medication_request = new MedicationRequest(resource_body);
-		let args = { id: resource_id, resource: medication_request };
+		// Create a new resource and pass it to the service
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.createMedicationRequest(args, logger)
 			.then((results) =>
@@ -79,14 +78,14 @@ module.exports.createMedicationRequest = function createMedicationRequest ({ pro
 };
 
 /**
-* @description Controller for updating/creating a medication_request. If the medication_request does not exist, it should be updated
-*/
+ * @description Controller for updating/creating MedicationRequest. If the MedicationRequest does not exist, it should be updated
+ */
 module.exports.updateMedicationRequest = function updateMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version, resource_body, resource_id } = req.sanitized_args;
-		// Get a version specific medication_request
+		// Get a version specific resource
 		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
 		// Validate the resource type before creating it
 		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
@@ -95,9 +94,9 @@ module.exports.updateMedicationRequest = function updateMedicationRequest ({ pro
 				version
 			));
 		}
-		// Create a new medication_request resource and pass it to the service
-		let medication_request = new MedicationRequest(resource_body);
-		let args = { id: resource_id, resource: medication_request };
+		// Create a new resource and pass it to the service
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateMedicationRequest(args, logger)
 			.then((results) =>
@@ -111,8 +110,8 @@ module.exports.updateMedicationRequest = function updateMedicationRequest ({ pro
 };
 
 /**
-* @description Controller for deleting a medication request resource.
-*/
+ * @description Controller for deleting an MedicationRequest.
+ */
 module.exports.deleteMedicationRequest = function deleteMedicationRequest ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 

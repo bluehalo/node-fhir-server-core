@@ -1,62 +1,34 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
-const careteam_args = require('./careteam.arguments');
+const resource_specific_args = require('./careteam.arguments');
 const controller = require('./careteam.controller');
 
 let write_only_scopes = write_scopes('CareTeam');
 let read_only_scopes = read_scopes('CareTeam');
 
+let common_args_array = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
+
+const resource_all_arguments = [
+	route_args.VERSION,	...common_args_array, ...resource_args_array,
+];
+
 let routes = [
 	{
 		type: 'get',
 		path: '/:version/careteam',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.ENCOUNTER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PARTICIPANT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
-		],
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getCareTeam
 	},
 	{
 		type: 'post',
 		path: '/:version/careteam/_search',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.DATE),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.ENCOUNTER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PARTICIPANT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, careteam_args.SUBJECT)
-		],
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.getCareTeam
 	},
