@@ -11,7 +11,7 @@ const CONFIG = {
 		introspectionUrl: 'https://afternoon-springs-39948.herokuapp.com/introspect'
 	},
 	server: {
-		port: 3000,
+		port: process.env.PORT || process.env.SERVER_PORT || 3000,
 		corsOptions: {
 			maxAge: 86400
 		},
