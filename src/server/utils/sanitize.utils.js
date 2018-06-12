@@ -79,6 +79,12 @@ let parseParams = req => {
 	return params;
 };
 
+let findMatchWithName = (name = '', params = {}) => {
+	let keys = Object.getOwnPropertyNames(params);
+	let match = keys.find(key => key.startsWith(name));
+	return { field: match, value: params[match] };
+};
+
 /**
  * @function sanitizeMiddleware
  * @summary Sanitize the arguments by removing extra arguments, escaping some, and
@@ -97,24 +103,25 @@ let sanitizeMiddleware = function (config) {
 		// Check each argument in the config
 		for (let i = 0; i < config.length; i++) {
 			let conf = config[i];
+			let { field, value } = findMatchWithName(conf.name, currentArgs);
 
 			// If the argument is required but not present
-			if (!currentArgs[conf.name] && conf.required) {
+			if (!value && conf.required) {
 				return next(errors.invalidParameter(conf.name + ' is required', req.params.version));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
 			// returns as NaN we can bail on it
 			try {
-				if (currentArgs[conf.name]) {
-					cleanArgs[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
+				if (value) {
+					cleanArgs[field] = parseValue(conf.type, value);
 				}
 			} catch (err) {
 				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.version));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
-			if (cleanArgs[conf.name] !== undefined && !validateType(conf.type, cleanArgs[conf.name])) {
+			if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
 				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.version));
 			}
 		}
