@@ -25,7 +25,7 @@ module.exports = {
 			interaction: [{
 				code: 'read'
 			}, {
-				code: 'search'
+				code: 'search-type'
 			}],
 			searchParam: searchParams
 		};
