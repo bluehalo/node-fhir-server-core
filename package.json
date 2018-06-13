@@ -35,9 +35,6 @@
 		],
 		"coveragePathIgnorePatterns": [
 			"<rootDir>/src/server/standards/"
-		],
-		"testPathIgnorePatterns": [
-			"<rootDir>/src/server/standards/"
 		]
 	},
 	"dependencies": {
