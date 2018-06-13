@@ -53,7 +53,7 @@ module.exports.createOrganization = function createOrganization ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
 		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateOrganization = function updateOrganization ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
 		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateOrganization = function updateOrganization ({ profile, logg
 		}
 		// Create a new organization resource and pass it to the service
 		let organization = new Organization(resource_body);
-		let args = { id: resource_id, resource: organization };
+		let args = { id, resource: organization };
 		// Pass any new information to the underlying service
 		return service.updateOrganization(args, logger)
 			.then((results) =>

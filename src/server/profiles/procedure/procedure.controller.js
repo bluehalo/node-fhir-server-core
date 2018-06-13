@@ -53,7 +53,7 @@ module.exports.createProcedure = function createProcedure ({ profile, logger, ap
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific procedure
 		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateProcedure = function updateProcedure ({ profile, logger, ap
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific procedure
 		let Procedure = require(resolveFromVersion(version, 'uscore/Procedure'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateProcedure = function updateProcedure ({ profile, logger, ap
 		}
 		// Create a new procedure resource and pass it to the service
 		let procedure = new Procedure(resource_body);
-		let args = { id: resource_id, resource: procedure };
+		let args = { id, resource: procedure };
 		// Pass any new information to the underlying service
 		return service.updateProcedure(args, logger)
 			.then((results) =>

@@ -53,7 +53,7 @@ module.exports.createCondition = function createCondition ({ profile, logger, ap
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific condition
 		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateCondition = function updateCondition ({ profile, logger, ap
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific condition
 		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateCondition = function updateCondition ({ profile, logger, ap
 		}
 		// Create a new condition resource and pass it to the service
 		let condition = new Condition(resource_body);
-		let args = { id: resource_id, resource: condition };
+		let args = { id, resource: condition };
 		// Pass any new information to the underlying service
 		return service.updateCondition(args, logger)
 			.then((results) =>

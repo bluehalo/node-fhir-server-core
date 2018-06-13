@@ -97,7 +97,7 @@ module.exports.createPatient = function createPatient ({ profile, logger, app })
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 		// Validate the resource type before creating it
@@ -129,7 +129,7 @@ module.exports.updatePatient = function updatePatient ({ profile, logger, app })
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 		// Validate the resource type before creating it
