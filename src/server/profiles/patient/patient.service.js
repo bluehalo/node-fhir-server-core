@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 module.exports.getCount = (req, logger, context) => new Promise((resolve, reject) => {
-	resolve(1);
-	// let message = 'Calling mock service. Did you forget to implement \'getCount\'';
-	// logger.info(message);
-	// reject(new Error(message));
+	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+	logger.info(message);
+	reject(new Error(message));
 });
 
 module.exports.getPatient = (req, logger, context) => new Promise((resolve, reject) => {
