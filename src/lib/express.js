@@ -13,6 +13,7 @@ const {
 	EVENTS
 } = require('../constants');
 
+
 /**
  * @function configureMiddleware
  * @summary Configure some basic express middleware
@@ -202,12 +203,12 @@ module.exports.initialize = async ({ config, logger }) => {
 	setupErrorHandler(app, logger);
 
 	/**
-	* Use an https server in production, this must be last
-	* If this app is behind a load balancer on AWS that has SSL certs, then you
-	* do not necessarily need this, but if this is being deployed with nothing in
-	* front of it, then you must add some SSL certs. This last section can be updated
-	* depending on the environment that you are deploying to.
-	*/
+	 * Use an https server in production, this must be last
+	 * If this app is behind a load balancer on AWS that has SSL certs, then you
+	 * do not necessarily need this, but if this is being deployed with nothing in
+	 * front of it, then you must add some SSL certs. This last section can be updated
+	 * depending on the environment that you are deploying to.
+	 */
 	if (USE_HTTPS) {
 
 		// These are required for running in https
