@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getConceptMap = function getConceptMap ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getConceptMap = function getConceptMap ({ profile, logger, config
 		// Get a version specific resource
 		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 
-		return service.getConceptMap(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ConceptMap, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getConceptMap = function getConceptMap ({ profile, logger, config
 };
 
 
-module.exports.getConceptMapById = function getConceptMapById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getConceptMapById = function getConceptMapById ({ profile, logger
 		// Get a version specific resource
 		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
 
-		return service.getConceptMapById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ConceptMap, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getConceptMapById = function getConceptMapById ({ profile, logger
 /**
  * @description Controller for creating ConceptMap
  */
-module.exports.createConceptMap = function createConceptMap ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createConceptMap = function createConceptMap ({ profile, logger, 
 		let new_resource = new ConceptMap(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createConceptMap(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ConceptMap.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createConceptMap = function createConceptMap ({ profile, logger, 
 /**
  * @description Controller for updating/creating ConceptMap. If the ConceptMap does not exist, it should be updated
  */
-module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, 
 		let new_resource = new ConceptMap(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateConceptMap(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ConceptMap.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateConceptMap = function updateConceptMap ({ profile, logger, 
 /**
  * @description Controller for deleting an ConceptMap.
  */
-module.exports.deleteConceptMap = function deleteConceptMap ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteConceptMap(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

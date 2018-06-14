@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getPaymentNotice = function getPaymentNotice ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getPaymentNotice = function getPaymentNotice ({ profile, logger, 
 		// Get a version specific resource
 		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 
-		return service.getPaymentNotice(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, PaymentNotice, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getPaymentNotice = function getPaymentNotice ({ profile, logger, 
 };
 
 
-module.exports.getPaymentNoticeById = function getPaymentNoticeById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getPaymentNoticeById = function getPaymentNoticeById ({ profile, 
 		// Get a version specific resource
 		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
 
-		return service.getPaymentNoticeById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, PaymentNotice, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getPaymentNoticeById = function getPaymentNoticeById ({ profile, 
 /**
  * @description Controller for creating PaymentNotice
  */
-module.exports.createPaymentNotice = function createPaymentNotice ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createPaymentNotice = function createPaymentNotice ({ profile, lo
 		let new_resource = new PaymentNotice(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createPaymentNotice(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, PaymentNotice.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createPaymentNotice = function createPaymentNotice ({ profile, lo
 /**
  * @description Controller for updating/creating PaymentNotice. If the PaymentNotice does not exist, it should be updated
  */
-module.exports.updatePaymentNotice = function updatePaymentNotice ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updatePaymentNotice = function updatePaymentNotice ({ profile, lo
 		let new_resource = new PaymentNotice(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updatePaymentNotice(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, PaymentNotice.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updatePaymentNotice = function updatePaymentNotice ({ profile, lo
 /**
  * @description Controller for deleting an PaymentNotice.
  */
-module.exports.deletePaymentNotice = function deletePaymentNotice ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deletePaymentNotice(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

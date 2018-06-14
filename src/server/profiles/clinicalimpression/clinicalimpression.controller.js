@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getClinicalImpression = function getClinicalImpression ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getClinicalImpression = function getClinicalImpression ({ profile
 		// Get a version specific resource
 		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 
-		return service.getClinicalImpression(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ClinicalImpression, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getClinicalImpression = function getClinicalImpression ({ profile
 };
 
 
-module.exports.getClinicalImpressionById = function getClinicalImpressionById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getClinicalImpressionById = function getClinicalImpressionById ({
 		// Get a version specific resource
 		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
 
-		return service.getClinicalImpressionById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ClinicalImpression, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getClinicalImpressionById = function getClinicalImpressionById ({
 /**
  * @description Controller for creating ClinicalImpression
  */
-module.exports.createClinicalImpression = function createClinicalImpression ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createClinicalImpression = function createClinicalImpression ({ p
 		let new_resource = new ClinicalImpression(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createClinicalImpression(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ClinicalImpression.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createClinicalImpression = function createClinicalImpression ({ p
 /**
  * @description Controller for updating/creating ClinicalImpression. If the ClinicalImpression does not exist, it should be updated
  */
-module.exports.updateClinicalImpression = function updateClinicalImpression ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateClinicalImpression = function updateClinicalImpression ({ p
 		let new_resource = new ClinicalImpression(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateClinicalImpression(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ClinicalImpression.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateClinicalImpression = function updateClinicalImpression ({ p
 /**
  * @description Controller for deleting an ClinicalImpression.
  */
-module.exports.deleteClinicalImpression = function deleteClinicalImpression ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteClinicalImpression(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDeviceMetric = function getDeviceMetric ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getDeviceMetric = function getDeviceMetric ({ profile, logger, co
 		// Get a version specific resource
 		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 
-		return service.getDeviceMetric(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, DeviceMetric, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getDeviceMetric = function getDeviceMetric ({ profile, logger, co
 };
 
 
-module.exports.getDeviceMetricById = function getDeviceMetricById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getDeviceMetricById = function getDeviceMetricById ({ profile, lo
 		// Get a version specific resource
 		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
 
-		return service.getDeviceMetricById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, DeviceMetric, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getDeviceMetricById = function getDeviceMetricById ({ profile, lo
 /**
  * @description Controller for creating DeviceMetric
  */
-module.exports.createDeviceMetric = function createDeviceMetric ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createDeviceMetric = function createDeviceMetric ({ profile, logg
 		let new_resource = new DeviceMetric(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createDeviceMetric(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, DeviceMetric.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createDeviceMetric = function createDeviceMetric ({ profile, logg
 /**
  * @description Controller for updating/creating DeviceMetric. If the DeviceMetric does not exist, it should be updated
  */
-module.exports.updateDeviceMetric = function updateDeviceMetric ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateDeviceMetric = function updateDeviceMetric ({ profile, logg
 		let new_resource = new DeviceMetric(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateDeviceMetric(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DeviceMetric.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateDeviceMetric = function updateDeviceMetric ({ profile, logg
 /**
  * @description Controller for deleting an DeviceMetric.
  */
-module.exports.deleteDeviceMetric = function deleteDeviceMetric ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteDeviceMetric(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

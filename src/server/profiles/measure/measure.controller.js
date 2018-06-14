@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMeasure = function getMeasure ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getMeasure = function getMeasure ({ profile, logger, config, app 
 		// Get a version specific resource
 		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 
-		return service.getMeasure(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, Measure, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getMeasure = function getMeasure ({ profile, logger, config, app 
 };
 
 
-module.exports.getMeasureById = function getMeasureById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getMeasureById = function getMeasureById ({ profile, logger, app 
 		// Get a version specific resource
 		let Measure = require(resolveFromVersion(version, 'base/Measure'));
 
-		return service.getMeasureById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, Measure, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getMeasureById = function getMeasureById ({ profile, logger, app 
 /**
  * @description Controller for creating Measure
  */
-module.exports.createMeasure = function createMeasure ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createMeasure = function createMeasure ({ profile, logger, app })
 		let new_resource = new Measure(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createMeasure(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Measure.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createMeasure = function createMeasure ({ profile, logger, app })
 /**
  * @description Controller for updating/creating Measure. If the Measure does not exist, it should be updated
  */
-module.exports.updateMeasure = function updateMeasure ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateMeasure = function updateMeasure ({ profile, logger, app })
 		let new_resource = new Measure(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateMeasure(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Measure.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateMeasure = function updateMeasure ({ profile, logger, app })
 /**
  * @description Controller for deleting an Measure.
  */
-module.exports.deleteMeasure = function deleteMeasure ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteMeasure(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

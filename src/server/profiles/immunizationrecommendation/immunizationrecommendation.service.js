@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getImmunizationRecommendation = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getImmunizationRecommendation\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in ImmunizationRecommendation service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getImmunizationRecommendationById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getImmunizationRecommendationById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in ImmunizationRecommendation service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createImmunizationRecommendation = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createImmunizationRecommendation\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in ImmunizationRecommendation service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateImmunizationRecommendation = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateImmunizationRecommendation\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in ImmunizationRecommendation service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteImmunizationRecommendation = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteImmunizationRecommendation\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in ImmunizationRecommendation service.';
 	logger.info(message);
 	reject(new Error(message));
 });

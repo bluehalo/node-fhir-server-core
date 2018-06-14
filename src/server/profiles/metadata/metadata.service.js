@@ -23,21 +23,21 @@ let mapProfiles = (profiles = {}) => {
 				&& profiles[profile_name].versions,
 			service: profiles[profile_name]
 				&& profiles[profile_name].serviceModule,
-			getCount: profiles[profile_name]
+			count: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
-				&& profiles[profile_name].serviceModule.getCount
+				&& profiles[profile_name].serviceModule.count
 		};
 	};
 };
 
 /**
 * Filter resources/profiles baased on the, having the required properties
-* if the service provided does not have a getCount method then we cannot
+* if the service provided does not have a count method then we cannot
 * generate a complete record
 */
 let filterProfiles = (version) => {
 	return resource => (
-		resource.getCount
+		resource.count
 		&& resource.makeResource
 		&& resource.versions.indexOf(version) > -1
 	);
@@ -83,7 +83,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	}
 
 	// Generate a list of promises
-	let count_promises = active_profiles.map(profile => profile.getCount(args, logger));
+	let count_promises = active_profiles.map(profile => profile.count(args, logger));
 
 	// Iterate over active resources and invoke get count on each
 	return Promise.all(count_promises).then(counts => {

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile
 		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
-		return service.getAllergyIntolerance(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, AllergyIntolerance, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getAllergyIntolerance = function getAllergyIntolerance ({ profile
 };
 
 
-module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 		// Get a version specific resource
 		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
 
-		return service.getAllergyIntoleranceById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, AllergyIntolerance, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getAllergyIntoleranceById = function getAllergyIntoleranceById ({
 /**
 * @description Controller for creating AllergyIntolerance
 */
-module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ p
 		let new_resource = new AllergyIntolerance(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createAllergyIntolerance(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, AllergyIntolerance.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createAllergyIntolerance = function createAllergyIntolerance ({ p
 /**
 * @description Controller for updating/creating AllergyIntolerance. If the AllergyIntolerance does not exist, it should be updated
 */
-module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ p
 		let new_resource = new AllergyIntolerance(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateAllergyIntolerance(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, AllergyIntolerance.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateAllergyIntolerance = function updateAllergyIntolerance ({ p
 /**
 * @description Controller for deleting an AllergyIntolerance.
 */
-module.exports.deleteAllergyIntolerance = function deleteAllergyIntolerance ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteAllergyIntolerance(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

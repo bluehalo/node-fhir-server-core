@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getClaim = function getClaim ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getClaim = function getClaim ({ profile, logger, config, app }) {
 		// Get a version specific resource
 		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 
-		return service.getClaim(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, Claim, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getClaim = function getClaim ({ profile, logger, config, app }) {
 };
 
 
-module.exports.getClaimById = function getClaimById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getClaimById = function getClaimById ({ profile, logger, app }) {
 		// Get a version specific resource
 		let Claim = require(resolveFromVersion(version, 'base/Claim'));
 
-		return service.getClaimById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, Claim, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getClaimById = function getClaimById ({ profile, logger, app }) {
 /**
  * @description Controller for creating Claim
  */
-module.exports.createClaim = function createClaim ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createClaim = function createClaim ({ profile, logger, app }) {
 		let new_resource = new Claim(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createClaim(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Claim.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createClaim = function createClaim ({ profile, logger, app }) {
 /**
  * @description Controller for updating/creating Claim. If the Claim does not exist, it should be updated
  */
-module.exports.updateClaim = function updateClaim ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateClaim = function updateClaim ({ profile, logger, app }) {
 		let new_resource = new Claim(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateClaim(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Claim.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateClaim = function updateClaim ({ profile, logger, app }) {
 /**
  * @description Controller for deleting an Claim.
  */
-module.exports.deleteClaim = function deleteClaim ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteClaim(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

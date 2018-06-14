@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDevice = function getDevice ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getDevice = function getDevice ({ profile, logger, config, app })
 		// Get a version specific device
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
-		return service.getDevice(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, Device, results, {
 					resourceUrl: config.auth.resourceServer
@@ -27,7 +27,7 @@ module.exports.getDevice = function getDevice ({ profile, logger, config, app })
 };
 
 
-module.exports.getDeviceById = function getDeviceById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -35,7 +35,7 @@ module.exports.getDeviceById = function getDeviceById ({ profile, logger, app })
 		// Get a version specific device
 		let Device = require(resolveFromVersion(version, 'uscore/Device'));
 
-		return service.getDeviceById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, Device, results)
 			)
@@ -49,7 +49,7 @@ module.exports.getDeviceById = function getDeviceById ({ profile, logger, app })
 /**
 * @description Controller for creating a device
 */
-module.exports.createDevice = function createDevice ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -67,7 +67,7 @@ module.exports.createDevice = function createDevice ({ profile, logger, app }) {
 		let device = new Device(resource_body);
 		let args = { id: resource_id, resource: device };
 		// Pass any new information to the underlying service
-		return service.createDevice(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, Device.__resourceType, results)
 			)
@@ -81,7 +81,7 @@ module.exports.createDevice = function createDevice ({ profile, logger, app }) {
 /**
 * @description Controller for updating/creating a device. If the device does not exist, it should be updated
 */
-module.exports.updateDevice = function updateDevice ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -99,7 +99,7 @@ module.exports.updateDevice = function updateDevice ({ profile, logger, app }) {
 		let device = new Device(resource_body);
 		let args = { id, resource: device };
 		// Pass any new information to the underlying service
-		return service.updateDevice(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, Device.__resourceType, results)
 			)
@@ -113,13 +113,13 @@ module.exports.updateDevice = function updateDevice ({ profile, logger, app }) {
 /**
 * @description Controller for deleting a device resource.
 */
-module.exports.deleteDevice = function deleteDevice ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteDevice(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

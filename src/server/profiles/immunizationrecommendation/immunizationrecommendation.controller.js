@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getImmunizationRecommendation = function getImmunizationRecommendation ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getImmunizationRecommendation = function getImmunizationRecommend
 		// Get a version specific resource
 		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 
-		return service.getImmunizationRecommendation(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ImmunizationRecommendation, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getImmunizationRecommendation = function getImmunizationRecommend
 };
 
 
-module.exports.getImmunizationRecommendationById = function getImmunizationRecommendationById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getImmunizationRecommendationById = function getImmunizationRecom
 		// Get a version specific resource
 		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
 
-		return service.getImmunizationRecommendationById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ImmunizationRecommendation, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getImmunizationRecommendationById = function getImmunizationRecom
 /**
  * @description Controller for creating ImmunizationRecommendation
  */
-module.exports.createImmunizationRecommendation = function createImmunizationRecommendation ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createImmunizationRecommendation = function createImmunizationRec
 		let new_resource = new ImmunizationRecommendation(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createImmunizationRecommendation(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ImmunizationRecommendation.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createImmunizationRecommendation = function createImmunizationRec
 /**
  * @description Controller for updating/creating ImmunizationRecommendation. If the ImmunizationRecommendation does not exist, it should be updated
  */
-module.exports.updateImmunizationRecommendation = function updateImmunizationRecommendation ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateImmunizationRecommendation = function updateImmunizationRec
 		let new_resource = new ImmunizationRecommendation(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateImmunizationRecommendation(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ImmunizationRecommendation.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateImmunizationRecommendation = function updateImmunizationRec
 /**
  * @description Controller for deleting an ImmunizationRecommendation.
  */
-module.exports.deleteImmunizationRecommendation = function deleteImmunizationRecommendation ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteImmunizationRecommendation(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

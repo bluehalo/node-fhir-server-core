@@ -23,14 +23,14 @@ let routes = [
 		path: '/:version/relatedperson',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getRelatedPerson
+		controller: controller.search
 	},
 	{
 		type: 'post',
 		path: '/:version/relatedperson/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getRelatedPerson
+		controller: controller.search
 	},
 	{
 		type: 'get',
@@ -40,7 +40,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getRelatedPersonById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
@@ -51,7 +51,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createRelatedPerson
+		controller: controller.create
 	},
 	{
 		type: 'put',
@@ -62,7 +62,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateRelatedPerson
+		controller: controller.update
 	},
 	{
 		type: 'delete',
@@ -73,7 +73,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteRelatedPerson
+		controller: controller.remove
 	}
 ];
 

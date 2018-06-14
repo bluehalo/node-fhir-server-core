@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDeviceComponent = function getDeviceComponent ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getDeviceComponent = function getDeviceComponent ({ profile, logg
 		// Get a version specific resource
 		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 
-		return service.getDeviceComponent(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, DeviceComponent, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getDeviceComponent = function getDeviceComponent ({ profile, logg
 };
 
 
-module.exports.getDeviceComponentById = function getDeviceComponentById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getDeviceComponentById = function getDeviceComponentById ({ profi
 		// Get a version specific resource
 		let DeviceComponent = require(resolveFromVersion(version, 'base/DeviceComponent'));
 
-		return service.getDeviceComponentById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, DeviceComponent, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getDeviceComponentById = function getDeviceComponentById ({ profi
 /**
  * @description Controller for creating DeviceComponent
  */
-module.exports.createDeviceComponent = function createDeviceComponent ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createDeviceComponent = function createDeviceComponent ({ profile
 		let new_resource = new DeviceComponent(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createDeviceComponent(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, DeviceComponent.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createDeviceComponent = function createDeviceComponent ({ profile
 /**
  * @description Controller for updating/creating DeviceComponent. If the DeviceComponent does not exist, it should be updated
  */
-module.exports.updateDeviceComponent = function updateDeviceComponent ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateDeviceComponent = function updateDeviceComponent ({ profile
 		let new_resource = new DeviceComponent(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateDeviceComponent(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DeviceComponent.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateDeviceComponent = function updateDeviceComponent ({ profile
 /**
  * @description Controller for deleting an DeviceComponent.
  */
-module.exports.deleteDeviceComponent = function deleteDeviceComponent ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteDeviceComponent(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

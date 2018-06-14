@@ -23,14 +23,14 @@ let routes = [
 		path: '/:version/claim',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getClaim
+		controller: controller.search
 	},
 	{
 		type: 'post',
 		path: '/:version/claim/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getClaim
+		controller: controller.search
 	},
 	{
 		type: 'get',
@@ -40,7 +40,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getClaimById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
@@ -51,7 +51,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createClaim
+		controller: controller.create
 	},
 	{
 		type: 'put',
@@ -62,7 +62,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateClaim
+		controller: controller.update
 	},
 	{
 		type: 'delete',
@@ -73,7 +73,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteClaim
+		controller: controller.remove
 	}
 ];
 

@@ -23,14 +23,14 @@ let routes = [
 		path: '/:version/documentmanifest',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifest
+		controller: controller.search
 	},
 	{
 		type: 'post',
 		path: '/:version/documentmanifest/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifest
+		controller: controller.search
 	},
 	{
 		type: 'get',
@@ -40,7 +40,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifestById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
@@ -51,7 +51,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createDocumentManifest
+		controller: controller.create
 	},
 	{
 		type: 'put',
@@ -62,7 +62,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateDocumentManifest
+		controller: controller.update
 	},
 	{
 		type: 'delete',
@@ -73,7 +73,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteDocumentManifest
+		controller: controller.remove
 	}
 ];
 
