@@ -54,8 +54,6 @@ let loadAuthValidator = (key, auth = {}) => {
 		auth.serviceModule = auth.service;
 	}
 
-
-
 	return auth;
 };
 

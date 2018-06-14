@@ -510,7 +510,7 @@ let main = async function () {
 		console.error(err.message);
 		process.exit(1);
 	} else {
-		server.logger.info('FHIR Server started successfully');
+		server.logger.info('FHIR server started successfully');
 	}
 };
 

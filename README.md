@@ -81,7 +81,7 @@ info: FHIR Server started successfully
 More configuration options, profiles, best practices, authentication are at [Asymmetrik Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki). 
 
 A developed implementation of this core server with the MongoDB database is at 
-[https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
+[Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
 
 ## Philosophy

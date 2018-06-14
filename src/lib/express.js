@@ -13,93 +13,6 @@ const {
 	EVENTS
 } = require('../constants');
 
-/**
- * @function configureMiddleware
- * @summary Configure some basic express middleware
- * @param {Express.app} app
- */
-let configureMiddleware = function (app, IS_PRODUCTION) {
-
-	// Enable stack traces
-	app.set('showStackError', !IS_PRODUCTION);
-
-	// Add compression
-	app.use(compression({ level: 9 }));
-
-	// Enable the body parser
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(bodyParser.json());
-
-	// Enable this if necessary to use put and delete, currently, we do not need it so don't enable it
-	// app.use(methodOverride());
-
-};
-
-/**
- * @function configureSession
- * @summary Configure some basic express middleware
- * @param {Express.app} app
- */
-let configureSession = function (app, serverConfig) {
-	// If a session was passed in the config, let's use it
-	if (serverConfig.sessionStore) {
-		app.use(serverConfig.sessionStore);
-	}
-};
-
-/**
- * @function configureEvents
- * @summary Setup subscriptions for various events
- * @param {Express.app} app
- */
-let configureEvents = function (app, events = {}) {
-	// Audit events. These will trigger when their is a
-	// security/privacy related event
-	if (typeof events.auditEvent === 'function') {
-		app.on(EVENTS.AUDIT, events.auditEvent);
-	}
-	// provenance events occur when a resource changes
-	// "how it came to be", meaning updates, creates, and deletes
-	if (typeof events.provenance === 'function') {
-		app.on(EVENTS.PROVENANCE, events.provenance);
-	}
-};
-
-/**
- * @function secureHeaders
- * @summary Add helmet to secure headers
- * @param {Express.app} app
- */
-let secureHeaders = function (app, USE_HTTPS) {
-	/**
-	 * The following headers are turned on by default:
-	 * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
-	 * - frameguard (prevent clickjacking). https://helmetjs.github.io/docs/frameguard
-	 * - hidePoweredBy (remove the X-Powered-By header). https://helmetjs.github.io/docs/hide-powered-by
-	 * - hsts (HTTP strict transport security). https://helmetjs.github.io/docs/hsts
-	 * - ieNoOpen (sets X-Download-Options for IE8+). https://helmetjs.github.io/docs/ienoopen
-	 * - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
-	 * - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
-	 */
-	app.use(helmet({
-		// Needs https running first
-		hsts: USE_HTTPS
-	}));
-};
-
-/**
- * @function setupRoutes
- * @summary Add routes
- * @param {Express.app} app
- */
-let setupRoutes = function (app, config, logger) {
-	// Setup a static directory in case one is needed
-	if (config.server && config.server.publicDirectory) {
-		app.use(express.static(config.server.publicDirectory));
-	}
-
-	routeSetter.setRoutes({ logger, config, app });
-};
 
 /**
  * @function initAuthConfig
@@ -134,7 +47,6 @@ let initAuthConfig = async function (config) {
 		}
 	}
 
-
 	// Introspection is not required depending on the oauth2 implementation (required for openid)
 	if (discoveryUrl && typeof oauthConfig.introspection_endpoint !== 'string') {
 		throw new Error('introspection_endpoint is not a string');
@@ -142,6 +54,92 @@ let initAuthConfig = async function (config) {
 
 	return oauthConfig;
 };
+
+
+/**
+ * @function configureMiddleware
+ * @summary Configure express middleware with stack trace, compression, body parser
+ * @param {Express.app} app
+ */
+let configureMiddleware = function (app, IS_PRODUCTION) {
+
+	// Enable stack traces, compression, body parser
+	app.set('showStackError', !IS_PRODUCTION);
+	app.use(compression({ level: 9 }));
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
+
+	// Enable methodOverrie if use put & delete. Currently, not necessary.
+	// app.use(methodOverride());
+};
+
+
+/**
+ * @function configureSession
+ * @summary Use session stored in serverConfig
+ * @param {Express.app} app
+ */
+let configureSession = function (app, serverConfig) {
+	if (serverConfig.sessionStore) {
+		app.use(serverConfig.sessionStore);
+	}
+};
+
+
+/**
+ * @function configureEvents
+ * @summary Configure Audit (security/privacy) and Providence (resource updated/created/deleted) events
+ * @param {Express.app} app
+ */
+let configureEvents = function (app, events = {}) {
+	// Trigger Audit Event when there's security/privacy related event
+	if (typeof events.auditEvent === 'function') {
+		app.on(EVENTS.AUDIT, events.auditEvent);
+	}
+	// Trigger Provenance Event when resources are updated/created/deleted
+	if (typeof events.provenance === 'function') {
+		app.on(EVENTS.PROVENANCE, events.provenance);
+	}
+};
+
+
+/**
+ * @function secureHeaders
+ * @summary Add helmet to secure headers
+ * @param {Express.app} app
+ */
+let secureHeaders = function (app, USE_HTTPS) {
+	/**
+	 * The following headers are turned on by default:
+	 * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
+	 * - frameguard (prevent clickjacking). https://helmetjs.github.io/docs/frameguard
+	 * - hidePoweredBy (remove the X-Powered-By header). https://helmetjs.github.io/docs/hide-powered-by
+	 * - hsts (HTTP strict transport security). https://helmetjs.github.io/docs/hsts
+	 * - ieNoOpen (sets X-Download-Options for IE8+). https://helmetjs.github.io/docs/ienoopen
+	 * - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
+	 * - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
+	 */
+	app.use(helmet({
+		// Needs https running first
+		hsts: USE_HTTPS
+	}));
+};
+
+
+/**
+ * @function setupRoutes
+ * @summary Add route with a static publicDirectory
+ * @param {Express.app} app
+ */
+let setupRoutes = function (app, config, logger) {
+	// Setup a static directory in case one is needed
+	if (config.server && config.server.publicDirectory) {
+		app.use(express.static(config.server.publicDirectory));
+	}
+
+	routeSetter.setRoutes({ logger, config, app });
+};
+
 
 /**
  * @function setupErrorHandler
@@ -176,6 +174,7 @@ let setupErrorHandler = function (app, logger) {
 	});
 };
 
+
 /**
  * @function initialize
  * @return {Promise}
@@ -193,7 +192,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	// Setup auth configs for middleware
 	await initAuthConfig(auth);
 
-	// Add some configurations to our app
+	// Add configurations
 	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
 	configureEvents(app, events);
@@ -209,17 +208,16 @@ module.exports.initialize = async ({ config, logger }) => {
 	* depending on the environment that you are deploying to.
 	*/
 	if (USE_HTTPS) {
-
-		// These are required for running in https
+		// HTTPS options
 		let options = {
 			key: fs.readFileSync(server.ssl.key),
 			cert: fs.readFileSync(server.ssl.cert)
 		};
 
-		// Pass back our https server
+		// Pass back https server
 		return https.createServer(options, app);
 	}
 
-	// Pass our app back if we are successful
+	// Pass back http server
 	return http.createServer(app);
 };
