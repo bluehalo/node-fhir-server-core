@@ -13,6 +13,7 @@ const {
 	EVENTS
 } = require('../constants');
 
+
 /**
  * @function configureMiddleware
  * @summary Configure some basic express middleware
