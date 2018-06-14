@@ -1,4 +1,18 @@
-// const methodOverride = require('method-override');
+/**
+ * This library initializes OAuthentication, configures Middlewares,
+ * and add server configurations including HTTPS, Routes
+ *
+ * Functions:
+ * initAuthConfig(auth);
+ * configureMiddleware(app, IS_PRODUCTION);
+ * configureSession(app, server);
+ * configureEvents(app, events);
+ * secureHeaders(app, USE_HTTPS);
+ * setupRoutes(app, config, logger);
+ * setupErrorHandler(app, logger);
+ *
+ */
+
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -12,7 +26,7 @@ const errors = require('../server/utils/error.utils');
 const {
 	EVENTS
 } = require('../constants');
-
+// const methodOverride = require('method-override');
 
 /**
  * @function initAuthConfig
@@ -186,13 +200,11 @@ module.exports.initialize = async ({ config, logger }) => {
 	const USE_HTTPS = (server.ssl && server.ssl.key && server.ssl.cert);
 	const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-	// Create our express instance
 	let app = express();
 
-	// Setup auth configs for middleware
+	// Setup auth configs and configurations for middleware
 	await initAuthConfig(auth);
 
-	// Add configurations
 	configureMiddleware(app, IS_PRODUCTION);
 	configureSession(app, server);
 	configureEvents(app, events);
@@ -208,16 +220,12 @@ module.exports.initialize = async ({ config, logger }) => {
 	* depending on the environment that you are deploying to.
 	*/
 	if (USE_HTTPS) {
-		// HTTPS options
 		let options = {
 			key: fs.readFileSync(server.ssl.key),
 			cert: fs.readFileSync(server.ssl.cert)
 		};
-
-		// Pass back https server
 		return https.createServer(options, app);
 	}
 
-	// Pass back http server
 	return http.createServer(app);
 };
