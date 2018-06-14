@@ -13,7 +13,7 @@ let generateInteractions = (service, resourceType) => {
 
 	// Test for the existence of a service method
 	if (service[`get${resourceType}`]) {
-		interactions.push({ code: 'search' });
+		interactions.push({ code: 'search-type' });
 	}
 
 	if (service[`get${resourceType}ById`]) {
