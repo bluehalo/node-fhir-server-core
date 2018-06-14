@@ -53,7 +53,7 @@ module.exports.createPractitioner = function createPractitioner ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific practitioner
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updatePractitioner = function updatePractitioner ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific practitioner
 		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updatePractitioner = function updatePractitioner ({ profile, logg
 		}
 		// Create a new practitioner resource and pass it to the service
 		let practitioner = new Practitioner(resource_body);
-		let args = { id: resource_id, resource: practitioner };
+		let args = { id, resource: practitioner };
 		// Pass any new information to the underlying service
 		return service.updatePractitioner(args, logger)
 			.then((results) =>

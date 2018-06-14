@@ -212,9 +212,9 @@ class Server {
 		this.app = !this.env.USE_HTTPS
 			? http.createServer(this.app)
 			: https.createServer({
-				key: fs.readFileSync(server.ssl.key),
-				cert: fs.readFileSync(server.ssl.cert)
-			}, this.app);
+					key: fs.readFileSync(server.ssl.key),
+					cert: fs.readFileSync(server.ssl.cert)
+				}, this.app);
 
 		// Start the app
 		this.app.listen(port, callback);

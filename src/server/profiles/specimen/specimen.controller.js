@@ -52,7 +52,7 @@ module.exports.createSpecimen = function createSpecimen ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 		// Validate the resource type before creating it
@@ -84,7 +84,7 @@ module.exports.updateSpecimen = function updateSpecimen ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
 		// Validate the resource type before creating it
@@ -96,7 +96,7 @@ module.exports.updateSpecimen = function updateSpecimen ({ profile, logger, app 
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new Specimen(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateSpecimen(args, logger)
 			.then((results) =>

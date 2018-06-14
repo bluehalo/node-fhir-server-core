@@ -53,7 +53,7 @@ module.exports.createLocation = function createLocation ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific location
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateLocation = function updateLocation ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific location
 		let Location = require(resolveFromVersion(version, 'uscore/Location'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateLocation = function updateLocation ({ profile, logger, app 
 		}
 		// Create a new location resource and pass it to the service
 		let location = new Location(resource_body);
-		let args = { id: resource_id, resource: location };
+		let args = { id, resource: location };
 		// Pass any new information to the underlying service
 		return service.updateLocation(args, logger)
 			.then((results) =>
