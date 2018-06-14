@@ -154,13 +154,12 @@ let setupErrorHandler = function (app, logger) {
 	app.use((err, req, res, next) => {
 		// If there is an error and it is our error type
 		if (err && errors.isServerError(err, req.params.version)) {
-			logger.error(err.statusCode, err.message);
 			res.status(err.statusCode).json(err);
 		}
 		// If there is still an error, throw a 500 and pass the message through
 		else if (err) {
-			let error = errors.internal(req.params.version);
-			logger.error(error.statusCode, error.message);
+			let error = errors.internal(err.message, req.params.version);
+			logger.error(error.statusCode, err.message);
 			res.status(error.statusCode).json(error);
 		}
 		// No error
@@ -172,7 +171,7 @@ let setupErrorHandler = function (app, logger) {
 	// Nothing has responded by now, respond with 404
 	app.use((req, res) => {
 		let error = errors.notFound(req.params.version);
-		logger.error(error.statusCode, error.message);
+		logger.error(error.statusCode, req.path);
 		res.status(error.statusCode).json(error);
 	});
 };
