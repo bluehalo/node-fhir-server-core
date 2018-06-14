@@ -25,12 +25,10 @@ Understanding of JavaScript [promise](https://developer.mozilla.org/en-US/docs/W
 
 ## Getting Started
 
-1. Install `node-fhir-server-core` initial modules with either NPM or Yarn:
+1. Install `node-fhir-server-core` initial modules with NPM:
 
 ```shell
 npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
-#OR
-yarn add git+https://github.com/Asymmetrik/node-fhir-server-core.git
 ```
 
 
@@ -38,29 +36,28 @@ yarn add git+https://github.com/Asymmetrik/node-fhir-server-core.git
 2. File `node-fhir-server-core/src/runner.js` allows custom authorization server which should be incorporated separately. The server portion can be included as followed:
  
 ```javascript
-const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/src/constants');
-const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const { VERSIONS } = FHIRServer.constants;
 
-// Server requires server.port and at least one profile
-
+/**
+* The server will not run unless you have at least one valid profile configuration
+*/
 const config = {
-  server: { port: 3000 },
-  profiles: {
-    patient: {
-  	  service: path.resolve('./profiles/patient/patient.service'),
-	  versions: [ VERSIONS.STU3 ]
+	profiles: {
+		patient: {
+			service: path.resolve('./profiles/patient/patient.service'),
+			versions: [ VERSIONS.STU3 ]
+		}
 	}
-  }
 };
 
-
-// fhirServerCore returns a promise so async/await can be used
-
-let main = async function () {
-  let server = await fhirServerCore(config).catch(console.error);
-  if (server) {
-    server.logger.info(`FHIR Server it at http://localhost:${config.port}`);
-  }
+let main = function () {
+	let server = FHIRServer.initialize(config);
+	server.logger.info('FHIR Server successfully validated.');
+	// Start our server
+	server.listen(3000, () =>
+		server.logger.info('FHIR Server listening on localhost:' + 3000)
+	);
 };
 
 main();
@@ -78,10 +75,9 @@ info: FHIR Server started successfully
 
 
 ## Usage
-More configuration options, profiles, best practices, authentication are at [Asymmetrik Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki). 
+For a complete list of all configuration options, supported profiles, their setups, best practices, authentication, etc. please consult our [Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki). More documentation and examples will be added over time.
 
-A developed implementation of this core server with the MongoDB database is at 
-[Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
+For a working Mongo example, implementing this core server, refer to [Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
 
 ## Philosophy
