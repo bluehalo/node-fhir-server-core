@@ -53,7 +53,7 @@ module.exports.createDiagnosticReport = function createDiagnosticReport ({ profi
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific diagnostic_report
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profi
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific diagnostic_report
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profi
 		}
 		// Create a new diagnostic_report resource and pass it to the service
 		let diagnostic_report = new DiagnosticReport(resource_body);
-		let args = { id: resource_id, resource: diagnostic_report };
+		let args = { id, resource: diagnostic_report };
 		// Pass any new information to the underlying service
 		return service.updateDiagnosticReport(args, logger)
 			.then((results) =>

@@ -52,7 +52,7 @@ module.exports.createEndPoint = function createEndPoint ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 		// Validate the resource type before creating it
@@ -84,7 +84,7 @@ module.exports.updateEndPoint = function updateEndPoint ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let EndPoint = require(resolveFromVersion(version, 'base/EndPoint'));
 		// Validate the resource type before creating it
@@ -96,7 +96,7 @@ module.exports.updateEndPoint = function updateEndPoint ({ profile, logger, app 
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new EndPoint(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateEndPoint(args, logger)
 			.then((results) =>

@@ -83,7 +83,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.SERVICEDEFINITION
+		profileKey: CONFIG_KEYS.STRUCTUREDEFINITION
 	},
 	routes
 };

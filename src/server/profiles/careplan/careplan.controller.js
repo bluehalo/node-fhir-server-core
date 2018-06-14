@@ -53,7 +53,7 @@ module.exports.createCarePlan = function createCarePlan ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific care_plan
 		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateCarePlan = function updateCarePlan ({ profile, logger, app 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific care_plan
 		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateCarePlan = function updateCarePlan ({ profile, logger, app 
 		}
 		// Create a new care_plan resource and pass it to the service
 		let care_plan = new CarePlan(resource_body);
-		let args = { id: resource_id, resource: care_plan };
+		let args = { id, resource: care_plan };
 		// Pass any new information to the underlying service
 		return service.updateCarePlan(args, logger)
 			.then((results) =>
