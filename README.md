@@ -18,8 +18,8 @@ The framework defines a core server, `node-fhir-server-core`, a secure Node.js m
 
 ## Prerequisites
 
-1. Install [Node.js](https://nodejs.org/en/) latest version (7.7+, **but** not 8.5, see [Attention](#attention)) and NPM included with Nodejs.
-2. Optional: Install [Yarn](https://yarnpkg.com/lang/en/docs/install) latest version.
+1. Install [Node.js](https://nodejs.org/en/) latest version (7.7+, **but** not 8.5, see [Attention](#attention))
+2. Additional for Windows: Install NPM included with Nodejs.
 
 Understanding of JavaScript [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and familiarity of the FHIR specification would be helpful.
 
