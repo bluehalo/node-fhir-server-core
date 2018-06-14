@@ -53,7 +53,7 @@ module.exports.createImmunization = function createImmunization ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific immunization
 		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateImmunization = function updateImmunization ({ profile, logg
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific immunization
 		let Immunization = require(resolveFromVersion(version, 'uscore/Immunization'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateImmunization = function updateImmunization ({ profile, logg
 		}
 		// Create a new immunization resource and pass it to the service
 		let immunization = new Immunization(resource_body);
-		let args = { id: resource_id, resource: immunization };
+		let args = { id, resource: immunization };
 		// Pass any new information to the underlying service
 		return service.updateImmunization(args, logger)
 			.then((results) =>

@@ -52,7 +52,7 @@ module.exports.createTestReport = function createTestReport ({ profile, logger, 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 		// Validate the resource type before creating it
@@ -84,7 +84,7 @@ module.exports.updateTestReport = function updateTestReport ({ profile, logger, 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
 		// Validate the resource type before creating it
@@ -96,7 +96,7 @@ module.exports.updateTestReport = function updateTestReport ({ profile, logger, 
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new TestReport(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateTestReport(args, logger)
 			.then((results) =>

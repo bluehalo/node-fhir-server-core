@@ -22,13 +22,11 @@ module.exports.route_args = {
 module.exports.write_args = {
 	RESOURCE_ID: {
 		name: 'resource_id',
-		type: 'string',
-		conformance_hide: true
+		type: 'string'
 	},
 	RESOURCE_BODY: {
 		name: 'resource_body',
-		type: 'json_string',
-		conformance_hide: true
+		type: 'json_string'
 	}
 };
 

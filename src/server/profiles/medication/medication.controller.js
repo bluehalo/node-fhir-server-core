@@ -53,7 +53,7 @@ module.exports.createMedication = function createMedication ({ profile, logger, 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific medication
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 		// Validate the resource type before creating it
@@ -85,7 +85,7 @@ module.exports.updateMedication = function updateMedication ({ profile, logger, 
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific medication
 		let Medication = require(resolveFromVersion(version, 'uscore/Medication'));
 		// Validate the resource type before creating it
@@ -97,7 +97,7 @@ module.exports.updateMedication = function updateMedication ({ profile, logger, 
 		}
 		// Create a new medication resource and pass it to the service
 		let medication = new Medication(resource_body);
-		let args = { id: resource_id, resource: medication };
+		let args = { id, resource: medication };
 		// Pass any new information to the underlying service
 		return service.updateMedication(args, logger)
 			.then((results) =>

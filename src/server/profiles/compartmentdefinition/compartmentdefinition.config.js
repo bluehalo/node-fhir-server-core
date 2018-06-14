@@ -83,7 +83,7 @@ let routes = [
  */
 module.exports = {
 	routeOptions: {
-		profileKey: CONFIG_KEYS.ALLERGYINTOLERANCE
+		profileKey: CONFIG_KEYS.COMPARTMENTDEFINITION
 	},
 	routes
 };

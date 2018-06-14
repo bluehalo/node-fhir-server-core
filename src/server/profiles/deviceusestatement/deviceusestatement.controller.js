@@ -52,7 +52,7 @@ module.exports.createDeviceUseStatement = function createDeviceUseStatement ({ p
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 		// Validate the resource type before creating it
@@ -84,7 +84,7 @@ module.exports.updateDeviceUseStatement = function updateDeviceUseStatement ({ p
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { version, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
 		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
 		// Validate the resource type before creating it
@@ -96,7 +96,7 @@ module.exports.updateDeviceUseStatement = function updateDeviceUseStatement ({ p
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new DeviceUseStatement(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
 		return service.updateDeviceUseStatement(args, logger)
 			.then((results) =>
