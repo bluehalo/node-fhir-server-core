@@ -32,8 +32,7 @@ npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
 ```
 
 
-
-2. File `node-fhir-server-core/src/runner.js` allows custom authorization server which should be incorporated separately. The server portion can be included as followed:
+2. The server portion can be required as followed. 
  
 ```javascript
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
@@ -62,6 +61,7 @@ let main = function () {
 
 main();
 ```
+
 
 3. Start server with NPM:
 ```
