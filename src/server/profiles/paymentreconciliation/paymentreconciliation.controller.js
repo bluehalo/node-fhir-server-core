@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getPaymentReconciliation = function getPaymentReconciliation ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getPaymentReconciliation = function getPaymentReconciliation ({ p
 		// Get a version specific resource
 		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 
-		return service.getPaymentReconciliation(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, PaymentReconciliation, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getPaymentReconciliation = function getPaymentReconciliation ({ p
 };
 
 
-module.exports.getPaymentReconciliationById = function getPaymentReconciliationById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getPaymentReconciliationById = function getPaymentReconciliationB
 		// Get a version specific resource
 		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
 
-		return service.getPaymentReconciliationById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, PaymentReconciliation, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getPaymentReconciliationById = function getPaymentReconciliationB
 /**
  * @description Controller for creating PaymentReconciliation
  */
-module.exports.createPaymentReconciliation = function createPaymentReconciliation ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createPaymentReconciliation = function createPaymentReconciliatio
 		let new_resource = new PaymentReconciliation(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createPaymentReconciliation(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, PaymentReconciliation.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createPaymentReconciliation = function createPaymentReconciliatio
 /**
  * @description Controller for updating/creating PaymentReconciliation. If the PaymentReconciliation does not exist, it should be updated
  */
-module.exports.updatePaymentReconciliation = function updatePaymentReconciliation ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updatePaymentReconciliation = function updatePaymentReconciliatio
 		let new_resource = new PaymentReconciliation(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updatePaymentReconciliation(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, PaymentReconciliation.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updatePaymentReconciliation = function updatePaymentReconciliatio
 /**
  * @description Controller for deleting an PaymentReconciliation.
  */
-module.exports.deletePaymentReconciliation = function deletePaymentReconciliation ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deletePaymentReconciliation(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

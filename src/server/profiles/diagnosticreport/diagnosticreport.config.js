@@ -25,14 +25,14 @@ let routes = [
 		path: '/:version/diagnosticreport',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDiagnosticReport
+		controller: controller.search
 	},
 	{
 		type: 'post',
 		path: '/:version/diagnosticreport/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDiagnosticReport
+		controller: controller.search
 	},
 	{
 		type: 'get',
@@ -42,7 +42,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getDiagnosticReportById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
@@ -53,7 +53,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createDiagnosticReport
+		controller: controller.create
 	},
 	{
 		type: 'put',
@@ -64,7 +64,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateDiagnosticReport
+		controller: controller.update
 	},
 	{
 		type: 'delete',
@@ -75,7 +75,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteDiagnosticReport
+		controller: controller.remove
 	}
 ];
 

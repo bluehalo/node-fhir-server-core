@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getEnrollmentRequest = function getEnrollmentRequest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getEnrollmentRequest = function getEnrollmentRequest ({ profile, 
 		// Get a version specific resource
 		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 
-		return service.getEnrollmentRequest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, EnrollmentRequest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getEnrollmentRequest = function getEnrollmentRequest ({ profile, 
 };
 
 
-module.exports.getEnrollmentRequestById = function getEnrollmentRequestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getEnrollmentRequestById = function getEnrollmentRequestById ({ p
 		// Get a version specific resource
 		let EnrollmentRequest = require(resolveFromVersion(version, 'base/EnrollmentRequest'));
 
-		return service.getEnrollmentRequestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, EnrollmentRequest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getEnrollmentRequestById = function getEnrollmentRequestById ({ p
 /**
  * @description Controller for creating EnrollmentRequest
  */
-module.exports.createEnrollmentRequest = function createEnrollmentRequest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createEnrollmentRequest = function createEnrollmentRequest ({ pro
 		let new_resource = new EnrollmentRequest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createEnrollmentRequest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, EnrollmentRequest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createEnrollmentRequest = function createEnrollmentRequest ({ pro
 /**
  * @description Controller for updating/creating EnrollmentRequest. If the EnrollmentRequest does not exist, it should be updated
  */
-module.exports.updateEnrollmentRequest = function updateEnrollmentRequest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateEnrollmentRequest = function updateEnrollmentRequest ({ pro
 		let new_resource = new EnrollmentRequest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateEnrollmentRequest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, EnrollmentRequest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateEnrollmentRequest = function updateEnrollmentRequest ({ pro
 /**
  * @description Controller for deleting an EnrollmentRequest.
  */
-module.exports.deleteEnrollmentRequest = function deleteEnrollmentRequest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteEnrollmentRequest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

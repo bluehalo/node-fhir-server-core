@@ -24,7 +24,7 @@ let routes = [
 		corsOptions: {methods: ['GET']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getLocation
+		controller: controller.search
 	},
 	{
 		type: 'post',
@@ -32,7 +32,7 @@ let routes = [
 		corsOptions: {methods: ['POST']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getLocation
+		controller: controller.search
 	},
 	{
 		type: 'get',
@@ -42,7 +42,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getLocationById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
@@ -53,7 +53,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createLocation
+		controller: controller.create
 	},
 	{
 		type: 'put',
@@ -64,7 +64,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateLocation
+		controller: controller.update
 	},
 	{
 		type: 'delete',
@@ -75,7 +75,7 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteLocation
+		controller: controller.remove
 	}
 ];
 

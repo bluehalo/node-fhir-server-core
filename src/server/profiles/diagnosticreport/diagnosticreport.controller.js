@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDiagnosticReport = function getDiagnosticReport ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getDiagnosticReport = function getDiagnosticReport ({ profile, lo
 		// Get a version specific diagnosticreport
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 
-		return service.getDiagnosticReport(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, DiagnosticReport, results, {
 					resourceUrl: config.auth.resourceServer
@@ -27,7 +27,7 @@ module.exports.getDiagnosticReport = function getDiagnosticReport ({ profile, lo
 };
 
 
-module.exports.getDiagnosticReportById = function getDiagnosticReportById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -35,7 +35,7 @@ module.exports.getDiagnosticReportById = function getDiagnosticReportById ({ pro
 		// Get a version specific diagnosticreport
 		let DiagnosticReport = require(resolveFromVersion(version, 'uscore/DiagnosticReport'));
 
-		return service.getDiagnosticReportById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, DiagnosticReport, results)
 			)
@@ -49,7 +49,7 @@ module.exports.getDiagnosticReportById = function getDiagnosticReportById ({ pro
 /**
 * @description Controller for creating a diagnostic_report
 */
-module.exports.createDiagnosticReport = function createDiagnosticReport ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -67,7 +67,7 @@ module.exports.createDiagnosticReport = function createDiagnosticReport ({ profi
 		let diagnostic_report = new DiagnosticReport(resource_body);
 		let args = { id: resource_id, resource: diagnostic_report };
 		// Pass any new information to the underlying service
-		return service.createDiagnosticReport(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, DiagnosticReport.__resourceType, results)
 			)
@@ -81,7 +81,7 @@ module.exports.createDiagnosticReport = function createDiagnosticReport ({ profi
 /**
 * @description Controller for updating/creating a diagnostic_report. If the diagnostic_report does not exist, it should be updated
 */
-module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -99,7 +99,7 @@ module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profi
 		let diagnostic_report = new DiagnosticReport(resource_body);
 		let args = { id, resource: diagnostic_report };
 		// Pass any new information to the underlying service
-		return service.updateDiagnosticReport(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DiagnosticReport.__resourceType, results)
 			)
@@ -113,13 +113,13 @@ module.exports.updateDiagnosticReport = function updateDiagnosticReport ({ profi
 /**
 * @description Controller for deleting an DiagnosticReport resource.
 */
-module.exports.deleteDiagnosticReport = function deleteDiagnosticReport ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteDiagnosticReport(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

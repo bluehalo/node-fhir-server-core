@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDocumentManifest = function getDocumentManifest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getDocumentManifest = function getDocumentManifest ({ profile, lo
 		// Get a version specific resource
 		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 
-		return service.getDocumentManifest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, DocumentManifest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getDocumentManifest = function getDocumentManifest ({ profile, lo
 };
 
 
-module.exports.getDocumentManifestById = function getDocumentManifestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getDocumentManifestById = function getDocumentManifestById ({ pro
 		// Get a version specific resource
 		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
 
-		return service.getDocumentManifestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, DocumentManifest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getDocumentManifestById = function getDocumentManifestById ({ pro
 /**
  * @description Controller for creating DocumentManifest
  */
-module.exports.createDocumentManifest = function createDocumentManifest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createDocumentManifest = function createDocumentManifest ({ profi
 		let new_resource = new DocumentManifest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createDocumentManifest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, DocumentManifest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createDocumentManifest = function createDocumentManifest ({ profi
 /**
  * @description Controller for updating/creating DocumentManifest. If the DocumentManifest does not exist, it should be updated
  */
-module.exports.updateDocumentManifest = function updateDocumentManifest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateDocumentManifest = function updateDocumentManifest ({ profi
 		let new_resource = new DocumentManifest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateDocumentManifest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, DocumentManifest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateDocumentManifest = function updateDocumentManifest ({ profi
 /**
  * @description Controller for deleting an DocumentManifest.
  */
-module.exports.deleteDocumentManifest = function deleteDocumentManifest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteDocumentManifest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

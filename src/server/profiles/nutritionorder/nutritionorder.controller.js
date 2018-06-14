@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getNutritionOrder = function getNutritionOrder ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getNutritionOrder = function getNutritionOrder ({ profile, logger
 		// Get a version specific resource
 		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 
-		return service.getNutritionOrder(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, NutritionOrder, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getNutritionOrder = function getNutritionOrder ({ profile, logger
 };
 
 
-module.exports.getNutritionOrderById = function getNutritionOrderById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getNutritionOrderById = function getNutritionOrderById ({ profile
 		// Get a version specific resource
 		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
 
-		return service.getNutritionOrderById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, NutritionOrder, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getNutritionOrderById = function getNutritionOrderById ({ profile
 /**
  * @description Controller for creating NutritionOrder
  */
-module.exports.createNutritionOrder = function createNutritionOrder ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createNutritionOrder = function createNutritionOrder ({ profile, 
 		let new_resource = new NutritionOrder(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createNutritionOrder(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, NutritionOrder.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createNutritionOrder = function createNutritionOrder ({ profile, 
 /**
  * @description Controller for updating/creating NutritionOrder. If the NutritionOrder does not exist, it should be updated
  */
-module.exports.updateNutritionOrder = function updateNutritionOrder ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateNutritionOrder = function updateNutritionOrder ({ profile, 
 		let new_resource = new NutritionOrder(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateNutritionOrder(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, NutritionOrder.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateNutritionOrder = function updateNutritionOrder ({ profile, 
 /**
  * @description Controller for deleting an NutritionOrder.
  */
-module.exports.deleteNutritionOrder = function deleteNutritionOrder ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteNutritionOrder(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

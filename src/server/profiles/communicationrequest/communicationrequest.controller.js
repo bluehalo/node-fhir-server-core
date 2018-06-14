@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCommunicationRequest = function getCommunicationRequest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getCommunicationRequest = function getCommunicationRequest ({ pro
 		// Get a version specific resource
 		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 
-		return service.getCommunicationRequest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, CommunicationRequest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getCommunicationRequest = function getCommunicationRequest ({ pro
 };
 
 
-module.exports.getCommunicationRequestById = function getCommunicationRequestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getCommunicationRequestById = function getCommunicationRequestByI
 		// Get a version specific resource
 		let CommunicationRequest = require(resolveFromVersion(version, 'base/CommunicationRequest'));
 
-		return service.getCommunicationRequestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, CommunicationRequest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getCommunicationRequestById = function getCommunicationRequestByI
 /**
  * @description Controller for creating CommunicationRequest
  */
-module.exports.createCommunicationRequest = function createCommunicationRequest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createCommunicationRequest = function createCommunicationRequest 
 		let new_resource = new CommunicationRequest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createCommunicationRequest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, CommunicationRequest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createCommunicationRequest = function createCommunicationRequest 
 /**
  * @description Controller for updating/creating CommunicationRequest. If the CommunicationRequest does not exist, it should be updated
  */
-module.exports.updateCommunicationRequest = function updateCommunicationRequest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateCommunicationRequest = function updateCommunicationRequest 
 		let new_resource = new CommunicationRequest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateCommunicationRequest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, CommunicationRequest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateCommunicationRequest = function updateCommunicationRequest 
 /**
  * @description Controller for deleting an CommunicationRequest.
  */
-module.exports.deleteCommunicationRequest = function deleteCommunicationRequest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteCommunicationRequest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getEpisodeOfCare = function getEpisodeOfCare ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getEpisodeOfCare = function getEpisodeOfCare ({ profile, logger, 
 		// Get a version specific resource
 		let EpisodeOfCare = require(resolveFromVersion(version, 'base/EpisodeOfCare'));
 
-		return service.getEpisodeOfCare(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, EpisodeOfCare, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getEpisodeOfCare = function getEpisodeOfCare ({ profile, logger, 
 };
 
 
-module.exports.getEpisodeOfCareById = function getEpisodeOfCareById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getEpisodeOfCareById = function getEpisodeOfCareById ({ profile, 
 		// Get a version specific resource
 		let EpisodeOfCare = require(resolveFromVersion(version, 'base/EpisodeOfCare'));
 
-		return service.getEpisodeOfCareById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, EpisodeOfCare, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getEpisodeOfCareById = function getEpisodeOfCareById ({ profile, 
 /**
  * @description Controller for creating EpisodeOfCare
  */
-module.exports.createEpisodeOfCare = function createEpisodeOfCare ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createEpisodeOfCare = function createEpisodeOfCare ({ profile, lo
 		let new_resource = new EpisodeOfCare(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createEpisodeOfCare(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, EpisodeOfCare.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createEpisodeOfCare = function createEpisodeOfCare ({ profile, lo
 /**
  * @description Controller for updating/creating EpisodeOfCare. If the EpisodeOfCare does not exist, it should be updated
  */
-module.exports.updateEpisodeOfCare = function updateEpisodeOfCare ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateEpisodeOfCare = function updateEpisodeOfCare ({ profile, lo
 		let new_resource = new EpisodeOfCare(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateEpisodeOfCare(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, EpisodeOfCare.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateEpisodeOfCare = function updateEpisodeOfCare ({ profile, lo
 /**
  * @description Controller for deleting an EpisodeOfCare.
  */
-module.exports.deleteEpisodeOfCare = function deleteEpisodeOfCare ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteEpisodeOfCare(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
