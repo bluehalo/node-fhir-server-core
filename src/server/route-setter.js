@@ -1,6 +1,7 @@
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
-const { validate } = require('./utils/auth.openid.validator');
+const { validateScopes } = require('./utils/scope.utils');
+const passport = require('passport');
 const { resolve } = require('./utils/resolve.utils');
 const { VERSIONS } = require('../constants');
 const appConfig = require('../config');
@@ -59,7 +60,7 @@ function noOpMiddleware (req, res, next) {
 * @description Validation Middleware Wrapper
 */
 function authenticationMiddleware (options) {
-	let { routeOptions, scopes, logger, config } = options;
+	let { routeOptions, config } = options;
 	// Don't do any validation for testing
 	if (process.env.NODE_ENV === 'test') {
 		return noOpMiddleware;
@@ -68,8 +69,13 @@ function authenticationMiddleware (options) {
 	if (routeOptions.isMetadata) {
 		return noOpMiddleware;
 	}
-	// Use the validation middleware
-	return validate(scopes, logger, config);
+	// if strategy is configured
+	if (config.auth && config.auth.strategy) {
+		let { name, useSession = false	} = config.auth.strategy;
+		return passport.authenticate(name, { session: useSession });
+	} else {
+		return noOpMiddleware;
+	}
 }
 
 
@@ -151,6 +157,8 @@ const setter = (options = {}) => {
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
 				authenticationMiddleware({ routeOptions, config, logger, scopes: route.scopes }),
+				// Scope validation
+				validateScopes(route.scopes),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);

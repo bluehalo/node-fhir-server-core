@@ -9,6 +9,7 @@ const http = require('http');
 const fs = require('fs');
 const routeSetter = require('../server/route-setter');
 const errors = require('../server/utils/error.utils');
+const passport = require('passport');
 const {
 	EVENTS
 } = require('../constants');
@@ -62,6 +63,14 @@ let configureEvents = function (app, events = {}) {
 	// "how it came to be", meaning updates, creates, and deletes
 	if (typeof events.provenance === 'function') {
 		app.on(EVENTS.PROVENANCE, events.provenance);
+	}
+};
+
+
+let configurePassport = function(config) {
+	if (config.auth && config.auth.strategy) {
+		let { strategy } = require(config.auth.strategy.service);
+		passport.use(strategy);
 	}
 };
 
@@ -198,6 +207,7 @@ module.exports.initialize = async ({ config, logger }) => {
 	configureSession(app, server);
 	configureEvents(app, events);
 	secureHeaders(app, USE_HTTPS);
+	configurePassport(config);
 	setupRoutes(app, config, logger);
 	setupErrorHandler(app, logger);
 

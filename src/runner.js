@@ -3,12 +3,11 @@ const fhirServer = require('./index.js');
 
 const CONFIG = {
 	auth: {
-		resourceServer: 'http://myserver.com',
-		service: './src/server/utils/auth.validator.mock.js',
-		protectedResourceClientId: 'client',
-		protectedResourceClientSecret: 'secret',
-		discoveryUrl: '',
-		introspectionUrl: 'https://afternoon-springs-39948.herokuapp.com/introspect'
+		strategy: {
+			name: 'bearer',
+			useSession: false,
+			service: '../server/strategies/bearer.strategy.js'
+		}
 	},
 	server: {
 		port: 3000,
