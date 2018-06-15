@@ -70,12 +70,12 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { version, version_id } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((observation) => {
 				let Resource = getResourceConstructor(version, observation.resourceType);
-				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
+				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation, version_id);
 			})
 			.catch((err) => {
 				logger.error(err);
