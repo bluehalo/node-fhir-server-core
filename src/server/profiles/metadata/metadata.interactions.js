@@ -12,24 +12,32 @@ let generateInteractions = (service, resourceType) => {
 	let interactions = [];
 
 	// Test for the existence of a service method
-	if (service[`get${resourceType}`]) {
+	if (service.search) {
 		interactions.push({ code: 'search-type' });
 	}
 
-	if (service[`get${resourceType}ById`]) {
+	if (service.searchById) {
 		interactions.push({ code: 'read' });
 	}
 
-	if (service[`create${resourceType}`]) {
+	if (service.create) {
 		interactions.push({ code: 'create' });
 	}
 
-	if (service[`update${resourceType}`]) {
+	if (service.update) {
 		interactions.push({ code: 'update' });
 	}
 
-	if (service[`delete${resourceType}`]) {
+	if (service.remove) {
 		interactions.push({ code: 'delete' });
+	}
+
+	if (service.history) {
+		interactions.push({ code: 'history-type' });
+	}
+
+	if (service.historyById) {
+		interactions.push({ code: 'history-instance' });
 	}
 
 	// Save these interactions so we don't need to do this again
