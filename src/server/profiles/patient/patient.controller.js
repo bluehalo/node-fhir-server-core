@@ -25,20 +25,20 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Patient, results, {
+				responseUtils.handleBundleReadResponse( res, base, Patient, results, {
 					resourceUrl: config.auth.resourceServer,
 					filter: patient_filter(req.patient)
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
@@ -49,10 +49,10 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id } = req.sanitized_args;
+		let { base, id } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
@@ -76,16 +76,16 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
 			});
 			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
 		}
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, Patient, results)
+				responseUtils.handleSingleReadResponse(res, next, base, Patient, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -97,14 +97,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new patient resource and pass it to the service
@@ -113,11 +113,11 @@ module.exports.create = function create ({ profile, logger, app }) {
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, Patient.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Patient.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -129,14 +129,14 @@ module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new patient resource and pass it to the service
@@ -145,11 +145,11 @@ module.exports.update = function update ({ profile, logger, app }) {
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, Patient.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Patient.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -161,7 +161,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
@@ -169,7 +169,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };
