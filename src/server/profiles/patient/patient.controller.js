@@ -175,7 +175,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for getting the history pf a patient resource.
+* @description Controller for getting the history of a Patient resource.
 */
 module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
@@ -197,7 +197,7 @@ module.exports.history = function history ({ profile, logger }) {
 };
 
 /**
-* @description Controller for getting the history of a patient resource by ID.
+* @description Controller for getting the history of a Patient resource by ID.
 */
 module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;

@@ -36,6 +36,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:version/organization/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:version/organization/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:version/organization/:id',
 		args: [
 			route_args.VERSION,
