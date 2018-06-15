@@ -18,7 +18,7 @@ describe('Generic Profile Tests', () => {
 	beforeAll(() => {
 		// Grab all the routes for all of our profiles
 		profileRoutes = glob
-			.sync('src/server/profiles/visionprescription/*.config.js')
+			.sync('src/server/profiles/**/*.config.js')
 			.map(filepath => require(path.resolve(filepath)))
 			.map(config => config.routes);
 
@@ -47,7 +47,6 @@ describe('Generic Profile Tests', () => {
 				// Make sure the severity is error
 				let issue = err.issue[0];
 				expect(issue.severity).toBe('error');
-				console.log(issue);
 			}
 		}
 	}, 60000);
