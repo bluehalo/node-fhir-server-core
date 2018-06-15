@@ -180,23 +180,6 @@ module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ p
 		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
 		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
 
-		if ( req.patient && id && req.patient !== id ) {
-			let resource = new AuditEvent({
-				type: {
-					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
-					code: '110113',
-					display: 'Security Alert',
-					userSelected: false
-				},
-				recorded: moment().toISOString(),
-				action: 'R',
-				outcome: '4',
-				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
-			});
-			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
-		}
-
 		return service.searchByHistoryVersionId(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, Observation, results, version_id)
