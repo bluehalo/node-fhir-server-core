@@ -73,3 +73,9 @@ module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.searchByHistoryVersionId = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchByHistoryVersionId\' in Patient service.';
+	logger.info(message);
+	reject(new Error(message));
+});
