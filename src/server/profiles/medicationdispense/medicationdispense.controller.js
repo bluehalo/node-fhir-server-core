@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationDispense = function getMedicationDispense ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getMedicationDispense = function getMedicationDispense ({ profile
 		// Get a version specific resource
 		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 
-		return service.getMedicationDispense(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, MedicationDispense, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getMedicationDispense = function getMedicationDispense ({ profile
 };
 
 
-module.exports.getMedicationDispenseById = function getMedicationDispenseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getMedicationDispenseById = function getMedicationDispenseById ({
 		// Get a version specific resource
 		let MedicationDispense = require(resolveFromVersion(version, 'base/MedicationDispense'));
 
-		return service.getMedicationDispenseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, MedicationDispense, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getMedicationDispenseById = function getMedicationDispenseById ({
 /**
  * @description Controller for creating MedicationDispense
  */
-module.exports.createMedicationDispense = function createMedicationDispense ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createMedicationDispense = function createMedicationDispense ({ p
 		let new_resource = new MedicationDispense(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createMedicationDispense(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, MedicationDispense.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createMedicationDispense = function createMedicationDispense ({ p
 /**
  * @description Controller for updating/creating MedicationDispense. If the MedicationDispense does not exist, it should be updated
  */
-module.exports.updateMedicationDispense = function updateMedicationDispense ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateMedicationDispense = function updateMedicationDispense ({ p
 		let new_resource = new MedicationDispense(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateMedicationDispense(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, MedicationDispense.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateMedicationDispense = function updateMedicationDispense ({ p
 /**
  * @description Controller for deleting an MedicationDispense.
  */
-module.exports.deleteMedicationDispense = function deleteMedicationDispense ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteMedicationDispense(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getReferralRequest = function getReferralRequest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getReferralRequest = function getReferralRequest ({ profile, logg
 		// Get a version specific resource
 		let ReferralRequest = require(resolveFromVersion(version, 'base/ReferralRequest'));
 
-		return service.getReferralRequest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ReferralRequest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getReferralRequest = function getReferralRequest ({ profile, logg
 };
 
 
-module.exports.getReferralRequestById = function getReferralRequestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getReferralRequestById = function getReferralRequestById ({ profi
 		// Get a version specific resource
 		let ReferralRequest = require(resolveFromVersion(version, 'base/ReferralRequest'));
 
-		return service.getReferralRequestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ReferralRequest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getReferralRequestById = function getReferralRequestById ({ profi
 /**
  * @description Controller for creating ReferralRequest
  */
-module.exports.createReferralRequest = function createReferralRequest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createReferralRequest = function createReferralRequest ({ profile
 		let new_resource = new ReferralRequest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createReferralRequest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ReferralRequest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createReferralRequest = function createReferralRequest ({ profile
 /**
  * @description Controller for updating/creating ReferralRequest. If the ReferralRequest does not exist, it should be updated
  */
-module.exports.updateReferralRequest = function updateReferralRequest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateReferralRequest = function updateReferralRequest ({ profile
 		let new_resource = new ReferralRequest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateReferralRequest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ReferralRequest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateReferralRequest = function updateReferralRequest ({ profile
 /**
  * @description Controller for deleting an ReferralRequest.
  */
-module.exports.deleteReferralRequest = function deleteReferralRequest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteReferralRequest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

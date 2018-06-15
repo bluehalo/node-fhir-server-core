@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getSupplyRequest = function getSupplyRequest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getSupplyRequest = function getSupplyRequest ({ profile, logger, 
 		// Get a version specific resource
 		let SupplyRequest = require(resolveFromVersion(version, 'base/SupplyRequest'));
 
-		return service.getSupplyRequest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, SupplyRequest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getSupplyRequest = function getSupplyRequest ({ profile, logger, 
 };
 
 
-module.exports.getSupplyRequestById = function getSupplyRequestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getSupplyRequestById = function getSupplyRequestById ({ profile, 
 		// Get a version specific resource
 		let SupplyRequest = require(resolveFromVersion(version, 'base/SupplyRequest'));
 
-		return service.getSupplyRequestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, SupplyRequest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getSupplyRequestById = function getSupplyRequestById ({ profile, 
 /**
  * @description Controller for creating SupplyRequest
  */
-module.exports.createSupplyRequest = function createSupplyRequest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createSupplyRequest = function createSupplyRequest ({ profile, lo
 		let new_resource = new SupplyRequest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createSupplyRequest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, SupplyRequest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createSupplyRequest = function createSupplyRequest ({ profile, lo
 /**
  * @description Controller for updating/creating SupplyRequest. If the SupplyRequest does not exist, it should be updated
  */
-module.exports.updateSupplyRequest = function updateSupplyRequest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateSupplyRequest = function updateSupplyRequest ({ profile, lo
 		let new_resource = new SupplyRequest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateSupplyRequest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, SupplyRequest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateSupplyRequest = function updateSupplyRequest ({ profile, lo
 /**
  * @description Controller for deleting an SupplyRequest.
  */
-module.exports.deleteSupplyRequest = function deleteSupplyRequest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteSupplyRequest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

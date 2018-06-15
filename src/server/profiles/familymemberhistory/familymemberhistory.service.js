@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getFamilyMemberHistory = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getFamilyMemberHistory\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in FamilyMemberHistory service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getFamilyMemberHistoryById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getFamilyMemberHistoryById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in FamilyMemberHistory service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createFamilyMemberHistory = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createFamilyMemberHistory\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in FamilyMemberHistory service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateFamilyMemberHistory = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateFamilyMemberHistory\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in FamilyMemberHistory service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteFamilyMemberHistory = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteFamilyMemberHistory\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in FamilyMemberHistory service.';
 	logger.info(message);
 	reject(new Error(message));
 });

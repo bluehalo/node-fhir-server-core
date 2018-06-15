@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getEligibilityResponse = function getEligibilityResponse ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getEligibilityResponse = function getEligibilityResponse ({ profi
 		// Get a version specific resource
 		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
 
-		return service.getEligibilityResponse(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, EligibilityResponse, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getEligibilityResponse = function getEligibilityResponse ({ profi
 };
 
 
-module.exports.getEligibilityResponseById = function getEligibilityResponseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getEligibilityResponseById = function getEligibilityResponseById 
 		// Get a version specific resource
 		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
 
-		return service.getEligibilityResponseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, EligibilityResponse, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getEligibilityResponseById = function getEligibilityResponseById 
 /**
  * @description Controller for creating EligibilityResponse
  */
-module.exports.createEligibilityResponse = function createEligibilityResponse ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createEligibilityResponse = function createEligibilityResponse ({
 		let new_resource = new EligibilityResponse(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createEligibilityResponse(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, EligibilityResponse.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createEligibilityResponse = function createEligibilityResponse ({
 /**
  * @description Controller for updating/creating EligibilityResponse. If the EligibilityResponse does not exist, it should be updated
  */
-module.exports.updateEligibilityResponse = function updateEligibilityResponse ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateEligibilityResponse = function updateEligibilityResponse ({
 		let new_resource = new EligibilityResponse(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateEligibilityResponse(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, EligibilityResponse.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateEligibilityResponse = function updateEligibilityResponse ({
 /**
  * @description Controller for deleting an EligibilityResponse.
  */
-module.exports.deleteEligibilityResponse = function deleteEligibilityResponse ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteEligibilityResponse(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

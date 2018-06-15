@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getExplanationOfBenefit = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getExplanationOfBenefit\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in ExplanationOfBenefit service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getExplanationOfBenefitById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getExplanationOfBenefitById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in ExplanationOfBenefit service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createExplanationOfBenefit = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createExplanationOfBenefit\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in ExplanationOfBenefit service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateExplanationOfBenefit = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateExplanationOfBenefit\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in ExplanationOfBenefit service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteExplanationOfBenefit = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteExplanationOfBenefit\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in ExplanationOfBenefit service.';
 	logger.info(message);
 	reject(new Error(message));
 });

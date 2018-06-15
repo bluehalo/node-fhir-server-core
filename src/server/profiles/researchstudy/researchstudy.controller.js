@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getResearchStudy = function getResearchStudy ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getResearchStudy = function getResearchStudy ({ profile, logger, 
 		// Get a version specific resource
 		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 
-		return service.getResearchStudy(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ResearchStudy, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getResearchStudy = function getResearchStudy ({ profile, logger, 
 };
 
 
-module.exports.getResearchStudyById = function getResearchStudyById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getResearchStudyById = function getResearchStudyById ({ profile, 
 		// Get a version specific resource
 		let ResearchStudy = require(resolveFromVersion(version, 'base/ResearchStudy'));
 
-		return service.getResearchStudyById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ResearchStudy, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getResearchStudyById = function getResearchStudyById ({ profile, 
 /**
  * @description Controller for creating ResearchStudy
  */
-module.exports.createResearchStudy = function createResearchStudy ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createResearchStudy = function createResearchStudy ({ profile, lo
 		let new_resource = new ResearchStudy(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createResearchStudy(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ResearchStudy.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createResearchStudy = function createResearchStudy ({ profile, lo
 /**
  * @description Controller for updating/creating ResearchStudy. If the ResearchStudy does not exist, it should be updated
  */
-module.exports.updateResearchStudy = function updateResearchStudy ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateResearchStudy = function updateResearchStudy ({ profile, lo
 		let new_resource = new ResearchStudy(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateResearchStudy(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ResearchStudy.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateResearchStudy = function updateResearchStudy ({ profile, lo
 /**
  * @description Controller for deleting an ResearchStudy.
  */
-module.exports.deleteResearchStudy = function deleteResearchStudy ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteResearchStudy(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

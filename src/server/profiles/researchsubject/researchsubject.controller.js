@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getResearchSubject = function getResearchSubject ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getResearchSubject = function getResearchSubject ({ profile, logg
 		// Get a version specific resource
 		let ResearchSubject = require(resolveFromVersion(version, 'base/ResearchSubject'));
 
-		return service.getResearchSubject(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ResearchSubject, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getResearchSubject = function getResearchSubject ({ profile, logg
 };
 
 
-module.exports.getResearchSubjectById = function getResearchSubjectById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getResearchSubjectById = function getResearchSubjectById ({ profi
 		// Get a version specific resource
 		let ResearchSubject = require(resolveFromVersion(version, 'base/ResearchSubject'));
 
-		return service.getResearchSubjectById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ResearchSubject, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getResearchSubjectById = function getResearchSubjectById ({ profi
 /**
  * @description Controller for creating ResearchSubject
  */
-module.exports.createResearchSubject = function createResearchSubject ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createResearchSubject = function createResearchSubject ({ profile
 		let new_resource = new ResearchSubject(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createResearchSubject(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ResearchSubject.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createResearchSubject = function createResearchSubject ({ profile
 /**
  * @description Controller for updating/creating ResearchSubject. If the ResearchSubject does not exist, it should be updated
  */
-module.exports.updateResearchSubject = function updateResearchSubject ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateResearchSubject = function updateResearchSubject ({ profile
 		let new_resource = new ResearchSubject(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateResearchSubject(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ResearchSubject.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateResearchSubject = function updateResearchSubject ({ profile
 /**
  * @description Controller for deleting an ResearchSubject.
  */
-module.exports.deleteResearchSubject = function deleteResearchSubject ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteResearchSubject(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

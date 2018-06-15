@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getCareTeam = function getCareTeam ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getCareTeam = function getCareTeam ({ profile, logger, config, ap
 		// Get a version specific careteam
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
-		return service.getCareTeam(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, CareTeam, results, {
 					resourceUrl: config.auth.resourceServer
@@ -27,7 +27,7 @@ module.exports.getCareTeam = function getCareTeam ({ profile, logger, config, ap
 };
 
 
-module.exports.getCareTeamById = function getCareTeamById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -35,7 +35,7 @@ module.exports.getCareTeamById = function getCareTeamById ({ profile, logger, ap
 		// Get a version specific careteam
 		let CareTeam = require(resolveFromVersion(version, 'uscore/CareTeam'));
 
-		return service.getCareTeamById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, CareTeam, results)
 			)
@@ -49,7 +49,7 @@ module.exports.getCareTeamById = function getCareTeamById ({ profile, logger, ap
 /**
 * @description Controller for creating a care_team
 */
-module.exports.createCareTeam = function createCareTeam ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -67,7 +67,7 @@ module.exports.createCareTeam = function createCareTeam ({ profile, logger, app 
 		let care_team = new CareTeam(resource_body);
 		let args = { id: resource_id, resource: care_team };
 		// Pass any new information to the underlying service
-		return service.createCareTeam(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, CareTeam.__resourceType, results)
 			)
@@ -81,7 +81,7 @@ module.exports.createCareTeam = function createCareTeam ({ profile, logger, app 
 /**
 * @description Controller for updating/creating a care_team. If the care_team does not exist, it should be updated
 */
-module.exports.updateCareTeam = function updateCareTeam ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -99,7 +99,7 @@ module.exports.updateCareTeam = function updateCareTeam ({ profile, logger, app 
 		let care_team = new CareTeam(resource_body);
 		let args = { id, resource: care_team };
 		// Pass any new information to the underlying service
-		return service.updateCareTeam(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, CareTeam.__resourceType, results)
 			)
@@ -113,13 +113,13 @@ module.exports.updateCareTeam = function updateCareTeam ({ profile, logger, app 
 /**
 * @description Controller for deleting an care team resource.
 */
-module.exports.deleteCareTeam = function deleteCareTeam ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteCareTeam(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error

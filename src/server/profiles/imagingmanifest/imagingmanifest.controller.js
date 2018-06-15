@@ -3,7 +3,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getImagingManifest = function getImagingManifest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports.getImagingManifest = function getImagingManifest ({ profile, logg
 		// Get a version specific resource
 		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 
-		return service.getImagingManifest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, version, ImagingManifest, results, {
 					resourceUrl: config.auth.resourceServer
@@ -26,7 +26,7 @@ module.exports.getImagingManifest = function getImagingManifest ({ profile, logg
 };
 
 
-module.exports.getImagingManifestById = function getImagingManifestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -34,7 +34,7 @@ module.exports.getImagingManifestById = function getImagingManifestById ({ profi
 		// Get a version specific resource
 		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
 
-		return service.getImagingManifestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, version, ImagingManifest, results)
 			)
@@ -48,7 +48,7 @@ module.exports.getImagingManifestById = function getImagingManifestById ({ profi
 /**
  * @description Controller for creating ImagingManifest
  */
-module.exports.createImagingManifest = function createImagingManifest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -66,7 +66,7 @@ module.exports.createImagingManifest = function createImagingManifest ({ profile
 		let new_resource = new ImagingManifest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createImagingManifest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
 				responseUtils.handleCreateResponse(res, version, ImagingManifest.__resourceType, results)
 			)
@@ -80,7 +80,7 @@ module.exports.createImagingManifest = function createImagingManifest ({ profile
 /**
  * @description Controller for updating/creating ImagingManifest. If the ImagingManifest does not exist, it should be updated
  */
-module.exports.updateImagingManifest = function updateImagingManifest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -98,7 +98,7 @@ module.exports.updateImagingManifest = function updateImagingManifest ({ profile
 		let new_resource = new ImagingManifest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateImagingManifest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
 				responseUtils.handleUpdateResponse(res, version, ImagingManifest.__resourceType, results)
 			)
@@ -112,13 +112,13 @@ module.exports.updateImagingManifest = function updateImagingManifest ({ profile
 /**
  * @description Controller for deleting an ImagingManifest.
  */
-module.exports.deleteImagingManifest = function deleteImagingManifest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { version } = req.sanitized_args;
 
-		return service.deleteImagingManifest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
