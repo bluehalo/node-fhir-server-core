@@ -32,6 +32,10 @@ let generateInteractions = (service, resourceType) => {
 		interactions.push({ code: 'delete' });
 	}
 
+	if (service.searchByHistoryVersionId) {
+		interactions.push({ code: 'vread' });
+	}
+
 	// Save these interactions so we don't need to do this again
 	profileInteractions[resourceType] = interactions;
 
