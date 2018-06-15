@@ -175,10 +175,9 @@ module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ p
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, version_id} = req.sanitized_args;
+		let { version, version_id} = req.sanitized_args;
 
 		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
 
 		return service.searchByHistoryVersionId(req.sanitized_args, logger)
 			.then((results) =>
