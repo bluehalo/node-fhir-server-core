@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getGroup = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getGroup\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in Group service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getGroupById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getGroupById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in Group service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createGroup = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createGroup\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in Group service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateGroup = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateGroup\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in Group service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteGroup = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteGroup\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in Group service.';
 	logger.info(message);
 	reject(new Error(message));
 });

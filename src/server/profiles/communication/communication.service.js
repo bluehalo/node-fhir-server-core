@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getCommunication = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCommunication\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in Communication service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getCommunicationById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCommunicationById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in Communication service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createCommunication = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createCommunication\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in Communication service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateCommunication = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateCommunication\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in Communication service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteCommunication = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteCommunication\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in Communication service.';
 	logger.info(message);
 	reject(new Error(message));
 });

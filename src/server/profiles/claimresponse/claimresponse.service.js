@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getClaimResponse = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getClaimResponse\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in ClaimResponse service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getClaimResponseById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getClaimResponseById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in ClaimResponse service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.createClaimResponse = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'createClaimResponse\'';
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in ClaimResponse service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.updateClaimResponse = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'updateClaimResponse\'';
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in ClaimResponse service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.deleteClaimResponse = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'deleteClaimResponse\'';
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in ClaimResponse service.';
 	logger.info(message);
 	reject(new Error(message));
 });

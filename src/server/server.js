@@ -1,7 +1,5 @@
-// const methodOverride = require('method-override');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-// const request = require('superagent');
 const Logger = require('./winston');
 const express = require('express');
 const helmet = require('helmet');
@@ -28,8 +26,6 @@ function validate (config = {}) {
 	let { server = {}} = config;
 
 	let hasValidServerConfiguration = (
-		// We must have a port
-		// server.port &&
 		// If the ssl config is present, it must have a key and cert
 		(!server.ssl || validSSLConfiguration(server.ssl))
 	);
@@ -178,12 +174,12 @@ class Server {
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
 			// If there is an error and it is our error type
-			if (err && errors.isServerError(err, req.params.version)) {
+			if (err && errors.isServerError(err, req.params.base)) {
 				res.status(err.statusCode).json(err);
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				let error = errors.internal(err.message, req.params.version);
+				let error = errors.internal(err.message, req.params.base);
 				this.logger.error(error.statusCode, err.message);
 				res.status(error.statusCode).json(error);
 			}
@@ -195,7 +191,7 @@ class Server {
 
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
-			let error = errors.notFound(req.params.version);
+			let error = errors.notFound(req.params.base);
 			this.logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});

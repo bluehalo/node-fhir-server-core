@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/capabilitystatement',
+		path: '/:base/capabilitystatement',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCapabilityStatement
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/capabilitystatement/_search',
+		path: '/:base/capabilitystatement/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCapabilityStatement
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/capabilitystatement/:id',
+		path: '/:base/capabilitystatement/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getCapabilityStatementById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/capabilitystatement',
+		path: '/:base/capabilitystatement',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createCapabilityStatement
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/capabilitystatement/:id',
+		path: '/:base/capabilitystatement/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateCapabilityStatement
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/capabilitystatement/:id',
+		path: '/:base/capabilitystatement/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteCapabilityStatement
+		controller: controller.remove
 	}
 ];
 

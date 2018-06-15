@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMessageDefinition = function getMessageDefinition ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
 
-		return service.getMessageDefinition(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, MessageDefinition, results, {
+				responseUtils.handleBundleReadResponse( res, base, MessageDefinition, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getMessageDefinitionById = function getMessageDefinitionById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
 
-		return service.getMessageDefinitionById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, MessageDefinition, results)
+				responseUtils.handleSingleReadResponse(res, next, base, MessageDefinition, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getMessageDefinitionById = function getMessageDefinitionById ({ p
 /**
  * @description Controller for creating MessageDefinition
  */
-module.exports.createMessageDefinition = function createMessageDefinition ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
 		// Validate the resource type before creating it
 		if (MessageDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MessageDefinition.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MessageDefinition(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createMessageDefinition(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, MessageDefinition.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, MessageDefinition.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createMessageDefinition = function createMessageDefinition ({ pro
 /**
  * @description Controller for updating/creating MessageDefinition. If the MessageDefinition does not exist, it should be updated
  */
-module.exports.updateMessageDefinition = function updateMessageDefinition ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
 		// Validate the resource type before creating it
 		if (MessageDefinition.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MessageDefinition.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MessageDefinition(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateMessageDefinition(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, MessageDefinition.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, MessageDefinition.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateMessageDefinition = function updateMessageDefinition ({ pro
 /**
  * @description Controller for deleting an MessageDefinition.
  */
-module.exports.deleteMessageDefinition = function deleteMessageDefinition ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteMessageDefinition(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getProcessResponse = function getProcessResponse ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcessResponse = require(resolveFromVersion(version, 'base/ProcessResponse'));
+		let ProcessResponse = require(resolveFromVersion(base, 'base/ProcessResponse'));
 
-		return service.getProcessResponse(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, ProcessResponse, results, {
+				responseUtils.handleBundleReadResponse( res, base, ProcessResponse, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getProcessResponseById = function getProcessResponseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let ProcessResponse = require(resolveFromVersion(version, 'base/ProcessResponse'));
+		let ProcessResponse = require(resolveFromVersion(base, 'base/ProcessResponse'));
 
-		return service.getProcessResponseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, ProcessResponse, results)
+				responseUtils.handleSingleReadResponse(res, next, base, ProcessResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getProcessResponseById = function getProcessResponseById ({ profi
 /**
  * @description Controller for creating ProcessResponse
  */
-module.exports.createProcessResponse = function createProcessResponse ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let ProcessResponse = require(resolveFromVersion(version, 'base/ProcessResponse'));
+		let ProcessResponse = require(resolveFromVersion(base, 'base/ProcessResponse'));
 		// Validate the resource type before creating it
 		if (ProcessResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${ProcessResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new ProcessResponse(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createProcessResponse(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, ProcessResponse.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, ProcessResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createProcessResponse = function createProcessResponse ({ profile
 /**
  * @description Controller for updating/creating ProcessResponse. If the ProcessResponse does not exist, it should be updated
  */
-module.exports.updateProcessResponse = function updateProcessResponse ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let ProcessResponse = require(resolveFromVersion(version, 'base/ProcessResponse'));
+		let ProcessResponse = require(resolveFromVersion(base, 'base/ProcessResponse'));
 		// Validate the resource type before creating it
 		if (ProcessResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${ProcessResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new ProcessResponse(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateProcessResponse(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, ProcessResponse.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, ProcessResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateProcessResponse = function updateProcessResponse ({ profile
 /**
  * @description Controller for deleting an ProcessResponse.
  */
-module.exports.deleteProcessResponse = function deleteProcessResponse ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteProcessResponse(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

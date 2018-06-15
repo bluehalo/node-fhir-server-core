@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationRequest = function getMedicationRequest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 
-		return service.getMedicationRequest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, MedicationRequest, results, {
+				responseUtils.handleBundleReadResponse( res, base, MedicationRequest, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getMedicationRequestById = function getMedicationRequestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 
-		return service.getMedicationRequestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, MedicationRequest, results)
+				responseUtils.handleSingleReadResponse(res, next, base, MedicationRequest, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getMedicationRequestById = function getMedicationRequestById ({ p
 /**
  * @description Controller for creating MedicationRequest
  */
-module.exports.createMedicationRequest = function createMedicationRequest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 		// Validate the resource type before creating it
 		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MedicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MedicationRequest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createMedicationRequest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, MedicationRequest.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, MedicationRequest.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createMedicationRequest = function createMedicationRequest ({ pro
 /**
  * @description Controller for updating/creating MedicationRequest. If the MedicationRequest does not exist, it should be updated
  */
-module.exports.updateMedicationRequest = function updateMedicationRequest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 		// Validate the resource type before creating it
 		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MedicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MedicationRequest(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateMedicationRequest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, MedicationRequest.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, MedicationRequest.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateMedicationRequest = function updateMedicationRequest ({ pro
 /**
  * @description Controller for deleting an MedicationRequest.
  */
-module.exports.deleteMedicationRequest = function deleteMedicationRequest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteMedicationRequest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

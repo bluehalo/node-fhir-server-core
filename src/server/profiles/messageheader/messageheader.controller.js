@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMessageHeader = function getMessageHeader ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
 
-		return service.getMessageHeader(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, MessageHeader, results, {
+				responseUtils.handleBundleReadResponse( res, base, MessageHeader, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getMessageHeaderById = function getMessageHeaderById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
 
-		return service.getMessageHeaderById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, MessageHeader, results)
+				responseUtils.handleSingleReadResponse(res, next, base, MessageHeader, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getMessageHeaderById = function getMessageHeaderById ({ profile, 
 /**
  * @description Controller for creating MessageHeader
  */
-module.exports.createMessageHeader = function createMessageHeader ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
 		// Validate the resource type before creating it
 		if (MessageHeader.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MessageHeader.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MessageHeader(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createMessageHeader(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, MessageHeader.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, MessageHeader.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createMessageHeader = function createMessageHeader ({ profile, lo
 /**
  * @description Controller for updating/creating MessageHeader. If the MessageHeader does not exist, it should be updated
  */
-module.exports.updateMessageHeader = function updateMessageHeader ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
 		// Validate the resource type before creating it
 		if (MessageHeader.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${MessageHeader.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new MessageHeader(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateMessageHeader(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, MessageHeader.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, MessageHeader.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateMessageHeader = function updateMessageHeader ({ profile, lo
 /**
  * @description Controller for deleting an MessageHeader.
  */
-module.exports.deleteMessageHeader = function deleteMessageHeader ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteMessageHeader(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

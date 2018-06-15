@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/bodysite',
+		path: '/:base/bodysite',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getBodySite
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/bodysite/_search',
+		path: '/:base/bodysite/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getBodySite
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/bodysite/:id',
+		path: '/:base/bodysite/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getBodySiteById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/bodysite',
+		path: '/:base/bodysite',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createBodySite
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/bodysite/:id',
+		path: '/:base/bodysite/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateBodySite
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/bodysite/:id',
+		path: '/:base/bodysite/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteBodySite
+		controller: controller.remove
 	}
 ];
 

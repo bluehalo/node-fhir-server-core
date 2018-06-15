@@ -3,8 +3,8 @@
 * @description Common express arguments used on many routes as route params
 */
 module.exports.route_args = {
-	VERSION: {
-		name: 'version',
+	BASE: {
+		name: 'base',
 		type: 'string',
 		conformance_hide: true
 	},

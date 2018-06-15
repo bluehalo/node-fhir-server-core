@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/servicedefinition',
+		path: '/:base/servicedefinition',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getServiceDefinition
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/servicedefinition/_search',
+		path: '/:base/servicedefinition/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getServiceDefinition
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/servicedefinition/:id',
+		path: '/:base/servicedefinition/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getServiceDefinitionById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/servicedefinition',
+		path: '/:base/servicedefinition',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createServiceDefinition
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/servicedefinition/:id',
+		path: '/:base/servicedefinition/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateServiceDefinition
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/servicedefinition/:id',
+		path: '/:base/servicedefinition/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteServiceDefinition
+		controller: controller.remove
 	}
 ];
 

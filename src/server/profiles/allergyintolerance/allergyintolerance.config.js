@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/allergyintolerance',
+		path: '/:base/allergyintolerance',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntolerance
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/allergyintolerance/_search',
+		path: '/:base/allergyintolerance/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntolerance
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/allergyintolerance/:id',
+		path: '/:base/allergyintolerance/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getAllergyIntoleranceById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/allergyintolerance',
+		path: '/:base/allergyintolerance',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createAllergyIntolerance
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/allergyintolerance/:id',
+		path: '/:base/allergyintolerance/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateAllergyIntolerance
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/allergyintolerance/:id',
+		path: '/:base/allergyintolerance/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteAllergyIntolerance
+		controller: controller.remove
 	}
 ];
 

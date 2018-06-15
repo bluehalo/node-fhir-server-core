@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/careteam',
+		path: '/:base/careteam',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCareTeam
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/careteam/_search',
+		path: '/:base/careteam/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCareTeam
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/careteam/:id',
+		path: '/:base/careteam/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getCareTeamById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/careteam',
+		path: '/:base/careteam',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createCareTeam
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/careteam/:id',
+		path: '/:base/careteam/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateCareTeam
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/careteam/:id',
+		path: '/:base/careteam/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteCareTeam
+		controller: controller.remove
 	}
 ];
 

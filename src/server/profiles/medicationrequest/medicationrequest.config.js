@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/medicationrequest',
+		path: '/:base/medicationrequest',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getMedicationRequest
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/medicationrequest/_search',
+		path: '/:base/medicationrequest/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getMedicationRequest
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/medicationrequest/:id',
+		path: '/:base/medicationrequest/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getMedicationRequestById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/medicationrequest',
+		path: '/:base/medicationrequest',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createMedicationRequest
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/medicationrequest/:id',
+		path: '/:base/medicationrequest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateMedicationRequest
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/medicationrequest/:id',
+		path: '/:base/medicationrequest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteMedicationRequest
+		controller: controller.remove
 	}
 ];
 

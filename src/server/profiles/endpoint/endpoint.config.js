@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/endpoint',
+		path: '/:base/endpoint',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getEndPoint
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/endpoint/_search',
+		path: '/:base/endpoint/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getEndPoint
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/endpoint/:id',
+		path: '/:base/endpoint/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getEndPointById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/endpoint',
+		path: '/:base/endpoint',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createEndPoint
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/endpoint/:id',
+		path: '/:base/endpoint/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateEndPoint
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/endpoint/:id',
+		path: '/:base/endpoint/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteEndPoint
+		controller: controller.remove
 	}
 ];
 

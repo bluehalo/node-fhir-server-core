@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/communicationrequest',
+		path: '/:base/communicationrequest',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCommunicationRequest
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/communicationrequest/_search',
+		path: '/:base/communicationrequest/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getCommunicationRequest
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/communicationrequest/:id',
+		path: '/:base/communicationrequest/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getCommunicationRequestById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/communicationrequest',
+		path: '/:base/communicationrequest',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createCommunicationRequest
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/communicationrequest/:id',
+		path: '/:base/communicationrequest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateCommunicationRequest
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/communicationrequest/:id',
+		path: '/:base/communicationrequest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteCommunicationRequest
+		controller: controller.remove
 	}
 ];
 

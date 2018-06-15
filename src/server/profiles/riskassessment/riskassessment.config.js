@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/riskassessment',
+		path: '/:base/riskassessment',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getRiskAssessment
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/riskassessment/_search',
+		path: '/:base/riskassessment/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getRiskAssessment
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/riskassessment/:id',
+		path: '/:base/riskassessment/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getRiskAssessmentById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/riskassessment',
+		path: '/:base/riskassessment',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createRiskAssessment
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/riskassessment/:id',
+		path: '/:base/riskassessment/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateRiskAssessment
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/riskassessment/:id',
+		path: '/:base/riskassessment/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteRiskAssessment
+		controller: controller.remove
 	}
 ];
 

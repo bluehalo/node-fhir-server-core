@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getEligibilityResponse = function getEligibilityResponse ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
+		let EligibilityResponse = require(resolveFromVersion(base, 'base/EligibilityResponse'));
 
-		return service.getEligibilityResponse(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, EligibilityResponse, results, {
+				responseUtils.handleBundleReadResponse( res, base, EligibilityResponse, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getEligibilityResponseById = function getEligibilityResponseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
+		let EligibilityResponse = require(resolveFromVersion(base, 'base/EligibilityResponse'));
 
-		return service.getEligibilityResponseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, EligibilityResponse, results)
+				responseUtils.handleSingleReadResponse(res, next, base, EligibilityResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getEligibilityResponseById = function getEligibilityResponseById 
 /**
  * @description Controller for creating EligibilityResponse
  */
-module.exports.createEligibilityResponse = function createEligibilityResponse ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
+		let EligibilityResponse = require(resolveFromVersion(base, 'base/EligibilityResponse'));
 		// Validate the resource type before creating it
 		if (EligibilityResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${EligibilityResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new EligibilityResponse(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createEligibilityResponse(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, EligibilityResponse.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, EligibilityResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createEligibilityResponse = function createEligibilityResponse ({
 /**
  * @description Controller for updating/creating EligibilityResponse. If the EligibilityResponse does not exist, it should be updated
  */
-module.exports.updateEligibilityResponse = function updateEligibilityResponse ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let EligibilityResponse = require(resolveFromVersion(version, 'base/EligibilityResponse'));
+		let EligibilityResponse = require(resolveFromVersion(base, 'base/EligibilityResponse'));
 		// Validate the resource type before creating it
 		if (EligibilityResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${EligibilityResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new EligibilityResponse(resource_body);
 		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateEligibilityResponse(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, EligibilityResponse.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, EligibilityResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateEligibilityResponse = function updateEligibilityResponse ({
 /**
  * @description Controller for deleting an EligibilityResponse.
  */
-module.exports.deleteEligibilityResponse = function deleteEligibilityResponse ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteEligibilityResponse(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };
