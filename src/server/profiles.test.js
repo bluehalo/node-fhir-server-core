@@ -11,14 +11,14 @@ let profileRoutes,
 		server;
 
 // Helper function to replace express params with mock values
-let fillRoute = route => route.replace(':version', VERSIONS.STU3).replace(':id', 1);
+let fillRoute = route => route.replace(':base', VERSIONS.STU3).replace(':id', 1);
 
 describe('Generic Profile Tests', () => {
 
 	beforeAll(() => {
 		// Grab all the routes for all of our profiles
 		profileRoutes = glob
-			.sync('src/server/profiles/*/*.config.js')
+			.sync('src/server/profiles/**/*.config.js')
 			.map(filepath => require(path.resolve(filepath)))
 			.map(config => config.routes);
 
