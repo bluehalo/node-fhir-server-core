@@ -1,4 +1,3 @@
-const errors = require('../../utils/error.utils');
 const service = require('./metadata.service');
 
 /**
