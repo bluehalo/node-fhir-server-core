@@ -42,7 +42,7 @@ let routes = [
 		scopes: read_only_scopes,
 		controller: controller.searchById
 	},
-	{ //ADDED
+	{
 		type: 'get',
 		path: '/:version/observation/:id/_history/:versionid',
 		args: [
@@ -51,7 +51,8 @@ let routes = [
 			route_args.VERSION_ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.searchById
+		controller: controller.searchByHistoryVersionId
+//	controller: controller.searchById
 	},
 	{
 		type: 'post',

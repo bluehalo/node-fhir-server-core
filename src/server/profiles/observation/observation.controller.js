@@ -70,12 +70,12 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, version_id } = req.sanitized_args;
+		let { version } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((observation) => {
 				let Resource = getResourceConstructor(version, observation.resourceType);
-				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation, version_id);
+				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
 			})
 			.catch((err) => {
 				logger.error(err);
@@ -164,6 +164,46 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, version, err);
+			});
+	};
+};
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version, id, version_id} = req.sanitized_args;
+
+		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
+		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+
+		if ( req.patient && id && req.patient !== id ) {
+			let resource = new AuditEvent({
+				type: {
+					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
+					code: '110113',
+					display: 'Security Alert',
+					userSelected: false
+				},
+				recorded: moment().toISOString(),
+				action: 'R',
+				outcome: '4',
+				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
+			});
+			app.emit(EVENTS.AUDIT, resource);
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
+		}
+
+		return service.searchByHistoryVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, version, Observation, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
 			});
 	};
 };
