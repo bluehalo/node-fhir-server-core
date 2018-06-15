@@ -35,19 +35,19 @@ let mapProfiles = (profiles = {}) => {
 * if the service provided does not have a count method then we cannot
 * generate a complete record
 */
-let filterProfiles = (version) => {
+let filterProfiles = (base) => {
 	return resource => (
 		resource.count
 		&& resource.makeResource
-		&& resource.versions.indexOf(version) > -1
+		&& resource.versions.indexOf(base) > -1
 	);
 };
 
 /**
 * Load the correct statement generators for the right version
 */
-let getStatementGenerators = (version) => {
-	switch (version) {
+let getStatementGenerators = (base) => {
+	switch (base) {
 		case VERSIONS.STU3: return require('./capability.stu3');
 		default: return {};
 	}
@@ -67,14 +67,14 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	let { profiles, security } = config;
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
-	let context = { version: args.version };
+	let context = { base: args.base };
 	// Get a list of profiles and their conformance info for this spec version
 	let active_profiles = profile_conformance_documents
 		.map(mapProfiles(profiles))
-		.filter(filterProfiles(context.version));
+		.filter(filterProfiles(args.base));
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(context.version);
+	let { makeStatement, securityStatement } = getStatementGenerators(args.base);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
