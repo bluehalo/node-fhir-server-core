@@ -49,7 +49,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id } = req.sanitized_args;
+		let { version, id, version_id} = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
 		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
@@ -81,7 +81,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, Patient, results)
+				responseUtils.handleSingleReadResponse(res, next, version, Patient, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);

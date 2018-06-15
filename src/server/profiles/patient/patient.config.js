@@ -42,6 +42,17 @@ let routes = [
 		scopes: read_only_scopes,
 		controller: controller.searchById
 	},
+	{ //ADDED
+		type: 'get',
+		path: '/:version/patient/:id/_history/:versionid',
+		args: [
+			route_args.VERSION,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchById
+	},
 	{
 		type: 'post',
 		path: '/:version/patient',

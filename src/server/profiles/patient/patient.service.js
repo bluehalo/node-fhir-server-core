@@ -19,7 +19,8 @@ module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
 	// 	'resourceType': 'Patient',
 	// 	'id': '1',
 	// 	'meta': {
-	// 		'versionId': '2.0'
+	//    'lastUpdated' : "2015-09-30T14:31:27.885+00:00",
+	// 		'versionId': '1001'
 	// 	},
 	// 	'text': {
 	// 		'status': 'generated',

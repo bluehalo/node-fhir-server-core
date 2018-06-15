@@ -11,13 +11,28 @@ const errors = require('./error.utils');
 * @param {T} Resource - Resource class to use for the results
 * @param {object} resource_json - resulting json to be passed in to the class
 */
-let handleSingleReadResponse = (res, next, version, Resource, resource_json) => {
+let handleSingleReadResponse = (res, next, version, Resource, resource_json, version_id) => {
+	let { id, version: resource_version } = resource_json;
+
 	if (resource_json) {
+		// If there's resource_version, then compare with requested version_id
+		if ((resource_version) && (version_id !== null)) {
+			if (resource_version === version_id) {
+				//Set ETag header versionId and Last-Modified
+				res.set('versionId', version_id);
+				res.set('Last-Modified', resource_json.meta.lastUpdated);
+				res.status(200).json(new Resource(resource_json));
+			} else {
+				next(errors.deleted(`${Resource.__resourceType} version ${version_id} not found.`, version));
+			}
+		}
+		// If there's no resource_version, then just return resource
 		res.status(200).json(new Resource(resource_json));
 	} else {
 		next(errors.notFound(`${Resource.__resourceType} not found.`, version));
 	}
 };
+
 
 /**
 * @description When resources are read in the controller functions
