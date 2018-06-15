@@ -44,9 +44,9 @@ let routes = [
 	},
 	{
 		type: 'get',
-		path: '/:version/observation/:id/_history/:versionid',
+		path: '/:base/observation/:id/_history/:versionid',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID,
 			route_args.VERSION_ID
 		],
