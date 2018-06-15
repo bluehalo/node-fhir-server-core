@@ -19,7 +19,7 @@ The framework defines a core server, `node-fhir-server-core`, a secure Node.js m
 ## Prerequisites
 
 1. Install [Node.js](https://nodejs.org/en/) latest version (7.7+, **but** not 8.5, see [Attention](#attention))
-2. Additional for Windows: Install NPM included with Nodejs.
+2. Windows users: Install [NPM](https://www.npmjs.com).
 
 Understanding of JavaScript [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and familiarity of the FHIR specification would be helpful.
 
@@ -32,7 +32,7 @@ npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
 ```
 
 
-2. The server portion can be required as followed. 
+2. The server portion can be required as followed: 
  
 ```javascript
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
