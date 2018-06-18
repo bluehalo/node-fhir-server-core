@@ -177,14 +177,14 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 /**
  * @description Controller for getting a resource by history version id
  */
-module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
+module.exports.searchByVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, version_id} = req.sanitized_args;
+		let { base, id, version_id} = req.sanitized_args;
 
-		let Patient = require(resolveFromVersion(version, 'uscore/Patient'));
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
 
 		if ( req.patient && id && req.patient !== id ) {
 			let resource = new AuditEvent({
@@ -200,16 +200,16 @@ module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ p
 				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
 			});
 			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, version));
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
 		}
 
-		return service.searchByHistoryVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, Patient, results, version_id)
+				responseUtils.handleSingleReadResponse(res, next, base, Patient, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

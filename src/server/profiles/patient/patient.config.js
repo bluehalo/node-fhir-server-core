@@ -34,16 +34,6 @@ let routes = [
 	},
 	{
 		type: 'get',
-		path: '/:base/patient/:id',
-		args: [
-			route_args.BASE,
-			route_args.ID
-		],
-		scopes: read_only_scopes,
-		controller: controller.searchById
-	},
-	{
-		type: 'get',
 		path: '/:base/patient/:id/_history/:versionid',
 		args: [
 			route_args.BASE,
@@ -51,8 +41,17 @@ let routes = [
 			route_args.VERSION_ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.searchByHistoryVersionId
-//	controller: controller.searchById
+		controller: controller.searchByVersionId
+	},
+	{
+		type: 'get',
+		path: '/:base/patient/:id',
+		args: [
+			route_args.BASE,
+			route_args.ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchById
 	},
 	{
 		type: 'post',

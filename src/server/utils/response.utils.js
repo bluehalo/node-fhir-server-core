@@ -13,23 +13,19 @@ const errors = require('./error.utils');
  */
 
 let handleSingleReadResponse = (res, next, base, Resource, resource_json, version_id) => {
-	let {version: resource_version} = resource_json;
-
 	if (resource_json) { //if there's resource found
-		if (version_id !== null) {
-			if ((resource_version) && (resource_version === version_id)) {
-				//compare version_id vs. resource_version
-				//if matched, send resource; if not matched, send version not found
+		let {version: resource_version} = resource_json;
+		if ((resource_version)) {
+			if (resource_version === version_id) {//if matched, send resource
 				res.set('versionId', version_id);
 				res.set('Last-Modified', resource_json.meta.lastUpdated);
 				res.status(200).json(new Resource(resource_json));
-			} else {
+			} else { //there's no delete flag, so if version_id !== resource_version, treat as deleted
 				next(errors.deleted(`${Resource.__resourceType} version ${version_id} not found.`, base));
 			}
-		}	//if version_id is null, then return resource regardless of version, just like a regular read
-		res.status(200).json(new Resource(resource_json));
-	} else { //if there's no resource found
-		next(errors.notFound(`${Resource.__resourceType} not found.`, base));
+		} else { //if there's no resource_version, treat version_id as not found
+			next(errors.notFound(`${Resource.__resourceType} not found.`, base));
+		}
 	}
 };
 

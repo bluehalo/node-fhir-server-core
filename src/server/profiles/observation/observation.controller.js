@@ -171,21 +171,21 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 /**
  * @description Controller for getting a resource by history version id
  */
-module.exports.searchByHistoryVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
+module.exports.searchByVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, version_id} = req.sanitized_args;
+		let { base, version_id} = req.sanitized_args;
 
-		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
+		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
 
-		return service.searchByHistoryVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, Observation, results, version_id)
+				responseUtils.handleSingleReadResponse(res, next, base, Observation, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
