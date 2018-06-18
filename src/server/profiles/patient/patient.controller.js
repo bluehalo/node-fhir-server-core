@@ -205,7 +205,7 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 
 		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Patient, results, version_id)
+				responseUtils.handleSingleVReadResponse(res, next, base, Patient, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
