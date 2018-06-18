@@ -171,7 +171,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 /**
  * @description Controller for getting a resource by history version id
  */
-module.exports.searchByVersionId = function searchByHistoryVersionId ({ profile, logger, app }) {
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {

@@ -36,7 +36,7 @@ module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 });
 
 module.exports.searchByVersionId = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'searchByHistoryVersionId\' in Observation service.';
+	let message = 'Calling mock service. Did you forget to implement \'searchByVersionId\' in Observation service.';
 	logger.info(message);
 	reject(new Error(message));
 });

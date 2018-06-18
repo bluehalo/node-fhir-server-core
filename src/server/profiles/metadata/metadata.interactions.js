@@ -32,7 +32,7 @@ let generateInteractions = (service, resourceType) => {
 		interactions.push({ code: 'delete' });
 	}
 
-	if (service.searchByHistoryVersionId) {
+	if (service.searchByVersionId) {
 		interactions.push({ code: 'vread' });
 	}
 
