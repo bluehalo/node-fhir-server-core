@@ -24,7 +24,7 @@ let handleSingleReadResponse = (res, next, base, Resource, resource_json, versio
 				next(errors.deleted(`${Resource.__resourceType} version ${version_id} not found.`, base));
 			}
 		} else { //if there's no resource_version, treat version_id as not found
-			next(errors.notFound(`${Resource.__resourceType} not found.`, base));
+			next(errors.notFound(`${Resource.__resourceType} version ${version_id} not found.`, base));
 		}
 	}
 };
