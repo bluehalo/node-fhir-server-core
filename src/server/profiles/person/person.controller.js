@@ -128,3 +128,48 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a Person resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+		// Get a version specific Person
+		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+
+		return service.history(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Person, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a Person resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { version } = req.sanitized_args;
+		// Get a version specific Person
+		let Person = require(resolveFromVersion(version, 'uscore/Person'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, version, Person, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, version));
+			});
+	};
+};
+
