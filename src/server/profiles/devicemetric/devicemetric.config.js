@@ -14,29 +14,29 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/devicemetric',
+		path: '/:base/devicemetric',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/devicemetric/_search',
+		path: '/:base/devicemetric/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/devicemetric/:id',
+		path: '/:base/devicemetric/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
@@ -44,9 +44,9 @@ let routes = [
 	},
 	{
 		type: 'post',
-		path: '/:version/devicemetric',
+		path: '/:base/devicemetric',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
@@ -55,10 +55,10 @@ let routes = [
 	},
 	{
 		type: 'put',
-		path: '/:version/devicemetric/:id',
+		path: '/:base/devicemetric/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
@@ -66,10 +66,10 @@ let routes = [
 	},
 	{
 		type: 'delete',
-		path: '/:version/devicemetric/:id',
+		path: '/:base/devicemetric/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
