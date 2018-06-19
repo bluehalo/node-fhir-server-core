@@ -39,8 +39,9 @@ let handleSingleVReadResponse = (res, next, base, Resource, resource_json, versi
 				res.set('versionId', version_id);
 				res.set('Last-Modified', resource_json.meta.lastUpdated);
 				res.status(200).json(new Resource(resource_json));
-			} else { //there's no delete flag, so if version_id !== resource_version, treat as deleted
-				next(errors.deleted(`${Resource.__resourceType} version ${version_id} not found.`, base));
+			} else { //treat as not found since there's currently no delete flag
+				//to do: process whether version has been deleted
+				next(errors.notFound(`${Resource.__resourceType} version ${version_id} not found.`, base));
 			}
 		} else { //if there's no resource_version, treat version_id as not found
 			next(errors.notFound(`${Resource.__resourceType} version ${version_id} not found.`, base));
