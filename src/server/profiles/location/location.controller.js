@@ -7,19 +7,19 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific location
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+		let Location = require(resolveFromVersion(base, 'uscore/Location'));
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Location, results, {
+				responseUtils.handleBundleReadResponse( res, base, Location, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
@@ -31,17 +31,17 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific location
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+		let Location = require(resolveFromVersion(base, 'uscore/Location'));
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, Location, results)
+				responseUtils.handleSingleReadResponse(res, next, base, Location, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -53,14 +53,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific location
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+		let Location = require(resolveFromVersion(base, 'uscore/Location'));
 		// Validate the resource type before creating it
 		if (Location.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Location.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new location resource and pass it to the service
@@ -69,11 +69,11 @@ module.exports.create = function create ({ profile, logger, app }) {
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, Location.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Location.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -85,14 +85,14 @@ module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, id, resource_body = {}} = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific location
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+		let Location = require(resolveFromVersion(base, 'uscore/Location'));
 		// Validate the resource type before creating it
 		if (Location.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Location.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new location resource and pass it to the service
@@ -101,11 +101,11 @@ module.exports.update = function update ({ profile, logger, app }) {
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, Location.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Location.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -117,7 +117,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
@@ -125,7 +125,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };
