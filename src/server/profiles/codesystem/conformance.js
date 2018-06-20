@@ -8,9 +8,9 @@ const { routes } = require('./codesystem.config');
  */
 module.exports = {
 	profile: 'codesystem',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CodeSystem = require(resolveFromVersion(version, 'base/CodeSystem'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let CodeSystem = require(resolveFromVersion(base, 'base/CodeSystem'));
 		// Return our conformance statement
 		return {
 			extension: [{

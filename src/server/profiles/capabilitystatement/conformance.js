@@ -8,9 +8,9 @@ const { routes } = require('./capabilitystatement.config');
  */
 module.exports = {
 	profile: 'capabilitystatement',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CapabilityStatement = require(resolveFromVersion(version, 'base/CapabilityStatement'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let CapabilityStatement = require(resolveFromVersion(base, 'base/CapabilityStatement'));
 		// Return our conformance statement
 		return {
 			extension: [{

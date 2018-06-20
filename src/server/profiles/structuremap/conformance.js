@@ -8,9 +8,9 @@ const { routes } = require('./structuremap.config');
  */
 module.exports = {
 	profile: 'structuremap',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let StructureMap = require(resolveFromVersion(version, 'base/StructureMap'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let StructureMap = require(resolveFromVersion(base, 'base/StructureMap'));
 		// Return our conformance statement
 		return {
 			extension: [{

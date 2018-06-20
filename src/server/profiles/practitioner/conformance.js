@@ -8,9 +8,9 @@ const { routes } = require('./practitioner.config');
  */
 module.exports = {
 	profile: 'practitioner',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Practitioner = require(resolveFromVersion(version, 'uscore/Practitioner'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Practitioner = require(resolveFromVersion(base, 'uscore/Practitioner'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./documentreference.config');
  */
 module.exports = {
 	profile: 'documentreference',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DocumentReference = require(resolveFromVersion(version, 'base/DocumentReference'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let DocumentReference = require(resolveFromVersion(base, 'base/DocumentReference'));
 		// Return our conformance statement
 		return {
 			extension: [{

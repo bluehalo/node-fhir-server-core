@@ -136,17 +136,17 @@ module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific AppointmentResponse
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(base, 'base/AppointmentResponse'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, AppointmentResponse, results)
+				responseUtils.handleBundleReadResponse( res, base, AppointmentResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -158,17 +158,17 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific AppointmentResponse
-		let AppointmentResponse = require(resolveFromVersion(version, 'uscore/AppointmentResponse'));
+		let AppointmentResponse = require(resolveFromVersion(base, 'base/AppointmentResponse'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, AppointmentResponse, results)
+				responseUtils.handleBundleReadResponse( res, base, AppointmentResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

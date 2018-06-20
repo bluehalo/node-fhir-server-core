@@ -8,9 +8,9 @@ const { routes } = require('./valueset.config');
  */
 module.exports = {
 	profile: 'valueset',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ValueSet = require(resolveFromVersion(version, 'base/ValueSet'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ValueSet = require(resolveFromVersion(base, 'base/ValueSet'));
 		// Return our conformance statement
 		return {
 			extension: [{

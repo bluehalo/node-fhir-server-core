@@ -8,9 +8,9 @@ const { routes } = require('./sequence.config');
  */
 module.exports = {
 	profile: 'sequence',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Sequence = require(resolveFromVersion(version, 'base/Sequence'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Sequence = require(resolveFromVersion(base, 'base/Sequence'));
 		// Return our conformance statement
 		return {
 			extension: [{

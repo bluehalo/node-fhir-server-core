@@ -8,9 +8,9 @@ const { routes } = require('./servicedefinition.config');
  */
 module.exports = {
 	profile: 'servicedefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ServiceDefinition = require(resolveFromVersion(version, 'base/ServiceDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ServiceDefinition = require(resolveFromVersion(base, 'base/ServiceDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

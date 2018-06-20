@@ -8,9 +8,9 @@ const { routes } = require('./library.config');
  */
 module.exports = {
 	profile: 'library',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Library = require(resolveFromVersion(version, 'base/Library'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Library = require(resolveFromVersion(base, 'base/Library'));
 		// Return our conformance statement
 		return {
 			extension: [{

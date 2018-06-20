@@ -8,9 +8,9 @@ const { routes } = require('./deviceusestatement.config');
  */
 module.exports = {
 	profile: 'deviceusestatement',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DeviceUseStatement = require(resolveFromVersion(version, 'base/DeviceUseStatement'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let DeviceUseStatement = require(resolveFromVersion(base, 'base/DeviceUseStatement'));
 		// Return our conformance statement
 		return {
 			extension: [{

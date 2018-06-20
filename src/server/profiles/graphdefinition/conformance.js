@@ -8,9 +8,9 @@ const { routes } = require('./graphdefinition.config');
  */
 module.exports = {
 	profile: 'graphdefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let GraphDefinition = require(resolveFromVersion(version, 'base/GraphDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let GraphDefinition = require(resolveFromVersion(base, 'base/GraphDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -137,17 +137,17 @@ module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific Device
-		let Device = require(resolveFromVersion(version, 'uscore/Device'));
+		let Device = require(resolveFromVersion(base, 'uscore/Device'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Device, results)
+				responseUtils.handleBundleReadResponse( res, base, Device, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -159,17 +159,17 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific Device
-		let Device = require(resolveFromVersion(version, 'uscore/Device'));
+		let Device = require(resolveFromVersion(base, 'uscore/Device'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Device, results)
+				responseUtils.handleBundleReadResponse( res, base, Device, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

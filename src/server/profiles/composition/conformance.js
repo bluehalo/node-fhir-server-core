@@ -8,9 +8,9 @@ const { routes } = require('./composition.config');
  */
 module.exports = {
 	profile: 'composition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Composition = require(resolveFromVersion(version, 'base/Composition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Composition = require(resolveFromVersion(base, 'base/Composition'));
 		// Return our conformance statement
 		return {
 			extension: [{

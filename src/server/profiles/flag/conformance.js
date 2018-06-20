@@ -8,9 +8,9 @@ const { routes } = require('./flag.config');
  */
 module.exports = {
 	profile: 'flag',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Flag = require(resolveFromVersion(version, 'base/Flag'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Flag = require(resolveFromVersion(base, 'base/Flag'));
 		// Return our conformance statement
 		return {
 			extension: [{

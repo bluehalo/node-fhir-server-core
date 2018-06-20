@@ -8,9 +8,9 @@ const { routes } = require('./appointment.config');
  */
 module.exports = {
 	profile: 'appointment',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Appointment = require(resolveFromVersion(version, 'base/Appointment'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Appointment = require(resolveFromVersion(base, 'base/Appointment'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./group.config');
  */
 module.exports = {
 	profile: 'group',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Group = require(resolveFromVersion(version, 'base/Group'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Group = require(resolveFromVersion(base, 'base/Group'));
 		// Return our conformance statement
 		return {
 			extension: [{

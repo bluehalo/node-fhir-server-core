@@ -136,17 +136,17 @@ module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific Sequence
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(base, 'base/Sequence'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Sequence, results)
+				responseUtils.handleBundleReadResponse( res, base, Sequence, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -158,17 +158,17 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific Sequence
-		let Sequence = require(resolveFromVersion(version, 'uscore/Sequence'));
+		let Sequence = require(resolveFromVersion(base, 'base/Sequence'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, Sequence, results)
+				responseUtils.handleBundleReadResponse( res, base, Sequence, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

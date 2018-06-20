@@ -136,17 +136,17 @@ module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific AuditEvent
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, AuditEvent, results)
+				responseUtils.handleBundleReadResponse( res, base, AuditEvent, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -158,17 +158,17 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific AuditEvent
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, AuditEvent, results)
+				responseUtils.handleBundleReadResponse( res, base, AuditEvent, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

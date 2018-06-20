@@ -8,9 +8,9 @@ const { routes } = require('./nutritionorder.config');
  */
 module.exports = {
 	profile: 'nutritionorder',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let NutritionOrder = require(resolveFromVersion(version, 'base/NutritionOrder'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let NutritionOrder = require(resolveFromVersion(base, 'base/NutritionOrder'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./healthcareservice.config');
  */
 module.exports = {
 	profile: 'healthcareservice',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let HealthcareService = require(resolveFromVersion(version, 'base/HealthcareService'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let HealthcareService = require(resolveFromVersion(base, 'base/HealthcareService'));
 		// Return our conformance statement
 		return {
 			extension: [{

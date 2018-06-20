@@ -8,9 +8,9 @@ const { routes } = require('./goal.config');
  */
 module.exports = {
 	profile: 'goal',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Goal = require(resolveFromVersion(version, 'uscore/Goal'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Goal = require(resolveFromVersion(base, 'uscore/Goal'));
 		// Return our conformance statement
 		return {
 			extension: [{

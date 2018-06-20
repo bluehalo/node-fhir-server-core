@@ -136,17 +136,17 @@ module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific PlanDefinition
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(base, 'base/PlanDefinition'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, PlanDefinition, results)
+				responseUtils.handleBundleReadResponse( res, base, PlanDefinition, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -158,17 +158,17 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific PlanDefinition
-		let PlanDefinition = require(resolveFromVersion(version, 'uscore/PlanDefinition'));
+		let PlanDefinition = require(resolveFromVersion(base, 'base/PlanDefinition'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, PlanDefinition, results)
+				responseUtils.handleBundleReadResponse( res, base, PlanDefinition, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };

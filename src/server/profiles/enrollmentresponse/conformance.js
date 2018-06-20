@@ -8,9 +8,9 @@ const { routes } = require('./enrollmentresponse.config');
  */
 module.exports = {
 	profile: 'enrollmentresponse',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let EnrollmentResponse = require(resolveFromVersion(version, 'base/EnrollmentResponse'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let EnrollmentResponse = require(resolveFromVersion(base, 'base/EnrollmentResponse'));
 		// Return our conformance statement
 		return {
 			extension: [{

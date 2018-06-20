@@ -8,9 +8,9 @@ const { routes } = require('./specimen.config');
  */
 module.exports = {
 	profile: 'specimen',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Specimen = require(resolveFromVersion(version, 'base/Specimen'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Specimen = require(resolveFromVersion(base, 'base/Specimen'));
 		// Return our conformance statement
 		return {
 			extension: [{

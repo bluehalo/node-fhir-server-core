@@ -8,9 +8,9 @@ const { routes } = require('./substance.config');
  */
 module.exports = {
 	profile: 'substance',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Substance = require(resolveFromVersion(version, 'base/Substance'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Substance = require(resolveFromVersion(base, 'base/Substance'));
 		// Return our conformance statement
 		return {
 			extension: [{
