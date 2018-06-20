@@ -12,7 +12,7 @@ const Immunization_VaccinationProtocol = require('./Immunization_VaccinationProt
 class Immunization extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Immunization';
 		Object.assign(this, opts);
 	}
@@ -29,7 +29,7 @@ class Immunization extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Immunization'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -52,7 +52,7 @@ class Immunization extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field status`);
 		}
 		this._status = new_value;
@@ -102,7 +102,7 @@ class Immunization extends DomainResource {
 	set date ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
 		this._date = new_value;
@@ -161,7 +161,7 @@ class Immunization extends DomainResource {
 	set expirationDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field expirationDate`);
 		}
 		this._expirationDate = new_value;
@@ -242,27 +242,27 @@ class Immunization extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
 			status: this._status,
 			notGiven: this._notGiven,
-			vaccineCode: this._vaccineCode,
-			patient: this._patient,
-			encounter: this._encounter,
+			vaccineCode: this._vaccineCode && this._vaccineCode.toJSON(),
+			patient: this._patient && this._patient.toJSON(),
+			encounter: this._encounter && this._encounter.toJSON(),
 			date: this._date,
 			primarySource: this._primarySource,
-			reportOrigin: this._reportOrigin,
-			location: this._location,
-			manufacturer: this._manufacturer,
+			reportOrigin: this._reportOrigin && this._reportOrigin.toJSON(),
+			location: this._location && this._location.toJSON(),
+			manufacturer: this._manufacturer && this._manufacturer.toJSON(),
 			lotNumber: this._lotNumber,
 			expirationDate: this._expirationDate,
-			site: this._site,
-			route: this._route,
-			doseQuantity: this._doseQuantity,
-			practitioner: this._practitioner,
-			note: this._note,
-			explanation: this._explanation,
-			reaction: this._reaction,
-			vaccinationProtocol: this._vaccinationProtocol
+			site: this._site && this._site.toJSON(),
+			route: this._route && this._route.toJSON(),
+			doseQuantity: this._doseQuantity && this._doseQuantity.toJSON(),
+			practitioner: this._practitioner && this._practitioner.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON()),
+			explanation: this._explanation && this._explanation.toJSON(),
+			reaction: this._reaction && this._reaction.map(v => v.toJSON()),
+			vaccinationProtocol: this._vaccinationProtocol && this._vaccinationProtocol.map(v => v.toJSON())
 		});
 	}
 

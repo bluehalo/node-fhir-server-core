@@ -4,7 +4,7 @@ const Period = require('./Period');
 class ContactPoint extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ContactPoint';
 		Object.assign(this, opts);
 	}
@@ -21,7 +21,7 @@ class ContactPoint extends Element {
 	set system ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['phone', 'fax', 'email', 'pager', 'url', 'sms', 'other'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field system`);
 		}
 		this._system = new_value;
@@ -44,7 +44,7 @@ class ContactPoint extends Element {
 	set use ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['home', 'work', 'temp', 'old', 'mobile'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field use`);
 		}
 		this._use = new_value;
@@ -58,7 +58,7 @@ class ContactPoint extends Element {
 	set rank ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field rank`);
 		}
 		this._rank = new_value;
@@ -79,7 +79,7 @@ class ContactPoint extends Element {
 			value: this._value,
 			use: this._use,
 			rank: this._rank,
-			period: this._period
+			period: this._period && this._period.toJSON()
 		});
 	}
 

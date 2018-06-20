@@ -6,7 +6,7 @@ const CodeableConcept = require('./CodeableConcept');
 class DataRequirement_CodeFilter extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DataRequirement_CodeFilter';
 		Object.assign(this, opts);
 	}
@@ -73,10 +73,10 @@ class DataRequirement_CodeFilter extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			path: this._path,
 			valueSetString: this._valueSetString,
-			valueSetReference: this._valueSetReference,
+			valueSetReference: this._valueSetReference && this._valueSetReference.toJSON(),
 			valueCode: this._valueCode,
-			valueCoding: this._valueCoding,
-			valueCodeableConcept: this._valueCodeableConcept
+			valueCoding: this._valueCoding && this._valueCoding.map(v => v.toJSON()),
+			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.map(v => v.toJSON())
 		});
 	}
 

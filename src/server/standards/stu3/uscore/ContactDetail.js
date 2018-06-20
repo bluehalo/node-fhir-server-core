@@ -4,7 +4,7 @@ const ContactPoint = require('./ContactPoint');
 class ContactDetail extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ContactDetail';
 		Object.assign(this, opts);
 	}
@@ -34,7 +34,7 @@ class ContactDetail extends Element {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			name: this._name,
-			telecom: this._telecom
+			telecom: this._telecom && this._telecom.map(v => v.toJSON())
 		});
 	}
 

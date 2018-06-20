@@ -4,7 +4,7 @@ const Meta = require('./Meta');
 class Resource extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Resource';
 		Object.assign(this, opts);
 	}
@@ -21,7 +21,7 @@ class Resource extends Element {
 	set id ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field id`);
 		}
 		this._id = new_value;
@@ -53,7 +53,7 @@ class Resource extends Element {
 	set language ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field language`);
 		}
 		this._language = new_value;
@@ -62,7 +62,7 @@ class Resource extends Element {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			id: this._id,
-			meta: this._meta,
+			meta: this._meta && this._meta.toJSON(),
 			implicitRules: this._implicitRules,
 			language: this._language
 		});

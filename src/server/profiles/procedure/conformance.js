@@ -14,19 +14,15 @@ module.exports = {
 		// Return our conformance statement
 		return {
 			extension: [{
-				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				url: 'https://www.hl7.org/fhir/search.html#count',
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
 			type: Procedure.__resourceType,
 			profile: {
-				reference: 'http://hl7.org/fhir/Profile/Procedure'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-procedure.html'
 			},
-			interaction: [{
-				code: 'read'
-			}, {
-				code: 'search'
-			}],
+			conditionalDelete: 'not-supported',
 			searchParam: searchParams
 		};
 	}

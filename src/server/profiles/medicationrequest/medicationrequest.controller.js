@@ -1,78 +1,130 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
+const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getMedicationRequest = ({ profile, logger, config, app }) => {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationrequest & bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let { base } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 
-		/**
-		* return service.getMedicationRequest(req, logger)
-		*		.then(sanitizeResponse) // Only show the user what they are allowed to see
-		*		.then(validateResponse); // Make sure the response data conforms to the spec
-		*/
-		return service.getMedicationRequest(req, logger, context)
-			.then((medicationrequests) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (medicationrequests) {
-					for (let resource of medicationrequests) {
-						if (!req.medicationrequest || req.medicationrequest === resource.medicationrequestId) {
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new MedicationRequest(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/MedicationRequest/${resource.id}`
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+		return service.search(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, MedicationRequest, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
 			.catch((err) => {
-				next(errors.internal(err.message, version));
+				logger.error(err);
+				next(errors.internal(err.message, base));
 			});
 	};
-
 
 };
 
 
-module.exports.getMedicationRequestById = ({ profile, logger, app }) => {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let version = req.params.version;
-		// Create a context I can pass some data through
-		let context = { version };
-		// Get a version specific medicationrequest
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+		let { base } = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 
-		return service.getMedicationRequestById(req, logger, context)
-			.then((medicationrequest) => {
-				if (medicationrequest) {
-					res.status(200).json(new MedicationRequest(medicationrequest));
-				} else {
-					next(errors.notFound('MedicationRequest not found', version));
-				}
-			})
+		return service.searchById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, base, MedicationRequest, results)
+			)
 			.catch((err) => {
-				next(errors.internal(err.message, version));
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating MedicationRequest
+ */
+module.exports.create = function create ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
+		// Validate the resource type before creating it
+		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				base
+			));
+		}
+		// Create a new resource and pass it to the service
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id: resource_id, resource: new_resource };
+		// Pass any new information to the underlying service
+		return service.create(args, logger)
+			.then((results) =>
+				responseUtils.handleCreateResponse(res, base, MedicationRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating MedicationRequest. If the MedicationRequest does not exist, it should be updated
+ */
+module.exports.update = function update ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, id, resource_body = {}} = req.sanitized_args;
+		// Get a version specific resource
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
+		// Validate the resource type before creating it
+		if (MedicationRequest.__resourceType !== resource_body.resourceType) {
+			return next(errors.invalidParameter(
+				`'resourceType' expected to have value of '${MedicationRequest.__resourceType}', received '${resource_body.resourceType}'`,
+				base
+			));
+		}
+		// Create a new resource and pass it to the service
+		let new_resource = new MedicationRequest(resource_body);
+		let args = { id, resource: new_resource };
+		// Pass any new information to the underlying service
+		return service.update(args, logger)
+			.then((results) =>
+				responseUtils.handleUpdateResponse(res, base, MedicationRequest.__resourceType, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for deleting an MedicationRequest.
+ */
+module.exports.remove = function remove ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+
+		return service.remove(req.sanitized_args, logger)
+			.then(() => responseUtils.handleDeleteResponse(res))
+			.catch((err = {}) => {
+				// Log the error
+				logger.error(err);
+				// Pass the error back
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

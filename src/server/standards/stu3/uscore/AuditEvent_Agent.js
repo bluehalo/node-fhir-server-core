@@ -8,7 +8,7 @@ const AuditEvent_Network = require('./AuditEvent_Network');
 class AuditEvent_Agent extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent_Agent';
 		Object.assign(this, opts);
 	}
@@ -118,17 +118,17 @@ class AuditEvent_Agent extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
-			reference: this._reference,
-			userId: this._userId,
+			role: this._role && this._role.map(v => v.toJSON()),
+			reference: this._reference && this._reference.toJSON(),
+			userId: this._userId && this._userId.toJSON(),
 			altId: this._altId,
 			name: this._name,
 			requestor: this._requestor,
-			location: this._location,
+			location: this._location && this._location.toJSON(),
 			policy: this._policy,
-			media: this._media,
-			network: this._network,
-			purposeOfUse: this._purposeOfUse
+			media: this._media && this._media.toJSON(),
+			network: this._network && this._network.toJSON(),
+			purposeOfUse: this._purposeOfUse && this._purposeOfUse.map(v => v.toJSON())
 		});
 	}
 

@@ -1,18 +1,36 @@
 /* eslint-disable no-unused-vars */
-module.exports.getCount = (req, logger, context) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCount\'';
+module.exports.count = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'count\'';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getCareTeam = (req, logger, context) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCareTeam\'';
+module.exports.search = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'search\' in CareTeam service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
-module.exports.getCareTeamById = (req, logger, context) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'getCareTeamById\'';
+module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in CareTeam service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.create = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'create\' in CareTeam service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.update = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'update\' in CareTeam service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in CareTeam service.';
 	logger.info(message);
 	reject(new Error(message));
 });

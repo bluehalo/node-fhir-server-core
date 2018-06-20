@@ -1,3 +1,4 @@
+const generateInteractions = require('./metadata.interactions');
 const { VERSIONS } = require('../../../constants');
 const errors = require('../../utils/error.utils');
 const path = require('path');
@@ -20,31 +21,33 @@ let mapProfiles = (profiles = {}) => {
 			makeResource: resource,
 			versions: profiles[profile_name]
 				&& profiles[profile_name].versions,
-			getCount: profiles[profile_name]
+			service: profiles[profile_name]
+				&& profiles[profile_name].serviceModule,
+			count: profiles[profile_name]
 				&& profiles[profile_name].serviceModule
-				&& profiles[profile_name].serviceModule.getCount
+				&& profiles[profile_name].serviceModule.count
 		};
 	};
 };
 
 /**
 * Filter resources/profiles baased on the, having the required properties
-* if the service provided does not have a getCount method then we cannot
+* if the service provided does not have a count method then we cannot
 * generate a complete record
 */
-let filterProfiles = (version) => {
+let filterProfiles = (base) => {
 	return resource => (
-		resource.getCount
+		resource.count
 		&& resource.makeResource
-		&& resource.versions.indexOf(version) > -1
+		&& resource.versions.indexOf(base) > -1
 	);
 };
 
 /**
 * Load the correct statement generators for the right version
 */
-let getStatementGenerators = (version) => {
-	switch (version) {
+let getStatementGenerators = (base) => {
+	switch (base) {
 		case VERSIONS.STU3: return require('./capability.stu3');
 		default: return {};
 	}
@@ -53,24 +56,25 @@ let getStatementGenerators = (version) => {
 /**
  * @function generateCapabilityStatement
  * @description Assemble the capability statement based on the current profiles
+ * @param {Object} args - Arguments for the endpoint
  * @param {Object} profiles - List of profile services we are using
  * @param {Winston} logger - Instance of Winston's logger
  * @return {Promise<Object>} - Return the capability statement
  */
-let generateCapabilityStatement = (req, config, logger) => new Promise((resolve, reject) => {
+let generateCapabilityStatement = (args, config, logger) => new Promise((resolve, reject) => {
 	logger.info('Metadata.generateCapabilityStatement');
 	// Create a new base capability statement per request
 	let { profiles, security } = config;
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
-	let context = { version: req.params.version };
+	let context = { base: args.base };
 	// Get a list of profiles and their conformance info for this spec version
 	let active_profiles = profile_conformance_documents
 		.map(mapProfiles(profiles))
-		.filter(filterProfiles(context.version));
+		.filter(filterProfiles(args.base));
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(context.version);
+	let { makeStatement, securityStatement } = getStatementGenerators(args.base);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
@@ -79,7 +83,7 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 	}
 
 	// Generate a list of promises
-	let count_promises = active_profiles.map(profile => profile.getCount(req, logger, context));
+	let count_promises = active_profiles.map(profile => profile.count(args, logger));
 
 	// Iterate over active resources and invoke get count on each
 	return Promise.all(count_promises).then(counts => {
@@ -94,8 +98,12 @@ let generateCapabilityStatement = (req, config, logger) => new Promise((resolve,
 		}
 
 		// Make the resource and give it the version so it can only include valid search params
-		server_statement.resource = active_profiles
-			.map((profile, i) => profile.makeResource(context.version, counts[i]));
+		server_statement.resource = active_profiles.map((profile, i) => {
+			let resource = profile.makeResource(context.version, counts[i]);
+			// Determine the interactions we need to list for this profile
+			resource.interaction = generateInteractions(profile.service, resource.type);
+			return resource;
+		});
 
 		// Add the server statement to the main statement
 		return resolve(makeStatement(server_statement));

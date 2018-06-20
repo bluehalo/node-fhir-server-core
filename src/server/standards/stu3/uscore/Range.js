@@ -4,7 +4,7 @@ const Quantity = require('./Quantity');
 class Range extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Range';
 		Object.assign(this, opts);
 	}
@@ -33,8 +33,8 @@ class Range extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			low: this._low,
-			high: this._high
+			low: this._low && this._low.toJSON(),
+			high: this._high && this._high.toJSON()
 		});
 	}
 

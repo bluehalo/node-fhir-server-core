@@ -4,7 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class OperationOutcome_Issue extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'OperationOutcome_Issue';
 		Object.assign(this, opts);
 	}
@@ -21,7 +21,7 @@ class OperationOutcome_Issue extends BackboneElement {
 	set severity ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['fatal', 'error', 'warning', 'information'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field severity`);
 		}
 		this._severity = new_value;
@@ -35,7 +35,7 @@ class OperationOutcome_Issue extends BackboneElement {
 	set code ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['invalid', 'structure', 'required', 'value', 'invariant', 'security', 'login', 'unknown', 'expired', 'forbidden', 'suppressed', 'processing', 'not-supported', 'duplicate', 'not-found', 'too-long', 'code-invalid', 'extension', 'too-costly', 'business-rule', 'conflict', 'incomplete', 'transient', 'lock-error', 'no-store', 'exception', 'timeout', 'throttled', 'informational'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field code`);
 		}
 		this._code = new_value;
@@ -81,7 +81,7 @@ class OperationOutcome_Issue extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			severity: this._severity,
 			code: this._code,
-			details: this._details,
+			details: this._details && this._details.toJSON(),
 			diagnostics: this._diagnostics,
 			location: this._location,
 			expression: this._expression

@@ -9,7 +9,7 @@ const Annotation = require('./Annotation');
 class CareTeam extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'CareTeam';
 		Object.assign(this, opts);
 	}
@@ -26,7 +26,7 @@ class CareTeam extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['CareTeam'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -49,7 +49,7 @@ class CareTeam extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposed', 'active', 'suspended', 'inactive', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -148,18 +148,18 @@ class CareTeam extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
 			status: this._status,
-			category: this._category,
+			category: this._category && this._category.map(v => v.toJSON()),
 			name: this._name,
-			subject: this._subject,
-			context: this._context,
-			period: this._period,
-			participant: this._participant,
-			reasonCode: this._reasonCode,
-			reasonReference: this._reasonReference,
-			managingOrganization: this._managingOrganization,
-			note: this._note
+			subject: this._subject && this._subject.toJSON(),
+			context: this._context && this._context.toJSON(),
+			period: this._period && this._period.toJSON(),
+			participant: this._participant && this._participant.map(v => v.toJSON()),
+			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
+			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
+			managingOrganization: this._managingOrganization && this._managingOrganization.map(v => v.toJSON()),
+			note: this._note && this._note.map(v => v.toJSON())
 		});
 	}
 

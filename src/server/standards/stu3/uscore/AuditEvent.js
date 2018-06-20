@@ -8,7 +8,7 @@ const AuditEvent_Entity = require('./AuditEvent_Entity');
 class AuditEvent extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AuditEvent';
 		Object.assign(this, opts);
 	}
@@ -25,7 +25,7 @@ class AuditEvent extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AuditEvent'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -57,7 +57,7 @@ class AuditEvent extends DomainResource {
 	set action ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['C', 'R', 'U', 'D', 'E'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field action`);
 		}
 		this._action = new_value;
@@ -80,7 +80,7 @@ class AuditEvent extends DomainResource {
 	set outcome ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['0', '4', '8', '12'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field outcome`);
 		}
 		this._outcome = new_value;
@@ -134,16 +134,16 @@ class AuditEvent extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			type: this._type,
-			subtype: this._subtype,
+			type: this._type && this._type.toJSON(),
+			subtype: this._subtype && this._subtype.map(v => v.toJSON()),
 			action: this._action,
 			recorded: this._recorded,
 			outcome: this._outcome,
 			outcomeDesc: this._outcomeDesc,
-			purposeOfEvent: this._purposeOfEvent,
-			agent: this._agent,
-			source: this._source,
-			entity: this._entity
+			purposeOfEvent: this._purposeOfEvent && this._purposeOfEvent.map(v => v.toJSON()),
+			agent: this._agent && this._agent.map(v => v.toJSON()),
+			source: this._source && this._source.toJSON(),
+			entity: this._entity && this._entity.map(v => v.toJSON())
 		});
 	}
 

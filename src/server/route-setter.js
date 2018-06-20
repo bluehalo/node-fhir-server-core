@@ -8,7 +8,7 @@ const glob = require('glob');
 const cors = require('cors');
 
 /**
-* Helper function to determine which versions are available
+* @description Helper function to determine which versions are available
 * and need to be supported by metadata endpoints
 * @param {profiles} - Profile configurations from end users
 * @return {array} Array of versions we need to support
@@ -26,6 +26,50 @@ function getAllConfiguredVersions (profiles = {}) {
 	// reason. Otherwise there may be some compliance issues.
 	return Array.from(provided_versions)
 		.filter((version) => supported_versions.indexOf(version) !== -1);
+}
+
+/**
+* @description Determine whether or not we have the necessary service for this
+* route. If we do not, return false, otherwise return true
+* @param {object} route - route configuration for this specific route
+* @param {object} profile - profile configuration for this particular profile
+* @return {boolean}
+*/
+function routeHasValidService (route, profile = {}) {
+	// If we have no serviceModule, we can't enable this route
+	if (!profile.serviceModule) {
+		return false;
+	}
+	// If we do not have an export containing the correct service, don't enable the route
+	if (!profile.serviceModule[route.controller.name]) {
+		return false;
+	}
+	// This route has a valid service, so we can enable it
+	return true;
+}
+
+/**
+* @description Noop middleware for express
+*/
+function noOpMiddleware (req, res, next) {
+	return next();
+}
+
+/**
+* @description Validation Middleware Wrapper
+*/
+function authenticationMiddleware (options) {
+	let { routeOptions, scopes, logger, config } = options;
+	// Don't do any validation for testing
+	if (process.env.NODE_ENV === 'test') {
+		return noOpMiddleware;
+	}
+	// Don't validate the metadata route
+	if (routeOptions.isMetadata) {
+		return noOpMiddleware;
+	}
+	// Use the validation middleware
+	return validate(scopes, logger, config);
 }
 
 
@@ -66,10 +110,20 @@ const setter = (options = {}) => {
 		for (let j = 0; j < routes.length; j++) {
 			let route = routes[j];
 			let profile = profiles[routeOptions.profileKey];
-			// Skip the iteration if the route is not required and the profile is not present
-			// The only required route should be metadata, which has a special case for handling
-			// available versions. It essentially needs to support all versions that appear in the config
-			if (!routeOptions.isMetadata && !profile) {
+
+			// We need a profile for metadata so we know which versions we need to support
+			if (routeOptions.isMetadata) {
+				profile = { versions: getAllConfiguredVersions(profiles) };
+			}
+
+			// Skip the route if their is no profile provided for this route
+			if (!profile) {
+				continue;
+			}
+
+			// If we do not have a service function from the provided service module,
+			// then don't add this route, don't test for metadata
+			if (!routeOptions.isMetadata && !routeHasValidService(route, profile)) {
 				continue;
 			}
 
@@ -78,16 +132,12 @@ const setter = (options = {}) => {
 				{},
 				default_cors_options,
 				profile && profile.corsOptions,
-				route.corsOptions
+				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
+				{ methods: [ route.type.toUpperCase() ]}
 			);
 
 			// Enable cors with preflight options
 			app.options(route.path, cors(cors_options));
-
-			// We need a profile for metadata so we know which versions we need to support
-			if (routeOptions.isMetadata) {
-				profile = { versions: getAllConfiguredVersions(profiles) };
-			}
 
 			// Setup the route with all the appropriate middleware
 			app[route.type](
@@ -100,7 +150,7 @@ const setter = (options = {}) => {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				routeOptions.isMetadata ? function(req, res, next) { return next(); } : validate(route.scopes, logger, config),
+				authenticationMiddleware({ routeOptions, config, logger, scopes: route.scopes }),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);

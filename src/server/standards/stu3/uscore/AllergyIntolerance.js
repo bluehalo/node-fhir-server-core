@@ -11,7 +11,7 @@ const AllergyIntolerance_Reaction = require('./AllergyIntolerance_Reaction');
 class AllergyIntolerance extends DomainResource {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'AllergyIntolerance';
 		Object.assign(this, opts);
 	}
@@ -28,7 +28,7 @@ class AllergyIntolerance extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['AllergyIntolerance'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -51,7 +51,7 @@ class AllergyIntolerance extends DomainResource {
 	set clinicalStatus ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'resolved'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field clinicalStatus`);
 		}
 		this._clinicalStatus = new_value;
@@ -65,7 +65,7 @@ class AllergyIntolerance extends DomainResource {
 	set verificationStatus ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['unconfirmed', 'confirmed', 'refuted', 'entered-in-error'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field verificationStatus`);
 		}
 		this._verificationStatus = new_value;
@@ -79,7 +79,7 @@ class AllergyIntolerance extends DomainResource {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['allergy', 'intolerance'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -93,7 +93,7 @@ class AllergyIntolerance extends DomainResource {
 	set category ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['food', 'medication', 'environment', 'biologic'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field category`);
 		}
 		this._category = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -107,7 +107,7 @@ class AllergyIntolerance extends DomainResource {
 	set criticality ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['low', 'high', 'unable-to-assess'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field criticality`);
 		}
 		this._criticality = new_value;
@@ -139,7 +139,7 @@ class AllergyIntolerance extends DomainResource {
 	set onsetDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
 		this._onsetDateTime = new_value;
@@ -189,7 +189,7 @@ class AllergyIntolerance extends DomainResource {
 	set assertedDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
 		this._assertedDate = new_value;
@@ -221,7 +221,7 @@ class AllergyIntolerance extends DomainResource {
 	set lastOccurrence ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field lastOccurrence`);
 		}
 		this._lastOccurrence = new_value;
@@ -248,25 +248,25 @@ class AllergyIntolerance extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier,
+			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
 			clinicalStatus: this._clinicalStatus,
 			verificationStatus: this._verificationStatus,
 			type: this._type,
 			category: this._category,
 			criticality: this._criticality,
-			code: this._code,
-			patient: this._patient,
+			code: this._code && this._code.toJSON(),
+			patient: this._patient && this._patient.toJSON(),
 			onsetDateTime: this._onsetDateTime,
-			onsetAge: this._onsetAge,
-			onsetPeriod: this._onsetPeriod,
-			onsetRange: this._onsetRange,
+			onsetAge: this._onsetAge && this._onsetAge.toJSON(),
+			onsetPeriod: this._onsetPeriod && this._onsetPeriod.toJSON(),
+			onsetRange: this._onsetRange && this._onsetRange.toJSON(),
 			onsetString: this._onsetString,
 			assertedDate: this._assertedDate,
-			recorder: this._recorder,
-			asserter: this._asserter,
+			recorder: this._recorder && this._recorder.toJSON(),
+			asserter: this._asserter && this._asserter.toJSON(),
 			lastOccurrence: this._lastOccurrence,
-			note: this._note,
-			reaction: this._reaction
+			note: this._note && this._note.map(v => v.toJSON()),
+			reaction: this._reaction && this._reaction.map(v => v.toJSON())
 		});
 	}
 

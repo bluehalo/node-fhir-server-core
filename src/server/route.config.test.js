@@ -3,8 +3,25 @@
 const path = require('path');
 const glob = require('glob');
 
-const ALLOWED_ARG_TYPES = ['string', 'boolean', 'number', 'date'];
-const ALLOWED_METHODS = ['get', 'post', 'put', 'delete'];
+const ALLOWED_ARG_TYPES = [
+	'string',
+	'boolean',
+	'number',
+	'date',
+	'token',
+	'uri',
+	'quantity',
+	'reference',
+	'json_string',
+	'composite'
+];
+
+const ALLOWED_METHODS = [
+	'get',
+	'post',
+	'put',
+	'delete'
+];
 
 let routeConfigs;
 
@@ -12,7 +29,7 @@ describe('Route Config Tests', () => {
 
   beforeAll(() => {
     routeConfigs = glob
-      .sync('src/server/*/*.config.js')
+      .sync('src/server/profiles/*/*.config.js')
       .map(filepath => require(path.resolve(filepath)));
   });
 
@@ -50,5 +67,23 @@ describe('Route Config Tests', () => {
 
     });
   });
+
+	test('should have a function name for all route.controllers except for metadata', () => {
+		routeConfigs.forEach((config) => {
+			// Routes must be an array
+			let { routes, routeOptions } = config;
+			// We use these to make sure each provided service module has the necessary service
+			// to enable a route, the service must have a method that matches the controller's name
+			// if the controller does not have a name, we have no way to make that determination
+			routes.forEach(route => {
+				// Ignore metadata
+				if (routeOptions && routeOptions.isMetadata) {
+					return;
+				}
+
+				expect(route.controller.name).not.toEqual('');
+			});
+		});
+	});
 
 });

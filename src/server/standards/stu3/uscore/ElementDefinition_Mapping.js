@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Mapping extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Mapping';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class ElementDefinition_Mapping extends BackboneElement {
 	set identity ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field identity`);
 		}
 		this._identity = new_value;
@@ -34,7 +34,7 @@ class ElementDefinition_Mapping extends BackboneElement {
 	set language ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field language`);
 		}
 		this._language = new_value;

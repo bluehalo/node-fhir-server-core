@@ -25,6 +25,16 @@ let parseValue = function (type, value) {
 			// replace any non word characters
 			result = validator.stripLow(xss(sanitize(value)));
 			break;
+		case 'token':
+			// strip any html tags from the query
+			// xss helps prevent html from slipping in
+			// strip a certain range of unicode characters
+			// replace any non word characters
+			result = validator.stripLow(xss(sanitize(value)));
+			break;
+		case 'json_string':
+			result = JSON.parse(value);
+			break;
 		default:
 			// Pass the value through, unknown types will fail when being validated
 			result = value;
@@ -45,6 +55,12 @@ let validateType = function (type, value) {
 		case 'string':
 			result = typeof value === 'string';
 			break;
+		case 'token':
+			result = typeof value === 'string';
+			break;
+		case 'json_string':
+			result = typeof value === 'object';
+			break;
 		case 'date':
 			result = moment(value).isValid();
 			break;
@@ -61,6 +77,12 @@ let parseParams = req => {
 	if (req.body && Object.keys(req.body).length) { Object.assign(params, req.body); }
 	if (req.params && Object.keys(req.params).length) { Object.assign(params, req.params); }
 	return params;
+};
+
+let findMatchWithName = (name = '', params = {}) => {
+	let keys = Object.getOwnPropertyNames(params);
+	let match = keys.find(key => key.startsWith(name));
+	return { field: match, value: params[match] };
 };
 
 /**
@@ -81,32 +103,31 @@ let sanitizeMiddleware = function (config) {
 		// Check each argument in the config
 		for (let i = 0; i < config.length; i++) {
 			let conf = config[i];
+			let { field, value } = findMatchWithName(conf.name, currentArgs);
 
 			// If the argument is required but not present
-			if (!currentArgs[conf.name] && conf.required) {
-				return next(errors.invalidParameter(conf.name + ' is required', req.params.version));
+			if (!value && conf.required) {
+				return next(errors.invalidParameter(conf.name + ' is required', req.params.base));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
 			// returns as NaN we can bail on it
 			try {
-				if (currentArgs[conf.name]) {
-					cleanArgs[conf.name] = parseValue(conf.type, currentArgs[conf.name]);
+				if (value) {
+					cleanArgs[field] = parseValue(conf.type, value);
 				}
 			} catch (err) {
-				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.version));
+				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
-			if (cleanArgs[conf.name] !== undefined && !validateType(conf.type, cleanArgs[conf.name])) {
-				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.version));
+			if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
+				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base));
 			}
 		}
 
-		// All is well, update params, query, or body, and move on to the next middleware/function
-		if (req.params && Object.keys(req.params).length) { req.params = cleanArgs; }
-		if (req.query && Object.keys(req.query).length) { req.query = cleanArgs; }
-		if (req.body && Object.keys(req.body).length) { req.body = cleanArgs; }
+		// Save the cleaned arguments on the request for later use, we must only use these later on
+		req.sanitized_args = cleanArgs;
 		next();
 	};
 };

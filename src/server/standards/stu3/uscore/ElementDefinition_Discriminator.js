@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Discriminator extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'ElementDefinition_Discriminator';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class ElementDefinition_Discriminator extends BackboneElement {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['value', 'exists', 'pattern', 'type', 'profile'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;

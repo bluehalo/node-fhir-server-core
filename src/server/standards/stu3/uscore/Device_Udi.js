@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Device_Udi extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Device_Udi';
 		Object.assign(this, opts);
 	}
@@ -74,7 +74,7 @@ class Device_Udi extends BackboneElement {
 	set entryType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['barcode', 'rfid', 'manual', 'card', 'self-reported', 'unknown'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field entryType`);
 		}
 		this._entryType = new_value;

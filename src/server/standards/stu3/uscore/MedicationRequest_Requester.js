@@ -4,7 +4,7 @@ const Reference = require('./Reference');
 class MedicationRequest_Requester extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'MedicationRequest_Requester';
 		Object.assign(this, opts);
 	}
@@ -33,8 +33,8 @@ class MedicationRequest_Requester extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			agent: this._agent,
-			onBehalfOf: this._onBehalfOf
+			agent: this._agent && this._agent.toJSON(),
+			onBehalfOf: this._onBehalfOf && this._onBehalfOf.toJSON()
 		});
 	}
 

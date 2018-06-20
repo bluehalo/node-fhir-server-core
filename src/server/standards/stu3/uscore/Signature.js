@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Signature extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Signature';
 		Object.assign(this, opts);
 	}
@@ -76,7 +76,7 @@ class Signature extends Element {
 	set contentType ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field contentType`);
 		}
 		this._contentType = new_value;
@@ -93,12 +93,12 @@ class Signature extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
+			type: this._type && this._type.map(v => v.toJSON()),
 			when: this._when,
 			whoUri: this._whoUri,
-			whoReference: this._whoReference,
+			whoReference: this._whoReference && this._whoReference.toJSON(),
 			onBehalfOfUri: this._onBehalfOfUri,
-			onBehalfOfReference: this._onBehalfOfReference,
+			onBehalfOfReference: this._onBehalfOfReference && this._onBehalfOfReference.toJSON(),
 			contentType: this._contentType,
 			blob: this._blob
 		});

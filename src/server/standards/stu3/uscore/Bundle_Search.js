@@ -3,7 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Bundle_Search extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Bundle_Search';
 		Object.assign(this, opts);
 	}
@@ -20,7 +20,7 @@ class Bundle_Search extends BackboneElement {
 	set mode ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['match', 'include', 'outcome'];
-		if ( allowed_values.indexOf(new_value) === -1 ) {
+		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field mode`);
 		}
 		this._mode = new_value;
@@ -34,7 +34,7 @@ class Bundle_Search extends BackboneElement {
 	set score ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field score`);
 		}
 		this._score = new_value;

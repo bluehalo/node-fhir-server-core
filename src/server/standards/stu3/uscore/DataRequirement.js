@@ -5,7 +5,7 @@ const DataRequirement_DateFilter = require('./DataRequirement_DateFilter');
 class DataRequirement extends Element {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'DataRequirement';
 		Object.assign(this, opts);
 	}
@@ -22,7 +22,7 @@ class DataRequirement extends Element {
 	set type ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( !pattern.test(new_value) ) {
+		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field type`);
 		}
 		this._type = new_value;
@@ -69,8 +69,8 @@ class DataRequirement extends Element {
 			type: this._type,
 			profile: this._profile,
 			mustSupport: this._mustSupport,
-			codeFilter: this._codeFilter,
-			dateFilter: this._dateFilter
+			codeFilter: this._codeFilter && this._codeFilter.map(v => v.toJSON()),
+			dateFilter: this._dateFilter && this._dateFilter.map(v => v.toJSON())
 		});
 	}
 

@@ -5,7 +5,7 @@ const Reference = require('./Reference');
 class Provenance_Agent extends BackboneElement {
 
 	constructor ( opts ) {
-		super();
+		super( opts );
 		this._resourceType = 'Provenance_Agent';
 		Object.assign(this, opts);
 	}
@@ -70,12 +70,12 @@ class Provenance_Agent extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role,
+			role: this._role && this._role.map(v => v.toJSON()),
 			whoUri: this._whoUri,
-			whoReference: this._whoReference,
+			whoReference: this._whoReference && this._whoReference.toJSON(),
 			onBehalfOfUri: this._onBehalfOfUri,
-			onBehalfOfReference: this._onBehalfOfReference,
-			relatedAgentType: this._relatedAgentType
+			onBehalfOfReference: this._onBehalfOfReference && this._onBehalfOfReference.toJSON(),
+			relatedAgentType: this._relatedAgentType && this._relatedAgentType.toJSON()
 		});
 	}
 
