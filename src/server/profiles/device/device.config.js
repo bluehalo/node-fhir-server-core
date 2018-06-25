@@ -2,8 +2,7 @@ const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./device.arguments');
-const controller = require('./device.controller');
-
+const controller = require('./{name}.controller');
 
 let write_only_scopes = write_scopes('Device');
 let read_only_scopes = read_scopes('Device');
@@ -32,6 +31,17 @@ let routes = [
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
+	},
+	{
+		type: 'get',
+		path: '/:base/device/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
 	},
 	{
 		type: 'get',

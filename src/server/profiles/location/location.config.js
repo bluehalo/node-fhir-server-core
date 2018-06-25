@@ -2,7 +2,7 @@ const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./location.arguments');
-const controller = require('./location.controller');
+const controller = require('./{name}.controller');
 
 let write_only_scopes = write_scopes('Location');
 let read_only_scopes = read_scopes('Location');
@@ -21,7 +21,6 @@ let routes = [
 	{
 		type: 'get',
 		path: '/:base/location',
-		corsOptions: {methods: ['GET']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
@@ -29,10 +28,20 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:base/location/_search',
-		corsOptions: {methods: ['POST']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
+	},
+	{
+		type: 'get',
+		path: '/:base/location/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
 	},
 	{
 		type: 'get',

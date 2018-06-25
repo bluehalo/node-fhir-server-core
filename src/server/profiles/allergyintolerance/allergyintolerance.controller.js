@@ -3,20 +3,60 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
+/**
+* Helper for getting the correct constructor for the various allergyintolerance types
+*/
+let getResourceConstructor = (base, resourceType) => {
+	let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+	let Results = require(resolveFromVersion(base, 'uscore/Results'));
+	let SmokingStatus = require(resolveFromVersion(base, 'uscore/SmokingStatus'));
+
+	switch (resourceType) {
+		case Results.__resourceType:
+			return Results;
+		case SmokingStatus.__resourceType:
+			return SmokingStatus;
+		default:
+			return AllergyIntolerance;
+	}
+};
+
 module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+		// Get a version specific bundle
+		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
 
 		return service.search(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, AllergyIntolerance, results, {
-					resourceUrl: config.auth.resourceServer
-				})
-			)
+			.then((allergyintolerances) => {
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
+
+				if (allergyintolerances) {
+					for (let resource of allergyintolerances) {
+						if (!req.allergyintolerance || req.allergyintolerance === resource.allergyintoleranceId) {
+							// Get a version specific allergyintolerance for the correct type of allergyintolerance
+							let AllergyIntolerance = getResourceConstructor(base, resource.resourceType);
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							entries.push({
+								search: { mode: 'match' },
+								resource: new AllergyIntolerance(resource),
+								fullUrl: `${config.auth.resourceServer}/$/AllergyIntolerance/${resource.id}`
+							});
+						}
+					}
+				}
+
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
+			})
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
@@ -31,13 +71,12 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, AllergyIntolerance, results)
-			)
+			.then((allergyintolerance) => {
+				let Resource = getResourceConstructor(base, allergyintolerance.resourceType);
+				responseUtils.handleSingleReadResponse(res, next, base, Resource, allergyintolerance);
+			})
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
@@ -46,29 +85,29 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for creating AllergyIntolerance
+* @description Controller for creating a allergyintolerance
 */
 module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+		// Get a version specific allergyintolerance
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${AllergyIntolerance.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new AllergyIntolerance(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		// Create a new allergyintolerance resource and pass it to the service
+		let allergyintolerance = new Resource(resource_body);
+		let args = { id: resource_id, resource: allergyintolerance };
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, AllergyIntolerance.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -78,29 +117,29 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for updating/creating AllergyIntolerance. If the AllergyIntolerance does not exist, it should be updated
+* @description Controller for updating/creating a allergyintolerance. If the allergyintolerance does not exist, it should be updated
 */
 module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+		// Get a version specific allergyintolerance
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (AllergyIntolerance.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${AllergyIntolerance.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new AllergyIntolerance(resource_body);
-		let args = { id, resource: new_resource };
+		// Create a new allergyintolerance resource and pass it to the service
+		let allergyintolerance = new Resource(resource_body);
+		let args = { id, resource: allergyintolerance };
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, AllergyIntolerance.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -110,7 +149,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for deleting an AllergyIntolerance.
+* @description Controller for deleting an allergyintolerance resource.
 */
 module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
@@ -125,6 +164,28 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
+			});
+	};
+};
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, version_id} = req.sanitized_args;
+
+		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, AllergyIntolerance, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
 			});
 	};
 };
