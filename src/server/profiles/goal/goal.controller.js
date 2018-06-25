@@ -9,7 +9,7 @@ const errors = require('../../utils/error.utils');
 let getResourceConstructor = (base) => {
 	let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
 	return AllergyIntolerance;
-}
+};
 
 /**
  * @description Controller to get a resource by history version id
