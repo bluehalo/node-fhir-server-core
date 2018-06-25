@@ -8,19 +8,37 @@ const errors = require('../../utils/error.utils');
 */
 let getResourceConstructor = (base, resourceType) => {
 	let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
-	let Results = require(resolveFromVersion(base, 'uscore/Results'));
-	let SmokingStatus = require(resolveFromVersion(base, 'uscore/SmokingStatus'));
 
-	switch (resourceType) {
-		case Results.__resourceType:
-			return Results;
-		case SmokingStatus.__resourceType:
-			return SmokingStatus;
-		default:
-			return AllergyIntolerance;
-	}
+	//if there are multiple resource extensions, use a switch resourceType statement (ex: Patient profile)
+	return AllergyIntolerance;
 };
 
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, version_id} = req.sanitized_args;
+
+		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, AllergyIntolerance, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+
+/**
+ * @description Controller to search allergyintolerance
+ */
 module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
@@ -65,7 +83,9 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 
 };
 
-
+/**
+ * @description Controller to searchById allergyintolerance
+ */
 module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
@@ -164,28 +184,6 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
-			});
-	};
-};
-
-/**
- * @description Controller for getting a resource by history version id
- */
-module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base, version_id} = req.sanitized_args;
-
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
-
-		return service.searchByVersionId(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleSingleVReadResponse(res, next, base, AllergyIntolerance, results, version_id)
-			)
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
 			});
 	};
 };

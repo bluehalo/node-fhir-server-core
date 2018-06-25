@@ -11,6 +11,12 @@ module.exports.search = (args, logger) => new Promise((resolve, reject) => {
 	reject(new Error(message));
 });
 
+module.exports.searchByVersionId = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchByVersionId\' in AllergyIntolerance service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
 module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'searchById\' in AllergyIntolerance service.';
 	logger.info(message);
@@ -31,12 +37,6 @@ module.exports.update = (args, logger) => new Promise((resolve, reject) => {
 
 module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 	let message = 'Calling mock service. Did you forget to implement \'remove\' in AllergyIntolerance service.';
-	logger.info(message);
-	reject(new Error(message));
-});
-
-module.exports.searchByVersionId = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'searchByVersionId\' in AllergyIntolerance service.';
 	logger.info(message);
 	reject(new Error(message));
 });
