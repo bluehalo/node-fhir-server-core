@@ -3,42 +3,100 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
+/**
+* Helper for getting the correct constructor for the various organization types
+*/
+let getResourceConstructor = (base, resourceType) => {
+	let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+
+	//if there are multiple resource extensions, use a switch resourceType statement (ex: Patient profile)
+	return Organization;
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific organization & bundle
+		let { base, version_id} = req.sanitized_args;
+
 		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Organization, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, Organization, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
-
 };
 
 
+/**
+ * @description Controller to search organization
+ */
+module.exports.search = function search ({ profile, logger, config, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific bundle
+		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
+
+		return service.search(req.sanitized_args, logger)
+			.then((organizations) => {
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
+
+				if (organizations) {
+					for (let resource of organizations) {
+						if (!req.organization || req.organization === resource.organizationId) {
+							// Get a version specific organization for the correct type of organization
+							let Organization = getResourceConstructor(base, resource.resourceType);
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							entries.push({
+								search: { mode: 'match' },
+								resource: new Organization(resource),
+								fullUrl: `${config.auth.resourceServer}/$/Organization/${resource.id}`
+							});
+						}
+					}
+				}
+
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+
+};
+
+/**
+ * @description Controller to searchById organization
+ */
 module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Organization, results)
-			)
+			.then((organization) => {
+				let Resource = getResourceConstructor(base, organization.resourceType);
+				responseUtils.handleSingleReadResponse(res, next, base, Resource, organization);
+			})
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
@@ -55,21 +113,21 @@ module.exports.create = function create ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (Organization.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Organization.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new organization resource and pass it to the service
-		let organization = new Organization(resource_body);
+		let organization = new Resource(resource_body);
 		let args = { id: resource_id, resource: organization };
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Organization.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -87,21 +145,21 @@ module.exports.update = function update ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (Organization.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Organization.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new organization resource and pass it to the service
-		let organization = new Organization(resource_body);
+		let organization = new Resource(resource_body);
 		let args = { id, resource: organization };
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Organization.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);

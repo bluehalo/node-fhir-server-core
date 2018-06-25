@@ -3,42 +3,100 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
+/**
+* Helper for getting the correct constructor for the various device types
+*/
+let getResourceConstructor = (base, resourceType) => {
+	let Device = require(resolveFromVersion(base, 'uscore/Device'));
+
+	//if there are multiple resource extensions, use a switch resourceType statement (ex: Patient profile)
+	return Device;
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific device
+		let { base, version_id} = req.sanitized_args;
+
 		let Device = require(resolveFromVersion(base, 'uscore/Device'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Device, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, Device, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
-
 };
 
 
+/**
+ * @description Controller to search device
+ */
+module.exports.search = function search ({ profile, logger, config, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific bundle
+		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
+
+		return service.search(req.sanitized_args, logger)
+			.then((devices) => {
+				let results = new Bundle({ type: 'searchset' });
+				let entries = [];
+
+				if (devices) {
+					for (let resource of devices) {
+						if (!req.device || req.device === resource.deviceId) {
+							// Get a version specific device for the correct type of device
+							let Device = getResourceConstructor(base, resource.resourceType);
+							// Modes:
+							// match - This resource matched the search specification.
+							// include - This resource is returned because it is referred to from another resource in the search set.
+							// outcome - An OperationOutcome that provides additional information about the processing of a search.
+							entries.push({
+								search: { mode: 'match' },
+								resource: new Device(resource),
+								fullUrl: `${config.auth.resourceServer}/$/Device/${resource.id}`
+							});
+						}
+					}
+				}
+
+				results.entry = entries;
+				results.total = entries.length;
+
+				res.status(200).json(results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+
+};
+
+/**
+ * @description Controller to searchById device
+ */
 module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific device
-		let Device = require(resolveFromVersion(base, 'uscore/Device'));
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Device, results)
-			)
+			.then((device) => {
+				let Resource = getResourceConstructor(base, device.resourceType);
+				responseUtils.handleSingleReadResponse(res, next, base, Resource, device);
+			})
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
@@ -55,21 +113,21 @@ module.exports.create = function create ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific device
-		let Device = require(resolveFromVersion(base, 'uscore/Device'));
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (Device.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Device.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new device resource and pass it to the service
-		let device = new Device(resource_body);
+		let device = new Resource(resource_body);
 		let args = { id: resource_id, resource: device };
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Device.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -87,21 +145,21 @@ module.exports.update = function update ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific device
-		let Device = require(resolveFromVersion(base, 'uscore/Device'));
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
-		if (Device.__resourceType !== resource_body.resourceType) {
+		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Device.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new device resource and pass it to the service
-		let device = new Device(resource_body);
+		let device = new Resource(resource_body);
 		let args = { id, resource: device };
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Device.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -111,7 +169,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for deleting a device resource.
+* @description Controller for deleting an device resource.
 */
 module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
