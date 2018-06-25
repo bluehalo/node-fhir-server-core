@@ -2,7 +2,7 @@ const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./careplan.arguments');
-const controller = require('./{name}.controller');
+const controller = require('./careplan.controller');
 
 let write_only_scopes = write_scopes('CarePlan');
 let read_only_scopes = read_scopes('CarePlan');
