@@ -39,7 +39,7 @@ module.exports.search = function search({profile, logger, config, app}) {
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse(res, base, Patient, results, {
+				responseUtils.handleBundleReadResponse(res, base, Organization, results, {
 					resourceUrl: config.auth.resourceServer,
 				})
 			)
@@ -59,10 +59,11 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 
+		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+
 		return service.searchById(req.sanitized_args, logger)
-			.then((organization) => {
-				let Resource = getResourceConstructor(base, organization.resourceType);
-				responseUtils.handleSingleReadResponse(res, next, base, Resource, organization);
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, Organization, results);
 			})
 			.catch((err) => {
 				logger.error(err);
@@ -80,11 +81,11 @@ module.exports.create = function create({profile, logger, app}) {
 	return (req, res, next) => {
 		let {base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
-		let Resource = getResourceConstructor(base, resource_body.resourceType);
+		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
 		// Validate the resource type before creating it
-		if (Resource.__resourceType !== resource_body.resourceType) {
+		if (Organization.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Organization.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
@@ -94,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Organization.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -112,11 +113,11 @@ module.exports.update = function update({profile, logger, app}) {
 	return (req, res, next) => {
 		let {base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific organization
-		let Resource = getResourceConstructor(base, resource_body.resourceType);
+		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
 		// Validate the resource type before creating it
-		if (Resource.__resourceType !== resource_body.resourceType) {
+		if (Organization.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Organization.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
@@ -126,7 +127,7 @@ module.exports.update = function update({profile, logger, app}) {
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Organization.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
