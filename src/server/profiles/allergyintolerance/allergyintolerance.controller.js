@@ -156,4 +156,4 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
-};
+}

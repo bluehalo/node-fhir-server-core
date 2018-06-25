@@ -4,16 +4,6 @@ const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 /**
-* Helper for getting the correct constructor for the various practitioner types
-*/
-let getResourceConstructor = (base, resourceType) => {
-	let Practitioner = require(resolveFromVersion(base, 'uscore/Practitioner'));
-
-	//if there are multiple resource extensions, use a switch resourceType statement (ex: Patient profile)
-	return Practitioner;
-};
-
-/**
  * @description Controller to get a resource by history version id
  */
 module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
@@ -44,43 +34,23 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific bundle
-		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
 
-		return service.search(req.sanitized_args, logger)
-			.then((practitioners) => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
+		return (req, res, next) => {
+			let { base } = req.sanitized_args;
 
-				if (practitioners) {
-					for (let resource of practitioners) {
-						if (!req.practitioner || req.practitioner === resource.practitionerId) {
-							// Get a version specific practitioner for the correct type of practitioner
-							let Practitioner = getResourceConstructor(base, resource.resourceType);
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Practitioner(resource),
-								fullUrl: `${config.auth.resourceServer}/$/Practitioner/${resource.id}`
-							});
-						}
-					}
-				}
+			let Practitioner = require(resolveFromVersion(base, 'uscore/Practitioner'));
 
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
-			});
-	};
-
+			return service.search(req.sanitized_args, logger)
+				.then((results) =>
+					responseUtils.handleBundleReadResponse( res, base, Patient, results, {
+						resourceUrl: config.auth.resourceServer,
+					})
+				)
+				.catch((err) => {
+					logger.error(err);
+					next(errors.internal(err.message, base));
+				});
+		};
 };
 
 /**
@@ -186,4 +156,4 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
-};
+}
