@@ -33,10 +33,10 @@ module.exports.search = function search({profile, logger, config, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return (req, res, next) => {
-			let  = req.sanitized_args;
+			let { base } = req.sanitized_args;
 
 			let Goal = require(resolveFromVersion(base, 'uscore/Goal'));
 
@@ -61,7 +61,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((goal) => {
@@ -146,7 +146,7 @@ module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
