@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
-const { resolveFromVersion } = require('../../utils/resolve.utils');
+const  = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
@@ -33,24 +33,20 @@ module.exports.search = function search({profile, logger, config, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let  = req.sanitized_args;
 
-		return (req, res, next) => {
-			let { base } = req.sanitized_args;
+		let Device = require(resolveFromVersion(base, 'uscore/Device'));
 
-			let Device = require(resolveFromVersion(base, 'uscore/Device'));
-
-			return service.search(req.sanitized_args, logger)
-				.then((results) =>
-					responseUtils.handleBundleReadResponse(res, base, Patient, results, {
-						resourceUrl: config.auth.resourceServer,
-					})
-				)
-				.catch((err) => {
-					logger.error(err);
-					next(errors.internal(err.message, base));
-				});
-		};
+		return service.search(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse(res, base, Patient, results, {
+					resourceUrl: config.auth.resourceServer,
+				})
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
 	};
 };
 
@@ -61,7 +57,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let  = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((device) => {
@@ -146,7 +142,7 @@ module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let  = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
