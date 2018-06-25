@@ -3,40 +3,51 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	let AllergyIntolerance = require(resolveFromVersion(base, 'base/AllergyIntolerance'));
+	return AllergyIntolerance;
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(base, 'base/ExpansionProfile'));
+		let {base, version_id} = req.sanitized_args;
+		let ExpansionProfile = getResourceConstructor(base);
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, ExpansionProfile, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, ExpansionProfile, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
 };
 
 
-module.exports.searchById = function searchById ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Controller to search expansionprofile
+ */
+module.exports.search = function search({profile, logger, config, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(base, 'base/ExpansionProfile'));
+		let ExpansionProfile = getResourceConstructor(base);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, ExpansionProfile, results)
+				responseUtils.handleBundleReadResponse(res, base, ExpansionProfile, results, {
+					resourceUrl: config.auth.resourceServer,
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -46,15 +57,35 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for creating ExpansionProfile
+ * @description Controller to searchById expansionprofile
  */
-module.exports.create = function create ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.searchById = function searchById({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(base, 'base/ExpansionProfile'));
+		let { base } = req.sanitized_args;
+		let ExpansionProfile = getResourceConstructor(base);
+
+		return service.searchById(req.sanitized_args, logger)
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, ExpansionProfile, results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating a expansionprofile
+ */
+module.exports.create = function create({profile, logger, app}) {
+	let {serviceModule: service} = profile;
+
+	return (req, res, next) => {
+		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let ExpansionProfile = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (ExpansionProfile.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -62,9 +93,9 @@ module.exports.create = function create ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new ExpansionProfile(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		// Create a new expansionprofile resource and pass it to the service
+		let expansionprofile = new ExpansionProfile(resource_body);
+		let args = {id: resource_id, resource: expansionprofile};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
@@ -78,15 +109,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for updating/creating ExpansionProfile. If the ExpansionProfile does not exist, it should be updated
+ * @description Controller for updating/creating a expansionprofile. If the expansionprofile does not exist, it should be updated
  */
-module.exports.update = function update ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.update = function update({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let ExpansionProfile = require(resolveFromVersion(base, 'base/ExpansionProfile'));
+		let {base, id, resource_body = {}} = req.sanitized_args;
+		let ExpansionProfile = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (ExpansionProfile.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -94,9 +124,9 @@ module.exports.update = function update ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new ExpansionProfile(resource_body);
-		let args = { id, resource: new_resource };
+		// Create a new expansionprofile resource and pass it to the service
+		let expansionprofile = new ExpansionProfile(resource_body);
+		let args = {id, resource: expansionprofile};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
@@ -110,10 +140,10 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for deleting an ExpansionProfile.
+ * @description Controller for deleting an expansionprofile resource.
  */
-module.exports.remove = function remove ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.remove = function remove({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;

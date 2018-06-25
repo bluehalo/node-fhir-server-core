@@ -6,31 +6,37 @@ module.exports.count = (args, logger) => new Promise((resolve, reject) => {
 });
 
 module.exports.search = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'search\' in EndPoint service.';
+	let message = 'Calling mock service. Did you forget to implement \'search\' in Endpoint service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.searchByVersionId = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'searchByVersionId\' in Endpoint service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
 module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'searchById\' in EndPoint service.';
+	let message = 'Calling mock service. Did you forget to implement \'searchById\' in Endpoint service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
 module.exports.create = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'create\' in EndPoint service.';
+	let message = 'Calling mock service. Did you forget to implement \'create\' in Endpoint service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
 module.exports.update = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'update\' in EndPoint service.';
+	let message = 'Calling mock service. Did you forget to implement \'update\' in Endpoint service.';
 	logger.info(message);
 	reject(new Error(message));
 });
 
 module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'remove\' in EndPoint service.';
+	let message = 'Calling mock service. Did you forget to implement \'remove\' in Endpoint service.';
 	logger.info(message);
 	reject(new Error(message));
 });

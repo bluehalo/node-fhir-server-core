@@ -3,40 +3,51 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	let AllergyIntolerance = require(resolveFromVersion(base, 'base/AllergyIntolerance'));
+	return AllergyIntolerance;
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
+		let {base, version_id} = req.sanitized_args;
+		let TestReport = getResourceConstructor(base);
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, TestReport, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, TestReport, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
 };
 
 
-module.exports.searchById = function searchById ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Controller to search testreport
+ */
+module.exports.search = function search({profile, logger, config, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
+		let TestReport = getResourceConstructor(base);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, TestReport, results)
+				responseUtils.handleBundleReadResponse(res, base, TestReport, results, {
+					resourceUrl: config.auth.resourceServer,
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -46,15 +57,35 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for creating TestReport
+ * @description Controller to searchById testreport
  */
-module.exports.create = function create ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.searchById = function searchById({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
+		let { base } = req.sanitized_args;
+		let TestReport = getResourceConstructor(base);
+
+		return service.searchById(req.sanitized_args, logger)
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, TestReport, results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating a testreport
+ */
+module.exports.create = function create({profile, logger, app}) {
+	let {serviceModule: service} = profile;
+
+	return (req, res, next) => {
+		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let TestReport = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (TestReport.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -62,9 +93,9 @@ module.exports.create = function create ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new TestReport(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		// Create a new testreport resource and pass it to the service
+		let testreport = new TestReport(resource_body);
+		let args = {id: resource_id, resource: testreport};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
@@ -78,15 +109,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for updating/creating TestReport. If the TestReport does not exist, it should be updated
+ * @description Controller for updating/creating a testreport. If the testreport does not exist, it should be updated
  */
-module.exports.update = function update ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.update = function update({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
+		let {base, id, resource_body = {}} = req.sanitized_args;
+		let TestReport = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (TestReport.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -94,9 +124,9 @@ module.exports.update = function update ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new TestReport(resource_body);
-		let args = { id, resource: new_resource };
+		// Create a new testreport resource and pass it to the service
+		let testreport = new TestReport(resource_body);
+		let args = {id, resource: testreport};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
@@ -110,10 +140,10 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for deleting an TestReport.
+ * @description Controller for deleting an testreport resource.
  */
-module.exports.remove = function remove ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.remove = function remove({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;

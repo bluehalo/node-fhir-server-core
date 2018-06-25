@@ -4,8 +4,8 @@ const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./endpoint.arguments');
 const controller = require('./endpoint.controller');
 
-let write_only_scopes = write_scopes('EndPoint');
-let read_only_scopes = read_scopes('EndPoint');
+let write_only_scopes = write_scopes('Endpoint');
+let read_only_scopes = read_scopes('Endpoint');
 
 let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -31,6 +31,17 @@ let routes = [
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
+	},
+	{
+		type: 'get',
+		path: '/:base/endpoint/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
 	},
 	{
 		type: 'get',
@@ -79,7 +90,7 @@ let routes = [
 
 /**
  * @name exports
- * @summary EndPoint config
+ * @summary Endpoint config
  */
 module.exports = {
 	routeOptions: {

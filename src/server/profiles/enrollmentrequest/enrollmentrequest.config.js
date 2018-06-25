@@ -34,6 +34,17 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/enrollmentrequest/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
+	},
+	{
+		type: 'get',
 		path: '/:base/enrollmentrequest/:id',
 		args: [
 			route_args.BASE,
