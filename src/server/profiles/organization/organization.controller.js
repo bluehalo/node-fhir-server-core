@@ -7,8 +7,8 @@ const errors = require('../../utils/error.utils');
  * @description Construct a resource with base/uscore path
  */
 let getResourceConstructor = (base) => {
-	let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
-	return AllergyIntolerance;
+	let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+	return Organization;
 };
 
 /**
