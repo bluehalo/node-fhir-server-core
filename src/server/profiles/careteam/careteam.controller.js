@@ -90,7 +90,7 @@ module.exports.create = function create({profile, logger, app}) {
 			));
 		}
 		// Create a new careteam resource and pass it to the service
-		let careteam = new Resource(resource_body);
+		let careteam = new CareTeam(resource_body);
 		let args = {id: resource_id, resource: careteam};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
@@ -122,7 +122,7 @@ module.exports.update = function update({profile, logger, app}) {
 			));
 		}
 		// Create a new careteam resource and pass it to the service
-		let careteam = new Resource(resource_body);
+		let careteam = new CareTeam(resource_body);
 		let args = {id, resource: careteam};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)

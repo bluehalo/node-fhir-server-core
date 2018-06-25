@@ -90,7 +90,7 @@ module.exports.create = function create({profile, logger, app}) {
 			));
 		}
 		// Create a new practitioner resource and pass it to the service
-		let practitioner = new Resource(resource_body);
+		let practitioner = new Practitioner(resource_body);
 		let args = {id: resource_id, resource: practitioner};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
@@ -122,7 +122,7 @@ module.exports.update = function update({profile, logger, app}) {
 			));
 		}
 		// Create a new practitioner resource and pass it to the service
-		let practitioner = new Resource(resource_body);
+		let practitioner = new Practitioner(resource_body);
 		let args = {id, resource: practitioner};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)

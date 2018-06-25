@@ -90,7 +90,7 @@ module.exports.create = function create({profile, logger, app}) {
 			));
 		}
 		// Create a new diagnosticreport resource and pass it to the service
-		let diagnosticreport = new Resource(resource_body);
+		let diagnosticreport = new DiagnosticReport(resource_body);
 		let args = {id: resource_id, resource: diagnosticreport};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
@@ -122,7 +122,7 @@ module.exports.update = function update({profile, logger, app}) {
 			));
 		}
 		// Create a new diagnosticreport resource and pass it to the service
-		let diagnosticreport = new Resource(resource_body);
+		let diagnosticreport = new DiagnosticReport(resource_body);
 		let args = {id, resource: diagnosticreport};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
