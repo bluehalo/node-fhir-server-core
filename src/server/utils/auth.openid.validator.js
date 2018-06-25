@@ -58,7 +58,7 @@ function getValidScopes(scopes, allowedScopes) {
 module.exports.validate = (allowedScopes, logger, config) => {
 
 	return async (req, res, next) => {
-		let version = req.params.version;
+		let version = req.params.base;
 
 		// get bearer token
 		const bearerToken = parseBearerToken(req);

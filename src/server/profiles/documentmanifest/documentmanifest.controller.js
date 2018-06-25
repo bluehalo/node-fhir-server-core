@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getDocumentManifest = function getDocumentManifest ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
 
-		return service.getDocumentManifest(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, DocumentManifest, results, {
+				responseUtils.handleBundleReadResponse( res, base, DocumentManifest, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getDocumentManifestById = function getDocumentManifestById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
 
-		return service.getDocumentManifestById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, DocumentManifest, results)
+				responseUtils.handleSingleReadResponse(res, next, base, DocumentManifest, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getDocumentManifestById = function getDocumentManifestById ({ pro
 /**
  * @description Controller for creating DocumentManifest
  */
-module.exports.createDocumentManifest = function createDocumentManifest ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
 		// Validate the resource type before creating it
 		if (DocumentManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${DocumentManifest.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new DocumentManifest(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createDocumentManifest(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, DocumentManifest.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, DocumentManifest.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createDocumentManifest = function createDocumentManifest ({ profi
 /**
  * @description Controller for updating/creating DocumentManifest. If the DocumentManifest does not exist, it should be updated
  */
-module.exports.updateDocumentManifest = function updateDocumentManifest ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
 		// Validate the resource type before creating it
 		if (DocumentManifest.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${DocumentManifest.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new DocumentManifest(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateDocumentManifest(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, DocumentManifest.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, DocumentManifest.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateDocumentManifest = function updateDocumentManifest ({ profi
 /**
  * @description Controller for deleting an DocumentManifest.
  */
-module.exports.deleteDocumentManifest = function deleteDocumentManifest ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteDocumentManifest(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

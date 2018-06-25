@@ -73,18 +73,18 @@ module.exports = {
 		name: 'requester',
 		type: 'reference',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#medicationrequest',
-		documentation: ''
+		documentation: undefined
 	},
 	STATUS: {
 		name: 'status',
 		type: 'token',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#medicationrequest',
-		documentation: ''
+		documentation: undefined
 	},
 	SUBJECT: {
 		name: 'subject',
 		type: 'reference',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#medicationrequest',
-		documentation: ''
+		documentation: undefined
 	}
 };

@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/operationdefinition',
+		path: '/:base/operationdefinition',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getOperationDefinition
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/operationdefinition/_search',
+		path: '/:base/operationdefinition/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getOperationDefinition
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/operationdefinition/:id',
+		path: '/:base/operationdefinition/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getOperationDefinitionById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/operationdefinition',
+		path: '/:base/operationdefinition',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createOperationDefinition
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/operationdefinition/:id',
+		path: '/:base/operationdefinition/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateOperationDefinition
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/operationdefinition/:id',
+		path: '/:base/operationdefinition/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteOperationDefinition
+		controller: controller.remove
 	}
 ];
 

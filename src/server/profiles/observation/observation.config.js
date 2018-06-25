@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/observation',
+		path: '/:base/observation',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getObservation
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/observation/_search',
+		path: '/:base/observation/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getObservation
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/observation/:id',
+		path: '/:base/observation/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getObservationById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/observation',
+		path: '/:base/observation',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createObservation
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/observation/:id',
+		path: '/:base/observation/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateObservation
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/observation/:id',
+		path: '/:base/observation/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteObservation
+		controller: controller.remove
 	}
 ];
 

@@ -32,16 +32,14 @@ npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
 Once installed, the server can be required in the application.
 
 ```javascript
-const { VERSIONS } = require('@asymmetrik/node-fhir-server-core/src/constants');
-const fhirServerCore = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const { VERSIONS } = FHIRServer.constants;
 
 /**
-* The configurations below are required and the server
-* will not run unless you have specified a server.port
-* and at least one valid profile configuration
+* The server will not run unless you have specified
+* at least one valid profile configuration
 */
 const config = {
-	server: { port: 3000 },
 	profiles: {
 		patient: {
 			service: path.resolve('./profiles/patient/patient.service'),
@@ -50,21 +48,13 @@ const config = {
 	}
 };
 
-/**
-* fhirServerCore returns a promise so you can use async/await
-* if you like, or just use a normal promise like so:
-*
-* fhirServerCore(config)
-* 	.then(server => server.logger.info('success'))
-* 	.catch(err => console.error(err));
-*/
-let main = async function () {
-	// If the app fails to start, log the error
-	let server = await fhirServerCore(config).catch(console.error);
-	
-	if (server) {
-		server.logger.info(`FHIR Server it at http://localhost:${config.port}`);
-	}
+let main = function () {
+	let server = FHIRServer.initialize(config);
+	server.logger.info('FHIR Server successfully validated.');
+	// Start our server
+	server.listen(3000, () =>
+		server.logger.info('FHIR Server listening on localhost:' + 3000)
+	);
 };
 
 main();

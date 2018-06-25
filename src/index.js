@@ -1,19 +1,37 @@
 const Server = require('./server/server');
+const constants = require('./constants');
 
 /**
  * @name exports
- * @description Export a function to generate a FHIR compatible server
- * @param {Object} config - FHIR Server configuration object
+ * @description Export the server and some convenience methods for building a FHIR server
  */
-module.exports = (config) => new Promise((resolve, reject) => {
-	let server;
-	// Create our FHIR server
-	try {
-		server = new Server(config);
-	} catch (err) {
-		reject(err);
-	}
+module.exports = {
 
-	// Start our server
-	return server.start().then(resolve).catch(reject);
-});
+	/**
+	* @description Export constants so users can have access to these
+	*/
+	constants: constants,
+
+	/**
+	* @description Export the server class so someone can build it themselves. This gives them
+	* much greater flexibility on ordering things and adding their own components/middleware to
+	* the server. When using this method, the user should consult the documentation and use all the same
+	* setup methods the default implementation uses.
+	*/
+	Server: Server,
+
+	/**
+	* @description Initialize is useful for building a server with all the defaults
+	* @param {Object} config - FHIR Server configuration object
+	* @return {Server}
+	*/
+	initialize: config => new Server(config)
+		.configureMiddleware()
+		.configureSession()
+		.configureHelmet()
+		.configurePassport()
+		.setPublicDirectory()
+		.setProfileRoutes()
+		.setErrorRoutes()
+
+};

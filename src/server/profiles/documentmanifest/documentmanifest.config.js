@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/documentmanifest',
+		path: '/:base/documentmanifest',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifest
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/documentmanifest/_search',
+		path: '/:base/documentmanifest/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifest
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/documentmanifest/:id',
+		path: '/:base/documentmanifest/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getDocumentManifestById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/documentmanifest',
+		path: '/:base/documentmanifest',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createDocumentManifest
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/documentmanifest/:id',
+		path: '/:base/documentmanifest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateDocumentManifest
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/documentmanifest/:id',
+		path: '/:base/documentmanifest/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteDocumentManifest
+		controller: controller.remove
 	}
 ];
 

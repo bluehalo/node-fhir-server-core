@@ -7,6 +7,11 @@ const request = require('superagent');
  */
 module.exports.strategy = new Strategy(
 	function(token, done) {
+
+		if (!process.env.introspectionUrl) {
+			return done(new Error('Invalid introspection endpoint.'));
+		}
+
 		request
 		.post(process.env.introspectionUrl)
 		.set('content-type', 'application/x-www-form-urlencoded')

@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getClaimResponse = function getClaimResponse ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let ClaimResponse = require(resolveFromVersion(version, 'base/ClaimResponse'));
+		let ClaimResponse = require(resolveFromVersion(base, 'base/ClaimResponse'));
 
-		return service.getClaimResponse(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, ClaimResponse, results, {
+				responseUtils.handleBundleReadResponse( res, base, ClaimResponse, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getClaimResponseById = function getClaimResponseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let ClaimResponse = require(resolveFromVersion(version, 'base/ClaimResponse'));
+		let ClaimResponse = require(resolveFromVersion(base, 'base/ClaimResponse'));
 
-		return service.getClaimResponseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, ClaimResponse, results)
+				responseUtils.handleSingleReadResponse(res, next, base, ClaimResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getClaimResponseById = function getClaimResponseById ({ profile, 
 /**
  * @description Controller for creating ClaimResponse
  */
-module.exports.createClaimResponse = function createClaimResponse ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let ClaimResponse = require(resolveFromVersion(version, 'base/ClaimResponse'));
+		let ClaimResponse = require(resolveFromVersion(base, 'base/ClaimResponse'));
 		// Validate the resource type before creating it
 		if (ClaimResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${ClaimResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new ClaimResponse(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createClaimResponse(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, ClaimResponse.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, ClaimResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createClaimResponse = function createClaimResponse ({ profile, lo
 /**
  * @description Controller for updating/creating ClaimResponse. If the ClaimResponse does not exist, it should be updated
  */
-module.exports.updateClaimResponse = function updateClaimResponse ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let ClaimResponse = require(resolveFromVersion(version, 'base/ClaimResponse'));
+		let ClaimResponse = require(resolveFromVersion(base, 'base/ClaimResponse'));
 		// Validate the resource type before creating it
 		if (ClaimResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${ClaimResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new ClaimResponse(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateClaimResponse(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, ClaimResponse.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, ClaimResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateClaimResponse = function updateClaimResponse ({ profile, lo
 /**
  * @description Controller for deleting an ClaimResponse.
  */
-module.exports.deleteClaimResponse = function deleteClaimResponse ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteClaimResponse(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

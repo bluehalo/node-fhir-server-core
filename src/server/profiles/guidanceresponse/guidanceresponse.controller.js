@@ -3,44 +3,44 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.getGuidanceResponse = function getGuidanceResponse ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let GuidanceResponse = require(resolveFromVersion(version, 'base/GuidanceResponse'));
+		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
 
-		return service.getGuidanceResponse(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, version, GuidanceResponse, results, {
+				responseUtils.handleBundleReadResponse( res, base, GuidanceResponse, results, {
 					resourceUrl: config.auth.resourceServer
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getGuidanceResponseById = function getGuidanceResponseById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific resource
-		let GuidanceResponse = require(resolveFromVersion(version, 'base/GuidanceResponse'));
+		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
 
-		return service.getGuidanceResponseById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, version, GuidanceResponse, results)
+				responseUtils.handleSingleReadResponse(res, next, base, GuidanceResponse, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -48,31 +48,31 @@ module.exports.getGuidanceResponseById = function getGuidanceResponseById ({ pro
 /**
  * @description Controller for creating GuidanceResponse
  */
-module.exports.createGuidanceResponse = function createGuidanceResponse ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let GuidanceResponse = require(resolveFromVersion(version, 'base/GuidanceResponse'));
+		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
 		// Validate the resource type before creating it
 		if (GuidanceResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${GuidanceResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new GuidanceResponse(resource_body);
 		let args = { id: resource_id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.createGuidanceResponse(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, GuidanceResponse.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, GuidanceResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -80,31 +80,31 @@ module.exports.createGuidanceResponse = function createGuidanceResponse ({ profi
 /**
  * @description Controller for updating/creating GuidanceResponse. If the GuidanceResponse does not exist, it should be updated
  */
-module.exports.updateGuidanceResponse = function updateGuidanceResponse ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific resource
-		let GuidanceResponse = require(resolveFromVersion(version, 'base/GuidanceResponse'));
+		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
 		// Validate the resource type before creating it
 		if (GuidanceResponse.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${GuidanceResponse.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new resource and pass it to the service
 		let new_resource = new GuidanceResponse(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		let args = { id, resource: new_resource };
 		// Pass any new information to the underlying service
-		return service.updateGuidanceResponse(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, GuidanceResponse.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, GuidanceResponse.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -112,19 +112,19 @@ module.exports.updateGuidanceResponse = function updateGuidanceResponse ({ profi
 /**
  * @description Controller for deleting an GuidanceResponse.
  */
-module.exports.deleteGuidanceResponse = function deleteGuidanceResponse ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteGuidanceResponse(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };

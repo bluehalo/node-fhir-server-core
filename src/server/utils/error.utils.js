@@ -2,10 +2,10 @@ const { resolveFromVersion } = require('./resolve.utils');
 const { ISSUE, VERSIONS } = require('../../constants');
 
 // Helper to determine which operation outcome to retrieve
-let getErrorConstructor = version => {
-	switch (version) {
+let getErrorConstructor = base => {
+	switch (base) {
 		case VERSIONS.STU3:
-			return require(resolveFromVersion(version, 'uscore/OperationOutcome'));
+			return require(resolveFromVersion(base, 'uscore/OperationOutcome'));
 		default:
 			return require(resolveFromVersion(VERSIONS.STU3, 'uscore/OperationOutcome'));
 	}
@@ -19,8 +19,8 @@ let div_content = (severity, diagnostics) =>
 /* eslint-enable no-useless-escape */
 
 // Invalid or Missing parameter from request
-let invalidParameter = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let invalidParameter = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 400,
 		text: {
@@ -36,8 +36,8 @@ let invalidParameter = (message, version) => {
 };
 
 // Unauthorized request of some resource
-let unauthorized = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let unauthorized = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 401,
 		text: {
@@ -52,8 +52,8 @@ let unauthorized = (message, version) => {
 	});
 };
 
-let insufficientScope = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let insufficientScope = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 403,
 		text: {
@@ -68,8 +68,8 @@ let insufficientScope = (message, version) => {
 	});
 };
 
-let notFound = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let notFound = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 404,
 		text: {
@@ -84,8 +84,8 @@ let notFound = (message, version) => {
 	});
 };
 
-let methodNotAllowed = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let methodNotAllowed = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 405,
 		text: {
@@ -100,8 +100,8 @@ let methodNotAllowed = (message, version) => {
 	});
 };
 
-let deleteConflict = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let deleteConflict = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 409,
 		text: {
@@ -116,8 +116,8 @@ let deleteConflict = (message, version) => {
 	});
 };
 
-let deleted = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let deleted = (message, base) => {
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 410,
 		text: {
@@ -132,8 +132,9 @@ let deleted = (message, version) => {
 	});
 };
 
-let internal = (message, version) => {
-	let ErrorConstructor = getErrorConstructor(version);
+let internal = (message, base) => {
+	console.log('ERROR', message);
+	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 500,
 		text: {
@@ -148,7 +149,7 @@ let internal = (message, version) => {
 	});
 };
 
-let isServerError = (err, version) => err instanceof getErrorConstructor(version);
+let isServerError = (err, base) => err instanceof getErrorConstructor(base);
 
 /**
  * @name exports

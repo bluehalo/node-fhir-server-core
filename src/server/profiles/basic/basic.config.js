@@ -14,66 +14,66 @@ let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
 const resource_all_arguments = [
-	route_args.VERSION,	...common_args_array, ...resource_args_array,
+	route_args.BASE,	...common_args_array, ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/basic',
+		path: '/:base/basic',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getBasic
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/basic/_search',
+		path: '/:base/basic/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getBasic
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/basic/:id',
+		path: '/:base/basic/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getBasicById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/basic',
+		path: '/:base/basic',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createBasic
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/basic/:id',
+		path: '/:base/basic/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateBasic
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/basic/:id',
+		path: '/:base/basic/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteBasic
+		controller: controller.remove
 	}
 ];
 

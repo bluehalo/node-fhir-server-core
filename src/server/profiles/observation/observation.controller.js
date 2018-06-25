@@ -6,10 +6,10 @@ const errors = require('../../utils/error.utils');
 /**
 * Helper for getting the correct constructor for the various observation types
 */
-let getResourceConstructor = (version, resourceType) => {
-	let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
-	let Results = require(resolveFromVersion(version, 'uscore/Results'));
-	let SmokingStatus = require(resolveFromVersion(version, 'uscore/SmokingStatus'));
+let getResourceConstructor = (base, resourceType) => {
+	let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
+	let Results = require(resolveFromVersion(base, 'uscore/Results'));
+	let SmokingStatus = require(resolveFromVersion(base, 'uscore/SmokingStatus'));
 
 	switch (resourceType) {
 		case Results.__resourceType:
@@ -21,15 +21,15 @@ let getResourceConstructor = (version, resourceType) => {
 	}
 };
 
-module.exports.getObservation = function getObservation ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 		// Get a version specific bundle
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
 
-		return service.getObservation(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -38,7 +38,7 @@ module.exports.getObservation = function getObservation ({ profile, logger, conf
 					for (let resource of observations) {
 						if (!req.observation || req.observation === resource.observationId) {
 							// Get a version specific observation for the correct type of observation
-							let Observation = getResourceConstructor(version, resource.resourceType);
+							let Observation = getResourceConstructor(base, resource.resourceType);
 							// Modes:
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
@@ -46,7 +46,7 @@ module.exports.getObservation = function getObservation ({ profile, logger, conf
 							entries.push({
 								search: { mode: 'match' },
 								resource: new Observation(resource),
-								fullUrl: `${config.auth.resourceServer}/${version}/Observation/${resource.id}`
+								fullUrl: `${config.auth.resourceServer}/${base}/Observation/${resource.id}`
 							});
 						}
 					}
@@ -59,27 +59,27 @@ module.exports.getObservation = function getObservation ({ profile, logger, conf
 			})
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 
 };
 
 
-module.exports.getObservationById = function getObservationById ({ profile, logger, app }) {
+module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.getObservationById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, logger)
 			.then((observation) => {
-				let Resource = getResourceConstructor(version, observation.resourceType);
-				responseUtils.handleSingleReadResponse(res, next, version, Resource, observation);
+				let Resource = getResourceConstructor(base, observation.resourceType);
+				responseUtils.handleSingleReadResponse(res, next, base, Resource, observation);
 			})
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -87,31 +87,31 @@ module.exports.getObservationById = function getObservationById ({ profile, logg
 /**
 * @description Controller for creating a observation
 */
-module.exports.createObservation = function createObservation ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific observation
-		let Resource = getResourceConstructor(version, resource_body.resourceType);
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
 		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new observation resource and pass it to the service
 		let observation = new Resource(resource_body);
 		let args = { id: resource_id, resource: observation };
 		// Pass any new information to the underlying service
-		return service.createObservation(args, logger)
+		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, version, Resource.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -119,31 +119,31 @@ module.exports.createObservation = function createObservation ({ profile, logger
 /**
 * @description Controller for updating/creating a observation. If the observation does not exist, it should be updated
 */
-module.exports.updateObservation = function updateObservation ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version, resource_body, resource_id } = req.sanitized_args;
+		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific observation
-		let Resource = getResourceConstructor(version, resource_body.resourceType);
+		let Resource = getResourceConstructor(base, resource_body.resourceType);
 		// Validate the resource type before creating it
 		if (Resource.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
-				version
+				base
 			));
 		}
 		// Create a new observation resource and pass it to the service
 		let observation = new Resource(resource_body);
-		let args = { id: resource_id, resource: observation };
+		let args = { id, resource: observation };
 		// Pass any new information to the underlying service
-		return service.updateObservation(args, logger)
+		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, version, Resource.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, version));
+				next(errors.internal(err.message, base));
 			});
 	};
 };
@@ -151,19 +151,19 @@ module.exports.updateObservation = function updateObservation ({ profile, logger
 /**
 * @description Controller for deleting an observation resource.
 */
-module.exports.deleteObservation = function deleteObservation ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { version } = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
-		return service.deleteObservation(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, version, err);
+				responseUtils.handleDeleteRejection(res, next, base, err);
 			});
 	};
 };
