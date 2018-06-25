@@ -4,6 +4,14 @@ const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 /**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+	return AllergyIntolerance;
+}
+
+/**
  * @description Controller to get a resource by history version id
  */
 module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
@@ -11,8 +19,7 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 
 	return (req, res, next) => {
 		let {base, version_id} = req.sanitized_args;
-
-		let Procedure = require(resolveFromVersion(base, 'uscore/Procedure'));
+		let Procedure = getResourceConstructor(base);
 
 		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
@@ -34,8 +41,7 @@ module.exports.search = function search({profile, logger, config, app}) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-
-		let Procedure = require(resolveFromVersion(base, 'uscore/Procedure'));
+		let Procedure = getResourceConstructor(base);
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
@@ -58,8 +64,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-
-		let Procedure = require(resolveFromVersion(base, 'uscore/Procedure'));
+		let Procedure = getResourceConstructor(base);
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((results) => {
@@ -80,8 +85,7 @@ module.exports.create = function create({profile, logger, app}) {
 
 	return (req, res, next) => {
 		let {base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific procedure
-		let Procedure = require(resolveFromVersion(base, 'uscore/Procedure'));
+		let Procedure = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Procedure.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -112,8 +116,7 @@ module.exports.update = function update({profile, logger, app}) {
 
 	return (req, res, next) => {
 		let {base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific procedure
-		let Procedure = require(resolveFromVersion(base, 'uscore/Procedure'));
+		let Procedure = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Procedure.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
