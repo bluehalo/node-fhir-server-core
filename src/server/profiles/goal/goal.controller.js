@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
-const  = require('../../utils/resolve.utils');
+const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
@@ -33,7 +33,7 @@ module.exports.search = function search({profile, logger, config, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		let Goal = require(resolveFromVersion(base, 'uscore/Goal'));
 
@@ -57,7 +57,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
 			.then((goal) => {
@@ -142,7 +142,7 @@ module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let  = req.sanitized_args;
+		let { base } = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
