@@ -1,16 +1,14 @@
+const { route_args } = require('../common.arguments');
 const controller = require('./metadata.controller');
 
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/metadata',
+		path: '/:base/metadata',
 		corsOptions: {
 			methods: ['GET']
 		},
-		args: [{
-			name: 'version',
-			type: 'string'
-		}],
+		args: [ route_args.BASE ],
 		scopes: [],
 		controller: controller.getCapabilityStatement
 	}

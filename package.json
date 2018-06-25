@@ -23,7 +23,7 @@
 		"watch-docs": "cross-env NODE_ENV=development;node docs/build",
 		"test:lint": "eslint \"src/**/*.js\"",
 		"test:src": "jest src",
-		"test": "set -e; npm run test:lint; npm run test:src"
+		"test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;"
 	},
 	"jest": {
 		"verbose": true,

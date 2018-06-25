@@ -1,111 +1,79 @@
 const {route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
-const medicationstatement_args = require('./medicationstatement.arguments');
+const resource_specific_args = require('./medicationstatement.arguments');
 const controller = require('./medicationstatement.controller');
 
 let write_only_scopes = write_scopes('MedicationStatement');
 let read_only_scopes = read_scopes('MedicationStatement');
 
+let common_args_array = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
+
+const resource_all_arguments = [
+	route_args.BASE,	...common_args_array, ...resource_args_array,
+];
+
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/medicationstatement',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CODE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.EFFECTIVE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.MEDICATION),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.PART_OF),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.SOURCE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.SUBJECT)
-		],
+		path: '/:base/medicationstatement',
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getMedicationStatement
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/medicationstatement/_search',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CATEGORY),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CODE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.CONTEXT),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.EFFECTIVE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.MEDICATION),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.PART_OF),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.PATIENT),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.SOURCE),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.STATUS),
-			Object.assign({versions: VERSIONS.STU3}, medicationstatement_args.SUBJECT)
-		],
+		path: '/:base/medicationstatement/_search',
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getMedicationStatement
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/medicationstatement/:id',
+		path: '/:base/medicationstatement/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getMedicationStatementById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/medicationstatement',
+		path: '/:base/medicationstatement',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createMedicationStatement
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/medicationstatement/:id',
+		path: '/:base/medicationstatement/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updateMedicationStatement
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/medicationstatement/:id',
+		path: '/:base/medicationstatement/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deleteMedicationStatement
+		controller: controller.remove
 	}
 ];
 

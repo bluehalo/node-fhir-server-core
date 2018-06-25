@@ -1,137 +1,79 @@
 const { route_args, common_args, write_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
-const patient_args = require('./patient.arguments');
+const resource_specific_args = require('./patient.arguments');
 const controller = require('./patient.controller');
 
 let write_only_scopes = write_scopes('Patient');
 let read_only_scopes = read_scopes('Patient');
 
+let common_args_array = Object.getOwnPropertyNames(common_args)
+	.map((arg_name) => common_args[arg_name]);
+
+let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
+
+const resource_all_arguments = [
+	route_args.BASE,	...common_args_array, ...resource_args_array,
+];
+
 let routes = [
 	{
 		type: 'get',
-		path: '/:version/patient',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ACTIVE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_CITY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_COUNTRY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_POSTALCODE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_STATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_USE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_BREED),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_SPECIES),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.BIRTHDATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.DEATH_DATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.DECEASED),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.EMAIL),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.FAMILY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GENDER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GENERAL_PRACTITIONER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GIVEN),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.LANGUAGE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.LINK),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.NAME),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ORGANIZATION),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
-		],
+		path: '/:base/patient',
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getPatient
+		controller: controller.search
 	},
 	{
 		type: 'post',
-		path: '/:version/patient/_search',
-		args: [
-			route_args.VERSION,
-			common_args._FORMAT,
-			common_args._CONTENT,
-			common_args._ID,
-			common_args._LASTUPDATED,
-			common_args._PROFILE,
-			common_args._QUERY,
-			common_args._SECURITY,
-			common_args._TAG,
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ACTIVE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_CITY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_COUNTRY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_POSTALCODE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_STATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ADDRESS_USE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_BREED),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ANIMAL_SPECIES),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.BIRTHDATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.DEATH_DATE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.DECEASED),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.EMAIL),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.FAMILY),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GENDER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GENERAL_PRACTITIONER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.GIVEN),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.IDENTIFIER),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.LANGUAGE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.LINK),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.NAME),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.ORGANIZATION),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONE),
-			Object.assign({versions: VERSIONS.STU3}, patient_args.PHONETIC),
-		],
+		path: '/:base/patient/_search',
+		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.getPatient
+		controller: controller.search
 	},
 	{
 		type: 'get',
-		path: '/:version/patient/:id',
+		path: '/:base/patient/:id',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.getPatientById
+		controller: controller.searchById
 	},
 	{
 		type: 'post',
-		path: '/:version/patient',
+		path: '/:base/patient',
 		args: [
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_ID,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.createPatient
+		controller: controller.create
 	},
 	{
 		type: 'put',
-		path: '/:version/patient/:id',
+		path: '/:base/patient/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.updatePatient
+		controller: controller.update
 	},
 	{
 		type: 'delete',
-		path: '/:version/patient/:id',
+		path: '/:base/patient/:id',
 		args: [
 			route_args.ID,
-			route_args.VERSION,
+			route_args.BASE,
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.deletePatient
+		controller: controller.remove
 	}
 ];
 

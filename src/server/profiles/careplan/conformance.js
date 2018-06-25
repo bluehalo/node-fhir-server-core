@@ -14,13 +14,13 @@ module.exports = {
 		// Return our conformance statement
 		return {
 			extension: [{
-				url: 'http://hl7api.sourceforge.net/hapi-fhir/res/extdefs.html#resourceCount',
+				url: 'https://www.hl7.org/fhir/search.html#count',
 				// This will be resolved dynamically by the service methods
 				valueDecimal: count
 			}],
 			type: CarePlan.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/capstmnts.html#careplan'
+				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-careplan.html'
 			},
 			conditionalDelete: 'not-supported',
 			searchParam: searchParams
