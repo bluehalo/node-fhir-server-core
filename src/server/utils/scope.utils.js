@@ -29,11 +29,6 @@ module.exports.validateScopes = (allowedScopes) => {
 		let version = req.params.version;
 		let scopes = req.authInfo;
 
-		// if route doesn't require any scopes
-		if (!allowedScopes || allowedScopes.length === 0) {
-			return next();
-		}
-
 		// get scopes that are valid for the endpoint specified
 		const validScopes = getValidScopes(scopes, allowedScopes);
 
