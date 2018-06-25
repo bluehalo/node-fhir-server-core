@@ -191,9 +191,8 @@ class Server {
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				console.log(err);
 				let error = errors.internal(err.message, req.params.base);
-				this.logger.error(error.statusCode, err.message);
+				this.logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
 			// No error
