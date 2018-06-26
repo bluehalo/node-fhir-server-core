@@ -3,12 +3,12 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
+
 /**
  * @description Construct a resource with base/uscore path
  */
 let getResourceConstructor = (base) => {
-	let Location = require(resolveFromVersion(base, 'uscore/Location'));
-	return Location;
+	return require(resolveFromVersion(base, 'uscore/Location'));
 };
 
 /**

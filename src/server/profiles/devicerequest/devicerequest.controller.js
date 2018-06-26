@@ -3,12 +3,12 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
+
 /**
  * @description Construct a resource with base/uscore path
  */
 let getResourceConstructor = (base) => {
-	let DeviceRequest = require(resolveFromVersion(base, 'base/DeviceRequest'));
-	return DeviceRequest;
+	return require(resolveFromVersion(base, 'base/DeviceRequest'));
 };
 
 /**
