@@ -99,7 +99,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 
 		// Make the resource and give it the version so it can only include valid search params
 		server_statement.resource = active_profiles.map((profile, i) => {
-			let resource = profile.makeResource(context.version, counts[i]);
+			let resource = profile.makeResource(context.base, counts[i]);
 			// Determine the interactions we need to list for this profile
 			resource.interaction = generateInteractions(profile.service, resource.type);
 			return resource;
