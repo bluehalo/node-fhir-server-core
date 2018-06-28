@@ -8,9 +8,9 @@ const { routes } = require('./auditevent.config');
  */
 module.exports = {
 	profile: 'auditevent',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let AuditEvent = require(resolveFromVersion(version, 'uscore/AuditEvent'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
 		// Return our conformance statement
 		return {
 			extension: [{

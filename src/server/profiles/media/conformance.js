@@ -8,9 +8,9 @@ const { routes } = require('./media.config');
  */
 module.exports = {
 	profile: 'media',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Media = require(resolveFromVersion(version, 'base/Media'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Media = require(resolveFromVersion(base, 'base/Media'));
 		// Return our conformance statement
 		return {
 			extension: [{

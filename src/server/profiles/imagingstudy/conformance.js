@@ -8,9 +8,9 @@ const { routes } = require('./imagingstudy.config');
  */
 module.exports = {
 	profile: 'imagingstudy',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ImagingStudy = require(resolveFromVersion(version, 'base/ImagingStudy'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ImagingStudy = require(resolveFromVersion(base, 'base/ImagingStudy'));
 		// Return our conformance statement
 		return {
 			extension: [{

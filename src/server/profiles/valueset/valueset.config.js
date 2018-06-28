@@ -40,6 +40,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/valueset/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:base/valueset/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:base/valueset/:id',
 		args: [
 			route_args.BASE,

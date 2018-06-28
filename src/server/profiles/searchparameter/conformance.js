@@ -8,9 +8,9 @@ const { routes } = require('./searchparameter.config');
  */
 module.exports = {
 	profile: 'searchparameter',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let SearchParameter = require(resolveFromVersion(version, 'base/SearchParameter'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let SearchParameter = require(resolveFromVersion(base, 'base/SearchParameter'));
 		// Return our conformance statement
 		return {
 			extension: [{

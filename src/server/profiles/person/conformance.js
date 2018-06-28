@@ -8,9 +8,9 @@ const { routes } = require('./person.config');
  */
 module.exports = {
 	profile: 'person',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Person = require(resolveFromVersion(version, 'base/Person'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Person = require(resolveFromVersion(base, 'base/Person'));
 		// Return our conformance statement
 		return {
 			extension: [{

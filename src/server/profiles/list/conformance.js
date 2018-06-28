@@ -8,9 +8,9 @@ const { routes } = require('./list.config');
  */
 module.exports = {
 	profile: 'list',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let List = require(resolveFromVersion(version, 'base/List'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let List = require(resolveFromVersion(base, 'base/List'));
 		// Return our conformance statement
 		return {
 			extension: [{

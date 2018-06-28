@@ -8,9 +8,9 @@ const { routes } = require('./adverseevent.config');
  */
 module.exports = {
 	profile: 'adverseevent',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let AdverseEvent = require(resolveFromVersion(version, 'base/AdverseEvent'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let AdverseEvent = require(resolveFromVersion(base, 'base/AdverseEvent'));
 		// Return our conformance statement
 		return {
 			extension: [{

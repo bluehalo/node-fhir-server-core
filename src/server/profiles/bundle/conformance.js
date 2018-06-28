@@ -8,9 +8,9 @@ const { routes } = require('./bundle.config');
  */
 module.exports = {
 	profile: 'bundle',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Bundle = require(resolveFromVersion(version, 'uscore/Bundle'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
 		// Return our conformance statement
 		return {
 			extension: [{

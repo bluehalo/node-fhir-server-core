@@ -8,9 +8,9 @@ const { routes } = require('./condition.config');
  */
 module.exports = {
 	profile: 'condition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Condition = require(resolveFromVersion(version, 'uscore/Condition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Condition = require(resolveFromVersion(base, 'uscore/Condition'));
 		// Return our conformance statement
 		return {
 			extension: [{

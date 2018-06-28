@@ -8,9 +8,9 @@ const { routes } = require('./implementationguide.config');
  */
 module.exports = {
 	profile: 'implementationguide',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ImplementationGuide = require(resolveFromVersion(version, 'base/ImplementationGuide'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ImplementationGuide = require(resolveFromVersion(base, 'base/ImplementationGuide'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./supplydelivery.config');
  */
 module.exports = {
 	profile: 'supplydelivery',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let SupplyDelivery = require(resolveFromVersion(version, 'base/SupplyDelivery'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let SupplyDelivery = require(resolveFromVersion(base, 'base/SupplyDelivery'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./claimresponse.config');
  */
 module.exports = {
 	profile: 'claimresponse',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ClaimResponse = require(resolveFromVersion(version, 'base/ClaimResponse'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ClaimResponse = require(resolveFromVersion(base, 'base/ClaimResponse'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./slot.config');
  */
 module.exports = {
 	profile: 'slot',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Slot = require(resolveFromVersion(version, 'base/Slot'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Slot = require(resolveFromVersion(base, 'base/Slot'));
 		// Return our conformance statement
 		return {
 			extension: [{

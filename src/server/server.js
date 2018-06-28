@@ -1,6 +1,6 @@
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const Logger = require('./winston');
+const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
 const https = require('https');
@@ -8,6 +8,7 @@ const http = require('http');
 const fs = require('fs');
 const routeSetter = require('./route-setter');
 const errors = require('./utils/error.utils');
+const Logger = require('./winston');
 
 const {
 	validSSLConfiguration,
@@ -149,6 +150,16 @@ class Server {
 		return this;
 	}
 
+	configurePassport () {
+		if (this.config.auth && this.config.auth.strategy) {
+			let { strategy } = require(this.config.auth.strategy.service);
+			passport.use(strategy);
+		}
+
+		// return self for chaining
+		return this;
+	}
+
 	// Setup a public directory for static assets
 	setPublicDirectory (publicDirectory = '') {
 		// Public config can come from the core config as well, let's handle both cases
@@ -167,6 +178,7 @@ class Server {
 		// return self for chaining
 		return this;
 	}
+
 
 	// Setup error routes
 	setErrorRoutes () {

@@ -8,9 +8,9 @@ const { routes } = require('./guidanceresponse.config');
  */
 module.exports = {
 	profile: 'guidanceresponse',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let GuidanceResponse = require(resolveFromVersion(version, 'base/GuidanceResponse'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
 		// Return our conformance statement
 		return {
 			extension: [{
