@@ -8,9 +8,9 @@ const { routes } = require('./location.config');
  */
 module.exports = {
 	profile: 'location',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Location = require(resolveFromVersion(version, 'uscore/Location'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Location = require(resolveFromVersion(base, 'uscore/Location'));
 		// Return our conformance statement
 		return {
 			extension: [{

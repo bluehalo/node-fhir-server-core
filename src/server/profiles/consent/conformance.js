@@ -8,9 +8,9 @@ const { routes } = require('./consent.config');
  */
 module.exports = {
 	profile: 'consent',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Consent = require(resolveFromVersion(version, 'uscore/Consent'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Consent = require(resolveFromVersion(base, 'uscore/Consent'));
 		// Return our conformance statement
 		return {
 			extension: [{

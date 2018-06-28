@@ -34,6 +34,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/medicationstatement/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:base/medicationstatement/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:base/medicationstatement/:id',
 		args: [
 			route_args.BASE,

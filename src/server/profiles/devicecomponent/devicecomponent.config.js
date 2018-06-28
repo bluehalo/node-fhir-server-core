@@ -34,6 +34,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/devicecomponent/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:base/devicecomponent/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:base/devicecomponent/:id',
 		args: [
 			route_args.BASE,

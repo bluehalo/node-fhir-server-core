@@ -8,9 +8,9 @@ const { routes } = require('./clinicalimpression.config');
  */
 module.exports = {
 	profile: 'clinicalimpression',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ClinicalImpression = require(resolveFromVersion(version, 'base/ClinicalImpression'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ClinicalImpression = require(resolveFromVersion(base, 'base/ClinicalImpression'));
 		// Return our conformance statement
 		return {
 			extension: [{

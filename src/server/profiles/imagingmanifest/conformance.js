@@ -8,9 +8,9 @@ const { routes } = require('./imagingmanifest.config');
  */
 module.exports = {
 	profile: 'imagingmanifest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ImagingManifest = require(resolveFromVersion(version, 'base/ImagingManifest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ImagingManifest = require(resolveFromVersion(base, 'base/ImagingManifest'));
 		// Return our conformance statement
 		return {
 			extension: [{

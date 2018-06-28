@@ -32,6 +32,14 @@ let generateInteractions = (service, resourceType) => {
 		interactions.push({ code: 'delete' });
 	}
 
+	if (service.history) {
+		interactions.push({ code: 'history-type' });
+	}
+
+	if (service.historyById) {
+		interactions.push({ code: 'history-instance' });
+	}
+
 	// Save these interactions so we don't need to do this again
 	profileInteractions[resourceType] = interactions;
 

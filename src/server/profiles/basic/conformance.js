@@ -8,9 +8,9 @@ const { routes } = require('./basic.config');
  */
 module.exports = {
 	profile: 'basic',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Basic = require(resolveFromVersion(version, 'base/Basic'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Basic = require(resolveFromVersion(base, 'base/Basic'));
 		// Return our conformance statement
 		return {
 			extension: [{

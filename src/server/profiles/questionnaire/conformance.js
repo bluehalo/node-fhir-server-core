@@ -8,9 +8,9 @@ const { routes } = require('./questionnaire.config');
  */
 module.exports = {
 	profile: 'questionnaire',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Questionnaire = require(resolveFromVersion(version, 'base/Questionnaire'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Questionnaire = require(resolveFromVersion(base, 'base/Questionnaire'));
 		// Return our conformance statement
 		return {
 			extension: [{

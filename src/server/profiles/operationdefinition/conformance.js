@@ -8,9 +8,9 @@ const { routes } = require('./operationdefinition.config');
  */
 module.exports = {
 	profile: 'operationdefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let OperationDefinition = require(resolveFromVersion(version, 'base/OperationDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let OperationDefinition = require(resolveFromVersion(base, 'base/OperationDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

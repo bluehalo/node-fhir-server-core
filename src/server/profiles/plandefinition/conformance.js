@@ -8,9 +8,9 @@ const { routes } = require('./plandefinition.config');
  */
 module.exports = {
 	profile: 'plandefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let PlanDefinition = require(resolveFromVersion(version, 'base/PlanDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let PlanDefinition = require(resolveFromVersion(base, 'base/PlanDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

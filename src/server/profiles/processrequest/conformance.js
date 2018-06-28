@@ -8,9 +8,9 @@ const { routes } = require('./processrequest.config');
  */
 module.exports = {
 	profile: 'processrequest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ProcessRequest = require(resolveFromVersion(version, 'base/ProcessRequest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ProcessRequest = require(resolveFromVersion(base, 'base/ProcessRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

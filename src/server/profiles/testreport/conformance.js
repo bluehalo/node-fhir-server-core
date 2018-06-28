@@ -8,9 +8,9 @@ const { routes } = require('./testreport.config');
  */
 module.exports = {
 	profile: 'testreport',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let TestReport = require(resolveFromVersion(version, 'base/TestReport'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
 		// Return our conformance statement
 		return {
 			extension: [{

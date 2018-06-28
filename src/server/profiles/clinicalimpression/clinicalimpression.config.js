@@ -34,6 +34,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/clinicalimpression/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:base/clinicalimpression/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:base/clinicalimpression/:id',
 		args: [
 			route_args.BASE,

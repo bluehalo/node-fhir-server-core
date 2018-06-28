@@ -128,3 +128,48 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a Task resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific Task
+		let Task = require(resolveFromVersion(base, 'base/Task'));
+
+		return service.history(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, Task, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a Task resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific Task
+		let Task = require(resolveFromVersion(base, 'base/Task'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, Task, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+

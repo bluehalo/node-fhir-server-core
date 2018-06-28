@@ -128,3 +128,48 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a CompartmentDefinition resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific CompartmentDefinition
+		let CompartmentDefinition = require(resolveFromVersion(base, 'base/CompartmentDefinition'));
+
+		return service.history(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, CompartmentDefinition, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a CompartmentDefinition resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific CompartmentDefinition
+		let CompartmentDefinition = require(resolveFromVersion(base, 'base/CompartmentDefinition'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, CompartmentDefinition, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+

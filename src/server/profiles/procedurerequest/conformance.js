@@ -8,9 +8,9 @@ const { routes } = require('./procedurerequest.config');
  */
 module.exports = {
 	profile: 'procedurerequest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ProcedureRequest = require(resolveFromVersion(version, 'base/ProcedureRequest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ProcedureRequest = require(resolveFromVersion(base, 'base/ProcedureRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

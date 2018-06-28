@@ -8,9 +8,9 @@ const { routes } = require('./paymentnotice.config');
  */
 module.exports = {
 	profile: 'paymentnotice',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let PaymentNotice = require(resolveFromVersion(version, 'base/PaymentNotice'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let PaymentNotice = require(resolveFromVersion(base, 'base/PaymentNotice'));
 		// Return our conformance statement
 		return {
 			extension: [{
