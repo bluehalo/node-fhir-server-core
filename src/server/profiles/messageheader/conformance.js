@@ -8,9 +8,9 @@ const { routes } = require('./messageheader.config');
  */
 module.exports = {
 	profile: 'messageheader',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let MessageHeader = require(resolveFromVersion(version, 'base/MessageHeader'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
 		// Return our conformance statement
 		return {
 			extension: [{

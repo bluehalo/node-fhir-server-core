@@ -8,9 +8,9 @@ const { routes } = require('./measurereport.config');
  */
 module.exports = {
 	profile: 'measurereport',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let MeasureReport = require(resolveFromVersion(version, 'base/MeasureReport'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let MeasureReport = require(resolveFromVersion(base, 'base/MeasureReport'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./bodysite.config');
  */
 module.exports = {
 	profile: 'bodysite',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let BodySite = require(resolveFromVersion(version, 'base/BodySite'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let BodySite = require(resolveFromVersion(base, 'base/BodySite'));
 		// Return our conformance statement
 		return {
 			extension: [{

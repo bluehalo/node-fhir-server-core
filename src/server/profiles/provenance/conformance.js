@@ -8,9 +8,9 @@ const { routes } = require('./provenance.config');
  */
 module.exports = {
 	profile: 'provenance',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Provenance = require(resolveFromVersion(version, 'base/Provenance'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Provenance = require(resolveFromVersion(base, 'base/Provenance'));
 		// Return our conformance statement
 		return {
 			extension: [{

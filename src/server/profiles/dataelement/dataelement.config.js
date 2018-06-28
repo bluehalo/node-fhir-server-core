@@ -34,6 +34,20 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/dataelement/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.history
+	},
+	{
+		type: 'get',
+		path: '/:base/dataelement/:id/_history',
+		args: resource_all_arguments,
+		scopes: read_only_scopes,
+		controller: controller.historyById
+	},
+	{
+		type: 'get',
 		path: '/:base/dataelement/:id',
 		args: [
 			route_args.BASE,

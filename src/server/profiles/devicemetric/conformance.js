@@ -8,9 +8,9 @@ const { routes } = require('./devicemetric.config');
  */
 module.exports = {
 	profile: 'devicemetric',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DeviceMetric = require(resolveFromVersion(version, 'base/DeviceMetric'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let DeviceMetric = require(resolveFromVersion(base, 'base/DeviceMetric'));
 		// Return our conformance statement
 		return {
 			extension: [{

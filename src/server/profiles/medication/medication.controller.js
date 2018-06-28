@@ -129,3 +129,48 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a Medication resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific Medication
+		let Medication = require(resolveFromVersion(base, 'uscore/Medication'));
+
+		return service.history(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, Medication, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a Medication resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific Medication
+		let Medication = require(resolveFromVersion(base, 'uscore/Medication'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, Medication, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+

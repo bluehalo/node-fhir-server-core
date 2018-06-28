@@ -8,9 +8,9 @@ const { routes } = require('./binary.config');
  */
 module.exports = {
 	profile: 'binary',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Binary = require(resolveFromVersion(version, 'base/Binary'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Binary = require(resolveFromVersion(base, 'base/Binary'));
 		// Return our conformance statement
 		return {
 			extension: [{

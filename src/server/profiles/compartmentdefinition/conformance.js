@@ -8,9 +8,9 @@ const { routes } = require('./compartmentdefinition.config');
  */
 module.exports = {
 	profile: 'compartmentdefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CompartmentDefinition = require(resolveFromVersion(version, 'base/CompartmentDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let CompartmentDefinition = require(resolveFromVersion(base, 'base/CompartmentDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

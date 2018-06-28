@@ -8,9 +8,9 @@ const { routes } = require('./chargeitem.config');
  */
 module.exports = {
 	profile: 'chargeitem',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ChargeItem = require(resolveFromVersion(version, 'base/ChargeItem'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ChargeItem = require(resolveFromVersion(base, 'base/ChargeItem'));
 		// Return our conformance statement
 		return {
 			extension: [{

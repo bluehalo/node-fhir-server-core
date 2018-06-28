@@ -8,9 +8,9 @@ const { routes } = require('./activitydefinition.config');
  */
 module.exports = {
 	profile: 'activitydefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ActivityDefinition = require(resolveFromVersion(version, 'base/ActivityDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ActivityDefinition = require(resolveFromVersion(base, 'base/ActivityDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{
