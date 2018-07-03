@@ -169,19 +169,19 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for getting a resource by history version id
- */
-module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+* @description Controller for getting the history of a Observation resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base, version_id} = req.sanitized_args;
-
+		let { base } = req.sanitized_args;
+		// Get a version specific Observation
 		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleVReadResponse(res, next, base, Observation, results, version_id)
+				responseUtils.handleBundleReadResponse( res, base, Observation, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -189,3 +189,26 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a Observation resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific Observation
+		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, Observation, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+

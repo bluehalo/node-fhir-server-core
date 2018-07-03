@@ -8,9 +8,9 @@ const { routes } = require('./schedule.config');
  */
 module.exports = {
 	profile: 'schedule',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Schedule = require(resolveFromVersion(version, 'base/Schedule'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Schedule = require(resolveFromVersion(base, 'base/Schedule'));
 		// Return our conformance statement
 		return {
 			extension: [{

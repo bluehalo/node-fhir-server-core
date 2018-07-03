@@ -19,8 +19,7 @@ module.exports.searchById = (args, logger) => new Promise((resolve, reject) => {
 	// 	'resourceType': 'Patient',
 	// 	'id': '1',
 	// 	'meta': {
-	//    'lastUpdated' : "2015-09-30T14:31:27.885+00:00",
-	// 		'versionId': '1001'
+	// 		'versionId': '2.0'
 	// 	},
 	// 	'text': {
 	// 		'status': 'generated',
@@ -74,8 +73,14 @@ module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 	reject(new Error(message));
 });
 
-module.exports.searchByVersionId = (args, logger) => new Promise((resolve, reject) => {
-	let message = 'Calling mock service. Did you forget to implement \'searchByVersionId\' in Patient service.';
+module.exports.history = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'history\' in Patient service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.historyById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'historyById\' in Patient service.';
 	logger.info(message);
 	reject(new Error(message));
 });

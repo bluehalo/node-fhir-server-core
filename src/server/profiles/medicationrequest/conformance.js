@@ -8,9 +8,9 @@ const { routes } = require('./medicationrequest.config');
  */
 module.exports = {
 	profile: 'medicationrequest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let MedicationRequest = require(resolveFromVersion(version, 'uscore/MedicationRequest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let MedicationRequest = require(resolveFromVersion(base, 'uscore/MedicationRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -40,3 +40,15 @@ module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 	logger.info(message);
 	reject(new Error(message));
 });
+
+module.exports.history = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'history\' in Communication service.';
+	logger.info(message);
+	reject(new Error(message));
+});
+
+module.exports.historyById = (args, logger) => new Promise((resolve, reject) => {
+	let message = 'Calling mock service. Did you forget to implement \'historyById\' in Communication service.';
+	logger.info(message);
+	reject(new Error(message));
+});

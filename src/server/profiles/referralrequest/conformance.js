@@ -8,9 +8,9 @@ const { routes } = require('./referralrequest.config');
  */
 module.exports = {
 	profile: 'referralrequest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ReferralRequest = require(resolveFromVersion(version, 'base/ReferralRequest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ReferralRequest = require(resolveFromVersion(base, 'base/ReferralRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

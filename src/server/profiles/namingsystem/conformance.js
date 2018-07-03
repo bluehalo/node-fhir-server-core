@@ -8,9 +8,9 @@ const { routes } = require('./namingsystem.config');
  */
 module.exports = {
 	profile: 'namingsystem',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let NamingSystem = require(resolveFromVersion(version, 'base/NamingSystem'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let NamingSystem = require(resolveFromVersion(base, 'base/NamingSystem'));
 		// Return our conformance statement
 		return {
 			extension: [{

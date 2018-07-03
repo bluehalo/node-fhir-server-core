@@ -8,9 +8,9 @@ const { routes } = require('./expansionprofile.config');
  */
 module.exports = {
 	profile: 'expansionprofile',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ExpansionProfile = require(resolveFromVersion(version, 'base/ExpansionProfile'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ExpansionProfile = require(resolveFromVersion(base, 'base/ExpansionProfile'));
 		// Return our conformance statement
 		return {
 			extension: [{

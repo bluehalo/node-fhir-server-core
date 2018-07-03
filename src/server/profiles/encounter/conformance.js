@@ -8,9 +8,9 @@ const { routes } = require('./encounter.config');
  */
 module.exports = {
 	profile: 'encounter',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Encounter = require(resolveFromVersion(version, 'base/Encounter'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
 		// Return our conformance statement
 		return {
 			extension: [{

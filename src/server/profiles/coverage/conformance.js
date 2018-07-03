@@ -8,9 +8,9 @@ const { routes } = require('./coverage.config');
  */
 module.exports = {
 	profile: 'coverage',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Coverage = require(resolveFromVersion(version, 'base/Coverage'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Coverage = require(resolveFromVersion(base, 'base/Coverage'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -158,3 +158,48 @@ module.exports.remove = function remove({profile, logger, app}) {
 			});
 	};
 };
+
+/**
+* @description Controller for getting the history of a ImagingStudy resource.
+*/
+module.exports.history = function history ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific ImagingStudy
+		let ImagingStudy = require(resolveFromVersion(base, 'base/ImagingStudy'));
+
+		return service.history(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, ImagingStudy, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a ImagingStudy resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base } = req.sanitized_args;
+		// Get a version specific ImagingStudy
+		let ImagingStudy = require(resolveFromVersion(base, 'base/ImagingStudy'));
+
+		return service.historyById(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base, ImagingStudy, results)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+

@@ -8,9 +8,9 @@ const { routes } = require('./riskassessment.config');
  */
 module.exports = {
 	profile: 'riskassessment',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let RiskAssessment = require(resolveFromVersion(version, 'base/RiskAssessment'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let RiskAssessment = require(resolveFromVersion(base, 'base/RiskAssessment'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./communication.config');
  */
 module.exports = {
 	profile: 'communication',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Communication = require(resolveFromVersion(version, 'base/Communication'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Communication = require(resolveFromVersion(base, 'base/Communication'));
 		// Return our conformance statement
 		return {
 			extension: [{

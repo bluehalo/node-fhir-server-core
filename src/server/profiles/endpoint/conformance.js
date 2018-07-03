@@ -8,9 +8,9 @@ const { routes } = require('./endpoint.config');
  */
 module.exports = {
 	profile: 'endpoint',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Endpoint = require(resolveFromVersion(version, 'base/Endpoint'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Endpoint = require(resolveFromVersion(base, 'base/Endpoint'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./subscription.config');
  */
 module.exports = {
 	profile: 'subscription',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Subscription = require(resolveFromVersion(version, 'base/Subscription'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Subscription = require(resolveFromVersion(base, 'base/Subscription'));
 		// Return our conformance statement
 		return {
 			extension: [{

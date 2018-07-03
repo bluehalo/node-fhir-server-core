@@ -8,9 +8,9 @@ const { routes } = require('./documentmanifest.config');
  */
 module.exports = {
 	profile: 'documentmanifest',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DocumentManifest = require(resolveFromVersion(version, 'base/DocumentManifest'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
 		// Return our conformance statement
 		return {
 			extension: [{

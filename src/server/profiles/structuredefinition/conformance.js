@@ -8,9 +8,9 @@ const { routes } = require('./structuredefinition.config');
  */
 module.exports = {
 	profile: 'structuredefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let StructureDefinition = require(resolveFromVersion(version, 'base/StructureDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let StructureDefinition = require(resolveFromVersion(base, 'base/StructureDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./task.config');
  */
 module.exports = {
 	profile: 'task',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Task = require(resolveFromVersion(version, 'base/Task'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Task = require(resolveFromVersion(base, 'base/Task'));
 		// Return our conformance statement
 		return {
 			extension: [{

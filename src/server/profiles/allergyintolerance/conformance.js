@@ -8,9 +8,9 @@ const { routes } = require('./allergyintolerance.config');
  */
 module.exports = {
 	profile: 'allergyintolerance',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let AllergyIntolerance = require(resolveFromVersion(version, 'uscore/AllergyIntolerance'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
 		// Return our conformance statement
 		return {
 			extension: [{
