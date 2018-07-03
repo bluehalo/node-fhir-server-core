@@ -7,27 +7,26 @@ const controller = require('./organization.controller');
 let write_only_scopes = write_scopes('Organization');
 let read_only_scopes = read_scopes('Organization');
 
+let search_args_array = Object.getOwnPropertyNames(search_args)
+    .map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, search_args[arg_name]));
+
 let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
 
 let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
 
-let search_args_array = Object.getOwnPropertyNames(search_args)
-	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, search_args[arg_name]));
-
 const resource_all_arguments = [
-	route_args.BASE,
-	...search_args_array,
-	...common_args_array,
-	...resource_args_array,
+    route_args.BASE,
+    ...search_args_array,
+    ...common_args_array,
+    ...resource_args_array,
 ];
 
 let routes = [
 	{
 		type: 'get',
 		path: '/:base/organization',
-		corsOptions: {methods: ['GET']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
@@ -35,25 +34,35 @@ let routes = [
 	{
 		type: 'post',
 		path: '/:base/organization/_search',
-		corsOptions: {methods: ['POST']},
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
 	},
-	{
-		type: 'get',
-		path: '/:base/organization/_history',
-		args: resource_all_arguments,
-		scopes: read_only_scopes,
-		controller: controller.history
-	},
-	{
-		type: 'get',
-		path: '/:base/organization/:id/_history',
-		args: resource_all_arguments,
-		scopes: read_only_scopes,
-		controller: controller.historyById
-	},
+    {
+        type: 'get',
+        path: '/:base/organization/:id/_history/:versionid',
+        args: [
+            route_args.BASE,
+            route_args.ID,
+            route_args.VERSION_ID
+        ],
+        scopes: read_only_scopes,
+        controller: controller.searchByVersionId
+    },
+    {
+        type: 'get',
+        path: '/:base/organization/_history',
+        args: resource_all_arguments,
+        scopes: read_only_scopes,
+        controller: controller.history
+    },
+    {
+        type: 'get',
+        path: '/:base/organization/:id/_history',
+        args: resource_all_arguments,
+        scopes: read_only_scopes,
+        controller: controller.historyById
+    },
 	{
 		type: 'get',
 		path: '/:base/organization/:id',
