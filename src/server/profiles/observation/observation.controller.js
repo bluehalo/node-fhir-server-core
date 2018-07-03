@@ -21,6 +21,30 @@ let getResourceConstructor = (base, resourceType) => {
 	}
 };
 
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, version_id} = req.sanitized_args;
+
+		let Observation = getResourceConstructor(base);
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, Observation, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+
 module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
 

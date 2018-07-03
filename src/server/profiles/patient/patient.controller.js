@@ -9,6 +9,13 @@ const {
 
 
 /**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	return require(resolveFromVersion(base, 'uscore/Patient'));
+};
+
+/**
 * @description Filter function for only allowing a certain patient to be
 * accessed if a patient id is present on the req object. user_id is req.patient
 * currently so if that value is present, they should only see patients whose
@@ -19,6 +26,47 @@ let patient_filter = function (user_id) {
 	// with SMART and since we do not know if that id matches whatever id
 	// the EHR has, how can we verify they are the same
 	return (patient) => !user_id || user_id === patient.id;
+};
+
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, id, version_id} = req.sanitized_args;
+
+		let Patient = getResourceConstructor(base);
+		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
+
+		if ( req.patient && id && req.patient !== id ) {
+			let resource = new AuditEvent({
+				type: {
+					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
+					code: '110113',
+					display: 'Security Alert',
+					userSelected: false
+				},
+				recorded: moment().toISOString(),
+				action: 'R',
+				outcome: '4',
+				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
+			});
+			app.emit(EVENTS.AUDIT, resource);
+			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
+		}
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, Patient, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
 };
 
 module.exports.search = function search ({ profile, logger, config, app }) {
