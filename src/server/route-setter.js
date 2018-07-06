@@ -82,13 +82,19 @@ function authenticationMiddleware (options) {
 * @description Scope Validation
 */
 function hasValidScopes (options) {
-	let { routeOptions, scopes } = options;
+	let { routeOptions, scopes, config } = options;
 	// Don't do any validation for testing
 	if (process.env.NODE_ENV === 'test') {
 		return noOpMiddleware;
 	}
+
 	// Don't validate the metadata route
 	if (routeOptions.isMetadata) {
+		return noOpMiddleware;
+	}
+
+	// no strategy defined
+	if (!config.auth || !config.auth.strategy) {
 		return noOpMiddleware;
 	}
 
@@ -176,7 +182,7 @@ const setter = (options = {}) => {
 				// Authentication middleware
 				authenticationMiddleware({ routeOptions, config, logger, scopes: route.scopes }),
 				// Scope validation
-				hasValidScopes({routeOptions, scopes: route.scopes}),
+				hasValidScopes({routeOptions, scopes: route.scopes, config}),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app })
 			);
