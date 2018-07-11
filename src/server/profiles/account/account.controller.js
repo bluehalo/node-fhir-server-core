@@ -177,11 +177,11 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 /*
  * @description Controller for validating an Account.
  */
-module.exports.validate = function validate ({ profile, logger, app }) {
+module.exports.validate = function validate ({ logger, app }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 
-		return validationUtils.validate('account', req.sanitized_args)
+		return validationUtils.validate('account', req.sanitized_args, logger)
 			.then((validationErrors) => responseUtils.handleValidateResponse(res, next, base, null, validationErrors))
 			.catch((err = {}) => {
 				// Log the error
@@ -202,7 +202,7 @@ module.exports.validateById = function validate ({ profile, logger, app }) {
 		let { base } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((results) => { return validationUtils.validate('account', results); })
+			.then((results) => { return validationUtils.validate('account', results, logger); })
 			.then((validationErrors) => responseUtils.handleValidateResponse(res, next, base, null, validationErrors))
 			.catch((err = {}) => {
 				// Log the error

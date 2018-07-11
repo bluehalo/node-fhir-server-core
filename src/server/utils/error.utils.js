@@ -1,4 +1,3 @@
-const { resolveFromVersion } = require('./resolve.utils');
 const { getOperationOutcome } = require('./standards.utils');
 const { ISSUE } = require('../../constants');
 

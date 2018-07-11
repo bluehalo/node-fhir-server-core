@@ -2,7 +2,7 @@ const { resolveFromVersion } = require('./resolve.utils');
 const { getOperationOutcome } = require('./standards.utils');
 
 const errors = require('./error.utils');
-const { ISSUE, VERSIONS } = require('../../constants');
+const { ISSUE } = require('../../constants');
 
 /**
 * @description When resources are read in the controller functions
@@ -158,24 +158,17 @@ let handleDeleteRejection = (res, next, base, err) => {
 };
 
 /**
-* @description 
-* @function handleValidateResponse
-* @param {Express.response} res - Express response object
+* @description Validation response indicating success
+* @function getValidResponse
+* @param {OperationOutcome}
 */
-let handleValidateResponse = (res, next, base, err, validationErrors) => {
+let getValidResponse = (base) => {
 	let OperationOutcome = getOperationOutcome(base);
-	let response = validationErrors
-		? getInvalidResponse(validationErrors)
-		: getValidResponse();
-	next(response);
-};
-
-let getValidResponse = () => {
 	return new OperationOutcome({
 		statusCode: 200,
 		text: {
 			status: 'additional',
-			div: `<div xmlns="http://www.w3.org/1999/xhtml"><p>All OK</p></div>`
+			div: '<div xmlns="http://www.w3.org/1999/xhtml"><p>All OK</p></div>'
 		},
 		issue: {
 			code: ISSUE.CODE.INFORMATIONAL,
@@ -185,10 +178,16 @@ let getValidResponse = () => {
 			}
 		}
 	});
-}
+};
 
-let getInvalidResponse = (validationErrors) => {
-	let response = new OperationOutcome({
+/**
+* @description Validation response indicating failure
+* @function getInvalidResponse
+* @param {OperationOutcome}
+*/
+let getInvalidResponse = (base, validationErrors) => {
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 200,
 		text: {
 			status: 'generated',
@@ -204,15 +203,27 @@ let getInvalidResponse = (validationErrors) => {
 			expression: validationErrors.expression
 		}
 	});
-}
+};
 
 /**
-* @description 
+* @description
+* @function handleValidateResponse
+* @param {Express.response} res - Express response object
+*/
+let handleValidateResponse = (res, next, base, err, validationErrors) => {
+	let response = validationErrors
+		? getInvalidResponse(base, validationErrors)
+		: getValidResponse(base);
+	next(response);
+};
+
+/**
+* @description
 * @function handleValidateRejection
 * @param {Express.response} res - Express response object
 */
 let handleValidateRejection = (res, next, base, err) => {
-	next(error);
+	next(err);
 };
 
 
