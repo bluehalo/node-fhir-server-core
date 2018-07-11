@@ -7,6 +7,7 @@ const { VERSIONS } = require('../constants');
 const appConfig = require('../config');
 const glob = require('glob');
 const cors = require('cors');
+const { route_dependencies } = require('./profiles/common.dependencies');
 
 /**
 * @description Helper function to determine which versions are available
@@ -37,16 +38,36 @@ function getAllConfiguredVersions (profiles = {}) {
 * @return {boolean}
 */
 function routeHasValidService (route, profile = {}) {
+	// if this route doesnt have any dependencies, always allow it.
+	if (!route.dependencies || route.dependencies.length === 0) {
+		return true;
+	}
 	// If we have no serviceModule, we can't enable this route
 	if (!profile.serviceModule) {
 		return false;
 	}
 	// If we do not have an export containing the correct service, don't enable the route
-	if (!profile.serviceModule[route.controller.name]) {
+	if (route.dependencies.includes(route_dependencies.SERVICE) && !profile.serviceModule[route.controller.name]) {
 		return false;
 	}
+
+	// Iterate through dependencies and ensure that all dependencies have been instantiated
+	// within the service module
+	let allDependenciesExist = true;
+	for (let i = 0; i < route.dependencies.length; i++) {
+		let dependency = route.dependencies[i];
+		// dont test this one if it's that special service case.
+		if (dependency === route_dependencies.SERVICE) {
+			continue;
+		}
+		if (!profile.serviceModule[dependency]) {
+			allDependenciesExist = false;
+			break;
+		}
+	}
+
 	// This route has a valid service, so we can enable it
-	return true;
+	return allDependenciesExist;
 }
 
 /**
