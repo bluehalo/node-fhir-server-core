@@ -5,6 +5,8 @@ const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./allergyintolerance.arguments');
 const controller = require('./allergyintolerance.controller');
 
+const validationUtils = require('../../utils/validation.utils');
+
 let write_only_scopes = write_scopes('AllergyIntolerance');
 let read_only_scopes = read_scopes('AllergyIntolerance');
 
@@ -103,6 +105,28 @@ let routes = [
 		scopes: write_only_scopes,
 		controller: controller.remove,
 		dependencies: [ route_dependencies.SERVICE ]
+	},
+	// ---- Validation ----
+	{
+		type: 'post',
+		path: '/:base/allergyintolerance/([\$])validate',
+		args: [
+			route_args.BASE
+		],
+		scopes: read_only_scopes,
+		controller: validationUtils.validateModel('allergyintolerance'),
+		dependencies: []
+	},
+	{
+		type: 'post',
+		path: '/:base/allergyintolerance/:id/([\$])validate',
+		args: [
+			route_args.BASE,
+			route_args.ID
+		],
+		scopes: read_only_scopes,
+		controller: validationUtils.validateModelById('allergyintolerance'),
+		dependencies: [ 'searchById' ]
 	}
 ];
 

@@ -5,6 +5,8 @@ const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./account.arguments');
 const controller = require('./account.controller');
 
+const validationUtils = require('../../utils/validation.utils');
+
 let write_only_scopes = write_scopes('Account');
 let read_only_scopes = read_scopes('Account');
 
@@ -115,7 +117,7 @@ let routes = [
 			route_args.BASE
 		],
 		scopes: read_only_scopes,
-		controller: controller.validate,
+		controller: validationUtils.validateModel('account'),
 		dependencies: []
 	},
 	{
@@ -126,7 +128,7 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.validateById,
+		controller: validationUtils.validateModelById('account'),
 		dependencies: [ 'searchById' ]
 	}
 ];

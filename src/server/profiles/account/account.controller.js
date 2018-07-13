@@ -1,7 +1,6 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "app" }] */
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
-const validationUtils = require('../../utils/validation.utils');
 const errors = require('../../utils/error.utils');
 
 module.exports.search = function search ({ profile, logger, config, app }) {
@@ -170,45 +169,6 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
-			});
-	};
-};
-
-/*
- * @description Controller for validating an Account.
- */
-module.exports.validate = function validate ({ logger, app }) {
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-
-		return validationUtils.validate('account', req.sanitized_args, logger)
-			.then((validationErrors) => responseUtils.handleValidateResponse(res, next, base, null, validationErrors))
-			.catch((err = {}) => {
-				// Log the error
-				logger.error(err);
-				// Pass the error back
-				responseUtils.handleValidateRejection(res, next, base, err);
-			});
-	};
-};
-
-/**
- * @description Controller for validating an Account by ID.
- */
-module.exports.validateById = function validate ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-
-		return service.searchById(req.sanitized_args, logger)
-			.then((results) => { return validationUtils.validate('account', results, logger); })
-			.then((validationErrors) => responseUtils.handleValidateResponse(res, next, base, null, validationErrors))
-			.catch((err = {}) => {
-				// Log the error
-				logger.error(err);
-				// Pass the error back
-				responseUtils.handleValidateRejection(res, next, base, err);
 			});
 	};
 };
