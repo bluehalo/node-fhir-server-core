@@ -42,13 +42,13 @@ module.exports.remove = (args, logger) => new Promise((resolve, reject) => {
 });
 
 module.exports.history = (args, logger) => new Promise((resolve, reject) => {
-    let message = 'Calling mock service. Did you forget to implement \'history\' in ResearchStudy service.';
-    logger.info(message);
-    reject(new Error(message));
+	let message = 'Calling mock service. Did you forget to implement \'history\' in ResearchStudy service.';
+	logger.info(message);
+	reject(new Error(message));
 });
 
 module.exports.historyById = (args, logger) => new Promise((resolve, reject) => {
-    let message = 'Calling mock service. Did you forget to implement \'historyById\' in ResearchStudy service.';
-    logger.info(message);
-    reject(new Error(message));
+	let message = 'Calling mock service. Did you forget to implement \'historyById\' in ResearchStudy service.';
+	logger.info(message);
+	reject(new Error(message));
 });
