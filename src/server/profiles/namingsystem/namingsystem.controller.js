@@ -167,7 +167,7 @@ module.exports.history = function history ({ profile, logger }) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific ActivityDefinition
+
 		let NamingSystem = getResourceConstructor(base);
 
 		return service.history(req.sanitized_args, logger)
@@ -189,7 +189,7 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific ActivityDefinition
+
 		let NamingSystem = getResourceConstructor(base);
 
 		return service.historyById(req.sanitized_args, logger)
