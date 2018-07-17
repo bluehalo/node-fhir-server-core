@@ -218,17 +218,6 @@ let handleValidateResponse = (res, next, base, err, validationErrors) => {
 };
 
 /**
-* @description
-* @function handleValidateRejection
-* @param {Express.response} res - Express response object
-*/
-let handleValidateRejection = (res, next, base, err) => {
-	next(err);
-};
-
-
-
-/**
  * @name exports
  * @static
  * @summary Various express response utils
@@ -240,6 +229,5 @@ module.exports = {
 	handleUpdateResponse,
 	handleDeleteResponse,
 	handleDeleteRejection,
-	handleValidateResponse,
-	handleValidateRejection
+	handleValidateResponse
 };
