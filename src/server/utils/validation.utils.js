@@ -38,7 +38,7 @@ function validateModel(model) {
 }
 
 /**
- * @description Controller for validating an Account by ID.
+ * @description Controller for validating a model by ID.
  */
 function validateModelById(model) {
 	return ({ profile, logger }) => {
