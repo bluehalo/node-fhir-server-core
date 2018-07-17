@@ -29,7 +29,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -72,7 +72,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((observation) => {
 				let Resource = getResourceConstructor(base, observation.resourceType);
 				responseUtils.handleSingleReadResponse(res, next, base, Resource, observation);

@@ -11,7 +11,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 		// Get a version specific resource
 		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, base, TestReport, results, {
 					resourceUrl: config.auth.resourceServer
@@ -34,7 +34,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 		// Get a version specific resource
 		let TestReport = require(resolveFromVersion(base, 'base/TestReport'));
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, base, TestReport, results)
 			)

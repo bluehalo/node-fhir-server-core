@@ -29,7 +29,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse( res, base, Patient, results, {
 					resourceUrl: config.auth.resourceServer,
@@ -79,7 +79,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
 		}
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleReadResponse(res, next, base, Patient, results)
 			)
