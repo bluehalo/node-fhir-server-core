@@ -1,15 +1,5 @@
-const { resolveFromVersion } = require('./resolve.utils');
-const { ISSUE, VERSIONS } = require('../../constants');
-
-// Helper to determine which operation outcome to retrieve
-let getErrorConstructor = base => {
-	switch (base) {
-		case VERSIONS.STU3:
-			return require(resolveFromVersion(base, 'uscore/OperationOutcome'));
-		default:
-			return require(resolveFromVersion(VERSIONS.STU3, 'uscore/OperationOutcome'));
-	}
-};
+const { getOperationOutcome } = require('./standards.utils');
+const { ISSUE } = require('../../constants');
 
 /* eslint-disable no-useless-escape */
 let div_content = (severity, diagnostics) =>
@@ -20,8 +10,8 @@ let div_content = (severity, diagnostics) =>
 
 // Invalid or Missing parameter from request
 let invalidParameter = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 400,
 		text: {
 			status: 'generated',
@@ -37,8 +27,8 @@ let invalidParameter = (message, base) => {
 
 // Unauthorized request of some resource
 let unauthorized = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 401,
 		text: {
 			status: 'generated',
@@ -53,8 +43,8 @@ let unauthorized = (message, base) => {
 };
 
 let insufficientScope = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 403,
 		text: {
 			status: 'generated',
@@ -69,8 +59,8 @@ let insufficientScope = (message, base) => {
 };
 
 let notFound = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 404,
 		text: {
 			status: 'generated',
@@ -85,8 +75,8 @@ let notFound = (message, base) => {
 };
 
 let methodNotAllowed = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 405,
 		text: {
 			status: 'generated',
@@ -101,8 +91,8 @@ let methodNotAllowed = (message, base) => {
 };
 
 let deleteConflict = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 409,
 		text: {
 			status: 'generated',
@@ -117,8 +107,8 @@ let deleteConflict = (message, base) => {
 };
 
 let deleted = (message, base) => {
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 410,
 		text: {
 			status: 'generated',
@@ -134,8 +124,8 @@ let deleted = (message, base) => {
 
 let internal = (message, base) => {
 	console.log('ERROR', message);
-	let ErrorConstructor = getErrorConstructor(base);
-	return new ErrorConstructor({
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
 		statusCode: 500,
 		text: {
 			status: 'generated',
@@ -149,7 +139,7 @@ let internal = (message, base) => {
 	});
 };
 
-let isServerError = (err, base) => err instanceof getErrorConstructor(base);
+let isServerError = (err, base) => err instanceof getOperationOutcome(base);
 
 /**
  * @name exports

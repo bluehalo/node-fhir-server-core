@@ -172,4 +172,3 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			});
 	};
 };
-

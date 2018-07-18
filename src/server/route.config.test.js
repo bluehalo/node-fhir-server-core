@@ -2,6 +2,7 @@
 
 const path = require('path');
 const glob = require('glob');
+const { route_dependencies } = require('./profiles/common.dependencies');
 
 const ALLOWED_ARG_TYPES = [
 	'string',
@@ -81,7 +82,13 @@ describe('Route Config Tests', () => {
 					return;
 				}
 
-				expect(route.controller.name).not.toEqual('');
+				if (!route.dependencies || route.dependencies.length === 0) {
+					return;
+				}
+
+				if (route.dependencies.includes(route_dependencies.SERVICE)) {
+					expect(route.controller.name).not.toEqual('');
+				}
 			});
 		});
 	});

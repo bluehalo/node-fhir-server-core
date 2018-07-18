@@ -1,5 +1,8 @@
 const { resolveFromVersion } = require('./resolve.utils');
+const { getOperationOutcome } = require('./standards.utils');
+
 const errors = require('./error.utils');
+const { ISSUE } = require('../../constants');
 
 /**
 * @description When resources are read in the controller functions
@@ -127,7 +130,7 @@ let handleUpdateResponse = (res, base, type, results) => {
 /**
 * @description When resources are passed to the delete[resource] controller functions
 * they all need to respond in a similar manner
-* @function handleUpdateResponse
+* @function handleDeleteResponse
 * @param {Express.response} res - Express response object
 */
 let handleDeleteResponse = (res) => {
@@ -137,7 +140,7 @@ let handleDeleteResponse = (res) => {
 /**
 * @description When resources are passed to the delete[resource] controller functions
 * they all need to respond in a similar manner with the correct error types
-* @function handleUpdateResponse
+* @function handleDeleteRejection
 * @param {Express.response} res - Express response object
 */
 let handleDeleteRejection = (res, next, base, err) => {
@@ -155,6 +158,66 @@ let handleDeleteRejection = (res, next, base, err) => {
 };
 
 /**
+* @description Validation response indicating success
+* @function getValidResponse
+* @param {OperationOutcome}
+*/
+let getValidResponse = (base) => {
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
+		statusCode: 200,
+		text: {
+			status: 'additional',
+			div: '<div xmlns="http://www.w3.org/1999/xhtml"><p>All OK</p></div>'
+		},
+		issue: {
+			code: ISSUE.CODE.INFORMATIONAL,
+			severity: ISSUE.SEVERITY.INFO,
+			details: {
+				text: 'All OK'
+			}
+		}
+	});
+};
+
+/**
+* @description Validation response indicating failure
+* @function getInvalidResponse
+* @param {OperationOutcome}
+*/
+let getInvalidResponse = (base, validationErrors) => {
+	let OperationOutcome = getOperationOutcome(base);
+	return new OperationOutcome({
+		statusCode: 200,
+		text: {
+			status: 'generated',
+			div: `<div xmlns="http://www.w3.org/1999/xhtml"><p>${validationErrors.message}</p></div>`
+		},
+		issue: {
+			code: ISSUE.CODE.STRUCTURE,
+			severity: ISSUE.SEVERITY.ERROR,
+			details: {
+				text: validationErrors.message
+			},
+			location: validationErrors.location,
+			expression: validationErrors.expression
+		}
+	});
+};
+
+/**
+* @description
+* @function handleValidateResponse
+* @param {Express.response} res - Express response object
+*/
+let handleValidateResponse = (res, next, base, err, validationErrors) => {
+	let response = validationErrors
+		? getInvalidResponse(base, validationErrors)
+		: getValidResponse(base);
+	next(response);
+};
+
+/**
  * @name exports
  * @static
  * @summary Various express response utils
@@ -165,5 +228,6 @@ module.exports = {
 	handleCreateResponse,
 	handleUpdateResponse,
 	handleDeleteResponse,
-	handleDeleteRejection
+	handleDeleteRejection,
+	handleValidateResponse
 };

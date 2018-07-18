@@ -1,8 +1,11 @@
 const { route_args, common_args, write_args, search_args } = require('../common.arguments');
 const { read_scopes, write_scopes } = require('../common.scopes');
+const { route_dependencies } = require('../common.dependencies');
 const { CONFIG_KEYS, VERSIONS } = require('../../../constants');
 const resource_specific_args = require('./account.arguments');
 const controller = require('./account.controller');
+
+const validationUtils = require('../../utils/validation.utils');
 
 let write_only_scopes = write_scopes('Account');
 let read_only_scopes = read_scopes('Account');
@@ -24,34 +27,41 @@ const resource_all_arguments = [
 ];
 
 let routes = [
+	// ---- Arguments ----
 	{
 		type: 'get',
 		path: '/:base/account',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.search
+		controller: controller.search,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
 	{
 		type: 'post',
 		path: '/:base/account/_search',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.search
+		controller: controller.search,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
+	// ---- History ----
 	{
 		type: 'get',
 		path: '/:base/account/_history',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.history
+		controller: controller.history,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
 	{
 		type: 'get',
 		path: '/:base/account/:id/_history',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
-		controller: controller.historyById
+		controller: controller.historyById,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
+	// ---- CRUD ----
 	{
 		type: 'get',
 		path: '/:base/account/:id',
@@ -60,7 +70,8 @@ let routes = [
 			route_args.ID
 		],
 		scopes: read_only_scopes,
-		controller: controller.searchById
+		controller: controller.searchById,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
 	{
 		type: 'post',
@@ -71,7 +82,8 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.create
+		controller: controller.create,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
 	{
 		type: 'put',
@@ -82,7 +94,8 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.update
+		controller: controller.update,
+		dependencies: [ route_dependencies.SERVICE ]
 	},
 	{
 		type: 'delete',
@@ -93,7 +106,30 @@ let routes = [
 			write_args.RESOURCE_BODY
 		],
 		scopes: write_only_scopes,
-		controller: controller.remove
+		controller: controller.remove,
+		dependencies: [ route_dependencies.SERVICE ]
+	},
+	// ---- Validation ----
+	{
+		type: 'post',
+		path: '/:base/account/([\$])validate',
+		args: [
+			route_args.BASE
+		],
+		scopes: read_only_scopes,
+		controller: validationUtils.validateModel('account'),
+		dependencies: []
+	},
+	{
+		type: 'post',
+		path: '/:base/account/:id/([\$])validate',
+		args: [
+			route_args.BASE,
+			route_args.ID
+		],
+		scopes: read_only_scopes,
+		controller: validationUtils.validateModelById('account'),
+		dependencies: [ 'searchById' ]
 	}
 ];
 
