@@ -8,9 +8,9 @@ const { routes } = require('./observation.config');
  */
 module.exports = {
 	profile: 'observation',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Observation = require(resolveFromVersion(version, 'uscore/Observation'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
 		// Return our conformance statement
 		return {
 			extension: [{

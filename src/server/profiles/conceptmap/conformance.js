@@ -8,9 +8,9 @@ const { routes } = require('./conceptmap.config');
  */
 module.exports = {
 	profile: 'conceptmap',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ConceptMap = require(resolveFromVersion(version, 'base/ConceptMap'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ConceptMap = require(resolveFromVersion(base, 'base/ConceptMap'));
 		// Return our conformance statement
 		return {
 			extension: [{

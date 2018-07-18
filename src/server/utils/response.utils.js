@@ -38,21 +38,33 @@ let handleSingleReadResponse = (res, next, base, Resource, resource_json) => {
 */
 let handleBundleReadResponse = (res, base, Resource, resource_json = [], options) => {
 	let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
-	let { filter, resourceUrl, resourceType = Resource.__resourceType } = options;
-	let results = new Bundle({ type: 'searchset' });
+	let Bundle_Link = require(resolveFromVersion(base, 'uscore/Bundle_Link'));
+	let { resourceUrl, resourceType = Resource.__resourceType } = options;
+
+	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
+	let self_link = new Bundle_Link({url: full_url, relation: 'self'});
+	let results = new Bundle({ type: 'searchset', link: self_link });
 	let entries = [];
 
 	if (resource_json) {
 		for (let resource of resource_json) {
-			if (!filter || (filter && filter(resource))) {
-				// Modes:
-				// match - This resource matched the search specification.
-				// include - This resource is returned because it is referred to from another resource in the search set.
-				// outcome - An OperationOutcome that provides additional information about the processing of a search.
+			let type = resource.resourceType;
+
+			// Modes:
+			// match - This resource matched the search specification.
+			// include - This resource is returned because it is referred to from another resource in the search set.
+			// outcome - An OperationOutcome that provides additional information about the processing of a search.
+			if (type === resourceType) {
 				entries.push({
 					search: { mode: 'match' },
-					resource: new Resource(resource),
+					resource,
 					fullUrl: `${resourceUrl}/${base}/${resourceType}/${resource.id}`
+				});
+			} else {
+				entries.push({
+					search: { mode: 'include' },
+					resource,
+					fullUrl: `${resourceUrl}/${base}/${type}/${resource.id}`
 				});
 			}
 		}

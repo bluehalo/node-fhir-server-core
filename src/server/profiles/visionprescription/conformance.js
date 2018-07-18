@@ -8,9 +8,9 @@ const { routes } = require('./visionprescription.config');
  */
 module.exports = {
 	profile: 'visionprescription',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let VisionPrescription = require(resolveFromVersion(version, 'base/VisionPrescription'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let VisionPrescription = require(resolveFromVersion(base, 'base/VisionPrescription'));
 		// Return our conformance statement
 		return {
 			extension: [{

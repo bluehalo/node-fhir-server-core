@@ -8,9 +8,9 @@ const { routes } = require('./contract.config');
  */
 module.exports = {
 	profile: 'contract',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Contract = require(resolveFromVersion(version, 'base/Contract'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Contract = require(resolveFromVersion(base, 'base/Contract'));
 		// Return our conformance statement
 		return {
 			extension: [{

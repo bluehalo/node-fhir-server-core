@@ -8,9 +8,9 @@ const { routes } = require('./dataelement.config');
  */
 module.exports = {
 	profile: 'dataelement',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let DataElement = require(resolveFromVersion(version, 'base/DataElement'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let DataElement = require(resolveFromVersion(base, 'base/DataElement'));
 		// Return our conformance statement
 		return {
 			extension: [{

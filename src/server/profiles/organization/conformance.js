@@ -8,9 +8,9 @@ const { routes } = require('./organization.config');
  */
 module.exports = {
 	profile: 'organization',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Organization = require(resolveFromVersion(version, 'uscore/Organization'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
 		// Return our conformance statement
 		return {
 			extension: [{

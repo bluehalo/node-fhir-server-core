@@ -8,9 +8,9 @@ const { routes } = require('./immunizationrecommendation.config');
  */
 module.exports = {
 	profile: 'immunizationrecommendation',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let ImmunizationRecommendation = require(resolveFromVersion(version, 'base/ImmunizationRecommendation'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let ImmunizationRecommendation = require(resolveFromVersion(base, 'base/ImmunizationRecommendation'));
 		// Return our conformance statement
 		return {
 			extension: [{

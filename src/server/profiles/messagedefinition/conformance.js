@@ -8,9 +8,9 @@ const { routes } = require('./messagedefinition.config');
  */
 module.exports = {
 	profile: 'messagedefinition',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let MessageDefinition = require(resolveFromVersion(version, 'base/MessageDefinition'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

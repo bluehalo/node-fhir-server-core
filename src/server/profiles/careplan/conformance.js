@@ -8,9 +8,9 @@ const { routes } = require('./careplan.config');
  */
 module.exports = {
 	profile: 'careplan',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let CarePlan = require(resolveFromVersion(version, 'uscore/CarePlan'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let CarePlan = require(resolveFromVersion(base, 'uscore/CarePlan'));
 		// Return our conformance statement
 		return {
 			extension: [{

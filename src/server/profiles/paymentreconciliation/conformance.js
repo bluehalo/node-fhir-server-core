@@ -8,9 +8,9 @@ const { routes } = require('./paymentreconciliation.config');
  */
 module.exports = {
 	profile: 'paymentreconciliation',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let PaymentReconciliation = require(resolveFromVersion(version, 'base/PaymentReconciliation'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let PaymentReconciliation = require(resolveFromVersion(base, 'base/PaymentReconciliation'));
 		// Return our conformance statement
 		return {
 			extension: [{

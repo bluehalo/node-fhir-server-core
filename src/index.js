@@ -29,6 +29,7 @@ module.exports = {
 		.configureMiddleware()
 		.configureSession()
 		.configureHelmet()
+		.configurePassport()
 		.setPublicDirectory()
 		.setProfileRoutes()
 		.setErrorRoutes()

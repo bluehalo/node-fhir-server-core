@@ -8,9 +8,9 @@ const { routes } = require('./testscript.config');
  */
 module.exports = {
 	profile: 'testscript',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let TestScript = require(resolveFromVersion(version, 'base/TestScript'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let TestScript = require(resolveFromVersion(base, 'base/TestScript'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -8,9 +8,9 @@ const { routes } = require('./linkage.config');
  */
 module.exports = {
 	profile: 'linkage',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let Linkage = require(resolveFromVersion(version, 'base/Linkage'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let Linkage = require(resolveFromVersion(base, 'base/Linkage'));
 		// Return our conformance statement
 		return {
 			extension: [{

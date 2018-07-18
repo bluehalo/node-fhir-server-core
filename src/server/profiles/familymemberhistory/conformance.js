@@ -8,9 +8,9 @@ const { routes } = require('./familymemberhistory.config');
  */
 module.exports = {
 	profile: 'familymemberhistory',
-	resource: (version, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, version);
-		let FamilyMemberHistory = require(resolveFromVersion(version, 'base/FamilyMemberHistory'));
+	resource: (base, count) => {
+		let searchParams = generateSearchParamsForConformance(routes, base);
+		let FamilyMemberHistory = require(resolveFromVersion(base, 'base/FamilyMemberHistory'));
 		// Return our conformance statement
 		return {
 			extension: [{
