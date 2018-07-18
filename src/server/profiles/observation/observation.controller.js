@@ -4,22 +4,34 @@ const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
 /**
-* Helper for getting the correct constructor for the various observation types
-*/
-let getResourceConstructor = (base, resourceType) => {
-	let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
-	let Results = require(resolveFromVersion(base, 'uscore/Results'));
-	let SmokingStatus = require(resolveFromVersion(base, 'uscore/SmokingStatus'));
-
-	switch (resourceType) {
-		case Results.__resourceType:
-			return Results;
-		case SmokingStatus.__resourceType:
-			return SmokingStatus;
-		default:
-			return Observation;
-	}
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	return require(resolveFromVersion(base, 'uscore/Observation'));
 };
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base, version_id} = req.sanitized_args;
+
+		let Observation = getResourceConstructor(base);
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, Observation, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
 
 module.exports.search = function search ({ profile, logger, config, app }) {
 	let { serviceModule: service } = profile;
@@ -38,7 +50,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 					for (let resource of observations) {
 						if (!req.observation || req.observation === resource.observationId) {
 							// Get a version specific observation for the correct type of observation
-							let Observation = getResourceConstructor(base, resource.resourceType);
+							let Observation = getResourceConstructor(base);
 							// Modes:
 							// match - This resource matched the search specification.
 							// include - This resource is returned because it is referred to from another resource in the search set.
@@ -73,9 +85,9 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 		let { base } = req.sanitized_args;
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((observation) => {
-				let Resource = getResourceConstructor(base, observation.resourceType);
-				responseUtils.handleSingleReadResponse(res, next, base, Resource, observation);
+			.then((results) => {
+				let Observation = getResourceConstructor(base);
+				responseUtils.handleSingleReadResponse(res, next, base, Observation, results);
 			})
 			.catch((err) => {
 				logger.error(err);
@@ -93,21 +105,21 @@ module.exports.create = function create ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific observation
-		let Resource = getResourceConstructor(base, resource_body.resourceType);
+		let Observation = getResourceConstructor(base);
 		// Validate the resource type before creating it
-		if (Resource.__resourceType !== resource_body.resourceType) {
+		if (Observation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Observation.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new observation resource and pass it to the service
-		let observation = new Resource(resource_body);
+		let observation = new Observation(resource_body);
 		let args = { id: resource_id, resource: observation };
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Resource.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Observation.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -125,21 +137,21 @@ module.exports.update = function update ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific observation
-		let Resource = getResourceConstructor(base, resource_body.resourceType);
+		let Observation = getResourceConstructor(base);
 		// Validate the resource type before creating it
-		if (Resource.__resourceType !== resource_body.resourceType) {
+		if (Observation.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${Resource.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Observation.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
 		// Create a new observation resource and pass it to the service
-		let observation = new Resource(resource_body);
+		let observation = new Observation(resource_body);
 		let args = { id, resource: observation };
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Resource.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Observation.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -177,7 +189,7 @@ module.exports.history = function history ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific Observation
-		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
+		let Observation = getResourceConstructor(base);
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
@@ -199,7 +211,7 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific Observation
-		let Observation = require(resolveFromVersion(base, 'uscore/Observation'));
+		let Observation = getResourceConstructor(base);
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>

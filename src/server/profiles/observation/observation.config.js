@@ -40,6 +40,17 @@ let routes = [
 	},
 	{
 		type: 'get',
+		path: '/:base/observation/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
+	},
+	{
+		type: 'get',
 		path: '/:base/observation/_history',
 		args: resource_all_arguments,
 		scopes: read_only_scopes,

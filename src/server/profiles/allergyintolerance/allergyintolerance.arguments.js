@@ -1,7 +1,7 @@
 /**
-* @name exports
-* @description All the possible patient arguments defined in one place
-*/
+ * @name exports
+ * @description All the possible patient arguments defined in one place
+ */
 module.exports = {
 	ASSERTER: {
 		name: 'asserter',

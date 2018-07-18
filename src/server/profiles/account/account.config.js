@@ -7,14 +7,14 @@ const controller = require('./account.controller');
 let write_only_scopes = write_scopes('Account');
 let read_only_scopes = read_scopes('Account');
 
+let search_args_array = Object.getOwnPropertyNames(search_args)
+	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, search_args[arg_name]));
+
 let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
 
 let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)
 	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, resource_specific_args[arg_name]));
-
-let search_args_array = Object.getOwnPropertyNames(search_args)
-	.map((arg_name) => Object.assign({ versions: VERSIONS.STU3 }, search_args[arg_name]));
 
 const resource_all_arguments = [
 	route_args.BASE,
@@ -37,6 +37,17 @@ let routes = [
 		args: resource_all_arguments,
 		scopes: read_only_scopes,
 		controller: controller.search
+	},
+	{
+		type: 'get',
+		path: '/:base/account/:id/_history/:versionid',
+		args: [
+			route_args.BASE,
+			route_args.ID,
+			route_args.VERSION_ID
+		],
+		scopes: read_only_scopes,
+		controller: controller.searchByVersionId
 	},
 	{
 		type: 'get',

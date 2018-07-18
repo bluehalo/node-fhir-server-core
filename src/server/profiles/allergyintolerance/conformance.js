@@ -20,7 +20,7 @@ module.exports = {
 			}],
 			type: AllergyIntolerance.__resourceType,
 			profile: {
-				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-allergyintolerance.html'
+				reference: 'http://hl7.org/fhir/allergyintolerance.html'
 			},
 			conditionalDelete: 'not-supported',
 			searchParam: searchParams

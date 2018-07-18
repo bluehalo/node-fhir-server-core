@@ -12,6 +12,11 @@ module.exports.route_args = {
 		name: 'id',
 		type: 'string',
 		conformance_hide: true
+	},
+	VERSION_ID: {
+		name: 'version_id',
+		type: 'string',
+		conformance_hide: true
 	}
 };
 

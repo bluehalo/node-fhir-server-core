@@ -3,41 +3,51 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+
+/**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	return require(resolveFromVersion(base, 'uscore/Organization'));
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific organization & bundle
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let {base, version_id} = req.sanitized_args;
+		let Organization = getResourceConstructor(base);
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Organization, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, Organization, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
-
 };
 
 
-module.exports.searchById = function searchById ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Controller to search organization
+ */
+module.exports.search = function search({profile, logger, config, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let Organization = getResourceConstructor(base);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Organization, results)
+				responseUtils.handleBundleReadResponse(res, base, Organization, results, {
+					resourceUrl: config.auth.resourceServer,
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -47,15 +57,35 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for creating a organization
-*/
-module.exports.create = function create ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+ * @description Controller to searchById organization
+ */
+module.exports.searchById = function searchById({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let { base } = req.sanitized_args;
+		let Organization = getResourceConstructor(base);
+
+		return service.searchById(req.sanitized_args, logger)
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, Organization, results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating a organization
+ */
+module.exports.create = function create({profile, logger, app}) {
+	let {serviceModule: service} = profile;
+
+	return (req, res, next) => {
+		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let Organization = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Organization.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -65,7 +95,7 @@ module.exports.create = function create ({ profile, logger, app }) {
 		}
 		// Create a new organization resource and pass it to the service
 		let organization = new Organization(resource_body);
-		let args = { id: resource_id, resource: organization };
+		let args = {id: resource_id, resource: organization};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
@@ -79,15 +109,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for updating/creating a organization. If the organization does not exist, it should be updated
-*/
-module.exports.update = function update ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+ * @description Controller for updating/creating Organization. If Organization does not exist, it should be updated
+ */
+module.exports.update = function update({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+		let {base, id, resource_body = {}} = req.sanitized_args;
+		let Organization = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Organization.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -97,7 +126,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 		}
 		// Create a new organization resource and pass it to the service
 		let organization = new Organization(resource_body);
-		let args = { id, resource: organization };
+		let args = {id, resource: organization};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
@@ -111,10 +140,10 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for deleting an organization resource.
-*/
-module.exports.remove = function remove ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+ * @description Controller for deleting Organization resource.
+ */
+module.exports.remove = function remove({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
@@ -122,7 +151,6 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
-				// Log the error
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
@@ -131,15 +159,15 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for getting the history of a Organization resource.
-*/
+ * @description Controller for getting the history of Organization resource.
+ */
 module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific Organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+
+		let Organization = getResourceConstructor(base);
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
@@ -153,15 +181,15 @@ module.exports.history = function history ({ profile, logger }) {
 };
 
 /**
-* @description Controller for getting the history of a Organization resource by ID.
-*/
+ * @description Controller for getting the history of Organization resource by ID.
+ */
 module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific Organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
+
+		let Organization = getResourceConstructor(base);
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
@@ -173,48 +201,3 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			});
 	};
 };
-
-/**
-* @description Controller for getting the history of a Organization resource.
-*/
-module.exports.history = function history ({ profile, logger }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific Organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
-
-		return service.history(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Organization, results)
-			)
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
-			});
-	};
-};
-
-/**
-* @description Controller for getting the history of a Organization resource by ID.
-*/
-module.exports.historyById = function historyById ({ profile, logger }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific Organization
-		let Organization = require(resolveFromVersion(base, 'uscore/Organization'));
-
-		return service.historyById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Organization, results)
-			)
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
-			});
-	};
-};
-

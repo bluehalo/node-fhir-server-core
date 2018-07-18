@@ -3,18 +3,50 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+
+/**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	return require(resolveFromVersion(base, 'base/Endpoint'));
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
+	let {serviceModule: service} = profile;
+
+	return (req, res, next) => {
+		let {base, version_id} = req.sanitized_args;
+		let Endpoint = getResourceConstructor(base);
+
+		return service.searchByVersionId(req.sanitized_args, logger)
+			.then((results) =>
+				responseUtils.handleSingleVReadResponse(res, next, base, Endpoint, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+
+/**
+ * @description Controller to search endpoint
+ */
+module.exports.search = function search({profile, logger, config, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+		let Endpoint = getResourceConstructor(base);
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, EndPoint, results, {
-					resourceUrl: config.auth.resourceServer
+				responseUtils.handleBundleReadResponse(res, base, Endpoint, results, {
+					resourceUrl: config.auth.resourceServer,
 				})
 			)
 			.catch((err) => {
@@ -22,22 +54,22 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 				next(errors.internal(err.message, base));
 			});
 	};
-
 };
 
-
-module.exports.searchById = function searchById ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Controller to searchById endpoint
+ */
+module.exports.searchById = function searchById({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+		let Endpoint = getResourceConstructor(base);
 
 		return service.searchById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, EndPoint, results)
-			)
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, Endpoint, results);
+			})
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
@@ -46,29 +78,28 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for creating EndPoint
+ * @description Controller for creating a endpoint
  */
-module.exports.create = function create ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.create = function create({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let Endpoint = getResourceConstructor(base);
 		// Validate the resource type before creating it
-		if (EndPoint.__resourceType !== resource_body.resourceType) {
+		if (Endpoint.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${EndPoint.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Endpoint.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new EndPoint(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		// Create a new endpoint resource and pass it to the service
+		let endpoint = new Endpoint(resource_body);
+		let args = {id: resource_id, resource: endpoint};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, EndPoint.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base, Endpoint.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -78,29 +109,28 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for updating/creating EndPoint. If the EndPoint does not exist, it should be updated
+ * @description Controller for updating/creating Endpoint. If Endpoint does not exist, it should be updated
  */
-module.exports.update = function update ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.update = function update({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+		let {base, id, resource_body = {}} = req.sanitized_args;
+		let Endpoint = getResourceConstructor(base);
 		// Validate the resource type before creating it
-		if (EndPoint.__resourceType !== resource_body.resourceType) {
+		if (Endpoint.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${EndPoint.__resourceType}', received '${resource_body.resourceType}'`,
+				`'resourceType' expected to have value of '${Endpoint.__resourceType}', received '${resource_body.resourceType}'`,
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new EndPoint(resource_body);
-		let args = { id, resource: new_resource };
+		// Create a new endpoint resource and pass it to the service
+		let endpoint = new Endpoint(resource_body);
+		let args = {id, resource: endpoint};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, EndPoint.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base, Endpoint.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -110,10 +140,10 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for deleting an EndPoint.
+ * @description Controller for deleting Endpoint resource.
  */
-module.exports.remove = function remove ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.remove = function remove({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
@@ -121,7 +151,6 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
-				// Log the error
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
@@ -130,19 +159,19 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for getting the history of a EndPoint resource.
-*/
+ * @description Controller for getting the history of Endpoint resource.
+ */
 module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific EndPoint
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+
+		let Endpoint = getResourceConstructor(base);
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, EndPoint, results)
+				responseUtils.handleBundleReadResponse( res, base, Endpoint, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -152,19 +181,19 @@ module.exports.history = function history ({ profile, logger }) {
 };
 
 /**
-* @description Controller for getting the history of a EndPoint resource by ID.
-*/
+ * @description Controller for getting the history of Endpoint resource by ID.
+ */
 module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific EndPoint
-		let EndPoint = require(resolveFromVersion(base, 'base/EndPoint'));
+
+		let Endpoint = getResourceConstructor(base);
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, EndPoint, results)
+				responseUtils.handleBundleReadResponse( res, base, Endpoint, results)
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -172,4 +201,3 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			});
 	};
 };
-

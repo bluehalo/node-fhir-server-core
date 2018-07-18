@@ -3,40 +3,51 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-module.exports.search = function search ({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+
+/**
+ * @description Construct a resource with base/uscore path
+ */
+let getResourceConstructor = (base) => {
+	return require(resolveFromVersion(base, 'base/Encounter'));
+};
+
+/**
+ * @description Controller to get a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+		let {base, version_id} = req.sanitized_args;
+		let Encounter = getResourceConstructor(base);
 
-		return service.search(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Encounter, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+				responseUtils.handleSingleVReadResponse(res, next, base, Encounter, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));
 			});
 	};
-
 };
 
 
-module.exports.searchById = function searchById ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+/**
+ * @description Controller to search encounter
+ */
+module.exports.search = function search({profile, logger, config, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+		let Encounter = getResourceConstructor(base);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Encounter, results)
+				responseUtils.handleBundleReadResponse(res, base, Encounter, results, {
+					resourceUrl: config.auth.resourceServer,
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -46,15 +57,35 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for creating Encounter
+ * @description Controller to searchById encounter
  */
-module.exports.create = function create ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.searchById = function searchById({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+		let { base } = req.sanitized_args;
+		let Encounter = getResourceConstructor(base);
+
+		return service.searchById(req.sanitized_args, logger)
+			.then((results) => {
+				responseUtils.handleSingleReadResponse(res, next, base, Encounter, results);
+			})
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base));
+			});
+	};
+};
+
+/**
+ * @description Controller for creating a encounter
+ */
+module.exports.create = function create({profile, logger, app}) {
+	let {serviceModule: service} = profile;
+
+	return (req, res, next) => {
+		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let Encounter = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Encounter.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -62,9 +93,9 @@ module.exports.create = function create ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new Encounter(resource_body);
-		let args = { id: resource_id, resource: new_resource };
+		// Create a new encounter resource and pass it to the service
+		let encounter = new Encounter(resource_body);
+		let args = {id: resource_id, resource: encounter};
 		// Pass any new information to the underlying service
 		return service.create(args, logger)
 			.then((results) =>
@@ -78,15 +109,14 @@ module.exports.create = function create ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for updating/creating Encounter. If the Encounter does not exist, it should be updated
+ * @description Controller for updating/creating Encounter. If Encounter does not exist, it should be updated
  */
-module.exports.update = function update ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.update = function update({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
-		// Get a version specific resource
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+		let {base, id, resource_body = {}} = req.sanitized_args;
+		let Encounter = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Encounter.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -94,9 +124,9 @@ module.exports.update = function update ({ profile, logger, app }) {
 				base
 			));
 		}
-		// Create a new resource and pass it to the service
-		let new_resource = new Encounter(resource_body);
-		let args = { id, resource: new_resource };
+		// Create a new encounter resource and pass it to the service
+		let encounter = new Encounter(resource_body);
+		let args = {id, resource: encounter};
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
@@ -110,10 +140,10 @@ module.exports.update = function update ({ profile, logger, app }) {
 };
 
 /**
- * @description Controller for deleting an Encounter.
+ * @description Controller for deleting Encounter resource.
  */
-module.exports.remove = function remove ({ profile, logger, app }) {
-	let { serviceModule: service } = profile;
+module.exports.remove = function remove({profile, logger, app}) {
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
@@ -121,7 +151,6 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
-				// Log the error
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
@@ -130,15 +159,15 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 };
 
 /**
-* @description Controller for getting the history of a Encounter resource.
-*/
+ * @description Controller for getting the history of Encounter resource.
+ */
 module.exports.history = function history ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific Encounter
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+
+		let Encounter = getResourceConstructor(base);
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
@@ -152,15 +181,15 @@ module.exports.history = function history ({ profile, logger }) {
 };
 
 /**
-* @description Controller for getting the history of a Encounter resource by ID.
-*/
+ * @description Controller for getting the history of Encounter resource by ID.
+ */
 module.exports.historyById = function historyById ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
-		// Get a version specific Encounter
-		let Encounter = require(resolveFromVersion(base, 'base/Encounter'));
+
+		let Encounter = getResourceConstructor(base);
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
@@ -172,4 +201,3 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			});
 	};
 };
-
