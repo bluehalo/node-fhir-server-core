@@ -109,7 +109,7 @@ module.exports.create = function create({profile, logger, app}) {
 };
 
 /**
- * @description Controller for updating/creating a requestgroup. If the requestgroup does not exist, it should be updated
+ * @description Controller for updating/creating RequestGroup. If RequestGroup does not exist, it should be updated
  */
 module.exports.update = function update({profile, logger, app}) {
 	let {serviceModule: service} = profile;
@@ -140,7 +140,7 @@ module.exports.update = function update({profile, logger, app}) {
 };
 
 /**
- * @description Controller for deleting an requestgroup resource.
+ * @description Controller for deleting RequestGroup resource.
  */
 module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
@@ -151,7 +151,6 @@ module.exports.remove = function remove({profile, logger, app}) {
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
-				// Log the error
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);

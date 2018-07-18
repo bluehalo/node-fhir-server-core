@@ -109,7 +109,7 @@ module.exports.create = function create({profile, logger, app}) {
 };
 
 /**
- * @description Controller for updating/creating a task. If the task does not exist, it should be updated
+ * @description Controller for updating/creating Task. If Task does not exist, it should be updated
  */
 module.exports.update = function update({profile, logger, app}) {
 	let {serviceModule: service} = profile;
@@ -140,7 +140,7 @@ module.exports.update = function update({profile, logger, app}) {
 };
 
 /**
- * @description Controller for deleting an task resource.
+ * @description Controller for deleting Task resource.
  */
 module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
@@ -151,7 +151,6 @@ module.exports.remove = function remove({profile, logger, app}) {
 		return service.remove(req.sanitized_args, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
-				// Log the error
 				logger.error(err);
 				// Pass the error back
 				responseUtils.handleDeleteRejection(res, next, base, err);
