@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'conceptmap',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ConceptMap = require(resolveFromVersion(base, 'base/ConceptMap'));
+		let ConceptMap = require(resolveFromVersion(base, 'ConceptMap'));
 		// Return our conformance statement
 		return {
 			extension: [{

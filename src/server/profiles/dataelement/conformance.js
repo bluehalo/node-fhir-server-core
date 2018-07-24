@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'dataelement',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let DataElement = require(resolveFromVersion(base, 'base/DataElement'));
+		let DataElement = require(resolveFromVersion(base, 'DataElement'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'messagedefinition',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let MessageDefinition = require(resolveFromVersion(base, 'base/MessageDefinition'));
+		let MessageDefinition = require(resolveFromVersion(base, 'MessageDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

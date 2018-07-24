@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'allergyintolerance',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let AllergyIntolerance = require(resolveFromVersion(base, 'uscore/AllergyIntolerance'));
+		let AllergyIntolerance = require(resolveFromVersion(base, 'AllergyIntolerance'));
 		// Return our conformance statement
 		return {
 			extension: [{

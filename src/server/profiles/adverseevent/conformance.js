@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'adverseevent',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let AdverseEvent = require(resolveFromVersion(base, 'base/AdverseEvent'));
+		let AdverseEvent = require(resolveFromVersion(base, 'AdverseEvent'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'media',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Media = require(resolveFromVersion(base, 'base/Media'));
+		let Media = require(resolveFromVersion(base, 'Media'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'codesystem',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let CodeSystem = require(resolveFromVersion(base, 'base/CodeSystem'));
+		let CodeSystem = require(resolveFromVersion(base, 'CodeSystem'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'devicemetric',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let DeviceMetric = require(resolveFromVersion(base, 'base/DeviceMetric'));
+		let DeviceMetric = require(resolveFromVersion(base, 'DeviceMetric'));
 		// Return our conformance statement
 		return {
 			extension: [{

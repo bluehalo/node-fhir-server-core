@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'linkage',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Linkage = require(resolveFromVersion(base, 'base/Linkage'));
+		let Linkage = require(resolveFromVersion(base, 'Linkage'));
 		// Return our conformance statement
 		return {
 			extension: [{

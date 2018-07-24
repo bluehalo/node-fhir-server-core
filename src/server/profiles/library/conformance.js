@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'library',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Library = require(resolveFromVersion(base, 'base/Library'));
+		let Library = require(resolveFromVersion(base, 'Library'));
 		// Return our conformance statement
 		return {
 			extension: [{

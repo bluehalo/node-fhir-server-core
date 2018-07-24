@@ -37,8 +37,8 @@ let handleSingleReadResponse = (res, next, base, Resource, resource_json) => {
 * the filter function should expect a resource to be passed in and return a boolean
 */
 let handleBundleReadResponse = (res, base, Resource, resource_json = [], options) => {
-	let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
-	let Bundle_Link = require(resolveFromVersion(base, 'uscore/Bundle_Link'));
+	let Bundle = require(resolveFromVersion(base, 'Bundle'));
+	let Bundle_Link = require(resolveFromVersion(base, 'Bundle_Link'));
 	let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
 	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;

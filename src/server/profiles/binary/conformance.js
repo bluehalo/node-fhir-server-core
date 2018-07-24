@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'binary',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Binary = require(resolveFromVersion(base, 'base/Binary'));
+		let Binary = require(resolveFromVersion(base, 'Binary'));
 		// Return our conformance statement
 		return {
 			extension: [{

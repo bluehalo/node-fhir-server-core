@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'immunizationrecommendation',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ImmunizationRecommendation = require(resolveFromVersion(base, 'base/ImmunizationRecommendation'));
+		let ImmunizationRecommendation = require(resolveFromVersion(base, 'ImmunizationRecommendation'));
 		// Return our conformance statement
 		return {
 			extension: [{

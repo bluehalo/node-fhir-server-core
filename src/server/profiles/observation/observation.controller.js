@@ -7,7 +7,7 @@ const errors = require('../../utils/error.utils');
  * @description Construct a resource with base/uscore path
  */
 let getResourceConstructor = (base) => {
-	return require(resolveFromVersion(base, 'uscore/Observation'));
+	return require(resolveFromVersion(base, 'Observation'));
 };
 
 /**
@@ -39,7 +39,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific bundle
-		let Bundle = require(resolveFromVersion(base, 'uscore/Bundle'));
+		let Bundle = require(resolveFromVersion(base, 'Bundle'));
 
 		return service.search(req.sanitized_args, logger)
 			.then((observations) => {

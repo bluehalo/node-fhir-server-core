@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'guidanceresponse',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let GuidanceResponse = require(resolveFromVersion(base, 'base/GuidanceResponse'));
+		let GuidanceResponse = require(resolveFromVersion(base, 'GuidanceResponse'));
 		// Return our conformance statement
 		return {
 			extension: [{

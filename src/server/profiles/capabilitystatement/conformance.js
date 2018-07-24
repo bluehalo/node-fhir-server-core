@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'capabilitystatement',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let CapabilityStatement = require(resolveFromVersion(base, 'base/CapabilityStatement'));
+		let CapabilityStatement = require(resolveFromVersion(base, 'CapabilityStatement'));
 		// Return our conformance statement
 		return {
 			extension: [{

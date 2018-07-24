@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'documentreference',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let DocumentReference = require(resolveFromVersion(base, 'base/DocumentReference'));
+		let DocumentReference = require(resolveFromVersion(base, 'DocumentReference'));
 		// Return our conformance statement
 		return {
 			extension: [{

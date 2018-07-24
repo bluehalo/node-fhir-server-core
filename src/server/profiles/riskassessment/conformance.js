@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'riskassessment',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let RiskAssessment = require(resolveFromVersion(base, 'base/RiskAssessment'));
+		let RiskAssessment = require(resolveFromVersion(base, 'RiskAssessment'));
 		// Return our conformance statement
 		return {
 			extension: [{

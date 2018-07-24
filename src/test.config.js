@@ -2,13 +2,13 @@ const FHIRServer = require('./index.js');
 let { VERSIONS } = FHIRServer.constants;
 
 module.exports = {
-	auth: {
-		strategy: {
-			name: 'bearer',
-			useSession: false,
-			service: '../server/strategies/bearer.strategy.js'
-		}
-	},
+	// auth: {
+	// 	strategy: {
+	// 		name: 'bearer',
+	// 		useSession: false,
+	// 		service: '../server/strategies/bearer.strategy.js'
+	// 	}
+	// },
 	server: {
 		port: 3000,
 		corsOptions: {

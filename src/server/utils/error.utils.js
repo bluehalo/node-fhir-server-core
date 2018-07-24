@@ -5,9 +5,9 @@ const { ISSUE, VERSIONS } = require('../../constants');
 let getErrorConstructor = base => {
 	switch (base) {
 		case VERSIONS.STU3:
-			return require(resolveFromVersion(base, 'uscore/OperationOutcome'));
+			return require(resolveFromVersion(base, 'OperationOutcome'));
 		default:
-			return require(resolveFromVersion(VERSIONS.STU3, 'uscore/OperationOutcome'));
+			return require(resolveFromVersion(VERSIONS.STU3, 'OperationOutcome'));
 	}
 };
 
@@ -133,7 +133,6 @@ let deleted = (message, base) => {
 };
 
 let internal = (message, base) => {
-	console.log('ERROR', message);
 	let ErrorConstructor = getErrorConstructor(base);
 	return new ErrorConstructor({
 		statusCode: 500,

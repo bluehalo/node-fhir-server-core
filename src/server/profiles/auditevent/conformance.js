@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'auditevent',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
+		let AuditEvent = require(resolveFromVersion(base, 'AuditEvent'));
 		// Return our conformance statement
 		return {
 			extension: [{

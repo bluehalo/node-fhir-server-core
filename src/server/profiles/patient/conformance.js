@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'patient',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 		// Return our conformance statement
 		return {
 			extension: [{

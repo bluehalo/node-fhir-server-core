@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'referralrequest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ReferralRequest = require(resolveFromVersion(base, 'base/ReferralRequest'));
+		let ReferralRequest = require(resolveFromVersion(base, 'ReferralRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

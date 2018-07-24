@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'graphdefinition',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let GraphDefinition = require(resolveFromVersion(base, 'base/GraphDefinition'));
+		let GraphDefinition = require(resolveFromVersion(base, 'GraphDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

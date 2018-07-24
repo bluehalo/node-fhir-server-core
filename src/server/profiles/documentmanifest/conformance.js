@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'documentmanifest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let DocumentManifest = require(resolveFromVersion(base, 'base/DocumentManifest'));
+		let DocumentManifest = require(resolveFromVersion(base, 'DocumentManifest'));
 		// Return our conformance statement
 		return {
 			extension: [{

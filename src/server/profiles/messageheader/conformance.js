@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'messageheader',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let MessageHeader = require(resolveFromVersion(base, 'base/MessageHeader'));
+		let MessageHeader = require(resolveFromVersion(base, 'MessageHeader'));
 		// Return our conformance statement
 		return {
 			extension: [{

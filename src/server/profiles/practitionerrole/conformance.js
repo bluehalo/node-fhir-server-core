@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'practitionerrole',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let PractitionerRole = require(resolveFromVersion(base, 'base/PractitionerRole'));
+		let PractitionerRole = require(resolveFromVersion(base, 'PractitionerRole'));
 		// Return our conformance statement
 		return {
 			extension: [{

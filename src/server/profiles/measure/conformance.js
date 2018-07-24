@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'measure',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let Measure = require(resolveFromVersion(base, 'base/Measure'));
+		let Measure = require(resolveFromVersion(base, 'Measure'));
 		// Return our conformance statement
 		return {
 			extension: [{

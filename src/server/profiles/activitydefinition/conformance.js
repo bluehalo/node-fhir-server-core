@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'activitydefinition',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ActivityDefinition = require(resolveFromVersion(base, 'base/ActivityDefinition'));
+		let ActivityDefinition = require(resolveFromVersion(base, 'ActivityDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

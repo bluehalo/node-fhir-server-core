@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'familymemberhistory',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let FamilyMemberHistory = require(resolveFromVersion(base, 'base/FamilyMemberHistory'));
+		let FamilyMemberHistory = require(resolveFromVersion(base, 'FamilyMemberHistory'));
 		// Return our conformance statement
 		return {
 			extension: [{

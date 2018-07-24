@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'valueset',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ValueSet = require(resolveFromVersion(base, 'base/ValueSet'));
+		let ValueSet = require(resolveFromVersion(base, 'ValueSet'));
 		// Return our conformance statement
 		return {
 			extension: [{

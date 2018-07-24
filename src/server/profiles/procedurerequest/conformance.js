@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'procedurerequest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ProcedureRequest = require(resolveFromVersion(base, 'base/ProcedureRequest'));
+		let ProcedureRequest = require(resolveFromVersion(base, 'ProcedureRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

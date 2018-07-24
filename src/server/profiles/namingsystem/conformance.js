@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'namingsystem',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let NamingSystem = require(resolveFromVersion(base, 'base/NamingSystem'));
+		let NamingSystem = require(resolveFromVersion(base, 'NamingSystem'));
 		// Return our conformance statement
 		return {
 			extension: [{

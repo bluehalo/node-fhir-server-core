@@ -12,7 +12,7 @@ const {
  * @description Construct a resource with base/uscore path
  */
 let getResourceConstructor = (base) => {
-	return require(resolveFromVersion(base, 'uscore/Patient'));
+	return require(resolveFromVersion(base, 'Patient'));
 };
 
 /**
@@ -39,7 +39,7 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 		let { base, id, version_id} = req.sanitized_args;
 
 		let Patient = getResourceConstructor(base);
-		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
+		let AuditEvent = require(resolveFromVersion(base, 'AuditEvent'));
 
 		if ( req.patient && id && req.patient !== id ) {
 			let resource = new AuditEvent({
@@ -75,7 +75,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 
 		return service.search(req.sanitized_args, logger)
 			.then((results) =>
@@ -99,8 +99,8 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, id } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
-		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
+		let AuditEvent = require(resolveFromVersion(base, 'AuditEvent'));
 
 		// If we have req.patient, then we need to validate that this patient
 		// is only accessing resources with his id, he is not allowed to access others
@@ -147,7 +147,7 @@ module.exports.create = function create ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, resource_id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -179,7 +179,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base, id, resource_body = {}} = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
@@ -231,7 +231,7 @@ module.exports.history = function history ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
@@ -253,7 +253,7 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
@@ -275,7 +275,7 @@ module.exports.history = function history ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific Patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
@@ -297,7 +297,7 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 	return (req, res, next) => {
 		let { base } = req.sanitized_args;
 		// Get a version specific Patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base, 'Patient'));
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>

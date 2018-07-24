@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'structuremap',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let StructureMap = require(resolveFromVersion(base, 'base/StructureMap'));
+		let StructureMap = require(resolveFromVersion(base, 'StructureMap'));
 		// Return our conformance statement
 		return {
 			extension: [{

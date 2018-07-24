@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'devicerequest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let DeviceRequest = require(resolveFromVersion(base, 'base/DeviceRequest'));
+		let DeviceRequest = require(resolveFromVersion(base, 'DeviceRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{

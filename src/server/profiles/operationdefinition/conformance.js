@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'operationdefinition',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let OperationDefinition = require(resolveFromVersion(base, 'base/OperationDefinition'));
+		let OperationDefinition = require(resolveFromVersion(base, 'OperationDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'imagingmanifest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let ImagingManifest = require(resolveFromVersion(base, 'base/ImagingManifest'));
+		let ImagingManifest = require(resolveFromVersion(base, 'ImagingManifest'));
 		// Return our conformance statement
 		return {
 			extension: [{

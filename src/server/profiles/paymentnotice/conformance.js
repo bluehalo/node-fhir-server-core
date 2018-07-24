@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'paymentnotice',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let PaymentNotice = require(resolveFromVersion(base, 'base/PaymentNotice'));
+		let PaymentNotice = require(resolveFromVersion(base, 'PaymentNotice'));
 		// Return our conformance statement
 		return {
 			extension: [{

@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'compartmentdefinition',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let CompartmentDefinition = require(resolveFromVersion(base, 'base/CompartmentDefinition'));
+		let CompartmentDefinition = require(resolveFromVersion(base, 'CompartmentDefinition'));
 		// Return our conformance statement
 		return {
 			extension: [{

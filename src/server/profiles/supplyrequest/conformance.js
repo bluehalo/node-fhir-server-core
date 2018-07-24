@@ -10,7 +10,7 @@ module.exports = {
 	profile: 'supplyrequest',
 	resource: (base, count) => {
 		let searchParams = generateSearchParamsForConformance(routes, base);
-		let SupplyRequest = require(resolveFromVersion(base, 'base/SupplyRequest'));
+		let SupplyRequest = require(resolveFromVersion(base, 'SupplyRequest'));
 		// Return our conformance statement
 		return {
 			extension: [{
