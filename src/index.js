@@ -1,6 +1,6 @@
 const Server = require('./server/server');
 const constants = require('./constants');
-const { resolveFromVersion } = require('../../utils/resolve.utils');
+const { resolveFromVersion } = require('./server/utils/resolve.utils');
 
 
 /**
