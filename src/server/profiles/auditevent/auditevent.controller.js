@@ -21,7 +21,7 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 		let {base, version_id} = req.sanitized_args;
 		let AuditEvent = getResourceConstructor(base);
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleVReadResponse(res, next, base, AuditEvent, results, version_id)
 			)

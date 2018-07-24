@@ -21,7 +21,7 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 		let {base, version_id} = req.sanitized_args;
 		let Account = getResourceConstructor(base);
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleVReadResponse(res, next, base, Account, results, version_id)
 			)
@@ -43,7 +43,7 @@ module.exports.search = function search({profile, logger, config, app}) {
 		let { base } = req.sanitized_args;
 		let Account = getResourceConstructor(base);
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse(res, base, Account, results, {
 					resourceUrl: config.auth.resourceServer,
@@ -66,10 +66,10 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 		let { base } = req.sanitized_args;
 		let Account = getResourceConstructor(base);
 
-		return service.searchById(req.sanitized_args, logger)
-			.then((results) => {
-				responseUtils.handleSingleReadResponse(res, next, base, Account, results);
-			})
+		return service.searchById(req.sanitized_args, req.contexts, logger)
+			.then((results) =>
+				responseUtils.handleSingleReadResponse(res, next, base, Account, results)
+			)
 			.catch((err) => {
 				logger.error(err);
 				next(errors.internal(err.message, base));

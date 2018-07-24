@@ -58,7 +58,7 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
 		}
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleVReadResponse(res, next, base, Patient, results, version_id)
 			)

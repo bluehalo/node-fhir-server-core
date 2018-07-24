@@ -21,7 +21,7 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 		let {base, version_id} = req.sanitized_args;
 		let Appointment = getResourceConstructor(base);
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleVReadResponse(res, next, base, Appointment, results, version_id)
 			)

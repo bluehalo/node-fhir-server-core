@@ -21,7 +21,7 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 
 		let Observation = getResourceConstructor(base);
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleSingleVReadResponse(res, next, base, Observation, results, version_id)
 			)
