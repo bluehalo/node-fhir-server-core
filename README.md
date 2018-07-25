@@ -70,6 +70,16 @@ Our project vision is to build an easy to use FHIR server that supports all reso
 
 We believe in establishing a robust security, especially when it comes to health information.  Part of the ONC Secure API Server Challenge was to stand up a server and let penetration testers have a go at it (you can see their results [here](https://github.com/Asymmetrik/node-fhir-server-core/issues?utf8=%E2%9C%93&q=label%3A%22ONC+FHIR+Challenge+Vulnerability%22+)).  We are committed to continuing this practice and we will continue fixing any vulnerabilities discovered so we can do our best to make this server as secure as possible.  For authentication, we are actively working on methods for simplifying integration with [SMART on FHIR](http://docs.smarthealthit.org/).
 
+## Roadmap
+- Support for more versions
+	- DSTU2 profiles is coming soon.
+	- R4 profiles will be available soon.
+- Remaining Endpoints (Terminology Operations)
+- Validation Service
+- Enhancing Authentication and adding additional scope checks
+- Better documentation on setup and configurations
+- Implementation guides and demos
+
 ## Contributing
 Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for more details regarding contributing issues or code.
 
