@@ -65,11 +65,6 @@ For a complete list of all configuration options, supported profiles, their setu
 
 For an already developed implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
-## Philosophy
-Our project vision is to build an easy to use FHIR server that supports all resource profiles defined in the [US Core implementation guide](http://www.hl7.org/fhir/us/core/) and is built with security in mind from the ground up. We decided to use a plugin style architecture so implementors could focus on writing queries and not worry about all the other technical difficulties of securing the server.  As this project matures, we plan to support more resources, custom extensions, versions, write capabilities, etc.  
-
-We believe in establishing a robust security, especially when it comes to health information.  Part of the ONC Secure API Server Challenge was to stand up a server and let penetration testers have a go at it (you can see their results [here](https://github.com/Asymmetrik/node-fhir-server-core/issues?utf8=%E2%9C%93&q=label%3A%22ONC+FHIR+Challenge+Vulnerability%22+)).  We are committed to continuing this practice and we will continue fixing any vulnerabilities discovered so we can do our best to make this server as secure as possible.  For authentication, we are actively working on methods for simplifying integration with [SMART on FHIR](http://docs.smarthealthit.org/).
-
 ## Roadmap
 - Support for more versions
 	- DSTU2 profiles is coming soon.
@@ -79,6 +74,11 @@ We believe in establishing a robust security, especially when it comes to health
 - Enhancing Authentication and adding additional scope checks
 - Better documentation on setup and configurations
 - Implementation guides and demos
+
+## Philosophy
+Our project vision is to build an easy to use FHIR server that supports all resource profiles defined in the [US Core implementation guide](http://www.hl7.org/fhir/us/core/) and is built with security in mind from the ground up. We decided to use a plugin style architecture so implementors could focus on writing queries and not worry about all the other technical difficulties of securing the server.  As this project matures, we plan to support more resources, custom extensions, versions, write capabilities, etc.  
+
+We believe in establishing a robust security, especially when it comes to health information.  Part of the ONC Secure API Server Challenge was to stand up a server and let penetration testers have a go at it (you can see their results [here](https://github.com/Asymmetrik/node-fhir-server-core/issues?utf8=%E2%9C%93&q=label%3A%22ONC+FHIR+Challenge+Vulnerability%22+)).  We are committed to continuing this practice and we will continue fixing any vulnerabilities discovered so we can do our best to make this server as secure as possible.  For authentication, we are actively working on methods for simplifying integration with [SMART on FHIR](http://docs.smarthealthit.org/).
 
 ## Contributing
 Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for more details regarding contributing issues or code.
