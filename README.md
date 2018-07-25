@@ -65,6 +65,16 @@ For a complete list of all configuration options, supported profiles, their setu
 
 For an already developed implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
+## Roadmap
+- Support for more versions
+	- DSTU2 profiles is coming soon.
+	- R4 profiles will be available in the near future.
+- Remaining Endpoints (Terminology Operations)
+- Validation Service
+- Enhancing Authentication and adding additional scope checks
+- Better documentation on setup and configurations
+- Implementation guides and demos
+
 ## Philosophy
 Our project vision is to build an easy to use FHIR server that supports all resource profiles defined in the [US Core implementation guide](http://www.hl7.org/fhir/us/core/) and is built with security in mind from the ground up. We decided to use a plugin style architecture so implementors could focus on writing queries and not worry about all the other technical difficulties of securing the server.  As this project matures, we plan to support more resources, custom extensions, versions, write capabilities, etc.  
 
