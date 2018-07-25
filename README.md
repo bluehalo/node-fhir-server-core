@@ -68,7 +68,7 @@ For an already developed implementation using MongoDB, please refer to our Githu
 ## Roadmap
 - Support for more versions
 	- DSTU2 profiles is coming soon.
-	- R4 profiles will be available soon.
+	- R4 profiles will be available in the near future.
 - Remaining Endpoints (Terminology Operations)
 - Validation Service
 - Enhancing Authentication and adding additional scope checks
