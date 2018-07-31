@@ -107,7 +107,7 @@ class Server {
 		this.app.use(compression({ level: 9 }));
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
-		this.app.use(bodyParser.json());
+		this.app.use(bodyParser.json({ type: 'application/*+json' }));
 		// return self for chaining
 		return this;
 	}
