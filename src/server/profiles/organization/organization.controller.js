@@ -84,7 +84,10 @@ module.exports.create = function create({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base, resource_id, resource_body = {}} = req.sanitized_args;
+		let {base, resource_id } = req.sanitized_args;
+
+		let resource_body = req.body;
+
 		let Organization = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Organization.__resourceType !== resource_body.resourceType) {
@@ -115,7 +118,10 @@ module.exports.update = function update({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base, id, resource_body = {}} = req.sanitized_args;
+		let {base, id} = req.sanitized_args;
+
+		let resource_body = req.body;
+
 		let Organization = getResourceConstructor(base);
 		// Validate the resource type before creating it
 		if (Organization.__resourceType !== resource_body.resourceType) {
