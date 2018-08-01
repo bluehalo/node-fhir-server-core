@@ -117,11 +117,12 @@ let handleUpdateResponse = (res, base, type, results) => {
 
 	if (resource_version) {
 		res.set('Content-Location', `${base}/${type}/${id}/_history/${resource_version}`);
+		res.set('ETag', resource_version)
+
 	}
 
 	res.set('Location', `${base}/${type}/${id}`);
 	res.set('Last-Modified', date.toISOString());
-	res.set('ETag', resource_version)
 	res.status(status).end();
 };
 
