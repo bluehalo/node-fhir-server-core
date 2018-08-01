@@ -97,9 +97,6 @@ let findMatchWithName = (name = '', params = {}) => {
  */
 let sanitizeMiddleware = function (config) {
 	return function (req, res, next) {
-
-		console.log(req);
-
 		let currentArgs = parseParams(req);
 		let cleanArgs = {};
 

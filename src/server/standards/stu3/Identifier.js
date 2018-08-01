@@ -1,7 +1,6 @@
 const Element = require('./Element');
 const CodeableConcept = require('./CodeableConcept');
 const Period = require('./Period');
-const Reference = require('./Reference');
 
 class Identifier extends Element {
 
@@ -70,6 +69,7 @@ class Identifier extends Element {
 	}
 
 	set assigner ( new_value ) {
+		const Reference = require('./Reference');
 		this._assigner = new Reference(new_value);
 	}
 
