@@ -121,13 +121,14 @@ let handleUpdateResponse = (res, base, type, results) => {
 
 	res.set('Location', `${base}/${type}/${id}`);
 	res.set('Last-Modified', date.toISOString());
+	res.set('ETag', resource_version)
 	res.status(status).end();
 };
 
 /**
 * @description When resources are passed to the delete[resource] controller functions
 * they all need to respond in a similar manner
-* @function handleUpdateResponse
+* @function handleDeleteResponse
 * @param {Express.response} res - Express response object
 */
 let handleDeleteResponse = (res) => {
