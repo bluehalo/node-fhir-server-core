@@ -7,8 +7,7 @@ const CarePlan_Detail = require('./CarePlan_Detail');
 class CarePlan_Activity extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'CarePlan_Activity';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -63,11 +62,11 @@ class CarePlan_Activity extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			outcomeCodeableConcept: this._outcomeCodeableConcept && this._outcomeCodeableConcept.map(v => v.toJSON()),
-			outcomeReference: this._outcomeReference && this._outcomeReference.map(v => v.toJSON()),
-			progress: this._progress && this._progress.map(v => v.toJSON()),
-			reference: this._reference && this._reference.toJSON(),
-			detail: this._detail && this._detail.toJSON()
+			outcomeCodeableConcept: this._outcomeCodeableConcept,
+			outcomeReference: this._outcomeReference,
+			progress: this._progress,
+			reference: this._reference,
+			detail: this._detail
 		});
 	}
 

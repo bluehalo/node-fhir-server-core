@@ -4,8 +4,7 @@ const Identifier = require('./Identifier');
 class Reference extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Reference';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -43,7 +42,7 @@ class Reference extends Element {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			reference: this._reference,
-			identifier: this._identifier && this._identifier.toJSON(),
+			identifier: this._identifier,
 			display: this._display
 		});
 	}

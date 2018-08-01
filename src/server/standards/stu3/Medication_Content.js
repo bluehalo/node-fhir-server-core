@@ -6,8 +6,7 @@ const Quantity = require('./Quantity');
 class Medication_Content extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Medication_Content';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -44,9 +43,9 @@ class Medication_Content extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			itemCodeableConcept: this._itemCodeableConcept && this._itemCodeableConcept.toJSON(),
-			itemReference: this._itemReference && this._itemReference.toJSON(),
-			amount: this._amount && this._amount.toJSON()
+			itemCodeableConcept: this._itemCodeableConcept,
+			itemReference: this._itemReference,
+			amount: this._amount
 		});
 	}
 

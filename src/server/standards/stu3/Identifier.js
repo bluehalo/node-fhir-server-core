@@ -1,12 +1,12 @@
 const Element = require('./Element');
 const CodeableConcept = require('./CodeableConcept');
 const Period = require('./Period');
+const Reference = require('./Reference');
 
 class Identifier extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Identifier';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -22,7 +22,7 @@ class Identifier extends Element {
 	set use ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['usual', 'official', 'temp', 'secondary'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field use`);
 		}
 		this._use = new_value;
@@ -70,18 +70,17 @@ class Identifier extends Element {
 	}
 
 	set assigner ( new_value ) {
-		const Reference = require('./Reference');
 		this._assigner = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			use: this._use,
-			type: this._type && this._type.toJSON(),
+			type: this._type,
 			system: this._system,
 			value: this._value,
-			period: this._period && this._period.toJSON(),
-			assigner: this._assigner && this._assigner.toJSON()
+			period: this._period,
+			assigner: this._assigner
 		});
 	}
 

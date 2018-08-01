@@ -7,8 +7,7 @@ const Duration = require('./Duration');
 class Goal_Target extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Goal_Target';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -60,7 +59,7 @@ class Goal_Target extends BackboneElement {
 	set dueDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dueDate`);
 		}
 		this._dueDate = new_value;
@@ -77,12 +76,12 @@ class Goal_Target extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			measure: this._measure && this._measure.toJSON(),
-			detailQuantity: this._detailQuantity && this._detailQuantity.toJSON(),
-			detailRange: this._detailRange && this._detailRange.toJSON(),
-			detailCodeableConcept: this._detailCodeableConcept && this._detailCodeableConcept.toJSON(),
+			measure: this._measure,
+			detailQuantity: this._detailQuantity,
+			detailRange: this._detailRange,
+			detailCodeableConcept: this._detailCodeableConcept,
 			dueDate: this._dueDate,
-			dueDuration: this._dueDuration && this._dueDuration.toJSON()
+			dueDuration: this._dueDuration
 		});
 	}
 

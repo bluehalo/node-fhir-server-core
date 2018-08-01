@@ -8,8 +8,7 @@ const Attachment = require('./Attachment');
 class Medication extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Medication';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -25,7 +24,7 @@ class Medication extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Medication'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -48,7 +47,7 @@ class Medication extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -120,15 +119,15 @@ class Medication extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			code: this._code && this._code.toJSON(),
+			code: this._code,
 			status: this._status,
 			isBrand: this._isBrand,
 			isOverTheCounter: this._isOverTheCounter,
-			manufacturer: this._manufacturer && this._manufacturer.toJSON(),
-			form: this._form && this._form.toJSON(),
-			ingredient: this._ingredient && this._ingredient.map(v => v.toJSON()),
-			package: this._package && this._package.toJSON(),
-			image: this._image && this._image.map(v => v.toJSON())
+			manufacturer: this._manufacturer,
+			form: this._form,
+			ingredient: this._ingredient,
+			package: this._package,
+			image: this._image
 		});
 	}
 

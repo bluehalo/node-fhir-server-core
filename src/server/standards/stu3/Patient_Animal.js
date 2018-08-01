@@ -4,8 +4,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Patient_Animal extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Patient_Animal';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -42,9 +41,9 @@ class Patient_Animal extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			species: this._species && this._species.toJSON(),
-			breed: this._breed && this._breed.toJSON(),
-			genderStatus: this._genderStatus && this._genderStatus.toJSON()
+			species: this._species,
+			breed: this._breed,
+			genderStatus: this._genderStatus
 		});
 	}
 

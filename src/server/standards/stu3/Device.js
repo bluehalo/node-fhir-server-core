@@ -9,8 +9,7 @@ const Annotation = require('./Annotation');
 class Device extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Device';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -26,7 +25,7 @@ class Device extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Device'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -58,7 +57,7 @@ class Device extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'inactive', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -99,7 +98,7 @@ class Device extends DomainResource {
 	set manufactureDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field manufactureDate`);
 		}
 		this._manufactureDate = new_value;
@@ -113,7 +112,7 @@ class Device extends DomainResource {
 	set expirationDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field expirationDate`);
 		}
 		this._expirationDate = new_value;
@@ -203,23 +202,23 @@ class Device extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			udi: this._udi && this._udi.toJSON(),
+			identifier: this._identifier,
+			udi: this._udi,
 			status: this._status,
-			type: this._type && this._type.toJSON(),
+			type: this._type,
 			lotNumber: this._lotNumber,
 			manufacturer: this._manufacturer,
 			manufactureDate: this._manufactureDate,
 			expirationDate: this._expirationDate,
 			model: this._model,
 			version: this._version,
-			patient: this._patient && this._patient.toJSON(),
-			owner: this._owner && this._owner.toJSON(),
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			location: this._location && this._location.toJSON(),
+			patient: this._patient,
+			owner: this._owner,
+			contact: this._contact,
+			location: this._location,
 			url: this._url,
-			note: this._note && this._note.map(v => v.toJSON()),
-			safety: this._safety && this._safety.map(v => v.toJSON())
+			note: this._note,
+			safety: this._safety
 		});
 	}
 

@@ -1,7 +1,6 @@
 class Element {
 
 	constructor ( opts ) {
-		this._resourceType = 'Element';
 		Object.assign(this, opts);
 	}
 
@@ -31,7 +30,7 @@ class Element {
 	toJSON () {
 		return {
 			id: this._id,
-			extension: this._extension && this._extension.map(v => v.toJSON())
+			extension: this._extension
 		};
 	}
 

@@ -3,8 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Consent_Policy extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Consent_Policy';
+		super();
 		Object.assign(this, opts);
 	}
 

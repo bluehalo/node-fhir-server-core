@@ -4,8 +4,7 @@ const Reference = require('./Reference');
 class ElementDefinition_Binding extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ElementDefinition_Binding';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -21,7 +20,7 @@ class ElementDefinition_Binding extends BackboneElement {
 	set strength ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['required', 'extensible', 'preferred', 'example'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field strength`);
 		}
 		this._strength = new_value;
@@ -59,7 +58,7 @@ class ElementDefinition_Binding extends BackboneElement {
 			strength: this._strength,
 			description: this._description,
 			valueSetUri: this._valueSetUri,
-			valueSetReference: this._valueSetReference && this._valueSetReference.toJSON()
+			valueSetReference: this._valueSetReference
 		});
 	}
 

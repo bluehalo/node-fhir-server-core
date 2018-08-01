@@ -5,8 +5,7 @@ const Extension = require('./Extension');
 class DomainResource extends Resource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'DomainResource';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -53,10 +52,10 @@ class DomainResource extends Resource {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			text: this._text && this._text.toJSON(),
-			contained: this._contained && this._contained.map(v => v.toJSON()),
-			extension: this._extension && this._extension.map(v => v.toJSON()),
-			modifierExtension: this._modifierExtension && this._modifierExtension.map(v => v.toJSON())
+			text: this._text,
+			contained: this._contained,
+			extension: this._extension,
+			modifierExtension: this._modifierExtension
 		});
 	}
 

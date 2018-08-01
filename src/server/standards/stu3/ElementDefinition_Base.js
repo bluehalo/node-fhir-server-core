@@ -3,8 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class ElementDefinition_Base extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ElementDefinition_Base';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -29,7 +28,7 @@ class ElementDefinition_Base extends BackboneElement {
 	set min ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
 		this._min = new_value;

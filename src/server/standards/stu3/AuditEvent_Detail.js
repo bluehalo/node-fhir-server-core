@@ -3,8 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class AuditEvent_Detail extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'AuditEvent_Detail';
+		super();
 		Object.assign(this, opts);
 	}
 

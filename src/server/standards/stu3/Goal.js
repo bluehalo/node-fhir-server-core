@@ -8,8 +8,7 @@ const Annotation = require('./Annotation');
 class Goal extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Goal';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -25,7 +24,7 @@ class Goal extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Goal'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -48,7 +47,7 @@ class Goal extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['proposed', 'accepted', 'planned', 'in-progress', 'on-target', 'ahead-of-target', 'behind-target', 'sustaining', 'achieved', 'on-hold', 'cancelled', 'entered-in-error', 'rejected'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -98,7 +97,7 @@ class Goal extends DomainResource {
 	set startDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field startDate`);
 		}
 		this._startDate = new_value;
@@ -130,7 +129,7 @@ class Goal extends DomainResource {
 	set statusDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field statusDate`);
 		}
 		this._statusDate = new_value;
@@ -193,22 +192,22 @@ class Goal extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			identifier: this._identifier,
 			status: this._status,
-			category: this._category && this._category.map(v => v.toJSON()),
-			priority: this._priority && this._priority.toJSON(),
-			description: this._description && this._description.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
+			category: this._category,
+			priority: this._priority,
+			description: this._description,
+			subject: this._subject,
 			startDate: this._startDate,
-			startCodeableConcept: this._startCodeableConcept && this._startCodeableConcept.toJSON(),
-			target: this._target && this._target.toJSON(),
+			startCodeableConcept: this._startCodeableConcept,
+			target: this._target,
 			statusDate: this._statusDate,
 			statusReason: this._statusReason,
-			expressedBy: this._expressedBy && this._expressedBy.toJSON(),
-			addresses: this._addresses && this._addresses.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON()),
-			outcomeCode: this._outcomeCode && this._outcomeCode.map(v => v.toJSON()),
-			outcomeReference: this._outcomeReference && this._outcomeReference.map(v => v.toJSON())
+			expressedBy: this._expressedBy,
+			addresses: this._addresses,
+			note: this._note,
+			outcomeCode: this._outcomeCode,
+			outcomeReference: this._outcomeReference
 		});
 	}
 

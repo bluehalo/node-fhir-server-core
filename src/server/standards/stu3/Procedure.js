@@ -10,8 +10,7 @@ const Procedure_FocalDevice = require('./Procedure_FocalDevice');
 class Procedure extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Procedure';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -27,7 +26,7 @@ class Procedure extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Procedure'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -77,7 +76,7 @@ class Procedure extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field status`);
 		}
 		this._status = new_value;
@@ -145,7 +144,7 @@ class Procedure extends DomainResource {
 	set performedDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field performedDateTime`);
 		}
 		this._performedDateTime = new_value;
@@ -289,33 +288,33 @@ class Procedure extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			definition: this._definition && this._definition.map(v => v.toJSON()),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
-			partOf: this._partOf && this._partOf.map(v => v.toJSON()),
+			identifier: this._identifier,
+			definition: this._definition,
+			basedOn: this._basedOn,
+			partOf: this._partOf,
 			status: this._status,
 			notDone: this._notDone,
-			notDoneReason: this._notDoneReason && this._notDoneReason.toJSON(),
-			category: this._category && this._category.toJSON(),
-			code: this._code && this._code.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
+			notDoneReason: this._notDoneReason,
+			category: this._category,
+			code: this._code,
+			subject: this._subject,
+			context: this._context,
 			performedDateTime: this._performedDateTime,
-			performedPeriod: this._performedPeriod && this._performedPeriod.toJSON(),
-			performer: this._performer && this._performer.map(v => v.toJSON()),
-			location: this._location && this._location.toJSON(),
-			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
-			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
-			bodySite: this._bodySite && this._bodySite.map(v => v.toJSON()),
-			outcome: this._outcome && this._outcome.toJSON(),
-			report: this._report && this._report.map(v => v.toJSON()),
-			complication: this._complication && this._complication.map(v => v.toJSON()),
-			complicationDetail: this._complicationDetail && this._complicationDetail.map(v => v.toJSON()),
-			followUp: this._followUp && this._followUp.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON()),
-			focalDevice: this._focalDevice && this._focalDevice.map(v => v.toJSON()),
-			usedReference: this._usedReference && this._usedReference.map(v => v.toJSON()),
-			usedCode: this._usedCode && this._usedCode.map(v => v.toJSON())
+			performedPeriod: this._performedPeriod,
+			performer: this._performer,
+			location: this._location,
+			reasonCode: this._reasonCode,
+			reasonReference: this._reasonReference,
+			bodySite: this._bodySite,
+			outcome: this._outcome,
+			report: this._report,
+			complication: this._complication,
+			complicationDetail: this._complicationDetail,
+			followUp: this._followUp,
+			note: this._note,
+			focalDevice: this._focalDevice,
+			usedReference: this._usedReference,
+			usedCode: this._usedCode
 		});
 	}
 

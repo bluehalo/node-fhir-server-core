@@ -4,8 +4,7 @@ const Reference = require('./Reference');
 class ParameterDefinition extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ParameterDefinition';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -21,7 +20,7 @@ class ParameterDefinition extends Element {
 	set name ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field name`);
 		}
 		this._name = new_value;
@@ -35,7 +34,7 @@ class ParameterDefinition extends Element {
 	set use ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field use`);
 		}
 		this._use = new_value;
@@ -49,7 +48,7 @@ class ParameterDefinition extends Element {
 	set min ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
 		this._min = new_value;
@@ -81,7 +80,7 @@ class ParameterDefinition extends Element {
 	set type ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field type`);
 		}
 		this._type = new_value;
@@ -104,7 +103,7 @@ class ParameterDefinition extends Element {
 			max: this._max,
 			documentation: this._documentation,
 			type: this._type,
-			profile: this._profile && this._profile.toJSON()
+			profile: this._profile
 		});
 	}
 

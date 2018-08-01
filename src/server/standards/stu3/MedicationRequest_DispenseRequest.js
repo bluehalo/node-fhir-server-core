@@ -7,8 +7,7 @@ const Reference = require('./Reference');
 class MedicationRequest_DispenseRequest extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'MedicationRequest_DispenseRequest';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -33,7 +32,7 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 	set numberOfRepeatsAllowed ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field numberOfRepeatsAllowed`);
 		}
 		this._numberOfRepeatsAllowed = new_value;
@@ -68,11 +67,11 @@ class MedicationRequest_DispenseRequest extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			validityPeriod: this._validityPeriod && this._validityPeriod.toJSON(),
+			validityPeriod: this._validityPeriod,
 			numberOfRepeatsAllowed: this._numberOfRepeatsAllowed,
-			quantity: this._quantity && this._quantity.toJSON(),
-			expectedSupplyDuration: this._expectedSupplyDuration && this._expectedSupplyDuration.toJSON(),
-			performer: this._performer && this._performer.toJSON()
+			quantity: this._quantity,
+			expectedSupplyDuration: this._expectedSupplyDuration,
+			performer: this._performer
 		});
 	}
 

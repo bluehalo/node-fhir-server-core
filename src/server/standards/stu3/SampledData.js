@@ -4,8 +4,7 @@ const Quantity = require('./Quantity');
 class SampledData extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'SampledData';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -30,7 +29,7 @@ class SampledData extends Element {
 	set period ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field period`);
 		}
 		this._period = new_value;
@@ -44,7 +43,7 @@ class SampledData extends Element {
 	set factor ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field factor`);
 		}
 		this._factor = new_value;
@@ -58,7 +57,7 @@ class SampledData extends Element {
 	set lowerLimit ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field lowerLimit`);
 		}
 		this._lowerLimit = new_value;
@@ -72,7 +71,7 @@ class SampledData extends Element {
 	set upperLimit ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field upperLimit`);
 		}
 		this._upperLimit = new_value;
@@ -86,7 +85,7 @@ class SampledData extends Element {
 	set dimensions ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dimensions`);
 		}
 		this._dimensions = new_value;
@@ -103,7 +102,7 @@ class SampledData extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			origin: this._origin && this._origin.toJSON(),
+			origin: this._origin,
 			period: this._period,
 			factor: this._factor,
 			lowerLimit: this._lowerLimit,

@@ -5,8 +5,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Timing extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Timing';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -44,8 +43,8 @@ class Timing extends Element {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			event: this._event,
-			repeat: this._repeat && this._repeat.toJSON(),
-			code: this._code && this._code.toJSON()
+			repeat: this._repeat,
+			code: this._code
 		});
 	}
 

@@ -4,8 +4,7 @@ const Coding = require('./Coding');
 class CodeableConcept extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'CodeableConcept';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -33,7 +32,7 @@ class CodeableConcept extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			coding: this._coding && this._coding.map(v => v.toJSON()),
+			coding: this._coding,
 			text: this._text
 		});
 	}

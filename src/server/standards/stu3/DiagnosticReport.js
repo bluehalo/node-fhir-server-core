@@ -10,8 +10,7 @@ const Attachment = require('./Attachment');
 class DiagnosticReport extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'DiagnosticReport';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -27,7 +26,7 @@ class DiagnosticReport extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['DiagnosticReport'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -59,7 +58,7 @@ class DiagnosticReport extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['registered', 'partial', 'preliminary', 'final', 'amended', 'corrected', 'appended', 'cancelled', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -109,7 +108,7 @@ class DiagnosticReport extends DomainResource {
 	set effectiveDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
 		this._effectiveDateTime = new_value;
@@ -208,24 +207,24 @@ class DiagnosticReport extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
+			identifier: this._identifier,
+			basedOn: this._basedOn,
 			status: this._status,
-			category: this._category && this._category.toJSON(),
-			code: this._code && this._code.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
+			category: this._category,
+			code: this._code,
+			subject: this._subject,
+			context: this._context,
 			effectiveDateTime: this._effectiveDateTime,
-			effectivePeriod: this._effectivePeriod && this._effectivePeriod.toJSON(),
+			effectivePeriod: this._effectivePeriod,
 			issued: this._issued,
-			performer: this._performer && this._performer.map(v => v.toJSON()),
-			specimen: this._specimen && this._specimen.map(v => v.toJSON()),
-			result: this._result && this._result.map(v => v.toJSON()),
-			imagingStudy: this._imagingStudy && this._imagingStudy.map(v => v.toJSON()),
-			image: this._image && this._image.map(v => v.toJSON()),
+			performer: this._performer,
+			specimen: this._specimen,
+			result: this._result,
+			imagingStudy: this._imagingStudy,
+			image: this._image,
 			conclusion: this._conclusion,
-			codedDiagnosis: this._codedDiagnosis && this._codedDiagnosis.map(v => v.toJSON()),
-			presentedForm: this._presentedForm && this._presentedForm.map(v => v.toJSON())
+			codedDiagnosis: this._codedDiagnosis,
+			presentedForm: this._presentedForm
 		});
 	}
 

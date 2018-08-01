@@ -5,8 +5,7 @@ const Reference = require('./Reference');
 class Condition_Evidence extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Condition_Evidence';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -34,8 +33,8 @@ class Condition_Evidence extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code && this._code.map(v => v.toJSON()),
-			detail: this._detail && this._detail.map(v => v.toJSON())
+			code: this._code,
+			detail: this._detail
 		});
 	}
 

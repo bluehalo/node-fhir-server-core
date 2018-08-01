@@ -6,8 +6,7 @@ const Period = require('./Period');
 class Timing_Repeat extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Timing_Repeat';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -50,7 +49,7 @@ class Timing_Repeat extends BackboneElement {
 	set count ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field count`);
 		}
 		this._count = new_value;
@@ -64,7 +63,7 @@ class Timing_Repeat extends BackboneElement {
 	set countMax ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field countMax`);
 		}
 		this._countMax = new_value;
@@ -78,7 +77,7 @@ class Timing_Repeat extends BackboneElement {
 	set duration ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field duration`);
 		}
 		this._duration = new_value;
@@ -92,7 +91,7 @@ class Timing_Repeat extends BackboneElement {
 	set durationMax ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field durationMax`);
 		}
 		this._durationMax = new_value;
@@ -106,7 +105,7 @@ class Timing_Repeat extends BackboneElement {
 	set durationUnit ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['s', 'min', 'h', 'd', 'wk', 'mo', 'a'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field durationUnit`);
 		}
 		this._durationUnit = new_value;
@@ -120,7 +119,7 @@ class Timing_Repeat extends BackboneElement {
 	set frequency ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field frequency`);
 		}
 		this._frequency = new_value;
@@ -134,7 +133,7 @@ class Timing_Repeat extends BackboneElement {
 	set frequencyMax ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field frequencyMax`);
 		}
 		this._frequencyMax = new_value;
@@ -148,7 +147,7 @@ class Timing_Repeat extends BackboneElement {
 	set period ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field period`);
 		}
 		this._period = new_value;
@@ -162,7 +161,7 @@ class Timing_Repeat extends BackboneElement {
 	set periodMax ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field periodMax`);
 		}
 		this._periodMax = new_value;
@@ -176,7 +175,7 @@ class Timing_Repeat extends BackboneElement {
 	set periodUnit ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['s', 'min', 'h', 'd', 'wk', 'mo', 'a'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field periodUnit`);
 		}
 		this._periodUnit = new_value;
@@ -208,7 +207,7 @@ class Timing_Repeat extends BackboneElement {
 	set when ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['MORN', 'AFT', 'EVE', 'NIGHT', 'PHS', 'HS', 'WAKE', 'C', 'CM', 'CD', 'CV', 'AC', 'ACM', 'ACD', 'ACV', 'PC', 'PCM', 'PCD', 'PCV'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field when`);
 		}
 		this._when = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -222,7 +221,7 @@ class Timing_Repeat extends BackboneElement {
 	set offset ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field offset`);
 		}
 		this._offset = new_value;
@@ -230,9 +229,9 @@ class Timing_Repeat extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			boundsDuration: this._boundsDuration && this._boundsDuration.toJSON(),
-			boundsRange: this._boundsRange && this._boundsRange.toJSON(),
-			boundsPeriod: this._boundsPeriod && this._boundsPeriod.toJSON(),
+			boundsDuration: this._boundsDuration,
+			boundsRange: this._boundsRange,
+			boundsPeriod: this._boundsPeriod,
 			count: this._count,
 			countMax: this._countMax,
 			duration: this._duration,

@@ -3,8 +3,7 @@ const Element = require('./Element');
 class Coding extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Coding';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -38,7 +37,7 @@ class Coding extends Element {
 	set code ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field code`);
 		}
 		this._code = new_value;

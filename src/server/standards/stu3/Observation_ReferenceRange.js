@@ -6,8 +6,7 @@ const Range = require('./Range');
 class Observation_ReferenceRange extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Observation_ReferenceRange';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -71,11 +70,11 @@ class Observation_ReferenceRange extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			low: this._low && this._low.toJSON(),
-			high: this._high && this._high.toJSON(),
-			type: this._type && this._type.toJSON(),
-			appliesTo: this._appliesTo && this._appliesTo.map(v => v.toJSON()),
-			age: this._age && this._age.toJSON(),
+			low: this._low,
+			high: this._high,
+			type: this._type,
+			appliesTo: this._appliesTo,
+			age: this._age,
 			text: this._text
 		});
 	}

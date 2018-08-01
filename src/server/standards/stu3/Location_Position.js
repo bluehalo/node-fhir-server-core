@@ -3,8 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Location_Position extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Location_Position';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -20,7 +19,7 @@ class Location_Position extends BackboneElement {
 	set longitude ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field longitude`);
 		}
 		this._longitude = new_value;
@@ -34,7 +33,7 @@ class Location_Position extends BackboneElement {
 	set latitude ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field latitude`);
 		}
 		this._latitude = new_value;
@@ -48,7 +47,7 @@ class Location_Position extends BackboneElement {
 	set altitude ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field altitude`);
 		}
 		this._altitude = new_value;

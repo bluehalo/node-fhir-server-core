@@ -7,8 +7,7 @@ const Address = require('./Address');
 class Organization_Contact extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Organization_Contact';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -54,10 +53,10 @@ class Organization_Contact extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			purpose: this._purpose && this._purpose.toJSON(),
-			name: this._name && this._name.toJSON(),
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			address: this._address && this._address.toJSON()
+			purpose: this._purpose,
+			name: this._name,
+			telecom: this._telecom,
+			address: this._address
 		});
 	}
 

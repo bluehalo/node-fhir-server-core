@@ -9,8 +9,7 @@ const Signature = require('./Signature');
 class Provenance extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Provenance';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -26,7 +25,7 @@ class Provenance extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Provenance'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -125,16 +124,16 @@ class Provenance extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			target: this._target && this._target.map(v => v.toJSON()),
-			period: this._period && this._period.toJSON(),
+			target: this._target,
+			period: this._period,
 			recorded: this._recorded,
 			policy: this._policy,
-			location: this._location && this._location.toJSON(),
-			reason: this._reason && this._reason.map(v => v.toJSON()),
-			activity: this._activity && this._activity.toJSON(),
-			agent: this._agent && this._agent.map(v => v.toJSON()),
-			entity: this._entity && this._entity.map(v => v.toJSON()),
-			signature: this._signature && this._signature.map(v => v.toJSON())
+			location: this._location,
+			reason: this._reason,
+			activity: this._activity,
+			agent: this._agent,
+			entity: this._entity,
+			signature: this._signature
 		});
 	}
 

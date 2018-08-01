@@ -3,8 +3,7 @@ const Quantity = require('./Quantity');
 class Money extends Quantity {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Money';
+		super();
 		Object.assign(this, opts);
 	}
 

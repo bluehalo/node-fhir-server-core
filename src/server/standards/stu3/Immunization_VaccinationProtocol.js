@@ -5,8 +5,7 @@ const CodeableConcept = require('./CodeableConcept');
 class Immunization_VaccinationProtocol extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Immunization_VaccinationProtocol';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -22,7 +21,7 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	set doseSequence ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field doseSequence`);
 		}
 		this._doseSequence = new_value;
@@ -63,7 +62,7 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 	set seriesDoses ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field seriesDoses`);
 		}
 		this._seriesDoses = new_value;
@@ -100,12 +99,12 @@ class Immunization_VaccinationProtocol extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			doseSequence: this._doseSequence,
 			description: this._description,
-			authority: this._authority && this._authority.toJSON(),
+			authority: this._authority,
 			series: this._series,
 			seriesDoses: this._seriesDoses,
-			targetDisease: this._targetDisease && this._targetDisease.map(v => v.toJSON()),
-			doseStatus: this._doseStatus && this._doseStatus.toJSON(),
-			doseStatusReason: this._doseStatusReason && this._doseStatusReason.toJSON()
+			targetDisease: this._targetDisease,
+			doseStatus: this._doseStatus,
+			doseStatusReason: this._doseStatusReason
 		});
 	}
 

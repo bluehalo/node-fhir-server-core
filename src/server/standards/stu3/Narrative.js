@@ -3,8 +3,7 @@ const Element = require('./Element');
 class Narrative extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Narrative';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -20,7 +19,7 @@ class Narrative extends Element {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['generated', 'extensions', 'additional', 'empty'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;

@@ -4,8 +4,7 @@ const Coding = require('./Coding');
 class Meta extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Meta';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -21,7 +20,7 @@ class Meta extends Element {
 	set versionId ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field versionId`);
 		}
 		this._versionId = new_value;
@@ -68,8 +67,8 @@ class Meta extends Element {
 			versionId: this._versionId,
 			lastUpdated: this._lastUpdated,
 			profile: this._profile,
-			security: this._security && this._security.map(v => v.toJSON()),
-			tag: this._tag && this._tag.map(v => v.toJSON())
+			security: this._security,
+			tag: this._tag
 		});
 	}
 

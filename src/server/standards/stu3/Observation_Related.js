@@ -4,8 +4,7 @@ const Reference = require('./Reference');
 class Observation_Related extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Observation_Related';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -21,7 +20,7 @@ class Observation_Related extends BackboneElement {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['has-member', 'derived-from', 'sequel-to', 'replaces', 'qualified-by', 'interfered-by'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -39,7 +38,7 @@ class Observation_Related extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			type: this._type,
-			target: this._target && this._target.toJSON()
+			target: this._target
 		});
 	}
 

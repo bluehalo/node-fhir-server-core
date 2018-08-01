@@ -6,8 +6,7 @@ const Provenance_Agent = require('./Provenance_Agent');
 class Provenance_Entity extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Provenance_Entity';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -23,7 +22,7 @@ class Provenance_Entity extends BackboneElement {
 	set role ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['derivation', 'revision', 'quotation', 'source', 'removal'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field role`);
 		}
 		this._role = new_value;
@@ -69,9 +68,9 @@ class Provenance_Entity extends BackboneElement {
 		return Object.assign(super.toJSON(), {
 			role: this._role,
 			whatUri: this._whatUri,
-			whatReference: this._whatReference && this._whatReference.toJSON(),
-			whatIdentifier: this._whatIdentifier && this._whatIdentifier.toJSON(),
-			agent: this._agent && this._agent.map(v => v.toJSON())
+			whatReference: this._whatReference,
+			whatIdentifier: this._whatIdentifier,
+			agent: this._agent
 		});
 	}
 

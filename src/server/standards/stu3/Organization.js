@@ -9,8 +9,7 @@ const Organization_Contact = require('./Organization_Contact');
 class Organization extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Organization';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -26,7 +25,7 @@ class Organization extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Organization'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -125,16 +124,16 @@ class Organization extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			identifier: this._identifier,
 			active: this._active,
-			type: this._type && this._type.map(v => v.toJSON()),
+			type: this._type,
 			name: this._name,
 			alias: this._alias,
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			address: this._address && this._address.map(v => v.toJSON()),
-			partOf: this._partOf && this._partOf.toJSON(),
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			endpoint: this._endpoint && this._endpoint.map(v => v.toJSON())
+			telecom: this._telecom,
+			address: this._address,
+			partOf: this._partOf,
+			contact: this._contact,
+			endpoint: this._endpoint
 		});
 	}
 

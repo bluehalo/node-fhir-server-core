@@ -4,8 +4,7 @@ const ContactDetail = require('./ContactDetail');
 class Contributor extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Contributor';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -21,7 +20,7 @@ class Contributor extends Element {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['author', 'editor', 'reviewer', 'endorser'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -49,7 +48,7 @@ class Contributor extends Element {
 		return Object.assign(super.toJSON(), {
 			type: this._type,
 			name: this._name,
-			contact: this._contact && this._contact.map(v => v.toJSON())
+			contact: this._contact
 		});
 	}
 

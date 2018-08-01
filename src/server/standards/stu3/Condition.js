@@ -12,8 +12,7 @@ const Annotation = require('./Annotation');
 class Condition extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Condition';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -29,7 +28,7 @@ class Condition extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Condition'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -50,10 +49,10 @@ class Condition extends DomainResource {
 	}
 
 	set clinicalStatus ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['active', 'recurrence', 'inactive', 'remission', 'resolved'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field clinicalStatus`);
+		// Throw if new value does not match the pattern
+		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		if ( !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field clinicalStatus`);
 		}
 		this._clinicalStatus = new_value;
 	}
@@ -66,7 +65,7 @@ class Condition extends DomainResource {
 	set verificationStatus ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['provisional', 'differential', 'confirmed', 'refuted', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field verificationStatus`);
 		}
 		this._verificationStatus = new_value;
@@ -134,7 +133,7 @@ class Condition extends DomainResource {
 	set onsetDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
 		this._onsetDateTime = new_value;
@@ -184,7 +183,7 @@ class Condition extends DomainResource {
 	set abatementDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field abatementDateTime`);
 		}
 		this._abatementDateTime = new_value;
@@ -243,7 +242,7 @@ class Condition extends DomainResource {
 	set assertedDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
 		this._assertedDate = new_value;
@@ -288,31 +287,31 @@ class Condition extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			identifier: this._identifier,
 			clinicalStatus: this._clinicalStatus,
 			verificationStatus: this._verificationStatus,
-			category: this._category && this._category.map(v => v.toJSON()),
-			severity: this._severity && this._severity.toJSON(),
-			code: this._code && this._code.toJSON(),
-			bodySite: this._bodySite && this._bodySite.map(v => v.toJSON()),
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
+			category: this._category,
+			severity: this._severity,
+			code: this._code,
+			bodySite: this._bodySite,
+			subject: this._subject,
+			context: this._context,
 			onsetDateTime: this._onsetDateTime,
-			onsetAge: this._onsetAge && this._onsetAge.toJSON(),
-			onsetPeriod: this._onsetPeriod && this._onsetPeriod.toJSON(),
-			onsetRange: this._onsetRange && this._onsetRange.toJSON(),
+			onsetAge: this._onsetAge,
+			onsetPeriod: this._onsetPeriod,
+			onsetRange: this._onsetRange,
 			onsetString: this._onsetString,
 			abatementDateTime: this._abatementDateTime,
-			abatementAge: this._abatementAge && this._abatementAge.toJSON(),
+			abatementAge: this._abatementAge,
 			abatementBoolean: this._abatementBoolean,
-			abatementPeriod: this._abatementPeriod && this._abatementPeriod.toJSON(),
-			abatementRange: this._abatementRange && this._abatementRange.toJSON(),
+			abatementPeriod: this._abatementPeriod,
+			abatementRange: this._abatementRange,
 			abatementString: this._abatementString,
 			assertedDate: this._assertedDate,
-			asserter: this._asserter && this._asserter.toJSON(),
-			stage: this._stage && this._stage.toJSON(),
-			evidence: this._evidence && this._evidence.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON())
+			asserter: this._asserter,
+			stage: this._stage,
+			evidence: this._evidence,
+			note: this._note
 		});
 	}
 

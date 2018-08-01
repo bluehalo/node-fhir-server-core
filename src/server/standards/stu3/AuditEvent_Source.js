@@ -5,8 +5,7 @@ const Coding = require('./Coding');
 class AuditEvent_Source extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'AuditEvent_Source';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -44,8 +43,8 @@ class AuditEvent_Source extends BackboneElement {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			site: this._site,
-			identifier: this._identifier && this._identifier.toJSON(),
-			type: this._type && this._type.map(v => v.toJSON())
+			identifier: this._identifier,
+			type: this._type
 		});
 	}
 

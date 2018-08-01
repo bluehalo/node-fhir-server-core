@@ -43,8 +43,7 @@ const ElementDefinition_Mapping = require('./ElementDefinition_Mapping');
 class ElementDefinition extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ElementDefinition';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -69,7 +68,7 @@ class ElementDefinition extends Element {
 	set representation ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['xmlAttr', 'xmlText', 'typeAttr', 'cdaText', 'xhtml'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field representation`);
 		}
 		this._representation = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
@@ -164,7 +163,7 @@ class ElementDefinition extends Element {
 	set min ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
 		this._min = new_value;
@@ -223,7 +222,7 @@ class ElementDefinition extends Element {
 	set defaultValueInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueInteger`);
 		}
 		this._defaultValueInteger = new_value;
@@ -237,7 +236,7 @@ class ElementDefinition extends Element {
 	set defaultValueDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDecimal`);
 		}
 		this._defaultValueDecimal = new_value;
@@ -287,7 +286,7 @@ class ElementDefinition extends Element {
 	set defaultValueDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDate`);
 		}
 		this._defaultValueDate = new_value;
@@ -301,7 +300,7 @@ class ElementDefinition extends Element {
 	set defaultValueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueDateTime`);
 		}
 		this._defaultValueDateTime = new_value;
@@ -315,7 +314,7 @@ class ElementDefinition extends Element {
 	set defaultValueTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueTime`);
 		}
 		this._defaultValueTime = new_value;
@@ -329,7 +328,7 @@ class ElementDefinition extends Element {
 	set defaultValueCode ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueCode`);
 		}
 		this._defaultValueCode = new_value;
@@ -343,7 +342,7 @@ class ElementDefinition extends Element {
 	set defaultValueOid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueOid`);
 		}
 		this._defaultValueOid = new_value;
@@ -357,7 +356,7 @@ class ElementDefinition extends Element {
 	set defaultValueUuid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueUuid`);
 		}
 		this._defaultValueUuid = new_value;
@@ -371,7 +370,7 @@ class ElementDefinition extends Element {
 	set defaultValueId ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueId`);
 		}
 		this._defaultValueId = new_value;
@@ -385,7 +384,7 @@ class ElementDefinition extends Element {
 	set defaultValueUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueUnsignedInt`);
 		}
 		this._defaultValueUnsignedInt = new_value;
@@ -399,7 +398,7 @@ class ElementDefinition extends Element {
 	set defaultValuePositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValuePositiveInt`);
 		}
 		this._defaultValuePositiveInt = new_value;
@@ -773,7 +772,7 @@ class ElementDefinition extends Element {
 	set fixedInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedInteger`);
 		}
 		this._fixedInteger = new_value;
@@ -787,7 +786,7 @@ class ElementDefinition extends Element {
 	set fixedDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDecimal`);
 		}
 		this._fixedDecimal = new_value;
@@ -837,7 +836,7 @@ class ElementDefinition extends Element {
 	set fixedDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDate`);
 		}
 		this._fixedDate = new_value;
@@ -851,7 +850,7 @@ class ElementDefinition extends Element {
 	set fixedDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedDateTime`);
 		}
 		this._fixedDateTime = new_value;
@@ -865,7 +864,7 @@ class ElementDefinition extends Element {
 	set fixedTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedTime`);
 		}
 		this._fixedTime = new_value;
@@ -879,7 +878,7 @@ class ElementDefinition extends Element {
 	set fixedCode ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedCode`);
 		}
 		this._fixedCode = new_value;
@@ -893,7 +892,7 @@ class ElementDefinition extends Element {
 	set fixedOid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedOid`);
 		}
 		this._fixedOid = new_value;
@@ -907,7 +906,7 @@ class ElementDefinition extends Element {
 	set fixedUuid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedUuid`);
 		}
 		this._fixedUuid = new_value;
@@ -921,7 +920,7 @@ class ElementDefinition extends Element {
 	set fixedId ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedId`);
 		}
 		this._fixedId = new_value;
@@ -935,7 +934,7 @@ class ElementDefinition extends Element {
 	set fixedUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedUnsignedInt`);
 		}
 		this._fixedUnsignedInt = new_value;
@@ -949,7 +948,7 @@ class ElementDefinition extends Element {
 	set fixedPositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedPositiveInt`);
 		}
 		this._fixedPositiveInt = new_value;
@@ -1305,7 +1304,7 @@ class ElementDefinition extends Element {
 	set patternInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternInteger`);
 		}
 		this._patternInteger = new_value;
@@ -1319,7 +1318,7 @@ class ElementDefinition extends Element {
 	set patternDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDecimal`);
 		}
 		this._patternDecimal = new_value;
@@ -1369,7 +1368,7 @@ class ElementDefinition extends Element {
 	set patternDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDate`);
 		}
 		this._patternDate = new_value;
@@ -1383,7 +1382,7 @@ class ElementDefinition extends Element {
 	set patternDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternDateTime`);
 		}
 		this._patternDateTime = new_value;
@@ -1397,7 +1396,7 @@ class ElementDefinition extends Element {
 	set patternTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternTime`);
 		}
 		this._patternTime = new_value;
@@ -1411,7 +1410,7 @@ class ElementDefinition extends Element {
 	set patternCode ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternCode`);
 		}
 		this._patternCode = new_value;
@@ -1425,7 +1424,7 @@ class ElementDefinition extends Element {
 	set patternOid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternOid`);
 		}
 		this._patternOid = new_value;
@@ -1439,7 +1438,7 @@ class ElementDefinition extends Element {
 	set patternUuid ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternUuid`);
 		}
 		this._patternUuid = new_value;
@@ -1453,7 +1452,7 @@ class ElementDefinition extends Element {
 	set patternId ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternId`);
 		}
 		this._patternId = new_value;
@@ -1467,7 +1466,7 @@ class ElementDefinition extends Element {
 	set patternUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternUnsignedInt`);
 		}
 		this._patternUnsignedInt = new_value;
@@ -1481,7 +1480,7 @@ class ElementDefinition extends Element {
 	set patternPositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternPositiveInt`);
 		}
 		this._patternPositiveInt = new_value;
@@ -1837,7 +1836,7 @@ class ElementDefinition extends Element {
 	set minValueDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDate`);
 		}
 		this._minValueDate = new_value;
@@ -1851,7 +1850,7 @@ class ElementDefinition extends Element {
 	set minValueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDateTime`);
 		}
 		this._minValueDateTime = new_value;
@@ -1874,7 +1873,7 @@ class ElementDefinition extends Element {
 	set minValueTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueTime`);
 		}
 		this._minValueTime = new_value;
@@ -1888,7 +1887,7 @@ class ElementDefinition extends Element {
 	set minValueDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDecimal`);
 		}
 		this._minValueDecimal = new_value;
@@ -1902,7 +1901,7 @@ class ElementDefinition extends Element {
 	set minValueInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueInteger`);
 		}
 		this._minValueInteger = new_value;
@@ -1916,7 +1915,7 @@ class ElementDefinition extends Element {
 	set minValuePositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValuePositiveInt`);
 		}
 		this._minValuePositiveInt = new_value;
@@ -1930,7 +1929,7 @@ class ElementDefinition extends Element {
 	set minValueUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueUnsignedInt`);
 		}
 		this._minValueUnsignedInt = new_value;
@@ -1953,7 +1952,7 @@ class ElementDefinition extends Element {
 	set maxValueDate ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDate`);
 		}
 		this._maxValueDate = new_value;
@@ -1967,7 +1966,7 @@ class ElementDefinition extends Element {
 	set maxValueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDateTime`);
 		}
 		this._maxValueDateTime = new_value;
@@ -1990,7 +1989,7 @@ class ElementDefinition extends Element {
 	set maxValueTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueTime`);
 		}
 		this._maxValueTime = new_value;
@@ -2004,7 +2003,7 @@ class ElementDefinition extends Element {
 	set maxValueDecimal ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDecimal`);
 		}
 		this._maxValueDecimal = new_value;
@@ -2018,7 +2017,7 @@ class ElementDefinition extends Element {
 	set maxValueInteger ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueInteger`);
 		}
 		this._maxValueInteger = new_value;
@@ -2032,7 +2031,7 @@ class ElementDefinition extends Element {
 	set maxValuePositiveInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValuePositiveInt`);
 		}
 		this._maxValuePositiveInt = new_value;
@@ -2046,7 +2045,7 @@ class ElementDefinition extends Element {
 	set maxValueUnsignedInt ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueUnsignedInt`);
 		}
 		this._maxValueUnsignedInt = new_value;
@@ -2069,7 +2068,7 @@ class ElementDefinition extends Element {
 	set maxLength ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxLength`);
 		}
 		this._maxLength = new_value;
@@ -2144,8 +2143,8 @@ class ElementDefinition extends Element {
 			representation: this._representation,
 			sliceName: this._sliceName,
 			label: this._label,
-			code: this._code && this._code.map(v => v.toJSON()),
-			slicing: this._slicing && this._slicing.toJSON(),
+			code: this._code,
+			slicing: this._slicing,
 			short: this._short,
 			definition: this._definition,
 			comment: this._comment,
@@ -2153,9 +2152,9 @@ class ElementDefinition extends Element {
 			alias: this._alias,
 			min: this._min,
 			max: this._max,
-			base: this._base && this._base.toJSON(),
+			base: this._base,
 			contentReference: this._contentReference,
-			type: this._type && this._type.map(v => v.toJSON()),
+			type: this._type,
 			defaultValueBoolean: this._defaultValueBoolean,
 			defaultValueInteger: this._defaultValueInteger,
 			defaultValueDecimal: this._defaultValueDecimal,
@@ -2173,42 +2172,42 @@ class ElementDefinition extends Element {
 			defaultValueUnsignedInt: this._defaultValueUnsignedInt,
 			defaultValuePositiveInt: this._defaultValuePositiveInt,
 			defaultValueMarkdown: this._defaultValueMarkdown,
-			defaultValueElement: this._defaultValueElement && this._defaultValueElement.toJSON(),
-			defaultValueExtension: this._defaultValueExtension && this._defaultValueExtension.toJSON(),
-			defaultValueBackboneElement: this._defaultValueBackboneElement && this._defaultValueBackboneElement.toJSON(),
-			defaultValueNarrative: this._defaultValueNarrative && this._defaultValueNarrative.toJSON(),
-			defaultValueAnnotation: this._defaultValueAnnotation && this._defaultValueAnnotation.toJSON(),
-			defaultValueAttachment: this._defaultValueAttachment && this._defaultValueAttachment.toJSON(),
-			defaultValueIdentifier: this._defaultValueIdentifier && this._defaultValueIdentifier.toJSON(),
-			defaultValueCodeableConcept: this._defaultValueCodeableConcept && this._defaultValueCodeableConcept.toJSON(),
-			defaultValueCoding: this._defaultValueCoding && this._defaultValueCoding.toJSON(),
-			defaultValueQuantity: this._defaultValueQuantity && this._defaultValueQuantity.toJSON(),
-			defaultValueDuration: this._defaultValueDuration && this._defaultValueDuration.toJSON(),
-			defaultValueSimpleQuantity: this._defaultValueSimpleQuantity && this._defaultValueSimpleQuantity.toJSON(),
-			defaultValueDistance: this._defaultValueDistance && this._defaultValueDistance.toJSON(),
-			defaultValueCount: this._defaultValueCount && this._defaultValueCount.toJSON(),
-			defaultValueMoney: this._defaultValueMoney && this._defaultValueMoney.toJSON(),
-			defaultValueAge: this._defaultValueAge && this._defaultValueAge.toJSON(),
-			defaultValueRange: this._defaultValueRange && this._defaultValueRange.toJSON(),
-			defaultValuePeriod: this._defaultValuePeriod && this._defaultValuePeriod.toJSON(),
-			defaultValueRatio: this._defaultValueRatio && this._defaultValueRatio.toJSON(),
-			defaultValueReference: this._defaultValueReference && this._defaultValueReference.toJSON(),
-			defaultValueSampledData: this._defaultValueSampledData && this._defaultValueSampledData.toJSON(),
-			defaultValueSignature: this._defaultValueSignature && this._defaultValueSignature.toJSON(),
-			defaultValueHumanName: this._defaultValueHumanName && this._defaultValueHumanName.toJSON(),
-			defaultValueAddress: this._defaultValueAddress && this._defaultValueAddress.toJSON(),
-			defaultValueContactPoint: this._defaultValueContactPoint && this._defaultValueContactPoint.toJSON(),
-			defaultValueTiming: this._defaultValueTiming && this._defaultValueTiming.toJSON(),
-			defaultValueMeta: this._defaultValueMeta && this._defaultValueMeta.toJSON(),
-			defaultValueElementDefinition: this._defaultValueElementDefinition && this._defaultValueElementDefinition.toJSON(),
-			defaultValueContactDetail: this._defaultValueContactDetail && this._defaultValueContactDetail.toJSON(),
-			defaultValueContributor: this._defaultValueContributor && this._defaultValueContributor.toJSON(),
-			defaultValueDosage: this._defaultValueDosage && this._defaultValueDosage.toJSON(),
-			defaultValueRelatedArtifact: this._defaultValueRelatedArtifact && this._defaultValueRelatedArtifact.toJSON(),
-			defaultValueUsageContext: this._defaultValueUsageContext && this._defaultValueUsageContext.toJSON(),
-			defaultValueDataRequirement: this._defaultValueDataRequirement && this._defaultValueDataRequirement.toJSON(),
-			defaultValueParameterDefinition: this._defaultValueParameterDefinition && this._defaultValueParameterDefinition.toJSON(),
-			defaultValueTriggerDefinition: this._defaultValueTriggerDefinition && this._defaultValueTriggerDefinition.toJSON(),
+			defaultValueElement: this._defaultValueElement,
+			defaultValueExtension: this._defaultValueExtension,
+			defaultValueBackboneElement: this._defaultValueBackboneElement,
+			defaultValueNarrative: this._defaultValueNarrative,
+			defaultValueAnnotation: this._defaultValueAnnotation,
+			defaultValueAttachment: this._defaultValueAttachment,
+			defaultValueIdentifier: this._defaultValueIdentifier,
+			defaultValueCodeableConcept: this._defaultValueCodeableConcept,
+			defaultValueCoding: this._defaultValueCoding,
+			defaultValueQuantity: this._defaultValueQuantity,
+			defaultValueDuration: this._defaultValueDuration,
+			defaultValueSimpleQuantity: this._defaultValueSimpleQuantity,
+			defaultValueDistance: this._defaultValueDistance,
+			defaultValueCount: this._defaultValueCount,
+			defaultValueMoney: this._defaultValueMoney,
+			defaultValueAge: this._defaultValueAge,
+			defaultValueRange: this._defaultValueRange,
+			defaultValuePeriod: this._defaultValuePeriod,
+			defaultValueRatio: this._defaultValueRatio,
+			defaultValueReference: this._defaultValueReference,
+			defaultValueSampledData: this._defaultValueSampledData,
+			defaultValueSignature: this._defaultValueSignature,
+			defaultValueHumanName: this._defaultValueHumanName,
+			defaultValueAddress: this._defaultValueAddress,
+			defaultValueContactPoint: this._defaultValueContactPoint,
+			defaultValueTiming: this._defaultValueTiming,
+			defaultValueMeta: this._defaultValueMeta,
+			defaultValueElementDefinition: this._defaultValueElementDefinition,
+			defaultValueContactDetail: this._defaultValueContactDetail,
+			defaultValueContributor: this._defaultValueContributor,
+			defaultValueDosage: this._defaultValueDosage,
+			defaultValueRelatedArtifact: this._defaultValueRelatedArtifact,
+			defaultValueUsageContext: this._defaultValueUsageContext,
+			defaultValueDataRequirement: this._defaultValueDataRequirement,
+			defaultValueParameterDefinition: this._defaultValueParameterDefinition,
+			defaultValueTriggerDefinition: this._defaultValueTriggerDefinition,
 			meaningWhenMissing: this._meaningWhenMissing,
 			orderMeaning: this._orderMeaning,
 			fixedBoolean: this._fixedBoolean,
@@ -2228,42 +2227,42 @@ class ElementDefinition extends Element {
 			fixedUnsignedInt: this._fixedUnsignedInt,
 			fixedPositiveInt: this._fixedPositiveInt,
 			fixedMarkdown: this._fixedMarkdown,
-			fixedElement: this._fixedElement && this._fixedElement.toJSON(),
-			fixedExtension: this._fixedExtension && this._fixedExtension.toJSON(),
-			fixedBackboneElement: this._fixedBackboneElement && this._fixedBackboneElement.toJSON(),
-			fixedNarrative: this._fixedNarrative && this._fixedNarrative.toJSON(),
-			fixedAnnotation: this._fixedAnnotation && this._fixedAnnotation.toJSON(),
-			fixedAttachment: this._fixedAttachment && this._fixedAttachment.toJSON(),
-			fixedIdentifier: this._fixedIdentifier && this._fixedIdentifier.toJSON(),
-			fixedCodeableConcept: this._fixedCodeableConcept && this._fixedCodeableConcept.toJSON(),
-			fixedCoding: this._fixedCoding && this._fixedCoding.toJSON(),
-			fixedQuantity: this._fixedQuantity && this._fixedQuantity.toJSON(),
-			fixedDuration: this._fixedDuration && this._fixedDuration.toJSON(),
-			fixedSimpleQuantity: this._fixedSimpleQuantity && this._fixedSimpleQuantity.toJSON(),
-			fixedDistance: this._fixedDistance && this._fixedDistance.toJSON(),
-			fixedCount: this._fixedCount && this._fixedCount.toJSON(),
-			fixedMoney: this._fixedMoney && this._fixedMoney.toJSON(),
-			fixedAge: this._fixedAge && this._fixedAge.toJSON(),
-			fixedRange: this._fixedRange && this._fixedRange.toJSON(),
-			fixedPeriod: this._fixedPeriod && this._fixedPeriod.toJSON(),
-			fixedRatio: this._fixedRatio && this._fixedRatio.toJSON(),
-			fixedReference: this._fixedReference && this._fixedReference.toJSON(),
-			fixedSampledData: this._fixedSampledData && this._fixedSampledData.toJSON(),
-			fixedSignature: this._fixedSignature && this._fixedSignature.toJSON(),
-			fixedHumanName: this._fixedHumanName && this._fixedHumanName.toJSON(),
-			fixedAddress: this._fixedAddress && this._fixedAddress.toJSON(),
-			fixedContactPoint: this._fixedContactPoint && this._fixedContactPoint.toJSON(),
-			fixedTiming: this._fixedTiming && this._fixedTiming.toJSON(),
-			fixedMeta: this._fixedMeta && this._fixedMeta.toJSON(),
-			fixedElementDefinition: this._fixedElementDefinition && this._fixedElementDefinition.toJSON(),
-			fixedContactDetail: this._fixedContactDetail && this._fixedContactDetail.toJSON(),
-			fixedContributor: this._fixedContributor && this._fixedContributor.toJSON(),
-			fixedDosage: this._fixedDosage && this._fixedDosage.toJSON(),
-			fixedRelatedArtifact: this._fixedRelatedArtifact && this._fixedRelatedArtifact.toJSON(),
-			fixedUsageContext: this._fixedUsageContext && this._fixedUsageContext.toJSON(),
-			fixedDataRequirement: this._fixedDataRequirement && this._fixedDataRequirement.toJSON(),
-			fixedParameterDefinition: this._fixedParameterDefinition && this._fixedParameterDefinition.toJSON(),
-			fixedTriggerDefinition: this._fixedTriggerDefinition && this._fixedTriggerDefinition.toJSON(),
+			fixedElement: this._fixedElement,
+			fixedExtension: this._fixedExtension,
+			fixedBackboneElement: this._fixedBackboneElement,
+			fixedNarrative: this._fixedNarrative,
+			fixedAnnotation: this._fixedAnnotation,
+			fixedAttachment: this._fixedAttachment,
+			fixedIdentifier: this._fixedIdentifier,
+			fixedCodeableConcept: this._fixedCodeableConcept,
+			fixedCoding: this._fixedCoding,
+			fixedQuantity: this._fixedQuantity,
+			fixedDuration: this._fixedDuration,
+			fixedSimpleQuantity: this._fixedSimpleQuantity,
+			fixedDistance: this._fixedDistance,
+			fixedCount: this._fixedCount,
+			fixedMoney: this._fixedMoney,
+			fixedAge: this._fixedAge,
+			fixedRange: this._fixedRange,
+			fixedPeriod: this._fixedPeriod,
+			fixedRatio: this._fixedRatio,
+			fixedReference: this._fixedReference,
+			fixedSampledData: this._fixedSampledData,
+			fixedSignature: this._fixedSignature,
+			fixedHumanName: this._fixedHumanName,
+			fixedAddress: this._fixedAddress,
+			fixedContactPoint: this._fixedContactPoint,
+			fixedTiming: this._fixedTiming,
+			fixedMeta: this._fixedMeta,
+			fixedElementDefinition: this._fixedElementDefinition,
+			fixedContactDetail: this._fixedContactDetail,
+			fixedContributor: this._fixedContributor,
+			fixedDosage: this._fixedDosage,
+			fixedRelatedArtifact: this._fixedRelatedArtifact,
+			fixedUsageContext: this._fixedUsageContext,
+			fixedDataRequirement: this._fixedDataRequirement,
+			fixedParameterDefinition: this._fixedParameterDefinition,
+			fixedTriggerDefinition: this._fixedTriggerDefinition,
 			patternBoolean: this._patternBoolean,
 			patternInteger: this._patternInteger,
 			patternDecimal: this._patternDecimal,
@@ -2281,43 +2280,43 @@ class ElementDefinition extends Element {
 			patternUnsignedInt: this._patternUnsignedInt,
 			patternPositiveInt: this._patternPositiveInt,
 			patternMarkdown: this._patternMarkdown,
-			patternElement: this._patternElement && this._patternElement.toJSON(),
-			patternExtension: this._patternExtension && this._patternExtension.toJSON(),
-			patternBackboneElement: this._patternBackboneElement && this._patternBackboneElement.toJSON(),
-			patternNarrative: this._patternNarrative && this._patternNarrative.toJSON(),
-			patternAnnotation: this._patternAnnotation && this._patternAnnotation.toJSON(),
-			patternAttachment: this._patternAttachment && this._patternAttachment.toJSON(),
-			patternIdentifier: this._patternIdentifier && this._patternIdentifier.toJSON(),
-			patternCodeableConcept: this._patternCodeableConcept && this._patternCodeableConcept.toJSON(),
-			patternCoding: this._patternCoding && this._patternCoding.toJSON(),
-			patternQuantity: this._patternQuantity && this._patternQuantity.toJSON(),
-			patternDuration: this._patternDuration && this._patternDuration.toJSON(),
-			patternSimpleQuantity: this._patternSimpleQuantity && this._patternSimpleQuantity.toJSON(),
-			patternDistance: this._patternDistance && this._patternDistance.toJSON(),
-			patternCount: this._patternCount && this._patternCount.toJSON(),
-			patternMoney: this._patternMoney && this._patternMoney.toJSON(),
-			patternAge: this._patternAge && this._patternAge.toJSON(),
-			patternRange: this._patternRange && this._patternRange.toJSON(),
-			patternPeriod: this._patternPeriod && this._patternPeriod.toJSON(),
-			patternRatio: this._patternRatio && this._patternRatio.toJSON(),
-			patternReference: this._patternReference && this._patternReference.toJSON(),
-			patternSampledData: this._patternSampledData && this._patternSampledData.toJSON(),
-			patternSignature: this._patternSignature && this._patternSignature.toJSON(),
-			patternHumanName: this._patternHumanName && this._patternHumanName.toJSON(),
-			patternAddress: this._patternAddress && this._patternAddress.toJSON(),
-			patternContactPoint: this._patternContactPoint && this._patternContactPoint.toJSON(),
-			patternTiming: this._patternTiming && this._patternTiming.toJSON(),
-			patternMeta: this._patternMeta && this._patternMeta.toJSON(),
-			patternElementDefinition: this._patternElementDefinition && this._patternElementDefinition.toJSON(),
-			patternContactDetail: this._patternContactDetail && this._patternContactDetail.toJSON(),
-			patternContributor: this._patternContributor && this._patternContributor.toJSON(),
-			patternDosage: this._patternDosage && this._patternDosage.toJSON(),
-			patternRelatedArtifact: this._patternRelatedArtifact && this._patternRelatedArtifact.toJSON(),
-			patternUsageContext: this._patternUsageContext && this._patternUsageContext.toJSON(),
-			patternDataRequirement: this._patternDataRequirement && this._patternDataRequirement.toJSON(),
-			patternParameterDefinition: this._patternParameterDefinition && this._patternParameterDefinition.toJSON(),
-			patternTriggerDefinition: this._patternTriggerDefinition && this._patternTriggerDefinition.toJSON(),
-			example: this._example && this._example.map(v => v.toJSON()),
+			patternElement: this._patternElement,
+			patternExtension: this._patternExtension,
+			patternBackboneElement: this._patternBackboneElement,
+			patternNarrative: this._patternNarrative,
+			patternAnnotation: this._patternAnnotation,
+			patternAttachment: this._patternAttachment,
+			patternIdentifier: this._patternIdentifier,
+			patternCodeableConcept: this._patternCodeableConcept,
+			patternCoding: this._patternCoding,
+			patternQuantity: this._patternQuantity,
+			patternDuration: this._patternDuration,
+			patternSimpleQuantity: this._patternSimpleQuantity,
+			patternDistance: this._patternDistance,
+			patternCount: this._patternCount,
+			patternMoney: this._patternMoney,
+			patternAge: this._patternAge,
+			patternRange: this._patternRange,
+			patternPeriod: this._patternPeriod,
+			patternRatio: this._patternRatio,
+			patternReference: this._patternReference,
+			patternSampledData: this._patternSampledData,
+			patternSignature: this._patternSignature,
+			patternHumanName: this._patternHumanName,
+			patternAddress: this._patternAddress,
+			patternContactPoint: this._patternContactPoint,
+			patternTiming: this._patternTiming,
+			patternMeta: this._patternMeta,
+			patternElementDefinition: this._patternElementDefinition,
+			patternContactDetail: this._patternContactDetail,
+			patternContributor: this._patternContributor,
+			patternDosage: this._patternDosage,
+			patternRelatedArtifact: this._patternRelatedArtifact,
+			patternUsageContext: this._patternUsageContext,
+			patternDataRequirement: this._patternDataRequirement,
+			patternParameterDefinition: this._patternParameterDefinition,
+			patternTriggerDefinition: this._patternTriggerDefinition,
+			example: this._example,
 			minValueDate: this._minValueDate,
 			minValueDateTime: this._minValueDateTime,
 			minValueInstant: this._minValueInstant,
@@ -2326,7 +2325,7 @@ class ElementDefinition extends Element {
 			minValueInteger: this._minValueInteger,
 			minValuePositiveInt: this._minValuePositiveInt,
 			minValueUnsignedInt: this._minValueUnsignedInt,
-			minValueQuantity: this._minValueQuantity && this._minValueQuantity.toJSON(),
+			minValueQuantity: this._minValueQuantity,
 			maxValueDate: this._maxValueDate,
 			maxValueDateTime: this._maxValueDateTime,
 			maxValueInstant: this._maxValueInstant,
@@ -2335,15 +2334,15 @@ class ElementDefinition extends Element {
 			maxValueInteger: this._maxValueInteger,
 			maxValuePositiveInt: this._maxValuePositiveInt,
 			maxValueUnsignedInt: this._maxValueUnsignedInt,
-			maxValueQuantity: this._maxValueQuantity && this._maxValueQuantity.toJSON(),
+			maxValueQuantity: this._maxValueQuantity,
 			maxLength: this._maxLength,
 			condition: this._condition,
-			constraint: this._constraint && this._constraint.map(v => v.toJSON()),
+			constraint: this._constraint,
 			mustSupport: this._mustSupport,
 			isModifier: this._isModifier,
 			isSummary: this._isSummary,
-			binding: this._binding && this._binding.toJSON(),
-			mapping: this._mapping && this._mapping.map(v => v.toJSON())
+			binding: this._binding,
+			mapping: this._mapping
 		});
 	}
 

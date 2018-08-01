@@ -9,8 +9,7 @@ const Period = require('./Period');
 class Patient_Contact extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Patient_Contact';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -62,7 +61,7 @@ class Patient_Contact extends BackboneElement {
 	set gender ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
 		}
 		this._gender = new_value;
@@ -88,13 +87,13 @@ class Patient_Contact extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			relationship: this._relationship && this._relationship.map(v => v.toJSON()),
-			name: this._name && this._name.toJSON(),
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			address: this._address && this._address.toJSON(),
+			relationship: this._relationship,
+			name: this._name,
+			telecom: this._telecom,
+			address: this._address,
 			gender: this._gender,
-			organization: this._organization && this._organization.toJSON(),
-			period: this._period && this._period.toJSON()
+			organization: this._organization,
+			period: this._period
 		});
 	}
 

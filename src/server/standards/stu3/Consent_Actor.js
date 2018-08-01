@@ -5,8 +5,7 @@ const Reference = require('./Reference');
 class Consent_Actor extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Consent_Actor';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -34,8 +33,8 @@ class Consent_Actor extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role && this._role.toJSON(),
-			reference: this._reference && this._reference.toJSON()
+			role: this._role,
+			reference: this._reference
 		});
 	}
 

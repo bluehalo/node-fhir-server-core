@@ -3,8 +3,7 @@ const BackboneElement = require('./BackboneElement');
 class Bundle_Link extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Bundle_Link';
+		super();
 		Object.assign(this, opts);
 	}
 

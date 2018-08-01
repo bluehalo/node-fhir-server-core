@@ -7,8 +7,7 @@ const Signature = require('./Signature');
 class Bundle extends Resource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Bundle';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -24,7 +23,7 @@ class Bundle extends Resource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Bundle'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -47,7 +46,7 @@ class Bundle extends Resource {
 	set type ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['document', 'message', 'transaction', 'transaction-response', 'batch', 'batch-response', 'history', 'searchset', 'collection'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
 		}
 		this._type = new_value;
@@ -61,7 +60,7 @@ class Bundle extends Resource {
 	set total ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /[0]|([1-9][0-9]*)/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field total`);
 		}
 		this._total = new_value;
@@ -97,12 +96,12 @@ class Bundle extends Resource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.toJSON(),
+			identifier: this._identifier,
 			type: this._type,
 			total: this._total,
-			link: this._link && this._link.map(v => v.toJSON()),
-			entry: this._entry && this._entry.map(v => v.toJSON()),
-			signature: this._signature && this._signature.toJSON()
+			link: this._link,
+			entry: this._entry,
+			signature: this._signature
 		});
 	}
 

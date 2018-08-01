@@ -10,8 +10,7 @@ const Reference = require('./Reference');
 class Location extends DomainResource {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Location';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -27,7 +26,7 @@ class Location extends DomainResource {
 	set resourceType ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['Location'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
 		}
 		this._resourceType = new_value;
@@ -50,7 +49,7 @@ class Location extends DomainResource {
 	set status ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['active', 'suspended', 'inactive'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
 		}
 		this._status = new_value;
@@ -100,7 +99,7 @@ class Location extends DomainResource {
 	set mode ( new_value ) {
 		// Throw if new value is not in the allowed values
 		let allowed_values = ['instance', 'kind'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
+		if ( allowed_values.indexOf(new_value) === -1 ) {
 			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field mode`);
 		}
 		this._mode = new_value;
@@ -181,21 +180,21 @@ class Location extends DomainResource {
 	toJSON () {
 		return Object.assign(super.toJSON(), {
 			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
+			identifier: this._identifier,
 			status: this._status,
-			operationalStatus: this._operationalStatus && this._operationalStatus.toJSON(),
+			operationalStatus: this._operationalStatus,
 			name: this._name,
 			alias: this._alias,
 			description: this._description,
 			mode: this._mode,
-			type: this._type && this._type.toJSON(),
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			address: this._address && this._address.toJSON(),
-			physicalType: this._physicalType && this._physicalType.toJSON(),
-			position: this._position && this._position.toJSON(),
-			managingOrganization: this._managingOrganization && this._managingOrganization.toJSON(),
-			partOf: this._partOf && this._partOf.toJSON(),
-			endpoint: this._endpoint && this._endpoint.map(v => v.toJSON())
+			type: this._type,
+			telecom: this._telecom,
+			address: this._address,
+			physicalType: this._physicalType,
+			position: this._position,
+			managingOrganization: this._managingOrganization,
+			partOf: this._partOf,
+			endpoint: this._endpoint
 		});
 	}
 

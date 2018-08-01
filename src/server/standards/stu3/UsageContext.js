@@ -7,8 +7,7 @@ const Range = require('./Range');
 class UsageContext extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'UsageContext';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -54,10 +53,10 @@ class UsageContext extends Element {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code && this._code.toJSON(),
-			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
-			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
-			valueRange: this._valueRange && this._valueRange.toJSON()
+			code: this._code,
+			valueCodeableConcept: this._valueCodeableConcept,
+			valueQuantity: this._valueQuantity,
+			valueRange: this._valueRange
 		});
 	}
 

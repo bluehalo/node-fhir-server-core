@@ -8,8 +8,7 @@ const Ratio = require('./Ratio');
 class Dosage extends Element {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Dosage';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -25,7 +24,7 @@ class Dosage extends Element {
 	set sequence ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field sequence`);
 		}
 		this._sequence = new_value;
@@ -188,22 +187,22 @@ class Dosage extends Element {
 		return Object.assign(super.toJSON(), {
 			sequence: this._sequence,
 			text: this._text,
-			additionalInstruction: this._additionalInstruction && this._additionalInstruction.map(v => v.toJSON()),
+			additionalInstruction: this._additionalInstruction,
 			patientInstruction: this._patientInstruction,
-			timing: this._timing && this._timing.toJSON(),
+			timing: this._timing,
 			asNeededBoolean: this._asNeededBoolean,
-			asNeededCodeableConcept: this._asNeededCodeableConcept && this._asNeededCodeableConcept.toJSON(),
-			site: this._site && this._site.toJSON(),
-			route: this._route && this._route.toJSON(),
-			method: this._method && this._method.toJSON(),
-			doseRange: this._doseRange && this._doseRange.toJSON(),
-			doseSimpleQuantity: this._doseSimpleQuantity && this._doseSimpleQuantity.toJSON(),
-			maxDosePerPeriod: this._maxDosePerPeriod && this._maxDosePerPeriod.toJSON(),
-			maxDosePerAdministration: this._maxDosePerAdministration && this._maxDosePerAdministration.toJSON(),
-			maxDosePerLifetime: this._maxDosePerLifetime && this._maxDosePerLifetime.toJSON(),
-			rateRatio: this._rateRatio && this._rateRatio.toJSON(),
-			rateRange: this._rateRange && this._rateRange.toJSON(),
-			rateSimpleQuantity: this._rateSimpleQuantity && this._rateSimpleQuantity.toJSON()
+			asNeededCodeableConcept: this._asNeededCodeableConcept,
+			site: this._site,
+			route: this._route,
+			method: this._method,
+			doseRange: this._doseRange,
+			doseSimpleQuantity: this._doseSimpleQuantity,
+			maxDosePerPeriod: this._maxDosePerPeriod,
+			maxDosePerAdministration: this._maxDosePerAdministration,
+			maxDosePerLifetime: this._maxDosePerLifetime,
+			rateRatio: this._rateRatio,
+			rateRange: this._rateRange,
+			rateSimpleQuantity: this._rateSimpleQuantity
 		});
 	}
 

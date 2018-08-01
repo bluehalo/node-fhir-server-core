@@ -6,8 +6,7 @@ const Ratio = require('./Ratio');
 class Medication_Ingredient extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Medication_Ingredient';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -53,10 +52,10 @@ class Medication_Ingredient extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			itemCodeableConcept: this._itemCodeableConcept && this._itemCodeableConcept.toJSON(),
-			itemReference: this._itemReference && this._itemReference.toJSON(),
+			itemCodeableConcept: this._itemCodeableConcept,
+			itemReference: this._itemReference,
 			isActive: this._isActive,
-			amount: this._amount && this._amount.toJSON()
+			amount: this._amount
 		});
 	}
 

@@ -7,8 +7,7 @@ const AuditEvent_Detail = require('./AuditEvent_Detail');
 class AuditEvent_Entity extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'AuditEvent_Entity';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -108,16 +107,16 @@ class AuditEvent_Entity extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			identifier: this._identifier && this._identifier.toJSON(),
-			reference: this._reference && this._reference.toJSON(),
-			type: this._type && this._type.toJSON(),
-			role: this._role && this._role.toJSON(),
-			lifecycle: this._lifecycle && this._lifecycle.toJSON(),
-			securityLabel: this._securityLabel && this._securityLabel.map(v => v.toJSON()),
+			identifier: this._identifier,
+			reference: this._reference,
+			type: this._type,
+			role: this._role,
+			lifecycle: this._lifecycle,
+			securityLabel: this._securityLabel,
 			name: this._name,
 			description: this._description,
 			query: this._query,
-			detail: this._detail && this._detail.map(v => v.toJSON())
+			detail: this._detail
 		});
 	}
 

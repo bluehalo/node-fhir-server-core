@@ -11,8 +11,7 @@ const Observation_ReferenceRange = require('./Observation_ReferenceRange');
 class Observation_Component extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Observation_Component';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -100,7 +99,7 @@ class Observation_Component extends BackboneElement {
 	set valueTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueTime`);
 		}
 		this._valueTime = new_value;
@@ -114,7 +113,7 @@ class Observation_Component extends BackboneElement {
 	set valueDateTime ( new_value ) {
 		// Throw if new value does not match the pattern
 		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
+		if ( !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this._valueDateTime = new_value;
@@ -158,20 +157,20 @@ class Observation_Component extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			code: this._code && this._code.toJSON(),
-			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
-			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
+			code: this._code,
+			valueQuantity: this._valueQuantity,
+			valueCodeableConcept: this._valueCodeableConcept,
 			valueString: this._valueString,
-			valueRange: this._valueRange && this._valueRange.toJSON(),
-			valueRatio: this._valueRatio && this._valueRatio.toJSON(),
-			valueSampledData: this._valueSampledData && this._valueSampledData.toJSON(),
-			valueAttachment: this._valueAttachment && this._valueAttachment.toJSON(),
+			valueRange: this._valueRange,
+			valueRatio: this._valueRatio,
+			valueSampledData: this._valueSampledData,
+			valueAttachment: this._valueAttachment,
 			valueTime: this._valueTime,
 			valueDateTime: this._valueDateTime,
-			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
-			dataAbsentReason: this._dataAbsentReason && this._dataAbsentReason.toJSON(),
-			interpretation: this._interpretation && this._interpretation.toJSON(),
-			referenceRange: this._referenceRange && this._referenceRange.map(v => v.toJSON())
+			valuePeriod: this._valuePeriod,
+			dataAbsentReason: this._dataAbsentReason,
+			interpretation: this._interpretation,
+			referenceRange: this._referenceRange
 		});
 	}
 

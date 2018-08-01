@@ -5,8 +5,7 @@ const Reference = require('./Reference');
 class DiagnosticReport_Performer extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'DiagnosticReport_Performer';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -34,8 +33,8 @@ class DiagnosticReport_Performer extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role && this._role.toJSON(),
-			actor: this._actor && this._actor.toJSON()
+			role: this._role,
+			actor: this._actor
 		});
 	}
 

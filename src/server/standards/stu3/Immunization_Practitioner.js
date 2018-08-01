@@ -5,8 +5,7 @@ const Reference = require('./Reference');
 class Immunization_Practitioner extends BackboneElement {
 
 	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Immunization_Practitioner';
+		super();
 		Object.assign(this, opts);
 	}
 
@@ -34,8 +33,8 @@ class Immunization_Practitioner extends BackboneElement {
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			role: this._role && this._role.toJSON(),
-			actor: this._actor && this._actor.toJSON()
+			role: this._role,
+			actor: this._actor
 		});
 	}
 
