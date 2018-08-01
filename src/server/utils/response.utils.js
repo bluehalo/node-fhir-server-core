@@ -13,6 +13,10 @@ const errors = require('./error.utils');
 */
 let handleSingleReadResponse = (res, next, base, Resource, resource_json) => {
 	if (resource_json) {
+
+		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
+		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
+
 		res.status(200).json(new Resource(resource_json));
 	} else {
 		next(errors.notFound(`${Resource.__resourceType} not found.`, base));
@@ -92,7 +96,7 @@ let handleCreateResponse = (res, base, type, results) => {
 
 	if (resource_version) {
 		res.set('Content-Location', `${base}/${type}/${id}/_history/${resource_version}`);
-		res.set('ETag', `${resource_version}`);
+		res.set('ETag', `W/"${resource_version}"`);
 	}
 
 	res.set('Location', `${base}/${type}/${id}`);
