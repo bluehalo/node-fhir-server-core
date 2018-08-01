@@ -92,6 +92,7 @@ let handleCreateResponse = (res, base, type, results) => {
 
 	if (resource_version) {
 		res.set('Content-Location', `${base}/${type}/${id}/_history/${resource_version}`);
+		res.set('ETag', `${resource_version}`);
 	}
 
 	res.set('Location', `${base}/${type}/${id}`);
@@ -117,6 +118,7 @@ let handleUpdateResponse = (res, base, type, results) => {
 
 	if (resource_version) {
 		res.set('Content-Location', `${base}/${type}/${id}/_history/${resource_version}`);
+		res.set('ETag', `${resource_version}`);
 	}
 
 	res.set('Location', `${base}/${type}/${id}`);

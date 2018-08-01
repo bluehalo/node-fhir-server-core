@@ -192,7 +192,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 		}
 		// Create a new patient resource and pass it to the service
 		let patient = new Patient(resource_body);
-		let args = { id, resource: patient };
+		let args = { id, base, resource: patient };
 		// Pass any new information to the underlying service
 		return service.update(args, logger)
 			.then((results) =>
