@@ -117,6 +117,8 @@ let handleUpdateResponse = (res, base, type, results) => {
 
 	if (resource_version) {
 		res.set('Content-Location', `${base}/${type}/${id}/_history/${resource_version}`);
+		res.set('ETag', resource_version)
+
 	}
 
 	res.set('Location', `${base}/${type}/${id}`);
@@ -127,7 +129,7 @@ let handleUpdateResponse = (res, base, type, results) => {
 /**
 * @description When resources are passed to the delete[resource] controller functions
 * they all need to respond in a similar manner
-* @function handleUpdateResponse
+* @function handleDeleteResponse
 * @param {Express.response} res - Express response object
 */
 let handleDeleteResponse = (res) => {
