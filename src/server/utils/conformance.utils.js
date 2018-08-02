@@ -72,5 +72,6 @@ let generateSearchParamsForConformance = (routes, version) => {
 };
 
 module.exports = {
-	generateSearchParamsForConformance
+	generateSearchParamsForConformance,
+	conformanceSearchParamsFilter
 };

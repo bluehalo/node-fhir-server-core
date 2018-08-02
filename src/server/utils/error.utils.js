@@ -3,11 +3,11 @@ const { ISSUE, VERSIONS } = require('../../constants');
 
 // Helper to determine which operation outcome to retrieve
 let getErrorConstructor = base => {
-	switch (base) {
-		case VERSIONS.STU3:
-			return require(resolveFromVersion(base, 'OperationOutcome'));
-		default:
-			return require(resolveFromVersion(VERSIONS.STU3, 'OperationOutcome'));
+
+	if (!base) {
+		return require(resolveFromVersion(VERSIONS['3_0_1'], 'OperationOutcome'));
+	} else {
+		return require(resolveFromVersion(base, 'OperationOutcome'));
 	}
 };
 

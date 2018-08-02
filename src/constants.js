@@ -170,10 +170,24 @@ exports.ISSUE = {
 };
 
 /**
+* Interactions Types.  Also the name of the controller methods
+*/
+exports.INTERACTIONS = {
+	SEARCH: 'search',
+	SEARCH_BY_ID: 'searchById',
+	SEARCH_BY_VID: 'searchByVersionId',
+	HISTORY: 'history',
+	HISTORY_BY_ID: 'historyById',
+	CREATE: 'create',
+	UPDATE: 'update',
+	DELETE: 'remove'
+};
+
+/**
 * These are currently the only versions we support
 */
 exports.VERSIONS = {
-	STU3: 'stu3'
+	'3_0_1': '3_0_1'
 };
 
 /**

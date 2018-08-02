@@ -1,6 +1,5 @@
-const { generateSearchParamsForConformance } = require('../../utils/conformance.utils');
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { routes } = require('./patient.config');
+const { getSearchParamaters } = require('../../utils/params.utils');
 
 /**
  * @name exports
@@ -9,7 +8,7 @@ const { routes } = require('./patient.config');
 module.exports = {
 	profile: 'patient',
 	resource: (base, count) => {
-		let searchParams = generateSearchParamsForConformance(routes, base);
+		let searchParams = getSearchParamaters('patient');
 		let Patient = require(resolveFromVersion(base, 'Patient'));
 		// Return our conformance statement
 		return {

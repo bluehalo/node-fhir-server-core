@@ -1,5 +1,4 @@
 const generateInteractions = require('./metadata.interactions');
-const { VERSIONS } = require('../../../constants');
 const errors = require('../../utils/error.utils');
 const path = require('path');
 const glob = require('glob');
@@ -47,9 +46,10 @@ let filterProfiles = (base) => {
 * Load the correct statement generators for the right version
 */
 let getStatementGenerators = (base) => {
-	switch (base) {
-		case VERSIONS.STU3: return require('./capability.stu3');
-		default: return {};
+	if (base) {
+		return require(`./capability.${base}`);
+	} else {
+		return {};
 	}
 };
 
