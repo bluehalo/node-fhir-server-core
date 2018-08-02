@@ -1,3 +1,5 @@
+const { getSearchParamaters } = require('./params.utils');
+
 /**
 * @description Reduce function for removing duplicates from the search params array
 * @param {Object} collection - Cumulutaive array for reduce function
@@ -71,7 +73,11 @@ let generateSearchParamsForConformance = (routes, version) => {
 		.map(conformanceSearchParamsMap(version));
 };
 
+let getSearchParams = (profileKey, version) => {
+	return getSearchParamaters(profileKey, version).filter(conformanceSearchParamsFilter(version));
+};
+
 module.exports = {
 	generateSearchParamsForConformance,
-	conformanceSearchParamsFilter
+	getSearchParams
 };

@@ -1,5 +1,5 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { getSearchParamaters } = require('../../utils/params.utils');
+const { getSearchParamaters } = require('../../utils/conformance.utils');
 
 /**
  * @name exports
