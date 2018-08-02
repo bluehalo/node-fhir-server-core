@@ -1,5 +1,4 @@
 const { route_args, common_args, search_args } = require('../profiles/common.arguments');
-const { conformanceSearchParamsFilter } = require('./conformance.utils');
 
 let common_args_array = Object.getOwnPropertyNames(common_args)
 	.map((arg_name) => common_args[arg_name]);
@@ -26,10 +25,9 @@ let getSearchParamaters = ( profileKey, version ) => {
 		...search_args_array,
 		...common_args_array,
 		...resource_args_array,
-	].filter(conformanceSearchParamsFilter());
+	];
 
 	return resource_all_arguments;
-
 };
 
 module.exports = {
