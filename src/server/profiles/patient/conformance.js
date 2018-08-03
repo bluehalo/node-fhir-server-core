@@ -1,5 +1,5 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
-const { getSearchParamaters } = require('../../utils/conformance.utils');
+const { getSearchParams } = require('../../utils/conformance.utils');
 
 /**
  * @name exports
@@ -8,7 +8,7 @@ const { getSearchParamaters } = require('../../utils/conformance.utils');
 module.exports = {
 	profile: 'patient',
 	resource: (base, count) => {
-		let searchParams = getSearchParamaters('patient');
+		let searchParams = getSearchParams('patient');
 		let Patient = require(resolveFromVersion(base, 'Patient'));
 		// Return our conformance statement
 		return {
