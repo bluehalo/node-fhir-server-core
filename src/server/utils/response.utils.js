@@ -17,7 +17,7 @@ let handleSingleReadResponse = (res, next, base, Resource, resource_json) => {
 		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
 		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
 
-		res.status(200).json(new Resource(resource_json));
+		res.status(200).type('application/fhir+json').json(new Resource(resource_json));
 	} else {
 		next(errors.notFound(`${Resource.__resourceType} not found.`, base));
 	}
@@ -77,7 +77,7 @@ let handleBundleReadResponse = (res, base, Resource, resource_json = [], options
 	results.entry = entries;
 	results.total = entries.length;
 
-	res.status(200).json(results);
+	res.status(200).type('application/fhir+json').json(results);
 };
 
 /**
