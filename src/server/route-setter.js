@@ -230,13 +230,13 @@ function configureResourceRoutes (options) {
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
-				route.path,
+				route.path.replace(':resource', key),
 				// Cors middleware
 				cors(cors_options),
 				// Version validation
 				versionValidationMiddleware(profile),
 				// profile validation
-				profileValidationMiddleware(profiles),
+				// profileValidationMiddleware(profiles),
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
