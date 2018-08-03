@@ -10,7 +10,7 @@ const errors = require('./error.utils');
 let profileValidationMiddleware = ( profiles = {} ) => {
 	return function validationMiddleware (req, res, next) {
 		let resource = req.params && req.params.resource;
-		if (!resource || !profiles.hasOwnProperty(resource) ) {
+		if (!resource || !profiles.hasOwnProperty(resource.toLowerCase()) ) {
 			return next(errors.notFound());
 		}
 
