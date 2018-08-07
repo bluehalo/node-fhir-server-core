@@ -161,7 +161,7 @@ module.exports.remove = function remove({profile, logger, app}) {
 /**
  * @description Controller for getting the history of ImplementationGuide resource.
  */
-module.exports.history = function history ({ profile, logger }) {
+module.exports.history = function history ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -183,7 +183,7 @@ module.exports.history = function history ({ profile, logger }) {
 /**
  * @description Controller for getting the history of ImplementationGuide resource by ID.
  */
-module.exports.historyById = function historyById ({ profile, logger }) {
+module.exports.historyById = function historyById ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
