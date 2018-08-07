@@ -23,7 +23,7 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 
 		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleSingleVReadResponse(res, next, base, DeviceUseStatement, results, version_id)
+				responseUtils.handleSingleReadResponse(res, next, base, DeviceUseStatement, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
