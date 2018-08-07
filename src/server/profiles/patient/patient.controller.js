@@ -215,7 +215,7 @@ module.exports.remove = function remove ({ profile, logger, app }) {
 		let { base } = req.sanitized_args;
 
 		return service.remove(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(res))
+			.then((results) => responseUtils.handleDeleteResponse(res, results))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);

@@ -136,7 +136,14 @@ let handleUpdateResponse = (res, base, type, results) => {
 * @function handleUpdateResponse
 * @param {Express.response} res - Express response object
 */
-let handleDeleteResponse = (res) => {
+let handleDeleteResponse = (res, results) => {
+
+	let { deleted } = results;
+
+	if (deleted) {
+		res.set('ETag', `deleted`);
+	}
+
 	res.status(204).end();
 };
 
