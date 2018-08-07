@@ -189,7 +189,7 @@ let handleBundleHistoryResponse = (res, base, Resource, resource_json = [], opti
 
 	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
 	let self_link = new Bundle_Link({url: full_url, relation: 'self'});
-	let results = new Bundle({ type: 'searchset', link: self_link });
+	let results = new Bundle({ type: 'searchset', link: self_link, type: 'history' });
 	let entries = [];
 
 	if (resource_json) {
