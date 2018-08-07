@@ -141,7 +141,7 @@ let handleDeleteResponse = (res, results) => {
 	let { deleted } = results;
 
 	if (deleted) {
-		res.set('ETag', `deleted`);
+		res.set('ETag', `${deleted}`);
 	}
 
 	res.status(204).end();
