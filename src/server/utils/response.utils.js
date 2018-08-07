@@ -196,9 +196,7 @@ let handleBundleHistoryResponse = (res, base, Resource, resource_json = [], opti
 		for (let resource of resource_json) {
 
 			let history_url = `${res.req.protocol}://${res.req.get('host')}/${resource.id}/_history/${resource.meta.versionId}`;
-
-			let bundle_request = new Bundle_Request({ url: history_url });
-
+			let bundle_request = new Bundle_Request({ url: history_url, method: 'PUT' });
 
 			let type = resource.resourceType;
 
