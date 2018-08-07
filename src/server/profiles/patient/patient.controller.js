@@ -238,7 +238,9 @@ module.exports.history = function history ({ profile, logger }) {
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Patient, results)
+				responseUtils.handleBundleHistoryResponse( res, base, Patient, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -260,7 +262,9 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Patient, results)
+				responseUtils.handleBundleHistoryResponse( res, base, Patient, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -268,48 +272,3 @@ module.exports.historyById = function historyById ({ profile, logger }) {
 			});
 	};
 };
-
-/**
-* @description Controller for getting the history of a Patient resource.
-*/
-module.exports.history = function history ({ profile, logger }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific Patient
-		let Patient = require(resolveFromVersion(base, 'Patient'));
-
-		return service.history(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Patient, results)
-			)
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
-			});
-	};
-};
-
-/**
-* @description Controller for getting the history of a Patient resource by ID.
-*/
-module.exports.historyById = function historyById ({ profile, logger }) {
-	let { serviceModule: service } = profile;
-
-	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific Patient
-		let Patient = require(resolveFromVersion(base, 'Patient'));
-
-		return service.historyById(req.sanitized_args, logger)
-			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Patient, results)
-			)
-			.catch((err) => {
-				logger.error(err);
-				next(errors.internal(err.message, base));
-			});
-	};
-};
-

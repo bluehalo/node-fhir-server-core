@@ -1,6 +1,5 @@
 const BackboneElement = require('./BackboneElement');
 const Bundle_Link = require('./Bundle_Link');
-const ResourceList = require('./ResourceList');
 const Bundle_Search = require('./Bundle_Search');
 const Bundle_Request = require('./Bundle_Request');
 const Bundle_Response = require('./Bundle_Response');
@@ -40,7 +39,7 @@ class Bundle_Entry extends BackboneElement {
 	}
 
 	set resource ( new_value ) {
-		this._resource = new ResourceList(new_value);
+		this._resource = new_value;
 	}
 
 	// Information about the search process that lead to the creation of this entry.

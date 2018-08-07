@@ -161,6 +161,76 @@ let handleDeleteRejection = (res, next, base, err) => {
 };
 
 /**
+* @description When resources are read in the controller functions
+* they all need to respond in a similar manner
+* @function handleBundleReadResponse
+* @param {Express.response} res - Express response object
+* @param {string} base - Which spec version is this request coming from
+* @param {T} Resource - Resource class to use for the results
+* @param {Array<object>} resource_json - resulting json to be passed in to the class
+* @param {object} options - Any additional options for configuring the response
+* @param {string} options.resourceUrl - Url for your resource server
+* @param {string} options.resourceType - Type to use in creating the full url for the resource
+* this cannot be inferred all the time because some resources types are not queryable. For example,
+* SmokingStatus is a valid resource type, but /stu3/SmokingStatus/3 can never work, you have to
+* access the resource at /stu3/Observation/3 instead
+* @param {function} options.filter - Filter function to filter the resources out
+* the filter function should expect a resource to be passed in and return a boolean
+*/
+let handleBundleHistoryResponse = (res, base, Resource, resource_json = [], options) => {
+
+	console.log(resource_json);
+
+	let Bundle = require(resolveFromVersion(base, 'Bundle'));
+	let Bundle_Link = require(resolveFromVersion(base, 'Bundle_Link'));
+	let Bundle_Request = require(resolveFromVersion(base, 'Bundle_Request'));
+
+	let { resourceUrl, resourceType = Resource.__resourceType } = options;
+
+	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
+	let self_link = new Bundle_Link({url: full_url, relation: 'self'});
+	let results = new Bundle({ type: 'searchset', link: self_link });
+	let entries = [];
+
+	if (resource_json) {
+		for (let resource of resource_json) {
+
+			let history_url = `${res.req.protocol}://${res.req.get('host')}/${resource.id}/_history/${resource.meta.versionId}`;
+
+			let bundle_request = new Bundle_Request({ url: history_url });
+
+
+			let type = resource.resourceType;
+
+			// Modes:
+			// match - This resource matched the search specification.
+			// include - This resource is returned because it is referred to from another resource in the search set.
+			// outcome - An OperationOutcome that provides additional information about the processing of a search.
+			if (type === resourceType) {
+				entries.push({
+					search: { mode: 'match' },
+					resource,
+					fullUrl: `${resourceUrl}/${base}/${resourceType}/${resource.id}`,
+					request: bundle_request
+				});
+			} else {
+				entries.push({
+					search: { mode: 'include' },
+					resource,
+					fullUrl: `${resourceUrl}/${base}/${type}/${resource.id}`,
+					request: bundle_request
+				});
+			}
+		}
+	}
+
+	results.entry = entries;
+	results.total = entries.length;
+
+	res.status(200).type('application/fhir+json').json(results);
+};
+
+/**
  * @name exports
  * @static
  * @summary Various express response utils
@@ -171,5 +241,6 @@ module.exports = {
 	handleCreateResponse,
 	handleUpdateResponse,
 	handleDeleteResponse,
-	handleDeleteRejection
+	handleDeleteRejection,
+	handleBundleHistoryResponse
 };

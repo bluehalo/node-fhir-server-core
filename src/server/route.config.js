@@ -13,7 +13,7 @@ let routes = [
 	},
 	{
 		type: 'get',
-		path: '/:base/:resource/:id/_history/:vid',
+		path: '/:base/:resource/:id/_history/:version_id',
 		interaction: INTERACTIONS.SEARCH_BY_VID
 	},
 	{
