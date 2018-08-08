@@ -138,7 +138,7 @@ let handleUpdateResponse = (res, base, type, results) => {
 */
 let handleDeleteResponse = (res, results) => {
 	if (results && results.deleted) {
-		res.set('ETag', `${deleted}`);
+		res.set('ETag', `${results.deleted}`);
 	}
 
 	res.status(204).end();
