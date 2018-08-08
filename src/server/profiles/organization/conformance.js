@@ -12,11 +12,11 @@ module.exports = {
 		let Organization = require(resolveFromVersion(base, 'Organization'));
 		// Return our conformance statement
 		return {
-			extension: [{
-				url: 'https://www.hl7.org/fhir/search.html#count',
-				// This will be resolved dynamically by the service methods
-				valueDecimal: count
-			}],
+			// extension: [{
+			// 	url: 'https://www.hl7.org/fhir/search.html#count',
+			// 	// This will be resolved dynamically by the service methods
+			// 	valueDecimal: count
+			// }],
 			type: Organization.__resourceType,
 			profile: {
 				reference: 'http://www.hl7.org/fhir/us/core/StructureDefinition-us-core-organization.html'
