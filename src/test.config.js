@@ -1,5 +1,5 @@
 const FHIRServer = require('./index.js');
-let { VERSIONS, CONFIG_KEYS } = FHIRServer.constants;
+let { VERSIONS } = FHIRServer.constants;
 
 module.exports = {
 	// auth: {
@@ -341,13 +341,12 @@ module.exports = {
 		// 	service: './src/server/profiles/operationdefinition/operationdefinition.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
 		// },
-		// organization: {
-		// 	service: './src/server/profiles/organization/organization.service.js',
-		// 	versions: [ VERSIONS['3_0_1'] ]
-		// },
+		organization: {
+			service: './src/server/profiles/service.mock.js',
+			versions: [ VERSIONS['3_0_1'] ]
+		},
 		patient: {
-			key: CONFIG_KEYS.PATIENT,
-			service: './src/server/profiles/patient/patient.service.js',
+			service: './src/server/profiles/service.mock.js',
 			versions: [ VERSIONS['3_0_1'] ]
 		},
 		// paymentnotice: {
