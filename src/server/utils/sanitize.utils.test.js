@@ -4,7 +4,7 @@ const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize
 const { VERSIONS } = require(path.resolve('./src/constants'));
 
 const ARGS_PARAM = {
-	version: VERSIONS.STU3
+	version: VERSIONS['3_0_1']
 };
 
 const ARGS = [

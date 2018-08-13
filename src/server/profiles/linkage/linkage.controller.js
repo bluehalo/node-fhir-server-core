@@ -171,7 +171,9 @@ module.exports.history = function history ({ profile, logger, config }) {
 
 		return service.history(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Linkage, results)
+				responseUtils.handleBundleHistoryResponse( res, base, Linkage, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
@@ -193,7 +195,9 @@ module.exports.historyById = function historyById ({ profile, logger, config }) 
 
 		return service.historyById(req.sanitized_args, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Linkage, results)
+				responseUtils.handleBundleHistoryResponse( res, base, Linkage, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);

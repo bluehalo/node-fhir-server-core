@@ -1,7 +1,6 @@
 
 const { route_args } = require('./profiles/common.arguments');
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
-const { profileValidationMiddleware } = require('./utils/profile.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
 const { validateScopes } = require('./utils/scope.utils');
@@ -235,8 +234,6 @@ function configureResourceRoutes (options) {
 				cors(cors_options),
 				// Version validation
 				versionValidationMiddleware(profile),
-				// profile validation
-				// profileValidationMiddleware(profiles),
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware

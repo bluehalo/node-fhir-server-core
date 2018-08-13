@@ -4,24 +4,15 @@ const test_config = require('../test.config');
 const { VERSIONS } = require('../constants');
 const request = require('supertest');
 const Server = require('./server');
-const path = require('path');
-const glob = require('glob');
 
-let profileRoutes,
-		server;
+let server;
 
 // Helper function to replace express params with mock values
-let fillRoute = route => route.replace(':base', VERSIONS.STU3).replace(':id', 1);
+let fillRoute = (route, key) => route.replace(':base', VERSIONS['3_0_1']).replace(':id', 1).replace(':resource', key);
 
 describe('Generic Profile Tests', () => {
 
 	beforeAll(() => {
-		// Grab all the routes for all of our profiles
-		profileRoutes = glob
-			.sync('src/server/profiles/**/*.config.js')
-			.map(filepath => require(path.resolve(filepath)))
-			.map(config => config.routes);
-
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' }});
 		server = new Server(config)
@@ -30,9 +21,14 @@ describe('Generic Profile Tests', () => {
 	});
 
 	test('should be able to hit all routes', async () => {
-		for (let routes of profileRoutes) {
+
+		let keys = Object.keys(server.config.profiles);
+		let { routes } = require('./route.config');
+
+
+		for (let key of keys) {
 			for (let route of routes) {
-				let path = fillRoute(route.path);
+				let path = fillRoute(route.path, key);
 				let method = route.type;
 				let response = await request(server.app)[method](path);
 
