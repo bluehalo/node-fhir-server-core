@@ -69,7 +69,7 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 	};
 };
 
-module.exports.search = function search ({ profile, logger, config, app }) {
+module.exports.search = function search ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -141,7 +141,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 /**
 * @description Controller for creating a patient
 */
-module.exports.create = function create ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -174,7 +174,7 @@ module.exports.create = function create ({ profile, logger, app }) {
 /**
 * @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
 */
-module.exports.update = function update ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -208,7 +208,7 @@ module.exports.update = function update ({ profile, logger, app }) {
 /**
 * @description Controller for deleting a patient resource.
 */
-module.exports.remove = function remove ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
