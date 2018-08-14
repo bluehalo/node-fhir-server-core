@@ -6,7 +6,7 @@ const moment = require('moment-timezone');
  */
 module.exports.makeStatement = resources => ({
 	resourceType: 'CapabilityStatement',
-	status: 'draft',
+	status: 'generated',
 	date: moment().tz('America/New_York').format(),
 	publisher: 'Not provided',
 	kind: 'instance',

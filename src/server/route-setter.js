@@ -148,8 +148,7 @@ function configureResourceRoutes (options) {
 		// Iterate over all of our routes
 		for (let j = 0; j < routes.length; j++) {
 			let route = routes[j];
-
-			let controller = require(`./profiles/${key}/${key}.controller`);
+			let controller = require(`./profiles/${key.toLowerCase()}/${key.toLowerCase()}.controller`);
 
 			// set args
 			switch (route.interaction) {

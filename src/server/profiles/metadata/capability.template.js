@@ -6,7 +6,7 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
  * @summary Conformance statement
  */
 module.exports = {
-	resource: (base, key ) => {
+	resource: (base, key) => {
 		let searchParams = getSearchParams(key, base);
 		let Resource = require(resolveFromVersion(base, key));
 

@@ -1,5 +1,5 @@
 const generateInteractions = require('./metadata.interactions');
-const conformanceTemplate = require('./conformance.template');
+const conformanceTemplate = require('./capability.template');
 const errors = require('../../utils/error.utils');
 
 /**
