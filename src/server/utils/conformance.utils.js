@@ -74,7 +74,18 @@ let generateSearchParamsForConformance = (routes, version) => {
 };
 
 let getSearchParams = (profileKey, version) => {
-	return getSearchParamaters(profileKey, version).filter(conformanceSearchParamsFilter(version));
+	let params = getSearchParamaters(profileKey, version).filter(conformanceSearchParamsFilter(version));
+
+	for (let key of Object.keys(params)) {
+		let param = params[key];
+
+		// don't show version
+		if (param.versions) {
+			delete param.versions;
+		}
+	}
+
+	return params;
 };
 
 module.exports = {
