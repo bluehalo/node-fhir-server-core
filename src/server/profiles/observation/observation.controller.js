@@ -41,7 +41,7 @@ module.exports.search = function search ({ profile, logger, config, app }) {
 		// Get a version specific bundle
 		let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((observations) => {
 				let results = new Bundle({ type: 'searchset' });
 				let entries = [];
@@ -84,7 +84,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) => {
 				let Observation = getResourceConstructor(base_version);
 				responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results);

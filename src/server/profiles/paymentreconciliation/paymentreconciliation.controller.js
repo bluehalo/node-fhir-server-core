@@ -43,7 +43,7 @@ module.exports.search = function search({profile, logger, config, app}) {
 		let { base_version } = req.sanitized_args;
 		let PaymentReconciliation = getResourceConstructor(base_version);
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
 				responseUtils.handleBundleReadResponse(res, base_version, PaymentReconciliation, results, {
 					resourceUrl: config.auth.resourceServer,
@@ -66,7 +66,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 		let { base_version } = req.sanitized_args;
 		let PaymentReconciliation = getResourceConstructor(base_version);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) => {
 				responseUtils.handleSingleReadResponse(res, next, base_version, PaymentReconciliation, results);
 			})
