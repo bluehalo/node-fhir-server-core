@@ -5,9 +5,9 @@ const errors = require('../../utils/error.utils');
 /**
 * Load the correct statement generators for the right version
 */
-let getStatementGenerators = (base) => {
-	if (base) {
-		return require(`./capability.${base}`);
+let getStatementGenerators = (base_version) => {
+	if (base_version) {
+		return require(`./capability.${base_version}`);
 	} else {
 		return {};
 	}
@@ -23,11 +23,11 @@ let getStatementGenerators = (base) => {
  */
 let generateCapabilityStatement = (args, config, logger) => new Promise((resolve, reject) => {
 	logger.info('Metadata.generateCapabilityStatement');
-	// Create a new base capability statement per request
+	// Create a new base_version capability statement per request
 	let { profiles, security } = config;
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
-	let context = { base: args.base };
+	let context = { base_version: args.base_version };
 
 	// create profile list
 	let keys = Object.keys(profiles);
@@ -43,7 +43,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	});
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(args.base);
+	let { makeStatement, securityStatement } = getStatementGenerators(args.base_version);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
@@ -63,7 +63,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 
 	// Make the resource and give it the version so it can only include valid search params
 	server_statement.resource = active_profiles.map((profile) => {
-		let resource = profile.makeResource(context.base, profile.key, 'Patient');
+		let resource = profile.makeResource(context.base_version, profile.key, 'Patient');
 		// Determine the interactions we need to list for this profile
 		resource.interaction = generateInteractions(profile.service, resource.type);
 		return resource;

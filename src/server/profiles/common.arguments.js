@@ -4,7 +4,7 @@
 */
 module.exports.route_args = {
 	BASE: {
-		name: 'base',
+		name: 'base_version',
 		type: 'string',
 		conformance_hide: true
 	},

@@ -3,7 +3,7 @@ const controller = require('./metadata.controller');
 
 let route = {
 	type: 'get',
-	path: '/:base/metadata',
+	path: '/:base_version/metadata',
 	corsOptions: {
 		methods: ['GET']
 	},
