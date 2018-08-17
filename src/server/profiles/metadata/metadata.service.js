@@ -1,55 +1,15 @@
 const generateInteractions = require('./metadata.interactions');
-const { VERSIONS } = require('../../../constants');
+const conformanceTemplate = require('./capability.template');
 const errors = require('../../utils/error.utils');
-const path = require('path');
-const glob = require('glob');
-
-/**
-* Load all the conformance documents ahead of time
-*/
-let profile_conformance_documents = glob.sync(path.resolve(__dirname, '../*/conformance.js'))
-	.map(conformance_path => require(conformance_path));
-
-/**
-* Return properties associated with the profile that will be useful for generating
-* the resource object in the capability/conformance statement
-*/
-let mapProfiles = (profiles = {}) => {
-	return ({ profile, resource }) => {
-		const profile_name = Object.keys(profiles).find(name => name === profile);
-		return {
-			makeResource: resource,
-			versions: profiles[profile_name]
-				&& profiles[profile_name].versions,
-			service: profiles[profile_name]
-				&& profiles[profile_name].serviceModule,
-			count: profiles[profile_name]
-				&& profiles[profile_name].serviceModule
-				&& profiles[profile_name].serviceModule.count
-		};
-	};
-};
-
-/**
-* Filter resources/profiles baased on the, having the required properties
-* if the service provided does not have a count method then we cannot
-* generate a complete record
-*/
-let filterProfiles = (base) => {
-	return resource => (
-		resource.count
-		&& resource.makeResource
-		&& resource.versions.indexOf(base) > -1
-	);
-};
 
 /**
 * Load the correct statement generators for the right version
 */
-let getStatementGenerators = (base) => {
-	switch (base) {
-		case VERSIONS.STU3: return require('./capability.stu3');
-		default: return {};
+let getStatementGenerators = (base_version) => {
+	if (base_version) {
+		return require(`./capability.${base_version}`);
+	} else {
+		return {};
 	}
 };
 
@@ -63,18 +23,27 @@ let getStatementGenerators = (base) => {
  */
 let generateCapabilityStatement = (args, config, logger) => new Promise((resolve, reject) => {
 	logger.info('Metadata.generateCapabilityStatement');
-	// Create a new base capability statement per request
+	// Create a new base_version capability statement per request
 	let { profiles, security } = config;
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
-	let context = { base: args.base };
-	// Get a list of profiles and their conformance info for this spec version
-	let active_profiles = profile_conformance_documents
-		.map(mapProfiles(profiles))
-		.filter(filterProfiles(args.base));
+	let context = { base_version: args.base_version };
+
+	// create profile list
+	let keys = Object.keys(profiles);
+	let active_profiles = keys.map((profile_name) => {
+		return {
+			key: profile_name,
+			makeResource: conformanceTemplate.resource,
+			versions: profiles[profile_name]
+				&& profiles[profile_name].versions,
+			service: profiles[profile_name]
+				&& profiles[profile_name].serviceModule
+		};
+	});
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(args.base);
+	let { makeStatement, securityStatement } = getStatementGenerators(args.base_version);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
@@ -82,34 +51,26 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 		return reject(errors.internal('Unable to generate metadata for this FHIR specification.'));
 	}
 
-	// Generate a list of promises
-	let count_promises = active_profiles.map(profile => profile.count(args, logger));
+	// Let's start building our confromance/capability statement
+	let server_statement = {
+		mode: 'server'
+	};
 
-	// Iterate over active resources and invoke get count on each
-	return Promise.all(count_promises).then(counts => {
-		// Let's start building our confromance/capability statement
-		let server_statement = {
-			mode: 'server'
-		};
+	// Add security information if available
+	if (config.server && security) {
+		server_statement.security = securityStatement(security);
+	}
 
-		// Add security information if available
-		if (config.server && security) {
-			server_statement.security = securityStatement(security);
-		}
+	// Make the resource and give it the version so it can only include valid search params
+	server_statement.resource = active_profiles.map((profile) => {
+		let resource = profile.makeResource(context.base_version, profile.key, 'Patient');
+		// Determine the interactions we need to list for this profile
+		resource.interaction = generateInteractions(profile.service, resource.type);
+		return resource;
+	});
 
-		// Make the resource and give it the version so it can only include valid search params
-		server_statement.resource = active_profiles.map((profile, i) => {
-			let resource = profile.makeResource(context.base, counts[i]);
-			// Determine the interactions we need to list for this profile
-			resource.interaction = generateInteractions(profile.service, resource.type);
-			return resource;
-		});
-
-		// Add the server statement to the main statement
-		return resolve(makeStatement(server_statement));
-	})
-	.catch(reject);
-
+	// Add the server statement to the main statement
+	return resolve(makeStatement(server_statement));
 });
 
 /**

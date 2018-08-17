@@ -5,10 +5,10 @@ const errors = require('../../utils/error.utils');
 
 
 /**
- * @description Construct a resource with base/uscore path
+ * @description Construct a resource with base_version/uscore path
  */
-let getResourceConstructor = (base) => {
-	return require(resolveFromVersion(base, 'uscore/Medication'));
+let getResourceConstructor = (base_version) => {
+	return require(resolveFromVersion(base_version, 'Medication'));
 };
 
 /**
@@ -18,16 +18,16 @@ module.exports.searchByVersionId = function searchByVersionId({profile, logger, 
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base, version_id} = req.sanitized_args;
-		let Medication = getResourceConstructor(base);
+		let {base_version, version_id} = req.sanitized_args;
+		let Medication = getResourceConstructor(base_version);
 
-		return service.searchByVersionId(req.sanitized_args, logger)
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleSingleVReadResponse(res, next, base, Medication, results, version_id)
+				responseUtils.handleSingleReadResponse(res, next, base_version, Medication, results, version_id)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -40,18 +40,18 @@ module.exports.search = function search({profile, logger, config, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		let Medication = getResourceConstructor(base);
+		let { base_version } = req.sanitized_args;
+		let Medication = getResourceConstructor(base_version);
 
-		return service.search(req.sanitized_args, logger)
+		return service.search(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse(res, base, Medication, results, {
+				responseUtils.handleBundleReadResponse(res, base_version, Medication, results, {
 					resourceUrl: config.auth.resourceServer,
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -63,16 +63,16 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		let Medication = getResourceConstructor(base);
+		let { base_version } = req.sanitized_args;
+		let Medication = getResourceConstructor(base_version);
 
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) => {
-				responseUtils.handleSingleReadResponse(res, next, base, Medication, results);
+				responseUtils.handleSingleReadResponse(res, next, base_version, Medication, results);
 			})
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -84,26 +84,26 @@ module.exports.create = function create({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base, resource_id, resource_body = {}} = req.sanitized_args;
-		let Medication = getResourceConstructor(base);
+		let {base_version, resource_id, resource_body = {}} = req.sanitized_args;
+		let Medication = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (Medication.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Medication.__resourceType}', received '${resource_body.resourceType}'`,
-				base
+				base_version
 			));
 		}
 		// Create a new medication resource and pass it to the service
 		let medication = new Medication(resource_body);
 		let args = {id: resource_id, resource: medication};
 		// Pass any new information to the underlying service
-		return service.create(args, logger)
+		return service.create(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Medication.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base_version, Medication.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -115,26 +115,26 @@ module.exports.update = function update({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base, id, resource_body = {}} = req.sanitized_args;
-		let Medication = getResourceConstructor(base);
+		let {base_version, id, resource_body = {}} = req.sanitized_args;
+		let Medication = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (Medication.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Medication.__resourceType}', received '${resource_body.resourceType}'`,
-				base
+				base_version
 			));
 		}
 		// Create a new medication resource and pass it to the service
 		let medication = new Medication(resource_body);
 		let args = {id, resource: medication};
 		// Pass any new information to the underlying service
-		return service.update(args, logger)
+		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Medication.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, Medication.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -146,14 +146,14 @@ module.exports.remove = function remove({profile, logger, app}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 
-		return service.remove(req.sanitized_args, logger)
+		return service.remove(req.sanitized_args, req.contexts, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, base, err);
+				responseUtils.handleDeleteRejection(res, next, base_version, err);
 			});
 	};
 };
@@ -161,21 +161,23 @@ module.exports.remove = function remove({profile, logger, app}) {
 /**
  * @description Controller for getting the history of Medication resource.
  */
-module.exports.history = function history ({ profile, logger }) {
+module.exports.history = function history ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 
-		let Medication = getResourceConstructor(base);
+		let Medication = getResourceConstructor(base_version);
 
-		return service.history(req.sanitized_args, logger)
+		return service.history(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Medication, results)
+				responseUtils.handleBundleHistoryResponse( res, base_version, Medication, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -183,21 +185,23 @@ module.exports.history = function history ({ profile, logger }) {
 /**
  * @description Controller for getting the history of Medication resource by ID.
  */
-module.exports.historyById = function historyById ({ profile, logger }) {
+module.exports.historyById = function historyById ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 
-		let Medication = getResourceConstructor(base);
+		let Medication = getResourceConstructor(base_version);
 
-		return service.historyById(req.sanitized_args, logger)
+		return service.historyById(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Medication, results)
+				responseUtils.handleBundleHistoryResponse( res, base_version, Medication, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };

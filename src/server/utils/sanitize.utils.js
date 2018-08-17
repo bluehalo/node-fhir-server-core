@@ -107,7 +107,7 @@ let sanitizeMiddleware = function (config) {
 
 			// If the argument is required but not present
 			if (!value && conf.required) {
-				return next(errors.invalidParameter(conf.name + ' is required', req.params.base));
+				return next(errors.invalidParameter(conf.name + ' is required', req.params.base_version));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
@@ -117,12 +117,12 @@ let sanitizeMiddleware = function (config) {
 					cleanArgs[field] = parseValue(conf.type, value);
 				}
 			} catch (err) {
-				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base));
+				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base_version));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
 			if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
-				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base));
+				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base_version));
 			}
 		}
 

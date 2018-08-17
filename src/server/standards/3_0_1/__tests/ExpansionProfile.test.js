@@ -1,0 +1,31 @@
+const ExpansionProfile = require('../ExpansionProfile');
+
+describe('ExpansionProfile Resource Test', () => {
+
+	test('should not throw when instantiating', () => {
+		/* eslint-disable no-unused-vars */
+		function create () {
+			let instance = new ExpansionProfile();
+		}
+
+		expect(create).not.toThrow();
+		/* eslint-enable no-unused-vars */
+	});
+
+	test('should have static __resourceType matching class name', () => {
+		expect(ExpansionProfile.__resourceType).toBe('ExpansionProfile');
+	});
+
+
+	test('should not throw when calling toJSON on an instance', () => {
+		/* eslint-disable no-unused-vars */
+		function create () {
+			let instance = new ExpansionProfile();
+			let json = instance.toJSON();
+		}
+
+		expect(create).not.toThrow();
+		/* eslint-enable no-unused-vars */
+	});
+
+});

@@ -4,7 +4,7 @@
 */
 module.exports.route_args = {
 	BASE: {
-		name: 'base',
+		name: 'base_version',
 		type: 'string',
 		conformance_hide: true
 	},
@@ -44,13 +44,13 @@ module.exports.search_args = {
 		name: '_include',
 		type: 'string',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
-		documentation: ''
+		documentation: undefined
 	},
 	_REVINCLUDE: {
 		name: '_revinclude',
 		type: 'string',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
-		documentation: ''
+		documentation: undefined
 	}
 };
 

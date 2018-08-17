@@ -107,7 +107,7 @@ class Server {
 		this.app.use(compression({ level: 9 }));
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
-		this.app.use(bodyParser.json());
+		this.app.use(bodyParser.json({ type: 'application/*+json' }));
 		// return self for chaining
 		return this;
 	}
@@ -186,12 +186,12 @@ class Server {
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
 			// If there is an error and it is our error type
-			if (err && errors.isServerError(err, req.params.base)) {
+			if (err && errors.isServerError(err, req.params.base_version)) {
 				res.status(err.statusCode).json(err);
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				let error = errors.internal(err.message, req.params.base);
+				let error = errors.internal(err.message, req.params.base_version);
 				this.logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
@@ -203,7 +203,7 @@ class Server {
 
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
-			let error = errors.notFound(req.params.base);
+			let error = errors.notFound(req.params.base_version);
 			this.logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});
