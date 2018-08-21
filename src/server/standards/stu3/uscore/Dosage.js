@@ -122,12 +122,12 @@ class Dosage extends Element {
 	}
 
 	// Amount of medication per dose.
-	get doseSimpleQuantity () {
-		return this._doseSimpleQuantity;
+	get doseQuantity () {
+		return this._doseQuantity;
 	}
 
-	set doseSimpleQuantity ( new_value ) {
-		this._doseSimpleQuantity = new Quantity(new_value);
+	set doseQuantity ( new_value ) {
+		this._doseQuantity = new Quantity(new_value);
 	}
 
 	// Upper limit on medication per unit of time.
@@ -197,7 +197,7 @@ class Dosage extends Element {
 			route: this._route && this._route.toJSON(),
 			method: this._method && this._method.toJSON(),
 			doseRange: this._doseRange && this._doseRange.toJSON(),
-			doseSimpleQuantity: this._doseSimpleQuantity && this._doseSimpleQuantity.toJSON(),
+			doseQuantity: this._doseQuantity && this._doseQuantity.toJSON(),
 			maxDosePerPeriod: this._maxDosePerPeriod && this._maxDosePerPeriod.toJSON(),
 			maxDosePerAdministration: this._maxDosePerAdministration && this._maxDosePerAdministration.toJSON(),
 			maxDosePerLifetime: this._maxDosePerLifetime && this._maxDosePerLifetime.toJSON(),
