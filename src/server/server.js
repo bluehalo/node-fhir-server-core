@@ -5,6 +5,7 @@ const express = require('express');
 const helmet = require('helmet');
 const https = require('https');
 const http = require('http');
+const path = require('path');
 const fs = require('fs');
 const routeSetter = require('./route-setter');
 const errors = require('./utils/error.utils');
@@ -152,7 +153,7 @@ class Server {
 
 	configurePassport () {
 		if (this.config.auth && this.config.auth.strategy) {
-			let { strategy } = require(this.config.auth.strategy.service);
+			let { strategy } = require(path.resolve(this.config.auth.strategy.service));
 			passport.use(strategy);
 		}
 
