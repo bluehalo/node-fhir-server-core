@@ -1,5 +1,6 @@
 
 const { route_args } = require('./profiles/common.arguments');
+const { read_scopes, write_scopes } = require('./profiles/common.scopes');
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
@@ -150,19 +151,21 @@ function configureResourceRoutes (options) {
 			let route = routes[j];
 			let controller = require(`./profiles/${key.toLowerCase()}/${key.toLowerCase()}.controller`);
 
-			// set args
 			switch (route.interaction) {
 				case INTERACTIONS.SEARCH:
 					route.args = getSearchParamaters(key);
+					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH];
 					break;
 
 				case INTERACTIONS.HISTORY:
 					route.args = getSearchParamaters(key);
+					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY];
 					break;
 				case INTERACTIONS.HISTORY_BY_ID:
 					route.args = [route_args.ID, ...getSearchParamaters(key)];
+					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
 					break;
 				case INTERACTIONS.SEARCH_BY_VID:
@@ -171,6 +174,7 @@ function configureResourceRoutes (options) {
 							route_args.ID,
 							route_args.VERSION_ID
 					];
+					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_VID];
 					break;
 				case INTERACTIONS.SEARCH_BY_ID:
@@ -178,12 +182,14 @@ function configureResourceRoutes (options) {
 						route_args.BASE,
 						route_args.ID
 					];
+					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_ID];
 					break;
 				case INTERACTIONS.CREATE:
 					route.args = [
 						route_args.BASE
 					];
+					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.CREATE];
 					break;
 				case INTERACTIONS.UPDATE:
@@ -191,6 +197,7 @@ function configureResourceRoutes (options) {
 						route_args.BASE,
 						route_args.ID
 					];
+					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.UPDATE];
 					break;
 				case INTERACTIONS.DELETE:
@@ -198,6 +205,7 @@ function configureResourceRoutes (options) {
 						route_args.BASE,
 						route_args.ID
 					];
+					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.DELETE];
 					break;
 			}
@@ -236,7 +244,7 @@ function configureResourceRoutes (options) {
 				// Parameter sanitzation middleware
 				sanitizeMiddleware(route.args),
 				// Authentication middleware
-				authenticationMiddleware({ config, logger, scopes: route.scopes }),
+				authenticationMiddleware({ config, logger }),
 				// Scope validation
 				hasValidScopes({ scopes: route.scopes, config }),
 				// Finally our controller function

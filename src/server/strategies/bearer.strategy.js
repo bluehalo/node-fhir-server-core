@@ -18,11 +18,12 @@ module.exports.strategy = new Strategy(
 		.send({token: token, client_id: process.env.clientId, client_secret: process.env.clientSecret})
 		.then((introspectionResponse) => {
 			const decodedToken = introspectionResponse.body;
+
 			if (decodedToken.active) {
-				let { scope, context, sub, user_id } = decodedToken;
+				let { scope, context = {patient: 1}, sub, user_id } = decodedToken;
 				let user = {user_id, sub};
 
-				return done(null, user, scope, context);
+				return done(null, user, {scope, context});
 			}
 
 			// default return unauthorized
