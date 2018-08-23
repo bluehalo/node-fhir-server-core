@@ -1,0 +1,80 @@
+module.exports = {
+	AUTHOR: {
+		name: 'Author',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-author',
+		description: 'The author of the request group.',
+	},
+	AUTHORED: {
+		name: 'Authored',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-authored',
+		description: 'The date the request group was authored.',
+	},
+	CONTEXT: {
+		name: 'Context',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-context',
+		description: 'The context the request group applies to.',
+	},
+	DEFINITION: {
+		name: 'Definition',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-definition',
+		description: 'The definition from which the request group is realized.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-encounter',
+		description: 'The encounter the request group applies to.',
+	},
+	GROUP_IDENTIFIER: {
+		name: 'Group_identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-group-identifier',
+		description: 'The group identifier for the request group.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-identifier',
+		description: 'External identifiers for the request group.',
+	},
+	INTENT: {
+		name: 'Intent',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-intent',
+		description: 'The intent of the request group.',
+	},
+	PARTICIPANT: {
+		name: 'Participant',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-participant',
+		description: 'The participant in the requests in the group.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-patient',
+		description: 'The identity of a patient to search for request groups.',
+	},
+	PRIORITY: {
+		name: 'Priority',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-priority',
+		description: 'The priority of the request group.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-status',
+		description: 'The status of the request group.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-subject',
+		description: 'The subject that the request group is about.',
+	},
+};

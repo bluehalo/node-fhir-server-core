@@ -99,7 +99,7 @@ function hasValidScopes (options) {
 function configureMetadataRoute (options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
-	let { route } = require('./profiles/metadata/metadata.config');
+	let { route } = require('./metadata/metadata.config');
 
 	// The user can provider default cors options to be provided on all routes
 	let default_cors_options = Object.assign({}, server.corsOptions);
@@ -142,9 +142,15 @@ function configureResourceRoutes (options) {
 	for (const key of Object.keys(profiles)) {
 		let profile = profiles[key];
 
-
 		// The user can provider default cors options to be provided on all routes
 		let default_cors_options = Object.assign({}, server.corsOptions);
+
+		// Get all search parameters for profile versions;
+		let search_parameters = [];
+
+		profile.versions.forEach(version => {
+			search_parameters.push(...getSearchParamaters(key, version));
+		});
 
 		// Iterate over all of our routes
 		for (let j = 0; j < routes.length; j++) {
@@ -153,18 +159,18 @@ function configureResourceRoutes (options) {
 
 			switch (route.interaction) {
 				case INTERACTIONS.SEARCH:
-					route.args = getSearchParamaters(key);
+					route.args = search_parameters;
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH];
 					break;
 
 				case INTERACTIONS.HISTORY:
-					route.args = getSearchParamaters(key);
+					route.args = search_parameters;
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY];
 					break;
 				case INTERACTIONS.HISTORY_BY_ID:
-					route.args = [route_args.ID, ...getSearchParamaters(key)];
+					route.args = [route_args.ID, ...search_parameters];
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
 					break;

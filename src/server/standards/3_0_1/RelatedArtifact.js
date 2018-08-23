@@ -1,88 +1,90 @@
 const Element = require('./Element');
-const Attachment = require('./Attachment');
-const Reference = require('./Reference');
+const UriScalar = require('./scalars/Uri.scalar');
 
 class RelatedArtifact extends Element {
 
-	constructor ( opts ) {
-		super( opts );
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'RelatedArtifact';
+		Object.assign(this, opt);
 	}
 
+	// This is a RelatedArtifact resource
 	static get __resourceType () {
 		return 'RelatedArtifact';
 	}
 
 	// The type of relationship to the related artifact.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['documentation', 'justification', 'citation', 'predecessor', 'successor', 'derived-from', 'depends-on', 'composed-of'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
-		}
-		this._type = new_value;
+	set type (new_value) {
+		this.__type = new_value;
 	}
 
 	// A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.
 	get display () {
-		return this._display;
+		return this.__display;
 	}
 
-	set display ( new_value ) {
-		this._display = new_value;
+	set display (new_value) {
+		this.__display = new_value;
 	}
 
 	// A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.
 	get citation () {
-		return this._citation;
+		return this.__citation;
 	}
 
-	set citation ( new_value ) {
-		this._citation = new_value;
+	set citation (new_value) {
+		this.__citation = new_value;
 	}
 
 	// A url for the artifact that can be followed to access the actual content.
 	get url () {
-		return this._url;
+		return this.__url;
 	}
 
-	set url ( new_value ) {
-		this._url = new_value;
+	set url (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field url`);
+		}
+		this.__url = new_value;
 	}
 
 	// The document being referenced, represented as an attachment. This is exclusive with the resource element.
 	get document () {
-		return this._document;
+		return this.__document;
 	}
 
-	set document ( new_value ) {
-		this._document = new Attachment(new_value);
+	set document (new_value) {
+		const Attachment = require('./Attachment');
+		this.__document = new Attachment(new_value);
 	}
 
 	// The related resource, such as a library, value set, profile, or other knowledge resource.
 	get resource () {
-		return this._resource;
+		return this.__resource;
 	}
 
-	set resource ( new_value ) {
-		this._resource = new Reference(new_value);
+	set resource (new_value) {
+		const Reference = require('./Reference');
+		this.__resource = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			type: this._type,
-			display: this._display,
-			citation: this._citation,
-			url: this._url,
-			document: this._document && this._document.toJSON(),
-			resource: this._resource && this._resource.toJSON()
+			type: this.__type,
+			display: this.__display,
+			citation: this.__citation,
+			url: this.__url,
+			document: this.__document && this.__document.toJSON(),
+			resource: this.__resource && this.__resource.toJSON()
 		});
 	}
-
 }
 
 module.exports = RelatedArtifact;

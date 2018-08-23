@@ -1,140 +1,134 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class EnrollmentResponse extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'EnrollmentResponse';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'EnrollmentResponse';
+		Object.assign(this, opt);
 	}
 
+	// This is a EnrollmentResponse resource
 	static get __resourceType () {
 		return 'EnrollmentResponse';
 	}
 
-	// This is a EnrollmentResponse resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['EnrollmentResponse'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__EnrollmentResponse = new_value;
 	}
 
 	// The Response business identifier.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status of the resource instance.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Original request resource reference.
 	get request () {
-		return this._request;
+		return this.__request;
 	}
 
-	set request ( new_value ) {
-		this._request = new Reference(new_value);
+	set request (new_value) {
+		const Reference = require('./Reference');
+		this.__request = new Reference(new_value);
 	}
 
 	// Processing status: error, complete.
 	get outcome () {
-		return this._outcome;
+		return this.__outcome;
 	}
 
-	set outcome ( new_value ) {
-		this._outcome = new CodeableConcept(new_value);
+	set outcome (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__outcome = new CodeableConcept(new_value);
 	}
 
 	// A description of the status of the adjudication.
 	get disposition () {
-		return this._disposition;
+		return this.__disposition;
 	}
 
-	set disposition ( new_value ) {
-		this._disposition = new_value;
+	set disposition (new_value) {
+		this.__disposition = new_value;
 	}
 
 	// The date when the enclosed suite of services were performed or completed.
 	get created () {
-		return this._created;
+		return this.__created;
 	}
 
-	set created ( new_value ) {
+	set created (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
-		this._created = new_value;
+		this.__created = new_value;
 	}
 
 	// The Insurer who produced this adjudicated response.
 	get organization () {
-		return this._organization;
+		return this.__organization;
 	}
 
-	set organization ( new_value ) {
-		this._organization = new Reference(new_value);
+	set organization (new_value) {
+		const Reference = require('./Reference');
+		this.__organization = new Reference(new_value);
 	}
 
 	// The practitioner who is responsible for the services rendered to the patient.
 	get requestProvider () {
-		return this._requestProvider;
+		return this.__requestProvider;
 	}
 
-	set requestProvider ( new_value ) {
-		this._requestProvider = new Reference(new_value);
+	set requestProvider (new_value) {
+		const Reference = require('./Reference');
+		this.__requestProvider = new Reference(new_value);
 	}
 
 	// The organization which is responsible for the services rendered to the patient.
 	get requestOrganization () {
-		return this._requestOrganization;
+		return this.__requestOrganization;
 	}
 
-	set requestOrganization ( new_value ) {
-		this._requestOrganization = new Reference(new_value);
+	set requestOrganization (new_value) {
+		const Reference = require('./Reference');
+		this.__requestOrganization = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			request: this._request && this._request.toJSON(),
-			outcome: this._outcome && this._outcome.toJSON(),
-			disposition: this._disposition,
-			created: this._created,
-			organization: this._organization && this._organization.toJSON(),
-			requestProvider: this._requestProvider && this._requestProvider.toJSON(),
-			requestOrganization: this._requestOrganization && this._requestOrganization.toJSON()
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			request: this.__request && this.__request.toJSON(),
+			outcome: this.__outcome && this.__outcome.toJSON(),
+			disposition: this.__disposition,
+			created: this.__created,
+			organization: this.__organization && this.__organization.toJSON(),
+			requestProvider: this.__requestProvider && this.__requestProvider.toJSON(),
+			requestOrganization: this.__requestOrganization && this.__requestOrganization.toJSON()
 		});
 	}
-
 }
 
 module.exports = EnrollmentResponse;

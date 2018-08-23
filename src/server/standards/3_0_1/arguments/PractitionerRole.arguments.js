@@ -1,0 +1,80 @@
+module.exports = {
+	EMAIL: {
+		name: 'Email',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/individual-email',
+		description: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in an email contact  * [RelatedPerson](relatedperson.html): A value in an email contact  * [Practitioner](practitioner.html): A value in an email contact  * [Person](person.html): A value in an email contact  * [Patient](patient.html): A value in an email contact  .',
+	},
+	PHONE: {
+		name: 'Phone',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/individual-phone',
+		description: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in a phone contact  * [RelatedPerson](relatedperson.html): A value in a phone contact  * [Practitioner](practitioner.html): A value in a phone contact  * [Person](person.html): A value in a phone contact  * [Patient](patient.html): A value in a phone contact  .',
+	},
+	TELECOM: {
+		name: 'Telecom',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/individual-telecom',
+		description: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): The value in any kind of contact  * [RelatedPerson](relatedperson.html): The value in any kind of contact  * [Practitioner](practitioner.html): The value in any kind of contact  * [Person](person.html): The value in any kind of contact  * [Patient](patient.html): The value in any kind of telecom details of the patient  .',
+	},
+	ACTIVE: {
+		name: 'Active',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-active',
+		description: 'Whether this practitioner\'s record is in active use.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-date',
+		description: 'The period during which the practitioner is authorized to perform in these role(s).',
+	},
+	ENDPOINT: {
+		name: 'Endpoint',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-endpoint',
+		description: 'Technical endpoints providing access to services operated for the practitioner with this role.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-identifier',
+		description: 'A practitioner\'s Identifier.',
+	},
+	LOCATION: {
+		name: 'Location',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-location',
+		description: 'One of the locations at which this practitioner provides care.',
+	},
+	ORGANIZATION: {
+		name: 'Organization',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-organization',
+		description: 'The identity of the organization the practitioner represents / acts on behalf of.',
+	},
+	PRACTITIONER: {
+		name: 'Practitioner',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-practitioner',
+		description: 'Practitioner that is able to provide the defined services for the organation.',
+	},
+	ROLE: {
+		name: 'Role',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-role',
+		description: 'The practitioner can perform this role at for the organization.',
+	},
+	SERVICE: {
+		name: 'Service',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-service',
+		description: 'The list of healthcare services that this worker provides for this role\'s Organization/Location(s).',
+	},
+	SPECIALTY: {
+		name: 'Specialty',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-specialty',
+		description: 'The practitioner has this specialty at an organization.',
+	},
+};

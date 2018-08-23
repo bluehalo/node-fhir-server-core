@@ -1,207 +1,206 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Annotation = require('./Annotation');
-const DataRequirement = require('./DataRequirement');
+const IdScalar = require('./scalars/Id.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class GuidanceResponse extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'GuidanceResponse';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'GuidanceResponse';
+		Object.assign(this, opt);
 	}
 
+	// This is a GuidanceResponse resource
 	static get __resourceType () {
 		return 'GuidanceResponse';
 	}
 
-	// This is a GuidanceResponse resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['GuidanceResponse'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__GuidanceResponse = new_value;
 	}
 
 	// The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
 	get requestId () {
-		return this._requestId;
+		return this.__requestId;
 	}
 
-	set requestId ( new_value ) {
+	set requestId (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
+		let pattern = IdScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field requestId`);
 		}
-		this._requestId = new_value;
+		this.__requestId = new_value;
 	}
 
 	// Allows a service to provide a unique, business identifier for the response.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = new Identifier(new_value);
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = new Identifier(new_value);
 	}
 
 	// A reference to the knowledge module that was invoked.
 	get module () {
-		return this._module;
+		return this.__module;
 	}
 
-	set module ( new_value ) {
-		this._module = new Reference(new_value);
+	set module (new_value) {
+		const Reference = require('./Reference');
+		this.__module = new Reference(new_value);
 	}
 
 	// The status of the response. If the evaluation is completed successfully, the status will indicate success. However, in order to complete the evaluation, the engine may require more information. In this case, the status will be data-required, and the response will contain a description of the additional required information. If the evaluation completed successfully, but the engine determines that a potentially more accurate response could be provided if more data was available, the status will be data-requested, and the response will contain a description of the additional requested information.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['success', 'data-requested', 'data-required', 'in-progress', 'failure', 'entered-in-error'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// The patient for which the request was processed.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
 	// Indicates when the guidance response was processed.
 	get occurrenceDateTime () {
-		return this._occurrenceDateTime;
+		return this.__occurrenceDateTime;
 	}
 
-	set occurrenceDateTime ( new_value ) {
+	set occurrenceDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
 		}
-		this._occurrenceDateTime = new_value;
+		this.__occurrenceDateTime = new_value;
 	}
 
 	// Provides a reference to the device that performed the guidance.
 	get performer () {
-		return this._performer;
+		return this.__performer;
 	}
 
-	set performer ( new_value ) {
-		this._performer = new Reference(new_value);
+	set performer (new_value) {
+		const Reference = require('./Reference');
+		this.__performer = new Reference(new_value);
 	}
 
 	// Indicates the reason the request was initiated. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response.
 	get reasonCodeableConcept () {
-		return this._reasonCodeableConcept;
+		return this.__reasonCodeableConcept;
 	}
 
-	set reasonCodeableConcept ( new_value ) {
-		this._reasonCodeableConcept = new CodeableConcept(new_value);
+	set reasonCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Indicates the reason the request was initiated. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = new Reference(new_value);
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = new Reference(new_value);
 	}
 
 	// Provides a mechanism to communicate additional information about the response.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Messages resulting from the evaluation of the artifact or artifacts. As part of evaluating the request, the engine may produce informational or warning messages. These messages will be provided by this element.
 	get evaluationMessage () {
-		return this._evaluationMessage;
+		return this.__evaluationMessage;
 	}
 
-	set evaluationMessage ( new_value ) {
-		this._evaluationMessage = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set evaluationMessage (new_value) {
+		const Reference = require('./Reference');
+		this.__evaluationMessage = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The output parameters of the evaluation, if any. Many modules will result in the return of specific resources such as procedure or communication requests that are returned as part of the operation result. However, modules may define specific outputs that would be returned as the result of the evaluation, and these would be returned in this element.
 	get outputParameters () {
-		return this._outputParameters;
+		return this.__outputParameters;
 	}
 
-	set outputParameters ( new_value ) {
-		this._outputParameters = new Reference(new_value);
+	set outputParameters (new_value) {
+		const Reference = require('./Reference');
+		this.__outputParameters = new Reference(new_value);
 	}
 
 	// The actions, if any, produced by the evaluation of the artifact.
 	get result () {
-		return this._result;
+		return this.__result;
 	}
 
-	set result ( new_value ) {
-		this._result = new Reference(new_value);
+	set result (new_value) {
+		const Reference = require('./Reference');
+		this.__result = new Reference(new_value);
 	}
 
 	// If the evaluation could not be completed due to lack of information, or additional information would potentially result in a more accurate response, this element will a description of the data required in order to proceed with the evaluation. A subsequent request to the service should include this data.
 	get dataRequirement () {
-		return this._dataRequirement;
+		return this.__dataRequirement;
 	}
 
-	set dataRequirement ( new_value ) {
-		this._dataRequirement = Array.isArray(new_value) ? new_value.map(val => new DataRequirement(val)) : [new DataRequirement(new_value)];
+	set dataRequirement (new_value) {
+		const DataRequirement = require('./DataRequirement');
+		this.__dataRequirement = Array.isArray(new_value) ? new_value.map(val => new DataRequirement(val)) : [new DataRequirement(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			requestId: this._requestId,
-			identifier: this._identifier && this._identifier.toJSON(),
-			module: this._module && this._module.toJSON(),
-			status: this._status,
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
-			occurrenceDateTime: this._occurrenceDateTime,
-			performer: this._performer && this._performer.toJSON(),
-			reasonCodeableConcept: this._reasonCodeableConcept && this._reasonCodeableConcept.toJSON(),
-			reasonReference: this._reasonReference && this._reasonReference.toJSON(),
-			note: this._note && this._note.map(v => v.toJSON()),
-			evaluationMessage: this._evaluationMessage && this._evaluationMessage.map(v => v.toJSON()),
-			outputParameters: this._outputParameters && this._outputParameters.toJSON(),
-			result: this._result && this._result.toJSON(),
-			dataRequirement: this._dataRequirement && this._dataRequirement.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			requestId: this.__requestId,
+			identifier: this.__identifier && this.__identifier.toJSON(),
+			module: this.__module && this.__module.toJSON(),
+			status: this.__status,
+			subject: this.__subject && this.__subject.toJSON(),
+			context: this.__context && this.__context.toJSON(),
+			occurrenceDateTime: this.__occurrenceDateTime,
+			performer: this.__performer && this.__performer.toJSON(),
+			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
+			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			evaluationMessage: this.__evaluationMessage && this.__evaluationMessage.map(v => v.toJSON()),
+			outputParameters: this.__outputParameters && this.__outputParameters.toJSON(),
+			result: this.__result && this.__result.toJSON(),
+			dataRequirement: this.__dataRequirement && this.__dataRequirement.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = GuidanceResponse;

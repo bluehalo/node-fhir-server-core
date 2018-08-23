@@ -1,0 +1,92 @@
+module.exports = {
+	BASED_ON: {
+		name: 'Based_on',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-based-on',
+		description: 'Request fulfilled by this communication.',
+	},
+	CATEGORY: {
+		name: 'Category',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-category',
+		description: 'Message category.',
+	},
+	CONTEXT: {
+		name: 'Context',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-context',
+		description: 'Encounter or episode leading to message.',
+	},
+	DEFINITION: {
+		name: 'Definition',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-definition',
+		description: 'Instantiates protocol or definition.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-encounter',
+		description: 'Encounter leading to message.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-identifier',
+		description: 'Unique identifier.',
+	},
+	MEDIUM: {
+		name: 'Medium',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-medium',
+		description: 'A channel of communication.',
+	},
+	PART_OF: {
+		name: 'Part_of',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-part-of',
+		description: 'Part of this action.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-patient',
+		description: 'Focus of message.',
+	},
+	RECEIVED: {
+		name: 'Received',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-received',
+		description: 'When received.',
+	},
+	RECIPIENT: {
+		name: 'Recipient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-recipient',
+		description: 'Message recipient.',
+	},
+	SENDER: {
+		name: 'Sender',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-sender',
+		description: 'Message sender.',
+	},
+	SENT: {
+		name: 'Sent',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-sent',
+		description: 'When sent.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-status',
+		description: 'preparation | in-progress | suspended | aborted | completed | entered-in-error.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Communication-subject',
+		description: 'Focus of message.',
+	},
+};

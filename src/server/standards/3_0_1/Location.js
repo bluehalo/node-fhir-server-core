@@ -1,204 +1,192 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Coding = require('./Coding');
-const CodeableConcept = require('./CodeableConcept');
-const ContactPoint = require('./ContactPoint');
-const Address = require('./Address');
-const Location_Position = require('./Location_Position');
-const Reference = require('./Reference');
 
 class Location extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Location';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Location';
+		Object.assign(this, opt);
 	}
 
+	// This is a Location resource
 	static get __resourceType () {
 		return 'Location';
 	}
 
-	// This is a Location resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Location'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Location = new_value;
 	}
 
 	// Unique code or number identifying the location to its users.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status property covers the general availability of the resource, not the current value which may be covered by the operationStatus, or by a schedule/slots if they are configured for the location.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['active', 'suspended', 'inactive'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
-	// The Operational status covers operation values most relevant to beds (but can also apply to rooms/units/chair/etc such as an isolation unit/dialisys chair). This typically covers concepts such as contamination, housekeeping and other activities like maintenance.
+	// The Operational status covers operation values most relevant to beds (but can also apply to rooms/units/chair/etc such as an isolation unit/dialisys chair). This typically covers concepts such as contamination, housekeeping and other activities like maintenance.
 	get operationalStatus () {
-		return this._operationalStatus;
+		return this.__operationalStatus;
 	}
 
-	set operationalStatus ( new_value ) {
-		this._operationalStatus = new Coding(new_value);
+	set operationalStatus (new_value) {
+		const Coding = require('./Coding');
+		this.__operationalStatus = new Coding(new_value);
 	}
 
 	// Name of the location as used by humans. Does not need to be unique.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = new_value;
+	set name (new_value) {
+		this.__name = new_value;
 	}
 
-	// A list of alternate names that the location is known as, or was known as in the past.
+	// A list of alternate names that the location is known as, or was known as in the past.
 	get alias () {
-		return this._alias;
+		return this.__alias;
 	}
 
-	set alias ( new_value ) {
-		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set alias (new_value) {
+		this.__alias = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Description of the Location, which helps in finding or referencing the place.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// Indicates whether a resource instance represents a specific location or a class of locations.
 	get mode () {
-		return this._mode;
+		return this.__mode;
 	}
 
-	set mode ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['instance', 'kind'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field mode`);
-		}
-		this._mode = new_value;
+	set mode (new_value) {
+		this.__mode = new_value;
 	}
 
 	// Indicates the type of function performed at the location.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		this._type = new CodeableConcept(new_value);
+	set type (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__type = new CodeableConcept(new_value);
 	}
 
 	// The contact details of communication devices available at the location. This can include phone numbers, fax numbers, mobile numbers, email addresses and web sites.
 	get telecom () {
-		return this._telecom;
+		return this.__telecom;
 	}
 
-	set telecom ( new_value ) {
-		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+	set telecom (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
 	// Physical location.
 	get address () {
-		return this._address;
+		return this.__address;
 	}
 
-	set address ( new_value ) {
-		this._address = new Address(new_value);
+	set address (new_value) {
+		const Address = require('./Address');
+		this.__address = new Address(new_value);
 	}
 
 	// Physical form of the location, e.g. building, room, vehicle, road.
 	get physicalType () {
-		return this._physicalType;
+		return this.__physicalType;
 	}
 
-	set physicalType ( new_value ) {
-		this._physicalType = new CodeableConcept(new_value);
+	set physicalType (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__physicalType = new CodeableConcept(new_value);
 	}
 
 	// The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML).
 	get position () {
-		return this._position;
+		return this.__position;
 	}
 
-	set position ( new_value ) {
-		this._position = new Location_Position(new_value);
+	set position (new_value) {
+		const LocationPosition = require('./LocationPosition');
+		this.__position = new LocationPosition(new_value);
 	}
 
 	// The organization responsible for the provisioning and upkeep of the location.
 	get managingOrganization () {
-		return this._managingOrganization;
+		return this.__managingOrganization;
 	}
 
-	set managingOrganization ( new_value ) {
-		this._managingOrganization = new Reference(new_value);
+	set managingOrganization (new_value) {
+		const Reference = require('./Reference');
+		this.__managingOrganization = new Reference(new_value);
 	}
 
 	// Another Location which this Location is physically part of.
 	get partOf () {
-		return this._partOf;
+		return this.__partOf;
 	}
 
-	set partOf ( new_value ) {
-		this._partOf = new Reference(new_value);
+	set partOf (new_value) {
+		const Reference = require('./Reference');
+		this.__partOf = new Reference(new_value);
 	}
 
 	// Technical endpoints providing access to services operated for the location.
 	get endpoint () {
-		return this._endpoint;
+		return this.__endpoint;
 	}
 
-	set endpoint ( new_value ) {
-		this._endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set endpoint (new_value) {
+		const Reference = require('./Reference');
+		this.__endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			operationalStatus: this._operationalStatus && this._operationalStatus.toJSON(),
-			name: this._name,
-			alias: this._alias,
-			description: this._description,
-			mode: this._mode,
-			type: this._type && this._type.toJSON(),
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			address: this._address && this._address.toJSON(),
-			physicalType: this._physicalType && this._physicalType.toJSON(),
-			position: this._position && this._position.toJSON(),
-			managingOrganization: this._managingOrganization && this._managingOrganization.toJSON(),
-			partOf: this._partOf && this._partOf.toJSON(),
-			endpoint: this._endpoint && this._endpoint.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			operationalStatus: this.__operationalStatus && this.__operationalStatus.toJSON(),
+			name: this.__name,
+			alias: this.__alias,
+			description: this.__description,
+			mode: this.__mode,
+			type: this.__type && this.__type.toJSON(),
+			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
+			address: this.__address && this.__address.toJSON(),
+			physicalType: this.__physicalType && this.__physicalType.toJSON(),
+			position: this.__position && this.__position.toJSON(),
+			managingOrganization: this.__managingOrganization && this.__managingOrganization.toJSON(),
+			partOf: this.__partOf && this.__partOf.toJSON(),
+			endpoint: this.__endpoint && this.__endpoint.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Location;

@@ -4,7 +4,7 @@ const { ISSUE, VERSIONS } = require('../../constants');
 // Helper to determine which operation outcome to retrieve
 let getErrorConstructor = base_version => {
 
-	if (!base_version) {
+	if (!base_version || !VERSIONS.hasOwnProperty(base_version)) {
 		return require(resolveFromVersion(VERSIONS['3_0_1'], 'OperationOutcome'));
 	} else {
 		return require(resolveFromVersion(base_version, 'OperationOutcome'));

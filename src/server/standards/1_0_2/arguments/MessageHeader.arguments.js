@@ -1,0 +1,86 @@
+module.exports = {
+	AUTHOR: {
+		name: 'Author',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-author',
+		description: 'The source of the decision.',
+	},
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-code',
+		description: 'ok | transient-error | fatal-error.',
+	},
+	DATA: {
+		name: 'Data',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-data',
+		description: 'The actual content of the message.',
+	},
+	DESTINATION: {
+		name: 'Destination',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-destination',
+		description: 'Name of system.',
+	},
+	DESTINATION_URI: {
+		name: 'Destination_uri',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-destination-uri',
+		description: 'Actual destination address or id.',
+	},
+	ENTERER: {
+		name: 'Enterer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-enterer',
+		description: 'The source of the data entry.',
+	},
+	EVENT: {
+		name: 'Event',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-event',
+		description: 'Code for the event this message represents.',
+	},
+	RECEIVER: {
+		name: 'Receiver',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-receiver',
+		description: 'Intended \'real-world\' recipient for the data.',
+	},
+	RESPONSE_ID: {
+		name: 'Response_id',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-response-id',
+		description: 'Id of original message.',
+	},
+	RESPONSIBLE: {
+		name: 'Responsible',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-responsible',
+		description: 'Final responsibility for event.',
+	},
+	SOURCE: {
+		name: 'Source',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-source',
+		description: 'Name of system.',
+	},
+	SOURCE_URI: {
+		name: 'Source_uri',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-source-uri',
+		description: 'Actual message source address or id.',
+	},
+	TARGET: {
+		name: 'Target',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-target',
+		description: 'Particular delivery destination within the destination.',
+	},
+	TIMESTAMP: {
+		name: 'Timestamp',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-timestamp',
+		description: 'Time that the message was sent.',
+	},
+};

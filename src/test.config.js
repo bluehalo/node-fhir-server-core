@@ -350,7 +350,7 @@ module.exports = {
 		},
 		[RESOURCES.PATIENT]: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [ VERSIONS['3_0_1'] ]
+			versions: [ VERSIONS['3_0_1'], VERSIONS['1_0_2'] ]
 		},
 		[RESOURCES.PAYMENTNOTICE]: {
 			service: './src/server/profiles/service.mock.js',

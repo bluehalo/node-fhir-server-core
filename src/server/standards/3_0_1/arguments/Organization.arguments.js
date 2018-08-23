@@ -1,0 +1,80 @@
+module.exports = {
+	ACTIVE: {
+		name: 'Active',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-active',
+		description: 'A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text.',
+	},
+	ADDRESS: {
+		name: 'Address',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address',
+		description: 'A (part of the) address of the organization.',
+	},
+	ADDRESS_CITY: {
+		name: 'Address_city',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-city',
+		description: 'A city specified in an address.',
+	},
+	ADDRESS_COUNTRY: {
+		name: 'Address_country',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-country',
+		description: 'A country specified in an address.',
+	},
+	ADDRESS_POSTALCODE: {
+		name: 'Address_postalcode',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-postalcode',
+		description: 'A postal code specified in an address.',
+	},
+	ADDRESS_STATE: {
+		name: 'Address_state',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-state',
+		description: 'A state specified in an address.',
+	},
+	ADDRESS_USE: {
+		name: 'Address_use',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-use',
+		description: 'A use code specified in an address.',
+	},
+	ENDPOINT: {
+		name: 'Endpoint',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-endpoint',
+		description: 'Technical endpoints providing access to services operated for the organization.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-identifier',
+		description: 'Any identifier for the organization (not the accreditation issuer\'s identifier).',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-name',
+		description: 'A portion of the organization\'s name or alias.',
+	},
+	PARTOF: {
+		name: 'Partof',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-partof',
+		description: 'An organization of which this organization forms a part.',
+	},
+	PHONETIC: {
+		name: 'Phonetic',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-phonetic',
+		description: 'A portion of the organization\'s name using some kind of phonetic matching algorithm.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Organization-type',
+		description: 'A code for the type of organization.',
+	},
+};

@@ -1,321 +1,315 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const Age = require('./Age');
-const Period = require('./Period');
-const Range = require('./Range');
-const Condition_Stage = require('./Condition_Stage');
-const Condition_Evidence = require('./Condition_Evidence');
-const Annotation = require('./Annotation');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class Condition extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Condition';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Condition';
+		Object.assign(this, opt);
 	}
 
+	// This is a Condition resource
 	static get __resourceType () {
 		return 'Condition';
 	}
 
-	// This is a Condition resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Condition'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Condition = new_value;
 	}
 
 	// This records identifiers associated with this condition that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The clinical status of the condition.
 	get clinicalStatus () {
-		return this._clinicalStatus;
+		return this.__clinicalStatus;
 	}
 
-	set clinicalStatus ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field clinicalStatus`);
-		}
-		this._clinicalStatus = new_value;
+	set clinicalStatus (new_value) {
+		this.__clinicalStatus = new_value;
 	}
 
 	// The verification status to support the clinical status of the condition.
 	get verificationStatus () {
-		return this._verificationStatus;
+		return this.__verificationStatus;
 	}
 
-	set verificationStatus ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['provisional', 'differential', 'confirmed', 'refuted', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field verificationStatus`);
-		}
-		this._verificationStatus = new_value;
+	set verificationStatus (new_value) {
+		this.__verificationStatus = new_value;
 	}
 
 	// A category assigned to the condition.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		this._category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set category (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// A subjective assessment of the severity of the condition as evaluated by the clinician.
 	get severity () {
-		return this._severity;
+		return this.__severity;
 	}
 
-	set severity ( new_value ) {
-		this._severity = new CodeableConcept(new_value);
+	set severity (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__severity = new CodeableConcept(new_value);
 	}
 
 	// Identification of the condition, problem or diagnosis.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = new CodeableConcept(new_value);
+	set code (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__code = new CodeableConcept(new_value);
 	}
 
 	// The anatomical location where this condition manifests itself.
 	get bodySite () {
-		return this._bodySite;
+		return this.__bodySite;
 	}
 
-	set bodySite ( new_value ) {
-		this._bodySite = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set bodySite (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__bodySite = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Indicates the patient or group who the condition record is associated with.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// Encounter during which the condition was first asserted.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
 	// Estimated or actual date or date-time  the condition began, in the opinion of the clinician.
 	get onsetDateTime () {
-		return this._onsetDateTime;
+		return this.__onsetDateTime;
 	}
 
-	set onsetDateTime ( new_value ) {
+	set onsetDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
-		this._onsetDateTime = new_value;
+		this.__onsetDateTime = new_value;
 	}
 
 	// Estimated or actual date or date-time  the condition began, in the opinion of the clinician.
 	get onsetAge () {
-		return this._onsetAge;
+		return this.__onsetAge;
 	}
 
-	set onsetAge ( new_value ) {
-		this._onsetAge = new Age(new_value);
+	set onsetAge (new_value) {
+		const Age = require('./Age');
+		this.__onsetAge = new Age(new_value);
 	}
 
 	// Estimated or actual date or date-time  the condition began, in the opinion of the clinician.
 	get onsetPeriod () {
-		return this._onsetPeriod;
+		return this.__onsetPeriod;
 	}
 
-	set onsetPeriod ( new_value ) {
-		this._onsetPeriod = new Period(new_value);
+	set onsetPeriod (new_value) {
+		const Period = require('./Period');
+		this.__onsetPeriod = new Period(new_value);
 	}
 
 	// Estimated or actual date or date-time  the condition began, in the opinion of the clinician.
 	get onsetRange () {
-		return this._onsetRange;
+		return this.__onsetRange;
 	}
 
-	set onsetRange ( new_value ) {
-		this._onsetRange = new Range(new_value);
+	set onsetRange (new_value) {
+		const Range = require('./Range');
+		this.__onsetRange = new Range(new_value);
 	}
 
 	// Estimated or actual date or date-time  the condition began, in the opinion of the clinician.
 	get onsetString () {
-		return this._onsetString;
+		return this.__onsetString;
 	}
 
-	set onsetString ( new_value ) {
-		this._onsetString = new_value;
+	set onsetString (new_value) {
+		this.__onsetString = new_value;
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementDateTime () {
-		return this._abatementDateTime;
+		return this.__abatementDateTime;
 	}
 
-	set abatementDateTime ( new_value ) {
+	set abatementDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field abatementDateTime`);
 		}
-		this._abatementDateTime = new_value;
+		this.__abatementDateTime = new_value;
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementAge () {
-		return this._abatementAge;
+		return this.__abatementAge;
 	}
 
-	set abatementAge ( new_value ) {
-		this._abatementAge = new Age(new_value);
+	set abatementAge (new_value) {
+		const Age = require('./Age');
+		this.__abatementAge = new Age(new_value);
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementBoolean () {
-		return this._abatementBoolean;
+		return this.__abatementBoolean;
 	}
 
-	set abatementBoolean ( new_value ) {
-		this._abatementBoolean = new_value;
+	set abatementBoolean (new_value) {
+		this.__abatementBoolean = new_value;
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementPeriod () {
-		return this._abatementPeriod;
+		return this.__abatementPeriod;
 	}
 
-	set abatementPeriod ( new_value ) {
-		this._abatementPeriod = new Period(new_value);
+	set abatementPeriod (new_value) {
+		const Period = require('./Period');
+		this.__abatementPeriod = new Period(new_value);
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementRange () {
-		return this._abatementRange;
+		return this.__abatementRange;
 	}
 
-	set abatementRange ( new_value ) {
-		this._abatementRange = new Range(new_value);
+	set abatementRange (new_value) {
+		const Range = require('./Range');
+		this.__abatementRange = new Range(new_value);
 	}
 
-	// The date or estimated date that the condition resolved or went into remission. This is called "abatement" because of the many overloaded connotations associated with "remission" or "resolution" - Conditions are never really resolved, but they can abate.
+	// The date or estimated date that the condition resolved or went into remission. This is called \'abatement\' because of the many overloaded connotations associated with \'remission\' or \'resolution\' - Conditions are never really resolved, but they can abate.
 	get abatementString () {
-		return this._abatementString;
+		return this.__abatementString;
 	}
 
-	set abatementString ( new_value ) {
-		this._abatementString = new_value;
+	set abatementString (new_value) {
+		this.__abatementString = new_value;
 	}
 
 	// The date on which the existance of the Condition was first asserted or acknowledged.
 	get assertedDate () {
-		return this._assertedDate;
+		return this.__assertedDate;
 	}
 
-	set assertedDate ( new_value ) {
+	set assertedDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
-		this._assertedDate = new_value;
+		this.__assertedDate = new_value;
 	}
 
 	// Individual who is making the condition statement.
 	get asserter () {
-		return this._asserter;
+		return this.__asserter;
 	}
 
-	set asserter ( new_value ) {
-		this._asserter = new Reference(new_value);
+	set asserter (new_value) {
+		const Reference = require('./Reference');
+		this.__asserter = new Reference(new_value);
 	}
 
 	// Clinical stage or grade of a condition. May include formal severity assessments.
 	get stage () {
-		return this._stage;
+		return this.__stage;
 	}
 
-	set stage ( new_value ) {
-		this._stage = new Condition_Stage(new_value);
+	set stage (new_value) {
+		const ConditionStage = require('./ConditionStage');
+		this.__stage = new ConditionStage(new_value);
 	}
 
 	// Supporting Evidence / manifestations that are the basis on which this condition is suspected or confirmed.
 	get evidence () {
-		return this._evidence;
+		return this.__evidence;
 	}
 
-	set evidence ( new_value ) {
-		this._evidence = Array.isArray(new_value) ? new_value.map(val => new Condition_Evidence(val)) : [new Condition_Evidence(new_value)];
+	set evidence (new_value) {
+		const ConditionEvidence = require('./ConditionEvidence');
+		this.__evidence = Array.isArray(new_value) ? new_value.map(val => new ConditionEvidence(val)) : [new ConditionEvidence(new_value)];
 	}
 
 	// Additional information about the Condition. This is a general notes/comments entry  for description of the Condition, its diagnosis and prognosis.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			clinicalStatus: this._clinicalStatus,
-			verificationStatus: this._verificationStatus,
-			category: this._category && this._category.map(v => v.toJSON()),
-			severity: this._severity && this._severity.toJSON(),
-			code: this._code && this._code.toJSON(),
-			bodySite: this._bodySite && this._bodySite.map(v => v.toJSON()),
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
-			onsetDateTime: this._onsetDateTime,
-			onsetAge: this._onsetAge && this._onsetAge.toJSON(),
-			onsetPeriod: this._onsetPeriod && this._onsetPeriod.toJSON(),
-			onsetRange: this._onsetRange && this._onsetRange.toJSON(),
-			onsetString: this._onsetString,
-			abatementDateTime: this._abatementDateTime,
-			abatementAge: this._abatementAge && this._abatementAge.toJSON(),
-			abatementBoolean: this._abatementBoolean,
-			abatementPeriod: this._abatementPeriod && this._abatementPeriod.toJSON(),
-			abatementRange: this._abatementRange && this._abatementRange.toJSON(),
-			abatementString: this._abatementString,
-			assertedDate: this._assertedDate,
-			asserter: this._asserter && this._asserter.toJSON(),
-			stage: this._stage && this._stage.toJSON(),
-			evidence: this._evidence && this._evidence.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			clinicalStatus: this.__clinicalStatus,
+			verificationStatus: this.__verificationStatus,
+			category: this.__category && this.__category.map(v => v.toJSON()),
+			severity: this.__severity && this.__severity.toJSON(),
+			code: this.__code && this.__code.toJSON(),
+			bodySite: this.__bodySite && this.__bodySite.map(v => v.toJSON()),
+			subject: this.__subject && this.__subject.toJSON(),
+			context: this.__context && this.__context.toJSON(),
+			onsetDateTime: this.__onsetDateTime,
+			onsetAge: this.__onsetAge && this.__onsetAge.toJSON(),
+			onsetPeriod: this.__onsetPeriod && this.__onsetPeriod.toJSON(),
+			onsetRange: this.__onsetRange && this.__onsetRange.toJSON(),
+			onsetString: this.__onsetString,
+			abatementDateTime: this.__abatementDateTime,
+			abatementAge: this.__abatementAge && this.__abatementAge.toJSON(),
+			abatementBoolean: this.__abatementBoolean,
+			abatementPeriod: this.__abatementPeriod && this.__abatementPeriod.toJSON(),
+			abatementRange: this.__abatementRange && this.__abatementRange.toJSON(),
+			abatementString: this.__abatementString,
+			assertedDate: this.__assertedDate,
+			asserter: this.__asserter && this.__asserter.toJSON(),
+			stage: this.__stage && this.__stage.toJSON(),
+			evidence: this.__evidence && this.__evidence.map(v => v.toJSON()),
+			note: this.__note && this.__note.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Condition;

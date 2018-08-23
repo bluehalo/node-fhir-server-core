@@ -1,0 +1,80 @@
+module.exports = {
+	CATEGORY: {
+		name: 'Category',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-category',
+		description: 'The behavior associated with the message.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-date',
+		description: 'The message definition publication date.',
+	},
+	DESCRIPTION: {
+		name: 'Description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-description',
+		description: 'The description of the message definition.',
+	},
+	EVENT: {
+		name: 'Event',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-event',
+		description: 'The event that triggers the message.',
+	},
+	FOCUS: {
+		name: 'Focus',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-focus',
+		description: 'A resource that is a permitted focus of the message.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-identifier',
+		description: 'External identifier for the message definition.',
+	},
+	JURISDICTION: {
+		name: 'Jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-jurisdiction',
+		description: 'Intended jurisdiction for the message definition.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-name',
+		description: 'Computationally friendly name of the message definition.',
+	},
+	PUBLISHER: {
+		name: 'Publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-publisher',
+		description: 'Name of the publisher of the message definition.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-status',
+		description: 'The current status of the message definition.',
+	},
+	TITLE: {
+		name: 'Title',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-title',
+		description: 'The human-friendly name of the message definition.',
+	},
+	URL: {
+		name: 'Url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-url',
+		description: 'The uri that identifies the message definition.',
+	},
+	VERSION: {
+		name: 'Version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-version',
+		description: 'The business version of the message definition.',
+	},
+};

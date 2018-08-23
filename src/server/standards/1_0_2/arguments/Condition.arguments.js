@@ -1,0 +1,92 @@
+module.exports = {
+	ASSERTER: {
+		name: 'Asserter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-asserter',
+		description: 'Person who asserts this condition.',
+	},
+	BODY_SITE: {
+		name: 'Body_site',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-body-site',
+		description: 'Anatomical location, if relevant.',
+	},
+	CATEGORY: {
+		name: 'Category',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-category',
+		description: 'The category of the condition.',
+	},
+	CLINICALSTATUS: {
+		name: 'Clinicalstatus',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-clinicalstatus',
+		description: 'The clinical status of the condition.',
+	},
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-code',
+		description: 'Code for the condition.',
+	},
+	DATE_RECORDED: {
+		name: 'Date_recorded',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-date-recorded',
+		description: 'A date, when the Condition statement was documented.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-encounter',
+		description: 'Encounter when condition first asserted.',
+	},
+	EVIDENCE: {
+		name: 'Evidence',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-evidence',
+		description: 'Manifestation/symptom.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-identifier',
+		description: 'A unique identifier of the condition record.',
+	},
+	ONSET: {
+		name: 'Onset',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-onset',
+		description: 'Date related onsets (dateTime and Period).',
+	},
+	ONSET_INFO: {
+		name: 'Onset_info',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-onset-info',
+		description: 'Other onsets (boolean, age, range, string).',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-patient',
+		description: 'Who has the condition?.',
+	},
+	SEVERITY: {
+		name: 'Severity',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-severity',
+		description: 'The severity of the condition.',
+	},
+	STAGE: {
+		name: 'Stage',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Condition-stage',
+		description: 'Simple summary (disease specific).',
+	},
+	AGE: {
+		name: 'Age',
+		type: 'number',
+		definition: 'http://hl7.org/fhir/SearchParameter/condition-daf-Condition-age',
+		description: 'Search based on Condition onsetAge.',
+	},
+};

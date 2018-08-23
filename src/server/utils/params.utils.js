@@ -11,7 +11,7 @@ let common_args_array = Object.getOwnPropertyNames(common_args)
 * @return {function} valid express middleware
 */
 let getSearchParamaters = ( profileKey, version ) => {
-	const resource_specific_args = require(`../profiles/${profileKey.toLowerCase()}/${profileKey.toLowerCase()}.arguments`);
+	const resource_specific_args = require(`../standards/${version}/arguments/${profileKey}.arguments`);
 
 	// Set paramaters
 	let resource_args_array = Object.getOwnPropertyNames(resource_specific_args)

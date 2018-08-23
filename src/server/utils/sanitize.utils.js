@@ -100,9 +100,15 @@ let sanitizeMiddleware = function (config) {
 		let currentArgs = parseParams(req);
 		let cleanArgs = {};
 
+		// filter only ones with verion or no version
+		let version_specific_params = config.filter(param => {
+			return !param.versions || param.versions === req.params.base_version;
+		});
+
 		// Check each argument in the config
-		for (let i = 0; i < config.length; i++) {
-			let conf = config[i];
+		for (let i = 0; i < version_specific_params.length; i++) {
+			let conf = version_specific_params[i];
+
 			let { field, value } = findMatchWithName(conf.name, currentArgs);
 
 			// If the argument is required but not present
@@ -128,6 +134,7 @@ let sanitizeMiddleware = function (config) {
 
 		// Save the cleaned arguments on the request for later use, we must only use these later on
 		req.sanitized_args = cleanArgs;
+
 		next();
 	};
 };

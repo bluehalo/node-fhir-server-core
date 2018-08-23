@@ -2,11 +2,6 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
-const moment = require('moment');
-const {
-	EVENTS
-} = require('../../../constants');
-
 
 /**
  * @description Construct a resource with base_version/uscore path
@@ -36,27 +31,9 @@ module.exports.searchByVersionId = function searchByVersionId ({ profile, logger
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, id, version_id} = req.sanitized_args;
+		let { base_version, version_id} = req.sanitized_args;
 
 		let Patient = getResourceConstructor(base_version);
-		let AuditEvent = require(resolveFromVersion(base_version, 'AuditEvent'));
-
-		if ( req.patient && id && req.patient !== id ) {
-			let resource = new AuditEvent({
-				type: {
-					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
-					code: '110113',
-					display: 'Security Alert',
-					userSelected: false
-				},
-				recorded: moment().toISOString(),
-				action: 'R',
-				outcome: '4',
-				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
-			});
-			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base_version));
-		}
 
 		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
@@ -97,35 +74,9 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, id } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base_version, 'Patient'));
-		let AuditEvent = require(resolveFromVersion(base_version, 'AuditEvent'));
-
-		// If we have req.patient, then we need to validate that this patient
-		// is only accessing resources with his id, he is not allowed to access others
-		if ( req.patient && id && req.patient !== id ) {
-			// Create an audit event
-			let resource = new AuditEvent({
-				// the type is a coding of the type of incident
-				type: {
-					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
-					code: '110113',
-					display: 'Security Alert',
-					userSelected: false
-				},
-				// Time of the event
-				recorded: moment().toISOString(),
-				// The attempted action is a read, according to https://www.hl7.org/fhir/valueset-audit-event-action.html
-				action: 'R',
-				// The outcome was a minor failure, according to https://www.hl7.org/fhir/valueset-audit-event-outcome.html
-				outcome: '4',
-				// Description of the outcome
-				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
-			});
-			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base_version));
-		}
 
 		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) =>

@@ -1,351 +1,350 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Period = require('./Period');
-const Task_Requester = require('./Task_Requester');
-const Annotation = require('./Annotation');
-const Task_Restriction = require('./Task_Restriction');
-const Task_Input = require('./Task_Input');
-const Task_Output = require('./Task_Output');
+const UriScalar = require('./scalars/Uri.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class Task extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Task';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Task';
+		Object.assign(this, opt);
 	}
 
+	// This is a Task resource
 	static get __resourceType () {
 		return 'Task';
 	}
 
-	// This is a Task resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Task'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Task = new_value;
 	}
 
 	// The business identifier for this task.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc.
 	get definitionUri () {
-		return this._definitionUri;
+		return this.__definitionUri;
 	}
 
-	set definitionUri ( new_value ) {
-		this._definitionUri = new_value;
+	set definitionUri (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field definitionUri`);
+		}
+		this.__definitionUri = new_value;
 	}
 
 	// A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc.
 	get definitionReference () {
-		return this._definitionReference;
+		return this.__definitionReference;
 	}
 
-	set definitionReference ( new_value ) {
-		this._definitionReference = new Reference(new_value);
+	set definitionReference (new_value) {
+		const Reference = require('./Reference');
+		this.__definitionReference = new Reference(new_value);
 	}
 
-	// BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a "request" resource such as a ProcedureRequest, MedicationRequest, ProcedureRequest, CarePlan, etc. which is distinct from the "request" resource the task is seeking to fulfil.  This latter resource is referenced by FocusOn.  For example, based on a ProcedureRequest (= BasedOn), a task is created to fulfil a procedureRequest ( = FocusOn ) to collect a specimen from a patient.
+	// BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a \'request\' resource such as a ProcedureRequest, MedicationRequest, ProcedureRequest, CarePlan, etc. which is distinct from the \'request\' resource the task is seeking to fulfil.  This latter resource is referenced by FocusOn.  For example, based on a ProcedureRequest (= BasedOn), a task is created to fulfil a procedureRequest ( = FocusOn ) to collect a specimen from a patient.
 	get basedOn () {
-		return this._basedOn;
+		return this.__basedOn;
 	}
 
-	set basedOn ( new_value ) {
-		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set basedOn (new_value) {
+		const Reference = require('./Reference');
+		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// An identifier that links together multiple tasks and other requests that were created in the same context.
 	get groupIdentifier () {
-		return this._groupIdentifier;
+		return this.__groupIdentifier;
 	}
 
-	set groupIdentifier ( new_value ) {
-		this._groupIdentifier = new Identifier(new_value);
+	set groupIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__groupIdentifier = new Identifier(new_value);
 	}
 
 	// Task that this particular task is part of.
 	get partOf () {
-		return this._partOf;
+		return this.__partOf;
 	}
 
-	set partOf ( new_value ) {
-		this._partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set partOf (new_value) {
+		const Reference = require('./Reference');
+		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The current status of the task.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['draft', 'requested', 'received', 'accepted', 'rejected', 'ready', 'cancelled', 'in-progress', 'on-hold', 'failed', 'completed', 'entered-in-error'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// An explanation as to why this task is held, failed, was refused, etc.
 	get statusReason () {
-		return this._statusReason;
+		return this.__statusReason;
 	}
 
-	set statusReason ( new_value ) {
-		this._statusReason = new CodeableConcept(new_value);
+	set statusReason (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__statusReason = new CodeableConcept(new_value);
 	}
 
 	// Contains business-specific nuances of the business state.
 	get businessStatus () {
-		return this._businessStatus;
+		return this.__businessStatus;
 	}
 
-	set businessStatus ( new_value ) {
-		this._businessStatus = new CodeableConcept(new_value);
+	set businessStatus (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__businessStatus = new CodeableConcept(new_value);
 	}
 
-	// Indicates the "level" of actionability associated with the Task.  I.e. Is this a proposed task, a planned task, an actionable task, etc.
+	// Indicates the \'level\' of actionability associated with the Task.  I.e. Is this a proposed task, a planned task, an actionable task, etc.
 	get intent () {
-		return this._intent;
+		return this.__intent;
 	}
 
-	set intent ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field intent`);
-		}
-		this._intent = new_value;
+	set intent (new_value) {
+		this.__intent = new_value;
 	}
 
 	// Indicates how quickly the Task should be addressed with respect to other requests.
 	get priority () {
-		return this._priority;
+		return this.__priority;
 	}
 
-	set priority ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field priority`);
-		}
-		this._priority = new_value;
+	set priority (new_value) {
+		this.__priority = new_value;
 	}
 
 	// A name or code (or both) briefly describing what the task involves.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = new CodeableConcept(new_value);
+	set code (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__code = new CodeableConcept(new_value);
 	}
 
 	// A free-text description of what is to be performed.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// The request being actioned or the resource being manipulated by this task.
 	get focus () {
-		return this._focus;
+		return this.__focus;
 	}
 
-	set focus ( new_value ) {
-		this._focus = new Reference(new_value);
+	set focus (new_value) {
+		const Reference = require('./Reference');
+		this.__focus = new Reference(new_value);
 	}
 
 	// The entity who benefits from the performance of the service specified in the task (e.g., the patient).
 	get for () {
-		return this._for;
+		return this.__for;
 	}
 
-	set for ( new_value ) {
-		this._for = new Reference(new_value);
+	set for (new_value) {
+		const Reference = require('./Reference');
+		this.__for = new Reference(new_value);
 	}
 
 	// The healthcare event  (e.g. a patient and healthcare provider interaction) during which this task was created.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
 	// Identifies the time action was first taken against the task (start) and/or the time final action was taken against the task prior to marking it as completed (end).
 	get executionPeriod () {
-		return this._executionPeriod;
+		return this.__executionPeriod;
 	}
 
-	set executionPeriod ( new_value ) {
-		this._executionPeriod = new Period(new_value);
+	set executionPeriod (new_value) {
+		const Period = require('./Period');
+		this.__executionPeriod = new Period(new_value);
 	}
 
 	// The date and time this task was created.
 	get authoredOn () {
-		return this._authoredOn;
+		return this.__authoredOn;
 	}
 
-	set authoredOn ( new_value ) {
+	set authoredOn (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
 		}
-		this._authoredOn = new_value;
+		this.__authoredOn = new_value;
 	}
 
 	// The date and time of last modification to this task.
 	get lastModified () {
-		return this._lastModified;
+		return this.__lastModified;
 	}
 
-	set lastModified ( new_value ) {
+	set lastModified (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field lastModified`);
 		}
-		this._lastModified = new_value;
+		this.__lastModified = new_value;
 	}
 
 	// The creator of the task.
 	get requester () {
-		return this._requester;
+		return this.__requester;
 	}
 
-	set requester ( new_value ) {
-		this._requester = new Task_Requester(new_value);
+	set requester (new_value) {
+		const TaskRequester = require('./TaskRequester');
+		this.__requester = new TaskRequester(new_value);
 	}
 
 	// The type of participant that can execute the task.
 	get performerType () {
-		return this._performerType;
+		return this.__performerType;
 	}
 
-	set performerType ( new_value ) {
-		this._performerType = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set performerType (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__performerType = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Individual organization or Device currently responsible for task execution.
 	get owner () {
-		return this._owner;
+		return this.__owner;
 	}
 
-	set owner ( new_value ) {
-		this._owner = new Reference(new_value);
+	set owner (new_value) {
+		const Reference = require('./Reference');
+		this.__owner = new Reference(new_value);
 	}
 
 	// A description or code indicating why this task needs to be performed.
 	get reason () {
-		return this._reason;
+		return this.__reason;
 	}
 
-	set reason ( new_value ) {
-		this._reason = new CodeableConcept(new_value);
+	set reason (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reason = new CodeableConcept(new_value);
 	}
 
 	// Free-text information captured about the task as it progresses.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task.
 	get relevantHistory () {
-		return this._relevantHistory;
+		return this.__relevantHistory;
 	}
 
-	set relevantHistory ( new_value ) {
-		this._relevantHistory = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set relevantHistory (new_value) {
+		const Reference = require('./Reference');
+		this.__relevantHistory = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// If the Task.focus is a request resource and the task is seeking fulfillment (i.e is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
 	get restriction () {
-		return this._restriction;
+		return this.__restriction;
 	}
 
-	set restriction ( new_value ) {
-		this._restriction = new Task_Restriction(new_value);
+	set restriction (new_value) {
+		const TaskRestriction = require('./TaskRestriction');
+		this.__restriction = new TaskRestriction(new_value);
 	}
 
 	// Additional information that may be needed in the execution of the task.
 	get input () {
-		return this._input;
+		return this.__input;
 	}
 
-	set input ( new_value ) {
-		this._input = Array.isArray(new_value) ? new_value.map(val => new Task_Input(val)) : [new Task_Input(new_value)];
+	set input (new_value) {
+		const TaskInput = require('./TaskInput');
+		this.__input = Array.isArray(new_value) ? new_value.map(val => new TaskInput(val)) : [new TaskInput(new_value)];
 	}
 
 	// Outputs produced by the Task.
 	get output () {
-		return this._output;
+		return this.__output;
 	}
 
-	set output ( new_value ) {
-		this._output = Array.isArray(new_value) ? new_value.map(val => new Task_Output(val)) : [new Task_Output(new_value)];
+	set output (new_value) {
+		const TaskOutput = require('./TaskOutput');
+		this.__output = Array.isArray(new_value) ? new_value.map(val => new TaskOutput(val)) : [new TaskOutput(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			definitionUri: this._definitionUri,
-			definitionReference: this._definitionReference && this._definitionReference.toJSON(),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
-			groupIdentifier: this._groupIdentifier && this._groupIdentifier.toJSON(),
-			partOf: this._partOf && this._partOf.map(v => v.toJSON()),
-			status: this._status,
-			statusReason: this._statusReason && this._statusReason.toJSON(),
-			businessStatus: this._businessStatus && this._businessStatus.toJSON(),
-			intent: this._intent,
-			priority: this._priority,
-			code: this._code && this._code.toJSON(),
-			description: this._description,
-			focus: this._focus && this._focus.toJSON(),
-			for: this._for && this._for.toJSON(),
-			context: this._context && this._context.toJSON(),
-			executionPeriod: this._executionPeriod && this._executionPeriod.toJSON(),
-			authoredOn: this._authoredOn,
-			lastModified: this._lastModified,
-			requester: this._requester && this._requester.toJSON(),
-			performerType: this._performerType && this._performerType.map(v => v.toJSON()),
-			owner: this._owner && this._owner.toJSON(),
-			reason: this._reason && this._reason.toJSON(),
-			note: this._note && this._note.map(v => v.toJSON()),
-			relevantHistory: this._relevantHistory && this._relevantHistory.map(v => v.toJSON()),
-			restriction: this._restriction && this._restriction.toJSON(),
-			input: this._input && this._input.map(v => v.toJSON()),
-			output: this._output && this._output.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			definitionUri: this.__definitionUri,
+			definitionReference: this.__definitionReference && this.__definitionReference.toJSON(),
+			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
+			groupIdentifier: this.__groupIdentifier && this.__groupIdentifier.toJSON(),
+			partOf: this.__partOf && this.__partOf.map(v => v.toJSON()),
+			status: this.__status,
+			statusReason: this.__statusReason && this.__statusReason.toJSON(),
+			businessStatus: this.__businessStatus && this.__businessStatus.toJSON(),
+			intent: this.__intent,
+			priority: this.__priority,
+			code: this.__code && this.__code.toJSON(),
+			description: this.__description,
+			focus: this.__focus && this.__focus.toJSON(),
+			for: this.__for && this.__for.toJSON(),
+			context: this.__context && this.__context.toJSON(),
+			executionPeriod: this.__executionPeriod && this.__executionPeriod.toJSON(),
+			authoredOn: this.__authoredOn,
+			lastModified: this.__lastModified,
+			requester: this.__requester && this.__requester.toJSON(),
+			performerType: this.__performerType && this.__performerType.map(v => v.toJSON()),
+			owner: this.__owner && this.__owner.toJSON(),
+			reason: this.__reason && this.__reason.toJSON(),
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			relevantHistory: this.__relevantHistory && this.__relevantHistory.map(v => v.toJSON()),
+			restriction: this.__restriction && this.__restriction.toJSON(),
+			input: this.__input && this.__input.map(v => v.toJSON()),
+			output: this.__output && this.__output.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Task;

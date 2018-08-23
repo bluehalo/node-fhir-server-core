@@ -1,172 +1,172 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const DocumentManifest_Content = require('./DocumentManifest_Content');
-const DocumentManifest_Related = require('./DocumentManifest_Related');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const UriScalar = require('./scalars/Uri.scalar');
 
 class DocumentManifest extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'DocumentManifest';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'DocumentManifest';
+		Object.assign(this, opt);
 	}
 
+	// This is a DocumentManifest resource
 	static get __resourceType () {
 		return 'DocumentManifest';
 	}
 
-	// This is a DocumentManifest resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['DocumentManifest'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__DocumentManifest = new_value;
 	}
 
 	// A single identifier that uniquely identifies this manifest. Principally used to refer to the manifest in non-FHIR contexts.
 	get masterIdentifier () {
-		return this._masterIdentifier;
+		return this.__masterIdentifier;
 	}
 
-	set masterIdentifier ( new_value ) {
-		this._masterIdentifier = new Identifier(new_value);
+	set masterIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__masterIdentifier = new Identifier(new_value);
 	}
 
 	// Other identifiers associated with the document manifest, including version independent  identifiers.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status of this document manifest.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['current', 'superseded', 'entered-in-error'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Specifies the kind of this set of documents (e.g. Patient Summary, Discharge Summary, Prescription, etc.). The type of a set of documents may be the same as one of the documents in it - especially if there is only one - but it may be wider.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		this._type = new CodeableConcept(new_value);
+	set type (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__type = new CodeableConcept(new_value);
 	}
 
 	// Who or what the set of documents is about. The documents can be about a person, (patient or healthcare practitioner), a device (i.e. machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure). If the documents cross more than one subject, then more than one subject is allowed here (unusual use case).
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// When the document manifest was created for submission to the server (not necessarily the same thing as the actual resource last modified time, since it may be modified, replicated, etc.).
 	get created () {
-		return this._created;
+		return this.__created;
 	}
 
-	set created ( new_value ) {
+	set created (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
-		this._created = new_value;
+		this.__created = new_value;
 	}
 
 	// Identifies who is responsible for creating the manifest, and adding  documents to it.
 	get author () {
-		return this._author;
+		return this.__author;
 	}
 
-	set author ( new_value ) {
-		this._author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set author (new_value) {
+		const Reference = require('./Reference');
+		this.__author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A patient, practitioner, or organization for which this set of documents is intended.
 	get recipient () {
-		return this._recipient;
+		return this.__recipient;
 	}
 
-	set recipient ( new_value ) {
-		this._recipient = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set recipient (new_value) {
+		const Reference = require('./Reference');
+		this.__recipient = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies the source system, application, or software that produced the document manifest.
 	get source () {
-		return this._source;
+		return this.__source;
 	}
 
-	set source ( new_value ) {
-		this._source = new_value;
+	set source (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field source`);
+		}
+		this.__source = new_value;
 	}
 
-	// Human-readable description of the source document. This is sometimes known as the "title".
+	// Human-readable description of the source document. This is sometimes known as the \'title\'.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// The list of Documents included in the manifest.
 	get content () {
-		return this._content;
+		return this.__content;
 	}
 
-	set content ( new_value ) {
-		this._content = Array.isArray(new_value) ? new_value.map(val => new DocumentManifest_Content(val)) : [new DocumentManifest_Content(new_value)];
+	set content (new_value) {
+		const DocumentManifestContent = require('./DocumentManifestContent');
+		this.__content = Array.isArray(new_value) ? new_value.map(val => new DocumentManifestContent(val)) : [new DocumentManifestContent(new_value)];
 	}
 
 	// Related identifiers or resources associated with the DocumentManifest.
 	get related () {
-		return this._related;
+		return this.__related;
 	}
 
-	set related ( new_value ) {
-		this._related = Array.isArray(new_value) ? new_value.map(val => new DocumentManifest_Related(val)) : [new DocumentManifest_Related(new_value)];
+	set related (new_value) {
+		const DocumentManifestRelated = require('./DocumentManifestRelated');
+		this.__related = Array.isArray(new_value) ? new_value.map(val => new DocumentManifestRelated(val)) : [new DocumentManifestRelated(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			masterIdentifier: this._masterIdentifier && this._masterIdentifier.toJSON(),
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			type: this._type && this._type.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			created: this._created,
-			author: this._author && this._author.map(v => v.toJSON()),
-			recipient: this._recipient && this._recipient.map(v => v.toJSON()),
-			source: this._source,
-			description: this._description,
-			content: this._content && this._content.map(v => v.toJSON()),
-			related: this._related && this._related.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			masterIdentifier: this.__masterIdentifier && this.__masterIdentifier.toJSON(),
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			type: this.__type && this.__type.toJSON(),
+			subject: this.__subject && this.__subject.toJSON(),
+			created: this.__created,
+			author: this.__author && this.__author.map(v => v.toJSON()),
+			recipient: this.__recipient && this.__recipient.map(v => v.toJSON()),
+			source: this.__source,
+			description: this.__description,
+			content: this.__content && this.__content.map(v => v.toJSON()),
+			related: this.__related && this.__related.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = DocumentManifest;

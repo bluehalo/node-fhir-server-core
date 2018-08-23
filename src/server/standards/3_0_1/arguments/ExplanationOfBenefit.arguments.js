@@ -1,0 +1,80 @@
+module.exports = {
+	CARE_TEAM: {
+		name: 'Care_team',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-care-team',
+		description: 'Member of the CareTeam.',
+	},
+	CLAIM: {
+		name: 'Claim',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-claim',
+		description: 'The reference to the claim.',
+	},
+	COVERAGE: {
+		name: 'Coverage',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-coverage',
+		description: 'The plan under which the claim was adjudicated.',
+	},
+	CREATED: {
+		name: 'Created',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-created',
+		description: 'The creation date for the EOB.',
+	},
+	DISPOSITION: {
+		name: 'Disposition',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-disposition',
+		description: 'The contents of the disposition message.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-encounter',
+		description: 'Encounters associated with a billed line item.',
+	},
+	ENTERER: {
+		name: 'Enterer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-enterer',
+		description: 'The party responsible for the entry of the Claim.',
+	},
+	FACILITY: {
+		name: 'Facility',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-facility',
+		description: 'Facility responsible for the goods and services.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-identifier',
+		description: 'The business identifier of the Explanation of Benefit.',
+	},
+	ORGANIZATION: {
+		name: 'Organization',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-organization',
+		description: 'The reference to the providing organization.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-patient',
+		description: 'The reference to the patient.',
+	},
+	PAYEE: {
+		name: 'Payee',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-payee',
+		description: 'The party receiving any payment for the Claim.',
+	},
+	PROVIDER: {
+		name: 'Provider',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-provider',
+		description: 'The reference to the provider.',
+	},
+};

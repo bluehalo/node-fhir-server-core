@@ -1,0 +1,80 @@
+module.exports = {
+	ACTIVITYCODE: {
+		name: 'Activitycode',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-activitycode',
+		description: 'Detail type of activity.',
+	},
+	ACTIVITYDATE: {
+		name: 'Activitydate',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-activitydate',
+		description: 'Specified date occurs within period specified by CarePlan.activity.timingSchedule.',
+	},
+	ACTIVITYREFERENCE: {
+		name: 'Activityreference',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-activityreference',
+		description: 'Activity details defined in specific resource.',
+	},
+	CONDITION: {
+		name: 'Condition',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-condition',
+		description: 'Health issues this plan addresses.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-date',
+		description: 'Time period plan covers.',
+	},
+	GOAL: {
+		name: 'Goal',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-goal',
+		description: 'Desired outcome of plan.',
+	},
+	PARTICIPANT: {
+		name: 'Participant',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-participant',
+		description: 'Who is involved.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-patient',
+		description: 'Who care plan is for.',
+	},
+	PERFORMER: {
+		name: 'Performer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-performer',
+		description: 'Matches if the practitioner is listed as a performer in any of the \'simple\' activities.  (For performers of the detailed activities, chain through the activitydetail search parameter.).',
+	},
+	RELATED: {
+		name: 'Related',
+		type: 'composite',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-related',
+		description: 'A combination of the type of relationship and the related plan.',
+	},
+	RELATEDCODE: {
+		name: 'Relatedcode',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-relatedcode',
+		description: 'includes | replaces | fulfills.',
+	},
+	RELATEDPLAN: {
+		name: 'Relatedplan',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-relatedplan',
+		description: 'Plan relationship exists with.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-subject',
+		description: 'Who care plan is for.',
+	},
+};

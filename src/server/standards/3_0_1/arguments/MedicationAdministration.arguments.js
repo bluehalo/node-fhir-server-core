@@ -1,0 +1,86 @@
+module.exports = {
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-code',
+		description: 'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  .',
+	},
+	CONTEXT: {
+		name: 'Context',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-context',
+		description: 'Return administrations that share this encounter or episode of care.',
+	},
+	DEVICE: {
+		name: 'Device',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-device',
+		description: 'Return administrations with this administration device identity.',
+	},
+	EFFECTIVE_TIME: {
+		name: 'Effective_time',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-effective-time',
+		description: 'Date administration happened (or did not happen).',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-identifier',
+		description: 'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions with this external identifier  * [MedicationAdministration](medicationadministration.html): Return administrations with this external identifier  * [MedicationStatement](medicationstatement.html): Return statements with this external identifier  * [MedicationDispense](medicationdispense.html): Return dispenses with this external identifier  .',
+	},
+	MEDICATION: {
+		name: 'Medication',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-medication',
+		description: 'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication reference  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication resource  * [MedicationStatement](medicationstatement.html): Return statements of this medication reference  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine resource  .',
+	},
+	NOT_GIVEN: {
+		name: 'Not_given',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-not-given',
+		description: 'Administrations that were not made.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-patient',
+		description: 'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Returns prescriptions for a specific patient  * [MedicationAdministration](medicationadministration.html): The identity of a patient to list administrations  for  * [MedicationStatement](medicationstatement.html): Returns statements for a specific patient.  * [MedicationDispense](medicationdispense.html): The identity of a patient to list dispenses  for  .',
+	},
+	PERFORMER: {
+		name: 'Performer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-performer',
+		description: 'The identify of the individual who administered the medication.',
+	},
+	PRESCRIPTION: {
+		name: 'Prescription',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-prescription',
+		description: 'Multiple Resources:     * [MedicationAdministration](medicationadministration.html): The identity of a prescription to list administrations from  * [MedicationDispense](medicationdispense.html): The identity of a prescription to list dispenses from  .',
+	},
+	REASON_GIVEN: {
+		name: 'Reason_given',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-reason-given',
+		description: 'Reasons for administering the medication.',
+	},
+	REASON_NOT_GIVEN: {
+		name: 'Reason_not_given',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-reason-not-given',
+		description: 'Reasons for not administering the medication.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-status',
+		description: 'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Status of the prescription  * [MedicationAdministration](medicationadministration.html): MedicationAdministration event status (for example one of active/paused/completed/nullified)  * [MedicationStatement](medicationstatement.html): Return statements that match the given status  * [MedicationDispense](medicationdispense.html): Return dispenses with a specified dispense status  .',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-subject',
+		description: 'The identify of the individual or group to list administrations for.',
+	},
+};

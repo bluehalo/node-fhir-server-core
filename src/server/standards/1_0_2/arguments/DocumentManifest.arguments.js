@@ -1,0 +1,80 @@
+module.exports = {
+	AUTHOR: {
+		name: 'Author',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-author',
+		description: 'Who and/or what authored the manifest.',
+	},
+	CONTENT_REF: {
+		name: 'Content_ref',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-content-ref',
+		description: 'Contents of this set of documents.',
+	},
+	CREATED: {
+		name: 'Created',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-created',
+		description: 'When this document manifest created.',
+	},
+	DESCRIPTION: {
+		name: 'Description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-description',
+		description: 'Human-readable description (title).',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-identifier',
+		description: 'Unique Identifier for the set of documents.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-patient',
+		description: 'The subject of the set of documents.',
+	},
+	RECIPIENT: {
+		name: 'Recipient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-recipient',
+		description: 'Intended to get notified about this set of documents.',
+	},
+	RELATED_ID: {
+		name: 'Related_id',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-related-id',
+		description: 'Identifiers of things that are related.',
+	},
+	RELATED_REF: {
+		name: 'Related_ref',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-related-ref',
+		description: 'Related Resource.',
+	},
+	SOURCE: {
+		name: 'Source',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-source',
+		description: 'The source system/application/software.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-status',
+		description: 'current | superseded | entered-in-error.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-subject',
+		description: 'The subject of the set of documents.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-type',
+		description: 'Kind of document set.',
+	},
+};

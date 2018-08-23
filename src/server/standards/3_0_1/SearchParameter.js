@@ -1,316 +1,299 @@
 const DomainResource = require('./DomainResource');
-const ContactDetail = require('./ContactDetail');
-const UsageContext = require('./UsageContext');
-const CodeableConcept = require('./CodeableConcept');
-const SearchParameter_Component = require('./SearchParameter_Component');
+const UriScalar = require('./scalars/Uri.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const CodeScalar = require('./scalars/Code.scalar');
 
 class SearchParameter extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'SearchParameter';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'SearchParameter';
+		Object.assign(this, opt);
 	}
 
+	// This is a SearchParameter resource
 	static get __resourceType () {
 		return 'SearchParameter';
 	}
 
-	// This is a SearchParameter resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['SearchParameter'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__SearchParameter = new_value;
 	}
 
 	// An absolute URI that is used to identify this search parameter when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this search parameter is (or will be) published. The URL SHOULD include the major version of the search parameter. For more information see [Technical and Business Versions](resource.html#versions).
 	get url () {
-		return this._url;
+		return this.__url;
 	}
 
-	set url ( new_value ) {
-		this._url = new_value;
+	set url (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field url`);
+		}
+		this.__url = new_value;
 	}
 
 	// The identifier that is used to identify this version of the search parameter when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the search parameter author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
 	get version () {
-		return this._version;
+		return this.__version;
 	}
 
-	set version ( new_value ) {
-		this._version = new_value;
+	set version (new_value) {
+		this.__version = new_value;
 	}
 
 	// A natural language name identifying the search parameter. This name should be usable as an identifier for the module by machine processing applications such as code generation.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = new_value;
+	set name (new_value) {
+		this.__name = new_value;
 	}
 
 	// The status of this search parameter. Enables tracking the life-cycle of the content.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['draft', 'active', 'retired', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// A boolean value to indicate that this search parameter is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
 	get experimental () {
-		return this._experimental;
+		return this.__experimental;
 	}
 
-	set experimental ( new_value ) {
-		this._experimental = new_value;
+	set experimental (new_value) {
+		this.__experimental = new_value;
 	}
 
 	// The date  (and optionally time) when the search parameter was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the search parameter changes.
 	get date () {
-		return this._date;
+		return this.__date;
 	}
 
-	set date ( new_value ) {
+	set date (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
-		this._date = new_value;
+		this.__date = new_value;
 	}
 
 	// The name of the individual or organization that published the search parameter.
 	get publisher () {
-		return this._publisher;
+		return this.__publisher;
 	}
 
-	set publisher ( new_value ) {
-		this._publisher = new_value;
+	set publisher (new_value) {
+		this.__publisher = new_value;
 	}
 
 	// Contact details to assist a user in finding and communicating with the publisher.
 	get contact () {
-		return this._contact;
+		return this.__contact;
 	}
 
-	set contact ( new_value ) {
-		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactDetail(val)) : [new ContactDetail(new_value)];
+	set contact (new_value) {
+		const ContactDetail = require('./ContactDetail');
+		this.__contact = Array.isArray(new_value) ? new_value.map(val => new ContactDetail(val)) : [new ContactDetail(new_value)];
 	}
 
 	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate search parameter instances.
 	get useContext () {
-		return this._useContext;
+		return this.__useContext;
 	}
 
-	set useContext ( new_value ) {
-		this._useContext = Array.isArray(new_value) ? new_value.map(val => new UsageContext(val)) : [new UsageContext(new_value)];
+	set useContext (new_value) {
+		const UsageContext = require('./UsageContext');
+		this.__useContext = Array.isArray(new_value) ? new_value.map(val => new UsageContext(val)) : [new UsageContext(new_value)];
 	}
 
 	// A legal or geographic region in which the search parameter is intended to be used.
 	get jurisdiction () {
-		return this._jurisdiction;
+		return this.__jurisdiction;
 	}
 
-	set jurisdiction ( new_value ) {
-		this._jurisdiction = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set jurisdiction (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__jurisdiction = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Explaination of why this search parameter is needed and why it has been designed as it has.
 	get purpose () {
-		return this._purpose;
+		return this.__purpose;
 	}
 
-	set purpose ( new_value ) {
-		this._purpose = new_value;
+	set purpose (new_value) {
+		this.__purpose = new_value;
 	}
 
 	// The code used in the URL or the parameter name in a parameters resource for this search parameter.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
+	set code (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field code`);
 		}
-		this._code = new_value;
+		this.__code = new_value;
 	}
 
 	// The base resource type(s) that this search parameter can be used against.
 	get base () {
-		return this._base;
+		return this.__base;
 	}
 
-	set base ( new_value ) {
-		this._base = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set base (new_value) {
+		this.__base = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// The type of value a search parameter refers to, and how the content is interpreted.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['number', 'date', 'string', 'token', 'reference', 'composite', 'quantity', 'uri'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
-		}
-		this._type = new_value;
+	set type (new_value) {
+		this.__type = new_value;
 	}
 
 	// Where this search parameter is originally defined. If a derivedFrom is provided, then the details in the search parameter must be consistent with the definition from which it is defined. I.e. the parameter should have the same meaning, and (usually) the functionality should be a proper subset of the underlying search parameter.
 	get derivedFrom () {
-		return this._derivedFrom;
+		return this.__derivedFrom;
 	}
 
-	set derivedFrom ( new_value ) {
-		this._derivedFrom = new_value;
+	set derivedFrom (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field derivedFrom`);
+		}
+		this.__derivedFrom = new_value;
 	}
 
-	// A free text natural language description of the search parameter from a consumer's perspective. and how it used.
+	// A free text natural language description of the search parameter from a consumer\'s perspective. and how it used.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// A FHIRPath expression that returns a set of elements for the search parameter.
 	get expression () {
-		return this._expression;
+		return this.__expression;
 	}
 
-	set expression ( new_value ) {
-		this._expression = new_value;
+	set expression (new_value) {
+		this.__expression = new_value;
 	}
 
 	// An XPath expression that returns a set of elements for the search parameter.
 	get xpath () {
-		return this._xpath;
+		return this.__xpath;
 	}
 
-	set xpath ( new_value ) {
-		this._xpath = new_value;
+	set xpath (new_value) {
+		this.__xpath = new_value;
 	}
 
 	// How the search parameter relates to the set of elements returned by evaluating the xpath query.
 	get xpathUsage () {
-		return this._xpathUsage;
+		return this.__xpathUsage;
 	}
 
-	set xpathUsage ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['normal', 'phonetic', 'nearby', 'distance', 'other'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field xpathUsage`);
-		}
-		this._xpathUsage = new_value;
+	set xpathUsage (new_value) {
+		this.__xpathUsage = new_value;
 	}
 
 	// Types of resource (if a resource is referenced).
 	get target () {
-		return this._target;
+		return this.__target;
 	}
 
-	set target ( new_value ) {
-		this._target = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set target (new_value) {
+		this.__target = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Comparators supported for the search parameter.
 	get comparator () {
-		return this._comparator;
+		return this.__comparator;
 	}
 
-	set comparator ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['eq', 'ne', 'gt', 'lt', 'ge', 'le', 'sa', 'eb', 'ap'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field comparator`);
-		}
-		this._comparator = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set comparator (new_value) {
+		this.__comparator = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// A modifier supported for the search parameter.
 	get modifier () {
-		return this._modifier;
+		return this.__modifier;
 	}
 
-	set modifier ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['missing', 'exact', 'contains', 'not', 'text', 'in', 'not-in', 'below', 'above', 'type'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field modifier`);
-		}
-		this._modifier = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set modifier (new_value) {
+		this.__modifier = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Contains the names of any search parameters which may be chained to the containing search parameter. Chained parameters may be added to search parameters of type reference, and specify that resources will only be returned if they contain a reference to a resource which matches the chained parameter value. Values for this field should be drawn from SearchParameter.code for a parameter on the target resource type.
 	get chain () {
-		return this._chain;
+		return this.__chain;
 	}
 
-	set chain ( new_value ) {
-		this._chain = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set chain (new_value) {
+		this.__chain = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Used to define the parts of a composite search parameter.
 	get component () {
-		return this._component;
+		return this.__component;
 	}
 
-	set component ( new_value ) {
-		this._component = Array.isArray(new_value) ? new_value.map(val => new SearchParameter_Component(val)) : [new SearchParameter_Component(new_value)];
+	set component (new_value) {
+		const SearchParameterComponent = require('./SearchParameterComponent');
+		this.__component = Array.isArray(new_value) ? new_value.map(val => new SearchParameterComponent(val)) : [new SearchParameterComponent(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			url: this._url,
-			version: this._version,
-			name: this._name,
-			status: this._status,
-			experimental: this._experimental,
-			date: this._date,
-			publisher: this._publisher,
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			useContext: this._useContext && this._useContext.map(v => v.toJSON()),
-			jurisdiction: this._jurisdiction && this._jurisdiction.map(v => v.toJSON()),
-			purpose: this._purpose,
-			code: this._code,
-			base: this._base,
-			type: this._type,
-			derivedFrom: this._derivedFrom,
-			description: this._description,
-			expression: this._expression,
-			xpath: this._xpath,
-			xpathUsage: this._xpathUsage,
-			target: this._target,
-			comparator: this._comparator,
-			modifier: this._modifier,
-			chain: this._chain,
-			component: this._component && this._component.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			url: this.__url,
+			version: this.__version,
+			name: this.__name,
+			status: this.__status,
+			experimental: this.__experimental,
+			date: this.__date,
+			publisher: this.__publisher,
+			contact: this.__contact && this.__contact.map(v => v.toJSON()),
+			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
+			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
+			purpose: this.__purpose,
+			code: this.__code,
+			base: this.__base,
+			type: this.__type,
+			derivedFrom: this.__derivedFrom,
+			description: this.__description,
+			expression: this.__expression,
+			xpath: this.__xpath,
+			xpathUsage: this.__xpathUsage,
+			target: this.__target,
+			comparator: this.__comparator,
+			modifier: this.__modifier,
+			chain: this.__chain,
+			component: this.__component && this.__component.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = SearchParameter;

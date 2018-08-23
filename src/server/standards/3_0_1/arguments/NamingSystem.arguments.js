@@ -1,0 +1,92 @@
+module.exports = {
+	CONTACT: {
+		name: 'Contact',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-contact',
+		description: 'Name of an individual to contact.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-date',
+		description: 'The naming system publication date.',
+	},
+	DESCRIPTION: {
+		name: 'Description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-description',
+		description: 'The description of the naming system.',
+	},
+	ID_TYPE: {
+		name: 'Id_type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-id-type',
+		description: 'oid | uuid | uri | other.',
+	},
+	JURISDICTION: {
+		name: 'Jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-jurisdiction',
+		description: 'Intended jurisdiction for the naming system.',
+	},
+	KIND: {
+		name: 'Kind',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-kind',
+		description: 'codesystem | identifier | root.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-name',
+		description: 'Computationally friendly name of the naming system.',
+	},
+	PERIOD: {
+		name: 'Period',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-period',
+		description: 'When is identifier valid?.',
+	},
+	PUBLISHER: {
+		name: 'Publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-publisher',
+		description: 'Name of the publisher of the naming system.',
+	},
+	REPLACED_BY: {
+		name: 'Replaced_by',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-replaced-by',
+		description: 'Use this instead.',
+	},
+	RESPONSIBLE: {
+		name: 'Responsible',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-responsible',
+		description: 'Who maintains system namespace?.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-status',
+		description: 'The current status of the naming system.',
+	},
+	TELECOM: {
+		name: 'Telecom',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-telecom',
+		description: 'Contact details for individual or organization.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-type',
+		description: 'e.g. driver,  provider,  patient, bank etc.',
+	},
+	VALUE: {
+		name: 'Value',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-value',
+		description: 'The unique identifier.',
+	},
+};

@@ -1,0 +1,80 @@
+module.exports = {
+	CARE_TEAM: {
+		name: 'Care_team',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-care-team',
+		description: 'Member of the CareTeam.',
+	},
+	CREATED: {
+		name: 'Created',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-created',
+		description: 'The creation date for the Claim.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-encounter',
+		description: 'Encounters associated with a billed line item.',
+	},
+	ENTERER: {
+		name: 'Enterer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-enterer',
+		description: 'The party responsible for the entry of the Claim.',
+	},
+	FACILITY: {
+		name: 'Facility',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-facility',
+		description: 'Facility responsible for the goods and services.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-identifier',
+		description: 'The primary identifier of the financial resource.',
+	},
+	INSURER: {
+		name: 'Insurer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-insurer',
+		description: 'The target payor/insurer for the Claim.',
+	},
+	ORGANIZATION: {
+		name: 'Organization',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-organization',
+		description: 'The reference to the providing organization.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-patient',
+		description: 'Patient receiving the services.',
+	},
+	PAYEE: {
+		name: 'Payee',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-payee',
+		description: 'The party receiving any payment for the Claim.',
+	},
+	PRIORITY: {
+		name: 'Priority',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-priority',
+		description: 'Processing priority requested.',
+	},
+	PROVIDER: {
+		name: 'Provider',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-provider',
+		description: 'Provider responsible for the Claim.',
+	},
+	USE: {
+		name: 'Use',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Claim-use',
+		description: 'The kind of financial resource.',
+	},
+};

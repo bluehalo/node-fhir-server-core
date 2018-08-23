@@ -1,111 +1,107 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Attachment = require('./Attachment');
-const Reference = require('./Reference');
 
 class BodySite extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'BodySite';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'BodySite';
+		Object.assign(this, opt);
 	}
 
+	// This is a BodySite resource
 	static get __resourceType () {
 		return 'BodySite';
 	}
 
-	// This is a BodySite resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['BodySite'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__BodySite = new_value;
 	}
 
 	// Identifier for this instance of the anatomical location.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// Whether this body site is in active use.
 	get active () {
-		return this._active;
+		return this.__active;
 	}
 
-	set active ( new_value ) {
-		this._active = new_value;
+	set active (new_value) {
+		this.__active = new_value;
 	}
 
 	// Named anatomical location - ideally coded where possible.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = new CodeableConcept(new_value);
+	set code (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__code = new CodeableConcept(new_value);
 	}
 
 	// Qualifier to refine the anatomical location.  These include qualifiers for laterality, relative location, directionality, number, and plane.
 	get qualifier () {
-		return this._qualifier;
+		return this.__qualifier;
 	}
 
-	set qualifier ( new_value ) {
-		this._qualifier = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set qualifier (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__qualifier = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// A summary, charactarization or explanation of the anatomic location.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// Image or images used to identify a location.
 	get image () {
-		return this._image;
+		return this.__image;
 	}
 
-	set image ( new_value ) {
-		this._image = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
+	set image (new_value) {
+		const Attachment = require('./Attachment');
+		this.__image = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
 	// The person to which the body site belongs.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			active: this._active,
-			code: this._code && this._code.toJSON(),
-			qualifier: this._qualifier && this._qualifier.map(v => v.toJSON()),
-			description: this._description,
-			image: this._image && this._image.map(v => v.toJSON()),
-			patient: this._patient && this._patient.toJSON()
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			active: this.__active,
+			code: this.__code && this.__code.toJSON(),
+			qualifier: this.__qualifier && this.__qualifier.map(v => v.toJSON()),
+			description: this.__description,
+			image: this.__image && this.__image.map(v => v.toJSON()),
+			patient: this.__patient && this.__patient.toJSON()
 		});
 	}
-
 }
 
 module.exports = BodySite;

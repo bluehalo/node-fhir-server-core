@@ -1,0 +1,80 @@
+module.exports = {
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-code',
+		description: 'A code for the data element (server may choose to do subsumption).',
+	},
+	CONTEXT: {
+		name: 'Context',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-context',
+		description: 'A use context assigned to the data element.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-date',
+		description: 'The data element publication date.',
+	},
+	DESCRIPTION: {
+		name: 'Description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-description',
+		description: 'Text search in the description of the data element.  This corresponds to the definition of the first DataElement.element.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-identifier',
+		description: 'The identifier of the data element.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-name',
+		description: 'Name of the data element.',
+	},
+	PUBLISHER: {
+		name: 'Publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-publisher',
+		description: 'Name of the publisher of the data element.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-status',
+		description: 'The current status of the data element.',
+	},
+	STRINGENCY: {
+		name: 'Stringency',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-stringency',
+		description: 'The stringency of the data element definition.',
+	},
+	URL: {
+		name: 'Url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-url',
+		description: 'The official URL for the data element.',
+	},
+	VERSION: {
+		name: 'Version',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-version',
+		description: 'The version identifier of the data element.',
+	},
+	OBJECTCLASS: {
+		name: 'ObjectClass',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/elementdefinition-11179-DataElement-objectClass',
+		description: 'Matches on the 11179-objectClass extension value.',
+	},
+	OBJECTCLASSPROPERTY: {
+		name: 'ObjectClassProperty',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/elementdefinition-11179-DataElement-objectClassProperty',
+		description: 'Matches on the 11179-objectClassProperty extension value.',
+	},
+};

@@ -183,8 +183,6 @@ let handleDeleteRejection = (res, next, base_version, err) => {
 */
 let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = [], options) => {
 
-	console.log(resource_json);
-
 	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
 	let Bundle_Link = require(resolveFromVersion(base_version, 'Bundle_Link'));
 	let Bundle_Request = require(resolveFromVersion(base_version, 'Bundle_Request'));

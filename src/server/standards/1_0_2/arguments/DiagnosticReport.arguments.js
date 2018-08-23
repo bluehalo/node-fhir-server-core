@@ -1,0 +1,92 @@
+module.exports = {
+	CATEGORY: {
+		name: 'Category',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-category',
+		description: 'Which diagnostic discipline/department created the report.',
+	},
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-code',
+		description: 'The code for the report as a whole, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-date',
+		description: 'The clinically relevant time of the report.',
+	},
+	DIAGNOSIS: {
+		name: 'Diagnosis',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-diagnosis',
+		description: 'A coded diagnosis on the report.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-encounter',
+		description: 'The Encounter when the order was made.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-identifier',
+		description: 'An identifier for the report.',
+	},
+	IMAGE: {
+		name: 'Image',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-image',
+		description: 'A reference to the image source.',
+	},
+	ISSUED: {
+		name: 'Issued',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-issued',
+		description: 'When the report was issued.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-patient',
+		description: 'The subject of the report if a patient.',
+	},
+	PERFORMER: {
+		name: 'Performer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-performer',
+		description: 'Who was the source of the report (organization).',
+	},
+	REQUEST: {
+		name: 'Request',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-request',
+		description: 'Reference to the test or procedure request.',
+	},
+	RESULT: {
+		name: 'Result',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-result',
+		description: 'Link to an atomic result (observation resource).',
+	},
+	SPECIMEN: {
+		name: 'Specimen',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-specimen',
+		description: 'The specimen details.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-status',
+		description: 'The status of the report.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-subject',
+		description: 'The subject of the report.',
+	},
+};

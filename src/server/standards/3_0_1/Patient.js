@@ -1,258 +1,246 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const HumanName = require('./HumanName');
-const ContactPoint = require('./ContactPoint');
-const Address = require('./Address');
-const CodeableConcept = require('./CodeableConcept');
-const Attachment = require('./Attachment');
-const Patient_Contact = require('./Patient_Contact');
-const Patient_Animal = require('./Patient_Animal');
-const Patient_Communication = require('./Patient_Communication');
-const Reference = require('./Reference');
-const Patient_Link = require('./Patient_Link');
+const DateScalar = require('./scalars/Date.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class Patient extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Patient';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Patient';
+		Object.assign(this, opt);
 	}
 
+	// This is a Patient resource
 	static get __resourceType () {
 		return 'Patient';
 	}
 
-	// This is a Patient resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Patient'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Patient = new_value;
 	}
 
 	// An identifier for this patient.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// Whether this patient record is in active use.
 	get active () {
-		return this._active;
+		return this.__active;
 	}
 
-	set active ( new_value ) {
-		this._active = new_value;
+	set active (new_value) {
+		this.__active = new_value;
 	}
 
 	// A name associated with the individual.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = Array.isArray(new_value) ? new_value.map(val => new HumanName(val)) : [new HumanName(new_value)];
+	set name (new_value) {
+		const HumanName = require('./HumanName');
+		this.__name = Array.isArray(new_value) ? new_value.map(val => new HumanName(val)) : [new HumanName(new_value)];
 	}
 
 	// A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.
 	get telecom () {
-		return this._telecom;
+		return this.__telecom;
 	}
 
-	set telecom ( new_value ) {
-		this._telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+	set telecom (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
 	// Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.
 	get gender () {
-		return this._gender;
+		return this.__gender;
 	}
 
-	set gender ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
-		}
-		this._gender = new_value;
+	set gender (new_value) {
+		this.__gender = new_value;
 	}
 
 	// The date of birth for the individual.
 	get birthDate () {
-		return this._birthDate;
+		return this.__birthDate;
 	}
 
-	set birthDate ( new_value ) {
+	set birthDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field birthDate`);
 		}
-		this._birthDate = new_value;
+		this.__birthDate = new_value;
 	}
 
 	// Indicates if the individual is deceased or not.
 	get deceasedBoolean () {
-		return this._deceasedBoolean;
+		return this.__deceasedBoolean;
 	}
 
-	set deceasedBoolean ( new_value ) {
-		this._deceasedBoolean = new_value;
+	set deceasedBoolean (new_value) {
+		this.__deceasedBoolean = new_value;
 	}
 
 	// Indicates if the individual is deceased or not.
 	get deceasedDateTime () {
-		return this._deceasedDateTime;
+		return this.__deceasedDateTime;
 	}
 
-	set deceasedDateTime ( new_value ) {
+	set deceasedDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field deceasedDateTime`);
 		}
-		this._deceasedDateTime = new_value;
+		this.__deceasedDateTime = new_value;
 	}
 
 	// Addresses for the individual.
 	get address () {
-		return this._address;
+		return this.__address;
 	}
 
-	set address ( new_value ) {
-		this._address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
+	set address (new_value) {
+		const Address = require('./Address');
+		this.__address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
 	}
 
-	// This field contains a patient's most recent marital (civil) status.
+	// This field contains a patient\'s most recent marital (civil) status.
 	get maritalStatus () {
-		return this._maritalStatus;
+		return this.__maritalStatus;
 	}
 
-	set maritalStatus ( new_value ) {
-		this._maritalStatus = new CodeableConcept(new_value);
+	set maritalStatus (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__maritalStatus = new CodeableConcept(new_value);
 	}
 
 	// Indicates whether the patient is part of a multiple (bool) or indicates the actual birth order (integer).
 	get multipleBirthBoolean () {
-		return this._multipleBirthBoolean;
+		return this.__multipleBirthBoolean;
 	}
 
-	set multipleBirthBoolean ( new_value ) {
-		this._multipleBirthBoolean = new_value;
+	set multipleBirthBoolean (new_value) {
+		this.__multipleBirthBoolean = new_value;
 	}
 
 	// Indicates whether the patient is part of a multiple (bool) or indicates the actual birth order (integer).
 	get multipleBirthInteger () {
-		return this._multipleBirthInteger;
+		return this.__multipleBirthInteger;
 	}
 
-	set multipleBirthInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field multipleBirthInteger`);
-		}
-		this._multipleBirthInteger = new_value;
+	set multipleBirthInteger (new_value) {
+		this.__multipleBirthInteger = new_value;
 	}
 
 	// Image of the patient.
 	get photo () {
-		return this._photo;
+		return this.__photo;
 	}
 
-	set photo ( new_value ) {
-		this._photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
+	set photo (new_value) {
+		const Attachment = require('./Attachment');
+		this.__photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
 	}
 
 	// A contact party (e.g. guardian, partner, friend) for the patient.
 	get contact () {
-		return this._contact;
+		return this.__contact;
 	}
 
-	set contact ( new_value ) {
-		this._contact = Array.isArray(new_value) ? new_value.map(val => new Patient_Contact(val)) : [new Patient_Contact(new_value)];
+	set contact (new_value) {
+		const PatientContact = require('./PatientContact');
+		this.__contact = Array.isArray(new_value) ? new_value.map(val => new PatientContact(val)) : [new PatientContact(new_value)];
 	}
 
 	// This patient is known to be an animal.
 	get animal () {
-		return this._animal;
+		return this.__animal;
 	}
 
-	set animal ( new_value ) {
-		this._animal = new Patient_Animal(new_value);
+	set animal (new_value) {
+		const PatientAnimal = require('./PatientAnimal');
+		this.__animal = new PatientAnimal(new_value);
 	}
 
 	// Languages which may be used to communicate with the patient about his or her health.
 	get communication () {
-		return this._communication;
+		return this.__communication;
 	}
 
-	set communication ( new_value ) {
-		this._communication = Array.isArray(new_value) ? new_value.map(val => new Patient_Communication(val)) : [new Patient_Communication(new_value)];
+	set communication (new_value) {
+		const PatientCommunication = require('./PatientCommunication');
+		this.__communication = Array.isArray(new_value) ? new_value.map(val => new PatientCommunication(val)) : [new PatientCommunication(new_value)];
 	}
 
-	// Patient's nominated care provider.
+	// Patient\'s nominated care provider.
 	get generalPractitioner () {
-		return this._generalPractitioner;
+		return this.__generalPractitioner;
 	}
 
-	set generalPractitioner ( new_value ) {
-		this._generalPractitioner = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set generalPractitioner (new_value) {
+		const Reference = require('./Reference');
+		this.__generalPractitioner = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Organization that is the custodian of the patient record.
 	get managingOrganization () {
-		return this._managingOrganization;
+		return this.__managingOrganization;
 	}
 
-	set managingOrganization ( new_value ) {
-		this._managingOrganization = new Reference(new_value);
+	set managingOrganization (new_value) {
+		const Reference = require('./Reference');
+		this.__managingOrganization = new Reference(new_value);
 	}
 
 	// Link to another patient resource that concerns the same actual patient.
 	get link () {
-		return this._link;
+		return this.__link;
 	}
 
-	set link ( new_value ) {
-		this._link = Array.isArray(new_value) ? new_value.map(val => new Patient_Link(val)) : [new Patient_Link(new_value)];
+	set link (new_value) {
+		const PatientLink = require('./PatientLink');
+		this.__link = Array.isArray(new_value) ? new_value.map(val => new PatientLink(val)) : [new PatientLink(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			active: this._active,
-			name: this._name && this._name.map(v => v.toJSON()),
-			telecom: this._telecom && this._telecom.map(v => v.toJSON()),
-			gender: this._gender,
-			birthDate: this._birthDate,
-			deceasedBoolean: this._deceasedBoolean,
-			deceasedDateTime: this._deceasedDateTime,
-			address: this._address && this._address.map(v => v.toJSON()),
-			maritalStatus: this._maritalStatus && this._maritalStatus.toJSON(),
-			multipleBirthBoolean: this._multipleBirthBoolean,
-			multipleBirthInteger: this._multipleBirthInteger,
-			photo: this._photo && this._photo.map(v => v.toJSON()),
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			animal: this._animal && this._animal.toJSON(),
-			communication: this._communication && this._communication.map(v => v.toJSON()),
-			generalPractitioner: this._generalPractitioner && this._generalPractitioner.map(v => v.toJSON()),
-			managingOrganization: this._managingOrganization && this._managingOrganization.toJSON(),
-			link: this._link && this._link.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			active: this.__active,
+			name: this.__name && this.__name.map(v => v.toJSON()),
+			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
+			gender: this.__gender,
+			birthDate: this.__birthDate,
+			deceasedBoolean: this.__deceasedBoolean,
+			deceasedDateTime: this.__deceasedDateTime,
+			address: this.__address && this.__address.map(v => v.toJSON()),
+			maritalStatus: this.__maritalStatus && this.__maritalStatus.toJSON(),
+			multipleBirthBoolean: this.__multipleBirthBoolean,
+			multipleBirthInteger: this.__multipleBirthInteger,
+			photo: this.__photo && this.__photo.map(v => v.toJSON()),
+			contact: this.__contact && this.__contact.map(v => v.toJSON()),
+			animal: this.__animal && this.__animal.toJSON(),
+			communication: this.__communication && this.__communication.map(v => v.toJSON()),
+			generalPractitioner: this.__generalPractitioner && this.__generalPractitioner.map(v => v.toJSON()),
+			managingOrganization: this.__managingOrganization && this.__managingOrganization.toJSON(),
+			link: this.__link && this.__link.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Patient;

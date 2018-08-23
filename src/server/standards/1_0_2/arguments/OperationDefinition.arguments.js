@@ -1,0 +1,80 @@
+module.exports = {
+	BASE: {
+		name: 'Base',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-base',
+		description: 'Marks this as a profile of the base.',
+	},
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-code',
+		description: 'Name used to invoke the operation.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-date',
+		description: 'Date for this version of the operation definition.',
+	},
+	INSTANCE: {
+		name: 'Instance',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-instance',
+		description: 'Invoke on an instance?.',
+	},
+	KIND: {
+		name: 'Kind',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-kind',
+		description: 'operation | query.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-name',
+		description: 'Informal name for this operation.',
+	},
+	PROFILE: {
+		name: 'Profile',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-profile',
+		description: 'Profile on the type.',
+	},
+	PUBLISHER: {
+		name: 'Publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-publisher',
+		description: 'Name of the publisher (Organization or individual).',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-status',
+		description: 'draft | active | retired.',
+	},
+	SYSTEM: {
+		name: 'System',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-system',
+		description: 'Invoke at the system level?.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-type',
+		description: 'Invoke at resource level for these type.',
+	},
+	URL: {
+		name: 'Url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-url',
+		description: 'Logical URL to reference this operation definition.',
+	},
+	VERSION: {
+		name: 'Version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-version',
+		description: 'Logical id for this version of the operation definition.',
+	},
+};

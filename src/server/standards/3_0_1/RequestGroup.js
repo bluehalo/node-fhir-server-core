@@ -1,222 +1,210 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Annotation = require('./Annotation');
-const RequestGroup_Action = require('./RequestGroup_Action');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class RequestGroup extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'RequestGroup';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'RequestGroup';
+		Object.assign(this, opt);
 	}
 
+	// This is a RequestGroup resource
 	static get __resourceType () {
 		return 'RequestGroup';
 	}
 
-	// This is a RequestGroup resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['RequestGroup'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__RequestGroup = new_value;
 	}
 
 	// Allows a service to provide a unique, business identifier for the request.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// A protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request.
 	get definition () {
-		return this._definition;
+		return this.__definition;
 	}
 
-	set definition ( new_value ) {
-		this._definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set definition (new_value) {
+		const Reference = require('./Reference');
+		this.__definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A plan, proposal or order that is fulfilled in whole or in part by this request.
 	get basedOn () {
-		return this._basedOn;
+		return this.__basedOn;
 	}
 
-	set basedOn ( new_value ) {
-		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set basedOn (new_value) {
+		const Reference = require('./Reference');
+		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Completed or terminated request(s) whose function is taken by this new request.
 	get replaces () {
-		return this._replaces;
+		return this.__replaces;
 	}
 
-	set replaces ( new_value ) {
-		this._replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set replaces (new_value) {
+		const Reference = require('./Reference');
+		this.__replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition, prescription or similar form.
 	get groupIdentifier () {
-		return this._groupIdentifier;
+		return this.__groupIdentifier;
 	}
 
-	set groupIdentifier ( new_value ) {
-		this._groupIdentifier = new Identifier(new_value);
+	set groupIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__groupIdentifier = new Identifier(new_value);
 	}
 
 	// The current state of the request. For request groups, the status reflects the status of all the requests in the group.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Indicates the level of authority/intentionality associated with the request and where the request fits into the workflow chain.
 	get intent () {
-		return this._intent;
+		return this.__intent;
 	}
 
-	set intent ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field intent`);
-		}
-		this._intent = new_value;
+	set intent (new_value) {
+		this.__intent = new_value;
 	}
 
 	// Indicates how quickly the request should be addressed with respect to other requests.
 	get priority () {
-		return this._priority;
+		return this.__priority;
 	}
 
-	set priority ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field priority`);
-		}
-		this._priority = new_value;
+	set priority (new_value) {
+		this.__priority = new_value;
 	}
 
 	// The subject for which the request group was created.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// Describes the context of the request group, if any.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
 	// Indicates when the request group was created.
 	get authoredOn () {
-		return this._authoredOn;
+		return this.__authoredOn;
 	}
 
-	set authoredOn ( new_value ) {
+	set authoredOn (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
 		}
-		this._authoredOn = new_value;
+		this.__authoredOn = new_value;
 	}
 
 	// Provides a reference to the author of the request group.
 	get author () {
-		return this._author;
+		return this.__author;
 	}
 
-	set author ( new_value ) {
-		this._author = new Reference(new_value);
+	set author (new_value) {
+		const Reference = require('./Reference');
+		this.__author = new Reference(new_value);
 	}
 
 	// Indicates the reason the request group was created. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response.
 	get reasonCodeableConcept () {
-		return this._reasonCodeableConcept;
+		return this.__reasonCodeableConcept;
 	}
 
-	set reasonCodeableConcept ( new_value ) {
-		this._reasonCodeableConcept = new CodeableConcept(new_value);
+	set reasonCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Indicates the reason the request group was created. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = new Reference(new_value);
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = new Reference(new_value);
 	}
 
 	// Provides a mechanism to communicate additional information about the response.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// The actions, if any, produced by the evaluation of the artifact.
 	get action () {
-		return this._action;
+		return this.__action;
 	}
 
-	set action ( new_value ) {
-		this._action = Array.isArray(new_value) ? new_value.map(val => new RequestGroup_Action(val)) : [new RequestGroup_Action(new_value)];
+	set action (new_value) {
+		const RequestGroupAction = require('./RequestGroupAction');
+		this.__action = Array.isArray(new_value) ? new_value.map(val => new RequestGroupAction(val)) : [new RequestGroupAction(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			definition: this._definition && this._definition.map(v => v.toJSON()),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
-			replaces: this._replaces && this._replaces.map(v => v.toJSON()),
-			groupIdentifier: this._groupIdentifier && this._groupIdentifier.toJSON(),
-			status: this._status,
-			intent: this._intent,
-			priority: this._priority,
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
-			authoredOn: this._authoredOn,
-			author: this._author && this._author.toJSON(),
-			reasonCodeableConcept: this._reasonCodeableConcept && this._reasonCodeableConcept.toJSON(),
-			reasonReference: this._reasonReference && this._reasonReference.toJSON(),
-			note: this._note && this._note.map(v => v.toJSON()),
-			action: this._action && this._action.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			definition: this.__definition && this.__definition.map(v => v.toJSON()),
+			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
+			replaces: this.__replaces && this.__replaces.map(v => v.toJSON()),
+			groupIdentifier: this.__groupIdentifier && this.__groupIdentifier.toJSON(),
+			status: this.__status,
+			intent: this.__intent,
+			priority: this.__priority,
+			subject: this.__subject && this.__subject.toJSON(),
+			context: this.__context && this.__context.toJSON(),
+			authoredOn: this.__authoredOn,
+			author: this.__author && this.__author.toJSON(),
+			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
+			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			action: this.__action && this.__action.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = RequestGroup;

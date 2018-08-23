@@ -1,73 +1,75 @@
 const Resource = require('./Resource');
-const Reference = require('./Reference');
+const CodeScalar = require('./scalars/Code.scalar');
+const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
 
 class Binary extends Resource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Binary';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Binary';
+		Object.assign(this, opt);
 	}
 
+	// This is a Binary resource
 	static get __resourceType () {
 		return 'Binary';
 	}
 
-	// This is a Binary resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Binary'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Binary = new_value;
 	}
 
 	// MimeType of the binary content represented as a standard MimeType (BCP 13).
 	get contentType () {
-		return this._contentType;
+		return this.__contentType;
 	}
 
-	set contentType ( new_value ) {
+	set contentType (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field contentType`);
 		}
-		this._contentType = new_value;
+		this.__contentType = new_value;
 	}
 
 	// Treat this binary as if it was this other resource for access control purposes.
 	get securityContext () {
-		return this._securityContext;
+		return this.__securityContext;
 	}
 
-	set securityContext ( new_value ) {
-		this._securityContext = new Reference(new_value);
+	set securityContext (new_value) {
+		const Reference = require('./Reference');
+		this.__securityContext = new Reference(new_value);
 	}
 
 	// The actual content, base64 encoded.
 	get content () {
-		return this._content;
+		return this.__content;
 	}
 
-	set content ( new_value ) {
-		this._content = new_value;
+	set content (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = Base64BinaryScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field content`);
+		}
+		this.__content = new_value;
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			contentType: this._contentType,
-			securityContext: this._securityContext && this._securityContext.toJSON(),
-			content: this._content
+			resourceType: this.__resourceType,
+			contentType: this.__contentType,
+			securityContext: this.__securityContext && this.__securityContext.toJSON(),
+			content: this.__content
 		});
 	}
-
 }
 
 module.exports = Binary;

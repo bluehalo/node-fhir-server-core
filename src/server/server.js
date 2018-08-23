@@ -186,13 +186,17 @@ class Server {
 		// Generic catch all error handler
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
+
+			// get base from URL instead of params since it might not be forwarded
+			let base = req.url.split('/')[1];
+
 			// If there is an error and it is our error type
-			if (err && errors.isServerError(err, req.params.base_version)) {
+			if (err && errors.isServerError(err, base)) {
 				res.status(err.statusCode).json(err);
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				let error = errors.internal(err.message, req.params.base_version);
+				let error = errors.internal(err.message, base);
 				this.logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
@@ -204,7 +208,9 @@ class Server {
 
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
-			let error = errors.notFound(req.params.base_version);
+			// get base from URL instead of params since it might not be forwarded
+
+			let error = errors.notFound();
 			this.logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});

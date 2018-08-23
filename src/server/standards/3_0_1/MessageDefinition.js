@@ -1,290 +1,284 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const ContactDetail = require('./ContactDetail');
-const UsageContext = require('./UsageContext');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const Coding = require('./Coding');
-const MessageDefinition_Focus = require('./MessageDefinition_Focus');
-const MessageDefinition_AllowedResponse = require('./MessageDefinition_AllowedResponse');
+const UriScalar = require('./scalars/Uri.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class MessageDefinition extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'MessageDefinition';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'MessageDefinition';
+		Object.assign(this, opt);
 	}
 
+	// This is a MessageDefinition resource
 	static get __resourceType () {
 		return 'MessageDefinition';
 	}
 
-	// This is a MessageDefinition resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['MessageDefinition'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__MessageDefinition = new_value;
 	}
 
 	// An absolute URI that is used to identify this message definition when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this message definition is (or will be) published. The URL SHOULD include the major version of the message definition. For more information see [Technical and Business Versions](resource.html#versions).
 	get url () {
-		return this._url;
+		return this.__url;
 	}
 
-	set url ( new_value ) {
-		this._url = new_value;
+	set url (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field url`);
+		}
+		this.__url = new_value;
 	}
 
 	// A formal identifier that is used to identify this message definition when it is represented in other formats, or referenced in a specification, model, design or an instance.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = new Identifier(new_value);
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = new Identifier(new_value);
 	}
 
 	// The identifier that is used to identify this version of the message definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the message definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
 	get version () {
-		return this._version;
+		return this.__version;
 	}
 
-	set version ( new_value ) {
-		this._version = new_value;
+	set version (new_value) {
+		this.__version = new_value;
 	}
 
 	// A natural language name identifying the message definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = new_value;
+	set name (new_value) {
+		this.__name = new_value;
 	}
 
 	// A short, descriptive, user-friendly title for the message definition.
 	get title () {
-		return this._title;
+		return this.__title;
 	}
 
-	set title ( new_value ) {
-		this._title = new_value;
+	set title (new_value) {
+		this.__title = new_value;
 	}
 
 	// The status of this message definition. Enables tracking the life-cycle of the content.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['draft', 'active', 'retired', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// A boolean value to indicate that this message definition is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
 	get experimental () {
-		return this._experimental;
+		return this.__experimental;
 	}
 
-	set experimental ( new_value ) {
-		this._experimental = new_value;
+	set experimental (new_value) {
+		this.__experimental = new_value;
 	}
 
 	// The date  (and optionally time) when the message definition was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the message definition changes.
 	get date () {
-		return this._date;
+		return this.__date;
 	}
 
-	set date ( new_value ) {
+	set date (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
-		this._date = new_value;
+		this.__date = new_value;
 	}
 
 	// The name of the individual or organization that published the message definition.
 	get publisher () {
-		return this._publisher;
+		return this.__publisher;
 	}
 
-	set publisher ( new_value ) {
-		this._publisher = new_value;
+	set publisher (new_value) {
+		this.__publisher = new_value;
 	}
 
 	// Contact details to assist a user in finding and communicating with the publisher.
 	get contact () {
-		return this._contact;
+		return this.__contact;
 	}
 
-	set contact ( new_value ) {
-		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactDetail(val)) : [new ContactDetail(new_value)];
+	set contact (new_value) {
+		const ContactDetail = require('./ContactDetail');
+		this.__contact = Array.isArray(new_value) ? new_value.map(val => new ContactDetail(val)) : [new ContactDetail(new_value)];
 	}
 
-	// A free text natural language description of the message definition from a consumer's perspective.
+	// A free text natural language description of the message definition from a consumer\'s perspective.
 	get description () {
-		return this._description;
+		return this.__description;
 	}
 
-	set description ( new_value ) {
-		this._description = new_value;
+	set description (new_value) {
+		this.__description = new_value;
 	}
 
 	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate message definition instances.
 	get useContext () {
-		return this._useContext;
+		return this.__useContext;
 	}
 
-	set useContext ( new_value ) {
-		this._useContext = Array.isArray(new_value) ? new_value.map(val => new UsageContext(val)) : [new UsageContext(new_value)];
+	set useContext (new_value) {
+		const UsageContext = require('./UsageContext');
+		this.__useContext = Array.isArray(new_value) ? new_value.map(val => new UsageContext(val)) : [new UsageContext(new_value)];
 	}
 
 	// A legal or geographic region in which the message definition is intended to be used.
 	get jurisdiction () {
-		return this._jurisdiction;
+		return this.__jurisdiction;
 	}
 
-	set jurisdiction ( new_value ) {
-		this._jurisdiction = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set jurisdiction (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__jurisdiction = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Explaination of why this message definition is needed and why it has been designed as it has.
 	get purpose () {
-		return this._purpose;
+		return this.__purpose;
 	}
 
-	set purpose ( new_value ) {
-		this._purpose = new_value;
+	set purpose (new_value) {
+		this.__purpose = new_value;
 	}
 
 	// A copyright statement relating to the message definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the message definition.
 	get copyright () {
-		return this._copyright;
+		return this.__copyright;
 	}
 
-	set copyright ( new_value ) {
-		this._copyright = new_value;
+	set copyright (new_value) {
+		this.__copyright = new_value;
 	}
 
 	// The MessageDefinition that is the basis for the contents of this resource.
 	get base () {
-		return this._base;
+		return this.__base;
 	}
 
-	set base ( new_value ) {
-		this._base = new Reference(new_value);
+	set base (new_value) {
+		const Reference = require('./Reference');
+		this.__base = new Reference(new_value);
 	}
 
 	// Identifies a protocol or workflow that this MessageDefinition represents a step in.
 	get parent () {
-		return this._parent;
+		return this.__parent;
 	}
 
-	set parent ( new_value ) {
-		this._parent = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set parent (new_value) {
+		const Reference = require('./Reference');
+		this.__parent = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A MessageDefinition that is superseded by this definition.
 	get replaces () {
-		return this._replaces;
+		return this.__replaces;
 	}
 
-	set replaces ( new_value ) {
-		this._replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set replaces (new_value) {
+		const Reference = require('./Reference');
+		this.__replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A coded identifier of a supported messaging event.
 	get event () {
-		return this._event;
+		return this.__event;
 	}
 
-	set event ( new_value ) {
-		this._event = new Coding(new_value);
+	set event (new_value) {
+		const Coding = require('./Coding');
+		this.__event = new Coding(new_value);
 	}
 
 	// The impact of the content of the message.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field category`);
-		}
-		this._category = new_value;
+	set category (new_value) {
+		this.__category = new_value;
 	}
 
 	// Identifies the resource (or resources) that are being addressed by the event.  For example, the Encounter for an admit message or two Account records for a merge.
 	get focus () {
-		return this._focus;
+		return this.__focus;
 	}
 
-	set focus ( new_value ) {
-		this._focus = Array.isArray(new_value) ? new_value.map(val => new MessageDefinition_Focus(val)) : [new MessageDefinition_Focus(new_value)];
+	set focus (new_value) {
+		const MessageDefinitionFocus = require('./MessageDefinitionFocus');
+		this.__focus = Array.isArray(new_value) ? new_value.map(val => new MessageDefinitionFocus(val)) : [new MessageDefinitionFocus(new_value)];
 	}
 
 	// Indicates whether a response is required for this message.
 	get responseRequired () {
-		return this._responseRequired;
+		return this.__responseRequired;
 	}
 
-	set responseRequired ( new_value ) {
-		this._responseRequired = new_value;
+	set responseRequired (new_value) {
+		this.__responseRequired = new_value;
 	}
 
 	// Indicates what types of messages may be sent as an application-level response to this message.
 	get allowedResponse () {
-		return this._allowedResponse;
+		return this.__allowedResponse;
 	}
 
-	set allowedResponse ( new_value ) {
-		this._allowedResponse = Array.isArray(new_value) ? new_value.map(val => new MessageDefinition_AllowedResponse(val)) : [new MessageDefinition_AllowedResponse(new_value)];
+	set allowedResponse (new_value) {
+		const MessageDefinitionAllowedResponse = require('./MessageDefinitionAllowedResponse');
+		this.__allowedResponse = Array.isArray(new_value) ? new_value.map(val => new MessageDefinitionAllowedResponse(val)) : [new MessageDefinitionAllowedResponse(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			url: this._url,
-			identifier: this._identifier && this._identifier.toJSON(),
-			version: this._version,
-			name: this._name,
-			title: this._title,
-			status: this._status,
-			experimental: this._experimental,
-			date: this._date,
-			publisher: this._publisher,
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			description: this._description,
-			useContext: this._useContext && this._useContext.map(v => v.toJSON()),
-			jurisdiction: this._jurisdiction && this._jurisdiction.map(v => v.toJSON()),
-			purpose: this._purpose,
-			copyright: this._copyright,
-			base: this._base && this._base.toJSON(),
-			parent: this._parent && this._parent.map(v => v.toJSON()),
-			replaces: this._replaces && this._replaces.map(v => v.toJSON()),
-			event: this._event && this._event.toJSON(),
-			category: this._category,
-			focus: this._focus && this._focus.map(v => v.toJSON()),
-			responseRequired: this._responseRequired,
-			allowedResponse: this._allowedResponse && this._allowedResponse.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			url: this.__url,
+			identifier: this.__identifier && this.__identifier.toJSON(),
+			version: this.__version,
+			name: this.__name,
+			title: this.__title,
+			status: this.__status,
+			experimental: this.__experimental,
+			date: this.__date,
+			publisher: this.__publisher,
+			contact: this.__contact && this.__contact.map(v => v.toJSON()),
+			description: this.__description,
+			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
+			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
+			purpose: this.__purpose,
+			copyright: this.__copyright,
+			base: this.__base && this.__base.toJSON(),
+			parent: this.__parent && this.__parent.map(v => v.toJSON()),
+			replaces: this.__replaces && this.__replaces.map(v => v.toJSON()),
+			event: this.__event && this.__event.toJSON(),
+			category: this.__category,
+			focus: this.__focus && this.__focus.map(v => v.toJSON()),
+			responseRequired: this.__responseRequired,
+			allowedResponse: this.__allowedResponse && this.__allowedResponse.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = MessageDefinition;

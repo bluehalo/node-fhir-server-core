@@ -1,0 +1,86 @@
+module.exports = {
+	BENEFICIARY: {
+		name: 'Beneficiary',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-beneficiary',
+		description: 'Covered party.',
+	},
+	CLASS: {
+		name: 'Class',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-class',
+		description: 'Class identifier.',
+	},
+	DEPENDENT: {
+		name: 'Dependent',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-dependent',
+		description: 'Dependent number.',
+	},
+	GROUP: {
+		name: 'Group',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-group',
+		description: 'Group identifier.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-identifier',
+		description: 'The primary identifier of the insured and the coverage.',
+	},
+	PAYOR: {
+		name: 'Payor',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-payor',
+		description: 'The identity of the insurer or party paying for services.',
+	},
+	PLAN: {
+		name: 'Plan',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-plan',
+		description: 'A plan or policy identifier.',
+	},
+	POLICY_HOLDER: {
+		name: 'Policy_holder',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-policy-holder',
+		description: 'Reference to the policyholder.',
+	},
+	SEQUENCE: {
+		name: 'Sequence',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-sequence',
+		description: 'Sequence number.',
+	},
+	SUBCLASS: {
+		name: 'Subclass',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subclass',
+		description: 'Sub-class identifier.',
+	},
+	SUBGROUP: {
+		name: 'Subgroup',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subgroup',
+		description: 'Sub-group identifier.',
+	},
+	SUBPLAN: {
+		name: 'Subplan',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subplan',
+		description: 'Sub-plan identifier.',
+	},
+	SUBSCRIBER: {
+		name: 'Subscriber',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subscriber',
+		description: 'Reference to the subscriber.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-type',
+		description: 'The kind of coverage (health plan, auto, Workers Compensation).',
+	},
+};

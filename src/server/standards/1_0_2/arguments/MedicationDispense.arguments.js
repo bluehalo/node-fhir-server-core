@@ -1,0 +1,80 @@
+module.exports = {
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-code',
+		description: 'Return dispenses of this medicine code.',
+	},
+	DESTINATION: {
+		name: 'Destination',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-destination',
+		description: 'Return dispenses that should be sent to a specific destination.',
+	},
+	DISPENSER: {
+		name: 'Dispenser',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-dispenser',
+		description: 'Return all dispenses performed by a specific individual.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-identifier',
+		description: 'Return dispenses with this external identifier.',
+	},
+	MEDICATION: {
+		name: 'Medication',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-medication',
+		description: 'Return dispenses of this medicine resource.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-patient',
+		description: 'The identity of a patient to list dispenses  for.',
+	},
+	PRESCRIPTION: {
+		name: 'Prescription',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-prescription',
+		description: 'The identity of a prescription to list dispenses from.',
+	},
+	RECEIVER: {
+		name: 'Receiver',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-receiver',
+		description: 'Who collected the medication.',
+	},
+	RESPONSIBLEPARTY: {
+		name: 'Responsibleparty',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-responsibleparty',
+		description: 'Return all dispenses with the specified responsible party.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-status',
+		description: 'Status of the dispense.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-type',
+		description: 'Return all dispenses of a specific type.',
+	},
+	WHENHANDEDOVER: {
+		name: 'Whenhandedover',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-whenhandedover',
+		description: 'Date when medication handed over to patient (outpatient setting), or supplied to ward or clinic (inpatient setting).',
+	},
+	WHENPREPARED: {
+		name: 'Whenprepared',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-whenprepared',
+		description: 'Date when medication prepared.',
+	},
+};

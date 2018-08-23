@@ -1,0 +1,86 @@
+module.exports = {
+	ADDRESS: {
+		name: 'Address',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address',
+		description: 'A (part of the) address of the location.',
+	},
+	ADDRESS_CITY: {
+		name: 'Address_city',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address-city',
+		description: 'A city specified in an address.',
+	},
+	ADDRESS_COUNTRY: {
+		name: 'Address_country',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address-country',
+		description: 'A country specified in an address.',
+	},
+	ADDRESS_POSTALCODE: {
+		name: 'Address_postalcode',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address-postalcode',
+		description: 'A postal code specified in an address.',
+	},
+	ADDRESS_STATE: {
+		name: 'Address_state',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address-state',
+		description: 'A state specified in an address.',
+	},
+	ADDRESS_USE: {
+		name: 'Address_use',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-address-use',
+		description: 'A use code specified in an address.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-identifier',
+		description: 'Unique code or number identifying the location to its users.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-name',
+		description: 'A (portion of the) name of the location.',
+	},
+	NEAR: {
+		name: 'Near',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-near',
+		description: 'The coordinates expressed as [lat],[long] (using the WGS84 datum, see notes) to find locations near to (servers may search using a square rather than a circle for efficiency).',
+	},
+	NEAR_DISTANCE: {
+		name: 'Near_distance',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-near-distance',
+		description: 'A distance quantity to limit the near search to locations within a specific distance.',
+	},
+	ORGANIZATION: {
+		name: 'Organization',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-organization',
+		description: 'Searches for locations that are managed by the provided organization.',
+	},
+	PARTOF: {
+		name: 'Partof',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-partof',
+		description: 'The location of which this location is a part.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-status',
+		description: 'Searches for locations with a specific kind of status.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Location-type',
+		description: 'A code for the type of location.',
+	},
+};

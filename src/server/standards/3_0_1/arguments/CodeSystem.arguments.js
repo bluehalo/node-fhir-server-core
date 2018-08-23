@@ -1,0 +1,86 @@
+module.exports = {
+	CODE: {
+		name: 'Code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-code',
+		description: 'A code defined in the code system.',
+	},
+	CONTENT_MODE: {
+		name: 'Content_mode',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-content-mode',
+		description: 'not-present | example | fragment | complete.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-date',
+		description: 'The code system publication date.',
+	},
+	DESCRIPTION: {
+		name: 'Description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-description',
+		description: 'The description of the code system.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-identifier',
+		description: 'External identifier for the code system.',
+	},
+	JURISDICTION: {
+		name: 'Jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-jurisdiction',
+		description: 'Intended jurisdiction for the code system.',
+	},
+	LANGUAGE: {
+		name: 'Language',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-language',
+		description: 'A language in which a designation is provided.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-name',
+		description: 'Computationally friendly name of the code system.',
+	},
+	PUBLISHER: {
+		name: 'Publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-publisher',
+		description: 'Name of the publisher of the code system.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-status',
+		description: 'The current status of the code system.',
+	},
+	SYSTEM: {
+		name: 'System',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-system',
+		description: 'The system for any codes defined by this code system (same as \'url\').',
+	},
+	TITLE: {
+		name: 'Title',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-title',
+		description: 'The human-friendly name of the code system.',
+	},
+	URL: {
+		name: 'Url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-url',
+		description: 'The uri that identifies the code system.',
+	},
+	VERSION: {
+		name: 'Version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-version',
+		description: 'The business version of the code system.',
+	},
+};

@@ -1,0 +1,80 @@
+module.exports = {
+	CATEGORY: {
+		name: 'Category',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-category',
+		description: 'Classifications for the study.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-date',
+		description: 'When the study began and ended.',
+	},
+	FOCUS: {
+		name: 'Focus',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-focus',
+		description: 'Drugs, devices, conditions, etc. under study.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-identifier',
+		description: 'Business Identifier for study.',
+	},
+	JURISDICTION: {
+		name: 'Jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-jurisdiction',
+		description: 'Geographic region(s) for study.',
+	},
+	KEYWORD: {
+		name: 'Keyword',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-keyword',
+		description: 'Used to search for the study.',
+	},
+	PARTOF: {
+		name: 'Partof',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-partof',
+		description: 'Part of larger study.',
+	},
+	PRINCIPALINVESTIGATOR: {
+		name: 'Principalinvestigator',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-principalinvestigator',
+		description: 'The individual responsible for the study.',
+	},
+	PROTOCOL: {
+		name: 'Protocol',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-protocol',
+		description: 'Steps followed in executing study.',
+	},
+	SITE: {
+		name: 'Site',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-site',
+		description: 'Location involved in study execution.',
+	},
+	SPONSOR: {
+		name: 'Sponsor',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-sponsor',
+		description: 'Organization responsible for the study.',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-status',
+		description: 'draft | in-progress | suspended | stopped | completed | entered-in-error.',
+	},
+	TITLE: {
+		name: 'Title',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-title',
+		description: 'Name for this study.',
+	},
+};

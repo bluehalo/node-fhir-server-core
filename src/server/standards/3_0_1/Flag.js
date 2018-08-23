@@ -1,126 +1,119 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const Period = require('./Period');
 
 class Flag extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Flag';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Flag';
+		Object.assign(this, opt);
 	}
 
+	// This is a Flag resource
 	static get __resourceType () {
 		return 'Flag';
 	}
 
-	// This is a Flag resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Flag'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Flag = new_value;
 	}
 
 	// Identifier assigned to the flag for external use (outside the FHIR environment).
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// Supports basic workflow.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['active', 'inactive', 'entered-in-error'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Allows an flag to be divided into different categories like clinical, administrative etc. Intended to be used as a means of filtering which flags are displayed to particular user or in a given context.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		this._category = new CodeableConcept(new_value);
+	set category (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__category = new CodeableConcept(new_value);
 	}
 
 	// The coded value or textual component of the flag to display to the user.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = new CodeableConcept(new_value);
+	set code (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__code = new CodeableConcept(new_value);
 	}
 
 	// The patient, location, group , organization , or practitioner, etc. this is about record this flag is associated with.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// The period of time from the activation of the flag to inactivation of the flag. If the flag is active, the end of the period should be unspecified.
 	get period () {
-		return this._period;
+		return this.__period;
 	}
 
-	set period ( new_value ) {
-		this._period = new Period(new_value);
+	set period (new_value) {
+		const Period = require('./Period');
+		this.__period = new Period(new_value);
 	}
 
 	// This alert is only relevant during the encounter.
 	get encounter () {
-		return this._encounter;
+		return this.__encounter;
 	}
 
-	set encounter ( new_value ) {
-		this._encounter = new Reference(new_value);
+	set encounter (new_value) {
+		const Reference = require('./Reference');
+		this.__encounter = new Reference(new_value);
 	}
 
 	// The person, organization or device that created the flag.
 	get author () {
-		return this._author;
+		return this.__author;
 	}
 
-	set author ( new_value ) {
-		this._author = new Reference(new_value);
+	set author (new_value) {
+		const Reference = require('./Reference');
+		this.__author = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			category: this._category && this._category.toJSON(),
-			code: this._code && this._code.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			period: this._period && this._period.toJSON(),
-			encounter: this._encounter && this._encounter.toJSON(),
-			author: this._author && this._author.toJSON()
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			category: this.__category && this.__category.toJSON(),
+			code: this.__code && this.__code.toJSON(),
+			subject: this.__subject && this.__subject.toJSON(),
+			period: this.__period && this.__period.toJSON(),
+			encounter: this.__encounter && this.__encounter.toJSON(),
+			author: this.__author && this.__author.toJSON()
 		});
 	}
-
 }
 
 module.exports = Flag;

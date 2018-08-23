@@ -1,70 +1,65 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const ImmunizationRecommendation_Recommendation = require('./ImmunizationRecommendation_Recommendation');
 
 class ImmunizationRecommendation extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ImmunizationRecommendation';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'ImmunizationRecommendation';
+		Object.assign(this, opt);
 	}
 
+	// This is a ImmunizationRecommendation resource
 	static get __resourceType () {
 		return 'ImmunizationRecommendation';
 	}
 
-	// This is a ImmunizationRecommendation resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['ImmunizationRecommendation'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__ImmunizationRecommendation = new_value;
 	}
 
 	// A unique identifier assigned to this particular recommendation record.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The patient the recommendations are for.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// Vaccine administration recommendations.
 	get recommendation () {
-		return this._recommendation;
+		return this.__recommendation;
 	}
 
-	set recommendation ( new_value ) {
-		this._recommendation = Array.isArray(new_value) ? new_value.map(val => new ImmunizationRecommendation_Recommendation(val)) : [new ImmunizationRecommendation_Recommendation(new_value)];
+	set recommendation (new_value) {
+		const ImmunizationRecommendationRecommendation = require('./ImmunizationRecommendationRecommendation');
+		this.__recommendation = Array.isArray(new_value) ? new_value.map(val => new ImmunizationRecommendationRecommendation(val)) : [new ImmunizationRecommendationRecommendation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			patient: this._patient && this._patient.toJSON(),
-			recommendation: this._recommendation && this._recommendation.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			patient: this.__patient && this.__patient.toJSON(),
+			recommendation: this.__recommendation && this.__recommendation.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = ImmunizationRecommendation;

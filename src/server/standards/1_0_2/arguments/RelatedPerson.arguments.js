@@ -1,0 +1,92 @@
+module.exports = {
+	ADDRESS: {
+		name: 'Address',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address',
+		description: 'An address in any kind of address/part.',
+	},
+	ADDRESS_CITY: {
+		name: 'Address_city',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-city',
+		description: 'A city specified in an address.',
+	},
+	ADDRESS_COUNTRY: {
+		name: 'Address_country',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-country',
+		description: 'A country specified in an address.',
+	},
+	ADDRESS_POSTALCODE: {
+		name: 'Address_postalcode',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-postalcode',
+		description: 'A postal code specified in an address.',
+	},
+	ADDRESS_STATE: {
+		name: 'Address_state',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-state',
+		description: 'A state specified in an address.',
+	},
+	ADDRESS_USE: {
+		name: 'Address_use',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-use',
+		description: 'A use code specified in an address.',
+	},
+	BIRTHDATE: {
+		name: 'Birthdate',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-birthdate',
+		description: 'The Related Person\'s date of birth.',
+	},
+	EMAIL: {
+		name: 'Email',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-email',
+		description: 'A value in an email contact.',
+	},
+	GENDER: {
+		name: 'Gender',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-gender',
+		description: 'Gender of the person.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-identifier',
+		description: 'A patient Identifier.',
+	},
+	NAME: {
+		name: 'Name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-name',
+		description: 'A portion of name in any name part.',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-patient',
+		description: 'The patient this person is related to.',
+	},
+	PHONE: {
+		name: 'Phone',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-phone',
+		description: 'A value in a phone contact.',
+	},
+	PHONETIC: {
+		name: 'Phonetic',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-phonetic',
+		description: 'A portion of name using some kind of phonetic matching algorithm.',
+	},
+	TELECOM: {
+		name: 'Telecom',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-telecom',
+		description: 'The value in any kind of contact.',
+	},
+};

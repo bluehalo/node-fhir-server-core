@@ -1,0 +1,98 @@
+module.exports = {
+	ATTESTER: {
+		name: 'Attester',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-attester',
+		description: 'Who attested the composition.',
+	},
+	AUTHOR: {
+		name: 'Author',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-author',
+		description: 'Who and/or what authored the composition.',
+	},
+	CLASS: {
+		name: 'Class',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-class',
+		description: 'Categorization of Composition.',
+	},
+	CONFIDENTIALITY: {
+		name: 'Confidentiality',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-confidentiality',
+		description: 'As defined by affinity domain.',
+	},
+	CONTEXT: {
+		name: 'Context',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-context',
+		description: 'Code(s) that apply to the event being documented.',
+	},
+	DATE: {
+		name: 'Date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-date',
+		description: 'Composition editing time.',
+	},
+	ENCOUNTER: {
+		name: 'Encounter',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-encounter',
+		description: 'Context of the Composition.',
+	},
+	ENTRY: {
+		name: 'Entry',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-entry',
+		description: 'A reference to data that supports this section.',
+	},
+	IDENTIFIER: {
+		name: 'Identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-identifier',
+		description: 'Logical identifier of composition (version-independent).',
+	},
+	PATIENT: {
+		name: 'Patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-patient',
+		description: 'Who and/or what the composition is about.',
+	},
+	PERIOD: {
+		name: 'Period',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-period',
+		description: 'The period covered by the documentation.',
+	},
+	SECTION: {
+		name: 'Section',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-section',
+		description: 'Classification of section (recommended).',
+	},
+	STATUS: {
+		name: 'Status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-status',
+		description: 'preliminary | final | amended | entered-in-error.',
+	},
+	SUBJECT: {
+		name: 'Subject',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-subject',
+		description: 'Who and/or what the composition is about.',
+	},
+	TITLE: {
+		name: 'Title',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-title',
+		description: 'Human Readable name/title.',
+	},
+	TYPE: {
+		name: 'Type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Composition-type',
+		description: 'Kind of composition (LOINC if possible).',
+	},
+};
