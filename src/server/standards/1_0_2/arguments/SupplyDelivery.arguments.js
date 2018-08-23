@@ -1,30 +1,30 @@
 module.exports = {
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-identifier',
 		description: 'External identifier.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-patient',
 		description: 'Patient for whom the item is supplied.',
 	},
 	RECEIVER: {
-		name: 'Receiver',
+		name: 'receiver',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-receiver',
 		description: 'Who collected the Supply.',
 	},
 	STATUS: {
-		name: 'Status',
+		name: 'status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-status',
 		description: 'in-progress | completed | abandoned.',
 	},
 	SUPPLIER: {
-		name: 'Supplier',
+		name: 'supplier',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-supplier',
 		description: 'Dispenser.',

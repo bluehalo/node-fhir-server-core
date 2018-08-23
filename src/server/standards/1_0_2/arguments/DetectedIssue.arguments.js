@@ -1,36 +1,36 @@
 module.exports = {
 	AUTHOR: {
-		name: 'Author',
+		name: 'author',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-author',
 		description: 'The provider or device that identified the issue.',
 	},
 	CATEGORY: {
-		name: 'Category',
+		name: 'category',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-category',
 		description: 'Issue Category, e.g. drug-drug, duplicate therapy, etc.',
 	},
 	DATE: {
-		name: 'Date',
+		name: 'date',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-date',
 		description: 'When identified.',
 	},
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-identifier',
 		description: 'Unique id for the detected issue.',
 	},
 	IMPLICATED: {
-		name: 'Implicated',
+		name: 'implicated',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-implicated',
 		description: 'Problem resource.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-patient',
 		description: 'Associated patient.',

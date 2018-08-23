@@ -1,36 +1,36 @@
 module.exports = {
 	AUTHOR: {
-		name: 'Author',
+		name: 'author',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-author',
 		description: 'Who created.',
 	},
 	CODE: {
-		name: 'Code',
+		name: 'code',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-code',
 		description: 'Kind of Resource.',
 	},
 	CREATED: {
-		name: 'Created',
+		name: 'created',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-created',
 		description: 'When created.',
 	},
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-identifier',
 		description: 'Business identifier.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-patient',
 		description: 'Identifies the focus of this resource.',
 	},
 	SUBJECT: {
-		name: 'Subject',
+		name: 'subject',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-subject',
 		description: 'Identifies the focus of this resource.',

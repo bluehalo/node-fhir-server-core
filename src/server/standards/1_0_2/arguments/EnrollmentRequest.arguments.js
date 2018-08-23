@@ -1,18 +1,18 @@
 module.exports = {
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-identifier',
 		description: 'The business identifier of the Enrollment.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-patient',
 		description: 'The party to be enrolled.',
 	},
 	SUBJECT: {
-		name: 'Subject',
+		name: 'subject',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-subject',
 		description: 'The party to be enrolled.',

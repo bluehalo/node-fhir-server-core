@@ -1,30 +1,30 @@
 module.exports = {
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-identifier',
 		description: 'The primary identifier of the financial resource.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-patient',
 		description: 'Patient.',
 	},
 	PRIORITY: {
-		name: 'Priority',
+		name: 'priority',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-priority',
 		description: 'Processing priority requested.',
 	},
 	PROVIDER: {
-		name: 'Provider',
+		name: 'provider',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-provider',
 		description: 'Provider responsible for the claim.',
 	},
 	USE: {
-		name: 'Use',
+		name: 'use',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-use',
 		description: 'The kind of financial resource.',

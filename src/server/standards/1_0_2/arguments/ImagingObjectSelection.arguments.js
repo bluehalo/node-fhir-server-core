@@ -1,36 +1,36 @@
 module.exports = {
 	AUTHOR: {
-		name: 'Author',
+		name: 'author',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-author',
 		description: 'Author of key DICOM object selection.',
 	},
 	AUTHORING_TIME: {
-		name: 'Authoring_time',
+		name: 'authoring-time',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-authoring-time',
 		description: 'Time of key DICOM object selection authoring.',
 	},
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'uri',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-identifier',
 		description: 'UID of key DICOM object selection.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-patient',
 		description: 'Subject of key DICOM object selection.',
 	},
 	SELECTED_STUDY: {
-		name: 'Selected_study',
+		name: 'selected-study',
 		type: 'uri',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-selected-study',
 		description: 'Study selected in key DICOM object selection.',
 	},
 	TITLE: {
-		name: 'Title',
+		name: 'title',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-title',
 		description: 'Title of key DICOM object selection.',

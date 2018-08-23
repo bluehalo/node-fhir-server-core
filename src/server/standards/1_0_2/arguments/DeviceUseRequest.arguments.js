@@ -1,18 +1,18 @@
 module.exports = {
 	DEVICE: {
-		name: 'Device',
+		name: 'device',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-device',
 		description: 'Device requested.',
 	},
 	PATIENT: {
-		name: 'Patient',
+		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-patient',
 		description: 'Search by subject - a patient.',
 	},
 	SUBJECT: {
-		name: 'Subject',
+		name: 'subject',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-subject',
 		description: 'Search by subject.',

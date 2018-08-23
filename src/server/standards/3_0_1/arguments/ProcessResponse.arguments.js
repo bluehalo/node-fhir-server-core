@@ -1,30 +1,30 @@
 module.exports = {
 	IDENTIFIER: {
-		name: 'Identifier',
+		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-identifier',
 		description: 'The business identifier of the Explanation of Benefit.',
 	},
 	ORGANIZATION: {
-		name: 'Organization',
+		name: 'organization',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-organization',
 		description: 'The organization who generated this resource.',
 	},
 	REQUEST: {
-		name: 'Request',
+		name: 'request',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-request',
 		description: 'The reference to the claim.',
 	},
 	REQUEST_ORGANIZATION: {
-		name: 'Request_organization',
+		name: 'request-organization',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-request-organization',
 		description: 'The Organization who is responsible the request transaction.',
 	},
 	REQUEST_PROVIDER: {
-		name: 'Request_provider',
+		name: 'request-provider',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-request-provider',
 		description: 'The Provider who is responsible the request transaction.',
