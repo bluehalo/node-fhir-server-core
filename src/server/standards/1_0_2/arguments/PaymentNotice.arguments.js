@@ -3,6 +3,6 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-identifier',
-		description: 'The business identifier of the Eligibility.',
+		documentation: 'The business identifier of the Eligibility.',
 	},
 };

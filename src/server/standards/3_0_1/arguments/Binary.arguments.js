@@ -3,6 +3,6 @@ module.exports = {
 		name: 'contenttype',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Binary-contenttype',
-		description: 'MimeType of the binary content.',
+		documentation: 'MimeType of the binary content.',
 	},
 };

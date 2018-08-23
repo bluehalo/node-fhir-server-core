@@ -3,24 +3,24 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-identifier',
-		description: 'The business identifier of the Enrollment.',
+		documentation: 'The business identifier of the Enrollment.',
 	},
 	ORGANIZATION: {
 		name: 'organization',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-organization',
-		description: 'The organization who generated this resource.',
+		documentation: 'The organization who generated this resource.',
 	},
 	PATIENT: {
 		name: 'patient',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-patient',
-		description: 'The party to be enrolled.',
+		documentation: 'The party to be enrolled.',
 	},
 	SUBJECT: {
 		name: 'subject',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-subject',
-		description: 'The party to be enrolled.',
+		documentation: 'The party to be enrolled.',
 	},
 };

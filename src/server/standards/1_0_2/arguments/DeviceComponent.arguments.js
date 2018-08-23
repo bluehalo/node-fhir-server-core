@@ -3,18 +3,18 @@ module.exports = {
 		name: 'parent',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-parent',
-		description: 'The parent DeviceComponent resource.',
+		documentation: 'The parent DeviceComponent resource.',
 	},
 	SOURCE: {
 		name: 'source',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-source',
-		description: 'The device source.',
+		documentation: 'The device source.',
 	},
 	TYPE: {
 		name: 'type',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-type',
-		description: 'The device component type.',
+		documentation: 'The device component type.',
 	},
 };
