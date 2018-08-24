@@ -42,11 +42,11 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 */
 let handleBundleReadResponse = (res, base_version, Resource, resource_json = [], options) => {
 	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
-	let Bundle_Link = require(resolveFromVersion(base_version, 'Bundle_Link'));
+	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
 	let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
 	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
-	let self_link = new Bundle_Link({url: full_url, relation: 'self'});
+	let self_link = new BundleLink({url: full_url, relation: 'self'});
 	let results = new Bundle({ type: 'searchset', link: self_link });
 	let entries = [];
 

@@ -34,8 +34,7 @@ class BundleEntry extends BackboneElement {
 	}
 
 	set resource (new_value) {
-		const ResourceList = require('./ResourceList');
-		this.__resource = new ResourceList(new_value);
+		this.__resource = new_value;
 	}
 
 	// Information about the search process that lead to the creation of this entry.

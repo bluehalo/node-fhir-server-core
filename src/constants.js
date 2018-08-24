@@ -72,6 +72,7 @@ exports.RESOURCES = {
     MEDICATIONSTATEMENT: 'MedicationStatement',
     MESSAGEDEFINITION: 'MessageDefinition',
     MESSAGEHEADER: 'MessageHeader',
+    META: 'Meta',
     NAMINGSYSTEM: 'NamingSystem',
     NUTRITIONORDER: 'NutritionOrder',
     OBSERVATION: 'Observation',
