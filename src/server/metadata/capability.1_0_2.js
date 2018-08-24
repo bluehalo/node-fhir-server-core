@@ -22,7 +22,7 @@ module.exports.makeStatement = function(resources) {
 			version: '0.0.1'
 		},
 		implementation: {
-			description: 'FHIR Test Server (STU3)'
+			description: 'FHIR Test Server (DSTU2)'
 		},
 		fhirVersion: '1.0.2',
 		acceptUnknown: 'extensions',
