@@ -185,7 +185,7 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 
 	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
 	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
-	let BundleRequest = require(resolveFromVersion(base_version, 'BundleEntryRequest'));
+	let BundleEntryRequest = require(resolveFromVersion(base_version, 'BundleEntryRequest'));
 
 	let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
