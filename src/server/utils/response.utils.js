@@ -184,13 +184,13 @@ let handleDeleteRejection = (res, next, base_version, err) => {
 let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = [], options) => {
 
 	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
-	let Bundle_Link = require(resolveFromVersion(base_version, 'Bundle_Link'));
-	let Bundle_Request = require(resolveFromVersion(base_version, 'Bundle_Request'));
+	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
+	let BundleRequest = require(resolveFromVersion(base_version, 'BundleEntryRequest'));
 
 	let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
 	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
-	let self_link = new Bundle_Link({url: full_url, relation: 'self'});
+	let self_link = new BundleLink({url: full_url, relation: 'self'});
 	let results = new Bundle({ link: self_link, type: 'history' });
 	let entries = [];
 
@@ -198,7 +198,7 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 		for (let resource of resource_json) {
 
 			let history_url = `${res.req.protocol}://${res.req.get('host')}/${resource.id}/_history/${resource.meta.versionId}`;
-			let bundle_request = new Bundle_Request({ url: history_url, method: 'PUT' });
+			let bundle_request = new BundleEntryRequest({ url: history_url, method: 'PUT' });
 
 			entries.push({
 				resource,
