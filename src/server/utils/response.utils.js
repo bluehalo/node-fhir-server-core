@@ -135,12 +135,15 @@ let handleUpdateResponse = (res, base_version, type, results, options) => {
 	let { id, created = false, resource_version } = results;
 	let { resourceUrl } = options;
 
+	if (!resourceUrl.endsWith('/')) {
+		resourceUrl += '/';
+	}
 
 	let status = created ? 201 : 200;
 	let date = new Date();
 
 	if (resource_version) {
-		res.set('Content-Location', `${base_version}/${type}/${id}/_history/${resource_version}`);
+		res.set('Content-Location', `${resourceUrl}${base_version}/${type}/${id}/_history/${resource_version}`);
 		res.set('ETag', `${resource_version}`);
 	}
 
@@ -150,7 +153,7 @@ let handleUpdateResponse = (res, base_version, type, results, options) => {
 		res.type(STU3_TYPE);
 	}
 
-	res.set('Location', `${resourceUrl}/${base_version}/${type}/${id}`);
+	res.set('Location', `${resourceUrl}${base_version}/${type}/${id}`);
 	res.set('Last-Modified', date.toISOString());
 	res.status(status).end();
 };
