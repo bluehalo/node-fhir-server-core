@@ -20,6 +20,10 @@ let generateInteractions = (service, resourceType) => {
 		interactions.push({ code: 'read' });
 	}
 
+	if (service.searchByVersionId) {
+		interactions.push({ code: 'vread' });
+	}
+
 	if (service.create) {
 		interactions.push({ code: 'create' });
 	}
