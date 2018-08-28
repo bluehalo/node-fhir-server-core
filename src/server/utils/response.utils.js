@@ -1,6 +1,10 @@
 const { resolveFromVersion } = require('./resolve.utils');
 const errors = require('./error.utils');
 
+const DSTU2_TYPE = 'application/json+fhir';
+const STU3_TYPE = 'application/fhir+json';
+
+
 /**
 * @description When resources are read in the controller functions
 * they all need to respond in a similar manner
@@ -17,7 +21,13 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
 		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
 
-		res.status(200).type('application/fhir+json').json(new Resource(resource_json));
+		if (base_version.startsWith('1')) {
+			res.type(DSTU2_TYPE);
+		} else {
+			res.type(STU3_TYPE)
+		}
+
+		res.status(200).json(new Resource(resource_json));
 	} else {
 		next(errors.notFound(`${Resource.__resourceType} not found.`, base_version));
 	}
@@ -77,7 +87,13 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 	results.entry = entries;
 	results.total = entries.length;
 
-	res.status(200).type('application/fhir+json').json(results);
+	if (base_version.startsWith('1')) {
+		res.type(DSTU2_TYPE);
+	} else {
+		res.type(STU3_TYPE)
+	}
+
+	res.status(200).json(results);
 };
 
 /**
@@ -123,6 +139,12 @@ let handleUpdateResponse = (res, base_version, type, results) => {
 	if (resource_version) {
 		res.set('Content-Location', `${base_version}/${type}/${id}/_history/${resource_version}`);
 		res.set('ETag', `${resource_version}`);
+	}
+
+	if (base_version.startsWith('1')) {
+		res.type(DSTU2_TYPE);
+	} else {
+		res.type(STU3_TYPE)
 	}
 
 	res.set('Location', `${base_version}/${type}/${id}`);
@@ -211,7 +233,13 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 	results.entry = entries;
 	results.total = entries.length;
 
-	res.status(200).type('application/fhir+json').json(results);
+	if (base_version.startsWith('1')) {
+		res.type(DSTU2_TYPE);
+	} else {
+		res.type(STU3_TYPE)
+	}
+
+	res.status(200).json(results);
 };
 
 /**
