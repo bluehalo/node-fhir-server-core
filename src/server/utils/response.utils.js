@@ -24,7 +24,7 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 		if (base_version.startsWith('1')) {
 			res.type(DSTU2_TYPE);
 		} else {
-			res.type(STU3_TYPE)
+			res.type(STU3_TYPE);
 		}
 
 		res.status(200).json(new Resource(resource_json));
@@ -90,7 +90,7 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 	if (base_version.startsWith('1')) {
 		res.type(DSTU2_TYPE);
 	} else {
-		res.type(STU3_TYPE)
+		res.type(STU3_TYPE);
 	}
 
 	res.status(200).json(results);
@@ -131,8 +131,11 @@ let handleCreateResponse = (res, base_version, type, results) => {
 * @param {boolean} results.created - Did the update result in a new resource being created
 * @param {string} results.resource_version - Version number of the updated resource
 */
-let handleUpdateResponse = (res, base_version, type, results) => {
+let handleUpdateResponse = (res, base_version, type, results, options) => {
 	let { id, created = false, resource_version } = results;
+	let { resourceUrl } = options;
+
+
 	let status = created ? 201 : 200;
 	let date = new Date();
 
@@ -144,10 +147,10 @@ let handleUpdateResponse = (res, base_version, type, results) => {
 	if (base_version.startsWith('1')) {
 		res.type(DSTU2_TYPE);
 	} else {
-		res.type(STU3_TYPE)
+		res.type(STU3_TYPE);
 	}
 
-	res.set('Location', `${base_version}/${type}/${id}`);
+	res.set('Location', `${resourceUrl}/${base_version}/${type}/${id}`);
 	res.set('Last-Modified', date.toISOString());
 	res.status(status).end();
 };
@@ -236,7 +239,7 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 	if (base_version.startsWith('1')) {
 		res.type(DSTU2_TYPE);
 	} else {
-		res.type(STU3_TYPE)
+		res.type(STU3_TYPE);
 	}
 
 	res.status(200).json(results);

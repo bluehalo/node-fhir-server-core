@@ -111,7 +111,7 @@ module.exports.create = function create({profile, logger, app}) {
 /**
  * @description Controller for updating/creating TestReport. If TestReport does not exist, it should be updated
  */
-module.exports.update = function update({profile, logger, app}) {
+module.exports.update = function update ({ profile, logger, config }) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
@@ -130,7 +130,9 @@ module.exports.update = function update({profile, logger, app}) {
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base_version, TestReport.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, TestReport.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
