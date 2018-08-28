@@ -1,0 +1,98 @@
+module.exports = {
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-date',
+		documentation: 'The conformance statement publication date.',
+	},
+	DESCRIPTION: {
+		name: 'description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-description',
+		documentation: 'Text search in the description of the conformance statement.',
+	},
+	EVENT: {
+		name: 'event',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-event',
+		documentation: 'Event code in a conformance statement.',
+	},
+	FHIRVERSION: {
+		name: 'fhirversion',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-fhirversion',
+		documentation: 'The version of FHIR.',
+	},
+	FORMAT: {
+		name: 'format',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-format',
+		documentation: 'formats supported (xml | json | mime type).',
+	},
+	MODE: {
+		name: 'mode',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-mode',
+		documentation: 'Mode - restful (server/client) or messaging (sender/receiver).',
+	},
+	NAME: {
+		name: 'name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-name',
+		documentation: 'Name of the conformance statement.',
+	},
+	PROFILE: {
+		name: 'profile',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-profile',
+		documentation: 'A profile id invoked in a conformance statement.',
+	},
+	PUBLISHER: {
+		name: 'publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-publisher',
+		documentation: 'Name of the publisher of the conformance statement.',
+	},
+	RESOURCE: {
+		name: 'resource',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-resource',
+		documentation: 'Name of a resource mentioned in a conformance statement.',
+	},
+	SECURITY: {
+		name: 'security',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-security',
+		documentation: 'OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates.',
+	},
+	SOFTWARE: {
+		name: 'software',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-software',
+		documentation: 'Part of a the name of a software application.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-status',
+		documentation: 'The current status of the conformance statement.',
+	},
+	SUPPORTED_PROFILE: {
+		name: 'supported-profile',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-supported-profile',
+		documentation: 'Profiles for use cases supported.',
+	},
+	URL: {
+		name: 'url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-url',
+		documentation: 'The uri that identifies the conformance statement.',
+	},
+	VERSION: {
+		name: 'version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-version',
+		documentation: 'The version identifier of the conformance statement.',
+	},
+};

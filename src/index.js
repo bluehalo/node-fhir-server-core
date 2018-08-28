@@ -1,5 +1,7 @@
 const Server = require('./server/server');
 const constants = require('./constants');
+const { resolveFromVersion } = require('./server/utils/resolve.utils');
+
 
 /**
  * @name exports
@@ -19,6 +21,11 @@ module.exports = {
 	* setup methods the default implementation uses.
 	*/
 	Server: Server,
+
+	/**
+	 * @description Export function to allow
+	 */
+	resolveFromVersion: resolveFromVersion,
 
 	/**
 	* @description Initialize is useful for building a server with all the defaults

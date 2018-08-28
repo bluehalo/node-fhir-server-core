@@ -1,0 +1,86 @@
+module.exports = {
+	BASE: {
+		name: 'base',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-base',
+		documentation: 'The resource type(s) this search parameter applies to.',
+	},
+	CODE: {
+		name: 'code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-code',
+		documentation: 'Code used in URL.',
+	},
+	COMPONENT: {
+		name: 'component',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-component',
+		documentation: 'Defines how the part works.',
+	},
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-date',
+		documentation: 'The search parameter publication date.',
+	},
+	DERIVED_FROM: {
+		name: 'derived-from',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-derived-from',
+		documentation: 'Original Definition for the search parameter.',
+	},
+	DESCRIPTION: {
+		name: 'description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-description',
+		documentation: 'The description of the search parameter.',
+	},
+	JURISDICTION: {
+		name: 'jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-jurisdiction',
+		documentation: 'Intended jurisdiction for the search parameter.',
+	},
+	NAME: {
+		name: 'name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-name',
+		documentation: 'Computationally friendly name of the search parameter.',
+	},
+	PUBLISHER: {
+		name: 'publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-publisher',
+		documentation: 'Name of the publisher of the search parameter.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-status',
+		documentation: 'The current status of the search parameter.',
+	},
+	TARGET: {
+		name: 'target',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-target',
+		documentation: 'Types of resource (if a resource reference).',
+	},
+	TYPE: {
+		name: 'type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-type',
+		documentation: 'number | date | string | token | reference | composite | quantity | uri.',
+	},
+	URL: {
+		name: 'url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-url',
+		documentation: 'The uri that identifies the search parameter.',
+	},
+	VERSION: {
+		name: 'version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-version',
+		documentation: 'The business version of the search parameter.',
+	},
+};

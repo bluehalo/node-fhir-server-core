@@ -1,0 +1,92 @@
+module.exports = {
+	BASE: {
+		name: 'base',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-base',
+		documentation: 'Marks this as a profile of the base.',
+	},
+	CODE: {
+		name: 'code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-code',
+		documentation: 'Name used to invoke the operation.',
+	},
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-date',
+		documentation: 'The operation definition publication date.',
+	},
+	DESCRIPTION: {
+		name: 'description',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-description',
+		documentation: 'The description of the operation definition.',
+	},
+	INSTANCE: {
+		name: 'instance',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-instance',
+		documentation: 'Invoke on an instance?.',
+	},
+	JURISDICTION: {
+		name: 'jurisdiction',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-jurisdiction',
+		documentation: 'Intended jurisdiction for the operation definition.',
+	},
+	KIND: {
+		name: 'kind',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-kind',
+		documentation: 'operation | query.',
+	},
+	NAME: {
+		name: 'name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-name',
+		documentation: 'Computationally friendly name of the operation definition.',
+	},
+	PARAM_PROFILE: {
+		name: 'param-profile',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-param-profile',
+		documentation: 'Profile on the type.',
+	},
+	PUBLISHER: {
+		name: 'publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-publisher',
+		documentation: 'Name of the publisher of the operation definition.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-status',
+		documentation: 'The current status of the operation definition.',
+	},
+	SYSTEM: {
+		name: 'system',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-system',
+		documentation: 'Invoke at the system level?.',
+	},
+	TYPE: {
+		name: 'type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-type',
+		documentation: 'Invole at the type level?.',
+	},
+	URL: {
+		name: 'url',
+		type: 'uri',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-url',
+		documentation: 'The uri that identifies the operation definition.',
+	},
+	VERSION: {
+		name: 'version',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-version',
+		documentation: 'The business version of the operation definition.',
+	},
+};

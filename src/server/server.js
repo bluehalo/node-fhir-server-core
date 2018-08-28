@@ -5,6 +5,7 @@ const express = require('express');
 const helmet = require('helmet');
 const https = require('https');
 const http = require('http');
+const path = require('path');
 const fs = require('fs');
 const routeSetter = require('./route-setter');
 const errors = require('./utils/error.utils');
@@ -107,7 +108,7 @@ class Server {
 		this.app.use(compression({ level: 9 }));
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
-		this.app.use(bodyParser.json());
+		this.app.use(bodyParser.json({ type: 'application/*+json' }));
 		// return self for chaining
 		return this;
 	}
@@ -152,7 +153,7 @@ class Server {
 
 	configurePassport () {
 		if (this.config.auth && this.config.auth.strategy) {
-			let { strategy } = require(this.config.auth.strategy.service);
+			let { strategy } = require(path.resolve(this.config.auth.strategy.service));
 			passport.use(strategy);
 		}
 
@@ -185,13 +186,17 @@ class Server {
 		// Generic catch all error handler
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
+
+			// get base from URL instead of params since it might not be forwarded
+			let base = req.url.split('/')[1];
+
 			// If there is an error and it is our error type
-			if (err && errors.isServerError(err, req.params.base)) {
+			if (err && errors.isServerError(err, base)) {
 				res.status(err.statusCode).json(err);
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				let error = errors.internal(err.message, req.params.base);
+				let error = errors.internal(err.message, base);
 				this.logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
@@ -203,7 +208,9 @@ class Server {
 
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
-			let error = errors.notFound(req.params.base);
+			// get base from URL instead of params since it might not be forwarded
+
+			let error = errors.notFound();
 			this.logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});
