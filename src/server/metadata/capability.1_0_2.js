@@ -13,7 +13,7 @@ module.exports.makeStatement = function(resources) {
 	let Conformance = getConformanceResource();
 
 	return new Conformance({
-		status: 'generated',
+		status: 'active',
 		date: moment().tz('America/New_York').format(),
 		publisher: 'Not provided',
 		kind: 'instance',
