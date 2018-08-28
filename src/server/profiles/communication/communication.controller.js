@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new communication resource and pass it to the service
 		let communication = new Communication(resource_body);
-		let args = {id: resource_id, resource: communication};
+		let args = {id: resource_id, base_version, resource: communication};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new activitydefinition resource and pass it to the service
 		let activitydefinition = new ActivityDefinition(resource_body);
-		let args = {id: resource_id, resource: activitydefinition};
+		let args = {id: resource_id, base_version, resource: activitydefinition};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

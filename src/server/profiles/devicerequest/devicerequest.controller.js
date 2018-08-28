@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new devicerequest resource and pass it to the service
 		let devicerequest = new DeviceRequest(resource_body);
-		let args = {id: resource_id, resource: devicerequest};
+		let args = {id: resource_id, base_version, resource: devicerequest};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

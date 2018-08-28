@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new questionnaireresponse resource and pass it to the service
 		let questionnaireresponse = new QuestionnaireResponse(resource_body);
-		let args = {id: resource_id, resource: questionnaireresponse};
+		let args = {id: resource_id, base_version, resource: questionnaireresponse};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

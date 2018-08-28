@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new auditevent resource and pass it to the service
 		let auditevent = new AuditEvent(resource_body);
-		let args = {id: resource_id, resource: auditevent};
+		let args = {id: resource_id, base_version, resource: auditevent};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

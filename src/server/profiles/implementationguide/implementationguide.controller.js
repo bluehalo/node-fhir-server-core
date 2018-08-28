@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new implementationguide resource and pass it to the service
 		let implementationguide = new ImplementationGuide(resource_body);
-		let args = {id: resource_id, resource: implementationguide};
+		let args = {id: resource_id, base_version, resource: implementationguide};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

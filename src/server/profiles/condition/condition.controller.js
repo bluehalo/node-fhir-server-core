@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new condition resource and pass it to the service
 		let condition = new Condition(resource_body);
-		let args = {id: resource_id, resource: condition};
+		let args = {id: resource_id, base_version, resource: condition};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

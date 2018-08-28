@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new medicationadministration resource and pass it to the service
 		let medicationadministration = new MedicationAdministration(resource_body);
-		let args = {id: resource_id, resource: medicationadministration};
+		let args = {id: resource_id, base_version, resource: medicationadministration};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

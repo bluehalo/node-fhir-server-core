@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new detectedissue resource and pass it to the service
 		let detectedissue = new DetectedIssue(resource_body);
-		let args = {id: resource_id, resource: detectedissue};
+		let args = {id: resource_id, base_version, resource: detectedissue};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

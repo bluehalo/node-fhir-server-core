@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new procedure resource and pass it to the service
 		let procedure = new Procedure(resource_body);
-		let args = {id: resource_id, resource: procedure};
+		let args = {id: resource_id, base_version, resource: procedure};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

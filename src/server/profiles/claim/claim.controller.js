@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new claim resource and pass it to the service
 		let claim = new Claim(resource_body);
-		let args = {id: resource_id, resource: claim};
+		let args = {id: resource_id, base_version, resource: claim};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

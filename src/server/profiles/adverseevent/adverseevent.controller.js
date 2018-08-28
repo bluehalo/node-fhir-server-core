@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new adverseevent resource and pass it to the service
 		let adverseevent = new AdverseEvent(resource_body);
-		let args = {id: resource_id, resource: adverseevent};
+		let args = {id: resource_id, base_version, resource: adverseevent};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

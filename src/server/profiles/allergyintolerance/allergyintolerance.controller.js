@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new allergyintolerance resource and pass it to the service
 		let allergyintolerance = new AllergyIntolerance(resource_body);
-		let args = {id: resource_id, resource: allergyintolerance};
+		let args = {id: resource_id, base_version, resource: allergyintolerance};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

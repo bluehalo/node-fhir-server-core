@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new subscription resource and pass it to the service
 		let subscription = new Subscription(resource_body);
-		let args = {id: resource_id, resource: subscription};
+		let args = {id: resource_id, base_version, resource: subscription};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

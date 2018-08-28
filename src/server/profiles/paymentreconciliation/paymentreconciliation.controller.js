@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new paymentreconciliation resource and pass it to the service
 		let paymentreconciliation = new PaymentReconciliation(resource_body);
-		let args = {id: resource_id, resource: paymentreconciliation};
+		let args = {id: resource_id, base_version, resource: paymentreconciliation};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

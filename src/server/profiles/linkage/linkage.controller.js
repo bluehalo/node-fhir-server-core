@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new linkage resource and pass it to the service
 		let linkage = new Linkage(resource_body);
-		let args = {id: resource_id, resource: linkage};
+		let args = {id: resource_id, base_version, resource: linkage};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

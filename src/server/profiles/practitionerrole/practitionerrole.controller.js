@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new practitionerrole resource and pass it to the service
 		let practitionerrole = new PractitionerRole(resource_body);
-		let args = {id: resource_id, resource: practitionerrole};
+		let args = {id: resource_id, base_version, resource: practitionerrole};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

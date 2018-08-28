@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new careplan resource and pass it to the service
 		let careplan = new CarePlan(resource_body);
-		let args = {id: resource_id, resource: careplan};
+		let args = {id: resource_id, base_version, resource: careplan};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

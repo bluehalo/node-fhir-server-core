@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new conceptmap resource and pass it to the service
 		let conceptmap = new ConceptMap(resource_body);
-		let args = {id: resource_id, resource: conceptmap};
+		let args = {id: resource_id, base_version, resource: conceptmap};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

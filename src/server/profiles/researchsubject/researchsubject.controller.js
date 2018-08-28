@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new researchsubject resource and pass it to the service
 		let researchsubject = new ResearchSubject(resource_body);
-		let args = {id: resource_id, resource: researchsubject};
+		let args = {id: resource_id, base_version, resource: researchsubject};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

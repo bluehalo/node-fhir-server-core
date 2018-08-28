@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new enrollmentresponse resource and pass it to the service
 		let enrollmentresponse = new EnrollmentResponse(resource_body);
-		let args = {id: resource_id, resource: enrollmentresponse};
+		let args = {id: resource_id, base_version, resource: enrollmentresponse};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

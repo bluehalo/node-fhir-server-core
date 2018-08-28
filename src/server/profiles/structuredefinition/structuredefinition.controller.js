@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new structuredefinition resource and pass it to the service
 		let structuredefinition = new StructureDefinition(resource_body);
-		let args = {id: resource_id, resource: structuredefinition};
+		let args = {id: resource_id, base_version, resource: structuredefinition};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

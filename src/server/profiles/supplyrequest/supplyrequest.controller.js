@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new supplyrequest resource and pass it to the service
 		let supplyrequest = new SupplyRequest(resource_body);
-		let args = {id: resource_id, resource: supplyrequest};
+		let args = {id: resource_id, base_version, resource: supplyrequest};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
