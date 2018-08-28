@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new devicemetric resource and pass it to the service
 		let devicemetric = new DeviceMetric(resource_body);
-		let args = {id, resource: devicemetric};
+		let args = {id, base_version, resource: devicemetric};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

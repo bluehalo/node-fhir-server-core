@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new searchparameter resource and pass it to the service
 		let searchparameter = new SearchParameter(resource_body);
-		let args = {id, resource: searchparameter};
+		let args = {id, base_version, resource: searchparameter};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

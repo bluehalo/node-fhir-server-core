@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new medicationdispense resource and pass it to the service
 		let medicationdispense = new MedicationDispense(resource_body);
-		let args = {id, resource: medicationdispense};
+		let args = {id, base_version, resource: medicationdispense};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

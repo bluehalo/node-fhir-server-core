@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new encounter resource and pass it to the service
 		let encounter = new Encounter(resource_body);
-		let args = {id, resource: encounter};
+		let args = {id, base_version, resource: encounter};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

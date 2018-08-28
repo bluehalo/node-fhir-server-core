@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new relatedperson resource and pass it to the service
 		let relatedperson = new RelatedPerson(resource_body);
-		let args = {id, resource: relatedperson};
+		let args = {id, base_version, resource: relatedperson};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

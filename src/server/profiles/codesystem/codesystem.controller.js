@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new codesystem resource and pass it to the service
 		let codesystem = new CodeSystem(resource_body);
-		let args = {id, resource: codesystem};
+		let args = {id, base_version, resource: codesystem};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

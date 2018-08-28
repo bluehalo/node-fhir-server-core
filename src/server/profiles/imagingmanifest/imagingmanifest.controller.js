@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new imagingmanifest resource and pass it to the service
 		let imagingmanifest = new ImagingManifest(resource_body);
-		let args = {id, resource: imagingmanifest};
+		let args = {id, base_version, resource: imagingmanifest};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

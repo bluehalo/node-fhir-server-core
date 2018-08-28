@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new chargeitem resource and pass it to the service
 		let chargeitem = new ChargeItem(resource_body);
-		let args = {id, resource: chargeitem};
+		let args = {id, base_version, resource: chargeitem};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

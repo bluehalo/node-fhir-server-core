@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new procedurerequest resource and pass it to the service
 		let procedurerequest = new ProcedureRequest(resource_body);
-		let args = {id, resource: procedurerequest};
+		let args = {id, base_version, resource: procedurerequest};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

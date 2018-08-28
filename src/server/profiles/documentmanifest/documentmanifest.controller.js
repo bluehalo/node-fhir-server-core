@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new documentmanifest resource and pass it to the service
 		let documentmanifest = new DocumentManifest(resource_body);
-		let args = {id, resource: documentmanifest};
+		let args = {id, base_version, resource: documentmanifest};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

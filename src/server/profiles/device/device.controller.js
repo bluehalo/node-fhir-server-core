@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new device resource and pass it to the service
 		let device = new Device(resource_body);
-		let args = {id, resource: device};
+		let args = {id, base_version, resource: device};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

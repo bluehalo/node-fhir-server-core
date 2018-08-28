@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new testscript resource and pass it to the service
 		let testscript = new TestScript(resource_body);
-		let args = {id, resource: testscript};
+		let args = {id, base_version, resource: testscript};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

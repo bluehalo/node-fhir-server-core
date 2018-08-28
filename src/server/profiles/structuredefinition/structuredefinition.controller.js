@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new structuredefinition resource and pass it to the service
 		let structuredefinition = new StructureDefinition(resource_body);
-		let args = {id, resource: structuredefinition};
+		let args = {id, base_version, resource: structuredefinition};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

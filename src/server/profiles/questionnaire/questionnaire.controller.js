@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new questionnaire resource and pass it to the service
 		let questionnaire = new Questionnaire(resource_body);
-		let args = {id, resource: questionnaire};
+		let args = {id, base_version, resource: questionnaire};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

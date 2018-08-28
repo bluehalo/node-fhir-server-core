@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new implementationguide resource and pass it to the service
 		let implementationguide = new ImplementationGuide(resource_body);
-		let args = {id, resource: implementationguide};
+		let args = {id, base_version, resource: implementationguide};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

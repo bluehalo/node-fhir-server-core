@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new immunization resource and pass it to the service
 		let immunization = new Immunization(resource_body);
-		let args = {id, resource: immunization};
+		let args = {id, base_version, resource: immunization};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

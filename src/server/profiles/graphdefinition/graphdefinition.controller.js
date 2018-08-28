@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new graphdefinition resource and pass it to the service
 		let graphdefinition = new GraphDefinition(resource_body);
-		let args = {id, resource: graphdefinition};
+		let args = {id, base_version, resource: graphdefinition};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

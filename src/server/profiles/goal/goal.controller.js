@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new goal resource and pass it to the service
 		let goal = new Goal(resource_body);
-		let args = {id, resource: goal};
+		let args = {id, base_version, resource: goal};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new supplyrequest resource and pass it to the service
 		let supplyrequest = new SupplyRequest(resource_body);
-		let args = {id, resource: supplyrequest};
+		let args = {id, base_version, resource: supplyrequest};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

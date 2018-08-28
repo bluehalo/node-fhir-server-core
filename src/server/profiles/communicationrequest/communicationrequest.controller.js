@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new communicationrequest resource and pass it to the service
 		let communicationrequest = new CommunicationRequest(resource_body);
-		let args = {id, resource: communicationrequest};
+		let args = {id, base_version, resource: communicationrequest};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

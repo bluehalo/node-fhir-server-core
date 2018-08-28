@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new paymentnotice resource and pass it to the service
 		let paymentnotice = new PaymentNotice(resource_body);
-		let args = {id, resource: paymentnotice};
+		let args = {id, base_version, resource: paymentnotice};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

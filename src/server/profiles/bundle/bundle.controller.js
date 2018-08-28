@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new bundle resource and pass it to the service
 		let bundle = new Bundle(resource_body);
-		let args = {id, resource: bundle};
+		let args = {id, base_version, resource: bundle};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

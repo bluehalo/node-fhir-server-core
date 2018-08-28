@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new media resource and pass it to the service
 		let media = new Media(resource_body);
-		let args = {id, resource: media};
+		let args = {id, base_version, resource: media};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

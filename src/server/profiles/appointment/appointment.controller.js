@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new appointment resource and pass it to the service
 		let appointment = new Appointment(resource_body);
-		let args = {id, resource: appointment};
+		let args = {id, base_version, resource: appointment};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

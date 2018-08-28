@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new library resource and pass it to the service
 		let library = new Library(resource_body);
-		let args = {id, resource: library};
+		let args = {id, base_version, resource: library};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

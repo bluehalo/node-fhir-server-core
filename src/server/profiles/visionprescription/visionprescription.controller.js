@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new visionprescription resource and pass it to the service
 		let visionprescription = new VisionPrescription(resource_body);
-		let args = {id: resource_id, resource: visionprescription};
+		let args = {id: resource_id, base_version, resource: visionprescription};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new visionprescription resource and pass it to the service
 		let visionprescription = new VisionPrescription(resource_body);
-		let args = {id, resource: visionprescription};
+		let args = {id, base_version, resource: visionprescription};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

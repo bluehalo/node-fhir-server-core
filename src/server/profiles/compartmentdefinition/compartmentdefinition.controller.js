@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new compartmentdefinition resource and pass it to the service
 		let compartmentdefinition = new CompartmentDefinition(resource_body);
-		let args = {id, resource: compartmentdefinition};
+		let args = {id, base_version, resource: compartmentdefinition};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

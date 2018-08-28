@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new diagnosticreport resource and pass it to the service
 		let diagnosticreport = new DiagnosticReport(resource_body);
-		let args = {id, resource: diagnosticreport};
+		let args = {id, base_version, resource: diagnosticreport};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

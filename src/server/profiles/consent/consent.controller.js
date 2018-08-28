@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new consent resource and pass it to the service
 		let consent = new Consent(resource_body);
-		let args = {id, resource: consent};
+		let args = {id, base_version, resource: consent};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

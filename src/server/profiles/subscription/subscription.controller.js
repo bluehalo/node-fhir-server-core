@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new subscription resource and pass it to the service
 		let subscription = new Subscription(resource_body);
-		let args = {id, resource: subscription};
+		let args = {id, base_version, resource: subscription};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

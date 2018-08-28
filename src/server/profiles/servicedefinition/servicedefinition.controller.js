@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new servicedefinition resource and pass it to the service
 		let servicedefinition = new ServiceDefinition(resource_body);
-		let args = {id, resource: servicedefinition};
+		let args = {id, base_version, resource: servicedefinition};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

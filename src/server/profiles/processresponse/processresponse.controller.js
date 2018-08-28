@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new processresponse resource and pass it to the service
 		let processresponse = new ProcessResponse(resource_body);
-		let args = {id, resource: processresponse};
+		let args = {id, base_version, resource: processresponse};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>

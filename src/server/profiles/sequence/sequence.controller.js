@@ -126,7 +126,7 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new sequence resource and pass it to the service
 		let sequence = new Sequence(resource_body);
-		let args = {id, resource: sequence};
+		let args = {id, base_version, resource: sequence};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>
