@@ -1,288 +1,288 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const ClaimResponse_Item = require('./ClaimResponse_Item');
-const ClaimResponse_AddItem = require('./ClaimResponse_AddItem');
-const ClaimResponse_Error = require('./ClaimResponse_Error');
-const Money = require('./Money');
-const ClaimResponse_Payment = require('./ClaimResponse_Payment');
-const Coding = require('./Coding');
-const ClaimResponse_ProcessNote = require('./ClaimResponse_ProcessNote');
-const ClaimResponse_Insurance = require('./ClaimResponse_Insurance');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class ClaimResponse extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'ClaimResponse';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'ClaimResponse';
+		Object.assign(this, opt);
 	}
 
+	// This is a ClaimResponse resource
 	static get __resourceType () {
 		return 'ClaimResponse';
 	}
 
-	// This is a ClaimResponse resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['ClaimResponse'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__ClaimResponse = new_value;
 	}
 
 	// The Response business identifier.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status of the resource instance.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Patient Resource.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// The date when the enclosed suite of services were performed or completed.
 	get created () {
-		return this._created;
+		return this.__created;
 	}
 
-	set created ( new_value ) {
+	set created (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
-		this._created = new_value;
+		this.__created = new_value;
 	}
 
 	// The Insurer who produced this adjudicated response.
 	get insurer () {
-		return this._insurer;
+		return this.__insurer;
 	}
 
-	set insurer ( new_value ) {
-		this._insurer = new Reference(new_value);
+	set insurer (new_value) {
+		const Reference = require('./Reference');
+		this.__insurer = new Reference(new_value);
 	}
 
 	// The practitioner who is responsible for the services rendered to the patient.
 	get requestProvider () {
-		return this._requestProvider;
+		return this.__requestProvider;
 	}
 
-	set requestProvider ( new_value ) {
-		this._requestProvider = new Reference(new_value);
+	set requestProvider (new_value) {
+		const Reference = require('./Reference');
+		this.__requestProvider = new Reference(new_value);
 	}
 
 	// The organization which is responsible for the services rendered to the patient.
 	get requestOrganization () {
-		return this._requestOrganization;
+		return this.__requestOrganization;
 	}
 
-	set requestOrganization ( new_value ) {
-		this._requestOrganization = new Reference(new_value);
+	set requestOrganization (new_value) {
+		const Reference = require('./Reference');
+		this.__requestOrganization = new Reference(new_value);
 	}
 
 	// Original request resource referrence.
 	get request () {
-		return this._request;
+		return this.__request;
 	}
 
-	set request ( new_value ) {
-		this._request = new Reference(new_value);
+	set request (new_value) {
+		const Reference = require('./Reference');
+		this.__request = new Reference(new_value);
 	}
 
 	// Processing outcome errror, partial or complete processing.
 	get outcome () {
-		return this._outcome;
+		return this.__outcome;
 	}
 
-	set outcome ( new_value ) {
-		this._outcome = new CodeableConcept(new_value);
+	set outcome (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__outcome = new CodeableConcept(new_value);
 	}
 
 	// A description of the status of the adjudication.
 	get disposition () {
-		return this._disposition;
+		return this.__disposition;
 	}
 
-	set disposition ( new_value ) {
-		this._disposition = new_value;
+	set disposition (new_value) {
+		this.__disposition = new_value;
 	}
 
 	// Party to be reimbursed: Subscriber, provider, other.
 	get payeeType () {
-		return this._payeeType;
+		return this.__payeeType;
 	}
 
-	set payeeType ( new_value ) {
-		this._payeeType = new CodeableConcept(new_value);
+	set payeeType (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__payeeType = new CodeableConcept(new_value);
 	}
 
 	// The first tier service adjudications for submitted services.
 	get item () {
-		return this._item;
+		return this.__item;
 	}
 
-	set item ( new_value ) {
-		this._item = Array.isArray(new_value) ? new_value.map(val => new ClaimResponse_Item(val)) : [new ClaimResponse_Item(new_value)];
+	set item (new_value) {
+		const ClaimResponseItem = require('./ClaimResponseItem');
+		this.__item = Array.isArray(new_value) ? new_value.map(val => new ClaimResponseItem(val)) : [new ClaimResponseItem(new_value)];
 	}
 
 	// The first tier service adjudications for payor added services.
 	get addItem () {
-		return this._addItem;
+		return this.__addItem;
 	}
 
-	set addItem ( new_value ) {
-		this._addItem = Array.isArray(new_value) ? new_value.map(val => new ClaimResponse_AddItem(val)) : [new ClaimResponse_AddItem(new_value)];
+	set addItem (new_value) {
+		const ClaimResponseAddItem = require('./ClaimResponseAddItem');
+		this.__addItem = Array.isArray(new_value) ? new_value.map(val => new ClaimResponseAddItem(val)) : [new ClaimResponseAddItem(new_value)];
 	}
 
 	// Mutually exclusive with Services Provided (Item).
 	get error () {
-		return this._error;
+		return this.__error;
 	}
 
-	set error ( new_value ) {
-		this._error = Array.isArray(new_value) ? new_value.map(val => new ClaimResponse_Error(val)) : [new ClaimResponse_Error(new_value)];
+	set error (new_value) {
+		const ClaimResponseError = require('./ClaimResponseError');
+		this.__error = Array.isArray(new_value) ? new_value.map(val => new ClaimResponseError(val)) : [new ClaimResponseError(new_value)];
 	}
 
 	// The total cost of the services reported.
 	get totalCost () {
-		return this._totalCost;
+		return this.__totalCost;
 	}
 
-	set totalCost ( new_value ) {
-		this._totalCost = new Money(new_value);
+	set totalCost (new_value) {
+		const Money = require('./Money');
+		this.__totalCost = new Money(new_value);
 	}
 
 	// The amount of deductible applied which was not allocated to any particular service line.
 	get unallocDeductable () {
-		return this._unallocDeductable;
+		return this.__unallocDeductable;
 	}
 
-	set unallocDeductable ( new_value ) {
-		this._unallocDeductable = new Money(new_value);
+	set unallocDeductable (new_value) {
+		const Money = require('./Money');
+		this.__unallocDeductable = new Money(new_value);
 	}
 
 	// Total amount of benefit payable (Equal to sum of the Benefit amounts from all detail lines and additions less the Unallocated Deductible).
 	get totalBenefit () {
-		return this._totalBenefit;
+		return this.__totalBenefit;
 	}
 
-	set totalBenefit ( new_value ) {
-		this._totalBenefit = new Money(new_value);
+	set totalBenefit (new_value) {
+		const Money = require('./Money');
+		this.__totalBenefit = new Money(new_value);
 	}
 
 	// Payment details for the claim if the claim has been paid.
 	get payment () {
-		return this._payment;
+		return this.__payment;
 	}
 
-	set payment ( new_value ) {
-		this._payment = new ClaimResponse_Payment(new_value);
+	set payment (new_value) {
+		const ClaimResponsePayment = require('./ClaimResponsePayment');
+		this.__payment = new ClaimResponsePayment(new_value);
 	}
 
 	// Status of funds reservation (For provider, for Patient, None).
 	get reserved () {
-		return this._reserved;
+		return this.__reserved;
 	}
 
-	set reserved ( new_value ) {
-		this._reserved = new Coding(new_value);
+	set reserved (new_value) {
+		const Coding = require('./Coding');
+		this.__reserved = new Coding(new_value);
 	}
 
 	// The form to be used for printing the content.
 	get form () {
-		return this._form;
+		return this.__form;
 	}
 
-	set form ( new_value ) {
-		this._form = new CodeableConcept(new_value);
+	set form (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__form = new CodeableConcept(new_value);
 	}
 
 	// Note text.
 	get processNote () {
-		return this._processNote;
+		return this.__processNote;
 	}
 
-	set processNote ( new_value ) {
-		this._processNote = Array.isArray(new_value) ? new_value.map(val => new ClaimResponse_ProcessNote(val)) : [new ClaimResponse_ProcessNote(new_value)];
+	set processNote (new_value) {
+		const ClaimResponseProcessNote = require('./ClaimResponseProcessNote');
+		this.__processNote = Array.isArray(new_value) ? new_value.map(val => new ClaimResponseProcessNote(val)) : [new ClaimResponseProcessNote(new_value)];
 	}
 
 	// Request for additional supporting or authorizing information, such as: documents, images or resources.
 	get communicationRequest () {
-		return this._communicationRequest;
+		return this.__communicationRequest;
 	}
 
-	set communicationRequest ( new_value ) {
-		this._communicationRequest = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set communicationRequest (new_value) {
+		const Reference = require('./Reference');
+		this.__communicationRequest = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Financial instrument by which payment information for health care.
 	get insurance () {
-		return this._insurance;
+		return this.__insurance;
 	}
 
-	set insurance ( new_value ) {
-		this._insurance = Array.isArray(new_value) ? new_value.map(val => new ClaimResponse_Insurance(val)) : [new ClaimResponse_Insurance(new_value)];
+	set insurance (new_value) {
+		const ClaimResponseInsurance = require('./ClaimResponseInsurance');
+		this.__insurance = Array.isArray(new_value) ? new_value.map(val => new ClaimResponseInsurance(val)) : [new ClaimResponseInsurance(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			patient: this._patient && this._patient.toJSON(),
-			created: this._created,
-			insurer: this._insurer && this._insurer.toJSON(),
-			requestProvider: this._requestProvider && this._requestProvider.toJSON(),
-			requestOrganization: this._requestOrganization && this._requestOrganization.toJSON(),
-			request: this._request && this._request.toJSON(),
-			outcome: this._outcome && this._outcome.toJSON(),
-			disposition: this._disposition,
-			payeeType: this._payeeType && this._payeeType.toJSON(),
-			item: this._item && this._item.map(v => v.toJSON()),
-			addItem: this._addItem && this._addItem.map(v => v.toJSON()),
-			error: this._error && this._error.map(v => v.toJSON()),
-			totalCost: this._totalCost && this._totalCost.toJSON(),
-			unallocDeductable: this._unallocDeductable && this._unallocDeductable.toJSON(),
-			totalBenefit: this._totalBenefit && this._totalBenefit.toJSON(),
-			payment: this._payment && this._payment.toJSON(),
-			reserved: this._reserved && this._reserved.toJSON(),
-			form: this._form && this._form.toJSON(),
-			processNote: this._processNote && this._processNote.map(v => v.toJSON()),
-			communicationRequest: this._communicationRequest && this._communicationRequest.map(v => v.toJSON()),
-			insurance: this._insurance && this._insurance.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			patient: this.__patient && this.__patient.toJSON(),
+			created: this.__created,
+			insurer: this.__insurer && this.__insurer.toJSON(),
+			requestProvider: this.__requestProvider && this.__requestProvider.toJSON(),
+			requestOrganization: this.__requestOrganization && this.__requestOrganization.toJSON(),
+			request: this.__request && this.__request.toJSON(),
+			outcome: this.__outcome && this.__outcome.toJSON(),
+			disposition: this.__disposition,
+			payeeType: this.__payeeType && this.__payeeType.toJSON(),
+			item: this.__item && this.__item.map(v => v.toJSON()),
+			addItem: this.__addItem && this.__addItem.map(v => v.toJSON()),
+			error: this.__error && this.__error.map(v => v.toJSON()),
+			totalCost: this.__totalCost && this.__totalCost.toJSON(),
+			unallocDeductable: this.__unallocDeductable && this.__unallocDeductable.toJSON(),
+			totalBenefit: this.__totalBenefit && this.__totalBenefit.toJSON(),
+			payment: this.__payment && this.__payment.toJSON(),
+			reserved: this.__reserved && this.__reserved.toJSON(),
+			form: this.__form && this.__form.toJSON(),
+			processNote: this.__processNote && this.__processNote.map(v => v.toJSON()),
+			communicationRequest: this.__communicationRequest && this.__communicationRequest.map(v => v.toJSON()),
+			insurance: this.__insurance && this.__insurance.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = ClaimResponse;

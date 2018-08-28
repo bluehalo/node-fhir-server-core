@@ -1,125 +1,121 @@
 const DomainResource = require('./DomainResource');
-const ContactPoint = require('./ContactPoint');
-const Subscription_Channel = require('./Subscription_Channel');
-const Coding = require('./Coding');
+const InstantScalar = require('./scalars/Instant.scalar');
 
 class Subscription extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Subscription';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Subscription';
+		Object.assign(this, opt);
 	}
 
+	// This is a Subscription resource
 	static get __resourceType () {
 		return 'Subscription';
 	}
 
-	// This is a Subscription resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Subscription'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Subscription = new_value;
 	}
 
 	// The status of the subscription, which marks the server state for managing the subscription.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['requested', 'active', 'error', 'off'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
 	get contact () {
-		return this._contact;
+		return this.__contact;
 	}
 
-	set contact ( new_value ) {
-		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+	set contact (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
 	// The time for the server to turn the subscription off.
 	get end () {
-		return this._end;
+		return this.__end;
 	}
 
-	set end ( new_value ) {
-		this._end = new_value;
+	set end (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = InstantScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field end`);
+		}
+		this.__end = new_value;
 	}
 
 	// A description of why this subscription is defined.
 	get reason () {
-		return this._reason;
+		return this.__reason;
 	}
 
-	set reason ( new_value ) {
-		this._reason = new_value;
+	set reason (new_value) {
+		this.__reason = new_value;
 	}
 
 	// The rules that the server should use to determine when to generate notifications for this subscription.
 	get criteria () {
-		return this._criteria;
+		return this.__criteria;
 	}
 
-	set criteria ( new_value ) {
-		this._criteria = new_value;
+	set criteria (new_value) {
+		this.__criteria = new_value;
 	}
 
 	// A record of the last error that occurred when the server processed a notification.
 	get error () {
-		return this._error;
+		return this.__error;
 	}
 
-	set error ( new_value ) {
-		this._error = new_value;
+	set error (new_value) {
+		this.__error = new_value;
 	}
 
 	// Details where to send notifications when resources are received that meet the criteria.
 	get channel () {
-		return this._channel;
+		return this.__channel;
 	}
 
-	set channel ( new_value ) {
-		this._channel = new Subscription_Channel(new_value);
+	set channel (new_value) {
+		const SubscriptionChannel = require('./SubscriptionChannel');
+		this.__channel = new SubscriptionChannel(new_value);
 	}
 
 	// A tag to add to any resource that matches the criteria, after the subscription is processed.
 	get tag () {
-		return this._tag;
+		return this.__tag;
 	}
 
-	set tag ( new_value ) {
-		this._tag = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
+	set tag (new_value) {
+		const Coding = require('./Coding');
+		this.__tag = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			status: this._status,
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			end: this._end,
-			reason: this._reason,
-			criteria: this._criteria,
-			error: this._error,
-			channel: this._channel && this._channel.toJSON(),
-			tag: this._tag && this._tag.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			status: this.__status,
+			contact: this.__contact && this.__contact.map(v => v.toJSON()),
+			end: this.__end,
+			reason: this.__reason,
+			criteria: this.__criteria,
+			error: this.__error,
+			channel: this.__channel && this.__channel.toJSON(),
+			tag: this.__tag && this.__tag.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Subscription;

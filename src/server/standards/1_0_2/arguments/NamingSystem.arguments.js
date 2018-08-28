@@ -1,0 +1,86 @@
+module.exports = {
+	CONTACT: {
+		name: 'contact',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-contact',
+		documentation: 'Name of a individual to contact.',
+	},
+	CONTEXT: {
+		name: 'context',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-context',
+		documentation: 'Content intends to support these contexts.',
+	},
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-date',
+		documentation: 'Publication Date(/time).',
+	},
+	ID_TYPE: {
+		name: 'id-type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-id-type',
+		documentation: 'oid | uuid | uri | other.',
+	},
+	KIND: {
+		name: 'kind',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-kind',
+		documentation: 'codesystem | identifier | root.',
+	},
+	NAME: {
+		name: 'name',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-name',
+		documentation: 'Human-readable label.',
+	},
+	PERIOD: {
+		name: 'period',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-period',
+		documentation: 'When is identifier valid?.',
+	},
+	PUBLISHER: {
+		name: 'publisher',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-publisher',
+		documentation: 'Name of the publisher (Organization or individual).',
+	},
+	REPLACED_BY: {
+		name: 'replaced-by',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-replaced-by',
+		documentation: 'Use this instead.',
+	},
+	RESPONSIBLE: {
+		name: 'responsible',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-responsible',
+		documentation: 'Who maintains system namespace?.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-status',
+		documentation: 'draft | active | retired.',
+	},
+	TELECOM: {
+		name: 'telecom',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-telecom',
+		documentation: 'Contact details for individual or publisher.',
+	},
+	TYPE: {
+		name: 'type',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-type',
+		documentation: 'e.g. driver,  provider,  patient, bank etc.',
+	},
+	VALUE: {
+		name: 'value',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-value',
+		documentation: 'The unique identifier.',
+	},
+};

@@ -1,263 +1,259 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Period = require('./Period');
-const Annotation = require('./Annotation');
-const Dosage = require('./Dosage');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class MedicationStatement extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'MedicationStatement';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'MedicationStatement';
+		Object.assign(this, opt);
 	}
 
+	// This is a MedicationStatement resource
 	static get __resourceType () {
 		return 'MedicationStatement';
 	}
 
-	// This is a MedicationStatement resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['MedicationStatement'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__MedicationStatement = new_value;
 	}
 
 	// External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// A plan, proposal or order that is fulfilled in whole or in part by this event.
 	get basedOn () {
-		return this._basedOn;
+		return this.__basedOn;
 	}
 
-	set basedOn ( new_value ) {
-		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set basedOn (new_value) {
+		const Reference = require('./Reference');
+		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A larger event of which this particular event is a component or step.
 	get partOf () {
-		return this._partOf;
+		return this.__partOf;
 	}
 
-	set partOf ( new_value ) {
-		this._partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set partOf (new_value) {
+		const Reference = require('./Reference');
+		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The encounter or episode of care that establishes the context for this MedicationStatement.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
-	// A code representing the patient or other source's judgment about the state of the medication used that this statement is about.  Generally this will be active or completed.
+	// A code representing the patient or other source\'s judgment about the state of the medication used that this statement is about.  Generally this will be active or completed.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['active', 'completed', 'entered-in-error', 'intended', 'stopped', 'on-hold'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Indicates where type of medication statement and where the medication is expected to be consumed or administered.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		this._category = new CodeableConcept(new_value);
+	set category (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__category = new CodeableConcept(new_value);
 	}
 
 	// Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
 	get medicationCodeableConcept () {
-		return this._medicationCodeableConcept;
+		return this.__medicationCodeableConcept;
 	}
 
-	set medicationCodeableConcept ( new_value ) {
-		this._medicationCodeableConcept = new CodeableConcept(new_value);
+	set medicationCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__medicationCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Identifies the medication being administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
 	get medicationReference () {
-		return this._medicationReference;
+		return this.__medicationReference;
 	}
 
-	set medicationReference ( new_value ) {
-		this._medicationReference = new Reference(new_value);
+	set medicationReference (new_value) {
+		const Reference = require('./Reference');
+		this.__medicationReference = new Reference(new_value);
 	}
 
 	// The interval of time during which it is being asserted that the patient was taking the medication (or was not taking, when the wasNotGiven element is true).
 	get effectiveDateTime () {
-		return this._effectiveDateTime;
+		return this.__effectiveDateTime;
 	}
 
-	set effectiveDateTime ( new_value ) {
+	set effectiveDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
-		this._effectiveDateTime = new_value;
+		this.__effectiveDateTime = new_value;
 	}
 
 	// The interval of time during which it is being asserted that the patient was taking the medication (or was not taking, when the wasNotGiven element is true).
 	get effectivePeriod () {
-		return this._effectivePeriod;
+		return this.__effectivePeriod;
 	}
 
-	set effectivePeriod ( new_value ) {
-		this._effectivePeriod = new Period(new_value);
+	set effectivePeriod (new_value) {
+		const Period = require('./Period');
+		this.__effectivePeriod = new Period(new_value);
 	}
 
 	// The date when the medication statement was asserted by the information source.
 	get dateAsserted () {
-		return this._dateAsserted;
+		return this.__dateAsserted;
 	}
 
-	set dateAsserted ( new_value ) {
+	set dateAsserted (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dateAsserted`);
 		}
-		this._dateAsserted = new_value;
+		this.__dateAsserted = new_value;
 	}
 
 	// The person or organization that provided the information about the taking of this medication. Note: Use derivedFrom when a MedicationStatement is derived from other resources, e.g Claim or MedicationRequest.
 	get informationSource () {
-		return this._informationSource;
+		return this.__informationSource;
 	}
 
-	set informationSource ( new_value ) {
-		this._informationSource = new Reference(new_value);
+	set informationSource (new_value) {
+		const Reference = require('./Reference');
+		this.__informationSource = new Reference(new_value);
 	}
 
 	// The person, animal or group who is/was taking the medication.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// Allows linking the MedicationStatement to the underlying MedicationRequest, or to other information that supports or is used to derive the MedicationStatement.
 	get derivedFrom () {
-		return this._derivedFrom;
+		return this.__derivedFrom;
 	}
 
-	set derivedFrom ( new_value ) {
-		this._derivedFrom = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set derivedFrom (new_value) {
+		const Reference = require('./Reference');
+		this.__derivedFrom = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Indicator of the certainty of whether the medication was taken by the patient.
 	get taken () {
-		return this._taken;
+		return this.__taken;
 	}
 
-	set taken ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['y', 'n', 'unk', 'na'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field taken`);
-		}
-		this._taken = new_value;
+	set taken (new_value) {
+		this.__taken = new_value;
 	}
 
 	// A code indicating why the medication was not taken.
 	get reasonNotTaken () {
-		return this._reasonNotTaken;
+		return this.__reasonNotTaken;
 	}
 
-	set reasonNotTaken ( new_value ) {
-		this._reasonNotTaken = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set reasonNotTaken (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonNotTaken = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// A reason for why the medication is being/was taken.
 	get reasonCode () {
-		return this._reasonCode;
+		return this.__reasonCode;
 	}
 
-	set reasonCode ( new_value ) {
-		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set reasonCode (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Condition or observation that supports why the medication is being/was taken.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Provides extra information about the medication statement that is not conveyed by the other attributes.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Indicates how the medication is/was or should be taken by the patient.
 	get dosage () {
-		return this._dosage;
+		return this.__dosage;
 	}
 
-	set dosage ( new_value ) {
-		this._dosage = Array.isArray(new_value) ? new_value.map(val => new Dosage(val)) : [new Dosage(new_value)];
+	set dosage (new_value) {
+		const Dosage = require('./Dosage');
+		this.__dosage = Array.isArray(new_value) ? new_value.map(val => new Dosage(val)) : [new Dosage(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
-			partOf: this._partOf && this._partOf.map(v => v.toJSON()),
-			context: this._context && this._context.toJSON(),
-			status: this._status,
-			category: this._category && this._category.toJSON(),
-			medicationCodeableConcept: this._medicationCodeableConcept && this._medicationCodeableConcept.toJSON(),
-			medicationReference: this._medicationReference && this._medicationReference.toJSON(),
-			effectiveDateTime: this._effectiveDateTime,
-			effectivePeriod: this._effectivePeriod && this._effectivePeriod.toJSON(),
-			dateAsserted: this._dateAsserted,
-			informationSource: this._informationSource && this._informationSource.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			derivedFrom: this._derivedFrom && this._derivedFrom.map(v => v.toJSON()),
-			taken: this._taken,
-			reasonNotTaken: this._reasonNotTaken && this._reasonNotTaken.map(v => v.toJSON()),
-			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
-			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON()),
-			dosage: this._dosage && this._dosage.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
+			partOf: this.__partOf && this.__partOf.map(v => v.toJSON()),
+			context: this.__context && this.__context.toJSON(),
+			status: this.__status,
+			category: this.__category && this.__category.toJSON(),
+			medicationCodeableConcept: this.__medicationCodeableConcept && this.__medicationCodeableConcept.toJSON(),
+			medicationReference: this.__medicationReference && this.__medicationReference.toJSON(),
+			effectiveDateTime: this.__effectiveDateTime,
+			effectivePeriod: this.__effectivePeriod && this.__effectivePeriod.toJSON(),
+			dateAsserted: this.__dateAsserted,
+			informationSource: this.__informationSource && this.__informationSource.toJSON(),
+			subject: this.__subject && this.__subject.toJSON(),
+			derivedFrom: this.__derivedFrom && this.__derivedFrom.map(v => v.toJSON()),
+			taken: this.__taken,
+			reasonNotTaken: this.__reasonNotTaken && this.__reasonNotTaken.map(v => v.toJSON()),
+			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
+			reasonReference: this.__reasonReference && this.__reasonReference.map(v => v.toJSON()),
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			dosage: this.__dosage && this.__dosage.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = MedicationStatement;

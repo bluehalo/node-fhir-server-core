@@ -1,182 +1,177 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const EligibilityResponse_Insurance = require('./EligibilityResponse_Insurance');
-const EligibilityResponse_Error = require('./EligibilityResponse_Error');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class EligibilityResponse extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'EligibilityResponse';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'EligibilityResponse';
+		Object.assign(this, opt);
 	}
 
+	// This is a EligibilityResponse resource
 	static get __resourceType () {
 		return 'EligibilityResponse';
 	}
 
-	// This is a EligibilityResponse resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['EligibilityResponse'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__EligibilityResponse = new_value;
 	}
 
 	// The Response business identifier.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status of the resource instance.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// The date when the enclosed suite of services were performed or completed.
 	get created () {
-		return this._created;
+		return this.__created;
 	}
 
-	set created ( new_value ) {
+	set created (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
-		this._created = new_value;
+		this.__created = new_value;
 	}
 
 	// The practitioner who is responsible for the services rendered to the patient.
 	get requestProvider () {
-		return this._requestProvider;
+		return this.__requestProvider;
 	}
 
-	set requestProvider ( new_value ) {
-		this._requestProvider = new Reference(new_value);
+	set requestProvider (new_value) {
+		const Reference = require('./Reference');
+		this.__requestProvider = new Reference(new_value);
 	}
 
 	// The organization which is responsible for the services rendered to the patient.
 	get requestOrganization () {
-		return this._requestOrganization;
+		return this.__requestOrganization;
 	}
 
-	set requestOrganization ( new_value ) {
-		this._requestOrganization = new Reference(new_value);
+	set requestOrganization (new_value) {
+		const Reference = require('./Reference');
+		this.__requestOrganization = new Reference(new_value);
 	}
 
 	// Original request resource reference.
 	get request () {
-		return this._request;
+		return this.__request;
 	}
 
-	set request ( new_value ) {
-		this._request = new Reference(new_value);
+	set request (new_value) {
+		const Reference = require('./Reference');
+		this.__request = new Reference(new_value);
 	}
 
 	// Transaction status: error, complete.
 	get outcome () {
-		return this._outcome;
+		return this.__outcome;
 	}
 
-	set outcome ( new_value ) {
-		this._outcome = new CodeableConcept(new_value);
+	set outcome (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__outcome = new CodeableConcept(new_value);
 	}
 
 	// A description of the status of the adjudication.
 	get disposition () {
-		return this._disposition;
+		return this.__disposition;
 	}
 
-	set disposition ( new_value ) {
-		this._disposition = new_value;
+	set disposition (new_value) {
+		this.__disposition = new_value;
 	}
 
 	// The Insurer who produced this adjudicated response.
 	get insurer () {
-		return this._insurer;
+		return this.__insurer;
 	}
 
-	set insurer ( new_value ) {
-		this._insurer = new Reference(new_value);
+	set insurer (new_value) {
+		const Reference = require('./Reference');
+		this.__insurer = new Reference(new_value);
 	}
 
 	// Flag indicating if the coverage provided is inforce currently  if no service date(s) specified or for the whole duration of the service dates.
 	get inforce () {
-		return this._inforce;
+		return this.__inforce;
 	}
 
-	set inforce ( new_value ) {
-		this._inforce = new_value;
+	set inforce (new_value) {
+		this.__inforce = new_value;
 	}
 
 	// The insurer may provide both the details for the requested coverage as well as details for additional coverages known to the insurer.
 	get insurance () {
-		return this._insurance;
+		return this.__insurance;
 	}
 
-	set insurance ( new_value ) {
-		this._insurance = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponse_Insurance(val)) : [new EligibilityResponse_Insurance(new_value)];
+	set insurance (new_value) {
+		const EligibilityResponseInsurance = require('./EligibilityResponseInsurance');
+		this.__insurance = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponseInsurance(val)) : [new EligibilityResponseInsurance(new_value)];
 	}
 
 	// The form to be used for printing the content.
 	get form () {
-		return this._form;
+		return this.__form;
 	}
 
-	set form ( new_value ) {
-		this._form = new CodeableConcept(new_value);
+	set form (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__form = new CodeableConcept(new_value);
 	}
 
 	// Mutually exclusive with Services Provided (Item).
 	get error () {
-		return this._error;
+		return this.__error;
 	}
 
-	set error ( new_value ) {
-		this._error = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponse_Error(val)) : [new EligibilityResponse_Error(new_value)];
+	set error (new_value) {
+		const EligibilityResponseError = require('./EligibilityResponseError');
+		this.__error = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponseError(val)) : [new EligibilityResponseError(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			created: this._created,
-			requestProvider: this._requestProvider && this._requestProvider.toJSON(),
-			requestOrganization: this._requestOrganization && this._requestOrganization.toJSON(),
-			request: this._request && this._request.toJSON(),
-			outcome: this._outcome && this._outcome.toJSON(),
-			disposition: this._disposition,
-			insurer: this._insurer && this._insurer.toJSON(),
-			inforce: this._inforce,
-			insurance: this._insurance && this._insurance.map(v => v.toJSON()),
-			form: this._form && this._form.toJSON(),
-			error: this._error && this._error.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			created: this.__created,
+			requestProvider: this.__requestProvider && this.__requestProvider.toJSON(),
+			requestOrganization: this.__requestOrganization && this.__requestOrganization.toJSON(),
+			request: this.__request && this.__request.toJSON(),
+			outcome: this.__outcome && this.__outcome.toJSON(),
+			disposition: this.__disposition,
+			insurer: this.__insurer && this.__insurer.toJSON(),
+			inforce: this.__inforce,
+			insurance: this.__insurance && this.__insurance.map(v => v.toJSON()),
+			form: this.__form && this.__form.toJSON(),
+			error: this.__error && this.__error.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = EligibilityResponse;

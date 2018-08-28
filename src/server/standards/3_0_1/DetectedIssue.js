@@ -1,166 +1,160 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const DetectedIssue_Mitigation = require('./DetectedIssue_Mitigation');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const UriScalar = require('./scalars/Uri.scalar');
 
 class DetectedIssue extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'DetectedIssue';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'DetectedIssue';
+		Object.assign(this, opt);
 	}
 
+	// This is a DetectedIssue resource
 	static get __resourceType () {
 		return 'DetectedIssue';
 	}
 
-	// This is a DetectedIssue resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['DetectedIssue'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__DetectedIssue = new_value;
 	}
 
 	// Business identifier associated with the detected issue record.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = new Identifier(new_value);
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = new Identifier(new_value);
 	}
 
 	// Indicates the status of the detected issue.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Identifies the general type of issue identified.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		this._category = new CodeableConcept(new_value);
+	set category (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__category = new CodeableConcept(new_value);
 	}
 
 	// Indicates the degree of importance associated with the identified issue based on the potential impact on the patient.
 	get severity () {
-		return this._severity;
+		return this.__severity;
 	}
 
-	set severity ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['high', 'moderate', 'low'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field severity`);
-		}
-		this._severity = new_value;
+	set severity (new_value) {
+		this.__severity = new_value;
 	}
 
 	// Indicates the patient whose record the detected issue is associated with.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// The date or date-time when the detected issue was initially identified.
 	get date () {
-		return this._date;
+		return this.__date;
 	}
 
-	set date ( new_value ) {
+	set date (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
-		this._date = new_value;
+		this.__date = new_value;
 	}
 
 	// Individual or device responsible for the issue being raised.  For example, a decision support application or a pharmacist conducting a medication review.
 	get author () {
-		return this._author;
+		return this.__author;
 	}
 
-	set author ( new_value ) {
-		this._author = new Reference(new_value);
+	set author (new_value) {
+		const Reference = require('./Reference');
+		this.__author = new Reference(new_value);
 	}
 
 	// Indicates the resource representing the current activity or proposed activity that is potentially problematic.
 	get implicated () {
-		return this._implicated;
+		return this.__implicated;
 	}
 
-	set implicated ( new_value ) {
-		this._implicated = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set implicated (new_value) {
+		const Reference = require('./Reference');
+		this.__implicated = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A textual explanation of the detected issue.
 	get detail () {
-		return this._detail;
+		return this.__detail;
 	}
 
-	set detail ( new_value ) {
-		this._detail = new_value;
+	set detail (new_value) {
+		this.__detail = new_value;
 	}
 
 	// The literature, knowledge-base or similar reference that describes the propensity for the detected issue identified.
 	get reference () {
-		return this._reference;
+		return this.__reference;
 	}
 
-	set reference ( new_value ) {
-		this._reference = new_value;
+	set reference (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field reference`);
+		}
+		this.__reference = new_value;
 	}
 
 	// Indicates an action that has been taken or is committed to to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting.  Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action.
 	get mitigation () {
-		return this._mitigation;
+		return this.__mitigation;
 	}
 
-	set mitigation ( new_value ) {
-		this._mitigation = Array.isArray(new_value) ? new_value.map(val => new DetectedIssue_Mitigation(val)) : [new DetectedIssue_Mitigation(new_value)];
+	set mitigation (new_value) {
+		const DetectedIssueMitigation = require('./DetectedIssueMitigation');
+		this.__mitigation = Array.isArray(new_value) ? new_value.map(val => new DetectedIssueMitigation(val)) : [new DetectedIssueMitigation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.toJSON(),
-			status: this._status,
-			category: this._category && this._category.toJSON(),
-			severity: this._severity,
-			patient: this._patient && this._patient.toJSON(),
-			date: this._date,
-			author: this._author && this._author.toJSON(),
-			implicated: this._implicated && this._implicated.map(v => v.toJSON()),
-			detail: this._detail,
-			reference: this._reference,
-			mitigation: this._mitigation && this._mitigation.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.toJSON(),
+			status: this.__status,
+			category: this.__category && this.__category.toJSON(),
+			severity: this.__severity,
+			patient: this.__patient && this.__patient.toJSON(),
+			date: this.__date,
+			author: this.__author && this.__author.toJSON(),
+			implicated: this.__implicated && this.__implicated.map(v => v.toJSON()),
+			detail: this.__detail,
+			reference: this.__reference,
+			mitigation: this.__mitigation && this.__mitigation.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = DetectedIssue;

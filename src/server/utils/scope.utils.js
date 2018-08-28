@@ -27,13 +27,17 @@ module.exports.validateScopes = (allowedScopes) => {
 
 	return async (req, res, next) => {
 		let version = req.params.version;
-		let scopes = req.authInfo;
+		let { scope, context } = req.authInfo;
 
 		// get scopes that are valid for the endpoint specified
-		const validScopes = getValidScopes(scopes, allowedScopes);
+		const validScopes = getValidScopes(scope, allowedScopes);
 
 		// verify if token has one of the required scopes
 		if (validScopes && validScopes.length > 0) {
+
+			// TODO: Validate/clean context?
+			req.contexts = context;
+
 			// validation complete
 			return next();
 		}

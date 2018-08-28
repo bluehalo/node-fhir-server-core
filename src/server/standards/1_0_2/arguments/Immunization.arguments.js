@@ -1,0 +1,98 @@
+module.exports = {
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-date',
+		documentation: 'Vaccination  (non)-Administration Date.',
+	},
+	DOSE_SEQUENCE: {
+		name: 'dose-sequence',
+		type: 'number',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-dose-sequence',
+		documentation: 'Dose number within series.',
+	},
+	IDENTIFIER: {
+		name: 'identifier',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-identifier',
+		documentation: 'Business identifier.',
+	},
+	LOCATION: {
+		name: 'location',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-location',
+		documentation: 'The service delivery location or facility in which the vaccine was / was to be administered.',
+	},
+	LOT_NUMBER: {
+		name: 'lot-number',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-lot-number',
+		documentation: 'Vaccine Lot Number.',
+	},
+	MANUFACTURER: {
+		name: 'manufacturer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-manufacturer',
+		documentation: 'Vaccine Manufacturer.',
+	},
+	NOTGIVEN: {
+		name: 'notgiven',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-notgiven',
+		documentation: 'Administrations which were not given.',
+	},
+	PATIENT: {
+		name: 'patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-patient',
+		documentation: 'The patient for the vaccination record.',
+	},
+	PERFORMER: {
+		name: 'performer',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-performer',
+		documentation: 'The practitioner who administered the vaccination.',
+	},
+	REACTION: {
+		name: 'reaction',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-reaction',
+		documentation: 'Additional information on reaction.',
+	},
+	REACTION_DATE: {
+		name: 'reaction-date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-reaction-date',
+		documentation: 'When reaction started.',
+	},
+	REASON: {
+		name: 'reason',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-reason',
+		documentation: 'Why immunization occurred.',
+	},
+	REASON_NOT_GIVEN: {
+		name: 'reason-not-given',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-reason-not-given',
+		documentation: 'Explanation of reason vaccination was not administered.',
+	},
+	REQUESTER: {
+		name: 'requester',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-requester',
+		documentation: 'The practitioner who ordered the vaccination.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-status',
+		documentation: 'Immunization event status.',
+	},
+	VACCINE_CODE: {
+		name: 'vaccine-code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/Immunization-vaccine-code',
+		documentation: 'Vaccine Product Administered.',
+	},
+};

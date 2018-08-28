@@ -1,141 +1,135 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const VisionPrescription_Dispense = require('./VisionPrescription_Dispense');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class VisionPrescription extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'VisionPrescription';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'VisionPrescription';
+		Object.assign(this, opt);
 	}
 
+	// This is a VisionPrescription resource
 	static get __resourceType () {
 		return 'VisionPrescription';
 	}
 
-	// This is a VisionPrescription resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['VisionPrescription'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__VisionPrescription = new_value;
 	}
 
 	// Business identifier which may be used by other parties to reference or identify the prescription.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// The status of the resource instance.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// A link to a resource representing the person to whom the vision products will be supplied.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// A link to a resource that identifies the particular occurrence of contact between patient and health care provider.
 	get encounter () {
-		return this._encounter;
+		return this.__encounter;
 	}
 
-	set encounter ( new_value ) {
-		this._encounter = new Reference(new_value);
+	set encounter (new_value) {
+		const Reference = require('./Reference');
+		this.__encounter = new Reference(new_value);
 	}
 
 	// The date (and perhaps time) when the prescription was written.
 	get dateWritten () {
-		return this._dateWritten;
+		return this.__dateWritten;
 	}
 
-	set dateWritten ( new_value ) {
+	set dateWritten (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field dateWritten`);
 		}
-		this._dateWritten = new_value;
+		this.__dateWritten = new_value;
 	}
 
 	// The healthcare professional responsible for authorizing the prescription.
 	get prescriber () {
-		return this._prescriber;
+		return this.__prescriber;
 	}
 
-	set prescriber ( new_value ) {
-		this._prescriber = new Reference(new_value);
+	set prescriber (new_value) {
+		const Reference = require('./Reference');
+		this.__prescriber = new Reference(new_value);
 	}
 
 	// Can be the reason or the indication for writing the prescription.
 	get reasonCodeableConcept () {
-		return this._reasonCodeableConcept;
+		return this.__reasonCodeableConcept;
 	}
 
-	set reasonCodeableConcept ( new_value ) {
-		this._reasonCodeableConcept = new CodeableConcept(new_value);
+	set reasonCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Can be the reason or the indication for writing the prescription.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = new Reference(new_value);
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = new Reference(new_value);
 	}
 
 	// Deals with details of the dispense part of the supply specification.
 	get dispense () {
-		return this._dispense;
+		return this.__dispense;
 	}
 
-	set dispense ( new_value ) {
-		this._dispense = Array.isArray(new_value) ? new_value.map(val => new VisionPrescription_Dispense(val)) : [new VisionPrescription_Dispense(new_value)];
+	set dispense (new_value) {
+		const VisionPrescriptionDispense = require('./VisionPrescriptionDispense');
+		this.__dispense = Array.isArray(new_value) ? new_value.map(val => new VisionPrescriptionDispense(val)) : [new VisionPrescriptionDispense(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			status: this._status,
-			patient: this._patient && this._patient.toJSON(),
-			encounter: this._encounter && this._encounter.toJSON(),
-			dateWritten: this._dateWritten,
-			prescriber: this._prescriber && this._prescriber.toJSON(),
-			reasonCodeableConcept: this._reasonCodeableConcept && this._reasonCodeableConcept.toJSON(),
-			reasonReference: this._reasonReference && this._reasonReference.toJSON(),
-			dispense: this._dispense && this._dispense.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			status: this.__status,
+			patient: this.__patient && this.__patient.toJSON(),
+			encounter: this.__encounter && this.__encounter.toJSON(),
+			dateWritten: this.__dateWritten,
+			prescriber: this.__prescriber && this.__prescriber.toJSON(),
+			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
+			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
+			dispense: this.__dispense && this.__dispense.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = VisionPrescription;

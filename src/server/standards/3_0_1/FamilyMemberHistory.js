@@ -1,330 +1,323 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Period = require('./Period');
-const Age = require('./Age');
-const Range = require('./Range');
-const Annotation = require('./Annotation');
-const FamilyMemberHistory_Condition = require('./FamilyMemberHistory_Condition');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const DateScalar = require('./scalars/Date.scalar');
 
 class FamilyMemberHistory extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'FamilyMemberHistory';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'FamilyMemberHistory';
+		Object.assign(this, opt);
 	}
 
+	// This is a FamilyMemberHistory resource
 	static get __resourceType () {
 		return 'FamilyMemberHistory';
 	}
 
-	// This is a FamilyMemberHistory resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['FamilyMemberHistory'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__FamilyMemberHistory = new_value;
 	}
 
 	// This records identifiers associated with this family member history record that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// A protocol or questionnaire that was adhered to in whole or in part by this event.
 	get definition () {
-		return this._definition;
+		return this.__definition;
 	}
 
-	set definition ( new_value ) {
-		this._definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set definition (new_value) {
+		const Reference = require('./Reference');
+		this.__definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A code specifying the status of the record of the family history of a specific family member.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['partial', 'completed', 'entered-in-error', 'health-unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
-	// If true, indicates the taking of an individual family member's history did not occur. The notDone element should not be used to document negated conditions, such as a family member that did not have a condition.
+	// If true, indicates the taking of an individual family member\'s history did not occur. The notDone element should not be used to document negated conditions, such as a family member that did not have a condition.
 	get notDone () {
-		return this._notDone;
+		return this.__notDone;
 	}
 
-	set notDone ( new_value ) {
-		this._notDone = new_value;
+	set notDone (new_value) {
+		this.__notDone = new_value;
 	}
 
-	// Describes why the family member's history is absent.
+	// Describes why the family member\'s history is absent.
 	get notDoneReason () {
-		return this._notDoneReason;
+		return this.__notDoneReason;
 	}
 
-	set notDoneReason ( new_value ) {
-		this._notDoneReason = new CodeableConcept(new_value);
+	set notDoneReason (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__notDoneReason = new CodeableConcept(new_value);
 	}
 
 	// The person who this history concerns.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// The date (and possibly time) when the family member history was taken.
 	get date () {
-		return this._date;
+		return this.__date;
 	}
 
-	set date ( new_value ) {
+	set date (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
-		this._date = new_value;
+		this.__date = new_value;
 	}
 
-	// This will either be a name or a description; e.g. "Aunt Susan", "my cousin with the red hair".
+	// This will either be a name or a description; e.g. \'Aunt Susan\', \'my cousin with the red hair\'.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = new_value;
+	set name (new_value) {
+		this.__name = new_value;
 	}
 
 	// The type of relationship this person has to the patient (father, mother, brother etc.).
 	get relationship () {
-		return this._relationship;
+		return this.__relationship;
 	}
 
-	set relationship ( new_value ) {
-		this._relationship = new CodeableConcept(new_value);
+	set relationship (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__relationship = new CodeableConcept(new_value);
 	}
 
 	// Administrative Gender - the gender that the relative is considered to have for administration and record keeping purposes.
 	get gender () {
-		return this._gender;
+		return this.__gender;
 	}
 
-	set gender ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['male', 'female', 'other', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field gender`);
-		}
-		this._gender = new_value;
+	set gender (new_value) {
+		this.__gender = new_value;
 	}
 
 	// The actual or approximate date of birth of the relative.
 	get bornPeriod () {
-		return this._bornPeriod;
+		return this.__bornPeriod;
 	}
 
-	set bornPeriod ( new_value ) {
-		this._bornPeriod = new Period(new_value);
+	set bornPeriod (new_value) {
+		const Period = require('./Period');
+		this.__bornPeriod = new Period(new_value);
 	}
 
 	// The actual or approximate date of birth of the relative.
 	get bornDate () {
-		return this._bornDate;
+		return this.__bornDate;
 	}
 
-	set bornDate ( new_value ) {
+	set bornDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field bornDate`);
 		}
-		this._bornDate = new_value;
+		this.__bornDate = new_value;
 	}
 
 	// The actual or approximate date of birth of the relative.
 	get bornString () {
-		return this._bornString;
+		return this.__bornString;
 	}
 
-	set bornString ( new_value ) {
-		this._bornString = new_value;
+	set bornString (new_value) {
+		this.__bornString = new_value;
 	}
 
 	// The age of the relative at the time the family member history is recorded.
 	get ageAge () {
-		return this._ageAge;
+		return this.__ageAge;
 	}
 
-	set ageAge ( new_value ) {
-		this._ageAge = new Age(new_value);
+	set ageAge (new_value) {
+		const Age = require('./Age');
+		this.__ageAge = new Age(new_value);
 	}
 
 	// The age of the relative at the time the family member history is recorded.
 	get ageRange () {
-		return this._ageRange;
+		return this.__ageRange;
 	}
 
-	set ageRange ( new_value ) {
-		this._ageRange = new Range(new_value);
+	set ageRange (new_value) {
+		const Range = require('./Range');
+		this.__ageRange = new Range(new_value);
 	}
 
 	// The age of the relative at the time the family member history is recorded.
 	get ageString () {
-		return this._ageString;
+		return this.__ageString;
 	}
 
-	set ageString ( new_value ) {
-		this._ageString = new_value;
+	set ageString (new_value) {
+		this.__ageString = new_value;
 	}
 
 	// If true, indicates that the age value specified is an estimated value.
 	get estimatedAge () {
-		return this._estimatedAge;
+		return this.__estimatedAge;
 	}
 
-	set estimatedAge ( new_value ) {
-		this._estimatedAge = new_value;
+	set estimatedAge (new_value) {
+		this.__estimatedAge = new_value;
 	}
 
 	// Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.
 	get deceasedBoolean () {
-		return this._deceasedBoolean;
+		return this.__deceasedBoolean;
 	}
 
-	set deceasedBoolean ( new_value ) {
-		this._deceasedBoolean = new_value;
+	set deceasedBoolean (new_value) {
+		this.__deceasedBoolean = new_value;
 	}
 
 	// Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.
 	get deceasedAge () {
-		return this._deceasedAge;
+		return this.__deceasedAge;
 	}
 
-	set deceasedAge ( new_value ) {
-		this._deceasedAge = new Age(new_value);
+	set deceasedAge (new_value) {
+		const Age = require('./Age');
+		this.__deceasedAge = new Age(new_value);
 	}
 
 	// Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.
 	get deceasedRange () {
-		return this._deceasedRange;
+		return this.__deceasedRange;
 	}
 
-	set deceasedRange ( new_value ) {
-		this._deceasedRange = new Range(new_value);
+	set deceasedRange (new_value) {
+		const Range = require('./Range');
+		this.__deceasedRange = new Range(new_value);
 	}
 
 	// Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.
 	get deceasedDate () {
-		return this._deceasedDate;
+		return this.__deceasedDate;
 	}
 
-	set deceasedDate ( new_value ) {
+	set deceasedDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field deceasedDate`);
 		}
-		this._deceasedDate = new_value;
+		this.__deceasedDate = new_value;
 	}
 
 	// Deceased flag or the actual or approximate age of the relative at the time of death for the family member history record.
 	get deceasedString () {
-		return this._deceasedString;
+		return this.__deceasedString;
 	}
 
-	set deceasedString ( new_value ) {
-		this._deceasedString = new_value;
+	set deceasedString (new_value) {
+		this.__deceasedString = new_value;
 	}
 
 	// Describes why the family member history occurred in coded or textual form.
 	get reasonCode () {
-		return this._reasonCode;
+		return this.__reasonCode;
 	}
 
-	set reasonCode ( new_value ) {
-		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set reasonCode (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	// Indicates a Condition, Observation, AllergyIntolerance, or QuestionnaireResponse that justifies this family member history event.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// This property allows a non condition-specific note to the made about the related person. Ideally, the note would be in the condition property, but this is not always possible.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.
 	get condition () {
-		return this._condition;
+		return this.__condition;
 	}
 
-	set condition ( new_value ) {
-		this._condition = Array.isArray(new_value) ? new_value.map(val => new FamilyMemberHistory_Condition(val)) : [new FamilyMemberHistory_Condition(new_value)];
+	set condition (new_value) {
+		const FamilyMemberHistoryCondition = require('./FamilyMemberHistoryCondition');
+		this.__condition = Array.isArray(new_value) ? new_value.map(val => new FamilyMemberHistoryCondition(val)) : [new FamilyMemberHistoryCondition(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			definition: this._definition && this._definition.map(v => v.toJSON()),
-			status: this._status,
-			notDone: this._notDone,
-			notDoneReason: this._notDoneReason && this._notDoneReason.toJSON(),
-			patient: this._patient && this._patient.toJSON(),
-			date: this._date,
-			name: this._name,
-			relationship: this._relationship && this._relationship.toJSON(),
-			gender: this._gender,
-			bornPeriod: this._bornPeriod && this._bornPeriod.toJSON(),
-			bornDate: this._bornDate,
-			bornString: this._bornString,
-			ageAge: this._ageAge && this._ageAge.toJSON(),
-			ageRange: this._ageRange && this._ageRange.toJSON(),
-			ageString: this._ageString,
-			estimatedAge: this._estimatedAge,
-			deceasedBoolean: this._deceasedBoolean,
-			deceasedAge: this._deceasedAge && this._deceasedAge.toJSON(),
-			deceasedRange: this._deceasedRange && this._deceasedRange.toJSON(),
-			deceasedDate: this._deceasedDate,
-			deceasedString: this._deceasedString,
-			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
-			reasonReference: this._reasonReference && this._reasonReference.map(v => v.toJSON()),
-			note: this._note && this._note.map(v => v.toJSON()),
-			condition: this._condition && this._condition.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			definition: this.__definition && this.__definition.map(v => v.toJSON()),
+			status: this.__status,
+			notDone: this.__notDone,
+			notDoneReason: this.__notDoneReason && this.__notDoneReason.toJSON(),
+			patient: this.__patient && this.__patient.toJSON(),
+			date: this.__date,
+			name: this.__name,
+			relationship: this.__relationship && this.__relationship.toJSON(),
+			gender: this.__gender,
+			bornPeriod: this.__bornPeriod && this.__bornPeriod.toJSON(),
+			bornDate: this.__bornDate,
+			bornString: this.__bornString,
+			ageAge: this.__ageAge && this.__ageAge.toJSON(),
+			ageRange: this.__ageRange && this.__ageRange.toJSON(),
+			ageString: this.__ageString,
+			estimatedAge: this.__estimatedAge,
+			deceasedBoolean: this.__deceasedBoolean,
+			deceasedAge: this.__deceasedAge && this.__deceasedAge.toJSON(),
+			deceasedRange: this.__deceasedRange && this.__deceasedRange.toJSON(),
+			deceasedDate: this.__deceasedDate,
+			deceasedString: this.__deceasedString,
+			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
+			reasonReference: this.__reasonReference && this.__reasonReference.map(v => v.toJSON()),
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			condition: this.__condition && this.__condition.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = FamilyMemberHistory;

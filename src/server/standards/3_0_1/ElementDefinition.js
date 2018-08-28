@@ -1,2351 +1,1939 @@
 const Element = require('./Element');
-const Coding = require('./Coding');
-const ElementDefinition_Slicing = require('./ElementDefinition_Slicing');
-const ElementDefinition_Base = require('./ElementDefinition_Base');
-const ElementDefinition_Type = require('./ElementDefinition_Type');
-const Extension = require('./Extension');
-const BackboneElement = require('./BackboneElement');
-const Narrative = require('./Narrative');
-const Annotation = require('./Annotation');
-const Attachment = require('./Attachment');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Quantity = require('./Quantity');
-const Duration = require('./Duration');
-const Distance = require('./Distance');
-const Count = require('./Count');
-const Money = require('./Money');
-const Age = require('./Age');
-const Range = require('./Range');
-const Period = require('./Period');
-const Ratio = require('./Ratio');
-const Reference = require('./Reference');
-const SampledData = require('./SampledData');
-const Signature = require('./Signature');
-const HumanName = require('./HumanName');
-const Address = require('./Address');
-const ContactPoint = require('./ContactPoint');
-const Timing = require('./Timing');
-const Meta = require('./Meta');
-const ContactDetail = require('./ContactDetail');
-const Contributor = require('./Contributor');
-const Dosage = require('./Dosage');
-const RelatedArtifact = require('./RelatedArtifact');
-const UsageContext = require('./UsageContext');
-const DataRequirement = require('./DataRequirement');
-const ParameterDefinition = require('./ParameterDefinition');
-const TriggerDefinition = require('./TriggerDefinition');
-const ElementDefinition_Example = require('./ElementDefinition_Example');
-const ElementDefinition_Constraint = require('./ElementDefinition_Constraint');
-const ElementDefinition_Binding = require('./ElementDefinition_Binding');
-const ElementDefinition_Mapping = require('./ElementDefinition_Mapping');
+const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
+const UriScalar = require('./scalars/Uri.scalar');
+const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+const CodeScalar = require('./scalars/Code.scalar');
+const DateScalar = require('./scalars/Date.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const IdScalar = require('./scalars/Id.scalar');
+const InstantScalar = require('./scalars/Instant.scalar');
+const OidScalar = require('./scalars/Oid.scalar');
+const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+const TimeScalar = require('./scalars/Time.scalar');
 
 class ElementDefinition extends Element {
 
-	constructor ( opts ) {
-		super( opts );
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'ElementDefinition';
+		Object.assign(this, opt);
 	}
 
+	// This is a ElementDefinition resource
 	static get __resourceType () {
 		return 'ElementDefinition';
 	}
 
-	// The path identifies the element and is expressed as a "."-separated list of ancestor elements, beginning with the name of the resource or extension.
+	// The path identifies the element and is expressed as a \'.\'-separated list of ancestor elements, beginning with the name of the resource or extension.
 	get path () {
-		return this._path;
+		return this.__path;
 	}
 
-	set path ( new_value ) {
-		this._path = new_value;
+	set path (new_value) {
+		this.__path = new_value;
 	}
 
 	// Codes that define how this element is represented in instances, when the deviation varies from the normal case.
 	get representation () {
-		return this._representation;
+		return this.__representation;
 	}
 
-	set representation ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['xmlAttr', 'xmlText', 'typeAttr', 'cdaText', 'xhtml'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field representation`);
-		}
-		this._representation = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set representation (new_value) {
+		this.__representation = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// The name of this element definition slice, when slicing is working. The name must be a token with no dots or spaces. This is a unique name referring to a specific set of constraints applied to this element, used to provide a name to different slices of the same element.
 	get sliceName () {
-		return this._sliceName;
+		return this.__sliceName;
 	}
 
-	set sliceName ( new_value ) {
-		this._sliceName = new_value;
+	set sliceName (new_value) {
+		this.__sliceName = new_value;
 	}
 
 	// A single preferred label which is the text to display beside the element indicating its meaning or to use to prompt for the element in a user display or form.
 	get label () {
-		return this._label;
+		return this.__label;
 	}
 
-	set label ( new_value ) {
-		this._label = new_value;
+	set label (new_value) {
+		this.__label = new_value;
 	}
 
 	// A code that has the same meaning as the element in a particular terminology.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
+	set code (new_value) {
+		const Coding = require('./Coding');
+		this.__code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
 	}
 
 	// Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set).
 	get slicing () {
-		return this._slicing;
+		return this.__slicing;
 	}
 
-	set slicing ( new_value ) {
-		this._slicing = new ElementDefinition_Slicing(new_value);
+	set slicing (new_value) {
+		const ElementDefinitionSlicing = require('./ElementDefinitionSlicing');
+		this.__slicing = new ElementDefinitionSlicing(new_value);
 	}
 
 	// A concise description of what this element means (e.g. for use in autogenerated summaries).
 	get short () {
-		return this._short;
+		return this.__short;
 	}
 
-	set short ( new_value ) {
-		this._short = new_value;
+	set short (new_value) {
+		this.__short = new_value;
 	}
 
 	// Provides a complete explanation of the meaning of the data element for human readability.  For the case of elements derived from existing elements (e.g. constraints), the definition SHALL be consistent with the base definition, but convey the meaning of the element in the particular context of use of the resource.
 	get definition () {
-		return this._definition;
+		return this.__definition;
 	}
 
-	set definition ( new_value ) {
-		this._definition = new_value;
+	set definition (new_value) {
+		this.__definition = new_value;
 	}
 
 	// Explanatory notes and implementation guidance about the data element, including notes about how to use the data properly, exceptions to proper use, etc.
 	get comment () {
-		return this._comment;
+		return this.__comment;
 	}
 
-	set comment ( new_value ) {
-		this._comment = new_value;
+	set comment (new_value) {
+		this.__comment = new_value;
 	}
 
 	// This element is for traceability of why the element was created and why the constraints exist as they do. This may be used to point to source materials or specifications that drove the structure of this element.
 	get requirements () {
-		return this._requirements;
+		return this.__requirements;
 	}
 
-	set requirements ( new_value ) {
-		this._requirements = new_value;
+	set requirements (new_value) {
+		this.__requirements = new_value;
 	}
 
 	// Identifies additional names by which this element might also be known.
 	get alias () {
-		return this._alias;
+		return this.__alias;
 	}
 
-	set alias ( new_value ) {
-		this._alias = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set alias (new_value) {
+		this.__alias = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// The minimum number of times this element SHALL appear in the instance.
 	get min () {
-		return this._min;
+		return this.__min;
 	}
 
-	set min ( new_value ) {
+	set min (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = UnsignedIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field min`);
 		}
-		this._min = new_value;
+		this.__min = new_value;
 	}
 
 	// The maximum number of times this element is permitted to appear in the instance.
 	get max () {
-		return this._max;
+		return this.__max;
 	}
 
-	set max ( new_value ) {
-		this._max = new_value;
+	set max (new_value) {
+		this.__max = new_value;
 	}
 
 	// Information about the base definition of the element, provided to make it unnecessary for tools to trace the deviation of the element through the derived and related profiles. This information is provided when the element definition is not the original definition of an element - i.g. either in a constraint on another type, or for elements from a super type in a snap shot.
 	get base () {
-		return this._base;
+		return this.__base;
 	}
 
-	set base ( new_value ) {
-		this._base = new ElementDefinition_Base(new_value);
+	set base (new_value) {
+		const ElementDefinitionBase = require('./ElementDefinitionBase');
+		this.__base = new ElementDefinitionBase(new_value);
 	}
 
 	// Identifies the identity of an element defined elsewhere in the profile whose content rules should be applied to the current element.
 	get contentReference () {
-		return this._contentReference;
+		return this.__contentReference;
 	}
 
-	set contentReference ( new_value ) {
-		this._contentReference = new_value;
+	set contentReference (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field contentReference`);
+		}
+		this.__contentReference = new_value;
 	}
 
 	// The data type or resource that the value of this element is permitted to be.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		this._type = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Type(val)) : [new ElementDefinition_Type(new_value)];
+	set type (new_value) {
+		const ElementDefinitionType = require('./ElementDefinitionType');
+		this.__type = Array.isArray(new_value) ? new_value.map(val => new ElementDefinitionType(val)) : [new ElementDefinitionType(new_value)];
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueBoolean () {
-		return this._defaultValueBoolean;
-	}
-
-	set defaultValueBoolean ( new_value ) {
-		this._defaultValueBoolean = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueInteger () {
-		return this._defaultValueInteger;
-	}
-
-	set defaultValueInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueInteger`);
-		}
-		this._defaultValueInteger = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDecimal () {
-		return this._defaultValueDecimal;
-	}
-
-	set defaultValueDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueDecimal`);
-		}
-		this._defaultValueDecimal = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueBase64Binary () {
-		return this._defaultValueBase64Binary;
+		return this.__defaultValueBase64Binary;
 	}
 
-	set defaultValueBase64Binary ( new_value ) {
-		this._defaultValueBase64Binary = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueInstant () {
-		return this._defaultValueInstant;
-	}
-
-	set defaultValueInstant ( new_value ) {
-		this._defaultValueInstant = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueString () {
-		return this._defaultValueString;
-	}
-
-	set defaultValueString ( new_value ) {
-		this._defaultValueString = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueUri () {
-		return this._defaultValueUri;
-	}
-
-	set defaultValueUri ( new_value ) {
-		this._defaultValueUri = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDate () {
-		return this._defaultValueDate;
-	}
-
-	set defaultValueDate ( new_value ) {
+	set defaultValueBase64Binary (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = Base64BinaryScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueDate`);
+			throw new Error(`Invalid format for ${new_value} on field defaultValueBase64Binary`);
 		}
-		this._defaultValueDate = new_value;
+		this.__defaultValueBase64Binary = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDateTime () {
-		return this._defaultValueDateTime;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueBoolean () {
+		return this.__defaultValueBoolean;
 	}
 
-	set defaultValueDateTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueDateTime`);
-		}
-		this._defaultValueDateTime = new_value;
+	set defaultValueBoolean (new_value) {
+		this.__defaultValueBoolean = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueTime () {
-		return this._defaultValueTime;
-	}
-
-	set defaultValueTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueTime`);
-		}
-		this._defaultValueTime = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueCode () {
-		return this._defaultValueCode;
+		return this.__defaultValueCode;
 	}
 
-	set defaultValueCode ( new_value ) {
+	set defaultValueCode (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueCode`);
 		}
-		this._defaultValueCode = new_value;
+		this.__defaultValueCode = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueOid () {
-		return this._defaultValueOid;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueDate () {
+		return this.__defaultValueDate;
 	}
 
-	set defaultValueOid ( new_value ) {
+	set defaultValueDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueOid`);
+			throw new Error(`Invalid format for ${new_value} on field defaultValueDate`);
 		}
-		this._defaultValueOid = new_value;
+		this.__defaultValueDate = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueUuid () {
-		return this._defaultValueUuid;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueDateTime () {
+		return this.__defaultValueDateTime;
 	}
 
-	set defaultValueUuid ( new_value ) {
+	set defaultValueDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueUuid`);
+			throw new Error(`Invalid format for ${new_value} on field defaultValueDateTime`);
 		}
-		this._defaultValueUuid = new_value;
+		this.__defaultValueDateTime = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueDecimal () {
+		return this.__defaultValueDecimal;
+	}
+
+	set defaultValueDecimal (new_value) {
+		this.__defaultValueDecimal = new_value;
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueId () {
-		return this._defaultValueId;
+		return this.__defaultValueId;
 	}
 
-	set defaultValueId ( new_value ) {
+	set defaultValueId (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
+		let pattern = IdScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValueId`);
 		}
-		this._defaultValueId = new_value;
+		this.__defaultValueId = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueUnsignedInt () {
-		return this._defaultValueUnsignedInt;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueInstant () {
+		return this.__defaultValueInstant;
 	}
 
-	set defaultValueUnsignedInt ( new_value ) {
+	set defaultValueInstant (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = InstantScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueUnsignedInt`);
+			throw new Error(`Invalid format for ${new_value} on field defaultValueInstant`);
 		}
-		this._defaultValueUnsignedInt = new_value;
+		this.__defaultValueInstant = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValuePositiveInt () {
-		return this._defaultValuePositiveInt;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueInteger () {
+		return this.__defaultValueInteger;
 	}
 
-	set defaultValuePositiveInt ( new_value ) {
+	set defaultValueInteger (new_value) {
+		this.__defaultValueInteger = new_value;
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueMarkdown () {
+		return this.__defaultValueMarkdown;
+	}
+
+	set defaultValueMarkdown (new_value) {
+		this.__defaultValueMarkdown = new_value;
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueOid () {
+		return this.__defaultValueOid;
+	}
+
+	set defaultValueOid (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = OidScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field defaultValueOid`);
+		}
+		this.__defaultValueOid = new_value;
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValuePositiveInt () {
+		return this.__defaultValuePositiveInt;
+	}
+
+	set defaultValuePositiveInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field defaultValuePositiveInt`);
 		}
-		this._defaultValuePositiveInt = new_value;
+		this.__defaultValuePositiveInt = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueMarkdown () {
-		return this._defaultValueMarkdown;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueString () {
+		return this.__defaultValueString;
 	}
 
-	set defaultValueMarkdown ( new_value ) {
-		this._defaultValueMarkdown = new_value;
+	set defaultValueString (new_value) {
+		this.__defaultValueString = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueElement () {
-		return this._defaultValueElement;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueTime () {
+		return this.__defaultValueTime;
 	}
 
-	set defaultValueElement ( new_value ) {
-		this._defaultValueElement = new Element(new_value);
+	set defaultValueTime (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = TimeScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field defaultValueTime`);
+		}
+		this.__defaultValueTime = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueExtension () {
-		return this._defaultValueExtension;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueUnsignedInt () {
+		return this.__defaultValueUnsignedInt;
 	}
 
-	set defaultValueExtension ( new_value ) {
-		this._defaultValueExtension = new Extension(new_value);
+	set defaultValueUnsignedInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UnsignedIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field defaultValueUnsignedInt`);
+		}
+		this.__defaultValueUnsignedInt = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueBackboneElement () {
-		return this._defaultValueBackboneElement;
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueUri () {
+		return this.__defaultValueUri;
 	}
 
-	set defaultValueBackboneElement ( new_value ) {
-		this._defaultValueBackboneElement = new BackboneElement(new_value);
+	set defaultValueUri (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field defaultValueUri`);
+		}
+		this.__defaultValueUri = new_value;
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueNarrative () {
-		return this._defaultValueNarrative;
-	}
-
-	set defaultValueNarrative ( new_value ) {
-		this._defaultValueNarrative = new Narrative(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueAnnotation () {
-		return this._defaultValueAnnotation;
-	}
-
-	set defaultValueAnnotation ( new_value ) {
-		this._defaultValueAnnotation = new Annotation(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueAttachment () {
-		return this._defaultValueAttachment;
-	}
-
-	set defaultValueAttachment ( new_value ) {
-		this._defaultValueAttachment = new Attachment(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueIdentifier () {
-		return this._defaultValueIdentifier;
-	}
-
-	set defaultValueIdentifier ( new_value ) {
-		this._defaultValueIdentifier = new Identifier(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueCodeableConcept () {
-		return this._defaultValueCodeableConcept;
-	}
-
-	set defaultValueCodeableConcept ( new_value ) {
-		this._defaultValueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueCoding () {
-		return this._defaultValueCoding;
-	}
-
-	set defaultValueCoding ( new_value ) {
-		this._defaultValueCoding = new Coding(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueQuantity () {
-		return this._defaultValueQuantity;
-	}
-
-	set defaultValueQuantity ( new_value ) {
-		this._defaultValueQuantity = new Quantity(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDuration () {
-		return this._defaultValueDuration;
-	}
-
-	set defaultValueDuration ( new_value ) {
-		this._defaultValueDuration = new Duration(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueSimpleQuantity () {
-		return this._defaultValueSimpleQuantity;
-	}
-
-	set defaultValueSimpleQuantity ( new_value ) {
-		this._defaultValueSimpleQuantity = new Quantity(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDistance () {
-		return this._defaultValueDistance;
-	}
-
-	set defaultValueDistance ( new_value ) {
-		this._defaultValueDistance = new Distance(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueCount () {
-		return this._defaultValueCount;
-	}
-
-	set defaultValueCount ( new_value ) {
-		this._defaultValueCount = new Count(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueMoney () {
-		return this._defaultValueMoney;
-	}
-
-	set defaultValueMoney ( new_value ) {
-		this._defaultValueMoney = new Money(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueAge () {
-		return this._defaultValueAge;
-	}
-
-	set defaultValueAge ( new_value ) {
-		this._defaultValueAge = new Age(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueRange () {
-		return this._defaultValueRange;
-	}
-
-	set defaultValueRange ( new_value ) {
-		this._defaultValueRange = new Range(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValuePeriod () {
-		return this._defaultValuePeriod;
-	}
-
-	set defaultValuePeriod ( new_value ) {
-		this._defaultValuePeriod = new Period(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueRatio () {
-		return this._defaultValueRatio;
-	}
-
-	set defaultValueRatio ( new_value ) {
-		this._defaultValueRatio = new Ratio(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueReference () {
-		return this._defaultValueReference;
-	}
-
-	set defaultValueReference ( new_value ) {
-		this._defaultValueReference = new Reference(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueSampledData () {
-		return this._defaultValueSampledData;
-	}
-
-	set defaultValueSampledData ( new_value ) {
-		this._defaultValueSampledData = new SampledData(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueSignature () {
-		return this._defaultValueSignature;
-	}
-
-	set defaultValueSignature ( new_value ) {
-		this._defaultValueSignature = new Signature(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueHumanName () {
-		return this._defaultValueHumanName;
-	}
-
-	set defaultValueHumanName ( new_value ) {
-		this._defaultValueHumanName = new HumanName(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueAddress () {
-		return this._defaultValueAddress;
+		return this.__defaultValueAddress;
 	}
 
-	set defaultValueAddress ( new_value ) {
-		this._defaultValueAddress = new Address(new_value);
+	set defaultValueAddress (new_value) {
+		const Address = require('./Address');
+		this.__defaultValueAddress = new Address(new_value);
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueAge () {
+		return this.__defaultValueAge;
+	}
+
+	set defaultValueAge (new_value) {
+		const Age = require('./Age');
+		this.__defaultValueAge = new Age(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueAnnotation () {
+		return this.__defaultValueAnnotation;
+	}
+
+	set defaultValueAnnotation (new_value) {
+		const Annotation = require('./Annotation');
+		this.__defaultValueAnnotation = new Annotation(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueAttachment () {
+		return this.__defaultValueAttachment;
+	}
+
+	set defaultValueAttachment (new_value) {
+		const Attachment = require('./Attachment');
+		this.__defaultValueAttachment = new Attachment(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueCodeableConcept () {
+		return this.__defaultValueCodeableConcept;
+	}
+
+	set defaultValueCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__defaultValueCodeableConcept = new CodeableConcept(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueCoding () {
+		return this.__defaultValueCoding;
+	}
+
+	set defaultValueCoding (new_value) {
+		const Coding = require('./Coding');
+		this.__defaultValueCoding = new Coding(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueContactPoint () {
-		return this._defaultValueContactPoint;
+		return this.__defaultValueContactPoint;
 	}
 
-	set defaultValueContactPoint ( new_value ) {
-		this._defaultValueContactPoint = new ContactPoint(new_value);
+	set defaultValueContactPoint (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__defaultValueContactPoint = new ContactPoint(new_value);
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueCount () {
+		return this.__defaultValueCount;
+	}
+
+	set defaultValueCount (new_value) {
+		const Count = require('./Count');
+		this.__defaultValueCount = new Count(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueDistance () {
+		return this.__defaultValueDistance;
+	}
+
+	set defaultValueDistance (new_value) {
+		const Distance = require('./Distance');
+		this.__defaultValueDistance = new Distance(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueDuration () {
+		return this.__defaultValueDuration;
+	}
+
+	set defaultValueDuration (new_value) {
+		const Duration = require('./Duration');
+		this.__defaultValueDuration = new Duration(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueHumanName () {
+		return this.__defaultValueHumanName;
+	}
+
+	set defaultValueHumanName (new_value) {
+		const HumanName = require('./HumanName');
+		this.__defaultValueHumanName = new HumanName(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueIdentifier () {
+		return this.__defaultValueIdentifier;
+	}
+
+	set defaultValueIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__defaultValueIdentifier = new Identifier(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueMoney () {
+		return this.__defaultValueMoney;
+	}
+
+	set defaultValueMoney (new_value) {
+		const Money = require('./Money');
+		this.__defaultValueMoney = new Money(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValuePeriod () {
+		return this.__defaultValuePeriod;
+	}
+
+	set defaultValuePeriod (new_value) {
+		const Period = require('./Period');
+		this.__defaultValuePeriod = new Period(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueQuantity () {
+		return this.__defaultValueQuantity;
+	}
+
+	set defaultValueQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__defaultValueQuantity = new Quantity(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueRange () {
+		return this.__defaultValueRange;
+	}
+
+	set defaultValueRange (new_value) {
+		const Range = require('./Range');
+		this.__defaultValueRange = new Range(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueRatio () {
+		return this.__defaultValueRatio;
+	}
+
+	set defaultValueRatio (new_value) {
+		const Ratio = require('./Ratio');
+		this.__defaultValueRatio = new Ratio(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueReference () {
+		return this.__defaultValueReference;
+	}
+
+	set defaultValueReference (new_value) {
+		const Reference = require('./Reference');
+		this.__defaultValueReference = new Reference(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueSampledData () {
+		return this.__defaultValueSampledData;
+	}
+
+	set defaultValueSampledData (new_value) {
+		const SampledData = require('./SampledData');
+		this.__defaultValueSampledData = new SampledData(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
+	get defaultValueSignature () {
+		return this.__defaultValueSignature;
+	}
+
+	set defaultValueSignature (new_value) {
+		const Signature = require('./Signature');
+		this.__defaultValueSignature = new Signature(new_value);
+	}
+
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueTiming () {
-		return this._defaultValueTiming;
+		return this.__defaultValueTiming;
 	}
 
-	set defaultValueTiming ( new_value ) {
-		this._defaultValueTiming = new Timing(new_value);
+	set defaultValueTiming (new_value) {
+		const Timing = require('./Timing');
+		this.__defaultValueTiming = new Timing(new_value);
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
+	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
 	get defaultValueMeta () {
-		return this._defaultValueMeta;
+		return this.__defaultValueMeta;
 	}
 
-	set defaultValueMeta ( new_value ) {
-		this._defaultValueMeta = new Meta(new_value);
+	set defaultValueMeta (new_value) {
+		const Meta = require('./Meta');
+		this.__defaultValueMeta = new Meta(new_value);
 	}
 
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueElementDefinition () {
-		return this._defaultValueElementDefinition;
-	}
-
-	set defaultValueElementDefinition ( new_value ) {
-		this._defaultValueElementDefinition = new ElementDefinition(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueContactDetail () {
-		return this._defaultValueContactDetail;
-	}
-
-	set defaultValueContactDetail ( new_value ) {
-		this._defaultValueContactDetail = new ContactDetail(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueContributor () {
-		return this._defaultValueContributor;
-	}
-
-	set defaultValueContributor ( new_value ) {
-		this._defaultValueContributor = new Contributor(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDosage () {
-		return this._defaultValueDosage;
-	}
-
-	set defaultValueDosage ( new_value ) {
-		this._defaultValueDosage = new Dosage(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueRelatedArtifact () {
-		return this._defaultValueRelatedArtifact;
-	}
-
-	set defaultValueRelatedArtifact ( new_value ) {
-		this._defaultValueRelatedArtifact = new RelatedArtifact(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueUsageContext () {
-		return this._defaultValueUsageContext;
-	}
-
-	set defaultValueUsageContext ( new_value ) {
-		this._defaultValueUsageContext = new UsageContext(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueDataRequirement () {
-		return this._defaultValueDataRequirement;
-	}
-
-	set defaultValueDataRequirement ( new_value ) {
-		this._defaultValueDataRequirement = new DataRequirement(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueParameterDefinition () {
-		return this._defaultValueParameterDefinition;
-	}
-
-	set defaultValueParameterDefinition ( new_value ) {
-		this._defaultValueParameterDefinition = new ParameterDefinition(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. 'if not otherwise specified, the abstract is false').
-	get defaultValueTriggerDefinition () {
-		return this._defaultValueTriggerDefinition;
-	}
-
-	set defaultValueTriggerDefinition ( new_value ) {
-		this._defaultValueTriggerDefinition = new TriggerDefinition(new_value);
-	}
-
-	// The Implicit meaning that is to be understood when this element is missing (e.g. 'when this element is missing, the period is ongoing'.
+	// The Implicit meaning that is to be understood when this element is missing (e.g. \'when this element is missing, the period is ongoing\'.
 	get meaningWhenMissing () {
-		return this._meaningWhenMissing;
+		return this.__meaningWhenMissing;
 	}
 
-	set meaningWhenMissing ( new_value ) {
-		this._meaningWhenMissing = new_value;
+	set meaningWhenMissing (new_value) {
+		this.__meaningWhenMissing = new_value;
 	}
 
 	// If present, indicates that the order of the repeating element has meaning and describes what that meaning is.  If absent, it means that the order of the element has no meaning.
 	get orderMeaning () {
-		return this._orderMeaning;
+		return this.__orderMeaning;
 	}
 
-	set orderMeaning ( new_value ) {
-		this._orderMeaning = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedBoolean () {
-		return this._fixedBoolean;
-	}
-
-	set fixedBoolean ( new_value ) {
-		this._fixedBoolean = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedInteger () {
-		return this._fixedInteger;
-	}
-
-	set fixedInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedInteger`);
-		}
-		this._fixedInteger = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDecimal () {
-		return this._fixedDecimal;
-	}
-
-	set fixedDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedDecimal`);
-		}
-		this._fixedDecimal = new_value;
+	set orderMeaning (new_value) {
+		this.__orderMeaning = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedBase64Binary () {
-		return this._fixedBase64Binary;
+		return this.__fixedBase64Binary;
 	}
 
-	set fixedBase64Binary ( new_value ) {
-		this._fixedBase64Binary = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedInstant () {
-		return this._fixedInstant;
-	}
-
-	set fixedInstant ( new_value ) {
-		this._fixedInstant = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedString () {
-		return this._fixedString;
-	}
-
-	set fixedString ( new_value ) {
-		this._fixedString = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUri () {
-		return this._fixedUri;
-	}
-
-	set fixedUri ( new_value ) {
-		this._fixedUri = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDate () {
-		return this._fixedDate;
-	}
-
-	set fixedDate ( new_value ) {
+	set fixedBase64Binary (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = Base64BinaryScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedDate`);
+			throw new Error(`Invalid format for ${new_value} on field fixedBase64Binary`);
 		}
-		this._fixedDate = new_value;
+		this.__fixedBase64Binary = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDateTime () {
-		return this._fixedDateTime;
+	get fixedBoolean () {
+		return this.__fixedBoolean;
 	}
 
-	set fixedDateTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedDateTime`);
-		}
-		this._fixedDateTime = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedTime () {
-		return this._fixedTime;
-	}
-
-	set fixedTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedTime`);
-		}
-		this._fixedTime = new_value;
+	set fixedBoolean (new_value) {
+		this.__fixedBoolean = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedCode () {
-		return this._fixedCode;
+		return this.__fixedCode;
 	}
 
-	set fixedCode ( new_value ) {
+	set fixedCode (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedCode`);
 		}
-		this._fixedCode = new_value;
+		this.__fixedCode = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedOid () {
-		return this._fixedOid;
+	get fixedDate () {
+		return this.__fixedDate;
 	}
 
-	set fixedOid ( new_value ) {
+	set fixedDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedOid`);
+			throw new Error(`Invalid format for ${new_value} on field fixedDate`);
 		}
-		this._fixedOid = new_value;
+		this.__fixedDate = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUuid () {
-		return this._fixedUuid;
+	get fixedDateTime () {
+		return this.__fixedDateTime;
 	}
 
-	set fixedUuid ( new_value ) {
+	set fixedDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedUuid`);
+			throw new Error(`Invalid format for ${new_value} on field fixedDateTime`);
 		}
-		this._fixedUuid = new_value;
+		this.__fixedDateTime = new_value;
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedDecimal () {
+		return this.__fixedDecimal;
+	}
+
+	set fixedDecimal (new_value) {
+		this.__fixedDecimal = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedId () {
-		return this._fixedId;
+		return this.__fixedId;
 	}
 
-	set fixedId ( new_value ) {
+	set fixedId (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
+		let pattern = IdScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field fixedId`);
 		}
-		this._fixedId = new_value;
+		this.__fixedId = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUnsignedInt () {
-		return this._fixedUnsignedInt;
+	get fixedInstant () {
+		return this.__fixedInstant;
 	}
 
-	set fixedUnsignedInt ( new_value ) {
+	set fixedInstant (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = InstantScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedUnsignedInt`);
+			throw new Error(`Invalid format for ${new_value} on field fixedInstant`);
 		}
-		this._fixedUnsignedInt = new_value;
+		this.__fixedInstant = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedPositiveInt () {
-		return this._fixedPositiveInt;
+	get fixedInteger () {
+		return this.__fixedInteger;
 	}
 
-	set fixedPositiveInt ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field fixedPositiveInt`);
-		}
-		this._fixedPositiveInt = new_value;
+	set fixedInteger (new_value) {
+		this.__fixedInteger = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedMarkdown () {
-		return this._fixedMarkdown;
+		return this.__fixedMarkdown;
 	}
 
-	set fixedMarkdown ( new_value ) {
-		this._fixedMarkdown = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedElement () {
-		return this._fixedElement;
-	}
-
-	set fixedElement ( new_value ) {
-		this._fixedElement = new Element(new_value);
+	set fixedMarkdown (new_value) {
+		this.__fixedMarkdown = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedExtension () {
-		return this._fixedExtension;
+	get fixedOid () {
+		return this.__fixedOid;
 	}
 
-	set fixedExtension ( new_value ) {
-		this._fixedExtension = new Extension(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedBackboneElement () {
-		return this._fixedBackboneElement;
-	}
-
-	set fixedBackboneElement ( new_value ) {
-		this._fixedBackboneElement = new BackboneElement(new_value);
+	set fixedOid (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = OidScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field fixedOid`);
+		}
+		this.__fixedOid = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedNarrative () {
-		return this._fixedNarrative;
+	get fixedPositiveInt () {
+		return this.__fixedPositiveInt;
 	}
 
-	set fixedNarrative ( new_value ) {
-		this._fixedNarrative = new Narrative(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAnnotation () {
-		return this._fixedAnnotation;
-	}
-
-	set fixedAnnotation ( new_value ) {
-		this._fixedAnnotation = new Annotation(new_value);
+	set fixedPositiveInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = PositiveIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field fixedPositiveInt`);
+		}
+		this.__fixedPositiveInt = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAttachment () {
-		return this._fixedAttachment;
+	get fixedString () {
+		return this.__fixedString;
 	}
 
-	set fixedAttachment ( new_value ) {
-		this._fixedAttachment = new Attachment(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedIdentifier () {
-		return this._fixedIdentifier;
-	}
-
-	set fixedIdentifier ( new_value ) {
-		this._fixedIdentifier = new Identifier(new_value);
+	set fixedString (new_value) {
+		this.__fixedString = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCodeableConcept () {
-		return this._fixedCodeableConcept;
+	get fixedTime () {
+		return this.__fixedTime;
 	}
 
-	set fixedCodeableConcept ( new_value ) {
-		this._fixedCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCoding () {
-		return this._fixedCoding;
-	}
-
-	set fixedCoding ( new_value ) {
-		this._fixedCoding = new Coding(new_value);
+	set fixedTime (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = TimeScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field fixedTime`);
+		}
+		this.__fixedTime = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedQuantity () {
-		return this._fixedQuantity;
+	get fixedUnsignedInt () {
+		return this.__fixedUnsignedInt;
 	}
 
-	set fixedQuantity ( new_value ) {
-		this._fixedQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDuration () {
-		return this._fixedDuration;
-	}
-
-	set fixedDuration ( new_value ) {
-		this._fixedDuration = new Duration(new_value);
+	set fixedUnsignedInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UnsignedIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field fixedUnsignedInt`);
+		}
+		this.__fixedUnsignedInt = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedSimpleQuantity () {
-		return this._fixedSimpleQuantity;
+	get fixedUri () {
+		return this.__fixedUri;
 	}
 
-	set fixedSimpleQuantity ( new_value ) {
-		this._fixedSimpleQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDistance () {
-		return this._fixedDistance;
-	}
-
-	set fixedDistance ( new_value ) {
-		this._fixedDistance = new Distance(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCount () {
-		return this._fixedCount;
-	}
-
-	set fixedCount ( new_value ) {
-		this._fixedCount = new Count(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedMoney () {
-		return this._fixedMoney;
-	}
-
-	set fixedMoney ( new_value ) {
-		this._fixedMoney = new Money(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAge () {
-		return this._fixedAge;
-	}
-
-	set fixedAge ( new_value ) {
-		this._fixedAge = new Age(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedRange () {
-		return this._fixedRange;
-	}
-
-	set fixedRange ( new_value ) {
-		this._fixedRange = new Range(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedPeriod () {
-		return this._fixedPeriod;
-	}
-
-	set fixedPeriod ( new_value ) {
-		this._fixedPeriod = new Period(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedRatio () {
-		return this._fixedRatio;
-	}
-
-	set fixedRatio ( new_value ) {
-		this._fixedRatio = new Ratio(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedReference () {
-		return this._fixedReference;
-	}
-
-	set fixedReference ( new_value ) {
-		this._fixedReference = new Reference(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedSampledData () {
-		return this._fixedSampledData;
-	}
-
-	set fixedSampledData ( new_value ) {
-		this._fixedSampledData = new SampledData(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedSignature () {
-		return this._fixedSignature;
-	}
-
-	set fixedSignature ( new_value ) {
-		this._fixedSignature = new Signature(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedHumanName () {
-		return this._fixedHumanName;
-	}
-
-	set fixedHumanName ( new_value ) {
-		this._fixedHumanName = new HumanName(new_value);
+	set fixedUri (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field fixedUri`);
+		}
+		this.__fixedUri = new_value;
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedAddress () {
-		return this._fixedAddress;
+		return this.__fixedAddress;
 	}
 
-	set fixedAddress ( new_value ) {
-		this._fixedAddress = new Address(new_value);
+	set fixedAddress (new_value) {
+		const Address = require('./Address');
+		this.__fixedAddress = new Address(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedAge () {
+		return this.__fixedAge;
+	}
+
+	set fixedAge (new_value) {
+		const Age = require('./Age');
+		this.__fixedAge = new Age(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedAnnotation () {
+		return this.__fixedAnnotation;
+	}
+
+	set fixedAnnotation (new_value) {
+		const Annotation = require('./Annotation');
+		this.__fixedAnnotation = new Annotation(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedAttachment () {
+		return this.__fixedAttachment;
+	}
+
+	set fixedAttachment (new_value) {
+		const Attachment = require('./Attachment');
+		this.__fixedAttachment = new Attachment(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedCodeableConcept () {
+		return this.__fixedCodeableConcept;
+	}
+
+	set fixedCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__fixedCodeableConcept = new CodeableConcept(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedCoding () {
+		return this.__fixedCoding;
+	}
+
+	set fixedCoding (new_value) {
+		const Coding = require('./Coding');
+		this.__fixedCoding = new Coding(new_value);
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedContactPoint () {
-		return this._fixedContactPoint;
+		return this.__fixedContactPoint;
 	}
 
-	set fixedContactPoint ( new_value ) {
-		this._fixedContactPoint = new ContactPoint(new_value);
+	set fixedContactPoint (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__fixedContactPoint = new ContactPoint(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedCount () {
+		return this.__fixedCount;
+	}
+
+	set fixedCount (new_value) {
+		const Count = require('./Count');
+		this.__fixedCount = new Count(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedDistance () {
+		return this.__fixedDistance;
+	}
+
+	set fixedDistance (new_value) {
+		const Distance = require('./Distance');
+		this.__fixedDistance = new Distance(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedDuration () {
+		return this.__fixedDuration;
+	}
+
+	set fixedDuration (new_value) {
+		const Duration = require('./Duration');
+		this.__fixedDuration = new Duration(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedHumanName () {
+		return this.__fixedHumanName;
+	}
+
+	set fixedHumanName (new_value) {
+		const HumanName = require('./HumanName');
+		this.__fixedHumanName = new HumanName(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedIdentifier () {
+		return this.__fixedIdentifier;
+	}
+
+	set fixedIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__fixedIdentifier = new Identifier(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedMoney () {
+		return this.__fixedMoney;
+	}
+
+	set fixedMoney (new_value) {
+		const Money = require('./Money');
+		this.__fixedMoney = new Money(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedPeriod () {
+		return this.__fixedPeriod;
+	}
+
+	set fixedPeriod (new_value) {
+		const Period = require('./Period');
+		this.__fixedPeriod = new Period(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedQuantity () {
+		return this.__fixedQuantity;
+	}
+
+	set fixedQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__fixedQuantity = new Quantity(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedRange () {
+		return this.__fixedRange;
+	}
+
+	set fixedRange (new_value) {
+		const Range = require('./Range');
+		this.__fixedRange = new Range(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedRatio () {
+		return this.__fixedRatio;
+	}
+
+	set fixedRatio (new_value) {
+		const Ratio = require('./Ratio');
+		this.__fixedRatio = new Ratio(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedReference () {
+		return this.__fixedReference;
+	}
+
+	set fixedReference (new_value) {
+		const Reference = require('./Reference');
+		this.__fixedReference = new Reference(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedSampledData () {
+		return this.__fixedSampledData;
+	}
+
+	set fixedSampledData (new_value) {
+		const SampledData = require('./SampledData');
+		this.__fixedSampledData = new SampledData(new_value);
+	}
+
+	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
+	get fixedSignature () {
+		return this.__fixedSignature;
+	}
+
+	set fixedSignature (new_value) {
+		const Signature = require('./Signature');
+		this.__fixedSignature = new Signature(new_value);
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedTiming () {
-		return this._fixedTiming;
+		return this.__fixedTiming;
 	}
 
-	set fixedTiming ( new_value ) {
-		this._fixedTiming = new Timing(new_value);
+	set fixedTiming (new_value) {
+		const Timing = require('./Timing');
+		this.__fixedTiming = new Timing(new_value);
 	}
 
 	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
 	get fixedMeta () {
-		return this._fixedMeta;
+		return this.__fixedMeta;
 	}
 
-	set fixedMeta ( new_value ) {
-		this._fixedMeta = new Meta(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedElementDefinition () {
-		return this._fixedElementDefinition;
-	}
-
-	set fixedElementDefinition ( new_value ) {
-		this._fixedElementDefinition = new ElementDefinition(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedContactDetail () {
-		return this._fixedContactDetail;
-	}
-
-	set fixedContactDetail ( new_value ) {
-		this._fixedContactDetail = new ContactDetail(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedContributor () {
-		return this._fixedContributor;
-	}
-
-	set fixedContributor ( new_value ) {
-		this._fixedContributor = new Contributor(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDosage () {
-		return this._fixedDosage;
-	}
-
-	set fixedDosage ( new_value ) {
-		this._fixedDosage = new Dosage(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedRelatedArtifact () {
-		return this._fixedRelatedArtifact;
-	}
-
-	set fixedRelatedArtifact ( new_value ) {
-		this._fixedRelatedArtifact = new RelatedArtifact(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUsageContext () {
-		return this._fixedUsageContext;
-	}
-
-	set fixedUsageContext ( new_value ) {
-		this._fixedUsageContext = new UsageContext(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDataRequirement () {
-		return this._fixedDataRequirement;
-	}
-
-	set fixedDataRequirement ( new_value ) {
-		this._fixedDataRequirement = new DataRequirement(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedParameterDefinition () {
-		return this._fixedParameterDefinition;
-	}
-
-	set fixedParameterDefinition ( new_value ) {
-		this._fixedParameterDefinition = new ParameterDefinition(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedTriggerDefinition () {
-		return this._fixedTriggerDefinition;
-	}
-
-	set fixedTriggerDefinition ( new_value ) {
-		this._fixedTriggerDefinition = new TriggerDefinition(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternBoolean () {
-		return this._patternBoolean;
-	}
-
-	set patternBoolean ( new_value ) {
-		this._patternBoolean = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternInteger () {
-		return this._patternInteger;
-	}
-
-	set patternInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternInteger`);
-		}
-		this._patternInteger = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDecimal () {
-		return this._patternDecimal;
-	}
-
-	set patternDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternDecimal`);
-		}
-		this._patternDecimal = new_value;
+	set fixedMeta (new_value) {
+		const Meta = require('./Meta');
+		this.__fixedMeta = new Meta(new_value);
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternBase64Binary () {
-		return this._patternBase64Binary;
+		return this.__patternBase64Binary;
 	}
 
-	set patternBase64Binary ( new_value ) {
-		this._patternBase64Binary = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternInstant () {
-		return this._patternInstant;
-	}
-
-	set patternInstant ( new_value ) {
-		this._patternInstant = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternString () {
-		return this._patternString;
-	}
-
-	set patternString ( new_value ) {
-		this._patternString = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUri () {
-		return this._patternUri;
-	}
-
-	set patternUri ( new_value ) {
-		this._patternUri = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDate () {
-		return this._patternDate;
-	}
-
-	set patternDate ( new_value ) {
+	set patternBase64Binary (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = Base64BinaryScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternDate`);
+			throw new Error(`Invalid format for ${new_value} on field patternBase64Binary`);
 		}
-		this._patternDate = new_value;
+		this.__patternBase64Binary = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDateTime () {
-		return this._patternDateTime;
+	get patternBoolean () {
+		return this.__patternBoolean;
 	}
 
-	set patternDateTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternDateTime`);
-		}
-		this._patternDateTime = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternTime () {
-		return this._patternTime;
-	}
-
-	set patternTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternTime`);
-		}
-		this._patternTime = new_value;
+	set patternBoolean (new_value) {
+		this.__patternBoolean = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternCode () {
-		return this._patternCode;
+		return this.__patternCode;
 	}
 
-	set patternCode ( new_value ) {
+	set patternCode (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternCode`);
 		}
-		this._patternCode = new_value;
+		this.__patternCode = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternOid () {
-		return this._patternOid;
+	get patternDate () {
+		return this.__patternDate;
 	}
 
-	set patternOid ( new_value ) {
+	set patternDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternOid`);
+			throw new Error(`Invalid format for ${new_value} on field patternDate`);
 		}
-		this._patternOid = new_value;
+		this.__patternDate = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUuid () {
-		return this._patternUuid;
+	get patternDateTime () {
+		return this.__patternDateTime;
 	}
 
-	set patternUuid ( new_value ) {
+	set patternDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternUuid`);
+			throw new Error(`Invalid format for ${new_value} on field patternDateTime`);
 		}
-		this._patternUuid = new_value;
+		this.__patternDateTime = new_value;
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternDecimal () {
+		return this.__patternDecimal;
+	}
+
+	set patternDecimal (new_value) {
+		this.__patternDecimal = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternId () {
-		return this._patternId;
+		return this.__patternId;
 	}
 
-	set patternId ( new_value ) {
+	set patternId (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
+		let pattern = IdScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field patternId`);
 		}
-		this._patternId = new_value;
+		this.__patternId = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUnsignedInt () {
-		return this._patternUnsignedInt;
+	get patternInstant () {
+		return this.__patternInstant;
 	}
 
-	set patternUnsignedInt ( new_value ) {
+	set patternInstant (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = InstantScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternUnsignedInt`);
+			throw new Error(`Invalid format for ${new_value} on field patternInstant`);
 		}
-		this._patternUnsignedInt = new_value;
+		this.__patternInstant = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternPositiveInt () {
-		return this._patternPositiveInt;
+	get patternInteger () {
+		return this.__patternInteger;
 	}
 
-	set patternPositiveInt ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field patternPositiveInt`);
-		}
-		this._patternPositiveInt = new_value;
+	set patternInteger (new_value) {
+		this.__patternInteger = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternMarkdown () {
-		return this._patternMarkdown;
+		return this.__patternMarkdown;
 	}
 
-	set patternMarkdown ( new_value ) {
-		this._patternMarkdown = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternElement () {
-		return this._patternElement;
-	}
-
-	set patternElement ( new_value ) {
-		this._patternElement = new Element(new_value);
+	set patternMarkdown (new_value) {
+		this.__patternMarkdown = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternExtension () {
-		return this._patternExtension;
+	get patternOid () {
+		return this.__patternOid;
 	}
 
-	set patternExtension ( new_value ) {
-		this._patternExtension = new Extension(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternBackboneElement () {
-		return this._patternBackboneElement;
-	}
-
-	set patternBackboneElement ( new_value ) {
-		this._patternBackboneElement = new BackboneElement(new_value);
+	set patternOid (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = OidScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field patternOid`);
+		}
+		this.__patternOid = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternNarrative () {
-		return this._patternNarrative;
+	get patternPositiveInt () {
+		return this.__patternPositiveInt;
 	}
 
-	set patternNarrative ( new_value ) {
-		this._patternNarrative = new Narrative(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAnnotation () {
-		return this._patternAnnotation;
-	}
-
-	set patternAnnotation ( new_value ) {
-		this._patternAnnotation = new Annotation(new_value);
+	set patternPositiveInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = PositiveIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field patternPositiveInt`);
+		}
+		this.__patternPositiveInt = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAttachment () {
-		return this._patternAttachment;
+	get patternString () {
+		return this.__patternString;
 	}
 
-	set patternAttachment ( new_value ) {
-		this._patternAttachment = new Attachment(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternIdentifier () {
-		return this._patternIdentifier;
-	}
-
-	set patternIdentifier ( new_value ) {
-		this._patternIdentifier = new Identifier(new_value);
+	set patternString (new_value) {
+		this.__patternString = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCodeableConcept () {
-		return this._patternCodeableConcept;
+	get patternTime () {
+		return this.__patternTime;
 	}
 
-	set patternCodeableConcept ( new_value ) {
-		this._patternCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCoding () {
-		return this._patternCoding;
-	}
-
-	set patternCoding ( new_value ) {
-		this._patternCoding = new Coding(new_value);
+	set patternTime (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = TimeScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field patternTime`);
+		}
+		this.__patternTime = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternQuantity () {
-		return this._patternQuantity;
+	get patternUnsignedInt () {
+		return this.__patternUnsignedInt;
 	}
 
-	set patternQuantity ( new_value ) {
-		this._patternQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDuration () {
-		return this._patternDuration;
-	}
-
-	set patternDuration ( new_value ) {
-		this._patternDuration = new Duration(new_value);
+	set patternUnsignedInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UnsignedIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field patternUnsignedInt`);
+		}
+		this.__patternUnsignedInt = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternSimpleQuantity () {
-		return this._patternSimpleQuantity;
+	get patternUri () {
+		return this.__patternUri;
 	}
 
-	set patternSimpleQuantity ( new_value ) {
-		this._patternSimpleQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDistance () {
-		return this._patternDistance;
-	}
-
-	set patternDistance ( new_value ) {
-		this._patternDistance = new Distance(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCount () {
-		return this._patternCount;
-	}
-
-	set patternCount ( new_value ) {
-		this._patternCount = new Count(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternMoney () {
-		return this._patternMoney;
-	}
-
-	set patternMoney ( new_value ) {
-		this._patternMoney = new Money(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAge () {
-		return this._patternAge;
-	}
-
-	set patternAge ( new_value ) {
-		this._patternAge = new Age(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternRange () {
-		return this._patternRange;
-	}
-
-	set patternRange ( new_value ) {
-		this._patternRange = new Range(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternPeriod () {
-		return this._patternPeriod;
-	}
-
-	set patternPeriod ( new_value ) {
-		this._patternPeriod = new Period(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternRatio () {
-		return this._patternRatio;
-	}
-
-	set patternRatio ( new_value ) {
-		this._patternRatio = new Ratio(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternReference () {
-		return this._patternReference;
-	}
-
-	set patternReference ( new_value ) {
-		this._patternReference = new Reference(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternSampledData () {
-		return this._patternSampledData;
-	}
-
-	set patternSampledData ( new_value ) {
-		this._patternSampledData = new SampledData(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternSignature () {
-		return this._patternSignature;
-	}
-
-	set patternSignature ( new_value ) {
-		this._patternSignature = new Signature(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternHumanName () {
-		return this._patternHumanName;
-	}
-
-	set patternHumanName ( new_value ) {
-		this._patternHumanName = new HumanName(new_value);
+	set patternUri (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field patternUri`);
+		}
+		this.__patternUri = new_value;
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternAddress () {
-		return this._patternAddress;
+		return this.__patternAddress;
 	}
 
-	set patternAddress ( new_value ) {
-		this._patternAddress = new Address(new_value);
+	set patternAddress (new_value) {
+		const Address = require('./Address');
+		this.__patternAddress = new Address(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternAge () {
+		return this.__patternAge;
+	}
+
+	set patternAge (new_value) {
+		const Age = require('./Age');
+		this.__patternAge = new Age(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternAnnotation () {
+		return this.__patternAnnotation;
+	}
+
+	set patternAnnotation (new_value) {
+		const Annotation = require('./Annotation');
+		this.__patternAnnotation = new Annotation(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternAttachment () {
+		return this.__patternAttachment;
+	}
+
+	set patternAttachment (new_value) {
+		const Attachment = require('./Attachment');
+		this.__patternAttachment = new Attachment(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternCodeableConcept () {
+		return this.__patternCodeableConcept;
+	}
+
+	set patternCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__patternCodeableConcept = new CodeableConcept(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternCoding () {
+		return this.__patternCoding;
+	}
+
+	set patternCoding (new_value) {
+		const Coding = require('./Coding');
+		this.__patternCoding = new Coding(new_value);
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternContactPoint () {
-		return this._patternContactPoint;
+		return this.__patternContactPoint;
 	}
 
-	set patternContactPoint ( new_value ) {
-		this._patternContactPoint = new ContactPoint(new_value);
+	set patternContactPoint (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__patternContactPoint = new ContactPoint(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternCount () {
+		return this.__patternCount;
+	}
+
+	set patternCount (new_value) {
+		const Count = require('./Count');
+		this.__patternCount = new Count(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternDistance () {
+		return this.__patternDistance;
+	}
+
+	set patternDistance (new_value) {
+		const Distance = require('./Distance');
+		this.__patternDistance = new Distance(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternDuration () {
+		return this.__patternDuration;
+	}
+
+	set patternDuration (new_value) {
+		const Duration = require('./Duration');
+		this.__patternDuration = new Duration(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternHumanName () {
+		return this.__patternHumanName;
+	}
+
+	set patternHumanName (new_value) {
+		const HumanName = require('./HumanName');
+		this.__patternHumanName = new HumanName(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternIdentifier () {
+		return this.__patternIdentifier;
+	}
+
+	set patternIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__patternIdentifier = new Identifier(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternMoney () {
+		return this.__patternMoney;
+	}
+
+	set patternMoney (new_value) {
+		const Money = require('./Money');
+		this.__patternMoney = new Money(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternPeriod () {
+		return this.__patternPeriod;
+	}
+
+	set patternPeriod (new_value) {
+		const Period = require('./Period');
+		this.__patternPeriod = new Period(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternQuantity () {
+		return this.__patternQuantity;
+	}
+
+	set patternQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__patternQuantity = new Quantity(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternRange () {
+		return this.__patternRange;
+	}
+
+	set patternRange (new_value) {
+		const Range = require('./Range');
+		this.__patternRange = new Range(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternRatio () {
+		return this.__patternRatio;
+	}
+
+	set patternRatio (new_value) {
+		const Ratio = require('./Ratio');
+		this.__patternRatio = new Ratio(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternReference () {
+		return this.__patternReference;
+	}
+
+	set patternReference (new_value) {
+		const Reference = require('./Reference');
+		this.__patternReference = new Reference(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternSampledData () {
+		return this.__patternSampledData;
+	}
+
+	set patternSampledData (new_value) {
+		const SampledData = require('./SampledData');
+		this.__patternSampledData = new SampledData(new_value);
+	}
+
+	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
+	get patternSignature () {
+		return this.__patternSignature;
+	}
+
+	set patternSignature (new_value) {
+		const Signature = require('./Signature');
+		this.__patternSignature = new Signature(new_value);
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternTiming () {
-		return this._patternTiming;
+		return this.__patternTiming;
 	}
 
-	set patternTiming ( new_value ) {
-		this._patternTiming = new Timing(new_value);
+	set patternTiming (new_value) {
+		const Timing = require('./Timing');
+		this.__patternTiming = new Timing(new_value);
 	}
 
 	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
 	get patternMeta () {
-		return this._patternMeta;
+		return this.__patternMeta;
 	}
 
-	set patternMeta ( new_value ) {
-		this._patternMeta = new Meta(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternElementDefinition () {
-		return this._patternElementDefinition;
-	}
-
-	set patternElementDefinition ( new_value ) {
-		this._patternElementDefinition = new ElementDefinition(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternContactDetail () {
-		return this._patternContactDetail;
-	}
-
-	set patternContactDetail ( new_value ) {
-		this._patternContactDetail = new ContactDetail(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternContributor () {
-		return this._patternContributor;
-	}
-
-	set patternContributor ( new_value ) {
-		this._patternContributor = new Contributor(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDosage () {
-		return this._patternDosage;
-	}
-
-	set patternDosage ( new_value ) {
-		this._patternDosage = new Dosage(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternRelatedArtifact () {
-		return this._patternRelatedArtifact;
-	}
-
-	set patternRelatedArtifact ( new_value ) {
-		this._patternRelatedArtifact = new RelatedArtifact(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUsageContext () {
-		return this._patternUsageContext;
-	}
-
-	set patternUsageContext ( new_value ) {
-		this._patternUsageContext = new UsageContext(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDataRequirement () {
-		return this._patternDataRequirement;
-	}
-
-	set patternDataRequirement ( new_value ) {
-		this._patternDataRequirement = new DataRequirement(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternParameterDefinition () {
-		return this._patternParameterDefinition;
-	}
-
-	set patternParameterDefinition ( new_value ) {
-		this._patternParameterDefinition = new ParameterDefinition(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternTriggerDefinition () {
-		return this._patternTriggerDefinition;
-	}
-
-	set patternTriggerDefinition ( new_value ) {
-		this._patternTriggerDefinition = new TriggerDefinition(new_value);
+	set patternMeta (new_value) {
+		const Meta = require('./Meta');
+		this.__patternMeta = new Meta(new_value);
 	}
 
 	// A sample value for this element demonstrating the type of information that would typically be found in the element.
 	get example () {
-		return this._example;
+		return this.__example;
 	}
 
-	set example ( new_value ) {
-		this._example = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Example(val)) : [new ElementDefinition_Example(new_value)];
+	set example (new_value) {
+		const ElementDefinitionExample = require('./ElementDefinitionExample');
+		this.__example = Array.isArray(new_value) ? new_value.map(val => new ElementDefinitionExample(val)) : [new ElementDefinitionExample(new_value)];
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueDate () {
-		return this._minValueDate;
+		return this.__minValueDate;
 	}
 
-	set minValueDate ( new_value ) {
+	set minValueDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDate`);
 		}
-		this._minValueDate = new_value;
+		this.__minValueDate = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueDateTime () {
-		return this._minValueDateTime;
+		return this.__minValueDateTime;
 	}
 
-	set minValueDateTime ( new_value ) {
+	set minValueDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueDateTime`);
 		}
-		this._minValueDateTime = new_value;
+		this.__minValueDateTime = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueInstant () {
-		return this._minValueInstant;
+		return this.__minValueInstant;
 	}
 
-	set minValueInstant ( new_value ) {
-		this._minValueInstant = new_value;
+	set minValueInstant (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = InstantScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field minValueInstant`);
+		}
+		this.__minValueInstant = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueTime () {
-		return this._minValueTime;
+		return this.__minValueTime;
 	}
 
-	set minValueTime ( new_value ) {
+	set minValueTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
+		let pattern = TimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueTime`);
 		}
-		this._minValueTime = new_value;
+		this.__minValueTime = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueDecimal () {
-		return this._minValueDecimal;
+		return this.__minValueDecimal;
 	}
 
-	set minValueDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field minValueDecimal`);
-		}
-		this._minValueDecimal = new_value;
+	set minValueDecimal (new_value) {
+		this.__minValueDecimal = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueInteger () {
-		return this._minValueInteger;
+		return this.__minValueInteger;
 	}
 
-	set minValueInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field minValueInteger`);
-		}
-		this._minValueInteger = new_value;
+	set minValueInteger (new_value) {
+		this.__minValueInteger = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValuePositiveInt () {
-		return this._minValuePositiveInt;
+		return this.__minValuePositiveInt;
 	}
 
-	set minValuePositiveInt ( new_value ) {
+	set minValuePositiveInt (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValuePositiveInt`);
 		}
-		this._minValuePositiveInt = new_value;
+		this.__minValuePositiveInt = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueUnsignedInt () {
-		return this._minValueUnsignedInt;
+		return this.__minValueUnsignedInt;
 	}
 
-	set minValueUnsignedInt ( new_value ) {
+	set minValueUnsignedInt (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = UnsignedIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field minValueUnsignedInt`);
 		}
-		this._minValueUnsignedInt = new_value;
+		this.__minValueUnsignedInt = new_value;
 	}
 
 	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get minValueQuantity () {
-		return this._minValueQuantity;
+		return this.__minValueQuantity;
 	}
 
-	set minValueQuantity ( new_value ) {
-		this._minValueQuantity = new Quantity(new_value);
+	set minValueQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__minValueQuantity = new Quantity(new_value);
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueDate () {
-		return this._maxValueDate;
+		return this.__maxValueDate;
 	}
 
-	set maxValueDate ( new_value ) {
+	set maxValueDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDate`);
 		}
-		this._maxValueDate = new_value;
+		this.__maxValueDate = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueDateTime () {
-		return this._maxValueDateTime;
+		return this.__maxValueDateTime;
 	}
 
-	set maxValueDateTime ( new_value ) {
+	set maxValueDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueDateTime`);
 		}
-		this._maxValueDateTime = new_value;
+		this.__maxValueDateTime = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueInstant () {
-		return this._maxValueInstant;
+		return this.__maxValueInstant;
 	}
 
-	set maxValueInstant ( new_value ) {
-		this._maxValueInstant = new_value;
+	set maxValueInstant (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = InstantScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field maxValueInstant`);
+		}
+		this.__maxValueInstant = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueTime () {
-		return this._maxValueTime;
+		return this.__maxValueTime;
 	}
 
-	set maxValueTime ( new_value ) {
+	set maxValueTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
+		let pattern = TimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueTime`);
 		}
-		this._maxValueTime = new_value;
+		this.__maxValueTime = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueDecimal () {
-		return this._maxValueDecimal;
+		return this.__maxValueDecimal;
 	}
 
-	set maxValueDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueDecimal`);
-		}
-		this._maxValueDecimal = new_value;
+	set maxValueDecimal (new_value) {
+		this.__maxValueDecimal = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueInteger () {
-		return this._maxValueInteger;
+		return this.__maxValueInteger;
 	}
 
-	set maxValueInteger ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueInteger`);
-		}
-		this._maxValueInteger = new_value;
+	set maxValueInteger (new_value) {
+		this.__maxValueInteger = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValuePositiveInt () {
-		return this._maxValuePositiveInt;
+		return this.__maxValuePositiveInt;
 	}
 
-	set maxValuePositiveInt ( new_value ) {
+	set maxValuePositiveInt (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValuePositiveInt`);
 		}
-		this._maxValuePositiveInt = new_value;
+		this.__maxValuePositiveInt = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueUnsignedInt () {
-		return this._maxValueUnsignedInt;
+		return this.__maxValueUnsignedInt;
 	}
 
-	set maxValueUnsignedInt ( new_value ) {
+	set maxValueUnsignedInt (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = UnsignedIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field maxValueUnsignedInt`);
 		}
-		this._maxValueUnsignedInt = new_value;
+		this.__maxValueUnsignedInt = new_value;
 	}
 
 	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
 	get maxValueQuantity () {
-		return this._maxValueQuantity;
+		return this.__maxValueQuantity;
 	}
 
-	set maxValueQuantity ( new_value ) {
-		this._maxValueQuantity = new Quantity(new_value);
+	set maxValueQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__maxValueQuantity = new Quantity(new_value);
 	}
 
 	// Indicates the maximum length in characters that is permitted to be present in conformant instances and which is expected to be supported by conformant consumers that support the element.
 	get maxLength () {
-		return this._maxLength;
+		return this.__maxLength;
 	}
 
-	set maxLength ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field maxLength`);
-		}
-		this._maxLength = new_value;
+	set maxLength (new_value) {
+		this.__maxLength = new_value;
 	}
 
 	// A reference to an invariant that may make additional statements about the cardinality or value in the instance.
 	get condition () {
-		return this._condition;
+		return this.__condition;
 	}
 
-	set condition ( new_value ) {
-		this._condition = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
+	set condition (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = IdScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field condition`);
+		}
+		this.__condition = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance.
 	get constraint () {
-		return this._constraint;
+		return this.__constraint;
 	}
 
-	set constraint ( new_value ) {
-		this._constraint = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Constraint(val)) : [new ElementDefinition_Constraint(new_value)];
+	set constraint (new_value) {
+		const ElementDefinitionConstraint = require('./ElementDefinitionConstraint');
+		this.__constraint = Array.isArray(new_value) ? new_value.map(val => new ElementDefinitionConstraint(val)) : [new ElementDefinitionConstraint(new_value)];
 	}
 
-	// If true, implementations that produce or consume resources SHALL provide "support" for the element in some meaningful way.  If false, the element may be ignored and not supported.
+	// If true, implementations that produce or consume resources SHALL provide \'support\' for the element in some meaningful way.  If false, the element may be ignored and not supported.
 	get mustSupport () {
-		return this._mustSupport;
+		return this.__mustSupport;
 	}
 
-	set mustSupport ( new_value ) {
-		this._mustSupport = new_value;
+	set mustSupport (new_value) {
+		this.__mustSupport = new_value;
 	}
 
 	// If true, the value of this element affects the interpretation of the element or resource that contains it, and the value of the element cannot be ignored. Typically, this is used for status, negation and qualification codes. The effect of this is that the element cannot be ignored by systems: they SHALL either recognize the element and process it, and/or a pre-determination has been made that it is not relevant to their particular system.
 	get isModifier () {
-		return this._isModifier;
+		return this.__isModifier;
 	}
 
-	set isModifier ( new_value ) {
-		this._isModifier = new_value;
+	set isModifier (new_value) {
+		this.__isModifier = new_value;
 	}
 
 	// Whether the element should be included if a client requests a search with the parameter _summary=true.
 	get isSummary () {
-		return this._isSummary;
+		return this.__isSummary;
 	}
 
-	set isSummary ( new_value ) {
-		this._isSummary = new_value;
+	set isSummary (new_value) {
+		this.__isSummary = new_value;
 	}
 
 	// Binds to a value set if this element is coded (code, Coding, CodeableConcept, Quantity), or the data types (string, uri).
 	get binding () {
-		return this._binding;
+		return this.__binding;
 	}
 
-	set binding ( new_value ) {
-		this._binding = new ElementDefinition_Binding(new_value);
+	set binding (new_value) {
+		const ElementDefinitionBinding = require('./ElementDefinitionBinding');
+		this.__binding = new ElementDefinitionBinding(new_value);
 	}
 
 	// Identifies a concept from an external specification that roughly corresponds to this element.
 	get mapping () {
-		return this._mapping;
+		return this.__mapping;
 	}
 
-	set mapping ( new_value ) {
-		this._mapping = Array.isArray(new_value) ? new_value.map(val => new ElementDefinition_Mapping(val)) : [new ElementDefinition_Mapping(new_value)];
+	set mapping (new_value) {
+		const ElementDefinitionMapping = require('./ElementDefinitionMapping');
+		this.__mapping = Array.isArray(new_value) ? new_value.map(val => new ElementDefinitionMapping(val)) : [new ElementDefinitionMapping(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			path: this._path,
-			representation: this._representation,
-			sliceName: this._sliceName,
-			label: this._label,
-			code: this._code && this._code.map(v => v.toJSON()),
-			slicing: this._slicing && this._slicing.toJSON(),
-			short: this._short,
-			definition: this._definition,
-			comment: this._comment,
-			requirements: this._requirements,
-			alias: this._alias,
-			min: this._min,
-			max: this._max,
-			base: this._base && this._base.toJSON(),
-			contentReference: this._contentReference,
-			type: this._type && this._type.map(v => v.toJSON()),
-			defaultValueBoolean: this._defaultValueBoolean,
-			defaultValueInteger: this._defaultValueInteger,
-			defaultValueDecimal: this._defaultValueDecimal,
-			defaultValueBase64Binary: this._defaultValueBase64Binary,
-			defaultValueInstant: this._defaultValueInstant,
-			defaultValueString: this._defaultValueString,
-			defaultValueUri: this._defaultValueUri,
-			defaultValueDate: this._defaultValueDate,
-			defaultValueDateTime: this._defaultValueDateTime,
-			defaultValueTime: this._defaultValueTime,
-			defaultValueCode: this._defaultValueCode,
-			defaultValueOid: this._defaultValueOid,
-			defaultValueUuid: this._defaultValueUuid,
-			defaultValueId: this._defaultValueId,
-			defaultValueUnsignedInt: this._defaultValueUnsignedInt,
-			defaultValuePositiveInt: this._defaultValuePositiveInt,
-			defaultValueMarkdown: this._defaultValueMarkdown,
-			defaultValueElement: this._defaultValueElement && this._defaultValueElement.toJSON(),
-			defaultValueExtension: this._defaultValueExtension && this._defaultValueExtension.toJSON(),
-			defaultValueBackboneElement: this._defaultValueBackboneElement && this._defaultValueBackboneElement.toJSON(),
-			defaultValueNarrative: this._defaultValueNarrative && this._defaultValueNarrative.toJSON(),
-			defaultValueAnnotation: this._defaultValueAnnotation && this._defaultValueAnnotation.toJSON(),
-			defaultValueAttachment: this._defaultValueAttachment && this._defaultValueAttachment.toJSON(),
-			defaultValueIdentifier: this._defaultValueIdentifier && this._defaultValueIdentifier.toJSON(),
-			defaultValueCodeableConcept: this._defaultValueCodeableConcept && this._defaultValueCodeableConcept.toJSON(),
-			defaultValueCoding: this._defaultValueCoding && this._defaultValueCoding.toJSON(),
-			defaultValueQuantity: this._defaultValueQuantity && this._defaultValueQuantity.toJSON(),
-			defaultValueDuration: this._defaultValueDuration && this._defaultValueDuration.toJSON(),
-			defaultValueSimpleQuantity: this._defaultValueSimpleQuantity && this._defaultValueSimpleQuantity.toJSON(),
-			defaultValueDistance: this._defaultValueDistance && this._defaultValueDistance.toJSON(),
-			defaultValueCount: this._defaultValueCount && this._defaultValueCount.toJSON(),
-			defaultValueMoney: this._defaultValueMoney && this._defaultValueMoney.toJSON(),
-			defaultValueAge: this._defaultValueAge && this._defaultValueAge.toJSON(),
-			defaultValueRange: this._defaultValueRange && this._defaultValueRange.toJSON(),
-			defaultValuePeriod: this._defaultValuePeriod && this._defaultValuePeriod.toJSON(),
-			defaultValueRatio: this._defaultValueRatio && this._defaultValueRatio.toJSON(),
-			defaultValueReference: this._defaultValueReference && this._defaultValueReference.toJSON(),
-			defaultValueSampledData: this._defaultValueSampledData && this._defaultValueSampledData.toJSON(),
-			defaultValueSignature: this._defaultValueSignature && this._defaultValueSignature.toJSON(),
-			defaultValueHumanName: this._defaultValueHumanName && this._defaultValueHumanName.toJSON(),
-			defaultValueAddress: this._defaultValueAddress && this._defaultValueAddress.toJSON(),
-			defaultValueContactPoint: this._defaultValueContactPoint && this._defaultValueContactPoint.toJSON(),
-			defaultValueTiming: this._defaultValueTiming && this._defaultValueTiming.toJSON(),
-			defaultValueMeta: this._defaultValueMeta && this._defaultValueMeta.toJSON(),
-			defaultValueElementDefinition: this._defaultValueElementDefinition && this._defaultValueElementDefinition.toJSON(),
-			defaultValueContactDetail: this._defaultValueContactDetail && this._defaultValueContactDetail.toJSON(),
-			defaultValueContributor: this._defaultValueContributor && this._defaultValueContributor.toJSON(),
-			defaultValueDosage: this._defaultValueDosage && this._defaultValueDosage.toJSON(),
-			defaultValueRelatedArtifact: this._defaultValueRelatedArtifact && this._defaultValueRelatedArtifact.toJSON(),
-			defaultValueUsageContext: this._defaultValueUsageContext && this._defaultValueUsageContext.toJSON(),
-			defaultValueDataRequirement: this._defaultValueDataRequirement && this._defaultValueDataRequirement.toJSON(),
-			defaultValueParameterDefinition: this._defaultValueParameterDefinition && this._defaultValueParameterDefinition.toJSON(),
-			defaultValueTriggerDefinition: this._defaultValueTriggerDefinition && this._defaultValueTriggerDefinition.toJSON(),
-			meaningWhenMissing: this._meaningWhenMissing,
-			orderMeaning: this._orderMeaning,
-			fixedBoolean: this._fixedBoolean,
-			fixedInteger: this._fixedInteger,
-			fixedDecimal: this._fixedDecimal,
-			fixedBase64Binary: this._fixedBase64Binary,
-			fixedInstant: this._fixedInstant,
-			fixedString: this._fixedString,
-			fixedUri: this._fixedUri,
-			fixedDate: this._fixedDate,
-			fixedDateTime: this._fixedDateTime,
-			fixedTime: this._fixedTime,
-			fixedCode: this._fixedCode,
-			fixedOid: this._fixedOid,
-			fixedUuid: this._fixedUuid,
-			fixedId: this._fixedId,
-			fixedUnsignedInt: this._fixedUnsignedInt,
-			fixedPositiveInt: this._fixedPositiveInt,
-			fixedMarkdown: this._fixedMarkdown,
-			fixedElement: this._fixedElement && this._fixedElement.toJSON(),
-			fixedExtension: this._fixedExtension && this._fixedExtension.toJSON(),
-			fixedBackboneElement: this._fixedBackboneElement && this._fixedBackboneElement.toJSON(),
-			fixedNarrative: this._fixedNarrative && this._fixedNarrative.toJSON(),
-			fixedAnnotation: this._fixedAnnotation && this._fixedAnnotation.toJSON(),
-			fixedAttachment: this._fixedAttachment && this._fixedAttachment.toJSON(),
-			fixedIdentifier: this._fixedIdentifier && this._fixedIdentifier.toJSON(),
-			fixedCodeableConcept: this._fixedCodeableConcept && this._fixedCodeableConcept.toJSON(),
-			fixedCoding: this._fixedCoding && this._fixedCoding.toJSON(),
-			fixedQuantity: this._fixedQuantity && this._fixedQuantity.toJSON(),
-			fixedDuration: this._fixedDuration && this._fixedDuration.toJSON(),
-			fixedSimpleQuantity: this._fixedSimpleQuantity && this._fixedSimpleQuantity.toJSON(),
-			fixedDistance: this._fixedDistance && this._fixedDistance.toJSON(),
-			fixedCount: this._fixedCount && this._fixedCount.toJSON(),
-			fixedMoney: this._fixedMoney && this._fixedMoney.toJSON(),
-			fixedAge: this._fixedAge && this._fixedAge.toJSON(),
-			fixedRange: this._fixedRange && this._fixedRange.toJSON(),
-			fixedPeriod: this._fixedPeriod && this._fixedPeriod.toJSON(),
-			fixedRatio: this._fixedRatio && this._fixedRatio.toJSON(),
-			fixedReference: this._fixedReference && this._fixedReference.toJSON(),
-			fixedSampledData: this._fixedSampledData && this._fixedSampledData.toJSON(),
-			fixedSignature: this._fixedSignature && this._fixedSignature.toJSON(),
-			fixedHumanName: this._fixedHumanName && this._fixedHumanName.toJSON(),
-			fixedAddress: this._fixedAddress && this._fixedAddress.toJSON(),
-			fixedContactPoint: this._fixedContactPoint && this._fixedContactPoint.toJSON(),
-			fixedTiming: this._fixedTiming && this._fixedTiming.toJSON(),
-			fixedMeta: this._fixedMeta && this._fixedMeta.toJSON(),
-			fixedElementDefinition: this._fixedElementDefinition && this._fixedElementDefinition.toJSON(),
-			fixedContactDetail: this._fixedContactDetail && this._fixedContactDetail.toJSON(),
-			fixedContributor: this._fixedContributor && this._fixedContributor.toJSON(),
-			fixedDosage: this._fixedDosage && this._fixedDosage.toJSON(),
-			fixedRelatedArtifact: this._fixedRelatedArtifact && this._fixedRelatedArtifact.toJSON(),
-			fixedUsageContext: this._fixedUsageContext && this._fixedUsageContext.toJSON(),
-			fixedDataRequirement: this._fixedDataRequirement && this._fixedDataRequirement.toJSON(),
-			fixedParameterDefinition: this._fixedParameterDefinition && this._fixedParameterDefinition.toJSON(),
-			fixedTriggerDefinition: this._fixedTriggerDefinition && this._fixedTriggerDefinition.toJSON(),
-			patternBoolean: this._patternBoolean,
-			patternInteger: this._patternInteger,
-			patternDecimal: this._patternDecimal,
-			patternBase64Binary: this._patternBase64Binary,
-			patternInstant: this._patternInstant,
-			patternString: this._patternString,
-			patternUri: this._patternUri,
-			patternDate: this._patternDate,
-			patternDateTime: this._patternDateTime,
-			patternTime: this._patternTime,
-			patternCode: this._patternCode,
-			patternOid: this._patternOid,
-			patternUuid: this._patternUuid,
-			patternId: this._patternId,
-			patternUnsignedInt: this._patternUnsignedInt,
-			patternPositiveInt: this._patternPositiveInt,
-			patternMarkdown: this._patternMarkdown,
-			patternElement: this._patternElement && this._patternElement.toJSON(),
-			patternExtension: this._patternExtension && this._patternExtension.toJSON(),
-			patternBackboneElement: this._patternBackboneElement && this._patternBackboneElement.toJSON(),
-			patternNarrative: this._patternNarrative && this._patternNarrative.toJSON(),
-			patternAnnotation: this._patternAnnotation && this._patternAnnotation.toJSON(),
-			patternAttachment: this._patternAttachment && this._patternAttachment.toJSON(),
-			patternIdentifier: this._patternIdentifier && this._patternIdentifier.toJSON(),
-			patternCodeableConcept: this._patternCodeableConcept && this._patternCodeableConcept.toJSON(),
-			patternCoding: this._patternCoding && this._patternCoding.toJSON(),
-			patternQuantity: this._patternQuantity && this._patternQuantity.toJSON(),
-			patternDuration: this._patternDuration && this._patternDuration.toJSON(),
-			patternSimpleQuantity: this._patternSimpleQuantity && this._patternSimpleQuantity.toJSON(),
-			patternDistance: this._patternDistance && this._patternDistance.toJSON(),
-			patternCount: this._patternCount && this._patternCount.toJSON(),
-			patternMoney: this._patternMoney && this._patternMoney.toJSON(),
-			patternAge: this._patternAge && this._patternAge.toJSON(),
-			patternRange: this._patternRange && this._patternRange.toJSON(),
-			patternPeriod: this._patternPeriod && this._patternPeriod.toJSON(),
-			patternRatio: this._patternRatio && this._patternRatio.toJSON(),
-			patternReference: this._patternReference && this._patternReference.toJSON(),
-			patternSampledData: this._patternSampledData && this._patternSampledData.toJSON(),
-			patternSignature: this._patternSignature && this._patternSignature.toJSON(),
-			patternHumanName: this._patternHumanName && this._patternHumanName.toJSON(),
-			patternAddress: this._patternAddress && this._patternAddress.toJSON(),
-			patternContactPoint: this._patternContactPoint && this._patternContactPoint.toJSON(),
-			patternTiming: this._patternTiming && this._patternTiming.toJSON(),
-			patternMeta: this._patternMeta && this._patternMeta.toJSON(),
-			patternElementDefinition: this._patternElementDefinition && this._patternElementDefinition.toJSON(),
-			patternContactDetail: this._patternContactDetail && this._patternContactDetail.toJSON(),
-			patternContributor: this._patternContributor && this._patternContributor.toJSON(),
-			patternDosage: this._patternDosage && this._patternDosage.toJSON(),
-			patternRelatedArtifact: this._patternRelatedArtifact && this._patternRelatedArtifact.toJSON(),
-			patternUsageContext: this._patternUsageContext && this._patternUsageContext.toJSON(),
-			patternDataRequirement: this._patternDataRequirement && this._patternDataRequirement.toJSON(),
-			patternParameterDefinition: this._patternParameterDefinition && this._patternParameterDefinition.toJSON(),
-			patternTriggerDefinition: this._patternTriggerDefinition && this._patternTriggerDefinition.toJSON(),
-			example: this._example && this._example.map(v => v.toJSON()),
-			minValueDate: this._minValueDate,
-			minValueDateTime: this._minValueDateTime,
-			minValueInstant: this._minValueInstant,
-			minValueTime: this._minValueTime,
-			minValueDecimal: this._minValueDecimal,
-			minValueInteger: this._minValueInteger,
-			minValuePositiveInt: this._minValuePositiveInt,
-			minValueUnsignedInt: this._minValueUnsignedInt,
-			minValueQuantity: this._minValueQuantity && this._minValueQuantity.toJSON(),
-			maxValueDate: this._maxValueDate,
-			maxValueDateTime: this._maxValueDateTime,
-			maxValueInstant: this._maxValueInstant,
-			maxValueTime: this._maxValueTime,
-			maxValueDecimal: this._maxValueDecimal,
-			maxValueInteger: this._maxValueInteger,
-			maxValuePositiveInt: this._maxValuePositiveInt,
-			maxValueUnsignedInt: this._maxValueUnsignedInt,
-			maxValueQuantity: this._maxValueQuantity && this._maxValueQuantity.toJSON(),
-			maxLength: this._maxLength,
-			condition: this._condition,
-			constraint: this._constraint && this._constraint.map(v => v.toJSON()),
-			mustSupport: this._mustSupport,
-			isModifier: this._isModifier,
-			isSummary: this._isSummary,
-			binding: this._binding && this._binding.toJSON(),
-			mapping: this._mapping && this._mapping.map(v => v.toJSON())
+			path: this.__path,
+			representation: this.__representation,
+			sliceName: this.__sliceName,
+			label: this.__label,
+			code: this.__code && this.__code.map(v => v.toJSON()),
+			slicing: this.__slicing && this.__slicing.toJSON(),
+			short: this.__short,
+			definition: this.__definition,
+			comment: this.__comment,
+			requirements: this.__requirements,
+			alias: this.__alias,
+			min: this.__min,
+			max: this.__max,
+			base: this.__base && this.__base.toJSON(),
+			contentReference: this.__contentReference,
+			type: this.__type && this.__type.map(v => v.toJSON()),
+			defaultValueBase64Binary: this.__defaultValueBase64Binary,
+			defaultValueBoolean: this.__defaultValueBoolean,
+			defaultValueCode: this.__defaultValueCode,
+			defaultValueDate: this.__defaultValueDate,
+			defaultValueDateTime: this.__defaultValueDateTime,
+			defaultValueDecimal: this.__defaultValueDecimal,
+			defaultValueId: this.__defaultValueId,
+			defaultValueInstant: this.__defaultValueInstant,
+			defaultValueInteger: this.__defaultValueInteger,
+			defaultValueMarkdown: this.__defaultValueMarkdown,
+			defaultValueOid: this.__defaultValueOid,
+			defaultValuePositiveInt: this.__defaultValuePositiveInt,
+			defaultValueString: this.__defaultValueString,
+			defaultValueTime: this.__defaultValueTime,
+			defaultValueUnsignedInt: this.__defaultValueUnsignedInt,
+			defaultValueUri: this.__defaultValueUri,
+			defaultValueAddress: this.__defaultValueAddress && this.__defaultValueAddress.toJSON(),
+			defaultValueAge: this.__defaultValueAge && this.__defaultValueAge.toJSON(),
+			defaultValueAnnotation: this.__defaultValueAnnotation && this.__defaultValueAnnotation.toJSON(),
+			defaultValueAttachment: this.__defaultValueAttachment && this.__defaultValueAttachment.toJSON(),
+			defaultValueCodeableConcept: this.__defaultValueCodeableConcept && this.__defaultValueCodeableConcept.toJSON(),
+			defaultValueCoding: this.__defaultValueCoding && this.__defaultValueCoding.toJSON(),
+			defaultValueContactPoint: this.__defaultValueContactPoint && this.__defaultValueContactPoint.toJSON(),
+			defaultValueCount: this.__defaultValueCount && this.__defaultValueCount.toJSON(),
+			defaultValueDistance: this.__defaultValueDistance && this.__defaultValueDistance.toJSON(),
+			defaultValueDuration: this.__defaultValueDuration && this.__defaultValueDuration.toJSON(),
+			defaultValueHumanName: this.__defaultValueHumanName && this.__defaultValueHumanName.toJSON(),
+			defaultValueIdentifier: this.__defaultValueIdentifier && this.__defaultValueIdentifier.toJSON(),
+			defaultValueMoney: this.__defaultValueMoney && this.__defaultValueMoney.toJSON(),
+			defaultValuePeriod: this.__defaultValuePeriod && this.__defaultValuePeriod.toJSON(),
+			defaultValueQuantity: this.__defaultValueQuantity && this.__defaultValueQuantity.toJSON(),
+			defaultValueRange: this.__defaultValueRange && this.__defaultValueRange.toJSON(),
+			defaultValueRatio: this.__defaultValueRatio && this.__defaultValueRatio.toJSON(),
+			defaultValueReference: this.__defaultValueReference && this.__defaultValueReference.toJSON(),
+			defaultValueSampledData: this.__defaultValueSampledData && this.__defaultValueSampledData.toJSON(),
+			defaultValueSignature: this.__defaultValueSignature && this.__defaultValueSignature.toJSON(),
+			defaultValueTiming: this.__defaultValueTiming && this.__defaultValueTiming.toJSON(),
+			defaultValueMeta: this.__defaultValueMeta && this.__defaultValueMeta.toJSON(),
+			meaningWhenMissing: this.__meaningWhenMissing,
+			orderMeaning: this.__orderMeaning,
+			fixedBase64Binary: this.__fixedBase64Binary,
+			fixedBoolean: this.__fixedBoolean,
+			fixedCode: this.__fixedCode,
+			fixedDate: this.__fixedDate,
+			fixedDateTime: this.__fixedDateTime,
+			fixedDecimal: this.__fixedDecimal,
+			fixedId: this.__fixedId,
+			fixedInstant: this.__fixedInstant,
+			fixedInteger: this.__fixedInteger,
+			fixedMarkdown: this.__fixedMarkdown,
+			fixedOid: this.__fixedOid,
+			fixedPositiveInt: this.__fixedPositiveInt,
+			fixedString: this.__fixedString,
+			fixedTime: this.__fixedTime,
+			fixedUnsignedInt: this.__fixedUnsignedInt,
+			fixedUri: this.__fixedUri,
+			fixedAddress: this.__fixedAddress && this.__fixedAddress.toJSON(),
+			fixedAge: this.__fixedAge && this.__fixedAge.toJSON(),
+			fixedAnnotation: this.__fixedAnnotation && this.__fixedAnnotation.toJSON(),
+			fixedAttachment: this.__fixedAttachment && this.__fixedAttachment.toJSON(),
+			fixedCodeableConcept: this.__fixedCodeableConcept && this.__fixedCodeableConcept.toJSON(),
+			fixedCoding: this.__fixedCoding && this.__fixedCoding.toJSON(),
+			fixedContactPoint: this.__fixedContactPoint && this.__fixedContactPoint.toJSON(),
+			fixedCount: this.__fixedCount && this.__fixedCount.toJSON(),
+			fixedDistance: this.__fixedDistance && this.__fixedDistance.toJSON(),
+			fixedDuration: this.__fixedDuration && this.__fixedDuration.toJSON(),
+			fixedHumanName: this.__fixedHumanName && this.__fixedHumanName.toJSON(),
+			fixedIdentifier: this.__fixedIdentifier && this.__fixedIdentifier.toJSON(),
+			fixedMoney: this.__fixedMoney && this.__fixedMoney.toJSON(),
+			fixedPeriod: this.__fixedPeriod && this.__fixedPeriod.toJSON(),
+			fixedQuantity: this.__fixedQuantity && this.__fixedQuantity.toJSON(),
+			fixedRange: this.__fixedRange && this.__fixedRange.toJSON(),
+			fixedRatio: this.__fixedRatio && this.__fixedRatio.toJSON(),
+			fixedReference: this.__fixedReference && this.__fixedReference.toJSON(),
+			fixedSampledData: this.__fixedSampledData && this.__fixedSampledData.toJSON(),
+			fixedSignature: this.__fixedSignature && this.__fixedSignature.toJSON(),
+			fixedTiming: this.__fixedTiming && this.__fixedTiming.toJSON(),
+			fixedMeta: this.__fixedMeta && this.__fixedMeta.toJSON(),
+			patternBase64Binary: this.__patternBase64Binary,
+			patternBoolean: this.__patternBoolean,
+			patternCode: this.__patternCode,
+			patternDate: this.__patternDate,
+			patternDateTime: this.__patternDateTime,
+			patternDecimal: this.__patternDecimal,
+			patternId: this.__patternId,
+			patternInstant: this.__patternInstant,
+			patternInteger: this.__patternInteger,
+			patternMarkdown: this.__patternMarkdown,
+			patternOid: this.__patternOid,
+			patternPositiveInt: this.__patternPositiveInt,
+			patternString: this.__patternString,
+			patternTime: this.__patternTime,
+			patternUnsignedInt: this.__patternUnsignedInt,
+			patternUri: this.__patternUri,
+			patternAddress: this.__patternAddress && this.__patternAddress.toJSON(),
+			patternAge: this.__patternAge && this.__patternAge.toJSON(),
+			patternAnnotation: this.__patternAnnotation && this.__patternAnnotation.toJSON(),
+			patternAttachment: this.__patternAttachment && this.__patternAttachment.toJSON(),
+			patternCodeableConcept: this.__patternCodeableConcept && this.__patternCodeableConcept.toJSON(),
+			patternCoding: this.__patternCoding && this.__patternCoding.toJSON(),
+			patternContactPoint: this.__patternContactPoint && this.__patternContactPoint.toJSON(),
+			patternCount: this.__patternCount && this.__patternCount.toJSON(),
+			patternDistance: this.__patternDistance && this.__patternDistance.toJSON(),
+			patternDuration: this.__patternDuration && this.__patternDuration.toJSON(),
+			patternHumanName: this.__patternHumanName && this.__patternHumanName.toJSON(),
+			patternIdentifier: this.__patternIdentifier && this.__patternIdentifier.toJSON(),
+			patternMoney: this.__patternMoney && this.__patternMoney.toJSON(),
+			patternPeriod: this.__patternPeriod && this.__patternPeriod.toJSON(),
+			patternQuantity: this.__patternQuantity && this.__patternQuantity.toJSON(),
+			patternRange: this.__patternRange && this.__patternRange.toJSON(),
+			patternRatio: this.__patternRatio && this.__patternRatio.toJSON(),
+			patternReference: this.__patternReference && this.__patternReference.toJSON(),
+			patternSampledData: this.__patternSampledData && this.__patternSampledData.toJSON(),
+			patternSignature: this.__patternSignature && this.__patternSignature.toJSON(),
+			patternTiming: this.__patternTiming && this.__patternTiming.toJSON(),
+			patternMeta: this.__patternMeta && this.__patternMeta.toJSON(),
+			example: this.__example && this.__example.map(v => v.toJSON()),
+			minValueDate: this.__minValueDate,
+			minValueDateTime: this.__minValueDateTime,
+			minValueInstant: this.__minValueInstant,
+			minValueTime: this.__minValueTime,
+			minValueDecimal: this.__minValueDecimal,
+			minValueInteger: this.__minValueInteger,
+			minValuePositiveInt: this.__minValuePositiveInt,
+			minValueUnsignedInt: this.__minValueUnsignedInt,
+			minValueQuantity: this.__minValueQuantity && this.__minValueQuantity.toJSON(),
+			maxValueDate: this.__maxValueDate,
+			maxValueDateTime: this.__maxValueDateTime,
+			maxValueInstant: this.__maxValueInstant,
+			maxValueTime: this.__maxValueTime,
+			maxValueDecimal: this.__maxValueDecimal,
+			maxValueInteger: this.__maxValueInteger,
+			maxValuePositiveInt: this.__maxValuePositiveInt,
+			maxValueUnsignedInt: this.__maxValueUnsignedInt,
+			maxValueQuantity: this.__maxValueQuantity && this.__maxValueQuantity.toJSON(),
+			maxLength: this.__maxLength,
+			condition: this.__condition,
+			constraint: this.__constraint && this.__constraint.map(v => v.toJSON()),
+			mustSupport: this.__mustSupport,
+			isModifier: this.__isModifier,
+			isSummary: this.__isSummary,
+			binding: this.__binding && this.__binding.toJSON(),
+			mapping: this.__mapping && this.__mapping.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = ElementDefinition;

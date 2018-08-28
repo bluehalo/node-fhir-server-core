@@ -1,228 +1,228 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Device_Udi = require('./Device_Udi');
-const CodeableConcept = require('./CodeableConcept');
-const Reference = require('./Reference');
-const ContactPoint = require('./ContactPoint');
-const Annotation = require('./Annotation');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const UriScalar = require('./scalars/Uri.scalar');
 
 class Device extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Device';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Device';
+		Object.assign(this, opt);
 	}
 
+	// This is a Device resource
 	static get __resourceType () {
 		return 'Device';
 	}
 
-	// This is a Device resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Device'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Device = new_value;
 	}
 
 	// Unique instance identifiers assigned to a device by manufacturers other organizations or owners.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// [Unique device identifier (UDI)](device.html#5.11.3.2.2) assigned to device label or package.
 	get udi () {
-		return this._udi;
+		return this.__udi;
 	}
 
-	set udi ( new_value ) {
-		this._udi = new Device_Udi(new_value);
+	set udi (new_value) {
+		const DeviceUdi = require('./DeviceUdi');
+		this.__udi = new DeviceUdi(new_value);
 	}
 
 	// Status of the Device availability.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['active', 'inactive', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Code or identifier to identify a kind of device.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		this._type = new CodeableConcept(new_value);
+	set type (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__type = new CodeableConcept(new_value);
 	}
 
 	// Lot number assigned by the manufacturer.
 	get lotNumber () {
-		return this._lotNumber;
+		return this.__lotNumber;
 	}
 
-	set lotNumber ( new_value ) {
-		this._lotNumber = new_value;
+	set lotNumber (new_value) {
+		this.__lotNumber = new_value;
 	}
 
 	// A name of the manufacturer.
 	get manufacturer () {
-		return this._manufacturer;
+		return this.__manufacturer;
 	}
 
-	set manufacturer ( new_value ) {
-		this._manufacturer = new_value;
+	set manufacturer (new_value) {
+		this.__manufacturer = new_value;
 	}
 
 	// The date and time when the device was manufactured.
 	get manufactureDate () {
-		return this._manufactureDate;
+		return this.__manufactureDate;
 	}
 
-	set manufactureDate ( new_value ) {
+	set manufactureDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field manufactureDate`);
 		}
-		this._manufactureDate = new_value;
+		this.__manufactureDate = new_value;
 	}
 
 	// The date and time beyond which this device is no longer valid or should not be used (if applicable).
 	get expirationDate () {
-		return this._expirationDate;
+		return this.__expirationDate;
 	}
 
-	set expirationDate ( new_value ) {
+	set expirationDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field expirationDate`);
 		}
-		this._expirationDate = new_value;
+		this.__expirationDate = new_value;
 	}
 
-	// The "model" is an identifier assigned by the manufacturer to identify the product by its type. This number is shared by the all devices sold as the same type.
+	// The \'model\' is an identifier assigned by the manufacturer to identify the product by its type. This number is shared by the all devices sold as the same type.
 	get model () {
-		return this._model;
+		return this.__model;
 	}
 
-	set model ( new_value ) {
-		this._model = new_value;
+	set model (new_value) {
+		this.__model = new_value;
 	}
 
 	// The version of the device, if the device has multiple releases under the same model, or if the device is software or carries firmware.
 	get version () {
-		return this._version;
+		return this.__version;
 	}
 
-	set version ( new_value ) {
-		this._version = new_value;
+	set version (new_value) {
+		this.__version = new_value;
 	}
 
 	// Patient information, If the device is affixed to a person.
 	get patient () {
-		return this._patient;
+		return this.__patient;
 	}
 
-	set patient ( new_value ) {
-		this._patient = new Reference(new_value);
+	set patient (new_value) {
+		const Reference = require('./Reference');
+		this.__patient = new Reference(new_value);
 	}
 
 	// An organization that is responsible for the provision and ongoing maintenance of the device.
 	get owner () {
-		return this._owner;
+		return this.__owner;
 	}
 
-	set owner ( new_value ) {
-		this._owner = new Reference(new_value);
+	set owner (new_value) {
+		const Reference = require('./Reference');
+		this.__owner = new Reference(new_value);
 	}
 
 	// Contact details for an organization or a particular human that is responsible for the device.
 	get contact () {
-		return this._contact;
+		return this.__contact;
 	}
 
-	set contact ( new_value ) {
-		this._contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+	set contact (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__contact = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
 	}
 
 	// The place where the device can be found.
 	get location () {
-		return this._location;
+		return this.__location;
 	}
 
-	set location ( new_value ) {
-		this._location = new Reference(new_value);
+	set location (new_value) {
+		const Reference = require('./Reference');
+		this.__location = new Reference(new_value);
 	}
 
 	// A network address on which the device may be contacted directly.
 	get url () {
-		return this._url;
+		return this.__url;
 	}
 
-	set url ( new_value ) {
-		this._url = new_value;
+	set url (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field url`);
+		}
+		this.__url = new_value;
 	}
 
 	// Descriptive information, usage information or implantation information that is not captured in an existing element.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Provides additional safety characteristics about a medical device.  For example devices containing latex.
 	get safety () {
-		return this._safety;
+		return this.__safety;
 	}
 
-	set safety ( new_value ) {
-		this._safety = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set safety (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__safety = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			udi: this._udi && this._udi.toJSON(),
-			status: this._status,
-			type: this._type && this._type.toJSON(),
-			lotNumber: this._lotNumber,
-			manufacturer: this._manufacturer,
-			manufactureDate: this._manufactureDate,
-			expirationDate: this._expirationDate,
-			model: this._model,
-			version: this._version,
-			patient: this._patient && this._patient.toJSON(),
-			owner: this._owner && this._owner.toJSON(),
-			contact: this._contact && this._contact.map(v => v.toJSON()),
-			location: this._location && this._location.toJSON(),
-			url: this._url,
-			note: this._note && this._note.map(v => v.toJSON()),
-			safety: this._safety && this._safety.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			udi: this.__udi && this.__udi.toJSON(),
+			status: this.__status,
+			type: this.__type && this.__type.toJSON(),
+			lotNumber: this.__lotNumber,
+			manufacturer: this.__manufacturer,
+			manufactureDate: this.__manufactureDate,
+			expirationDate: this.__expirationDate,
+			model: this.__model,
+			version: this.__version,
+			patient: this.__patient && this.__patient.toJSON(),
+			owner: this.__owner && this.__owner.toJSON(),
+			contact: this.__contact && this.__contact.map(v => v.toJSON()),
+			location: this.__location && this.__location.toJSON(),
+			url: this.__url,
+			note: this.__note && this.__note.map(v => v.toJSON()),
+			safety: this.__safety && this.__safety.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Device;

@@ -72,6 +72,7 @@ exports.RESOURCES = {
     MEDICATIONSTATEMENT: 'MedicationStatement',
     MESSAGEDEFINITION: 'MessageDefinition',
     MESSAGEHEADER: 'MessageHeader',
+    META: 'Meta',
     NAMINGSYSTEM: 'NamingSystem',
     NUTRITIONORDER: 'NutritionOrder',
     OBSERVATION: 'Observation',
@@ -184,6 +185,7 @@ exports.INTERACTIONS = {
 * These are currently the only versions we support
 */
 exports.VERSIONS = {
+	'1_0_2': '1_0_2',
 	'3_0_1': '3_0_1'
 };
 

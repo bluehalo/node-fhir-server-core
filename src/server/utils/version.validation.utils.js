@@ -14,7 +14,7 @@ let versionValidationMiddleware = ( profile = {}) => {
 		let base_version = req.params && req.params.base_version;
 
 		if (!base_version || versions.indexOf(base_version) === -1) {
-			return next(errors.notFound());
+			return next(errors.notFound(undefined, base_version));
 		}
 
 		next();

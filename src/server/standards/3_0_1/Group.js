@@ -1,141 +1,132 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Group_Characteristic = require('./Group_Characteristic');
-const Group_Member = require('./Group_Member');
+const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
 
 class Group extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Group';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Group';
+		Object.assign(this, opt);
 	}
 
+	// This is a Group resource
 	static get __resourceType () {
 		return 'Group';
 	}
 
-	// This is a Group resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Group'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Group = new_value;
 	}
 
 	// A unique business identifier for this group.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// Indicates whether the record for the group is available for use or is merely being retained for historical purposes.
 	get active () {
-		return this._active;
+		return this.__active;
 	}
 
-	set active ( new_value ) {
-		this._active = new_value;
+	set active (new_value) {
+		this.__active = new_value;
 	}
 
 	// Identifies the broad classification of the kind of resources the group includes.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['person', 'animal', 'practitioner', 'device', 'medication', 'substance'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
-		}
-		this._type = new_value;
+	set type (new_value) {
+		this.__type = new_value;
 	}
 
 	// If true, indicates that the resource refers to a specific group of real individuals.  If false, the group defines a set of intended individuals.
 	get actual () {
-		return this._actual;
+		return this.__actual;
 	}
 
-	set actual ( new_value ) {
-		this._actual = new_value;
+	set actual (new_value) {
+		this.__actual = new_value;
 	}
 
-	// Provides a specific type of resource the group includes; e.g. "cow", "syringe", etc.
+	// Provides a specific type of resource the group includes; e.g. \'cow\', \'syringe\', etc.
 	get code () {
-		return this._code;
+		return this.__code;
 	}
 
-	set code ( new_value ) {
-		this._code = new CodeableConcept(new_value);
+	set code (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__code = new CodeableConcept(new_value);
 	}
 
 	// A label assigned to the group for human identification and communication.
 	get name () {
-		return this._name;
+		return this.__name;
 	}
 
-	set name ( new_value ) {
-		this._name = new_value;
+	set name (new_value) {
+		this.__name = new_value;
 	}
 
 	// A count of the number of resource instances that are part of the group.
 	get quantity () {
-		return this._quantity;
+		return this.__quantity;
 	}
 
-	set quantity ( new_value ) {
+	set quantity (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = UnsignedIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field quantity`);
 		}
-		this._quantity = new_value;
+		this.__quantity = new_value;
 	}
 
 	// Identifies the traits shared by members of the group.
 	get characteristic () {
-		return this._characteristic;
+		return this.__characteristic;
 	}
 
-	set characteristic ( new_value ) {
-		this._characteristic = Array.isArray(new_value) ? new_value.map(val => new Group_Characteristic(val)) : [new Group_Characteristic(new_value)];
+	set characteristic (new_value) {
+		const GroupCharacteristic = require('./GroupCharacteristic');
+		this.__characteristic = Array.isArray(new_value) ? new_value.map(val => new GroupCharacteristic(val)) : [new GroupCharacteristic(new_value)];
 	}
 
 	// Identifies the resource instances that are members of the group.
 	get member () {
-		return this._member;
+		return this.__member;
 	}
 
-	set member ( new_value ) {
-		this._member = Array.isArray(new_value) ? new_value.map(val => new Group_Member(val)) : [new Group_Member(new_value)];
+	set member (new_value) {
+		const GroupMember = require('./GroupMember');
+		this.__member = Array.isArray(new_value) ? new_value.map(val => new GroupMember(val)) : [new GroupMember(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			active: this._active,
-			type: this._type,
-			actual: this._actual,
-			code: this._code && this._code.toJSON(),
-			name: this._name,
-			quantity: this._quantity,
-			characteristic: this._characteristic && this._characteristic.map(v => v.toJSON()),
-			member: this._member && this._member.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			active: this.__active,
+			type: this.__type,
+			actual: this.__actual,
+			code: this.__code && this.__code.toJSON(),
+			name: this.__name,
+			quantity: this.__quantity,
+			characteristic: this.__characteristic && this.__characteristic.map(v => v.toJSON()),
+			member: this.__member && this.__member.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Group;

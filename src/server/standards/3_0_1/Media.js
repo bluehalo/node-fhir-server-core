@@ -1,263 +1,263 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const Reference = require('./Reference');
-const CodeableConcept = require('./CodeableConcept');
-const Period = require('./Period');
-const Attachment = require('./Attachment');
-const Annotation = require('./Annotation');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
 
 class Media extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'Media';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Media';
+		Object.assign(this, opt);
 	}
 
+	// This is a Media resource
 	static get __resourceType () {
 		return 'Media';
 	}
 
-	// This is a Media resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['Media'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__Media = new_value;
 	}
 
 	// Identifiers associated with the image - these may include identifiers for the image itself, identifiers for the context of its collection (e.g. series ids) and context ids such as accession numbers or other workflow identifiers.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
 	}
 
 	// A procedure that is fulfilled in whole or in part by the creation of this media.
 	get basedOn () {
-		return this._basedOn;
+		return this.__basedOn;
 	}
 
-	set basedOn ( new_value ) {
-		this._basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set basedOn (new_value) {
+		const Reference = require('./Reference');
+		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Whether the media is a photo (still image), an audio recording, or a video recording.
 	get type () {
-		return this._type;
+		return this.__type;
 	}
 
-	set type ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['photo', 'video', 'audio'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field type`);
-		}
-		this._type = new_value;
+	set type (new_value) {
+		this.__type = new_value;
 	}
 
 	// Details of the type of the media - usually, how it was acquired (what type of device). If images sourced from a DICOM system, are wrapped in a Media resource, then this is the modality.
 	get subtype () {
-		return this._subtype;
+		return this.__subtype;
 	}
 
-	set subtype ( new_value ) {
-		this._subtype = new CodeableConcept(new_value);
+	set subtype (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__subtype = new CodeableConcept(new_value);
 	}
 
 	// The name of the imaging view e.g. Lateral or Antero-posterior (AP).
 	get view () {
-		return this._view;
+		return this.__view;
 	}
 
-	set view ( new_value ) {
-		this._view = new CodeableConcept(new_value);
+	set view (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__view = new CodeableConcept(new_value);
 	}
 
 	// Who/What this Media is a record of.
 	get subject () {
-		return this._subject;
+		return this.__subject;
 	}
 
-	set subject ( new_value ) {
-		this._subject = new Reference(new_value);
+	set subject (new_value) {
+		const Reference = require('./Reference');
+		this.__subject = new Reference(new_value);
 	}
 
 	// The encounter or episode of care that establishes the context for this media.
 	get context () {
-		return this._context;
+		return this.__context;
 	}
 
-	set context ( new_value ) {
-		this._context = new Reference(new_value);
+	set context (new_value) {
+		const Reference = require('./Reference');
+		this.__context = new Reference(new_value);
 	}
 
 	// The date and time(s) at which the media was collected.
 	get occurrenceDateTime () {
-		return this._occurrenceDateTime;
+		return this.__occurrenceDateTime;
 	}
 
-	set occurrenceDateTime ( new_value ) {
+	set occurrenceDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
 		}
-		this._occurrenceDateTime = new_value;
+		this.__occurrenceDateTime = new_value;
 	}
 
 	// The date and time(s) at which the media was collected.
 	get occurrencePeriod () {
-		return this._occurrencePeriod;
+		return this.__occurrencePeriod;
 	}
 
-	set occurrencePeriod ( new_value ) {
-		this._occurrencePeriod = new Period(new_value);
+	set occurrencePeriod (new_value) {
+		const Period = require('./Period');
+		this.__occurrencePeriod = new Period(new_value);
 	}
 
 	// The person who administered the collection of the image.
 	get operator () {
-		return this._operator;
+		return this.__operator;
 	}
 
-	set operator ( new_value ) {
-		this._operator = new Reference(new_value);
+	set operator (new_value) {
+		const Reference = require('./Reference');
+		this.__operator = new Reference(new_value);
 	}
 
 	// Describes why the event occurred in coded or textual form.
 	get reasonCode () {
-		return this._reasonCode;
+		return this.__reasonCode;
 	}
 
-	set reasonCode ( new_value ) {
-		this._reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+	set reasonCode (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
 	}
 
-	// Indicates the site on the subject's body where the media was collected (i.e. the target site).
+	// Indicates the site on the subject\'s body where the media was collected (i.e. the target site).
 	get bodySite () {
-		return this._bodySite;
+		return this.__bodySite;
 	}
 
-	set bodySite ( new_value ) {
-		this._bodySite = new CodeableConcept(new_value);
+	set bodySite (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__bodySite = new CodeableConcept(new_value);
 	}
 
 	// The device used to collect the media.
 	get device () {
-		return this._device;
+		return this.__device;
 	}
 
-	set device ( new_value ) {
-		this._device = new Reference(new_value);
+	set device (new_value) {
+		const Reference = require('./Reference');
+		this.__device = new Reference(new_value);
 	}
 
 	// Height of the image in pixels (photo/video).
 	get height () {
-		return this._height;
+		return this.__height;
 	}
 
-	set height ( new_value ) {
+	set height (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field height`);
 		}
-		this._height = new_value;
+		this.__height = new_value;
 	}
 
 	// Width of the image in pixels (photo/video).
 	get width () {
-		return this._width;
+		return this.__width;
 	}
 
-	set width ( new_value ) {
+	set width (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field width`);
 		}
-		this._width = new_value;
+		this.__width = new_value;
 	}
 
 	// The number of frames in a photo. This is used with a multi-page fax, or an imaging acquisition context that takes multiple slices in a single image, or an animated gif. If there is more than one frame, this SHALL have a value in order to alert interface software that a multi-frame capable rendering widget is required.
 	get frames () {
-		return this._frames;
+		return this.__frames;
 	}
 
-	set frames ( new_value ) {
+	set frames (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
+		let pattern = PositiveIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field frames`);
 		}
-		this._frames = new_value;
+		this.__frames = new_value;
 	}
 
 	// The duration of the recording in seconds - for audio and video.
 	get duration () {
-		return this._duration;
+		return this.__duration;
 	}
 
-	set duration ( new_value ) {
+	set duration (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = UnsignedIntScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field duration`);
 		}
-		this._duration = new_value;
+		this.__duration = new_value;
 	}
 
 	// The actual content of the media - inline or by direct reference to the media source file.
 	get content () {
-		return this._content;
+		return this.__content;
 	}
 
-	set content ( new_value ) {
-		this._content = new Attachment(new_value);
+	set content (new_value) {
+		const Attachment = require('./Attachment');
+		this.__content = new Attachment(new_value);
 	}
 
 	// Comments made about the media by the performer, subject or other participants.
 	get note () {
-		return this._note;
+		return this.__note;
 	}
 
-	set note ( new_value ) {
-		this._note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
+	set note (new_value) {
+		const Annotation = require('./Annotation');
+		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.map(v => v.toJSON()),
-			basedOn: this._basedOn && this._basedOn.map(v => v.toJSON()),
-			type: this._type,
-			subtype: this._subtype && this._subtype.toJSON(),
-			view: this._view && this._view.toJSON(),
-			subject: this._subject && this._subject.toJSON(),
-			context: this._context && this._context.toJSON(),
-			occurrenceDateTime: this._occurrenceDateTime,
-			occurrencePeriod: this._occurrencePeriod && this._occurrencePeriod.toJSON(),
-			operator: this._operator && this._operator.toJSON(),
-			reasonCode: this._reasonCode && this._reasonCode.map(v => v.toJSON()),
-			bodySite: this._bodySite && this._bodySite.toJSON(),
-			device: this._device && this._device.toJSON(),
-			height: this._height,
-			width: this._width,
-			frames: this._frames,
-			duration: this._duration,
-			content: this._content && this._content.toJSON(),
-			note: this._note && this._note.map(v => v.toJSON())
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
+			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
+			type: this.__type,
+			subtype: this.__subtype && this.__subtype.toJSON(),
+			view: this.__view && this.__view.toJSON(),
+			subject: this.__subject && this.__subject.toJSON(),
+			context: this.__context && this.__context.toJSON(),
+			occurrenceDateTime: this.__occurrenceDateTime,
+			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
+			operator: this.__operator && this.__operator.toJSON(),
+			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
+			bodySite: this.__bodySite && this.__bodySite.toJSON(),
+			device: this.__device && this.__device.toJSON(),
+			height: this.__height,
+			width: this.__width,
+			frames: this.__frames,
+			duration: this.__duration,
+			content: this.__content && this.__content.toJSON(),
+			note: this.__note && this.__note.map(v => v.toJSON())
 		});
 	}
-
 }
 
 module.exports = Media;

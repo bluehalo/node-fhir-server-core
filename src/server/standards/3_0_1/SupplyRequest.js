@@ -1,214 +1,204 @@
 const DomainResource = require('./DomainResource');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const SupplyRequest_OrderedItem = require('./SupplyRequest_OrderedItem');
-const Period = require('./Period');
-const Timing = require('./Timing');
-const SupplyRequest_Requester = require('./SupplyRequest_Requester');
-const Reference = require('./Reference');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class SupplyRequest extends DomainResource {
 
-	constructor ( opts ) {
-		super( opts );
-		this._resourceType = 'SupplyRequest';
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'SupplyRequest';
+		Object.assign(this, opt);
 	}
 
+	// This is a SupplyRequest resource
 	static get __resourceType () {
 		return 'SupplyRequest';
 	}
 
-	// This is a SupplyRequest resource
+	// Type of this resource.
 	get resourceType () {
-		return this._resourceType;
+		return this.__resourceType;
 	}
 
-	set resourceType ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['SupplyRequest'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field resourceType`);
-		}
-		this._resourceType = new_value;
+	set resourceType (new_value) {
+		this.__SupplyRequest = new_value;
 	}
 
 	// Unique identifier for this supply request.
 	get identifier () {
-		return this._identifier;
+		return this.__identifier;
 	}
 
-	set identifier ( new_value ) {
-		this._identifier = new Identifier(new_value);
+	set identifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__identifier = new Identifier(new_value);
 	}
 
 	// Status of the supply request.
 	get status () {
-		return this._status;
+		return this.__status;
 	}
 
-	set status ( new_value ) {
-		// Throw if new value is not in the allowed values
-		let allowed_values = ['draft', 'active', 'suspended', 'cancelled', 'completed', 'entered-in-error', 'unknown'];
-		if ( new_value && allowed_values.indexOf(new_value) === -1 ) {
-			throw new Error(`Expected one of ${allowed_values}, got ${new_value} for field status`);
-		}
-		this._status = new_value;
+	set status (new_value) {
+		this.__status = new_value;
 	}
 
 	// Category of supply, e.g.  central, non-stock, etc. This is used to support work flows associated with the supply process.
 	get category () {
-		return this._category;
+		return this.__category;
 	}
 
-	set category ( new_value ) {
-		this._category = new CodeableConcept(new_value);
+	set category (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__category = new CodeableConcept(new_value);
 	}
 
 	// Indicates how quickly this SupplyRequest should be addressed with respect to other requests.
 	get priority () {
-		return this._priority;
+		return this.__priority;
 	}
 
-	set priority ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field priority`);
-		}
-		this._priority = new_value;
+	set priority (new_value) {
+		this.__priority = new_value;
 	}
 
 	// The item being requested.
 	get orderedItem () {
-		return this._orderedItem;
+		return this.__orderedItem;
 	}
 
-	set orderedItem ( new_value ) {
-		this._orderedItem = new SupplyRequest_OrderedItem(new_value);
+	set orderedItem (new_value) {
+		const SupplyRequestOrderedItem = require('./SupplyRequestOrderedItem');
+		this.__orderedItem = new SupplyRequestOrderedItem(new_value);
 	}
 
 	// When the request should be fulfilled.
 	get occurrenceDateTime () {
-		return this._occurrenceDateTime;
+		return this.__occurrenceDateTime;
 	}
 
-	set occurrenceDateTime ( new_value ) {
+	set occurrenceDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
 		}
-		this._occurrenceDateTime = new_value;
+		this.__occurrenceDateTime = new_value;
 	}
 
 	// When the request should be fulfilled.
 	get occurrencePeriod () {
-		return this._occurrencePeriod;
+		return this.__occurrencePeriod;
 	}
 
-	set occurrencePeriod ( new_value ) {
-		this._occurrencePeriod = new Period(new_value);
+	set occurrencePeriod (new_value) {
+		const Period = require('./Period');
+		this.__occurrencePeriod = new Period(new_value);
 	}
 
 	// When the request should be fulfilled.
 	get occurrenceTiming () {
-		return this._occurrenceTiming;
+		return this.__occurrenceTiming;
 	}
 
-	set occurrenceTiming ( new_value ) {
-		this._occurrenceTiming = new Timing(new_value);
+	set occurrenceTiming (new_value) {
+		const Timing = require('./Timing');
+		this.__occurrenceTiming = new Timing(new_value);
 	}
 
 	// When the request was made.
 	get authoredOn () {
-		return this._authoredOn;
+		return this.__authoredOn;
 	}
 
-	set authoredOn ( new_value ) {
+	set authoredOn (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
 		}
-		this._authoredOn = new_value;
+		this.__authoredOn = new_value;
 	}
 
 	// The individual who initiated the request and has responsibility for its activation.
 	get requester () {
-		return this._requester;
+		return this.__requester;
 	}
 
-	set requester ( new_value ) {
-		this._requester = new SupplyRequest_Requester(new_value);
+	set requester (new_value) {
+		const SupplyRequestRequester = require('./SupplyRequestRequester');
+		this.__requester = new SupplyRequestRequester(new_value);
 	}
 
 	// Who is intended to fulfill the request.
 	get supplier () {
-		return this._supplier;
+		return this.__supplier;
 	}
 
-	set supplier ( new_value ) {
-		this._supplier = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+	set supplier (new_value) {
+		const Reference = require('./Reference');
+		this.__supplier = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Why the supply item was requested.
 	get reasonCodeableConcept () {
-		return this._reasonCodeableConcept;
+		return this.__reasonCodeableConcept;
 	}
 
-	set reasonCodeableConcept ( new_value ) {
-		this._reasonCodeableConcept = new CodeableConcept(new_value);
+	set reasonCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__reasonCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Why the supply item was requested.
 	get reasonReference () {
-		return this._reasonReference;
+		return this.__reasonReference;
 	}
 
-	set reasonReference ( new_value ) {
-		this._reasonReference = new Reference(new_value);
+	set reasonReference (new_value) {
+		const Reference = require('./Reference');
+		this.__reasonReference = new Reference(new_value);
 	}
 
 	// Where the supply is expected to come from.
 	get deliverFrom () {
-		return this._deliverFrom;
+		return this.__deliverFrom;
 	}
 
-	set deliverFrom ( new_value ) {
-		this._deliverFrom = new Reference(new_value);
+	set deliverFrom (new_value) {
+		const Reference = require('./Reference');
+		this.__deliverFrom = new Reference(new_value);
 	}
 
 	// Where the supply is destined to go.
 	get deliverTo () {
-		return this._deliverTo;
+		return this.__deliverTo;
 	}
 
-	set deliverTo ( new_value ) {
-		this._deliverTo = new Reference(new_value);
+	set deliverTo (new_value) {
+		const Reference = require('./Reference');
+		this.__deliverTo = new Reference(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			resourceType: this._resourceType,
-			identifier: this._identifier && this._identifier.toJSON(),
-			status: this._status,
-			category: this._category && this._category.toJSON(),
-			priority: this._priority,
-			orderedItem: this._orderedItem && this._orderedItem.toJSON(),
-			occurrenceDateTime: this._occurrenceDateTime,
-			occurrencePeriod: this._occurrencePeriod && this._occurrencePeriod.toJSON(),
-			occurrenceTiming: this._occurrenceTiming && this._occurrenceTiming.toJSON(),
-			authoredOn: this._authoredOn,
-			requester: this._requester && this._requester.toJSON(),
-			supplier: this._supplier && this._supplier.map(v => v.toJSON()),
-			reasonCodeableConcept: this._reasonCodeableConcept && this._reasonCodeableConcept.toJSON(),
-			reasonReference: this._reasonReference && this._reasonReference.toJSON(),
-			deliverFrom: this._deliverFrom && this._deliverFrom.toJSON(),
-			deliverTo: this._deliverTo && this._deliverTo.toJSON()
+			resourceType: this.__resourceType,
+			identifier: this.__identifier && this.__identifier.toJSON(),
+			status: this.__status,
+			category: this.__category && this.__category.toJSON(),
+			priority: this.__priority,
+			orderedItem: this.__orderedItem && this.__orderedItem.toJSON(),
+			occurrenceDateTime: this.__occurrenceDateTime,
+			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
+			occurrenceTiming: this.__occurrenceTiming && this.__occurrenceTiming.toJSON(),
+			authoredOn: this.__authoredOn,
+			requester: this.__requester && this.__requester.toJSON(),
+			supplier: this.__supplier && this.__supplier.map(v => v.toJSON()),
+			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
+			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
+			deliverFrom: this.__deliverFrom && this.__deliverFrom.toJSON(),
+			deliverTo: this.__deliverTo && this.__deliverTo.toJSON()
 		});
 	}
-
 }
 
 module.exports = SupplyRequest;

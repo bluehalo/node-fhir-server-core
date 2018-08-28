@@ -1,649 +1,505 @@
 const Element = require('./Element');
-const BackboneElement = require('./BackboneElement');
-const Narrative = require('./Narrative');
-const Annotation = require('./Annotation');
-const Attachment = require('./Attachment');
-const Identifier = require('./Identifier');
-const CodeableConcept = require('./CodeableConcept');
-const Coding = require('./Coding');
-const Quantity = require('./Quantity');
-const Duration = require('./Duration');
-const Distance = require('./Distance');
-const Count = require('./Count');
-const Money = require('./Money');
-const Age = require('./Age');
-const Range = require('./Range');
-const Period = require('./Period');
-const Ratio = require('./Ratio');
-const Reference = require('./Reference');
-const SampledData = require('./SampledData');
-const Signature = require('./Signature');
-const HumanName = require('./HumanName');
-const Address = require('./Address');
-const ContactPoint = require('./ContactPoint');
-const Timing = require('./Timing');
-const Meta = require('./Meta');
-const ElementDefinition = require('./ElementDefinition');
-const ContactDetail = require('./ContactDetail');
-const Contributor = require('./Contributor');
-const Dosage = require('./Dosage');
-const RelatedArtifact = require('./RelatedArtifact');
-const UsageContext = require('./UsageContext');
-const DataRequirement = require('./DataRequirement');
-const ParameterDefinition = require('./ParameterDefinition');
-const TriggerDefinition = require('./TriggerDefinition');
+const UriScalar = require('./scalars/Uri.scalar');
+const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+const CodeScalar = require('./scalars/Code.scalar');
+const DateScalar = require('./scalars/Date.scalar');
+const DateTimeScalar = require('./scalars/DateTime.scalar');
+const IdScalar = require('./scalars/Id.scalar');
+const InstantScalar = require('./scalars/Instant.scalar');
+const OidScalar = require('./scalars/Oid.scalar');
+const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+const TimeScalar = require('./scalars/Time.scalar');
+const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
 
 class Extension extends Element {
 
-	constructor ( opts ) {
-		super( opts );
-		Object.assign(this, opts);
+	constructor ( opt ) {
+		super( opt );
+		this.__resourceType = 'Extension';
+		Object.assign(this, opt);
 	}
 
+	// This is a Extension resource
 	static get __resourceType () {
 		return 'Extension';
 	}
 
 	// Source of the definition for the extension code - a logical name or a URL.
 	get url () {
-		return this._url;
+		return this.__url;
 	}
 
-	set url ( new_value ) {
-		this._url = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueBoolean () {
-		return this._valueBoolean;
-	}
-
-	set valueBoolean ( new_value ) {
-		this._valueBoolean = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueInteger () {
-		return this._valueInteger;
-	}
-
-	set valueInteger ( new_value ) {
+	set url (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))/;
+		let pattern = UriScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueInteger`);
+			throw new Error(`Invalid format for ${new_value} on field url`);
 		}
-		this._valueInteger = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDecimal () {
-		return this._valueDecimal;
-	}
-
-	set valueDecimal ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?([0]|([1-9][0-9]*))(\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueDecimal`);
-		}
-		this._valueDecimal = new_value;
+		this.__url = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueBase64Binary () {
-		return this._valueBase64Binary;
+		return this.__valueBase64Binary;
 	}
 
-	set valueBase64Binary ( new_value ) {
-		this._valueBase64Binary = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueInstant () {
-		return this._valueInstant;
-	}
-
-	set valueInstant ( new_value ) {
-		this._valueInstant = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueString () {
-		return this._valueString;
-	}
-
-	set valueString ( new_value ) {
-		this._valueString = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueUri () {
-		return this._valueUri;
-	}
-
-	set valueUri ( new_value ) {
-		this._valueUri = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDate () {
-		return this._valueDate;
-	}
-
-	set valueDate ( new_value ) {
+	set valueBase64Binary (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1]))?)?/;
+		let pattern = Base64BinaryScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueDate`);
+			throw new Error(`Invalid format for ${new_value} on field valueBase64Binary`);
 		}
-		this._valueDate = new_value;
+		this.__valueBase64Binary = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDateTime () {
-		return this._valueDateTime;
+	get valueBoolean () {
+		return this.__valueBoolean;
 	}
 
-	set valueDateTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /-?[0-9]{4}(-(0[1-9]|1[0-2])(-(0[0-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)))?)?)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
-		}
-		this._valueDateTime = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueTime () {
-		return this._valueTime;
-	}
-
-	set valueTime ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\.[0-9]+)?/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueTime`);
-		}
-		this._valueTime = new_value;
+	set valueBoolean (new_value) {
+		this.__valueBoolean = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueCode () {
-		return this._valueCode;
+		return this.__valueCode;
 	}
 
-	set valueCode ( new_value ) {
+	set valueCode (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[^\s]+([\s]?[^\s]+)*/;
+		let pattern = CodeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueCode`);
 		}
-		this._valueCode = new_value;
+		this.__valueCode = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueOid () {
-		return this._valueOid;
+	get valueDate () {
+		return this.__valueDate;
 	}
 
-	set valueOid ( new_value ) {
+	set valueDate (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:oid:(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*/;
+		let pattern = DateScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueOid`);
+			throw new Error(`Invalid format for ${new_value} on field valueDate`);
 		}
-		this._valueOid = new_value;
+		this.__valueDate = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueUuid () {
-		return this._valueUuid;
+	get valueDateTime () {
+		return this.__valueDateTime;
 	}
 
-	set valueUuid ( new_value ) {
+	set valueDateTime (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+		let pattern = DateTimeScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueUuid`);
+			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
-		this._valueUuid = new_value;
+		this.__valueDateTime = new_value;
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueDecimal () {
+		return this.__valueDecimal;
+	}
+
+	set valueDecimal (new_value) {
+		this.__valueDecimal = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueId () {
-		return this._valueId;
+		return this.__valueId;
 	}
 
-	set valueId ( new_value ) {
+	set valueId (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[A-Za-z0-9\-\.]{1,64}/;
+		let pattern = IdScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
 			throw new Error(`Invalid format for ${new_value} on field valueId`);
 		}
-		this._valueId = new_value;
+		this.__valueId = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueUnsignedInt () {
-		return this._valueUnsignedInt;
+	get valueInstant () {
+		return this.__valueInstant;
 	}
 
-	set valueUnsignedInt ( new_value ) {
+	set valueInstant (new_value) {
 		// Throw if new value does not match the pattern
-		let pattern = /[0]|([1-9][0-9]*)/;
+		let pattern = InstantScalar.regex();
 		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
+			throw new Error(`Invalid format for ${new_value} on field valueInstant`);
 		}
-		this._valueUnsignedInt = new_value;
+		this.__valueInstant = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valuePositiveInt () {
-		return this._valuePositiveInt;
+	get valueInteger () {
+		return this.__valueInteger;
 	}
 
-	set valuePositiveInt ( new_value ) {
-		// Throw if new value does not match the pattern
-		let pattern = /[1-9][0-9]*/;
-		if ( new_value && !pattern.test(new_value) ) {
-			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
-		}
-		this._valuePositiveInt = new_value;
+	set valueInteger (new_value) {
+		this.__valueInteger = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueMarkdown () {
-		return this._valueMarkdown;
+		return this.__valueMarkdown;
 	}
 
-	set valueMarkdown ( new_value ) {
-		this._valueMarkdown = new_value;
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueElement () {
-		return this._valueElement;
-	}
-
-	set valueElement ( new_value ) {
-		this._valueElement = new Element(new_value);
+	set valueMarkdown (new_value) {
+		this.__valueMarkdown = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueExtension () {
-		return this._valueExtension;
+	get valueOid () {
+		return this.__valueOid;
 	}
 
-	set valueExtension ( new_value ) {
-		this._valueExtension = new Extension(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueBackboneElement () {
-		return this._valueBackboneElement;
-	}
-
-	set valueBackboneElement ( new_value ) {
-		this._valueBackboneElement = new BackboneElement(new_value);
+	set valueOid (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = OidScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field valueOid`);
+		}
+		this.__valueOid = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueNarrative () {
-		return this._valueNarrative;
+	get valuePositiveInt () {
+		return this.__valuePositiveInt;
 	}
 
-	set valueNarrative ( new_value ) {
-		this._valueNarrative = new Narrative(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueAnnotation () {
-		return this._valueAnnotation;
-	}
-
-	set valueAnnotation ( new_value ) {
-		this._valueAnnotation = new Annotation(new_value);
+	set valuePositiveInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = PositiveIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
+		}
+		this.__valuePositiveInt = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueAttachment () {
-		return this._valueAttachment;
+	get valueString () {
+		return this.__valueString;
 	}
 
-	set valueAttachment ( new_value ) {
-		this._valueAttachment = new Attachment(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueIdentifier () {
-		return this._valueIdentifier;
-	}
-
-	set valueIdentifier ( new_value ) {
-		this._valueIdentifier = new Identifier(new_value);
+	set valueString (new_value) {
+		this.__valueString = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueCodeableConcept () {
-		return this._valueCodeableConcept;
+	get valueTime () {
+		return this.__valueTime;
 	}
 
-	set valueCodeableConcept ( new_value ) {
-		this._valueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueCoding () {
-		return this._valueCoding;
-	}
-
-	set valueCoding ( new_value ) {
-		this._valueCoding = new Coding(new_value);
+	set valueTime (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = TimeScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field valueTime`);
+		}
+		this.__valueTime = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueQuantity () {
-		return this._valueQuantity;
+	get valueUnsignedInt () {
+		return this.__valueUnsignedInt;
 	}
 
-	set valueQuantity ( new_value ) {
-		this._valueQuantity = new Quantity(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDuration () {
-		return this._valueDuration;
-	}
-
-	set valueDuration ( new_value ) {
-		this._valueDuration = new Duration(new_value);
+	set valueUnsignedInt (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UnsignedIntScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
+		}
+		this.__valueUnsignedInt = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueSimpleQuantity () {
-		return this._valueSimpleQuantity;
+	get valueUri () {
+		return this.__valueUri;
 	}
 
-	set valueSimpleQuantity ( new_value ) {
-		this._valueSimpleQuantity = new Quantity(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDistance () {
-		return this._valueDistance;
-	}
-
-	set valueDistance ( new_value ) {
-		this._valueDistance = new Distance(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueCount () {
-		return this._valueCount;
-	}
-
-	set valueCount ( new_value ) {
-		this._valueCount = new Count(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueMoney () {
-		return this._valueMoney;
-	}
-
-	set valueMoney ( new_value ) {
-		this._valueMoney = new Money(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueAge () {
-		return this._valueAge;
-	}
-
-	set valueAge ( new_value ) {
-		this._valueAge = new Age(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueRange () {
-		return this._valueRange;
-	}
-
-	set valueRange ( new_value ) {
-		this._valueRange = new Range(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valuePeriod () {
-		return this._valuePeriod;
-	}
-
-	set valuePeriod ( new_value ) {
-		this._valuePeriod = new Period(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueRatio () {
-		return this._valueRatio;
-	}
-
-	set valueRatio ( new_value ) {
-		this._valueRatio = new Ratio(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueReference () {
-		return this._valueReference;
-	}
-
-	set valueReference ( new_value ) {
-		this._valueReference = new Reference(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueSampledData () {
-		return this._valueSampledData;
-	}
-
-	set valueSampledData ( new_value ) {
-		this._valueSampledData = new SampledData(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueSignature () {
-		return this._valueSignature;
-	}
-
-	set valueSignature ( new_value ) {
-		this._valueSignature = new Signature(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueHumanName () {
-		return this._valueHumanName;
-	}
-
-	set valueHumanName ( new_value ) {
-		this._valueHumanName = new HumanName(new_value);
+	set valueUri (new_value) {
+		// Throw if new value does not match the pattern
+		let pattern = UriScalar.regex();
+		if ( new_value && !pattern.test(new_value) ) {
+			throw new Error(`Invalid format for ${new_value} on field valueUri`);
+		}
+		this.__valueUri = new_value;
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueAddress () {
-		return this._valueAddress;
+		return this.__valueAddress;
 	}
 
-	set valueAddress ( new_value ) {
-		this._valueAddress = new Address(new_value);
+	set valueAddress (new_value) {
+		const Address = require('./Address');
+		this.__valueAddress = new Address(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueAge () {
+		return this.__valueAge;
+	}
+
+	set valueAge (new_value) {
+		const Age = require('./Age');
+		this.__valueAge = new Age(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueAnnotation () {
+		return this.__valueAnnotation;
+	}
+
+	set valueAnnotation (new_value) {
+		const Annotation = require('./Annotation');
+		this.__valueAnnotation = new Annotation(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueAttachment () {
+		return this.__valueAttachment;
+	}
+
+	set valueAttachment (new_value) {
+		const Attachment = require('./Attachment');
+		this.__valueAttachment = new Attachment(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueCodeableConcept () {
+		return this.__valueCodeableConcept;
+	}
+
+	set valueCodeableConcept (new_value) {
+		const CodeableConcept = require('./CodeableConcept');
+		this.__valueCodeableConcept = new CodeableConcept(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueCoding () {
+		return this.__valueCoding;
+	}
+
+	set valueCoding (new_value) {
+		const Coding = require('./Coding');
+		this.__valueCoding = new Coding(new_value);
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueContactPoint () {
-		return this._valueContactPoint;
+		return this.__valueContactPoint;
 	}
 
-	set valueContactPoint ( new_value ) {
-		this._valueContactPoint = new ContactPoint(new_value);
+	set valueContactPoint (new_value) {
+		const ContactPoint = require('./ContactPoint');
+		this.__valueContactPoint = new ContactPoint(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueCount () {
+		return this.__valueCount;
+	}
+
+	set valueCount (new_value) {
+		const Count = require('./Count');
+		this.__valueCount = new Count(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueDistance () {
+		return this.__valueDistance;
+	}
+
+	set valueDistance (new_value) {
+		const Distance = require('./Distance');
+		this.__valueDistance = new Distance(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueDuration () {
+		return this.__valueDuration;
+	}
+
+	set valueDuration (new_value) {
+		const Duration = require('./Duration');
+		this.__valueDuration = new Duration(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueHumanName () {
+		return this.__valueHumanName;
+	}
+
+	set valueHumanName (new_value) {
+		const HumanName = require('./HumanName');
+		this.__valueHumanName = new HumanName(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueIdentifier () {
+		return this.__valueIdentifier;
+	}
+
+	set valueIdentifier (new_value) {
+		const Identifier = require('./Identifier');
+		this.__valueIdentifier = new Identifier(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueMoney () {
+		return this.__valueMoney;
+	}
+
+	set valueMoney (new_value) {
+		const Money = require('./Money');
+		this.__valueMoney = new Money(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valuePeriod () {
+		return this.__valuePeriod;
+	}
+
+	set valuePeriod (new_value) {
+		const Period = require('./Period');
+		this.__valuePeriod = new Period(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueQuantity () {
+		return this.__valueQuantity;
+	}
+
+	set valueQuantity (new_value) {
+		const Quantity = require('./Quantity');
+		this.__valueQuantity = new Quantity(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueRange () {
+		return this.__valueRange;
+	}
+
+	set valueRange (new_value) {
+		const Range = require('./Range');
+		this.__valueRange = new Range(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueRatio () {
+		return this.__valueRatio;
+	}
+
+	set valueRatio (new_value) {
+		const Ratio = require('./Ratio');
+		this.__valueRatio = new Ratio(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueReference () {
+		return this.__valueReference;
+	}
+
+	set valueReference (new_value) {
+		const Reference = require('./Reference');
+		this.__valueReference = new Reference(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueSampledData () {
+		return this.__valueSampledData;
+	}
+
+	set valueSampledData (new_value) {
+		const SampledData = require('./SampledData');
+		this.__valueSampledData = new SampledData(new_value);
+	}
+
+	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
+	get valueSignature () {
+		return this.__valueSignature;
+	}
+
+	set valueSignature (new_value) {
+		const Signature = require('./Signature');
+		this.__valueSignature = new Signature(new_value);
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueTiming () {
-		return this._valueTiming;
+		return this.__valueTiming;
 	}
 
-	set valueTiming ( new_value ) {
-		this._valueTiming = new Timing(new_value);
+	set valueTiming (new_value) {
+		const Timing = require('./Timing');
+		this.__valueTiming = new Timing(new_value);
 	}
 
 	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
 	get valueMeta () {
-		return this._valueMeta;
+		return this.__valueMeta;
 	}
 
-	set valueMeta ( new_value ) {
-		this._valueMeta = new Meta(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueElementDefinition () {
-		return this._valueElementDefinition;
-	}
-
-	set valueElementDefinition ( new_value ) {
-		this._valueElementDefinition = new ElementDefinition(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueContactDetail () {
-		return this._valueContactDetail;
-	}
-
-	set valueContactDetail ( new_value ) {
-		this._valueContactDetail = new ContactDetail(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueContributor () {
-		return this._valueContributor;
-	}
-
-	set valueContributor ( new_value ) {
-		this._valueContributor = new Contributor(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDosage () {
-		return this._valueDosage;
-	}
-
-	set valueDosage ( new_value ) {
-		this._valueDosage = new Dosage(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueRelatedArtifact () {
-		return this._valueRelatedArtifact;
-	}
-
-	set valueRelatedArtifact ( new_value ) {
-		this._valueRelatedArtifact = new RelatedArtifact(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueUsageContext () {
-		return this._valueUsageContext;
-	}
-
-	set valueUsageContext ( new_value ) {
-		this._valueUsageContext = new UsageContext(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueDataRequirement () {
-		return this._valueDataRequirement;
-	}
-
-	set valueDataRequirement ( new_value ) {
-		this._valueDataRequirement = new DataRequirement(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueParameterDefinition () {
-		return this._valueParameterDefinition;
-	}
-
-	set valueParameterDefinition ( new_value ) {
-		this._valueParameterDefinition = new ParameterDefinition(new_value);
-	}
-
-	// Value of extension - may be a resource or one of a constrained set of the data types (see Extensibility in the spec for list).
-	get valueTriggerDefinition () {
-		return this._valueTriggerDefinition;
-	}
-
-	set valueTriggerDefinition ( new_value ) {
-		this._valueTriggerDefinition = new TriggerDefinition(new_value);
+	set valueMeta (new_value) {
+		const Meta = require('./Meta');
+		this.__valueMeta = new Meta(new_value);
 	}
 
 	toJSON () {
 		return Object.assign(super.toJSON(), {
-			url: this._url,
-			valueBoolean: this._valueBoolean,
-			valueInteger: this._valueInteger,
-			valueDecimal: this._valueDecimal,
-			valueBase64Binary: this._valueBase64Binary,
-			valueInstant: this._valueInstant,
-			valueString: this._valueString,
-			valueUri: this._valueUri,
-			valueDate: this._valueDate,
-			valueDateTime: this._valueDateTime,
-			valueTime: this._valueTime,
-			valueCode: this._valueCode,
-			valueOid: this._valueOid,
-			valueUuid: this._valueUuid,
-			valueId: this._valueId,
-			valueUnsignedInt: this._valueUnsignedInt,
-			valuePositiveInt: this._valuePositiveInt,
-			valueMarkdown: this._valueMarkdown,
-			valueElement: this._valueElement && this._valueElement.toJSON(),
-			valueExtension: this._valueExtension && this._valueExtension.toJSON(),
-			valueBackboneElement: this._valueBackboneElement && this._valueBackboneElement.toJSON(),
-			valueNarrative: this._valueNarrative && this._valueNarrative.toJSON(),
-			valueAnnotation: this._valueAnnotation && this._valueAnnotation.toJSON(),
-			valueAttachment: this._valueAttachment && this._valueAttachment.toJSON(),
-			valueIdentifier: this._valueIdentifier && this._valueIdentifier.toJSON(),
-			valueCodeableConcept: this._valueCodeableConcept && this._valueCodeableConcept.toJSON(),
-			valueCoding: this._valueCoding && this._valueCoding.toJSON(),
-			valueQuantity: this._valueQuantity && this._valueQuantity.toJSON(),
-			valueDuration: this._valueDuration && this._valueDuration.toJSON(),
-			valueSimpleQuantity: this._valueSimpleQuantity && this._valueSimpleQuantity.toJSON(),
-			valueDistance: this._valueDistance && this._valueDistance.toJSON(),
-			valueCount: this._valueCount && this._valueCount.toJSON(),
-			valueMoney: this._valueMoney && this._valueMoney.toJSON(),
-			valueAge: this._valueAge && this._valueAge.toJSON(),
-			valueRange: this._valueRange && this._valueRange.toJSON(),
-			valuePeriod: this._valuePeriod && this._valuePeriod.toJSON(),
-			valueRatio: this._valueRatio && this._valueRatio.toJSON(),
-			valueReference: this._valueReference && this._valueReference.toJSON(),
-			valueSampledData: this._valueSampledData && this._valueSampledData.toJSON(),
-			valueSignature: this._valueSignature && this._valueSignature.toJSON(),
-			valueHumanName: this._valueHumanName && this._valueHumanName.toJSON(),
-			valueAddress: this._valueAddress && this._valueAddress.toJSON(),
-			valueContactPoint: this._valueContactPoint && this._valueContactPoint.toJSON(),
-			valueTiming: this._valueTiming && this._valueTiming.toJSON(),
-			valueMeta: this._valueMeta && this._valueMeta.toJSON(),
-			valueElementDefinition: this._valueElementDefinition && this._valueElementDefinition.toJSON(),
-			valueContactDetail: this._valueContactDetail && this._valueContactDetail.toJSON(),
-			valueContributor: this._valueContributor && this._valueContributor.toJSON(),
-			valueDosage: this._valueDosage && this._valueDosage.toJSON(),
-			valueRelatedArtifact: this._valueRelatedArtifact && this._valueRelatedArtifact.toJSON(),
-			valueUsageContext: this._valueUsageContext && this._valueUsageContext.toJSON(),
-			valueDataRequirement: this._valueDataRequirement && this._valueDataRequirement.toJSON(),
-			valueParameterDefinition: this._valueParameterDefinition && this._valueParameterDefinition.toJSON(),
-			valueTriggerDefinition: this._valueTriggerDefinition && this._valueTriggerDefinition.toJSON()
+			url: this.__url,
+			valueBase64Binary: this.__valueBase64Binary,
+			valueBoolean: this.__valueBoolean,
+			valueCode: this.__valueCode,
+			valueDate: this.__valueDate,
+			valueDateTime: this.__valueDateTime,
+			valueDecimal: this.__valueDecimal,
+			valueId: this.__valueId,
+			valueInstant: this.__valueInstant,
+			valueInteger: this.__valueInteger,
+			valueMarkdown: this.__valueMarkdown,
+			valueOid: this.__valueOid,
+			valuePositiveInt: this.__valuePositiveInt,
+			valueString: this.__valueString,
+			valueTime: this.__valueTime,
+			valueUnsignedInt: this.__valueUnsignedInt,
+			valueUri: this.__valueUri,
+			valueAddress: this.__valueAddress && this.__valueAddress.toJSON(),
+			valueAge: this.__valueAge && this.__valueAge.toJSON(),
+			valueAnnotation: this.__valueAnnotation && this.__valueAnnotation.toJSON(),
+			valueAttachment: this.__valueAttachment && this.__valueAttachment.toJSON(),
+			valueCodeableConcept: this.__valueCodeableConcept && this.__valueCodeableConcept.toJSON(),
+			valueCoding: this.__valueCoding && this.__valueCoding.toJSON(),
+			valueContactPoint: this.__valueContactPoint && this.__valueContactPoint.toJSON(),
+			valueCount: this.__valueCount && this.__valueCount.toJSON(),
+			valueDistance: this.__valueDistance && this.__valueDistance.toJSON(),
+			valueDuration: this.__valueDuration && this.__valueDuration.toJSON(),
+			valueHumanName: this.__valueHumanName && this.__valueHumanName.toJSON(),
+			valueIdentifier: this.__valueIdentifier && this.__valueIdentifier.toJSON(),
+			valueMoney: this.__valueMoney && this.__valueMoney.toJSON(),
+			valuePeriod: this.__valuePeriod && this.__valuePeriod.toJSON(),
+			valueQuantity: this.__valueQuantity && this.__valueQuantity.toJSON(),
+			valueRange: this.__valueRange && this.__valueRange.toJSON(),
+			valueRatio: this.__valueRatio && this.__valueRatio.toJSON(),
+			valueReference: this.__valueReference && this.__valueReference.toJSON(),
+			valueSampledData: this.__valueSampledData && this.__valueSampledData.toJSON(),
+			valueSignature: this.__valueSignature && this.__valueSignature.toJSON(),
+			valueTiming: this.__valueTiming && this.__valueTiming.toJSON(),
+			valueMeta: this.__valueMeta && this.__valueMeta.toJSON()
 		});
 	}
-
 }
 
 module.exports = Extension;

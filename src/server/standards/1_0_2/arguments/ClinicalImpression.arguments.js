@@ -1,0 +1,86 @@
+module.exports = {
+	ACTION: {
+		name: 'action',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-action',
+		documentation: 'Actions taken during assessment.',
+	},
+	ASSESSOR: {
+		name: 'assessor',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-assessor',
+		documentation: 'The clinician performing the assessment.',
+	},
+	DATE: {
+		name: 'date',
+		type: 'date',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-date',
+		documentation: 'When the assessment occurred.',
+	},
+	FINDING: {
+		name: 'finding',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-finding',
+		documentation: 'Specific text or code for finding.',
+	},
+	INVESTIGATION: {
+		name: 'investigation',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-investigation',
+		documentation: 'Record of a specific investigation.',
+	},
+	PATIENT: {
+		name: 'patient',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-patient',
+		documentation: 'The patient being assessed.',
+	},
+	PLAN: {
+		name: 'plan',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-plan',
+		documentation: 'Plan of action after assessment.',
+	},
+	PREVIOUS: {
+		name: 'previous',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-previous',
+		documentation: 'Reference to last assessment.',
+	},
+	PROBLEM: {
+		name: 'problem',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-problem',
+		documentation: 'General assessment of patient state.',
+	},
+	RESOLVED: {
+		name: 'resolved',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-resolved',
+		documentation: 'Diagnoses/conditions resolved since previous assessment.',
+	},
+	RULEDOUT: {
+		name: 'ruledout',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-ruledout',
+		documentation: 'Specific text of code for diagnosis.',
+	},
+	STATUS: {
+		name: 'status',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-status',
+		documentation: 'in-progress | completed | entered-in-error.',
+	},
+	TRIGGER: {
+		name: 'trigger',
+		type: 'reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-trigger',
+		documentation: 'Request or event that necessitated this assessment.',
+	},
+	TRIGGER_CODE: {
+		name: 'trigger-code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-trigger-code',
+		documentation: 'Request or event that necessitated this assessment.',
+	},
+};
