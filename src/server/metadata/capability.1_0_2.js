@@ -27,7 +27,7 @@ module.exports.makeStatement = function(resources) {
 		fhirVersion: '1.0.2',
 		acceptUnknown: 'extensions',
 		format: [
-			'application/fhir+json'
+			'application/json+fhir'
 		],
 		rest: [
 			resources
