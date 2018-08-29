@@ -1,9 +1,27 @@
 const { resolveFromVersion } = require('./resolve.utils');
+const { VERSIONS } = require('../../constants');
 const errors = require('./error.utils');
+const path = require('path');
 
-const DSTU2_TYPE = 'application/json+fhir';
-const STU3_TYPE = 'application/fhir+json';
 
+/**
+ * Gets the content type based on the version.  DSUT2 returns 'application/json+fhir' where STU3
+ * 'application/fhir+json'.
+ *
+ * @param {*} base_version
+ */
+let getContentType = (base_version) => {
+	const DSTU2_TYPE = 'application/json+fhir';
+	const STU3_TYPE = 'application/fhir+json';
+
+	if (base_version === VERSIONS['1_0_2']) {
+		return DSTU2_TYPE;
+	} else if (base_version === VERSIONS['3_0_1']) {
+		return STU3_TYPE;
+	} else {
+		return 'application/json';
+	}
+};
 
 /**
 * @description When resources are read in the controller functions
@@ -20,12 +38,7 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 
 		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
 		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
-
-		if (base_version.startsWith('1')) {
-			res.type(DSTU2_TYPE);
-		} else {
-			res.type(STU3_TYPE);
-		}
+		res.type(getContentType(base_version));
 
 		res.status(200).json(new Resource(resource_json));
 	} else {
@@ -87,12 +100,7 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 	results.entry = entries;
 	results.total = entries.length;
 
-	if (base_version.startsWith('1')) {
-		res.type(DSTU2_TYPE);
-	} else {
-		res.type(STU3_TYPE);
-	}
-
+	res.type(getContentType(base_version));
 	res.status(200).json(results);
 };
 
@@ -135,25 +143,16 @@ let handleUpdateResponse = (res, base_version, type, results, options) => {
 	let { id, created = false, resource_version } = results;
 	let { resourceUrl } = options;
 
-	if (!resourceUrl.endsWith('/')) {
-		resourceUrl += '/';
-	}
-
 	let status = created ? 201 : 200;
 	let date = new Date();
 
 	if (resource_version) {
-		res.set('Content-Location', `${resourceUrl}${base_version}/${type}/${id}/_history/${resource_version}`);
+		res.set('Content-Location', `${path.join(resourceUrl, '/')}${base_version}/${type}/${id}/_history/${resource_version}`);
 		res.set('ETag', `${resource_version}`);
 	}
 
-	if (base_version.startsWith('1')) {
-		res.type(DSTU2_TYPE);
-	} else {
-		res.type(STU3_TYPE);
-	}
-
-	res.set('Location', `${resourceUrl}${base_version}/${type}/${id}`);
+	res.type(getContentType(base_version));
+	res.set('Location', `${path.join(resourceUrl, '/')}${base_version}/${type}/${id}`);
 	res.set('Last-Modified', date.toISOString());
 	res.status(status).end();
 };
@@ -239,12 +238,7 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 	results.entry = entries;
 	results.total = entries.length;
 
-	if (base_version.startsWith('1')) {
-		res.type(DSTU2_TYPE);
-	} else {
-		res.type(STU3_TYPE);
-	}
-
+	res.type(getContentType(base_version));
 	res.status(200).json(results);
 };
 
