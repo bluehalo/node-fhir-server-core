@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new person resource and pass it to the service
 		let person = new Person(resource_body);
-		let args = {id: resource_id, resource: person};
+		let args = {id: resource_id, base_version, resource: person};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
@@ -111,7 +111,7 @@ module.exports.create = function create({profile, logger, app}) {
 /**
  * @description Controller for updating/creating Person. If Person does not exist, it should be updated
  */
-module.exports.update = function update({profile, logger, app}) {
+module.exports.update = function update ({ profile, logger, config }) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
@@ -126,11 +126,13 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new person resource and pass it to the service
 		let person = new Person(resource_body);
-		let args = {id, resource: person};
+		let args = {id, base_version, resource: person};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base_version, Person.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, Person.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
