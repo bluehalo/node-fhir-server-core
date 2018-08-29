@@ -147,12 +147,12 @@ let handleUpdateResponse = (res, base_version, type, results, options) => {
 	let date = new Date();
 
 	if (resource_version) {
-		res.set('Content-Location', `${path.join(resourceUrl, '/')}${base_version}/${type}/${id}/_history/${resource_version}`);
+		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
 		res.set('ETag', `${resource_version}`);
 	}
 
 	res.type(getContentType(base_version));
-	res.set('Location', `${path.join(resourceUrl, '/')}${base_version}/${type}/${id}`);
+	res.set('Location', `${path.join(resourceUrl, base_version, type, id)}`);
 	res.set('Last-Modified', date.toISOString());
 	res.status(status).end();
 };
