@@ -2,11 +2,13 @@
 const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
-const moment = require('moment');
-const {
-	EVENTS
-} = require('../../../constants');
 
+/**
+ * @description Construct a resource with base_version/uscore path
+ */
+let getResourceConstructor = (base_version) => {
+	return require(resolveFromVersion(base_version, 'Patient'));
+};
 
 /**
 * @description Filter function for only allowing a certain patient to be
@@ -21,24 +23,47 @@ let patient_filter = function (user_id) {
 	return (patient) => !user_id || user_id === patient.id;
 };
 
-module.exports.search = function search ({ profile, logger, config, app }) {
+
+/**
+ * @description Controller for getting a resource by history version id
+ */
+module.exports.searchByVersionId = function searchByVersionId ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
-		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let { base_version, version_id} = req.sanitized_args;
 
-		return service.search(req.sanitized_args, logger)
+		let Patient = getResourceConstructor(base_version);
+
+		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleBundleReadResponse( res, base, Patient, results, {
+				responseUtils.handleSingleReadResponse(res, next, base_version, Patient, results, version_id)
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base_version));
+			});
+	};
+};
+
+module.exports.search = function search ({ profile, logger, config }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base_version } = req.sanitized_args;
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
+
+		return service.search(req.sanitized_args, req.contexts, logger)
+			.then((results) =>
+				responseUtils.handleBundleReadResponse( res, base_version, Patient, results, {
 					resourceUrl: config.auth.resourceServer,
 					filter: patient_filter(req.patient)
 				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 
@@ -49,43 +74,17 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base, id } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
-		let AuditEvent = require(resolveFromVersion(base, 'uscore/AuditEvent'));
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
 
-		// If we have req.patient, then we need to validate that this patient
-		// is only accessing resources with his id, he is not allowed to access others
-		if ( req.patient && id && req.patient !== id ) {
-			// Create an audit event
-			let resource = new AuditEvent({
-				// the type is a coding of the type of incident
-				type: {
-					system: 'https://www.hl7.org/fhir/valueset-audit-event-type.html',
-					code: '110113',
-					display: 'Security Alert',
-					userSelected: false
-				},
-				// Time of the event
-				recorded: moment().toISOString(),
-				// The attempted action is a read, according to https://www.hl7.org/fhir/valueset-audit-event-action.html
-				action: 'R',
-				// The outcome was a minor failure, according to https://www.hl7.org/fhir/valueset-audit-event-outcome.html
-				outcome: '4',
-				// Description of the outcome
-				outcomeDescription: `Patient ${req.patient} tried to access patient ${req.params.id} and is not allowed to access this patient.`
-			});
-			app.emit(EVENTS.AUDIT, resource);
-			return next(errors.unauthorized(`You are not allowed to access patient ${req.params.id}.`, base));
-		}
-
-		return service.searchById(req.sanitized_args, logger)
+		return service.searchById(req.sanitized_args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base, Patient, results)
+				responseUtils.handleSingleReadResponse(res, next, base_version, Patient, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -93,31 +92,32 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 /**
 * @description Controller for creating a patient
 */
-module.exports.create = function create ({ profile, logger, app }) {
+module.exports.create = function create ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base_version, resource_id} = req.sanitized_args;
+		let resource_body = req.body;
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
-				base
+				base_version
 			));
 		}
 		// Create a new patient resource and pass it to the service
 		let patient = new Patient(resource_body);
 		let args = { id: resource_id, resource: patient };
 		// Pass any new information to the underlying service
-		return service.create(args, logger)
+		return service.create(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base, Patient.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base_version, Patient.__resourceType, results)
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -125,31 +125,37 @@ module.exports.create = function create ({ profile, logger, app }) {
 /**
 * @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
 */
-module.exports.update = function update ({ profile, logger, app }) {
+module.exports.update = function update ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base, id, resource_body = {}} = req.sanitized_args;
+		let { base_version, id} = req.sanitized_args;
+		let resource_body = req.body;
+
+		console.log(resource_body);
+
 		// Get a version specific patient
-		let Patient = require(resolveFromVersion(base, 'uscore/Patient'));
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
 		// Validate the resource type before creating it
 		if (Patient.__resourceType !== resource_body.resourceType) {
 			return next(errors.invalidParameter(
 				`'resourceType' expected to have value of '${Patient.__resourceType}', received '${resource_body.resourceType}'`,
-				base
+				base_version
 			));
 		}
 		// Create a new patient resource and pass it to the service
 		let patient = new Patient(resource_body);
-		let args = { id, resource: patient };
+		let args = { id, base_version, resource: patient };
 		// Pass any new information to the underlying service
-		return service.update(args, logger)
+		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base, Patient.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, Patient.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
-				next(errors.internal(err.message, base));
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };
@@ -157,19 +163,67 @@ module.exports.update = function update ({ profile, logger, app }) {
 /**
 * @description Controller for deleting a patient resource.
 */
-module.exports.remove = function remove ({ profile, logger, app }) {
+module.exports.remove = function remove ({ profile, logger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base } = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 
-		return service.remove(req.sanitized_args, logger)
-			.then(() => responseUtils.handleDeleteResponse(res))
+		return service.remove(req.sanitized_args, req.contexts, logger)
+			.then((results) => responseUtils.handleDeleteResponse(res, results))
 			.catch((err = {}) => {
 				// Log the error
 				logger.error(err);
 				// Pass the error back
-				responseUtils.handleDeleteRejection(res, next, base, err);
+				responseUtils.handleDeleteRejection(res, next, base_version, err);
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a Patient resource.
+*/
+module.exports.history = function history ({ profile, logger, config }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base_version } = req.sanitized_args;
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
+
+		return service.history(req.sanitized_args, req.contexts, logger)
+			.then((results) =>
+				responseUtils.handleBundleHistoryResponse( res, base_version, Patient, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base_version));
+			});
+	};
+};
+
+/**
+* @description Controller for getting the history of a Patient resource by ID.
+*/
+module.exports.historyById = function historyById ({ profile, logger, config }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base_version } = req.sanitized_args;
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
+
+		return service.historyById(req.sanitized_args, req.contexts, logger)
+			.then((results) =>
+				responseUtils.handleBundleHistoryResponse( res, base_version, Patient, results, {
+					resourceUrl: config.auth.resourceServer
+				})
+			)
+			.catch((err) => {
+				logger.error(err);
+				next(errors.internal(err.message, base_version));
 			});
 	};
 };

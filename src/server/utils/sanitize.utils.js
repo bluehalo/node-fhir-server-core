@@ -100,14 +100,20 @@ let sanitizeMiddleware = function (config) {
 		let currentArgs = parseParams(req);
 		let cleanArgs = {};
 
+		// filter only ones with verion or no version
+		let version_specific_params = config.filter(param => {
+			return !param.versions || param.versions === req.params.base_version;
+		});
+
 		// Check each argument in the config
-		for (let i = 0; i < config.length; i++) {
-			let conf = config[i];
+		for (let i = 0; i < version_specific_params.length; i++) {
+			let conf = version_specific_params[i];
+
 			let { field, value } = findMatchWithName(conf.name, currentArgs);
 
 			// If the argument is required but not present
 			if (!value && conf.required) {
-				return next(errors.invalidParameter(conf.name + ' is required', req.params.base));
+				return next(errors.invalidParameter(conf.name + ' is required', req.params.base_version));
 			}
 
 			// Try to cast the type to the correct type, do this first so that if something
@@ -117,17 +123,18 @@ let sanitizeMiddleware = function (config) {
 					cleanArgs[field] = parseValue(conf.type, value);
 				}
 			} catch (err) {
-				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base));
+				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base_version));
 			}
 
       // If we have the arg and the type is wrong, throw invalid arg
 			if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
-				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base));
+				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base_version));
 			}
 		}
 
 		// Save the cleaned arguments on the request for later use, we must only use these later on
 		req.sanitized_args = cleanArgs;
+
 		next();
 	};
 };

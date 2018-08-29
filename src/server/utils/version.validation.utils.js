@@ -11,10 +11,10 @@ let versionValidationMiddleware = ( profile = {}) => {
 	let { versions = [] } = profile;
 
 	return function validationMiddleware (req, res, next) {
-		let base = req.params && req.params.base;
+		let base_version = req.params && req.params.base_version;
 
-		if (!base || versions.indexOf(base) === -1) {
-			return next(errors.notFound());
+		if (!base_version || versions.indexOf(base_version) === -1) {
+			return next(errors.notFound(undefined, base_version));
 		}
 
 		next();

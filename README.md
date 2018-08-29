@@ -43,7 +43,7 @@ const config = {
 	profiles: {
 		patient: {
 			service: path.resolve('./profiles/patient/patient.service'),
-			versions: [ VERSIONS.STU3 ]
+			versions: [ VERSIONS['3_0_1'] ]
 		}
 	}
 };

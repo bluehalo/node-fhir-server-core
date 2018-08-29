@@ -1,6 +1,6 @@
 {
 	"name": "@asymmetrik/node-fhir-server-core",
-	"version": "1.0.0-rc1",
+	"version": "1.1.0",
 	"description": "Node FHIR Rest API Server",
 	"main": "src/index",
 	"author": "Asymmetrik Ltd.",
@@ -53,6 +53,8 @@
 		"moment": "^2.19.4",
 		"moment-timezone": "^0.5.14",
 		"mongodb": "^3.0.0-rc0",
+		"passport": "^0.4.0",
+		"passport-http-bearer": "^1.0.1",
 		"sanitize-html": "^1.16.1",
 		"superagent": "^3.8.3",
 		"validator": "^9.1.2",

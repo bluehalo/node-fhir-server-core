@@ -11,6 +11,6 @@ src/cert.pem
 docs/dist
 npm-debug.log
 .DS_Store
-coverage
+/coverage
 .idea/
 !/src/server/profiles/coverage/

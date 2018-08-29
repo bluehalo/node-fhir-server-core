@@ -1,5 +1,7 @@
 const Server = require('./server/server');
 const constants = require('./constants');
+const { resolveFromVersion } = require('./server/utils/resolve.utils');
+
 
 /**
  * @name exports
@@ -21,6 +23,11 @@ module.exports = {
 	Server: Server,
 
 	/**
+	 * @description Export function to allow
+	 */
+	resolveFromVersion: resolveFromVersion,
+
+	/**
 	* @description Initialize is useful for building a server with all the defaults
 	* @param {Object} config - FHIR Server configuration object
 	* @return {Server}
@@ -29,6 +36,7 @@ module.exports = {
 		.configureMiddleware()
 		.configureSession()
 		.configureHelmet()
+		.configurePassport()
 		.setPublicDirectory()
 		.setProfileRoutes()
 		.setErrorRoutes()

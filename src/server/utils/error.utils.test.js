@@ -16,7 +16,7 @@ const {
 describe('Error Utils Tests', () => {
 
 	test('should return correct OperationOutcome for an invalidParameter error', () => {
-		let error = invalidParameter('Age is invalid.', VERSIONS.STU3);
+		let error = invalidParameter('Age is invalid.', VERSIONS['3_0_1']);
 		let issue = error.issue[0];
 
 		expect(error.statusCode).toEqual(400);
@@ -28,8 +28,8 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an unauthorized error', () => {
-		let errorWithMessage = unauthorized('You shall not pass.', VERSIONS.STU3);
-		let errorWithoutMessage = unauthorized('', VERSIONS.STU3);
+		let errorWithMessage = unauthorized('You shall not pass.', VERSIONS['3_0_1']);
+		let errorWithoutMessage = unauthorized('', VERSIONS['3_0_1']);
 
 		expect(errorWithMessage.statusCode).toEqual(401);
 		expect(errorWithMessage.issue).toHaveLength(1);
@@ -47,8 +47,8 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an insufficientScope error', () => {
-		let errorWithMessage = insufficientScope('Not enough scope for this action.', VERSIONS.STU3);
-		let errorWithoutMessage = insufficientScope('', VERSIONS.STU3);
+		let errorWithMessage = insufficientScope('Not enough scope for this action.', VERSIONS['3_0_1']);
+		let errorWithoutMessage = insufficientScope('', VERSIONS['3_0_1']);
 
 		expect(errorWithMessage.statusCode).toEqual(403);
 		expect(errorWithMessage.issue).toHaveLength(1);
@@ -66,8 +66,8 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an notFound error', () => {
-		let errorWithMessage = notFound('Somthing not found.', VERSIONS.STU3);
-		let errorWithoutMessage = notFound('', VERSIONS.STU3);
+		let errorWithMessage = notFound('Somthing not found.', VERSIONS['3_0_1']);
+		let errorWithoutMessage = notFound('', VERSIONS['3_0_1']);
 
 		expect(errorWithMessage.statusCode).toEqual(404);
 		expect(errorWithMessage.issue).toHaveLength(1);
@@ -85,8 +85,8 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an deleted error', () => {
-		let errorWithMessage = deleted('This resource has been deleted.', VERSIONS.STU3);
-		let errorWithoutMessage = deleted('', VERSIONS.STU3);
+		let errorWithMessage = deleted('This resource has been deleted.', VERSIONS['3_0_1']);
+		let errorWithoutMessage = deleted('', VERSIONS['3_0_1']);
 
 		expect(errorWithMessage.statusCode).toEqual(410);
 		expect(errorWithMessage.issue).toHaveLength(1);
@@ -104,8 +104,8 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an internal error', () => {
-		let errorWithMessage = internal('Internal Server Error.', VERSIONS.STU3);
-		let errorWithoutMessage = internal('', VERSIONS.STU3);
+		let errorWithMessage = internal('Internal Server Error.', VERSIONS['3_0_1']);
+		let errorWithoutMessage = internal('', VERSIONS['3_0_1']);
 
 		expect(errorWithMessage.statusCode).toEqual(500);
 		expect(errorWithMessage.issue).toHaveLength(1);
@@ -124,12 +124,12 @@ describe('Error Utils Tests', () => {
 
 	test('should correctly determine if an error is an OperationOutcome', () => {
 		let normalError = new Error('FooBar');
-		let operationError = invalidParameter('', VERSIONS.STU3);
+		let operationError = invalidParameter('', VERSIONS['3_0_1']);
 		let operationErrorWithoutVersion = invalidParameter('');
 
-		expect(isServerError(normalError, VERSIONS.STU3)).toBeFalsy();
-		expect(isServerError(operationError, VERSIONS.STU3)).toBeTruthy();
-		expect(isServerError(operationErrorWithoutVersion, VERSIONS.STU3)).toBeTruthy();
+		expect(isServerError(normalError, VERSIONS['3_0_1'])).toBeFalsy();
+		expect(isServerError(operationError, VERSIONS['3_0_1'])).toBeTruthy();
+		expect(isServerError(operationErrorWithoutVersion, VERSIONS['3_0_1'])).toBeTruthy();
 	});
 
 });
