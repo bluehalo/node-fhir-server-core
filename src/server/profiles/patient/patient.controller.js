@@ -125,12 +125,14 @@ module.exports.create = function create ({ profile, logger }) {
 /**
 * @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
 */
-module.exports.update = function update ({ profile, logger }) {
+module.exports.update = function update ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version, id} = req.sanitized_args;
 		let resource_body = req.body;
+
+		console.log(resource_body);
 
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base_version, 'Patient'));
@@ -147,7 +149,9 @@ module.exports.update = function update ({ profile, logger }) {
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base_version, Patient.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, Patient.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);

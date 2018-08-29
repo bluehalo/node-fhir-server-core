@@ -95,7 +95,7 @@ module.exports.create = function create({profile, logger, app}) {
 		}
 		// Create a new devicecomponent resource and pass it to the service
 		let devicecomponent = new DeviceComponent(resource_body);
-		let args = {id: resource_id, resource: devicecomponent};
+		let args = {id: resource_id, base_version, resource: devicecomponent};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
@@ -111,7 +111,7 @@ module.exports.create = function create({profile, logger, app}) {
 /**
  * @description Controller for updating/creating DeviceComponent. If DeviceComponent does not exist, it should be updated
  */
-module.exports.update = function update({profile, logger, app}) {
+module.exports.update = function update ({ profile, logger, config }) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
@@ -126,11 +126,13 @@ module.exports.update = function update({profile, logger, app}) {
 		}
 		// Create a new devicecomponent resource and pass it to the service
 		let devicecomponent = new DeviceComponent(resource_body);
-		let args = {id, resource: devicecomponent};
+		let args = {id, base_version, resource: devicecomponent};
 		// Pass any new information to the underlying service
 		return service.update(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleUpdateResponse(res, base_version, DeviceComponent.__resourceType, results)
+				responseUtils.handleUpdateResponse(res, base_version, DeviceComponent.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);

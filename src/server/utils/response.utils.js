@@ -1,5 +1,27 @@
 const { resolveFromVersion } = require('./resolve.utils');
+const { VERSIONS } = require('../../constants');
 const errors = require('./error.utils');
+const path = require('path');
+
+
+/**
+ * Gets the content type based on the version.  DSUT2 returns 'application/json+fhir' where STU3
+ * 'application/fhir+json'.
+ *
+ * @param {*} base_version
+ */
+let getContentType = (base_version) => {
+	const DSTU2_TYPE = 'application/json+fhir';
+	const STU3_TYPE = 'application/fhir+json';
+
+	if (base_version === VERSIONS['1_0_2']) {
+		return DSTU2_TYPE;
+	} else if (base_version === VERSIONS['3_0_1']) {
+		return STU3_TYPE;
+	} else {
+		return 'application/json';
+	}
+};
 
 /**
 * @description When resources are read in the controller functions
@@ -16,8 +38,9 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 
 		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
 		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
+		res.type(getContentType(base_version));
 
-		res.status(200).type('application/fhir+json').json(new Resource(resource_json));
+		res.status(200).json(new Resource(resource_json));
 	} else {
 		next(errors.notFound(`${Resource.__resourceType} not found.`, base_version));
 	}
@@ -77,7 +100,8 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 	results.entry = entries;
 	results.total = entries.length;
 
-	res.status(200).type('application/fhir+json').json(results);
+	res.type(getContentType(base_version));
+	res.status(200).json(results);
 };
 
 /**
@@ -115,17 +139,20 @@ let handleCreateResponse = (res, base_version, type, results) => {
 * @param {boolean} results.created - Did the update result in a new resource being created
 * @param {string} results.resource_version - Version number of the updated resource
 */
-let handleUpdateResponse = (res, base_version, type, results) => {
+let handleUpdateResponse = (res, base_version, type, results, options) => {
 	let { id, created = false, resource_version } = results;
+	let { resourceUrl } = options;
+
 	let status = created ? 201 : 200;
 	let date = new Date();
 
 	if (resource_version) {
-		res.set('Content-Location', `${base_version}/${type}/${id}/_history/${resource_version}`);
+		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
 		res.set('ETag', `${resource_version}`);
 	}
 
-	res.set('Location', `${base_version}/${type}/${id}`);
+	res.type(getContentType(base_version));
+	res.set('Location', `${path.join(resourceUrl, base_version, type, id)}`);
 	res.set('Last-Modified', date.toISOString());
 	res.status(status).end();
 };
@@ -211,7 +238,8 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 	results.entry = entries;
 	results.total = entries.length;
 
-	res.status(200).type('application/fhir+json').json(results);
+	res.type(getContentType(base_version));
+	res.status(200).json(results);
 };
 
 /**

@@ -13,7 +13,7 @@ module.exports.makeStatement = function(resources) {
 	let Conformance = getConformanceResource();
 
 	return new Conformance({
-		status: 'generated',
+		status: 'active',
 		date: moment().tz('America/New_York').format(),
 		publisher: 'Not provided',
 		kind: 'instance',
@@ -27,7 +27,7 @@ module.exports.makeStatement = function(resources) {
 		fhirVersion: '1.0.2',
 		acceptUnknown: 'extensions',
 		format: [
-			'application/fhir+json'
+			'application/json+fhir'
 		],
 		rest: [
 			resources
