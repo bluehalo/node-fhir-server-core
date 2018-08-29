@@ -5,9 +5,11 @@ Asymmetrik FHIR API Server
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
 
-The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.
+The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.  This server framework currently supports both DSTU2 (1.0.2) and STU3 (3.0.1) simultaneously.  You can decide to support both or just one by editing the configuration.
 
 The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
+
+For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
 
 <img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
@@ -63,7 +65,15 @@ main();
 ## Usage
 For a complete list of all configuration options, supported profiles, their setups, best practices, authentication, etc. please consult our [Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki). More documentation and examples will be added over time.
 
-For an already developed implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
+## Roadmap
+- Support for more versions
+	- Multiple versions within DSTU2 and STU3
+	- R4
+- Remaining Endpoints (Terminology Operations)
+- Validation Service
+- Enhancing Authentication and adding additional scope checks
+- Better documentation on setup and configurations
+- Implementation guides and demos
 
 ## Philosophy
 Our project vision is to build an easy to use FHIR server that supports all resource profiles defined in the [US Core implementation guide](http://www.hl7.org/fhir/us/core/) and is built with security in mind from the ground up. We decided to use a plugin style architecture so implementors could focus on writing queries and not worry about all the other technical difficulties of securing the server.  As this project matures, we plan to support more resources, custom extensions, versions, write capabilities, etc.  
