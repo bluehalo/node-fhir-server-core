@@ -132,8 +132,6 @@ module.exports.update = function update ({ profile, logger, config }) {
 		let { base_version, id} = req.sanitized_args;
 		let resource_body = req.body;
 
-		console.log(resource_body);
-
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base_version, 'Patient'));
 		// Validate the resource type before creating it
