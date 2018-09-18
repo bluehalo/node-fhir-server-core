@@ -28,7 +28,6 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
 	let context = { base_version: args.base_version };
-
 	// create profile list
 	let keys = Object.keys(profiles);
 	let active_profiles = keys.map((profile_name) => {
@@ -64,7 +63,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	// Make the resource and give it the version so it can only include valid search params
 	server_statement.resource = active_profiles.map((profile) => {
 		let resource = profile.service.makeResource ?
-			profile.service.makeResource(context.base_version, profile.key) :
+			profile.service.makeResource(Object.assign(args, {'key': profile.key}), logger) :
 			profile.makeResource(context.base_version, profile.key);
 		// Determine the interactions we need to list for this profile
 		resource.interaction = generateInteractions(profile.service, resource.type);

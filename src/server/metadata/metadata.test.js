@@ -11,14 +11,14 @@ let server;
 let fillRoute = (route, key) => route.replace(':base_version', VERSIONS['3_0_1']).replace(':id', 1).replace(':resource', key);
 
 //A function to make a custom confirmance statement
-let customMakeResource = (base_version, key) => {
-    let Resource = require(resolve_utils.resolveFromVersion(base_version, key));
+let customMakeResource = (args,logger) => {
+    let Resource = require(resolve_utils.resolveFromVersion(args.base_version, args.key));
   
     // Return our conformance statement
     return {
       type: Resource.__resourceType,
       profile: {
-        reference: `http://example.org/fhir/${key}.html`
+        reference: `http://example.org/fhir/${args.key}.html`
       },
       conditionalDelete: 'not-supported',
       searchParam:  [
