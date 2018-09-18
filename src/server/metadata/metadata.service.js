@@ -42,7 +42,9 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	}).filter(profile => profile.versions.indexOf(context.base_version) !== -1);
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(args.base_version);
+	let { makeStatement, securityStatement } = config.statementGenerator ?
+		config.statementGenerator(args, logger) :
+		getStatementGenerators(args.base_version);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
