@@ -99,6 +99,61 @@ describe('Conformance Tests', () => {
         expect(response.body.implementation.description).toBe("FHIR Test Server (STU3)");
     }, 60000);
 
+    test('Test that the server returns a default security statement', async () => {
+		// Standup a basic server
+        let config = Object.assign({}, test_config, { logging: { level: 'emerg' }});
+        config.security = [{
+ 		        url: 'authorize',
+    		    valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize'
+	        },
+	        {
+	            url: 'token',
+	            valueUri: 'https://afternoon-springs-39948.herokuapp.com/token'
+            }
+        ]
+		server = new Server(config)
+			.setProfileRoutes()
+			.setErrorRoutes();
+
+        let keys = Object.keys(server.config.profiles);
+		let { routes } = require('../route.config');
+
+
+        let response = await request(server.app)['get']('/3_0_1/metadata');
+        expect(response.body.resourceType).toBe("CapabilityStatement");
+
+        let security = response.body.rest[0].security;
+        expect(security.service[0].text).toBe("OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)");
+    }, 60000);
+
+    test('Test that the server returns a custom security statement', async () => {
+		// Standup a basic server
+        let config = Object.assign({}, test_config, { logging: { level: 'emerg' }});
+        config.security = [{
+ 		        url: 'authorize',
+    		    valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize'
+	        },
+	        {
+	            url: 'token',
+	            valueUri: 'https://afternoon-springs-39948.herokuapp.com/token'
+            }
+        ]
+        config.statementGenerator = customGetStatementGenerators;
+		server = new Server(config)
+			.setProfileRoutes()
+			.setErrorRoutes();
+
+        let keys = Object.keys(server.config.profiles);
+		let { routes } = require('../route.config');
+
+
+        let response = await request(server.app)['get']('/3_0_1/metadata');
+        expect(response.body.resourceType).toBe("CapabilityStatement");
+
+        let security = response.body.rest[0].security;
+        expect(security.service[0].text).toBe("Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)");
+    }, 60000);
+
     test('Test that the server returns a custom capability statement', async () => {
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' }});
