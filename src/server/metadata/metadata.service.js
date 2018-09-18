@@ -63,7 +63,9 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 
 	// Make the resource and give it the version so it can only include valid search params
 	server_statement.resource = active_profiles.map((profile) => {
-		let resource = profile.makeResource(context.base_version, profile.key, 'Patient');
+		let resource = profile.service.makeResource ?
+			profile.service.makeResource(context.base_version, profile.key) :
+			profile.makeResource(context.base_version, profile.key);
 		// Determine the interactions we need to list for this profile
 		resource.interaction = generateInteractions(profile.service, resource.type);
 		return resource;
