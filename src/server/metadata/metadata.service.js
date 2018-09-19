@@ -28,7 +28,6 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	// Create a context object to pass through to underlying services
 	// we may add more information to this later on
 	let context = { base_version: args.base_version };
-
 	// create profile list
 	let keys = Object.keys(profiles);
 	let active_profiles = keys.map((profile_name) => {
@@ -43,7 +42,9 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	}).filter(profile => profile.versions.indexOf(context.base_version) !== -1);
 
 	// Get the necessary functions to generate statements
-	let { makeStatement, securityStatement } = getStatementGenerators(args.base_version);
+	let { makeStatement, securityStatement } = config.statementGenerator ?
+		config.statementGenerator(args, logger) :
+		getStatementGenerators(args.base_version);
 
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
@@ -63,7 +64,9 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 
 	// Make the resource and give it the version so it can only include valid search params
 	server_statement.resource = active_profiles.map((profile) => {
-		let resource = profile.makeResource(context.base_version, profile.key, 'Patient');
+		let resource = profile.service.makeResource ?
+			profile.service.makeResource(Object.assign(args, {'key': profile.key}), logger) :
+			profile.makeResource(context.base_version, profile.key);
 		// Determine the interactions we need to list for this profile
 		resource.interaction = generateInteractions(profile.service, resource.type);
 		return resource;
