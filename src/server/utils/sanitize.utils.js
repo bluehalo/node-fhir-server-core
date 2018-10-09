@@ -62,7 +62,10 @@ let validateType = function (type, value) {
 			result = typeof value === 'object';
 			break;
 		case 'date':
-			result = moment(value).isValid();
+			result = typeof value === 'string';
+			break;
+		case 'reference':
+			result = typeof value === 'string';
 			break;
 		default:
 			result = false;
