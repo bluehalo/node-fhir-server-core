@@ -38,8 +38,7 @@ class DomainResource extends Resource {
 	}
 
 	set contained (new_value) {
-		const ResourceList = require('./ResourceList');
-		this.__contained = Array.isArray(new_value) ? new_value.map(val => new ResourceList(val)) : [new ResourceList(new_value)];
+		this.__contained = Array.isArray(new_value) ? new_value.map(val => val) : [new_value];
 	}
 
 	// May be used to represent additional information that is not part of the basic definition of the resource. In order to make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
@@ -66,7 +65,7 @@ class DomainResource extends Resource {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			text: this.__text && this.__text.toJSON(),
-			contained: this.__contained && this.__contained.map(v => v.toJSON()),
+			contained: this.__contained,
 			extension: this.__extension && this.__extension.map(v => v.toJSON()),
 			modifierExtension: this.__modifierExtension && this.__modifierExtension.map(v => v.toJSON())
 		});

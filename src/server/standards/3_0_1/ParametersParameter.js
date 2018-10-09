@@ -458,8 +458,7 @@ class ParametersParameter extends BackboneElement {
 	}
 
 	set resource (new_value) {
-		const ResourceList = require('./ResourceList');
-		this.__resource = new ResourceList(new_value);
+		this.__resource = new_value;
 	}
 
 	toJSON () {
@@ -503,7 +502,7 @@ class ParametersParameter extends BackboneElement {
 			valueSignature: this.__valueSignature && this.__valueSignature.toJSON(),
 			valueTiming: this.__valueTiming && this.__valueTiming.toJSON(),
 			valueMeta: this.__valueMeta && this.__valueMeta.toJSON(),
-			resource: this.__resource && this.__resource.toJSON()
+			resource: this.__resource
 		});
 	}
 }
