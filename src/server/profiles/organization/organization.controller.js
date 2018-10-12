@@ -80,7 +80,7 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 /**
  * @description Controller for creating a organization
  */
-module.exports.create = function create({profile, logger, app}) {
+module.exports.create = function create({profile, logger, app, config}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
@@ -102,7 +102,9 @@ module.exports.create = function create({profile, logger, app}) {
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base_version, Organization.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base_version, Organization.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);

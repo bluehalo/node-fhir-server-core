@@ -115,11 +115,12 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 * @param {string} results.id - Id of the updated/created resource
 * @param {string} results.resource_version - Version number of the updated resource
 */
-let handleCreateResponse = (res, base_version, type, results) => {
+let handleCreateResponse = (res, base_version, type, results, options) => {
 	let { id, resource_version } = results;
+	let { resourceUrl } = options;
 
 	if (resource_version) {
-		res.set('Content-Location', `${base_version}/${type}/${id}/_history/${resource_version}`);
+		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
 		res.set('ETag', `W/"${resource_version}"`);
 	}
 
