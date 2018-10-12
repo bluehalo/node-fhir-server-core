@@ -80,11 +80,12 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 /**
  * @description Controller for creating a documentmanifest
  */
-module.exports.create = function create({profile, logger, app}) {
+module.exports.create = function create({profile, logger, app, config}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base_version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base_version, resource_id} = req.sanitized_args;
+		let resource_body = req.body;
 		let DocumentManifest = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (DocumentManifest.__resourceType !== resource_body.resourceType) {
@@ -99,7 +100,9 @@ module.exports.create = function create({profile, logger, app}) {
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base_version, DocumentManifest.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base_version, DocumentManifest.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);

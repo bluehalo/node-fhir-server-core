@@ -92,7 +92,7 @@ module.exports.searchById = function searchById ({ profile, logger, app }) {
 /**
 * @description Controller for creating a patient
 */
-module.exports.create = function create ({ profile, logger }) {
+module.exports.create = function create ({ profile, logger, app, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -109,11 +109,13 @@ module.exports.create = function create ({ profile, logger }) {
 		}
 		// Create a new patient resource and pass it to the service
 		let patient = new Patient(resource_body);
-		let args = { id: resource_id, resource: patient };
+		let args = { id: resource_id, base_version, resource: patient };
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
-				responseUtils.handleCreateResponse(res, base_version, Patient.__resourceType, results)
+				responseUtils.handleCreateResponse(res, base_version, Patient.__resourceType, results, {
+					resourceUrl: config.auth.resourceServer
+				})
 			)
 			.catch((err) => {
 				logger.error(err);
