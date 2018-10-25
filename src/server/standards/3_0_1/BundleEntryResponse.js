@@ -67,8 +67,8 @@ class BundleEntryResponse extends BackboneElement {
 	}
 
 	set outcome (new_value) {
-		const ResourceList = require('./ResourceList');
-		this.__outcome = new ResourceList(new_value);
+		const OperationOutcome = require('./OperationOutcome');
+		this.__outcome = new OperationOutcome(new_value);
 	}
 
 	toJSON () {
