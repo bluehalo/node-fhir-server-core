@@ -27,7 +27,7 @@ module.exports.validateScopes = (allowedScopes) => {
 
 	return async (req, res, next) => {
 		let version = req.params.version;
-		let { scope, context } = req.authInfo;
+		let { scope, context } = req.user;
 
 		// get scopes that are valid for the endpoint specified
 		const validScopes = getValidScopes(scope, allowedScopes);
