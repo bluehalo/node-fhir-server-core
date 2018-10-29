@@ -118,7 +118,8 @@ module.exports.update = function update ({ profile, logger, config }) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let {base_version, id, resource_body = {}} = req.sanitized_args;
+		let { base_version, id} = req.sanitized_args;
+		let resource_body = req.body;
 		let ExpansionProfile = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (ExpansionProfile.__resourceType !== resource_body.resourceType) {

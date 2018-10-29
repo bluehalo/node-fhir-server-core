@@ -103,7 +103,8 @@ module.exports.create = function create ({ profile, logger, app, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, resource_id, resource_body = {}} = req.sanitized_args;
+		let { base_version, resource_id} = req.sanitized_args;
+		let resource_body = req.body;
 		// Get a version specific observation
 		let Observation = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
@@ -137,7 +138,9 @@ module.exports.update = function update ({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, id, resource_body = {}} = req.sanitized_args;
+		let { base_version, id} = req.sanitized_args;
+		let resource_body = req.body;
+
 		// Get a version specific observation
 		let Observation = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
