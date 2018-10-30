@@ -1,5 +1,4 @@
 const sanitize = require('sanitize-html');
-const moment = require('moment-timezone');
 const errors = require('./error.utils');
 const validator = require('validator');
 const xss = require('xss');
@@ -11,9 +10,7 @@ let parseValue = function (type, value) {
 			result = validator.toFloat(value);
 			break;
 		case 'date':
-			result = /^[0-9]*$/g.test(value)
-				? moment(+value).tz('America/New_York')
-				: moment(value).tz('America/New_York');
+			result = validator.stripLow(xss(sanitize(value)));
 			break;
 		case 'boolean':
 			result = validator.toBoolean(value);
