@@ -57,9 +57,6 @@ let validateType = function (type, value) {
 		case 'date':
 			result = typeof value === 'string';
 			break;
-		case 'reference':
-			result = typeof value === 'string';
-			break;
 		default:
 			result = false;
 			break;
