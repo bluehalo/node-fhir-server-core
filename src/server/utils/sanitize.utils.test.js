@@ -1,4 +1,3 @@
-const moment = require('moment');
 const path = require('path');
 const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize.utils'));
 const { VERSIONS } = require(path.resolve('./src/constants'));
@@ -74,9 +73,9 @@ describe('Sanitize Utils Tests', () => {
 		expect(typeof first_name).toEqual('string');
 		expect(typeof isAlive).toEqual('boolean');
 		expect(typeof age).toEqual('number');
-		// birthdate should be a moment object
-		expect(birthdate.isValid()).toBeTruthy();
-		expect(birthdate).toBeInstanceOf(moment);
+		expect(typeof birthdate).toEqual('string');
+		// birthdate no longer moment object
+		// expect(birthdate).toBeInstanceOf(moment);
 		// Make sure next was called but without an error
 		expect(next).toHaveBeenCalled();
 		// This should be the argument next would be invoked with
@@ -93,8 +92,8 @@ describe('Sanitize Utils Tests', () => {
 		// invoke our middleware
 		middleware(req, null, next);
 
-		expect(req.sanitized_args.birthdate.isValid()).toBeTruthy();
-		expect(req.sanitized_args.birthdate).toBeInstanceOf(moment);
+		expect(req.sanitized_args.birthdate).toEqual(query.birthdate);
+		expect(typeof req.sanitized_args.birthdate).toEqual('string');
 	});
 
 	test('should filter out extra arguments that do not belong', () => {
