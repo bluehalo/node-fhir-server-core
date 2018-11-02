@@ -16,7 +16,7 @@
 		"node": ">=8.6"
 	},
 	"scripts": {
-		"start": "cross-env NODE_ENV=production; node src/runner",
+		"start": "node src/runner",
 		"nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
 		"serve-docs": "npm run build-docs;node docs/server",
 		"build-docs": "cross-env NODE_ENV=production;node docs/build",
