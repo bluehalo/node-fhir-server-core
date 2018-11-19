@@ -1,5 +1,4 @@
 const sanitize = require('sanitize-html');
-const moment = require('moment-timezone');
 const errors = require('./error.utils');
 const validator = require('validator');
 const xss = require('xss');
@@ -11,20 +10,14 @@ let parseValue = function (type, value) {
 			result = validator.toFloat(value);
 			break;
 		case 'date':
-			result = /^[0-9]*$/g.test(value)
-				? moment(+value).tz('America/New_York')
-				: moment(value).tz('America/New_York');
+			result = validator.stripLow(xss(sanitize(value)));
 			break;
 		case 'boolean':
 			result = validator.toBoolean(value);
 			break;
 		case 'string':
-			// strip any html tags from the query
-			// xss helps prevent html from slipping in
-			// strip a certain range of unicode characters
-			// replace any non word characters
-			result = validator.stripLow(xss(sanitize(value)));
-			break;
+		case 'reference':
+		case 'uri':
 		case 'token':
 			// strip any html tags from the query
 			// xss helps prevent html from slipping in
@@ -53,16 +46,14 @@ let validateType = function (type, value) {
 			result = typeof value === 'boolean';
 			break;
 		case 'string':
-			result = typeof value === 'string';
-			break;
+		case 'reference':
+		case 'uri':
 		case 'token':
+		case 'date':
 			result = typeof value === 'string';
 			break;
 		case 'json_string':
 			result = typeof value === 'object';
-			break;
-		case 'date':
-			result = moment(value).isValid();
 			break;
 		default:
 			result = false;
