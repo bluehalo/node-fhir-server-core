@@ -1,4 +1,3 @@
-
 const { route_args } = require('./profiles/common.arguments');
 const { read_scopes, write_scopes } = require('./profiles/common.scopes');
 const { versionValidationMiddleware } = require('./utils/version.validation.utils');
@@ -9,15 +8,13 @@ const passport = require('passport');
 const { VERSIONS, INTERACTIONS } = require('../constants');
 const cors = require('cors');
 
-
-
 /**
-* @description Helper function to determine which versions are available
-* and need to be supported by metadata endpoints
-* @param {profiles} - Profile configurations from end users
-* @return {array} Array of versions we need to support
-*/
-function getAllConfiguredVersions (profiles = {}) {
+ * @description Helper function to determine which versions are available
+ * and need to be supported by metadata endpoints
+ * @param {profiles} - Profile configurations from end users
+ * @return {array} Array of versions we need to support
+ */
+function getAllConfiguredVersions(profiles = {}) {
 	let supported_versions = Object.values(VERSIONS);
 	let provided_versions = Object.getOwnPropertyNames(profiles).reduce((set, profile_key) => {
 		let { versions = [] } = profiles[profile_key];
@@ -28,24 +25,24 @@ function getAllConfiguredVersions (profiles = {}) {
 	// Filter the provided versions by ones we actually support. We need to check this to make
 	// sure some user does not pass in a version we do not officially support in core for whatever
 	// reason. Otherwise there may be some compliance issues.
-	return Array.from(provided_versions)
-		.filter((version) => supported_versions.indexOf(version) !== -1);
+	return Array.from(provided_versions).filter(version => supported_versions.indexOf(version) !== -1);
 }
 
 /**
-* @description Determine whether or not we have the necessary service for this
-* route. If we do not, return false, otherwise return true
-* @param {object} route - route configuration for this specific route
-* @param {object} profile - profile configuration for this particular profile
-* @return {boolean}
-*/
-function routeHasValidService (route, profile = {}) {
+ * @description Determine whether or not we have the necessary service for this
+ * route. If we do not, return false, otherwise return true
+ * @param {object} route - route configuration for this specific route
+ * @param {object} profile - profile configuration for this particular profile
+ * @return {boolean}
+ */
+function routeHasValidService(route, profile = {}) {
 	// If we have no serviceModule, we can't enable this route
 	if (!profile.serviceModule) {
 		return false;
 	}
+
 	// If we do not have an export containing the correct service, don't enable the route
-	if (!profile.serviceModule[route.controller.name]) {
+	if (!route.controller || !profile.serviceModule[route.controller.name]) {
 		return false;
 	}
 	// This route has a valid service, so we can enable it
@@ -53,16 +50,16 @@ function routeHasValidService (route, profile = {}) {
 }
 
 /**
-* @description Noop middleware for express
-*/
-function noOpMiddleware (req, res, next) {
+ * @description Noop middleware for express
+ */
+function noOpMiddleware(req, res, next) {
 	return next();
 }
 
 /**
-* @description Validation Middleware Wrapper
-*/
-function authenticationMiddleware (options) {
+ * @description Validation Middleware Wrapper
+ */
+function authenticationMiddleware(options) {
 	let { config } = options;
 	// Don't do any validation for testing
 	if (process.env.NODE_ENV === 'test') {
@@ -71,7 +68,7 @@ function authenticationMiddleware (options) {
 
 	// if strategy is configured
 	if (config.auth && config.auth.strategy) {
-		let { name, useSession = false	} = config.auth.strategy;
+		let { name, useSession = false } = config.auth.strategy;
 		return passport.authenticate(name, { session: useSession });
 	} else {
 		return noOpMiddleware;
@@ -79,9 +76,9 @@ function authenticationMiddleware (options) {
 }
 
 /**
-* @description Scope Validation
-*/
-function hasValidScopes (options) {
+ * @description Scope Validation
+ */
+function hasValidScopes(options) {
 	let { scopes, config } = options;
 	// Don't do any validation for testing
 	if (process.env.NODE_ENV === 'test') {
@@ -96,7 +93,7 @@ function hasValidScopes (options) {
 	return validateScopes(scopes);
 }
 
-function configureMetadataRoute (options) {
+function configureMetadataRoute(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
 	let { route } = require('./metadata/metadata.config');
@@ -111,7 +108,7 @@ function configureMetadataRoute (options) {
 		default_cors_options,
 		profile && profile.corsOptions,
 		// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-		{ methods: [ route.type.toUpperCase() ]}
+		{ methods: [route.type.toUpperCase()] }
 	);
 
 	// Enable cors with preflight options
@@ -132,8 +129,7 @@ function configureMetadataRoute (options) {
 	);
 }
 
-
-function configureResourceRoutes (options) {
+function configureResourceRoutes(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
 	let { routes } = require('./route.config');
@@ -156,14 +152,12 @@ function configureResourceRoutes (options) {
 		for (let j = 0; j < routes.length; j++) {
 			let route = routes[j];
 			let controller = require(`./profiles/${key.toLowerCase()}/${key.toLowerCase()}.controller`);
-
 			switch (route.interaction) {
 				case INTERACTIONS.SEARCH:
 					route.args = search_parameters;
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH];
 					break;
-
 				case INTERACTIONS.HISTORY:
 					route.args = search_parameters;
 					route.scopes = read_scopes(key);
@@ -175,44 +169,34 @@ function configureResourceRoutes (options) {
 					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
 					break;
 				case INTERACTIONS.SEARCH_BY_VID:
-					route.args = [
-							route_args.BASE,
-							route_args.ID,
-							route_args.VERSION_ID
-					];
+					route.args = [route_args.BASE, route_args.ID, route_args.VERSION_ID];
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_VID];
 					break;
 				case INTERACTIONS.SEARCH_BY_ID:
-					route.args = [
-						route_args.BASE,
-						route_args.ID
-					];
+					route.args = [route_args.BASE, route_args.ID];
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_ID];
 					break;
 				case INTERACTIONS.CREATE:
-					route.args = [
-						route_args.BASE
-					];
+					route.args = [route_args.BASE];
 					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.CREATE];
 					break;
 				case INTERACTIONS.UPDATE:
-					route.args = [
-						route_args.BASE,
-						route_args.ID
-					];
+					route.args = [route_args.BASE, route_args.ID];
 					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.UPDATE];
 					break;
 				case INTERACTIONS.DELETE:
-					route.args = [
-						route_args.BASE,
-						route_args.ID
-					];
+					route.args = [route_args.BASE, route_args.ID];
 					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.DELETE];
+					break;
+				case INTERACTIONS.EXPAND_BY_ID:
+					route.args = [route_args.BASE, route_args.ID, ...search_parameters];
+					route.scopes = read_scopes(key);
+					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
 			}
 
@@ -233,7 +217,7 @@ function configureResourceRoutes (options) {
 				default_cors_options,
 				profile && profile.corsOptions,
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-				{ methods: [ route.type.toUpperCase() ]}
+				{ methods: [route.type.toUpperCase()] }
 			);
 
 			// Enable cors with preflight options
@@ -259,7 +243,6 @@ function configureResourceRoutes (options) {
 		}
 	}
 }
-
 
 // Step 1
 // Find all the config files
