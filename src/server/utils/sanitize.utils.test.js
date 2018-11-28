@@ -86,7 +86,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should accept a different format for date types', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let query = { birthdate: '2017-03-01T13:10:00' };
-		let req = { query, params: ARGS_PARAM };
+		let req = { query, params: ARGS_PARAM, method: 'GET' };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -99,7 +99,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should filter out extra arguments that do not belong', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
 		let body = { id: 'john-doe', age: '24', birthdate: '740088404220', isAlive: 'true' };
-		let req = { body, params: ARGS_PARAM };
+		let req = { body, params: ARGS_PARAM, method: 'POST' };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -180,7 +180,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should pass an error to next if an argument is not the correct type', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let query = { age: 'Johnson' };
-		let req = { query, params: ARGS_PARAM };
+		let req = { query, params: ARGS_PARAM, method: 'GET' };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -200,7 +200,7 @@ describe('Sanitize Utils Tests', () => {
 		// if it is a number going in, someone might have got something past express
 		// and we should never allow the query to happen, it should trigger an error
 		let query = { age: 24 };
-		let req = { query, params: ARGS_PARAM };
+		let req = { query, params: ARGS_PARAM, method: 'GET' };
 		let next = jest.fn();
 
 		// invoke our middleware
