@@ -106,6 +106,12 @@ module.exports.common_args = {
 		type: 'token',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined
+	},
+	_COUNT: {
+		name: '_count',
+		type: 'number',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
 	}
 };
 
