@@ -40,6 +40,18 @@ module.exports.write_args = {
 * @description Common arguments used for search
 */
 module.exports.search_args = {
+	_SORT: {
+		name: '_sort',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_COUNT: {
+		name: '_count',
+		type: 'number',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
 	_INCLUDE: {
 		name: '_include',
 		type: 'string',
@@ -48,6 +60,18 @@ module.exports.search_args = {
 	},
 	_REVINCLUDE: {
 		name: '_revinclude',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_SUMMARY: {
+		name: '_summary',
+		type: 'token',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_ELEMENTS: {
+		name: '_elements',
 		type: 'string',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined
@@ -107,11 +131,5 @@ module.exports.common_args = {
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined
 	},
-	_COUNT: {
-		name: '_count',
-		type: 'number',
-		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
-		documentation: undefined
-	}
 };
 

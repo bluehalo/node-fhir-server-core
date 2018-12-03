@@ -29,6 +29,33 @@ const ARGS = [
 	}
 ];
 
+const SEARCH_ARGS = [
+	{
+		name: '_sort',
+		type: 'string'
+	},
+	{
+		name: '_count',
+		type: 'number'
+	},
+	{
+		name: '_include',
+		type: 'string'
+	},
+	{
+		name: '_revinclude',
+		type: 'string'
+	},
+	{
+		name: '_summary',
+		type: 'token'
+	},
+	{
+		name: '_elements',
+		type: 'string'
+	},
+];
+
 const REQUIRED_ARGS = [
 	{
 		name: 'id',
@@ -212,6 +239,39 @@ describe('Sanitize Utils Tests', () => {
 
 		let issue = nextArg.issue[0];
 		expect(issue.diagnostics).toEqual('age is invalid');
+	});
+
+	test('should allow all common search args', () => {
+
+		let middleware = sanitizeMiddleware(SEARCH_ARGS);
+		let params = { _sort: 'status', _count: '1', _include: 'Observation', _revinclude: 'Patient', _summary: 'text', _elements: 'identifier' };
+		let req = { params: Object.assign(params, ARGS_PARAM) };
+		let next = jest.fn();
+
+		// invoke our middleware
+		middleware(req, null, next);
+
+		// console log error so easier to find
+		if (next && next.mock.calls[0][0]) {
+			let nextArg = next.mock.calls[0][0];
+			console.log(nextArg.issue[0]);
+		}
+
+		// Inspect params and make sure they are the correct type
+		let { _sort, _count, _include, _revinclude, _summary, _elements } = req.sanitized_args;
+
+		expect(typeof _sort).toEqual('string');
+		expect(typeof _count).toEqual('number');
+		expect(typeof _include).toEqual('string');
+		expect(typeof _revinclude).toEqual('string');
+		expect(typeof _summary).toEqual('string');
+		expect(typeof _elements).toEqual('string');
+
+		// Make sure next was called but without an error
+		expect(next).toHaveBeenCalled();
+		// This should be the argument next would be invoked with
+		// calls[0] is the first set of arguments, calls[0][0] is the first argument
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 });
