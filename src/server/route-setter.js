@@ -94,10 +94,11 @@ function hasValidScopes(options) {
 }
 
 function configureMetadataRoute(options) {
+	console.log('boot')
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
 	let { route } = require('./metadata/metadata.config');
-
+	debugger
 	// The user can provider default cors options to be provided on all routes
 	let default_cors_options = Object.assign({}, server.corsOptions);
 	let profile = { versions: getAllConfiguredVersions(profiles) };

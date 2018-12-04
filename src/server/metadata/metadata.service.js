@@ -30,6 +30,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	let context = { base_version: args.base_version };
 	// create profile list
 	let keys = Object.keys(profiles);
+	debugger
 	let active_profiles = keys.map((profile_name) => {
 		return {
 			key: profile_name,
@@ -45,7 +46,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 	let { makeStatement, securityStatement } = config.statementGenerator ?
 		config.statementGenerator(args, logger) :
 		getStatementGenerators(args.base_version);
-
+	debugger
 	// If we do not have these functions, we cannot generate a new statement
 	if (!makeStatement || !securityStatement) {
 		// TODO: Figure out messaging for this scenario
@@ -68,6 +69,7 @@ let generateCapabilityStatement = (args, config, logger) => new Promise((resolve
 			profile.service.makeResource(Object.assign(args, {'key': profile.key}), logger) :
 			profile.makeResource(context.base_version, profile.key);
 		// Determine the interactions we need to list for this profile
+		debugger
 		resource.interaction = generateInteractions(profile.service, resource.type);
 		return resource;
 	});
