@@ -34,14 +34,29 @@ let getSearchParamaters = (profileKey, version) => {
 		fileIndex = filesLowerCase.indexOf(profileKey);
 	}
 
+	// Parameters defined by standards
 	const resource_specific_args = require(`../standards/${version}/arguments/${
 		files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
 	}`);
+
+	// Custom parameters
+	let custom_args = {};
+
+	/* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
+	try {
+		custom_args = require(`../profiles/${profileKey.toLowerCase()}/${profileKey.toLowerCase()}.arguments`);
+	} catch (err) { }
+
+
 	// Set paramaters
 	let resource_args_array = Object.getOwnPropertyNames(
 		resource_specific_args
 	).map(arg_name =>
 		Object.assign({ versions: version }, resource_specific_args[arg_name])
+	);
+
+	let custom_args_array = Object.getOwnPropertyNames(custom_args).map(
+		arg_name => Object.assign({ versions: version }, custom_args[arg_name])
 	);
 
 	let search_args_array = Object.getOwnPropertyNames(search_args).map(
@@ -52,7 +67,8 @@ let getSearchParamaters = (profileKey, version) => {
 		route_args.BASE,
 		...search_args_array,
 		...common_args_array,
-		...resource_args_array
+		...resource_args_array,
+		...custom_args_array
 	];
 
 	return resource_all_arguments;
