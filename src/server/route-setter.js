@@ -4,9 +4,11 @@ const { versionValidationMiddleware } = require('./utils/version.validation.util
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
 const { validateScopes } = require('./utils/scope.utils');
+const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const passport = require('passport');
 const { VERSIONS, INTERACTIONS } = require('../constants');
 const cors = require('cors');
+const operationsController = require('./operations/operations.controller');
 
 /**
  * @description Helper function to determine which versions are available
@@ -94,11 +96,9 @@ function hasValidScopes(options) {
 }
 
 function configureMetadataRoute(options) {
-	console.log('boot')
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
 	let { route } = require('./metadata/metadata.config');
-	debugger
 	// The user can provider default cors options to be provided on all routes
 	let default_cors_options = Object.assign({}, server.corsOptions);
 	let profile = { versions: getAllConfiguredVersions(profiles) };
@@ -223,7 +223,6 @@ function configureResourceRoutes(options) {
 
 			// Enable cors with preflight options
 			app.options(route.path, cors(cors_options));
-
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
@@ -245,6 +244,87 @@ function configureResourceRoutes(options) {
 	}
 }
 
+function configureOperationRoutes(options) {
+	let { app, config, logger } = options;
+	let { profiles, server } = config;
+	let { routes } = require('./route.config');
+
+	let default_cors_options = Object.assign({}, server.corsOptions);
+	// loop through all profiles
+	for (const key of Object.keys(profiles)) {
+		let profile = profiles[key];
+		if (!profile.operation || !profile.operation.length) {
+			continue;
+		}
+
+		for (var i = 0; i < profile.operation.length; i++) {
+			const op = profile.operation[i];
+
+			if (!op.name) {
+				throw Error('Must supply a key of name.  Value should be hyphen-cased in config file and camelCased in your implementation.');
+			}
+
+			if (!op.route) {
+				throw Error('Must supply a key of route. Value should begin with a forward slash, /');
+			}
+
+			if (!op.method) {
+				throw Error('Must supply a key of method with value of either GET or POST.');
+			}
+
+			const funcName = hypenToCamelcase(op.name);
+
+			if (!Object.keys(profile.serviceModule).includes(funcName)) {
+				throw Error(`Must include a function for ${key} with name ${funcName} that you specified in your configuration file.`);
+			}
+			let search_parameters = [];
+
+			profile.versions.forEach(version => {
+				search_parameters.push(...getSearchParamaters(key, version));
+			});
+
+			let route, operationControllerFunction;
+			if (op.method.toLowerCase() === 'post') {
+				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_POST);
+				route.scopes = write_scopes(key);
+				operationControllerFunction = INTERACTIONS.OPERATIONS_POST;
+			} else {
+				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_GET);
+				route.scopes = read_scopes(key);
+				operationControllerFunction = INTERACTIONS.OPERATIONS_GET;
+			}
+
+			// Merge any route specific cors options
+			let cors_options = Object.assign(
+				{},
+				default_cors_options,
+				profile && profile.corsOptions,
+				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
+				{ methods: [route.type.toUpperCase()] }
+			);
+			// Enable cors with preflight options
+			app.options(route.path, cors(cors_options));
+			// Setup the route with all the appropriate middleware
+			app[route.type](
+				// Actual path for the route
+				route.path.replace(':resource', key).concat(op.route).replace('$', '([\\$])'),
+				// Cors middleware
+				cors(cors_options),
+				// Version validation
+				versionValidationMiddleware(profile),
+				// Parameter sanitzation middleware
+				sanitizeMiddleware([route_args.BASE, route_args.ID, ...search_parameters]),
+				// Authentication middleware
+				authenticationMiddleware({ config, logger }),
+				// Scope validation
+				hasValidScopes({ scopes: route.scopes, config }),
+				// Finally our controller function
+				operationsController[operationControllerFunction]({ profile, logger, funcName})
+			);
+		}
+	}
+}
+
 // Step 1
 // Find all the config files
 // Step 2
@@ -258,8 +338,12 @@ const setter = (options = {}) => {
 	// set metadata route
 	configureMetadataRoute(options);
 
+	// set operation routes
+	configureOperationRoutes(options);
+
 	// set resource routes
 	configureResourceRoutes(options);
+
 };
 
 module.exports = {

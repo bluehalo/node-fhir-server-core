@@ -179,7 +179,9 @@ exports.INTERACTIONS = {
 	CREATE: 'create',
 	UPDATE: 'update',
 	DELETE: 'remove',
-	EXPAND_BY_ID: 'expandById'
+	EXPAND_BY_ID: 'expandById',
+	OPERATIONS_POST: 'operationsPost',
+	OPERATIONS_GET: 'operationsGet'
 };
 
 /**
