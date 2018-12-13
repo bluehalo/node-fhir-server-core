@@ -6,6 +6,8 @@ const ARGS_PARAM = {
 	version: VERSIONS['3_0_1']
 };
 
+const URL = 'localhost:3000/3_0_1/Patient/_search';
+
 const ARGS = [
 	{
 		name: 'first_name',
@@ -126,7 +128,7 @@ describe('Sanitize Utils Tests', () => {
 	test('should filter out extra arguments that do not belong', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
 		let body = { id: 'john-doe', age: '24', birthdate: '740088404220', isAlive: 'true' };
-		let req = { body, params: ARGS_PARAM };
+		let req = { body, params: ARGS_PARAM, url: URL };
 		let next = jest.fn();
 
 		// invoke our middleware
@@ -190,7 +192,7 @@ describe('Sanitize Utils Tests', () => {
 
 	test('should pass an error to next if a required argument is missing', () => {
 		let middleware = sanitizeMiddleware(REQUIRED_ARGS);
-		let req = { body: { name: 'joe' }, params: ARGS_PARAM };
+		let req = { body: { name: 'joe' }, params: ARGS_PARAM, url: URL };
 		let next = jest.fn();
 
 		// invoke our middleware

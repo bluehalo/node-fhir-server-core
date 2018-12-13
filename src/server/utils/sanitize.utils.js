@@ -64,8 +64,9 @@ let validateType = function (type, value) {
 
 let parseParams = req => {
 	let params = {};
+	let isSearch = req.url && req.url.endsWith('_search');
 	if (req.query && Object.keys(req.query).length) { Object.assign(params, req.query); }
-	if (req.body && Object.keys(req.body).length && req.url.endsWith('_search')) { Object.assign(params, req.body); }
+	if (req.body && Object.keys(req.body).length && isSearch) { Object.assign(params, req.body); }
 	if (req.params && Object.keys(req.params).length) { Object.assign(params, req.params); }
 	return params;
 };
