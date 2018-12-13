@@ -1,7 +1,7 @@
 /**
-* Generate a list of interactions a particular profile can support
-* keep a local copy of interactions so this does not need to happen each time
-*/
+ * Generate a list of interactions a particular profile can support
+ * keep a local copy of interactions so this does not need to happen each time
+ */
 let profileInteractions = {};
 let generateInteractions = (service, resourceType) => {
 	// return from cache if it exists
@@ -42,6 +42,10 @@ let generateInteractions = (service, resourceType) => {
 
 	if (service.historyById) {
 		interactions.push({ code: 'history-instance' });
+	}
+
+	if (service.expandById) {
+		interactions.push({ code: 'expand' });
 	}
 
 	// Save these interactions so we don't need to do this again
