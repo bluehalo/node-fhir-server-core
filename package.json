@@ -65,9 +65,9 @@
     "snyk": "^1.116.2"
   },
   "devDependencies": {
-    "jest": "^21.2.1",
+    "jest": "^23.6.0",
     "nock": "^9.1.5",
-    "nodemon": "^1.18.7",
+    "nodemon": "^1.18.6",
     "supertest": "^3.0.0"
   },
   "snyk": true
