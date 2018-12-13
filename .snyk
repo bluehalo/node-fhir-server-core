@@ -6,6 +6,9 @@ ignore:
     - chownr:
         reason: No patch available
         expires: '2019-01-12T18:03:30.458Z'
+      node-pre-gyp > tar > chownr:
+        reason: No patch available
+        expires: '2019-01-12T18:29:51.804Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:hoek:20180212':
