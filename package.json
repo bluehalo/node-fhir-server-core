@@ -24,6 +24,7 @@
     "test:lint": "eslint \"src/**/*.js\"",
     "test:src": "jest src",
     "test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;",
+		"snyk": "snyk",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect"
   },
