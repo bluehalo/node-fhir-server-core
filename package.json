@@ -1,70 +1,75 @@
 {
-	"name": "@asymmetrik/node-fhir-server-core",
-	"version": "1.2.0",
-	"description": "Node FHIR Rest API Server",
-	"main": "src/index",
-	"author": "Asymmetrik Ltd.",
-	"contributors": [
-		"Bryan Young <byoung@asymmetrik.com>",
-		"Robert Winterbottom <rwinterbottom@asymmetrik.com>",
-		"Eddie Davis <edavis@asymmetrik.com>",
-		"Jon Lee <jlee@asymmetrik.com>"
-	],
-	"license": "MIT",
-	"private": true,
-	"engines": {
-		"node": ">=8.6"
-	},
-	"scripts": {
-		"start": "cross-env NODE_ENV=production; node src/runner",
-		"nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
-		"serve-docs": "npm run build-docs;node docs/server",
-		"build-docs": "cross-env NODE_ENV=production;node docs/build",
-		"watch-docs": "cross-env NODE_ENV=development;node docs/build",
-		"test:lint": "eslint \"src/**/*.js\"",
-		"test:src": "jest src",
-		"test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;"
-	},
-	"jest": {
-		"verbose": true,
-		"collectCoverage": true,
-		"coverageReporters": [
-			"text",
-			"lcov",
-			"json"
-		],
-		"coveragePathIgnorePatterns": [
-			"<rootDir>/src/server/standards/"
-		]
-	},
-	"dependencies": {
-		"body-parser": "^1.18.2",
-		"compression": "^1.7.1",
-		"cors": "^2.8.4",
-		"cross-env": "^5.1.4",
-		"eslint": "^4.12.1",
-		"express": "^4.16.2",
-		"glob": "^7.1.2",
-		"helmet": "^3.9.0",
-		"jsonschema": "^1.2.2",
-		"jsonwebtoken": "^8.1.0",
-		"jwk-to-pem": "^1.2.6",
-		"method-override": "^2.3.10",
-		"moment": "^2.19.4",
-		"moment-timezone": "^0.5.14",
-		"mongodb": "^3.0.0-rc0",
-		"passport": "^0.4.0",
-		"passport-http-bearer": "^1.0.1",
-		"sanitize-html": "^1.16.1",
-		"superagent": "^3.8.3",
-		"validator": "^9.1.2",
-		"winston": "^2.4.0",
-		"xss": "^0.3.4"
-	},
-	"devDependencies": {
-		"jest": "^21.2.1",
-		"nock": "^9.1.5",
-		"nodemon": "^1.12.1",
-		"supertest": "^3.0.0"
-	}
+  "name": "@asymmetrik/node-fhir-server-core",
+  "version": "1.2.0",
+  "description": "Node FHIR Rest API Server",
+  "main": "src/index",
+  "author": "Asymmetrik Ltd.",
+  "contributors": [
+    "Bryan Young <byoung@asymmetrik.com>",
+    "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
+    "Eddie Davis <edavis@asymmetrik.com>",
+    "Jon Lee <jlee@asymmetrik.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=8.6"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=production; node src/runner",
+    "nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
+    "serve-docs": "npm run build-docs;node docs/server",
+    "build-docs": "cross-env NODE_ENV=production;node docs/build",
+    "watch-docs": "cross-env NODE_ENV=development;node docs/build",
+    "test:lint": "eslint \"src/**/*.js\"",
+    "test:src": "jest src",
+    "test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;",
+		"snyk": "snyk",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/server/standards/"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "cross-env": "^5.1.4",
+    "eslint": "^4.12.1",
+    "express": "^4.16.2",
+    "glob": "^7.1.2",
+    "helmet": "^3.9.0",
+    "jsonschema": "^1.2.2",
+    "jsonwebtoken": "^8.1.0",
+    "jwk-to-pem": "^1.2.6",
+    "method-override": "^2.3.10",
+    "moment": "^2.19.4",
+    "moment-timezone": "^0.5.14",
+    "mongodb": "^3.0.0-rc0",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "sanitize-html": "^1.16.1",
+    "superagent": "^3.8.3",
+    "validator": "^9.1.2",
+    "winston": "^2.4.0",
+    "xss": "^0.3.4",
+    "snyk": "^1.116.2"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nock": "^9.1.5",
+    "nodemon": "^1.18.6",
+    "supertest": "^3.0.0"
+  },
+  "snyk": true
 }
