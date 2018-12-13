@@ -45,6 +45,21 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
 };
 
 /**
+ * @description Handle all Operation Responses by passing own resource, because all operations
+ * should return an out <Parameter>
+ * @function handleOperationResponse
+ * @param {Express.response} res - Express response object
+ * @param {function} next - next function from express middleware
+ * @param {string} base_version - Which spec version is this request coming from
+ * @param {object} resource_json - resulting json to be passed in to the class
+ */
+let handleOperationResponse = (res, next, base_version, resource_json) => {
+	//An Operation should always return some sort of out <Parameter>.
+	res.type(getContentType(base_version));
+	res.status(200).json(resource_json);
+};
+
+/**
  * @description When resources are read in the controller functions
  * they all need to respond in a similar manner
  * @function handleBundleReadResponse
@@ -276,11 +291,12 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
  */
 module.exports = {
 	handleSingleReadResponse,
+	handleOperationResponse,
 	handleBundleReadResponse,
 	handleCreateResponse,
 	handleUpdateResponse,
 	handleDeleteResponse,
 	handleDeleteRejection,
 	handleBundleHistoryResponse,
-	handleExpandReadResponse
+	handleExpandReadResponse,
 };
