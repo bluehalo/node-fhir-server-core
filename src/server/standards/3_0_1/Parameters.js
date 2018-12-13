@@ -28,8 +28,8 @@ class Parameters extends Resource {
 	}
 
 	set parameter (new_value) {
-		const ParametersParameter = require('./ParametersParameter');
-		this.__parameter = Array.isArray(new_value) ? new_value.map(val => new ParametersParameter(val)) : [new ParametersParameter(new_value)];
+		const ParametersParameterMultiPart = require('./ParametersParameterMultiPart');
+		this.__parameter = Array.isArray(new_value) ? new_value.map(val => new ParametersParameterMultiPart(val)) : [new ParametersParameterMultiPart(new_value)];
 	}
 
 	toJSON () {
