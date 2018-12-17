@@ -84,7 +84,7 @@ module.exports.create = function create({profile, logger, app, config}) {
 	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base_version, resource_id} = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 		let resource_body = req.body;
 		let Procedure = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
@@ -96,7 +96,7 @@ module.exports.create = function create({profile, logger, app, config}) {
 		}
 		// Create a new procedure resource and pass it to the service
 		let procedure = new Procedure(resource_body);
-		let args = {id: resource_id, base_version, resource: procedure};
+		let args = { base_version, resource: procedure};
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>
