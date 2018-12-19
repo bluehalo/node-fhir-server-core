@@ -21,21 +21,6 @@ module.exports.route_args = {
 };
 
 /**
-* @name exports
-* @description Common arguments used for writing new resources
-*/
-module.exports.write_args = {
-	RESOURCE_ID: {
-		name: 'resource_id',
-		type: 'string'
-	},
-	RESOURCE_BODY: {
-		name: 'resource_body',
-		type: 'json_string'
-	}
-};
-
-/**
 * @name search_args
 * @description Common arguments used for search
 */
