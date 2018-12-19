@@ -102,6 +102,10 @@ class Server {
 
 	// Configure middleware
 	configureMiddleware () {
+		//Enable error tracking request handler if supplied in config
+		if (this.config.errorTracking && this.config.errorTracking.requestHandler) {
+			this.app.use(this.config.errorTracking.requestHandler());
+		}
 		// Enable stack traces
 		this.app.set('showStackError', !this.env.IS_PRODUCTION);
 		// Add compression
@@ -183,6 +187,11 @@ class Server {
 
 	// Setup error routes
 	setErrorRoutes () {
+		//Enable error tracking error handler if supplied in config
+		if (this.config.errorTracking && this.config.errorTracking.errorHandler) {
+			this.app.use(this.config.errorTracking.errorHandler());
+		}
+
 		// Generic catch all error handler
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
