@@ -64,15 +64,19 @@ let validateType = function (type, value) {
 
 let parseParams = req => {
 	let params = {};
-	if (req.query && Object.keys(req.query).length) { Object.assign(params, req.query); }
-	if (req.body && Object.keys(req.body).length) { Object.assign(params, req.body); }
+	let isSearch = req.url && req.url.endsWith('_search');
+	if (req.query && req.method === 'GET' && Object.keys(req.query).length) { Object.assign(params, req.query); }
+	if (req.body && ['PUT', 'POST'].includes(req.method) && Object.keys(req.body).length && isSearch) { Object.assign(params, req.body); }
 	if (req.params && Object.keys(req.params).length) { Object.assign(params, req.params); }
 	return params;
 };
 
 let findMatchWithName = (name = '', params = {}) => {
 	let keys = Object.getOwnPropertyNames(params);
-	let match = keys.find(key => key.startsWith(name));
+	let match = keys.find(key => {
+		let parameter = key.split(':')[0];
+		return name === parameter;
+	});
 	return { field: match, value: params[match] };
 };
 
