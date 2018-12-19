@@ -93,7 +93,7 @@ class Server {
 		let { server = {}} = this.config;
 
 		this.env = {
-			IS_PRODUCTION: process.env.NODE_ENV === 'production',
+			IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
 			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert
 		};
 		// return self for chaining
