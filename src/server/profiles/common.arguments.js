@@ -21,25 +21,22 @@ module.exports.route_args = {
 };
 
 /**
-* @name exports
-* @description Common arguments used for writing new resources
-*/
-module.exports.write_args = {
-	RESOURCE_ID: {
-		name: 'resource_id',
-		type: 'string'
-	},
-	RESOURCE_BODY: {
-		name: 'resource_body',
-		type: 'json_string'
-	}
-};
-
-/**
 * @name search_args
 * @description Common arguments used for search
 */
 module.exports.search_args = {
+	_SORT: {
+		name: '_sort',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_COUNT: {
+		name: '_count',
+		type: 'number',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
 	_INCLUDE: {
 		name: '_include',
 		type: 'string',
@@ -48,6 +45,18 @@ module.exports.search_args = {
 	},
 	_REVINCLUDE: {
 		name: '_revinclude',
+		type: 'string',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_SUMMARY: {
+		name: '_summary',
+		type: 'token',
+		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
+		documentation: undefined
+	},
+	_ELEMENTS: {
+		name: '_elements',
 		type: 'string',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined
@@ -106,6 +115,6 @@ module.exports.common_args = {
 		type: 'token',
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined
-	}
+	},
 };
 

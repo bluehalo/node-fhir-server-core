@@ -103,7 +103,7 @@ module.exports.create = function create ({ profile, logger, app, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, resource_id} = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 		let resource_body = req.body;
 		// Get a version specific observation
 		let Observation = getResourceConstructor(base_version);
@@ -116,7 +116,7 @@ module.exports.create = function create ({ profile, logger, app, config }) {
 		}
 		// Create a new observation resource and pass it to the service
 		let observation = new Observation(resource_body);
-		let args = { id: resource_id, base_version, resource: observation };
+		let args = { base_version, resource: observation };
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

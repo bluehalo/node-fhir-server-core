@@ -96,7 +96,7 @@ module.exports.create = function create ({ profile, logger, app, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, resource_id} = req.sanitized_args;
+		let { base_version } = req.sanitized_args;
 		let resource_body = req.body;
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base_version, 'Patient'));
@@ -109,7 +109,7 @@ module.exports.create = function create ({ profile, logger, app, config }) {
 		}
 		// Create a new patient resource and pass it to the service
 		let patient = new Patient(resource_body);
-		let args = { id: resource_id, base_version, resource: patient };
+		let args = { base_version, resource: patient };
 		// Pass any new information to the underlying service
 		return service.create(args, req.contexts, logger)
 			.then((results) =>

@@ -49,13 +49,11 @@ let validateType = function (type, value) {
 		case 'reference':
 		case 'uri':
 		case 'token':
+		case 'date':
 			result = typeof value === 'string';
 			break;
 		case 'json_string':
 			result = typeof value === 'object';
-			break;
-		case 'date':
-			result = typeof value === 'string';
 			break;
 		default:
 			result = false;
