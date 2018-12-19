@@ -53,6 +53,16 @@ let routes = [
 		interaction: INTERACTIONS.EXPAND_BY_ID
 	},
 	/* eslint-disable no-useless-escape */
+	{
+		type: 'post',
+		path: '/:base_version/:resource',
+		interaction: INTERACTIONS.OPERATIONS_POST
+	},
+	{
+		type: 'get',
+		path: '/:base_version/:resource',
+		interaction: INTERACTIONS.OPERATIONS_GET
+	}
 ];
 
 /**
