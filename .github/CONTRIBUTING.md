@@ -13,11 +13,11 @@ Try to explain the current behavior, expected behavior, provide a reproducible c
 ## Submitting pull requests
 If you want to submit a pull request, please adhere to the following guidelines.
 
-1. Fork the repo and checkout the `develop` branch. You should create a new branch off of `develop`.
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this repo to your GitHub account and clone it.
 2. If you're adding new code, add tests to cover them or at least demonstrate how to test the new feature.
 3. Update documentation if applicable.
 4. Ensure your branch passes all the tests, by running `npm test`.
-5. Submit your PR back to the `develop` branch.
+5. Submit your PR back to the branch you branched from.
 
 ## Code style
 Code style is governed by eslint and our `.editorconfig`. You can view all the rules in our `.eslintrc` or just run `npm run test:lint` to see any issues.
