@@ -1,41 +1,40 @@
 const BackboneElement = require('./BackboneElement');
 
 class ClinicalImpressionFinding extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ClinicalImpressionFinding';
 		Object.assign(this, opt);
 	}
 
 	// This is a ClinicalImpressionFinding resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ClinicalImpressionFinding';
 	}
 
 	// Specific text of code for finding or diagnosis.
-	get item () {
+	get item() {
 		return this.__item;
 	}
 
-	set item (new_value) {
+	set item(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__item = new CodeableConcept(new_value);
 	}
 
 	// Which investigations support finding or diagnosis.
-	get cause () {
+	get cause() {
 		return this.__cause;
 	}
 
-	set cause (new_value) {
+	set cause(new_value) {
 		this.__cause = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			item: this.__item && this.__item.toJSON(),
-			cause: this.__cause
+			cause: this.__cause,
 		});
 	}
 }

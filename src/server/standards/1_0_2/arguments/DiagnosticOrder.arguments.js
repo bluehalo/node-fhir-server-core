@@ -33,7 +33,8 @@ module.exports = {
 		name: 'event-status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticOrder-event-status',
-		documentation: 'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
+		documentation:
+			'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
 	},
 	EVENT_STATUS_DATE: {
 		name: 'event-status-date',
@@ -57,13 +58,15 @@ module.exports = {
 		name: 'item-past-status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticOrder-item-past-status',
-		documentation: 'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
+		documentation:
+			'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
 	},
 	ITEM_STATUS: {
 		name: 'item-status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticOrder-item-status',
-		documentation: 'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
+		documentation:
+			'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
 	},
 	ITEM_STATUS_DATE: {
 		name: 'item-status-date',
@@ -93,7 +96,8 @@ module.exports = {
 		name: 'status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticOrder-status',
-		documentation: 'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
+		documentation:
+			'proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed.',
 	},
 	SUBJECT: {
 		name: 'subject',

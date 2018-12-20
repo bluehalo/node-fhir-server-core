@@ -51,7 +51,8 @@ module.exports = {
 		name: 'performer',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/CarePlan-performer',
-		documentation: 'Matches if the practitioner is listed as a performer in any of the \'simple\' activities.  (For performers of the detailed activities, chain through the activitydetail search parameter.).',
+		documentation:
+			"Matches if the practitioner is listed as a performer in any of the 'simple' activities.  (For performers of the detailed activities, chain through the activitydetail search parameter.).",
 	},
 	RELATED: {
 		name: 'related',

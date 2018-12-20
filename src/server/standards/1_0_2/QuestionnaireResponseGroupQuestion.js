@@ -1,51 +1,52 @@
 const BackboneElement = require('./BackboneElement');
 
 class QuestionnaireResponseGroupQuestion extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'QuestionnaireResponseGroupQuestion';
 		Object.assign(this, opt);
 	}
 
 	// This is a QuestionnaireResponseGroupQuestion resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'QuestionnaireResponseGroupQuestion';
 	}
 
 	// Identifies the question from the Questionnaire that corresponds to this question in the QuestionnaireResponse resource.
-	get linkId () {
+	get linkId() {
 		return this.__linkId;
 	}
 
-	set linkId (new_value) {
+	set linkId(new_value) {
 		this.__linkId = new_value;
 	}
 
 	// The actual question as shown to the user to prompt them for an answer.
-	get text () {
+	get text() {
 		return this.__text;
 	}
 
-	set text (new_value) {
+	set text(new_value) {
 		this.__text = new_value;
 	}
 
 	// The respondent\'s answer(s) to the question.
-	get answer () {
+	get answer() {
 		return this.__answer;
 	}
 
-	set answer (new_value) {
+	set answer(new_value) {
 		const QuestionnaireResponseGroupQuestionAnswer = require('./QuestionnaireResponseGroupQuestionAnswer');
-		this.__answer = Array.isArray(new_value) ? new_value.map(val => new QuestionnaireResponseGroupQuestionAnswer(val)) : [new QuestionnaireResponseGroupQuestionAnswer(new_value)];
+		this.__answer = Array.isArray(new_value)
+			? new_value.map(val => new QuestionnaireResponseGroupQuestionAnswer(val))
+			: [new QuestionnaireResponseGroupQuestionAnswer(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			linkId: this.__linkId,
 			text: this.__text,
-			answer: this.__answer && this.__answer.map(v => v.toJSON())
+			answer: this.__answer && this.__answer.map(v => v.toJSON()),
 		});
 	}
 }

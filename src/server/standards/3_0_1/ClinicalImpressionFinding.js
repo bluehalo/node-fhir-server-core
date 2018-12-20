@@ -1,52 +1,51 @@
 const BackboneElement = require('./BackboneElement');
 
 class ClinicalImpressionFinding extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ClinicalImpressionFinding';
 		Object.assign(this, opt);
 	}
 
 	// This is a ClinicalImpressionFinding resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ClinicalImpressionFinding';
 	}
 
 	// Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions.
-	get itemCodeableConcept () {
+	get itemCodeableConcept() {
 		return this.__itemCodeableConcept;
 	}
 
-	set itemCodeableConcept (new_value) {
+	set itemCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__itemCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Specific text, code or reference for finding or diagnosis, which may include ruled-out or resolved conditions.
-	get itemReference () {
+	get itemReference() {
 		return this.__itemReference;
 	}
 
-	set itemReference (new_value) {
+	set itemReference(new_value) {
 		const Reference = require('./Reference');
 		this.__itemReference = new Reference(new_value);
 	}
 
 	// Which investigations support finding or diagnosis.
-	get basis () {
+	get basis() {
 		return this.__basis;
 	}
 
-	set basis (new_value) {
+	set basis(new_value) {
 		this.__basis = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			itemCodeableConcept: this.__itemCodeableConcept && this.__itemCodeableConcept.toJSON(),
 			itemReference: this.__itemReference && this.__itemReference.toJSON(),
-			basis: this.__basis
+			basis: this.__basis,
 		});
 	}
 }

@@ -1,51 +1,50 @@
 const BackboneElement = require('./BackboneElement');
 
 class CodeSystemConceptDesignation extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'CodeSystemConceptDesignation';
 		Object.assign(this, opt);
 	}
 
 	// This is a CodeSystemConceptDesignation resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'CodeSystemConceptDesignation';
 	}
 
 	// The language this designation is defined for.
-	get language () {
+	get language() {
 		return this.__language;
 	}
 
-	set language (new_value) {
+	set language(new_value) {
 		this.__language = new_value;
 	}
 
 	// A code that details how this designation would be used.
-	get use () {
+	get use() {
 		return this.__use;
 	}
 
-	set use (new_value) {
+	set use(new_value) {
 		const Coding = require('./Coding');
 		this.__use = new Coding(new_value);
 	}
 
 	// The text value for this designation.
-	get value () {
+	get value() {
 		return this.__value;
 	}
 
-	set value (new_value) {
+	set value(new_value) {
 		this.__value = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			language: this.__language,
 			use: this.__use && this.__use.toJSON(),
-			value: this.__value
+			value: this.__value,
 		});
 	}
 }

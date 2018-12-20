@@ -45,7 +45,7 @@ module.exports = {
 		name: 'receiver',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-receiver',
-		documentation: 'Intended \'real-world\' recipient for the data.',
+		documentation: "Intended 'real-world' recipient for the data.",
 	},
 	RESPONSE_ID: {
 		name: 'response-id',

@@ -3,7 +3,7 @@ const errors = require('./error.utils');
 const validator = require('validator');
 const xss = require('xss');
 
-let parseValue = function (type, value) {
+let parseValue = function(type, value) {
 	let result;
 	switch (type) {
 		case 'number':
@@ -36,7 +36,7 @@ let parseValue = function (type, value) {
 	return result;
 };
 
-let validateType = function (type, value) {
+let validateType = function(type, value) {
 	let result;
 	switch (type) {
 		case 'number':
@@ -65,9 +65,15 @@ let validateType = function (type, value) {
 let parseParams = req => {
 	let params = {};
 	let isSearch = req.url && req.url.endsWith('_search');
-	if (req.query && req.method === 'GET' && Object.keys(req.query).length) { Object.assign(params, req.query); }
-	if (req.body && ['PUT', 'POST'].includes(req.method) && Object.keys(req.body).length && isSearch) { Object.assign(params, req.body); }
-	if (req.params && Object.keys(req.params).length) { Object.assign(params, req.params); }
+	if (req.query && req.method === 'GET' && Object.keys(req.query).length) {
+		Object.assign(params, req.query);
+	}
+	if (req.body && ['PUT', 'POST'].includes(req.method) && Object.keys(req.body).length && isSearch) {
+		Object.assign(params, req.body);
+	}
+	if (req.params && Object.keys(req.params).length) {
+		Object.assign(params, req.params);
+	}
 	return params;
 };
 
@@ -90,8 +96,8 @@ let findMatchWithName = (name = '', params = {}) => {
  * @param {string} config.type - Argument type. Acceptable types are (boolean, string, number)
  * @param {boolean} required - Should we throw if this argument is present and invalid, default is false
  */
-let sanitizeMiddleware = function (config) {
-	return function (req, res, next) {
+let sanitizeMiddleware = function(config) {
+	return function(req, res, next) {
 		let currentArgs = parseParams(req);
 		let cleanArgs = {};
 
@@ -121,7 +127,7 @@ let sanitizeMiddleware = function (config) {
 				return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base_version));
 			}
 
-      // If we have the arg and the type is wrong, throw invalid arg
+			// If we have the arg and the type is wrong, throw invalid arg
 			if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
 				return next(errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base_version));
 			}
@@ -135,5 +141,5 @@ let sanitizeMiddleware = function (config) {
 };
 
 module.exports = {
-	sanitizeMiddleware
+	sanitizeMiddleware,
 };

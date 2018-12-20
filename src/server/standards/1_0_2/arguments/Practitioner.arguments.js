@@ -69,7 +69,7 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-identifier',
-		documentation: 'A practitioner\'s Identifier.',
+		documentation: "A practitioner's Identifier.",
 	},
 	LOCATION: {
 		name: 'location',

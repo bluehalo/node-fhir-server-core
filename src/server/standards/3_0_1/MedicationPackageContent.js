@@ -1,53 +1,52 @@
 const BackboneElement = require('./BackboneElement');
 
 class MedicationPackageContent extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'MedicationPackageContent';
 		Object.assign(this, opt);
 	}
 
 	// This is a MedicationPackageContent resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'MedicationPackageContent';
 	}
 
 	// Identifies one of the items in the package.
-	get itemCodeableConcept () {
+	get itemCodeableConcept() {
 		return this.__itemCodeableConcept;
 	}
 
-	set itemCodeableConcept (new_value) {
+	set itemCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__itemCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Identifies one of the items in the package.
-	get itemReference () {
+	get itemReference() {
 		return this.__itemReference;
 	}
 
-	set itemReference (new_value) {
+	set itemReference(new_value) {
 		const Reference = require('./Reference');
 		this.__itemReference = new Reference(new_value);
 	}
 
 	// The amount of the product that is in the package.
-	get amount () {
+	get amount() {
 		return this.__amount;
 	}
 
-	set amount (new_value) {
+	set amount(new_value) {
 		const Quantity = require('./Quantity');
 		this.__amount = new Quantity(new_value);
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			itemCodeableConcept: this.__itemCodeableConcept && this.__itemCodeableConcept.toJSON(),
 			itemReference: this.__itemReference && this.__itemReference.toJSON(),
-			amount: this.__amount && this.__amount.toJSON()
+			amount: this.__amount && this.__amount.toJSON(),
 		});
 	}
 }

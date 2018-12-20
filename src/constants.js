@@ -114,7 +114,7 @@ exports.RESOURCES = {
 	TESTREPORT: 'TestReport',
 	TESTSCRIPT: 'TestScript',
 	VALUESET: 'ValueSet',
-	VISIONPRESCRIPTION: 'VisionPrescription'
+	VISIONPRESCRIPTION: 'VisionPrescription',
 };
 
 exports.ISSUE = {
@@ -122,7 +122,7 @@ exports.ISSUE = {
 		FATAL: 'fatal',
 		ERROR: 'error',
 		WARNING: 'warning',
-		INFO: 'information'
+		INFO: 'information',
 	},
 	// Codes defined here: https://www.hl7.org/fhir/valueset-issue-type.html
 	CODE: {
@@ -163,8 +163,8 @@ exports.ISSUE = {
 		TIMEOUT: 'timeout',
 		THROTTLED: 'throttled',
 		// Informational has no parent/children
-		INFORMATIONAL: 'informational'
-	}
+		INFORMATIONAL: 'informational',
+	},
 };
 
 /**
@@ -181,7 +181,7 @@ exports.INTERACTIONS = {
 	DELETE: 'remove',
 	EXPAND_BY_ID: 'expandById',
 	OPERATIONS_POST: 'operationsPost',
-	OPERATIONS_GET: 'operationsGet'
+	OPERATIONS_GET: 'operationsGet',
 };
 
 /**
@@ -189,7 +189,7 @@ exports.INTERACTIONS = {
  */
 exports.VERSIONS = {
 	'1_0_2': '1_0_2',
-	'3_0_1': '3_0_1'
+	'3_0_1': '3_0_1',
 };
 
 /**
@@ -197,5 +197,5 @@ exports.VERSIONS = {
  */
 exports.EVENTS = {
 	AUDIT: 'audit-event',
-	PROVENANCE: 'provenance'
+	PROVENANCE: 'provenance',
 };

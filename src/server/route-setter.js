@@ -109,7 +109,7 @@ function configureMetadataRoute(options) {
 		default_cors_options,
 		profile && profile.corsOptions,
 		// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-		{ methods: [route.type.toUpperCase()] }
+		{ methods: [route.type.toUpperCase()] },
 	);
 
 	// Enable cors with preflight options
@@ -126,7 +126,7 @@ function configureMetadataRoute(options) {
 		// Parameter sanitzation middleware
 		sanitizeMiddleware(route.args),
 		// Finally our controller function
-		route.controller({ profile, logger, config, app })
+		route.controller({ profile, logger, config, app }),
 	);
 }
 
@@ -218,7 +218,7 @@ function configureResourceRoutes(options) {
 				default_cors_options,
 				profile && profile.corsOptions,
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-				{ methods: [route.type.toUpperCase()] }
+				{ methods: [route.type.toUpperCase()] },
 			);
 
 			// Enable cors with preflight options
@@ -238,7 +238,7 @@ function configureResourceRoutes(options) {
 				// Scope validation
 				hasValidScopes({ scopes: route.scopes, config }),
 				// Finally our controller function
-				route.controller({ profile, logger, config, app })
+				route.controller({ profile, logger, config, app }),
 			);
 		}
 	}
@@ -261,7 +261,9 @@ function configureOperationRoutes(options) {
 			const op = profile.operation[i];
 
 			if (!op.name) {
-				throw Error('Must supply a key of name.  Value should be hyphen-cased in config file and camelCased in your implementation.');
+				throw Error(
+					'Must supply a key of name.  Value should be hyphen-cased in config file and camelCased in your implementation.',
+				);
 			}
 
 			if (!op.route) {
@@ -275,7 +277,9 @@ function configureOperationRoutes(options) {
 			const funcName = hypenToCamelcase(op.name);
 
 			if (!Object.keys(profile.serviceModule).includes(funcName)) {
-				throw Error(`Must include a function for ${key} with name ${funcName} that you specified in your configuration file.`);
+				throw Error(
+					`Must include a function for ${key} with name ${funcName} that you specified in your configuration file.`,
+				);
 			}
 			let search_parameters = [];
 
@@ -300,14 +304,17 @@ function configureOperationRoutes(options) {
 				default_cors_options,
 				profile && profile.corsOptions,
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-				{ methods: [route.type.toUpperCase()] }
+				{ methods: [route.type.toUpperCase()] },
 			);
 			// Enable cors with preflight options
 			app.options(route.path, cors(cors_options));
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
-				route.path.replace(':resource', key).concat(op.route).replace('$', '([\\$])'),
+				route.path
+					.replace(':resource', key)
+					.concat(op.route)
+					.replace('$', '([$])'),
 				// Cors middleware
 				cors(cors_options),
 				// Version validation
@@ -319,7 +326,7 @@ function configureOperationRoutes(options) {
 				// Scope validation
 				hasValidScopes({ scopes: route.scopes, config }),
 				// Finally our controller function
-				operationsController[operationControllerFunction]({ profile, logger, funcName})
+				operationsController[operationControllerFunction]({ profile, logger, funcName }),
 			);
 		}
 	}
@@ -343,9 +350,8 @@ const setter = (options = {}) => {
 
 	// set resource routes
 	configureResourceRoutes(options);
-
 };
 
 module.exports = {
-	setRoutes: setter
+	setRoutes: setter,
 };

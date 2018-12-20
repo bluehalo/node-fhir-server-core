@@ -15,7 +15,8 @@ module.exports = {
 		name: 'description',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/DataElement-description',
-		documentation: 'Text search in the description of the data element.  This corresponds to the definition of the first DataElement.element.',
+		documentation:
+			'Text search in the description of the data element.  This corresponds to the definition of the first DataElement.element.',
 	},
 	IDENTIFIER: {
 		name: 'identifier',

@@ -1,88 +1,87 @@
 const BackboneElement = require('./BackboneElement');
 
 class FamilyMemberHistoryCondition extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'FamilyMemberHistoryCondition';
 		Object.assign(this, opt);
 	}
 
 	// This is a FamilyMemberHistoryCondition resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'FamilyMemberHistoryCondition';
 	}
 
 	// The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like \'cancer\' depending on how much is known about the condition and the capabilities of the creating system.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__code = new CodeableConcept(new_value);
 	}
 
 	// Indicates what happened as a result of this condition.  If the condition resulted in death, deceased date is captured on the relation.
-	get outcome () {
+	get outcome() {
 		return this.__outcome;
 	}
 
-	set outcome (new_value) {
+	set outcome(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__outcome = new CodeableConcept(new_value);
 	}
 
 	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetQuantity () {
+	get onsetQuantity() {
 		return this.__onsetQuantity;
 	}
 
-	set onsetQuantity (new_value) {
+	set onsetQuantity(new_value) {
 		const Quantity = require('./Quantity');
 		this.__onsetQuantity = new Quantity(new_value);
 	}
 
 	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetRange () {
+	get onsetRange() {
 		return this.__onsetRange;
 	}
 
-	set onsetRange (new_value) {
+	set onsetRange(new_value) {
 		const Range = require('./Range');
 		this.__onsetRange = new Range(new_value);
 	}
 
 	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetPeriod () {
+	get onsetPeriod() {
 		return this.__onsetPeriod;
 	}
 
-	set onsetPeriod (new_value) {
+	set onsetPeriod(new_value) {
 		const Period = require('./Period');
 		this.__onsetPeriod = new Period(new_value);
 	}
 
 	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetString () {
+	get onsetString() {
 		return this.__onsetString;
 	}
 
-	set onsetString (new_value) {
+	set onsetString(new_value) {
 		this.__onsetString = new_value;
 	}
 
 	// An area where general notes can be placed about this specific condition.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const Annotation = require('./Annotation');
 		this.__note = new Annotation(new_value);
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			code: this.__code && this.__code.toJSON(),
 			outcome: this.__outcome && this.__outcome.toJSON(),
@@ -90,7 +89,7 @@ class FamilyMemberHistoryCondition extends BackboneElement {
 			onsetRange: this.__onsetRange && this.__onsetRange.toJSON(),
 			onsetPeriod: this.__onsetPeriod && this.__onsetPeriod.toJSON(),
 			onsetString: this.__onsetString,
-			note: this.__note && this.__note.toJSON()
+			note: this.__note && this.__note.toJSON(),
 		});
 	}
 }

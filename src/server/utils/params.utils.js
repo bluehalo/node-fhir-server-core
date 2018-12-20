@@ -1,15 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 
-const {
-	route_args,
-	common_args,
-	search_args
-} = require('../profiles/common.arguments');
+const { route_args, common_args, search_args } = require('../profiles/common.arguments');
 
-let common_args_array = Object.getOwnPropertyNames(common_args).map(
-	arg_name => common_args[arg_name]
-);
+let common_args_array = Object.getOwnPropertyNames(common_args).map(arg_name => common_args[arg_name]);
 
 /**
  * @description Middleware for validating the correct spec version is being accessed
@@ -22,13 +16,9 @@ let getSearchParamaters = (profileKey, version) => {
 	let fileIndex;
 	let files;
 	if (profileKey && typeof profileKey === 'string') {
-		files = fs
-			.readdirSync(
-				path.resolve(__dirname + `/../standards/${version}/arguments/`)
-			)
-			.map(filename => {
-				return filename;
-			});
+		files = fs.readdirSync(path.resolve(__dirname + `/../standards/${version}/arguments/`)).map(filename => {
+			return filename;
+		});
 
 		const filesLowerCase = files.map(elm => elm.split('.')[0].toLowerCase());
 		fileIndex = filesLowerCase.indexOf(profileKey);
@@ -38,26 +28,19 @@ let getSearchParamaters = (profileKey, version) => {
 		files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
 	}`);
 	// Set paramaters
-	let resource_args_array = Object.getOwnPropertyNames(
-		resource_specific_args
-	).map(arg_name =>
-		Object.assign({ versions: version }, resource_specific_args[arg_name])
+	let resource_args_array = Object.getOwnPropertyNames(resource_specific_args).map(arg_name =>
+		Object.assign({ versions: version }, resource_specific_args[arg_name]),
 	);
 
-	let search_args_array = Object.getOwnPropertyNames(search_args).map(
-		arg_name => Object.assign({ versions: version }, search_args[arg_name])
+	let search_args_array = Object.getOwnPropertyNames(search_args).map(arg_name =>
+		Object.assign({ versions: version }, search_args[arg_name]),
 	);
 
-	let resource_all_arguments = [
-		route_args.BASE,
-		...search_args_array,
-		...common_args_array,
-		...resource_args_array
-	];
+	let resource_all_arguments = [route_args.BASE, ...search_args_array, ...common_args_array, ...resource_args_array];
 
 	return resource_all_arguments;
 };
 
 module.exports = {
-	getSearchParamaters
+	getSearchParamaters,
 };

@@ -2,234 +2,247 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class Communication extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'Communication';
 		Object.assign(this, opt);
 	}
 
 	// This is a Communication resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'Communication';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__Communication = new_value;
 	}
 
 	// Identifiers associated with this Communication that are defined by business processes and/ or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// A protocol, guideline, or other definition that was adhered to in whole or in part by this communication event.
-	get definition () {
+	get definition() {
 		return this.__definition;
 	}
 
-	set definition (new_value) {
+	set definition(new_value) {
 		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__definition = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// An order, proposal or plan fulfilled in whole or in part by this Communication.
-	get basedOn () {
+	get basedOn() {
 		return this.__basedOn;
 	}
 
-	set basedOn (new_value) {
+	set basedOn(new_value) {
 		const Reference = require('./Reference');
 		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Part of this action.
-	get partOf () {
+	get partOf() {
 		return this.__partOf;
 	}
 
-	set partOf (new_value) {
+	set partOf(new_value) {
 		const Reference = require('./Reference');
 		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The status of the transmission.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// If true, indicates that the described communication event did not actually occur.
-	get notDone () {
+	get notDone() {
 		return this.__notDone;
 	}
 
-	set notDone (new_value) {
+	set notDone(new_value) {
 		this.__notDone = new_value;
 	}
 
 	// Describes why the communication event did not occur in coded and/or textual form.
-	get notDoneReason () {
+	get notDoneReason() {
 		return this.__notDoneReason;
 	}
 
-	set notDoneReason (new_value) {
+	set notDoneReason(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__notDoneReason = new CodeableConcept(new_value);
 	}
 
 	// The type of message conveyed such as alert, notification, reminder, instruction, etc.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__category = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// A channel that was used for this communication (e.g. email, fax).
-	get medium () {
+	get medium() {
 		return this.__medium;
 	}
 
-	set medium (new_value) {
+	set medium(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__medium = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__medium = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// The patient or group that was the focus of this communication.
-	get subject () {
+	get subject() {
 		return this.__subject;
 	}
 
-	set subject (new_value) {
+	set subject(new_value) {
 		const Reference = require('./Reference');
 		this.__subject = new Reference(new_value);
 	}
 
 	// The entity (e.g. person, organization, clinical information system, or device) which was the target of the communication. If receipts need to be tracked by individual, a separate resource instance will need to be created for each recipient.  Multiple recipient communications are intended where either a receipt(s) is not tracked (e.g. a mass mail-out) or is captured in aggregate (all emails confirmed received by a particular time).
-	get recipient () {
+	get recipient() {
 		return this.__recipient;
 	}
 
-	set recipient (new_value) {
+	set recipient(new_value) {
 		const Reference = require('./Reference');
 		this.__recipient = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The resources which were responsible for or related to producing this communication.
-	get topic () {
+	get topic() {
 		return this.__topic;
 	}
 
-	set topic (new_value) {
+	set topic(new_value) {
 		const Reference = require('./Reference');
 		this.__topic = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// The encounter within which the communication was sent.
-	get context () {
+	get context() {
 		return this.__context;
 	}
 
-	set context (new_value) {
+	set context(new_value) {
 		const Reference = require('./Reference');
 		this.__context = new Reference(new_value);
 	}
 
 	// The time when this communication was sent.
-	get sent () {
+	get sent() {
 		return this.__sent;
 	}
 
-	set sent (new_value) {
+	set sent(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field sent`);
 		}
 		this.__sent = new_value;
 	}
 
 	// The time when this communication arrived at the destination.
-	get received () {
+	get received() {
 		return this.__received;
 	}
 
-	set received (new_value) {
+	set received(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field received`);
 		}
 		this.__received = new_value;
 	}
 
 	// The entity (e.g. person, organization, clinical information system, or device) which was the source of the communication.
-	get sender () {
+	get sender() {
 		return this.__sender;
 	}
 
-	set sender (new_value) {
+	set sender(new_value) {
 		const Reference = require('./Reference');
 		this.__sender = new Reference(new_value);
 	}
 
 	// The reason or justification for the communication.
-	get reasonCode () {
+	get reasonCode() {
 		return this.__reasonCode;
 	}
 
-	set reasonCode (new_value) {
+	set reasonCode(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__reasonCode = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Indicates another resource whose existence justifies this communication.
-	get reasonReference () {
+	get reasonReference() {
 		return this.__reasonReference;
 	}
 
-	set reasonReference (new_value) {
+	set reasonReference(new_value) {
 		const Reference = require('./Reference');
-		this.__reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__reasonReference = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// Text, attachment(s), or resource(s) that was communicated to the recipient.
-	get payload () {
+	get payload() {
 		return this.__payload;
 	}
 
-	set payload (new_value) {
+	set payload(new_value) {
 		const CommunicationPayload = require('./CommunicationPayload');
-		this.__payload = Array.isArray(new_value) ? new_value.map(val => new CommunicationPayload(val)) : [new CommunicationPayload(new_value)];
+		this.__payload = Array.isArray(new_value)
+			? new_value.map(val => new CommunicationPayload(val))
+			: [new CommunicationPayload(new_value)];
 	}
 
 	// Additional notes or commentary about the communication by the sender, receiver or other interested parties.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const Annotation = require('./Annotation');
 		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -251,7 +264,7 @@ class Communication extends DomainResource {
 			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
 			reasonReference: this.__reasonReference && this.__reasonReference.map(v => v.toJSON()),
 			payload: this.__payload && this.__payload.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON())
+			note: this.__note && this.__note.map(v => v.toJSON()),
 		});
 	}
 }

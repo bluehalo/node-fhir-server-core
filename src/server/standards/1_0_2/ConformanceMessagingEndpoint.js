@@ -2,46 +2,45 @@ const BackboneElement = require('./BackboneElement');
 const UriScalar = require('./scalars/Uri.scalar');
 
 class ConformanceMessagingEndpoint extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ConformanceMessagingEndpoint';
 		Object.assign(this, opt);
 	}
 
 	// This is a ConformanceMessagingEndpoint resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ConformanceMessagingEndpoint';
 	}
 
 	// A list of the messaging transport protocol(s) identifiers, supported by this endpoint.
-	get protocol () {
+	get protocol() {
 		return this.__protocol;
 	}
 
-	set protocol (new_value) {
+	set protocol(new_value) {
 		const Coding = require('./Coding');
 		this.__protocol = new Coding(new_value);
 	}
 
 	// The network address of the end-point. For solutions that do not use network addresses for routing, it can be just an identifier.
-	get address () {
+	get address() {
 		return this.__address;
 	}
 
-	set address (new_value) {
+	set address(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = UriScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field address`);
 		}
 		this.__address = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			protocol: this.__protocol && this.__protocol.toJSON(),
-			address: this.__address
+			address: this.__address,
 		});
 	}
 }

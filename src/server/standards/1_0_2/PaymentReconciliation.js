@@ -2,180 +2,185 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class PaymentReconciliation extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'PaymentReconciliation';
 		Object.assign(this, opt);
 	}
 
 	// This is a PaymentReconciliation resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'PaymentReconciliation';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__PaymentReconciliation = new_value;
 	}
 
 	// The Response business identifier.
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// Original request resource reference.
-	get request () {
+	get request() {
 		return this.__request;
 	}
 
-	set request (new_value) {
+	set request(new_value) {
 		const Reference = require('./Reference');
 		this.__request = new Reference(new_value);
 	}
 
 	// Transaction status: error, complete.
-	get outcome () {
+	get outcome() {
 		return this.__outcome;
 	}
 
-	set outcome (new_value) {
+	set outcome(new_value) {
 		this.__outcome = new_value;
 	}
 
 	// A description of the status of the adjudication.
-	get disposition () {
+	get disposition() {
 		return this.__disposition;
 	}
 
-	set disposition (new_value) {
+	set disposition(new_value) {
 		this.__disposition = new_value;
 	}
 
 	// The version of the style of resource contents. This should be mapped to the allowable profiles for this and supporting resources.
-	get ruleset () {
+	get ruleset() {
 		return this.__ruleset;
 	}
 
-	set ruleset (new_value) {
+	set ruleset(new_value) {
 		const Coding = require('./Coding');
 		this.__ruleset = new Coding(new_value);
 	}
 
 	// The style (standard) and version of the original material which was converted into this resource.
-	get originalRuleset () {
+	get originalRuleset() {
 		return this.__originalRuleset;
 	}
 
-	set originalRuleset (new_value) {
+	set originalRuleset(new_value) {
 		const Coding = require('./Coding');
 		this.__originalRuleset = new Coding(new_value);
 	}
 
 	// The date when the enclosed suite of services were performed or completed.
-	get created () {
+	get created() {
 		return this.__created;
 	}
 
-	set created (new_value) {
+	set created(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
 		this.__created = new_value;
 	}
 
 	// The period of time for which payments have been gathered into this bulk payment for settlement.
-	get period () {
+	get period() {
 		return this.__period;
 	}
 
-	set period (new_value) {
+	set period(new_value) {
 		const Period = require('./Period');
 		this.__period = new Period(new_value);
 	}
 
 	// The Insurer who produced this adjudicated response.
-	get organization () {
+	get organization() {
 		return this.__organization;
 	}
 
-	set organization (new_value) {
+	set organization(new_value) {
 		const Reference = require('./Reference');
 		this.__organization = new Reference(new_value);
 	}
 
 	// The practitioner who is responsible for the services rendered to the patient.
-	get requestProvider () {
+	get requestProvider() {
 		return this.__requestProvider;
 	}
 
-	set requestProvider (new_value) {
+	set requestProvider(new_value) {
 		const Reference = require('./Reference');
 		this.__requestProvider = new Reference(new_value);
 	}
 
 	// The organization which is responsible for the services rendered to the patient.
-	get requestOrganization () {
+	get requestOrganization() {
 		return this.__requestOrganization;
 	}
 
-	set requestOrganization (new_value) {
+	set requestOrganization(new_value) {
 		const Reference = require('./Reference');
 		this.__requestOrganization = new Reference(new_value);
 	}
 
 	// List of individual settlement amounts and the corresponding transaction.
-	get detail () {
+	get detail() {
 		return this.__detail;
 	}
 
-	set detail (new_value) {
+	set detail(new_value) {
 		const PaymentReconciliationDetail = require('./PaymentReconciliationDetail');
-		this.__detail = Array.isArray(new_value) ? new_value.map(val => new PaymentReconciliationDetail(val)) : [new PaymentReconciliationDetail(new_value)];
+		this.__detail = Array.isArray(new_value)
+			? new_value.map(val => new PaymentReconciliationDetail(val))
+			: [new PaymentReconciliationDetail(new_value)];
 	}
 
 	// The form to be used for printing the content.
-	get form () {
+	get form() {
 		return this.__form;
 	}
 
-	set form (new_value) {
+	set form(new_value) {
 		const Coding = require('./Coding');
 		this.__form = new Coding(new_value);
 	}
 
 	// Total payment amount.
-	get total () {
+	get total() {
 		return this.__total;
 	}
 
-	set total (new_value) {
+	set total(new_value) {
 		const Quantity = require('./Quantity');
 		this.__total = new Quantity(new_value);
 	}
 
 	// Suite of notes.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const PaymentReconciliationNote = require('./PaymentReconciliationNote');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new PaymentReconciliationNote(val)) : [new PaymentReconciliationNote(new_value)];
+		this.__note = Array.isArray(new_value)
+			? new_value.map(val => new PaymentReconciliationNote(val))
+			: [new PaymentReconciliationNote(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -192,7 +197,7 @@ class PaymentReconciliation extends DomainResource {
 			detail: this.__detail && this.__detail.map(v => v.toJSON()),
 			form: this.__form && this.__form.toJSON(),
 			total: this.__total && this.__total.toJSON(),
-			note: this.__note && this.__note.map(v => v.toJSON())
+			note: this.__note && this.__note.map(v => v.toJSON()),
 		});
 	}
 }

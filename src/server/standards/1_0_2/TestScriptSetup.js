@@ -1,31 +1,32 @@
 const BackboneElement = require('./BackboneElement');
 
 class TestScriptSetup extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'TestScriptSetup';
 		Object.assign(this, opt);
 	}
 
 	// This is a TestScriptSetup resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'TestScriptSetup';
 	}
 
 	// Action would contain either an operation or an assertion.
-	get action () {
+	get action() {
 		return this.__action;
 	}
 
-	set action (new_value) {
+	set action(new_value) {
 		const TestScriptSetupAction = require('./TestScriptSetupAction');
-		this.__action = Array.isArray(new_value) ? new_value.map(val => new TestScriptSetupAction(val)) : [new TestScriptSetupAction(new_value)];
+		this.__action = Array.isArray(new_value)
+			? new_value.map(val => new TestScriptSetupAction(val))
+			: [new TestScriptSetupAction(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
-			action: this.__action && this.__action.map(v => v.toJSON())
+			action: this.__action && this.__action.map(v => v.toJSON()),
 		});
 	}
 }

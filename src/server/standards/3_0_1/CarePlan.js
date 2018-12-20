@@ -1,224 +1,233 @@
 const DomainResource = require('./DomainResource');
 
 class CarePlan extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'CarePlan';
 		Object.assign(this, opt);
 	}
 
 	// This is a CarePlan resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'CarePlan';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__CarePlan = new_value;
 	}
 
 	// This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// Identifies the protocol, questionnaire, guideline or other specification the care plan should be conducted in accordance with.
-	get definition () {
+	get definition() {
 		return this.__definition;
 	}
 
-	set definition (new_value) {
+	set definition(new_value) {
 		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__definition = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// A care plan that is fulfilled in whole or in part by this care plan.
-	get basedOn () {
+	get basedOn() {
 		return this.__basedOn;
 	}
 
-	set basedOn (new_value) {
+	set basedOn(new_value) {
 		const Reference = require('./Reference');
 		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Completed or terminated care plan whose function is taken by this new care plan.
-	get replaces () {
+	get replaces() {
 		return this.__replaces;
 	}
 
-	set replaces (new_value) {
+	set replaces(new_value) {
 		const Reference = require('./Reference');
 		this.__replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A larger care plan of which this particular care plan is a component or step.
-	get partOf () {
+	get partOf() {
 		return this.__partOf;
 	}
 
-	set partOf (new_value) {
+	set partOf(new_value) {
 		const Reference = require('./Reference');
 		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain.
-	get intent () {
+	get intent() {
 		return this.__intent;
 	}
 
-	set intent (new_value) {
+	set intent(new_value) {
 		this.__intent = new_value;
 	}
 
 	// Identifies what \'kind\' of plan this is to support differentiation between multiple co-existing plans; e.g. \'Home health\', \'psychiatric\', \'asthma\', \'disease management\', \'wellness plan\', etc.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__category = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__category = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Human-friendly name for the CarePlan.
-	get title () {
+	get title() {
 		return this.__title;
 	}
 
-	set title (new_value) {
+	set title(new_value) {
 		this.__title = new_value;
 	}
 
 	// A description of the scope and nature of the plan.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
 	// Identifies the patient or group whose intended care is described by the plan.
-	get subject () {
+	get subject() {
 		return this.__subject;
 	}
 
-	set subject (new_value) {
+	set subject(new_value) {
 		const Reference = require('./Reference');
 		this.__subject = new Reference(new_value);
 	}
 
 	// Identifies the original context in which this particular CarePlan was created.
-	get context () {
+	get context() {
 		return this.__context;
 	}
 
-	set context (new_value) {
+	set context(new_value) {
 		const Reference = require('./Reference');
 		this.__context = new Reference(new_value);
 	}
 
 	// Indicates when the plan did (or is intended to) come into effect and end.
-	get period () {
+	get period() {
 		return this.__period;
 	}
 
-	set period (new_value) {
+	set period(new_value) {
 		const Period = require('./Period');
 		this.__period = new Period(new_value);
 	}
 
 	// Identifies the individual(s) or ogranization who is responsible for the content of the care plan.
-	get author () {
+	get author() {
 		return this.__author;
 	}
 
-	set author (new_value) {
+	set author(new_value) {
 		const Reference = require('./Reference');
 		this.__author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies all people and organizations who are expected to be involved in the care envisioned by this plan.
-	get careTeam () {
+	get careTeam() {
 		return this.__careTeam;
 	}
 
-	set careTeam (new_value) {
+	set careTeam(new_value) {
 		const Reference = require('./Reference');
 		this.__careTeam = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan.
-	get addresses () {
+	get addresses() {
 		return this.__addresses;
 	}
 
-	set addresses (new_value) {
+	set addresses(new_value) {
 		const Reference = require('./Reference');
 		this.__addresses = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies portions of the patient\'s record that specifically influenced the formation of the plan.  These might include co-morbidities, recent procedures, limitations, recent assessments, etc.
-	get supportingInfo () {
+	get supportingInfo() {
 		return this.__supportingInfo;
 	}
 
-	set supportingInfo (new_value) {
+	set supportingInfo(new_value) {
 		const Reference = require('./Reference');
-		this.__supportingInfo = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__supportingInfo = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// Describes the intended objective(s) of carrying out the care plan.
-	get goal () {
+	get goal() {
 		return this.__goal;
 	}
 
-	set goal (new_value) {
+	set goal(new_value) {
 		const Reference = require('./Reference');
 		this.__goal = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.
-	get activity () {
+	get activity() {
 		return this.__activity;
 	}
 
-	set activity (new_value) {
+	set activity(new_value) {
 		const CarePlanActivity = require('./CarePlanActivity');
-		this.__activity = Array.isArray(new_value) ? new_value.map(val => new CarePlanActivity(val)) : [new CarePlanActivity(new_value)];
+		this.__activity = Array.isArray(new_value)
+			? new_value.map(val => new CarePlanActivity(val))
+			: [new CarePlanActivity(new_value)];
 	}
 
 	// General notes about the care plan not covered elsewhere.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const Annotation = require('./Annotation');
 		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -240,7 +249,7 @@ class CarePlan extends DomainResource {
 			supportingInfo: this.__supportingInfo && this.__supportingInfo.map(v => v.toJSON()),
 			goal: this.__goal && this.__goal.map(v => v.toJSON()),
 			activity: this.__activity && this.__activity.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON())
+			note: this.__note && this.__note.map(v => v.toJSON()),
 		});
 	}
 }

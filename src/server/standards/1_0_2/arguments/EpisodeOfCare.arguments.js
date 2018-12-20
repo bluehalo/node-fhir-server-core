@@ -15,7 +15,7 @@ module.exports = {
 		name: 'date',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-date',
-		documentation: 'The provided date search value falls within the episode of care\'s period.',
+		documentation: "The provided date search value falls within the episode of care's period.",
 	},
 	IDENTIFIER: {
 		name: 'identifier',
@@ -45,7 +45,8 @@ module.exports = {
 		name: 'status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-status',
-		documentation: 'The current status of the Episode of Care as provided (does not check the status history collection).',
+		documentation:
+			'The current status of the Episode of Care as provided (does not check the status history collection).',
 	},
 	TEAM_MEMBER: {
 		name: 'team-member',
