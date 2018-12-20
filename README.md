@@ -25,10 +25,10 @@ Install `node-fhir-server-core` as followed:
 
 ```shell
 # For yarn users
-yarn add git+https://github.com/Asymmetrik/node-fhir-server-core.git
+yarn add @asymmetrik/node-fhir-server-core
 
 # For npm users
-npm install --save git+https://github.com/Asymmetrik/node-fhir-server-core.git
+npm install --save @asymmetrik/node-fhir-server-core
 ```
 
 Once installed, the server can be required in the application.
@@ -81,10 +81,10 @@ Our project vision is to build an easy to use FHIR server that supports all reso
 We believe in establishing a robust security, especially when it comes to health information.  Part of the ONC Secure API Server Challenge was to stand up a server and let penetration testers have a go at it (you can see their results [here](https://github.com/Asymmetrik/node-fhir-server-core/issues?utf8=%E2%9C%93&q=label%3A%22ONC+FHIR+Challenge+Vulnerability%22+)).  We are committed to continuing this practice and we will continue fixing any vulnerabilities discovered so we can do our best to make this server as secure as possible.  For authentication, we are actively working on methods for simplifying integration with [SMART on FHIR](http://docs.smarthealthit.org/).
 
 ## Contributing
-Please see [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for more details regarding contributing issues or code.
+Please see [CONTRIBUTING.md](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/.github/CONTRIBUTING.md) for more details regarding contributing issues or code.
 
 ## Attention
 This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 **BUT** not 8.5.
 
 ## License
-`@asymmetrik/node-fhir-server-core` is [MIT licensed](./LICENSE).
+`@asymmetrik/node-fhir-server-core` is [MIT licensed](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/LICENSE).
