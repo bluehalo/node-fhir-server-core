@@ -76,13 +76,15 @@ module.exports = {
 		name: 'component-value-quantity',
 		type: 'quantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-value-quantity',
-		documentation: 'The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
+		documentation:
+			'The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
 	},
 	COMPONENT_VALUE_STRING: {
 		name: 'component-value-string',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-value-string',
-		documentation: 'The value of the component observation, if the value is a string, and also searches in CodeableConcept.text.',
+		documentation:
+			'The value of the component observation, if the value is a string, and also searches in CodeableConcept.text.',
 	},
 	DATA_ABSENT_REASON: {
 		name: 'data-absent-reason',
@@ -178,7 +180,8 @@ module.exports = {
 		name: 'value-quantity',
 		type: 'quantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-value-quantity',
-		documentation: 'The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
+		documentation:
+			'The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
 	},
 	VALUE_STRING: {
 		name: 'value-string',

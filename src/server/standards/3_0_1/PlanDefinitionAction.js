@@ -3,298 +3,317 @@ const IdScalar = require('./scalars/Id.scalar');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class PlanDefinitionAction extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'PlanDefinitionAction';
 		Object.assign(this, opt);
 	}
 
 	// This is a PlanDefinitionAction resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'PlanDefinitionAction';
 	}
 
 	// A user-visible label for the action.
-	get label () {
+	get label() {
 		return this.__label;
 	}
 
-	set label (new_value) {
+	set label(new_value) {
 		this.__label = new_value;
 	}
 
 	// The title of the action displayed to a user.
-	get title () {
+	get title() {
 		return this.__title;
 	}
 
-	set title (new_value) {
+	set title(new_value) {
 		this.__title = new_value;
 	}
 
 	// A short description of the action used to provide a summary to display to the user.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
 	// A text equivalent of the action to be performed. This provides a human-interpretable description of the action when the definition is consumed by a system that may not be capable of interpreting it dynamically.
-	get textEquivalent () {
+	get textEquivalent() {
 		return this.__textEquivalent;
 	}
 
-	set textEquivalent (new_value) {
+	set textEquivalent(new_value) {
 		this.__textEquivalent = new_value;
 	}
 
 	// A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a the section of a documentation template.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__code = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__code = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// A description of why this action is necessary or appropriate.
-	get reason () {
+	get reason() {
 		return this.__reason;
 	}
 
-	set reason (new_value) {
+	set reason(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__reason = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources.
-	get documentation () {
+	get documentation() {
 		return this.__documentation;
 	}
 
-	set documentation (new_value) {
+	set documentation(new_value) {
 		const RelatedArtifact = require('./RelatedArtifact');
-		this.__documentation = Array.isArray(new_value) ? new_value.map(val => new RelatedArtifact(val)) : [new RelatedArtifact(new_value)];
+		this.__documentation = Array.isArray(new_value)
+			? new_value.map(val => new RelatedArtifact(val))
+			: [new RelatedArtifact(new_value)];
 	}
 
 	// Identifies goals that this action supports. The reference must be to a goal element defined within this plan definition.
-	get goalId () {
+	get goalId() {
 		return this.__goalId;
 	}
 
-	set goalId (new_value) {
+	set goalId(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = IdScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field goalId`);
 		}
 		this.__goalId = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// A description of when the action should be triggered.
-	get triggerDefinition () {
+	get triggerDefinition() {
 		return this.__triggerDefinition;
 	}
 
-	set triggerDefinition (new_value) {
+	set triggerDefinition(new_value) {
 		const TriggerDefinition = require('./TriggerDefinition');
-		this.__triggerDefinition = Array.isArray(new_value) ? new_value.map(val => new TriggerDefinition(val)) : [new TriggerDefinition(new_value)];
+		this.__triggerDefinition = Array.isArray(new_value)
+			? new_value.map(val => new TriggerDefinition(val))
+			: [new TriggerDefinition(new_value)];
 	}
 
 	// An expression that describes applicability criteria, or start/stop conditions for the action.
-	get condition () {
+	get condition() {
 		return this.__condition;
 	}
 
-	set condition (new_value) {
+	set condition(new_value) {
 		const PlanDefinitionActionCondition = require('./PlanDefinitionActionCondition');
-		this.__condition = Array.isArray(new_value) ? new_value.map(val => new PlanDefinitionActionCondition(val)) : [new PlanDefinitionActionCondition(new_value)];
+		this.__condition = Array.isArray(new_value)
+			? new_value.map(val => new PlanDefinitionActionCondition(val))
+			: [new PlanDefinitionActionCondition(new_value)];
 	}
 
 	// Defines input data requirements for the action.
-	get input () {
+	get input() {
 		return this.__input;
 	}
 
-	set input (new_value) {
+	set input(new_value) {
 		const DataRequirement = require('./DataRequirement');
-		this.__input = Array.isArray(new_value) ? new_value.map(val => new DataRequirement(val)) : [new DataRequirement(new_value)];
+		this.__input = Array.isArray(new_value)
+			? new_value.map(val => new DataRequirement(val))
+			: [new DataRequirement(new_value)];
 	}
 
 	// Defines the outputs of the action, if any.
-	get output () {
+	get output() {
 		return this.__output;
 	}
 
-	set output (new_value) {
+	set output(new_value) {
 		const DataRequirement = require('./DataRequirement');
-		this.__output = Array.isArray(new_value) ? new_value.map(val => new DataRequirement(val)) : [new DataRequirement(new_value)];
+		this.__output = Array.isArray(new_value)
+			? new_value.map(val => new DataRequirement(val))
+			: [new DataRequirement(new_value)];
 	}
 
 	// A relationship to another action such as \'before\' or \'30-60 minutes after start of\'.
-	get relatedAction () {
+	get relatedAction() {
 		return this.__relatedAction;
 	}
 
-	set relatedAction (new_value) {
+	set relatedAction(new_value) {
 		const PlanDefinitionActionRelatedAction = require('./PlanDefinitionActionRelatedAction');
-		this.__relatedAction = Array.isArray(new_value) ? new_value.map(val => new PlanDefinitionActionRelatedAction(val)) : [new PlanDefinitionActionRelatedAction(new_value)];
+		this.__relatedAction = Array.isArray(new_value)
+			? new_value.map(val => new PlanDefinitionActionRelatedAction(val))
+			: [new PlanDefinitionActionRelatedAction(new_value)];
 	}
 
 	// An optional value describing when the action should be performed.
-	get timingDateTime () {
+	get timingDateTime() {
 		return this.__timingDateTime;
 	}
 
-	set timingDateTime (new_value) {
+	set timingDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field timingDateTime`);
 		}
 		this.__timingDateTime = new_value;
 	}
 
 	// An optional value describing when the action should be performed.
-	get timingPeriod () {
+	get timingPeriod() {
 		return this.__timingPeriod;
 	}
 
-	set timingPeriod (new_value) {
+	set timingPeriod(new_value) {
 		const Period = require('./Period');
 		this.__timingPeriod = new Period(new_value);
 	}
 
 	// An optional value describing when the action should be performed.
-	get timingDuration () {
+	get timingDuration() {
 		return this.__timingDuration;
 	}
 
-	set timingDuration (new_value) {
+	set timingDuration(new_value) {
 		const Duration = require('./Duration');
 		this.__timingDuration = new Duration(new_value);
 	}
 
 	// An optional value describing when the action should be performed.
-	get timingRange () {
+	get timingRange() {
 		return this.__timingRange;
 	}
 
-	set timingRange (new_value) {
+	set timingRange(new_value) {
 		const Range = require('./Range');
 		this.__timingRange = new Range(new_value);
 	}
 
 	// An optional value describing when the action should be performed.
-	get timingTiming () {
+	get timingTiming() {
 		return this.__timingTiming;
 	}
 
-	set timingTiming (new_value) {
+	set timingTiming(new_value) {
 		const Timing = require('./Timing');
 		this.__timingTiming = new Timing(new_value);
 	}
 
 	// Indicates who should participate in performing the action described.
-	get participant () {
+	get participant() {
 		return this.__participant;
 	}
 
-	set participant (new_value) {
+	set participant(new_value) {
 		const PlanDefinitionActionParticipant = require('./PlanDefinitionActionParticipant');
-		this.__participant = Array.isArray(new_value) ? new_value.map(val => new PlanDefinitionActionParticipant(val)) : [new PlanDefinitionActionParticipant(new_value)];
+		this.__participant = Array.isArray(new_value)
+			? new_value.map(val => new PlanDefinitionActionParticipant(val))
+			: [new PlanDefinitionActionParticipant(new_value)];
 	}
 
 	// The type of action to perform (create, update, remove).
-	get type () {
+	get type() {
 		return this.__type;
 	}
 
-	set type (new_value) {
+	set type(new_value) {
 		const Coding = require('./Coding');
 		this.__type = new Coding(new_value);
 	}
 
 	// Defines the grouping behavior for the action and its children.
-	get groupingBehavior () {
+	get groupingBehavior() {
 		return this.__groupingBehavior;
 	}
 
-	set groupingBehavior (new_value) {
+	set groupingBehavior(new_value) {
 		this.__groupingBehavior = new_value;
 	}
 
 	// Defines the selection behavior for the action and its children.
-	get selectionBehavior () {
+	get selectionBehavior() {
 		return this.__selectionBehavior;
 	}
 
-	set selectionBehavior (new_value) {
+	set selectionBehavior(new_value) {
 		this.__selectionBehavior = new_value;
 	}
 
 	// Defines the requiredness behavior for the action.
-	get requiredBehavior () {
+	get requiredBehavior() {
 		return this.__requiredBehavior;
 	}
 
-	set requiredBehavior (new_value) {
+	set requiredBehavior(new_value) {
 		this.__requiredBehavior = new_value;
 	}
 
 	// Defines whether the action should usually be preselected.
-	get precheckBehavior () {
+	get precheckBehavior() {
 		return this.__precheckBehavior;
 	}
 
-	set precheckBehavior (new_value) {
+	set precheckBehavior(new_value) {
 		this.__precheckBehavior = new_value;
 	}
 
 	// Defines whether the action can be selected multiple times.
-	get cardinalityBehavior () {
+	get cardinalityBehavior() {
 		return this.__cardinalityBehavior;
 	}
 
-	set cardinalityBehavior (new_value) {
+	set cardinalityBehavior(new_value) {
 		this.__cardinalityBehavior = new_value;
 	}
 
 	// A reference to an ActivityDefinition that describes the action to be taken in detail, or a PlanDefinition that describes a series of actions to be taken.
-	get definition () {
+	get definition() {
 		return this.__definition;
 	}
 
-	set definition (new_value) {
+	set definition(new_value) {
 		const Reference = require('./Reference');
 		this.__definition = new Reference(new_value);
 	}
 
 	// A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input.
-	get transform () {
+	get transform() {
 		return this.__transform;
 	}
 
-	set transform (new_value) {
+	set transform(new_value) {
 		const Reference = require('./Reference');
 		this.__transform = new Reference(new_value);
 	}
 
 	// Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient\'s weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result.
-	get dynamicValue () {
+	get dynamicValue() {
 		return this.__dynamicValue;
 	}
 
-	set dynamicValue (new_value) {
+	set dynamicValue(new_value) {
 		const PlanDefinitionActionDynamicValue = require('./PlanDefinitionActionDynamicValue');
-		this.__dynamicValue = Array.isArray(new_value) ? new_value.map(val => new PlanDefinitionActionDynamicValue(val)) : [new PlanDefinitionActionDynamicValue(new_value)];
+		this.__dynamicValue = Array.isArray(new_value)
+			? new_value.map(val => new PlanDefinitionActionDynamicValue(val))
+			: [new PlanDefinitionActionDynamicValue(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			label: this.__label,
 			title: this.__title,
@@ -323,7 +342,7 @@ class PlanDefinitionAction extends BackboneElement {
 			cardinalityBehavior: this.__cardinalityBehavior,
 			definition: this.__definition && this.__definition.toJSON(),
 			transform: this.__transform && this.__transform.toJSON(),
-			dynamicValue: this.__dynamicValue && this.__dynamicValue.map(v => v.toJSON())
+			dynamicValue: this.__dynamicValue && this.__dynamicValue.map(v => v.toJSON()),
 		});
 	}
 }

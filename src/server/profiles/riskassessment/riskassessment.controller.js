@@ -3,53 +3,53 @@ const { resolveFromVersion } = require('../../utils/resolve.utils');
 const responseUtils = require('../../utils/response.utils');
 const errors = require('../../utils/error.utils');
 
-
 /**
  * @description Construct a resource with base_version/uscore path
  */
-let getResourceConstructor = (base_version) => {
+let getResourceConstructor = base_version => {
 	return require(resolveFromVersion(base_version, 'RiskAssessment'));
 };
 
 /**
  * @description Controller to get a resource by history version id
  */
-module.exports.searchByVersionId = function searchByVersionId({profile, logger, app}) {
-	let {serviceModule: service} = profile;
+module.exports.searchByVersionId = function searchByVersionId({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let {base_version, version_id} = req.sanitized_args;
+		let { base_version, version_id } = req.sanitized_args;
 		let RiskAssessment = getResourceConstructor(base_version);
 
-		return service.searchByVersionId(req.sanitized_args, req.contexts, logger)
-			.then((results) =>
-				responseUtils.handleSingleReadResponse(res, next, base_version, RiskAssessment, results, version_id)
+		return service
+			.searchByVersionId(req.sanitized_args, req.contexts, logger)
+			.then(results =>
+				responseUtils.handleSingleReadResponse(res, next, base_version, RiskAssessment, results, version_id),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
 	};
 };
 
-
 /**
  * @description Controller to search riskassessment
  */
-module.exports.search = function search({profile, logger, config, app}) {
-	let {serviceModule: service} = profile;
+module.exports.search = function search({ profile, logger, config, app }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
 		let RiskAssessment = getResourceConstructor(base_version);
 
-		return service.search(req.sanitized_args, req.contexts, logger)
-			.then((results) =>
+		return service
+			.search(req.sanitized_args, req.contexts, logger)
+			.then(results =>
 				responseUtils.handleBundleReadResponse(res, base_version, RiskAssessment, results, {
 					resourceUrl: config.auth.resourceServer,
-				})
+				}),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
@@ -59,18 +59,19 @@ module.exports.search = function search({profile, logger, config, app}) {
 /**
  * @description Controller to searchById riskassessment
  */
-module.exports.searchById = function searchById({profile, logger, app}) {
-	let {serviceModule: service} = profile;
+module.exports.searchById = function searchById({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
 		let RiskAssessment = getResourceConstructor(base_version);
 
-		return service.searchById(req.sanitized_args, req.contexts, logger)
-			.then((results) => {
+		return service
+			.searchById(req.sanitized_args, req.contexts, logger)
+			.then(results => {
 				responseUtils.handleSingleReadResponse(res, next, base_version, RiskAssessment, results);
 			})
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
@@ -80,8 +81,8 @@ module.exports.searchById = function searchById({profile, logger, app}) {
 /**
  * @description Controller for creating a riskassessment
  */
-module.exports.create = function create({profile, logger, app, config}) {
-	let {serviceModule: service} = profile;
+module.exports.create = function create({ profile, logger, app, config }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
@@ -89,22 +90,27 @@ module.exports.create = function create({profile, logger, app, config}) {
 		let RiskAssessment = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
-			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${resource_body.resourceType}'`,
-				base_version
-			));
+			return next(
+				errors.invalidParameter(
+					`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${
+						resource_body.resourceType
+					}'`,
+					base_version,
+				),
+			);
 		}
 		// Create a new riskassessment resource and pass it to the service
 		let riskassessment = new RiskAssessment(resource_body);
-		let args = { base_version, resource: riskassessment};
+		let args = { base_version, resource: riskassessment };
 		// Pass any new information to the underlying service
-		return service.create(args, req.contexts, logger)
-			.then((results) =>
+		return service
+			.create(args, req.contexts, logger)
+			.then(results =>
 				responseUtils.handleCreateResponse(res, base_version, RiskAssessment.__resourceType, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
@@ -114,31 +120,36 @@ module.exports.create = function create({profile, logger, app, config}) {
 /**
  * @description Controller for updating/creating RiskAssessment. If RiskAssessment does not exist, it should be updated
  */
-module.exports.update = function update ({ profile, logger, config }) {
-	let {serviceModule: service} = profile;
+module.exports.update = function update({ profile, logger, config }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, id} = req.sanitized_args;
+		let { base_version, id } = req.sanitized_args;
 		let resource_body = req.body;
 		let RiskAssessment = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
 		if (RiskAssessment.__resourceType !== resource_body.resourceType) {
-			return next(errors.invalidParameter(
-				`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${resource_body.resourceType}'`,
-				base_version
-			));
+			return next(
+				errors.invalidParameter(
+					`'resourceType' expected to have value of '${RiskAssessment.__resourceType}', received '${
+						resource_body.resourceType
+					}'`,
+					base_version,
+				),
+			);
 		}
 		// Create a new riskassessment resource and pass it to the service
 		let riskassessment = new RiskAssessment(resource_body);
-		let args = {id, base_version, resource: riskassessment};
+		let args = { id, base_version, resource: riskassessment };
 		// Pass any new information to the underlying service
-		return service.update(args, req.contexts, logger)
-			.then((results) =>
+		return service
+			.update(args, req.contexts, logger)
+			.then(results =>
 				responseUtils.handleUpdateResponse(res, base_version, RiskAssessment.__resourceType, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
@@ -148,13 +159,14 @@ module.exports.update = function update ({ profile, logger, config }) {
 /**
  * @description Controller for deleting RiskAssessment resource.
  */
-module.exports.remove = function remove({profile, logger, app}) {
-	let {serviceModule: service} = profile;
+module.exports.remove = function remove({ profile, logger, app }) {
+	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
 
-		return service.remove(req.sanitized_args, req.contexts, logger)
+		return service
+			.remove(req.sanitized_args, req.contexts, logger)
 			.then(() => responseUtils.handleDeleteResponse(res))
 			.catch((err = {}) => {
 				logger.error(err);
@@ -167,7 +179,7 @@ module.exports.remove = function remove({profile, logger, app}) {
 /**
  * @description Controller for getting the history of RiskAssessment resource.
  */
-module.exports.history = function history ({ profile, logger, config }) {
+module.exports.history = function history({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -175,13 +187,14 @@ module.exports.history = function history ({ profile, logger, config }) {
 
 		let RiskAssessment = getResourceConstructor(base_version);
 
-		return service.history(req.sanitized_args, req.contexts, logger)
-			.then((results) =>
-				responseUtils.handleBundleHistoryResponse( res, base_version, RiskAssessment, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+		return service
+			.history(req.sanitized_args, req.contexts, logger)
+			.then(results =>
+				responseUtils.handleBundleHistoryResponse(res, base_version, RiskAssessment, results, {
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});
@@ -191,7 +204,7 @@ module.exports.history = function history ({ profile, logger, config }) {
 /**
  * @description Controller for getting the history of RiskAssessment resource by ID.
  */
-module.exports.historyById = function historyById ({ profile, logger, config }) {
+module.exports.historyById = function historyById({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -199,13 +212,14 @@ module.exports.historyById = function historyById ({ profile, logger, config }) 
 
 		let RiskAssessment = getResourceConstructor(base_version);
 
-		return service.historyById(req.sanitized_args, req.contexts, logger)
-			.then((results) =>
-				responseUtils.handleBundleHistoryResponse( res, base_version, RiskAssessment, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+		return service
+			.historyById(req.sanitized_args, req.contexts, logger)
+			.then(results =>
+				responseUtils.handleBundleHistoryResponse(res, base_version, RiskAssessment, results, {
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
-			.catch((err) => {
+			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
 			});

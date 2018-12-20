@@ -8,30 +8,27 @@ let getCapabilityStatementResource = () => {
 	return require(resolveFromVersion('3_0_1', 'CapabilityStatement'));
 };
 
-
 module.exports.makeStatement = function(resources) {
 	let CapabilityStatement = getCapabilityStatementResource();
 
 	return new CapabilityStatement({
 		status: 'active',
-		date: moment().tz('America/New_York').format(),
+		date: moment()
+			.tz('America/New_York')
+			.format(),
 		publisher: 'Not provided',
 		kind: 'instance',
 		software: {
 			name: 'FHIR Server',
-			version: '0.0.1'
+			version: '0.0.1',
 		},
 		implementation: {
-			description: 'FHIR Test Server (STU3)'
+			description: 'FHIR Test Server (STU3)',
 		},
 		fhirVersion: '3.0.1',
 		acceptUnknown: 'extensions',
-		format: [
-			'application/fhir+json'
-		],
-		rest: [
-			resources
-		]
+		format: ['application/fhir+json'],
+		rest: [resources],
 	});
 };
 
@@ -41,15 +38,21 @@ module.exports.makeStatement = function(resources) {
  */
 module.exports.securityStatement = securityUrls => ({
 	cors: true,
-	service: [{
-		coding: [{
-				system: 'http://hl7.org/fhir/restful-security-service',
-				code: 'SMART-on-FHIR'
-		}],
-		text: 'OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
-	}],
-	extension: [{
-		url: 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris',
-		extension: securityUrls
-	}]
+	service: [
+		{
+			coding: [
+				{
+					system: 'http://hl7.org/fhir/restful-security-service',
+					code: 'SMART-on-FHIR',
+				},
+			],
+			text: 'OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)',
+		},
+	],
+	extension: [
+		{
+			url: 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris',
+			extension: securityUrls,
+		},
+	],
 });

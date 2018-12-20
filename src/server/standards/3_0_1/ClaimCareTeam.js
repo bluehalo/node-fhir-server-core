@@ -2,78 +2,77 @@ const BackboneElement = require('./BackboneElement');
 const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
 
 class ClaimCareTeam extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ClaimCareTeam';
 		Object.assign(this, opt);
 	}
 
 	// This is a ClaimCareTeam resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ClaimCareTeam';
 	}
 
 	// Sequence of the careTeam which serves to order and provide a link.
-	get sequence () {
+	get sequence() {
 		return this.__sequence;
 	}
 
-	set sequence (new_value) {
+	set sequence(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = PositiveIntScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field sequence`);
 		}
 		this.__sequence = new_value;
 	}
 
 	// Member of the team who provided the overall service.
-	get provider () {
+	get provider() {
 		return this.__provider;
 	}
 
-	set provider (new_value) {
+	set provider(new_value) {
 		const Reference = require('./Reference');
 		this.__provider = new Reference(new_value);
 	}
 
 	// The party who is billing and responsible for the claimed good or service rendered to the patient.
-	get responsible () {
+	get responsible() {
 		return this.__responsible;
 	}
 
-	set responsible (new_value) {
+	set responsible(new_value) {
 		this.__responsible = new_value;
 	}
 
 	// The lead, assisting or supervising practitioner and their discipline if a multidisiplinary team.
-	get role () {
+	get role() {
 		return this.__role;
 	}
 
-	set role (new_value) {
+	set role(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__role = new CodeableConcept(new_value);
 	}
 
 	// The qualification which is applicable for this service.
-	get qualification () {
+	get qualification() {
 		return this.__qualification;
 	}
 
-	set qualification (new_value) {
+	set qualification(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__qualification = new CodeableConcept(new_value);
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			sequence: this.__sequence,
 			provider: this.__provider && this.__provider.toJSON(),
 			responsible: this.__responsible,
 			role: this.__role && this.__role.toJSON(),
-			qualification: this.__qualification && this.__qualification.toJSON()
+			qualification: this.__qualification && this.__qualification.toJSON(),
 		});
 	}
 }

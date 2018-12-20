@@ -44,8 +44,8 @@ module.exports.search = function search({ profile, logger, config, app }) {
 			.search(req.sanitized_args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleBundleReadResponse(res, base_version, ValueSet, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
 			.catch(err => {
 				logger.error(err);
@@ -93,8 +93,8 @@ module.exports.create = function create({ profile, logger, app, config }) {
 					`'resourceType' expected to have value of '${ValueSet.__resourceType}', received '${
 						resource_body.resourceType
 					}'`,
-					base_version
-				)
+					base_version,
+				),
 			);
 		}
 		// Create a new valueset resource and pass it to the service
@@ -105,8 +105,8 @@ module.exports.create = function create({ profile, logger, app, config }) {
 			.create(args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleCreateResponse(res, base_version, ValueSet.__resourceType, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
 			.catch(err => {
 				logger.error(err);
@@ -122,7 +122,7 @@ module.exports.update = function update({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
-		let { base_version, id} = req.sanitized_args;
+		let { base_version, id } = req.sanitized_args;
 		let resource_body = req.body;
 		let ValueSet = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
@@ -132,8 +132,8 @@ module.exports.update = function update({ profile, logger, config }) {
 					`'resourceType' expected to have value of '${ValueSet.__resourceType}', received '${
 						resource_body.resourceType
 					}'`,
-					base_version
-				)
+					base_version,
+				),
 			);
 		}
 		// Create a new valueset resource and pass it to the service
@@ -144,8 +144,8 @@ module.exports.update = function update({ profile, logger, config }) {
 			.update(args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleUpdateResponse(res, base_version, ValueSet.__resourceType, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
 			.catch(err => {
 				logger.error(err);
@@ -189,8 +189,8 @@ module.exports.history = function history({ profile, logger, config }) {
 			.history(req.sanitized_args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleBundleHistoryResponse(res, base_version, ValueSet, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
 			.catch(err => {
 				logger.error(err);
@@ -214,8 +214,8 @@ module.exports.historyById = function historyById({ profile, logger, config }) {
 			.historyById(req.sanitized_args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleBundleHistoryResponse(res, base_version, ValueSet, results, {
-					resourceUrl: config.auth.resourceServer
-				})
+					resourceUrl: config.auth.resourceServer,
+				}),
 			)
 			.catch(err => {
 				logger.error(err);
@@ -238,7 +238,7 @@ module.exports.expandById = function expandById({ profile, logger, config }) {
 			.expandById(req.sanitized_args, req.contexts, logger)
 			.then(results => {
 				responseUtils.handleExpandReadResponse(res, base_version, ValueSet, results, {
-					resourceUrl: config.auth.resourceServer
+					resourceUrl: config.auth.resourceServer,
 				});
 			})
 			.catch(err => {

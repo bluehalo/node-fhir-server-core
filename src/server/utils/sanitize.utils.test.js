@@ -3,7 +3,7 @@ const { sanitizeMiddleware } = require(path.resolve('./src/server/utils/sanitize
 const { VERSIONS } = require(path.resolve('./src/constants'));
 
 const ARGS_PARAM = {
-	version: VERSIONS['3_0_1']
+	version: VERSIONS['3_0_1'],
 };
 
 const URL = 'localhost:3000/3_0_1/Patient/_search';
@@ -11,50 +11,50 @@ const URL = 'localhost:3000/3_0_1/Patient/_search';
 const ARGS = [
 	{
 		name: 'first_name',
-		type: 'string'
+		type: 'string',
 	},
 	{
 		name: 'birthdate',
-		type: 'date'
+		type: 'date',
 	},
 	{
 		name: 'isAlive',
-		type: 'boolean'
+		type: 'boolean',
 	},
 	{
 		name: 'age',
-		type: 'number'
+		type: 'number',
 	},
 	{
 		name: 'identifier',
-		type: 'token'
-	}
+		type: 'token',
+	},
 ];
 
 const SEARCH_ARGS = [
 	{
 		name: '_sort',
-		type: 'string'
+		type: 'string',
 	},
 	{
 		name: '_count',
-		type: 'number'
+		type: 'number',
 	},
 	{
 		name: '_include',
-		type: 'string'
+		type: 'string',
 	},
 	{
 		name: '_revinclude',
-		type: 'string'
+		type: 'string',
 	},
 	{
 		name: '_summary',
-		type: 'token'
+		type: 'token',
 	},
 	{
 		name: '_elements',
-		type: 'string'
+		type: 'string',
 	},
 ];
 
@@ -62,19 +62,18 @@ const REQUIRED_ARGS = [
 	{
 		name: 'id',
 		type: 'string',
-		required: true
-	}
+		required: true,
+	},
 ];
 
 const INVALID_TYPE_ARGS = [
 	{
 		name: 'age',
-		type: 'integer'
-	}
+		type: 'integer',
+	},
 ];
 
 describe('Sanitize Utils Tests', () => {
-
 	test('should not pass an error if no args are provided and none are required', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let req = { params: ARGS_PARAM };
@@ -178,7 +177,7 @@ describe('Sanitize Utils Tests', () => {
 		let middleware = sanitizeMiddleware(ARGS);
 		let params = {
 			identifier: '<script>alert(2+2);</script>',
-			first_name: '<script>hello</script>world!'
+			first_name: '<script>hello</script>world!',
 		};
 		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
@@ -244,9 +243,15 @@ describe('Sanitize Utils Tests', () => {
 	});
 
 	test('should allow all common search args', () => {
-
 		let middleware = sanitizeMiddleware(SEARCH_ARGS);
-		let params = { _sort: 'status', _count: '1', _include: 'Observation', _revinclude: 'Patient', _summary: 'text', _elements: 'identifier' };
+		let params = {
+			_sort: 'status',
+			_count: '1',
+			_include: 'Observation',
+			_revinclude: 'Patient',
+			_summary: 'text',
+			_elements: 'identifier',
+		};
 		let req = { params: Object.assign(params, ARGS_PARAM) };
 		let next = jest.fn();
 
@@ -275,5 +280,4 @@ describe('Sanitize Utils Tests', () => {
 		// calls[0] is the first set of arguments, calls[0][0] is the first argument
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
-
 });

@@ -5,244 +5,251 @@ const IdScalar = require('./scalars/Id.scalar');
 const CodeScalar = require('./scalars/Code.scalar');
 
 class Conformance extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'Conformance';
 		Object.assign(this, opt);
 	}
 
 	// This is a Conformance resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'Conformance';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__Conformance = new_value;
 	}
 
 	// An absolute URL that is used to identify this conformance statement when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this conformance statement is (or will be) published.
-	get url () {
+	get url() {
 		return this.__url;
 	}
 
-	set url (new_value) {
+	set url(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = UriScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field url`);
 		}
 		this.__url = new_value;
 	}
 
 	// The identifier that is used to identify this version of the conformance statement when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.
-	get version () {
+	get version() {
 		return this.__version;
 	}
 
-	set version (new_value) {
+	set version(new_value) {
 		this.__version = new_value;
 	}
 
 	// A free text natural language name identifying the conformance statement.
-	get name () {
+	get name() {
 		return this.__name;
 	}
 
-	set name (new_value) {
+	set name(new_value) {
 		this.__name = new_value;
 	}
 
 	// The status of this conformance statement.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// A flag to indicate that this conformance statement is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental () {
+	get experimental() {
 		return this.__experimental;
 	}
 
-	set experimental (new_value) {
+	set experimental(new_value) {
 		this.__experimental = new_value;
 	}
 
 	// The name of the individual or organization that published the conformance.
-	get publisher () {
+	get publisher() {
 		return this.__publisher;
 	}
 
-	set publisher (new_value) {
+	set publisher(new_value) {
 		this.__publisher = new_value;
 	}
 
 	// Contacts to assist a user in finding and communicating with the publisher.
-	get contact () {
+	get contact() {
 		return this.__contact;
 	}
 
-	set contact (new_value) {
+	set contact(new_value) {
 		const ConformanceContact = require('./ConformanceContact');
-		this.__contact = Array.isArray(new_value) ? new_value.map(val => new ConformanceContact(val)) : [new ConformanceContact(new_value)];
+		this.__contact = Array.isArray(new_value)
+			? new_value.map(val => new ConformanceContact(val))
+			: [new ConformanceContact(new_value)];
 	}
 
 	// The date  (and optionally time) when the conformance statement was published. The date must change when the business version changes, if it does, and it must change if the status code changes. In addition, it should change when the substantive content of the conformance statement changes.
-	get date () {
+	get date() {
 		return this.__date;
 	}
 
-	set date (new_value) {
+	set date(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field date`);
 		}
 		this.__date = new_value;
 	}
 
 	// A free text natural language description of the conformance statement and its use. Typically, this is used when the conformance statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
 	// Explains why this conformance statement is needed and why it\'s been constrained as it has.
-	get requirements () {
+	get requirements() {
 		return this.__requirements;
 	}
 
-	set requirements (new_value) {
+	set requirements(new_value) {
 		this.__requirements = new_value;
 	}
 
 	// A copyright statement relating to the conformance statement and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the details of the system described by the conformance statement.
-	get copyright () {
+	get copyright() {
 		return this.__copyright;
 	}
 
-	set copyright (new_value) {
+	set copyright(new_value) {
 		this.__copyright = new_value;
 	}
 
 	// The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind not instance of software) or a class of implementation (e.g. a desired purchase).
-	get kind () {
+	get kind() {
 		return this.__kind;
 	}
 
-	set kind (new_value) {
+	set kind(new_value) {
 		this.__kind = new_value;
 	}
 
 	// Software that is covered by this conformance statement.  It is used when the conformance statement describes the capabilities of a particular software version, independent of an installation.
-	get software () {
+	get software() {
 		return this.__software;
 	}
 
-	set software (new_value) {
+	set software(new_value) {
 		const ConformanceSoftware = require('./ConformanceSoftware');
 		this.__software = new ConformanceSoftware(new_value);
 	}
 
 	// Identifies a specific implementation instance that is described by the conformance statement - i.e. a particular installation, rather than the capabilities of a software program.
-	get implementation () {
+	get implementation() {
 		return this.__implementation;
 	}
 
-	set implementation (new_value) {
+	set implementation(new_value) {
 		const ConformanceImplementation = require('./ConformanceImplementation');
 		this.__implementation = new ConformanceImplementation(new_value);
 	}
 
 	// The version of the FHIR specification on which this conformance statement is based.
-	get fhirVersion () {
+	get fhirVersion() {
 		return this.__fhirVersion;
 	}
 
-	set fhirVersion (new_value) {
+	set fhirVersion(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = IdScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field fhirVersion`);
 		}
 		this.__fhirVersion = new_value;
 	}
 
 	// A code that indicates whether the application accepts unknown elements or extensions when reading resources.
-	get acceptUnknown () {
+	get acceptUnknown() {
 		return this.__acceptUnknown;
 	}
 
-	set acceptUnknown (new_value) {
+	set acceptUnknown(new_value) {
 		this.__acceptUnknown = new_value;
 	}
 
 	// A list of the formats supported by this implementation using their content types.
-	get format () {
+	get format() {
 		return this.__format;
 	}
 
-	set format (new_value) {
+	set format(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = CodeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field format`);
 		}
 		this.__format = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// A list of profiles that represent different use cases supported by the system. For a server, \'supported by the system\' means the system hosts/produces a set of resources that are conformant to a particular profile, and allows clients that use its services to search using this profile and to find appropriate data. For a client, it means the system will search by this profile and process data according to the guidance implicit in the profile. See further discussion in [Using Profiles]{profiling.html#profile-uses}.
-	get profile () {
+	get profile() {
 		return this.__profile;
 	}
 
-	set profile (new_value) {
+	set profile(new_value) {
 		const Reference = require('./Reference');
 		this.__profile = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// A definition of the restful capabilities of the solution, if any.
-	get rest () {
+	get rest() {
 		return this.__rest;
 	}
 
-	set rest (new_value) {
+	set rest(new_value) {
 		const ConformanceRest = require('./ConformanceRest');
-		this.__rest = Array.isArray(new_value) ? new_value.map(val => new ConformanceRest(val)) : [new ConformanceRest(new_value)];
+		this.__rest = Array.isArray(new_value)
+			? new_value.map(val => new ConformanceRest(val))
+			: [new ConformanceRest(new_value)];
 	}
 
 	// A description of the messaging capabilities of the solution.
-	get messaging () {
+	get messaging() {
 		return this.__messaging;
 	}
 
-	set messaging (new_value) {
+	set messaging(new_value) {
 		const ConformanceMessaging = require('./ConformanceMessaging');
-		this.__messaging = Array.isArray(new_value) ? new_value.map(val => new ConformanceMessaging(val)) : [new ConformanceMessaging(new_value)];
+		this.__messaging = Array.isArray(new_value)
+			? new_value.map(val => new ConformanceMessaging(val))
+			: [new ConformanceMessaging(new_value)];
 	}
 
 	// A document definition.
-	get document () {
+	get document() {
 		return this.__document;
 	}
 
-	set document (new_value) {
+	set document(new_value) {
 		const ConformanceDocument = require('./ConformanceDocument');
-		this.__document = Array.isArray(new_value) ? new_value.map(val => new ConformanceDocument(val)) : [new ConformanceDocument(new_value)];
+		this.__document = Array.isArray(new_value)
+			? new_value.map(val => new ConformanceDocument(val))
+			: [new ConformanceDocument(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			url: this.__url,
@@ -265,7 +272,7 @@ class Conformance extends DomainResource {
 			profile: this.__profile && this.__profile.map(v => v.toJSON()),
 			rest: this.__rest && this.__rest.map(v => v.toJSON()),
 			messaging: this.__messaging && this.__messaging.map(v => v.toJSON()),
-			document: this.__document && this.__document.map(v => v.toJSON())
+			document: this.__document && this.__document.map(v => v.toJSON()),
 		});
 	}
 }

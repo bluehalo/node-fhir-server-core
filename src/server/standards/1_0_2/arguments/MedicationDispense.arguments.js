@@ -69,7 +69,8 @@ module.exports = {
 		name: 'whenhandedover',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-whenhandedover',
-		documentation: 'Date when medication handed over to patient (outpatient setting), or supplied to ward or clinic (inpatient setting).',
+		documentation:
+			'Date when medication handed over to patient (outpatient setting), or supplied to ward or clinic (inpatient setting).',
 	},
 	WHENPREPARED: {
 		name: 'whenprepared',

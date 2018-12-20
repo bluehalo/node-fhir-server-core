@@ -5,16 +5,12 @@ const {
 	notFound,
 	deleted,
 	internal,
-	isServerError
+	isServerError,
 } = require('./error.utils');
 
-const {
-	ISSUE,
-	VERSIONS
-} = require('../../constants');
+const { ISSUE, VERSIONS } = require('../../constants');
 
 describe('Error Utils Tests', () => {
-
 	test('should return correct OperationOutcome for an invalidParameter error', () => {
 		let error = invalidParameter('Age is invalid.', VERSIONS['3_0_1']);
 		let issue = error.issue[0];
@@ -131,5 +127,4 @@ describe('Error Utils Tests', () => {
 		expect(isServerError(operationError, VERSIONS['3_0_1'])).toBeTruthy();
 		expect(isServerError(operationErrorWithoutVersion, VERSIONS['3_0_1'])).toBeTruthy();
 	});
-
 });

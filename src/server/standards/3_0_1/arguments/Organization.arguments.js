@@ -3,7 +3,8 @@ module.exports = {
 		name: 'active',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-active',
-		documentation: 'A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text.',
+		documentation:
+			'A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text.',
 	},
 	ADDRESS: {
 		name: 'address',
@@ -51,13 +52,13 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-identifier',
-		documentation: 'Any identifier for the organization (not the accreditation issuer\'s identifier).',
+		documentation: "Any identifier for the organization (not the accreditation issuer's identifier).",
 	},
 	NAME: {
 		name: 'name',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-name',
-		documentation: 'A portion of the organization\'s name or alias.',
+		documentation: "A portion of the organization's name or alias.",
 	},
 	PARTOF: {
 		name: 'partof',
@@ -69,7 +70,7 @@ module.exports = {
 		name: 'phonetic',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-phonetic',
-		documentation: 'A portion of the organization\'s name using some kind of phonetic matching algorithm.',
+		documentation: "A portion of the organization's name using some kind of phonetic matching algorithm.",
 	},
 	TYPE: {
 		name: 'type',

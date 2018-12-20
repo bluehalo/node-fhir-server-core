@@ -3,7 +3,7 @@ module.exports = {
 		name: 'active',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-active',
-		documentation: 'Whether the organization\'s record is active.',
+		documentation: "Whether the organization's record is active.",
 	},
 	ADDRESS: {
 		name: 'address',
@@ -45,13 +45,13 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-identifier',
-		documentation: 'Any identifier for the organization (not the accreditation issuer\'s identifier).',
+		documentation: "Any identifier for the organization (not the accreditation issuer's identifier).",
 	},
 	NAME: {
 		name: 'name',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-name',
-		documentation: 'A portion of the organization\'s name.',
+		documentation: "A portion of the organization's name.",
 	},
 	PARTOF: {
 		name: 'partof',
@@ -63,7 +63,7 @@ module.exports = {
 		name: 'phonetic',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-phonetic',
-		documentation: 'A portion of the organization\'s name using some kind of phonetic matching algorithm.',
+		documentation: "A portion of the organization's name using some kind of phonetic matching algorithm.",
 	},
 	TYPE: {
 		name: 'type',

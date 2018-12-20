@@ -2,224 +2,227 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class AllergyIntolerance extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'AllergyIntolerance';
 		Object.assign(this, opt);
 	}
 
 	// This is a AllergyIntolerance resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'AllergyIntolerance';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__AllergyIntolerance = new_value;
 	}
 
 	// This records identifiers associated with this allergy/intolerance concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// The clinical status of the allergy or intolerance.
-	get clinicalStatus () {
+	get clinicalStatus() {
 		return this.__clinicalStatus;
 	}
 
-	set clinicalStatus (new_value) {
+	set clinicalStatus(new_value) {
 		this.__clinicalStatus = new_value;
 	}
 
 	// Assertion about certainty associated with the propensity, or potential risk, of a reaction to the identified substance (including pharmaceutical product).
-	get verificationStatus () {
+	get verificationStatus() {
 		return this.__verificationStatus;
 	}
 
-	set verificationStatus (new_value) {
+	set verificationStatus(new_value) {
 		this.__verificationStatus = new_value;
 	}
 
 	// Identification of the underlying physiological mechanism for the reaction risk.
-	get type () {
+	get type() {
 		return this.__type;
 	}
 
-	set type (new_value) {
+	set type(new_value) {
 		this.__type = new_value;
 	}
 
 	// Category of the identified substance.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		this.__category = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Estimate of the potential clinical harm, or seriousness, of the reaction to the identified substance.
-	get criticality () {
+	get criticality() {
 		return this.__criticality;
 	}
 
-	set criticality (new_value) {
+	set criticality(new_value) {
 		this.__criticality = new_value;
 	}
 
 	// Code for an allergy or intolerance statement (either a positive or a negated/excluded statement).  This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk (e.g., \'Latex\'), an allergy or intolerance condition (e.g., \'Latex allergy\'), or a negated/excluded code for a specific substance or class (e.g., \'No latex allergy\') or a general or categorical negated statement (e.g.,  \'No known allergy\', \'No known drug allergies\').
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__code = new CodeableConcept(new_value);
 	}
 
 	// The patient who has the allergy or intolerance.
-	get patient () {
+	get patient() {
 		return this.__patient;
 	}
 
-	set patient (new_value) {
+	set patient(new_value) {
 		const Reference = require('./Reference');
 		this.__patient = new Reference(new_value);
 	}
 
 	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetDateTime () {
+	get onsetDateTime() {
 		return this.__onsetDateTime;
 	}
 
-	set onsetDateTime (new_value) {
+	set onsetDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
 		}
 		this.__onsetDateTime = new_value;
 	}
 
 	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetAge () {
+	get onsetAge() {
 		return this.__onsetAge;
 	}
 
-	set onsetAge (new_value) {
+	set onsetAge(new_value) {
 		const Age = require('./Age');
 		this.__onsetAge = new Age(new_value);
 	}
 
 	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetPeriod () {
+	get onsetPeriod() {
 		return this.__onsetPeriod;
 	}
 
-	set onsetPeriod (new_value) {
+	set onsetPeriod(new_value) {
 		const Period = require('./Period');
 		this.__onsetPeriod = new Period(new_value);
 	}
 
 	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetRange () {
+	get onsetRange() {
 		return this.__onsetRange;
 	}
 
-	set onsetRange (new_value) {
+	set onsetRange(new_value) {
 		const Range = require('./Range');
 		this.__onsetRange = new Range(new_value);
 	}
 
 	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetString () {
+	get onsetString() {
 		return this.__onsetString;
 	}
 
-	set onsetString (new_value) {
+	set onsetString(new_value) {
 		this.__onsetString = new_value;
 	}
 
 	// The date on which the existance of the AllergyIntolerance was first asserted or acknowledged.
-	get assertedDate () {
+	get assertedDate() {
 		return this.__assertedDate;
 	}
 
-	set assertedDate (new_value) {
+	set assertedDate(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
 		}
 		this.__assertedDate = new_value;
 	}
 
 	// Individual who recorded the record and takes responsibility for its content.
-	get recorder () {
+	get recorder() {
 		return this.__recorder;
 	}
 
-	set recorder (new_value) {
+	set recorder(new_value) {
 		const Reference = require('./Reference');
 		this.__recorder = new Reference(new_value);
 	}
 
 	// The source of the information about the allergy that is recorded.
-	get asserter () {
+	get asserter() {
 		return this.__asserter;
 	}
 
-	set asserter (new_value) {
+	set asserter(new_value) {
 		const Reference = require('./Reference');
 		this.__asserter = new Reference(new_value);
 	}
 
 	// Represents the date and/or time of the last known occurrence of a reaction event.
-	get lastOccurrence () {
+	get lastOccurrence() {
 		return this.__lastOccurrence;
 	}
 
-	set lastOccurrence (new_value) {
+	set lastOccurrence(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field lastOccurrence`);
 		}
 		this.__lastOccurrence = new_value;
 	}
 
 	// Additional narrative about the propensity for the Adverse Reaction, not captured in other fields.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const Annotation = require('./Annotation');
 		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Details about each adverse reaction event linked to exposure to the identified substance.
-	get reaction () {
+	get reaction() {
 		return this.__reaction;
 	}
 
-	set reaction (new_value) {
+	set reaction(new_value) {
 		const AllergyIntoleranceReaction = require('./AllergyIntoleranceReaction');
-		this.__reaction = Array.isArray(new_value) ? new_value.map(val => new AllergyIntoleranceReaction(val)) : [new AllergyIntoleranceReaction(new_value)];
+		this.__reaction = Array.isArray(new_value)
+			? new_value.map(val => new AllergyIntoleranceReaction(val))
+			: [new AllergyIntoleranceReaction(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -240,7 +243,7 @@ class AllergyIntolerance extends DomainResource {
 			asserter: this.__asserter && this.__asserter.toJSON(),
 			lastOccurrence: this.__lastOccurrence,
 			note: this.__note && this.__note.map(v => v.toJSON()),
-			reaction: this.__reaction && this.__reaction.map(v => v.toJSON())
+			reaction: this.__reaction && this.__reaction.map(v => v.toJSON()),
 		});
 	}
 }

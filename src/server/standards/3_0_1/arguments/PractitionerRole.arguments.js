@@ -3,25 +3,28 @@ module.exports = {
 		name: 'email',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-email',
-		documentation: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in an email contact  * [RelatedPerson](relatedperson.html): A value in an email contact  * [Practitioner](practitioner.html): A value in an email contact  * [Person](person.html): A value in an email contact  * [Patient](patient.html): A value in an email contact  .',
+		documentation:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in an email contact  * [RelatedPerson](relatedperson.html): A value in an email contact  * [Practitioner](practitioner.html): A value in an email contact  * [Person](person.html): A value in an email contact  * [Patient](patient.html): A value in an email contact  .',
 	},
 	PHONE: {
 		name: 'phone',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-phone',
-		documentation: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in a phone contact  * [RelatedPerson](relatedperson.html): A value in a phone contact  * [Practitioner](practitioner.html): A value in a phone contact  * [Person](person.html): A value in a phone contact  * [Patient](patient.html): A value in a phone contact  .',
+		documentation:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in a phone contact  * [RelatedPerson](relatedperson.html): A value in a phone contact  * [Practitioner](practitioner.html): A value in a phone contact  * [Person](person.html): A value in a phone contact  * [Patient](patient.html): A value in a phone contact  .',
 	},
 	TELECOM: {
 		name: 'telecom',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-telecom',
-		documentation: 'Multiple Resources:     * [PractitionerRole](practitionerrole.html): The value in any kind of contact  * [RelatedPerson](relatedperson.html): The value in any kind of contact  * [Practitioner](practitioner.html): The value in any kind of contact  * [Person](person.html): The value in any kind of contact  * [Patient](patient.html): The value in any kind of telecom details of the patient  .',
+		documentation:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): The value in any kind of contact  * [RelatedPerson](relatedperson.html): The value in any kind of contact  * [Practitioner](practitioner.html): The value in any kind of contact  * [Person](person.html): The value in any kind of contact  * [Patient](patient.html): The value in any kind of telecom details of the patient  .',
 	},
 	ACTIVE: {
 		name: 'active',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-active',
-		documentation: 'Whether this practitioner\'s record is in active use.',
+		documentation: "Whether this practitioner's record is in active use.",
 	},
 	DATE: {
 		name: 'date',
@@ -39,7 +42,7 @@ module.exports = {
 		name: 'identifier',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-identifier',
-		documentation: 'A practitioner\'s Identifier.',
+		documentation: "A practitioner's Identifier.",
 	},
 	LOCATION: {
 		name: 'location',
@@ -69,7 +72,8 @@ module.exports = {
 		name: 'service',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/PractitionerRole-service',
-		documentation: 'The list of healthcare services that this worker provides for this role\'s Organization/Location(s).',
+		documentation:
+			"The list of healthcare services that this worker provides for this role's Organization/Location(s).",
 	},
 	SPECIALTY: {
 		name: 'specialty',

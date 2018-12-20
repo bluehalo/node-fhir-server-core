@@ -11,6 +11,7 @@
   },
   "extends": "eslint:recommended",
   "rules": {
+    "no-mixed-spaces-and-tabs": [0, "smart-tabs"],
     "quotes": [2, "single", "avoid-escape"],
     "no-compare-neg-zero": 0,
     "no-console": 0,

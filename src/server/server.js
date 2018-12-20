@@ -11,26 +11,20 @@ const routeSetter = require('./route-setter');
 const errors = require('./utils/error.utils');
 const Logger = require('./winston');
 
-const {
-	validSSLConfiguration,
-	loadProfile,
-	loadAuthValidator
-} = require('./utils/config.validators');
-
+const { validSSLConfiguration, loadProfile, loadAuthValidator } = require('./utils/config.validators');
 
 /**
  * @name validate
  * @description Validate the config and provide defaults for some values
  * @param {Object} config
  */
-function validate (config = {}) {
+function validate(config = {}) {
 	// Validate server settings
-	let { server = {}} = config;
+	let { server = {} } = config;
 
-	let hasValidServerConfiguration = (
+	let hasValidServerConfiguration =
 		// If the ssl config is present, it must have a key and cert
-		(!server.ssl || validSSLConfiguration(server.ssl))
-	);
+		!server.ssl || validSSLConfiguration(server.ssl);
 
 	// Validate logger settings
 	// These are not required, so if something is missing, we will set some sensible defaults
@@ -53,8 +47,7 @@ function validate (config = {}) {
 	// Throw errors if any of these conditions have failed
 	if (!hasValidServerConfiguration) {
 		throw new Error(
-			'Server configuration is invalid.'
-			+ ' Please review the README.md section on Server Configuration.'
+			'Server configuration is invalid.' + ' Please review the README.md section on Server Configuration.',
 		);
 	}
 
@@ -62,8 +55,8 @@ function validate (config = {}) {
 	// and we can't start
 	if (profileKeys.length === 0) {
 		throw new Error(
-			'No profiles configured. You must configure atleast 1 profile to run this server.'
-			+ ' Please review the README.md section on Configuring Profiles.'
+			'No profiles configured. You must configure atleast 1 profile to run this server.' +
+				' Please review the README.md section on Configuring Profiles.',
 		);
 	}
 
@@ -71,18 +64,15 @@ function validate (config = {}) {
 	// so these must be valid and loaded.
 	if (!profileHasServicesConfigured) {
 		throw new Error(
-			'No valid profile configurations found.'
-			+ ' Please review the README.md section on Configuring Profiles.'
+			'No valid profile configurations found.' + ' Please review the README.md section on Configuring Profiles.',
 		);
 	}
 
 	return config;
 }
 
-
 class Server {
-
-	constructor (config = {}) {
+	constructor(config = {}) {
 		// Validate the config has the required properties
 		this.config = validate(config);
 		// Setup a logger for the application
@@ -90,18 +80,18 @@ class Server {
 		// Setup our express instance
 		this.app = express();
 		// Setup some environment variables handy for setup
-		let { server = {}} = this.config;
+		let { server = {} } = this.config;
 
 		this.env = {
 			IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
-			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert
+			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert,
 		};
 		// return self for chaining
 		return this;
 	}
 
 	// Configure middleware
-	configureMiddleware () {
+	configureMiddleware() {
 		//Enable error tracking request handler if supplied in config
 		if (this.config.errorTracking && this.config.errorTracking.requestHandler) {
 			this.app.use(this.config.errorTracking.requestHandler());
@@ -112,13 +102,13 @@ class Server {
 		this.app.use(compression({ level: 9 }));
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
-		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir']}));
+		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
 		// return self for chaining
 		return this;
 	}
 
 	// Configure helmet
-	configureHelmet (helmetConfig) {
+	configureHelmet(helmetConfig) {
 		/**
 		 * The following headers are turned on by default:
 		 * - dnsPrefetchControl (Controle browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
@@ -129,18 +119,22 @@ class Server {
 		 * - noSniff (prevent clients from sniffing MIME type). https://helmetjs.github.io/docs/dont-sniff-mimetype
 		 * - xssFilter (adds small XSS protections). https://helmetjs.github.io/docs/xss-filter/
 		 */
-		this.app.use(helmet(helmetConfig || {
-			// Needs https running first
-			hsts: this.env.USE_HTTPS
-		}));
+		this.app.use(
+			helmet(
+				helmetConfig || {
+					// Needs https running first
+					hsts: this.env.USE_HTTPS,
+				},
+			),
+		);
 		// return self for chaining
 		return this;
 	}
 
 	// Configure session
-	configureSession (session) {
+	configureSession(session) {
 		// Session config can come from the core config as well, let's handle both cases
-		let { server = {}} = this.config;
+		let { server = {} } = this.config;
 		// If a session was passed in the config, let's use it
 		if (session || server.sessionStore) {
 			this.app.use(session || server.sessionStore);
@@ -150,12 +144,12 @@ class Server {
 	}
 
 	// Configure authorization
-	configureAuthorization () {
+	configureAuthorization() {
 		// return self for chaining
 		return this;
 	}
 
-	configurePassport () {
+	configurePassport() {
 		if (this.config.auth && this.config.auth.strategy) {
 			let { strategy } = require(path.resolve(this.config.auth.strategy.service));
 			passport.use(strategy);
@@ -166,9 +160,9 @@ class Server {
 	}
 
 	// Setup a public directory for static assets
-	setPublicDirectory (publicDirectory = '') {
+	setPublicDirectory(publicDirectory = '') {
 		// Public config can come from the core config as well, let's handle both cases
-		let { server = {}} = this.config;
+		let { server = {} } = this.config;
 
 		if (publicDirectory || server.publicDirectory) {
 			this.app.use(express.static(publicDirectory || server.publicDirectory));
@@ -178,15 +172,14 @@ class Server {
 	}
 
 	// Setup profile routes
-	setProfileRoutes () {
+	setProfileRoutes() {
 		routeSetter.setRoutes(this);
 		// return self for chaining
 		return this;
 	}
 
-
 	// Setup error routes
-	setErrorRoutes () {
+	setErrorRoutes() {
 		//Enable error tracking error handler if supplied in config
 		if (this.config.errorTracking && this.config.errorTracking.errorHandler) {
 			this.app.use(this.config.errorTracking.errorHandler());
@@ -195,7 +188,6 @@ class Server {
 		// Generic catch all error handler
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
-
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1];
 
@@ -229,21 +221,23 @@ class Server {
 	}
 
 	// Start the server
-	listen (port = process.env.PORT, callback) {
-		let { server = {}} = this.config;
+	listen(port = process.env.PORT, callback) {
+		let { server = {} } = this.config;
 
 		// Update the express app to be in instance of createServer
 		this.app = !this.env.USE_HTTPS
 			? http.createServer(this.app)
-			: https.createServer({
-					key: fs.readFileSync(server.ssl.key),
-					cert: fs.readFileSync(server.ssl.cert)
-				}, this.app);
+			: https.createServer(
+					{
+						key: fs.readFileSync(server.ssl.key),
+						cert: fs.readFileSync(server.ssl.cert),
+					},
+					this.app,
+			  );
 
 		// Start the app
 		this.app.listen(port, callback);
 	}
-
 }
 
 module.exports = Server;

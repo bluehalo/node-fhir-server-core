@@ -5,10 +5,10 @@ let route = {
 	type: 'get',
 	path: '/:base_version/metadata',
 	corsOptions: {
-		methods: ['GET']
+		methods: ['GET'],
 	},
-	args: [ route_args.BASE ],
-	controller: controller.getCapabilityStatement
+	args: [route_args.BASE],
+	controller: controller.getCapabilityStatement,
 };
 
 /**
@@ -16,5 +16,5 @@ let route = {
  * @summary Metadata config
  */
 module.exports = {
-	route
+	route,
 };

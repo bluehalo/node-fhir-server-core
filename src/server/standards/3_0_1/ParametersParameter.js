@@ -12,456 +12,455 @@ const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
 const UriScalar = require('./scalars/Uri.scalar');
 
 class ParametersParameter extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ParametersParameter';
 		Object.assign(this, opt);
 	}
 
 	// This is a ParametersParameter resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ParametersParameter';
 	}
 
 	// The name of the parameter (reference to the operation definition).
-	get name () {
+	get name() {
 		return this.__name;
 	}
 
-	set name (new_value) {
+	set name(new_value) {
 		this.__name = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueBase64Binary () {
+	get valueBase64Binary() {
 		return this.__valueBase64Binary;
 	}
 
-	set valueBase64Binary (new_value) {
+	set valueBase64Binary(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = Base64BinaryScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueBase64Binary`);
 		}
 		this.__valueBase64Binary = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueBoolean () {
+	get valueBoolean() {
 		return this.__valueBoolean;
 	}
 
-	set valueBoolean (new_value) {
+	set valueBoolean(new_value) {
 		this.__valueBoolean = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueCode () {
+	get valueCode() {
 		return this.__valueCode;
 	}
 
-	set valueCode (new_value) {
+	set valueCode(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = CodeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueCode`);
 		}
 		this.__valueCode = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueDate () {
+	get valueDate() {
 		return this.__valueDate;
 	}
 
-	set valueDate (new_value) {
+	set valueDate(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueDate`);
 		}
 		this.__valueDate = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueDateTime () {
+	get valueDateTime() {
 		return this.__valueDateTime;
 	}
 
-	set valueDateTime (new_value) {
+	set valueDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
 		}
 		this.__valueDateTime = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueDecimal () {
+	get valueDecimal() {
 		return this.__valueDecimal;
 	}
 
-	set valueDecimal (new_value) {
+	set valueDecimal(new_value) {
 		this.__valueDecimal = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueId () {
+	get valueId() {
 		return this.__valueId;
 	}
 
-	set valueId (new_value) {
+	set valueId(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = IdScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueId`);
 		}
 		this.__valueId = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueInstant () {
+	get valueInstant() {
 		return this.__valueInstant;
 	}
 
-	set valueInstant (new_value) {
+	set valueInstant(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = InstantScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueInstant`);
 		}
 		this.__valueInstant = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueInteger () {
+	get valueInteger() {
 		return this.__valueInteger;
 	}
 
-	set valueInteger (new_value) {
+	set valueInteger(new_value) {
 		this.__valueInteger = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueMarkdown () {
+	get valueMarkdown() {
 		return this.__valueMarkdown;
 	}
 
-	set valueMarkdown (new_value) {
+	set valueMarkdown(new_value) {
 		this.__valueMarkdown = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueOid () {
+	get valueOid() {
 		return this.__valueOid;
 	}
 
-	set valueOid (new_value) {
+	set valueOid(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = OidScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueOid`);
 		}
 		this.__valueOid = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valuePositiveInt () {
+	get valuePositiveInt() {
 		return this.__valuePositiveInt;
 	}
 
-	set valuePositiveInt (new_value) {
+	set valuePositiveInt(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = PositiveIntScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
 		}
 		this.__valuePositiveInt = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueString () {
+	get valueString() {
 		return this.__valueString;
 	}
 
-	set valueString (new_value) {
+	set valueString(new_value) {
 		this.__valueString = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueTime () {
+	get valueTime() {
 		return this.__valueTime;
 	}
 
-	set valueTime (new_value) {
+	set valueTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = TimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueTime`);
 		}
 		this.__valueTime = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueUnsignedInt () {
+	get valueUnsignedInt() {
 		return this.__valueUnsignedInt;
 	}
 
-	set valueUnsignedInt (new_value) {
+	set valueUnsignedInt(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = UnsignedIntScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
 		}
 		this.__valueUnsignedInt = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueUri () {
+	get valueUri() {
 		return this.__valueUri;
 	}
 
-	set valueUri (new_value) {
+	set valueUri(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = UriScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field valueUri`);
 		}
 		this.__valueUri = new_value;
 	}
 
 	// If the parameter is a data type.
-	get valueAddress () {
+	get valueAddress() {
 		return this.__valueAddress;
 	}
 
-	set valueAddress (new_value) {
+	set valueAddress(new_value) {
 		const Address = require('./Address');
 		this.__valueAddress = new Address(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueAge () {
+	get valueAge() {
 		return this.__valueAge;
 	}
 
-	set valueAge (new_value) {
+	set valueAge(new_value) {
 		const Age = require('./Age');
 		this.__valueAge = new Age(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueAnnotation () {
+	get valueAnnotation() {
 		return this.__valueAnnotation;
 	}
 
-	set valueAnnotation (new_value) {
+	set valueAnnotation(new_value) {
 		const Annotation = require('./Annotation');
 		this.__valueAnnotation = new Annotation(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueAttachment () {
+	get valueAttachment() {
 		return this.__valueAttachment;
 	}
 
-	set valueAttachment (new_value) {
+	set valueAttachment(new_value) {
 		const Attachment = require('./Attachment');
 		this.__valueAttachment = new Attachment(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueCodeableConcept () {
+	get valueCodeableConcept() {
 		return this.__valueCodeableConcept;
 	}
 
-	set valueCodeableConcept (new_value) {
+	set valueCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__valueCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueCoding () {
+	get valueCoding() {
 		return this.__valueCoding;
 	}
 
-	set valueCoding (new_value) {
+	set valueCoding(new_value) {
 		const Coding = require('./Coding');
 		this.__valueCoding = new Coding(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueContactPoint () {
+	get valueContactPoint() {
 		return this.__valueContactPoint;
 	}
 
-	set valueContactPoint (new_value) {
+	set valueContactPoint(new_value) {
 		const ContactPoint = require('./ContactPoint');
 		this.__valueContactPoint = new ContactPoint(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueCount () {
+	get valueCount() {
 		return this.__valueCount;
 	}
 
-	set valueCount (new_value) {
+	set valueCount(new_value) {
 		const Count = require('./Count');
 		this.__valueCount = new Count(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueDistance () {
+	get valueDistance() {
 		return this.__valueDistance;
 	}
 
-	set valueDistance (new_value) {
+	set valueDistance(new_value) {
 		const Distance = require('./Distance');
 		this.__valueDistance = new Distance(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueDuration () {
+	get valueDuration() {
 		return this.__valueDuration;
 	}
 
-	set valueDuration (new_value) {
+	set valueDuration(new_value) {
 		const Duration = require('./Duration');
 		this.__valueDuration = new Duration(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueHumanName () {
+	get valueHumanName() {
 		return this.__valueHumanName;
 	}
 
-	set valueHumanName (new_value) {
+	set valueHumanName(new_value) {
 		const HumanName = require('./HumanName');
 		this.__valueHumanName = new HumanName(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueIdentifier () {
+	get valueIdentifier() {
 		return this.__valueIdentifier;
 	}
 
-	set valueIdentifier (new_value) {
+	set valueIdentifier(new_value) {
 		const Identifier = require('./Identifier');
 		this.__valueIdentifier = new Identifier(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueMoney () {
+	get valueMoney() {
 		return this.__valueMoney;
 	}
 
-	set valueMoney (new_value) {
+	set valueMoney(new_value) {
 		const Money = require('./Money');
 		this.__valueMoney = new Money(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valuePeriod () {
+	get valuePeriod() {
 		return this.__valuePeriod;
 	}
 
-	set valuePeriod (new_value) {
+	set valuePeriod(new_value) {
 		const Period = require('./Period');
 		this.__valuePeriod = new Period(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueQuantity () {
+	get valueQuantity() {
 		return this.__valueQuantity;
 	}
 
-	set valueQuantity (new_value) {
+	set valueQuantity(new_value) {
 		const Quantity = require('./Quantity');
 		this.__valueQuantity = new Quantity(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueRange () {
+	get valueRange() {
 		return this.__valueRange;
 	}
 
-	set valueRange (new_value) {
+	set valueRange(new_value) {
 		const Range = require('./Range');
 		this.__valueRange = new Range(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueRatio () {
+	get valueRatio() {
 		return this.__valueRatio;
 	}
 
-	set valueRatio (new_value) {
+	set valueRatio(new_value) {
 		const Ratio = require('./Ratio');
 		this.__valueRatio = new Ratio(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueReference () {
+	get valueReference() {
 		return this.__valueReference;
 	}
 
-	set valueReference (new_value) {
+	set valueReference(new_value) {
 		const Reference = require('./Reference');
 		this.__valueReference = new Reference(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueSampledData () {
+	get valueSampledData() {
 		return this.__valueSampledData;
 	}
 
-	set valueSampledData (new_value) {
+	set valueSampledData(new_value) {
 		const SampledData = require('./SampledData');
 		this.__valueSampledData = new SampledData(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueSignature () {
+	get valueSignature() {
 		return this.__valueSignature;
 	}
 
-	set valueSignature (new_value) {
+	set valueSignature(new_value) {
 		const Signature = require('./Signature');
 		this.__valueSignature = new Signature(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueTiming () {
+	get valueTiming() {
 		return this.__valueTiming;
 	}
 
-	set valueTiming (new_value) {
+	set valueTiming(new_value) {
 		const Timing = require('./Timing');
 		this.__valueTiming = new Timing(new_value);
 	}
 
 	// If the parameter is a data type.
-	get valueMeta () {
+	get valueMeta() {
 		return this.__valueMeta;
 	}
 
-	set valueMeta (new_value) {
+	set valueMeta(new_value) {
 		const Meta = require('./Meta');
 		this.__valueMeta = new Meta(new_value);
 	}
 
 	// If the parameter is a whole resource.
-	get resource () {
+	get resource() {
 		return this.__resource;
 	}
 
-	set resource (new_value) {
+	set resource(new_value) {
 		this.__resource = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			name: this.__name,
 			valueBase64Binary: this.__valueBase64Binary,
@@ -502,7 +501,7 @@ class ParametersParameter extends BackboneElement {
 			valueSignature: this.__valueSignature && this.__valueSignature.toJSON(),
 			valueTiming: this.__valueTiming && this.__valueTiming.toJSON(),
 			valueMeta: this.__valueMeta && this.__valueMeta.toJSON(),
-			resource: this.__resource
+			resource: this.__resource,
 		});
 	}
 }

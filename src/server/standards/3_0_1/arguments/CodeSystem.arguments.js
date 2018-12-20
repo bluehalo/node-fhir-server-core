@@ -63,7 +63,7 @@ module.exports = {
 		name: 'system',
 		type: 'uri',
 		definition: 'http://hl7.org/fhir/SearchParameter/CodeSystem-system',
-		documentation: 'The system for any codes defined by this code system (same as \'url\').',
+		documentation: "The system for any codes defined by this code system (same as 'url').",
 	},
 	TITLE: {
 		name: 'title',

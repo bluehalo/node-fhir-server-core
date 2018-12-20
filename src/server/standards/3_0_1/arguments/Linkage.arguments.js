@@ -15,6 +15,6 @@ module.exports = {
 		name: 'source',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Linkage-source',
-		documentation: 'Matches on any item in the Linkage with a type of \'source\'.',
+		documentation: "Matches on any item in the Linkage with a type of 'source'.",
 	},
 };

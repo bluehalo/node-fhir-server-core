@@ -14,10 +14,10 @@ module.exports = {
 		return {
 			type: Resource.__resourceType,
 			profile: {
-				reference: `http://hl7.org/fhir/${key}.html`
+				reference: `http://hl7.org/fhir/${key}.html`,
 			},
 			conditionalDelete: 'not-supported',
-			searchParam: searchParams
+			searchParam: searchParams,
 		};
-	}
+	},
 };

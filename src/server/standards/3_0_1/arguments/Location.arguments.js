@@ -51,25 +51,28 @@ module.exports = {
 		name: 'name',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Location-name',
-		documentation: 'A portion of the location\'s name or alias.',
+		documentation: "A portion of the location's name or alias.",
 	},
 	NEAR: {
 		name: 'near',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Location-near',
-		documentation: 'The coordinates expressed as [latitude]:[longitude] (using the WGS84 datum, see notes) to find locations near to (servers may search using a square rather than a circle for efficiency)  Requires the near-distance parameter to be provided also.',
+		documentation:
+			'The coordinates expressed as [latitude]:[longitude] (using the WGS84 datum, see notes) to find locations near to (servers may search using a square rather than a circle for efficiency)  Requires the near-distance parameter to be provided also.',
 	},
 	NEAR_DISTANCE: {
 		name: 'near-distance',
 		type: 'quantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Location-near-distance',
-		documentation: 'A distance quantity to limit the near search to locations within a specific distance  Requires the near parameter to also be included.',
+		documentation:
+			'A distance quantity to limit the near search to locations within a specific distance  Requires the near parameter to also be included.',
 	},
 	OPERATIONAL_STATUS: {
 		name: 'operational-status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Location-operational-status',
-		documentation: 'Searches for locations (typically bed/room) that have an operational status (e.g. contaminated, housekeeping).',
+		documentation:
+			'Searches for locations (typically bed/room) that have an operational status (e.g. contaminated, housekeeping).',
 	},
 	ORGANIZATION: {
 		name: 'organization',

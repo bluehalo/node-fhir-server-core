@@ -98,13 +98,13 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 				entries.push({
 					search: { mode: 'match' },
 					resource,
-					fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`
+					fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
 				});
 			} else {
 				entries.push({
 					search: { mode: 'include' },
 					resource,
-					fullUrl: `${resourceUrl}/${base_version}/${type}/${resource.id}`
+					fullUrl: `${resourceUrl}/${base_version}/${type}/${resource.id}`,
 				});
 			}
 		}
@@ -266,13 +266,13 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
 			}`;
 			let bundle_request = new BundleEntryRequest({
 				url: history_url,
-				method: 'PUT'
+				method: 'PUT',
 			});
 
 			entries.push({
 				resource,
 				fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
-				request: bundle_request
+				request: bundle_request,
 			});
 		}
 	}

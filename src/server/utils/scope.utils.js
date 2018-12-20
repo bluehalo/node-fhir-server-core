@@ -23,8 +23,7 @@ function getValidScopes(scopes, allowedScopes) {
  * @param {Object} loggerUtil
  * @param {Object} config
  */
-module.exports.validateScopes = (allowedScopes) => {
-
+module.exports.validateScopes = allowedScopes => {
 	return async (req, res, next) => {
 		let version = req.params.version;
 		let { scope, context } = req.user;
@@ -34,7 +33,6 @@ module.exports.validateScopes = (allowedScopes) => {
 
 		// verify if token has one of the required scopes
 		if (validScopes && validScopes.length > 0) {
-
 			// TODO: Validate/clean context?
 			req.contexts = context;
 

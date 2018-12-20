@@ -3,7 +3,8 @@ module.exports = {
 		name: 'device-name',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-device-name',
-		documentation: 'A server defined search that may match any of the string fields in the Device.udi.name  or Device.type.coding.display or  Device.type.text.',
+		documentation:
+			'A server defined search that may match any of the string fields in the Device.udi.name  or Device.type.coding.display or  Device.type.text.',
 	},
 	IDENTIFIER: {
 		name: 'identifier',
@@ -57,7 +58,8 @@ module.exports = {
 		name: 'udi-carrier',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-udi-carrier',
-		documentation: 'UDI Barcode (RFID or other technology) string either in HRF format or AIDC format converted to base64 string.',
+		documentation:
+			'UDI Barcode (RFID or other technology) string either in HRF format or AIDC format converted to base64 string.',
 	},
 	UDI_DI: {
 		name: 'udi-di',

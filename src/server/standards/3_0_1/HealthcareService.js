@@ -1,260 +1,279 @@
 const DomainResource = require('./DomainResource');
 
 class HealthcareService extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'HealthcareService';
 		Object.assign(this, opt);
 	}
 
 	// This is a HealthcareService resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'HealthcareService';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__HealthcareService = new_value;
 	}
 
 	// External identifiers for this item.
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// Whether this healthcareservice record is in active use.
-	get active () {
+	get active() {
 		return this.__active;
 	}
 
-	set active (new_value) {
+	set active(new_value) {
 		this.__active = new_value;
 	}
 
 	// The organization that provides this healthcare service.
-	get providedBy () {
+	get providedBy() {
 		return this.__providedBy;
 	}
 
-	set providedBy (new_value) {
+	set providedBy(new_value) {
 		const Reference = require('./Reference');
 		this.__providedBy = new Reference(new_value);
 	}
 
 	// Identifies the broad category of service being performed or delivered.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__category = new CodeableConcept(new_value);
 	}
 
 	// The specific type of service that may be delivered or performed.
-	get type () {
+	get type() {
 		return this.__type;
 	}
 
-	set type (new_value) {
+	set type(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__type = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__type = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Collection of specialties handled by the service site. This is more of a medical term.
-	get specialty () {
+	get specialty() {
 		return this.__specialty;
 	}
 
-	set specialty (new_value) {
+	set specialty(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__specialty = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__specialty = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// The location(s) where this healthcare service may be provided.
-	get location () {
+	get location() {
 		return this.__location;
 	}
 
-	set location (new_value) {
+	set location(new_value) {
 		const Reference = require('./Reference');
 		this.__location = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Further description of the service as it would be presented to a consumer while searching.
-	get name () {
+	get name() {
 		return this.__name;
 	}
 
-	set name (new_value) {
+	set name(new_value) {
 		this.__name = new_value;
 	}
 
 	// Any additional description of the service and/or any specific issues not covered by the other attributes, which can be displayed as further detail under the serviceName.
-	get comment () {
+	get comment() {
 		return this.__comment;
 	}
 
-	set comment (new_value) {
+	set comment(new_value) {
 		this.__comment = new_value;
 	}
 
 	// Extra details about the service that can\'t be placed in the other fields.
-	get extraDetails () {
+	get extraDetails() {
 		return this.__extraDetails;
 	}
 
-	set extraDetails (new_value) {
+	set extraDetails(new_value) {
 		this.__extraDetails = new_value;
 	}
 
 	// If there is a photo/symbol associated with this HealthcareService, it may be included here to facilitate quick identification of the service in a list.
-	get photo () {
+	get photo() {
 		return this.__photo;
 	}
 
-	set photo (new_value) {
+	set photo(new_value) {
 		const Attachment = require('./Attachment');
 		this.__photo = new Attachment(new_value);
 	}
 
 	// List of contacts related to this specific healthcare service.
-	get telecom () {
+	get telecom() {
 		return this.__telecom;
 	}
 
-	set telecom (new_value) {
+	set telecom(new_value) {
 		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+		this.__telecom = Array.isArray(new_value)
+			? new_value.map(val => new ContactPoint(val))
+			: [new ContactPoint(new_value)];
 	}
 
 	// The location(s) that this service is available to (not where the service is provided).
-	get coverageArea () {
+	get coverageArea() {
 		return this.__coverageArea;
 	}
 
-	set coverageArea (new_value) {
+	set coverageArea(new_value) {
 		const Reference = require('./Reference');
-		this.__coverageArea = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__coverageArea = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// The code(s) that detail the conditions under which the healthcare service is available/offered.
-	get serviceProvisionCode () {
+	get serviceProvisionCode() {
 		return this.__serviceProvisionCode;
 	}
 
-	set serviceProvisionCode (new_value) {
+	set serviceProvisionCode(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__serviceProvisionCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__serviceProvisionCode = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Does this service have specific eligibility requirements that need to be met in order to use the service?.
-	get eligibility () {
+	get eligibility() {
 		return this.__eligibility;
 	}
 
-	set eligibility (new_value) {
+	set eligibility(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__eligibility = new CodeableConcept(new_value);
 	}
 
 	// Describes the eligibility conditions for the service.
-	get eligibilityNote () {
+	get eligibilityNote() {
 		return this.__eligibilityNote;
 	}
 
-	set eligibilityNote (new_value) {
+	set eligibilityNote(new_value) {
 		this.__eligibilityNote = new_value;
 	}
 
 	// Program Names that can be used to categorize the service.
-	get programName () {
+	get programName() {
 		return this.__programName;
 	}
 
-	set programName (new_value) {
+	set programName(new_value) {
 		this.__programName = Array.isArray(new_value) ? new_value : [new_value];
 	}
 
 	// Collection of characteristics (attributes).
-	get characteristic () {
+	get characteristic() {
 		return this.__characteristic;
 	}
 
-	set characteristic (new_value) {
+	set characteristic(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__characteristic = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__characteristic = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Ways that the service accepts referrals, if this is not provided then it is implied that no referral is required.
-	get referralMethod () {
+	get referralMethod() {
 		return this.__referralMethod;
 	}
 
-	set referralMethod (new_value) {
+	set referralMethod(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__referralMethod = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__referralMethod = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Indicates whether or not a prospective consumer will require an appointment for a particular service at a site to be provided by the Organization. Indicates if an appointment is required for access to this service.
-	get appointmentRequired () {
+	get appointmentRequired() {
 		return this.__appointmentRequired;
 	}
 
-	set appointmentRequired (new_value) {
+	set appointmentRequired(new_value) {
 		this.__appointmentRequired = new_value;
 	}
 
 	// A collection of times that the Service Site is available.
-	get availableTime () {
+	get availableTime() {
 		return this.__availableTime;
 	}
 
-	set availableTime (new_value) {
+	set availableTime(new_value) {
 		const HealthcareServiceAvailableTime = require('./HealthcareServiceAvailableTime');
-		this.__availableTime = Array.isArray(new_value) ? new_value.map(val => new HealthcareServiceAvailableTime(val)) : [new HealthcareServiceAvailableTime(new_value)];
+		this.__availableTime = Array.isArray(new_value)
+			? new_value.map(val => new HealthcareServiceAvailableTime(val))
+			: [new HealthcareServiceAvailableTime(new_value)];
 	}
 
 	// The HealthcareService is not available during this period of time due to the provided reason.
-	get notAvailable () {
+	get notAvailable() {
 		return this.__notAvailable;
 	}
 
-	set notAvailable (new_value) {
+	set notAvailable(new_value) {
 		const HealthcareServiceNotAvailable = require('./HealthcareServiceNotAvailable');
-		this.__notAvailable = Array.isArray(new_value) ? new_value.map(val => new HealthcareServiceNotAvailable(val)) : [new HealthcareServiceNotAvailable(new_value)];
+		this.__notAvailable = Array.isArray(new_value)
+			? new_value.map(val => new HealthcareServiceNotAvailable(val))
+			: [new HealthcareServiceNotAvailable(new_value)];
 	}
 
 	// A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times.
-	get availabilityExceptions () {
+	get availabilityExceptions() {
 		return this.__availabilityExceptions;
 	}
 
-	set availabilityExceptions (new_value) {
+	set availabilityExceptions(new_value) {
 		this.__availabilityExceptions = new_value;
 	}
 
 	// Technical endpoints providing access to services operated for the specific healthcare services defined at this resource.
-	get endpoint () {
+	get endpoint() {
 		return this.__endpoint;
 	}
 
-	set endpoint (new_value) {
+	set endpoint(new_value) {
 		const Reference = require('./Reference');
 		this.__endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -280,7 +299,7 @@ class HealthcareService extends DomainResource {
 			availableTime: this.__availableTime && this.__availableTime.map(v => v.toJSON()),
 			notAvailable: this.__notAvailable && this.__notAvailable.map(v => v.toJSON()),
 			availabilityExceptions: this.__availabilityExceptions,
-			endpoint: this.__endpoint && this.__endpoint.map(v => v.toJSON())
+			endpoint: this.__endpoint && this.__endpoint.map(v => v.toJSON()),
 		});
 	}
 }
