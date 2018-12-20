@@ -302,7 +302,6 @@ function configureOperationRoutes(options) {
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
 				{ methods: [route.type.toUpperCase()] }
 			);
-
 			// Enable cors with preflight options
 			app.options(route.path, cors(cors_options));
 			// Setup the route with all the appropriate middleware
