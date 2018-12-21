@@ -66,7 +66,7 @@ let handleOperationResponse = (res, next, base_version, resource_json) => {
  * @param {Express.response} res - Express response object
  * @param {string} base_version - Which spec version is this request coming from
  * @param {T} Resource - Resource class to use for the results
- * @param {Array<object>} resource_json - resulting json to be passed in to the class
+ * @param {Array<object>} results - resulting json to be passed in to the class
  * @param {object} options - Any additional options for configuring the response
  * @param {string} options.resourceUrl - Url for your resource server
  * @param {string} options.resourceType - Type to use in creating the full url for the resource
@@ -76,14 +76,52 @@ let handleOperationResponse = (res, next, base_version, resource_json) => {
  * @param {function} options.filter - Filter function to filter the resources out
  * the filter function should expect a resource to be passed in and return a boolean
  */
-let handleBundleReadResponse = (res, base_version, Resource, resource_json = [], options) => {
+let handleBundleReadResponse = (res, base_version, Resource, results, options) => {
 	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
 	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
 	let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
 	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
-	let self_link = new BundleLink({ url: full_url, relation: 'self' });
-	let results = new Bundle({ type: 'searchset', link: self_link });
+	let links = [];
+	// self link
+	links.push(new BundleLink({ url: full_url, relation: 'self' }));
+
+	let total = 0;
+	let resource_json = [];
+	let count;
+	let offset;
+
+	// changing the way results are returned.
+	if (Array.isArray(results)) {
+		total = results.length;
+		resource_json = results;
+	} else if (results instanceof Object) {
+		total = results.total || 0;
+		resource_json = results.entries;
+		count = results.count;
+		offset = results.offset || 0;
+	}
+
+	if (count) {
+		let next_offset = offset + count;
+		let prev_offset = offset - count;
+
+		if (next_offset < total) {
+			let next_url = full_url.includes('_offset')
+				? full_url.replace(/_offset=(\d*)/, `_offset=${next_offset}`)
+				: `${full_url}&_offset=${next_offset}`;
+			links.push(new BundleLink({ url: next_url, relation: 'next' }));
+		}
+		if (prev_offset >= 0) {
+			let prev_url = full_url.includes('_offset')
+				? full_url.replace(/_offset=(\d*)/, `_offset=${prev_offset}`)
+				: `${full_url}&_offset=${prev_offset}`;
+
+			links.push(new BundleLink({ url: prev_url, relation: 'previous' }));
+		}
+	}
+
+	let bundle = new Bundle({ type: 'searchset', link: links });
 	let entries = [];
 
 	if (resource_json) {
@@ -110,11 +148,11 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
 		}
 	}
 
-	results.entry = entries;
-	results.total = entries.length;
+	bundle.entry = entries;
+	bundle.total = total;
 
 	res.type(getContentType(base_version));
-	res.status(200).json(results);
+	res.status(200).json(bundle);
 };
 
 /**

@@ -61,6 +61,12 @@ module.exports.search_args = {
 		definition: 'https://www.hl7.org/fhir/searchparameter-registry.html#resource',
 		documentation: undefined,
 	},
+	_OFFSET: {
+		name: '_offset',
+		type: 'number',
+		definition: undefined,
+		documentation: undefined,
+	},
 };
 
 /**
