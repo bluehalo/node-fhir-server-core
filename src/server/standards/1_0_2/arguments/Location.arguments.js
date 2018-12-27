@@ -51,7 +51,8 @@ module.exports = {
 		name: 'near',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Location-near',
-		documentation: 'The coordinates expressed as [lat],[long] (using the WGS84 datum, see notes) to find locations near to (servers may search using a square rather than a circle for efficiency).',
+		documentation:
+			'The coordinates expressed as [lat],[long] (using the WGS84 datum, see notes) to find locations near to (servers may search using a square rather than a circle for efficiency).',
 	},
 	NEAR_DISTANCE: {
 		name: 'near-distance',

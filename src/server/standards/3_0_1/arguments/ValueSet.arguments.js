@@ -1,4 +1,11 @@
 module.exports = {
+	CODE: {
+		name: 'code',
+		type: 'token',
+		definition: 'http://hl7.org/fhir/SearchParameter/medications-code',
+		documentation:
+			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  .',
+	},
 	DATE: {
 		name: 'date',
 		type: 'date',
@@ -70,5 +77,11 @@ module.exports = {
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-version',
 		documentation: 'The business version of the value set.',
+	},
+	FILTER: {
+		name: 'filter',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/OperationDefinition/ValueSet-expand',
+		documentation: 'Filtering the value set',
 	},
 };

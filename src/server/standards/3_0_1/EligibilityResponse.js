@@ -2,159 +2,164 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class EligibilityResponse extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'EligibilityResponse';
 		Object.assign(this, opt);
 	}
 
 	// This is a EligibilityResponse resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'EligibilityResponse';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__EligibilityResponse = new_value;
 	}
 
 	// The Response business identifier.
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// The status of the resource instance.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// The date when the enclosed suite of services were performed or completed.
-	get created () {
+	get created() {
 		return this.__created;
 	}
 
-	set created (new_value) {
+	set created(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field created`);
 		}
 		this.__created = new_value;
 	}
 
 	// The practitioner who is responsible for the services rendered to the patient.
-	get requestProvider () {
+	get requestProvider() {
 		return this.__requestProvider;
 	}
 
-	set requestProvider (new_value) {
+	set requestProvider(new_value) {
 		const Reference = require('./Reference');
 		this.__requestProvider = new Reference(new_value);
 	}
 
 	// The organization which is responsible for the services rendered to the patient.
-	get requestOrganization () {
+	get requestOrganization() {
 		return this.__requestOrganization;
 	}
 
-	set requestOrganization (new_value) {
+	set requestOrganization(new_value) {
 		const Reference = require('./Reference');
 		this.__requestOrganization = new Reference(new_value);
 	}
 
 	// Original request resource reference.
-	get request () {
+	get request() {
 		return this.__request;
 	}
 
-	set request (new_value) {
+	set request(new_value) {
 		const Reference = require('./Reference');
 		this.__request = new Reference(new_value);
 	}
 
 	// Transaction status: error, complete.
-	get outcome () {
+	get outcome() {
 		return this.__outcome;
 	}
 
-	set outcome (new_value) {
+	set outcome(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__outcome = new CodeableConcept(new_value);
 	}
 
 	// A description of the status of the adjudication.
-	get disposition () {
+	get disposition() {
 		return this.__disposition;
 	}
 
-	set disposition (new_value) {
+	set disposition(new_value) {
 		this.__disposition = new_value;
 	}
 
 	// The Insurer who produced this adjudicated response.
-	get insurer () {
+	get insurer() {
 		return this.__insurer;
 	}
 
-	set insurer (new_value) {
+	set insurer(new_value) {
 		const Reference = require('./Reference');
 		this.__insurer = new Reference(new_value);
 	}
 
 	// Flag indicating if the coverage provided is inforce currently  if no service date(s) specified or for the whole duration of the service dates.
-	get inforce () {
+	get inforce() {
 		return this.__inforce;
 	}
 
-	set inforce (new_value) {
+	set inforce(new_value) {
 		this.__inforce = new_value;
 	}
 
 	// The insurer may provide both the details for the requested coverage as well as details for additional coverages known to the insurer.
-	get insurance () {
+	get insurance() {
 		return this.__insurance;
 	}
 
-	set insurance (new_value) {
+	set insurance(new_value) {
 		const EligibilityResponseInsurance = require('./EligibilityResponseInsurance');
-		this.__insurance = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponseInsurance(val)) : [new EligibilityResponseInsurance(new_value)];
+		this.__insurance = Array.isArray(new_value)
+			? new_value.map(val => new EligibilityResponseInsurance(val))
+			: [new EligibilityResponseInsurance(new_value)];
 	}
 
 	// The form to be used for printing the content.
-	get form () {
+	get form() {
 		return this.__form;
 	}
 
-	set form (new_value) {
+	set form(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__form = new CodeableConcept(new_value);
 	}
 
 	// Mutually exclusive with Services Provided (Item).
-	get error () {
+	get error() {
 		return this.__error;
 	}
 
-	set error (new_value) {
+	set error(new_value) {
 		const EligibilityResponseError = require('./EligibilityResponseError');
-		this.__error = Array.isArray(new_value) ? new_value.map(val => new EligibilityResponseError(val)) : [new EligibilityResponseError(new_value)];
+		this.__error = Array.isArray(new_value)
+			? new_value.map(val => new EligibilityResponseError(val))
+			: [new EligibilityResponseError(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -169,7 +174,7 @@ class EligibilityResponse extends DomainResource {
 			inforce: this.__inforce,
 			insurance: this.__insurance && this.__insurance.map(v => v.toJSON()),
 			form: this.__form && this.__form.toJSON(),
-			error: this.__error && this.__error.map(v => v.toJSON())
+			error: this.__error && this.__error.map(v => v.toJSON()),
 		});
 	}
 }

@@ -39,6 +39,6 @@ module.exports = {
 		name: 'condition',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/familymemberhistory-daf-FamilyMemberHistory-condition',
-		documentation: 'Search for a history of a particular condition within a patient\'s family.',
-	}
+		documentation: "Search for a history of a particular condition within a patient's family.",
+	},
 };

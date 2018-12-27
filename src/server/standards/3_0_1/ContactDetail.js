@@ -1,41 +1,42 @@
 const Element = require('./Element');
 
 class ContactDetail extends Element {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ContactDetail';
 		Object.assign(this, opt);
 	}
 
 	// This is a ContactDetail resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ContactDetail';
 	}
 
 	// The name of an individual to contact.
-	get name () {
+	get name() {
 		return this.__name;
 	}
 
-	set name (new_value) {
+	set name(new_value) {
 		this.__name = new_value;
 	}
 
 	// The contact details for the individual (if a name was provided) or the organization.
-	get telecom () {
+	get telecom() {
 		return this.__telecom;
 	}
 
-	set telecom (new_value) {
+	set telecom(new_value) {
 		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value) ? new_value.map(val => new ContactPoint(val)) : [new ContactPoint(new_value)];
+		this.__telecom = Array.isArray(new_value)
+			? new_value.map(val => new ContactPoint(val))
+			: [new ContactPoint(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			name: this.__name,
-			telecom: this.__telecom && this.__telecom.map(v => v.toJSON())
+			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
 		});
 	}
 }

@@ -1,8 +1,8 @@
 /**
-* @description Define the common read scopes in a single place
-* @param {string} profile - Profile name, e.g. Patient or AllergyIntolerance
-* @return {Array<string>} An array of scopes
-*/
+ * @description Define the common read scopes in a single place
+ * @param {string} profile - Profile name, e.g. Patient or AllergyIntolerance
+ * @return {Array<string>} An array of scopes
+ */
 module.exports.read_scopes = profile => {
 	let profile_lower = profile.toLowerCase();
 
@@ -14,15 +14,15 @@ module.exports.read_scopes = profile => {
 		`${profile_lower}/*.*`,
 		`${profile_lower}/${profile}.*`,
 		`${profile_lower}/${profile}.read`,
-		`${profile_lower}/*.read`
+		`${profile_lower}/*.read`,
 	];
 };
 
 /**
-* @description Define the common write scopes in a single place
-* @param {string} profile - Profile name, e.g. Patient or AllergyIntolerance
-* @return {Array<string>} An array of scopes
-*/
+ * @description Define the common write scopes in a single place
+ * @param {string} profile - Profile name, e.g. Patient or AllergyIntolerance
+ * @return {Array<string>} An array of scopes
+ */
 module.exports.write_scopes = profile => {
 	let profile_lower = profile.toLowerCase();
 
@@ -34,6 +34,6 @@ module.exports.write_scopes = profile => {
 		`${profile_lower}/*.*`,
 		`${profile_lower}/${profile}.*`,
 		`${profile_lower}/${profile}.write`,
-		`${profile_lower}/*.write`
+		`${profile_lower}/*.write`,
 	];
 };

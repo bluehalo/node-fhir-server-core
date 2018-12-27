@@ -2,250 +2,265 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class MedicationAdministration extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'MedicationAdministration';
 		Object.assign(this, opt);
 	}
 
 	// This is a MedicationAdministration resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'MedicationAdministration';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__MedicationAdministration = new_value;
 	}
 
 	// External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated.
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// A protocol, guideline, orderset or other definition that was adhered to in whole or in part by this event.
-	get definition () {
+	get definition() {
 		return this.__definition;
 	}
 
-	set definition (new_value) {
+	set definition(new_value) {
 		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__definition = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// A larger event of which this particular event is a component or step.
-	get partOf () {
+	get partOf() {
 		return this.__partOf;
 	}
 
-	set partOf (new_value) {
+	set partOf(new_value) {
 		const Reference = require('./Reference');
 		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Will generally be set to show that the administration has been completed.  For some long running administrations such as infusions it is possible for an administration to be started but not completed or it may be paused while some other process is under way.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// Indicates the type of medication administration and where the medication is expected to be consumed or administered.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__category = new CodeableConcept(new_value);
 	}
 
 	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	get medicationCodeableConcept () {
+	get medicationCodeableConcept() {
 		return this.__medicationCodeableConcept;
 	}
 
-	set medicationCodeableConcept (new_value) {
+	set medicationCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__medicationCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	get medicationReference () {
+	get medicationReference() {
 		return this.__medicationReference;
 	}
 
-	set medicationReference (new_value) {
+	set medicationReference(new_value) {
 		const Reference = require('./Reference');
 		this.__medicationReference = new Reference(new_value);
 	}
 
 	// The person or animal or group receiving the medication.
-	get subject () {
+	get subject() {
 		return this.__subject;
 	}
 
-	set subject (new_value) {
+	set subject(new_value) {
 		const Reference = require('./Reference');
 		this.__subject = new Reference(new_value);
 	}
 
 	// The visit, admission or other contact between patient and health care provider the medication administration was performed as part of.
-	get context () {
+	get context() {
 		return this.__context;
 	}
 
-	set context (new_value) {
+	set context(new_value) {
 		const Reference = require('./Reference');
 		this.__context = new Reference(new_value);
 	}
 
 	// Additional information (for example, patient height and weight) that supports the administration of the medication.
-	get supportingInformation () {
+	get supportingInformation() {
 		return this.__supportingInformation;
 	}
 
-	set supportingInformation (new_value) {
+	set supportingInformation(new_value) {
 		const Reference = require('./Reference');
-		this.__supportingInformation = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__supportingInformation = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// A specific date/time or interval of time during which the administration took place (or did not take place, when the \'notGiven\' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	get effectiveDateTime () {
+	get effectiveDateTime() {
 		return this.__effectiveDateTime;
 	}
 
-	set effectiveDateTime (new_value) {
+	set effectiveDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
 		}
 		this.__effectiveDateTime = new_value;
 	}
 
 	// A specific date/time or interval of time during which the administration took place (or did not take place, when the \'notGiven\' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	get effectivePeriod () {
+	get effectivePeriod() {
 		return this.__effectivePeriod;
 	}
 
-	set effectivePeriod (new_value) {
+	set effectivePeriod(new_value) {
 		const Period = require('./Period');
 		this.__effectivePeriod = new Period(new_value);
 	}
 
 	// The individual who was responsible for giving the medication to the patient.
-	get performer () {
+	get performer() {
 		return this.__performer;
 	}
 
-	set performer (new_value) {
+	set performer(new_value) {
 		const MedicationAdministrationPerformer = require('./MedicationAdministrationPerformer');
-		this.__performer = Array.isArray(new_value) ? new_value.map(val => new MedicationAdministrationPerformer(val)) : [new MedicationAdministrationPerformer(new_value)];
+		this.__performer = Array.isArray(new_value)
+			? new_value.map(val => new MedicationAdministrationPerformer(val))
+			: [new MedicationAdministrationPerformer(new_value)];
 	}
 
 	// Set this to true if the record is saying that the medication was NOT administered.
-	get notGiven () {
+	get notGiven() {
 		return this.__notGiven;
 	}
 
-	set notGiven (new_value) {
+	set notGiven(new_value) {
 		this.__notGiven = new_value;
 	}
 
 	// A code indicating why the administration was not performed.
-	get reasonNotGiven () {
+	get reasonNotGiven() {
 		return this.__reasonNotGiven;
 	}
 
-	set reasonNotGiven (new_value) {
+	set reasonNotGiven(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonNotGiven = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__reasonNotGiven = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// A code indicating why the medication was given.
-	get reasonCode () {
+	get reasonCode() {
 		return this.__reasonCode;
 	}
 
-	set reasonCode (new_value) {
+	set reasonCode(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__reasonCode = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Condition or observation that supports why the medication was administered.
-	get reasonReference () {
+	get reasonReference() {
 		return this.__reasonReference;
 	}
 
-	set reasonReference (new_value) {
+	set reasonReference(new_value) {
 		const Reference = require('./Reference');
-		this.__reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__reasonReference = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// The original request, instruction or authority to perform the administration.
-	get prescription () {
+	get prescription() {
 		return this.__prescription;
 	}
 
-	set prescription (new_value) {
+	set prescription(new_value) {
 		const Reference = require('./Reference');
 		this.__prescription = new Reference(new_value);
 	}
 
 	// The device used in administering the medication to the patient.  For example, a particular infusion pump.
-	get device () {
+	get device() {
 		return this.__device;
 	}
 
-	set device (new_value) {
+	set device(new_value) {
 		const Reference = require('./Reference');
 		this.__device = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Extra information about the medication administration that is not conveyed by the other attributes.
-	get note () {
+	get note() {
 		return this.__note;
 	}
 
-	set note (new_value) {
+	set note(new_value) {
 		const Annotation = require('./Annotation');
 		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
 	}
 
 	// Describes the medication dosage information details e.g. dose, rate, site, route, etc.
-	get dosage () {
+	get dosage() {
 		return this.__dosage;
 	}
 
-	set dosage (new_value) {
+	set dosage(new_value) {
 		const MedicationAdministrationDosage = require('./MedicationAdministrationDosage');
 		this.__dosage = new MedicationAdministrationDosage(new_value);
 	}
 
 	// A summary of the events of interest that have occurred, such as when the administration was verified.
-	get eventHistory () {
+	get eventHistory() {
 		return this.__eventHistory;
 	}
 
-	set eventHistory (new_value) {
+	set eventHistory(new_value) {
 		const Reference = require('./Reference');
-		this.__eventHistory = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__eventHistory = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -269,7 +284,7 @@ class MedicationAdministration extends DomainResource {
 			device: this.__device && this.__device.map(v => v.toJSON()),
 			note: this.__note && this.__note.map(v => v.toJSON()),
 			dosage: this.__dosage && this.__dosage.toJSON(),
-			eventHistory: this.__eventHistory && this.__eventHistory.map(v => v.toJSON())
+			eventHistory: this.__eventHistory && this.__eventHistory.map(v => v.toJSON()),
 		});
 	}
 }

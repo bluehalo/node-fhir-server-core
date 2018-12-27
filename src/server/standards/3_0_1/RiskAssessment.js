@@ -2,209 +2,210 @@ const DomainResource = require('./DomainResource');
 const DateTimeScalar = require('./scalars/DateTime.scalar');
 
 class RiskAssessment extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'RiskAssessment';
 		Object.assign(this, opt);
 	}
 
 	// This is a RiskAssessment resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'RiskAssessment';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__RiskAssessment = new_value;
 	}
 
 	// Business identifier assigned to the risk assessment.
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
 		this.__identifier = new Identifier(new_value);
 	}
 
 	// A reference to the request that is fulfilled by this risk assessment.
-	get basedOn () {
+	get basedOn() {
 		return this.__basedOn;
 	}
 
-	set basedOn (new_value) {
+	set basedOn(new_value) {
 		const Reference = require('./Reference');
 		this.__basedOn = new Reference(new_value);
 	}
 
 	// A reference to a resource that this risk assessment is part of, such as a Procedure.
-	get parent () {
+	get parent() {
 		return this.__parent;
 	}
 
-	set parent (new_value) {
+	set parent(new_value) {
 		const Reference = require('./Reference');
 		this.__parent = new Reference(new_value);
 	}
 
 	// The status of the RiskAssessment, using the same statuses as an Observation.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// The algorithm, process or mechanism used to evaluate the risk.
-	get method () {
+	get method() {
 		return this.__method;
 	}
 
-	set method (new_value) {
+	set method(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__method = new CodeableConcept(new_value);
 	}
 
 	// The type of the risk assessment performed.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__code = new CodeableConcept(new_value);
 	}
 
 	// The patient or group the risk assessment applies to.
-	get subject () {
+	get subject() {
 		return this.__subject;
 	}
 
-	set subject (new_value) {
+	set subject(new_value) {
 		const Reference = require('./Reference');
 		this.__subject = new Reference(new_value);
 	}
 
 	// The encounter where the assessment was performed.
-	get context () {
+	get context() {
 		return this.__context;
 	}
 
-	set context (new_value) {
+	set context(new_value) {
 		const Reference = require('./Reference');
 		this.__context = new Reference(new_value);
 	}
 
 	// The date (and possibly time) the risk assessment was performed.
-	get occurrenceDateTime () {
+	get occurrenceDateTime() {
 		return this.__occurrenceDateTime;
 	}
 
-	set occurrenceDateTime (new_value) {
+	set occurrenceDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
 		}
 		this.__occurrenceDateTime = new_value;
 	}
 
 	// The date (and possibly time) the risk assessment was performed.
-	get occurrencePeriod () {
+	get occurrencePeriod() {
 		return this.__occurrencePeriod;
 	}
 
-	set occurrencePeriod (new_value) {
+	set occurrencePeriod(new_value) {
 		const Period = require('./Period');
 		this.__occurrencePeriod = new Period(new_value);
 	}
 
 	// For assessments or prognosis specific to a particular condition, indicates the condition being assessed.
-	get condition () {
+	get condition() {
 		return this.__condition;
 	}
 
-	set condition (new_value) {
+	set condition(new_value) {
 		const Reference = require('./Reference');
 		this.__condition = new Reference(new_value);
 	}
 
 	// The provider or software application that performed the assessment.
-	get performer () {
+	get performer() {
 		return this.__performer;
 	}
 
-	set performer (new_value) {
+	set performer(new_value) {
 		const Reference = require('./Reference');
 		this.__performer = new Reference(new_value);
 	}
 
 	// The reason the risk assessment was performed.
-	get reasonCodeableConcept () {
+	get reasonCodeableConcept() {
 		return this.__reasonCodeableConcept;
 	}
 
-	set reasonCodeableConcept (new_value) {
+	set reasonCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__reasonCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// The reason the risk assessment was performed.
-	get reasonReference () {
+	get reasonReference() {
 		return this.__reasonReference;
 	}
 
-	set reasonReference (new_value) {
+	set reasonReference(new_value) {
 		const Reference = require('./Reference');
 		this.__reasonReference = new Reference(new_value);
 	}
 
 	// Indicates the source data considered as part of the assessment (FamilyHistory, Observations, Procedures, Conditions, etc.).
-	get basis () {
+	get basis() {
 		return this.__basis;
 	}
 
-	set basis (new_value) {
+	set basis(new_value) {
 		const Reference = require('./Reference');
 		this.__basis = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Describes the expected outcome for the subject.
-	get prediction () {
+	get prediction() {
 		return this.__prediction;
 	}
 
-	set prediction (new_value) {
+	set prediction(new_value) {
 		const RiskAssessmentPrediction = require('./RiskAssessmentPrediction');
-		this.__prediction = Array.isArray(new_value) ? new_value.map(val => new RiskAssessmentPrediction(val)) : [new RiskAssessmentPrediction(new_value)];
+		this.__prediction = Array.isArray(new_value)
+			? new_value.map(val => new RiskAssessmentPrediction(val))
+			: [new RiskAssessmentPrediction(new_value)];
 	}
 
 	// A description of the steps that might be taken to reduce the identified risk(s).
-	get mitigation () {
+	get mitigation() {
 		return this.__mitigation;
 	}
 
-	set mitigation (new_value) {
+	set mitigation(new_value) {
 		this.__mitigation = new_value;
 	}
 
 	// Additional comments about the risk assessment.
-	get comment () {
+	get comment() {
 		return this.__comment;
 	}
 
-	set comment (new_value) {
+	set comment(new_value) {
 		this.__comment = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.toJSON(),
@@ -224,7 +225,7 @@ class RiskAssessment extends DomainResource {
 			basis: this.__basis && this.__basis.map(v => v.toJSON()),
 			prediction: this.__prediction && this.__prediction.map(v => v.toJSON()),
 			mitigation: this.__mitigation,
-			comment: this.__comment
+			comment: this.__comment,
 		});
 	}
 }

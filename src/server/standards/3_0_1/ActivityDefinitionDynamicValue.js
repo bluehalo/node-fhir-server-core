@@ -1,60 +1,59 @@
 const BackboneElement = require('./BackboneElement');
 
 class ActivityDefinitionDynamicValue extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ActivityDefinitionDynamicValue';
 		Object.assign(this, opt);
 	}
 
 	// This is a ActivityDefinitionDynamicValue resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ActivityDefinitionDynamicValue';
 	}
 
 	// A brief, natural language description of the intended semantics of the dynamic value.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
 	// The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression.
-	get path () {
+	get path() {
 		return this.__path;
 	}
 
-	set path (new_value) {
+	set path(new_value) {
 		this.__path = new_value;
 	}
 
 	// The media type of the language for the expression.
-	get language () {
+	get language() {
 		return this.__language;
 	}
 
-	set language (new_value) {
+	set language(new_value) {
 		this.__language = new_value;
 	}
 
 	// An expression specifying the value of the customized element.
-	get expression () {
+	get expression() {
 		return this.__expression;
 	}
 
-	set expression (new_value) {
+	set expression(new_value) {
 		this.__expression = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			description: this.__description,
 			path: this.__path,
 			language: this.__language,
-			expression: this.__expression
+			expression: this.__expression,
 		});
 	}
 }

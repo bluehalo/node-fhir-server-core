@@ -1,40 +1,39 @@
 const BackboneElement = require('./BackboneElement');
 
 class ConformanceRestResourceInteraction extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ConformanceRestResourceInteraction';
 		Object.assign(this, opt);
 	}
 
 	// This is a ConformanceRestResourceInteraction resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ConformanceRestResourceInteraction';
 	}
 
 	// Coded identifier of the operation, supported by the system resource.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		this.__code = new_value;
 	}
 
 	// Guidance specific to the implementation of this operation, such as \'delete is a logical delete\' or \'updates are only allowed with version id\' or \'creates permitted from pre-authorized certificates only\'.
-	get documentation () {
+	get documentation() {
 		return this.__documentation;
 	}
 
-	set documentation (new_value) {
+	set documentation(new_value) {
 		this.__documentation = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			code: this.__code,
-			documentation: this.__documentation
+			documentation: this.__documentation,
 		});
 	}
 }

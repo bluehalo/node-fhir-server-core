@@ -39,7 +39,7 @@ module.exports = {
 		name: 'birthdate',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-birthdate',
-		documentation: 'The Related Person\'s date of birth.',
+		documentation: "The Related Person's date of birth.",
 	},
 	EMAIL: {
 		name: 'email',

@@ -1,41 +1,40 @@
 const BackboneElement = require('./BackboneElement');
 
 class DocumentReferenceRelatesTo extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'DocumentReferenceRelatesTo';
 		Object.assign(this, opt);
 	}
 
 	// This is a DocumentReferenceRelatesTo resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'DocumentReferenceRelatesTo';
 	}
 
 	// The type of relationship that this document has with anther document.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		this.__code = new_value;
 	}
 
 	// The target document of this relationship.
-	get target () {
+	get target() {
 		return this.__target;
 	}
 
-	set target (new_value) {
+	set target(new_value) {
 		const Reference = require('./Reference');
 		this.__target = new Reference(new_value);
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			code: this.__code,
-			target: this.__target && this.__target.toJSON()
+			target: this.__target && this.__target.toJSON(),
 		});
 	}
 }

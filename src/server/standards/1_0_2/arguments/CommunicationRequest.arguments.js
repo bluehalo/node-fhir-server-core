@@ -63,7 +63,8 @@ module.exports = {
 		name: 'status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-status',
-		documentation: 'proposed | planned | requested | received | accepted | in-progress | completed | suspended | rejected | failed.',
+		documentation:
+			'proposed | planned | requested | received | accepted | in-progress | completed | suspended | rejected | failed.',
 	},
 	SUBJECT: {
 		name: 'subject',

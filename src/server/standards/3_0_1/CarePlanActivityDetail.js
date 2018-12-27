@@ -1,204 +1,207 @@
 const BackboneElement = require('./BackboneElement');
 
 class CarePlanActivityDetail extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'CarePlanActivityDetail';
 		Object.assign(this, opt);
 	}
 
 	// This is a CarePlanActivityDetail resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'CarePlanActivityDetail';
 	}
 
 	// High-level categorization of the type of activity in a care plan.
-	get category () {
+	get category() {
 		return this.__category;
 	}
 
-	set category (new_value) {
+	set category(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__category = new CodeableConcept(new_value);
 	}
 
 	// Identifies the protocol, questionnaire, guideline or other specification the planned activity should be conducted in accordance with.
-	get definition () {
+	get definition() {
 		return this.__definition;
 	}
 
-	set definition (new_value) {
+	set definition(new_value) {
 		const Reference = require('./Reference');
 		this.__definition = new Reference(new_value);
 	}
 
 	// Detailed description of the type of planned activity; e.g. What lab test, what procedure, what kind of encounter.
-	get code () {
+	get code() {
 		return this.__code;
 	}
 
-	set code (new_value) {
+	set code(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__code = new CodeableConcept(new_value);
 	}
 
 	// Provides the rationale that drove the inclusion of this particular activity as part of the plan or the reason why the activity was prohibited.
-	get reasonCode () {
+	get reasonCode() {
 		return this.__reasonCode;
 	}
 
-	set reasonCode (new_value) {
+	set reasonCode(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCode = Array.isArray(new_value) ? new_value.map(val => new CodeableConcept(val)) : [new CodeableConcept(new_value)];
+		this.__reasonCode = Array.isArray(new_value)
+			? new_value.map(val => new CodeableConcept(val))
+			: [new CodeableConcept(new_value)];
 	}
 
 	// Provides the health condition(s) that drove the inclusion of this particular activity as part of the plan.
-	get reasonReference () {
+	get reasonReference() {
 		return this.__reasonReference;
 	}
 
-	set reasonReference (new_value) {
+	set reasonReference(new_value) {
 		const Reference = require('./Reference');
-		this.__reasonReference = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
+		this.__reasonReference = Array.isArray(new_value)
+			? new_value.map(val => new Reference(val))
+			: [new Reference(new_value)];
 	}
 
 	// Internal reference that identifies the goals that this activity is intended to contribute towards meeting.
-	get goal () {
+	get goal() {
 		return this.__goal;
 	}
 
-	set goal (new_value) {
+	set goal(new_value) {
 		const Reference = require('./Reference');
 		this.__goal = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies what progress is being made for the specific activity.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// Provides reason why the activity isn\'t yet started, is on hold, was cancelled, etc.
-	get statusReason () {
+	get statusReason() {
 		return this.__statusReason;
 	}
 
-	set statusReason (new_value) {
+	set statusReason(new_value) {
 		this.__statusReason = new_value;
 	}
 
 	// If true, indicates that the described activity is one that must NOT be engaged in when following the plan.  If false, indicates that the described activity is one that should be engaged in when following the plan.
-	get prohibited () {
+	get prohibited() {
 		return this.__prohibited;
 	}
 
-	set prohibited (new_value) {
+	set prohibited(new_value) {
 		this.__prohibited = new_value;
 	}
 
 	// The period, timing or frequency upon which the described activity is to occur.
-	get scheduledTiming () {
+	get scheduledTiming() {
 		return this.__scheduledTiming;
 	}
 
-	set scheduledTiming (new_value) {
+	set scheduledTiming(new_value) {
 		const Timing = require('./Timing');
 		this.__scheduledTiming = new Timing(new_value);
 	}
 
 	// The period, timing or frequency upon which the described activity is to occur.
-	get scheduledPeriod () {
+	get scheduledPeriod() {
 		return this.__scheduledPeriod;
 	}
 
-	set scheduledPeriod (new_value) {
+	set scheduledPeriod(new_value) {
 		const Period = require('./Period');
 		this.__scheduledPeriod = new Period(new_value);
 	}
 
 	// The period, timing or frequency upon which the described activity is to occur.
-	get scheduledString () {
+	get scheduledString() {
 		return this.__scheduledString;
 	}
 
-	set scheduledString (new_value) {
+	set scheduledString(new_value) {
 		this.__scheduledString = new_value;
 	}
 
 	// Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc.
-	get location () {
+	get location() {
 		return this.__location;
 	}
 
-	set location (new_value) {
+	set location(new_value) {
 		const Reference = require('./Reference');
 		this.__location = new Reference(new_value);
 	}
 
 	// Identifies who\'s expected to be involved in the activity.
-	get performer () {
+	get performer() {
 		return this.__performer;
 	}
 
-	set performer (new_value) {
+	set performer(new_value) {
 		const Reference = require('./Reference');
 		this.__performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
 	}
 
 	// Identifies the food, drug or other product to be consumed or supplied in the activity.
-	get productCodeableConcept () {
+	get productCodeableConcept() {
 		return this.__productCodeableConcept;
 	}
 
-	set productCodeableConcept (new_value) {
+	set productCodeableConcept(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__productCodeableConcept = new CodeableConcept(new_value);
 	}
 
 	// Identifies the food, drug or other product to be consumed or supplied in the activity.
-	get productReference () {
+	get productReference() {
 		return this.__productReference;
 	}
 
-	set productReference (new_value) {
+	set productReference(new_value) {
 		const Reference = require('./Reference');
 		this.__productReference = new Reference(new_value);
 	}
 
 	// Identifies the quantity expected to be consumed in a given day.
-	get dailyAmount () {
+	get dailyAmount() {
 		return this.__dailyAmount;
 	}
 
-	set dailyAmount (new_value) {
+	set dailyAmount(new_value) {
 		const Quantity = require('./Quantity');
 		this.__dailyAmount = new Quantity(new_value);
 	}
 
 	// Identifies the quantity expected to be supplied, administered or consumed by the subject.
-	get quantity () {
+	get quantity() {
 		return this.__quantity;
 	}
 
-	set quantity (new_value) {
+	set quantity(new_value) {
 		const Quantity = require('./Quantity');
 		this.__quantity = new Quantity(new_value);
 	}
 
 	// This provides a textual description of constraints on the intended activity occurrence, including relation to other activities.  It may also include objectives, pre-conditions and end-conditions.  Finally, it may convey specifics about the activity such as body site, method, route, etc.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			category: this.__category && this.__category.toJSON(),
 			definition: this.__definition && this.__definition.toJSON(),
@@ -218,7 +221,7 @@ class CarePlanActivityDetail extends BackboneElement {
 			productReference: this.__productReference && this.__productReference.toJSON(),
 			dailyAmount: this.__dailyAmount && this.__dailyAmount.toJSON(),
 			quantity: this.__quantity && this.__quantity.toJSON(),
-			description: this.__description
+			description: this.__description,
 		});
 	}
 }

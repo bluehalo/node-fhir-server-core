@@ -5,169 +5,168 @@ const TimeScalar = require('./scalars/Time.scalar');
 const UriScalar = require('./scalars/Uri.scalar');
 
 class QuestionnaireItemEnableWhen extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'QuestionnaireItemEnableWhen';
 		Object.assign(this, opt);
 	}
 
 	// This is a QuestionnaireItemEnableWhen resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'QuestionnaireItemEnableWhen';
 	}
 
 	// The linkId for the question whose answer (or lack of answer) governs whether this item is enabled.
-	get question () {
+	get question() {
 		return this.__question;
 	}
 
-	set question (new_value) {
+	set question(new_value) {
 		this.__question = new_value;
 	}
 
 	// An indication that this item should be enabled only if the specified question is answered (hasAnswer=true) or not answered (hasAnswer=false).
-	get hasAnswer () {
+	get hasAnswer() {
 		return this.__hasAnswer;
 	}
 
-	set hasAnswer (new_value) {
+	set hasAnswer(new_value) {
 		this.__hasAnswer = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerBoolean () {
+	get answerBoolean() {
 		return this.__answerBoolean;
 	}
 
-	set answerBoolean (new_value) {
+	set answerBoolean(new_value) {
 		this.__answerBoolean = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDecimal () {
+	get answerDecimal() {
 		return this.__answerDecimal;
 	}
 
-	set answerDecimal (new_value) {
+	set answerDecimal(new_value) {
 		this.__answerDecimal = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerInteger () {
+	get answerInteger() {
 		return this.__answerInteger;
 	}
 
-	set answerInteger (new_value) {
+	set answerInteger(new_value) {
 		this.__answerInteger = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDate () {
+	get answerDate() {
 		return this.__answerDate;
 	}
 
-	set answerDate (new_value) {
+	set answerDate(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field answerDate`);
 		}
 		this.__answerDate = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDateTime () {
+	get answerDateTime() {
 		return this.__answerDateTime;
 	}
 
-	set answerDateTime (new_value) {
+	set answerDateTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = DateTimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field answerDateTime`);
 		}
 		this.__answerDateTime = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerTime () {
+	get answerTime() {
 		return this.__answerTime;
 	}
 
-	set answerTime (new_value) {
+	set answerTime(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = TimeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field answerTime`);
 		}
 		this.__answerTime = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerString () {
+	get answerString() {
 		return this.__answerString;
 	}
 
-	set answerString (new_value) {
+	set answerString(new_value) {
 		this.__answerString = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerUri () {
+	get answerUri() {
 		return this.__answerUri;
 	}
 
-	set answerUri (new_value) {
+	set answerUri(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = UriScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field answerUri`);
 		}
 		this.__answerUri = new_value;
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerAttachment () {
+	get answerAttachment() {
 		return this.__answerAttachment;
 	}
 
-	set answerAttachment (new_value) {
+	set answerAttachment(new_value) {
 		const Attachment = require('./Attachment');
 		this.__answerAttachment = new Attachment(new_value);
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerCoding () {
+	get answerCoding() {
 		return this.__answerCoding;
 	}
 
-	set answerCoding (new_value) {
+	set answerCoding(new_value) {
 		const Coding = require('./Coding');
 		this.__answerCoding = new Coding(new_value);
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerQuantity () {
+	get answerQuantity() {
 		return this.__answerQuantity;
 	}
 
-	set answerQuantity (new_value) {
+	set answerQuantity(new_value) {
 		const Quantity = require('./Quantity');
 		this.__answerQuantity = new Quantity(new_value);
 	}
 
 	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerReference () {
+	get answerReference() {
 		return this.__answerReference;
 	}
 
-	set answerReference (new_value) {
+	set answerReference(new_value) {
 		const Reference = require('./Reference');
 		this.__answerReference = new Reference(new_value);
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			question: this.__question,
 			hasAnswer: this.__hasAnswer,
@@ -182,7 +181,7 @@ class QuestionnaireItemEnableWhen extends BackboneElement {
 			answerAttachment: this.__answerAttachment && this.__answerAttachment.toJSON(),
 			answerCoding: this.__answerCoding && this.__answerCoding.toJSON(),
 			answerQuantity: this.__answerQuantity && this.__answerQuantity.toJSON(),
-			answerReference: this.__answerReference && this.__answerReference.toJSON()
+			answerReference: this.__answerReference && this.__answerReference.toJSON(),
 		});
 	}
 }

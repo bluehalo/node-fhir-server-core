@@ -3,50 +3,49 @@ const CodeScalar = require('./scalars/Code.scalar');
 const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
 
 class ConformanceRestSecurityCertificate extends BackboneElement {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'ConformanceRestSecurityCertificate';
 		Object.assign(this, opt);
 	}
 
 	// This is a ConformanceRestSecurityCertificate resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'ConformanceRestSecurityCertificate';
 	}
 
 	// Mime type for certificate.
-	get type () {
+	get type() {
 		return this.__type;
 	}
 
-	set type (new_value) {
+	set type(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = CodeScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field type`);
 		}
 		this.__type = new_value;
 	}
 
 	// Actual certificate.
-	get blob () {
+	get blob() {
 		return this.__blob;
 	}
 
-	set blob (new_value) {
+	set blob(new_value) {
 		// Throw if new value does not match the pattern
 		let pattern = Base64BinaryScalar.regex();
-		if ( new_value && !pattern.test(new_value) ) {
+		if (new_value && !pattern.test(new_value)) {
 			throw new Error(`Invalid format for ${new_value} on field blob`);
 		}
 		this.__blob = new_value;
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			type: this.__type,
-			blob: this.__blob
+			blob: this.__blob,
 		});
 	}
 }

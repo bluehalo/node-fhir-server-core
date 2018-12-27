@@ -23,18 +23,16 @@ function getValidScopes(scopes, allowedScopes) {
  * @param {Object} loggerUtil
  * @param {Object} config
  */
-module.exports.validateScopes = (allowedScopes) => {
-
+module.exports.validateScopes = allowedScopes => {
 	return async (req, res, next) => {
 		let version = req.params.version;
-		let { scope, context } = req.authInfo;
+		let { scope, context } = req.user;
 
 		// get scopes that are valid for the endpoint specified
 		const validScopes = getValidScopes(scope, allowedScopes);
 
 		// verify if token has one of the required scopes
 		if (validScopes && validScopes.length > 0) {
-
 			// TODO: Validate/clean context?
 			req.contexts = context;
 

@@ -3,7 +3,8 @@ module.exports = {
 		name: 'category',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-category',
-		documentation: 'AE | PAE  An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not.',
+		documentation:
+			'AE | PAE  An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not.',
 	},
 	DATE: {
 		name: 'date',

@@ -15,7 +15,7 @@ module.exports = {
 		name: 'characteristic',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-characteristic',
-		documentation: 'One of the HealthcareService\'s characteristics.',
+		documentation: "One of the HealthcareService's characteristics.",
 	},
 	ENDPOINT: {
 		name: 'endpoint',

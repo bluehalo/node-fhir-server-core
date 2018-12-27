@@ -1,145 +1,150 @@
 const DomainResource = require('./DomainResource');
 
 class Account extends DomainResource {
-
-	constructor ( opt ) {
-		super( opt );
+	constructor(opt) {
+		super(opt);
 		this.__resourceType = 'Account';
 		Object.assign(this, opt);
 	}
 
 	// This is a Account resource
-	static get __resourceType () {
+	static get __resourceType() {
 		return 'Account';
 	}
 
 	// Type of this resource.
-	get resourceType () {
+	get resourceType() {
 		return this.__resourceType;
 	}
 
-	set resourceType (new_value) {
+	set resourceType(new_value) {
 		this.__Account = new_value;
 	}
 
 	// Unique identifier used to reference the account.  May or may not be intended for human use (e.g. credit card number).
-	get identifier () {
+	get identifier() {
 		return this.__identifier;
 	}
 
-	set identifier (new_value) {
+	set identifier(new_value) {
 		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value) ? new_value.map(val => new Identifier(val)) : [new Identifier(new_value)];
+		this.__identifier = Array.isArray(new_value)
+			? new_value.map(val => new Identifier(val))
+			: [new Identifier(new_value)];
 	}
 
 	// Indicates whether the account is presently used/usable or not.
-	get status () {
+	get status() {
 		return this.__status;
 	}
 
-	set status (new_value) {
+	set status(new_value) {
 		this.__status = new_value;
 	}
 
 	// Categorizes the account for reporting and searching purposes.
-	get type () {
+	get type() {
 		return this.__type;
 	}
 
-	set type (new_value) {
+	set type(new_value) {
 		const CodeableConcept = require('./CodeableConcept');
 		this.__type = new CodeableConcept(new_value);
 	}
 
 	// Name used for the account when displaying it to humans in reports, etc.
-	get name () {
+	get name() {
 		return this.__name;
 	}
 
-	set name (new_value) {
+	set name(new_value) {
 		this.__name = new_value;
 	}
 
 	// Identifies the patient, device, practitioner, location or other object the account is associated with.
-	get subject () {
+	get subject() {
 		return this.__subject;
 	}
 
-	set subject (new_value) {
+	set subject(new_value) {
 		const Reference = require('./Reference');
 		this.__subject = new Reference(new_value);
 	}
 
 	// Identifies the period of time the account applies to; e.g. accounts created per fiscal year, quarter, etc.
-	get period () {
+	get period() {
 		return this.__period;
 	}
 
-	set period (new_value) {
+	set period(new_value) {
 		const Period = require('./Period');
 		this.__period = new Period(new_value);
 	}
 
 	// Indicates the period of time over which the account is allowed to have transactions posted to it. This period may be different to the coveragePeriod which is the duration of time that services may occur.
-	get active () {
+	get active() {
 		return this.__active;
 	}
 
-	set active (new_value) {
+	set active(new_value) {
 		const Period = require('./Period');
 		this.__active = new Period(new_value);
 	}
 
 	// Represents the sum of all credits less all debits associated with the account.  Might be positive, zero or negative.
-	get balance () {
+	get balance() {
 		return this.__balance;
 	}
 
-	set balance (new_value) {
+	set balance(new_value) {
 		const Money = require('./Money');
 		this.__balance = new Money(new_value);
 	}
 
 	// The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account.
-	get coverage () {
+	get coverage() {
 		return this.__coverage;
 	}
 
-	set coverage (new_value) {
+	set coverage(new_value) {
 		const AccountCoverage = require('./AccountCoverage');
-		this.__coverage = Array.isArray(new_value) ? new_value.map(val => new AccountCoverage(val)) : [new AccountCoverage(new_value)];
+		this.__coverage = Array.isArray(new_value)
+			? new_value.map(val => new AccountCoverage(val))
+			: [new AccountCoverage(new_value)];
 	}
 
 	// Indicates the organization, department, etc. with responsibility for the account.
-	get owner () {
+	get owner() {
 		return this.__owner;
 	}
 
-	set owner (new_value) {
+	set owner(new_value) {
 		const Reference = require('./Reference');
 		this.__owner = new Reference(new_value);
 	}
 
 	// Provides additional information about what the account tracks and how it is used.
-	get description () {
+	get description() {
 		return this.__description;
 	}
 
-	set description (new_value) {
+	set description(new_value) {
 		this.__description = new_value;
 	}
 
 	// Parties financially responsible for the account.
-	get guarantor () {
+	get guarantor() {
 		return this.__guarantor;
 	}
 
-	set guarantor (new_value) {
+	set guarantor(new_value) {
 		const AccountGuarantor = require('./AccountGuarantor');
-		this.__guarantor = Array.isArray(new_value) ? new_value.map(val => new AccountGuarantor(val)) : [new AccountGuarantor(new_value)];
+		this.__guarantor = Array.isArray(new_value)
+			? new_value.map(val => new AccountGuarantor(val))
+			: [new AccountGuarantor(new_value)];
 	}
 
-	toJSON () {
+	toJSON() {
 		return Object.assign(super.toJSON(), {
 			resourceType: this.__resourceType,
 			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
@@ -153,7 +158,7 @@ class Account extends DomainResource {
 			coverage: this.__coverage && this.__coverage.map(v => v.toJSON()),
 			owner: this.__owner && this.__owner.toJSON(),
 			description: this.__description,
-			guarantor: this.__guarantor && this.__guarantor.map(v => v.toJSON())
+			guarantor: this.__guarantor && this.__guarantor.map(v => v.toJSON()),
 		});
 	}
 }

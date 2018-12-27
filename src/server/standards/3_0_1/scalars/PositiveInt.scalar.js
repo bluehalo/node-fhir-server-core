@@ -4,10 +4,9 @@
  */
 class PositiveInt {
 	// TODO: Make sure the regex is in the scalar
-	static regex () {
+	static regex() {
 		return new RegExp('.*', 'g');
 	}
-
 }
 
 module.exports = PositiveInt;

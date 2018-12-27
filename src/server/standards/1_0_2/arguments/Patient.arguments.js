@@ -57,13 +57,14 @@ module.exports = {
 		name: 'birthdate',
 		type: 'date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-birthdate',
-		documentation: 'The patient\'s date of birth.',
+		documentation: "The patient's date of birth.",
 	},
 	CAREPROVIDER: {
 		name: 'careprovider',
 		type: 'reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-careprovider',
-		documentation: 'Patient\'s nominated care provider, could be a care manager, not the organization that manages the record.',
+		documentation:
+			"Patient's nominated care provider, could be a care manager, not the organization that manages the record.",
 	},
 	DEATHDATE: {
 		name: 'deathdate',

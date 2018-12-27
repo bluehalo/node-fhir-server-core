@@ -39,7 +39,8 @@ module.exports = {
 		name: 'part-status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-part-status',
-		documentation: 'The Participation status of the subject, or other participant on the appointment. Can be used to locate participants that have not responded to meeting requests.',
+		documentation:
+			'The Participation status of the subject, or other participant on the appointment. Can be used to locate participants that have not responded to meeting requests.',
 	},
 	PATIENT: {
 		name: 'patient',

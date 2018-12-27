@@ -21,7 +21,8 @@ module.exports = {
 		name: 'status',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-status',
-		documentation: 'proposed | planned | accepted | rejected | in-progress | achieved | sustaining | on-hold | cancelled.',
+		documentation:
+			'proposed | planned | accepted | rejected | in-progress | achieved | sustaining | on-hold | cancelled.',
 	},
 	SUBJECT: {
 		name: 'subject',

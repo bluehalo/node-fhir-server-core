@@ -9,7 +9,8 @@ module.exports = {
 		name: 'code',
 		type: 'token',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-code',
-		documentation: 'The code for the report as a whole, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result.',
+		documentation:
+			'The code for the report as a whole, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result.',
 	},
 	DATE: {
 		name: 'date',
