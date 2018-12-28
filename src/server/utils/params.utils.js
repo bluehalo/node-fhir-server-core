@@ -24,7 +24,7 @@ let getSearchParamaters = (profileKey, version, customArgsModule) => {
 		fileIndex = filesLowerCase.indexOf(profileKey);
 	}
 
-	let resource_specific_args = [];
+	let resource_specific_args = null;
 	if (customArgsModule) {
 		resource_specific_args = require(`${customArgsModule}`)[version];
 	}
