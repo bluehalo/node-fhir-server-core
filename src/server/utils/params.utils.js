@@ -12,7 +12,7 @@ let common_args_array = Object.getOwnPropertyNames(common_args).map(arg_name => 
  * @param {Object} profile - Configurations for the profile from the wrapping library
  * @return {function} valid express middleware
  */
-let getSearchParamaters = (profileKey, version) => {
+let getSearchParamaters = (profileKey, version, customArgsModule) => {
 	let fileIndex;
 	let files;
 	if (profileKey && typeof profileKey === 'string') {
@@ -24,9 +24,15 @@ let getSearchParamaters = (profileKey, version) => {
 		fileIndex = filesLowerCase.indexOf(profileKey);
 	}
 
-	const resource_specific_args = require(`../standards/${version}/arguments/${
-		files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
-	}`);
+	let resource_specific_args = [];
+	if (customArgsModule) {
+		resource_specific_args = require(`${customArgsModule}`)[version];
+	}
+    if (!resource_specific_args) {
+		resource_specific_args = require(`../standards/${version}/arguments/${
+			files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
+		}`);
+	}
 	// Set paramaters
 	let resource_args_array = Object.getOwnPropertyNames(resource_specific_args).map(arg_name =>
 		Object.assign({ versions: version }, resource_specific_args[arg_name]),

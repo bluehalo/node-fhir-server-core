@@ -138,7 +138,7 @@ function configureResourceRoutes(options) {
 	// loop through all profiles
 	for (const key of Object.keys(profiles)) {
 		let profile = profiles[key];
-
+		let customArguments = profile.customArguments;
 		// The user can provider default cors options to be provided on all routes
 		let default_cors_options = Object.assign({}, server.corsOptions);
 
@@ -146,7 +146,7 @@ function configureResourceRoutes(options) {
 		let search_parameters = [];
 
 		profile.versions.forEach(version => {
-			search_parameters.push(...getSearchParamaters(key, version));
+			search_parameters.push(...getSearchParamaters(key, version, customArguments));
 		});
 
 		// Iterate over all of our routes
