@@ -21,9 +21,6 @@
   "scripts": {
     "start": "node src/runner",
     "nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
-    "serve-docs": "npm run build-docs;node docs/server",
-    "build-docs": "cross-env NODE_ENV=production;node docs/build",
-    "watch-docs": "cross-env NODE_ENV=development;node docs/build",
     "test:lint": "eslint \"src/**/*.js\"",
     "test:src": "jest src",
     "test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;",
