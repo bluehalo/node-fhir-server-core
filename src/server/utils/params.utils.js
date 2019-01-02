@@ -26,7 +26,7 @@ let getSearchParamaters = (profileKey, version, customArgsModule) => {
 
 	let resource_specific_args = null;
 	if (customArgsModule) {
-		resource_specific_args = require(`${customArgsModule}`)[version];
+		resource_specific_args = require(`${customArgsModule}`).makeResource().searchParam;
 	}
     if (!resource_specific_args) {
 		resource_specific_args = require(`../standards/${version}/arguments/${

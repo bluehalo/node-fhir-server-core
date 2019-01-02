@@ -138,7 +138,7 @@ function configureResourceRoutes(options) {
 	// loop through all profiles
 	for (const key of Object.keys(profiles)) {
 		let profile = profiles[key];
-		let customArguments = profile.customArguments;
+		let customArguments = profile.metadata;
 		// The user can provider default cors options to be provided on all routes
 		let default_cors_options = Object.assign({}, server.corsOptions);
 
