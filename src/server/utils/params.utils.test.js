@@ -15,7 +15,7 @@ describe('Param Utils Tests', () => {
 	test('Should get the custom arguments when custom module provided', () => {
         let params = getSearchParameters('Patient', '3_0_1', path.resolve('./src/server/utils/params.utils.test.arguments.js'));
         expect(typeof params).toEqual('object');
-        expect(params.length).toEqual(16);
+        expect(params.length).toEqual(26);
         let bar = params.find(p => p.name === 'bar');
         expect(typeof bar).toEqual('object');
 	});

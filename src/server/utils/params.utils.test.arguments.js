@@ -1,9 +1,76 @@
-module.exports['3_0_1'] = {
-    FOO: {
-        name: 'bar',
-        type: 'number',
-        definition: 'http://hl7.org/fhir/SearchParameter/clinical-patient',
-        documentation:
-            'Multiple Resources:     * [ReferralRequest](referralrequest.html): Who the referral is about  * [DocumentManifest](documentmanifest.html): The subject of the set of documents  * [Goal](goal.html): Who this goal is intended for  * [Consent](consent.html): Who the consent applies to  * [DocumentReference](documentreference.html): Who/what is the subject of the document  * [ImagingManifest](imagingmanifest.html): Subject of the ImagingManifest (or a DICOM Key Object Selection which it represents)  * [RiskAssessment](riskassessment.html): Who/what does assessment apply to?  * [CareTeam](careteam.html): Who care team is for  * [ImagingStudy](imagingstudy.html): Who the study is about  * [FamilyMemberHistory](familymemberhistory.html): The identity of a subject to list family member history items for  * [Encounter](encounter.html): The patient ro group present at the encounter  * [DeviceUseStatement](deviceusestatement.html): Search by subject - a patient  * [DeviceRequest](devicerequest.html): Individual the service is ordered for  * [AllergyIntolerance](allergyintolerance.html): Who the sensitivity is for  * [CarePlan](careplan.html): Who care plan is for  * [EpisodeOfCare](episodeofcare.html): The patient who is the focus of this episode of care  * [Procedure](procedure.html): Search by subject - a patient  * [List](list.html): If all resources have the same subject  * [Immunization](immunization.html): The patient for the vaccination record  * [VisionPrescription](visionprescription.html): The identity of a patient to list dispenses for  * [ProcedureRequest](procedurerequest.html): Search by subject - a patient  * [Flag](flag.html): The identity of a subject to list flags for  * [Observation](observation.html): The subject that the observation is about (if patient)  * [DiagnosticReport](diagnosticreport.html): The subject of the report if a patient  * [NutritionOrder](nutritionorder.html): The identity of the person who requires the diet, formula or nutritional supplement  * [Condition](condition.html): Who has the condition?  * [Composition](composition.html): Who and/or what the composition is about  * [DetectedIssue](detectedissue.html): Associated patient  * [SupplyDelivery](supplydelivery.html): Patient for whom the item is supplied  * [ClinicalImpression](clinicalimpression.html): Patient or group assessed  .',
-    },
-};
+
+module.exports.makeResource = (_args, _logger) => {
+    return {
+      'profile': {
+        'reference': 'https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1'
+      },
+      'searchInclude': [
+        '*',
+        'AllergyIntolerance:patient',
+        'CarePlan:patient',
+        'Condition:patient',
+        'DocumentReference:patient',
+        'Encounter:patient',
+        'Flag:patient',
+        'Immunization:patient',
+        'MedicationStatement:patient',
+        'Observation:patient',
+        'Patient:general-practitioner',
+        'Patient:organization',
+        'Procedure:patient'
+      ],
+      'searchParam': [
+        {
+          'documentation': 'The ID of the resource',
+          'name': '_id',
+          'type': 'string'
+        },
+        {
+          'documentation': 'A postalCode specified in an address',
+          'name': 'address-postalcode',
+          'type': 'string'
+        },
+        {
+          'documentation': 'The patient\'s date of birth',
+          'name': 'birthdate',
+          'type': 'date'
+        },
+        {
+          'documentation': 'A value in an email contact',
+          'name': 'email',
+          'type': 'string'
+        },
+        {
+          'documentation': 'A portion of the family name of the patient',
+          'name': 'family',
+          'type': 'string'
+        },
+        {
+          'documentation': 'Gender of the patient',
+          'name': 'gender',
+          'type': 'string'
+        },
+        {
+          'documentation': 'A portion of the given name of the patient',
+          'name': 'given',
+          'type': 'string'
+        },
+        {
+          'documentation': 'A patient identifier',
+          'name': 'identifier',
+          'type': 'token'
+        },
+        {
+          'documentation': 'A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text',
+          'name': 'name',
+          'type': 'string'
+        },
+        {
+          'documentation': 'A value in a phone contact',
+          'name': 'bar',
+          'type': 'string'
+        }
+      ],
+      'type': 'Patient'
+    };
+  };
