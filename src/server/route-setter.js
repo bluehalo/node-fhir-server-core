@@ -146,7 +146,7 @@ function configureResourceRoutes(options) {
 		let search_parameters = [];
 
 		profile.versions.forEach(version => {
-			search_parameters.push(...getSearchParamaters(key, version, customArguments));
+			search_parameters.push(...getSearchParamaters(key, version, customArguments, logger));
 		});
 
 		// Iterate over all of our routes
