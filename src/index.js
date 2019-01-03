@@ -1,6 +1,7 @@
 const Server = require('./server/server');
 const constants = require('./constants');
 const { resolveFromVersion } = require('./server/utils/resolve.utils');
+
 /**
  * @name exports
  * @description Export the server and some convenience methods for building a FHIR server
