@@ -57,3 +57,6 @@ Before submitting a pull request, try to make sure you have done the following.
 3. If documentation should be added, please add it to the correct location. If the [Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki) should be updated, make note of that in your PR and try to prepare a snippet we can add once your PR is merged.
 
 Once everything is ready to go, submit a PR to the `master` branch.
+
+## Resources
+For more information about how things are designed and how they work, please consult our [wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki).
