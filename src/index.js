@@ -1,13 +1,11 @@
 const Server = require('./server/server');
 const constants = require('./constants');
 const { resolveFromVersion } = require('./server/utils/resolve.utils');
-const errors = require('./server/utils/error.utils');
 /**
  * @name exports
  * @description Export the server and some convenience methods for building a FHIR server
  */
 module.exports = {
-	errors: errors,
 	/**
 	 * @description Export constants so users can have access to these
 	 */
