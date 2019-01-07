@@ -222,7 +222,7 @@ function configureResourceRoutes(options) {
 			);
 
 			// Enable cors with preflight options
-			app.options(route.path, cors(cors_options));
+			app.options(route.path.replace(':resource', key), cors(cors_options));
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
