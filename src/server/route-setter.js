@@ -218,7 +218,7 @@ function configureResourceRoutes(options) {
 				default_cors_options,
 				profile && profile.corsOptions,
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-				{ methods: [route.type.toUpperCase()] },
+				{ methods: default_cors_options.methods || [route.type.toUpperCase()] },
 			);
 
 			// Enable cors with preflight options
