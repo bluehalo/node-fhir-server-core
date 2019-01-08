@@ -22,7 +22,7 @@ describe('Deprecation Notice', () => {
 			foo: jest.fn(),
 			bar: jest.fn(),
 			baz: 'someProp',
-			obj: { one: 1 }
+			obj: { one: 1 },
 		};
 
 		let message = 'Deprecated';
@@ -50,7 +50,7 @@ describe('Deprecation Notice', () => {
 			foo: jest.fn(),
 			bar: jest.fn(),
 			baz: 'someProp',
-			obj: { one: 1 }
+			obj: { one: 1 },
 		};
 
 		let message = 'Deprecated';
@@ -61,6 +61,14 @@ describe('Deprecation Notice', () => {
 		expect(test.bar).not.toBe(newTest.bar);
 		expect(newTest.baz).toBe('someProp');
 		expect(newTest.obj).toBe(test.obj);
+
+		// Calling the new version should invoke the spy, while calling the original
+		// should not invoke the spy, so count should only be one
+		newTest.foo();
+		test.foo();
+
+		expect(spy).toHaveBeenCalled();
+		expect(spy.mock.calls).toHaveLength(1);
 
 		spy.mockRestore();
 	});

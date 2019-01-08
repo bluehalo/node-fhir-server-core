@@ -1,10 +1,10 @@
-	// Simple wrapper to use for functions
-	function deprecationWrapper (func, msg) {
-		return function () {
-			console.log(msg);
-			return func(...arguments);
-		};
-	}
+// Simple wrapper to use for functions
+function deprecationWrapper(func, msg) {
+	return function() {
+		console.log(msg);
+		return func(...arguments);
+	};
+}
 
 /**
  * @description Simple wrapper function that logs a deprecation notice when a
@@ -15,7 +15,7 @@
  * @param {String} message - Deprecation Notice
  * @return {function} Wrapper around provided function
  */
-module.exports = function deprecationNotice (funcOrObject, message) {
+module.exports = function deprecationNotice(funcOrObject, message) {
 	// If we have a function simply wrap it
 	if (typeof funcOrObject === 'function') {
 		return deprecationWrapper(funcOrObject, message);
