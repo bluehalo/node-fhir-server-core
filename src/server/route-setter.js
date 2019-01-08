@@ -218,11 +218,11 @@ function configureResourceRoutes(options) {
 				default_cors_options,
 				profile && profile.corsOptions,
 				// Add a default cors setting for methods that defaults to type, e.g. { methods: [ 'DELETE' ]}
-				{ methods: [route.type.toUpperCase()] },
+				{ methods: default_cors_options.methods || [route.type.toUpperCase()] },
 			);
 
 			// Enable cors with preflight options
-			app.options(route.path, cors(cors_options));
+			app.options(route.path.replace(':resource', key), cors(cors_options));
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
