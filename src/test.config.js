@@ -15,6 +15,7 @@ module.exports = {
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400,
+			methods: 'HEAD,PUT,PATCH,POST,DELETE'
 		},
 		// ssl: {
 		// 	key: './src/key.pem',
