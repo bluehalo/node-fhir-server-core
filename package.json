@@ -10,11 +10,11 @@
   ],
   "license": "MIT",
   "prettier": {
-		"printWidth": 120,
-		"semi": true,
-		"singleQuote": true,
-		"trailingComma": "all"
-	},
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "engines": {
     "node": ">=8.6"
   },
@@ -24,7 +24,7 @@
     "test:lint": "eslint \"src/**/*.js\"",
     "test:src": "jest src",
     "test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;",
-		"prettier": "prettier \"src/**/*.js\" --write",
+    "prettier": "prettier \"src/**/*.js\" --write",
     "snyk": "snyk",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect"
@@ -42,6 +42,7 @@
     ]
   },
   "dependencies": {
+    "@asymmetrik/sof-scope-checker": "^1.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
