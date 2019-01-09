@@ -292,6 +292,10 @@ function configureOperationRoutes(options) {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_POST);
 				route.scopes = write_scopes(key);
 				operationControllerFunction = INTERACTIONS.OPERATIONS_POST;
+			} else if (op.method.toLowerCase() === 'patch') {
+				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_PATCH);
+				route.scopes = write_scopes(key);
+				operationControllerFunction = INTERACTIONS.OPERATIONS_PATCH;
 			} else {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_GET);
 				route.scopes = read_scopes(key);

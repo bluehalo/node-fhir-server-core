@@ -2,6 +2,11 @@ const { INTERACTIONS } = require('../constants');
 
 let routes = [
 	{
+		type: 'patch',
+		path: '/:base_version/:resource/:id',
+		interaction: INTERACTIONS.OPERATIONS_PATCH,
+	},
+	{
 		type: 'get',
 		path: '/:base_version/:resource',
 		interaction: INTERACTIONS.SEARCH,
