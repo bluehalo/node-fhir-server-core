@@ -102,7 +102,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 				errors.invalidParameter(
 					`'resourceType' expected to have value of '${Patient.__resourceType}', received '${
 						resource_body.resourceType
-					}'`,
+						}'`,
 					base_version,
 				),
 			);
@@ -143,7 +143,7 @@ module.exports.update = function update({ profile, logger, config }) {
 				errors.invalidParameter(
 					`'resourceType' expected to have value of '${Patient.__resourceType}', received '${
 						resource_body.resourceType
-					}'`,
+						}'`,
 					base_version,
 				),
 			);
@@ -227,6 +227,46 @@ module.exports.historyById = function historyById({ profile, logger, config }) {
 			.historyById(req.sanitized_args, req.contexts, logger)
 			.then(results =>
 				responseUtils.handleBundleHistoryResponse(res, base_version, Patient, results, {
+					resourceUrl: config.auth.resourceServer,
+				}),
+			)
+			.catch(err => {
+				logger.error(err);
+				next(errors.internal(err.message, base_version));
+			});
+	};
+};
+
+/**
+ * @description Controller for updating/creating a patient. If the patient does not exist, it should be updated
+ */
+module.exports.patch = function patch({ profile, logger, config }) {
+	let { serviceModule: service } = profile;
+	return (req, res, next) => {
+		let { base_version, id } = req.sanitized_args;
+		let resource_body = req.body;
+
+		// Get a version specific patient
+		let Patient = require(resolveFromVersion(base_version, 'Patient'));
+		// Validate the resource type before creating it
+		if (Patient.__resourceType !== resource_body.resourceType) {
+			return next(
+				errors.invalidParameter(
+					`'resourceType' expected to have value of '${Patient.__resourceType}', received '${
+						resource_body.resourceType
+						}'`,
+					base_version,
+				),
+			);
+		}
+		// Create a new patient resource and pass it to the service
+		let patient = new Patient(resource_body);
+		let args = { id, base_version, resource: patient };
+		// Pass any new information to the underlying service
+		return service
+			.patch(args, req.contexts, logger)
+			.then(results =>
+				responseUtils.handleUpdateResponse(res, base_version, Patient.__resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)

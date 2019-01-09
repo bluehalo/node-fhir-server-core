@@ -199,6 +199,12 @@ function configureResourceRoutes(options) {
 					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
+				case INTERACTIONS.PATCH:
+					console.log('adding patch ');
+					route.args = [route_args.BASE, route_args.ID];
+					route.scopes = write_scopes(key);
+					route.controller = controller[INTERACTIONS.PATCH];
+					break;
 			}
 
 			// If we do not have a service function from the provided service module,
@@ -224,6 +230,11 @@ function configureResourceRoutes(options) {
 			// Enable cors with preflight options
 			app.options(route.path.replace(':resource', key), cors(cors_options));
 			// Setup the route with all the appropriate middleware
+
+			if (route.type === 'patch') {
+				console.log(route);
+			}
+
 			app[route.type](
 				// Actual path for the route
 				route.path.replace(':resource', key),
@@ -240,6 +251,8 @@ function configureResourceRoutes(options) {
 				// Finally our controller function
 				route.controller({ profile, logger, config, app }),
 			);
+
+			// console.log(app);
 		}
 	}
 }
@@ -292,10 +305,6 @@ function configureOperationRoutes(options) {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_POST);
 				route.scopes = write_scopes(key);
 				operationControllerFunction = INTERACTIONS.OPERATIONS_POST;
-			} else if (op.method.toLowerCase() === 'patch') {
-				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_PATCH);
-				route.scopes = write_scopes(key);
-				operationControllerFunction = INTERACTIONS.OPERATIONS_PATCH;
 			} else {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_GET);
 				route.scopes = read_scopes(key);

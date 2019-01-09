@@ -4,7 +4,7 @@ let routes = [
 	{
 		type: 'patch',
 		path: '/:base_version/:resource/:id',
-		interaction: INTERACTIONS.OPERATIONS_PATCH,
+		interaction: INTERACTIONS.PATCH,
 	},
 	{
 		type: 'get',
