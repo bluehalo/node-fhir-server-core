@@ -60,3 +60,10 @@ module.exports.expandById = (args, context, logger) =>
 		logger.info(message);
 		reject(new Error(message));
 	});
+
+module.exports.operationsPatch = (args, context, logger) =>
+	new Promise((resolve, reject) => {
+		let message = "Calling mock service. Did you forget to implement 'operationsPatch'.";
+		logger.info(message);
+		reject(new Error(message));
+	});
