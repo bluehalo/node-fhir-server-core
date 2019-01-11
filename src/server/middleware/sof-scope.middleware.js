@@ -37,7 +37,7 @@ function deriveActionFromInteraction(interaction) {
  * @return {Array<String>} scopes assigned to a particular user
  */
 function parseScopes(user = {}) {
-	return typeof user.scopes === 'string' ? user.scopes.split(/[, ]/) : [];
+	return typeof user.scope === 'string' ? user.scope.split(/[, ]/) : [];
 }
 
 /**

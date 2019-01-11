@@ -59,7 +59,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 		};
 
 		let next = jest.fn();
-		let req = { user: { scopes: '' } };
+		let req = { user: { scope: '' } };
 		let res = {};
 
 		let middleware = sofScopeMiddleware(options);
@@ -94,7 +94,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 		};
 
 		let next = jest.fn();
-		let req = { user: { scopes: '' }, params: { version: '1_0_2' } };
+		let req = { user: { scope: '' }, params: { version: '1_0_2' } };
 		let res = {};
 
 		let middleware = sofScopeMiddleware(options);
@@ -122,7 +122,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 		};
 
 		let next = jest.fn();
-		let req = { user: { scopes: 'patient/*.write' } };
+		let req = { user: { scope: 'patient/*.write' } };
 		let res = {};
 
 		let middleware = sofScopeMiddleware(options);
