@@ -4,13 +4,13 @@ const { INTERACTIONS } = require('../../constants');
 const errors = require('../utils/error.utils');
 
 /**
-* @name deriveActionFromInteraction
-* @summary Given an interaction, what type of action will be performed
-* on this particular route, either read, write, or *
-* @param {String} interaction
-* @return {String} action needed to access a route
-*/
-function deriveActionFromInteraction (interaction) {
+ * @name deriveActionFromInteraction
+ * @summary Given an interaction, what type of action will be performed
+ * on this particular route, either read, write, or *
+ * @param {String} interaction
+ * @return {String} action needed to access a route
+ */
+function deriveActionFromInteraction(interaction) {
 	switch (interaction) {
 		case INTERACTIONS.SEARCH:
 		case INTERACTIONS.HISTORY:
@@ -31,23 +31,21 @@ function deriveActionFromInteraction (interaction) {
 }
 
 /**
-* @name parseScopes
-* @summary Parse scopes from a user context
-* @param {Object} userToken
-* @return {Array<String>} scopes assigned to a particular user
-*/
-function parseScopes (userToken) {
-	return typeof userToken.scopes === 'string'
-		? userToken.scopes.split(/[, ]/)
-		: [];
+ * @name parseScopes
+ * @summary Parse scopes from a user context
+ * @param {Object} user
+ * @return {Array<String>} scopes assigned to a particular user
+ */
+function parseScopes(user = {}) {
+	return typeof user.scopes === 'string' ? user.scopes.split(/[, ]/) : [];
 }
 
 /**
  * @name exports
  * @summary SOF Scope Middleware function
  */
-module.exports = function sofScopeCheckMiddleware (options = {}) {
-	let { route = {}, name = '', auth = {}} = options;
+module.exports = function sofScopeCheckMiddleware(options = {}) {
+	let { route = {}, name = '', auth = {} } = options;
 	// Disable validation when in a test environment
 	if (process.env.NODE_ENV === 'test') {
 		return noOpMiddleware;
@@ -60,8 +58,8 @@ module.exports = function sofScopeCheckMiddleware (options = {}) {
 	}
 
 	// At this point, we have determined we want Smart on FHIR authentication
-	return function sofScopeMiddleware (req, res, next) {
-		// name is lowercased, we want upper
+	return function sofScopeMiddleware(req, res, next) {
+		// name is lowercased, we want upper, foo -> Foo
 		let resource = name.slice(0, 1).toUpperCase() + name.slice(1);
 		let action = deriveActionFromInteraction(route.interaction);
 		let scopes = parseScopes(req && req.user);
@@ -69,7 +67,7 @@ module.exports = function sofScopeCheckMiddleware (options = {}) {
 		let { error } = scopeChecker(resource, action, scopes);
 
 		if (error) {
-			return next(errors.unauthorized(error.message, req.params.version));
+			return next(errors.unauthorized(error.message, req.params && req.params.version));
 		}
 
 		return next();

@@ -38,7 +38,8 @@
       "json"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/server/standards/"
+      "<rootDir>/src/server/standards/",
+			"<rootDir>/src/server/profiles/"
     ]
   },
   "dependencies": {

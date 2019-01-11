@@ -1,6 +1,6 @@
+const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const { route_args } = require('./profiles/common.arguments');
-const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
 const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
