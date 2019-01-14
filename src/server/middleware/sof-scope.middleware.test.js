@@ -49,7 +49,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 				type: 'smart',
 				strategy: {
 					name: 'bearer',
-					service: 'path/to/strategy.js'
+					service: 'path/to/strategy.js',
 				},
 			},
 			route: {
@@ -84,7 +84,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 				type: 'smart',
 				strategy: {
 					name: 'bearer',
-					service: 'path/to/strategy.js'
+					service: 'path/to/strategy.js',
 				},
 			},
 			route: {
@@ -112,7 +112,7 @@ describe('Smart on FHIR Scope Middleware', () => {
 				type: 'smart',
 				strategy: {
 					name: 'bearer',
-					service: 'path/to/strategy.js'
+					service: 'path/to/strategy.js',
 				},
 			},
 			route: {
