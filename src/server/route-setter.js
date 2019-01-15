@@ -1,9 +1,8 @@
+const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
+const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const { route_args } = require('./profiles/common.arguments');
-const { read_scopes, write_scopes } = require('./profiles/common.scopes');
-const { versionValidationMiddleware } = require('./utils/version.validation.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
-const { validateScopes } = require('./utils/scope.utils');
 const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const passport = require('passport');
 const { VERSIONS, INTERACTIONS } = require('../constants');
@@ -77,24 +76,6 @@ function authenticationMiddleware(options) {
 	}
 }
 
-/**
- * @description Scope Validation
- */
-function hasValidScopes(options) {
-	let { scopes, config } = options;
-	// Don't do any validation for testing
-	if (process.env.NODE_ENV === 'test') {
-		return noOpMiddleware;
-	}
-
-	// no strategy defined
-	if (!config.auth || !config.auth.strategy) {
-		return noOpMiddleware;
-	}
-
-	return validateScopes(scopes);
-}
-
 function configureMetadataRoute(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
@@ -156,47 +137,38 @@ function configureResourceRoutes(options) {
 			switch (route.interaction) {
 				case INTERACTIONS.SEARCH:
 					route.args = search_parameters;
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH];
 					break;
 				case INTERACTIONS.HISTORY:
 					route.args = search_parameters;
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY];
 					break;
 				case INTERACTIONS.HISTORY_BY_ID:
 					route.args = [route_args.ID, ...search_parameters];
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
 					break;
 				case INTERACTIONS.SEARCH_BY_VID:
 					route.args = [route_args.BASE, route_args.ID, route_args.VERSION_ID];
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_VID];
 					break;
 				case INTERACTIONS.SEARCH_BY_ID:
 					route.args = [route_args.BASE, route_args.ID];
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.SEARCH_BY_ID];
 					break;
 				case INTERACTIONS.CREATE:
 					route.args = [route_args.BASE];
-					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.CREATE];
 					break;
 				case INTERACTIONS.UPDATE:
 					route.args = [route_args.BASE, route_args.ID];
-					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.UPDATE];
 					break;
 				case INTERACTIONS.DELETE:
 					route.args = [route_args.BASE, route_args.ID];
-					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.DELETE];
 					break;
 				case INTERACTIONS.EXPAND_BY_ID:
 					route.args = [route_args.BASE, route_args.ID, ...search_parameters];
-					route.scopes = read_scopes(key);
 					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
 			}
@@ -236,7 +208,7 @@ function configureResourceRoutes(options) {
 				// Authentication middleware
 				authenticationMiddleware({ config, logger }),
 				// Scope validation
-				hasValidScopes({ scopes: route.scopes, config }),
+				sofScopeMiddleware({ route, name: key, auth: config.auth }),
 				// Finally our controller function
 				route.controller({ profile, logger, config, app }),
 			);
@@ -290,11 +262,9 @@ function configureOperationRoutes(options) {
 			let route, operationControllerFunction;
 			if (op.method.toLowerCase() === 'post') {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_POST);
-				route.scopes = write_scopes(key);
 				operationControllerFunction = INTERACTIONS.OPERATIONS_POST;
 			} else {
 				route = routes.find(elm => elm.interaction === INTERACTIONS.OPERATIONS_GET);
-				route.scopes = read_scopes(key);
 				operationControllerFunction = INTERACTIONS.OPERATIONS_GET;
 			}
 
@@ -324,7 +294,7 @@ function configureOperationRoutes(options) {
 				// Authentication middleware
 				authenticationMiddleware({ config, logger }),
 				// Scope validation
-				hasValidScopes({ scopes: route.scopes, config }),
+				sofScopeMiddleware({ route, auth: config.auth, name: key }),
 				// Finally our controller function
 				operationsController[operationControllerFunction]({ profile, logger, funcName }),
 			);

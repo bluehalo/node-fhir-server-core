@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@asymmetrik/sof-scope-checker@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/sof-scope-checker/-/sof-scope-checker-1.0.1.tgz#dd5a10088d015546c11c3160e786ed65ba9381d3"
+  integrity sha512-T6A24Llmrtpd46F6tfwU8Myd1ulUPKFCL3Tj6DZYLm+skQzrQ6/Bs9q3CeV7J3JX7IGw3pwh699Z78vuyDbUJQ==
+
 "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
