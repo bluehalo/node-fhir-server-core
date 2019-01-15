@@ -200,7 +200,6 @@ function configureResourceRoutes(options) {
 					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
 				case INTERACTIONS.PATCH:
-					console.log('adding patch ');
 					route.args = [route_args.BASE, route_args.ID];
 					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.PATCH];
@@ -229,12 +228,8 @@ function configureResourceRoutes(options) {
 
 			// Enable cors with preflight options
 			app.options(route.path.replace(':resource', key), cors(cors_options));
+
 			// Setup the route with all the appropriate middleware
-
-			if (route.type === 'patch') {
-				console.log(route);
-			}
-
 			app[route.type](
 				// Actual path for the route
 				route.path.replace(':resource', key),
@@ -251,8 +246,6 @@ function configureResourceRoutes(options) {
 				// Finally our controller function
 				route.controller({ profile, logger, config, app }),
 			);
-
-			// console.log(app);
 		}
 	}
 }
