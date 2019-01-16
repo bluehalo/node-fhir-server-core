@@ -1,4 +1,4 @@
-const errors = require('./error.utils');
+const errors = require('../utils/error.utils');
 
 /**
  * @description Middleware for validating the correct spec version is being accessed
@@ -7,7 +7,7 @@ const errors = require('./error.utils');
  * @param {Object} profile - Configurations for the profile from the wrapping library
  * @return {function} valid express middleware
  */
-let versionValidationMiddleware = (profile = {}) => {
+module.exports = function versionValidationMiddleware(profile = {}) {
 	let { versions = [] } = profile;
 
 	return function validationMiddleware(req, res, next) {
@@ -19,8 +19,4 @@ let versionValidationMiddleware = (profile = {}) => {
 
 		next();
 	};
-};
-
-module.exports = {
-	versionValidationMiddleware,
 };
