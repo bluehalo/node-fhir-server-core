@@ -102,7 +102,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 				errors.invalidParameter(
 					`'resourceType' expected to have value of '${Patient.__resourceType}', received '${
 						resource_body.resourceType
-						}'`,
+					}'`,
 					base_version,
 				),
 			);
@@ -143,7 +143,7 @@ module.exports.update = function update({ profile, logger, config }) {
 				errors.invalidParameter(
 					`'resourceType' expected to have value of '${Patient.__resourceType}', received '${
 						resource_body.resourceType
-						}'`,
+					}'`,
 					base_version,
 				),
 			);
@@ -246,14 +246,13 @@ module.exports.historyById = function historyById({ profile, logger, config }) {
 module.exports.patch = function patch({ profile, logger, config }) {
 	let { serviceModule: service } = profile;
 	return (req, res, next) => {
-
 		let patchContent = req.body;
 		let { base_version, id } = req.sanitized_args;
 
 		// Get a version specific patient
 		let Patient = require(resolveFromVersion(base_version, 'Patient'));
 
-		let args = { id, base_version, patchContent};
+		let args = { id, base_version, patchContent };
 		// Pass any new information to the underlying service
 		return service
 			.patch(args, req.contexts, logger)
