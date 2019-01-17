@@ -173,7 +173,6 @@ function configureResourceRoutes(options) {
 					break;
 				case INTERACTIONS.PATCH:
 					route.args = [route_args.BASE, route_args.ID];
-					route.scopes = write_scopes(key);
 					route.controller = controller[INTERACTIONS.PATCH];
 					break;
 			}
