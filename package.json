@@ -38,10 +38,12 @@
       "json"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/server/standards/"
+      "<rootDir>/src/server/standards/",
+			"<rootDir>/src/server/profiles/"
     ]
   },
   "dependencies": {
+    "@asymmetrik/sof-scope-checker": "^1.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
