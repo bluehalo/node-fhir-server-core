@@ -1,5 +1,9 @@
+const errorUtils = require('./utils/error.utils.js');
+const invariant = require('./utils/invariant.js');
+const routeSetter = require('./route-setter.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
+const Logger = require('./winston.js');
 const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
@@ -7,10 +11,6 @@ const https = require('https');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const invariant = require('./utils/invariant.js');
-const routeSetter = require('./route-setter.js');
-const errorUtils = require('./utils/error.utils.js');
-const Logger = require('./winston.js');
 
 /**
  * @name mergeDefaults
