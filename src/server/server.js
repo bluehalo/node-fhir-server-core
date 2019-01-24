@@ -7,76 +7,106 @@ const https = require('https');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const routeSetter = require('./route-setter');
-const errors = require('./utils/error.utils');
-const Logger = require('./winston');
+const invariant = require('./utils/invariant.js');
+const routeSetter = require('./route-setter.js');
+const errorUtils = require('./utils/error.utils.js');
+const Logger = require('./winston.js');
 
-const { validSSLConfiguration, loadProfile, loadAuthValidator } = require('./utils/config.validators');
+/**
+ * @name mergeDefaults
+ * @description Merge defaults into provided config
+ * @param {Object} config
+ * @return {Object} config merged with defaults
+ */
+function mergeDefaults(providedConfig) {
+	// Define any default settings the server should have to get up and running
+	let defaults = {
+		profiles: {},
+		server: {},
+		logging: {
+			level: 'error',
+		},
+	};
+
+	return Object.assign(defaults, providedConfig);
+}
+
+/**
+ * @name verifyAndLoadProfiles
+ * @description Attempt to load profiles
+ * @param {Object} profiles
+ * @return {Array<String>} Formatted error messages for all encountered issues
+ */
+function verifyAndLoadProfiles(profiles) {
+	let errors = [];
+	// At this stage, we are only validating the configuration, not the server's
+	// support for the given profile. We will do that in the when setting up routes
+	// This may change for future versions when we generate new resources and we
+	// can more easily perform the validation here
+	Object.getOwnPropertyNames(profiles).forEach(name => {
+		let versions = profiles[name].versions;
+		let service = profiles[name].service;
+		let message;
+		// No service provided, we cannot load it
+		if (!service || !versions) {
+			message = `Invalid ${name} configuration. Missing service and/or versions.`;
+		} else {
+			try {
+				profiles[name].serviceModule = typeof service === 'string' ? require(path.resolve(service)) : service;
+			} catch (err) {
+				message = `Invalid ${name} configuration. ${err.message}`;
+			}
+		}
+		// Add the error message if we have one
+		if (message) {
+			errors.push(message);
+		}
+	});
+	return errors;
+}
 
 /**
  * @name validate
  * @description Validate the config and provide defaults for some values
  * @param {Object} config
  */
-function validate(config = {}) {
-	// Validate server settings
-	let { server = {} } = config;
+function validate(config) {
+	// If the ssl config is present, it must have a key and cert
+	invariant(
+		!config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
+		'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
+			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Configuration',
+	);
 
-	let hasValidServerConfiguration =
-		// If the ssl config is present, it must have a key and cert
-		!server.ssl || validSSLConfiguration(server.ssl);
+	// If we have no profiles configured, notify them now
+	invariant(
+		Object.keys(config.profiles).length > 0,
+		'No profiles configured. We do not enable any profiles by default so please ' +
+			'review the profile wiki for how to enable profiles and capabilities. ' +
+			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+	);
 
-	// Validate logger settings
-	// These are not required, so if something is missing, we will set some sensible defaults
-	if (!(config.logging && config.logging.level)) {
-		// Add the default logging level but nothing else
-		config.logging = Object.assign({}, config.logging, { level: 'error' });
-	}
+	// We need to verify that each provided key is valid and that the config
+	// for that profile contains a service that we can load. Let's compile a list
+	// of errors while loading them.
+	let errors = verifyAndLoadProfiles(config.profiles);
 
-	// Validate auth validator
-	config.auth = loadAuthValidator('auth', config.auth);
-
-	// Grab all the profile keys
-	let profileKeys = Object.keys(config.profiles);
-
-	// Verify that each profile has a service and that it can be loaded
-	let profileHasServicesConfigured = profileKeys.every(profileKey => {
-		return loadProfile(profileKey, config.profiles[profileKey]);
-	});
-
-	// Throw errors if any of these conditions have failed
-	if (!hasValidServerConfiguration) {
-		throw new Error(
-			'Server configuration is invalid.' + ' Please review the README.md section on Server Configuration.',
-		);
-	}
-
-	// If we have no profile keys, then they did not setup any profiles for the server
-	// and we can't start
-	if (profileKeys.length === 0) {
-		throw new Error(
-			'No profiles configured. You must configure atleast 1 profile to run this server.' +
-				' Please review the README.md section on Configuring Profiles.',
-		);
-	}
-
-	// Does the profile have services configured. Without services, we cannot get data
-	// so these must be valid and loaded.
-	if (!profileHasServicesConfigured) {
-		throw new Error(
-			'No valid profile configurations found.' + ' Please review the README.md section on Configuring Profiles.',
-		);
-	}
-
-	return config;
+	invariant(
+		errors.length === 0,
+		'Encountered the following errors attempting to load your provided profiles:' +
+			`\n${errors.join('\n')}\n` +
+			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+	);
 }
 
 class Server {
 	constructor(config = {}) {
-		// Validate the config has the required properties
-		this.config = validate(config);
+		// Merge in any defaults we want to set at the server level
+		this.config = mergeDefaults(config);
+		// Validate the config has minimum required settings to run
+		validate(this.config);
 		// Setup a logger for the application
-		this.logger = new Logger(config.logging);
+		this.logger = new Logger(this.config.logging);
 		// Setup our express instance
 		this.app = express();
 		// Setup some environment variables handy for setup
@@ -192,12 +222,12 @@ class Server {
 			let base = req.url.split('/')[1];
 
 			// If there is an error and it is our error type
-			if (err && errors.isServerError(err, base)) {
+			if (err && errorUtils.isServerError(err, base)) {
 				res.status(err.statusCode).json(err);
 			}
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
-				let error = errors.internal(err.message, base);
+				let error = errorUtils.internal(err.message, base);
 				this.logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
@@ -211,7 +241,7 @@ class Server {
 		this.app.use((req, res) => {
 			// get base from URL instead of params since it might not be forwarded
 
-			let error = errors.notFound();
+			let error = errorUtils.notFound();
 			this.logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});
@@ -222,7 +252,13 @@ class Server {
 
 	// Start the server
 	listen(port = process.env.PORT, callback) {
-		let { server = {} } = this.config;
+		let server = this.config.server;
+		// If we are missing a port, let's notify them
+		invariant(
+			port || server.port,
+			'Missing port. Please provide a port when initializing the server. See ' +
+				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Configuration',
+		);
 
 		// Update the express app to be in instance of createServer
 		this.app = !this.env.USE_HTTPS
@@ -236,7 +272,7 @@ class Server {
 			  );
 
 		// Start the app
-		this.app.listen(port, callback);
+		this.app.listen(port || server.port, callback);
 	}
 }
 

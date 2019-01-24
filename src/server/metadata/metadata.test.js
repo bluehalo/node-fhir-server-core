@@ -224,9 +224,9 @@ describe('Conformance Tests', () => {
 		let keys = Object.keys(server.config.profiles);
 		//Patch the test config to include our custom metadata module
 		for (let key of keys) {
-			server.config.profiles[key].metadata = path.resolve(__dirname,'metadata.test.metadata.js');
+			server.config.profiles[key].metadata = path.resolve(__dirname, 'metadata.test.metadata.js');
 		}
-		
+
 		let { routes } = require('../route.config');
 
 		let response = await request(server.app)['get']('/3_0_1/metadata');
@@ -234,8 +234,9 @@ describe('Conformance Tests', () => {
 		//Check the reference for each resource is the customised one
 		for (let key of keys) {
 			let account_resource = response.body.rest[0].resource.find(rsc => rsc.type === 'Foobar');
-			expect(account_resource.profile.reference).toBe(`https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1`);
+			expect(account_resource.profile.reference).toBe(
+				`https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1`,
+			);
 		}
 	}, 60000);
-
 });

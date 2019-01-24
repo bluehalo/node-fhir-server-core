@@ -3,24 +3,24 @@ let { VERSIONS, RESOURCES } = FHIRServer.constants;
 
 module.exports = {
 	// Authentication setup
-	auth: {
-		resourceServer: 'http://localhost:3000',
-		// strategy: {
-		// 	name: 'bearer',
-		// 	useSession: false,
-		// 	service: '../server/strategies/bearer.strategy.js'
-		// }
-	},
+	// auth: {
+	// 	resourceServer: 'http://localhost:3000',
+	// 	// strategy: {
+	// 	// 	name: 'bearer',
+	// 	// 	useSession: false,
+	// 	// 	service: '../server/strategies/bearer.strategy.js'
+	// 	// }
+	// },
 	server: {
 		port: 3000,
-		corsOptions: {
-			maxAge: 86400,
-			methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-		},
-		// ssl: {
-		// 	key: './src/key.pem',
-		// 	cert: './src/cert.pem'
-		// }
+		// corsOptions: {
+		// 	maxAge: 86400,
+		// 	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		// },
+		// 	// ssl: {
+		// 	// 	key: './src/key.pem',
+		// 	// 	cert: './src/cert.pem'
+		// 	// }
 	},
 	logging: {
 		level: 'debug',

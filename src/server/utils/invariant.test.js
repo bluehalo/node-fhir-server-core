@@ -2,8 +2,12 @@ const invariant = require('./invariant.js');
 
 let originalNodeEnv;
 describe('Invariant', () => {
-	beforeAll(() => { originalNodeEnv = process.env.NODE_ENV; });
-	afterEach(() => { process.env.NODE_ENV = originalNodeEnv; });
+	beforeAll(() => {
+		originalNodeEnv = process.env.NODE_ENV;
+	});
+	afterEach(() => {
+		process.env.NODE_ENV = originalNodeEnv;
+	});
 
 	test('should not throw if given condition is truthy', () => {
 		expect(() => {
