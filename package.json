@@ -69,7 +69,7 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
+    "jest": "^24.0.0",
     "nock": "^9.1.5",
     "nodemon": "^1.18.6",
     "prettier": "^1.15.3",
