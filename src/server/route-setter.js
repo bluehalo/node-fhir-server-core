@@ -1,13 +1,13 @@
 const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
+const operationsController = require('./operations/operations.controller');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
-const { route_args } = require('./profiles/common.arguments');
+const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParamaters } = require('./utils/params.utils');
-const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
-const passport = require('passport');
 const { VERSIONS, INTERACTIONS } = require('../constants');
+const { route_args, routes } = require('./route.config');
+const passport = require('passport');
 const cors = require('cors');
-const operationsController = require('./operations/operations.controller');
 
 /**
  * @description Helper function to determine which versions are available
@@ -80,6 +80,7 @@ function configureMetadataRoute(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
 	let { route } = require('./metadata/metadata.config');
+
 	// The user can provider default cors options to be provided on all routes
 	let default_cors_options = Object.assign({}, server.corsOptions);
 	let profile = { versions: getAllConfiguredVersions(profiles) };
@@ -114,7 +115,6 @@ function configureMetadataRoute(options) {
 function configureResourceRoutes(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
-	let { routes } = require('./route.config');
 
 	// loop through all profiles
 	for (const key of Object.keys(profiles)) {
@@ -219,7 +219,6 @@ function configureResourceRoutes(options) {
 function configureOperationRoutes(options) {
 	let { app, config, logger } = options;
 	let { profiles, server } = config;
-	let { routes } = require('./route.config');
 
 	let default_cors_options = Object.assign({}, server.corsOptions);
 	// loop through all profiles
