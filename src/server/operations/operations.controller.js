@@ -4,7 +4,7 @@ const errors = require('../utils/error.utils');
 /**
  * @description Controller for all POST operations
  */
-module.exports.operationsPost = function operationsPost({ profile, logger, funcName }) {
+module.exports.operationsPost = function operationsPost({ profile, logger, name }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports.operationsPost = function operationsPost({ profile, logger, funcN
 		let resource_body = req.body;
 		let args = { id: resource_id, base_version, resource: resource_body };
 
-		service[funcName](args, req.contexts, logger)
+		service[name](args, req.contexts, logger)
 			.then(results => {
 				responseUtils.handleOperationResponse(res, next, base_version, results);
 			})
@@ -26,11 +26,11 @@ module.exports.operationsPost = function operationsPost({ profile, logger, funcN
 /**
  * @description Controller for all GET operations
  */
-module.exports.operationsGet = function operationsGet({ profile, logger, funcName }) {
+module.exports.operationsGet = function operationsGet({ profile, logger, name }) {
 	let { serviceModule: service } = profile;
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
-		service[funcName](req.sanitized_args, req.contexts, logger)
+		service[name](req.sanitized_args, req.contexts, logger)
 			.then(results => {
 				responseUtils.handleOperationResponse(res, next, base_version, results);
 			})

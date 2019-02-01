@@ -3,7 +3,7 @@ const operationsController = require('./operations/operations.controller');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const hypenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
-const { getSearchParamaters } = require('./utils/params.utils');
+const { getSearchParameters } = require('./utils/params.utils');
 const { VERSIONS, INTERACTIONS } = require('../constants');
 const { route_args, routes } = require('./route.config');
 const passport = require('passport');
@@ -122,29 +122,38 @@ function configureResourceRoutes(options) {
 		let customArguments = profile.metadata;
 		// The user can provider default cors options to be provided on all routes
 		let default_cors_options = Object.assign({}, server.corsOptions);
+		let searchParameters, controller;
 
-		// Get all search parameters for profile versions;
-		let search_parameters = [];
-
-		profile.versions.forEach(version => {
-			search_parameters.push(...getSearchParamaters(key, version, customArguments, logger));
-		});
+		// Attempt to load search parameters and the corresponding controller
+		// if these fail to load, the user has configured an invalid profile key
+		try {
+			controller = require(`./profiles/${key.toLowerCase()}/${key.toLowerCase()}.controller`);
+			// Get all search parameters for profile versions
+			searchParameters = profile.versions.reduce((all, version) =>
+				all.concat(getSearchParameters(key, version, customArguments, logger))
+			, []);
+		} catch (err) {
+			throw new Error(
+				'You provided an invalid profile key, please see the Profile wiki for ' +
+				'instructions on how to enable various profile in your server. See ' +
+				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile'
+			);
+		}
 
 		// Iterate over all of our routes
 		for (let j = 0; j < routes.length; j++) {
 			let route = routes[j];
-			let controller = require(`./profiles/${key.toLowerCase()}/${key.toLowerCase()}.controller`);
 			switch (route.interaction) {
 				case INTERACTIONS.SEARCH:
-					route.args = search_parameters;
+					route.args = searchParameters;
 					route.controller = controller[INTERACTIONS.SEARCH];
 					break;
 				case INTERACTIONS.HISTORY:
-					route.args = search_parameters;
+					route.args = searchParameters;
 					route.controller = controller[INTERACTIONS.HISTORY];
 					break;
 				case INTERACTIONS.HISTORY_BY_ID:
-					route.args = [route_args.ID, ...search_parameters];
+					route.args = [route_args.ID, ...searchParameters];
 					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
 					break;
 				case INTERACTIONS.SEARCH_BY_VID:
@@ -168,7 +177,7 @@ function configureResourceRoutes(options) {
 					route.controller = controller[INTERACTIONS.DELETE];
 					break;
 				case INTERACTIONS.EXPAND_BY_ID:
-					route.args = [route_args.BASE, route_args.ID, ...search_parameters];
+					route.args = [route_args.BASE, route_args.ID, ...searchParameters];
 					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
 			}
@@ -255,7 +264,7 @@ function configureOperationRoutes(options) {
 			let search_parameters = [];
 
 			profile.versions.forEach(version => {
-				search_parameters.push(...getSearchParamaters(key, version));
+				search_parameters.push(...getSearchParameters(key, version));
 			});
 
 			let route, operationControllerFunction;
@@ -306,10 +315,9 @@ function configureOperationRoutes(options) {
 // Step 2
 // Filter all the config files by valid configurations
 // Step 3
-// Inject all necessary params into from config and app into route-setter
+// Inject all necessary params from config and app into route-setter
 // Step 4
-// Setup and configure all routes and make sure to pass in valid profiles for each route
-
+// Setup all routes and make sure to pass in valid profiles for each route
 const setter = (options = {}) => {
 	// set metadata route
 	configureMetadataRoute(options);
