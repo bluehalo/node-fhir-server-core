@@ -32,6 +32,7 @@
   },
   "jest": {
     "verbose": true,
+    "clearMocks": true,
     "collectCoverage": true,
     "coverageReporters": [
       "text",
@@ -40,7 +41,8 @@
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/server/standards/",
-      "<rootDir>/src/server/profiles/"
+      "<rootDir>/src/server/profiles/",
+      "<rootDir>/src/server/resources/"
     ]
   },
   "dependencies": {
@@ -66,7 +68,7 @@
     "snyk": "^1.116.2",
     "superagent": "^3.8.3",
     "validator": "^9.1.2",
-    "winston": "^2.4.0",
+    "winston": "^3.2.1",
     "xss": "^0.3.4"
   },
   "devDependencies": {

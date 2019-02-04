@@ -1,4 +1,4 @@
-module.exports.makeResource = (_args, _logger) => {
+module.exports.makeResource = () => {
 	return {
 		profile: {
 			reference: 'https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1',

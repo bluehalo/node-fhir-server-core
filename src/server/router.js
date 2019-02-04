@@ -1,13 +1,12 @@
 const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
+const authenticationMiddleware = require('./middleware/authentication.middleware.js');
 const operationsController = require('./operations/operations.controller');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const { route_args: routeArgs, routes } = require('./route.config');
 const hyphenToCamelcase = require('./utils/hyphen-to-camel.utils');
-const noOpMiddleware = require('./middleware/noop.middleware.js');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParameters } = require('./utils/params.utils');
 const { VERSIONS, INTERACTIONS } = require('../constants');
-const passport = require('passport');
 const cors = require('cors');
 
 
@@ -30,24 +29,6 @@ function getAllConfiguredVersions(profiles = {}) {
 	// reason. Otherwise there may be some compliance issues.
 	return Array.from(providedVersions)
 		.filter(version => supportedVersions.indexOf(version) !== -1);
-}
-
-/**
- * @description Validation Middleware Wrapper
- */
-function authenticationMiddleware(config) {
-	// Don't do any validation for testing
-	if (process.env.NODE_ENV === 'test') {
-		return noOpMiddleware;
-	}
-
-	// if strategy is configured
-	if (config.auth && config.auth.strategy) {
-		let { name, useSession = false } = config.auth.strategy;
-		return passport.authenticate(name, { session: useSession });
-	} else {
-		return noOpMiddleware;
-	}
 }
 
 /**
@@ -84,7 +65,9 @@ function enableOperationRoutesForProfile (app, config, profile, key, parameters,
 
 	for (let op of profile.operation) {
 		let functionName = hyphenToCamelcase(op.name || '');
-		let hasController = Object.keys(profile.serviceModule).includes(functionName);
+		let hasController = profile.serviceModule
+			? Object.keys(profile.serviceModule).includes(functionName)
+			: false;
 		// Check for required configurations, must have name, route, method, and
 		// a matching controller
 		if (!op.name || !op.route || !op.method || !hasController) {
@@ -101,16 +84,18 @@ function enableOperationRoutesForProfile (app, config, profile, key, parameters,
 			methods: [route.type.toUpperCase()],
 		});
 
+		let operationRoute = route.path
+			.replace(':resource', key)
+			.concat(op.route)
+			.replace('$', '([\$])');
+
 		// Enable cors with preflight
-		app.options(route.path, cors(corsOptions));
+		app.options(operationRoute, cors(corsOptions));
 
 		// Enable this operation route
 		app[route.type](
 			// We need to allow the $ to exist in these routes
-			route.path
-				.replace(':resource', key)
-				.concat(op.route)
-				.replace('$', '([\$])'),
+			operationRoute,
 			cors(corsOptions),
 			versionValidationMiddleware(profile),
 			sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
@@ -228,13 +213,15 @@ function enableResourceRoutes (app, config, corsDefaults) {
 				methods: [ corsDefaults.methods || route.type.toUpperCase() ]
 			});
 
+			let profileRoute = route.path.replace(':resource', key);
+
 			// Enable cors with preflight
-			app.options(route.path, cors(corsOptions));
+			app.options(profileRoute, cors(corsOptions));
 
 			// Enable this operation route
 			app[route.type](
 				// We need to allow the $ to exist in these routes
-				route.path.replace(':resource', key),
+				profileRoute,
 				cors(corsOptions),
 				versionValidationMiddleware(profile),
 				sanitizeMiddleware(route.args),

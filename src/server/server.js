@@ -1,9 +1,10 @@
+const deprecate = require('./utils/deprecation.notice.js');
 const errorUtils = require('./utils/error.utils.js');
 const invariant = require('./utils/invariant.js');
-const routeSetter = require('./route-setter.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const Logger = require('./winston.js');
+const loggers = require('./winston.js');
+const router = require('./router.js');
 const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
@@ -106,7 +107,14 @@ class Server {
 		// Validate the config has minimum required settings to run
 		validate(this.config);
 		// Setup a logger for the application
-		this.logger = new Logger(this.config.logging);
+		loggers.initialize(this.config.logging);
+
+		// TODO: REMOVE: logger in future versions, emit notices for now
+		this.logger = deprecate(
+			loggers.get(),
+			'Using the logger this way is deprecated. Please see the documentation on ' +
+			'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
+		);
 		// Setup our express instance
 		this.app = express();
 		// Setup some environment variables handy for setup
@@ -203,13 +211,14 @@ class Server {
 
 	// Setup profile routes
 	setProfileRoutes() {
-		routeSetter.setRoutes(this);
+		router.setRoutes(this);
 		// return self for chaining
 		return this;
 	}
 
 	// Setup error routes
 	setErrorRoutes() {
+		let logger = loggers.get();
 		//Enable error tracking error handler if supplied in config
 		if (this.config.errorTracking && this.config.errorTracking.errorHandler) {
 			this.app.use(this.config.errorTracking.errorHandler());
@@ -228,7 +237,7 @@ class Server {
 			// If there is still an error, throw a 500 and pass the message through
 			else if (err) {
 				let error = errorUtils.internal(err.message, base);
-				this.logger.error(error.statusCode, err);
+				logger.error(error.statusCode, err);
 				res.status(error.statusCode).json(error);
 			}
 			// No error
@@ -240,9 +249,8 @@ class Server {
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
 			// get base from URL instead of params since it might not be forwarded
-
 			let error = errorUtils.notFound();
-			this.logger.error(error.statusCode, req.path);
+			logger.error(error.statusCode, req.path);
 			res.status(error.statusCode).json(error);
 		});
 

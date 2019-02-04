@@ -1,6 +1,9 @@
-const generateInteractions = require('./metadata.interactions');
-const conformanceTemplate = require('./capability.template');
-const errors = require('../utils/error.utils');
+const generateInteractions = require('./metadata.interactions.js');
+const conformanceTemplate = require('./capability.template.js');
+const errors = require('../utils/error.utils.js');
+const loggers = require('../winston.js');
+
+let logger = loggers.get();
 
 /**
  * Load the correct statement generators for the right version
@@ -21,7 +24,7 @@ let getStatementGenerators = base_version => {
  * @param {Winston} logger - Instance of Winston's logger
  * @return {Promise<Object>} - Return the capability statement
  */
-let generateCapabilityStatement = (args, config, logger) =>
+let generateCapabilityStatement = (args, config, _logger) =>
 	new Promise((resolve, reject) => {
 		logger.info('Metadata.generateCapabilityStatement');
 		// Create a new base_version capability statement per request
@@ -45,7 +48,7 @@ let generateCapabilityStatement = (args, config, logger) =>
 
 		// Get the necessary functions to generate statements
 		let { makeStatement, securityStatement } = config.statementGenerator
-			? config.statementGenerator(args, logger)
+			? config.statementGenerator(args, _logger)
 			: getStatementGenerators(args.base_version);
 		// If we do not have these functions, we cannot generate a new statement
 		if (!makeStatement || !securityStatement) {
@@ -93,7 +96,7 @@ let generateCapabilityStatement = (args, config, logger) =>
 				customMakeResource = profile.service.makeResource;
 			}
 			let resource = customMakeResource
-				? customMakeResource(Object.assign(args, { key: profile.key }), logger)
+				? customMakeResource(Object.assign(args, { key: profile.key }), _logger)
 				: profile.makeResource(context.base_version, profile.key);
 			// Determine the interactions we need to list for this profile
 			resource.interaction = generateInteractions(profile.service, resource.type);
