@@ -1,7 +1,5 @@
 const path = require('path');
-const {
-	getSearchParameters,
-} = require(path.resolve('./src/server/utils/params.utils'));
+const { getSearchParameters } = require(path.resolve('./src/server/utils/params.utils'));
 
 describe('Param Utils Tests', () => {
 	describe('getSearchParameters', () => {
@@ -23,9 +21,7 @@ describe('Param Utils Tests', () => {
 				/* eslint-disable no-unused-vars */
 				let badParams = getSearchParameters('foobar', '2.3.4');
 				/* eslint-enable no-unused-vars */
-			}).toThrowError(
-				"Cannot find module '../resources/2.3.4/parameters/foobar.parameters.js'"
-			);
+			}).toThrowError("Cannot find module '../resources/2.3.4/parameters/foobar.parameters.js'");
 		});
 
 		test('should return an array with name added to each argument', () => {
@@ -42,5 +38,4 @@ describe('Param Utils Tests', () => {
 			expect(stu3Params).toHaveLength(17);
 		});
 	});
-
 });

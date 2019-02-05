@@ -8,9 +8,9 @@ let config = {
 	auth: {
 		strategy: {
 			name: 'test',
-			useSession: true
-		}
-	}
+			useSession: true,
+		},
+	},
 };
 
 describe('Authentication Middleware Test', () => {
@@ -47,7 +47,7 @@ describe('Authentication Middleware Test', () => {
 	test('should default session to false if none is provided', () => {
 		process.env.NODE_ENV = 'production';
 		let newConfig = Object.assign({}, config, {
-			auth: { strategy: { name: 'default' }}
+			auth: { strategy: { name: 'default' } },
 		});
 
 		let middleware = authenticationMiddleware(newConfig);

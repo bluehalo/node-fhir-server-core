@@ -6,9 +6,17 @@ const { route_args: routeArgs, routes } = require('./route.config');
 const hyphenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParameters } = require('./utils/params.utils');
+const deprecate = require('../utils/deprecation.notice.js');
 const { VERSIONS, INTERACTIONS } = require('../constants');
+const loggers = require('./winston.js');
 const cors = require('cors');
 
+// TODO: REMOVE: logger in future versions, emit notices for now
+let deprecatedLogger = deprecate(
+	loggers.get(),
+	'Using the logger this way is deprecated. Please see the documentation on ' +
+		'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+);
 
 /**
  * @function getAllConfiguredVersions
@@ -27,8 +35,7 @@ function getAllConfiguredVersions(profiles = {}) {
 	// Filter the provided versions by ones we actually support. We need to check this to make
 	// sure some user does not pass in a version we do not officially support in core for whatever
 	// reason. Otherwise there may be some compliance issues.
-	return Array.from(providedVersions)
-		.filter(version => supportedVersions.indexOf(version) !== -1);
+	return Array.from(providedVersions).filter(version => supportedVersions.indexOf(version) !== -1);
 }
 
 /**
@@ -40,11 +47,7 @@ function getAllConfiguredVersions(profiles = {}) {
  * @return {boolean}
  */
 function hasValidService(route = {}, profile = {}) {
-	return Boolean(
-		route.controller
-		&& profile.serviceModule
-		&& profile.serviceModule[route.controller.name]
-	);
+	return Boolean(route.controller && profile.serviceModule && profile.serviceModule[route.controller.name]);
 }
 
 /**
@@ -57,17 +60,16 @@ function hasValidService(route = {}, profile = {}) {
  * @param {Array<Object>} parameters - Parameters allowed for this profile
  * @param {Object} corsDefaults - Default cors settings
  */
-function enableOperationRoutesForProfile (app, config, profile, key, parameters, corsDefaults) {
+function enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults) {
 	// Error message we will use for invalid configurations
-	let errorMessage = `Invalid operation configuration for ${key}. Please ` +
-	'see the Operations wiki for instructions on how to use operations. ' +
-	'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Operations';
+	let errorMessage =
+		`Invalid operation configuration for ${key}. Please ` +
+		'see the Operations wiki for instructions on how to use operations. ' +
+		'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Operations';
 
 	for (let op of profile.operation) {
 		let functionName = hyphenToCamelcase(op.name || '');
-		let hasController = profile.serviceModule
-			? Object.keys(profile.serviceModule).includes(functionName)
-			: false;
+		let hasController = profile.serviceModule ? Object.keys(profile.serviceModule).includes(functionName) : false;
 		// Check for required configurations, must have name, route, method, and
 		// a matching controller
 		if (!op.name || !op.route || !op.method || !hasController) {
@@ -75,9 +77,7 @@ function enableOperationRoutesForProfile (app, config, profile, key, parameters,
 		}
 
 		let lowercaseMethod = op.method.toLowerCase();
-		let interaction = lowercaseMethod === 'post'
-			? INTERACTIONS.OPERATIONS_POST
-			: INTERACTIONS.OPERATIONS_GET;
+		let interaction = lowercaseMethod === 'post' ? INTERACTIONS.OPERATIONS_POST : INTERACTIONS.OPERATIONS_GET;
 
 		let route = routes.find(rt => rt.interaction === interaction);
 		let corsOptions = Object.assign({}, corsDefaults, {
@@ -87,7 +87,7 @@ function enableOperationRoutesForProfile (app, config, profile, key, parameters,
 		let operationRoute = route.path
 			.replace(':resource', key)
 			.concat(op.route)
-			.replace('$', '([\$])');
+			.replace('$', '([$])');
 
 		// Enable cors with preflight
 		app.options(operationRoute, cors(corsOptions));
@@ -101,23 +101,23 @@ function enableOperationRoutesForProfile (app, config, profile, key, parameters,
 			sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
 			authenticationMiddleware({ config }),
 			sofScopeMiddleware({ route, auth: config.auth, name: key }),
-			operationsController[interaction]({ profile, name: functionName })
+			// TODO: REMOVE: logger in future versions
+			operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger }),
 		);
-
 	}
 }
 
-function enableMetadataRoute (app, config, corsDefaults) {
+function enableMetadataRoute(app, config, corsDefaults) {
 	let { route } = require('./metadata/metadata.config');
 
 	// Determine which versions need a metadata endpoint, we need to loop through
 	// all the configured profiles and find all the uniquely provided versions
 	let versionValidationConfiguration = {
-		versions: getAllConfiguredVersions(config.profiles)
+		versions: getAllConfiguredVersions(config.profiles),
 	};
 
 	let corsOptions = Object.assign({}, corsDefaults, {
-		methods: [route.type.toUpperCase()]
+		methods: [route.type.toUpperCase()],
 	});
 
 	// Enable cors with preflight
@@ -129,12 +129,12 @@ function enableMetadataRoute (app, config, corsDefaults) {
 		cors(corsOptions),
 		versionValidationMiddleware(versionValidationConfiguration),
 		sanitizeMiddleware(route.args),
-		route.controller({ config })
+		// TODO: REMOVE: logger in future versions
+		route.controller({ config, logger: deprecatedLogger }),
 	);
-
 }
 
-function enableResourceRoutes (app, config, corsDefaults) {
+function enableResourceRoutes(app, config, corsDefaults) {
 	// Iterate over all of our provided profiles
 	for (let key in config.profiles) {
 		let lowercaseKey = key.toLowerCase();
@@ -148,14 +148,15 @@ function enableResourceRoutes (app, config, corsDefaults) {
 
 		try {
 			controller = require(`./profiles/${lowercaseKey}/${lowercaseKey}.controller`);
-			parameters = profile.versions.reduce((all, version) =>
-				all.concat(getSearchParameters(lowercaseKey, version, overrideArguments))
-			, []);
+			parameters = profile.versions.reduce(
+				(all, version) => all.concat(getSearchParameters(lowercaseKey, version, overrideArguments)),
+				[],
+			);
 		} catch (err) {
 			throw new Error(
 				`${key} is an invalid profile configuration, please see the wiki for ` +
-				'instructions on how to enable a profile in your server, ' +
-				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile'
+					'instructions on how to enable a profile in your server, ' +
+					'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
 			);
 		}
 
@@ -210,7 +211,7 @@ function enableResourceRoutes (app, config, corsDefaults) {
 			}
 
 			let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
-				methods: [ corsDefaults.methods || route.type.toUpperCase() ]
+				methods: [corsDefaults.methods || route.type.toUpperCase()],
 			});
 
 			let profileRoute = route.path.replace(':resource', key);
@@ -227,14 +228,14 @@ function enableResourceRoutes (app, config, corsDefaults) {
 				sanitizeMiddleware(route.args),
 				authenticationMiddleware({ config }),
 				sofScopeMiddleware({ route, auth: config.auth, name: key }),
-				route.controller({ profile, config, app })
+				// TODO: REMOVE: logger in future versions
+				route.controller({ profile, config, app, logger: deprecatedLogger }),
 			);
 		}
-
 	}
 }
 
-function setRoutes (options = {}) {
+function setRoutes(options = {}) {
 	let { app, config } = options;
 	let { server } = config;
 
@@ -247,5 +248,5 @@ function setRoutes (options = {}) {
 }
 
 module.exports = {
-	setRoutes
+	setRoutes,
 };

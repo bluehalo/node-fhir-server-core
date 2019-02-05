@@ -10,27 +10,29 @@ let mockServiceModule = {
 	aggregateResults: () => Promise.resolve(),
 };
 
-let mockOperationConfig = [{
-	name: 'aggregate-results',
-	route: '/$aggregate-results',
-	method: 'POST'
-}];
+let mockOperationConfig = [
+	{
+		name: 'aggregate-results',
+		route: '/$aggregate-results',
+		method: 'POST',
+	},
+];
 
 describe('Router Tests', () => {
 	beforeEach(() => {
 		app = {
 			get: jest.fn(),
 			post: jest.fn(),
-			options: jest.fn()
+			options: jest.fn(),
 		};
 		config = {
 			server: {},
 			profiles: {
 				patient: {
 					service: path.resolve('./src/server/profiles/service.mock.js'),
-					versions: ['3_0_1']
-				}
-			}
+					versions: ['3_0_1'],
+				},
+			},
 		};
 	});
 
@@ -38,7 +40,7 @@ describe('Router Tests', () => {
 		// Add another version via a different route
 		config.profiles.observation = {
 			service: path.resolve('./src/server/profiles/service.mock.js'),
-			versions: ['4_0_0']
+			versions: ['4_0_0'],
 		};
 		// Run the router with some defaults
 		router.setRoutes({ app, config });
@@ -49,9 +51,7 @@ describe('Router Tests', () => {
 		// It returns the options given to it so we can see which versions were
 		// selected
 		let versionValidationMockReturn = app.get.mock.calls[0][2];
-		expect(versionValidationMockReturn.versions).toEqual(
-			expect.arrayContaining(['3_0_1', '4_0_0'])
-		);
+		expect(versionValidationMockReturn.versions).toEqual(expect.arrayContaining(['3_0_1', '4_0_0']));
 	});
 
 	test('should throw for invalid profile configurations', () => {
@@ -99,19 +99,23 @@ describe('Router Tests', () => {
 			router.setRoutes({ app, config });
 		}).toThrowError(operationWiki);
 		// missing operation is next
-		config.profiles.patient.operation = [{
-			name: 'foo-bar',
-			route: '/$foo-bar'
-		}];
+		config.profiles.patient.operation = [
+			{
+				name: 'foo-bar',
+				route: '/$foo-bar',
+			},
+		];
 		expect(() => {
 			router.setRoutes({ app, config });
 		}).toThrowError(operationWiki);
 		// No matching service module is last
-		config.profiles.patient.operation = [{
-			name: 'foo-bar',
-			route: '/$foo-bar',
-			method: 'POST'
-		}];
+		config.profiles.patient.operation = [
+			{
+				name: 'foo-bar',
+				route: '/$foo-bar',
+				method: 'POST',
+			},
+		];
 		expect(() => {
 			router.setRoutes({ app, config });
 		}).toThrowError(operationWiki);

@@ -9,13 +9,13 @@
  */
 let getSearchParameters = (profile, version, customArgsModule, logger) => {
 	let lowercaseProfileName = profile.toLowerCase(),
-			allArguments = {};
+		allArguments = {};
 	// If we have a custom args module, we will use this to populate the allowed
 	// args for this particular route instead of the default arguments included
 	if (customArgsModule) {
 		let paramsAsArray = require(String(customArgsModule)).makeResource(
 			Object.assign({}, { base_version: version, key: lowercaseProfileName }),
-			logger
+			logger,
 		).searchParam;
 		// We need to key these by name so we can remove duplicates on merge
 		allArguments = paramsAsArray.reduce((all, arg) => {
@@ -23,22 +23,19 @@ let getSearchParameters = (profile, version, customArgsModule, logger) => {
 			return all;
 		}, {});
 	} else {
-		allArguments = require(
-			`../resources/${version}/parameters/${lowercaseProfileName}.parameters.js`
-		);
+		allArguments = require(`../resources/${version}/parameters/${lowercaseProfileName}.parameters.js`);
 	}
 
 	// Load our common arguments that apply to all resources
-	allArguments = Object.assign(allArguments, require(
-		`../resources/${version}/parameters/resource.parameters.js`
-	));
+	allArguments = Object.assign(allArguments, require(`../resources/${version}/parameters/resource.parameters.js`));
 
 	// Everyone has a DomainResource and Resource parameter we want to include
 	// except DSTU2(1_0_2), so do not attempt to merge that in DSTU2
 	if (version !== '1_0_2') {
-		allArguments = Object.assign(allArguments, require(
-			`../resources/${version}/parameters/domainresource.parameters.js`
-		));
+		allArguments = Object.assign(
+			allArguments,
+			require(`../resources/${version}/parameters/domainresource.parameters.js`),
+		);
 	}
 
 	// Convert these into an array
@@ -48,5 +45,5 @@ let getSearchParameters = (profile, version, customArgsModule, logger) => {
 };
 
 module.exports = {
-	getSearchParameters
+	getSearchParameters,
 };

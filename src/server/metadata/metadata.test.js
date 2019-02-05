@@ -63,7 +63,7 @@ customCapabilityStatement = function(resources) {
 };
 
 //A custom statementGenerator getter
-let customGetStatementGenerators = (args) => {
+let customGetStatementGenerators = args => {
 	return {
 		makeStatement: customCapabilityStatement,
 		securityStatement: customSecurityStatement,
@@ -71,7 +71,7 @@ let customGetStatementGenerators = (args) => {
 };
 
 //A function to make a custom resource conformance statement
-let customMakeResource = (args) => {
+let customMakeResource = args => {
 	let Resource = require(resolve_utils.resolveFromVersion(args.base_version, args.key));
 
 	// Return our conformance statement
