@@ -1,6 +1,3 @@
-const FHIRServer = require('./index.js');
-let { VERSIONS } = FHIRServer.constants;
-
 module.exports = {
 	server: {
 		port: 3000,
@@ -30,35 +27,35 @@ module.exports = {
 	profiles: {
 		Appointment: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		AppointmentResponse: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		Bundle: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		MedicationRequest: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		Observation: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		Patient: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1'], VERSIONS['1_0_2']],
+			versions: ['1_0_2', '3_0_1'],
 		},
 		Questionnaire: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 		QuestionnaireResponse: {
 			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['3_0_1']],
+			versions: ['3_0_1'],
 		},
 	},
 };
