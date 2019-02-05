@@ -1,8 +1,8 @@
 const responseUtils = require('../utils/response.utils.js');
 const errors = require('../utils/error.utils.js');
-const loggers = require('../winston.js');
+const { container } = require('../winston.js');
 
-let logger = loggers.get();
+let logger = container.get('default');
 
 /**
  * @description Controller for all POST operations

@@ -1,6 +1,6 @@
-const loggers = require('../winston.js');
+const { container } = require('../winston.js');
 
-let logger = loggers.get();
+let logger = container.get('default');
 
 module.exports.search = (_args, _context) =>
 	new Promise((resolve, reject) => {

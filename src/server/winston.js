@@ -11,8 +11,15 @@ const { Container, transports } = require('winston');
  let container = new Container();
 
 /**
+ * @description Logging container that can be used to modify any loggers
+ * availablie in the current application
+ */
+module.exports.container = container;
+
+/**
  * @function get
- * @description Retrieve a logger by name, can be one the user created or not
+ * @description Retrieve a logger by name, same as container.get except with a
+ * default value applied to it
  * @param {String} name - Name of the logger
  * @param {Object} options - Options for the logger, this is also an alias for
  * adding a logger
