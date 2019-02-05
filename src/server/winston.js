@@ -1,4 +1,4 @@
-const { loggers, transports } = require('winston');
+const { Container, transports } = require('winston');
 
 /**
  * Features
@@ -8,12 +8,14 @@ const { loggers, transports } = require('winston');
  * - try not to be too much of a breaking change
  */
 
+ let container = new Container();
+
 /**
  * @function add
  * @description Expose the winston logger to make it easy to add more loggers
  * for the end user
  */
-module.exports.add = loggers.add;
+module.exports.add = container.add;
 
 /**
  * @function get
@@ -21,14 +23,19 @@ module.exports.add = loggers.add;
  * @param {String} name - Name of the logger
  * @return {winston.logger}
  */
-module.exports.get = (name = 'default') => loggers.get(name);
+module.exports.get = (name = 'default') => container.get(name);
 
 /**
  * @function initialize
  * @description Initialize a default console logger
  */
 module.exports.initialize = (config = {}) => {
-	loggers.add('default', {
+	// If we already have a logger by the provided default name remove it
+	// if (container.has('default')) {
+	// 	container.close('default');
+	// }
+
+	container.add('default', {
 		transports: [
 			new transports.Console({
 				level: config.level,
@@ -37,6 +44,4 @@ module.exports.initialize = (config = {}) => {
 			}),
 		],
 	});
-
-	return loggers.get();
 };

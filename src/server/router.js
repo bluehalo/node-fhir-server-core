@@ -1,22 +1,14 @@
 const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
 const authenticationMiddleware = require('./middleware/authentication.middleware.js');
-const operationsController = require('./operations/operations.controller');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const { route_args: routeArgs, routes } = require('./route.config');
 const hyphenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
 const { getSearchParameters } = require('./utils/params.utils');
-const deprecate = require('../utils/deprecation.notice.js');
 const { VERSIONS, INTERACTIONS } = require('../constants');
+const deprecate = require('./utils/deprecation.notice.js');
 const loggers = require('./winston.js');
 const cors = require('cors');
-
-// TODO: REMOVE: logger in future versions, emit notices for now
-let deprecatedLogger = deprecate(
-	loggers.get(),
-	'Using the logger this way is deprecated. Please see the documentation on ' +
-		'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
-);
 
 /**
  * @function getAllConfiguredVersions
@@ -61,6 +53,7 @@ function hasValidService(route = {}, profile = {}) {
  * @param {Object} corsDefaults - Default cors settings
  */
 function enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults) {
+	const operationsController = require('./operations/operations.controller');
 	// Error message we will use for invalid configurations
 	let errorMessage =
 		`Invalid operation configuration for ${key}. Please ` +
@@ -88,6 +81,13 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 			.replace(':resource', key)
 			.concat(op.route)
 			.replace('$', '([$])');
+
+		// TODO: REMOVE: logger in future versions, emit notices for now
+		let deprecatedLogger = deprecate(
+			loggers.get(),
+			'Using the logger this way is deprecated. Please see the documentation on ' +
+				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+		);
 
 		// Enable cors with preflight
 		app.options(operationRoute, cors(corsOptions));
@@ -119,6 +119,12 @@ function enableMetadataRoute(app, config, corsDefaults) {
 	let corsOptions = Object.assign({}, corsDefaults, {
 		methods: [route.type.toUpperCase()],
 	});
+
+	let deprecatedLogger = deprecate(
+		loggers.get(),
+		'Using the logger this way is deprecated. Please see the documentation on ' +
+			'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+	);
 
 	// Enable cors with preflight
 	app.options(route.path, cors(corsOptions));
@@ -215,6 +221,12 @@ function enableResourceRoutes(app, config, corsDefaults) {
 			});
 
 			let profileRoute = route.path.replace(':resource', key);
+
+			let deprecatedLogger = deprecate(
+				loggers.get(),
+				'Using the logger this way is deprecated. Please see the documentation on ' +
+					'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+			);
 
 			// Enable cors with preflight
 			app.options(profileRoute, cors(corsOptions));

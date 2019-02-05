@@ -104,10 +104,10 @@ class Server {
 	constructor(config = {}) {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
-		// Validate the config has minimum required settings to run
-		validate(this.config);
 		// Setup a logger for the application
 		loggers.initialize(this.config.logging);
+		// Validate the config has minimum required settings to run
+		validate(this.config);
 
 		// TODO: REMOVE: logger in future versions, emit notices for now
 		this.logger = deprecate(

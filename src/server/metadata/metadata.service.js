@@ -1,9 +1,6 @@
 const generateInteractions = require('./metadata.interactions.js');
 const conformanceTemplate = require('./capability.template.js');
 const errors = require('../utils/error.utils.js');
-// const loggers = require('../winston.js');
-//
-// let logger = loggers.get();
 
 /**
  * Load the correct statement generators for the right version
