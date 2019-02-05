@@ -128,8 +128,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
 		cors(corsOptions),
 		versionValidationMiddleware(versionValidationConfiguration),
 		sanitizeMiddleware(route.args),
-		// TODO: REMOVE: logger in future versions
-		route.controller({ config, logger: deprecatedLogger }),
+		route.controller({ config }),
 	);
 }
 

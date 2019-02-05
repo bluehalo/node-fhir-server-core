@@ -3,7 +3,7 @@ const errorUtils = require('./utils/error.utils.js');
 const invariant = require('./utils/invariant.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const winston = require('./winston.js');
+const loggers = require('./winston.js');
 const router = require('./router.js');
 const passport = require('passport');
 const express = require('express');
@@ -105,13 +105,13 @@ class Server {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
 		// Setup a logger for the application
-		winston.initialize(this.config.logging);
+		loggers.initialize(this.config.logging);
 		// Validate the config has minimum required settings to run
 		validate(this.config);
 
 		// TODO: REMOVE: logger in future versions, emit notices for now
 		this.logger = deprecate(
-			winston.get('default'),
+			loggers.get('default'),
 			'Using the logger this way is deprecated. Please see the documentation on ' +
 				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 		);
@@ -218,7 +218,7 @@ class Server {
 
 	// Setup error routes
 	setErrorRoutes() {
-		let logger = winston.get('default');
+		let logger = loggers.get('default');
 		//Enable error tracking error handler if supplied in config
 		if (this.config.errorTracking && this.config.errorTracking.errorHandler) {
 			this.app.use(this.config.errorTracking.errorHandler());

@@ -1,6 +1,10 @@
 const generateInteractions = require('./metadata.interactions.js');
 const conformanceTemplate = require('./capability.template.js');
+const deprecate = require('../utils/deprecation.notice.js');
 const errors = require('../utils/error.utils.js');
+const { container } = require('../winston.js');
+
+let logger = container.get('default');
 
 /**
  * Load the correct statement generators for the right version
@@ -21,7 +25,7 @@ let getStatementGenerators = base_version => {
  * @param {Winston} logger - Instance of Winston's logger
  * @return {Promise<Object>} - Return the capability statement
  */
-let generateCapabilityStatement = (args, config, logger) =>
+let generateCapabilityStatement = (args, config) =>
 	new Promise((resolve, reject) => {
 		logger.info('Metadata.generateCapabilityStatement');
 		// Create a new base_version capability statement per request
@@ -43,9 +47,16 @@ let generateCapabilityStatement = (args, config, logger) =>
 			})
 			.filter(profile => profile.versions.indexOf(context.base_version) !== -1);
 
+		// TODO: REMOVE: Logger deprecatedLogger
+		let deprecatedLogger = deprecate(
+			container.get('default'),
+			'Using the logger this way is deprecated. Please see the documentation on ' +
+				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+		);
+
 		// Get the necessary functions to generate statements
 		let { makeStatement, securityStatement } = config.statementGenerator
-			? config.statementGenerator(args, logger)
+			? config.statementGenerator(args, deprecatedLogger)
 			: getStatementGenerators(args.base_version);
 		// If we do not have these functions, we cannot generate a new statement
 		if (!makeStatement || !securityStatement) {
@@ -93,7 +104,7 @@ let generateCapabilityStatement = (args, config, logger) =>
 				customMakeResource = profile.service.makeResource;
 			}
 			let resource = customMakeResource
-				? customMakeResource(Object.assign(args, { key: profile.key }), logger)
+				? customMakeResource(Object.assign(args, { key: profile.key }), deprecatedLogger)
 				: profile.makeResource(context.base_version, profile.key);
 			// Determine the interactions we need to list for this profile
 			resource.interaction = generateInteractions(profile.service, resource.type);
