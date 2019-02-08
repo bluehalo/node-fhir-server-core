@@ -1,4 +1,4 @@
-const { resolveFromVersion } = require('./server/utils/resolve.utils');
+const { resolveSchema } = require('./server/utils/resolve.utils');
 const winston = require('./server/winston.js');
 const Server = require('./server/server');
 const constants = require('./constants');
@@ -24,7 +24,7 @@ module.exports = {
 	/**
 	 * @description Export function to support easier loading of classes
 	 */
-	resolveFromVersion: resolveFromVersion,
+	resolveSchema: resolveSchema,
 
 	/**
 	 * @description Export logger to allow for customization and easy access to

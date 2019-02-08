@@ -4,6 +4,7 @@ const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
 const { route_args: routeArgs, routes } = require('./route.config');
 const hyphenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
+const { resolveFromVersion } = require('./utils/resolove.utils');
 const { getSearchParameters } = require('./utils/params.utils');
 const { VERSIONS, INTERACTIONS } = require('../constants');
 const deprecate = require('./utils/deprecation.notice.js');
@@ -149,7 +150,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 			let controller, parameters;
 
 			try {
-				controller = require(`./resources/${version}/controllers/${lowercaseKey}.controller.js`);
+				controller = require(resolveFromVersion(version, `controllers/${lowercaseKey}.controller.js`));
 				parameters = getSearchParameters(lowercaseKey, version, overrideArguments);
 			} catch (err) {
 				throw new Error(
@@ -220,7 +221,6 @@ function enableResourceRoutes(app, config, corsDefaults) {
 
 				// Enable this operation route
 				app[route.type](
-					// We need to allow the $ to exist in these routes
 					profileRoute,
 					cors(corsOptions),
 					versionValidationMiddleware(profile),

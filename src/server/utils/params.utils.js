@@ -1,3 +1,5 @@
+const { resolveFromVersion } = require('./resolve.utils.js');
+
 /**
  * @function getSearchParameters
  * @description Get the search parameters for a given resource on a specific version
@@ -17,24 +19,29 @@ let getSearchParameters = (profile, version, customArgsModule, logger) => {
 			Object.assign({}, { base_version: version, key: lowercaseProfileName }),
 			logger,
 		).searchParam;
-		// We need to key these by name so we can remove duplicates on merge
+		// We need to key these by name so we can remove duplicates on assign
 		allArguments = paramsAsArray.reduce((all, arg) => {
 			all[arg.name] = arg;
 			return all;
 		}, {});
 	} else {
-		allArguments = require(`../resources/${version}/parameters/${lowercaseProfileName}.parameters.js`);
+		allArguments = require(
+			resolveFromVersion(version, `/parameters/${lowercaseProfileName}.parameters.js`)
+		);
 	}
 
 	// Load our common arguments that apply to all resources
-	allArguments = Object.assign(allArguments, require(`../resources/${version}/parameters/resource.parameters.js`));
+	allArguments = Object.assign(
+		allArguments,
+		require(resolveFromVersion(version, '/parameters/resource.parameters.js'))
+	);
 
 	// Everyone has a DomainResource and Resource parameter we want to include
-	// except DSTU2(1_0_2), so do not attempt to merge that in DSTU2
+	// except DSTU2(1_0_2), so do not attempt to assign that in DSTU2
 	if (version !== '1_0_2') {
 		allArguments = Object.assign(
 			allArguments,
-			require(`../resources/${version}/parameters/domainresource.parameters.js`),
+			require(resolveFromVersion(version, '/parameters/domainresource.parameters.js')),
 		);
 	}
 

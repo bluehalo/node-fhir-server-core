@@ -1,10 +1,10 @@
 /* eslint-disable */
-const moment = require('moment-timezone');
+const { resolveSchema } = require('../utils/resolve.utils');
 const test_config = require('../../test.config');
 const { VERSIONS } = require('../../constants');
+const moment = require('moment-timezone');
 const request = require('supertest');
 const Server = require('../server');
-const resolve_utils = require('../utils/resolve.utils');
 const path = require('path');
 let server;
 
@@ -39,7 +39,7 @@ customSecurityStatement = securityUrls => ({
 
 //Helper function to build a custom capability statement
 customCapabilityStatement = function(resources) {
-	let CapabilityStatement = require(resolve_utils.resolveFromVersion('3_0_1', 'CapabilityStatement'));
+	let CapabilityStatement = require(resolveSchema('3_0_1', 'CapabilityStatement'));
 
 	return new CapabilityStatement({
 		status: 'active',
@@ -72,7 +72,7 @@ let customGetStatementGenerators = args => {
 
 //A function to make a custom resource conformance statement
 let customMakeResource = args => {
-	let Resource = require(resolve_utils.resolveFromVersion(args.base_version, args.key));
+	let Resource = require(resolveSchema(args.base_version, args.key));
 
 	// Return our conformance statement
 	return {
