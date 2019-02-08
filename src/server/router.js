@@ -137,98 +137,100 @@ function enableResourceRoutes(app, config, corsDefaults) {
 	for (let key in config.profiles) {
 		let lowercaseKey = key.toLowerCase();
 		let profile = config.profiles[key];
+		let versions = profile.versions;
 		// User's can override arguments by providing their own metadata
 		// function, may have more use in other areas in the future
 		let overrideArguments = profile.metadata;
-		// We need to check if the provided key is one this server supports
-		// so load anything related to the key here and handle with one simple error
-		let controller, parameters;
 
-		try {
-			controller = require(`./profiles/${lowercaseKey}/${lowercaseKey}.controller`);
-			parameters = profile.versions.reduce(
-				(all, version) => all.concat(getSearchParameters(lowercaseKey, version, overrideArguments)),
-				[],
-			);
-		} catch (err) {
-			throw new Error(
-				`${key} is an invalid profile configuration, please see the wiki for ` +
-					'instructions on how to enable a profile in your server, ' +
-					'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
-			);
-		}
+		// Enable the routes for each version configured
+		for (let version of versions) {
+			// We need to check if the provided key is one this server supports
+			// so load anything related to the key here and handle with one simple error
+			let controller, parameters;
 
-		// Enable all provided operations for this profile
-		if (profile.operation && profile.operation.length) {
-			enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults);
-		}
-
-		// We want to enable all routes on each profile that has a valid service
-		for (let route of routes) {
-			switch (route.interaction) {
-				case INTERACTIONS.SEARCH:
-					route.args = [routeArgs.BASE, ...parameters];
-					route.controller = controller[INTERACTIONS.SEARCH];
-					break;
-				case INTERACTIONS.HISTORY:
-					route.args = [routeArgs.BASE, ...parameters];
-					route.controller = controller[INTERACTIONS.HISTORY];
-					break;
-				case INTERACTIONS.HISTORY_BY_ID:
-					route.args = [routeArgs.BASE, routeArgs.ID, ...parameters];
-					route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
-					break;
-				case INTERACTIONS.SEARCH_BY_VID:
-					route.args = [routeArgs.BASE, routeArgs.ID, routeArgs.VERSION_ID];
-					route.controller = controller[INTERACTIONS.SEARCH_BY_VID];
-					break;
-				case INTERACTIONS.SEARCH_BY_ID:
-					route.args = [routeArgs.BASE, routeArgs.ID];
-					route.controller = controller[INTERACTIONS.SEARCH_BY_ID];
-					break;
-				case INTERACTIONS.CREATE:
-					route.args = [routeArgs.BASE];
-					route.controller = controller[INTERACTIONS.CREATE];
-					break;
-				case INTERACTIONS.UPDATE:
-					route.args = [routeArgs.BASE, routeArgs.ID];
-					route.controller = controller[INTERACTIONS.UPDATE];
-					break;
-				case INTERACTIONS.DELETE:
-					route.args = [routeArgs.BASE, routeArgs.ID];
-					route.controller = controller[INTERACTIONS.DELETE];
-					break;
-				case INTERACTIONS.EXPAND_BY_ID:
-					route.args = [routeArgs.BASE, routeArgs.ID, ...parameters];
-					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
-					break;
+			try {
+				controller = require(`./resources/${version}/controllers/${lowercaseKey}.controller.js`);
+				parameters = getSearchParameters(lowercaseKey, version, overrideArguments);
+			} catch (err) {
+				throw new Error(
+					`${key} is an invalid profile configuration, please see the wiki for ` +
+						'instructions on how to enable a profile in your server, ' +
+						'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+				);
 			}
 
-			if (!hasValidService(route, profile)) {
-				continue;
+			// Enable all provided operations for this profile
+			if (profile.operation && profile.operation.length) {
+				enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults);
 			}
 
-			let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
-				methods: [corsDefaults.methods || route.type.toUpperCase()],
-			});
+			// We want to enable all routes on each profile that has a valid service
+			for (let route of routes) {
+				switch (route.interaction) {
+					case INTERACTIONS.SEARCH:
+						route.args = [routeArgs.BASE, ...parameters];
+						route.controller = controller[INTERACTIONS.SEARCH];
+						break;
+					case INTERACTIONS.HISTORY:
+						route.args = [routeArgs.BASE, ...parameters];
+						route.controller = controller[INTERACTIONS.HISTORY];
+						break;
+					case INTERACTIONS.HISTORY_BY_ID:
+						route.args = [routeArgs.BASE, routeArgs.ID, ...parameters];
+						route.controller = controller[INTERACTIONS.HISTORY_BY_ID];
+						break;
+					case INTERACTIONS.SEARCH_BY_VID:
+						route.args = [routeArgs.BASE, routeArgs.ID, routeArgs.VERSION_ID];
+						route.controller = controller[INTERACTIONS.SEARCH_BY_VID];
+						break;
+					case INTERACTIONS.SEARCH_BY_ID:
+						route.args = [routeArgs.BASE, routeArgs.ID];
+						route.controller = controller[INTERACTIONS.SEARCH_BY_ID];
+						break;
+					case INTERACTIONS.CREATE:
+						route.args = [routeArgs.BASE];
+						route.controller = controller[INTERACTIONS.CREATE];
+						break;
+					case INTERACTIONS.UPDATE:
+						route.args = [routeArgs.BASE, routeArgs.ID];
+						route.controller = controller[INTERACTIONS.UPDATE];
+						break;
+					case INTERACTIONS.DELETE:
+						route.args = [routeArgs.BASE, routeArgs.ID];
+						route.controller = controller[INTERACTIONS.DELETE];
+						break;
+					case INTERACTIONS.EXPAND_BY_ID:
+						route.args = [routeArgs.BASE, routeArgs.ID, ...parameters];
+						route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
+						break;
+				}
 
-			let profileRoute = route.path.replace(':resource', key);
+				if (!hasValidService(route, profile)) {
+					continue;
+				}
 
-			// Enable cors with preflight
-			app.options(profileRoute, cors(corsOptions));
+				let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
+					methods: [corsDefaults.methods || route.type.toUpperCase()],
+				});
 
-			// Enable this operation route
-			app[route.type](
-				// We need to allow the $ to exist in these routes
-				profileRoute,
-				cors(corsOptions),
-				versionValidationMiddleware(profile),
-				sanitizeMiddleware(route.args),
-				authenticationMiddleware({ config }),
-				sofScopeMiddleware({ route, auth: config.auth, name: key }),
-				// TODO: REMOVE: logger in future versions
-				route.controller({ profile, config, app, logger: deprecatedLogger }),
-			);
+				let profileRoute = route.path.replace(':resource', key);
+
+				// Enable cors with preflight
+				app.options(profileRoute, cors(corsOptions));
+
+				// Enable this operation route
+				app[route.type](
+					// We need to allow the $ to exist in these routes
+					profileRoute,
+					cors(corsOptions),
+					versionValidationMiddleware(profile),
+					sanitizeMiddleware(route.args),
+					authenticationMiddleware({ config }),
+					sofScopeMiddleware({ route, auth: config.auth, name: key }),
+					route.controller(profile.serviceModule),
+				);
+
+			}
 		}
 	}
 }

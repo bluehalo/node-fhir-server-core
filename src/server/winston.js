@@ -8,7 +8,7 @@ const { Container, transports } = require('winston');
  * - try not to be too much of a breaking change
  */
 
- let container = new Container();
+let container = new Container();
 
 /**
  * @description Logging container that can be used to modify any loggers
