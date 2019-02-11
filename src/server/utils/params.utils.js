@@ -25,15 +25,13 @@ let getSearchParameters = (profile, version, customArgsModule, logger) => {
 			return all;
 		}, {});
 	} else {
-		allArguments = require(
-			resolveFromVersion(version, `/parameters/${lowercaseProfileName}.parameters.js`)
-		);
+		allArguments = require(resolveFromVersion(version, `/parameters/${lowercaseProfileName}.parameters.js`));
 	}
 
 	// Load our common arguments that apply to all resources
 	allArguments = Object.assign(
 		allArguments,
-		require(resolveFromVersion(version, '/parameters/resource.parameters.js'))
+		require(resolveFromVersion(version, '/parameters/resource.parameters.js')),
 	);
 
 	// Everyone has a DomainResource and Resource parameter we want to include

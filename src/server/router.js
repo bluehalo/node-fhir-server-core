@@ -233,7 +233,6 @@ function enableResourceRoutes(app, config, corsDefaults) {
 					sofScopeMiddleware({ route, auth: config.auth, name: key }),
 					route.controller(profile.serviceModule),
 				);
-
 			}
 		}
 	}

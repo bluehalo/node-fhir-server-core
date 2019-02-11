@@ -87,6 +87,21 @@ module.exports.remove = function remove(service) {
 };
 
 /**
+ * @function patch
+ * @param {Function} service
+ * @return Promise
+ */
+module.exports.patch = function patch(service) {
+	let options = { type: 'ExpansionProfile' };
+	return (req, res, next) => {
+		return service
+			.patch(req.sanitized_args, { req })
+			.then(json => handler.update(req, res, json, options))
+			.catch(next);
+	};
+};
+
+/**
  * @function history
  * @param {Function} service
  * @return Promise
