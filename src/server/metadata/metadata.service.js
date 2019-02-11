@@ -38,6 +38,7 @@ let generateCapabilityStatement = (args, config, logger) =>
 					makeResource: conformanceTemplate.resource,
 					versions: profiles[profile_name] && profiles[profile_name].versions,
 					service: profiles[profile_name] && profiles[profile_name].serviceModule,
+					metadata: profiles[profile_name] && profiles[profile_name].metadata,
 				};
 			})
 			.filter(profile => profile.versions.indexOf(context.base_version) !== -1);
@@ -83,11 +84,16 @@ let generateCapabilityStatement = (args, config, logger) =>
 		if (operations && operations.length) {
 			server_statement.operation = operations;
 		}
-
 		// Make the resource and give it the version so it can only include valid search params
+		let customMakeResource = null;
 		server_statement.resource = active_profiles.map(profile => {
-			let resource = profile.service.makeResource
-				? profile.service.makeResource(Object.assign(args, { key: profile.key }), logger)
+			if (profile.metadata) {
+				customMakeResource = (require(profile.metadata).makeResource);
+			} else {
+				customMakeResource = profile.service.makeResource;
+			}
+			let resource = customMakeResource
+				? customMakeResource(Object.assign(args, { key: profile.key }), logger)
 				: profile.makeResource(context.base_version, profile.key);
 			// Determine the interactions we need to list for this profile
 			resource.interaction = generateInteractions(profile.service, resource.type);
