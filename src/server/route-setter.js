@@ -171,6 +171,10 @@ function configureResourceRoutes(options) {
 					route.args = [route_args.BASE, route_args.ID, ...search_parameters];
 					route.controller = controller[INTERACTIONS.EXPAND_BY_ID];
 					break;
+				case INTERACTIONS.PATCH:
+					route.args = [route_args.BASE, route_args.ID];
+					route.controller = controller[INTERACTIONS.PATCH];
+					break;
 			}
 
 			// If we do not have a service function from the provided service module,
@@ -195,6 +199,7 @@ function configureResourceRoutes(options) {
 
 			// Enable cors with preflight options
 			app.options(route.path.replace(':resource', key), cors(cors_options));
+
 			// Setup the route with all the appropriate middleware
 			app[route.type](
 				// Actual path for the route
