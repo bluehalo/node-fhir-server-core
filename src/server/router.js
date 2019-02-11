@@ -200,6 +200,10 @@ function enableResourceRoutes(app, config, corsDefaults) {
 						route.args = [routeArgs.BASE, routeArgs.ID];
 						route.controller = controller[INTERACTIONS.DELETE];
 						break;
+					case INTERACTIONS.PATCH:
+						route.args = [routeArgs.BASE, routeArgs.ID];
+						route.controller = controller[INTERACTIONS.PATCH];
+						break;
 					case INTERACTIONS.EXPAND_BY_ID:
 						route.args = [routeArgs.BASE, routeArgs.ID, ...parameters];
 						route.controller = controller[INTERACTIONS.EXPAND_BY_ID];

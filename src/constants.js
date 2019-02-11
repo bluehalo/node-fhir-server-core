@@ -63,6 +63,7 @@ exports.INTERACTIONS = {
 	EXPAND_BY_ID: 'expandById',
 	OPERATIONS_POST: 'operationsPost',
 	OPERATIONS_GET: 'operationsGet',
+	PATCH: 'patch',
 };
 
 /**
