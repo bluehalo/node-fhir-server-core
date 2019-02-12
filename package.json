@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Node FHIR Rest API Server",
   "main": "src/index",
   "author": "Asymmetrik Ltd.",
@@ -21,9 +21,10 @@
   "scripts": {
     "start": "node src/runner",
     "nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
-    "test:lint": "eslint \"src/**/*.js\"",
-    "test:src": "jest src",
-    "test": "cross-env NODE_ENV=test; set -e; npm run test:lint; npm run test:src;",
+    "lint": "eslint \"src/**/*.js\"",
+    "jest": "jest src",
+    "test": "cross-env NODE_ENV=test; set -e; npm run lint; npm run jest;",
+    "changelog": "conventional-changelog -p angular -s -r 0 -i CHANGELOG.md",
     "prettier": "prettier \"src/**/*.js\" --write",
     "snyk": "snyk",
     "snyk-protect": "snyk protect",
@@ -39,7 +40,7 @@
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/server/standards/",
-			"<rootDir>/src/server/profiles/"
+      "<rootDir>/src/server/profiles/"
     ]
   },
   "dependencies": {
@@ -69,6 +70,7 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "conventional-changelog-cli": "^2.0.11",
     "jest": "^24.0.0",
     "nock": "^9.1.5",
     "nodemon": "^1.18.6",

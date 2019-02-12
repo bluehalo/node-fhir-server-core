@@ -88,7 +88,7 @@ let generateCapabilityStatement = (args, config, logger) =>
 		let customMakeResource = null;
 		server_statement.resource = active_profiles.map(profile => {
 			if (profile.metadata) {
-				customMakeResource = (require(profile.metadata).makeResource);
+				customMakeResource = require(profile.metadata).makeResource;
 			} else {
 				customMakeResource = profile.service.makeResource;
 			}

@@ -26,9 +26,12 @@ let getSearchParamaters = (profileKey, version, customArgsModule, logger) => {
 
 	let resource_specific_args = null;
 	if (customArgsModule) {
-		resource_specific_args = require(`${customArgsModule}`).makeResource(Object.assign({}, { base_version: version, key: profileKey }), logger).searchParam;
+		resource_specific_args = require(`${customArgsModule}`).makeResource(
+			Object.assign({}, { base_version: version, key: profileKey }),
+			logger,
+		).searchParam;
 	}
-    if (!resource_specific_args) {
+	if (!resource_specific_args) {
 		resource_specific_args = require(`../standards/${version}/arguments/${
 			files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
 		}`);
