@@ -40,8 +40,6 @@
       "json"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/server/standards/",
-      "<rootDir>/src/server/profiles/",
       "<rootDir>/src/server/resources/"
     ]
   },
