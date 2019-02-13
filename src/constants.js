@@ -60,10 +60,9 @@ exports.INTERACTIONS = {
 	CREATE: 'create',
 	UPDATE: 'update',
 	DELETE: 'remove',
-	EXPAND_BY_ID: 'expandById',
+	PATCH: 'patch',
 	OPERATIONS_POST: 'operationsPost',
 	OPERATIONS_GET: 'operationsGet',
-	PATCH: 'patch',
 };
 
 /**
