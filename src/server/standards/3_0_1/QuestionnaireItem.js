@@ -278,6 +278,17 @@ class QuestionnaireItem extends BackboneElement {
 		this.__initialReference = new Reference(new_value);
 	}
 
+	// A particular question, question grouping or display text that is part of the questionnaire.
+	get item() {
+		return this.__item;
+	}
+
+	set item(new_value) {
+		this.__item = Array.isArray(new_value)
+			? new_value.map(val => new QuestionnaireItem(val))
+			: [new QuestionnaireItem(new_value)];
+	}
+
 	toJSON() {
 		return Object.assign(super.toJSON(), {
 			linkId: this.__linkId,
@@ -305,6 +316,7 @@ class QuestionnaireItem extends BackboneElement {
 			initialCoding: this.__initialCoding && this.__initialCoding.toJSON(),
 			initialQuantity: this.__initialQuantity && this.__initialQuantity.toJSON(),
 			initialReference: this.__initialReference && this.__initialReference.toJSON(),
+			item: this.__item && this.__item.map(v => v.toJSON()),
 		});
 	}
 }
