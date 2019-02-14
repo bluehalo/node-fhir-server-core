@@ -73,7 +73,6 @@ class QuestionnaireResponseItem extends BackboneElement {
 	}
 
 	set item(new_value) {
-		const QuestionnaireResponseItem = require('./QuestionnaireResponseItem');
 		this.__item = Array.isArray(new_value)
 			? new_value.map(val => new QuestionnaireResponseItem(val))
 			: [new QuestionnaireResponseItem(new_value)];
