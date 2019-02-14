@@ -67,6 +67,18 @@ class QuestionnaireResponseItem extends BackboneElement {
 			: [new QuestionnaireResponseItemAnswer(new_value)];
 	}
 
+	// A group or question item from the original questionnaire for which answers are provided.
+	get item() {
+		return this.__item;
+	}
+
+	set item(new_value) {
+		const QuestionnaireResponseItem = require('./QuestionnaireResponseItem');
+		this.__item = Array.isArray(new_value)
+			? new_value.map(val => new QuestionnaireResponseItem(val))
+			: [new QuestionnaireResponseItem(new_value)];
+	}
+
 	toJSON() {
 		return Object.assign(super.toJSON(), {
 			linkId: this.__linkId,
@@ -74,6 +86,7 @@ class QuestionnaireResponseItem extends BackboneElement {
 			text: this.__text,
 			subject: this.__subject && this.__subject.toJSON(),
 			answer: this.__answer && this.__answer.map(v => v.toJSON()),
+			item: this.__item && this.__item.map(v => v.toJSON()),
 		});
 	}
 }
