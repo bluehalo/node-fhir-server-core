@@ -100,22 +100,35 @@ describe('Error Utils Tests', () => {
 	});
 
 	test('should return correct OperationOutcome for an internal error', () => {
-		let errorWithMessage = internal('Internal Server Error.', VERSIONS['3_0_1']);
-		let errorWithoutMessage = internal('', VERSIONS['3_0_1']);
+		let errorWithMessage = new Error('Internal Server Error.');
+		let responseWithMessage = internal(errorWithMessage, VERSIONS['3_0_1']);
+		let errorWithoutMessage = new Error('');
+		let responseWithoutMessage = internal(errorWithoutMessage, VERSIONS['3_0_1']);
+		let customError = new Error('This is custom.');
+		customError.statusCode = 404;
+		customError.code = 'not-found';
+		customError.severity = 'warning';
+		customError.isCustom = true;
+		let responseCustom = internal(customError, VERSIONS['3_0_1']);
 
-		expect(errorWithMessage.statusCode).toEqual(500);
-		expect(errorWithMessage.issue).toHaveLength(1);
+		expect(responseWithMessage.statusCode).toEqual(500);
+		expect(responseWithMessage.issue).toHaveLength(1);
+		expect(responseCustom.statusCode).toEqual(404);
 
-		let issueWithMessage = errorWithMessage.issue[0];
-		let issueWithoutMessage = errorWithoutMessage.issue[0];
+		let issueWithMessage = responseWithMessage.issue[0];
+		let issueWithoutMessage = responseWithoutMessage.issue[0];
+		let customIssueWithMessage = responseCustom.issue[0];
 
 		// Check the code and severity on one
 		expect(issueWithMessage.code).toBe(ISSUE.CODE.EXCEPTION);
 		expect(issueWithoutMessage.severity).toBe(ISSUE.SEVERITY.ERROR);
+		expect(customIssueWithMessage.severity).toBe(ISSUE.SEVERITY.WARNING);
 
 		// Check the message for both
 		expect(issueWithMessage.diagnostics).toBe('Internal Server Error.');
 		expect(issueWithoutMessage.diagnostics).toBe('500: Internal server error');
+		expect(customIssueWithMessage.diagnostics).toBe('This is custom.');
+
 	});
 
 	test('should correctly determine if an error is an OperationOutcome', () => {
