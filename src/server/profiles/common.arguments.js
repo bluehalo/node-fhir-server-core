@@ -80,6 +80,12 @@ module.exports.common_args = {
 		definition: 'https://www.hl7.org/fhir/http.html#mime-type',
 		documentation: undefined,
 	},
+	_FILTER: {
+		name: '_filter',
+		type: 'string',
+		definition: 'http://hl7.org/fhir/search_filter.html',
+		documentation: undefined
+	},
 	_ID: {
 		name: '_id',
 		type: 'token',
