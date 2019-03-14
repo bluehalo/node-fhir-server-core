@@ -18,14 +18,11 @@ module.exports.searchByVersionId = function searchByVersionId({ profile, logger,
 
 	return (req, res, next) => {
 		let { base_version, version_id } = req.sanitized_args;
-
 		let Observation = getResourceConstructor(base_version);
 
 		return service
 			.searchByVersionId(req.sanitized_args, req.contexts, logger)
-			.then(results =>
-				responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results, version_id),
-			)
+			.then(results => responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results, version_id))
 			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
@@ -34,42 +31,19 @@ module.exports.searchByVersionId = function searchByVersionId({ profile, logger,
 };
 
 module.exports.search = function search({ profile, logger, config, app }) {
-	let { serviceModule: service } = profile;
+	let {serviceModule: service} = profile;
 
 	return (req, res, next) => {
-		let { base_version } = req.sanitized_args;
-		// Get a version specific bundle
-		let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
+		let {base_version} = req.sanitized_args;
+		let Observation = getResourceConstructor(base_version);
 
 		return service
 			.search(req.sanitized_args, req.contexts, logger)
-			.then(observations => {
-				let results = new Bundle({ type: 'searchset' });
-				let entries = [];
-
-				if (observations) {
-					for (let resource of observations) {
-						if (!req.observation || req.observation === resource.observationId) {
-							// Get a version specific observation for the correct type of observation
-							let Observation = getResourceConstructor(base_version);
-							// Modes:
-							// match - This resource matched the search specification.
-							// include - This resource is returned because it is referred to from another resource in the search set.
-							// outcome - An OperationOutcome that provides additional information about the processing of a search.
-							entries.push({
-								search: { mode: 'match' },
-								resource: new Observation(resource),
-								fullUrl: `${config.auth.resourceServer}/${base_version}/Observation/${resource.id}`,
-							});
-						}
-					}
-				}
-
-				results.entry = entries;
-				results.total = entries.length;
-
-				res.status(200).json(results);
-			})
+			.then(results =>
+				responseUtils.handleBundleReadResponse(res, base_version, Observation, results, {
+					resourceUrl: config.auth.resourceServer
+				}),
+			)
 			.catch(err => {
 				logger.error(err);
 				next(errors.internal(err.message, base_version));
@@ -77,16 +51,17 @@ module.exports.search = function search({ profile, logger, config, app }) {
 	};
 };
 
+
 module.exports.searchById = function searchById({ profile, logger, app }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
 		let { base_version } = req.sanitized_args;
+		let Observation = getResourceConstructor(base_version);
 
 		return service
 			.searchById(req.sanitized_args, req.contexts, logger)
 			.then(results => {
-				let Observation = getResourceConstructor(base_version);
 				responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results);
 			})
 			.catch(err => {
