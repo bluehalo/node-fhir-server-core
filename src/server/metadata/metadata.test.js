@@ -76,7 +76,7 @@ let customMakeResource = (args, logger) => {
 
 	// Return our conformance statement
 	return {
-		type: Resource.__resourceType,
+		type: Resource.resourceType,
 		profile: {
 			reference: `http://example.org/fhir/${args.key}.html`,
 		},
