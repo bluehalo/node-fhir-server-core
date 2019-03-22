@@ -1,0 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the auditevent query
+ */
+module.exports = {
+	action: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.event.action',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-action',
+		description: 'Type of action performed during the event',
+	},
+	address: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.participant.network.address',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-address',
+		description: 'Identifier for the network access point of the user device',
+	},
+	altid: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.participant.altId',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-altid',
+		description: 'Alternative User id e.g. authentication',
+	},
+	date: {
+		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AuditEvent.event.dateTime',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-date',
+		description: 'Time when the event occurred on source',
+	},
+	desc: {
+		type: 'string',
+		fhirtype: 'string',
+		xpath: 'AuditEvent.object.name',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-desc',
+		description: 'Instance-specific descriptor for Object',
+	},
+	identity: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.object.identifier',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-identity',
+		description: 'Specific instance of object (e.g. versioned)',
+	},
+	name: {
+		type: 'string',
+		fhirtype: 'string',
+		xpath: 'AuditEvent.participant.name',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-name',
+		description: 'Human-meaningful name for the user',
+	},
+	'object-type': {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.object.type',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-object-type',
+		description: 'Type of object involved',
+	},
+	participant: {
+		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.participant.reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-participant',
+		description: 'Direct reference to resource',
+	},
+	patient: {
+		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.participant.reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-patient',
+		description: 'Direct reference to resource',
+	},
+	policy: {
+		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'AuditEvent.participant.policy',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-policy',
+		description: 'Policy that authorized event',
+	},
+	reference: {
+		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.object.reference',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-reference',
+		description: 'Specific instance of resource (e.g. versioned)',
+	},
+	site: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.source.site',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-site',
+		description: 'Logical source location within the enterprise',
+	},
+	source: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.source.identifier',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-source',
+		description: 'The identity of source detecting the event',
+	},
+	subtype: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.event.subtype',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-subtype',
+		description: 'More specific type/id for the event',
+	},
+	type: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.event.type',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-type',
+		description: 'Type/identifier of event',
+	},
+	user: {
+		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.participant.userId',
+		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-user',
+		description: 'Unique identifier for the user',
+	},
+};
