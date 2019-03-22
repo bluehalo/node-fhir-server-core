@@ -1,316 +1,574 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary DeviceRequest Class
+ */
+module.exports = class DeviceRequest {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DeviceRequest extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DeviceRequest';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.definition = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'priorRequest', {
+			enumerable: true,
+			get: () => this.__data.priorRequest,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.priorRequest = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'groupIdentifier', {
+			enumerable: true,
+			get: () => this.__data.groupIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.groupIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://build.fhir.org/valueset-request-intent.html
+		Object.defineProperty(this, 'intent', {
+			enumerable: true,
+			get: () => this.__data.intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.intent = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_priority', {
+			enumerable: true,
+			get: () => this.__data._priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priority = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priority = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/device-kind
+		Object.defineProperty(this, 'codeReference', {
+			enumerable: true,
+			get: () => this.__data.codeReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.codeReference = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/device-kind
+		Object.defineProperty(this, 'codeCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.codeCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.codeCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data._occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._occurrenceDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data.occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.occurrenceDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'occurrencePeriod', {
+			enumerable: true,
+			get: () => this.__data.occurrencePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.occurrencePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceTiming', {
+			enumerable: true,
+			get: () => this.__data.occurrenceTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.occurrenceTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, '_authoredOn', {
+			enumerable: true,
+			get: () => this.__data._authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._authoredOn = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'authoredOn', {
+			enumerable: true,
+			get: () => this.__data.authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.authoredOn = value;
+			},
+		});
+
+		Object.defineProperty(this, 'requester', {
+			enumerable: true,
+			get: () => this.__data.requester,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DeviceRequestRequester = require('./devicerequestrequester.js');
+				this.__data.requester = new DeviceRequestRequester(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/participant-role
+		Object.defineProperty(this, 'performerType', {
+			enumerable: true,
+			get: () => this.__data.performerType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.performerType = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performer = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/condition-code
+		Object.defineProperty(this, 'reasonCode', {
+			enumerable: true,
+			get: () => this.__data.reasonCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonCode = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'reasonReference', {
+			enumerable: true,
+			get: () => this.__data.reasonReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reasonReference = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInfo', {
+			enumerable: true,
+			get: () => this.__data.supportingInfo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInfo = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'relevantHistory', {
+			enumerable: true,
+			get: () => this.__data.relevantHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.relevantHistory = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DeviceRequest',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DeviceRequest resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DeviceRequest';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__DeviceRequest = new_value;
-	}
-
-	// Identifiers assigned to this order by the orderer or by the receiver.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Protocol or definition followed by this request. For example: The proposed act must be performed if the indicated conditions occur, e.g.., shortness of breath, SpO2 less than x%.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Plan/proposal/order fulfilled by this request.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The request takes the place of the referenced completed or terminated request(s).
-	get priorRequest() {
-		return this.__priorRequest;
-	}
-
-	set priorRequest(new_value) {
-		const Reference = require('./Reference');
-		this.__priorRequest = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Composite request this is part of.
-	get groupIdentifier() {
-		return this.__groupIdentifier;
-	}
-
-	set groupIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__groupIdentifier = new Identifier(new_value);
-	}
-
-	// The status of the request.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Whether the request is a proposal, plan, an original order or a reflex order.
-	get intent() {
-		return this.__intent;
-	}
-
-	set intent(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__intent = new CodeableConcept(new_value);
-	}
-
-	// Indicates how quickly the {{title}} should be addressed with respect to other requests.
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		this.__priority = new_value;
-	}
-
-	// The details of the device to be used.
-	get codeReference() {
-		return this.__codeReference;
-	}
-
-	set codeReference(new_value) {
-		const Reference = require('./Reference');
-		this.__codeReference = new Reference(new_value);
-	}
-
-	// The details of the device to be used.
-	get codeCodeableConcept() {
-		return this.__codeCodeableConcept;
-	}
-
-	set codeCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__codeCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The patient who will use the device.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// An encounter that provides additional context in which this request is made.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. \'Every 8 hours\'; \'Three times a day\'; \'1/2 an hour before breakfast for 10 days from 23-Dec 2011:\'; \'15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\'.
-	get occurrenceDateTime() {
-		return this.__occurrenceDateTime;
-	}
-
-	set occurrenceDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
-		}
-		this.__occurrenceDateTime = new_value;
-	}
-
-	// The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. \'Every 8 hours\'; \'Three times a day\'; \'1/2 an hour before breakfast for 10 days from 23-Dec 2011:\'; \'15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\'.
-	get occurrencePeriod() {
-		return this.__occurrencePeriod;
-	}
-
-	set occurrencePeriod(new_value) {
-		const Period = require('./Period');
-		this.__occurrencePeriod = new Period(new_value);
-	}
-
-	// The timing schedule for the use of the device. The Schedule data type allows many different expressions, for example. \'Every 8 hours\'; \'Three times a day\'; \'1/2 an hour before breakfast for 10 days from 23-Dec 2011:\'; \'15 Oct 2013, 17 Oct 2013 and 1 Nov 2013\'.
-	get occurrenceTiming() {
-		return this.__occurrenceTiming;
-	}
-
-	set occurrenceTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__occurrenceTiming = new Timing(new_value);
-	}
-
-	// When the request transitioned to being actionable.
-	get authoredOn() {
-		return this.__authoredOn;
-	}
-
-	set authoredOn(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
-		}
-		this.__authoredOn = new_value;
-	}
-
-	// The individual who initiated the request and has responsibility for its activation.
-	get requester() {
-		return this.__requester;
-	}
-
-	set requester(new_value) {
-		const DeviceRequestRequester = require('./DeviceRequestRequester');
-		this.__requester = new DeviceRequestRequester(new_value);
-	}
-
-	// Desired type of performer for doing the diagnostic testing.
-	get performerType() {
-		return this.__performerType;
-	}
-
-	set performerType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__performerType = new CodeableConcept(new_value);
-	}
-
-	// The desired perfomer for doing the diagnostic testing.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const Reference = require('./Reference');
-		this.__performer = new Reference(new_value);
-	}
-
-	// Reason or justification for the use of this device.
-	get reasonCode() {
-		return this.__reasonCode;
-	}
-
-	set reasonCode(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCode = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Reason or justification for the use of this device.
-	get reasonReference() {
-		return this.__reasonReference;
-	}
-
-	set reasonReference(new_value) {
-		const Reference = require('./Reference');
-		this.__reasonReference = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Additional clinical information about the patient that may influence the request fulfilment.  For example, this may includes body where on the subject\'s the device will be used ( i.e. the target site).
-	get supportingInfo() {
-		return this.__supportingInfo;
-	}
-
-	set supportingInfo(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInfo = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Details about this request that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Key events in the history of the request.
-	get relevantHistory() {
-		return this.__relevantHistory;
-	}
-
-	set relevantHistory(new_value) {
-		const Reference = require('./Reference');
-		this.__relevantHistory = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			definition: this.__definition && this.__definition.map(v => v.toJSON()),
-			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
-			priorRequest: this.__priorRequest && this.__priorRequest.map(v => v.toJSON()),
-			groupIdentifier: this.__groupIdentifier && this.__groupIdentifier.toJSON(),
-			status: this.__status,
-			intent: this.__intent && this.__intent.toJSON(),
-			priority: this.__priority,
-			codeReference: this.__codeReference && this.__codeReference.toJSON(),
-			codeCodeableConcept: this.__codeCodeableConcept && this.__codeCodeableConcept.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			occurrenceDateTime: this.__occurrenceDateTime,
-			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
-			occurrenceTiming: this.__occurrenceTiming && this.__occurrenceTiming.toJSON(),
-			authoredOn: this.__authoredOn,
-			requester: this.__requester && this.__requester.toJSON(),
-			performerType: this.__performerType && this.__performerType.toJSON(),
-			performer: this.__performer && this.__performer.toJSON(),
-			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
-			reasonReference: this.__reasonReference && this.__reasonReference.map(v => v.toJSON()),
-			supportingInfo: this.__supportingInfo && this.__supportingInfo.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			relevantHistory: this.__relevantHistory && this.__relevantHistory.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			definition: this.definition && this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			priorRequest: this.priorRequest && this.priorRequest.map(v => v.toJSON()),
+			groupIdentifier: this.groupIdentifier && this.groupIdentifier.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			intent: this.intent && this.intent.toJSON(),
+			_priority: this._priority && this._priority.toJSON(),
+			priority: this.priority,
+			codeReference: this.codeReference && this.codeReference.toJSON(),
+			codeCodeableConcept: this.codeCodeableConcept && this.codeCodeableConcept.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_occurrenceDateTime: this._occurrenceDateTime && this._occurrenceDateTime.toJSON(),
+			occurrenceDateTime: this.occurrenceDateTime,
+			occurrencePeriod: this.occurrencePeriod && this.occurrencePeriod.toJSON(),
+			occurrenceTiming: this.occurrenceTiming && this.occurrenceTiming.toJSON(),
+			_authoredOn: this._authoredOn && this._authoredOn.toJSON(),
+			authoredOn: this.authoredOn,
+			requester: this.requester && this.requester.toJSON(),
+			performerType: this.performerType && this.performerType.toJSON(),
+			performer: this.performer && this.performer.toJSON(),
+			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
+			supportingInfo: this.supportingInfo && this.supportingInfo.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			relevantHistory: this.relevantHistory && this.relevantHistory.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = DeviceRequest;
+};

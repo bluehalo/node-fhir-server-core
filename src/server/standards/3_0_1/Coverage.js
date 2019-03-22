@@ -1,209 +1,486 @@
-const DomainResource = require('./DomainResource');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary Coverage Class
+ */
+module.exports = class Coverage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Coverage extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Coverage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fm-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/coverage-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'policyHolder', {
+			enumerable: true,
+			get: () => this.__data.policyHolder,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.policyHolder = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subscriber', {
+			enumerable: true,
+			get: () => this.__data.subscriber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subscriber = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_subscriberId', {
+			enumerable: true,
+			get: () => this.__data._subscriberId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subscriberId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subscriberId', {
+			enumerable: true,
+			get: () => this.__data.subscriberId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subscriberId = value;
+			},
+		});
+
+		Object.defineProperty(this, 'beneficiary', {
+			enumerable: true,
+			get: () => this.__data.beneficiary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.beneficiary = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/policyholder-relationship
+		Object.defineProperty(this, 'relationship', {
+			enumerable: true,
+			get: () => this.__data.relationship,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.relationship = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'payor', {
+			enumerable: true,
+			get: () => this.__data.payor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.payor = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'grouping', {
+			enumerable: true,
+			get: () => this.__data.grouping,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CoverageGrouping = require('./coveragegrouping.js');
+				this.__data.grouping = new CoverageGrouping(value);
+			},
+		});
+
+		Object.defineProperty(this, '_dependent', {
+			enumerable: true,
+			get: () => this.__data._dependent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dependent = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dependent', {
+			enumerable: true,
+			get: () => this.__data.dependent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dependent = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+
+		Object.defineProperty(this, '_order', {
+			enumerable: true,
+			get: () => this.__data._order,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._order = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'order', {
+			enumerable: true,
+			get: () => this.__data.order,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.order = value;
+			},
+		});
+
+		Object.defineProperty(this, '_network', {
+			enumerable: true,
+			get: () => this.__data._network,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._network = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'network', {
+			enumerable: true,
+			get: () => this.__data.network,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.network = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contract', {
+			enumerable: true,
+			get: () => this.__data.contract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.contract = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Coverage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Coverage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Coverage';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Coverage = new_value;
-	}
-
-	// The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Certificate number, Personal Health Number or Case ID. May be constructed as the concatination of the Coverage.SubscriberID and the Coverage.dependant.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The status of the resource instance.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The type of coverage: social program, medical plan, accident coverage (workers compensation, auto), group health or payment by an individual or organization.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// The party who \'owns\' the insurance policy,  may be an individual, corporation or the subscriber\'s employer.
-	get policyHolder() {
-		return this.__policyHolder;
-	}
-
-	set policyHolder(new_value) {
-		const Reference = require('./Reference');
-		this.__policyHolder = new Reference(new_value);
-	}
-
-	// The party who has signed-up for or \'owns\' the contractual relationship to the policy or to whom the benefit of the policy for services rendered to them or their family is due.
-	get subscriber() {
-		return this.__subscriber;
-	}
-
-	set subscriber(new_value) {
-		const Reference = require('./Reference');
-		this.__subscriber = new Reference(new_value);
-	}
-
-	// The insurer assigned ID for the Subscriber.
-	get subscriberId() {
-		return this.__subscriberId;
-	}
-
-	set subscriberId(new_value) {
-		this.__subscriberId = new_value;
-	}
-
-	// The party who benefits from the insurance coverage., the patient when services are provided.
-	get beneficiary() {
-		return this.__beneficiary;
-	}
-
-	set beneficiary(new_value) {
-		const Reference = require('./Reference');
-		this.__beneficiary = new Reference(new_value);
-	}
-
-	// The relationship of beneficiary (patient) to the subscriber.
-	get relationship() {
-		return this.__relationship;
-	}
-
-	set relationship(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__relationship = new CodeableConcept(new_value);
-	}
-
-	// Time period during which the coverage is in force. A missing start date indicates the start date isn\'t known, a missing end date means the coverage is continuing to be in force.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The program or plan underwriter or payor including both insurance and non-insurance agreements, such as patient-pay agreements. May provide multiple identifiers such as insurance company identifier or business identifier (BIN number).
-	get payor() {
-		return this.__payor;
-	}
-
-	set payor(new_value) {
-		const Reference = require('./Reference');
-		this.__payor = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A suite of underwrite specific classifiers, for example may be used to identify a class of coverage or employer group, Policy, Plan.
-	get grouping() {
-		return this.__grouping;
-	}
-
-	set grouping(new_value) {
-		const CoverageGrouping = require('./CoverageGrouping');
-		this.__grouping = new CoverageGrouping(new_value);
-	}
-
-	// A unique identifier for a dependent under the coverage.
-	get dependent() {
-		return this.__dependent;
-	}
-
-	set dependent(new_value) {
-		this.__dependent = new_value;
-	}
-
-	// An optional counter for a particular instance of the identified coverage which increments upon each renewal.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		this.__sequence = new_value;
-	}
-
-	// The order of applicability of this coverage relative to other coverages which are currently inforce. Note, there may be gaps in the numbering and this does not imply primary, secondard etc. as the specific positioning of coverages depends upon the episode of care.
-	get order() {
-		return this.__order;
-	}
-
-	set order(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field order`);
-		}
-		this.__order = new_value;
-	}
-
-	// The insurer-specific identifier for the insurer-defined network of providers to which the beneficiary may seek treatment which will be covered at the \'in-network\' rate, otherwise \'out of network\' terms and conditions apply.
-	get network() {
-		return this.__network;
-	}
-
-	set network(new_value) {
-		this.__network = new_value;
-	}
-
-	// The policy(s) which constitute this insurance coverage.
-	get contract() {
-		return this.__contract;
-	}
-
-	set contract(new_value) {
-		const Reference = require('./Reference');
-		this.__contract = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			type: this.__type && this.__type.toJSON(),
-			policyHolder: this.__policyHolder && this.__policyHolder.toJSON(),
-			subscriber: this.__subscriber && this.__subscriber.toJSON(),
-			subscriberId: this.__subscriberId,
-			beneficiary: this.__beneficiary && this.__beneficiary.toJSON(),
-			relationship: this.__relationship && this.__relationship.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			payor: this.__payor && this.__payor.map(v => v.toJSON()),
-			grouping: this.__grouping && this.__grouping.toJSON(),
-			dependent: this.__dependent,
-			sequence: this.__sequence,
-			order: this.__order,
-			network: this.__network,
-			contract: this.__contract && this.__contract.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			type: this.type && this.type.toJSON(),
+			policyHolder: this.policyHolder && this.policyHolder.toJSON(),
+			subscriber: this.subscriber && this.subscriber.toJSON(),
+			_subscriberId: this._subscriberId && this._subscriberId.toJSON(),
+			subscriberId: this.subscriberId,
+			beneficiary: this.beneficiary && this.beneficiary.toJSON(),
+			relationship: this.relationship && this.relationship.toJSON(),
+			period: this.period && this.period.toJSON(),
+			payor: this.payor && this.payor.map(v => v.toJSON()),
+			grouping: this.grouping && this.grouping.toJSON(),
+			_dependent: this._dependent && this._dependent.toJSON(),
+			dependent: this.dependent,
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			_order: this._order && this._order.toJSON(),
+			order: this.order,
+			_network: this._network && this._network.toJSON(),
+			network: this.network,
+			contract: this.contract && this.contract.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Coverage;
+};

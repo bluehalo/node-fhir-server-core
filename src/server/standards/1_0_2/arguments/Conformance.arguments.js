@@ -1,98 +1,119 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the conformance query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Conformance.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-date',
-		documentation: 'The conformance statement publication date.',
+		description: 'The conformance statement publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Conformance.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-description',
-		documentation: 'Text search in the description of the conformance statement.',
+		description: 'Text search in the description of the conformance statement',
 	},
-	EVENT: {
-		name: 'event',
+	event: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.messaging.event.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-event',
-		documentation: 'Event code in a conformance statement.',
+		description: 'Event code in a conformance statement',
 	},
-	FHIRVERSION: {
-		name: 'fhirversion',
+	fhirversion: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-fhirversion',
-		documentation: 'The version of FHIR.',
+		description: 'The version of FHIR',
 	},
-	FORMAT: {
-		name: 'format',
+	format: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.format',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-format',
-		documentation: 'formats supported (xml | json | mime type).',
+		description: 'formats supported (xml | json | mime type)',
 	},
-	MODE: {
-		name: 'mode',
+	mode: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.rest.mode',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-mode',
-		documentation: 'Mode - restful (server/client) or messaging (sender/receiver).',
+		description: 'Mode - restful (server/client) or messaging (sender/receiver)',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Conformance.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-name',
-		documentation: 'Name of the conformance statement.',
+		description: 'Name of the conformance statement',
 	},
-	PROFILE: {
-		name: 'profile',
+	profile: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Conformance.rest.resource.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-profile',
-		documentation: 'A profile id invoked in a conformance statement.',
+		description: 'A profile id invoked in a conformance statement',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Conformance.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-publisher',
-		documentation: 'Name of the publisher of the conformance statement.',
+		description: 'Name of the publisher of the conformance statement',
 	},
-	RESOURCE: {
-		name: 'resource',
+	resource: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.rest.resource.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-resource',
-		documentation: 'Name of a resource mentioned in a conformance statement.',
+		description: 'Name of a resource mentioned in a conformance statement',
 	},
-	SECURITY: {
-		name: 'security',
+	security: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.rest.security.service',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-security',
-		documentation: 'OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates.',
+		description: 'OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates',
 	},
-	SOFTWARE: {
-		name: 'software',
+	software: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Conformance.software.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-software',
-		documentation: 'Part of a the name of a software application.',
+		description: 'Part of a the name of a software application',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-status',
-		documentation: 'The current status of the conformance statement.',
+		description: 'The current status of the conformance statement',
 	},
-	SUPPORTED_PROFILE: {
-		name: 'supported-profile',
+	'supported-profile': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Conformance.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-supported-profile',
-		documentation: 'Profiles for use cases supported.',
+		description: 'Profiles for use cases supported',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Conformance.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-url',
-		documentation: 'The uri that identifies the conformance statement.',
+		description: 'The uri that identifies the conformance statement',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Conformance.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Conformance-version',
-		documentation: 'The version identifier of the conformance statement.',
+		description: 'The version identifier of the conformance statement',
 	},
 };

@@ -1,146 +1,294 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary AuditEventParticipant Class
+ */
+module.exports = class AuditEventParticipant {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AuditEventParticipant extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AuditEventParticipant';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/dicm-402-roleid
+		Object.defineProperty(this, 'role', {
+			enumerable: true,
+			get: () => this.__data.role,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.role = Array.isArray(value) ? value.map(v => new CodeableConcept(v)) : [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'reference', {
+			enumerable: true,
+			get: () => this.__data.reference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'userId', {
+			enumerable: true,
+			get: () => this.__data.userId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.userId = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_altId', {
+			enumerable: true,
+			get: () => this.__data._altId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._altId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'altId', {
+			enumerable: true,
+			get: () => this.__data.altId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.altId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_requestor', {
+			enumerable: true,
+			get: () => this.__data._requestor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requestor = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requestor', {
+			enumerable: true,
+			get: () => this.__data.requestor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requestor = value;
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.location = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_policy', {
+			enumerable: true,
+			get: () => this.__data._policy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._policy = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'policy', {
+			enumerable: true,
+			get: () => this.__data.policy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.policy = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/dicm-405-mediatype
+		Object.defineProperty(this, 'media', {
+			enumerable: true,
+			get: () => this.__data.media,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.media = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'network', {
+			enumerable: true,
+			get: () => this.__data.network,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AuditEventParticipantNetwork = require('./auditeventparticipantnetwork.js');
+				this.__data.network = new AuditEventParticipantNetwork(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'purposeOfUse', {
+			enumerable: true,
+			get: () => this.__data.purposeOfUse,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.purposeOfUse = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AuditEventParticipant',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AuditEventParticipant resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AuditEventParticipant';
 	}
 
-	// Specification of the role(s) the user plays when performing the event. Usually the codes used in this element are local codes defined by the role-based access control security system used in the local context.
-	get role() {
-		return this.__role;
-	}
-
-	set role(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__role = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Direct reference to a resource that identifies the participant.
-	get reference() {
-		return this.__reference;
-	}
-
-	set reference(new_value) {
-		const Reference = require('./Reference');
-		this.__reference = new Reference(new_value);
-	}
-
-	// Unique identifier for the user actively participating in the event.
-	get userId() {
-		return this.__userId;
-	}
-
-	set userId(new_value) {
-		const Identifier = require('./Identifier');
-		this.__userId = new Identifier(new_value);
-	}
-
-	// Alternative Participant Identifier. For a human, this should be a user identifier text string from authentication system. This identifier would be one known to a common authentication system (e.g. single sign-on), if available.
-	get altId() {
-		return this.__altId;
-	}
-
-	set altId(new_value) {
-		this.__altId = new_value;
-	}
-
-	// Human-meaningful name for the user.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// Indicator that the user is or is not the requestor, or initiator, for the event being audited.
-	get requestor() {
-		return this.__requestor;
-	}
-
-	set requestor(new_value) {
-		this.__requestor = new_value;
-	}
-
-	// Where the event occurred.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		const Reference = require('./Reference');
-		this.__location = new Reference(new_value);
-	}
-
-	// The policy or plan that authorized the activity being recorded. Typically, a single activity may have multiple applicable policies, such as patient consent, guarantor funding, etc. The policy would also indicate the security token used.
-	get policy() {
-		return this.__policy;
-	}
-
-	set policy(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field policy`);
-		}
-		this.__policy = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Type of media involved. Used when the event is about exporting/importing onto media.
-	get media() {
-		return this.__media;
-	}
-
-	set media(new_value) {
-		const Coding = require('./Coding');
-		this.__media = new Coding(new_value);
-	}
-
-	// Logical network location for application activity, if the activity has a network location.
-	get network() {
-		return this.__network;
-	}
-
-	set network(new_value) {
-		const AuditEventParticipantNetwork = require('./AuditEventParticipantNetwork');
-		this.__network = new AuditEventParticipantNetwork(new_value);
-	}
-
-	// The reason (purpose of use), specific to this participant, that was used during the event being recorded.
-	get purposeOfUse() {
-		return this.__purposeOfUse;
-	}
-
-	set purposeOfUse(new_value) {
-		const Coding = require('./Coding');
-		this.__purposeOfUse = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			role: this.__role && this.__role.map(v => v.toJSON()),
-			reference: this.__reference && this.__reference.toJSON(),
-			userId: this.__userId && this.__userId.toJSON(),
-			altId: this.__altId,
-			name: this.__name,
-			requestor: this.__requestor,
-			location: this.__location && this.__location.toJSON(),
-			policy: this.__policy,
-			media: this.__media && this.__media.toJSON(),
-			network: this.__network && this.__network.toJSON(),
-			purposeOfUse: this.__purposeOfUse && this.__purposeOfUse.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			role: this.role && this.role.map(v => v.toJSON()),
+			reference: this.reference && this.reference.toJSON(),
+			userId: this.userId && this.userId.toJSON(),
+			_altId: this._altId && this._altId.toJSON(),
+			altId: this.altId,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_requestor: this._requestor && this._requestor.toJSON(),
+			requestor: this.requestor,
+			location: this.location && this.location.toJSON(),
+			_policy: this._policy && this._policy.toJSON(),
+			policy: this.policy,
+			media: this.media && this.media.toJSON(),
+			network: this.network && this.network.toJSON(),
+			purposeOfUse: this.purposeOfUse && this.purposeOfUse.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AuditEventParticipant;
+};

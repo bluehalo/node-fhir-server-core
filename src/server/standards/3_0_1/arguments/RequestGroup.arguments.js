@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the requestgroup query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-author',
-		documentation: 'The author of the request group.',
+		description: 'The author of the request group',
 	},
-	AUTHORED: {
-		name: 'authored',
+	authored: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'RequestGroup.authoredOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-authored',
-		documentation: 'The date the request group was authored.',
+		description: 'The date the request group was authored',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-context',
-		documentation: 'The context the request group applies to.',
+		description: 'The context the request group applies to',
 	},
-	DEFINITION: {
-		name: 'definition',
+	definition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.definition',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-definition',
-		documentation: 'The definition from which the request group is realized.',
+		description: 'The definition from which the request group is realized',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-encounter',
-		documentation: 'The encounter the request group applies to.',
+		description: 'The encounter the request group applies to',
 	},
-	GROUP_IDENTIFIER: {
-		name: 'group-identifier',
+	'group-identifier': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RequestGroup.groupIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-group-identifier',
-		documentation: 'The group identifier for the request group.',
+		description: 'The group identifier for the request group',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RequestGroup.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-identifier',
-		documentation: 'External identifiers for the request group.',
+		description: 'External identifiers for the request group',
 	},
-	INTENT: {
-		name: 'intent',
+	intent: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RequestGroup.intent',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-intent',
-		documentation: 'The intent of the request group.',
+		description: 'The intent of the request group',
 	},
-	PARTICIPANT: {
-		name: 'participant',
+	participant: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.action.participant',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-participant',
-		documentation: 'The participant in the requests in the group.',
+		description: 'The participant in the requests in the group',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-patient',
-		documentation: 'The identity of a patient to search for request groups.',
+		description: 'The identity of a patient to search for request groups',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RequestGroup.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-priority',
-		documentation: 'The priority of the request group.',
+		description: 'The priority of the request group',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RequestGroup.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-status',
-		documentation: 'The status of the request group.',
+		description: 'The status of the request group',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RequestGroup.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/RequestGroup-subject',
-		documentation: 'The subject that the request group is about.',
+		description: 'The subject that the request group is about',
 	},
 };

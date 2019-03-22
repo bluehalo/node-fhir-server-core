@@ -1,50 +1,131 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ValueSetCompose Class
+ */
+module.exports = class ValueSetCompose {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetCompose extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetCompose';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_import', {
+			enumerable: true,
+			get: () => this.__data._import,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._import = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'import', {
+			enumerable: true,
+			get: () => this.__data.import,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.import = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'include', {
+			enumerable: true,
+			get: () => this.__data.include,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetComposeInclude = require('./valuesetcomposeinclude.js');
+				this.__data.include = Array.isArray(value)
+					? value.map(v => new ValueSetComposeInclude(v))
+					: [new ValueSetComposeInclude(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetCompose',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetCompose resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetCompose';
 	}
 
-	// Includes the contents of the referenced value set as a part of the contents of this value set. This is an absolute URI that is a reference to ValueSet.uri.
-	get import() {
-		return this.__import;
-	}
-
-	set import(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field import`);
-		}
-		this.__import = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Include one or more codes from a code system.
-	get include() {
-		return this.__include;
-	}
-
-	set include(new_value) {
-		const ValueSetComposeInclude = require('./ValueSetComposeInclude');
-		this.__include = Array.isArray(new_value)
-			? new_value.map(val => new ValueSetComposeInclude(val))
-			: [new ValueSetComposeInclude(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			import: this.__import,
-			include: this.__include && this.__include.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_import: this._import && this._import.toJSON(),
+			import: this.import,
+			include: this.include && this.include.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ValueSetCompose;
+};

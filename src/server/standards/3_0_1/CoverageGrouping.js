@@ -1,141 +1,412 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary CoverageGrouping Class
+ */
+module.exports = class CoverageGrouping {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CoverageGrouping extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CoverageGrouping';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_group', {
+			enumerable: true,
+			get: () => this.__data._group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._group = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'group', {
+			enumerable: true,
+			get: () => this.__data.group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.group = value;
+			},
+		});
+
+		Object.defineProperty(this, '_groupDisplay', {
+			enumerable: true,
+			get: () => this.__data._groupDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._groupDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'groupDisplay', {
+			enumerable: true,
+			get: () => this.__data.groupDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.groupDisplay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subGroup', {
+			enumerable: true,
+			get: () => this.__data._subGroup,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subGroup = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subGroup', {
+			enumerable: true,
+			get: () => this.__data.subGroup,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subGroup = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subGroupDisplay', {
+			enumerable: true,
+			get: () => this.__data._subGroupDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subGroupDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subGroupDisplay', {
+			enumerable: true,
+			get: () => this.__data.subGroupDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subGroupDisplay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_plan', {
+			enumerable: true,
+			get: () => this.__data._plan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._plan = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'plan', {
+			enumerable: true,
+			get: () => this.__data.plan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.plan = value;
+			},
+		});
+
+		Object.defineProperty(this, '_planDisplay', {
+			enumerable: true,
+			get: () => this.__data._planDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._planDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'planDisplay', {
+			enumerable: true,
+			get: () => this.__data.planDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.planDisplay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subPlan', {
+			enumerable: true,
+			get: () => this.__data._subPlan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subPlan = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subPlan', {
+			enumerable: true,
+			get: () => this.__data.subPlan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subPlan = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subPlanDisplay', {
+			enumerable: true,
+			get: () => this.__data._subPlanDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subPlanDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subPlanDisplay', {
+			enumerable: true,
+			get: () => this.__data.subPlanDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subPlanDisplay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_class', {
+			enumerable: true,
+			get: () => this.__data._class,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._class = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'class', {
+			enumerable: true,
+			get: () => this.__data.class,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.class = value;
+			},
+		});
+
+		Object.defineProperty(this, '_classDisplay', {
+			enumerable: true,
+			get: () => this.__data._classDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._classDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'classDisplay', {
+			enumerable: true,
+			get: () => this.__data.classDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.classDisplay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subClass', {
+			enumerable: true,
+			get: () => this.__data._subClass,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subClass = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subClass', {
+			enumerable: true,
+			get: () => this.__data.subClass,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subClass = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subClassDisplay', {
+			enumerable: true,
+			get: () => this.__data._subClassDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subClassDisplay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subClassDisplay', {
+			enumerable: true,
+			get: () => this.__data.subClassDisplay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subClassDisplay = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CoverageGrouping',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CoverageGrouping resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CoverageGrouping';
 	}
 
-	// Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify an employer group. May also be referred to as a Policy or Group ID.
-	get group() {
-		return this.__group;
-	}
-
-	set group(new_value) {
-		this.__group = new_value;
-	}
-
-	// A short description for the group.
-	get groupDisplay() {
-		return this.__groupDisplay;
-	}
-
-	set groupDisplay(new_value) {
-		this.__groupDisplay = new_value;
-	}
-
-	// Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a subset of an employer group.
-	get subGroup() {
-		return this.__subGroup;
-	}
-
-	set subGroup(new_value) {
-		this.__subGroup = new_value;
-	}
-
-	// A short description for the subgroup.
-	get subGroupDisplay() {
-		return this.__subGroupDisplay;
-	}
-
-	set subGroupDisplay(new_value) {
-		this.__subGroupDisplay = new_value;
-	}
-
-	// Identifies a style or collective of coverage issued by the underwriter, for example may be used to identify a collection of benefits provided to employees. May be referred to as a Section or Division ID.
-	get plan() {
-		return this.__plan;
-	}
-
-	set plan(new_value) {
-		this.__plan = new_value;
-	}
-
-	// A short description for the plan.
-	get planDisplay() {
-		return this.__planDisplay;
-	}
-
-	set planDisplay(new_value) {
-		this.__planDisplay = new_value;
-	}
-
-	// Identifies a sub-style or sub-collective of coverage issued by the underwriter, for example may be used to identify a subset of a collection of benefits provided to employees.
-	get subPlan() {
-		return this.__subPlan;
-	}
-
-	set subPlan(new_value) {
-		this.__subPlan = new_value;
-	}
-
-	// A short description for the subplan.
-	get subPlanDisplay() {
-		return this.__subPlanDisplay;
-	}
-
-	set subPlanDisplay(new_value) {
-		this.__subPlanDisplay = new_value;
-	}
-
-	// Identifies a style or collective of coverage issues by the underwriter, for example may be used to identify a class of coverage such as a level of deductables or co-payment.
-	get class() {
-		return this.__class;
-	}
-
-	set class(new_value) {
-		this.__class = new_value;
-	}
-
-	// A short description for the class.
-	get classDisplay() {
-		return this.__classDisplay;
-	}
-
-	set classDisplay(new_value) {
-		this.__classDisplay = new_value;
-	}
-
-	// Identifies a sub-style or sub-collective of coverage issues by the underwriter, for example may be used to identify a subclass of coverage such as a sub-level of deductables or co-payment.
-	get subClass() {
-		return this.__subClass;
-	}
-
-	set subClass(new_value) {
-		this.__subClass = new_value;
-	}
-
-	// A short description for the subclass.
-	get subClassDisplay() {
-		return this.__subClassDisplay;
-	}
-
-	set subClassDisplay(new_value) {
-		this.__subClassDisplay = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			group: this.__group,
-			groupDisplay: this.__groupDisplay,
-			subGroup: this.__subGroup,
-			subGroupDisplay: this.__subGroupDisplay,
-			plan: this.__plan,
-			planDisplay: this.__planDisplay,
-			subPlan: this.__subPlan,
-			subPlanDisplay: this.__subPlanDisplay,
-			class: this.__class,
-			classDisplay: this.__classDisplay,
-			subClass: this.__subClass,
-			subClassDisplay: this.__subClassDisplay,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_group: this._group && this._group.toJSON(),
+			group: this.group,
+			_groupDisplay: this._groupDisplay && this._groupDisplay.toJSON(),
+			groupDisplay: this.groupDisplay,
+			_subGroup: this._subGroup && this._subGroup.toJSON(),
+			subGroup: this.subGroup,
+			_subGroupDisplay: this._subGroupDisplay && this._subGroupDisplay.toJSON(),
+			subGroupDisplay: this.subGroupDisplay,
+			_plan: this._plan && this._plan.toJSON(),
+			plan: this.plan,
+			_planDisplay: this._planDisplay && this._planDisplay.toJSON(),
+			planDisplay: this.planDisplay,
+			_subPlan: this._subPlan && this._subPlan.toJSON(),
+			subPlan: this.subPlan,
+			_subPlanDisplay: this._subPlanDisplay && this._subPlanDisplay.toJSON(),
+			subPlanDisplay: this.subPlanDisplay,
+			_class: this._class && this._class.toJSON(),
+			class: this.class,
+			_classDisplay: this._classDisplay && this._classDisplay.toJSON(),
+			classDisplay: this.classDisplay,
+			_subClass: this._subClass && this._subClass.toJSON(),
+			subClass: this.subClass,
+			_subClassDisplay: this._subClassDisplay && this._subClassDisplay.toJSON(),
+			subClassDisplay: this.subClassDisplay,
+		};
 	}
-}
-
-module.exports = CoverageGrouping;
+};

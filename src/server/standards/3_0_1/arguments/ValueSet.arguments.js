@@ -1,87 +1,91 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the valueset query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
-		type: 'token',
-		definition: 'http://hl7.org/fhir/SearchParameter/medications-code',
-		documentation:
-			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  .',
-	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ValueSet.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-date',
-		documentation: 'The value set publication date.',
+		description: 'The value set publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-description',
-		documentation: 'The description of the value set.',
+		description: 'The description of the value set',
 	},
-	EXPANSION: {
-		name: 'expansion',
+	expansion: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.expansion.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-expansion',
-		documentation: 'Uniquely identifies this expansion.',
+		description: 'Uniquely identifies this expansion',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-identifier',
-		documentation: 'External identifier for the value set.',
+		description: 'External identifier for the value set',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-jurisdiction',
-		documentation: 'Intended jurisdiction for the value set.',
+		description: 'Intended jurisdiction for the value set',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-name',
-		documentation: 'Computationally friendly name of the value set.',
+		description: 'Computationally friendly name of the value set',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-publisher',
-		documentation: 'Name of the publisher of the value set.',
+		description: 'Name of the publisher of the value set',
 	},
-	REFERENCE: {
-		name: 'reference',
+	reference: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.compose.include.system',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-reference',
-		documentation: 'A code system included or excluded in the value set or an imported value set.',
+		description: 'A code system included or excluded in the value set or an imported value set',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-status',
-		documentation: 'The current status of the value set.',
+		description: 'The current status of the value set',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-title',
-		documentation: 'The human-friendly name of the value set.',
+		description: 'The human-friendly name of the value set',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-url',
-		documentation: 'The uri that identifies the value set.',
+		description: 'The uri that identifies the value set',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-version',
-		documentation: 'The business version of the value set.',
-	},
-	FILTER: {
-		name: 'filter',
-		type: 'string',
-		definition: 'http://hl7.org/fhir/OperationDefinition/ValueSet-expand',
-		documentation: 'Filtering the value set',
+		description: 'The business version of the value set',
 	},
 };

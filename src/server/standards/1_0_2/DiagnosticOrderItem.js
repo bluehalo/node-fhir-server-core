@@ -1,64 +1,157 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary DiagnosticOrderItem Class
+ */
+module.exports = class DiagnosticOrderItem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DiagnosticOrderItem extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DiagnosticOrderItem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-requests
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'specimen', {
+			enumerable: true,
+			get: () => this.__data.specimen,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.specimen = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodySite = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DiagnosticOrderItem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DiagnosticOrderItem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DiagnosticOrderItem';
 	}
 
-	// A code that identifies a particular diagnostic investigation, or panel of investigations, that have been requested.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// If the item is related to a specific specimen.
-	get specimen() {
-		return this.__specimen;
-	}
-
-	set specimen(new_value) {
-		const Reference = require('./Reference');
-		this.__specimen = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Anatomical location where the request test should be performed.  This is the target site.
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__bodySite = new CodeableConcept(new_value);
-	}
-
-	// The status of this individual item within the order.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code && this.__code.toJSON(),
-			specimen: this.__specimen && this.__specimen.map(v => v.toJSON()),
-			bodySite: this.__bodySite && this.__bodySite.toJSON(),
-			status: this.__status,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			specimen: this.specimen && this.specimen.map(v => v.toJSON()),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+		};
 	}
-}
-
-module.exports = DiagnosticOrderItem;
+};

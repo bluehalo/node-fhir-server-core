@@ -1,58 +1,132 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary MedicationDispenseSubstitution Class
+ */
+module.exports = class MedicationDispenseSubstitution {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MedicationDispenseSubstitution extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MedicationDispenseSubstitution';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActSubstanceAdminSubstitutionCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-SubstanceAdminSubstitutionReason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'responsibleParty', {
+			enumerable: true,
+			get: () => this.__data.responsibleParty,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.responsibleParty = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MedicationDispenseSubstitution',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MedicationDispenseSubstitution resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MedicationDispenseSubstitution';
 	}
 
-	// A code signifying whether a different drug was dispensed from what was prescribed.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Indicates the reason for the substitution of (or lack of substitution) from what was prescribed.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The person or organization that has primary responsibility for the substitution.
-	get responsibleParty() {
-		return this.__responsibleParty;
-	}
-
-	set responsibleParty(new_value) {
-		const Reference = require('./Reference');
-		this.__responsibleParty = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			responsibleParty: this.__responsibleParty && this.__responsibleParty.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			responsibleParty: this.responsibleParty && this.responsibleParty.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = MedicationDispenseSubstitution;
+};

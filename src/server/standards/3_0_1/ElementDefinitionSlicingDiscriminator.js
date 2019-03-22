@@ -1,41 +1,126 @@
-const Element = require('./Element');
+/**
+ * @name exports
+ * @summary ElementDefinitionSlicingDiscriminator Class
+ */
+module.exports = class ElementDefinitionSlicingDiscriminator {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ElementDefinitionSlicingDiscriminator extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ElementDefinitionSlicingDiscriminator';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/discriminator-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_path', {
+			enumerable: true,
+			get: () => this.__data._path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._path = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'path', {
+			enumerable: true,
+			get: () => this.__data.path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.path = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ElementDefinitionSlicingDiscriminator',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ElementDefinitionSlicingDiscriminator resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ElementDefinitionSlicingDiscriminator';
 	}
 
-	// How the element value is interpreted when discrimination is evaluated.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// A FHIRPath expression, using a restricted subset of FHIRPath, that is used to identify the element on which discrimination is based.
-	get path() {
-		return this.__path;
-	}
-
-	set path(new_value) {
-		this.__path = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			path: this.__path,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_path: this._path && this._path.toJSON(),
+			path: this.path,
+		};
 	}
-}
-
-module.exports = ElementDefinitionSlicingDiscriminator;
+};

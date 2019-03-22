@@ -1,81 +1,199 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary QuestionnaireResponseItem Class
+ */
+module.exports = class QuestionnaireResponseItem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class QuestionnaireResponseItem extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'QuestionnaireResponseItem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_linkId', {
+			enumerable: true,
+			get: () => this.__data._linkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._linkId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'linkId', {
+			enumerable: true,
+			get: () => this.__data.linkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.linkId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_definition', {
+			enumerable: true,
+			get: () => this.__data._definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definition = value;
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'answer', {
+			enumerable: true,
+			get: () => this.__data.answer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let QuestionnaireResponseItemAnswer = require('./questionnaireresponseitemanswer.js');
+				this.__data.answer = Array.isArray(value)
+					? value.map(v => new QuestionnaireResponseItemAnswer(v))
+					: [new QuestionnaireResponseItemAnswer(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'QuestionnaireResponseItem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a QuestionnaireResponseItem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'QuestionnaireResponseItem';
 	}
 
-	// The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource.
-	get linkId() {
-		return this.__linkId;
-	}
-
-	set linkId(new_value) {
-		this.__linkId = new_value;
-	}
-
-	// A reference to an [ElementDefinition](elementdefinition.html) that provides the details for the item.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field definition`);
-		}
-		this.__definition = new_value;
-	}
-
-	// Text that is displayed above the contents of the group or as the text of the question being answered.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
-	// More specific subject this section\'s answers are about, details the subject given in QuestionnaireResponse.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The respondent\'s answer(s) to the question.
-	get answer() {
-		return this.__answer;
-	}
-
-	set answer(new_value) {
-		const QuestionnaireResponseItemAnswer = require('./QuestionnaireResponseItemAnswer');
-		this.__answer = Array.isArray(new_value)
-			? new_value.map(val => new QuestionnaireResponseItemAnswer(val))
-			: [new QuestionnaireResponseItemAnswer(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			linkId: this.__linkId,
-			definition: this.__definition,
-			text: this.__text,
-			subject: this.__subject && this.__subject.toJSON(),
-			answer: this.__answer && this.__answer.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_linkId: this._linkId && this._linkId.toJSON(),
+			linkId: this.linkId,
+			_definition: this._definition && this._definition.toJSON(),
+			definition: this.definition,
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+			subject: this.subject && this.subject.toJSON(),
+			answer: this.answer && this.answer.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = QuestionnaireResponseItem;
+};

@@ -1,192 +1,178 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the observation query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-category',
-		documentation: 'The classification of the type of observation.',
+		description: 'The classification of the type of observation',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-code',
-		documentation: 'The code of the observation type.',
+		description: 'The code of the observation type',
 	},
-	CODE_VALUE_CONCEPT: {
-		name: 'code-value-concept',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-code-value-concept',
-		documentation: 'Code and coded value parameter pair.',
-	},
-	CODE_VALUE_DATE: {
-		name: 'code-value-date',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-code-value-date',
-		documentation: 'Code and date/time value parameter pair.',
-	},
-	CODE_VALUE_QUANTITY: {
-		name: 'code-value-quantity',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-code-value-quantity',
-		documentation: 'Code and quantity value parameter pair.',
-	},
-	CODE_VALUE_STRING: {
-		name: 'code-value-string',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-code-value-string',
-		documentation: 'Code and string value parameter pair.',
-	},
-	COMPONENT_CODE: {
-		name: 'component-code',
+	'component-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.component.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-code',
-		documentation: 'The component code of the observation type.',
+		description: 'The component code of the observation type',
 	},
-	COMPONENT_CODE_VALUE_CONCEPT: {
-		name: 'component-code-component-value-concept',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-code-component-value-concept',
-		documentation: 'Component code and component coded value parameter pair.',
-	},
-	COMPONENT_CODE_VALUE_QUANTITY: {
-		name: 'component-code-component-value-quantity',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-code-component-value-quantity',
-		documentation: 'Component code and component quantity value parameter pair.',
-	},
-	COMPONENT_CODE_VALUE_STRING: {
-		name: 'component-code-component-value-string',
-		type: 'composite',
-		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-code-component-value-string',
-		documentation: 'Component code and component string value parameter pair.',
-	},
-
-	COMPONENT_DATA_ABSENT_REASON: {
-		name: 'component-data-absent-reason',
+	'component-data-absent-reason': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.component.dataAbsentReason',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-data-absent-reason',
-		documentation: 'The reason why the expected value in the element Observation.component.value[x] is missing.',
+		description: 'The reason why the expected value in the element Observation.component.value[x] is missing.',
 	},
-	COMPONENT_VALUE_CONCEPT: {
-		name: 'component-value-concept',
+	'component-value-concept': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.component.valueCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-value-concept',
-		documentation: 'The value of the component observation, if the value is a CodeableConcept.',
+		description: 'The value of the component observation, if the value is a CodeableConcept',
 	},
-	COMPONENT_VALUE_QUANTITY: {
-		name: 'component-value-quantity',
+	'component-value-quantity': {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'Observation.component.valueQuantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-value-quantity',
-		documentation:
-			'The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
+		description:
+			'The value of the component observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)',
 	},
-	COMPONENT_VALUE_STRING: {
-		name: 'component-value-string',
+	'component-value-string': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Observation.component.valueString',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-component-value-string',
-		documentation:
-			'The value of the component observation, if the value is a string, and also searches in CodeableConcept.text.',
+		description:
+			'The value of the component observation, if the value is a string, and also searches in CodeableConcept.text',
 	},
-	DATA_ABSENT_REASON: {
-		name: 'data-absent-reason',
+	'data-absent-reason': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.dataAbsentReason',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-data-absent-reason',
-		documentation: 'The reason why the expected value in the element Observation.value[x] is missing.',
+		description: 'The reason why the expected value in the element Observation.value[x] is missing.',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Observation.effectiveDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-date',
-		documentation: 'Obtained date/time. If the obtained element is a period, a date that falls in the period.',
+		description: 'Obtained date/time. If the obtained element is a period, a date that falls in the period',
 	},
-	DEVICE: {
-		name: 'device',
+	device: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.device',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-device',
-		documentation: 'The Device that generated the observation data.',
+		description: 'The Device that generated the observation data.',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-encounter',
-		documentation: 'Healthcare event related to the observation.',
+		description: 'Healthcare event related to the observation',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-identifier',
-		documentation: 'The unique id for a particular observation.',
+		description: 'The unique id for a particular observation',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-patient',
-		documentation: 'The subject that the observation is about (if patient).',
+		description: 'The subject that the observation is about (if patient)',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.performer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-performer',
-		documentation: 'Who performed the observation.',
+		description: 'Who performed the observation',
 	},
-	RELATED: {
-		name: 'related',
+	related: {
 		type: 'composite',
+		fhirtype: 'composite',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-related',
-		documentation: 'Related Observations - search on related-type and related-target together.',
+		description: 'Related Observations - search on related-type and related-target together',
 	},
-	RELATED_TARGET: {
-		name: 'related-target',
+	'related-target': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.related.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-related-target',
-		documentation: 'Resource that is related to this one.',
+		description: 'Resource that is related to this one',
 	},
-	RELATED_TYPE: {
-		name: 'related-type',
+	'related-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.related.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-related-type',
-		documentation: 'has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by.',
+		description: 'has-member | derived-from | sequel-to | replaces | qualified-by | interfered-by',
 	},
-	SPECIMEN: {
-		name: 'specimen',
+	specimen: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.specimen',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-specimen',
-		documentation: 'Specimen used for this observation.',
+		description: 'Specimen used for this observation',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-status',
-		documentation: 'The status of the observation.',
+		description: 'The status of the observation',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Observation.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-subject',
-		documentation: 'The subject that the observation is about.',
+		description: 'The subject that the observation is about',
 	},
-	VALUE_CONCEPT: {
-		name: 'value-concept',
+	'value-concept': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Observation.valueCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-value-concept',
-		documentation: 'The value of the observation, if the value is a CodeableConcept.',
+		description: 'The value of the observation, if the value is a CodeableConcept',
 	},
-	VALUE_DATE: {
-		name: 'value-date',
+	'value-date': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Observation.valueDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-value-date',
-		documentation: 'The value of the observation, if the value is a date or period of time.',
+		description: 'The value of the observation, if the value is a date or period of time',
 	},
-	VALUE_QUANTITY: {
-		name: 'value-quantity',
+	'value-quantity': {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'Observation.valueQuantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-value-quantity',
-		documentation:
-			'The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data).',
+		description:
+			'The value of the observation, if the value is a Quantity, or a SampledData (just search on the bounds of the values in sampled data)',
 	},
-	VALUE_STRING: {
-		name: 'value-string',
+	'value-string': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Observation.valueString',
 		definition: 'http://hl7.org/fhir/SearchParameter/Observation-value-string',
-		documentation: 'The value of the observation, if the value is a string, and also searches in CodeableConcept.text.',
+		description: 'The value of the observation, if the value is a string, and also searches in CodeableConcept.text',
 	},
 };

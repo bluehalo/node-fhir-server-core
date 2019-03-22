@@ -1,113 +1,254 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary AllergyIntoleranceReaction Class
+ */
+module.exports = class AllergyIntoleranceReaction {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AllergyIntoleranceReaction extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AllergyIntoleranceReaction';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/substance-code
+		Object.defineProperty(this, 'substance', {
+			enumerable: true,
+			get: () => this.__data.substance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.substance = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_certainty', {
+			enumerable: true,
+			get: () => this.__data._certainty,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._certainty = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/reaction-event-certainty
+		Object.defineProperty(this, 'certainty', {
+			enumerable: true,
+			get: () => this.__data.certainty,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.certainty = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/manifestation-codes
+		Object.defineProperty(this, 'manifestation', {
+			enumerable: true,
+			get: () => this.__data.manifestation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.manifestation = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_onset', {
+			enumerable: true,
+			get: () => this.__data._onset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._onset = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onset', {
+			enumerable: true,
+			get: () => this.__data.onset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.onset = value;
+			},
+		});
+
+		Object.defineProperty(this, '_severity', {
+			enumerable: true,
+			get: () => this.__data._severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._severity = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/reaction-event-severity
+		Object.defineProperty(this, 'severity', {
+			enumerable: true,
+			get: () => this.__data.severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.severity = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/route-codes
+		Object.defineProperty(this, 'exposureRoute', {
+			enumerable: true,
+			get: () => this.__data.exposureRoute,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.exposureRoute = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = new Annotation(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AllergyIntoleranceReaction',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AllergyIntoleranceReaction resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AllergyIntoleranceReaction';
 	}
 
-	// Identification of the specific substance considered to be responsible for the Adverse Reaction event. Note: the substance for a specific reaction may be different to the substance identified as the cause of the risk, but must be consistent with it. For instance, it may be a more specific substance (e.g. a brand medication) or a composite substance that includes the identified substance. It must be clinically safe to only process the AllergyIntolerance.substance and ignore the AllergyIntolerance.event.substance.
-	get substance() {
-		return this.__substance;
-	}
-
-	set substance(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__substance = new CodeableConcept(new_value);
-	}
-
-	// Statement about the degree of clinical certainty that the specific substance was the cause of the manifestation in this reaction event.
-	get certainty() {
-		return this.__certainty;
-	}
-
-	set certainty(new_value) {
-		this.__certainty = new_value;
-	}
-
-	// Clinical symptoms and/or signs that are observed or associated with the adverse reaction event.
-	get manifestation() {
-		return this.__manifestation;
-	}
-
-	set manifestation(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__manifestation = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Text description about the reaction as a whole, including details of the manifestation if required.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Record of the date and/or time of the onset of the Reaction.
-	get onset() {
-		return this.__onset;
-	}
-
-	set onset(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field onset`);
-		}
-		this.__onset = new_value;
-	}
-
-	// Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations.
-	get severity() {
-		return this.__severity;
-	}
-
-	set severity(new_value) {
-		this.__severity = new_value;
-	}
-
-	// Identification of the route by which the subject was exposed to the substance.
-	get exposureRoute() {
-		return this.__exposureRoute;
-	}
-
-	set exposureRoute(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__exposureRoute = new CodeableConcept(new_value);
-	}
-
-	// Additional text about the adverse reaction event not captured in other fields.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = new Annotation(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			substance: this.__substance && this.__substance.toJSON(),
-			certainty: this.__certainty,
-			manifestation: this.__manifestation && this.__manifestation.map(v => v.toJSON()),
-			description: this.__description,
-			onset: this.__onset,
-			severity: this.__severity,
-			exposureRoute: this.__exposureRoute && this.__exposureRoute.toJSON(),
-			note: this.__note && this.__note.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			substance: this.substance && this.substance.toJSON(),
+			_certainty: this._certainty && this._certainty.toJSON(),
+			certainty: this.certainty,
+			manifestation: this.manifestation && this.manifestation.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_onset: this._onset && this._onset.toJSON(),
+			onset: this.onset,
+			_severity: this._severity && this._severity.toJSON(),
+			severity: this.severity,
+			exposureRoute: this.exposureRoute && this.exposureRoute.toJSON(),
+			note: this.note && this.note.toJSON(),
+		};
 	}
-}
-
-module.exports = AllergyIntoleranceReaction;
+};

@@ -1,69 +1,170 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary DiagnosticOrderEvent Class
+ */
+module.exports = class DiagnosticOrderEvent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DiagnosticOrderEvent extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DiagnosticOrderEvent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-event
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.description = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_dateTime', {
+			enumerable: true,
+			get: () => this.__data._dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dateTime', {
+			enumerable: true,
+			get: () => this.__data.dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'actor', {
+			enumerable: true,
+			get: () => this.__data.actor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.actor = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DiagnosticOrderEvent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DiagnosticOrderEvent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DiagnosticOrderEvent';
 	}
 
-	// The status for the event.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Additional information about the event that occurred - e.g. if the status remained unchanged.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__description = new CodeableConcept(new_value);
-	}
-
-	// The date/time at which the event occurred.
-	get dateTime() {
-		return this.__dateTime;
-	}
-
-	set dateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dateTime`);
-		}
-		this.__dateTime = new_value;
-	}
-
-	// The person responsible for performing or recording the action.
-	get actor() {
-		return this.__actor;
-	}
-
-	set actor(new_value) {
-		const Reference = require('./Reference');
-		this.__actor = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			status: this.__status,
-			description: this.__description && this.__description.toJSON(),
-			dateTime: this.__dateTime,
-			actor: this.__actor && this.__actor.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			description: this.description && this.description.toJSON(),
+			_dateTime: this._dateTime && this._dateTime.toJSON(),
+			dateTime: this.dateTime,
+			actor: this.actor && this.actor.toJSON(),
+		};
 	}
-}
-
-module.exports = DiagnosticOrderEvent;
+};

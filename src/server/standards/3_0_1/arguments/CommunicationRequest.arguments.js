@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the communicationrequest query
+ */
 module.exports = {
-	AUTHORED: {
-		name: 'authored',
+	authored: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CommunicationRequest.authoredOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-authored',
-		documentation: 'When request transitioned to being actionable.',
+		description: 'When request transitioned to being actionable',
 	},
-	BASED_ON: {
-		name: 'based-on',
+	'based-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.basedOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-based-on',
-		documentation: 'Fulfills plan or proposal.',
+		description: 'Fulfills plan or proposal',
 	},
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-category',
-		documentation: 'Message category.',
+		description: 'Message category',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-context',
-		documentation: 'Encounter or episode leading to message.',
+		description: 'Encounter or episode leading to message',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-encounter',
-		documentation: 'Encounter leading to message.',
+		description: 'Encounter leading to message',
 	},
-	GROUP_IDENTIFIER: {
-		name: 'group-identifier',
+	'group-identifier': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.groupIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-group-identifier',
-		documentation: 'Composite request this is part of.',
+		description: 'Composite request this is part of',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-identifier',
-		documentation: 'Unique identifier.',
+		description: 'Unique identifier',
 	},
-	MEDIUM: {
-		name: 'medium',
+	medium: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.medium',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-medium',
-		documentation: 'A channel of communication.',
+		description: 'A channel of communication',
 	},
-	OCCURRENCE: {
-		name: 'occurrence',
+	occurrence: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CommunicationRequest.occurrenceDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-occurrence',
-		documentation: 'When scheduled.',
+		description: 'When scheduled',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-patient',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-priority',
-		documentation: 'Message urgency.',
+		description: 'Message urgency',
 	},
-	RECIPIENT: {
-		name: 'recipient',
+	recipient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.recipient',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-recipient',
-		documentation: 'Message recipient.',
+		description: 'Message recipient',
 	},
-	REPLACES: {
-		name: 'replaces',
+	replaces: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.replaces',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-replaces',
-		documentation: 'Request(s) replaced by this request.',
+		description: 'Request(s) replaced by this request',
 	},
-	REQUESTER: {
-		name: 'requester',
+	requester: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.requester.agent',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-requester',
-		documentation: 'Individual making the request.',
+		description: 'Individual making the request',
 	},
-	SENDER: {
-		name: 'sender',
+	sender: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.sender',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-sender',
-		documentation: 'Message sender.',
+		description: 'Message sender',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-status',
-		documentation: 'draft | active | suspended | cancelled | completed | entered-in-error | unknown.',
+		description: 'draft | active | suspended | cancelled | completed | entered-in-error | unknown',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-subject',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
 };

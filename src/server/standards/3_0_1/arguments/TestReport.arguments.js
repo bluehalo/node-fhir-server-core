@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the testreport query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestReport.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-identifier',
-		documentation: 'An external identifier for the test report.',
+		description: 'An external identifier for the test report',
 	},
-	ISSUED: {
-		name: 'issued',
+	issued: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'TestReport.issued',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-issued',
-		documentation: 'The test report generation date.',
+		description: 'The test report generation date',
 	},
-	PARTICIPANT: {
-		name: 'participant',
+	participant: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'TestReport.participant.uri',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-participant',
-		documentation: 'The reference to a participant in the test execution.',
+		description: 'The reference to a participant in the test execution',
 	},
-	RESULT: {
-		name: 'result',
+	result: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestReport.result',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-result',
-		documentation: 'The result disposition of the test execution.',
+		description: 'The result disposition of the test execution',
 	},
-	TESTER: {
-		name: 'tester',
+	tester: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestReport.tester',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-tester',
-		documentation: 'The name of the testing organization.',
+		description: 'The name of the testing organization',
 	},
-	TESTSCRIPT: {
-		name: 'testscript',
+	testscript: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'TestReport.testScript',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestReport-testscript',
-		documentation: 'The test script executed to produce this report.',
+		description: 'The test script executed to produce this report',
 	},
 };

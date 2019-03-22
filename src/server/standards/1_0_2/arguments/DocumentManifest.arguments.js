@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the documentmanifest query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-author',
-		documentation: 'Who and/or what authored the manifest.',
+		description: 'Who and/or what authored the manifest',
 	},
-	CONTENT_REF: {
-		name: 'content-ref',
+	'content-ref': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.content.pReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-content-ref',
-		documentation: 'Contents of this set of documents.',
+		description: 'Contents of this set of documents',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DocumentManifest.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-created',
-		documentation: 'When this document manifest created.',
+		description: 'When this document manifest created',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'DocumentManifest.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-description',
-		documentation: 'Human-readable description (title).',
+		description: 'Human-readable description (title)',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentManifest.masterIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-identifier',
-		documentation: 'Unique Identifier for the set of documents.',
+		description: 'Unique Identifier for the set of documents',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-patient',
-		documentation: 'The subject of the set of documents.',
+		description: 'The subject of the set of documents',
 	},
-	RECIPIENT: {
-		name: 'recipient',
+	recipient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.recipient',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-recipient',
-		documentation: 'Intended to get notified about this set of documents.',
+		description: 'Intended to get notified about this set of documents',
 	},
-	RELATED_ID: {
-		name: 'related-id',
+	'related-id': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentManifest.related.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-related-id',
-		documentation: 'Identifiers of things that are related.',
+		description: 'Identifiers of things that are related',
 	},
-	RELATED_REF: {
-		name: 'related-ref',
+	'related-ref': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.related.ref',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-related-ref',
-		documentation: 'Related Resource.',
+		description: 'Related Resource',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'DocumentManifest.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-source',
-		documentation: 'The source system/application/software.',
+		description: 'The source system/application/software',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentManifest.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-status',
-		documentation: 'current | superseded | entered-in-error.',
+		description: 'current | superseded | entered-in-error',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentManifest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-subject',
-		documentation: 'The subject of the set of documents.',
+		description: 'The subject of the set of documents',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentManifest.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentManifest-type',
-		documentation: 'Kind of document set.',
+		description: 'Kind of document set',
 	},
 };

@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the basic query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Basic.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-author',
-		documentation: 'Who created.',
+		description: 'Who created',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Basic.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-code',
-		documentation: 'Kind of Resource.',
+		description: 'Kind of Resource',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Basic.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-created',
-		documentation: 'When created.',
+		description: 'When created',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Basic.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-identifier',
-		documentation: 'Business identifier.',
+		description: 'Business identifier',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Basic.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-patient',
-		documentation: 'Identifies the focus of this resource.',
+		description: 'Identifies the focus of this resource',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Basic.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Basic-subject',
-		documentation: 'Identifies the focus of this resource.',
+		description: 'Identifies the focus of this resource',
 	},
 };

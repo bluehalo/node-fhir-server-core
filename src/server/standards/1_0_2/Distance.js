@@ -1,20 +1,30 @@
-const Quantity = require('./Quantity');
+/**
+ * @name exports
+ * @summary Distance Class
+ */
+module.exports = class Distance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Distance extends Quantity {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Distance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Distance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Distance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Distance';
 	}
 
 	toJSON() {
-		return Object.assign(super.toJSON(), {});
+		return {};
 	}
-}
-
-module.exports = Distance;
+};

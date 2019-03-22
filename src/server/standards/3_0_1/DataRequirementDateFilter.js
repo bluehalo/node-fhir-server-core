@@ -1,69 +1,154 @@
-const Element = require('./Element');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary DataRequirementDateFilter Class
+ */
+module.exports = class DataRequirementDateFilter {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DataRequirementDateFilter extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DataRequirementDateFilter';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_path', {
+			enumerable: true,
+			get: () => this.__data._path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._path = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'path', {
+			enumerable: true,
+			get: () => this.__data.path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.path = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDateTime', {
+			enumerable: true,
+			get: () => this.__data._valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDateTime', {
+			enumerable: true,
+			get: () => this.__data.valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valuePeriod', {
+			enumerable: true,
+			get: () => this.__data.valuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.valuePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDuration', {
+			enumerable: true,
+			get: () => this.__data.valueDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.valueDuration = new Duration(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DataRequirementDateFilter',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DataRequirementDateFilter resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DataRequirementDateFilter';
 	}
 
-	// The date-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type dateTime, Period, Schedule, or Timing.
-	get path() {
-		return this.__path;
-	}
-
-	set path(new_value) {
-		this.__path = new_value;
-	}
-
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration from now.
-	get valueDateTime() {
-		return this.__valueDateTime;
-	}
-
-	set valueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
-		}
-		this.__valueDateTime = new_value;
-	}
-
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration from now.
-	get valuePeriod() {
-		return this.__valuePeriod;
-	}
-
-	set valuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__valuePeriod = new Period(new_value);
-	}
-
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration from now.
-	get valueDuration() {
-		return this.__valueDuration;
-	}
-
-	set valueDuration(new_value) {
-		const Duration = require('./Duration');
-		this.__valueDuration = new Duration(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			path: this.__path,
-			valueDateTime: this.__valueDateTime,
-			valuePeriod: this.__valuePeriod && this.__valuePeriod.toJSON(),
-			valueDuration: this.__valueDuration && this.__valueDuration.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_path: this._path && this._path.toJSON(),
+			path: this.path,
+			_valueDateTime: this._valueDateTime && this._valueDateTime.toJSON(),
+			valueDateTime: this.valueDateTime,
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			valueDuration: this.valueDuration && this.valueDuration.toJSON(),
+		};
 	}
-}
-
-module.exports = DataRequirementDateFilter;
+};

@@ -1,86 +1,105 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the namingsystem query
+ */
 module.exports = {
-	CONTACT: {
-		name: 'contact',
+	contact: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.contact.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-contact',
-		documentation: 'Name of a individual to contact.',
+		description: 'Name of a individual to contact',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.useContext',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-context',
-		documentation: 'Content intends to support these contexts.',
+		description: 'Content intends to support these contexts',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'NamingSystem.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-date',
-		documentation: 'Publication Date(/time).',
+		description: 'Publication Date(/time)',
 	},
-	ID_TYPE: {
-		name: 'id-type',
+	'id-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.uniqueId.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-id-type',
-		documentation: 'oid | uuid | uri | other.',
+		description: 'oid | uuid | uri | other',
 	},
-	KIND: {
-		name: 'kind',
+	kind: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.kind',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-kind',
-		documentation: 'codesystem | identifier | root.',
+		description: 'codesystem | identifier | root',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-name',
-		documentation: 'Human-readable label.',
+		description: 'Human-readable label',
 	},
-	PERIOD: {
-		name: 'period',
+	period: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'NamingSystem.uniqueId.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-period',
-		documentation: 'When is identifier valid?.',
+		description: 'When is identifier valid?',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-publisher',
-		documentation: 'Name of the publisher (Organization or individual).',
+		description: 'Name of the publisher (Organization or individual)',
 	},
-	REPLACED_BY: {
-		name: 'replaced-by',
+	'replaced-by': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'NamingSystem.replacedBy',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-replaced-by',
-		documentation: 'Use this instead.',
+		description: 'Use this instead',
 	},
-	RESPONSIBLE: {
-		name: 'responsible',
+	responsible: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.responsible',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-responsible',
-		documentation: 'Who maintains system namespace?.',
+		description: 'Who maintains system namespace?',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-status',
-		documentation: 'draft | active | retired.',
+		description: 'draft | active | retired',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.contact.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-telecom',
-		documentation: 'Contact details for individual or publisher.',
+		description: 'Contact details for individual or publisher',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-type',
-		documentation: 'e.g. driver,  provider,  patient, bank etc.',
+		description: 'e.g. driver,  provider,  patient, bank etc.',
 	},
-	VALUE: {
-		name: 'value',
+	value: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.uniqueId.value',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-value',
-		documentation: 'The unique identifier.',
+		description: 'The unique identifier',
 	},
 };

@@ -1,155 +1,354 @@
-const DomainResource = require('./DomainResource');
-const InstantScalar = require('./scalars/Instant.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary Provenance Class
+ */
+module.exports = class Provenance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Provenance extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Provenance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'target', {
+			enumerable: true,
+			get: () => this.__data.target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.target = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_recorded', {
+			enumerable: true,
+			get: () => this.__data._recorded,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._recorded = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recorded', {
+			enumerable: true,
+			get: () => this.__data.recorded,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.recorded = value;
+			},
+		});
+
+		Object.defineProperty(this, '_policy', {
+			enumerable: true,
+			get: () => this.__data._policy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._policy = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'policy', {
+			enumerable: true,
+			get: () => this.__data.policy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.policy = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.location = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.reason = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/provenance-activity-type
+		Object.defineProperty(this, 'activity', {
+			enumerable: true,
+			get: () => this.__data.activity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.activity = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'agent', {
+			enumerable: true,
+			get: () => this.__data.agent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ProvenanceAgent = require('./provenanceagent.js');
+				this.__data.agent = Array.isArray(value)
+					? value.map(v => new ProvenanceAgent(v))
+					: [new ProvenanceAgent(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'entity', {
+			enumerable: true,
+			get: () => this.__data.entity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ProvenanceEntity = require('./provenanceentity.js');
+				this.__data.entity = Array.isArray(value)
+					? value.map(v => new ProvenanceEntity(v))
+					: [new ProvenanceEntity(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'signature', {
+			enumerable: true,
+			get: () => this.__data.signature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.signature = Array.isArray(value) ? value.map(v => new Signature(v)) : [new Signature(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Provenance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Provenance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Provenance';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Provenance = new_value;
-	}
-
-	// The Reference(s) that were generated or updated by  the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity.
-	get target() {
-		return this.__target;
-	}
-
-	set target(new_value) {
-		const Reference = require('./Reference');
-		this.__target = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The period during which the activity occurred.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The instant of time at which the activity was recorded.
-	get recorded() {
-		return this.__recorded;
-	}
-
-	set recorded(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field recorded`);
-		}
-		this.__recorded = new_value;
-	}
-
-	// Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc.
-	get policy() {
-		return this.__policy;
-	}
-
-	set policy(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field policy`);
-		}
-		this.__policy = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Where the activity occurred, if relevant.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		const Reference = require('./Reference');
-		this.__location = new Reference(new_value);
-	}
-
-	// The reason that the activity was taking place.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const Coding = require('./Coding');
-		this.__reason = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
-	get activity() {
-		return this.__activity;
-	}
-
-	set activity(new_value) {
-		const Coding = require('./Coding');
-		this.__activity = new Coding(new_value);
-	}
-
-	// An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place.
-	get agent() {
-		return this.__agent;
-	}
-
-	set agent(new_value) {
-		const ProvenanceAgent = require('./ProvenanceAgent');
-		this.__agent = Array.isArray(new_value)
-			? new_value.map(val => new ProvenanceAgent(val))
-			: [new ProvenanceAgent(new_value)];
-	}
-
-	// An entity used in this activity.
-	get entity() {
-		return this.__entity;
-	}
-
-	set entity(new_value) {
-		const ProvenanceEntity = require('./ProvenanceEntity');
-		this.__entity = Array.isArray(new_value)
-			? new_value.map(val => new ProvenanceEntity(val))
-			: [new ProvenanceEntity(new_value)];
-	}
-
-	// A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated.
-	get signature() {
-		return this.__signature;
-	}
-
-	set signature(new_value) {
-		const Signature = require('./Signature');
-		this.__signature = Array.isArray(new_value) ? new_value.map(val => new Signature(val)) : [new Signature(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			target: this.__target && this.__target.map(v => v.toJSON()),
-			period: this.__period && this.__period.toJSON(),
-			recorded: this.__recorded,
-			policy: this.__policy,
-			location: this.__location && this.__location.toJSON(),
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			activity: this.__activity && this.__activity.toJSON(),
-			agent: this.__agent && this.__agent.map(v => v.toJSON()),
-			entity: this.__entity && this.__entity.map(v => v.toJSON()),
-			signature: this.__signature && this.__signature.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			target: this.target && this.target.map(v => v.toJSON()),
+			period: this.period && this.period.toJSON(),
+			_recorded: this._recorded && this._recorded.toJSON(),
+			recorded: this.recorded,
+			_policy: this._policy && this._policy.toJSON(),
+			policy: this.policy,
+			location: this.location && this.location.toJSON(),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			activity: this.activity && this.activity.toJSON(),
+			agent: this.agent && this.agent.map(v => v.toJSON()),
+			entity: this.entity && this.entity.map(v => v.toJSON()),
+			signature: this.signature && this.signature.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Provenance;
+};

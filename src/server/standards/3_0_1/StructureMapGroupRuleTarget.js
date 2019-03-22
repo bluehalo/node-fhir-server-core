@@ -1,120 +1,293 @@
-const BackboneElement = require('./BackboneElement');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary StructureMapGroupRuleTarget Class
+ */
+module.exports = class StructureMapGroupRuleTarget {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class StructureMapGroupRuleTarget extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'StructureMapGroupRuleTarget';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_context', {
+			enumerable: true,
+			get: () => this.__data._context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._context = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.context = value;
+			},
+		});
+
+		Object.defineProperty(this, '_contextType', {
+			enumerable: true,
+			get: () => this.__data._contextType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._contextType = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/map-context-type
+		Object.defineProperty(this, 'contextType', {
+			enumerable: true,
+			get: () => this.__data.contextType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contextType = value;
+			},
+		});
+
+		Object.defineProperty(this, '_element', {
+			enumerable: true,
+			get: () => this.__data._element,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._element = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'element', {
+			enumerable: true,
+			get: () => this.__data.element,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.element = value;
+			},
+		});
+
+		Object.defineProperty(this, '_variable', {
+			enumerable: true,
+			get: () => this.__data._variable,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._variable = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'variable', {
+			enumerable: true,
+			get: () => this.__data.variable,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.variable = value;
+			},
+		});
+
+		Object.defineProperty(this, '_listMode', {
+			enumerable: true,
+			get: () => this.__data._listMode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._listMode = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/map-target-list-mode
+		Object.defineProperty(this, 'listMode', {
+			enumerable: true,
+			get: () => this.__data.listMode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.listMode = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_listRuleId', {
+			enumerable: true,
+			get: () => this.__data._listRuleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._listRuleId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'listRuleId', {
+			enumerable: true,
+			get: () => this.__data.listRuleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.listRuleId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_transform', {
+			enumerable: true,
+			get: () => this.__data._transform,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._transform = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/map-transform
+		Object.defineProperty(this, 'transform', {
+			enumerable: true,
+			get: () => this.__data.transform,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.transform = value;
+			},
+		});
+
+		Object.defineProperty(this, 'parameter', {
+			enumerable: true,
+			get: () => this.__data.parameter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let StructureMapGroupRuleTargetParameter = require('./structuremapgroupruletargetparameter.js');
+				this.__data.parameter = Array.isArray(value)
+					? value.map(v => new StructureMapGroupRuleTargetParameter(v))
+					: [new StructureMapGroupRuleTargetParameter(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'StructureMapGroupRuleTarget',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a StructureMapGroupRuleTarget resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'StructureMapGroupRuleTarget';
 	}
 
-	// Type or variable this rule applies to.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field context`);
-		}
-		this.__context = new_value;
-	}
-
-	// How to interpret the context.
-	get contextType() {
-		return this.__contextType;
-	}
-
-	set contextType(new_value) {
-		this.__contextType = new_value;
-	}
-
-	// Field to create in the context.
-	get element() {
-		return this.__element;
-	}
-
-	set element(new_value) {
-		this.__element = new_value;
-	}
-
-	// Named context for field, if desired, and a field is specified.
-	get variable() {
-		return this.__variable;
-	}
-
-	set variable(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field variable`);
-		}
-		this.__variable = new_value;
-	}
-
-	// If field is a list, how to manage the list.
-	get listMode() {
-		return this.__listMode;
-	}
-
-	set listMode(new_value) {
-		this.__listMode = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Internal rule reference for shared list items.
-	get listRuleId() {
-		return this.__listRuleId;
-	}
-
-	set listRuleId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field listRuleId`);
-		}
-		this.__listRuleId = new_value;
-	}
-
-	// How the data is copied / created.
-	get transform() {
-		return this.__transform;
-	}
-
-	set transform(new_value) {
-		this.__transform = new_value;
-	}
-
-	// Parameters to the transform.
-	get parameter() {
-		return this.__parameter;
-	}
-
-	set parameter(new_value) {
-		const StructureMapGroupRuleTargetParameter = require('./StructureMapGroupRuleTargetParameter');
-		this.__parameter = Array.isArray(new_value)
-			? new_value.map(val => new StructureMapGroupRuleTargetParameter(val))
-			: [new StructureMapGroupRuleTargetParameter(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			context: this.__context,
-			contextType: this.__contextType,
-			element: this.__element,
-			variable: this.__variable,
-			listMode: this.__listMode,
-			listRuleId: this.__listRuleId,
-			transform: this.__transform,
-			parameter: this.__parameter && this.__parameter.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_context: this._context && this._context.toJSON(),
+			context: this.context,
+			_contextType: this._contextType && this._contextType.toJSON(),
+			contextType: this.contextType,
+			_element: this._element && this._element.toJSON(),
+			element: this.element,
+			_variable: this._variable && this._variable.toJSON(),
+			variable: this.variable,
+			_listMode: this._listMode && this._listMode.toJSON(),
+			listMode: this.listMode,
+			_listRuleId: this._listRuleId && this._listRuleId.toJSON(),
+			listRuleId: this.listRuleId,
+			_transform: this._transform && this._transform.toJSON(),
+			transform: this.transform,
+			parameter: this.parameter && this.parameter.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = StructureMapGroupRuleTarget;
+};

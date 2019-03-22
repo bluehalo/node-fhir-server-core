@@ -1,42 +1,129 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary HealthcareServiceNotAvailable Class
+ */
+module.exports = class HealthcareServiceNotAvailable {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class HealthcareServiceNotAvailable extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'HealthcareServiceNotAvailable';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'during', {
+			enumerable: true,
+			get: () => this.__data.during,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.during = new Period(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'HealthcareServiceNotAvailable',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a HealthcareServiceNotAvailable resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'HealthcareServiceNotAvailable';
 	}
 
-	// The reason that can be presented to the user as to why this time is not available.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Service is not available (seasonally or for a public holiday) from this date.
-	get during() {
-		return this.__during;
-	}
-
-	set during(new_value) {
-		const Period = require('./Period');
-		this.__during = new Period(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			description: this.__description,
-			during: this.__during && this.__during.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			during: this.during && this.during.toJSON(),
+		};
 	}
-}
-
-module.exports = HealthcareServiceNotAvailable;
+};

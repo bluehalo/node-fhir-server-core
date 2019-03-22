@@ -1,92 +1,197 @@
-const Element = require('./Element');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary DataRequirementCodeFilter Class
+ */
+module.exports = class DataRequirementCodeFilter {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DataRequirementCodeFilter extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DataRequirementCodeFilter';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_path', {
+			enumerable: true,
+			get: () => this.__data._path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._path = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'path', {
+			enumerable: true,
+			get: () => this.__data.path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.path = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueSetString', {
+			enumerable: true,
+			get: () => this.__data._valueSetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueSetString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueSetString', {
+			enumerable: true,
+			get: () => this.__data.valueSetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueSetString = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valueSetReference', {
+			enumerable: true,
+			get: () => this.__data.valueSetReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.valueSetReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_valueCode', {
+			enumerable: true,
+			get: () => this.__data._valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCode', {
+			enumerable: true,
+			get: () => this.__data.valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueCode = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'valueCoding', {
+			enumerable: true,
+			get: () => this.__data.valueCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.valueCoding = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'valueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.valueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.valueCodeableConcept = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DataRequirementCodeFilter',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DataRequirementCodeFilter resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DataRequirementCodeFilter';
 	}
 
-	// The code-valued attribute of the filter. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept.
-	get path() {
-		return this.__path;
-	}
-
-	set path(new_value) {
-		this.__path = new_value;
-	}
-
-	// The valueset for the code filter. The valueSet and value elements are exclusive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset.
-	get valueSetString() {
-		return this.__valueSetString;
-	}
-
-	set valueSetString(new_value) {
-		this.__valueSetString = new_value;
-	}
-
-	// The valueset for the code filter. The valueSet and value elements are exclusive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset.
-	get valueSetReference() {
-		return this.__valueSetReference;
-	}
-
-	set valueSetReference(new_value) {
-		const Reference = require('./Reference');
-		this.__valueSetReference = new Reference(new_value);
-	}
-
-	// The codes for the code filter. Only one of valueSet, valueCode, valueCoding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes.
-	get valueCode() {
-		return this.__valueCode;
-	}
-
-	set valueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueCode`);
-		}
-		this.__valueCode = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The Codings for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified Codings.
-	get valueCoding() {
-		return this.__valueCoding;
-	}
-
-	set valueCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__valueCoding = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// The CodeableConcepts for the code filter. Only one of valueSet, valueCode, valueConding, or valueCodeableConcept may be specified. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified CodeableConcepts.
-	get valueCodeableConcept() {
-		return this.__valueCodeableConcept;
-	}
-
-	set valueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__valueCodeableConcept = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			path: this.__path,
-			valueSetString: this.__valueSetString,
-			valueSetReference: this.__valueSetReference && this.__valueSetReference.toJSON(),
-			valueCode: this.__valueCode,
-			valueCoding: this.__valueCoding && this.__valueCoding.map(v => v.toJSON()),
-			valueCodeableConcept: this.__valueCodeableConcept && this.__valueCodeableConcept.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_path: this._path && this._path.toJSON(),
+			path: this.path,
+			_valueSetString: this._valueSetString && this._valueSetString.toJSON(),
+			valueSetString: this.valueSetString,
+			valueSetReference: this.valueSetReference && this.valueSetReference.toJSON(),
+			_valueCode: this._valueCode && this._valueCode.toJSON(),
+			valueCode: this.valueCode,
+			valueCoding: this.valueCoding && this.valueCoding.map(v => v.toJSON()),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = DataRequirementCodeFilter;
+};

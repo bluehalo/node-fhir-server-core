@@ -1,53 +1,142 @@
-const BackboneElement = require('./BackboneElement');
-const CodeScalar = require('./scalars/Code.scalar');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+/**
+ * @name exports
+ * @summary ConformanceRestSecurityCertificate Class
+ */
+module.exports = class ConformanceRestSecurityCertificate {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConformanceRestSecurityCertificate extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConformanceRestSecurityCertificate';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_blob', {
+			enumerable: true,
+			get: () => this.__data._blob,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._blob = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'blob', {
+			enumerable: true,
+			get: () => this.__data.blob,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.blob = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConformanceRestSecurityCertificate',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConformanceRestSecurityCertificate resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConformanceRestSecurityCertificate';
 	}
 
-	// Mime type for certificate.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field type`);
-		}
-		this.__type = new_value;
-	}
-
-	// Actual certificate.
-	get blob() {
-		return this.__blob;
-	}
-
-	set blob(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field blob`);
-		}
-		this.__blob = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			blob: this.__blob,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_blob: this._blob && this._blob.toJSON(),
+			blob: this.blob,
+		};
 	}
-}
-
-module.exports = ConformanceRestSecurityCertificate;
+};

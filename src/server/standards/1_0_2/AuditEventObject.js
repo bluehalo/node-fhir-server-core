@@ -1,136 +1,269 @@
-const BackboneElement = require('./BackboneElement');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+/**
+ * @name exports
+ * @summary AuditEventObject Class
+ */
+module.exports = class AuditEventObject {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AuditEventObject extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AuditEventObject';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reference', {
+			enumerable: true,
+			get: () => this.__data.reference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reference = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/object-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/object-role
+		Object.defineProperty(this, 'role', {
+			enumerable: true,
+			get: () => this.__data.role,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.role = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/object-lifecycle
+		Object.defineProperty(this, 'lifecycle', {
+			enumerable: true,
+			get: () => this.__data.lifecycle,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.lifecycle = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/security-labels
+		Object.defineProperty(this, 'securityLabel', {
+			enumerable: true,
+			get: () => this.__data.securityLabel,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.securityLabel = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_query', {
+			enumerable: true,
+			get: () => this.__data._query,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._query = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'query', {
+			enumerable: true,
+			get: () => this.__data.query,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.query = value;
+			},
+		});
+
+		Object.defineProperty(this, 'detail', {
+			enumerable: true,
+			get: () => this.__data.detail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AuditEventObjectDetail = require('./auditeventobjectdetail.js');
+				this.__data.detail = Array.isArray(value)
+					? value.map(v => new AuditEventObjectDetail(v))
+					: [new AuditEventObjectDetail(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AuditEventObject',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AuditEventObject resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AuditEventObject';
 	}
 
-	// Identifies a specific instance of the participant object. The reference should always be version specific.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// Identifies a specific instance of the participant object. The reference should always be version specific.
-	get reference() {
-		return this.__reference;
-	}
-
-	set reference(new_value) {
-		const Reference = require('./Reference');
-		this.__reference = new Reference(new_value);
-	}
-
-	// The type of the object that was involved in this audit event.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// Code representing the functional application role of Participant Object being audited.
-	get role() {
-		return this.__role;
-	}
-
-	set role(new_value) {
-		const Coding = require('./Coding');
-		this.__role = new Coding(new_value);
-	}
-
-	// Identifier for the data life-cycle stage for the participant object.
-	get lifecycle() {
-		return this.__lifecycle;
-	}
-
-	set lifecycle(new_value) {
-		const Coding = require('./Coding');
-		this.__lifecycle = new Coding(new_value);
-	}
-
-	// Denotes security labels for the identified object.
-	get securityLabel() {
-		return this.__securityLabel;
-	}
-
-	set securityLabel(new_value) {
-		const Coding = require('./Coding');
-		this.__securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// An instance-specific descriptor of the Participant Object ID audited, such as a person\'s name.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// Text that describes the object in more detail.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The actual query for a query-type participant object.
-	get query() {
-		return this.__query;
-	}
-
-	set query(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field query`);
-		}
-		this.__query = new_value;
-	}
-
-	// Additional Information about the Object.
-	get detail() {
-		return this.__detail;
-	}
-
-	set detail(new_value) {
-		const AuditEventObjectDetail = require('./AuditEventObjectDetail');
-		this.__detail = Array.isArray(new_value)
-			? new_value.map(val => new AuditEventObjectDetail(val))
-			: [new AuditEventObjectDetail(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			reference: this.__reference && this.__reference.toJSON(),
-			type: this.__type && this.__type.toJSON(),
-			role: this.__role && this.__role.toJSON(),
-			lifecycle: this.__lifecycle && this.__lifecycle.toJSON(),
-			securityLabel: this.__securityLabel && this.__securityLabel.map(v => v.toJSON()),
-			name: this.__name,
-			description: this.__description,
-			query: this.__query,
-			detail: this.__detail && this.__detail.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			reference: this.reference && this.reference.toJSON(),
+			type: this.type && this.type.toJSON(),
+			role: this.role && this.role.toJSON(),
+			lifecycle: this.lifecycle && this.lifecycle.toJSON(),
+			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_query: this._query && this._query.toJSON(),
+			query: this.query,
+			detail: this.detail && this.detail.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AuditEventObject;
+};

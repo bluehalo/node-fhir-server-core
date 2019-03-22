@@ -1,408 +1,744 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
-const TimeScalar = require('./scalars/Time.scalar');
+/**
+ * @name exports
+ * @summary Observation Class
+ */
+module.exports = class Observation {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Observation extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Observation';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-category
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-codes
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_effectiveDateTime', {
+			enumerable: true,
+			get: () => this.__data._effectiveDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._effectiveDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'effectiveDateTime', {
+			enumerable: true,
+			get: () => this.__data.effectiveDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.effectiveDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'effectivePeriod', {
+			enumerable: true,
+			get: () => this.__data.effectivePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.effectivePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_issued', {
+			enumerable: true,
+			get: () => this.__data._issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._issued = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'issued', {
+			enumerable: true,
+			get: () => this.__data.issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.issued = value;
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performer = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'valueQuantity', {
+			enumerable: true,
+			get: () => this.__data.valueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.valueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.valueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.valueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_valueString', {
+			enumerable: true,
+			get: () => this.__data._valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueString', {
+			enumerable: true,
+			get: () => this.__data.valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueBoolean', {
+			enumerable: true,
+			get: () => this.__data._valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueBoolean', {
+			enumerable: true,
+			get: () => this.__data.valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valueRange', {
+			enumerable: true,
+			get: () => this.__data.valueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.valueRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueRatio', {
+			enumerable: true,
+			get: () => this.__data.valueRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.valueRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueSampledData', {
+			enumerable: true,
+			get: () => this.__data.valueSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.valueSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueAttachment', {
+			enumerable: true,
+			get: () => this.__data.valueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.valueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, '_valueTime', {
+			enumerable: true,
+			get: () => this.__data._valueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueTime', {
+			enumerable: true,
+			get: () => this.__data.valueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDateTime', {
+			enumerable: true,
+			get: () => this.__data._valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDateTime', {
+			enumerable: true,
+			get: () => this.__data.valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valuePeriod', {
+			enumerable: true,
+			get: () => this.__data.valuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.valuePeriod = new Period(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-valueabsentreason
+		Object.defineProperty(this, 'dataAbsentReason', {
+			enumerable: true,
+			get: () => this.__data.dataAbsentReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.dataAbsentReason = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-interpretation
+		Object.defineProperty(this, 'interpretation', {
+			enumerable: true,
+			get: () => this.__data.interpretation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.interpretation = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_comment', {
+			enumerable: true,
+			get: () => this.__data._comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comment = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'comment', {
+			enumerable: true,
+			get: () => this.__data.comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comment = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodySite = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-methods
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'specimen', {
+			enumerable: true,
+			get: () => this.__data.specimen,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.specimen = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'device', {
+			enumerable: true,
+			get: () => this.__data.device,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.device = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referenceRange', {
+			enumerable: true,
+			get: () => this.__data.referenceRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ObservationReferenceRange = require('./observationreferencerange.js');
+				this.__data.referenceRange = Array.isArray(value)
+					? value.map(v => new ObservationReferenceRange(v))
+					: [new ObservationReferenceRange(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'related', {
+			enumerable: true,
+			get: () => this.__data.related,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ObservationRelated = require('./observationrelated.js');
+				this.__data.related = Array.isArray(value)
+					? value.map(v => new ObservationRelated(v))
+					: [new ObservationRelated(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'component', {
+			enumerable: true,
+			get: () => this.__data.component,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ObservationComponent = require('./observationcomponent.js');
+				this.__data.component = Array.isArray(value)
+					? value.map(v => new ObservationComponent(v))
+					: [new ObservationComponent(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Observation',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Observation resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Observation';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Observation = new_value;
-	}
-
-	// A unique identifier assigned to this observation.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// A plan, proposal or order that is fulfilled in whole or in part by this event.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The status of the result value.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A code that classifies the general type of observation being made.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Describes what was observed. Sometimes this is called the observation \'name\'.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The patient, or group of patients, location, or device whose characteristics (direct or indirect) are described by the observation and into whose record the observation is placed.  Comments: Indirect characteristics may be those of a specimen, fetus, donor,  other observer (for example a relative or EMT), or any observation made about the subject.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The healthcare event  (e.g. a patient and healthcare provider interaction) during which this observation is made.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \'physiologically relevant time\'. This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.
-	get effectiveDateTime() {
-		return this.__effectiveDateTime;
-	}
-
-	set effectiveDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field effectiveDateTime`);
-		}
-		this.__effectiveDateTime = new_value;
-	}
-
-	// The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the \'physiologically relevant time\'. This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself.
-	get effectivePeriod() {
-		return this.__effectivePeriod;
-	}
-
-	set effectivePeriod(new_value) {
-		const Period = require('./Period');
-		this.__effectivePeriod = new Period(new_value);
-	}
-
-	// The date and time this observation was made available to providers, typically after the results have been reviewed and verified.
-	get issued() {
-		return this.__issued;
-	}
-
-	set issued(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field issued`);
-		}
-		this.__issued = new_value;
-	}
-
-	// Who was responsible for asserting the observed value as \'true\'.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const Reference = require('./Reference');
-		this.__performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueQuantity() {
-		return this.__valueQuantity;
-	}
-
-	set valueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__valueQuantity = new Quantity(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueCodeableConcept() {
-		return this.__valueCodeableConcept;
-	}
-
-	set valueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__valueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueString() {
-		return this.__valueString;
-	}
-
-	set valueString(new_value) {
-		this.__valueString = new_value;
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueBoolean() {
-		return this.__valueBoolean;
-	}
-
-	set valueBoolean(new_value) {
-		this.__valueBoolean = new_value;
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueRange() {
-		return this.__valueRange;
-	}
-
-	set valueRange(new_value) {
-		const Range = require('./Range');
-		this.__valueRange = new Range(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueRatio() {
-		return this.__valueRatio;
-	}
-
-	set valueRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__valueRatio = new Ratio(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueSampledData() {
-		return this.__valueSampledData;
-	}
-
-	set valueSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__valueSampledData = new SampledData(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueAttachment() {
-		return this.__valueAttachment;
-	}
-
-	set valueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__valueAttachment = new Attachment(new_value);
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueTime() {
-		return this.__valueTime;
-	}
-
-	set valueTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueTime`);
-		}
-		this.__valueTime = new_value;
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valueDateTime() {
-		return this.__valueDateTime;
-	}
-
-	set valueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
-		}
-		this.__valueDateTime = new_value;
-	}
-
-	// The information determined as a result of making the observation, if the information has a simple value.
-	get valuePeriod() {
-		return this.__valuePeriod;
-	}
-
-	set valuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__valuePeriod = new Period(new_value);
-	}
-
-	// Provides a reason why the expected value in the element Observation.value[x] is missing.
-	get dataAbsentReason() {
-		return this.__dataAbsentReason;
-	}
-
-	set dataAbsentReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__dataAbsentReason = new CodeableConcept(new_value);
-	}
-
-	// The assessment made based on the result of the observation.  Intended as a simple compact code often placed adjacent to the result value in reports and flow sheets to signal the meaning/normalcy status of the result. Otherwise known as abnormal flag.
-	get interpretation() {
-		return this.__interpretation;
-	}
-
-	set interpretation(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__interpretation = new CodeableConcept(new_value);
-	}
-
-	// May include statements about significant, unexpected or unreliable values, or information about the source of the value where this may be relevant to the interpretation of the result.
-	get comment() {
-		return this.__comment;
-	}
-
-	set comment(new_value) {
-		this.__comment = new_value;
-	}
-
-	// Indicates the site on the subject\'s body where the observation was made (i.e. the target site).
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__bodySite = new CodeableConcept(new_value);
-	}
-
-	// Indicates the mechanism used to perform the observation.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// The specimen that was used when this observation was made.
-	get specimen() {
-		return this.__specimen;
-	}
-
-	set specimen(new_value) {
-		const Reference = require('./Reference');
-		this.__specimen = new Reference(new_value);
-	}
-
-	// The device used to generate the observation data.
-	get device() {
-		return this.__device;
-	}
-
-	set device(new_value) {
-		const Reference = require('./Reference');
-		this.__device = new Reference(new_value);
-	}
-
-	// Guidance on how to interpret the value by comparison to a normal or recommended range.
-	get referenceRange() {
-		return this.__referenceRange;
-	}
-
-	set referenceRange(new_value) {
-		const ObservationReferenceRange = require('./ObservationReferenceRange');
-		this.__referenceRange = Array.isArray(new_value)
-			? new_value.map(val => new ObservationReferenceRange(val))
-			: [new ObservationReferenceRange(new_value)];
-	}
-
-	// A  reference to another resource (usually another Observation) whose relationship is defined by the relationship type code.
-	get related() {
-		return this.__related;
-	}
-
-	set related(new_value) {
-		const ObservationRelated = require('./ObservationRelated');
-		this.__related = Array.isArray(new_value)
-			? new_value.map(val => new ObservationRelated(val))
-			: [new ObservationRelated(new_value)];
-	}
-
-	// Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.
-	get component() {
-		return this.__component;
-	}
-
-	set component(new_value) {
-		const ObservationComponent = require('./ObservationComponent');
-		this.__component = Array.isArray(new_value)
-			? new_value.map(val => new ObservationComponent(val))
-			: [new ObservationComponent(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
-			status: this.__status,
-			category: this.__category && this.__category.map(v => v.toJSON()),
-			code: this.__code && this.__code.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			effectiveDateTime: this.__effectiveDateTime,
-			effectivePeriod: this.__effectivePeriod && this.__effectivePeriod.toJSON(),
-			issued: this.__issued,
-			performer: this.__performer && this.__performer.map(v => v.toJSON()),
-			valueQuantity: this.__valueQuantity && this.__valueQuantity.toJSON(),
-			valueCodeableConcept: this.__valueCodeableConcept && this.__valueCodeableConcept.toJSON(),
-			valueString: this.__valueString,
-			valueBoolean: this.__valueBoolean,
-			valueRange: this.__valueRange && this.__valueRange.toJSON(),
-			valueRatio: this.__valueRatio && this.__valueRatio.toJSON(),
-			valueSampledData: this.__valueSampledData && this.__valueSampledData.toJSON(),
-			valueAttachment: this.__valueAttachment && this.__valueAttachment.toJSON(),
-			valueTime: this.__valueTime,
-			valueDateTime: this.__valueDateTime,
-			valuePeriod: this.__valuePeriod && this.__valuePeriod.toJSON(),
-			dataAbsentReason: this.__dataAbsentReason && this.__dataAbsentReason.toJSON(),
-			interpretation: this.__interpretation && this.__interpretation.toJSON(),
-			comment: this.__comment,
-			bodySite: this.__bodySite && this.__bodySite.toJSON(),
-			method: this.__method && this.__method.toJSON(),
-			specimen: this.__specimen && this.__specimen.toJSON(),
-			device: this.__device && this.__device.toJSON(),
-			referenceRange: this.__referenceRange && this.__referenceRange.map(v => v.toJSON()),
-			related: this.__related && this.__related.map(v => v.toJSON()),
-			component: this.__component && this.__component.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			category: this.category && this.category.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_effectiveDateTime: this._effectiveDateTime && this._effectiveDateTime.toJSON(),
+			effectiveDateTime: this.effectiveDateTime,
+			effectivePeriod: this.effectivePeriod && this.effectivePeriod.toJSON(),
+			_issued: this._issued && this._issued.toJSON(),
+			issued: this.issued,
+			performer: this.performer && this.performer.map(v => v.toJSON()),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			_valueString: this._valueString && this._valueString.toJSON(),
+			valueString: this.valueString,
+			_valueBoolean: this._valueBoolean && this._valueBoolean.toJSON(),
+			valueBoolean: this.valueBoolean,
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
+			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			_valueTime: this._valueTime && this._valueTime.toJSON(),
+			valueTime: this.valueTime,
+			_valueDateTime: this._valueDateTime && this._valueDateTime.toJSON(),
+			valueDateTime: this.valueDateTime,
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
+			interpretation: this.interpretation && this.interpretation.toJSON(),
+			_comment: this._comment && this._comment.toJSON(),
+			comment: this.comment,
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			method: this.method && this.method.toJSON(),
+			specimen: this.specimen && this.specimen.toJSON(),
+			device: this.device && this.device.toJSON(),
+			referenceRange: this.referenceRange && this.referenceRange.map(v => v.toJSON()),
+			related: this.related && this.related.map(v => v.toJSON()),
+			component: this.component && this.component.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Observation;
+};

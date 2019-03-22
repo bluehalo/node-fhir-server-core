@@ -1,222 +1,393 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ClaimItem Class
+ */
+module.exports = class ClaimItem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimItem extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimItem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'provider', {
+			enumerable: true,
+			get: () => this.__data.provider,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.provider = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_diagnosisLinkId', {
+			enumerable: true,
+			get: () => this.__data._diagnosisLinkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._diagnosisLinkId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'diagnosisLinkId', {
+			enumerable: true,
+			get: () => this.__data.diagnosisLinkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.diagnosisLinkId = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/service-uscls
+		Object.defineProperty(this, 'service', {
+			enumerable: true,
+			get: () => this.__data.service,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.service = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_serviceDate', {
+			enumerable: true,
+			get: () => this.__data._serviceDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._serviceDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'serviceDate', {
+			enumerable: true,
+			get: () => this.__data.serviceDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.serviceDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'unitPrice', {
+			enumerable: true,
+			get: () => this.__data.unitPrice,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.unitPrice = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_factor', {
+			enumerable: true,
+			get: () => this.__data._factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._factor = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'factor', {
+			enumerable: true,
+			get: () => this.__data.factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.factor = value;
+			},
+		});
+
+		Object.defineProperty(this, '_points', {
+			enumerable: true,
+			get: () => this.__data._points,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._points = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'points', {
+			enumerable: true,
+			get: () => this.__data.points,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.points = value;
+			},
+		});
+
+		Object.defineProperty(this, 'net', {
+			enumerable: true,
+			get: () => this.__data.net,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.net = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/udi
+		Object.defineProperty(this, 'udi', {
+			enumerable: true,
+			get: () => this.__data.udi,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.udi = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/tooth
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.bodySite = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/surface
+		Object.defineProperty(this, 'subSite', {
+			enumerable: true,
+			get: () => this.__data.subSite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.subSite = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-modifiers
+		Object.defineProperty(this, 'modifier', {
+			enumerable: true,
+			get: () => this.__data.modifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.modifier = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'detail', {
+			enumerable: true,
+			get: () => this.__data.detail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimItemDetail = require('./claimitemdetail.js');
+				this.__data.detail = Array.isArray(value)
+					? value.map(v => new ClaimItemDetail(v))
+					: [new ClaimItemDetail(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'prosthesis', {
+			enumerable: true,
+			get: () => this.__data.prosthesis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimItemProsthesis = require('./claimitemprosthesis.js');
+				this.__data.prosthesis = new ClaimItemProsthesis(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimItem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimItem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimItem';
 	}
 
-	// A service line number.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The type of product or service.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// The practitioner who is responsible for the services rendered to the patient.
-	get provider() {
-		return this.__provider;
-	}
-
-	set provider(new_value) {
-		const Reference = require('./Reference');
-		this.__provider = new Reference(new_value);
-	}
-
-	// Diagnosis applicable for this service or product line.
-	get diagnosisLinkId() {
-		return this.__diagnosisLinkId;
-	}
-
-	set diagnosisLinkId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field diagnosisLinkId`);
-		}
-		this.__diagnosisLinkId = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// If a grouping item then \'GROUP\' otherwise it is a node therefore a code to indicate the Professional Service or Product supplied.
-	get service() {
-		return this.__service;
-	}
-
-	set service(new_value) {
-		const Coding = require('./Coding');
-		this.__service = new Coding(new_value);
-	}
-
-	// The date when the enclosed suite of services were performed or completed.
-	get serviceDate() {
-		return this.__serviceDate;
-	}
-
-	set serviceDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field serviceDate`);
-		}
-		this.__serviceDate = new_value;
-	}
-
-	// The number of repetitions of a service or product.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// If the item is a node then this is the fee for the product or service, otherwise this is the total of the fees for the children of the group.
-	get unitPrice() {
-		return this.__unitPrice;
-	}
-
-	set unitPrice(new_value) {
-		const Quantity = require('./Quantity');
-		this.__unitPrice = new Quantity(new_value);
-	}
-
-	// A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.
-	get factor() {
-		return this.__factor;
-	}
-
-	set factor(new_value) {
-		this.__factor = new_value;
-	}
-
-	// An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the good or service delivered. The concept of Points allows for assignment of point values for services and/or goods, such that a monetary amount can be assigned to each point.
-	get points() {
-		return this.__points;
-	}
-
-	set points(new_value) {
-		this.__points = new_value;
-	}
-
-	// The quantity times the unit price for an additional  service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied.
-	get net() {
-		return this.__net;
-	}
-
-	set net(new_value) {
-		const Quantity = require('./Quantity');
-		this.__net = new Quantity(new_value);
-	}
-
-	// List of Unique Device Identifiers associated with this line item.
-	get udi() {
-		return this.__udi;
-	}
-
-	set udi(new_value) {
-		const Coding = require('./Coding');
-		this.__udi = new Coding(new_value);
-	}
-
-	// Physical service site on the patient (limb, tooth, etc.).
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const Coding = require('./Coding');
-		this.__bodySite = new Coding(new_value);
-	}
-
-	// A region or surface of the site, e.g. limb region or tooth surface(s).
-	get subSite() {
-		return this.__subSite;
-	}
-
-	set subSite(new_value) {
-		const Coding = require('./Coding');
-		this.__subSite = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Item typification or modifiers codes, e.g. for Oral whether the treatment is cosmetic or associated with TMJ, or an appliance was lost or stolen.
-	get modifier() {
-		return this.__modifier;
-	}
-
-	set modifier(new_value) {
-		const Coding = require('./Coding');
-		this.__modifier = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Second tier of goods and services.
-	get detail() {
-		return this.__detail;
-	}
-
-	set detail(new_value) {
-		const ClaimItemDetail = require('./ClaimItemDetail');
-		this.__detail = Array.isArray(new_value)
-			? new_value.map(val => new ClaimItemDetail(val))
-			: [new ClaimItemDetail(new_value)];
-	}
-
-	// The materials and placement date of prior fixed prosthesis.
-	get prosthesis() {
-		return this.__prosthesis;
-	}
-
-	set prosthesis(new_value) {
-		const ClaimItemProsthesis = require('./ClaimItemProsthesis');
-		this.__prosthesis = new ClaimItemProsthesis(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			type: this.__type && this.__type.toJSON(),
-			provider: this.__provider && this.__provider.toJSON(),
-			diagnosisLinkId: this.__diagnosisLinkId,
-			service: this.__service && this.__service.toJSON(),
-			serviceDate: this.__serviceDate,
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			unitPrice: this.__unitPrice && this.__unitPrice.toJSON(),
-			factor: this.__factor,
-			points: this.__points,
-			net: this.__net && this.__net.toJSON(),
-			udi: this.__udi && this.__udi.toJSON(),
-			bodySite: this.__bodySite && this.__bodySite.toJSON(),
-			subSite: this.__subSite && this.__subSite.map(v => v.toJSON()),
-			modifier: this.__modifier && this.__modifier.map(v => v.toJSON()),
-			detail: this.__detail && this.__detail.map(v => v.toJSON()),
-			prosthesis: this.__prosthesis && this.__prosthesis.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			type: this.type && this.type.toJSON(),
+			provider: this.provider && this.provider.toJSON(),
+			_diagnosisLinkId: this._diagnosisLinkId && this._diagnosisLinkId.toJSON(),
+			diagnosisLinkId: this.diagnosisLinkId,
+			service: this.service && this.service.toJSON(),
+			_serviceDate: this._serviceDate && this._serviceDate.toJSON(),
+			serviceDate: this.serviceDate,
+			quantity: this.quantity && this.quantity.toJSON(),
+			unitPrice: this.unitPrice && this.unitPrice.toJSON(),
+			_factor: this._factor && this._factor.toJSON(),
+			factor: this.factor,
+			_points: this._points && this._points.toJSON(),
+			points: this.points,
+			net: this.net && this.net.toJSON(),
+			udi: this.udi && this.udi.toJSON(),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			subSite: this.subSite && this.subSite.map(v => v.toJSON()),
+			modifier: this.modifier && this.modifier.map(v => v.toJSON()),
+			detail: this.detail && this.detail.map(v => v.toJSON()),
+			prosthesis: this.prosthesis && this.prosthesis.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimItem;
+};

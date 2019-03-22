@@ -1,26 +1,35 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the devicecomponent query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DeviceComponent.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-identifier',
-		documentation: 'The identifier of the component.',
+		description: 'The identifier of the component',
 	},
-	PARENT: {
-		name: 'parent',
+	parent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceComponent.parent',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-parent',
-		documentation: 'The parent DeviceComponent resource.',
+		description: 'The parent DeviceComponent resource',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceComponent.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-source',
-		documentation: 'The device source.',
+		description: 'The device source',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DeviceComponent.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceComponent-type',
-		documentation: 'The device component type.',
+		description: 'The device component type',
 	},
 };

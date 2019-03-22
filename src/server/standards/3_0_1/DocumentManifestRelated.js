@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary DocumentManifestRelated Class
+ */
+module.exports = class DocumentManifestRelated {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DocumentManifestRelated extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DocumentManifestRelated';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ref', {
+			enumerable: true,
+			get: () => this.__data.ref,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.ref = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DocumentManifestRelated',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DocumentManifestRelated resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DocumentManifestRelated';
 	}
 
-	// Related identifier to this DocumentManifest.  For example, Order numbers, accession numbers, XDW workflow numbers.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// Related Resource to this DocumentManifest. For example, Order, ProcedureRequest,  Procedure, EligibilityRequest, etc.
-	get ref() {
-		return this.__ref;
-	}
-
-	set ref(new_value) {
-		const Reference = require('./Reference');
-		this.__ref = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			ref: this.__ref && this.__ref.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			ref: this.ref && this.ref.toJSON(),
+		};
 	}
-}
-
-module.exports = DocumentManifestRelated;
+};

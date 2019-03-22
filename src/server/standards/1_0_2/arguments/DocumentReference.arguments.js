@@ -1,158 +1,189 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the documentreference query
+ */
 module.exports = {
-	AUTHENTICATOR: {
-		name: 'authenticator',
+	authenticator: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.authenticator',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-authenticator',
-		documentation: 'Who/what authenticated the document.',
+		description: 'Who/what authenticated the document',
 	},
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-author',
-		documentation: 'Who and/or what authored the document.',
+		description: 'Who and/or what authored the document',
 	},
-	CLASS: {
-		name: 'class',
+	class: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.class',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-class',
-		documentation: 'Categorization of document.',
+		description: 'Categorization of document',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DocumentReference.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-created',
-		documentation: 'Document creation time.',
+		description: 'Document creation time',
 	},
-	CUSTODIAN: {
-		name: 'custodian',
+	custodian: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.custodian',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-custodian',
-		documentation: 'Organization which maintains the document.',
+		description: 'Organization which maintains the document',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'DocumentReference.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-description',
-		documentation: 'Human-readable description (title).',
+		description: 'Human-readable description (title)',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.context.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-encounter',
-		documentation: 'Context of the document  content.',
+		description: 'Context of the document  content',
 	},
-	EVENT: {
-		name: 'event',
+	event: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.context.event',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-event',
-		documentation: 'Main Clinical Acts Documented.',
+		description: 'Main Clinical Acts Documented',
 	},
-	FACILITY: {
-		name: 'facility',
+	facility: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.context.facilityType',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-facility',
-		documentation: 'Kind of facility where patient was seen.',
+		description: 'Kind of facility where patient was seen',
 	},
-	FORMAT: {
-		name: 'format',
+	format: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.content.format',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-format',
-		documentation: 'Format/content rules for the document.',
+		description: 'Format/content rules for the document',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.masterIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-identifier',
-		documentation: 'Master Version Specific Identifier.',
+		description: 'Master Version Specific Identifier',
 	},
-	INDEXED: {
-		name: 'indexed',
+	indexed: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DocumentReference.indexed',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-indexed',
-		documentation: 'When this document reference created.',
+		description: 'When this document reference created',
 	},
-	LANGUAGE: {
-		name: 'language',
+	language: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.content.attachment.language',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-language',
-		documentation: 'Human language of the content (BCP-47).',
+		description: 'Human language of the content (BCP-47)',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'DocumentReference.content.attachment.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-location',
-		documentation: 'Uri where the data can be found.',
+		description: 'Uri where the data can be found',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-patient',
-		documentation: 'Who/what is the subject of the document.',
+		description: 'Who/what is the subject of the document',
 	},
-	PERIOD: {
-		name: 'period',
+	period: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DocumentReference.context.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-period',
-		documentation: 'Time of service that is being documented.',
+		description: 'Time of service that is being documented',
 	},
-	RELATED_ID: {
-		name: 'related-id',
+	'related-id': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.context.related.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-related-id',
-		documentation: 'Identifier of related objects or events.',
+		description: 'Identifier of related objects or events',
 	},
-	RELATED_REF: {
-		name: 'related-ref',
+	'related-ref': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.context.related.ref',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-related-ref',
-		documentation: 'Related Resource.',
+		description: 'Related Resource',
 	},
-	RELATESTO: {
-		name: 'relatesto',
+	relatesto: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.relatesTo.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-relatesto',
-		documentation: 'Target of the relationship.',
+		description: 'Target of the relationship',
 	},
-	RELATION: {
-		name: 'relation',
+	relation: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.relatesTo.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-relation',
-		documentation: 'replaces | transforms | signs | appends.',
+		description: 'replaces | transforms | signs | appends',
 	},
-	RELATIONSHIP: {
-		name: 'relationship',
+	relationship: {
 		type: 'composite',
+		fhirtype: 'composite',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-relationship',
-		documentation: 'Combination of relation and relatesTo.',
+		description: 'Combination of relation and relatesTo',
 	},
-	SECURITYLABEL: {
-		name: 'securitylabel',
+	securitylabel: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.securityLabel',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-securitylabel',
-		documentation: 'Document security-tags.',
+		description: 'Document security-tags',
 	},
-	SETTING: {
-		name: 'setting',
+	setting: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.context.practiceSetting',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-setting',
-		documentation: 'Additional details about where the content was created (e.g. clinical specialty).',
+		description: 'Additional details about where the content was created (e.g. clinical specialty)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-status',
-		documentation: 'current | superseded | entered-in-error.',
+		description: 'current | superseded | entered-in-error',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DocumentReference.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-subject',
-		documentation: 'Who/what is the subject of the document.',
+		description: 'Who/what is the subject of the document',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DocumentReference.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/DocumentReference-type',
-		documentation: 'Kind of document (LOINC if possible).',
+		description: 'Kind of document (LOINC if possible)',
 	},
 };

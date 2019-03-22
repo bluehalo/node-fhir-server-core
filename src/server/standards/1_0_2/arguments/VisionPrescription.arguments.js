@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the visionprescription query
+ */
 module.exports = {
-	DATEWRITTEN: {
-		name: 'datewritten',
+	datewritten: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'VisionPrescription.dateWritten',
 		definition: 'http://hl7.org/fhir/SearchParameter/VisionPrescription-datewritten',
-		documentation: 'Return prescriptions written on this date.',
+		description: 'Return prescriptions written on this date',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'VisionPrescription.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/VisionPrescription-encounter',
-		documentation: 'Return prescriptions with this encounter identifier.',
+		description: 'Return prescriptions with this encounter identifier',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'VisionPrescription.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/VisionPrescription-identifier',
-		documentation: 'Return prescriptions with this external identifier.',
+		description: 'Return prescriptions with this external identifier',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'VisionPrescription.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/VisionPrescription-patient',
-		documentation: 'The identity of a patient to list dispenses for.',
+		description: 'The identity of a patient to list dispenses for',
 	},
-	PRESCRIBER: {
-		name: 'prescriber',
+	prescriber: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'VisionPrescription.prescriber',
 		definition: 'http://hl7.org/fhir/SearchParameter/VisionPrescription-prescriber',
-		documentation: 'Who authorizes the vision product.',
+		description: 'Who authorizes the vision product',
 	},
 };

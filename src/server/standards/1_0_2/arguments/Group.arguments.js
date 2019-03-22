@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the group query
+ */
 module.exports = {
-	ACTUAL: {
-		name: 'actual',
+	actual: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.actual',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-actual',
-		documentation: 'Descriptive or actual.',
+		description: 'Descriptive or actual',
 	},
-	CHARACTERISTIC: {
-		name: 'characteristic',
+	characteristic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.characteristic.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-characteristic',
-		documentation: 'Kind of characteristic.',
+		description: 'Kind of characteristic',
 	},
-	CHARACTERISTIC_VALUE: {
-		name: 'characteristic-value',
+	'characteristic-value': {
 		type: 'composite',
+		fhirtype: 'composite',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-characteristic-value',
-		documentation: 'A composite of both characteristic and value.',
+		description: 'A composite of both characteristic and value',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-code',
-		documentation: 'The kind of resources contained.',
+		description: 'The kind of resources contained',
 	},
-	EXCLUDE: {
-		name: 'exclude',
+	exclude: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.characteristic.exclude',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-exclude',
-		documentation: 'Group includes or excludes.',
+		description: 'Group includes or excludes',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-identifier',
-		documentation: 'Unique id.',
+		description: 'Unique id',
 	},
-	MEMBER: {
-		name: 'member',
+	member: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Group.member.entity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-member',
-		documentation: 'Reference to the group member.',
+		description: 'Reference to the group member',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-type',
-		documentation: 'The type of resources the group contains.',
+		description: 'The type of resources the group contains',
 	},
-	VALUE: {
-		name: 'value',
+	value: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Group.characteristic.valueCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Group-value',
-		documentation: 'Value held by characteristic.',
+		description: 'Value held by characteristic',
 	},
 };

@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ExpansionProfileDesignation Class
+ */
+module.exports = class ExpansionProfileDesignation {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ExpansionProfileDesignation extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ExpansionProfileDesignation';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'include', {
+			enumerable: true,
+			get: () => this.__data.include,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExpansionProfileDesignationInclude = require('./expansionprofiledesignationinclude.js');
+				this.__data.include = new ExpansionProfileDesignationInclude(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exclude', {
+			enumerable: true,
+			get: () => this.__data.exclude,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExpansionProfileDesignationExclude = require('./expansionprofiledesignationexclude.js');
+				this.__data.exclude = new ExpansionProfileDesignationExclude(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ExpansionProfileDesignation',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ExpansionProfileDesignation resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ExpansionProfileDesignation';
 	}
 
-	// Designations to be included.
-	get include() {
-		return this.__include;
-	}
-
-	set include(new_value) {
-		const ExpansionProfileDesignationInclude = require('./ExpansionProfileDesignationInclude');
-		this.__include = new ExpansionProfileDesignationInclude(new_value);
-	}
-
-	// Designations to be excluded.
-	get exclude() {
-		return this.__exclude;
-	}
-
-	set exclude(new_value) {
-		const ExpansionProfileDesignationExclude = require('./ExpansionProfileDesignationExclude');
-		this.__exclude = new ExpansionProfileDesignationExclude(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			include: this.__include && this.__include.toJSON(),
-			exclude: this.__exclude && this.__exclude.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			include: this.include && this.include.toJSON(),
+			exclude: this.exclude && this.exclude.toJSON(),
+		};
 	}
-}
-
-module.exports = ExpansionProfileDesignation;
+};

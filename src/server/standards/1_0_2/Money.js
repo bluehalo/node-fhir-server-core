@@ -1,20 +1,30 @@
-const Quantity = require('./Quantity');
+/**
+ * @name exports
+ * @summary Money Class
+ */
+module.exports = class Money {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Money extends Quantity {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Money';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Money',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Money resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Money';
 	}
 
 	toJSON() {
-		return Object.assign(super.toJSON(), {});
+		return {};
 	}
-}
-
-module.exports = Money;
+};

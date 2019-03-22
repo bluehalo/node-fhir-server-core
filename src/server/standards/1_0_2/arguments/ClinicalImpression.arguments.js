@@ -1,86 +1,105 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the clinicalimpression query
+ */
 module.exports = {
-	ACTION: {
-		name: 'action',
+	action: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.action',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-action',
-		documentation: 'Actions taken during assessment.',
+		description: 'Actions taken during assessment',
 	},
-	ASSESSOR: {
-		name: 'assessor',
+	assessor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.assessor',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-assessor',
-		documentation: 'The clinician performing the assessment.',
+		description: 'The clinician performing the assessment',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ClinicalImpression.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-date',
-		documentation: 'When the assessment occurred.',
+		description: 'When the assessment occurred',
 	},
-	FINDING: {
-		name: 'finding',
+	finding: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClinicalImpression.finding.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-finding',
-		documentation: 'Specific text or code for finding.',
+		description: 'Specific text or code for finding',
 	},
-	INVESTIGATION: {
-		name: 'investigation',
+	investigation: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.investigations.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-investigation',
-		documentation: 'Record of a specific investigation.',
+		description: 'Record of a specific investigation',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-patient',
-		documentation: 'The patient being assessed.',
+		description: 'The patient being assessed',
 	},
-	PLAN: {
-		name: 'plan',
+	plan: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.plan',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-plan',
-		documentation: 'Plan of action after assessment.',
+		description: 'Plan of action after assessment',
 	},
-	PREVIOUS: {
-		name: 'previous',
+	previous: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.previous',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-previous',
-		documentation: 'Reference to last assessment.',
+		description: 'Reference to last assessment',
 	},
-	PROBLEM: {
-		name: 'problem',
+	problem: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.problem',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-problem',
-		documentation: 'General assessment of patient state.',
+		description: 'General assessment of patient state',
 	},
-	RESOLVED: {
-		name: 'resolved',
+	resolved: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClinicalImpression.resolved',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-resolved',
-		documentation: 'Diagnoses/conditions resolved since previous assessment.',
+		description: 'Diagnoses/conditions resolved since previous assessment',
 	},
-	RULEDOUT: {
-		name: 'ruledout',
+	ruledout: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClinicalImpression.ruledOut.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-ruledout',
-		documentation: 'Specific text of code for diagnosis.',
+		description: 'Specific text of code for diagnosis',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClinicalImpression.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-status',
-		documentation: 'in-progress | completed | entered-in-error.',
+		description: 'in-progress | completed | entered-in-error',
 	},
-	TRIGGER: {
-		name: 'trigger',
+	trigger: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClinicalImpression.triggerReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-trigger',
-		documentation: 'Request or event that necessitated this assessment.',
+		description: 'Request or event that necessitated this assessment',
 	},
-	TRIGGER_CODE: {
-		name: 'trigger-code',
+	'trigger-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClinicalImpression.triggerCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-trigger-code',
-		documentation: 'Request or event that necessitated this assessment.',
+		description: 'Request or event that necessitated this assessment',
 	},
 };

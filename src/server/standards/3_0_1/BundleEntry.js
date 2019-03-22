@@ -1,80 +1,170 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary BundleEntry Class
+ */
+module.exports = class BundleEntry {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class BundleEntry extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'BundleEntry';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_fullUrl', {
+			enumerable: true,
+			get: () => this.__data._fullUrl,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fullUrl = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fullUrl', {
+			enumerable: true,
+			get: () => this.__data.fullUrl,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fullUrl = value;
+			},
+		});
+
+		Object.defineProperty(this, 'resource', {
+			enumerable: true,
+			get: () => this.__data.resource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.resource = value;
+			},
+		});
+
+		Object.defineProperty(this, 'search', {
+			enumerable: true,
+			get: () => this.__data.search,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleEntrySearch = require('./bundleentrysearch.js');
+				this.__data.search = new BundleEntrySearch(value);
+			},
+		});
+
+		Object.defineProperty(this, 'request', {
+			enumerable: true,
+			get: () => this.__data.request,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleEntryRequest = require('./bundleentryrequest.js');
+				this.__data.request = new BundleEntryRequest(value);
+			},
+		});
+
+		Object.defineProperty(this, 'response', {
+			enumerable: true,
+			get: () => this.__data.response,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleEntryResponse = require('./bundleentryresponse.js');
+				this.__data.response = new BundleEntryResponse(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'BundleEntry',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a BundleEntry resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'BundleEntry';
 	}
 
-	// The Absolute URL for the resource.  The fullUrl SHALL not disagree with the id in the resource. The fullUrl is a version independent reference to the resource. The fullUrl element SHALL have a value except that:  * fullUrl can be empty on a POST (although it does not need to when specifying a temporary id for reference in the bundle) * Results from operations might involve resources that are not identified.
-	get fullUrl() {
-		return this.__fullUrl;
-	}
-
-	set fullUrl(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fullUrl`);
-		}
-		this.__fullUrl = new_value;
-	}
-
-	// The Resources for the entry.
-	get resource() {
-		return this.__resource;
-	}
-
-	set resource(new_value) {
-		this.__resource = new_value;
-	}
-
-	// Information about the search process that lead to the creation of this entry.
-	get search() {
-		return this.__search;
-	}
-
-	set search(new_value) {
-		const BundleEntrySearch = require('./BundleEntrySearch');
-		this.__search = new BundleEntrySearch(new_value);
-	}
-
-	// Additional information about how this entry should be processed as part of a transaction.
-	get request() {
-		return this.__request;
-	}
-
-	set request(new_value) {
-		const BundleEntryRequest = require('./BundleEntryRequest');
-		this.__request = new BundleEntryRequest(new_value);
-	}
-
-	// Additional information about how this entry should be processed as part of a transaction.
-	get response() {
-		return this.__response;
-	}
-
-	set response(new_value) {
-		const BundleEntryResponse = require('./BundleEntryResponse');
-		this.__response = new BundleEntryResponse(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			fullUrl: this.__fullUrl,
-			resource: this.__resource && this.__resource.toJSON(),
-			search: this.__search && this.__search.toJSON(),
-			request: this.__request && this.__request.toJSON(),
-			response: this.__response && this.__response.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_fullUrl: this._fullUrl && this._fullUrl.toJSON(),
+			fullUrl: this.fullUrl,
+			resource: this.resource,
+			search: this.search && this.search.toJSON(),
+			request: this.request && this.request.toJSON(),
+			response: this.response && this.response.toJSON(),
+		};
 	}
-}
-
-module.exports = BundleEntry;
+};

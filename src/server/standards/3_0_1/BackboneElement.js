@@ -1,34 +1,88 @@
-const Element = require('./Element');
+/**
+ * @name exports
+ * @summary BackboneElement Class
+ */
+module.exports = class BackboneElement {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class BackboneElement extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'BackboneElement';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'BackboneElement',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a BackboneElement resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'BackboneElement';
 	}
 
-	// May be used to represent additional information that is not part of the basic definition of the element, and that modifies the understanding of the element that contains it. Usually modifier elements provide negation or qualification. In order to make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-	get modifierExtension() {
-		return this.__modifierExtension;
-	}
-
-	set modifierExtension(new_value) {
-		const Extension = require('./Extension');
-		this.__modifierExtension = Array.isArray(new_value)
-			? new_value.map(val => new Extension(val))
-			: [new Extension(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			modifierExtension: this.__modifierExtension && this.__modifierExtension.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = BackboneElement;
+};

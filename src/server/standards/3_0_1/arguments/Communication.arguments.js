@@ -1,92 +1,112 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the communication query
+ */
 module.exports = {
-	BASED_ON: {
-		name: 'based-on',
+	'based-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.basedOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-based-on',
-		documentation: 'Request fulfilled by this communication.',
+		description: 'Request fulfilled by this communication',
 	},
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Communication.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-category',
-		documentation: 'Message category.',
+		description: 'Message category',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-context',
-		documentation: 'Encounter or episode leading to message.',
+		description: 'Encounter or episode leading to message',
 	},
-	DEFINITION: {
-		name: 'definition',
+	definition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.definition',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-definition',
-		documentation: 'Instantiates protocol or definition.',
+		description: 'Instantiates protocol or definition',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-encounter',
-		documentation: 'Encounter leading to message.',
+		description: 'Encounter leading to message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Communication.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-identifier',
-		documentation: 'Unique identifier.',
+		description: 'Unique identifier',
 	},
-	MEDIUM: {
-		name: 'medium',
+	medium: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Communication.medium',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-medium',
-		documentation: 'A channel of communication.',
+		description: 'A channel of communication',
 	},
-	PART_OF: {
-		name: 'part-of',
+	'part-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-part-of',
-		documentation: 'Part of this action.',
+		description: 'Part of this action',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-patient',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
-	RECEIVED: {
-		name: 'received',
+	received: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Communication.received',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-received',
-		documentation: 'When received.',
+		description: 'When received',
 	},
-	RECIPIENT: {
-		name: 'recipient',
+	recipient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.recipient',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-recipient',
-		documentation: 'Message recipient.',
+		description: 'Message recipient',
 	},
-	SENDER: {
-		name: 'sender',
+	sender: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.sender',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-sender',
-		documentation: 'Message sender.',
+		description: 'Message sender',
 	},
-	SENT: {
-		name: 'sent',
+	sent: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Communication.sent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-sent',
-		documentation: 'When sent.',
+		description: 'When sent',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Communication.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-status',
-		documentation: 'preparation | in-progress | suspended | aborted | completed | entered-in-error.',
+		description: 'preparation | in-progress | suspended | aborted | completed | entered-in-error',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Communication.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Communication-subject',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
 };

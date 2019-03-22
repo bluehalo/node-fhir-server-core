@@ -1,26 +1,35 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the processrequest query
+ */
 module.exports = {
-	ACTION: {
-		name: 'action',
+	action: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ProcessRequest.action',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessRequest-action',
-		documentation: 'The action requested by this resource.',
+		description: 'The action requested by this resource',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ProcessRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessRequest-identifier',
-		documentation: 'The business identifier of the ProcessRequest.',
+		description: 'The business identifier of the ProcessRequest',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessRequest.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessRequest-organization',
-		documentation: 'The organization who generated this request.',
+		description: 'The organization who generated this request',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessRequest.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessRequest-provider',
-		documentation: 'The provider who regenerated this request.',
+		description: 'The provider who regenerated this request',
 	},
 };

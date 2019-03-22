@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the order query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Order.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-date',
-		documentation: 'When the order was made.',
+		description: 'When the order was made',
 	},
-	DETAIL: {
-		name: 'detail',
+	detail: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Order.detail',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-detail',
-		documentation: 'What action is being ordered.',
+		description: 'What action is being ordered',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Order.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-identifier',
-		documentation: 'Instance id from source, target, and/or  others.',
+		description: 'Instance id from source, target, and/or  others',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Order.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-patient',
-		documentation: 'Patient this order is about.',
+		description: 'Patient this order is about',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Order.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-source',
-		documentation: 'Who initiated the order.',
+		description: 'Who initiated the order',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Order.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-subject',
-		documentation: 'Patient this order is about.',
+		description: 'Patient this order is about',
 	},
-	TARGET: {
-		name: 'target',
+	target: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Order.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-target',
-		documentation: 'Who is intended to fulfill the order.',
+		description: 'Who is intended to fulfill the order',
 	},
-	WHEN: {
-		name: 'when',
+	when: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Order.when.schedule',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-when',
-		documentation: 'A formal schedule.',
+		description: 'A formal schedule',
 	},
-	WHEN_CODE: {
-		name: 'when_code',
+	when_code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Order.when.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Order-whencode',
-		documentation: 'Code specifies when request should be done. The code may simply be a priority code.',
+		description: 'Code specifies when request should be done. The code may simply be a priority code',
 	},
 };

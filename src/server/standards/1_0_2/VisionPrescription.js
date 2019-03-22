@@ -1,128 +1,311 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary VisionPrescription Class
+ */
+module.exports = class VisionPrescription {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class VisionPrescription extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'VisionPrescription';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_dateWritten', {
+			enumerable: true,
+			get: () => this.__data._dateWritten,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dateWritten = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dateWritten', {
+			enumerable: true,
+			get: () => this.__data.dateWritten,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dateWritten = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'prescriber', {
+			enumerable: true,
+			get: () => this.__data.prescriber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.prescriber = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reasonCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.reasonCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reasonReference', {
+			enumerable: true,
+			get: () => this.__data.reasonReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reasonReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dispense', {
+			enumerable: true,
+			get: () => this.__data.dispense,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let VisionPrescriptionDispense = require('./visionprescriptiondispense.js');
+				this.__data.dispense = Array.isArray(value)
+					? value.map(v => new VisionPrescriptionDispense(v))
+					: [new VisionPrescriptionDispense(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'VisionPrescription',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a VisionPrescription resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'VisionPrescription';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__VisionPrescription = new_value;
-	}
-
-	// Business identifier which may be used by other parties to reference or identify the prescription.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The date (and perhaps time) when the prescription was written.
-	get dateWritten() {
-		return this.__dateWritten;
-	}
-
-	set dateWritten(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dateWritten`);
-		}
-		this.__dateWritten = new_value;
-	}
-
-	// A link to a resource representing the person to whom the vision products will be supplied.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The healthcare professional responsible for authorizing the prescription.
-	get prescriber() {
-		return this.__prescriber;
-	}
-
-	set prescriber(new_value) {
-		const Reference = require('./Reference');
-		this.__prescriber = new Reference(new_value);
-	}
-
-	// A link to a resource that identifies the particular occurrence of contact between patient and health care provider.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// Can be the reason or the indication for writing the prescription.
-	get reasonCodeableConcept() {
-		return this.__reasonCodeableConcept;
-	}
-
-	set reasonCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Can be the reason or the indication for writing the prescription.
-	get reasonReference() {
-		return this.__reasonReference;
-	}
-
-	set reasonReference(new_value) {
-		const Reference = require('./Reference');
-		this.__reasonReference = new Reference(new_value);
-	}
-
-	// Deals with details of the dispense part of the supply specification.
-	get dispense() {
-		return this.__dispense;
-	}
-
-	set dispense(new_value) {
-		const VisionPrescriptionDispense = require('./VisionPrescriptionDispense');
-		this.__dispense = Array.isArray(new_value)
-			? new_value.map(val => new VisionPrescriptionDispense(val))
-			: [new VisionPrescriptionDispense(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			dateWritten: this.__dateWritten,
-			patient: this.__patient && this.__patient.toJSON(),
-			prescriber: this.__prescriber && this.__prescriber.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
-			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
-			dispense: this.__dispense && this.__dispense.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_dateWritten: this._dateWritten && this._dateWritten.toJSON(),
+			dateWritten: this.dateWritten,
+			patient: this.patient && this.patient.toJSON(),
+			prescriber: this.prescriber && this.prescriber.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			reasonCodeableConcept: this.reasonCodeableConcept && this.reasonCodeableConcept.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			dispense: this.dispense && this.dispense.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = VisionPrescription;
+};

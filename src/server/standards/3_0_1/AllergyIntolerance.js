@@ -1,251 +1,569 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary AllergyIntolerance Class
+ */
+module.exports = class AllergyIntolerance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AllergyIntolerance extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AllergyIntolerance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_clinicalStatus', {
+			enumerable: true,
+			get: () => this.__data._clinicalStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._clinicalStatus = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergy-clinical-status
+		Object.defineProperty(this, 'clinicalStatus', {
+			enumerable: true,
+			get: () => this.__data.clinicalStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.clinicalStatus = value;
+			},
+		});
+
+		Object.defineProperty(this, '_verificationStatus', {
+			enumerable: true,
+			get: () => this.__data._verificationStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._verificationStatus = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergy-verification-status
+		Object.defineProperty(this, 'verificationStatus', {
+			enumerable: true,
+			get: () => this.__data.verificationStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.verificationStatus = value;
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergy-intolerance-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_category', {
+			enumerable: true,
+			get: () => this.__data._category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._category = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergy-intolerance-category
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.category = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_criticality', {
+			enumerable: true,
+			get: () => this.__data._criticality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._criticality = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality
+		Object.defineProperty(this, 'criticality', {
+			enumerable: true,
+			get: () => this.__data.criticality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.criticality = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/allergyintolerance-code
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_onsetDateTime', {
+			enumerable: true,
+			get: () => this.__data._onsetDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._onsetDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetDateTime', {
+			enumerable: true,
+			get: () => this.__data.onsetDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.onsetDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'onsetAge', {
+			enumerable: true,
+			get: () => this.__data.onsetAge,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Age = require('./age.js');
+				this.__data.onsetAge = new Age(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetPeriod', {
+			enumerable: true,
+			get: () => this.__data.onsetPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.onsetPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetRange', {
+			enumerable: true,
+			get: () => this.__data.onsetRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.onsetRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, '_onsetString', {
+			enumerable: true,
+			get: () => this.__data._onsetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._onsetString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetString', {
+			enumerable: true,
+			get: () => this.__data.onsetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.onsetString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_assertedDate', {
+			enumerable: true,
+			get: () => this.__data._assertedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._assertedDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'assertedDate', {
+			enumerable: true,
+			get: () => this.__data.assertedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.assertedDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'recorder', {
+			enumerable: true,
+			get: () => this.__data.recorder,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.recorder = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'asserter', {
+			enumerable: true,
+			get: () => this.__data.asserter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.asserter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_lastOccurrence', {
+			enumerable: true,
+			get: () => this.__data._lastOccurrence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lastOccurrence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lastOccurrence', {
+			enumerable: true,
+			get: () => this.__data.lastOccurrence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lastOccurrence = value;
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'reaction', {
+			enumerable: true,
+			get: () => this.__data.reaction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AllergyIntoleranceReaction = require('./allergyintolerancereaction.js');
+				this.__data.reaction = Array.isArray(value)
+					? value.map(v => new AllergyIntoleranceReaction(v))
+					: [new AllergyIntoleranceReaction(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AllergyIntolerance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AllergyIntolerance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AllergyIntolerance';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__AllergyIntolerance = new_value;
-	}
-
-	// This records identifiers associated with this allergy/intolerance concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The clinical status of the allergy or intolerance.
-	get clinicalStatus() {
-		return this.__clinicalStatus;
-	}
-
-	set clinicalStatus(new_value) {
-		this.__clinicalStatus = new_value;
-	}
-
-	// Assertion about certainty associated with the propensity, or potential risk, of a reaction to the identified substance (including pharmaceutical product).
-	get verificationStatus() {
-		return this.__verificationStatus;
-	}
-
-	set verificationStatus(new_value) {
-		this.__verificationStatus = new_value;
-	}
-
-	// Identification of the underlying physiological mechanism for the reaction risk.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// Category of the identified substance.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		this.__category = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Estimate of the potential clinical harm, or seriousness, of the reaction to the identified substance.
-	get criticality() {
-		return this.__criticality;
-	}
-
-	set criticality(new_value) {
-		this.__criticality = new_value;
-	}
-
-	// Code for an allergy or intolerance statement (either a positive or a negated/excluded statement).  This may be a code for a substance or pharmaceutical product that is considered to be responsible for the adverse reaction risk (e.g., \'Latex\'), an allergy or intolerance condition (e.g., \'Latex allergy\'), or a negated/excluded code for a specific substance or class (e.g., \'No latex allergy\') or a general or categorical negated statement (e.g.,  \'No known allergy\', \'No known drug allergies\').
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The patient who has the allergy or intolerance.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetDateTime() {
-		return this.__onsetDateTime;
-	}
-
-	set onsetDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field onsetDateTime`);
-		}
-		this.__onsetDateTime = new_value;
-	}
-
-	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetAge() {
-		return this.__onsetAge;
-	}
-
-	set onsetAge(new_value) {
-		const Age = require('./Age');
-		this.__onsetAge = new Age(new_value);
-	}
-
-	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetPeriod() {
-		return this.__onsetPeriod;
-	}
-
-	set onsetPeriod(new_value) {
-		const Period = require('./Period');
-		this.__onsetPeriod = new Period(new_value);
-	}
-
-	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetRange() {
-		return this.__onsetRange;
-	}
-
-	set onsetRange(new_value) {
-		const Range = require('./Range');
-		this.__onsetRange = new Range(new_value);
-	}
-
-	// Estimated or actual date,  date-time, or age when allergy or intolerance was identified.
-	get onsetString() {
-		return this.__onsetString;
-	}
-
-	set onsetString(new_value) {
-		this.__onsetString = new_value;
-	}
-
-	// The date on which the existance of the AllergyIntolerance was first asserted or acknowledged.
-	get assertedDate() {
-		return this.__assertedDate;
-	}
-
-	set assertedDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field assertedDate`);
-		}
-		this.__assertedDate = new_value;
-	}
-
-	// Individual who recorded the record and takes responsibility for its content.
-	get recorder() {
-		return this.__recorder;
-	}
-
-	set recorder(new_value) {
-		const Reference = require('./Reference');
-		this.__recorder = new Reference(new_value);
-	}
-
-	// The source of the information about the allergy that is recorded.
-	get asserter() {
-		return this.__asserter;
-	}
-
-	set asserter(new_value) {
-		const Reference = require('./Reference');
-		this.__asserter = new Reference(new_value);
-	}
-
-	// Represents the date and/or time of the last known occurrence of a reaction event.
-	get lastOccurrence() {
-		return this.__lastOccurrence;
-	}
-
-	set lastOccurrence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field lastOccurrence`);
-		}
-		this.__lastOccurrence = new_value;
-	}
-
-	// Additional narrative about the propensity for the Adverse Reaction, not captured in other fields.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Details about each adverse reaction event linked to exposure to the identified substance.
-	get reaction() {
-		return this.__reaction;
-	}
-
-	set reaction(new_value) {
-		const AllergyIntoleranceReaction = require('./AllergyIntoleranceReaction');
-		this.__reaction = Array.isArray(new_value)
-			? new_value.map(val => new AllergyIntoleranceReaction(val))
-			: [new AllergyIntoleranceReaction(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			clinicalStatus: this.__clinicalStatus,
-			verificationStatus: this.__verificationStatus,
-			type: this.__type,
-			category: this.__category,
-			criticality: this.__criticality,
-			code: this.__code && this.__code.toJSON(),
-			patient: this.__patient && this.__patient.toJSON(),
-			onsetDateTime: this.__onsetDateTime,
-			onsetAge: this.__onsetAge && this.__onsetAge.toJSON(),
-			onsetPeriod: this.__onsetPeriod && this.__onsetPeriod.toJSON(),
-			onsetRange: this.__onsetRange && this.__onsetRange.toJSON(),
-			onsetString: this.__onsetString,
-			assertedDate: this.__assertedDate,
-			recorder: this.__recorder && this.__recorder.toJSON(),
-			asserter: this.__asserter && this.__asserter.toJSON(),
-			lastOccurrence: this.__lastOccurrence,
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			reaction: this.__reaction && this.__reaction.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_clinicalStatus: this._clinicalStatus && this._clinicalStatus.toJSON(),
+			clinicalStatus: this.clinicalStatus,
+			_verificationStatus: this._verificationStatus && this._verificationStatus.toJSON(),
+			verificationStatus: this.verificationStatus,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_category: this._category && this._category.toJSON(),
+			category: this.category,
+			_criticality: this._criticality && this._criticality.toJSON(),
+			criticality: this.criticality,
+			code: this.code && this.code.toJSON(),
+			patient: this.patient && this.patient.toJSON(),
+			_onsetDateTime: this._onsetDateTime && this._onsetDateTime.toJSON(),
+			onsetDateTime: this.onsetDateTime,
+			onsetAge: this.onsetAge && this.onsetAge.toJSON(),
+			onsetPeriod: this.onsetPeriod && this.onsetPeriod.toJSON(),
+			onsetRange: this.onsetRange && this.onsetRange.toJSON(),
+			_onsetString: this._onsetString && this._onsetString.toJSON(),
+			onsetString: this.onsetString,
+			_assertedDate: this._assertedDate && this._assertedDate.toJSON(),
+			assertedDate: this.assertedDate,
+			recorder: this.recorder && this.recorder.toJSON(),
+			asserter: this.asserter && this.asserter.toJSON(),
+			_lastOccurrence: this._lastOccurrence && this._lastOccurrence.toJSON(),
+			lastOccurrence: this.lastOccurrence,
+			note: this.note && this.note.map(v => v.toJSON()),
+			reaction: this.reaction && this.reaction.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AllergyIntolerance;
+};

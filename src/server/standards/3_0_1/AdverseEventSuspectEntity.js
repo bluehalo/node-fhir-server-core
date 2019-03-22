@@ -1,96 +1,212 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary AdverseEventSuspectEntity Class
+ */
+module.exports = class AdverseEventSuspectEntity {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AdverseEventSuspectEntity extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AdverseEventSuspectEntity';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'instance', {
+			enumerable: true,
+			get: () => this.__data.instance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.instance = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_causality', {
+			enumerable: true,
+			get: () => this.__data._causality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._causality = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-causality
+		Object.defineProperty(this, 'causality', {
+			enumerable: true,
+			get: () => this.__data.causality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.causality = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-causality-assess
+		Object.defineProperty(this, 'causalityAssessment', {
+			enumerable: true,
+			get: () => this.__data.causalityAssessment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.causalityAssessment = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_causalityProductRelatedness', {
+			enumerable: true,
+			get: () => this.__data._causalityProductRelatedness,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._causalityProductRelatedness = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'causalityProductRelatedness', {
+			enumerable: true,
+			get: () => this.__data.causalityProductRelatedness,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.causalityProductRelatedness = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-causality-method
+		Object.defineProperty(this, 'causalityMethod', {
+			enumerable: true,
+			get: () => this.__data.causalityMethod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.causalityMethod = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'causalityAuthor', {
+			enumerable: true,
+			get: () => this.__data.causalityAuthor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.causalityAuthor = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-causality-result
+		Object.defineProperty(this, 'causalityResult', {
+			enumerable: true,
+			get: () => this.__data.causalityResult,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.causalityResult = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AdverseEventSuspectEntity',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AdverseEventSuspectEntity resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AdverseEventSuspectEntity';
 	}
 
-	// Identifies the actual instance of what caused the adverse event.  May be a substance, medication, medication administration, medication statement or a device.
-	get instance() {
-		return this.__instance;
-	}
-
-	set instance(new_value) {
-		const Reference = require('./Reference');
-		this.__instance = new Reference(new_value);
-	}
-
-	// causality1 | causality2.
-	get causality() {
-		return this.__causality;
-	}
-
-	set causality(new_value) {
-		this.__causality = new_value;
-	}
-
-	// assess1 | assess2.
-	get causalityAssessment() {
-		return this.__causalityAssessment;
-	}
-
-	set causalityAssessment(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__causalityAssessment = new CodeableConcept(new_value);
-	}
-
-	// AdverseEvent.suspectEntity.causalityProductRelatedness.
-	get causalityProductRelatedness() {
-		return this.__causalityProductRelatedness;
-	}
-
-	set causalityProductRelatedness(new_value) {
-		this.__causalityProductRelatedness = new_value;
-	}
-
-	// method1 | method2.
-	get causalityMethod() {
-		return this.__causalityMethod;
-	}
-
-	set causalityMethod(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__causalityMethod = new CodeableConcept(new_value);
-	}
-
-	// AdverseEvent.suspectEntity.causalityAuthor.
-	get causalityAuthor() {
-		return this.__causalityAuthor;
-	}
-
-	set causalityAuthor(new_value) {
-		const Reference = require('./Reference');
-		this.__causalityAuthor = new Reference(new_value);
-	}
-
-	// result1 | result2.
-	get causalityResult() {
-		return this.__causalityResult;
-	}
-
-	set causalityResult(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__causalityResult = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			instance: this.__instance && this.__instance.toJSON(),
-			causality: this.__causality,
-			causalityAssessment: this.__causalityAssessment && this.__causalityAssessment.toJSON(),
-			causalityProductRelatedness: this.__causalityProductRelatedness,
-			causalityMethod: this.__causalityMethod && this.__causalityMethod.toJSON(),
-			causalityAuthor: this.__causalityAuthor && this.__causalityAuthor.toJSON(),
-			causalityResult: this.__causalityResult && this.__causalityResult.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			instance: this.instance && this.instance.toJSON(),
+			_causality: this._causality && this._causality.toJSON(),
+			causality: this.causality,
+			causalityAssessment: this.causalityAssessment && this.causalityAssessment.toJSON(),
+			_causalityProductRelatedness: this._causalityProductRelatedness && this._causalityProductRelatedness.toJSON(),
+			causalityProductRelatedness: this.causalityProductRelatedness,
+			causalityMethod: this.causalityMethod && this.causalityMethod.toJSON(),
+			causalityAuthor: this.causalityAuthor && this.causalityAuthor.toJSON(),
+			causalityResult: this.causalityResult && this.causalityResult.toJSON(),
+		};
 	}
-}
-
-module.exports = AdverseEventSuspectEntity;
+};

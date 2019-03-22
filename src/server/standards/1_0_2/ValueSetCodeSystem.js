@@ -1,70 +1,185 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ValueSetCodeSystem Class
+ */
+module.exports = class ValueSetCodeSystem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetCodeSystem extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetCodeSystem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_caseSensitive', {
+			enumerable: true,
+			get: () => this.__data._caseSensitive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._caseSensitive = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'caseSensitive', {
+			enumerable: true,
+			get: () => this.__data.caseSensitive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.caseSensitive = value;
+			},
+		});
+
+		Object.defineProperty(this, 'concept', {
+			enumerable: true,
+			get: () => this.__data.concept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetCodeSystemConcept = require('./valuesetcodesystemconcept.js');
+				this.__data.concept = Array.isArray(value)
+					? value.map(v => new ValueSetCodeSystemConcept(v))
+					: [new ValueSetCodeSystemConcept(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetCodeSystem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetCodeSystem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetCodeSystem';
 	}
 
-	// An absolute URI that is used to reference this code system, including in [Coding]{datatypes.html#Coding}.system.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// The version of this code system that defines the codes. Note that the version is optional because a well maintained code system does not suffer from versioning, and therefore the version does not need to be maintained. However many code systems are not well maintained, and the version needs to be defined and tracked.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// If code comparison is case sensitive when codes within this system are compared to each other.
-	get caseSensitive() {
-		return this.__caseSensitive;
-	}
-
-	set caseSensitive(new_value) {
-		this.__caseSensitive = new_value;
-	}
-
-	// Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meaning of the hierarchical relationships are.
-	get concept() {
-		return this.__concept;
-	}
-
-	set concept(new_value) {
-		const ValueSetCodeSystemConcept = require('./ValueSetCodeSystemConcept');
-		this.__concept = Array.isArray(new_value)
-			? new_value.map(val => new ValueSetCodeSystemConcept(val))
-			: [new ValueSetCodeSystemConcept(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			system: this.__system,
-			version: this.__version,
-			caseSensitive: this.__caseSensitive,
-			concept: this.__concept && this.__concept.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_caseSensitive: this._caseSensitive && this._caseSensitive.toJSON(),
+			caseSensitive: this.caseSensitive,
+			concept: this.concept && this.concept.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ValueSetCodeSystem;
+};

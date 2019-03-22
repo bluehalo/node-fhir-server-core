@@ -1,58 +1,156 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ClaimResponseNote Class
+ */
+module.exports = class ClaimResponseNote {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimResponseNote extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimResponseNote';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_number', {
+			enumerable: true,
+			get: () => this.__data._number,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._number = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'number', {
+			enumerable: true,
+			get: () => this.__data.number,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.number = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/note-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimResponseNote',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimResponseNote resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimResponseNote';
 	}
 
-	// An integer associated with each note which may be referred to from each service line item.
-	get number() {
-		return this.__number;
-	}
-
-	set number(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field number`);
-		}
-		this.__number = new_value;
-	}
-
-	// The note purpose: Print/Display.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// The note text.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			number: this.__number,
-			type: this.__type && this.__type.toJSON(),
-			text: this.__text,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_number: this._number && this._number.toJSON(),
+			number: this.number,
+			type: this.type && this.type.toJSON(),
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+		};
 	}
-}
-
-module.exports = ClaimResponseNote;
+};

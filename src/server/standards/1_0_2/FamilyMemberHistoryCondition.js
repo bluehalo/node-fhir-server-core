@@ -1,97 +1,199 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary FamilyMemberHistoryCondition Class
+ */
+module.exports = class FamilyMemberHistoryCondition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class FamilyMemberHistoryCondition extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'FamilyMemberHistoryCondition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/condition-code
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/condition-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetQuantity', {
+			enumerable: true,
+			get: () => this.__data.onsetQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.onsetQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetRange', {
+			enumerable: true,
+			get: () => this.__data.onsetRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.onsetRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetPeriod', {
+			enumerable: true,
+			get: () => this.__data.onsetPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.onsetPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_onsetString', {
+			enumerable: true,
+			get: () => this.__data._onsetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._onsetString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onsetString', {
+			enumerable: true,
+			get: () => this.__data.onsetString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.onsetString = value;
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = new Annotation(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'FamilyMemberHistoryCondition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a FamilyMemberHistoryCondition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'FamilyMemberHistoryCondition';
 	}
 
-	// The actual condition specified. Could be a coded condition (like MI or Diabetes) or a less specific string like \'cancer\' depending on how much is known about the condition and the capabilities of the creating system.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// Indicates what happened as a result of this condition.  If the condition resulted in death, deceased date is captured on the relation.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcome = new CodeableConcept(new_value);
-	}
-
-	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetQuantity() {
-		return this.__onsetQuantity;
-	}
-
-	set onsetQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__onsetQuantity = new Quantity(new_value);
-	}
-
-	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetRange() {
-		return this.__onsetRange;
-	}
-
-	set onsetRange(new_value) {
-		const Range = require('./Range');
-		this.__onsetRange = new Range(new_value);
-	}
-
-	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetPeriod() {
-		return this.__onsetPeriod;
-	}
-
-	set onsetPeriod(new_value) {
-		const Period = require('./Period');
-		this.__onsetPeriod = new Period(new_value);
-	}
-
-	// Either the age of onset, range of approximate age or descriptive string can be recorded.  For conditions with multiple occurrences, this describes the first known occurrence.
-	get onsetString() {
-		return this.__onsetString;
-	}
-
-	set onsetString(new_value) {
-		this.__onsetString = new_value;
-	}
-
-	// An area where general notes can be placed about this specific condition.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = new Annotation(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code && this.__code.toJSON(),
-			outcome: this.__outcome && this.__outcome.toJSON(),
-			onsetQuantity: this.__onsetQuantity && this.__onsetQuantity.toJSON(),
-			onsetRange: this.__onsetRange && this.__onsetRange.toJSON(),
-			onsetPeriod: this.__onsetPeriod && this.__onsetPeriod.toJSON(),
-			onsetString: this.__onsetString,
-			note: this.__note && this.__note.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			outcome: this.outcome && this.outcome.toJSON(),
+			onsetQuantity: this.onsetQuantity && this.onsetQuantity.toJSON(),
+			onsetRange: this.onsetRange && this.onsetRange.toJSON(),
+			onsetPeriod: this.onsetPeriod && this.onsetPeriod.toJSON(),
+			_onsetString: this._onsetString && this._onsetString.toJSON(),
+			onsetString: this.onsetString,
+			note: this.note && this.note.toJSON(),
+		};
 	}
-}
-
-module.exports = FamilyMemberHistoryCondition;
+};

@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the procedurerequest query
+ */
 module.exports = {
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcedureRequest.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-encounter',
-		documentation: 'Encounter request created during.',
+		description: 'Encounter request created during',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ProcedureRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-identifier',
-		documentation: 'A unique identifier of the Procedure Request.',
+		description: 'A unique identifier of the Procedure Request',
 	},
-	ORDERER: {
-		name: 'orderer',
+	orderer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcedureRequest.orderer',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-orderer',
-		documentation: 'Who made request.',
+		description: 'Who made request',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcedureRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-patient',
-		documentation: 'Search by subject - a patient.',
+		description: 'Search by subject - a patient',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcedureRequest.performer',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-performer',
-		documentation: 'Who should perform the procedure.',
+		description: 'Who should perform the procedure',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcedureRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcedureRequest-subject',
-		documentation: 'Search by subject.',
+		description: 'Search by subject',
 	},
 };

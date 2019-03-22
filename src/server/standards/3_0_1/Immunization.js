@@ -1,276 +1,562 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary Immunization Class
+ */
+module.exports = class Immunization {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Immunization extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Immunization';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/immunization-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_notGiven', {
+			enumerable: true,
+			get: () => this.__data._notGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._notGiven = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'notGiven', {
+			enumerable: true,
+			get: () => this.__data.notGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.notGiven = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vaccine-code
+		Object.defineProperty(this, 'vaccineCode', {
+			enumerable: true,
+			get: () => this.__data.vaccineCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.vaccineCode = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_primarySource', {
+			enumerable: true,
+			get: () => this.__data._primarySource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._primarySource = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'primarySource', {
+			enumerable: true,
+			get: () => this.__data.primarySource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.primarySource = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/immunization-origin
+		Object.defineProperty(this, 'reportOrigin', {
+			enumerable: true,
+			get: () => this.__data.reportOrigin,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reportOrigin = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.location = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'manufacturer', {
+			enumerable: true,
+			get: () => this.__data.manufacturer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.manufacturer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_lotNumber', {
+			enumerable: true,
+			get: () => this.__data._lotNumber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lotNumber = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lotNumber', {
+			enumerable: true,
+			get: () => this.__data.lotNumber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lotNumber = value;
+			},
+		});
+
+		Object.defineProperty(this, '_expirationDate', {
+			enumerable: true,
+			get: () => this.__data._expirationDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._expirationDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'expirationDate', {
+			enumerable: true,
+			get: () => this.__data.expirationDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.expirationDate = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/immunization-site
+		Object.defineProperty(this, 'site', {
+			enumerable: true,
+			get: () => this.__data.site,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.site = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/immunization-route
+		Object.defineProperty(this, 'route', {
+			enumerable: true,
+			get: () => this.__data.route,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.route = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'doseQuantity', {
+			enumerable: true,
+			get: () => this.__data.doseQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.doseQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'practitioner', {
+			enumerable: true,
+			get: () => this.__data.practitioner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImmunizationPractitioner = require('./immunizationpractitioner.js');
+				this.__data.practitioner = Array.isArray(value)
+					? value.map(v => new ImmunizationPractitioner(v))
+					: [new ImmunizationPractitioner(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'explanation', {
+			enumerable: true,
+			get: () => this.__data.explanation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImmunizationExplanation = require('./immunizationexplanation.js');
+				this.__data.explanation = new ImmunizationExplanation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reaction', {
+			enumerable: true,
+			get: () => this.__data.reaction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImmunizationReaction = require('./immunizationreaction.js');
+				this.__data.reaction = Array.isArray(value)
+					? value.map(v => new ImmunizationReaction(v))
+					: [new ImmunizationReaction(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'vaccinationProtocol', {
+			enumerable: true,
+			get: () => this.__data.vaccinationProtocol,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImmunizationVaccinationProtocol = require('./immunizationvaccinationprotocol.js');
+				this.__data.vaccinationProtocol = Array.isArray(value)
+					? value.map(v => new ImmunizationVaccinationProtocol(v))
+					: [new ImmunizationVaccinationProtocol(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Immunization',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Immunization resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Immunization';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Immunization = new_value;
-	}
-
-	// A unique identifier assigned to this immunization record.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Indicates the current status of the vaccination event.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Indicates if the vaccination was or was not given.
-	get notGiven() {
-		return this.__notGiven;
-	}
-
-	set notGiven(new_value) {
-		this.__notGiven = new_value;
-	}
-
-	// Vaccine that was administered or was to be administered.
-	get vaccineCode() {
-		return this.__vaccineCode;
-	}
-
-	set vaccineCode(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__vaccineCode = new CodeableConcept(new_value);
-	}
-
-	// The patient who either received or did not receive the immunization.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The visit or admission or other contact between patient and health care provider the immunization was performed as part of.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// Date vaccine administered or was to be administered.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// An indication that the content of the record is based on information from the person who administered the vaccine. This reflects the context under which the data was originally recorded.
-	get primarySource() {
-		return this.__primarySource;
-	}
-
-	set primarySource(new_value) {
-		this.__primarySource = new_value;
-	}
-
-	// The source of the data when the report of the immunization event is not based on information from the person who administered the vaccine.
-	get reportOrigin() {
-		return this.__reportOrigin;
-	}
-
-	set reportOrigin(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reportOrigin = new CodeableConcept(new_value);
-	}
-
-	// The service delivery location where the vaccine administration occurred.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		const Reference = require('./Reference');
-		this.__location = new Reference(new_value);
-	}
-
-	// Name of vaccine manufacturer.
-	get manufacturer() {
-		return this.__manufacturer;
-	}
-
-	set manufacturer(new_value) {
-		const Reference = require('./Reference');
-		this.__manufacturer = new Reference(new_value);
-	}
-
-	// Lot number of the  vaccine product.
-	get lotNumber() {
-		return this.__lotNumber;
-	}
-
-	set lotNumber(new_value) {
-		this.__lotNumber = new_value;
-	}
-
-	// Date vaccine batch expires.
-	get expirationDate() {
-		return this.__expirationDate;
-	}
-
-	set expirationDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field expirationDate`);
-		}
-		this.__expirationDate = new_value;
-	}
-
-	// Body site where vaccine was administered.
-	get site() {
-		return this.__site;
-	}
-
-	set site(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__site = new CodeableConcept(new_value);
-	}
-
-	// The path by which the vaccine product is taken into the body.
-	get route() {
-		return this.__route;
-	}
-
-	set route(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__route = new CodeableConcept(new_value);
-	}
-
-	// The quantity of vaccine product that was administered.
-	get doseQuantity() {
-		return this.__doseQuantity;
-	}
-
-	set doseQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__doseQuantity = new Quantity(new_value);
-	}
-
-	// Indicates who or what performed the event.
-	get practitioner() {
-		return this.__practitioner;
-	}
-
-	set practitioner(new_value) {
-		const ImmunizationPractitioner = require('./ImmunizationPractitioner');
-		this.__practitioner = Array.isArray(new_value)
-			? new_value.map(val => new ImmunizationPractitioner(val))
-			: [new ImmunizationPractitioner(new_value)];
-	}
-
-	// Extra information about the immunization that is not conveyed by the other attributes.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Reasons why a vaccine was or was not administered.
-	get explanation() {
-		return this.__explanation;
-	}
-
-	set explanation(new_value) {
-		const ImmunizationExplanation = require('./ImmunizationExplanation');
-		this.__explanation = new ImmunizationExplanation(new_value);
-	}
-
-	// Categorical data indicating that an adverse event is associated in time to an immunization.
-	get reaction() {
-		return this.__reaction;
-	}
-
-	set reaction(new_value) {
-		const ImmunizationReaction = require('./ImmunizationReaction');
-		this.__reaction = Array.isArray(new_value)
-			? new_value.map(val => new ImmunizationReaction(val))
-			: [new ImmunizationReaction(new_value)];
-	}
-
-	// Contains information about the protocol(s) under which the vaccine was administered.
-	get vaccinationProtocol() {
-		return this.__vaccinationProtocol;
-	}
-
-	set vaccinationProtocol(new_value) {
-		const ImmunizationVaccinationProtocol = require('./ImmunizationVaccinationProtocol');
-		this.__vaccinationProtocol = Array.isArray(new_value)
-			? new_value.map(val => new ImmunizationVaccinationProtocol(val))
-			: [new ImmunizationVaccinationProtocol(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			notGiven: this.__notGiven,
-			vaccineCode: this.__vaccineCode && this.__vaccineCode.toJSON(),
-			patient: this.__patient && this.__patient.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			date: this.__date,
-			primarySource: this.__primarySource,
-			reportOrigin: this.__reportOrigin && this.__reportOrigin.toJSON(),
-			location: this.__location && this.__location.toJSON(),
-			manufacturer: this.__manufacturer && this.__manufacturer.toJSON(),
-			lotNumber: this.__lotNumber,
-			expirationDate: this.__expirationDate,
-			site: this.__site && this.__site.toJSON(),
-			route: this.__route && this.__route.toJSON(),
-			doseQuantity: this.__doseQuantity && this.__doseQuantity.toJSON(),
-			practitioner: this.__practitioner && this.__practitioner.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			explanation: this.__explanation && this.__explanation.toJSON(),
-			reaction: this.__reaction && this.__reaction.map(v => v.toJSON()),
-			vaccinationProtocol: this.__vaccinationProtocol && this.__vaccinationProtocol.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_notGiven: this._notGiven && this._notGiven.toJSON(),
+			notGiven: this.notGiven,
+			vaccineCode: this.vaccineCode && this.vaccineCode.toJSON(),
+			patient: this.patient && this.patient.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_primarySource: this._primarySource && this._primarySource.toJSON(),
+			primarySource: this.primarySource,
+			reportOrigin: this.reportOrigin && this.reportOrigin.toJSON(),
+			location: this.location && this.location.toJSON(),
+			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
+			_lotNumber: this._lotNumber && this._lotNumber.toJSON(),
+			lotNumber: this.lotNumber,
+			_expirationDate: this._expirationDate && this._expirationDate.toJSON(),
+			expirationDate: this.expirationDate,
+			site: this.site && this.site.toJSON(),
+			route: this.route && this.route.toJSON(),
+			doseQuantity: this.doseQuantity && this.doseQuantity.toJSON(),
+			practitioner: this.practitioner && this.practitioner.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			explanation: this.explanation && this.explanation.toJSON(),
+			reaction: this.reaction && this.reaction.map(v => v.toJSON()),
+			vaccinationProtocol: this.vaccinationProtocol && this.vaccinationProtocol.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Immunization;
+};

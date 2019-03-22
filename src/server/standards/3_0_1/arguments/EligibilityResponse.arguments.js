@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the eligibilityresponse query
+ */
 module.exports = {
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'EligibilityResponse.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-created',
-		documentation: 'The creation date.',
+		description: 'The creation date',
 	},
-	DISPOSITION: {
-		name: 'disposition',
+	disposition: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'EligibilityResponse.disposition',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-disposition',
-		documentation: 'The contents of the disposition message.',
+		description: 'The contents of the disposition message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EligibilityResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-identifier',
-		documentation: 'The business identifier.',
+		description: 'The business identifier',
 	},
-	INSURER: {
-		name: 'insurer',
+	insurer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityResponse.insurer',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-insurer',
-		documentation: 'The organization which generated this resource.',
+		description: 'The organization which generated this resource',
 	},
-	OUTCOME: {
-		name: 'outcome',
+	outcome: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EligibilityResponse.outcome',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-outcome',
-		documentation: 'The processing outcome.',
+		description: 'The processing outcome',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityResponse.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-request',
-		documentation: 'The EligibilityRequest reference.',
+		description: 'The EligibilityRequest reference',
 	},
-	REQUEST_ORGANIZATION: {
-		name: 'request-organization',
+	'request-organization': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityResponse.requestOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-request-organization',
-		documentation: 'The EligibilityRequest organization.',
+		description: 'The EligibilityRequest organization',
 	},
-	REQUEST_PROVIDER: {
-		name: 'request-provider',
+	'request-provider': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityResponse.requestProvider',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityResponse-request-provider',
-		documentation: 'The EligibilityRequest provider.',
+		description: 'The EligibilityRequest provider',
 	},
 };

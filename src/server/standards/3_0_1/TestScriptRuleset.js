@@ -1,45 +1,118 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary TestScriptRuleset Class
+ */
+module.exports = class TestScriptRuleset {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TestScriptRuleset extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TestScriptRuleset';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'resource', {
+			enumerable: true,
+			get: () => this.__data.resource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.resource = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rule', {
+			enumerable: true,
+			get: () => this.__data.rule,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TestScriptRulesetRule = require('./testscriptrulesetrule.js');
+				this.__data.rule = Array.isArray(value)
+					? value.map(v => new TestScriptRulesetRule(v))
+					: [new TestScriptRulesetRule(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TestScriptRuleset',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TestScriptRuleset resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TestScriptRuleset';
 	}
 
-	// Reference to the resource (containing the contents of the ruleset needed for assertions).
-	get resource() {
-		return this.__resource;
-	}
-
-	set resource(new_value) {
-		const Reference = require('./Reference');
-		this.__resource = new Reference(new_value);
-	}
-
-	// The referenced rule within the external ruleset template.
-	get rule() {
-		return this.__rule;
-	}
-
-	set rule(new_value) {
-		const TestScriptRulesetRule = require('./TestScriptRulesetRule');
-		this.__rule = Array.isArray(new_value)
-			? new_value.map(val => new TestScriptRulesetRule(val))
-			: [new TestScriptRulesetRule(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resource: this.__resource && this.__resource.toJSON(),
-			rule: this.__rule && this.__rule.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			resource: this.resource && this.resource.toJSON(),
+			rule: this.rule && this.rule.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = TestScriptRuleset;
+};

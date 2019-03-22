@@ -1,20 +1,28 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the measurereport query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MeasureReport.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MeasureReport-identifier',
-		documentation: 'External identifier of the measure report to be returned.',
+		description: 'External identifier of the measure report to be returned',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MeasureReport.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/MeasureReport-patient',
-		documentation: 'The identity of a patient to search for individual measure report results for.',
+		description: 'The identity of a patient to search for individual measure report results for',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MeasureReport.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MeasureReport-status',
-		documentation: 'The status of the measure report.',
+		description: 'The status of the measure report',
 	},
 };

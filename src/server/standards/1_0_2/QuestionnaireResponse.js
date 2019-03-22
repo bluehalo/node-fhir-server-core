@@ -1,134 +1,336 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary QuestionnaireResponse Class
+ */
+module.exports = class QuestionnaireResponse {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class QuestionnaireResponse extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'QuestionnaireResponse';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'questionnaire', {
+			enumerable: true,
+			get: () => this.__data.questionnaire,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.questionnaire = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_authored', {
+			enumerable: true,
+			get: () => this.__data._authored,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._authored = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'authored', {
+			enumerable: true,
+			get: () => this.__data.authored,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.authored = value;
+			},
+		});
+
+		Object.defineProperty(this, 'source', {
+			enumerable: true,
+			get: () => this.__data.source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.source = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'group', {
+			enumerable: true,
+			get: () => this.__data.group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let QuestionnaireResponseGroup = require('./questionnaireresponsegroup.js');
+				this.__data.group = new QuestionnaireResponseGroup(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'QuestionnaireResponse',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a QuestionnaireResponse resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'QuestionnaireResponse';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__QuestionnaireResponse = new_value;
-	}
-
-	// A business identifier assigned to a particular completed (or partially completed) questionnaire.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// Indicates the Questionnaire resource that defines the form for which answers are being provided.
-	get questionnaire() {
-		return this.__questionnaire;
-	}
-
-	set questionnaire(new_value) {
-		const Reference = require('./Reference');
-		this.__questionnaire = new Reference(new_value);
-	}
-
-	// The lifecycle status of the questionnaire response as a whole.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The subject of the questionnaire response.  This could be a patient, organization, practitioner, device, etc.  This is who/what the answers apply to, but is not necessarily the source of information.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = new Reference(new_value);
-	}
-
-	// The date and/or time that this version of the questionnaire response was authored.
-	get authored() {
-		return this.__authored;
-	}
-
-	set authored(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field authored`);
-		}
-		this.__authored = new_value;
-	}
-
-	// The person who answered the questions about the subject.
-	get source() {
-		return this.__source;
-	}
-
-	set source(new_value) {
-		const Reference = require('./Reference');
-		this.__source = new Reference(new_value);
-	}
-
-	// Encounter during which this set of questionnaire response were collected. When there were multiple encounters, this is the one considered most relevant to the context of the answers.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// A group of questions to a possibly similarly grouped set of questions in the questionnaire response.
-	get group() {
-		return this.__group;
-	}
-
-	set group(new_value) {
-		const QuestionnaireResponseGroup = require('./QuestionnaireResponseGroup');
-		this.__group = new QuestionnaireResponseGroup(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			questionnaire: this.__questionnaire && this.__questionnaire.toJSON(),
-			status: this.__status,
-			subject: this.__subject && this.__subject.toJSON(),
-			author: this.__author && this.__author.toJSON(),
-			authored: this.__authored,
-			source: this.__source && this.__source.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			group: this.__group && this.__group.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			questionnaire: this.questionnaire && this.questionnaire.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			subject: this.subject && this.subject.toJSON(),
+			author: this.author && this.author.toJSON(),
+			_authored: this._authored && this._authored.toJSON(),
+			authored: this.authored,
+			source: this.source && this.source.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			group: this.group && this.group.toJSON(),
+		};
 	}
-}
-
-module.exports = QuestionnaireResponse;
+};

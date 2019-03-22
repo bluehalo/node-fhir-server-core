@@ -1,118 +1,254 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ImmunizationVaccinationProtocol Class
+ */
+module.exports = class ImmunizationVaccinationProtocol {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImmunizationVaccinationProtocol extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImmunizationVaccinationProtocol';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_doseSequence', {
+			enumerable: true,
+			get: () => this.__data._doseSequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._doseSequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'doseSequence', {
+			enumerable: true,
+			get: () => this.__data.doseSequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.doseSequence = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'authority', {
+			enumerable: true,
+			get: () => this.__data.authority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.authority = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_series', {
+			enumerable: true,
+			get: () => this.__data._series,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._series = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'series', {
+			enumerable: true,
+			get: () => this.__data.series,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.series = value;
+			},
+		});
+
+		Object.defineProperty(this, '_seriesDoses', {
+			enumerable: true,
+			get: () => this.__data._seriesDoses,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._seriesDoses = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'seriesDoses', {
+			enumerable: true,
+			get: () => this.__data.seriesDoses,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.seriesDoses = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vaccination-protocol-dose-target
+		Object.defineProperty(this, 'targetDisease', {
+			enumerable: true,
+			get: () => this.__data.targetDisease,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.targetDisease = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vaccination-protocol-dose-status
+		Object.defineProperty(this, 'doseStatus', {
+			enumerable: true,
+			get: () => this.__data.doseStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.doseStatus = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vaccination-protocol-dose-status-reason
+		Object.defineProperty(this, 'doseStatusReason', {
+			enumerable: true,
+			get: () => this.__data.doseStatusReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.doseStatusReason = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImmunizationVaccinationProtocol',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImmunizationVaccinationProtocol resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImmunizationVaccinationProtocol';
 	}
 
-	// Nominal position in a series.
-	get doseSequence() {
-		return this.__doseSequence;
-	}
-
-	set doseSequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field doseSequence`);
-		}
-		this.__doseSequence = new_value;
-	}
-
-	// Contains the description about the protocol under which the vaccine was administered.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Indicates the authority who published the protocol.  E.g. ACIP.
-	get authority() {
-		return this.__authority;
-	}
-
-	set authority(new_value) {
-		const Reference = require('./Reference');
-		this.__authority = new Reference(new_value);
-	}
-
-	// One possible path to achieve presumed immunity against a disease - within the context of an authority.
-	get series() {
-		return this.__series;
-	}
-
-	set series(new_value) {
-		this.__series = new_value;
-	}
-
-	// The recommended number of doses to achieve immunity.
-	get seriesDoses() {
-		return this.__seriesDoses;
-	}
-
-	set seriesDoses(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field seriesDoses`);
-		}
-		this.__seriesDoses = new_value;
-	}
-
-	// The targeted disease.
-	get targetDisease() {
-		return this.__targetDisease;
-	}
-
-	set targetDisease(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__targetDisease = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Indicates if the immunization event should \'count\' against  the protocol.
-	get doseStatus() {
-		return this.__doseStatus;
-	}
-
-	set doseStatus(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__doseStatus = new CodeableConcept(new_value);
-	}
-
-	// Provides an explanation as to why an immunization event should or should not count against the protocol.
-	get doseStatusReason() {
-		return this.__doseStatusReason;
-	}
-
-	set doseStatusReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__doseStatusReason = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			doseSequence: this.__doseSequence,
-			description: this.__description,
-			authority: this.__authority && this.__authority.toJSON(),
-			series: this.__series,
-			seriesDoses: this.__seriesDoses,
-			targetDisease: this.__targetDisease && this.__targetDisease.map(v => v.toJSON()),
-			doseStatus: this.__doseStatus && this.__doseStatus.toJSON(),
-			doseStatusReason: this.__doseStatusReason && this.__doseStatusReason.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_doseSequence: this._doseSequence && this._doseSequence.toJSON(),
+			doseSequence: this.doseSequence,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			authority: this.authority && this.authority.toJSON(),
+			_series: this._series && this._series.toJSON(),
+			series: this.series,
+			_seriesDoses: this._seriesDoses && this._seriesDoses.toJSON(),
+			seriesDoses: this.seriesDoses,
+			targetDisease: this.targetDisease && this.targetDisease.map(v => v.toJSON()),
+			doseStatus: this.doseStatus && this.doseStatus.toJSON(),
+			doseStatusReason: this.doseStatusReason && this.doseStatusReason.toJSON(),
+		};
 	}
-}
-
-module.exports = ImmunizationVaccinationProtocol;
+};

@@ -1,60 +1,158 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ValueSetCompose Class
+ */
+module.exports = class ValueSetCompose {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetCompose extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetCompose';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_lockedDate', {
+			enumerable: true,
+			get: () => this.__data._lockedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lockedDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lockedDate', {
+			enumerable: true,
+			get: () => this.__data.lockedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lockedDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_inactive', {
+			enumerable: true,
+			get: () => this.__data._inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._inactive = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'inactive', {
+			enumerable: true,
+			get: () => this.__data.inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.inactive = value;
+			},
+		});
+
+		Object.defineProperty(this, 'include', {
+			enumerable: true,
+			get: () => this.__data.include,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetComposeInclude = require('./valuesetcomposeinclude.js');
+				this.__data.include = Array.isArray(value)
+					? value.map(v => new ValueSetComposeInclude(v))
+					: [new ValueSetComposeInclude(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetCompose',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetCompose resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetCompose';
 	}
 
-	// If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.
-	get lockedDate() {
-		return this.__lockedDate;
-	}
-
-	set lockedDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field lockedDate`);
-		}
-		this.__lockedDate = new_value;
-	}
-
-	// Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).
-	get inactive() {
-		return this.__inactive;
-	}
-
-	set inactive(new_value) {
-		this.__inactive = new_value;
-	}
-
-	// Include one or more codes from a code system or other value set(s).
-	get include() {
-		return this.__include;
-	}
-
-	set include(new_value) {
-		const ValueSetComposeInclude = require('./ValueSetComposeInclude');
-		this.__include = Array.isArray(new_value)
-			? new_value.map(val => new ValueSetComposeInclude(val))
-			: [new ValueSetComposeInclude(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			lockedDate: this.__lockedDate,
-			inactive: this.__inactive,
-			include: this.__include && this.__include.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_lockedDate: this._lockedDate && this._lockedDate.toJSON(),
+			lockedDate: this.lockedDate,
+			_inactive: this._inactive && this._inactive.toJSON(),
+			inactive: this.inactive,
+			include: this.include && this.include.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ValueSetCompose;
+};

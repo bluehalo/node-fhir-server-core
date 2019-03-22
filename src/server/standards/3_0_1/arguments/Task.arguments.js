@@ -1,122 +1,147 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the task query
+ */
 module.exports = {
-	AUTHORED_ON: {
-		name: 'authored-on',
+	'authored-on': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Task.authoredOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-authored-on',
-		documentation: 'Search by creation date.',
+		description: 'Search by creation date',
 	},
-	BASED_ON: {
-		name: 'based-on',
+	'based-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.basedOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-based-on',
-		documentation: 'Search by requests this task is based on.',
+		description: 'Search by requests this task is based on',
 	},
-	BUSINESS_STATUS: {
-		name: 'business-status',
+	'business-status': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.businessStatus',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-business-status',
-		documentation: 'Search by business status.',
+		description: 'Search by business status',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-code',
-		documentation: 'Search by task code.',
+		description: 'Search by task code',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-context',
-		documentation: 'Search by encounter or episode.',
+		description: 'Search by encounter or episode',
 	},
-	FOCUS: {
-		name: 'focus',
+	focus: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.focus',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-focus',
-		documentation: 'Search by task focus.',
+		description: 'Search by task focus',
 	},
-	GROUP_IDENTIFIER: {
-		name: 'group-identifier',
+	'group-identifier': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.groupIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-group-identifier',
-		documentation: 'Search by group identifier.',
+		description: 'Search by group identifier',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-identifier',
-		documentation: 'Search for a task instance by its business identifier.',
+		description: 'Search for a task instance by its business identifier',
 	},
-	INTENT: {
-		name: 'intent',
+	intent: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.intent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-intent',
-		documentation: 'Search by task intent.',
+		description: 'Search by task intent',
 	},
-	MODIFIED: {
-		name: 'modified',
+	modified: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Task.lastModified',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-modified',
-		documentation: 'Search by last modification date.',
+		description: 'Search by last modification date',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.requester.onBehalfOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-organization',
-		documentation: 'Search by responsible organization.',
+		description: 'Search by responsible organization',
 	},
-	OWNER: {
-		name: 'owner',
+	owner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.owner',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-owner',
-		documentation: 'Search by task owner.',
+		description: 'Search by task owner',
 	},
-	PART_OF: {
-		name: 'part-of',
+	'part-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-part-of',
-		documentation: 'Search by task this task is part of.',
+		description: 'Search by task this task is part of',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.for',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-patient',
-		documentation: 'Search by patient.',
+		description: 'Search by patient',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.performerType',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-performer',
-		documentation: 'Search by recommended type of performer (e.g., Requester, Performer, Scheduler).',
+		description: 'Search by recommended type of performer (e.g., Requester, Performer, Scheduler).',
 	},
-	PERIOD: {
-		name: 'period',
+	period: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Task.executionPeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-period',
-		documentation: 'Search by period Task is/was underway.',
+		description: 'Search by period Task is/was underway',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-priority',
-		documentation: 'Search by task priority.',
+		description: 'Search by task priority',
 	},
-	REQUESTER: {
-		name: 'requester',
+	requester: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.requester.agent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-requester',
-		documentation: 'Search by task requester.',
+		description: 'Search by task requester',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Task.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-status',
-		documentation: 'Search by task status.',
+		description: 'Search by task status',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Task.for',
 		definition: 'http://hl7.org/fhir/SearchParameter/Task-subject',
-		documentation: 'Search by subject.',
+		description: 'Search by subject',
 	},
 };

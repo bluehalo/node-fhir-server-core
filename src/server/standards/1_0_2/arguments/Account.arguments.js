@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the account query
+ */
 module.exports = {
-	BALANCE: {
-		name: 'balance',
+	balance: {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'Account.balance',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-balance',
-		documentation: 'How much is in account?.',
+		description: 'How much is in account?',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Account.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-identifier',
-		documentation: 'Account number.',
+		description: 'Account number',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Account.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-name',
-		documentation: 'Human-readable label.',
+		description: 'Human-readable label',
 	},
-	OWNER: {
-		name: 'owner',
+	owner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Account.owner',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-owner',
-		documentation: 'Who is responsible?.',
+		description: 'Who is responsible?',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Account.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-patient',
-		documentation: 'What is account tied to?.',
+		description: 'What is account tied to?',
 	},
-	PERIOD: {
-		name: 'period',
+	period: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Account.coveragePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-period',
-		documentation: 'Transaction window.',
+		description: 'Transaction window',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Account.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-status',
-		documentation: 'active | inactive.',
+		description: 'active | inactive',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Account.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-subject',
-		documentation: 'What is account tied to?.',
+		description: 'What is account tied to?',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Account.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Account-type',
-		documentation: 'E.g. patient, expense, depreciation.',
+		description: 'E.g. patient, expense, depreciation',
 	},
 };

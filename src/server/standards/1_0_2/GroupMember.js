@@ -1,53 +1,143 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary GroupMember Class
+ */
+module.exports = class GroupMember {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class GroupMember extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'GroupMember';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'entity', {
+			enumerable: true,
+			get: () => this.__data.entity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.entity = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_inactive', {
+			enumerable: true,
+			get: () => this.__data._inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._inactive = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'inactive', {
+			enumerable: true,
+			get: () => this.__data.inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.inactive = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'GroupMember',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a GroupMember resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'GroupMember';
 	}
 
-	// A reference to the entity that is a member of the group. Must be consistent with Group.type.
-	get entity() {
-		return this.__entity;
-	}
-
-	set entity(new_value) {
-		const Reference = require('./Reference');
-		this.__entity = new Reference(new_value);
-	}
-
-	// The period that the member was in the group, if known.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// A flag to indicate that the member is no longer in the group, but previously may have been a member.
-	get inactive() {
-		return this.__inactive;
-	}
-
-	set inactive(new_value) {
-		this.__inactive = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			entity: this.__entity && this.__entity.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			inactive: this.__inactive,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			entity: this.entity && this.entity.toJSON(),
+			period: this.period && this.period.toJSON(),
+			_inactive: this._inactive && this._inactive.toJSON(),
+			inactive: this.inactive,
+		};
 	}
-}
-
-module.exports = GroupMember;
+};

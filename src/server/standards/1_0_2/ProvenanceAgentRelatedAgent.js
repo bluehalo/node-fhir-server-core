@@ -1,48 +1,129 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ProvenanceAgentRelatedAgent Class
+ */
+module.exports = class ProvenanceAgentRelatedAgent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ProvenanceAgentRelatedAgent extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ProvenanceAgentRelatedAgent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-RoleLinkType
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_target', {
+			enumerable: true,
+			get: () => this.__data._target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._target = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'target', {
+			enumerable: true,
+			get: () => this.__data.target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.target = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ProvenanceAgentRelatedAgent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ProvenanceAgentRelatedAgent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ProvenanceAgentRelatedAgent';
 	}
 
-	// The type of relationship between agents.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// An internal reference to another agent listed in this provenance by its identifier.
-	get target() {
-		return this.__target;
-	}
-
-	set target(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field target`);
-		}
-		this.__target = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			target: this.__target,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			_target: this._target && this._target.toJSON(),
+			target: this.target,
+		};
 	}
-}
-
-module.exports = ProvenanceAgentRelatedAgent;
+};

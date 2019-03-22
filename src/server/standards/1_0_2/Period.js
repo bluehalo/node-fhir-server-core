@@ -1,52 +1,126 @@
-const Element = require('./Element');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Period Class
+ */
+module.exports = class Period {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Period extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Period';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_start', {
+			enumerable: true,
+			get: () => this.__data._start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._start = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'start', {
+			enumerable: true,
+			get: () => this.__data.start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.start = value;
+			},
+		});
+
+		Object.defineProperty(this, '_end', {
+			enumerable: true,
+			get: () => this.__data._end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._end = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'end', {
+			enumerable: true,
+			get: () => this.__data.end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.end = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Period',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Period resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Period';
 	}
 
-	// The start of the period. The boundary is inclusive.
-	get start() {
-		return this.__start;
-	}
-
-	set start(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field start`);
-		}
-		this.__start = new_value;
-	}
-
-	// The end of the period. If the end of the period is missing, it means that the period is ongoing. The start may be in the past, and the end date in the future, which means that period is expected/planned to end at that time.
-	get end() {
-		return this.__end;
-	}
-
-	set end(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field end`);
-		}
-		this.__end = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			start: this.__start,
-			end: this.__end,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_start: this._start && this._start.toJSON(),
+			start: this.start,
+			_end: this._end && this._end.toJSON(),
+			end: this.end,
+		};
 	}
-}
-
-module.exports = Period;
+};

@@ -1,93 +1,250 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary ValueSetExpansionContains Class
+ */
+module.exports = class ValueSetExpansionContains {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetExpansionContains extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetExpansionContains';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_abstract', {
+			enumerable: true,
+			get: () => this.__data._abstract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._abstract = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'abstract', {
+			enumerable: true,
+			get: () => this.__data.abstract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.abstract = value;
+			},
+		});
+
+		Object.defineProperty(this, '_inactive', {
+			enumerable: true,
+			get: () => this.__data._inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._inactive = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'inactive', {
+			enumerable: true,
+			get: () => this.__data.inactive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.inactive = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_display', {
+			enumerable: true,
+			get: () => this.__data._display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._display = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'display', {
+			enumerable: true,
+			get: () => this.__data.display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.display = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetExpansionContains',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetExpansionContains resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetExpansionContains';
 	}
 
-	// An absolute URI which is the code system in which the code for this item in the expansion is defined.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// If true, this entry is included in the expansion for navigational purposes, and the user cannot select the code directly as a proper value.
-	get abstract() {
-		return this.__abstract;
-	}
-
-	set abstract(new_value) {
-		this.__abstract = new_value;
-	}
-
-	// If the concept is inactive in the code system that defines it. Inactive codes are those that are no longer to be used, but are maintained by the code system for understanding legacy data.
-	get inactive() {
-		return this.__inactive;
-	}
-
-	set inactive(new_value) {
-		this.__inactive = new_value;
-	}
-
-	// The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// The code for this item in the expansion hierarchy. If this code is missing the entry in the hierarchy is a place holder (abstract) and does not represent a valid code in the value set.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field code`);
-		}
-		this.__code = new_value;
-	}
-
-	// The recommended display for this item in the expansion.
-	get display() {
-		return this.__display;
-	}
-
-	set display(new_value) {
-		this.__display = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			system: this.__system,
-			abstract: this.__abstract,
-			inactive: this.__inactive,
-			version: this.__version,
-			code: this.__code,
-			display: this.__display,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_abstract: this._abstract && this._abstract.toJSON(),
+			abstract: this.abstract,
+			_inactive: this._inactive && this._inactive.toJSON(),
+			inactive: this.inactive,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_display: this._display && this._display.toJSON(),
+			display: this.display,
+		};
 	}
-}
-
-module.exports = ValueSetExpansionContains;
+};

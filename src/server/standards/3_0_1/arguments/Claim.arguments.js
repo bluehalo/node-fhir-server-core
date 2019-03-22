@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the claim query
+ */
 module.exports = {
-	CARE_TEAM: {
-		name: 'care-team',
+	'care-team': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.careTeam.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-care-team',
-		documentation: 'Member of the CareTeam.',
+		description: 'Member of the CareTeam',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Claim.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-created',
-		documentation: 'The creation date for the Claim.',
+		description: 'The creation date for the Claim',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.item.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-encounter',
-		documentation: 'Encounters associated with a billed line item.',
+		description: 'Encounters associated with a billed line item',
 	},
-	ENTERER: {
-		name: 'enterer',
+	enterer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.enterer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-enterer',
-		documentation: 'The party responsible for the entry of the Claim.',
+		description: 'The party responsible for the entry of the Claim',
 	},
-	FACILITY: {
-		name: 'facility',
+	facility: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.facility',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-facility',
-		documentation: 'Facility responsible for the goods and services.',
+		description: 'Facility responsible for the goods and services',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-identifier',
-		documentation: 'The primary identifier of the financial resource.',
+		description: 'The primary identifier of the financial resource',
 	},
-	INSURER: {
-		name: 'insurer',
+	insurer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.insurer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-insurer',
-		documentation: 'The target payor/insurer for the Claim.',
+		description: 'The target payor/insurer for the Claim',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-organization',
-		documentation: 'The reference to the providing organization.',
+		description: 'The reference to the providing organization',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-patient',
-		documentation: 'Patient receiving the services.',
+		description: 'Patient receiving the services',
 	},
-	PAYEE: {
-		name: 'payee',
+	payee: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.payee.party',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-payee',
-		documentation: 'The party receiving any payment for the Claim.',
+		description: 'The party receiving any payment for the Claim',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-priority',
-		documentation: 'Processing priority requested.',
+		description: 'Processing priority requested',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-provider',
-		documentation: 'Provider responsible for the Claim.',
+		description: 'Provider responsible for the Claim',
 	},
-	USE: {
-		name: 'use',
+	use: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-use',
-		documentation: 'The kind of financial resource.',
+		description: 'The kind of financial resource',
 	},
 };

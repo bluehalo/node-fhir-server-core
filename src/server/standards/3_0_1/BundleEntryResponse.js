@@ -1,84 +1,209 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
+/**
+ * @name exports
+ * @summary BundleEntryResponse Class
+ */
+module.exports = class BundleEntryResponse {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class BundleEntryResponse extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'BundleEntryResponse';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_location', {
+			enumerable: true,
+			get: () => this.__data._location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._location = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.location = value;
+			},
+		});
+
+		Object.defineProperty(this, '_etag', {
+			enumerable: true,
+			get: () => this.__data._etag,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._etag = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'etag', {
+			enumerable: true,
+			get: () => this.__data.etag,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.etag = value;
+			},
+		});
+
+		Object.defineProperty(this, '_lastModified', {
+			enumerable: true,
+			get: () => this.__data._lastModified,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lastModified = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lastModified', {
+			enumerable: true,
+			get: () => this.__data.lastModified,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lastModified = value;
+			},
+		});
+
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.outcome = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'BundleEntryResponse',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a BundleEntryResponse resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'BundleEntryResponse';
 	}
 
-	// The status code returned by processing this entry. The status SHALL start with a 3 digit HTTP code (e.g. 404) and may contain the standard HTTP description associated with the status code.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The location header created by processing this operation.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field location`);
-		}
-		this.__location = new_value;
-	}
-
-	// The etag for the resource, it the operation for the entry produced a versioned resource (see [Resource Metadata and Versioning](http.html#versioning) and [Managing Resource Contention](http.html#concurrency)).
-	get etag() {
-		return this.__etag;
-	}
-
-	set etag(new_value) {
-		this.__etag = new_value;
-	}
-
-	// The date/time that the resource was modified on the server.
-	get lastModified() {
-		return this.__lastModified;
-	}
-
-	set lastModified(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field lastModified`);
-		}
-		this.__lastModified = new_value;
-	}
-
-	// An OperationOutcome containing hints and warnings produced as part of processing this entry in a batch or transaction.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const OperationOutcome = require('./OperationOutcome');
-		this.__outcome = new OperationOutcome(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			status: this.__status,
-			location: this.__location,
-			etag: this.__etag,
-			lastModified: this.__lastModified,
-			outcome: this.__outcome && this.__outcome.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_location: this._location && this._location.toJSON(),
+			location: this.location,
+			_etag: this._etag && this._etag.toJSON(),
+			etag: this.etag,
+			_lastModified: this._lastModified && this._lastModified.toJSON(),
+			lastModified: this.lastModified,
+			outcome: this.outcome,
+		};
 	}
-}
-
-module.exports = BundleEntryResponse;
+};

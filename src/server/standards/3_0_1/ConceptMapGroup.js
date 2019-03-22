@@ -1,96 +1,226 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ConceptMapGroup Class
+ */
+module.exports = class ConceptMapGroup {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConceptMapGroup extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConceptMapGroup';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_source', {
+			enumerable: true,
+			get: () => this.__data._source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._source = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'source', {
+			enumerable: true,
+			get: () => this.__data.source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.source = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sourceVersion', {
+			enumerable: true,
+			get: () => this.__data._sourceVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sourceVersion = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sourceVersion', {
+			enumerable: true,
+			get: () => this.__data.sourceVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sourceVersion = value;
+			},
+		});
+
+		Object.defineProperty(this, '_target', {
+			enumerable: true,
+			get: () => this.__data._target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._target = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'target', {
+			enumerable: true,
+			get: () => this.__data.target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.target = value;
+			},
+		});
+
+		Object.defineProperty(this, '_targetVersion', {
+			enumerable: true,
+			get: () => this.__data._targetVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._targetVersion = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'targetVersion', {
+			enumerable: true,
+			get: () => this.__data.targetVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.targetVersion = value;
+			},
+		});
+
+		Object.defineProperty(this, 'element', {
+			enumerable: true,
+			get: () => this.__data.element,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConceptMapGroupElement = require('./conceptmapgroupelement.js');
+				this.__data.element = Array.isArray(value)
+					? value.map(v => new ConceptMapGroupElement(v))
+					: [new ConceptMapGroupElement(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'unmapped', {
+			enumerable: true,
+			get: () => this.__data.unmapped,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConceptMapGroupUnmapped = require('./conceptmapgroupunmapped.js');
+				this.__data.unmapped = new ConceptMapGroupUnmapped(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConceptMapGroup',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConceptMapGroup resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConceptMapGroup';
 	}
 
-	// An absolute URI that identifies the Code System (if the source is a value set that crosses more than one code system).
-	get source() {
-		return this.__source;
-	}
-
-	set source(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field source`);
-		}
-		this.__source = new_value;
-	}
-
-	// The specific version of the code system, as determined by the code system authority.
-	get sourceVersion() {
-		return this.__sourceVersion;
-	}
-
-	set sourceVersion(new_value) {
-		this.__sourceVersion = new_value;
-	}
-
-	// An absolute URI that identifies the code system of the target code (if the target is a value set that cross code systems).
-	get target() {
-		return this.__target;
-	}
-
-	set target(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field target`);
-		}
-		this.__target = new_value;
-	}
-
-	// The specific version of the code system, as determined by the code system authority.
-	get targetVersion() {
-		return this.__targetVersion;
-	}
-
-	set targetVersion(new_value) {
-		this.__targetVersion = new_value;
-	}
-
-	// Mappings for an individual concept in the source to one or more concepts in the target.
-	get element() {
-		return this.__element;
-	}
-
-	set element(new_value) {
-		const ConceptMapGroupElement = require('./ConceptMapGroupElement');
-		this.__element = Array.isArray(new_value)
-			? new_value.map(val => new ConceptMapGroupElement(val))
-			: [new ConceptMapGroupElement(new_value)];
-	}
-
-	// What to do when there is no match in the mappings in the group.
-	get unmapped() {
-		return this.__unmapped;
-	}
-
-	set unmapped(new_value) {
-		const ConceptMapGroupUnmapped = require('./ConceptMapGroupUnmapped');
-		this.__unmapped = new ConceptMapGroupUnmapped(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			source: this.__source,
-			sourceVersion: this.__sourceVersion,
-			target: this.__target,
-			targetVersion: this.__targetVersion,
-			element: this.__element && this.__element.map(v => v.toJSON()),
-			unmapped: this.__unmapped && this.__unmapped.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_source: this._source && this._source.toJSON(),
+			source: this.source,
+			_sourceVersion: this._sourceVersion && this._sourceVersion.toJSON(),
+			sourceVersion: this.sourceVersion,
+			_target: this._target && this._target.toJSON(),
+			target: this.target,
+			_targetVersion: this._targetVersion && this._targetVersion.toJSON(),
+			targetVersion: this.targetVersion,
+			element: this.element && this.element.map(v => v.toJSON()),
+			unmapped: this.unmapped && this.unmapped.toJSON(),
+		};
 	}
-}
-
-module.exports = ConceptMapGroup;
+};

@@ -1,167 +1,197 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the patient query
+ */
 module.exports = {
-	ACTIVE: {
-		name: 'active',
+	active: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.active',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-active',
-		documentation: 'Whether the patient record is active.',
+		description: 'Whether the patient record is active',
 	},
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Practitioner](practitioner.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Person](person.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  * [Patient](patient.html): A server defined search that may match any of the string fields in the Address, including line, city, state, country, postalCode, and/or text  ',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address-city',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A city specified in an address  * [Practitioner](practitioner.html): A city specified in an address  * [Person](person.html): A city specified in an address  * [Patient](patient.html): A city specified in an address  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A city specified in an address  * [Practitioner](practitioner.html): A city specified in an address  * [Person](person.html): A city specified in an address  * [Patient](patient.html): A city specified in an address  ',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address-country',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A country specified in an address  * [Practitioner](practitioner.html): A country specified in an address  * [Person](person.html): A country specified in an address  * [Patient](patient.html): A country specified in an address  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A country specified in an address  * [Practitioner](practitioner.html): A country specified in an address  * [Person](person.html): A country specified in an address  * [Patient](patient.html): A country specified in an address  ',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address-postalcode',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A postal code specified in an address  * [Practitioner](practitioner.html): A postalCode specified in an address  * [Person](person.html): A postal code specified in an address  * [Patient](patient.html): A postalCode specified in an address  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A postal code specified in an address  * [Practitioner](practitioner.html): A postalCode specified in an address  * [Person](person.html): A postal code specified in an address  * [Patient](patient.html): A postalCode specified in an address  ',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address-state',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A state specified in an address  * [Practitioner](practitioner.html): A state specified in an address  * [Person](person.html): A state specified in an address  * [Patient](patient.html): A state specified in an address  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A state specified in an address  * [Practitioner](practitioner.html): A state specified in an address  * [Person](person.html): A state specified in an address  * [Patient](patient.html): A state specified in an address  ',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-address-use',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A use code specified in an address  * [Practitioner](practitioner.html): A use code specified in an address  * [Person](person.html): A use code specified in an address  * [Patient](patient.html): A use code specified in an address  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A use code specified in an address  * [Practitioner](practitioner.html): A use code specified in an address  * [Person](person.html): A use code specified in an address  * [Patient](patient.html): A use code specified in an address  ',
 	},
-	ANIMAL_BREED: {
-		name: 'animal-breed',
+	'animal-breed': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.animal.breed',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-animal-breed',
-		documentation: 'The breed for animal patients.',
+		description: 'The breed for animal patients',
 	},
-	ANIMAL_SPECIES: {
-		name: 'animal-species',
+	'animal-species': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.animal.species',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-animal-species',
-		documentation: 'The species for animal patients.',
+		description: 'The species for animal patients',
 	},
-	BIRTHDATE: {
-		name: 'birthdate',
+	birthdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Patient.birthDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-birthdate',
-		documentation:
-			"Multiple Resources:     * [RelatedPerson](relatedperson.html): The Related Person's date of birth  * [Person](person.html): The person's date of birth  * [Patient](patient.html): The patient's date of birth  .",
+		description:
+			"Multiple Resources:     * [RelatedPerson](relatedperson.html): The Related Person's date of birth  * [Person](person.html): The person's date of birth  * [Patient](patient.html): The patient's date of birth  ",
 	},
-	DEATH_DATE: {
-		name: 'death-date',
+	'death-date': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Patient.deceasedDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-death-date',
-		documentation: 'The date of death has been provided and satisfies this search value.',
+		description: 'The date of death has been provided and satisfies this search value',
 	},
-	DECEASED: {
-		name: 'deceased',
+	deceased: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.deceasedBoolean',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-deceased',
-		documentation: 'This patient has been marked as deceased, or as a death date entered.',
+		description: 'This patient has been marked as deceased, or as a death date entered',
 	},
-	EMAIL: {
-		name: 'email',
+	email: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.telecom[system/@value='email']",
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-email',
-		documentation:
-			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in an email contact  * [RelatedPerson](relatedperson.html): A value in an email contact  * [Practitioner](practitioner.html): A value in an email contact  * [Person](person.html): A value in an email contact  * [Patient](patient.html): A value in an email contact  .',
+		description:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in an email contact  * [RelatedPerson](relatedperson.html): A value in an email contact  * [Practitioner](practitioner.html): A value in an email contact  * [Person](person.html): A value in an email contact  * [Patient](patient.html): A value in an email contact  ',
 	},
-	FAMILY: {
-		name: 'family',
+	family: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name.family',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-family',
-		documentation:
-			'Multiple Resources:     * [Practitioner](practitioner.html): A portion of the family name  * [Patient](patient.html): A portion of the family name of the patient  .',
+		description:
+			'Multiple Resources:     * [Practitioner](practitioner.html): A portion of the family name  * [Patient](patient.html): A portion of the family name of the patient  ',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-gender',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): Gender of the related person  * [Practitioner](practitioner.html): Gender of the practitioner  * [Person](person.html): The gender of the person  * [Patient](patient.html): Gender of the patient  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): Gender of the related person  * [Practitioner](practitioner.html): Gender of the practitioner  * [Person](person.html): The gender of the person  * [Patient](patient.html): Gender of the patient  ',
 	},
-	GENERAL_PRACTITIONER: {
-		name: 'general-practitioner',
+	'general-practitioner': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.generalPractitioner',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-general-practitioner',
-		documentation: "Patient's nominated general practitioner, not the organization that manages the record.",
+		description: "Patient's nominated general practitioner, not the organization that manages the record",
 	},
-	GIVEN: {
-		name: 'given',
+	given: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name.given',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-given',
-		documentation:
-			'Multiple Resources:     * [Practitioner](practitioner.html): A portion of the given name  * [Patient](patient.html): A portion of the given name of the patient  .',
+		description:
+			'Multiple Resources:     * [Practitioner](practitioner.html): A portion of the given name  * [Patient](patient.html): A portion of the given name of the patient  ',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-identifier',
-		documentation: 'A patient identifier.',
+		description: 'A patient identifier',
 	},
-	LANGUAGE: {
-		name: 'language',
+	language: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.communication.language',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-language',
-		documentation: 'Language code (irrespective of use value).',
+		description: 'Language code (irrespective of use value)',
 	},
-	LINK: {
-		name: 'link',
+	link: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.link.other',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-link',
-		documentation: 'All patients linked to the given patient.',
+		description: 'All patients linked to the given patient',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-name',
-		documentation:
-			'A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text.',
+		description:
+			'A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-organization',
-		documentation: 'The organization at which this person is a patient.',
+		description: 'The organization at which this person is a patient',
 	},
-	PHONE: {
-		name: 'phone',
+	phone: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.telecom[system/@value='phone']",
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-phone',
-		documentation:
-			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in a phone contact  * [RelatedPerson](relatedperson.html): A value in a phone contact  * [Practitioner](practitioner.html): A value in a phone contact  * [Person](person.html): A value in a phone contact  * [Patient](patient.html): A value in a phone contact  .',
+		description:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): A value in a phone contact  * [RelatedPerson](relatedperson.html): A value in a phone contact  * [Practitioner](practitioner.html): A value in a phone contact  * [Person](person.html): A value in a phone contact  * [Patient](patient.html): A value in a phone contact  ',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-phonetic',
-		documentation:
-			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm  * [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm  * [Person](person.html): A portion of name using some kind of phonetic matching algorithm  * [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm  .',
+		description:
+			'Multiple Resources:     * [RelatedPerson](relatedperson.html): A portion of name using some kind of phonetic matching algorithm  * [Practitioner](practitioner.html): A portion of either family or given name using some kind of phonetic matching algorithm  * [Person](person.html): A portion of name using some kind of phonetic matching algorithm  * [Patient](patient.html): A portion of either family or given name using some kind of phonetic matching algorithm  ',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/individual-telecom',
-		documentation:
-			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): The value in any kind of contact  * [RelatedPerson](relatedperson.html): The value in any kind of contact  * [Practitioner](practitioner.html): The value in any kind of contact  * [Person](person.html): The value in any kind of contact  * [Patient](patient.html): The value in any kind of telecom details of the patient  .',
+		description:
+			'Multiple Resources:     * [PractitionerRole](practitionerrole.html): The value in any kind of contact  * [RelatedPerson](relatedperson.html): The value in any kind of contact  * [Practitioner](practitioner.html): The value in any kind of contact  * [Person](person.html): The value in any kind of contact  * [Patient](patient.html): The value in any kind of telecom details of the patient  ',
 	},
 };

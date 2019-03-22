@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the paymentreconciliation query
+ */
 module.exports = {
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'PaymentReconciliation.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-created',
-		documentation: 'The creation date.',
+		description: 'The creation date',
 	},
-	DISPOSITION: {
-		name: 'disposition',
+	disposition: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'PaymentReconciliation.disposition',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-disposition',
-		documentation: 'The contents of the disposition message.',
+		description: 'The contents of the disposition message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentReconciliation.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-identifier',
-		documentation: 'The business identifier of the Explanation of Benefit.',
+		description: 'The business identifier of the Explanation of Benefit',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentReconciliation.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	OUTCOME: {
-		name: 'outcome',
+	outcome: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentReconciliation.outcome',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-outcome',
-		documentation: 'The processing outcome.',
+		description: 'The processing outcome',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentReconciliation.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-request',
-		documentation: 'The reference to the claim.',
+		description: 'The reference to the claim',
 	},
-	REQUEST_ORGANIZATION: {
-		name: 'request-organization',
+	'request-organization': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentReconciliation.requestOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-request-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	REQUEST_PROVIDER: {
-		name: 'request-provider',
+	'request-provider': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentReconciliation.requestProvider',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-request-provider',
-		documentation: 'The reference to the provider who sumbitted the claim.',
+		description: 'The reference to the provider who sumbitted the claim',
 	},
 };

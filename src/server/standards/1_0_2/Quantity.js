@@ -1,83 +1,207 @@
-const Element = require('./Element');
-const UriScalar = require('./scalars/Uri.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary Quantity Class
+ */
+module.exports = class Quantity {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Quantity extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Quantity';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_value', {
+			enumerable: true,
+			get: () => this.__data._value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._value = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'value', {
+			enumerable: true,
+			get: () => this.__data.value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.value = value;
+			},
+		});
+
+		Object.defineProperty(this, '_comparator', {
+			enumerable: true,
+			get: () => this.__data._comparator,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comparator = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/quantity-comparator
+		Object.defineProperty(this, 'comparator', {
+			enumerable: true,
+			get: () => this.__data.comparator,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comparator = value;
+			},
+		});
+
+		Object.defineProperty(this, '_unit', {
+			enumerable: true,
+			get: () => this.__data._unit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._unit = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'unit', {
+			enumerable: true,
+			get: () => this.__data.unit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.unit = value;
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Quantity',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Quantity resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Quantity';
 	}
 
-	// The value of the measured amount. The value includes an implicit precision in the presentation of the value.
-	get value() {
-		return this.__value;
-	}
-
-	set value(new_value) {
-		this.__value = new_value;
-	}
-
-	// How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is \'<\' , then the real value is < stated value.
-	get comparator() {
-		return this.__comparator;
-	}
-
-	set comparator(new_value) {
-		this.__comparator = new_value;
-	}
-
-	// A human-readable form of the unit.
-	get unit() {
-		return this.__unit;
-	}
-
-	set unit(new_value) {
-		this.__unit = new_value;
-	}
-
-	// The identification of the system that provides the coded form of the unit.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// A computer processable form of the unit in some unit representation system.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field code`);
-		}
-		this.__code = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			value: this.__value,
-			comparator: this.__comparator,
-			unit: this.__unit,
-			system: this.__system,
-			code: this.__code,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_value: this._value && this._value.toJSON(),
+			value: this.value,
+			_comparator: this._comparator && this._comparator.toJSON(),
+			comparator: this.comparator,
+			_unit: this._unit && this._unit.toJSON(),
+			unit: this.unit,
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+		};
 	}
-}
-
-module.exports = Quantity;
+};

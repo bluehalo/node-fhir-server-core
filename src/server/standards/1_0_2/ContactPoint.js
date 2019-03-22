@@ -1,78 +1,194 @@
-const Element = require('./Element');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ContactPoint Class
+ */
+module.exports = class ContactPoint {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ContactPoint extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ContactPoint';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contact-point-system
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_value', {
+			enumerable: true,
+			get: () => this.__data._value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._value = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'value', {
+			enumerable: true,
+			get: () => this.__data.value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.value = value;
+			},
+		});
+
+		Object.defineProperty(this, '_use', {
+			enumerable: true,
+			get: () => this.__data._use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._use = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contact-point-use
+		Object.defineProperty(this, 'use', {
+			enumerable: true,
+			get: () => this.__data.use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.use = value;
+			},
+		});
+
+		Object.defineProperty(this, '_rank', {
+			enumerable: true,
+			get: () => this.__data._rank,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._rank = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rank', {
+			enumerable: true,
+			get: () => this.__data.rank,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.rank = value;
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ContactPoint',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ContactPoint resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ContactPoint';
 	}
 
-	// Telecommunications form for contact point - what communications system is required to make use of the contact.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		this.__system = new_value;
-	}
-
-	// The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).
-	get value() {
-		return this.__value;
-	}
-
-	set value(new_value) {
-		this.__value = new_value;
-	}
-
-	// Identifies the purpose for the contact point.
-	get use() {
-		return this.__use;
-	}
-
-	set use(new_value) {
-		this.__use = new_value;
-	}
-
-	// Specifies a preferred order in which to use a set of contacts. Contacts are ranked with lower values coming before higher values.
-	get rank() {
-		return this.__rank;
-	}
-
-	set rank(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field rank`);
-		}
-		this.__rank = new_value;
-	}
-
-	// Time period when the contact point was/is in use.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			system: this.__system,
-			value: this.__value,
-			use: this.__use,
-			rank: this.__rank,
-			period: this.__period && this.__period.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_value: this._value && this._value.toJSON(),
+			value: this.value,
+			_use: this._use && this._use.toJSON(),
+			use: this.use,
+			_rank: this._rank && this._rank.toJSON(),
+			rank: this.rank,
+			period: this.period && this.period.toJSON(),
+		};
 	}
-}
-
-module.exports = ContactPoint;
+};

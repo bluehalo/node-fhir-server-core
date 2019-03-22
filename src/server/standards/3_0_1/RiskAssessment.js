@@ -1,233 +1,490 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary RiskAssessment Class
+ */
+module.exports = class RiskAssessment {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class RiskAssessment extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'RiskAssessment';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'parent', {
+			enumerable: true,
+			get: () => this.__data.parent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.parent = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data._occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._occurrenceDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data.occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.occurrenceDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'occurrencePeriod', {
+			enumerable: true,
+			get: () => this.__data.occurrencePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.occurrencePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'condition', {
+			enumerable: true,
+			get: () => this.__data.condition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.condition = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reasonCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.reasonCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reasonReference', {
+			enumerable: true,
+			get: () => this.__data.reasonReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reasonReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'basis', {
+			enumerable: true,
+			get: () => this.__data.basis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basis = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'prediction', {
+			enumerable: true,
+			get: () => this.__data.prediction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let RiskAssessmentPrediction = require('./riskassessmentprediction.js');
+				this.__data.prediction = Array.isArray(value)
+					? value.map(v => new RiskAssessmentPrediction(v))
+					: [new RiskAssessmentPrediction(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_mitigation', {
+			enumerable: true,
+			get: () => this.__data._mitigation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._mitigation = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'mitigation', {
+			enumerable: true,
+			get: () => this.__data.mitigation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.mitigation = value;
+			},
+		});
+
+		Object.defineProperty(this, '_comment', {
+			enumerable: true,
+			get: () => this.__data._comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comment = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'comment', {
+			enumerable: true,
+			get: () => this.__data.comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comment = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'RiskAssessment',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a RiskAssessment resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'RiskAssessment';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__RiskAssessment = new_value;
-	}
-
-	// Business identifier assigned to the risk assessment.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// A reference to the request that is fulfilled by this risk assessment.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = new Reference(new_value);
-	}
-
-	// A reference to a resource that this risk assessment is part of, such as a Procedure.
-	get parent() {
-		return this.__parent;
-	}
-
-	set parent(new_value) {
-		const Reference = require('./Reference');
-		this.__parent = new Reference(new_value);
-	}
-
-	// The status of the RiskAssessment, using the same statuses as an Observation.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The algorithm, process or mechanism used to evaluate the risk.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// The type of the risk assessment performed.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The patient or group the risk assessment applies to.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The encounter where the assessment was performed.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// The date (and possibly time) the risk assessment was performed.
-	get occurrenceDateTime() {
-		return this.__occurrenceDateTime;
-	}
-
-	set occurrenceDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
-		}
-		this.__occurrenceDateTime = new_value;
-	}
-
-	// The date (and possibly time) the risk assessment was performed.
-	get occurrencePeriod() {
-		return this.__occurrencePeriod;
-	}
-
-	set occurrencePeriod(new_value) {
-		const Period = require('./Period');
-		this.__occurrencePeriod = new Period(new_value);
-	}
-
-	// For assessments or prognosis specific to a particular condition, indicates the condition being assessed.
-	get condition() {
-		return this.__condition;
-	}
-
-	set condition(new_value) {
-		const Reference = require('./Reference');
-		this.__condition = new Reference(new_value);
-	}
-
-	// The provider or software application that performed the assessment.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const Reference = require('./Reference');
-		this.__performer = new Reference(new_value);
-	}
-
-	// The reason the risk assessment was performed.
-	get reasonCodeableConcept() {
-		return this.__reasonCodeableConcept;
-	}
-
-	set reasonCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The reason the risk assessment was performed.
-	get reasonReference() {
-		return this.__reasonReference;
-	}
-
-	set reasonReference(new_value) {
-		const Reference = require('./Reference');
-		this.__reasonReference = new Reference(new_value);
-	}
-
-	// Indicates the source data considered as part of the assessment (FamilyHistory, Observations, Procedures, Conditions, etc.).
-	get basis() {
-		return this.__basis;
-	}
-
-	set basis(new_value) {
-		const Reference = require('./Reference');
-		this.__basis = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Describes the expected outcome for the subject.
-	get prediction() {
-		return this.__prediction;
-	}
-
-	set prediction(new_value) {
-		const RiskAssessmentPrediction = require('./RiskAssessmentPrediction');
-		this.__prediction = Array.isArray(new_value)
-			? new_value.map(val => new RiskAssessmentPrediction(val))
-			: [new RiskAssessmentPrediction(new_value)];
-	}
-
-	// A description of the steps that might be taken to reduce the identified risk(s).
-	get mitigation() {
-		return this.__mitigation;
-	}
-
-	set mitigation(new_value) {
-		this.__mitigation = new_value;
-	}
-
-	// Additional comments about the risk assessment.
-	get comment() {
-		return this.__comment;
-	}
-
-	set comment(new_value) {
-		this.__comment = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			basedOn: this.__basedOn && this.__basedOn.toJSON(),
-			parent: this.__parent && this.__parent.toJSON(),
-			status: this.__status,
-			method: this.__method && this.__method.toJSON(),
-			code: this.__code && this.__code.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			occurrenceDateTime: this.__occurrenceDateTime,
-			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
-			condition: this.__condition && this.__condition.toJSON(),
-			performer: this.__performer && this.__performer.toJSON(),
-			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
-			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
-			basis: this.__basis && this.__basis.map(v => v.toJSON()),
-			prediction: this.__prediction && this.__prediction.map(v => v.toJSON()),
-			mitigation: this.__mitigation,
-			comment: this.__comment,
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			basedOn: this.basedOn && this.basedOn.toJSON(),
+			parent: this.parent && this.parent.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			method: this.method && this.method.toJSON(),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_occurrenceDateTime: this._occurrenceDateTime && this._occurrenceDateTime.toJSON(),
+			occurrenceDateTime: this.occurrenceDateTime,
+			occurrencePeriod: this.occurrencePeriod && this.occurrencePeriod.toJSON(),
+			condition: this.condition && this.condition.toJSON(),
+			performer: this.performer && this.performer.toJSON(),
+			reasonCodeableConcept: this.reasonCodeableConcept && this.reasonCodeableConcept.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			basis: this.basis && this.basis.map(v => v.toJSON()),
+			prediction: this.prediction && this.prediction.map(v => v.toJSON()),
+			_mitigation: this._mitigation && this._mitigation.toJSON(),
+			mitigation: this.mitigation,
+			_comment: this._comment && this._comment.toJSON(),
+			comment: this.comment,
+		};
 	}
-}
-
-module.exports = RiskAssessment;
+};

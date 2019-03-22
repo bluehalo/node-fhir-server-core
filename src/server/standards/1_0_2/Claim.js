@@ -1,369 +1,659 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary Claim Class
+ */
+module.exports = class Claim {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Claim extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Claim';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-type-link
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/ruleset
+		Object.defineProperty(this, 'ruleset', {
+			enumerable: true,
+			get: () => this.__data.ruleset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.ruleset = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/ruleset
+		Object.defineProperty(this, 'originalRuleset', {
+			enumerable: true,
+			get: () => this.__data.originalRuleset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.originalRuleset = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_created', {
+			enumerable: true,
+			get: () => this.__data._created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._created = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'created', {
+			enumerable: true,
+			get: () => this.__data.created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.created = value;
+			},
+		});
+
+		Object.defineProperty(this, 'target', {
+			enumerable: true,
+			get: () => this.__data.target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.target = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'provider', {
+			enumerable: true,
+			get: () => this.__data.provider,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.provider = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'organization', {
+			enumerable: true,
+			get: () => this.__data.organization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.organization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_use', {
+			enumerable: true,
+			get: () => this.__data._use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._use = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-use-link
+		Object.defineProperty(this, 'use', {
+			enumerable: true,
+			get: () => this.__data.use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.use = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/process-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.priority = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fundsreserve
+		Object.defineProperty(this, 'fundsReserve', {
+			enumerable: true,
+			get: () => this.__data.fundsReserve,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.fundsReserve = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'enterer', {
+			enumerable: true,
+			get: () => this.__data.enterer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.enterer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'facility', {
+			enumerable: true,
+			get: () => this.__data.facility,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.facility = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'prescription', {
+			enumerable: true,
+			get: () => this.__data.prescription,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.prescription = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'originalPrescription', {
+			enumerable: true,
+			get: () => this.__data.originalPrescription,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.originalPrescription = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'payee', {
+			enumerable: true,
+			get: () => this.__data.payee,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimPayee = require('./claimpayee.js');
+				this.__data.payee = new ClaimPayee(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referral', {
+			enumerable: true,
+			get: () => this.__data.referral,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.referral = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'diagnosis', {
+			enumerable: true,
+			get: () => this.__data.diagnosis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimDiagnosis = require('./claimdiagnosis.js');
+				this.__data.diagnosis = Array.isArray(value)
+					? value.map(v => new ClaimDiagnosis(v))
+					: [new ClaimDiagnosis(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fm-conditions
+		Object.defineProperty(this, 'condition', {
+			enumerable: true,
+			get: () => this.__data.condition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.condition = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'coverage', {
+			enumerable: true,
+			get: () => this.__data.coverage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimCoverage = require('./claimcoverage.js');
+				this.__data.coverage = Array.isArray(value) ? value.map(v => new ClaimCoverage(v)) : [new ClaimCoverage(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-exception
+		Object.defineProperty(this, 'exception', {
+			enumerable: true,
+			get: () => this.__data.exception,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.exception = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_school', {
+			enumerable: true,
+			get: () => this.__data._school,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._school = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'school', {
+			enumerable: true,
+			get: () => this.__data.school,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.school = value;
+			},
+		});
+
+		Object.defineProperty(this, '_accident', {
+			enumerable: true,
+			get: () => this.__data._accident,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._accident = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'accident', {
+			enumerable: true,
+			get: () => this.__data.accident,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.accident = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActIncidentCode
+		Object.defineProperty(this, 'accidentType', {
+			enumerable: true,
+			get: () => this.__data.accidentType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.accidentType = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/intervention
+		Object.defineProperty(this, 'interventionException', {
+			enumerable: true,
+			get: () => this.__data.interventionException,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.interventionException = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimItem = require('./claimitem.js');
+				this.__data.item = Array.isArray(value) ? value.map(v => new ClaimItem(v)) : [new ClaimItem(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/additionalmaterials
+		Object.defineProperty(this, 'additionalMaterials', {
+			enumerable: true,
+			get: () => this.__data.additionalMaterials,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.additionalMaterials = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'missingTeeth', {
+			enumerable: true,
+			get: () => this.__data.missingTeeth,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimMissingTeeth = require('./claimmissingteeth.js');
+				this.__data.missingTeeth = Array.isArray(value)
+					? value.map(v => new ClaimMissingTeeth(v))
+					: [new ClaimMissingTeeth(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Claim',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Claim resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Claim';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Claim = new_value;
-	}
-
-	// The category of claim this is.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// The business identifier for the instance: invoice number, claim number, pre-determination or pre-authorization number.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The version of the specification on which this instance relies.
-	get ruleset() {
-		return this.__ruleset;
-	}
-
-	set ruleset(new_value) {
-		const Coding = require('./Coding');
-		this.__ruleset = new Coding(new_value);
-	}
-
-	// The version of the specification from which the original instance was created.
-	get originalRuleset() {
-		return this.__originalRuleset;
-	}
-
-	set originalRuleset(new_value) {
-		const Coding = require('./Coding');
-		this.__originalRuleset = new Coding(new_value);
-	}
-
-	// The date when the enclosed suite of services were performed or completed.
-	get created() {
-		return this.__created;
-	}
-
-	set created(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field created`);
-		}
-		this.__created = new_value;
-	}
-
-	// Insurer Identifier, typical BIN number (6 digit).
-	get target() {
-		return this.__target;
-	}
-
-	set target(new_value) {
-		const Reference = require('./Reference');
-		this.__target = new Reference(new_value);
-	}
-
-	// The provider which is responsible for the bill, claim pre-determination, pre-authorization.
-	get provider() {
-		return this.__provider;
-	}
-
-	set provider(new_value) {
-		const Reference = require('./Reference');
-		this.__provider = new Reference(new_value);
-	}
-
-	// The organization which is responsible for the bill, claim pre-determination, pre-authorization.
-	get organization() {
-		return this.__organization;
-	}
-
-	set organization(new_value) {
-		const Reference = require('./Reference');
-		this.__organization = new Reference(new_value);
-	}
-
-	// Complete (Bill or Claim), Proposed (Pre-Authorization), Exploratory (Pre-determination).
-	get use() {
-		return this.__use;
-	}
-
-	set use(new_value) {
-		this.__use = new_value;
-	}
-
-	// Immediate (stat), best effort (normal), deferred (deferred).
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		const Coding = require('./Coding');
-		this.__priority = new Coding(new_value);
-	}
-
-	// In the case of a Pre-Determination/Pre-Authorization the provider may request that funds in the amount of the expected Benefit be reserved (\'Patient\' or \'Provider\') to pay for the Benefits determined on the subsequent claim(s). \'None\' explicitly indicates no funds reserving is requested.
-	get fundsReserve() {
-		return this.__fundsReserve;
-	}
-
-	set fundsReserve(new_value) {
-		const Coding = require('./Coding');
-		this.__fundsReserve = new Coding(new_value);
-	}
-
-	// Person who created the invoice/claim/pre-determination or pre-authorization.
-	get enterer() {
-		return this.__enterer;
-	}
-
-	set enterer(new_value) {
-		const Reference = require('./Reference');
-		this.__enterer = new Reference(new_value);
-	}
-
-	// Facility where the services were provided.
-	get facility() {
-		return this.__facility;
-	}
-
-	set facility(new_value) {
-		const Reference = require('./Reference');
-		this.__facility = new Reference(new_value);
-	}
-
-	// Prescription to support the dispensing of Pharmacy or Vision products.
-	get prescription() {
-		return this.__prescription;
-	}
-
-	set prescription(new_value) {
-		const Reference = require('./Reference');
-		this.__prescription = new Reference(new_value);
-	}
-
-	// Original prescription to support the dispensing of pharmacy services, medications or products.
-	get originalPrescription() {
-		return this.__originalPrescription;
-	}
-
-	set originalPrescription(new_value) {
-		const Reference = require('./Reference');
-		this.__originalPrescription = new Reference(new_value);
-	}
-
-	// The party to be reimbursed for the services.
-	get payee() {
-		return this.__payee;
-	}
-
-	set payee(new_value) {
-		const ClaimPayee = require('./ClaimPayee');
-		this.__payee = new ClaimPayee(new_value);
-	}
-
-	// The referral resource which lists the date, practitioner, reason and other supporting information.
-	get referral() {
-		return this.__referral;
-	}
-
-	set referral(new_value) {
-		const Reference = require('./Reference');
-		this.__referral = new Reference(new_value);
-	}
-
-	// Ordered list of patient diagnosis for which care is sought.
-	get diagnosis() {
-		return this.__diagnosis;
-	}
-
-	set diagnosis(new_value) {
-		const ClaimDiagnosis = require('./ClaimDiagnosis');
-		this.__diagnosis = Array.isArray(new_value)
-			? new_value.map(val => new ClaimDiagnosis(val))
-			: [new ClaimDiagnosis(new_value)];
-	}
-
-	// List of patient conditions for which care is sought.
-	get condition() {
-		return this.__condition;
-	}
-
-	set condition(new_value) {
-		const Coding = require('./Coding');
-		this.__condition = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Patient Resource.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// Financial instrument by which payment information for health care.
-	get coverage() {
-		return this.__coverage;
-	}
-
-	set coverage(new_value) {
-		const ClaimCoverage = require('./ClaimCoverage');
-		this.__coverage = Array.isArray(new_value)
-			? new_value.map(val => new ClaimCoverage(val))
-			: [new ClaimCoverage(new_value)];
-	}
-
-	// Factors which may influence the applicability of coverage.
-	get exception() {
-		return this.__exception;
-	}
-
-	set exception(new_value) {
-		const Coding = require('./Coding');
-		this.__exception = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Name of school for over-aged dependents.
-	get school() {
-		return this.__school;
-	}
-
-	set school(new_value) {
-		this.__school = new_value;
-	}
-
-	// Date of an accident which these services are addressing.
-	get accident() {
-		return this.__accident;
-	}
-
-	set accident(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field accident`);
-		}
-		this.__accident = new_value;
-	}
-
-	// Type of accident: work, auto, etc.
-	get accidentType() {
-		return this.__accidentType;
-	}
-
-	set accidentType(new_value) {
-		const Coding = require('./Coding');
-		this.__accidentType = new Coding(new_value);
-	}
-
-	// A list of intervention and exception codes which may influence the adjudication of the claim.
-	get interventionException() {
-		return this.__interventionException;
-	}
-
-	set interventionException(new_value) {
-		const Coding = require('./Coding');
-		this.__interventionException = Array.isArray(new_value)
-			? new_value.map(val => new Coding(val))
-			: [new Coding(new_value)];
-	}
-
-	// First tier of goods and services.
-	get item() {
-		return this.__item;
-	}
-
-	set item(new_value) {
-		const ClaimItem = require('./ClaimItem');
-		this.__item = Array.isArray(new_value) ? new_value.map(val => new ClaimItem(val)) : [new ClaimItem(new_value)];
-	}
-
-	// Code to indicate that Xrays, images, emails, documents, models or attachments are being sent in support of this submission.
-	get additionalMaterials() {
-		return this.__additionalMaterials;
-	}
-
-	set additionalMaterials(new_value) {
-		const Coding = require('./Coding');
-		this.__additionalMaterials = Array.isArray(new_value)
-			? new_value.map(val => new Coding(val))
-			: [new Coding(new_value)];
-	}
-
-	// A list of teeth which would be expected but are not found due to having been previously  extracted or for other reasons.
-	get missingTeeth() {
-		return this.__missingTeeth;
-	}
-
-	set missingTeeth(new_value) {
-		const ClaimMissingTeeth = require('./ClaimMissingTeeth');
-		this.__missingTeeth = Array.isArray(new_value)
-			? new_value.map(val => new ClaimMissingTeeth(val))
-			: [new ClaimMissingTeeth(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			type: this.__type,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			ruleset: this.__ruleset && this.__ruleset.toJSON(),
-			originalRuleset: this.__originalRuleset && this.__originalRuleset.toJSON(),
-			created: this.__created,
-			target: this.__target && this.__target.toJSON(),
-			provider: this.__provider && this.__provider.toJSON(),
-			organization: this.__organization && this.__organization.toJSON(),
-			use: this.__use,
-			priority: this.__priority && this.__priority.toJSON(),
-			fundsReserve: this.__fundsReserve && this.__fundsReserve.toJSON(),
-			enterer: this.__enterer && this.__enterer.toJSON(),
-			facility: this.__facility && this.__facility.toJSON(),
-			prescription: this.__prescription && this.__prescription.toJSON(),
-			originalPrescription: this.__originalPrescription && this.__originalPrescription.toJSON(),
-			payee: this.__payee && this.__payee.toJSON(),
-			referral: this.__referral && this.__referral.toJSON(),
-			diagnosis: this.__diagnosis && this.__diagnosis.map(v => v.toJSON()),
-			condition: this.__condition && this.__condition.map(v => v.toJSON()),
-			patient: this.__patient && this.__patient.toJSON(),
-			coverage: this.__coverage && this.__coverage.map(v => v.toJSON()),
-			exception: this.__exception && this.__exception.map(v => v.toJSON()),
-			school: this.__school,
-			accident: this.__accident,
-			accidentType: this.__accidentType && this.__accidentType.toJSON(),
-			interventionException: this.__interventionException && this.__interventionException.map(v => v.toJSON()),
-			item: this.__item && this.__item.map(v => v.toJSON()),
-			additionalMaterials: this.__additionalMaterials && this.__additionalMaterials.map(v => v.toJSON()),
-			missingTeeth: this.__missingTeeth && this.__missingTeeth.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			ruleset: this.ruleset && this.ruleset.toJSON(),
+			originalRuleset: this.originalRuleset && this.originalRuleset.toJSON(),
+			_created: this._created && this._created.toJSON(),
+			created: this.created,
+			target: this.target && this.target.toJSON(),
+			provider: this.provider && this.provider.toJSON(),
+			organization: this.organization && this.organization.toJSON(),
+			_use: this._use && this._use.toJSON(),
+			use: this.use,
+			priority: this.priority && this.priority.toJSON(),
+			fundsReserve: this.fundsReserve && this.fundsReserve.toJSON(),
+			enterer: this.enterer && this.enterer.toJSON(),
+			facility: this.facility && this.facility.toJSON(),
+			prescription: this.prescription && this.prescription.toJSON(),
+			originalPrescription: this.originalPrescription && this.originalPrescription.toJSON(),
+			payee: this.payee && this.payee.toJSON(),
+			referral: this.referral && this.referral.toJSON(),
+			diagnosis: this.diagnosis && this.diagnosis.map(v => v.toJSON()),
+			condition: this.condition && this.condition.map(v => v.toJSON()),
+			patient: this.patient && this.patient.toJSON(),
+			coverage: this.coverage && this.coverage.map(v => v.toJSON()),
+			exception: this.exception && this.exception.map(v => v.toJSON()),
+			_school: this._school && this._school.toJSON(),
+			school: this.school,
+			_accident: this._accident && this._accident.toJSON(),
+			accident: this.accident,
+			accidentType: this.accidentType && this.accidentType.toJSON(),
+			interventionException: this.interventionException && this.interventionException.map(v => v.toJSON()),
+			item: this.item && this.item.map(v => v.toJSON()),
+			additionalMaterials: this.additionalMaterials && this.additionalMaterials.map(v => v.toJSON()),
+			missingTeeth: this.missingTeeth && this.missingTeeth.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Claim;
+};

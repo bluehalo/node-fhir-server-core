@@ -1,8 +1,14 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the eligibilityrequest query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EligibilityRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-identifier',
-		documentation: 'The business identifier of the Eligibility.',
+		description: 'The business identifier of the Eligibility',
 	},
 };

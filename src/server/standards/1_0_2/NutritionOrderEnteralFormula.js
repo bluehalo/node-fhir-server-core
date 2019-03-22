@@ -1,119 +1,255 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary NutritionOrderEnteralFormula Class
+ */
+module.exports = class NutritionOrderEnteralFormula {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class NutritionOrderEnteralFormula extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'NutritionOrderEnteralFormula';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/entformula-type
+		Object.defineProperty(this, 'baseFormulaType', {
+			enumerable: true,
+			get: () => this.__data.baseFormulaType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.baseFormulaType = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_baseFormulaProductName', {
+			enumerable: true,
+			get: () => this.__data._baseFormulaProductName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._baseFormulaProductName = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'baseFormulaProductName', {
+			enumerable: true,
+			get: () => this.__data.baseFormulaProductName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.baseFormulaProductName = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/entformula-additive
+		Object.defineProperty(this, 'additiveType', {
+			enumerable: true,
+			get: () => this.__data.additiveType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.additiveType = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_additiveProductName', {
+			enumerable: true,
+			get: () => this.__data._additiveProductName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._additiveProductName = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'additiveProductName', {
+			enumerable: true,
+			get: () => this.__data.additiveProductName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.additiveProductName = value;
+			},
+		});
+
+		Object.defineProperty(this, 'caloricDensity', {
+			enumerable: true,
+			get: () => this.__data.caloricDensity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.caloricDensity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/enteral-route
+		Object.defineProperty(this, 'routeofAdministration', {
+			enumerable: true,
+			get: () => this.__data.routeofAdministration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.routeofAdministration = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'administration', {
+			enumerable: true,
+			get: () => this.__data.administration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let NutritionOrderEnteralFormulaAdministration = require('./nutritionorderenteralformulaadministration.js');
+				this.__data.administration = Array.isArray(value)
+					? value.map(v => new NutritionOrderEnteralFormulaAdministration(v))
+					: [new NutritionOrderEnteralFormulaAdministration(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'maxVolumeToDeliver', {
+			enumerable: true,
+			get: () => this.__data.maxVolumeToDeliver,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.maxVolumeToDeliver = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_administrationInstruction', {
+			enumerable: true,
+			get: () => this.__data._administrationInstruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._administrationInstruction = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'administrationInstruction', {
+			enumerable: true,
+			get: () => this.__data.administrationInstruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.administrationInstruction = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'NutritionOrderEnteralFormula',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a NutritionOrderEnteralFormula resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'NutritionOrderEnteralFormula';
 	}
 
-	// The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula.
-	get baseFormulaType() {
-		return this.__baseFormulaType;
-	}
-
-	set baseFormulaType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__baseFormulaType = new CodeableConcept(new_value);
-	}
-
-	// The product or brand name of the enteral or infant formula product such as \'ACME Adult Standard Formula\'.
-	get baseFormulaProductName() {
-		return this.__baseFormulaProductName;
-	}
-
-	set baseFormulaProductName(new_value) {
-		this.__baseFormulaProductName = new_value;
-	}
-
-	// Indicates the type of modular component such as protein, carbohydrate, fat or fiber to be provided in addition to or mixed with the base formula.
-	get additiveType() {
-		return this.__additiveType;
-	}
-
-	set additiveType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__additiveType = new CodeableConcept(new_value);
-	}
-
-	// The product or brand name of the type of modular component to be added to the formula.
-	get additiveProductName() {
-		return this.__additiveProductName;
-	}
-
-	set additiveProductName(new_value) {
-		this.__additiveProductName = new_value;
-	}
-
-	// The amount of energy (Calories) that the formula should provide per specified volume, typically per mL or fluid oz.  For example, an infant may require a formula that provides 24 Calories per fluid ounce or an adult may require an enteral formula that provides 1.5 Calorie/mL.
-	get caloricDensity() {
-		return this.__caloricDensity;
-	}
-
-	set caloricDensity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__caloricDensity = new Quantity(new_value);
-	}
-
-	// The route or physiological path of administration into the patient\'s gastrointestinal  tract for purposes of providing the formula feeding, e.g. nasogastric tube.
-	get routeofAdministration() {
-		return this.__routeofAdministration;
-	}
-
-	set routeofAdministration(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__routeofAdministration = new CodeableConcept(new_value);
-	}
-
-	// Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours.
-	get administration() {
-		return this.__administration;
-	}
-
-	set administration(new_value) {
-		const NutritionOrderEnteralFormulaAdministration = require('./NutritionOrderEnteralFormulaAdministration');
-		this.__administration = Array.isArray(new_value)
-			? new_value.map(val => new NutritionOrderEnteralFormulaAdministration(val))
-			: [new NutritionOrderEnteralFormulaAdministration(new_value)];
-	}
-
-	// The maximum total quantity of formula that may be administered to a subject over the period of time, e.g. 1440 mL over 24 hours.
-	get maxVolumeToDeliver() {
-		return this.__maxVolumeToDeliver;
-	}
-
-	set maxVolumeToDeliver(new_value) {
-		const Quantity = require('./Quantity');
-		this.__maxVolumeToDeliver = new Quantity(new_value);
-	}
-
-	// Free text formula administration, feeding instructions or additional instructions or information.
-	get administrationInstruction() {
-		return this.__administrationInstruction;
-	}
-
-	set administrationInstruction(new_value) {
-		this.__administrationInstruction = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			baseFormulaType: this.__baseFormulaType && this.__baseFormulaType.toJSON(),
-			baseFormulaProductName: this.__baseFormulaProductName,
-			additiveType: this.__additiveType && this.__additiveType.toJSON(),
-			additiveProductName: this.__additiveProductName,
-			caloricDensity: this.__caloricDensity && this.__caloricDensity.toJSON(),
-			routeofAdministration: this.__routeofAdministration && this.__routeofAdministration.toJSON(),
-			administration: this.__administration && this.__administration.map(v => v.toJSON()),
-			maxVolumeToDeliver: this.__maxVolumeToDeliver && this.__maxVolumeToDeliver.toJSON(),
-			administrationInstruction: this.__administrationInstruction,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			baseFormulaType: this.baseFormulaType && this.baseFormulaType.toJSON(),
+			_baseFormulaProductName: this._baseFormulaProductName && this._baseFormulaProductName.toJSON(),
+			baseFormulaProductName: this.baseFormulaProductName,
+			additiveType: this.additiveType && this.additiveType.toJSON(),
+			_additiveProductName: this._additiveProductName && this._additiveProductName.toJSON(),
+			additiveProductName: this.additiveProductName,
+			caloricDensity: this.caloricDensity && this.caloricDensity.toJSON(),
+			routeofAdministration: this.routeofAdministration && this.routeofAdministration.toJSON(),
+			administration: this.administration && this.administration.map(v => v.toJSON()),
+			maxVolumeToDeliver: this.maxVolumeToDeliver && this.maxVolumeToDeliver.toJSON(),
+			_administrationInstruction: this._administrationInstruction && this._administrationInstruction.toJSON(),
+			administrationInstruction: this.administrationInstruction,
+		};
 	}
-}
-
-module.exports = NutritionOrderEnteralFormula;
+};

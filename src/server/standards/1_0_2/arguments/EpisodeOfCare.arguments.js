@@ -1,63 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the episodeofcare query
+ */
 module.exports = {
-	CARE_MANAGER: {
-		name: 'care-manager',
+	'care-manager': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.careManager',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-care-manager',
-		documentation: 'Care manager/care co-ordinator for the patient.',
+		description: 'Care manager/care co-ordinator for the patient',
 	},
-	CONDITION: {
-		name: 'condition',
+	condition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.condition',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-condition',
-		documentation: 'Conditions/problems/diagnoses this episode of care is for.',
+		description: 'Conditions/problems/diagnoses this episode of care is for',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'EpisodeOfCare.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-date',
-		documentation: "The provided date search value falls within the episode of care's period.",
+		description: "The provided date search value falls within the episode of care's period",
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EpisodeOfCare.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-identifier',
-		documentation: 'Identifier(s) for the EpisodeOfCare.',
+		description: 'Identifier(s) for the EpisodeOfCare',
 	},
-	INCOMINGREFERRAL: {
-		name: 'incomingreferral',
+	incomingreferral: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.referralRequest',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-incomingreferral',
-		documentation: 'Incoming Referral Request.',
+		description: 'Incoming Referral Request',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-organization',
-		documentation: 'The organization that has assumed the specific responsibilities of this EpisodeOfCare.',
+		description: 'The organization that has assumed the specific responsibilities of this EpisodeOfCare',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-patient',
-		documentation: 'Patient for this episode of care.',
+		description: 'Patient for this episode of care',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EpisodeOfCare.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-status',
-		documentation:
-			'The current status of the Episode of Care as provided (does not check the status history collection).',
+		description: 'The current status of the Episode of Care as provided (does not check the status history collection)',
 	},
-	TEAM_MEMBER: {
-		name: 'team-member',
+	'team-member': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EpisodeOfCare.careTeam.member',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-team-member',
-		documentation: 'A Practitioner or Organization allocated to the care team for this EpisodeOfCare.',
+		description: 'A Practitioner or Organization allocated to the care team for this EpisodeOfCare',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EpisodeOfCare.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/EpisodeOfCare-type',
-		documentation: 'Type/class  - e.g. specialist referral, disease management.',
+		description: 'Type/class  - e.g. specialist referral, disease management',
 	},
 };

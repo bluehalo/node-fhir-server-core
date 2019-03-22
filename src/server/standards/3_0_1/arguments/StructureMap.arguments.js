@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the structuremap query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'StructureMap.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-date',
-		documentation: 'The structure map publication date.',
+		description: 'The structure map publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureMap.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-description',
-		documentation: 'The description of the structure map.',
+		description: 'The description of the structure map',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureMap.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-identifier',
-		documentation: 'External identifier for the structure map.',
+		description: 'External identifier for the structure map',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureMap.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-jurisdiction',
-		documentation: 'Intended jurisdiction for the structure map.',
+		description: 'Intended jurisdiction for the structure map',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureMap.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-name',
-		documentation: 'Computationally friendly name of the structure map.',
+		description: 'Computationally friendly name of the structure map',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureMap.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-publisher',
-		documentation: 'Name of the publisher of the structure map.',
+		description: 'Name of the publisher of the structure map',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureMap.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-status',
-		documentation: 'The current status of the structure map.',
+		description: 'The current status of the structure map',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureMap.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-title',
-		documentation: 'The human-friendly name of the structure map.',
+		description: 'The human-friendly name of the structure map',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'StructureMap.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-url',
-		documentation: 'The uri that identifies the structure map.',
+		description: 'The uri that identifies the structure map',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureMap.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureMap-version',
-		documentation: 'The business version of the structure map.',
+		description: 'The business version of the structure map',
 	},
 };

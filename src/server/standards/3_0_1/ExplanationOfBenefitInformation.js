@@ -1,140 +1,267 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ExplanationOfBenefitInformation Class
+ */
+module.exports = class ExplanationOfBenefitInformation {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ExplanationOfBenefitInformation extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ExplanationOfBenefitInformation';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-informationcategory
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-exception
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_timingDate', {
+			enumerable: true,
+			get: () => this.__data._timingDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._timingDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'timingDate', {
+			enumerable: true,
+			get: () => this.__data.timingDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.timingDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'timingPeriod', {
+			enumerable: true,
+			get: () => this.__data.timingPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.timingPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_valueString', {
+			enumerable: true,
+			get: () => this.__data._valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueString', {
+			enumerable: true,
+			get: () => this.__data.valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueString = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valueQuantity', {
+			enumerable: true,
+			get: () => this.__data.valueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.valueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueAttachment', {
+			enumerable: true,
+			get: () => this.__data.valueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.valueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueReference', {
+			enumerable: true,
+			get: () => this.__data.valueReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.valueReference = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/missing-tooth-reason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.reason = new Coding(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ExplanationOfBenefitInformation',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ExplanationOfBenefitInformation resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ExplanationOfBenefitInformation';
 	}
 
-	// Sequence of the information element which serves to provide a link.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The general class of the information supplied: information; exception; accident, employment; onset, etc.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = new CodeableConcept(new_value);
-	}
-
-	// System and code pertaining to the specific information regarding special conditions relating to the setting, treatment or patient  for which care is sought which may influence the adjudication.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The date when or period to which this information refers.
-	get timingDate() {
-		return this.__timingDate;
-	}
-
-	set timingDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field timingDate`);
-		}
-		this.__timingDate = new_value;
-	}
-
-	// The date when or period to which this information refers.
-	get timingPeriod() {
-		return this.__timingPeriod;
-	}
-
-	set timingPeriod(new_value) {
-		const Period = require('./Period');
-		this.__timingPeriod = new Period(new_value);
-	}
-
-	// Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data.
-	get valueString() {
-		return this.__valueString;
-	}
-
-	set valueString(new_value) {
-		this.__valueString = new_value;
-	}
-
-	// Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data.
-	get valueQuantity() {
-		return this.__valueQuantity;
-	}
-
-	set valueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__valueQuantity = new Quantity(new_value);
-	}
-
-	// Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data.
-	get valueAttachment() {
-		return this.__valueAttachment;
-	}
-
-	set valueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__valueAttachment = new Attachment(new_value);
-	}
-
-	// Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data.
-	get valueReference() {
-		return this.__valueReference;
-	}
-
-	set valueReference(new_value) {
-		const Reference = require('./Reference');
-		this.__valueReference = new Reference(new_value);
-	}
-
-	// For example, provides the reason for: the additional stay, or missing tooth or any other situation where a reason code is required in addition to the content.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const Coding = require('./Coding');
-		this.__reason = new Coding(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			category: this.__category && this.__category.toJSON(),
-			code: this.__code && this.__code.toJSON(),
-			timingDate: this.__timingDate,
-			timingPeriod: this.__timingPeriod && this.__timingPeriod.toJSON(),
-			valueString: this.__valueString,
-			valueQuantity: this.__valueQuantity && this.__valueQuantity.toJSON(),
-			valueAttachment: this.__valueAttachment && this.__valueAttachment.toJSON(),
-			valueReference: this.__valueReference && this.__valueReference.toJSON(),
-			reason: this.__reason && this.__reason.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			category: this.category && this.category.toJSON(),
+			code: this.code && this.code.toJSON(),
+			_timingDate: this._timingDate && this._timingDate.toJSON(),
+			timingDate: this.timingDate,
+			timingPeriod: this.timingPeriod && this.timingPeriod.toJSON(),
+			_valueString: this._valueString && this._valueString.toJSON(),
+			valueString: this.valueString,
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			valueReference: this.valueReference && this.valueReference.toJSON(),
+			reason: this.reason && this.reason.toJSON(),
+		};
 	}
-}
-
-module.exports = ExplanationOfBenefitInformation;
+};

@@ -1,63 +1,78 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medication query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-code',
-		documentation:
-			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  .',
+		description:
+			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  ',
 	},
-	CONTAINER: {
-		name: 'container',
+	container: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.package.container',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-container',
-		documentation: 'E.g. box, vial, blister-pack.',
+		description: 'E.g. box, vial, blister-pack',
 	},
-	FORM: {
-		name: 'form',
+	form: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.form',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-form',
-		documentation: 'powder | tablets | capsule +.',
+		description: 'powder | tablets | capsule +',
 	},
-	INGREDIENT: {
-		name: 'ingredient',
+	ingredient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.ingredient.itemReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-ingredient',
-		documentation: 'The product contained.',
+		description: 'The product contained',
 	},
-	INGREDIENT_CODE: {
-		name: 'ingredient-code',
+	'ingredient-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.ingredient.itemCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-ingredient-code',
-		documentation: 'The product contained.',
+		description: 'The product contained',
 	},
-	MANUFACTURER: {
-		name: 'manufacturer',
+	manufacturer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.manufacturer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-manufacturer',
-		documentation: 'Manufacturer of the item.',
+		description: 'Manufacturer of the item',
 	},
-	OVER_THE_COUNTER: {
-		name: 'over-the-counter',
+	'over-the-counter': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.isOverTheCounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-over-the-counter',
-		documentation: 'True if medication does not require a prescription.',
+		description: 'True if medication does not require a prescription',
 	},
-	PACKAGE_ITEM: {
-		name: 'package-item',
+	'package-item': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.package.content.itemReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-package-item',
-		documentation: 'The item in the package.',
+		description: 'The item in the package',
 	},
-	PACKAGE_ITEM_CODE: {
-		name: 'package-item-code',
+	'package-item-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.package.content.itemCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-package-item-code',
-		documentation: 'The item in the package.',
+		description: 'The item in the package',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-status',
-		documentation: 'active | inactive | entered-in-error.',
+		description: 'active | inactive | entered-in-error',
 	},
 };

@@ -1,53 +1,143 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary AuditEventSource Class
+ */
+module.exports = class AuditEventSource {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AuditEventSource extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AuditEventSource';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_site', {
+			enumerable: true,
+			get: () => this.__data._site,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._site = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'site', {
+			enumerable: true,
+			get: () => this.__data.site,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.site = value;
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-source-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AuditEventSource',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AuditEventSource resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AuditEventSource';
 	}
 
-	// Logical source location within the healthcare enterprise network.  For example, a hospital or other provider location within a multi-entity provider group.
-	get site() {
-		return this.__site;
-	}
-
-	set site(new_value) {
-		this.__site = new_value;
-	}
-
-	// Identifier of the source where the event was detected.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// Code specifying the type of source where event originated.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			site: this.__site,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			type: this.__type && this.__type.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_site: this._site && this._site.toJSON(),
+			site: this.site,
+			identifier: this.identifier && this.identifier.toJSON(),
+			type: this.type && this.type.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AuditEventSource;
+};

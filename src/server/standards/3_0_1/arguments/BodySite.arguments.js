@@ -1,20 +1,28 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the bodysite query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'BodySite.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/BodySite-code',
-		documentation: 'Named anatomical location.',
+		description: 'Named anatomical location',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'BodySite.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/BodySite-identifier',
-		documentation: 'Identifier for this instance of the anatomical location.',
+		description: 'Identifier for this instance of the anatomical location',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'BodySite.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/BodySite-patient',
-		documentation: 'Patient to whom bodysite belongs.',
+		description: 'Patient to whom bodysite belongs',
 	},
 };

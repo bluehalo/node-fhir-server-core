@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the measure query
+ */
 module.exports = {
-	COMPOSED_OF: {
-		name: 'composed-of',
+	'composed-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Measure.relatedArtifact[type/@value='composed-of'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-composed-of',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Measure.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-date',
-		documentation: 'The measure publication date.',
+		description: 'The measure publication date',
 	},
-	DEPENDS_ON: {
-		name: 'depends-on',
+	'depends-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Measure.relatedArtifact[type/@value='depends-on'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-depends-on',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DERIVED_FROM: {
-		name: 'derived-from',
+	'derived-from': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Measure.relatedArtifact[type/@value='derived-from'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-derived-from',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Measure.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-description',
-		documentation: 'The description of the measure.',
+		description: 'The description of the measure',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Measure.effectivePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-effective',
-		documentation: 'The time during which the measure is intended to be in use.',
+		description: 'The time during which the measure is intended to be in use',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Measure.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-identifier',
-		documentation: 'External identifier for the measure.',
+		description: 'External identifier for the measure',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Measure.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-jurisdiction',
-		documentation: 'Intended jurisdiction for the measure.',
+		description: 'Intended jurisdiction for the measure',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Measure.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-name',
-		documentation: 'Computationally friendly name of the measure.',
+		description: 'Computationally friendly name of the measure',
 	},
-	PREDECESSOR: {
-		name: 'predecessor',
+	predecessor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Measure.relatedArtifact[type/@value='predecessor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-predecessor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Measure.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-publisher',
-		documentation: 'Name of the publisher of the measure.',
+		description: 'Name of the publisher of the measure',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Measure.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-status',
-		documentation: 'The current status of the measure.',
+		description: 'The current status of the measure',
 	},
-	SUCCESSOR: {
-		name: 'successor',
+	successor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Measure.relatedArtifact[type/@value='successor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-successor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Measure.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-title',
-		documentation: 'The human-friendly name of the measure.',
+		description: 'The human-friendly name of the measure',
 	},
-	TOPIC: {
-		name: 'topic',
+	topic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Measure.topic',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-topic',
-		documentation: 'Topics associated with the module.',
+		description: 'Topics associated with the module',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Measure.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-url',
-		documentation: 'The uri that identifies the measure.',
+		description: 'The uri that identifies the measure',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Measure.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Measure-version',
-		documentation: 'The business version of the measure.',
+		description: 'The business version of the measure',
 	},
 };

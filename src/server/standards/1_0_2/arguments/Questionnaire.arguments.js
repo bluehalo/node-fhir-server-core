@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the questionnaire query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.group.concept',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-code',
-		documentation: 'A code that corresponds to the questionnaire or one of its groups.',
+		description: 'A code that corresponds to the questionnaire or one of its groups',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Questionnaire.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-date',
-		documentation: 'When the questionnaire was last changed.',
+		description: 'When the questionnaire was last changed',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-identifier',
-		documentation: 'An identifier for the questionnaire.',
+		description: 'An identifier for the questionnaire',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-publisher',
-		documentation: 'The author of the questionnaire.',
+		description: 'The author of the questionnaire',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-status',
-		documentation: 'The status of the questionnaire.',
+		description: 'The status of the questionnaire',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.group.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-title',
-		documentation: 'All or part of the name of the questionnaire (title for the root group of the questionnaire).',
+		description: 'All or part of the name of the questionnaire (title for the root group of the questionnaire)',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-version',
-		documentation: 'The business version of the questionnaire.',
+		description: 'The business version of the questionnaire',
 	},
 };

@@ -1,26 +1,35 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the enrollmentrequest query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EnrollmentRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-identifier',
-		documentation: 'The business identifier of the Enrollment.',
+		description: 'The business identifier of the Enrollment',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EnrollmentRequest.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EnrollmentRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-patient',
-		documentation: 'The party to be enrolled.',
+		description: 'The party to be enrolled',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EnrollmentRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentRequest-subject',
-		documentation: 'The party to be enrolled.',
+		description: 'The party to be enrolled',
 	},
 };

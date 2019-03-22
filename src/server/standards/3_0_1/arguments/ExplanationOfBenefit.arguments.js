@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the explanationofbenefit query
+ */
 module.exports = {
-	CARE_TEAM: {
-		name: 'care-team',
+	'care-team': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.careTeam.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-care-team',
-		documentation: 'Member of the CareTeam.',
+		description: 'Member of the CareTeam',
 	},
-	CLAIM: {
-		name: 'claim',
+	claim: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.claim',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-claim',
-		documentation: 'The reference to the claim.',
+		description: 'The reference to the claim',
 	},
-	COVERAGE: {
-		name: 'coverage',
+	coverage: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.insurance.coverage',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-coverage',
-		documentation: 'The plan under which the claim was adjudicated.',
+		description: 'The plan under which the claim was adjudicated',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ExplanationOfBenefit.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-created',
-		documentation: 'The creation date for the EOB.',
+		description: 'The creation date for the EOB',
 	},
-	DISPOSITION: {
-		name: 'disposition',
+	disposition: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ExplanationOfBenefit.disposition',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-disposition',
-		documentation: 'The contents of the disposition message.',
+		description: 'The contents of the disposition message',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.item.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-encounter',
-		documentation: 'Encounters associated with a billed line item.',
+		description: 'Encounters associated with a billed line item',
 	},
-	ENTERER: {
-		name: 'enterer',
+	enterer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.enterer',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-enterer',
-		documentation: 'The party responsible for the entry of the Claim.',
+		description: 'The party responsible for the entry of the Claim',
 	},
-	FACILITY: {
-		name: 'facility',
+	facility: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.facility',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-facility',
-		documentation: 'Facility responsible for the goods and services.',
+		description: 'Facility responsible for the goods and services',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ExplanationOfBenefit.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-identifier',
-		documentation: 'The business identifier of the Explanation of Benefit.',
+		description: 'The business identifier of the Explanation of Benefit',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-organization',
-		documentation: 'The reference to the providing organization.',
+		description: 'The reference to the providing organization',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-patient',
-		documentation: 'The reference to the patient.',
+		description: 'The reference to the patient',
 	},
-	PAYEE: {
-		name: 'payee',
+	payee: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.payee.party',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-payee',
-		documentation: 'The party receiving any payment for the Claim.',
+		description: 'The party receiving any payment for the Claim',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ExplanationOfBenefit.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-provider',
-		documentation: 'The reference to the provider.',
+		description: 'The reference to the provider',
 	},
 };

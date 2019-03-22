@@ -1,80 +1,184 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary SpecimenProcessing Class
+ */
+module.exports = class SpecimenProcessing {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SpecimenProcessing extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SpecimenProcessing';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/specimen-processing-procedure
+		Object.defineProperty(this, 'procedure', {
+			enumerable: true,
+			get: () => this.__data.procedure,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.procedure = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'additive', {
+			enumerable: true,
+			get: () => this.__data.additive,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.additive = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_timeDateTime', {
+			enumerable: true,
+			get: () => this.__data._timeDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._timeDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'timeDateTime', {
+			enumerable: true,
+			get: () => this.__data.timeDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.timeDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'timePeriod', {
+			enumerable: true,
+			get: () => this.__data.timePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.timePeriod = new Period(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SpecimenProcessing',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SpecimenProcessing resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SpecimenProcessing';
 	}
 
-	// Textual description of procedure.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// A coded value specifying the procedure used to process the specimen.
-	get procedure() {
-		return this.__procedure;
-	}
-
-	set procedure(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__procedure = new CodeableConcept(new_value);
-	}
-
-	// Material used in the processing step.
-	get additive() {
-		return this.__additive;
-	}
-
-	set additive(new_value) {
-		const Reference = require('./Reference');
-		this.__additive = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A record of the time or period when the specimen processing occurred.  For example the time of sample fixation or the period of time the sample was in formalin.
-	get timeDateTime() {
-		return this.__timeDateTime;
-	}
-
-	set timeDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field timeDateTime`);
-		}
-		this.__timeDateTime = new_value;
-	}
-
-	// A record of the time or period when the specimen processing occurred.  For example the time of sample fixation or the period of time the sample was in formalin.
-	get timePeriod() {
-		return this.__timePeriod;
-	}
-
-	set timePeriod(new_value) {
-		const Period = require('./Period');
-		this.__timePeriod = new Period(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			description: this.__description,
-			procedure: this.__procedure && this.__procedure.toJSON(),
-			additive: this.__additive && this.__additive.map(v => v.toJSON()),
-			timeDateTime: this.__timeDateTime,
-			timePeriod: this.__timePeriod && this.__timePeriod.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			procedure: this.procedure && this.procedure.toJSON(),
+			additive: this.additive && this.additive.map(v => v.toJSON()),
+			_timeDateTime: this._timeDateTime && this._timeDateTime.toJSON(),
+			timeDateTime: this.timeDateTime,
+			timePeriod: this.timePeriod && this.timePeriod.toJSON(),
+		};
 	}
-}
-
-module.exports = SpecimenProcessing;
+};

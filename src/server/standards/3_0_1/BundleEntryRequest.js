@@ -1,93 +1,250 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
+/**
+ * @name exports
+ * @summary BundleEntryRequest Class
+ */
+module.exports = class BundleEntryRequest {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class BundleEntryRequest extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'BundleEntryRequest';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_method', {
+			enumerable: true,
+			get: () => this.__data._method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._method = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/http-verb
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.method = value;
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, '_ifNoneMatch', {
+			enumerable: true,
+			get: () => this.__data._ifNoneMatch,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._ifNoneMatch = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ifNoneMatch', {
+			enumerable: true,
+			get: () => this.__data.ifNoneMatch,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.ifNoneMatch = value;
+			},
+		});
+
+		Object.defineProperty(this, '_ifModifiedSince', {
+			enumerable: true,
+			get: () => this.__data._ifModifiedSince,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._ifModifiedSince = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ifModifiedSince', {
+			enumerable: true,
+			get: () => this.__data.ifModifiedSince,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.ifModifiedSince = value;
+			},
+		});
+
+		Object.defineProperty(this, '_ifMatch', {
+			enumerable: true,
+			get: () => this.__data._ifMatch,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._ifMatch = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ifMatch', {
+			enumerable: true,
+			get: () => this.__data.ifMatch,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.ifMatch = value;
+			},
+		});
+
+		Object.defineProperty(this, '_ifNoneExist', {
+			enumerable: true,
+			get: () => this.__data._ifNoneExist,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._ifNoneExist = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ifNoneExist', {
+			enumerable: true,
+			get: () => this.__data.ifNoneExist,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.ifNoneExist = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'BundleEntryRequest',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a BundleEntryRequest resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'BundleEntryRequest';
 	}
 
-	// The HTTP verb for this entry in either a change history, or a transaction/ transaction response.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		this.__method = new_value;
-	}
-
-	// The URL for this entry, relative to the root (the address to which the request is posted).
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// If the ETag values match, return a 304 Not Modified status. See the API documentation for [\'Conditional Read\'](http.html#cread).
-	get ifNoneMatch() {
-		return this.__ifNoneMatch;
-	}
-
-	set ifNoneMatch(new_value) {
-		this.__ifNoneMatch = new_value;
-	}
-
-	// Only perform the operation if the last updated date matches. See the API documentation for [\'Conditional Read\'](http.html#cread).
-	get ifModifiedSince() {
-		return this.__ifModifiedSince;
-	}
-
-	set ifModifiedSince(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field ifModifiedSince`);
-		}
-		this.__ifModifiedSince = new_value;
-	}
-
-	// Only perform the operation if the Etag value matches. For more information, see the API section [\'Managing Resource Contention\'](http.html#concurrency).
-	get ifMatch() {
-		return this.__ifMatch;
-	}
-
-	set ifMatch(new_value) {
-		this.__ifMatch = new_value;
-	}
-
-	// Instruct the server not to perform the create if a specified resource already exists. For further information, see the API documentation for [\'Conditional Create\'](http.html#ccreate). This is just the query portion of the URL - what follows the \'?\' (not including the \'?\').
-	get ifNoneExist() {
-		return this.__ifNoneExist;
-	}
-
-	set ifNoneExist(new_value) {
-		this.__ifNoneExist = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			method: this.__method,
-			url: this.__url,
-			ifNoneMatch: this.__ifNoneMatch,
-			ifModifiedSince: this.__ifModifiedSince,
-			ifMatch: this.__ifMatch,
-			ifNoneExist: this.__ifNoneExist,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_method: this._method && this._method.toJSON(),
+			method: this.method,
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			_ifNoneMatch: this._ifNoneMatch && this._ifNoneMatch.toJSON(),
+			ifNoneMatch: this.ifNoneMatch,
+			_ifModifiedSince: this._ifModifiedSince && this._ifModifiedSince.toJSON(),
+			ifModifiedSince: this.ifModifiedSince,
+			_ifMatch: this._ifMatch && this._ifMatch.toJSON(),
+			ifMatch: this.ifMatch,
+			_ifNoneExist: this._ifNoneExist && this._ifNoneExist.toJSON(),
+			ifNoneExist: this.ifNoneExist,
+		};
 	}
-}
-
-module.exports = BundleEntryRequest;
+};

@@ -1,39 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the goal query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Goal.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-category',
-		documentation: 'E.g. Treatment, dietary, behavioral, etc.',
+		description: 'E.g. Treatment, dietary, behavioral, etc.',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Goal.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-identifier',
-		documentation: 'External Ids for this goal.',
+		description: 'External Ids for this goal',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Goal.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-patient',
-		documentation: 'Who this goal is intended for.',
+		description: 'Who this goal is intended for',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Goal.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-status',
-		documentation:
-			'proposed | planned | accepted | rejected | in-progress | achieved | sustaining | on-hold | cancelled.',
+		description: 'proposed | planned | accepted | rejected | in-progress | achieved | sustaining | on-hold | cancelled',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Goal.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-subject',
-		documentation: 'Who this goal is intended for.',
+		description: 'Who this goal is intended for',
 	},
-	TARGETDATE: {
-		name: 'targetdate',
+	targetdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Goal.targetDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/Goal-targetdate',
-		documentation: 'Reach goal on or before.',
+		description: 'Reach goal on or before',
 	},
 };

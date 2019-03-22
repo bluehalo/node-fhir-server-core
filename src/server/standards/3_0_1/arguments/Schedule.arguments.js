@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the schedule query
+ */
 module.exports = {
-	ACTIVE: {
-		name: 'active',
+	active: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Schedule.active',
 		definition: 'http://hl7.org/fhir/SearchParameter/Schedule-active',
-		documentation: 'Is the schedule in active use.',
+		description: 'Is the schedule in active use',
 	},
-	ACTOR: {
-		name: 'actor',
+	actor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Schedule.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Schedule-actor',
-		documentation: 'The individual(HealthcareService, Practitioner, Location, ...) to find a Schedule for.',
+		description: 'The individual(HealthcareService, Practitioner, Location, ...) to find a Schedule for',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Schedule.planningHorizon',
 		definition: 'http://hl7.org/fhir/SearchParameter/Schedule-date',
-		documentation: 'Search for Schedule resources that have a period that contains this date specified.',
+		description: 'Search for Schedule resources that have a period that contains this date specified',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Schedule.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Schedule-identifier',
-		documentation: 'A Schedule Identifier.',
+		description: 'A Schedule Identifier',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Schedule.serviceType',
 		definition: 'http://hl7.org/fhir/SearchParameter/Schedule-type',
-		documentation: 'The type of appointments that can be booked into associated slot(s).',
+		description: 'The type of appointments that can be booked into associated slot(s)',
 	},
 };

@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the servicedefinition query
+ */
 module.exports = {
-	COMPOSED_OF: {
-		name: 'composed-of',
+	'composed-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "ServiceDefinition.relatedArtifact[type/@value='composed-of'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-composed-of',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ServiceDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-date',
-		documentation: 'The service definition publication date.',
+		description: 'The service definition publication date',
 	},
-	DEPENDS_ON: {
-		name: 'depends-on',
+	'depends-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "ServiceDefinition.relatedArtifact[type/@value='depends-on'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-depends-on',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DERIVED_FROM: {
-		name: 'derived-from',
+	'derived-from': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "ServiceDefinition.relatedArtifact[type/@value='derived-from'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-derived-from',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ServiceDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-description',
-		documentation: 'The description of the service definition.',
+		description: 'The description of the service definition',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ServiceDefinition.effectivePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-effective',
-		documentation: 'The time during which the service definition is intended to be in use.',
+		description: 'The time during which the service definition is intended to be in use',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ServiceDefinition.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-identifier',
-		documentation: 'External identifier for the service definition.',
+		description: 'External identifier for the service definition',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ServiceDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the service definition.',
+		description: 'Intended jurisdiction for the service definition',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ServiceDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-name',
-		documentation: 'Computationally friendly name of the service definition.',
+		description: 'Computationally friendly name of the service definition',
 	},
-	PREDECESSOR: {
-		name: 'predecessor',
+	predecessor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "ServiceDefinition.relatedArtifact[type/@value='predecessor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-predecessor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ServiceDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-publisher',
-		documentation: 'Name of the publisher of the service definition.',
+		description: 'Name of the publisher of the service definition',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ServiceDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-status',
-		documentation: 'The current status of the service definition.',
+		description: 'The current status of the service definition',
 	},
-	SUCCESSOR: {
-		name: 'successor',
+	successor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "ServiceDefinition.relatedArtifact[type/@value='successor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-successor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ServiceDefinition.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-title',
-		documentation: 'The human-friendly name of the service definition.',
+		description: 'The human-friendly name of the service definition',
 	},
-	TOPIC: {
-		name: 'topic',
+	topic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ServiceDefinition.topic',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-topic',
-		documentation: 'Topics associated with the module.',
+		description: 'Topics associated with the module',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ServiceDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-url',
-		documentation: 'The uri that identifies the service definition.',
+		description: 'The uri that identifies the service definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ServiceDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ServiceDefinition-version',
-		documentation: 'The business version of the service definition.',
+		description: 'The business version of the service definition',
 	},
 };

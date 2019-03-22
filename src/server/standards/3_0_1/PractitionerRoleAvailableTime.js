@@ -1,72 +1,196 @@
-const BackboneElement = require('./BackboneElement');
-const TimeScalar = require('./scalars/Time.scalar');
+/**
+ * @name exports
+ * @summary PractitionerRoleAvailableTime Class
+ */
+module.exports = class PractitionerRoleAvailableTime {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PractitionerRoleAvailableTime extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PractitionerRoleAvailableTime';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_daysOfWeek', {
+			enumerable: true,
+			get: () => this.__data._daysOfWeek,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._daysOfWeek = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/days-of-week
+		Object.defineProperty(this, 'daysOfWeek', {
+			enumerable: true,
+			get: () => this.__data.daysOfWeek,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.daysOfWeek = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_allDay', {
+			enumerable: true,
+			get: () => this.__data._allDay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._allDay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'allDay', {
+			enumerable: true,
+			get: () => this.__data.allDay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.allDay = value;
+			},
+		});
+
+		Object.defineProperty(this, '_availableStartTime', {
+			enumerable: true,
+			get: () => this.__data._availableStartTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._availableStartTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'availableStartTime', {
+			enumerable: true,
+			get: () => this.__data.availableStartTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.availableStartTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_availableEndTime', {
+			enumerable: true,
+			get: () => this.__data._availableEndTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._availableEndTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'availableEndTime', {
+			enumerable: true,
+			get: () => this.__data.availableEndTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.availableEndTime = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PractitionerRoleAvailableTime',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PractitionerRoleAvailableTime resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PractitionerRoleAvailableTime';
 	}
 
-	// Indicates which days of the week are available between the start and end Times.
-	get daysOfWeek() {
-		return this.__daysOfWeek;
-	}
-
-	set daysOfWeek(new_value) {
-		this.__daysOfWeek = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Is this always available? (hence times are irrelevant) e.g. 24 hour service.
-	get allDay() {
-		return this.__allDay;
-	}
-
-	set allDay(new_value) {
-		this.__allDay = new_value;
-	}
-
-	// The opening time of day. Note: If the AllDay flag is set, then this time is ignored.
-	get availableStartTime() {
-		return this.__availableStartTime;
-	}
-
-	set availableStartTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field availableStartTime`);
-		}
-		this.__availableStartTime = new_value;
-	}
-
-	// The closing time of day. Note: If the AllDay flag is set, then this time is ignored.
-	get availableEndTime() {
-		return this.__availableEndTime;
-	}
-
-	set availableEndTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field availableEndTime`);
-		}
-		this.__availableEndTime = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			daysOfWeek: this.__daysOfWeek,
-			allDay: this.__allDay,
-			availableStartTime: this.__availableStartTime,
-			availableEndTime: this.__availableEndTime,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_daysOfWeek: this._daysOfWeek && this._daysOfWeek.toJSON(),
+			daysOfWeek: this.daysOfWeek,
+			_allDay: this._allDay && this._allDay.toJSON(),
+			allDay: this.allDay,
+			_availableStartTime: this._availableStartTime && this._availableStartTime.toJSON(),
+			availableStartTime: this.availableStartTime,
+			_availableEndTime: this._availableEndTime && this._availableEndTime.toJSON(),
+			availableEndTime: this.availableEndTime,
+		};
 	}
-}
-
-module.exports = PractitionerRoleAvailableTime;
+};

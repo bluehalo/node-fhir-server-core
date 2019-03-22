@@ -208,7 +208,9 @@ describe('Conformance Tests', () => {
 		expect(response.body.resourceType).toBe('CapabilityStatement');
 		//Check the reference for each resource is the customised one
 		for (let key of keys) {
-			let account_resource = response.body.rest[0].resource.find(rsc => rsc.type === key);
+			let account_resource = response.body.rest[0].resource.find(rsc => {
+				return rsc.type === key;
+			});
 			expect(account_resource.profile.reference).toBe(`http://example.org/fhir/${key}.html`);
 		}
 	}, 60000);

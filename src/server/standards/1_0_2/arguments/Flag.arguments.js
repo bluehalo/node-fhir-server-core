@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the flag query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Flag.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/Flag-author',
-		documentation: 'Flag creator.',
+		description: 'Flag creator',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Flag.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/Flag-date',
-		documentation: 'Time period when flag is active.',
+		description: 'Time period when flag is active',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Flag.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/Flag-encounter',
-		documentation: 'Alert relevant during encounter.',
+		description: 'Alert relevant during encounter',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Flag.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Flag-patient',
-		documentation: 'The identity of a subject to list flags for.',
+		description: 'The identity of a subject to list flags for',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Flag.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Flag-subject',
-		documentation: 'The identity of a subject to list flags for.',
+		description: 'The identity of a subject to list flags for',
 	},
 };

@@ -1,206 +1,492 @@
-const Element = require('./Element');
-const TimeScalar = require('./scalars/Time.scalar');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
+/**
+ * @name exports
+ * @summary TimingRepeat Class
+ */
+module.exports = class TimingRepeat {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TimingRepeat extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TimingRepeat';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'boundsDuration', {
+			enumerable: true,
+			get: () => this.__data.boundsDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.boundsDuration = new Duration(value);
+			},
+		});
+
+		Object.defineProperty(this, 'boundsRange', {
+			enumerable: true,
+			get: () => this.__data.boundsRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.boundsRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'boundsPeriod', {
+			enumerable: true,
+			get: () => this.__data.boundsPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.boundsPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_count', {
+			enumerable: true,
+			get: () => this.__data._count,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._count = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'count', {
+			enumerable: true,
+			get: () => this.__data.count,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.count = value;
+			},
+		});
+
+		Object.defineProperty(this, '_countMax', {
+			enumerable: true,
+			get: () => this.__data._countMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._countMax = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'countMax', {
+			enumerable: true,
+			get: () => this.__data.countMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.countMax = value;
+			},
+		});
+
+		Object.defineProperty(this, '_duration', {
+			enumerable: true,
+			get: () => this.__data._duration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._duration = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'duration', {
+			enumerable: true,
+			get: () => this.__data.duration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.duration = value;
+			},
+		});
+
+		Object.defineProperty(this, '_durationMax', {
+			enumerable: true,
+			get: () => this.__data._durationMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._durationMax = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'durationMax', {
+			enumerable: true,
+			get: () => this.__data.durationMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.durationMax = value;
+			},
+		});
+
+		Object.defineProperty(this, '_durationUnit', {
+			enumerable: true,
+			get: () => this.__data._durationUnit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._durationUnit = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/units-of-time
+		Object.defineProperty(this, 'durationUnit', {
+			enumerable: true,
+			get: () => this.__data.durationUnit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.durationUnit = value;
+			},
+		});
+
+		Object.defineProperty(this, '_frequency', {
+			enumerable: true,
+			get: () => this.__data._frequency,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._frequency = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'frequency', {
+			enumerable: true,
+			get: () => this.__data.frequency,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.frequency = value;
+			},
+		});
+
+		Object.defineProperty(this, '_frequencyMax', {
+			enumerable: true,
+			get: () => this.__data._frequencyMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._frequencyMax = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'frequencyMax', {
+			enumerable: true,
+			get: () => this.__data.frequencyMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.frequencyMax = value;
+			},
+		});
+
+		Object.defineProperty(this, '_period', {
+			enumerable: true,
+			get: () => this.__data._period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._period = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.period = value;
+			},
+		});
+
+		Object.defineProperty(this, '_periodMax', {
+			enumerable: true,
+			get: () => this.__data._periodMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._periodMax = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'periodMax', {
+			enumerable: true,
+			get: () => this.__data.periodMax,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.periodMax = value;
+			},
+		});
+
+		Object.defineProperty(this, '_periodUnit', {
+			enumerable: true,
+			get: () => this.__data._periodUnit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._periodUnit = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/units-of-time
+		Object.defineProperty(this, 'periodUnit', {
+			enumerable: true,
+			get: () => this.__data.periodUnit,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.periodUnit = value;
+			},
+		});
+
+		Object.defineProperty(this, '_dayOfWeek', {
+			enumerable: true,
+			get: () => this.__data._dayOfWeek,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dayOfWeek = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/days-of-week
+		Object.defineProperty(this, 'dayOfWeek', {
+			enumerable: true,
+			get: () => this.__data.dayOfWeek,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dayOfWeek = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_timeOfDay', {
+			enumerable: true,
+			get: () => this.__data._timeOfDay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._timeOfDay = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'timeOfDay', {
+			enumerable: true,
+			get: () => this.__data.timeOfDay,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.timeOfDay = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_when', {
+			enumerable: true,
+			get: () => this.__data._when,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._when = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/event-timing
+		Object.defineProperty(this, 'when', {
+			enumerable: true,
+			get: () => this.__data.when,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.when = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_offset', {
+			enumerable: true,
+			get: () => this.__data._offset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._offset = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'offset', {
+			enumerable: true,
+			get: () => this.__data.offset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.offset = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TimingRepeat',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TimingRepeat resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TimingRepeat';
 	}
 
-	// Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
-	get boundsDuration() {
-		return this.__boundsDuration;
-	}
-
-	set boundsDuration(new_value) {
-		const Duration = require('./Duration');
-		this.__boundsDuration = new Duration(new_value);
-	}
-
-	// Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
-	get boundsRange() {
-		return this.__boundsRange;
-	}
-
-	set boundsRange(new_value) {
-		const Range = require('./Range');
-		this.__boundsRange = new Range(new_value);
-	}
-
-	// Either a duration for the length of the timing schedule, a range of possible length, or outer bounds for start and/or end limits of the timing schedule.
-	get boundsPeriod() {
-		return this.__boundsPeriod;
-	}
-
-	set boundsPeriod(new_value) {
-		const Period = require('./Period');
-		this.__boundsPeriod = new Period(new_value);
-	}
-
-	// A total count of the desired number of repetitions.
-	get count() {
-		return this.__count;
-	}
-
-	set count(new_value) {
-		this.__count = new_value;
-	}
-
-	// A maximum value for the count of the desired repetitions (e.g. do something 6-8 times).
-	get countMax() {
-		return this.__countMax;
-	}
-
-	set countMax(new_value) {
-		this.__countMax = new_value;
-	}
-
-	// How long this thing happens for when it happens.
-	get duration() {
-		return this.__duration;
-	}
-
-	set duration(new_value) {
-		this.__duration = new_value;
-	}
-
-	// The upper limit of how long this thing happens for when it happens.
-	get durationMax() {
-		return this.__durationMax;
-	}
-
-	set durationMax(new_value) {
-		this.__durationMax = new_value;
-	}
-
-	// The units of time for the duration, in UCUM units.
-	get durationUnit() {
-		return this.__durationUnit;
-	}
-
-	set durationUnit(new_value) {
-		this.__durationUnit = new_value;
-	}
-
-	// The number of times to repeat the action within the specified period / period range (i.e. both period and periodMax provided).
-	get frequency() {
-		return this.__frequency;
-	}
-
-	set frequency(new_value) {
-		this.__frequency = new_value;
-	}
-
-	// If present, indicates that the frequency is a range - so to repeat between [frequency] and [frequencyMax] times within the period or period range.
-	get frequencyMax() {
-		return this.__frequencyMax;
-	}
-
-	set frequencyMax(new_value) {
-		this.__frequencyMax = new_value;
-	}
-
-	// Indicates the duration of time over which repetitions are to occur; e.g. to express \'3 times per day\', 3 would be the frequency and \'1 day\' would be the period.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		this.__period = new_value;
-	}
-
-	// If present, indicates that the period is a range from [period] to [periodMax], allowing expressing concepts such as \'do this once every 3-5 days.
-	get periodMax() {
-		return this.__periodMax;
-	}
-
-	set periodMax(new_value) {
-		this.__periodMax = new_value;
-	}
-
-	// The units of time for the period in UCUM units.
-	get periodUnit() {
-		return this.__periodUnit;
-	}
-
-	set periodUnit(new_value) {
-		this.__periodUnit = new_value;
-	}
-
-	// If one or more days of week is provided, then the action happens only on the specified day(s).
-	get dayOfWeek() {
-		return this.__dayOfWeek;
-	}
-
-	set dayOfWeek(new_value) {
-		this.__dayOfWeek = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Specified time of day for action to take place.
-	get timeOfDay() {
-		return this.__timeOfDay;
-	}
-
-	set timeOfDay(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field timeOfDay`);
-		}
-		this.__timeOfDay = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Real world events that the occurrence of the event should be tied to.
-	get when() {
-		return this.__when;
-	}
-
-	set when(new_value) {
-		this.__when = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The number of minutes from the event. If the event code does not indicate whether the minutes is before or after the event, then the offset is assumed to be after the event.
-	get offset() {
-		return this.__offset;
-	}
-
-	set offset(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field offset`);
-		}
-		this.__offset = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			boundsDuration: this.__boundsDuration && this.__boundsDuration.toJSON(),
-			boundsRange: this.__boundsRange && this.__boundsRange.toJSON(),
-			boundsPeriod: this.__boundsPeriod && this.__boundsPeriod.toJSON(),
-			count: this.__count,
-			countMax: this.__countMax,
-			duration: this.__duration,
-			durationMax: this.__durationMax,
-			durationUnit: this.__durationUnit,
-			frequency: this.__frequency,
-			frequencyMax: this.__frequencyMax,
-			period: this.__period,
-			periodMax: this.__periodMax,
-			periodUnit: this.__periodUnit,
-			dayOfWeek: this.__dayOfWeek,
-			timeOfDay: this.__timeOfDay,
-			when: this.__when,
-			offset: this.__offset,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			boundsDuration: this.boundsDuration && this.boundsDuration.toJSON(),
+			boundsRange: this.boundsRange && this.boundsRange.toJSON(),
+			boundsPeriod: this.boundsPeriod && this.boundsPeriod.toJSON(),
+			_count: this._count && this._count.toJSON(),
+			count: this.count,
+			_countMax: this._countMax && this._countMax.toJSON(),
+			countMax: this.countMax,
+			_duration: this._duration && this._duration.toJSON(),
+			duration: this.duration,
+			_durationMax: this._durationMax && this._durationMax.toJSON(),
+			durationMax: this.durationMax,
+			_durationUnit: this._durationUnit && this._durationUnit.toJSON(),
+			durationUnit: this.durationUnit,
+			_frequency: this._frequency && this._frequency.toJSON(),
+			frequency: this.frequency,
+			_frequencyMax: this._frequencyMax && this._frequencyMax.toJSON(),
+			frequencyMax: this.frequencyMax,
+			_period: this._period && this._period.toJSON(),
+			period: this.period,
+			_periodMax: this._periodMax && this._periodMax.toJSON(),
+			periodMax: this.periodMax,
+			_periodUnit: this._periodUnit && this._periodUnit.toJSON(),
+			periodUnit: this.periodUnit,
+			_dayOfWeek: this._dayOfWeek && this._dayOfWeek.toJSON(),
+			dayOfWeek: this.dayOfWeek,
+			_timeOfDay: this._timeOfDay && this._timeOfDay.toJSON(),
+			timeOfDay: this.timeOfDay,
+			_when: this._when && this._when.toJSON(),
+			when: this.when,
+			_offset: this._offset && this._offset.toJSON(),
+			offset: this.offset,
+		};
 	}
-}
-
-module.exports = TimingRepeat;
+};

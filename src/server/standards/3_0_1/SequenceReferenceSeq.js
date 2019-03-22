@@ -1,104 +1,265 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary SequenceReferenceSeq Class
+ */
+module.exports = class SequenceReferenceSeq {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SequenceReferenceSeq extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SequenceReferenceSeq';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/chromosome-human
+		Object.defineProperty(this, 'chromosome', {
+			enumerable: true,
+			get: () => this.__data.chromosome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.chromosome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_genomeBuild', {
+			enumerable: true,
+			get: () => this.__data._genomeBuild,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._genomeBuild = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'genomeBuild', {
+			enumerable: true,
+			get: () => this.__data.genomeBuild,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.genomeBuild = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/sequence-referenceSeq
+		Object.defineProperty(this, 'referenceSeqId', {
+			enumerable: true,
+			get: () => this.__data.referenceSeqId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.referenceSeqId = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referenceSeqPointer', {
+			enumerable: true,
+			get: () => this.__data.referenceSeqPointer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.referenceSeqPointer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_referenceSeqString', {
+			enumerable: true,
+			get: () => this.__data._referenceSeqString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._referenceSeqString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referenceSeqString', {
+			enumerable: true,
+			get: () => this.__data.referenceSeqString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.referenceSeqString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_strand', {
+			enumerable: true,
+			get: () => this.__data._strand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._strand = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'strand', {
+			enumerable: true,
+			get: () => this.__data.strand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.strand = value;
+			},
+		});
+
+		Object.defineProperty(this, '_windowStart', {
+			enumerable: true,
+			get: () => this.__data._windowStart,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._windowStart = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'windowStart', {
+			enumerable: true,
+			get: () => this.__data.windowStart,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.windowStart = value;
+			},
+		});
+
+		Object.defineProperty(this, '_windowEnd', {
+			enumerable: true,
+			get: () => this.__data._windowEnd,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._windowEnd = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'windowEnd', {
+			enumerable: true,
+			get: () => this.__data.windowEnd,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.windowEnd = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SequenceReferenceSeq',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SequenceReferenceSeq resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SequenceReferenceSeq';
 	}
 
-	// Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340)).
-	get chromosome() {
-		return this.__chromosome;
-	}
-
-	set chromosome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__chromosome = new CodeableConcept(new_value);
-	}
-
-	// The Genome Build used for reference, following GRCh build versions e.g. \'GRCh 37\'.  Version number must be included if a versioned release of a primary build was used.
-	get genomeBuild() {
-		return this.__genomeBuild;
-	}
-
-	set genomeBuild(new_value) {
-		this.__genomeBuild = new_value;
-	}
-
-	// Reference identifier of reference sequence submitted to NCBI. It must match the type in the Sequence.type field. For example, the prefix, “NG_” identifies reference sequence for genes, “NM_” for messenger RNA transcripts, and “NP_” for amino acid sequences.
-	get referenceSeqId() {
-		return this.__referenceSeqId;
-	}
-
-	set referenceSeqId(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__referenceSeqId = new CodeableConcept(new_value);
-	}
-
-	// A Pointer to another Sequence entity as reference sequence.
-	get referenceSeqPointer() {
-		return this.__referenceSeqPointer;
-	}
-
-	set referenceSeqPointer(new_value) {
-		const Reference = require('./Reference');
-		this.__referenceSeqPointer = new Reference(new_value);
-	}
-
-	// A string like \'ACGT\'.
-	get referenceSeqString() {
-		return this.__referenceSeqString;
-	}
-
-	set referenceSeqString(new_value) {
-		this.__referenceSeqString = new_value;
-	}
-
-	// Directionality of DNA sequence. Available values are \'1\' for the plus strand (5\' to 3\')/Watson/Sense/positive  and \'-1\' for the minus strand(3\' to 5\')/Crick/Antisense/negative.
-	get strand() {
-		return this.__strand;
-	}
-
-	set strand(new_value) {
-		this.__strand = new_value;
-	}
-
-	// Start position of the window on the reference sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	get windowStart() {
-		return this.__windowStart;
-	}
-
-	set windowStart(new_value) {
-		this.__windowStart = new_value;
-	}
-
-	// End position of the window on the reference sequence. If the coordinate system is 0-based then end is is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	get windowEnd() {
-		return this.__windowEnd;
-	}
-
-	set windowEnd(new_value) {
-		this.__windowEnd = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			chromosome: this.__chromosome && this.__chromosome.toJSON(),
-			genomeBuild: this.__genomeBuild,
-			referenceSeqId: this.__referenceSeqId && this.__referenceSeqId.toJSON(),
-			referenceSeqPointer: this.__referenceSeqPointer && this.__referenceSeqPointer.toJSON(),
-			referenceSeqString: this.__referenceSeqString,
-			strand: this.__strand,
-			windowStart: this.__windowStart,
-			windowEnd: this.__windowEnd,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			chromosome: this.chromosome && this.chromosome.toJSON(),
+			_genomeBuild: this._genomeBuild && this._genomeBuild.toJSON(),
+			genomeBuild: this.genomeBuild,
+			referenceSeqId: this.referenceSeqId && this.referenceSeqId.toJSON(),
+			referenceSeqPointer: this.referenceSeqPointer && this.referenceSeqPointer.toJSON(),
+			_referenceSeqString: this._referenceSeqString && this._referenceSeqString.toJSON(),
+			referenceSeqString: this.referenceSeqString,
+			_strand: this._strand && this._strand.toJSON(),
+			strand: this.strand,
+			_windowStart: this._windowStart && this._windowStart.toJSON(),
+			windowStart: this.windowStart,
+			_windowEnd: this._windowEnd && this._windowEnd.toJSON(),
+			windowEnd: this.windowEnd,
+		};
 	}
-}
-
-module.exports = SequenceReferenceSeq;
+};

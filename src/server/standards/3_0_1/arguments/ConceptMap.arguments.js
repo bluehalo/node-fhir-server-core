@@ -1,128 +1,154 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the conceptmap query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ConceptMap.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-date',
-		documentation: 'The concept map publication date.',
+		description: 'The concept map publication date',
 	},
-	DEPENDSON: {
-		name: 'dependson',
+	dependson: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.group.element.target.dependsOn.property',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-dependson',
-		documentation: 'Reference to property mapping depends on.',
+		description: 'Reference to property mapping depends on',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ConceptMap.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-description',
-		documentation: 'The description of the concept map.',
+		description: 'The description of the concept map',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-identifier',
-		documentation: 'External identifier for the concept map.',
+		description: 'External identifier for the concept map',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-jurisdiction',
-		documentation: 'Intended jurisdiction for the concept map.',
+		description: 'Intended jurisdiction for the concept map',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ConceptMap.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-name',
-		documentation: 'Computationally friendly name of the concept map.',
+		description: 'Computationally friendly name of the concept map',
 	},
-	OTHER: {
-		name: 'other',
+	other: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.group.unmapped.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-other',
-		documentation: 'Canonical URL for other concept map.',
+		description: 'Canonical URL for other concept map',
 	},
-	PRODUCT: {
-		name: 'product',
+	product: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.group.element.target.product.property',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-product',
-		documentation: 'Reference to property mapping depends on.',
+		description: 'Reference to property mapping depends on',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ConceptMap.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-publisher',
-		documentation: 'Name of the publisher of the concept map.',
+		description: 'Name of the publisher of the concept map',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ConceptMap.sourceReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-source',
-		documentation: 'Identifies the source of the concepts which are being mapped.',
+		description: 'Identifies the source of the concepts which are being mapped',
 	},
-	SOURCE_CODE: {
-		name: 'source-code',
+	'source-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.group.element.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-source-code',
-		documentation: 'Identifies element being mapped.',
+		description: 'Identifies element being mapped',
 	},
-	SOURCE_SYSTEM: {
-		name: 'source-system',
+	'source-system': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.group.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-source-system',
-		documentation: 'Code System (if value set crosses code systems).',
+		description: 'Code System (if value set crosses code systems)',
 	},
-	SOURCE_URI: {
-		name: 'source-uri',
+	'source-uri': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ConceptMap.sourceUri',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-source-uri',
-		documentation: 'Identifies the source of the concepts which are being mapped.',
+		description: 'Identifies the source of the concepts which are being mapped',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-status',
-		documentation: 'The current status of the concept map.',
+		description: 'The current status of the concept map',
 	},
-	TARGET: {
-		name: 'target',
+	target: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ConceptMap.targetReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-target',
-		documentation: 'Provides context to the mappings.',
+		description: 'Provides context to the mappings',
 	},
-	TARGET_CODE: {
-		name: 'target-code',
+	'target-code': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.group.element.target.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-target-code',
-		documentation: 'Code that identifies the target element.',
+		description: 'Code that identifies the target element',
 	},
-	TARGET_SYSTEM: {
-		name: 'target-system',
+	'target-system': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.group.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-target-system',
-		documentation: 'System of the target (if necessary).',
+		description: 'System of the target (if necessary)',
 	},
-	TARGET_URI: {
-		name: 'target-uri',
+	'target-uri': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ConceptMap.targetUri',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-target-uri',
-		documentation: 'Provides context to the mappings.',
+		description: 'Provides context to the mappings',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ConceptMap.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-title',
-		documentation: 'The human-friendly name of the concept map.',
+		description: 'The human-friendly name of the concept map',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ConceptMap.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-url',
-		documentation: 'The uri that identifies the concept map.',
+		description: 'The uri that identifies the concept map',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ConceptMap.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ConceptMap-version',
-		documentation: 'The business version of the concept map.',
+		description: 'The business version of the concept map',
 	},
 };

@@ -1,104 +1,265 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary QuestionnaireGroupQuestion Class
+ */
+module.exports = class QuestionnaireGroupQuestion {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class QuestionnaireGroupQuestion extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'QuestionnaireGroupQuestion';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_linkId', {
+			enumerable: true,
+			get: () => this.__data._linkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._linkId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'linkId', {
+			enumerable: true,
+			get: () => this.__data.linkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.linkId = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-questions
+		Object.defineProperty(this, 'concept', {
+			enumerable: true,
+			get: () => this.__data.concept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.concept = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/answer-format
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_required', {
+			enumerable: true,
+			get: () => this.__data._required,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._required = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'required', {
+			enumerable: true,
+			get: () => this.__data.required,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.required = value;
+			},
+		});
+
+		Object.defineProperty(this, '_repeats', {
+			enumerable: true,
+			get: () => this.__data._repeats,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._repeats = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'repeats', {
+			enumerable: true,
+			get: () => this.__data.repeats,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.repeats = value;
+			},
+		});
+
+		Object.defineProperty(this, 'options', {
+			enumerable: true,
+			get: () => this.__data.options,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.options = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'option', {
+			enumerable: true,
+			get: () => this.__data.option,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.option = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'QuestionnaireGroupQuestion',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a QuestionnaireGroupQuestion resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'QuestionnaireGroupQuestion';
 	}
 
-	// An identifier that is unique within the questionnaire allowing linkage to the equivalent group in a [[[QuestionnaireResponse]]] resource.
-	get linkId() {
-		return this.__linkId;
-	}
-
-	set linkId(new_value) {
-		this.__linkId = new_value;
-	}
-
-	// Identifies a how this question is known in a particular terminology such as LOINC.
-	get concept() {
-		return this.__concept;
-	}
-
-	set concept(new_value) {
-		const Coding = require('./Coding');
-		this.__concept = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// The actual question as shown to the user to prompt them for an answer.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
-	// The expected format of the answer, e.g. the type of input (string, integer) or whether a (multiple) choice is expected.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// If true, indicates that the question must be answered and have required groups within it also present.  If false, the question and any contained groups may be skipped when answering the questionnaire.
-	get required() {
-		return this.__required;
-	}
-
-	set required(new_value) {
-		this.__required = new_value;
-	}
-
-	// If true, the question may have more than one answer.
-	get repeats() {
-		return this.__repeats;
-	}
-
-	set repeats(new_value) {
-		this.__repeats = new_value;
-	}
-
-	// Reference to a value set containing a list of codes representing permitted answers for the question.
-	get options() {
-		return this.__options;
-	}
-
-	set options(new_value) {
-		const Reference = require('./Reference');
-		this.__options = new Reference(new_value);
-	}
-
-	// For a \'choice\' question, identifies one of the permitted answers for the question.
-	get option() {
-		return this.__option;
-	}
-
-	set option(new_value) {
-		const Coding = require('./Coding');
-		this.__option = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			linkId: this.__linkId,
-			concept: this.__concept && this.__concept.map(v => v.toJSON()),
-			text: this.__text,
-			type: this.__type,
-			required: this.__required,
-			repeats: this.__repeats,
-			options: this.__options && this.__options.toJSON(),
-			option: this.__option && this.__option.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_linkId: this._linkId && this._linkId.toJSON(),
+			linkId: this.linkId,
+			concept: this.concept && this.concept.map(v => v.toJSON()),
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_required: this._required && this._required.toJSON(),
+			required: this.required,
+			_repeats: this._repeats && this._repeats.toJSON(),
+			repeats: this.repeats,
+			options: this.options && this.options.toJSON(),
+			option: this.option && this.option.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = QuestionnaireGroupQuestion;
+};

@@ -1,42 +1,129 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary PatientCommunication Class
+ */
+module.exports = class PatientCommunication {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PatientCommunication extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PatientCommunication';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.language = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_preferred', {
+			enumerable: true,
+			get: () => this.__data._preferred,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._preferred = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'preferred', {
+			enumerable: true,
+			get: () => this.__data.preferred,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.preferred = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PatientCommunication',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PatientCommunication resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PatientCommunication';
 	}
 
-	// The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. \'en\' for English, or \'en-US\' for American English versus \'en-EN\' for England English.
-	get language() {
-		return this.__language;
-	}
-
-	set language(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__language = new CodeableConcept(new_value);
-	}
-
-	// Indicates whether or not the patient prefers this language (over other languages he masters up a certain level).
-	get preferred() {
-		return this.__preferred;
-	}
-
-	set preferred(new_value) {
-		this.__preferred = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			language: this.__language && this.__language.toJSON(),
-			preferred: this.__preferred,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			language: this.language && this.language.toJSON(),
+			_preferred: this._preferred && this._preferred.toJSON(),
+			preferred: this.preferred,
+		};
 	}
-}
-
-module.exports = PatientCommunication;
+};

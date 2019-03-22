@@ -1,20 +1,30 @@
-const Quantity = require('./Quantity');
+/**
+ * @name exports
+ * @summary Count Class
+ */
+module.exports = class Count {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Count extends Quantity {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Count';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Count',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Count resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Count';
 	}
 
 	toJSON() {
-		return Object.assign(super.toJSON(), {});
+		return {};
 	}
-}
-
-module.exports = Count;
+};

@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the testscript query
+ */
 module.exports = {
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-description',
-		documentation: 'Natural language description of the TestScript.',
+		description: 'Natural language description of the TestScript',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestScript.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-identifier',
-		documentation: 'External identifier.',
+		description: 'External identifier',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-name',
-		documentation: 'Informal name for this TestScript.',
+		description: 'Informal name for this TestScript',
 	},
-	TESTSCRIPT_CAPABILITY: {
-		name: 'testscript-capability',
+	'testscript-capability': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.metadata.capability.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-testscript-capability',
-		documentation: 'TestScript required and validated capability.',
+		description: 'TestScript required and validated capability',
 	},
-	TESTSCRIPT_SETUP_CAPABILITY: {
-		name: 'testscript-setup-capability',
+	'testscript-setup-capability': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.setup.metadata.capability.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-testscript-setup-capability',
-		documentation: 'TestScript setup required and validated capability.',
+		description: 'TestScript setup required and validated capability',
 	},
-	TESTSCRIPT_TEST_CAPABILITY: {
-		name: 'testscript-test-capability',
+	'testscript-test-capability': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.test.metadata.capability.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-testscript-test-capability',
-		documentation: 'TestScript test required and validated capability.',
+		description: 'TestScript test required and validated capability',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'TestScript.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-url',
-		documentation: 'Absolute URL used to reference this TestScript.',
+		description: 'Absolute URL used to reference this TestScript',
 	},
 };

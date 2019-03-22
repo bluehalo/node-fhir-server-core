@@ -1,200 +1,452 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary Sequence Class
+ */
+module.exports = class Sequence {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Sequence extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Sequence';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/sequence-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_coordinateSystem', {
+			enumerable: true,
+			get: () => this.__data._coordinateSystem,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._coordinateSystem = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'coordinateSystem', {
+			enumerable: true,
+			get: () => this.__data.coordinateSystem,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.coordinateSystem = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'specimen', {
+			enumerable: true,
+			get: () => this.__data.specimen,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.specimen = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'device', {
+			enumerable: true,
+			get: () => this.__data.device,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.device = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referenceSeq', {
+			enumerable: true,
+			get: () => this.__data.referenceSeq,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SequenceReferenceSeq = require('./sequencereferenceseq.js');
+				this.__data.referenceSeq = new SequenceReferenceSeq(value);
+			},
+		});
+
+		Object.defineProperty(this, 'variant', {
+			enumerable: true,
+			get: () => this.__data.variant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SequenceVariant = require('./sequencevariant.js');
+				this.__data.variant = Array.isArray(value)
+					? value.map(v => new SequenceVariant(v))
+					: [new SequenceVariant(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_observedSeq', {
+			enumerable: true,
+			get: () => this.__data._observedSeq,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._observedSeq = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'observedSeq', {
+			enumerable: true,
+			get: () => this.__data.observedSeq,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.observedSeq = value;
+			},
+		});
+
+		Object.defineProperty(this, 'quality', {
+			enumerable: true,
+			get: () => this.__data.quality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SequenceQuality = require('./sequencequality.js');
+				this.__data.quality = Array.isArray(value)
+					? value.map(v => new SequenceQuality(v))
+					: [new SequenceQuality(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_readCoverage', {
+			enumerable: true,
+			get: () => this.__data._readCoverage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._readCoverage = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'readCoverage', {
+			enumerable: true,
+			get: () => this.__data.readCoverage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.readCoverage = value;
+			},
+		});
+
+		Object.defineProperty(this, 'repository', {
+			enumerable: true,
+			get: () => this.__data.repository,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SequenceRepository = require('./sequencerepository.js');
+				this.__data.repository = Array.isArray(value)
+					? value.map(v => new SequenceRepository(v))
+					: [new SequenceRepository(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'pointer', {
+			enumerable: true,
+			get: () => this.__data.pointer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.pointer = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Sequence',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Sequence resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Sequence';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Sequence = new_value;
-	}
-
-	// A unique identifier for this particular sequence instance. This is a FHIR-defined id.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Amino Acid Sequence/ DNA Sequence / RNA Sequence.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// Whether the sequence is numbered starting at 0 (0-based numbering or coordinates, inclusive start, exclusive end) or starting at 1 (1-based numbering, inclusive start and inclusive end).
-	get coordinateSystem() {
-		return this.__coordinateSystem;
-	}
-
-	set coordinateSystem(new_value) {
-		this.__coordinateSystem = new_value;
-	}
-
-	// The patient whose sequencing results are described by this resource.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// Specimen used for sequencing.
-	get specimen() {
-		return this.__specimen;
-	}
-
-	set specimen(new_value) {
-		const Reference = require('./Reference');
-		this.__specimen = new Reference(new_value);
-	}
-
-	// The method for sequencing, for example, chip information.
-	get device() {
-		return this.__device;
-	}
-
-	set device(new_value) {
-		const Reference = require('./Reference');
-		this.__device = new Reference(new_value);
-	}
-
-	// The organization or lab that should be responsible for this result.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const Reference = require('./Reference');
-		this.__performer = new Reference(new_value);
-	}
-
-	// The number of copies of the seqeunce of interest. (RNASeq).
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// A sequence that is used as a reference to describe variants that are present in a sequence analyzed.
-	get referenceSeq() {
-		return this.__referenceSeq;
-	}
-
-	set referenceSeq(new_value) {
-		const SequenceReferenceSeq = require('./SequenceReferenceSeq');
-		this.__referenceSeq = new SequenceReferenceSeq(new_value);
-	}
-
-	// The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string.
-	get variant() {
-		return this.__variant;
-	}
-
-	set variant(new_value) {
-		const SequenceVariant = require('./SequenceVariant');
-		this.__variant = Array.isArray(new_value)
-			? new_value.map(val => new SequenceVariant(val))
-			: [new SequenceVariant(new_value)];
-	}
-
-	// Sequence that was observed. It is the result marked by referenceSeq along with variant records on referenceSeq. This shall starts from referenceSeq.windowStart and end by referenceSeq.windowEnd.
-	get observedSeq() {
-		return this.__observedSeq;
-	}
-
-	set observedSeq(new_value) {
-		this.__observedSeq = new_value;
-	}
-
-	// An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686)).
-	get quality() {
-		return this.__quality;
-	}
-
-	set quality(new_value) {
-		const SequenceQuality = require('./SequenceQuality');
-		this.__quality = Array.isArray(new_value)
-			? new_value.map(val => new SequenceQuality(val))
-			: [new SequenceQuality(new_value)];
-	}
-
-	// Coverage (read depth or depth) is the average number of reads representing a given nucleotide in the reconstructed sequence.
-	get readCoverage() {
-		return this.__readCoverage;
-	}
-
-	set readCoverage(new_value) {
-		this.__readCoverage = new_value;
-	}
-
-	// Configurations of the external repository. The repository shall store target\'s observedSeq or records related with target\'s observedSeq.
-	get repository() {
-		return this.__repository;
-	}
-
-	set repository(new_value) {
-		const SequenceRepository = require('./SequenceRepository');
-		this.__repository = Array.isArray(new_value)
-			? new_value.map(val => new SequenceRepository(val))
-			: [new SequenceRepository(new_value)];
-	}
-
-	// Pointer to next atomic sequence which at most contains one variant.
-	get pointer() {
-		return this.__pointer;
-	}
-
-	set pointer(new_value) {
-		const Reference = require('./Reference');
-		this.__pointer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			type: this.__type,
-			coordinateSystem: this.__coordinateSystem,
-			patient: this.__patient && this.__patient.toJSON(),
-			specimen: this.__specimen && this.__specimen.toJSON(),
-			device: this.__device && this.__device.toJSON(),
-			performer: this.__performer && this.__performer.toJSON(),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			referenceSeq: this.__referenceSeq && this.__referenceSeq.toJSON(),
-			variant: this.__variant && this.__variant.map(v => v.toJSON()),
-			observedSeq: this.__observedSeq,
-			quality: this.__quality && this.__quality.map(v => v.toJSON()),
-			readCoverage: this.__readCoverage,
-			repository: this.__repository && this.__repository.map(v => v.toJSON()),
-			pointer: this.__pointer && this.__pointer.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_coordinateSystem: this._coordinateSystem && this._coordinateSystem.toJSON(),
+			coordinateSystem: this.coordinateSystem,
+			patient: this.patient && this.patient.toJSON(),
+			specimen: this.specimen && this.specimen.toJSON(),
+			device: this.device && this.device.toJSON(),
+			performer: this.performer && this.performer.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			referenceSeq: this.referenceSeq && this.referenceSeq.toJSON(),
+			variant: this.variant && this.variant.map(v => v.toJSON()),
+			_observedSeq: this._observedSeq && this._observedSeq.toJSON(),
+			observedSeq: this.observedSeq,
+			quality: this.quality && this.quality.map(v => v.toJSON()),
+			_readCoverage: this._readCoverage && this._readCoverage.toJSON(),
+			readCoverage: this.readCoverage,
+			repository: this.repository && this.repository.map(v => v.toJSON()),
+			pointer: this.pointer && this.pointer.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Sequence;
+};

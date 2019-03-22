@@ -1,65 +1,128 @@
-const Element = require('./Element');
+/**
+ * @name exports
+ * @summary UsageContext Class
+ */
+module.exports = class UsageContext {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class UsageContext extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'UsageContext';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/usage-context-type
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.code = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/use-context
+		Object.defineProperty(this, 'valueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.valueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.valueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/use-context
+		Object.defineProperty(this, 'valueQuantity', {
+			enumerable: true,
+			get: () => this.__data.valueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.valueQuantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/use-context
+		Object.defineProperty(this, 'valueRange', {
+			enumerable: true,
+			get: () => this.__data.valueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.valueRange = new Range(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'UsageContext',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a UsageContext resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'UsageContext';
 	}
 
-	// A code that identifies the type of context being specified by this usage context.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const Coding = require('./Coding');
-		this.__code = new Coding(new_value);
-	}
-
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	get valueCodeableConcept() {
-		return this.__valueCodeableConcept;
-	}
-
-	set valueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__valueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	get valueQuantity() {
-		return this.__valueQuantity;
-	}
-
-	set valueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__valueQuantity = new Quantity(new_value);
-	}
-
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	get valueRange() {
-		return this.__valueRange;
-	}
-
-	set valueRange(new_value) {
-		const Range = require('./Range');
-		this.__valueRange = new Range(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code && this.__code.toJSON(),
-			valueCodeableConcept: this.__valueCodeableConcept && this.__valueCodeableConcept.toJSON(),
-			valueQuantity: this.__valueQuantity && this.__valueQuantity.toJSON(),
-			valueRange: this.__valueRange && this.__valueRange.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+		};
 	}
-}
-
-module.exports = UsageContext;
+};

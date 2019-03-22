@@ -1,103 +1,261 @@
-const Element = require('./Element');
-const IdScalar = require('./scalars/Id.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ElementDefinitionConstraint Class
+ */
+module.exports = class ElementDefinitionConstraint {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ElementDefinitionConstraint extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ElementDefinitionConstraint';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_key', {
+			enumerable: true,
+			get: () => this.__data._key,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._key = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'key', {
+			enumerable: true,
+			get: () => this.__data.key,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.key = value;
+			},
+		});
+
+		Object.defineProperty(this, '_requirements', {
+			enumerable: true,
+			get: () => this.__data._requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requirements = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requirements', {
+			enumerable: true,
+			get: () => this.__data.requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requirements = value;
+			},
+		});
+
+		Object.defineProperty(this, '_severity', {
+			enumerable: true,
+			get: () => this.__data._severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._severity = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/constraint-severity
+		Object.defineProperty(this, 'severity', {
+			enumerable: true,
+			get: () => this.__data.severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.severity = value;
+			},
+		});
+
+		Object.defineProperty(this, '_human', {
+			enumerable: true,
+			get: () => this.__data._human,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._human = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'human', {
+			enumerable: true,
+			get: () => this.__data.human,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.human = value;
+			},
+		});
+
+		Object.defineProperty(this, '_expression', {
+			enumerable: true,
+			get: () => this.__data._expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._expression = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'expression', {
+			enumerable: true,
+			get: () => this.__data.expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.expression = value;
+			},
+		});
+
+		Object.defineProperty(this, '_xpath', {
+			enumerable: true,
+			get: () => this.__data._xpath,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._xpath = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'xpath', {
+			enumerable: true,
+			get: () => this.__data.xpath,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.xpath = value;
+			},
+		});
+
+		Object.defineProperty(this, '_source', {
+			enumerable: true,
+			get: () => this.__data._source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._source = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'source', {
+			enumerable: true,
+			get: () => this.__data.source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.source = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ElementDefinitionConstraint',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ElementDefinitionConstraint resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ElementDefinitionConstraint';
 	}
 
-	// Allows identification of which elements have their cardinalities impacted by the constraint.  Will not be referenced for constraints that do not affect cardinality.
-	get key() {
-		return this.__key;
-	}
-
-	set key(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field key`);
-		}
-		this.__key = new_value;
-	}
-
-	// Description of why this constraint is necessary or appropriate.
-	get requirements() {
-		return this.__requirements;
-	}
-
-	set requirements(new_value) {
-		this.__requirements = new_value;
-	}
-
-	// Identifies the impact constraint violation has on the conformance of the instance.
-	get severity() {
-		return this.__severity;
-	}
-
-	set severity(new_value) {
-		this.__severity = new_value;
-	}
-
-	// Text that can be used to describe the constraint in messages identifying that the constraint has been violated.
-	get human() {
-		return this.__human;
-	}
-
-	set human(new_value) {
-		this.__human = new_value;
-	}
-
-	// A [FHIRPath](http://hl7.org/fluentpath) expression of constraint that can be executed to see if this constraint is met.
-	get expression() {
-		return this.__expression;
-	}
-
-	set expression(new_value) {
-		this.__expression = new_value;
-	}
-
-	// An XPath expression of constraint that can be executed to see if this constraint is met.
-	get xpath() {
-		return this.__xpath;
-	}
-
-	set xpath(new_value) {
-		this.__xpath = new_value;
-	}
-
-	// A reference to the original source of the constraint, for traceability purposes.
-	get source() {
-		return this.__source;
-	}
-
-	set source(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field source`);
-		}
-		this.__source = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			key: this.__key,
-			requirements: this.__requirements,
-			severity: this.__severity,
-			human: this.__human,
-			expression: this.__expression,
-			xpath: this.__xpath,
-			source: this.__source,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_key: this._key && this._key.toJSON(),
+			key: this.key,
+			_requirements: this._requirements && this._requirements.toJSON(),
+			requirements: this.requirements,
+			_severity: this._severity && this._severity.toJSON(),
+			severity: this.severity,
+			_human: this._human && this._human.toJSON(),
+			human: this.human,
+			_expression: this._expression && this._expression.toJSON(),
+			expression: this.expression,
+			_xpath: this._xpath && this._xpath.toJSON(),
+			xpath: this.xpath,
+			_source: this._source && this._source.toJSON(),
+			source: this.source,
+		};
 	}
-}
-
-module.exports = ElementDefinitionConstraint;
+};

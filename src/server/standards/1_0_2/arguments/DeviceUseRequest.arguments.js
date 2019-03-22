@@ -1,20 +1,28 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the deviceuserequest query
+ */
 module.exports = {
-	DEVICE: {
-		name: 'device',
+	device: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceUseRequest.device',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-device',
-		documentation: 'Device requested.',
+		description: 'Device requested',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceUseRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-patient',
-		documentation: 'Search by subject - a patient.',
+		description: 'Search by subject - a patient',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceUseRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceUseRequest-subject',
-		documentation: 'Search by subject.',
+		description: 'Search by subject',
 	},
 };

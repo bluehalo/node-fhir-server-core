@@ -1,280 +1,666 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const IdScalar = require('./scalars/Id.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary Conformance Class
+ */
+module.exports = class Conformance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Conformance extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Conformance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/conformance-resource-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceContact = require('./conformancecontact.js');
+				this.__data.contact = Array.isArray(value)
+					? value.map(v => new ConformanceContact(v))
+					: [new ConformanceContact(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_requirements', {
+			enumerable: true,
+			get: () => this.__data._requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requirements = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requirements', {
+			enumerable: true,
+			get: () => this.__data.requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requirements = value;
+			},
+		});
+
+		Object.defineProperty(this, '_copyright', {
+			enumerable: true,
+			get: () => this.__data._copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._copyright = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'copyright', {
+			enumerable: true,
+			get: () => this.__data.copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.copyright = value;
+			},
+		});
+
+		Object.defineProperty(this, '_kind', {
+			enumerable: true,
+			get: () => this.__data._kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._kind = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/conformance-statement-kind
+		Object.defineProperty(this, 'kind', {
+			enumerable: true,
+			get: () => this.__data.kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.kind = value;
+			},
+		});
+
+		Object.defineProperty(this, 'software', {
+			enumerable: true,
+			get: () => this.__data.software,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceSoftware = require('./conformancesoftware.js');
+				this.__data.software = new ConformanceSoftware(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implementation', {
+			enumerable: true,
+			get: () => this.__data.implementation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceImplementation = require('./conformanceimplementation.js');
+				this.__data.implementation = new ConformanceImplementation(value);
+			},
+		});
+
+		Object.defineProperty(this, '_fhirVersion', {
+			enumerable: true,
+			get: () => this.__data._fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fhirVersion = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fhirVersion', {
+			enumerable: true,
+			get: () => this.__data.fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fhirVersion = value;
+			},
+		});
+
+		Object.defineProperty(this, '_acceptUnknown', {
+			enumerable: true,
+			get: () => this.__data._acceptUnknown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._acceptUnknown = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/unknown-content-code
+		Object.defineProperty(this, 'acceptUnknown', {
+			enumerable: true,
+			get: () => this.__data.acceptUnknown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.acceptUnknown = value;
+			},
+		});
+
+		Object.defineProperty(this, '_format', {
+			enumerable: true,
+			get: () => this.__data._format,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._format = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'format', {
+			enumerable: true,
+			get: () => this.__data.format,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.format = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'profile', {
+			enumerable: true,
+			get: () => this.__data.profile,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.profile = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'rest', {
+			enumerable: true,
+			get: () => this.__data.rest,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceRest = require('./conformancerest.js');
+				this.__data.rest = Array.isArray(value) ? value.map(v => new ConformanceRest(v)) : [new ConformanceRest(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'messaging', {
+			enumerable: true,
+			get: () => this.__data.messaging,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceMessaging = require('./conformancemessaging.js');
+				this.__data.messaging = Array.isArray(value)
+					? value.map(v => new ConformanceMessaging(v))
+					: [new ConformanceMessaging(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'document', {
+			enumerable: true,
+			get: () => this.__data.document,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceDocument = require('./conformancedocument.js');
+				this.__data.document = Array.isArray(value)
+					? value.map(v => new ConformanceDocument(v))
+					: [new ConformanceDocument(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Conformance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Conformance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Conformance';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Conformance = new_value;
-	}
-
-	// An absolute URL that is used to identify this conformance statement when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this conformance statement is (or will be) published.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// The identifier that is used to identify this version of the conformance statement when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// A free text natural language name identifying the conformance statement.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The status of this conformance statement.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A flag to indicate that this conformance statement is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The name of the individual or organization that published the conformance.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contacts to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ConformanceContact = require('./ConformanceContact');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceContact(val))
-			: [new ConformanceContact(new_value)];
-	}
-
-	// The date  (and optionally time) when the conformance statement was published. The date must change when the business version changes, if it does, and it must change if the status code changes. In addition, it should change when the substantive content of the conformance statement changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// A free text natural language description of the conformance statement and its use. Typically, this is used when the conformance statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Explains why this conformance statement is needed and why it\'s been constrained as it has.
-	get requirements() {
-		return this.__requirements;
-	}
-
-	set requirements(new_value) {
-		this.__requirements = new_value;
-	}
-
-	// A copyright statement relating to the conformance statement and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the details of the system described by the conformance statement.
-	get copyright() {
-		return this.__copyright;
-	}
-
-	set copyright(new_value) {
-		this.__copyright = new_value;
-	}
-
-	// The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind not instance of software) or a class of implementation (e.g. a desired purchase).
-	get kind() {
-		return this.__kind;
-	}
-
-	set kind(new_value) {
-		this.__kind = new_value;
-	}
-
-	// Software that is covered by this conformance statement.  It is used when the conformance statement describes the capabilities of a particular software version, independent of an installation.
-	get software() {
-		return this.__software;
-	}
-
-	set software(new_value) {
-		const ConformanceSoftware = require('./ConformanceSoftware');
-		this.__software = new ConformanceSoftware(new_value);
-	}
-
-	// Identifies a specific implementation instance that is described by the conformance statement - i.e. a particular installation, rather than the capabilities of a software program.
-	get implementation() {
-		return this.__implementation;
-	}
-
-	set implementation(new_value) {
-		const ConformanceImplementation = require('./ConformanceImplementation');
-		this.__implementation = new ConformanceImplementation(new_value);
-	}
-
-	// The version of the FHIR specification on which this conformance statement is based.
-	get fhirVersion() {
-		return this.__fhirVersion;
-	}
-
-	set fhirVersion(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fhirVersion`);
-		}
-		this.__fhirVersion = new_value;
-	}
-
-	// A code that indicates whether the application accepts unknown elements or extensions when reading resources.
-	get acceptUnknown() {
-		return this.__acceptUnknown;
-	}
-
-	set acceptUnknown(new_value) {
-		this.__acceptUnknown = new_value;
-	}
-
-	// A list of the formats supported by this implementation using their content types.
-	get format() {
-		return this.__format;
-	}
-
-	set format(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field format`);
-		}
-		this.__format = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A list of profiles that represent different use cases supported by the system. For a server, \'supported by the system\' means the system hosts/produces a set of resources that are conformant to a particular profile, and allows clients that use its services to search using this profile and to find appropriate data. For a client, it means the system will search by this profile and process data according to the guidance implicit in the profile. See further discussion in [Using Profiles]{profiling.html#profile-uses}.
-	get profile() {
-		return this.__profile;
-	}
-
-	set profile(new_value) {
-		const Reference = require('./Reference');
-		this.__profile = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A definition of the restful capabilities of the solution, if any.
-	get rest() {
-		return this.__rest;
-	}
-
-	set rest(new_value) {
-		const ConformanceRest = require('./ConformanceRest');
-		this.__rest = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceRest(val))
-			: [new ConformanceRest(new_value)];
-	}
-
-	// A description of the messaging capabilities of the solution.
-	get messaging() {
-		return this.__messaging;
-	}
-
-	set messaging(new_value) {
-		const ConformanceMessaging = require('./ConformanceMessaging');
-		this.__messaging = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceMessaging(val))
-			: [new ConformanceMessaging(new_value)];
-	}
-
-	// A document definition.
-	get document() {
-		return this.__document;
-	}
-
-	set document(new_value) {
-		const ConformanceDocument = require('./ConformanceDocument');
-		this.__document = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceDocument(val))
-			: [new ConformanceDocument(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			version: this.__version,
-			name: this.__name,
-			status: this.__status,
-			experimental: this.__experimental,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			date: this.__date,
-			description: this.__description,
-			requirements: this.__requirements,
-			copyright: this.__copyright,
-			kind: this.__kind,
-			software: this.__software && this.__software.toJSON(),
-			implementation: this.__implementation && this.__implementation.toJSON(),
-			fhirVersion: this.__fhirVersion,
-			acceptUnknown: this.__acceptUnknown,
-			format: this.__format,
-			profile: this.__profile && this.__profile.map(v => v.toJSON()),
-			rest: this.__rest && this.__rest.map(v => v.toJSON()),
-			messaging: this.__messaging && this.__messaging.map(v => v.toJSON()),
-			document: this.__document && this.__document.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_requirements: this._requirements && this._requirements.toJSON(),
+			requirements: this.requirements,
+			_copyright: this._copyright && this._copyright.toJSON(),
+			copyright: this.copyright,
+			_kind: this._kind && this._kind.toJSON(),
+			kind: this.kind,
+			software: this.software && this.software.toJSON(),
+			implementation: this.implementation && this.implementation.toJSON(),
+			_fhirVersion: this._fhirVersion && this._fhirVersion.toJSON(),
+			fhirVersion: this.fhirVersion,
+			_acceptUnknown: this._acceptUnknown && this._acceptUnknown.toJSON(),
+			acceptUnknown: this.acceptUnknown,
+			_format: this._format && this._format.toJSON(),
+			format: this.format,
+			profile: this.profile && this.profile.map(v => v.toJSON()),
+			rest: this.rest && this.rest.map(v => v.toJSON()),
+			messaging: this.messaging && this.messaging.map(v => v.toJSON()),
+			document: this.document && this.document.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Conformance;
+};

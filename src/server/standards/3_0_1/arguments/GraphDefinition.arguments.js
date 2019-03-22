@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the graphdefinition query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'GraphDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-date',
-		documentation: 'The graph definition publication date.',
+		description: 'The graph definition publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'GraphDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-description',
-		documentation: 'The description of the graph definition.',
+		description: 'The description of the graph definition',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GraphDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the graph definition.',
+		description: 'Intended jurisdiction for the graph definition',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'GraphDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-name',
-		documentation: 'Computationally friendly name of the graph definition.',
+		description: 'Computationally friendly name of the graph definition',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'GraphDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-publisher',
-		documentation: 'Name of the publisher of the graph definition.',
+		description: 'Name of the publisher of the graph definition',
 	},
-	START: {
-		name: 'start',
+	start: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GraphDefinition.start',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-start',
-		documentation: 'Type of resource at which the graph starts.',
+		description: 'Type of resource at which the graph starts',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GraphDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-status',
-		documentation: 'The current status of the graph definition.',
+		description: 'The current status of the graph definition',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'GraphDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-url',
-		documentation: 'The uri that identifies the graph definition.',
+		description: 'The uri that identifies the graph definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GraphDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/GraphDefinition-version',
-		documentation: 'The business version of the graph definition.',
+		description: 'The business version of the graph definition',
 	},
 };

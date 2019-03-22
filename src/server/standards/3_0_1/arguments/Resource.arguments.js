@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the resource query
+ */
 module.exports = {
-	_CONTENT: {
-		name: '_content',
+	_content: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-content',
-		documentation: 'Search on the entire content of the resource.',
+		description: 'Search on the entire content of the resource',
 	},
-	_ID: {
-		name: '_id',
+	_id: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Resource.id',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-id',
-		documentation: 'Logical id of this artifact.',
+		description: 'Logical id of this artifact',
 	},
-	_LASTUPDATED: {
-		name: '_lastUpdated',
+	_lastUpdated: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Resource.meta.lastUpdated',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-lastUpdated',
-		documentation: 'When the resource version last changed.',
+		description: 'When the resource version last changed',
 	},
-	_PROFILE: {
-		name: '_profile',
+	_profile: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Resource.meta.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-profile',
-		documentation: 'Profiles this resource claims to conform to.',
+		description: 'Profiles this resource claims to conform to',
 	},
-	_QUERY: {
-		name: '_query',
+	_query: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-query',
-		documentation: 'A custom search profile that describes a specific defined query operation.',
+		description: 'A custom search profile that describes a specific defined query operation',
 	},
-	_SECURITY: {
-		name: '_security',
+	_security: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Resource.meta.security',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-security',
-		documentation: 'Security Labels applied to this resource.',
+		description: 'Security Labels applied to this resource',
 	},
-	_TAG: {
-		name: '_tag',
+	_tag: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Resource.meta.tag',
 		definition: 'http://hl7.org/fhir/SearchParameter/Resource-tag',
-		documentation: 'Tags applied to this resource.',
+		description: 'Tags applied to this resource',
 	},
 };

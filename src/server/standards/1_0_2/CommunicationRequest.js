@@ -1,212 +1,439 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary CommunicationRequest Class
+ */
+module.exports = class CommunicationRequest {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CommunicationRequest extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CommunicationRequest';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sender', {
+			enumerable: true,
+			get: () => this.__data.sender,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.sender = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recipient', {
+			enumerable: true,
+			get: () => this.__data.recipient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.recipient = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'payload', {
+			enumerable: true,
+			get: () => this.__data.payload,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CommunicationRequestPayload = require('./communicationrequestpayload.js');
+				this.__data.payload = Array.isArray(value)
+					? value.map(v => new CommunicationRequestPayload(v))
+					: [new CommunicationRequestPayload(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ParticipationMode
+		Object.defineProperty(this, 'medium', {
+			enumerable: true,
+			get: () => this.__data.medium,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.medium = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'requester', {
+			enumerable: true,
+			get: () => this.__data.requester,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.requester = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/communication-request-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_scheduledDateTime', {
+			enumerable: true,
+			get: () => this.__data._scheduledDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._scheduledDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'scheduledDateTime', {
+			enumerable: true,
+			get: () => this.__data.scheduledDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.scheduledDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'scheduledPeriod', {
+			enumerable: true,
+			get: () => this.__data.scheduledPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.scheduledPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_requestedOn', {
+			enumerable: true,
+			get: () => this.__data._requestedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requestedOn = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requestedOn', {
+			enumerable: true,
+			get: () => this.__data.requestedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requestedOn = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.priority = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CommunicationRequest',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CommunicationRequest resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CommunicationRequest';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__CommunicationRequest = new_value;
-	}
-
-	// A unique ID of this request for reference purposes. It must be provided if user wants it returned as part of any output, otherwise it will be autogenerated, if needed, by CDS system. Does not need to be the actual ID of the source system.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The type of message to be sent such as alert, notification, reminder, instruction, etc.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = new CodeableConcept(new_value);
-	}
-
-	// The entity (e.g. person, organization, clinical information system, or device) which is to be the source of the communication.
-	get sender() {
-		return this.__sender;
-	}
-
-	set sender(new_value) {
-		const Reference = require('./Reference');
-		this.__sender = new Reference(new_value);
-	}
-
-	// The entity (e.g. person, organization, clinical information system, or device) which is the intended target of the communication.
-	get recipient() {
-		return this.__recipient;
-	}
-
-	set recipient(new_value) {
-		const Reference = require('./Reference');
-		this.__recipient = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Text, attachment(s), or resource(s) to be communicated to the recipient.
-	get payload() {
-		return this.__payload;
-	}
-
-	set payload(new_value) {
-		const CommunicationRequestPayload = require('./CommunicationRequestPayload');
-		this.__payload = Array.isArray(new_value)
-			? new_value.map(val => new CommunicationRequestPayload(val))
-			: [new CommunicationRequestPayload(new_value)];
-	}
-
-	// A channel that was used for this communication (e.g. email, fax).
-	get medium() {
-		return this.__medium;
-	}
-
-	set medium(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__medium = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The responsible person who authorizes this order, e.g. physician. This may be different than the author of the order statement, e.g. clerk, who may have entered the statement into the order entry application.
-	get requester() {
-		return this.__requester;
-	}
-
-	set requester(new_value) {
-		const Reference = require('./Reference');
-		this.__requester = new Reference(new_value);
-	}
-
-	// The status of the proposal or order.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The encounter within which the communication request was created.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The time when this communication is to occur.
-	get scheduledDateTime() {
-		return this.__scheduledDateTime;
-	}
-
-	set scheduledDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field scheduledDateTime`);
-		}
-		this.__scheduledDateTime = new_value;
-	}
-
-	// The time when this communication is to occur.
-	get scheduledPeriod() {
-		return this.__scheduledPeriod;
-	}
-
-	set scheduledPeriod(new_value) {
-		const Period = require('./Period');
-		this.__scheduledPeriod = new Period(new_value);
-	}
-
-	// The reason or justification for the communication request.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The time when the request was made.
-	get requestedOn() {
-		return this.__requestedOn;
-	}
-
-	set requestedOn(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field requestedOn`);
-		}
-		this.__requestedOn = new_value;
-	}
-
-	// The patient who is the focus of this communication request.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// Characterizes how quickly the proposed act must be initiated. Includes concepts such as stat, urgent, routine.
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__priority = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			category: this.__category && this.__category.toJSON(),
-			sender: this.__sender && this.__sender.toJSON(),
-			recipient: this.__recipient && this.__recipient.map(v => v.toJSON()),
-			payload: this.__payload && this.__payload.map(v => v.toJSON()),
-			medium: this.__medium && this.__medium.map(v => v.toJSON()),
-			requester: this.__requester && this.__requester.toJSON(),
-			status: this.__status,
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			scheduledDateTime: this.__scheduledDateTime,
-			scheduledPeriod: this.__scheduledPeriod && this.__scheduledPeriod.toJSON(),
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			requestedOn: this.__requestedOn,
-			subject: this.__subject && this.__subject.toJSON(),
-			priority: this.__priority && this.__priority.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			category: this.category && this.category.toJSON(),
+			sender: this.sender && this.sender.toJSON(),
+			recipient: this.recipient && this.recipient.map(v => v.toJSON()),
+			payload: this.payload && this.payload.map(v => v.toJSON()),
+			medium: this.medium && this.medium.map(v => v.toJSON()),
+			requester: this.requester && this.requester.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			encounter: this.encounter && this.encounter.toJSON(),
+			_scheduledDateTime: this._scheduledDateTime && this._scheduledDateTime.toJSON(),
+			scheduledDateTime: this.scheduledDateTime,
+			scheduledPeriod: this.scheduledPeriod && this.scheduledPeriod.toJSON(),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			_requestedOn: this._requestedOn && this._requestedOn.toJSON(),
+			requestedOn: this.requestedOn,
+			subject: this.subject && this.subject.toJSON(),
+			priority: this.priority && this.priority.toJSON(),
+		};
 	}
-}
-
-module.exports = CommunicationRequest;
+};

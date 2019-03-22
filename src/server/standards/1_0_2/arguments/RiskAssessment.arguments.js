@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the riskassessment query
+ */
 module.exports = {
-	CONDITION: {
-		name: 'condition',
+	condition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RiskAssessment.condition',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-condition',
-		documentation: 'Condition assessed.',
+		description: 'Condition assessed',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'RiskAssessment.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-date',
-		documentation: 'When was assessment made?.',
+		description: 'When was assessment made?',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RiskAssessment.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-encounter',
-		documentation: 'Where was assessment performed?.',
+		description: 'Where was assessment performed?',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RiskAssessment.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-identifier',
-		documentation: 'Unique identifier for the assessment.',
+		description: 'Unique identifier for the assessment',
 	},
-	METHOD: {
-		name: 'method',
+	method: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RiskAssessment.method',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-method',
-		documentation: 'Evaluation mechanism.',
+		description: 'Evaluation mechanism',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RiskAssessment.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-patient',
-		documentation: 'Who/what does assessment apply to?.',
+		description: 'Who/what does assessment apply to?',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RiskAssessment.performer',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-performer',
-		documentation: 'Who did assessment?.',
+		description: 'Who did assessment?',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RiskAssessment.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/RiskAssessment-subject',
-		documentation: 'Who/what does assessment apply to?.',
+		description: 'Who/what does assessment apply to?',
 	},
 };

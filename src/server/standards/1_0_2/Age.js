@@ -1,20 +1,30 @@
-const Quantity = require('./Quantity');
+/**
+ * @name exports
+ * @summary Age Class
+ */
+module.exports = class Age {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Age extends Quantity {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Age';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Age',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Age resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Age';
 	}
 
 	toJSON() {
-		return Object.assign(super.toJSON(), {});
+		return {};
 	}
-}
-
-module.exports = Age;
+};

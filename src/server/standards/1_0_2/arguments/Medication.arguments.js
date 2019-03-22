@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medication query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-code',
-		documentation: 'Codes that identify this medication.',
+		description: 'Codes that identify this medication',
 	},
-	CONTAINER: {
-		name: 'container',
+	container: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.package.container',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-container',
-		documentation: 'E.g. box, vial, blister-pack.',
+		description: 'E.g. box, vial, blister-pack',
 	},
-	CONTENT: {
-		name: 'content',
+	content: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.package.content.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-content',
-		documentation: 'A product in the package.',
+		description: 'A product in the package',
 	},
-	FORM: {
-		name: 'form',
+	form: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Medication.product.form',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-form',
-		documentation: 'powder | tablets | carton +.',
+		description: 'powder | tablets | carton +',
 	},
-	INGREDIENT: {
-		name: 'ingredient',
+	ingredient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.product.ingredient.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-ingredient',
-		documentation: 'The product contained.',
+		description: 'The product contained',
 	},
-	MANUFACTURER: {
-		name: 'manufacturer',
+	manufacturer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Medication.manufacturer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Medication-manufacturer',
-		documentation: 'Manufacturer of the item.',
+		description: 'Manufacturer of the item',
 	},
 };

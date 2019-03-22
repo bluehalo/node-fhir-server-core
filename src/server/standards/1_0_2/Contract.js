@@ -1,265 +1,473 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Contract Class
+ */
+module.exports = class Contract {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Contract extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Contract';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_issued', {
+			enumerable: true,
+			get: () => this.__data._issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._issued = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'issued', {
+			enumerable: true,
+			get: () => this.__data.issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.issued = value;
+			},
+		});
+
+		Object.defineProperty(this, 'applies', {
+			enumerable: true,
+			get: () => this.__data.applies,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.applies = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'authority', {
+			enumerable: true,
+			get: () => this.__data.authority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.authority = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'domain', {
+			enumerable: true,
+			get: () => this.__data.domain,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.domain = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-subtype
+		Object.defineProperty(this, 'subType', {
+			enumerable: true,
+			get: () => this.__data.subType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.subType = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-action
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.action = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'actionReason', {
+			enumerable: true,
+			get: () => this.__data.actionReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.actionReason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'actor', {
+			enumerable: true,
+			get: () => this.__data.actor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractActor = require('./contractactor.js');
+				this.__data.actor = Array.isArray(value) ? value.map(v => new ContractActor(v)) : [new ContractActor(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'valuedItem', {
+			enumerable: true,
+			get: () => this.__data.valuedItem,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractValuedItem = require('./contractvalueditem.js');
+				this.__data.valuedItem = Array.isArray(value)
+					? value.map(v => new ContractValuedItem(v))
+					: [new ContractValuedItem(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'signer', {
+			enumerable: true,
+			get: () => this.__data.signer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractSigner = require('./contractsigner.js');
+				this.__data.signer = Array.isArray(value) ? value.map(v => new ContractSigner(v)) : [new ContractSigner(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'term', {
+			enumerable: true,
+			get: () => this.__data.term,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractTerm = require('./contractterm.js');
+				this.__data.term = Array.isArray(value) ? value.map(v => new ContractTerm(v)) : [new ContractTerm(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'bindingAttachment', {
+			enumerable: true,
+			get: () => this.__data.bindingAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.bindingAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'bindingReference', {
+			enumerable: true,
+			get: () => this.__data.bindingReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.bindingReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'friendly', {
+			enumerable: true,
+			get: () => this.__data.friendly,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractFriendly = require('./contractfriendly.js');
+				this.__data.friendly = Array.isArray(value)
+					? value.map(v => new ContractFriendly(v))
+					: [new ContractFriendly(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'legal', {
+			enumerable: true,
+			get: () => this.__data.legal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractLegal = require('./contractlegal.js');
+				this.__data.legal = Array.isArray(value) ? value.map(v => new ContractLegal(v)) : [new ContractLegal(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'rule', {
+			enumerable: true,
+			get: () => this.__data.rule,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractRule = require('./contractrule.js');
+				this.__data.rule = Array.isArray(value) ? value.map(v => new ContractRule(v)) : [new ContractRule(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Contract',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Contract resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Contract';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Contract = new_value;
-	}
-
-	// Unique identifier for this Contract.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// When this  Contract was issued.
-	get issued() {
-		return this.__issued;
-	}
-
-	set issued(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field issued`);
-		}
-		this.__issued = new_value;
-	}
-
-	// Relevant time or time-period when this Contract is applicable.
-	get applies() {
-		return this.__applies;
-	}
-
-	set applies(new_value) {
-		const Period = require('./Period');
-		this.__applies = new Period(new_value);
-	}
-
-	// Who and/or what this Contract is about: typically a Patient, Organization, or valued items such as goods and services.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies.
-	get authority() {
-		return this.__authority;
-	}
-
-	set authority(new_value) {
-		const Reference = require('./Reference');
-		this.__authority = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources.
-	get domain() {
-		return this.__domain;
-	}
-
-	set domain(new_value) {
-		const Reference = require('./Reference');
-		this.__domain = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Type of Contract such as an insurance policy, real estate contract, a will, power of attorny, Privacy or Security policy , trust framework agreement, etc.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// More specific type or specialization of an overarching or more general contract such as auto insurance, home owner  insurance, prenupial agreement, Advanced-Directive, or privacy consent.
-	get subType() {
-		return this.__subType;
-	}
-
-	set subType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__subType = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Action stipulated by this Contract.
-	get action() {
-		return this.__action;
-	}
-
-	set action(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__action = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Reason for action stipulated by this Contract.
-	get actionReason() {
-		return this.__actionReason;
-	}
-
-	set actionReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__actionReason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// List of Contract actors.
-	get actor() {
-		return this.__actor;
-	}
-
-	set actor(new_value) {
-		const ContractActor = require('./ContractActor');
-		this.__actor = Array.isArray(new_value)
-			? new_value.map(val => new ContractActor(val))
-			: [new ContractActor(new_value)];
-	}
-
-	// Contract Valued Item List.
-	get valuedItem() {
-		return this.__valuedItem;
-	}
-
-	set valuedItem(new_value) {
-		const ContractValuedItem = require('./ContractValuedItem');
-		this.__valuedItem = Array.isArray(new_value)
-			? new_value.map(val => new ContractValuedItem(val))
-			: [new ContractValuedItem(new_value)];
-	}
-
-	// Party signing this Contract.
-	get signer() {
-		return this.__signer;
-	}
-
-	set signer(new_value) {
-		const ContractSigner = require('./ContractSigner');
-		this.__signer = Array.isArray(new_value)
-			? new_value.map(val => new ContractSigner(val))
-			: [new ContractSigner(new_value)];
-	}
-
-	// One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups.
-	get term() {
-		return this.__term;
-	}
-
-	set term(new_value) {
-		const ContractTerm = require('./ContractTerm');
-		this.__term = Array.isArray(new_value)
-			? new_value.map(val => new ContractTerm(val))
-			: [new ContractTerm(new_value)];
-	}
-
-	// Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the \'source of truth\' and which would be the basis for legal action related to enforcement of this Contract.
-	get bindingAttachment() {
-		return this.__bindingAttachment;
-	}
-
-	set bindingAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__bindingAttachment = new Attachment(new_value);
-	}
-
-	// Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the \'source of truth\' and which would be the basis for legal action related to enforcement of this Contract.
-	get bindingReference() {
-		return this.__bindingReference;
-	}
-
-	set bindingReference(new_value) {
-		const Reference = require('./Reference');
-		this.__bindingReference = new Reference(new_value);
-	}
-
-	// The \'patient friendly language\' versionof the Contract in whole or in parts. \'Patient friendly language\' means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.
-	get friendly() {
-		return this.__friendly;
-	}
-
-	set friendly(new_value) {
-		const ContractFriendly = require('./ContractFriendly');
-		this.__friendly = Array.isArray(new_value)
-			? new_value.map(val => new ContractFriendly(val))
-			: [new ContractFriendly(new_value)];
-	}
-
-	// List of Legal expressions or representations of this Contract.
-	get legal() {
-		return this.__legal;
-	}
-
-	set legal(new_value) {
-		const ContractLegal = require('./ContractLegal');
-		this.__legal = Array.isArray(new_value)
-			? new_value.map(val => new ContractLegal(val))
-			: [new ContractLegal(new_value)];
-	}
-
-	// List of Computable Policy Rule Language Representations of this Contract.
-	get rule() {
-		return this.__rule;
-	}
-
-	set rule(new_value) {
-		const ContractRule = require('./ContractRule');
-		this.__rule = Array.isArray(new_value)
-			? new_value.map(val => new ContractRule(val))
-			: [new ContractRule(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			issued: this.__issued,
-			applies: this.__applies && this.__applies.toJSON(),
-			subject: this.__subject && this.__subject.map(v => v.toJSON()),
-			authority: this.__authority && this.__authority.map(v => v.toJSON()),
-			domain: this.__domain && this.__domain.map(v => v.toJSON()),
-			type: this.__type && this.__type.toJSON(),
-			subType: this.__subType && this.__subType.map(v => v.toJSON()),
-			action: this.__action && this.__action.map(v => v.toJSON()),
-			actionReason: this.__actionReason && this.__actionReason.map(v => v.toJSON()),
-			actor: this.__actor && this.__actor.map(v => v.toJSON()),
-			valuedItem: this.__valuedItem && this.__valuedItem.map(v => v.toJSON()),
-			signer: this.__signer && this.__signer.map(v => v.toJSON()),
-			term: this.__term && this.__term.map(v => v.toJSON()),
-			bindingAttachment: this.__bindingAttachment && this.__bindingAttachment.toJSON(),
-			bindingReference: this.__bindingReference && this.__bindingReference.toJSON(),
-			friendly: this.__friendly && this.__friendly.map(v => v.toJSON()),
-			legal: this.__legal && this.__legal.map(v => v.toJSON()),
-			rule: this.__rule && this.__rule.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_issued: this._issued && this._issued.toJSON(),
+			issued: this.issued,
+			applies: this.applies && this.applies.toJSON(),
+			subject: this.subject && this.subject.map(v => v.toJSON()),
+			authority: this.authority && this.authority.map(v => v.toJSON()),
+			domain: this.domain && this.domain.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			subType: this.subType && this.subType.map(v => v.toJSON()),
+			action: this.action && this.action.map(v => v.toJSON()),
+			actionReason: this.actionReason && this.actionReason.map(v => v.toJSON()),
+			actor: this.actor && this.actor.map(v => v.toJSON()),
+			valuedItem: this.valuedItem && this.valuedItem.map(v => v.toJSON()),
+			signer: this.signer && this.signer.map(v => v.toJSON()),
+			term: this.term && this.term.map(v => v.toJSON()),
+			bindingAttachment: this.bindingAttachment && this.bindingAttachment.toJSON(),
+			bindingReference: this.bindingReference && this.bindingReference.toJSON(),
+			friendly: this.friendly && this.friendly.map(v => v.toJSON()),
+			legal: this.legal && this.legal.map(v => v.toJSON()),
+			rule: this.rule && this.rule.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Contract;
+};

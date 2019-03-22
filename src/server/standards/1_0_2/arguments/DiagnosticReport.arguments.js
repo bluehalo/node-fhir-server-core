@@ -1,93 +1,113 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the diagnosticreport query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DiagnosticReport.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-category',
-		documentation: 'Which diagnostic discipline/department created the report.',
+		description: 'Which diagnostic discipline/department created the report',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DiagnosticReport.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-code',
-		documentation:
-			'The code for the report as a whole, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result.',
+		description:
+			'The code for the report as a whole, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DiagnosticReport.effectiveDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-date',
-		documentation: 'The clinically relevant time of the report.',
+		description: 'The clinically relevant time of the report',
 	},
-	DIAGNOSIS: {
-		name: 'diagnosis',
+	diagnosis: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DiagnosticReport.codedDiagnosis',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-diagnosis',
-		documentation: 'A coded diagnosis on the report.',
+		description: 'A coded diagnosis on the report',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-encounter',
-		documentation: 'The Encounter when the order was made.',
+		description: 'The Encounter when the order was made',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DiagnosticReport.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-identifier',
-		documentation: 'An identifier for the report.',
+		description: 'An identifier for the report',
 	},
-	IMAGE: {
-		name: 'image',
+	image: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.image.link',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-image',
-		documentation: 'A reference to the image source.',
+		description: 'A reference to the image source.',
 	},
-	ISSUED: {
-		name: 'issued',
+	issued: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DiagnosticReport.issued',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-issued',
-		documentation: 'When the report was issued.',
+		description: 'When the report was issued',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-patient',
-		documentation: 'The subject of the report if a patient.',
+		description: 'The subject of the report if a patient',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.performer',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-performer',
-		documentation: 'Who was the source of the report (organization).',
+		description: 'Who was the source of the report (organization)',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-request',
-		documentation: 'Reference to the test or procedure request.',
+		description: 'Reference to the test or procedure request.',
 	},
-	RESULT: {
-		name: 'result',
+	result: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.result',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-result',
-		documentation: 'Link to an atomic result (observation resource).',
+		description: 'Link to an atomic result (observation resource)',
 	},
-	SPECIMEN: {
-		name: 'specimen',
+	specimen: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.specimen',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-specimen',
-		documentation: 'The specimen details.',
+		description: 'The specimen details',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DiagnosticReport.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-status',
-		documentation: 'The status of the report.',
+		description: 'The status of the report',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DiagnosticReport.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/DiagnosticReport-subject',
-		documentation: 'The subject of the report.',
+		description: 'The subject of the report',
 	},
 };

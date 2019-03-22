@@ -1,257 +1,520 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary CarePlan Class
+ */
+module.exports = class CarePlan {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CarePlan extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CarePlan';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.definition = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'replaces', {
+			enumerable: true,
+			get: () => this.__data.replaces,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.replaces = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'partOf', {
+			enumerable: true,
+			get: () => this.__data.partOf,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.partOf = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/care-plan-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_intent', {
+			enumerable: true,
+			get: () => this.__data._intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._intent = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/care-plan-intent
+		Object.defineProperty(this, 'intent', {
+			enumerable: true,
+			get: () => this.__data.intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.intent = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/care-plan-category
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_title', {
+			enumerable: true,
+			get: () => this.__data._title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._title = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.title = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'careTeam', {
+			enumerable: true,
+			get: () => this.__data.careTeam,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.careTeam = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'addresses', {
+			enumerable: true,
+			get: () => this.__data.addresses,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.addresses = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInfo', {
+			enumerable: true,
+			get: () => this.__data.supportingInfo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInfo = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'goal', {
+			enumerable: true,
+			get: () => this.__data.goal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.goal = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'activity', {
+			enumerable: true,
+			get: () => this.__data.activity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CarePlanActivity = require('./careplanactivity.js');
+				this.__data.activity = Array.isArray(value)
+					? value.map(v => new CarePlanActivity(v))
+					: [new CarePlanActivity(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CarePlan',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CarePlan resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CarePlan';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__CarePlan = new_value;
-	}
-
-	// This records identifiers associated with this care plan that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Identifies the protocol, questionnaire, guideline or other specification the care plan should be conducted in accordance with.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// A care plan that is fulfilled in whole or in part by this care plan.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Completed or terminated care plan whose function is taken by this new care plan.
-	get replaces() {
-		return this.__replaces;
-	}
-
-	set replaces(new_value) {
-		const Reference = require('./Reference');
-		this.__replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A larger care plan of which this particular care plan is a component or step.
-	get partOf() {
-		return this.__partOf;
-	}
-
-	set partOf(new_value) {
-		const Reference = require('./Reference');
-		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Indicates whether the plan is currently being acted upon, represents future intentions or is now a historical record.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Indicates the level of authority/intentionality associated with the care plan and where the care plan fits into the workflow chain.
-	get intent() {
-		return this.__intent;
-	}
-
-	set intent(new_value) {
-		this.__intent = new_value;
-	}
-
-	// Identifies what \'kind\' of plan this is to support differentiation between multiple co-existing plans; e.g. \'Home health\', \'psychiatric\', \'asthma\', \'disease management\', \'wellness plan\', etc.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Human-friendly name for the CarePlan.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		this.__title = new_value;
-	}
-
-	// A description of the scope and nature of the plan.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Identifies the patient or group whose intended care is described by the plan.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// Identifies the original context in which this particular CarePlan was created.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// Indicates when the plan did (or is intended to) come into effect and end.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// Identifies the individual(s) or ogranization who is responsible for the content of the care plan.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Identifies all people and organizations who are expected to be involved in the care envisioned by this plan.
-	get careTeam() {
-		return this.__careTeam;
-	}
-
-	set careTeam(new_value) {
-		const Reference = require('./Reference');
-		this.__careTeam = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Identifies the conditions/problems/concerns/diagnoses/etc. whose management and/or mitigation are handled by this plan.
-	get addresses() {
-		return this.__addresses;
-	}
-
-	set addresses(new_value) {
-		const Reference = require('./Reference');
-		this.__addresses = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Identifies portions of the patient\'s record that specifically influenced the formation of the plan.  These might include co-morbidities, recent procedures, limitations, recent assessments, etc.
-	get supportingInfo() {
-		return this.__supportingInfo;
-	}
-
-	set supportingInfo(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInfo = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Describes the intended objective(s) of carrying out the care plan.
-	get goal() {
-		return this.__goal;
-	}
-
-	set goal(new_value) {
-		const Reference = require('./Reference');
-		this.__goal = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.
-	get activity() {
-		return this.__activity;
-	}
-
-	set activity(new_value) {
-		const CarePlanActivity = require('./CarePlanActivity');
-		this.__activity = Array.isArray(new_value)
-			? new_value.map(val => new CarePlanActivity(val))
-			: [new CarePlanActivity(new_value)];
-	}
-
-	// General notes about the care plan not covered elsewhere.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			definition: this.__definition && this.__definition.map(v => v.toJSON()),
-			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
-			replaces: this.__replaces && this.__replaces.map(v => v.toJSON()),
-			partOf: this.__partOf && this.__partOf.map(v => v.toJSON()),
-			status: this.__status,
-			intent: this.__intent,
-			category: this.__category && this.__category.map(v => v.toJSON()),
-			title: this.__title,
-			description: this.__description,
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			author: this.__author && this.__author.map(v => v.toJSON()),
-			careTeam: this.__careTeam && this.__careTeam.map(v => v.toJSON()),
-			addresses: this.__addresses && this.__addresses.map(v => v.toJSON()),
-			supportingInfo: this.__supportingInfo && this.__supportingInfo.map(v => v.toJSON()),
-			goal: this.__goal && this.__goal.map(v => v.toJSON()),
-			activity: this.__activity && this.__activity.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			definition: this.definition && this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			replaces: this.replaces && this.replaces.map(v => v.toJSON()),
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_intent: this._intent && this._intent.toJSON(),
+			intent: this.intent,
+			category: this.category && this.category.map(v => v.toJSON()),
+			_title: this._title && this._title.toJSON(),
+			title: this.title,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			period: this.period && this.period.toJSON(),
+			author: this.author && this.author.map(v => v.toJSON()),
+			careTeam: this.careTeam && this.careTeam.map(v => v.toJSON()),
+			addresses: this.addresses && this.addresses.map(v => v.toJSON()),
+			supportingInfo: this.supportingInfo && this.supportingInfo.map(v => v.toJSON()),
+			goal: this.goal && this.goal.map(v => v.toJSON()),
+			activity: this.activity && this.activity.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = CarePlan;
+};

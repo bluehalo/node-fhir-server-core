@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medicationorder query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationOrder.medicationCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-code',
-		documentation: 'Return administrations of this medication code.',
+		description: 'Return administrations of this medication code',
 	},
-	DATEWRITTEN: {
-		name: 'datewritten',
+	datewritten: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationOrder.dateWritten',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-datewritten',
-		documentation: 'Return prescriptions written on this date.',
+		description: 'Return prescriptions written on this date',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationOrder.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-encounter',
-		documentation: 'Return prescriptions with this encounter identifier.',
+		description: 'Return prescriptions with this encounter identifier',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationOrder.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-identifier',
-		documentation: 'Return prescriptions with this external identifier.',
+		description: 'Return prescriptions with this external identifier',
 	},
-	MEDICATION: {
-		name: 'medication',
+	medication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationOrder.medicationReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-medication',
-		documentation: 'Return administrations of this medication reference.',
+		description: 'Return administrations of this medication reference',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationOrder.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-patient',
-		documentation: 'The identity of a patient to list orders  for.',
+		description: 'The identity of a patient to list orders  for',
 	},
-	PRESCRIBER: {
-		name: 'prescriber',
+	prescriber: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationOrder.prescriber',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-prescriber',
-		documentation: 'Who ordered the medication(s).',
+		description: 'Who ordered the medication(s)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationOrder.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationOrder-status',
-		documentation: 'Status of the prescription.',
+		description: 'Status of the prescription',
 	},
 };

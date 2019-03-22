@@ -1,51 +1,64 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the appointment query
+ */
 module.exports = {
-	ACTOR: {
-		name: 'actor',
+	actor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Appointment.participant.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-actor',
-		documentation: 'Any one of the individuals participating in the appointment.',
+		description: 'Any one of the individuals participating in the appointment',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Appointment.start',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-date',
-		documentation: 'Appointment date/time.',
+		description: 'Appointment date/time.',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Appointment.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-identifier',
-		documentation: 'An Identifier of the Appointment.',
+		description: 'An Identifier of the Appointment',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Appointment.participant.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-location',
-		documentation: 'This location is listed in the participants of the appointment.',
+		description: 'This location is listed in the participants of the appointment',
 	},
-	PART_STATUS: {
-		name: 'part-status',
+	'part-status': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Appointment.participant.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-part-status',
-		documentation:
+		description:
 			'The Participation status of the subject, or other participant on the appointment. Can be used to locate participants that have not responded to meeting requests.',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Appointment.participant.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-patient',
-		documentation: 'One of the individuals of the appointment is this patient.',
+		description: 'One of the individuals of the appointment is this patient',
 	},
-	PRACTITIONER: {
-		name: 'practitioner',
+	practitioner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Appointment.participant.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-practitioner',
-		documentation: 'One of the individuals of the appointment is this practitioner.',
+		description: 'One of the individuals of the appointment is this practitioner',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Appointment.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Appointment-status',
-		documentation: 'The overall status of the appointment.',
+		description: 'The overall status of the appointment',
 	},
 };

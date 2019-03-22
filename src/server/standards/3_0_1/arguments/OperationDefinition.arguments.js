@@ -1,92 +1,112 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the operationdefinition query
+ */
 module.exports = {
-	BASE: {
-		name: 'base',
+	base: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OperationDefinition.base',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-base',
-		documentation: 'Marks this as a profile of the base.',
+		description: 'Marks this as a profile of the base',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-code',
-		documentation: 'Name used to invoke the operation.',
+		description: 'Name used to invoke the operation',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'OperationDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-date',
-		documentation: 'The operation definition publication date.',
+		description: 'The operation definition publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'OperationDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-description',
-		documentation: 'The description of the operation definition.',
+		description: 'The description of the operation definition',
 	},
-	INSTANCE: {
-		name: 'instance',
+	instance: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.instance',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-instance',
-		documentation: 'Invoke on an instance?.',
+		description: 'Invoke on an instance?',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the operation definition.',
+		description: 'Intended jurisdiction for the operation definition',
 	},
-	KIND: {
-		name: 'kind',
+	kind: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.kind',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-kind',
-		documentation: 'operation | query.',
+		description: 'operation | query',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'OperationDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-name',
-		documentation: 'Computationally friendly name of the operation definition.',
+		description: 'Computationally friendly name of the operation definition',
 	},
-	PARAM_PROFILE: {
-		name: 'param-profile',
+	'param-profile': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OperationDefinition.parameter.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-param-profile',
-		documentation: 'Profile on the type.',
+		description: 'Profile on the type',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'OperationDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-publisher',
-		documentation: 'Name of the publisher of the operation definition.',
+		description: 'Name of the publisher of the operation definition',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-status',
-		documentation: 'The current status of the operation definition.',
+		description: 'The current status of the operation definition',
 	},
-	SYSTEM: {
-		name: 'system',
+	system: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.system',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-system',
-		documentation: 'Invoke at the system level?.',
+		description: 'Invoke at the system level?',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-type',
-		documentation: 'Invole at the type level?.',
+		description: 'Invole at the type level?',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'OperationDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-url',
-		documentation: 'The uri that identifies the operation definition.',
+		description: 'The uri that identifies the operation definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-version',
-		documentation: 'The business version of the operation definition.',
+		description: 'The business version of the operation definition',
 	},
 };

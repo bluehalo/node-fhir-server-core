@@ -1,77 +1,172 @@
-const BackboneElement = require('./BackboneElement');
-const OidScalar = require('./scalars/Oid.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ImagingObjectSelectionStudy Class
+ */
+module.exports = class ImagingObjectSelectionStudy {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImagingObjectSelectionStudy extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImagingObjectSelectionStudy';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_uid', {
+			enumerable: true,
+			get: () => this.__data._uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._uid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'uid', {
+			enumerable: true,
+			get: () => this.__data.uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.uid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, 'imagingStudy', {
+			enumerable: true,
+			get: () => this.__data.imagingStudy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.imagingStudy = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'series', {
+			enumerable: true,
+			get: () => this.__data.series,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImagingObjectSelectionStudySeries = require('./imagingobjectselectionstudyseries.js');
+				this.__data.series = Array.isArray(value)
+					? value.map(v => new ImagingObjectSelectionStudySeries(v))
+					: [new ImagingObjectSelectionStudySeries(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImagingObjectSelectionStudy',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImagingObjectSelectionStudy resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImagingObjectSelectionStudy';
 	}
 
-	// Study instance UID of the SOP instances in the selection.
-	get uid() {
-		return this.__uid;
-	}
-
-	set uid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field uid`);
-		}
-		this.__uid = new_value;
-	}
-
-	// WADO-RS URL to retrieve the study. Note that this URL retrieves all SOP instances of the study, not only those in the selection.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// Reference to the Imaging Study in FHIR form.
-	get imagingStudy() {
-		return this.__imagingStudy;
-	}
-
-	set imagingStudy(new_value) {
-		const Reference = require('./Reference');
-		this.__imagingStudy = new Reference(new_value);
-	}
-
-	// Series identity and locating information of the DICOM SOP instances in the selection.
-	get series() {
-		return this.__series;
-	}
-
-	set series(new_value) {
-		const ImagingObjectSelectionStudySeries = require('./ImagingObjectSelectionStudySeries');
-		this.__series = Array.isArray(new_value)
-			? new_value.map(val => new ImagingObjectSelectionStudySeries(val))
-			: [new ImagingObjectSelectionStudySeries(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			uid: this.__uid,
-			url: this.__url,
-			imagingStudy: this.__imagingStudy && this.__imagingStudy.toJSON(),
-			series: this.__series && this.__series.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_uid: this._uid && this._uid.toJSON(),
+			uid: this.uid,
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			imagingStudy: this.imagingStudy && this.imagingStudy.toJSON(),
+			series: this.series && this.series.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ImagingObjectSelectionStudy;
+};

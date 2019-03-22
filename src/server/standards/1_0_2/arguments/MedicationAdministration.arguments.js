@@ -1,68 +1,84 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medicationadministration query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationAdministration.medicationCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-code',
-		documentation: 'Return administrations of this medication code.',
+		description: 'Return administrations of this medication code',
 	},
-	DEVICE: {
-		name: 'device',
+	device: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.device',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-device',
-		documentation: 'Return administrations with this administration device identity.',
+		description: 'Return administrations with this administration device identity',
 	},
-	EFFECTIVETIME: {
-		name: 'effectivetime',
+	effectivetime: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationAdministration.effectiveTimeDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-effectivetime',
-		documentation: 'Date administration happened (or did not happen).',
+		description: 'Date administration happened (or did not happen)',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-encounter',
-		documentation: 'Return administrations that share this encounter.',
+		description: 'Return administrations that share this encounter',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationAdministration.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-identifier',
-		documentation: 'Return administrations with this external identifier.',
+		description: 'Return administrations with this external identifier',
 	},
-	MEDICATION: {
-		name: 'medication',
+	medication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.medicationReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-medication',
-		documentation: 'Return administrations of this medication resource.',
+		description: 'Return administrations of this medication resource',
 	},
-	NOTGIVEN: {
-		name: 'notgiven',
+	notgiven: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationAdministration.wasNotGiven',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-notgiven',
-		documentation: 'Administrations that were not made.',
+		description: 'Administrations that were not made',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-patient',
-		documentation: 'The identity of a patient to list administrations  for.',
+		description: 'The identity of a patient to list administrations  for',
 	},
-	PRACTITIONER: {
-		name: 'practitioner',
+	practitioner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.practitioner',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-practitioner',
-		documentation: 'Who administered substance.',
+		description: 'Who administered substance',
 	},
-	PRESCRIPTION: {
-		name: 'prescription',
+	prescription: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationAdministration.prescription',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-prescription',
-		documentation: 'The identity of a prescription to list administrations from.',
+		description: 'The identity of a prescription to list administrations from',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationAdministration.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationAdministration-status',
-		documentation: 'MedicationAdministration event status (for example one of active/paused/completed/nullified).',
+		description: 'MedicationAdministration event status (for example one of active/paused/completed/nullified)',
 	},
 };

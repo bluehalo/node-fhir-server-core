@@ -1,8 +1,14 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the paymentnotice query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentNotice.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-identifier',
-		documentation: 'The business identifier of the Eligibility.',
+		description: 'The business identifier of the Eligibility',
 	},
 };

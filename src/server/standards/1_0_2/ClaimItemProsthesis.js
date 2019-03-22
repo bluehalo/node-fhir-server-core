@@ -1,58 +1,156 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ClaimItemProsthesis Class
+ */
+module.exports = class ClaimItemProsthesis {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimItemProsthesis extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimItemProsthesis';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_initial', {
+			enumerable: true,
+			get: () => this.__data._initial,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._initial = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'initial', {
+			enumerable: true,
+			get: () => this.__data.initial,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.initial = value;
+			},
+		});
+
+		Object.defineProperty(this, '_priorDate', {
+			enumerable: true,
+			get: () => this.__data._priorDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priorDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'priorDate', {
+			enumerable: true,
+			get: () => this.__data.priorDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priorDate = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/oral-prosthodontic-material
+		Object.defineProperty(this, 'priorMaterial', {
+			enumerable: true,
+			get: () => this.__data.priorMaterial,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.priorMaterial = new Coding(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimItemProsthesis',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimItemProsthesis resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimItemProsthesis';
 	}
 
-	// Indicates whether this is the initial placement of a fixed prosthesis.
-	get initial() {
-		return this.__initial;
-	}
-
-	set initial(new_value) {
-		this.__initial = new_value;
-	}
-
-	// Date of the initial placement.
-	get priorDate() {
-		return this.__priorDate;
-	}
-
-	set priorDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field priorDate`);
-		}
-		this.__priorDate = new_value;
-	}
-
-	// Material of the prior denture or bridge prosthesis. (Oral).
-	get priorMaterial() {
-		return this.__priorMaterial;
-	}
-
-	set priorMaterial(new_value) {
-		const Coding = require('./Coding');
-		this.__priorMaterial = new Coding(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			initial: this.__initial,
-			priorDate: this.__priorDate,
-			priorMaterial: this.__priorMaterial && this.__priorMaterial.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_initial: this._initial && this._initial.toJSON(),
+			initial: this.initial,
+			_priorDate: this._priorDate && this._priorDate.toJSON(),
+			priorDate: this.priorDate,
+			priorMaterial: this.priorMaterial && this.priorMaterial.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimItemProsthesis;
+};

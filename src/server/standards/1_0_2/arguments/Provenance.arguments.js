@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the provenance query
+ */
 module.exports = {
-	AGENT: {
-		name: 'agent',
+	agent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Provenance.agent.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-agent',
-		documentation: 'Individual, device or organization playing role.',
+		description: 'Individual, device or organization playing role',
 	},
-	END: {
-		name: 'end',
+	end: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Provenance.period.end',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-end',
-		documentation: 'End time with inclusive boundary, if not ongoing.',
+		description: 'End time with inclusive boundary, if not ongoing',
 	},
-	ENTITY: {
-		name: 'entity',
+	entity: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Provenance.entity.reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-entity',
-		documentation: 'Identity of entity.',
+		description: 'Identity of entity',
 	},
-	ENTITYTYPE: {
-		name: 'entitytype',
+	entitytype: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Provenance.entity.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-entitytype',
-		documentation: 'The type of resource in this entity.',
+		description: 'The type of resource in this entity',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Provenance.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-location',
-		documentation: 'Where the activity occurred, if relevant.',
+		description: 'Where the activity occurred, if relevant',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Provenance.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-patient',
-		documentation: 'Target Reference(s) (usually version specific).',
+		description: 'Target Reference(s) (usually version specific)',
 	},
-	SIGTYPE: {
-		name: 'sigtype',
+	sigtype: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Provenance.signature.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-sigtype',
-		documentation: 'Indication of the reason the entity signed the object(s).',
+		description: 'Indication of the reason the entity signed the object(s)',
 	},
-	START: {
-		name: 'start',
+	start: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Provenance.period.start',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-start',
-		documentation: 'Starting time with inclusive boundary.',
+		description: 'Starting time with inclusive boundary',
 	},
-	TARGET: {
-		name: 'target',
+	target: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Provenance.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-target',
-		documentation: 'Target Reference(s) (usually version specific).',
+		description: 'Target Reference(s) (usually version specific)',
 	},
-	USERID: {
-		name: 'userid',
+	userid: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Provenance.agent.userId',
 		definition: 'http://hl7.org/fhir/SearchParameter/Provenance-userid',
-		documentation: 'Authorization-system identifier for the agent.',
+		description: 'Authorization-system identifier for the agent',
 	},
 };

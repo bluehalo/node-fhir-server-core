@@ -1,107 +1,304 @@
-const BackboneElement = require('./BackboneElement');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary TestScriptVariable Class
+ */
+module.exports = class TestScriptVariable {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TestScriptVariable extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TestScriptVariable';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValue', {
+			enumerable: true,
+			get: () => this.__data._defaultValue,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValue = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValue', {
+			enumerable: true,
+			get: () => this.__data.defaultValue,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValue = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_expression', {
+			enumerable: true,
+			get: () => this.__data._expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._expression = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'expression', {
+			enumerable: true,
+			get: () => this.__data.expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.expression = value;
+			},
+		});
+
+		Object.defineProperty(this, '_headerField', {
+			enumerable: true,
+			get: () => this.__data._headerField,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._headerField = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'headerField', {
+			enumerable: true,
+			get: () => this.__data.headerField,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.headerField = value;
+			},
+		});
+
+		Object.defineProperty(this, '_hint', {
+			enumerable: true,
+			get: () => this.__data._hint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._hint = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'hint', {
+			enumerable: true,
+			get: () => this.__data.hint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.hint = value;
+			},
+		});
+
+		Object.defineProperty(this, '_path', {
+			enumerable: true,
+			get: () => this.__data._path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._path = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'path', {
+			enumerable: true,
+			get: () => this.__data.path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.path = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sourceId', {
+			enumerable: true,
+			get: () => this.__data._sourceId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sourceId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sourceId', {
+			enumerable: true,
+			get: () => this.__data.sourceId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sourceId = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TestScriptVariable',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TestScriptVariable resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TestScriptVariable';
 	}
 
-	// Descriptive name for this variable.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// A default, hard-coded, or user-defined value for this variable.
-	get defaultValue() {
-		return this.__defaultValue;
-	}
-
-	set defaultValue(new_value) {
-		this.__defaultValue = new_value;
-	}
-
-	// A free text natural language description of the variable and its purpose.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The fluentpath expression to evaluate against the fixture body. When variables are defined, only one of either expression, headerField or path must be specified.
-	get expression() {
-		return this.__expression;
-	}
-
-	set expression(new_value) {
-		this.__expression = new_value;
-	}
-
-	// Will be used to grab the HTTP header field value from the headers that sourceId is pointing to.
-	get headerField() {
-		return this.__headerField;
-	}
-
-	set headerField(new_value) {
-		this.__headerField = new_value;
-	}
-
-	// Displayable text string with hint help information to the user when entering a default value.
-	get hint() {
-		return this.__hint;
-	}
-
-	set hint(new_value) {
-		this.__hint = new_value;
-	}
-
-	// XPath or JSONPath to evaluate against the fixture body.  When variables are defined, only one of either expression, headerField or path must be specified.
-	get path() {
-		return this.__path;
-	}
-
-	set path(new_value) {
-		this.__path = new_value;
-	}
-
-	// Fixture to evaluate the XPath/JSONPath expression or the headerField  against within this variable.
-	get sourceId() {
-		return this.__sourceId;
-	}
-
-	set sourceId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sourceId`);
-		}
-		this.__sourceId = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			name: this.__name,
-			defaultValue: this.__defaultValue,
-			description: this.__description,
-			expression: this.__expression,
-			headerField: this.__headerField,
-			hint: this.__hint,
-			path: this.__path,
-			sourceId: this.__sourceId,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_defaultValue: this._defaultValue && this._defaultValue.toJSON(),
+			defaultValue: this.defaultValue,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_expression: this._expression && this._expression.toJSON(),
+			expression: this.expression,
+			_headerField: this._headerField && this._headerField.toJSON(),
+			headerField: this.headerField,
+			_hint: this._hint && this._hint.toJSON(),
+			hint: this.hint,
+			_path: this._path && this._path.toJSON(),
+			path: this.path,
+			_sourceId: this._sourceId && this._sourceId.toJSON(),
+			sourceId: this.sourceId,
+		};
 	}
-}
-
-module.exports = TestScriptVariable;
+};

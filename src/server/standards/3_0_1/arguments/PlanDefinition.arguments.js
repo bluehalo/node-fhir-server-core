@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the plandefinition query
+ */
 module.exports = {
-	COMPOSED_OF: {
-		name: 'composed-of',
+	'composed-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "PlanDefinition.relatedArtifact[type/@value='composed-of'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-composed-of',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'PlanDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-date',
-		documentation: 'The plan definition publication date.',
+		description: 'The plan definition publication date',
 	},
-	DEPENDS_ON: {
-		name: 'depends-on',
+	'depends-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "PlanDefinition.relatedArtifact[type/@value='depends-on'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-depends-on',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DERIVED_FROM: {
-		name: 'derived-from',
+	'derived-from': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "PlanDefinition.relatedArtifact[type/@value='derived-from'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-derived-from',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'PlanDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-description',
-		documentation: 'The description of the plan definition.',
+		description: 'The description of the plan definition',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'PlanDefinition.effectivePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-effective',
-		documentation: 'The time during which the plan definition is intended to be in use.',
+		description: 'The time during which the plan definition is intended to be in use',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PlanDefinition.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-identifier',
-		documentation: 'External identifier for the plan definition.',
+		description: 'External identifier for the plan definition',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PlanDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the plan definition.',
+		description: 'Intended jurisdiction for the plan definition',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'PlanDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-name',
-		documentation: 'Computationally friendly name of the plan definition.',
+		description: 'Computationally friendly name of the plan definition',
 	},
-	PREDECESSOR: {
-		name: 'predecessor',
+	predecessor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "PlanDefinition.relatedArtifact[type/@value='predecessor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-predecessor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'PlanDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-publisher',
-		documentation: 'Name of the publisher of the plan definition.',
+		description: 'Name of the publisher of the plan definition',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PlanDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-status',
-		documentation: 'The current status of the plan definition.',
+		description: 'The current status of the plan definition',
 	},
-	SUCCESSOR: {
-		name: 'successor',
+	successor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "PlanDefinition.relatedArtifact[type/@value='successor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-successor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'PlanDefinition.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-title',
-		documentation: 'The human-friendly name of the plan definition.',
+		description: 'The human-friendly name of the plan definition',
 	},
-	TOPIC: {
-		name: 'topic',
+	topic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PlanDefinition.topic',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-topic',
-		documentation: 'Topics associated with the module.',
+		description: 'Topics associated with the module',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'PlanDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-url',
-		documentation: 'The uri that identifies the plan definition.',
+		description: 'The uri that identifies the plan definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PlanDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/PlanDefinition-version',
-		documentation: 'The business version of the plan definition.',
+		description: 'The business version of the plan definition',
 	},
 };

@@ -1,177 +1,386 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary NutritionOrder Class
+ */
+module.exports = class NutritionOrder {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class NutritionOrder extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'NutritionOrder';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/nutrition-request-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_dateTime', {
+			enumerable: true,
+			get: () => this.__data._dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dateTime', {
+			enumerable: true,
+			get: () => this.__data.dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'orderer', {
+			enumerable: true,
+			get: () => this.__data.orderer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.orderer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'allergyIntolerance', {
+			enumerable: true,
+			get: () => this.__data.allergyIntolerance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.allergyIntolerance = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/encounter-diet
+		Object.defineProperty(this, 'foodPreferenceModifier', {
+			enumerable: true,
+			get: () => this.__data.foodPreferenceModifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.foodPreferenceModifier = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/food-type
+		Object.defineProperty(this, 'excludeFoodModifier', {
+			enumerable: true,
+			get: () => this.__data.excludeFoodModifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.excludeFoodModifier = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'oralDiet', {
+			enumerable: true,
+			get: () => this.__data.oralDiet,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let NutritionOrderOralDiet = require('./nutritionorderoraldiet.js');
+				this.__data.oralDiet = new NutritionOrderOralDiet(value);
+			},
+		});
+
+		Object.defineProperty(this, 'supplement', {
+			enumerable: true,
+			get: () => this.__data.supplement,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let NutritionOrderSupplement = require('./nutritionordersupplement.js');
+				this.__data.supplement = Array.isArray(value)
+					? value.map(v => new NutritionOrderSupplement(v))
+					: [new NutritionOrderSupplement(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'enteralFormula', {
+			enumerable: true,
+			get: () => this.__data.enteralFormula,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let NutritionOrderEnteralFormula = require('./nutritionorderenteralformula.js');
+				this.__data.enteralFormula = new NutritionOrderEnteralFormula(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'NutritionOrder',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a NutritionOrder resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'NutritionOrder';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__NutritionOrder = new_value;
-	}
-
-	// Identifiers assigned to this order by the order sender or by the order receiver.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The workflow status of the nutrition order/request.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The person (patient) who needs the nutrition order for an oral diet, nutritional supplement and/or enteral or formula feeding.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// An encounter that provides additional information about the healthcare context in which this request is made.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The date and time that this nutrition order was requested.
-	get dateTime() {
-		return this.__dateTime;
-	}
-
-	set dateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dateTime`);
-		}
-		this.__dateTime = new_value;
-	}
-
-	// The practitioner that holds legal responsibility for ordering the diet, nutritional supplement, or formula feedings.
-	get orderer() {
-		return this.__orderer;
-	}
-
-	set orderer(new_value) {
-		const Reference = require('./Reference');
-		this.__orderer = new Reference(new_value);
-	}
-
-	// A link to a record of allergies or intolerances  which should be included in the nutrition order.
-	get allergyIntolerance() {
-		return this.__allergyIntolerance;
-	}
-
-	set allergyIntolerance(new_value) {
-		const Reference = require('./Reference');
-		this.__allergyIntolerance = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// This modifier is used to convey order-specific modifiers about the type of food that should be given. These can be derived from patient allergies, intolerances, or preferences such as Halal, Vegan or Kosher. This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings.
-	get foodPreferenceModifier() {
-		return this.__foodPreferenceModifier;
-	}
-
-	set foodPreferenceModifier(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__foodPreferenceModifier = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// This modifier is used to convey order-specific modifiers about the type of food that should NOT be given. These can be derived from patient allergies, intolerances, or preferences such as No Red Meat, No Soy or No Wheat or  Gluten-Free.  While it should not be necessary to repeat allergy or intolerance information captured in the referenced AllergyIntolerance resource in the excludeFoodModifier, this element may be used to convey additional specificity related to foods that should be eliminated from the patient’s diet for any reason.  This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings.
-	get excludeFoodModifier() {
-		return this.__excludeFoodModifier;
-	}
-
-	set excludeFoodModifier(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__excludeFoodModifier = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Diet given orally in contrast to enteral (tube) feeding.
-	get oralDiet() {
-		return this.__oralDiet;
-	}
-
-	set oralDiet(new_value) {
-		const NutritionOrderOralDiet = require('./NutritionOrderOralDiet');
-		this.__oralDiet = new NutritionOrderOralDiet(new_value);
-	}
-
-	// Oral nutritional products given in order to add further nutritional value to the patient\'s diet.
-	get supplement() {
-		return this.__supplement;
-	}
-
-	set supplement(new_value) {
-		const NutritionOrderSupplement = require('./NutritionOrderSupplement');
-		this.__supplement = Array.isArray(new_value)
-			? new_value.map(val => new NutritionOrderSupplement(val))
-			: [new NutritionOrderSupplement(new_value)];
-	}
-
-	// Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity.
-	get enteralFormula() {
-		return this.__enteralFormula;
-	}
-
-	set enteralFormula(new_value) {
-		const NutritionOrderEnteralFormula = require('./NutritionOrderEnteralFormula');
-		this.__enteralFormula = new NutritionOrderEnteralFormula(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			patient: this.__patient && this.__patient.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			dateTime: this.__dateTime,
-			orderer: this.__orderer && this.__orderer.toJSON(),
-			allergyIntolerance: this.__allergyIntolerance && this.__allergyIntolerance.map(v => v.toJSON()),
-			foodPreferenceModifier: this.__foodPreferenceModifier && this.__foodPreferenceModifier.map(v => v.toJSON()),
-			excludeFoodModifier: this.__excludeFoodModifier && this.__excludeFoodModifier.map(v => v.toJSON()),
-			oralDiet: this.__oralDiet && this.__oralDiet.toJSON(),
-			supplement: this.__supplement && this.__supplement.map(v => v.toJSON()),
-			enteralFormula: this.__enteralFormula && this.__enteralFormula.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			patient: this.patient && this.patient.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			_dateTime: this._dateTime && this._dateTime.toJSON(),
+			dateTime: this.dateTime,
+			orderer: this.orderer && this.orderer.toJSON(),
+			allergyIntolerance: this.allergyIntolerance && this.allergyIntolerance.map(v => v.toJSON()),
+			foodPreferenceModifier: this.foodPreferenceModifier && this.foodPreferenceModifier.map(v => v.toJSON()),
+			excludeFoodModifier: this.excludeFoodModifier && this.excludeFoodModifier.map(v => v.toJSON()),
+			oralDiet: this.oralDiet && this.oralDiet.toJSON(),
+			supplement: this.supplement && this.supplement.map(v => v.toJSON()),
+			enteralFormula: this.enteralFormula && this.enteralFormula.toJSON(),
+		};
 	}
-}
-
-module.exports = NutritionOrder;
+};

@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the healthcareservice query
+ */
 module.exports = {
-	CHARACTERISTIC: {
-		name: 'characteristic',
+	characteristic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'HealthcareService.characteristic',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-characteristic',
-		documentation: "One of the HealthcareService's characteristics.",
+		description: "One of the HealthcareService's characteristics",
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'HealthcareService.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-identifier',
-		documentation: 'External identifiers for this item.',
+		description: 'External identifiers for this item',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'HealthcareService.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-location',
-		documentation: 'The location of the Healthcare Service.',
+		description: 'The location of the Healthcare Service',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'HealthcareService.serviceName',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-name',
-		documentation: 'A portion of the Healthcare service name.',
+		description: 'A portion of the Healthcare service name',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'HealthcareService.providedBy',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-organization',
-		documentation: 'The organization that provides this Healthcare Service.',
+		description: 'The organization that provides this Healthcare Service',
 	},
-	PROGRAMNAME: {
-		name: 'programname',
+	programname: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'HealthcareService.programName',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-programname',
-		documentation: 'One of the Program Names serviced by this HealthcareService.',
+		description: 'One of the Program Names serviced by this HealthcareService',
 	},
-	SERVICECATEGORY: {
-		name: 'servicecategory',
+	servicecategory: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'HealthcareService.serviceCategory',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-servicecategory',
-		documentation: 'Service Category of the Healthcare Service.',
+		description: 'Service Category of the Healthcare Service',
 	},
-	SERVICETYPE: {
-		name: 'servicetype',
+	servicetype: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'HealthcareService.serviceType.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/HealthcareService-servicetype',
-		documentation: 'The type of service provided by this healthcare service.',
+		description: 'The type of service provided by this healthcare service',
 	},
 };

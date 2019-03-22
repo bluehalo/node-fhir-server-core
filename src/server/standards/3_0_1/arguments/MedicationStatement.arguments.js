@@ -1,73 +1,89 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medicationstatement query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.medicationCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-code',
-		documentation:
-			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  .',
+		description:
+			'Multiple Resources:     * [Medication](medication.html): Codes that identify this medication  * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication code  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication code  * [MedicationStatement](medicationstatement.html): Return statements of this medication code  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine code  ',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-identifier',
-		documentation:
-			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions with this external identifier  * [MedicationAdministration](medicationadministration.html): Return administrations with this external identifier  * [MedicationStatement](medicationstatement.html): Return statements with this external identifier  * [MedicationDispense](medicationdispense.html): Return dispenses with this external identifier  .',
+		description:
+			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions with this external identifier  * [MedicationAdministration](medicationadministration.html): Return administrations with this external identifier  * [MedicationStatement](medicationstatement.html): Return statements with this external identifier  * [MedicationDispense](medicationdispense.html): Return dispenses with this external identifier  ',
 	},
-	MEDICATION: {
-		name: 'medication',
+	medication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.medicationReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-medication',
-		documentation:
-			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication reference  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication resource  * [MedicationStatement](medicationstatement.html): Return statements of this medication reference  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine resource  .',
+		description:
+			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Return prescriptions of this medication reference  * [MedicationAdministration](medicationadministration.html): Return administrations of this medication resource  * [MedicationStatement](medicationstatement.html): Return statements of this medication reference  * [MedicationDispense](medicationdispense.html): Return dispenses of this medicine resource  ',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-patient',
-		documentation:
-			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Returns prescriptions for a specific patient  * [MedicationAdministration](medicationadministration.html): The identity of a patient to list administrations  for  * [MedicationStatement](medicationstatement.html): Returns statements for a specific patient.  * [MedicationDispense](medicationdispense.html): The identity of a patient to list dispenses  for  .',
+		description:
+			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Returns prescriptions for a specific patient  * [MedicationAdministration](medicationadministration.html): The identity of a patient to list administrations  for  * [MedicationStatement](medicationstatement.html): Returns statements for a specific patient.  * [MedicationDispense](medicationdispense.html): The identity of a patient to list dispenses  for  ',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/medications-status',
-		documentation:
-			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Status of the prescription  * [MedicationAdministration](medicationadministration.html): MedicationAdministration event status (for example one of active/paused/completed/nullified)  * [MedicationStatement](medicationstatement.html): Return statements that match the given status  * [MedicationDispense](medicationdispense.html): Return dispenses with a specified dispense status  .',
+		description:
+			'Multiple Resources:     * [MedicationRequest](medicationrequest.html): Status of the prescription  * [MedicationAdministration](medicationadministration.html): MedicationAdministration event status (for example one of active/paused/completed/nullified)  * [MedicationStatement](medicationstatement.html): Return statements that match the given status  * [MedicationDispense](medicationdispense.html): Return dispenses with a specified dispense status  ',
 	},
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-category',
-		documentation: 'Returns statements of this category of medicationstatement.',
+		description: 'Returns statements of this category of medicationstatement',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-context',
-		documentation: 'Returns statements for a specific context (episode or episode of Care).',
+		description: 'Returns statements for a specific context (episode or episode of Care).',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationStatement.effectiveDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-effective',
-		documentation: 'Date when patient was taking (or not taking) the medication.',
+		description: 'Date when patient was taking (or not taking) the medication',
 	},
-	PART_OF: {
-		name: 'part-of',
+	'part-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-part-of',
-		documentation: 'Returns statements that are part of another event.',
+		description: 'Returns statements that are part of another event.',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.informationSource',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-source',
-		documentation: 'Who or where the information in the statement came from.',
+		description: 'Who or where the information in the statement came from',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-subject',
-		documentation: 'The identity of a patient, animal or group to list statements for.',
+		description: 'The identity of a patient, animal or group to list statements for',
 	},
 };

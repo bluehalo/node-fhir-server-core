@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the claimresponse query
+ */
 module.exports = {
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ClaimResponse.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-created',
-		documentation: 'The creation date.',
+		description: 'The creation date',
 	},
-	DISPOSITION: {
-		name: 'disposition',
+	disposition: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ClaimResponse.disposition',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-disposition',
-		documentation: 'The contents of the disposition message.',
+		description: 'The contents of the disposition message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClaimResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-identifier',
-		documentation: 'The identity of the claimresponse.',
+		description: 'The identity of the claimresponse',
 	},
-	INSURER: {
-		name: 'insurer',
+	insurer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClaimResponse.insurer',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-insurer',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	OUTCOME: {
-		name: 'outcome',
+	outcome: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClaimResponse.outcome',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-outcome',
-		documentation: 'The processing outcome.',
+		description: 'The processing outcome',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClaimResponse.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-patient',
-		documentation: 'The subject of care.',
+		description: 'The subject of care.',
 	},
-	PAYMENT_DATE: {
-		name: 'payment-date',
+	'payment-date': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ClaimResponse.payment.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-payment-date',
-		documentation: 'The expected paymentDate.',
+		description: 'The expected paymentDate',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClaimResponse.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-request',
-		documentation: 'The claim reference.',
+		description: 'The claim reference',
 	},
-	REQUEST_PROVIDER: {
-		name: 'request-provider',
+	'request-provider': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ClaimResponse.requestProvider',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-request-provider',
-		documentation: 'The Provider of the claim.',
+		description: 'The Provider of the claim',
 	},
 };

@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the nutritionorder query
+ */
 module.exports = {
-	ADDITIVE: {
-		name: 'additive',
+	additive: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.enteralFormula.additiveType',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-additive',
-		documentation: 'Type of module component to add to the feeding.',
+		description: 'Type of module component to add to the feeding',
 	},
-	DATETIME: {
-		name: 'datetime',
+	datetime: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'NutritionOrder.dateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-datetime',
-		documentation: 'Return nutrition orders requested on this date.',
+		description: 'Return nutrition orders requested on this date',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'NutritionOrder.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-encounter',
-		documentation: 'Return nutrition orders with this encounter identifier.',
+		description: 'Return nutrition orders with this encounter identifier',
 	},
-	FORMULA: {
-		name: 'formula',
+	formula: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.enteralFormula.baseFormulaType',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-formula',
-		documentation: 'Type of enteral or infant formula.',
+		description: 'Type of enteral or infant formula',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-identifier',
-		documentation: 'Return nutrition orders with this external identifier.',
+		description: 'Return nutrition orders with this external identifier',
 	},
-	ORALDIET: {
-		name: 'oraldiet',
+	oraldiet: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.oralDiet.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-oraldiet',
-		documentation: 'Type of diet that can be consumed orally (i.e., take via the mouth).',
+		description: 'Type of diet that can be consumed orally (i.e., take via the mouth).',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'NutritionOrder.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-patient',
-		documentation: 'The identity of the person who requires the diet, formula or nutritional supplement.',
+		description: 'The identity of the person who requires the diet, formula or nutritional supplement',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'NutritionOrder.orderer',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-provider',
-		documentation: 'The identify of the provider who placed the nutrition order.',
+		description: 'The identify of the provider who placed the nutrition order',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-status',
-		documentation: 'Status of the nutrition order.',
+		description: 'Status of the nutrition order.',
 	},
-	SUPPLEMENT: {
-		name: 'supplement',
+	supplement: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NutritionOrder.supplement.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NutritionOrder-supplement',
-		documentation: 'Type of supplement product requested.',
+		description: 'Type of supplement product requested',
 	},
 };

@@ -1,136 +1,247 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ConsentExcept Class
+ */
+module.exports = class ConsentExcept {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConsentExcept extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConsentExcept';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/consent-except-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'actor', {
+			enumerable: true,
+			get: () => this.__data.actor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConsentExceptActor = require('./consentexceptactor.js');
+				this.__data.actor = Array.isArray(value)
+					? value.map(v => new ConsentExceptActor(v))
+					: [new ConsentExceptActor(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/consent-action
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.action = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/security-labels
+		Object.defineProperty(this, 'securityLabel', {
+			enumerable: true,
+			get: () => this.__data.securityLabel,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.securityLabel = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'purpose', {
+			enumerable: true,
+			get: () => this.__data.purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.purpose = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/consent-content-class
+		Object.defineProperty(this, 'class', {
+			enumerable: true,
+			get: () => this.__data.class,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.class = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/consent-content-code
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.code = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'dataPeriod', {
+			enumerable: true,
+			get: () => this.__data.dataPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.dataPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'data', {
+			enumerable: true,
+			get: () => this.__data.data,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConsentExceptData = require('./consentexceptdata.js');
+				this.__data.data = Array.isArray(value)
+					? value.map(v => new ConsentExceptData(v))
+					: [new ConsentExceptData(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConsentExcept',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConsentExcept resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConsentExcept';
 	}
 
-	// Action  to take - permit or deny - when the exception conditions are met.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// The timeframe in this exception is valid.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// Who or what is controlled by this Exception. Use group to identify a set of actors by some property they share (e.g. \'admitting officers\').
-	get actor() {
-		return this.__actor;
-	}
-
-	set actor(new_value) {
-		const ConsentExceptActor = require('./ConsentExceptActor');
-		this.__actor = Array.isArray(new_value)
-			? new_value.map(val => new ConsentExceptActor(val))
-			: [new ConsentExceptActor(new_value)];
-	}
-
-	// Actions controlled by this Exception.
-	get action() {
-		return this.__action;
-	}
-
-	set action(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__action = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A set of security labels that define which resources are controlled by this exception. If more than one label is specified, all resources must have all the specified labels.
-	get securityLabel() {
-		return this.__securityLabel;
-	}
-
-	set securityLabel(new_value) {
-		const Coding = require('./Coding');
-		this.__securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// The context of the activities a user is taking - why the user is accessing the data - that are controlled by this exception.
-	get purpose() {
-		return this.__purpose;
-	}
-
-	set purpose(new_value) {
-		const Coding = require('./Coding');
-		this.__purpose = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// The class of information covered by this exception. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to.
-	get class() {
-		return this.__class;
-	}
-
-	set class(new_value) {
-		const Coding = require('./Coding');
-		this.__class = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// If this code is found in an instance, then the exception applies.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const Coding = require('./Coding');
-		this.__code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Clinical or Operational Relevant period of time that bounds the data controlled by this exception.
-	get dataPeriod() {
-		return this.__dataPeriod;
-	}
-
-	set dataPeriod(new_value) {
-		const Period = require('./Period');
-		this.__dataPeriod = new Period(new_value);
-	}
-
-	// The resources controlled by this exception, if specific resources are referenced.
-	get data() {
-		return this.__data;
-	}
-
-	set data(new_value) {
-		const ConsentExceptData = require('./ConsentExceptData');
-		this.__data = Array.isArray(new_value)
-			? new_value.map(val => new ConsentExceptData(val))
-			: [new ConsentExceptData(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			period: this.__period && this.__period.toJSON(),
-			actor: this.__actor && this.__actor.map(v => v.toJSON()),
-			action: this.__action && this.__action.map(v => v.toJSON()),
-			securityLabel: this.__securityLabel && this.__securityLabel.map(v => v.toJSON()),
-			purpose: this.__purpose && this.__purpose.map(v => v.toJSON()),
-			class: this.__class && this.__class.map(v => v.toJSON()),
-			code: this.__code && this.__code.map(v => v.toJSON()),
-			dataPeriod: this.__dataPeriod && this.__dataPeriod.toJSON(),
-			data: this.__data && this.__data.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			period: this.period && this.period.toJSON(),
+			actor: this.actor && this.actor.map(v => v.toJSON()),
+			action: this.action && this.action.map(v => v.toJSON()),
+			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
+			purpose: this.purpose && this.purpose.map(v => v.toJSON()),
+			class: this.class && this.class.map(v => v.toJSON()),
+			code: this.code && this.code.map(v => v.toJSON()),
+			dataPeriod: this.dataPeriod && this.dataPeriod.toJSON(),
+			data: this.data && this.data.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ConsentExcept;
+};

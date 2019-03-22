@@ -1,42 +1,129 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary CapabilityStatementMessagingSupportedMessage Class
+ */
+module.exports = class CapabilityStatementMessagingSupportedMessage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CapabilityStatementMessagingSupportedMessage extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CapabilityStatementMessagingSupportedMessage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_mode', {
+			enumerable: true,
+			get: () => this.__data._mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._mode = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/event-capability-mode
+		Object.defineProperty(this, 'mode', {
+			enumerable: true,
+			get: () => this.__data.mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.mode = value;
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.definition = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CapabilityStatementMessagingSupportedMessage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CapabilityStatementMessagingSupportedMessage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CapabilityStatementMessagingSupportedMessage';
 	}
 
-	// The mode of this event declaration - whether application is sender or receiver.
-	get mode() {
-		return this.__mode;
-	}
-
-	set mode(new_value) {
-		this.__mode = new_value;
-	}
-
-	// Points to a message definition that identifies the messaging event, message structure, allowed responses, etc.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		const Reference = require('./Reference');
-		this.__definition = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			mode: this.__mode,
-			definition: this.__definition && this.__definition.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_mode: this._mode && this._mode.toJSON(),
+			mode: this.mode,
+			definition: this.definition && this.definition.toJSON(),
+		};
 	}
-}
-
-module.exports = CapabilityStatementMessagingSupportedMessage;
+};

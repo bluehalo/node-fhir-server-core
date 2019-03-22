@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the questionnaireresponse query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-author',
-		documentation: 'The author of the questionnaire.',
+		description: 'The author of the questionnaire',
 	},
-	AUTHORED: {
-		name: 'authored',
+	authored: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'QuestionnaireResponse.authored',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-authored',
-		documentation: 'When the questionnaire was authored.',
+		description: 'When the questionnaire was authored',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-encounter',
-		documentation: 'Encounter during which questionnaire was authored.',
+		description: 'Encounter during which questionnaire was authored',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-patient',
-		documentation: 'The patient that is the subject of the questionnaire.',
+		description: 'The patient that is the subject of the questionnaire',
 	},
-	QUESTIONNAIRE: {
-		name: 'questionnaire',
+	questionnaire: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.questionnaire',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-questionnaire',
-		documentation: 'The questionnaire the answers are provided for.',
+		description: 'The questionnaire the answers are provided for',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-source',
-		documentation: 'The person who answered the questions.',
+		description: 'The person who answered the questions',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'QuestionnaireResponse.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-status',
-		documentation: 'The status of the questionnaire response.',
+		description: 'The status of the questionnaire response',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'QuestionnaireResponse.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-subject',
-		documentation: 'The subject of the questionnaire.',
+		description: 'The subject of the questionnaire',
 	},
 };

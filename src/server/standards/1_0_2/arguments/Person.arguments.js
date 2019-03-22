@@ -1,116 +1,140 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the person query
+ */
 module.exports = {
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address',
-		documentation: 'An address in any kind of address/part.',
+		description: 'An address in any kind of address/part',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address-city',
-		documentation: 'A city specified in an address.',
+		description: 'A city specified in an address',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address-country',
-		documentation: 'A country specified in an address.',
+		description: 'A country specified in an address',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address-postalcode',
-		documentation: 'A postal code specified in an address.',
+		description: 'A postal code specified in an address',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address-state',
-		documentation: 'A state specified in an address.',
+		description: 'A state specified in an address',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Person.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-address-use',
-		documentation: 'A use code specified in an address.',
+		description: 'A use code specified in an address',
 	},
-	BIRTHDATE: {
-		name: 'birthdate',
+	birthdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Person.birthDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-birthdate',
-		documentation: "The person's date of birth.",
+		description: "The person's date of birth",
 	},
-	EMAIL: {
-		name: 'email',
+	email: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Person.telecom[system/@value='email']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-email',
-		documentation: 'A value in an email contact.',
+		description: 'A value in an email contact',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Person.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-gender',
-		documentation: 'The gender of the person.',
+		description: 'The gender of the person',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Person.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-identifier',
-		documentation: 'A person Identifier.',
+		description: 'A person Identifier',
 	},
-	LINK: {
-		name: 'link',
+	link: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Person.link.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-link',
-		documentation: 'Any link has this Patient, Person, RelatedPerson or Practitioner reference.',
+		description: 'Any link has this Patient, Person, RelatedPerson or Practitioner reference',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-name',
-		documentation: 'A portion of name in any name part.',
+		description: 'A portion of name in any name part',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Person.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-organization',
-		documentation: 'The organization at which this person record is being managed.',
+		description: 'The organization at which this person record is being managed',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Person.link.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-patient',
-		documentation: 'The Person links to this Patient.',
+		description: 'The Person links to this Patient',
 	},
-	PHONE: {
-		name: 'phone',
+	phone: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Person.telecom[system/@value='phone']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-phone',
-		documentation: 'A value in a phone contact.',
+		description: 'A value in a phone contact',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Person.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-phonetic',
-		documentation: 'A portion of name using some kind of phonetic matching algorithm.',
+		description: 'A portion of name using some kind of phonetic matching algorithm',
 	},
-	PRACTITIONER: {
-		name: 'practitioner',
+	practitioner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Person.link.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-practitioner',
-		documentation: 'The Person links to this Practitioner.',
+		description: 'The Person links to this Practitioner',
 	},
-	RELATEDPERSON: {
-		name: 'relatedperson',
+	relatedperson: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Person.link.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-relatedperson',
-		documentation: 'The Person links to this RelatedPerson.',
+		description: 'The Person links to this RelatedPerson',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Person.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/Person-telecom',
-		documentation: 'The value in any kind of contact.',
+		description: 'The value in any kind of contact',
 	},
 };

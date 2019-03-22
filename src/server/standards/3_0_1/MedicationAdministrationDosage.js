@@ -1,97 +1,199 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary MedicationAdministrationDosage Class
+ */
+module.exports = class MedicationAdministrationDosage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MedicationAdministrationDosage extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MedicationAdministrationDosage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/approach-site-codes
+		Object.defineProperty(this, 'site', {
+			enumerable: true,
+			get: () => this.__data.site,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.site = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/route-codes
+		Object.defineProperty(this, 'route', {
+			enumerable: true,
+			get: () => this.__data.route,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.route = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/administration-method-codes
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dose', {
+			enumerable: true,
+			get: () => this.__data.dose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.dose = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateRatio', {
+			enumerable: true,
+			get: () => this.__data.rateRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.rateRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateQuantity', {
+			enumerable: true,
+			get: () => this.__data.rateQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.rateQuantity = new Quantity(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MedicationAdministrationDosage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MedicationAdministrationDosage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MedicationAdministrationDosage';
 	}
 
-	// Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.  The dosage instructions should reflect the dosage of the medication that was administered.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
-	// A coded specification of the anatomic site where the medication first entered the body.  For example, \'left arm\'.
-	get site() {
-		return this.__site;
-	}
-
-	set site(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__site = new CodeableConcept(new_value);
-	}
-
-	// A code specifying the route or physiological path of administration of a therapeutic agent into or onto the patient.  For example, topical, intravenous, etc.
-	get route() {
-		return this.__route;
-	}
-
-	set route(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__route = new CodeableConcept(new_value);
-	}
-
-	// A coded value indicating the method by which the medication is intended to be or was introduced into or on the body.  This attribute will most often NOT be populated.  It is most commonly used for injections.  For example, Slow Push, Deep IV.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// The amount of the medication given at one administration event.   Use this value when the administration is essentially an instantaneous event such as a swallowing a tablet or giving an injection.
-	get dose() {
-		return this.__dose;
-	}
-
-	set dose(new_value) {
-		const Quantity = require('./Quantity');
-		this.__dose = new Quantity(new_value);
-	}
-
-	// Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours.
-	get rateRatio() {
-		return this.__rateRatio;
-	}
-
-	set rateRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__rateRatio = new Ratio(new_value);
-	}
-
-	// Identifies the speed with which the medication was or will be introduced into the patient.  Typically the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours.
-	get rateQuantity() {
-		return this.__rateQuantity;
-	}
-
-	set rateQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__rateQuantity = new Quantity(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			text: this.__text,
-			site: this.__site && this.__site.toJSON(),
-			route: this.__route && this.__route.toJSON(),
-			method: this.__method && this.__method.toJSON(),
-			dose: this.__dose && this.__dose.toJSON(),
-			rateRatio: this.__rateRatio && this.__rateRatio.toJSON(),
-			rateQuantity: this.__rateQuantity && this.__rateQuantity.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+			site: this.site && this.site.toJSON(),
+			route: this.route && this.route.toJSON(),
+			method: this.method && this.method.toJSON(),
+			dose: this.dose && this.dose.toJSON(),
+			rateRatio: this.rateRatio && this.rateRatio.toJSON(),
+			rateQuantity: this.rateQuantity && this.rateQuantity.toJSON(),
+		};
 	}
-}
-
-module.exports = MedicationAdministrationDosage;
+};

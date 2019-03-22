@@ -1,52 +1,156 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary TestScriptFixture Class
+ */
+module.exports = class TestScriptFixture {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TestScriptFixture extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TestScriptFixture';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_autocreate', {
+			enumerable: true,
+			get: () => this.__data._autocreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._autocreate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'autocreate', {
+			enumerable: true,
+			get: () => this.__data.autocreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.autocreate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_autodelete', {
+			enumerable: true,
+			get: () => this.__data._autodelete,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._autodelete = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'autodelete', {
+			enumerable: true,
+			get: () => this.__data.autodelete,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.autodelete = value;
+			},
+		});
+
+		Object.defineProperty(this, 'resource', {
+			enumerable: true,
+			get: () => this.__data.resource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.resource = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TestScriptFixture',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TestScriptFixture resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TestScriptFixture';
 	}
 
-	// Whether or not to implicitly create the fixture during setup. If true, the fixture is automatically created on each server being tested during setup, therefore no create operation is required for this fixture in the TestScript.setup section.
-	get autocreate() {
-		return this.__autocreate;
-	}
-
-	set autocreate(new_value) {
-		this.__autocreate = new_value;
-	}
-
-	// Whether or not to implicitly delete the fixture during teardown If true, the fixture is automatically deleted on each server being tested during teardown, therefore no delete operation is required for this fixture in the TestScript.teardown section.
-	get autodelete() {
-		return this.__autodelete;
-	}
-
-	set autodelete(new_value) {
-		this.__autodelete = new_value;
-	}
-
-	// Reference to the resource (containing the contents of the resource needed for operations).
-	get resource() {
-		return this.__resource;
-	}
-
-	set resource(new_value) {
-		const Reference = require('./Reference');
-		this.__resource = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			autocreate: this.__autocreate,
-			autodelete: this.__autodelete,
-			resource: this.__resource && this.__resource.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_autocreate: this._autocreate && this._autocreate.toJSON(),
+			autocreate: this.autocreate,
+			_autodelete: this._autodelete && this._autodelete.toJSON(),
+			autodelete: this.autodelete,
+			resource: this.resource && this.resource.toJSON(),
+		};
 	}
-}
-
-module.exports = TestScriptFixture;
+};

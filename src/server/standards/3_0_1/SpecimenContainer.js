@@ -1,99 +1,199 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary SpecimenContainer Class
+ */
+module.exports = class SpecimenContainer {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SpecimenContainer extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SpecimenContainer';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/specimen-container-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'capacity', {
+			enumerable: true,
+			get: () => this.__data.capacity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.capacity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'specimenQuantity', {
+			enumerable: true,
+			get: () => this.__data.specimenQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.specimenQuantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v2-0371
+		Object.defineProperty(this, 'additiveCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.additiveCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.additiveCodeableConcept = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v2-0371
+		Object.defineProperty(this, 'additiveReference', {
+			enumerable: true,
+			get: () => this.__data.additiveReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.additiveReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SpecimenContainer',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SpecimenContainer resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SpecimenContainer';
 	}
 
-	// Id for container. There may be multiple; a manufacturer\'s bar code, lab assigned identifier, etc. The container ID may differ from the specimen id in some circumstances.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Textual description of the container.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The type of container associated with the specimen (e.g. slide, aliquot, etc.).
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// The capacity (volume or other measure) the container may contain.
-	get capacity() {
-		return this.__capacity;
-	}
-
-	set capacity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__capacity = new Quantity(new_value);
-	}
-
-	// The quantity of specimen in the container; may be volume, dimensions, or other appropriate measurements, depending on the specimen type.
-	get specimenQuantity() {
-		return this.__specimenQuantity;
-	}
-
-	set specimenQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__specimenQuantity = new Quantity(new_value);
-	}
-
-	// Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
-	get additiveCodeableConcept() {
-		return this.__additiveCodeableConcept;
-	}
-
-	set additiveCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__additiveCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Introduced substance to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
-	get additiveReference() {
-		return this.__additiveReference;
-	}
-
-	set additiveReference(new_value) {
-		const Reference = require('./Reference');
-		this.__additiveReference = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			description: this.__description,
-			type: this.__type && this.__type.toJSON(),
-			capacity: this.__capacity && this.__capacity.toJSON(),
-			specimenQuantity: this.__specimenQuantity && this.__specimenQuantity.toJSON(),
-			additiveCodeableConcept: this.__additiveCodeableConcept && this.__additiveCodeableConcept.toJSON(),
-			additiveReference: this.__additiveReference && this.__additiveReference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			type: this.type && this.type.toJSON(),
+			capacity: this.capacity && this.capacity.toJSON(),
+			specimenQuantity: this.specimenQuantity && this.specimenQuantity.toJSON(),
+			additiveCodeableConcept: this.additiveCodeableConcept && this.additiveCodeableConcept.toJSON(),
+			additiveReference: this.additiveReference && this.additiveReference.toJSON(),
+		};
 	}
-}
-
-module.exports = SpecimenContainer;
+};

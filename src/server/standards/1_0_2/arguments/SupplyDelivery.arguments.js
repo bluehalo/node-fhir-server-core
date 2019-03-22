@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the supplydelivery query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SupplyDelivery.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-identifier',
-		documentation: 'External identifier.',
+		description: 'External identifier',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'SupplyDelivery.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-patient',
-		documentation: 'Patient for whom the item is supplied.',
+		description: 'Patient for whom the item is supplied',
 	},
-	RECEIVER: {
-		name: 'receiver',
+	receiver: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'SupplyDelivery.receiver',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-receiver',
-		documentation: 'Who collected the Supply.',
+		description: 'Who collected the Supply',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SupplyDelivery.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-status',
-		documentation: 'in-progress | completed | abandoned.',
+		description: 'in-progress | completed | abandoned',
 	},
-	SUPPLIER: {
-		name: 'supplier',
+	supplier: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'SupplyDelivery.supplier',
 		definition: 'http://hl7.org/fhir/SearchParameter/SupplyDelivery-supplier',
-		documentation: 'Dispenser.',
+		description: 'Dispenser',
 	},
 };

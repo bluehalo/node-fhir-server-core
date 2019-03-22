@@ -1,172 +1,336 @@
-const BackboneElement = require('./BackboneElement');
-const OidScalar = require('./scalars/Oid.scalar');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ImagingStudySeries Class
+ */
+module.exports = class ImagingStudySeries {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImagingStudySeries extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImagingStudySeries';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_uid', {
+			enumerable: true,
+			get: () => this.__data._uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._uid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'uid', {
+			enumerable: true,
+			get: () => this.__data.uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.uid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_number', {
+			enumerable: true,
+			get: () => this.__data._number,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._number = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'number', {
+			enumerable: true,
+			get: () => this.__data.number,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.number = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/dicom-cid29
+		Object.defineProperty(this, 'modality', {
+			enumerable: true,
+			get: () => this.__data.modality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.modality = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_numberOfInstances', {
+			enumerable: true,
+			get: () => this.__data._numberOfInstances,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._numberOfInstances = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'numberOfInstances', {
+			enumerable: true,
+			get: () => this.__data.numberOfInstances,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.numberOfInstances = value;
+			},
+		});
+
+		Object.defineProperty(this, '_availability', {
+			enumerable: true,
+			get: () => this.__data._availability,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._availability = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/instance-availability
+		Object.defineProperty(this, 'availability', {
+			enumerable: true,
+			get: () => this.__data.availability,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.availability = value;
+			},
+		});
+
+		Object.defineProperty(this, 'endpoint', {
+			enumerable: true,
+			get: () => this.__data.endpoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.endpoint = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.bodySite = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/bodysite-laterality
+		Object.defineProperty(this, 'laterality', {
+			enumerable: true,
+			get: () => this.__data.laterality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.laterality = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_started', {
+			enumerable: true,
+			get: () => this.__data._started,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._started = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'started', {
+			enumerable: true,
+			get: () => this.__data.started,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.started = value;
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performer = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'instance', {
+			enumerable: true,
+			get: () => this.__data.instance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImagingStudySeriesInstance = require('./imagingstudyseriesinstance.js');
+				this.__data.instance = Array.isArray(value)
+					? value.map(v => new ImagingStudySeriesInstance(v))
+					: [new ImagingStudySeriesInstance(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImagingStudySeries',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImagingStudySeries resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImagingStudySeries';
 	}
 
-	// Formal identifier for this series.
-	get uid() {
-		return this.__uid;
-	}
-
-	set uid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field uid`);
-		}
-		this.__uid = new_value;
-	}
-
-	// The numeric identifier of this series in the study.
-	get number() {
-		return this.__number;
-	}
-
-	set number(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field number`);
-		}
-		this.__number = new_value;
-	}
-
-	// The modality of this series sequence.
-	get modality() {
-		return this.__modality;
-	}
-
-	set modality(new_value) {
-		const Coding = require('./Coding');
-		this.__modality = new Coding(new_value);
-	}
-
-	// A description of the series.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Number of SOP Instances in the Study. The value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.
-	get numberOfInstances() {
-		return this.__numberOfInstances;
-	}
-
-	set numberOfInstances(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field numberOfInstances`);
-		}
-		this.__numberOfInstances = new_value;
-	}
-
-	// Availability of series (online, offline or nearline).
-	get availability() {
-		return this.__availability;
-	}
-
-	set availability(new_value) {
-		this.__availability = new_value;
-	}
-
-	// The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.type.
-	get endpoint() {
-		return this.__endpoint;
-	}
-
-	set endpoint(new_value) {
-		const Reference = require('./Reference');
-		this.__endpoint = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality.
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const Coding = require('./Coding');
-		this.__bodySite = new Coding(new_value);
-	}
-
-	// The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite.
-	get laterality() {
-		return this.__laterality;
-	}
-
-	set laterality(new_value) {
-		const Coding = require('./Coding');
-		this.__laterality = new Coding(new_value);
-	}
-
-	// The date and time the series was started.
-	get started() {
-		return this.__started;
-	}
-
-	set started(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field started`);
-		}
-		this.__started = new_value;
-	}
-
-	// The physician or operator (often the radiology technician)  who performed the series. The performer is recorded at the series level, since each series in a study may be performed by a different practitioner, at different times, and using different devices. A series may be performed by multiple practitioners.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const Reference = require('./Reference');
-		this.__performer = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A single SOP instance within the series, e.g. an image, or presentation state.
-	get instance() {
-		return this.__instance;
-	}
-
-	set instance(new_value) {
-		const ImagingStudySeriesInstance = require('./ImagingStudySeriesInstance');
-		this.__instance = Array.isArray(new_value)
-			? new_value.map(val => new ImagingStudySeriesInstance(val))
-			: [new ImagingStudySeriesInstance(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			uid: this.__uid,
-			number: this.__number,
-			modality: this.__modality && this.__modality.toJSON(),
-			description: this.__description,
-			numberOfInstances: this.__numberOfInstances,
-			availability: this.__availability,
-			endpoint: this.__endpoint && this.__endpoint.map(v => v.toJSON()),
-			bodySite: this.__bodySite && this.__bodySite.toJSON(),
-			laterality: this.__laterality && this.__laterality.toJSON(),
-			started: this.__started,
-			performer: this.__performer && this.__performer.map(v => v.toJSON()),
-			instance: this.__instance && this.__instance.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_uid: this._uid && this._uid.toJSON(),
+			uid: this.uid,
+			_number: this._number && this._number.toJSON(),
+			number: this.number,
+			modality: this.modality && this.modality.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_numberOfInstances: this._numberOfInstances && this._numberOfInstances.toJSON(),
+			numberOfInstances: this.numberOfInstances,
+			_availability: this._availability && this._availability.toJSON(),
+			availability: this.availability,
+			endpoint: this.endpoint && this.endpoint.map(v => v.toJSON()),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+			laterality: this.laterality && this.laterality.toJSON(),
+			_started: this._started && this._started.toJSON(),
+			started: this.started,
+			performer: this.performer && this.performer.map(v => v.toJSON()),
+			instance: this.instance && this.instance.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ImagingStudySeries;
+};

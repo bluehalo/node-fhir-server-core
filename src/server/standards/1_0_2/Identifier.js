@@ -1,90 +1,195 @@
-const Element = require('./Element');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary Identifier Class
+ */
+module.exports = class Identifier {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Identifier extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Identifier';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_use', {
+			enumerable: true,
+			get: () => this.__data._use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._use = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/identifier-use
+		Object.defineProperty(this, 'use', {
+			enumerable: true,
+			get: () => this.__data.use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.use = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/identifier-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_value', {
+			enumerable: true,
+			get: () => this.__data._value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._value = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'value', {
+			enumerable: true,
+			get: () => this.__data.value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.value = value;
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'assigner', {
+			enumerable: true,
+			get: () => this.__data.assigner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.assigner = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Identifier',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Identifier resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Identifier';
 	}
 
-	// The purpose of this identifier.
-	get use() {
-		return this.__use;
-	}
-
-	set use(new_value) {
-		this.__use = new_value;
-	}
-
-	// A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Establishes the namespace in which set of possible id values is unique.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// The portion of the identifier typically displayed to the user and which is unique within the context of the system.
-	get value() {
-		return this.__value;
-	}
-
-	set value(new_value) {
-		this.__value = new_value;
-	}
-
-	// Time period during which identifier is/was valid for use.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// Organization that issued/manages the identifier.
-	get assigner() {
-		return this.__assigner;
-	}
-
-	set assigner(new_value) {
-		const Reference = require('./Reference');
-		this.__assigner = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			use: this.__use,
-			type: this.__type && this.__type.toJSON(),
-			system: this.__system,
-			value: this.__value,
-			period: this.__period && this.__period.toJSON(),
-			assigner: this.__assigner && this.__assigner.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_use: this._use && this._use.toJSON(),
+			use: this.use,
+			type: this.type && this.type.toJSON(),
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_value: this._value && this._value.toJSON(),
+			value: this.value,
+			period: this.period && this.period.toJSON(),
+			assigner: this.assigner && this.assigner.toJSON(),
+		};
 	}
-}
-
-module.exports = Identifier;
+};

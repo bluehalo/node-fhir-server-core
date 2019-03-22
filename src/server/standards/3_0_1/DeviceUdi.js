@@ -1,108 +1,277 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+/**
+ * @name exports
+ * @summary DeviceUdi Class
+ */
+module.exports = class DeviceUdi {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DeviceUdi extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DeviceUdi';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_deviceIdentifier', {
+			enumerable: true,
+			get: () => this.__data._deviceIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._deviceIdentifier = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'deviceIdentifier', {
+			enumerable: true,
+			get: () => this.__data.deviceIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.deviceIdentifier = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_jurisdiction', {
+			enumerable: true,
+			get: () => this.__data._jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._jurisdiction = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'jurisdiction', {
+			enumerable: true,
+			get: () => this.__data.jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.jurisdiction = value;
+			},
+		});
+
+		Object.defineProperty(this, '_carrierHRF', {
+			enumerable: true,
+			get: () => this.__data._carrierHRF,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._carrierHRF = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'carrierHRF', {
+			enumerable: true,
+			get: () => this.__data.carrierHRF,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.carrierHRF = value;
+			},
+		});
+
+		Object.defineProperty(this, '_carrierAIDC', {
+			enumerable: true,
+			get: () => this.__data._carrierAIDC,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._carrierAIDC = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'carrierAIDC', {
+			enumerable: true,
+			get: () => this.__data.carrierAIDC,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.carrierAIDC = value;
+			},
+		});
+
+		Object.defineProperty(this, '_issuer', {
+			enumerable: true,
+			get: () => this.__data._issuer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._issuer = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'issuer', {
+			enumerable: true,
+			get: () => this.__data.issuer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.issuer = value;
+			},
+		});
+
+		Object.defineProperty(this, '_entryType', {
+			enumerable: true,
+			get: () => this.__data._entryType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._entryType = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/udi-entry-type
+		Object.defineProperty(this, 'entryType', {
+			enumerable: true,
+			get: () => this.__data.entryType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.entryType = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DeviceUdi',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DeviceUdi resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DeviceUdi';
 	}
 
-	// The device identifier (DI) is a mandatory, fixed portion of a UDI that identifies the labeler and the specific version or model of a device.
-	get deviceIdentifier() {
-		return this.__deviceIdentifier;
-	}
-
-	set deviceIdentifier(new_value) {
-		this.__deviceIdentifier = new_value;
-	}
-
-	// Name of device as used in labeling or catalog.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The identity of the authoritative source for UDI generation within a  jurisdiction.  All UDIs are globally unique within a single namespace. with the appropriate repository uri as the system.  For example,  UDIs of devices managed in the U.S. by the FDA, the value is  http://hl7.org/fhir/NamingSystem/fda-udi.
-	get jurisdiction() {
-		return this.__jurisdiction;
-	}
-
-	set jurisdiction(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field jurisdiction`);
-		}
-		this.__jurisdiction = new_value;
-	}
-
-	// The full UDI carrier as the human readable form (HRF) representation of the barcode string as printed on the packaging of the device.
-	get carrierHRF() {
-		return this.__carrierHRF;
-	}
-
-	set carrierHRF(new_value) {
-		this.__carrierHRF = new_value;
-	}
-
-	// The full UDI carrier of the Automatic Identification and Data Capture (AIDC) technology representation of the barcode string as printed on the packaging of the device - E.g a barcode or RFID.   Because of limitations on character sets in XML and the need to round-trip JSON data through XML, AIDC Formats *SHALL* be base64 encoded.
-	get carrierAIDC() {
-		return this.__carrierAIDC;
-	}
-
-	set carrierAIDC(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field carrierAIDC`);
-		}
-		this.__carrierAIDC = new_value;
-	}
-
-	// Organization that is charged with issuing UDIs for devices.  For example, the US FDA issuers include : 1) GS1:  http://hl7.org/fhir/NamingSystem/gs1-di,  2) HIBCC: http://hl7.org/fhir/NamingSystem/hibcc-dI,  3) ICCBBA for blood containers: http://hl7.org/fhir/NamingSystem/iccbba-blood-di,  4) ICCBA for other devices: http://hl7.org/fhir/NamingSystem/iccbba-other-di.
-	get issuer() {
-		return this.__issuer;
-	}
-
-	set issuer(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field issuer`);
-		}
-		this.__issuer = new_value;
-	}
-
-	// A coded entry to indicate how the data was entered.
-	get entryType() {
-		return this.__entryType;
-	}
-
-	set entryType(new_value) {
-		this.__entryType = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			deviceIdentifier: this.__deviceIdentifier,
-			name: this.__name,
-			jurisdiction: this.__jurisdiction,
-			carrierHRF: this.__carrierHRF,
-			carrierAIDC: this.__carrierAIDC,
-			issuer: this.__issuer,
-			entryType: this.__entryType,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_deviceIdentifier: this._deviceIdentifier && this._deviceIdentifier.toJSON(),
+			deviceIdentifier: this.deviceIdentifier,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_jurisdiction: this._jurisdiction && this._jurisdiction.toJSON(),
+			jurisdiction: this.jurisdiction,
+			_carrierHRF: this._carrierHRF && this._carrierHRF.toJSON(),
+			carrierHRF: this.carrierHRF,
+			_carrierAIDC: this._carrierAIDC && this._carrierAIDC.toJSON(),
+			carrierAIDC: this.carrierAIDC,
+			_issuer: this._issuer && this._issuer.toJSON(),
+			issuer: this.issuer,
+			_entryType: this._entryType && this._entryType.toJSON(),
+			entryType: this.entryType,
+		};
 	}
-}
-
-module.exports = DeviceUdi;
+};

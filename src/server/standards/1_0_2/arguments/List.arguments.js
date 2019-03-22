@@ -1,68 +1,84 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the list query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'List.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-code',
-		documentation: 'What the purpose of this list is.',
+		description: 'What the purpose of this list is',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'List.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-date',
-		documentation: 'When the list was prepared.',
+		description: 'When the list was prepared',
 	},
-	EMPTY_REASON: {
-		name: 'empty-reason',
+	'empty-reason': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'List.emptyReason',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-empty-reason',
-		documentation: 'Why list is empty.',
+		description: 'Why list is empty',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'List.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-encounter',
-		documentation: 'Context in which list created.',
+		description: 'Context in which list created',
 	},
-	ITEM: {
-		name: 'item',
+	item: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'List.entry.item',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-item',
-		documentation: 'Actual entry.',
+		description: 'Actual entry',
 	},
-	NOTES: {
-		name: 'notes',
+	notes: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'List.note',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-notes',
-		documentation: 'Comments about the list.',
+		description: 'Comments about the list',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'List.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-patient',
-		documentation: 'If all resources have the same subject.',
+		description: 'If all resources have the same subject',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'List.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-source',
-		documentation: 'Who and/or what defined the list contents (aka Author).',
+		description: 'Who and/or what defined the list contents (aka Author)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'List.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-status',
-		documentation: 'current | retired | entered-in-error.',
+		description: 'current | retired | entered-in-error',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'List.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-subject',
-		documentation: 'If all resources have the same subject.',
+		description: 'If all resources have the same subject',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'List.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/List-title',
-		documentation: 'Descriptive name for the list.',
+		description: 'Descriptive name for the list',
 	},
 };

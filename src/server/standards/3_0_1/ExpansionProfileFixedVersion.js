@@ -1,57 +1,169 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ExpansionProfileFixedVersion Class
+ */
+module.exports = class ExpansionProfileFixedVersion {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ExpansionProfileFixedVersion extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ExpansionProfileFixedVersion';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_mode', {
+			enumerable: true,
+			get: () => this.__data._mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._mode = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/system-version-processing-mode
+		Object.defineProperty(this, 'mode', {
+			enumerable: true,
+			get: () => this.__data.mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.mode = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ExpansionProfileFixedVersion',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ExpansionProfileFixedVersion resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ExpansionProfileFixedVersion';
 	}
 
-	// The specific system for which to fix the version.
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// The version of the code system from which codes in the expansion should be included.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// How to manage the intersection between a fixed version in a value set, and this fixed version of the system in the expansion profile.
-	get mode() {
-		return this.__mode;
-	}
-
-	set mode(new_value) {
-		this.__mode = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			system: this.__system,
-			version: this.__version,
-			mode: this.__mode,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_mode: this._mode && this._mode.toJSON(),
+			mode: this.mode,
+		};
 	}
-}
-
-module.exports = ExpansionProfileFixedVersion;
+};

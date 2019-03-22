@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the messagedefinition query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-category',
-		documentation: 'The behavior associated with the message.',
+		description: 'The behavior associated with the message',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MessageDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-date',
-		documentation: 'The message definition publication date.',
+		description: 'The message definition publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-description',
-		documentation: 'The description of the message definition.',
+		description: 'The description of the message definition',
 	},
-	EVENT: {
-		name: 'event',
+	event: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.event',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-event',
-		documentation: 'The event that triggers the message.',
+		description: 'The event that triggers the message',
 	},
-	FOCUS: {
-		name: 'focus',
+	focus: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.focus.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-focus',
-		documentation: 'A resource that is a permitted focus of the message.',
+		description: 'A resource that is a permitted focus of the message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-identifier',
-		documentation: 'External identifier for the message definition.',
+		description: 'External identifier for the message definition',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the message definition.',
+		description: 'Intended jurisdiction for the message definition',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-name',
-		documentation: 'Computationally friendly name of the message definition.',
+		description: 'Computationally friendly name of the message definition',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-publisher',
-		documentation: 'Name of the publisher of the message definition.',
+		description: 'Name of the publisher of the message definition',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-status',
-		documentation: 'The current status of the message definition.',
+		description: 'The current status of the message definition',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageDefinition.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-title',
-		documentation: 'The human-friendly name of the message definition.',
+		description: 'The human-friendly name of the message definition',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'MessageDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-url',
-		documentation: 'The uri that identifies the message definition.',
+		description: 'The uri that identifies the message definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageDefinition-version',
-		documentation: 'The business version of the message definition.',
+		description: 'The business version of the message definition',
 	},
 };

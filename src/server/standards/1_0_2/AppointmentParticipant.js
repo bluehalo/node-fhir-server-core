@@ -1,65 +1,170 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary AppointmentParticipant Class
+ */
+module.exports = class AppointmentParticipant {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AppointmentParticipant extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AppointmentParticipant';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/encounter-participant-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = Array.isArray(value) ? value.map(v => new CodeableConcept(v)) : [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'actor', {
+			enumerable: true,
+			get: () => this.__data.actor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.actor = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_required', {
+			enumerable: true,
+			get: () => this.__data._required,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._required = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/participantrequired
+		Object.defineProperty(this, 'required', {
+			enumerable: true,
+			get: () => this.__data.required,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.required = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/participationstatus
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AppointmentParticipant',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AppointmentParticipant resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AppointmentParticipant';
 	}
 
-	// Role of participant in the appointment.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A Person, Location/HealthcareService or Device that is participating in the appointment.
-	get actor() {
-		return this.__actor;
-	}
-
-	set actor(new_value) {
-		const Reference = require('./Reference');
-		this.__actor = new Reference(new_value);
-	}
-
-	// Is this participant required to be present at the meeting. This covers a use-case where 2 doctors need to meet to discuss the results for a specific patient, and the patient is not required to be present.
-	get required() {
-		return this.__required;
-	}
-
-	set required(new_value) {
-		this.__required = new_value;
-	}
-
-	// Participation status of the Patient.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.map(v => v.toJSON()),
-			actor: this.__actor && this.__actor.toJSON(),
-			required: this.__required,
-			status: this.__status,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.map(v => v.toJSON()),
+			actor: this.actor && this.actor.toJSON(),
+			_required: this._required && this._required.toJSON(),
+			required: this.required,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+		};
 	}
-}
-
-module.exports = AppointmentParticipant;
+};

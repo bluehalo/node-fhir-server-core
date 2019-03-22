@@ -1,137 +1,377 @@
-const DomainResource = require('./DomainResource');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
+/**
+ * @name exports
+ * @summary Group Class
+ */
+module.exports = class Group {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Group extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Group';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_active', {
+			enumerable: true,
+			get: () => this.__data._active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._active = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'active', {
+			enumerable: true,
+			get: () => this.__data.active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.active = value;
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/group-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_actual', {
+			enumerable: true,
+			get: () => this.__data._actual,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._actual = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'actual', {
+			enumerable: true,
+			get: () => this.__data.actual,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.actual = value;
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_quantity', {
+			enumerable: true,
+			get: () => this.__data._quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._quantity = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.quantity = value;
+			},
+		});
+
+		Object.defineProperty(this, 'characteristic', {
+			enumerable: true,
+			get: () => this.__data.characteristic,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let GroupCharacteristic = require('./groupcharacteristic.js');
+				this.__data.characteristic = Array.isArray(value)
+					? value.map(v => new GroupCharacteristic(v))
+					: [new GroupCharacteristic(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'member', {
+			enumerable: true,
+			get: () => this.__data.member,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let GroupMember = require('./groupmember.js');
+				this.__data.member = Array.isArray(value) ? value.map(v => new GroupMember(v)) : [new GroupMember(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Group',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Group resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Group';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Group = new_value;
-	}
-
-	// A unique business identifier for this group.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Indicates whether the record for the group is available for use or is merely being retained for historical purposes.
-	get active() {
-		return this.__active;
-	}
-
-	set active(new_value) {
-		this.__active = new_value;
-	}
-
-	// Identifies the broad classification of the kind of resources the group includes.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// If true, indicates that the resource refers to a specific group of real individuals.  If false, the group defines a set of intended individuals.
-	get actual() {
-		return this.__actual;
-	}
-
-	set actual(new_value) {
-		this.__actual = new_value;
-	}
-
-	// Provides a specific type of resource the group includes; e.g. \'cow\', \'syringe\', etc.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// A label assigned to the group for human identification and communication.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// A count of the number of resource instances that are part of the group.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field quantity`);
-		}
-		this.__quantity = new_value;
-	}
-
-	// Identifies the traits shared by members of the group.
-	get characteristic() {
-		return this.__characteristic;
-	}
-
-	set characteristic(new_value) {
-		const GroupCharacteristic = require('./GroupCharacteristic');
-		this.__characteristic = Array.isArray(new_value)
-			? new_value.map(val => new GroupCharacteristic(val))
-			: [new GroupCharacteristic(new_value)];
-	}
-
-	// Identifies the resource instances that are members of the group.
-	get member() {
-		return this.__member;
-	}
-
-	set member(new_value) {
-		const GroupMember = require('./GroupMember');
-		this.__member = Array.isArray(new_value)
-			? new_value.map(val => new GroupMember(val))
-			: [new GroupMember(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			active: this.__active,
-			type: this.__type,
-			actual: this.__actual,
-			code: this.__code && this.__code.toJSON(),
-			name: this.__name,
-			quantity: this.__quantity,
-			characteristic: this.__characteristic && this.__characteristic.map(v => v.toJSON()),
-			member: this.__member && this.__member.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_active: this._active && this._active.toJSON(),
+			active: this.active,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_actual: this._actual && this._actual.toJSON(),
+			actual: this.actual,
+			code: this.code && this.code.toJSON(),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_quantity: this._quantity && this._quantity.toJSON(),
+			quantity: this.quantity,
+			characteristic: this.characteristic && this.characteristic.map(v => v.toJSON()),
+			member: this.member && this.member.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Group;
+};

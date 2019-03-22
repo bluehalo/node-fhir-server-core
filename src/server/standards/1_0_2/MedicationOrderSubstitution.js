@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary MedicationOrderSubstitution Class
+ */
+module.exports = class MedicationOrderSubstitution {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MedicationOrderSubstitution extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MedicationOrderSubstitution';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActSubstanceAdminSubstitutionCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-SubstanceAdminSubstitutionReason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MedicationOrderSubstitution',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MedicationOrderSubstitution resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MedicationOrderSubstitution';
 	}
 
-	// A code signifying whether a different drug should be dispensed from what was prescribed.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Indicates the reason for the substitution, or why substitution must or must not be performed.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			reason: this.__reason && this.__reason.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			reason: this.reason && this.reason.toJSON(),
+		};
 	}
-}
-
-module.exports = MedicationOrderSubstitution;
+};

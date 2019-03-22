@@ -1,76 +1,93 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the device query
+ */
 module.exports = {
-	DEVICE_NAME: {
-		name: 'device-name',
+	'device-name': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Device.udi.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-device-name',
-		documentation:
-			'A server defined search that may match any of the string fields in the Device.udi.name  or Device.type.coding.display or  Device.type.text.',
+		description:
+			'A server defined search that may match any of the string fields in the Device.udi.name  or Device.type.coding.display or  Device.type.text',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Device.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-identifier',
-		documentation: 'Instance id from manufacturer, owner, and others.',
+		description: 'Instance id from manufacturer, owner, and others',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Device.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-location',
-		documentation: 'A location, where the resource is found.',
+		description: 'A location, where the resource is found',
 	},
-	MANUFACTURER: {
-		name: 'manufacturer',
+	manufacturer: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Device.manufacturer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-manufacturer',
-		documentation: 'The manufacturer of the device.',
+		description: 'The manufacturer of the device',
 	},
-	MODEL: {
-		name: 'model',
+	model: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Device.model',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-model',
-		documentation: 'The model of the device.',
+		description: 'The model of the device',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Device.owner',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-organization',
-		documentation: 'The organization responsible for the device.',
+		description: 'The organization responsible for the device',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Device.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-patient',
-		documentation: 'Patient information, if the resource is affixed to a person.',
+		description: 'Patient information, if the resource is affixed to a person',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Device.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-status',
-		documentation: 'active | inactive | entered-in-error | unknown.',
+		description: 'active | inactive | entered-in-error | unknown',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Device.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-type',
-		documentation: 'The type of the device.',
+		description: 'The type of the device',
 	},
-	UDI_CARRIER: {
-		name: 'udi-carrier',
+	'udi-carrier': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Device.udi.carrierHRF',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-udi-carrier',
-		documentation:
+		description:
 			'UDI Barcode (RFID or other technology) string either in HRF format or AIDC format converted to base64 string.',
 	},
-	UDI_DI: {
-		name: 'udi-di',
+	'udi-di': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Device.udi.deviceIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-udi-di',
-		documentation: 'The udi Device Identifier (DI).',
+		description: 'The udi Device Identifier (DI)',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Device.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/Device-url',
-		documentation: 'Network address to contact device.',
+		description: 'Network address to contact device',
 	},
 };

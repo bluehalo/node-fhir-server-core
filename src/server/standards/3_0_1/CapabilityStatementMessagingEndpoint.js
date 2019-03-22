@@ -1,48 +1,129 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary CapabilityStatementMessagingEndpoint Class
+ */
+module.exports = class CapabilityStatementMessagingEndpoint {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CapabilityStatementMessagingEndpoint extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CapabilityStatementMessagingEndpoint';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/message-transport
+		Object.defineProperty(this, 'protocol', {
+			enumerable: true,
+			get: () => this.__data.protocol,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.protocol = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_address', {
+			enumerable: true,
+			get: () => this.__data._address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._address = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'address', {
+			enumerable: true,
+			get: () => this.__data.address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.address = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CapabilityStatementMessagingEndpoint',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CapabilityStatementMessagingEndpoint resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CapabilityStatementMessagingEndpoint';
 	}
 
-	// A list of the messaging transport protocol(s) identifiers, supported by this endpoint.
-	get protocol() {
-		return this.__protocol;
-	}
-
-	set protocol(new_value) {
-		const Coding = require('./Coding');
-		this.__protocol = new Coding(new_value);
-	}
-
-	// The network address of the end-point. For solutions that do not use network addresses for routing, it can be just an identifier.
-	get address() {
-		return this.__address;
-	}
-
-	set address(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field address`);
-		}
-		this.__address = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			protocol: this.__protocol && this.__protocol.toJSON(),
-			address: this.__address,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			protocol: this.protocol && this.protocol.toJSON(),
+			_address: this._address && this._address.toJSON(),
+			address: this.address,
+		};
 	}
-}
-
-module.exports = CapabilityStatementMessagingEndpoint;
+};

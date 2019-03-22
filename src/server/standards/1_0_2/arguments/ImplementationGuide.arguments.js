@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the implementationguide query
+ */
 module.exports = {
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImplementationGuide.useContext',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-context',
-		documentation: 'A use context assigned to the structure.',
+		description: 'A use context assigned to the structure',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ImplementationGuide.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-date',
-		documentation: 'The implementation guide publication date.',
+		description: 'The implementation guide publication date',
 	},
-	DEPENDENCY: {
-		name: 'dependency',
+	dependency: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImplementationGuide.dependency.uri',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-dependency',
-		documentation: 'Where to find dependency.',
+		description: 'Where to find dependency',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ImplementationGuide.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-description',
-		documentation: 'Text search in the description of the implementation guide.',
+		description: 'Text search in the description of the implementation guide',
 	},
-	EXPERIMENTAL: {
-		name: 'experimental',
+	experimental: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImplementationGuide.experimental',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-experimental',
-		documentation: 'If for testing purposes, not real usage.',
+		description: 'If for testing purposes, not real usage',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ImplementationGuide.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-name',
-		documentation: 'Name of the implementation guide.',
+		description: 'Name of the implementation guide',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ImplementationGuide.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-publisher',
-		documentation: 'Name of the publisher of the implementation guide.',
+		description: 'Name of the publisher of the implementation guide',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImplementationGuide.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-status',
-		documentation: 'The current status of the implementation guide.',
+		description: 'The current status of the implementation guide',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImplementationGuide.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-url',
-		documentation: 'Absolute URL used to reference this Implementation Guide.',
+		description: 'Absolute URL used to reference this Implementation Guide',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImplementationGuide.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImplementationGuide-version',
-		documentation: 'The version identifier of the implementation guide.',
+		description: 'The version identifier of the implementation guide',
 	},
 };

@@ -1,89 +1,208 @@
-const Element = require('./Element');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary RelatedArtifact Class
+ */
+module.exports = class RelatedArtifact {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class RelatedArtifact extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'RelatedArtifact';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/related-artifact-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_display', {
+			enumerable: true,
+			get: () => this.__data._display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._display = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'display', {
+			enumerable: true,
+			get: () => this.__data.display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.display = value;
+			},
+		});
+
+		Object.defineProperty(this, '_citation', {
+			enumerable: true,
+			get: () => this.__data._citation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._citation = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'citation', {
+			enumerable: true,
+			get: () => this.__data.citation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.citation = value;
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, 'document', {
+			enumerable: true,
+			get: () => this.__data.document,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.document = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'resource', {
+			enumerable: true,
+			get: () => this.__data.resource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.resource = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'RelatedArtifact',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a RelatedArtifact resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'RelatedArtifact';
 	}
 
-	// The type of relationship to the related artifact.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.
-	get display() {
-		return this.__display;
-	}
-
-	set display(new_value) {
-		this.__display = new_value;
-	}
-
-	// A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.
-	get citation() {
-		return this.__citation;
-	}
-
-	set citation(new_value) {
-		this.__citation = new_value;
-	}
-
-	// A url for the artifact that can be followed to access the actual content.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// The document being referenced, represented as an attachment. This is exclusive with the resource element.
-	get document() {
-		return this.__document;
-	}
-
-	set document(new_value) {
-		const Attachment = require('./Attachment');
-		this.__document = new Attachment(new_value);
-	}
-
-	// The related resource, such as a library, value set, profile, or other knowledge resource.
-	get resource() {
-		return this.__resource;
-	}
-
-	set resource(new_value) {
-		const Reference = require('./Reference');
-		this.__resource = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			display: this.__display,
-			citation: this.__citation,
-			url: this.__url,
-			document: this.__document && this.__document.toJSON(),
-			resource: this.__resource && this.__resource.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_display: this._display && this._display.toJSON(),
+			display: this.display,
+			_citation: this._citation && this._citation.toJSON(),
+			citation: this.citation,
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			document: this.document && this.document.toJSON(),
+			resource: this.resource && this.resource.toJSON(),
+		};
 	}
-}
-
-module.exports = RelatedArtifact;
+};

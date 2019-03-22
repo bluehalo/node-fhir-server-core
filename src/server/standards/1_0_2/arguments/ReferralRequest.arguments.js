@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the referralrequest query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ReferralRequest.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-date',
-		documentation: 'Creation or activation date.',
+		description: 'Creation or activation date',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ReferralRequest.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-patient',
-		documentation: 'Who the referral is about.',
+		description: 'Who the referral is about',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ReferralRequest.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-priority',
-		documentation: 'The priority assigned to the referral.',
+		description: 'The priority assigned to the referral',
 	},
-	RECIPIENT: {
-		name: 'recipient',
+	recipient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ReferralRequest.recipient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-recipient',
-		documentation: 'The person that the referral was sent to.',
+		description: 'The person that the referral was sent to',
 	},
-	REQUESTER: {
-		name: 'requester',
+	requester: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ReferralRequest.requester',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-requester',
-		documentation: 'Requester of referral / transfer of care.',
+		description: 'Requester of referral / transfer of care',
 	},
-	SPECIALTY: {
-		name: 'specialty',
+	specialty: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ReferralRequest.specialty',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-specialty',
-		documentation: 'The specialty that the referral is for.',
+		description: 'The specialty that the referral is for',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ReferralRequest.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-status',
-		documentation: 'The status of the referral.',
+		description: 'The status of the referral',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ReferralRequest.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/ReferralRequest-type',
-		documentation: 'The type of the referral.',
+		description: 'The type of the referral',
 	},
 };

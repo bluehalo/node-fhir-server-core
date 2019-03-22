@@ -1,81 +1,99 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medicationdispense query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationDispense.medicationCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-code',
-		documentation: 'Return dispenses of this medicine code.',
+		description: 'Return dispenses of this medicine code',
 	},
-	DESTINATION: {
-		name: 'destination',
+	destination: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.destination',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-destination',
-		documentation: 'Return dispenses that should be sent to a specific destination.',
+		description: 'Return dispenses that should be sent to a specific destination',
 	},
-	DISPENSER: {
-		name: 'dispenser',
+	dispenser: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.dispenser',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-dispenser',
-		documentation: 'Return all dispenses performed by a specific individual.',
+		description: 'Return all dispenses performed by a specific individual',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationDispense.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-identifier',
-		documentation: 'Return dispenses with this external identifier.',
+		description: 'Return dispenses with this external identifier',
 	},
-	MEDICATION: {
-		name: 'medication',
+	medication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.medicationReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-medication',
-		documentation: 'Return dispenses of this medicine resource.',
+		description: 'Return dispenses of this medicine resource',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-patient',
-		documentation: 'The identity of a patient to list dispenses  for.',
+		description: 'The identity of a patient to list dispenses  for',
 	},
-	PRESCRIPTION: {
-		name: 'prescription',
+	prescription: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.authorizingPrescription',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-prescription',
-		documentation: 'The identity of a prescription to list dispenses from.',
+		description: 'The identity of a prescription to list dispenses from',
 	},
-	RECEIVER: {
-		name: 'receiver',
+	receiver: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.receiver',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-receiver',
-		documentation: 'Who collected the medication.',
+		description: 'Who collected the medication',
 	},
-	RESPONSIBLEPARTY: {
-		name: 'responsibleparty',
+	responsibleparty: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationDispense.substitution.responsibleParty',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-responsibleparty',
-		documentation: 'Return all dispenses with the specified responsible party.',
+		description: 'Return all dispenses with the specified responsible party',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationDispense.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-status',
-		documentation: 'Status of the dispense.',
+		description: 'Status of the dispense',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationDispense.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-type',
-		documentation: 'Return all dispenses of a specific type.',
+		description: 'Return all dispenses of a specific type',
 	},
-	WHENHANDEDOVER: {
-		name: 'whenhandedover',
+	whenhandedover: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationDispense.whenHandedOver',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-whenhandedover',
-		documentation:
-			'Date when medication handed over to patient (outpatient setting), or supplied to ward or clinic (inpatient setting).',
+		description:
+			'Date when medication handed over to patient (outpatient setting), or supplied to ward or clinic (inpatient setting)',
 	},
-	WHENPREPARED: {
-		name: 'whenprepared',
+	whenprepared: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationDispense.whenPrepared',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationDispense-whenprepared',
-		documentation: 'Date when medication prepared.',
+		description: 'Date when medication prepared',
 	},
 };

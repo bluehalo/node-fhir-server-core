@@ -1,122 +1,147 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the encounter query
+ */
 module.exports = {
-	APPOINTMENT: {
-		name: 'appointment',
+	appointment: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.appointment',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-appointment',
-		documentation: 'The appointment that scheduled this encounter.',
+		description: 'The appointment that scheduled this encounter',
 	},
-	CONDITION: {
-		name: 'condition',
+	condition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.indication',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-condition',
-		documentation: 'Reason the encounter takes place (resource).',
+		description: 'Reason the encounter takes place (resource)',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Encounter.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-date',
-		documentation: 'A date within the period the Encounter lasted.',
+		description: 'A date within the period the Encounter lasted',
 	},
-	EPISODEOFCARE: {
-		name: 'episodeofcare',
+	episodeofcare: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.episodeOfCare',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-episodeofcare',
-		documentation: 'Episode(s) of care that this encounter should be recorded against.',
+		description: 'Episode(s) of care that this encounter should be recorded against',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-identifier',
-		documentation: 'Identifier(s) by which this encounter is known.',
+		description: 'Identifier(s) by which this encounter is known',
 	},
-	INCOMINGREFERRAL: {
-		name: 'incomingreferral',
+	incomingreferral: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.incomingReferral',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-incomingreferral',
-		documentation: 'The ReferralRequest that initiated this encounter.',
+		description: 'The ReferralRequest that initiated this encounter',
 	},
-	INDICATION: {
-		name: 'indication',
+	indication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.indication',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-indication',
-		documentation: 'Reason the encounter takes place (resource).',
+		description: 'Reason the encounter takes place (resource)',
 	},
-	LENGTH: {
-		name: 'length',
+	length: {
 		type: 'number',
+		fhirtype: 'number',
+		xpath: 'Encounter.length',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-length',
-		documentation: 'Length of encounter in days.',
+		description: 'Length of encounter in days',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.location.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-location',
-		documentation: 'Location the encounter takes place.',
+		description: 'Location the encounter takes place',
 	},
-	LOCATION_PERIOD: {
-		name: 'location-period',
+	'location-period': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Encounter.location.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-location-period',
-		documentation: 'Time period during which the patient was present at the location.',
+		description: 'Time period during which the patient was present at the location',
 	},
-	PART_OF: {
-		name: 'part-of',
+	'part-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-part-of',
-		documentation: 'Another Encounter this encounter is part of.',
+		description: 'Another Encounter this encounter is part of',
 	},
-	PARTICIPANT: {
-		name: 'participant',
+	participant: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.participant.individual',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-participant',
-		documentation: 'Persons involved in the encounter other than the patient.',
+		description: 'Persons involved in the encounter other than the patient',
 	},
-	PARTICIPANT_TYPE: {
-		name: 'participant-type',
+	'participant-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.participant.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-participant-type',
-		documentation: 'Role of participant in encounter.',
+		description: 'Role of participant in encounter',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-patient',
-		documentation: 'The patient present at the encounter.',
+		description: 'The patient present at the encounter',
 	},
-	PRACTITIONER: {
-		name: 'practitioner',
+	practitioner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.participant.individual',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-practitioner',
-		documentation: 'Persons involved in the encounter other than the patient.',
+		description: 'Persons involved in the encounter other than the patient',
 	},
-	PROCEDURE: {
-		name: 'procedure',
+	procedure: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Encounter.indication',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-procedure',
-		documentation: 'Reason the encounter takes place (resource).',
+		description: 'Reason the encounter takes place (resource)',
 	},
-	REASON: {
-		name: 'reason',
+	reason: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.reason',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-reason',
-		documentation: 'Reason the encounter takes place (code).',
+		description: 'Reason the encounter takes place (code)',
 	},
-	SPECIAL_ARRANGEMENT: {
-		name: 'special-arrangement',
+	'special-arrangement': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.hospitalization.specialArrangement',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-special-arrangement',
-		documentation: 'Wheelchair, translator, stretcher, etc.',
+		description: 'Wheelchair, translator, stretcher, etc.',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-status',
-		documentation: 'planned | arrived | in-progress | onleave | finished | cancelled.',
+		description: 'planned | arrived | in-progress | onleave | finished | cancelled',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Encounter.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Encounter-type',
-		documentation: 'Specific type of encounter.',
+		description: 'Specific type of encounter',
 	},
 };

@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the medicationstatement query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.medicationCodeableConcept',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-code',
-		documentation: 'Return administrations of this medication code.',
+		description: 'Return administrations of this medication code',
 	},
-	EFFECTIVEDATE: {
-		name: 'effectivedate',
+	effectivedate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MedicationStatement.effectiveDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-effectivedate',
-		documentation: 'Date when patient was taking (or not taking) the medication.',
+		description: 'Date when patient was taking (or not taking) the medication',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-identifier',
-		documentation: 'Return statements with this external identifier.',
+		description: 'Return statements with this external identifier',
 	},
-	MEDICATION: {
-		name: 'medication',
+	medication: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.medicationReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-medication',
-		documentation: 'Return administrations of this medication reference.',
+		description: 'Return administrations of this medication reference',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-patient',
-		documentation: 'The identity of a patient to list statements  for.',
+		description: 'The identity of a patient to list statements  for',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MedicationStatement.informationSource',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-source',
-		documentation: 'Who the information in the statement came from.',
+		description: 'Who the information in the statement came from',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MedicationStatement.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/MedicationStatement-status',
-		documentation: 'Return statements that match the given status.',
+		description: 'Return statements that match the given status',
 	},
 };

@@ -1,124 +1,361 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Questionnaire Class
+ */
+module.exports = class Questionnaire {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Questionnaire extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Questionnaire';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'telecom', {
+			enumerable: true,
+			get: () => this.__data.telecom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.telecom = Array.isArray(value) ? value.map(v => new ContactPoint(v)) : [new ContactPoint(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_subjectType', {
+			enumerable: true,
+			get: () => this.__data._subjectType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subjectType = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/resource-types
+		Object.defineProperty(this, 'subjectType', {
+			enumerable: true,
+			get: () => this.__data.subjectType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subjectType = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'group', {
+			enumerable: true,
+			get: () => this.__data.group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let QuestionnaireGroup = require('./questionnairegroup.js');
+				this.__data.group = new QuestionnaireGroup(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Questionnaire',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Questionnaire resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Questionnaire';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Questionnaire = new_value;
-	}
-
-	// This records identifiers associated with this question set that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The version number assigned by the publisher for business reasons.  It may remain the same when the resource is updated.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// The lifecycle status of the questionnaire as a whole.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The date that this questionnaire was last changed.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Organization or person responsible for developing and maintaining the questionnaire.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contact details to assist a user in finding and communicating with the publisher.
-	get telecom() {
-		return this.__telecom;
-	}
-
-	set telecom(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value)
-			? new_value.map(val => new ContactPoint(val))
-			: [new ContactPoint(new_value)];
-	}
-
-	// Identifies the types of subjects that can be the subject of the questionnaire.
-	get subjectType() {
-		return this.__subjectType;
-	}
-
-	set subjectType(new_value) {
-		this.__subjectType = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A collection of related questions (or further groupings of questions).
-	get group() {
-		return this.__group;
-	}
-
-	set group(new_value) {
-		const QuestionnaireGroup = require('./QuestionnaireGroup');
-		this.__group = new QuestionnaireGroup(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			version: this.__version,
-			status: this.__status,
-			date: this.__date,
-			publisher: this.__publisher,
-			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
-			subjectType: this.__subjectType,
-			group: this.__group && this.__group.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
+			_subjectType: this._subjectType && this._subjectType.toJSON(),
+			subjectType: this.subjectType,
+			group: this.group && this.group.toJSON(),
+		};
 	}
-}
-
-module.exports = Questionnaire;
+};

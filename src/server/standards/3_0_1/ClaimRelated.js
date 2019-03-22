@@ -1,54 +1,130 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ClaimRelated Class
+ */
+module.exports = class ClaimRelated {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimRelated extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimRelated';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'claim', {
+			enumerable: true,
+			get: () => this.__data.claim,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.claim = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/related-claim-relationship
+		Object.defineProperty(this, 'relationship', {
+			enumerable: true,
+			get: () => this.__data.relationship,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.relationship = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reference', {
+			enumerable: true,
+			get: () => this.__data.reference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.reference = new Identifier(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimRelated',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimRelated resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimRelated';
 	}
 
-	// Other claims which are related to this claim such as prior claim versions or for related services.
-	get claim() {
-		return this.__claim;
-	}
-
-	set claim(new_value) {
-		const Reference = require('./Reference');
-		this.__claim = new Reference(new_value);
-	}
-
-	// For example prior or umbrella.
-	get relationship() {
-		return this.__relationship;
-	}
-
-	set relationship(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__relationship = new CodeableConcept(new_value);
-	}
-
-	// An alternate organizational reference to the case or file to which this particular claim pertains - eg Property/Casualy insurer claim # or Workers Compensation case # .
-	get reference() {
-		return this.__reference;
-	}
-
-	set reference(new_value) {
-		const Identifier = require('./Identifier');
-		this.__reference = new Identifier(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			claim: this.__claim && this.__claim.toJSON(),
-			relationship: this.__relationship && this.__relationship.toJSON(),
-			reference: this.__reference && this.__reference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			claim: this.claim && this.claim.toJSON(),
+			relationship: this.relationship && this.relationship.toJSON(),
+			reference: this.reference && this.reference.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimRelated;
+};

@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the orderresponse query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OrderResponse.orderStatus',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-code',
-		documentation: 'pending | review | rejected | error | accepted | cancelled | replaced | aborted | completed.',
+		description: 'pending | review | rejected | error | accepted | cancelled | replaced | aborted | completed',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'OrderResponse.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-date',
-		documentation: 'When the response was made.',
+		description: 'When the response was made',
 	},
-	FULFILLMENT: {
-		name: 'fulfillment',
+	fulfillment: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OrderResponse.fulfillment',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-fulfillment',
-		documentation: 'Details of the outcome of performing the order.',
+		description: 'Details of the outcome of performing the order',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OrderResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-identifier',
-		documentation: 'Identifiers assigned to this order by the orderer or by the receiver.',
+		description: 'Identifiers assigned to this order by the orderer or by the receiver',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OrderResponse.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-request',
-		documentation: 'The order that this is a response to.',
+		description: 'The order that this is a response to',
 	},
-	WHO: {
-		name: 'who',
+	who: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OrderResponse.who',
 		definition: 'http://hl7.org/fhir/SearchParameter/OrderResponse-who',
-		documentation: 'Who made the response.',
+		description: 'Who made the response',
 	},
 };

@@ -1,116 +1,140 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the capabilitystatement query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CapabilityStatement.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-date',
-		documentation: 'The capability statement publication date.',
+		description: 'The capability statement publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CapabilityStatement.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-description',
-		documentation: 'The description of the capability statement.',
+		description: 'The description of the capability statement',
 	},
-	EVENT: {
-		name: 'event',
+	event: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.messaging.event.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-event',
-		documentation: 'Event code in a capability statement.',
+		description: 'Event code in a capability statement',
 	},
-	FHIRVERSION: {
-		name: 'fhirversion',
+	fhirversion: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-fhirversion',
-		documentation: 'The version of FHIR.',
+		description: 'The version of FHIR',
 	},
-	FORMAT: {
-		name: 'format',
+	format: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.format',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-format',
-		documentation: 'formats supported (xml | json | ttl | mime type).',
+		description: 'formats supported (xml | json | ttl | mime type)',
 	},
-	GUIDE: {
-		name: 'guide',
+	guide: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'CapabilityStatement.implementationGuide',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-guide',
-		documentation: 'Implementation guides supported.',
+		description: 'Implementation guides supported',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-jurisdiction',
-		documentation: 'Intended jurisdiction for the capability statement.',
+		description: 'Intended jurisdiction for the capability statement',
 	},
-	MODE: {
-		name: 'mode',
+	mode: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.rest.mode',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-mode',
-		documentation: 'Mode - restful (server/client) or messaging (sender/receiver).',
+		description: 'Mode - restful (server/client) or messaging (sender/receiver)',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CapabilityStatement.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-name',
-		documentation: 'Computationally friendly name of the capability statement.',
+		description: 'Computationally friendly name of the capability statement',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CapabilityStatement.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-publisher',
-		documentation: 'Name of the publisher of the capability statement.',
+		description: 'Name of the publisher of the capability statement',
 	},
-	RESOURCE: {
-		name: 'resource',
+	resource: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.rest.resource.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-resource',
-		documentation: 'Name of a resource mentioned in a capability statement.',
+		description: 'Name of a resource mentioned in a capability statement',
 	},
-	RESOURCE_PROFILE: {
-		name: 'resource-profile',
+	'resource-profile': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CapabilityStatement.rest.resource.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-resource-profile',
-		documentation: 'A profile id invoked in a capability statement.',
+		description: 'A profile id invoked in a capability statement',
 	},
-	SECURITY_SERVICE: {
-		name: 'security-service',
+	'security-service': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.rest.security.service',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-security-service',
-		documentation: 'OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates.',
+		description: 'OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates',
 	},
-	SOFTWARE: {
-		name: 'software',
+	software: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CapabilityStatement.software.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-software',
-		documentation: 'Part of a the name of a software application.',
+		description: 'Part of a the name of a software application',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-status',
-		documentation: 'The current status of the capability statement.',
+		description: 'The current status of the capability statement',
 	},
-	SUPPORTED_PROFILE: {
-		name: 'supported-profile',
+	'supported-profile': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CapabilityStatement.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-supported-profile',
-		documentation: 'Profiles for use cases supported.',
+		description: 'Profiles for use cases supported',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CapabilityStatement.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-title',
-		documentation: 'The human-friendly name of the capability statement.',
+		description: 'The human-friendly name of the capability statement',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'CapabilityStatement.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-url',
-		documentation: 'The uri that identifies the capability statement.',
+		description: 'The uri that identifies the capability statement',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CapabilityStatement.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/CapabilityStatement-version',
-		documentation: 'The business version of the capability statement.',
+		description: 'The business version of the capability statement',
 	},
 };

@@ -1,68 +1,84 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the testscript query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'TestScript.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-date',
-		documentation: 'The test script publication date.',
+		description: 'The test script publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-description',
-		documentation: 'The description of the test script.',
+		description: 'The description of the test script',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestScript.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-identifier',
-		documentation: 'External identifier for the test script.',
+		description: 'External identifier for the test script',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestScript.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-jurisdiction',
-		documentation: 'Intended jurisdiction for the test script.',
+		description: 'Intended jurisdiction for the test script',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-name',
-		documentation: 'Computationally friendly name of the test script.',
+		description: 'Computationally friendly name of the test script',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-publisher',
-		documentation: 'Name of the publisher of the test script.',
+		description: 'Name of the publisher of the test script',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestScript.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-status',
-		documentation: 'The current status of the test script.',
+		description: 'The current status of the test script',
 	},
-	TESTSCRIPT_CAPABILITY: {
-		name: 'testscript-capability',
+	'testscript-capability': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.metadata.capability.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-testscript-capability',
-		documentation: 'TestScript required and validated capability.',
+		description: 'TestScript required and validated capability',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'TestScript.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-title',
-		documentation: 'The human-friendly name of the test script.',
+		description: 'The human-friendly name of the test script',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'TestScript.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-url',
-		documentation: 'The uri that identifies the test script.',
+		description: 'The uri that identifies the test script',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'TestScript.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/TestScript-version',
-		documentation: 'The business version of the test script.',
+		description: 'The business version of the test script',
 	},
 };

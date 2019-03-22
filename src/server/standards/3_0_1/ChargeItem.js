@@ -1,325 +1,620 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ChargeItem Class
+ */
+module.exports = class ChargeItem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ChargeItem extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ChargeItem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_definition', {
+			enumerable: true,
+			get: () => this.__data._definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definition = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/chargeitem-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'partOf', {
+			enumerable: true,
+			get: () => this.__data.partOf,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.partOf = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/chargeitem-billingcodes
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data._occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._occurrenceDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data.occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.occurrenceDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'occurrencePeriod', {
+			enumerable: true,
+			get: () => this.__data.occurrencePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.occurrencePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceTiming', {
+			enumerable: true,
+			get: () => this.__data.occurrenceTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.occurrenceTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'participant', {
+			enumerable: true,
+			get: () => this.__data.participant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ChargeItemParticipant = require('./chargeitemparticipant.js');
+				this.__data.participant = Array.isArray(value)
+					? value.map(v => new ChargeItemParticipant(v))
+					: [new ChargeItemParticipant(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'performingOrganization', {
+			enumerable: true,
+			get: () => this.__data.performingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requestingOrganization', {
+			enumerable: true,
+			get: () => this.__data.requestingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.requestingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodysite', {
+			enumerable: true,
+			get: () => this.__data.bodysite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodysite = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_factorOverride', {
+			enumerable: true,
+			get: () => this.__data._factorOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._factorOverride = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'factorOverride', {
+			enumerable: true,
+			get: () => this.__data.factorOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.factorOverride = value;
+			},
+		});
+
+		Object.defineProperty(this, 'priceOverride', {
+			enumerable: true,
+			get: () => this.__data.priceOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.priceOverride = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, '_overrideReason', {
+			enumerable: true,
+			get: () => this.__data._overrideReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._overrideReason = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'overrideReason', {
+			enumerable: true,
+			get: () => this.__data.overrideReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.overrideReason = value;
+			},
+		});
+
+		Object.defineProperty(this, 'enterer', {
+			enumerable: true,
+			get: () => this.__data.enterer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.enterer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_enteredDate', {
+			enumerable: true,
+			get: () => this.__data._enteredDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._enteredDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'enteredDate', {
+			enumerable: true,
+			get: () => this.__data.enteredDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.enteredDate = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/icd-10
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'service', {
+			enumerable: true,
+			get: () => this.__data.service,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.service = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'account', {
+			enumerable: true,
+			get: () => this.__data.account,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.account = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInformation', {
+			enumerable: true,
+			get: () => this.__data.supportingInformation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInformation = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ChargeItem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ChargeItem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ChargeItem';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__ChargeItem = new_value;
-	}
-
-	// Identifiers assigned to this event performer or other systems.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// References the source of pricing information, rules of application for the code this ChargeItem uses.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field definition`);
-		}
-		this.__definition = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The current state of the ChargeItem.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// ChargeItems can be grouped to larger ChargeItems covering the whole set.
-	get partOf() {
-		return this.__partOf;
-	}
-
-	set partOf(new_value) {
-		const Reference = require('./Reference');
-		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// A code that identifies the charge, like a billing code.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The individual or set of individuals the action is being or was performed on.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The encounter or episode of care that establishes the context for this event.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// Date/time(s) or duration when the charged service was applied.
-	get occurrenceDateTime() {
-		return this.__occurrenceDateTime;
-	}
-
-	set occurrenceDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
-		}
-		this.__occurrenceDateTime = new_value;
-	}
-
-	// Date/time(s) or duration when the charged service was applied.
-	get occurrencePeriod() {
-		return this.__occurrencePeriod;
-	}
-
-	set occurrencePeriod(new_value) {
-		const Period = require('./Period');
-		this.__occurrencePeriod = new Period(new_value);
-	}
-
-	// Date/time(s) or duration when the charged service was applied.
-	get occurrenceTiming() {
-		return this.__occurrenceTiming;
-	}
-
-	set occurrenceTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__occurrenceTiming = new Timing(new_value);
-	}
-
-	// Indicates who or what performed or participated in the charged service.
-	get participant() {
-		return this.__participant;
-	}
-
-	set participant(new_value) {
-		const ChargeItemParticipant = require('./ChargeItemParticipant');
-		this.__participant = Array.isArray(new_value)
-			? new_value.map(val => new ChargeItemParticipant(val))
-			: [new ChargeItemParticipant(new_value)];
-	}
-
-	// The organization requesting the service.
-	get performingOrganization() {
-		return this.__performingOrganization;
-	}
-
-	set performingOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__performingOrganization = new Reference(new_value);
-	}
-
-	// The organization performing the service.
-	get requestingOrganization() {
-		return this.__requestingOrganization;
-	}
-
-	set requestingOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__requestingOrganization = new Reference(new_value);
-	}
-
-	// Quantity of which the charge item has been serviced.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// The anatomical location where the related service has been applied.
-	get bodysite() {
-		return this.__bodysite;
-	}
-
-	set bodysite(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__bodysite = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Factor overriding the factor determined by the rules associated with the code.
-	get factorOverride() {
-		return this.__factorOverride;
-	}
-
-	set factorOverride(new_value) {
-		this.__factorOverride = new_value;
-	}
-
-	// Total price of the charge overriding the list price associated with the code.
-	get priceOverride() {
-		return this.__priceOverride;
-	}
-
-	set priceOverride(new_value) {
-		const Money = require('./Money');
-		this.__priceOverride = new Money(new_value);
-	}
-
-	// If the list price or the rule based factor associated with the code is overridden, this attribute can capture a text to indicate the  reason for this action.
-	get overrideReason() {
-		return this.__overrideReason;
-	}
-
-	set overrideReason(new_value) {
-		this.__overrideReason = new_value;
-	}
-
-	// The device, practitioner, etc. who entered the charge item.
-	get enterer() {
-		return this.__enterer;
-	}
-
-	set enterer(new_value) {
-		const Reference = require('./Reference');
-		this.__enterer = new Reference(new_value);
-	}
-
-	// Date the charge item was entered.
-	get enteredDate() {
-		return this.__enteredDate;
-	}
-
-	set enteredDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field enteredDate`);
-		}
-		this.__enteredDate = new_value;
-	}
-
-	// Describes why the event occurred in coded or textual form.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Indicated the rendered service that caused this charge.
-	get service() {
-		return this.__service;
-	}
-
-	set service(new_value) {
-		const Reference = require('./Reference');
-		this.__service = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Account into which this ChargeItems belongs.
-	get account() {
-		return this.__account;
-	}
-
-	set account(new_value) {
-		const Reference = require('./Reference');
-		this.__account = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Comments made about the event by the performer, subject or other participants.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Further information supporting the this charge.
-	get supportingInformation() {
-		return this.__supportingInformation;
-	}
-
-	set supportingInformation(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInformation = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			definition: this.__definition,
-			status: this.__status,
-			partOf: this.__partOf && this.__partOf.map(v => v.toJSON()),
-			code: this.__code && this.__code.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			occurrenceDateTime: this.__occurrenceDateTime,
-			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
-			occurrenceTiming: this.__occurrenceTiming && this.__occurrenceTiming.toJSON(),
-			participant: this.__participant && this.__participant.map(v => v.toJSON()),
-			performingOrganization: this.__performingOrganization && this.__performingOrganization.toJSON(),
-			requestingOrganization: this.__requestingOrganization && this.__requestingOrganization.toJSON(),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			bodysite: this.__bodysite && this.__bodysite.map(v => v.toJSON()),
-			factorOverride: this.__factorOverride,
-			priceOverride: this.__priceOverride && this.__priceOverride.toJSON(),
-			overrideReason: this.__overrideReason,
-			enterer: this.__enterer && this.__enterer.toJSON(),
-			enteredDate: this.__enteredDate,
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			service: this.__service && this.__service.map(v => v.toJSON()),
-			account: this.__account && this.__account.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			supportingInformation: this.__supportingInformation && this.__supportingInformation.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_definition: this._definition && this._definition.toJSON(),
+			definition: this.definition,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_occurrenceDateTime: this._occurrenceDateTime && this._occurrenceDateTime.toJSON(),
+			occurrenceDateTime: this.occurrenceDateTime,
+			occurrencePeriod: this.occurrencePeriod && this.occurrencePeriod.toJSON(),
+			occurrenceTiming: this.occurrenceTiming && this.occurrenceTiming.toJSON(),
+			participant: this.participant && this.participant.map(v => v.toJSON()),
+			performingOrganization: this.performingOrganization && this.performingOrganization.toJSON(),
+			requestingOrganization: this.requestingOrganization && this.requestingOrganization.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			bodysite: this.bodysite && this.bodysite.map(v => v.toJSON()),
+			_factorOverride: this._factorOverride && this._factorOverride.toJSON(),
+			factorOverride: this.factorOverride,
+			priceOverride: this.priceOverride && this.priceOverride.toJSON(),
+			_overrideReason: this._overrideReason && this._overrideReason.toJSON(),
+			overrideReason: this.overrideReason,
+			enterer: this.enterer && this.enterer.toJSON(),
+			_enteredDate: this._enteredDate && this._enteredDate.toJSON(),
+			enteredDate: this.enteredDate,
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			service: this.service && this.service.map(v => v.toJSON()),
+			account: this.account && this.account.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			supportingInformation: this.supportingInformation && this.supportingInformation.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ChargeItem;
+};

@@ -1,82 +1,160 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary CarePlanActivity Class
+ */
+module.exports = class CarePlanActivity {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CarePlanActivity extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CarePlanActivity';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/care-plan-activity-outcome
+		Object.defineProperty(this, 'outcomeCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.outcomeCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcomeCodeableConcept = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'outcomeReference', {
+			enumerable: true,
+			get: () => this.__data.outcomeReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.outcomeReference = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'progress', {
+			enumerable: true,
+			get: () => this.__data.progress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.progress = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'reference', {
+			enumerable: true,
+			get: () => this.__data.reference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detail', {
+			enumerable: true,
+			get: () => this.__data.detail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CarePlanActivityDetail = require('./careplanactivitydetail.js');
+				this.__data.detail = new CarePlanActivityDetail(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CarePlanActivity',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CarePlanActivity resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CarePlanActivity';
 	}
 
-	// Identifies the outcome at the point when the status of the activity is assessed.  For example, the outcome of an education activity could be patient understands (or not).
-	get outcomeCodeableConcept() {
-		return this.__outcomeCodeableConcept;
-	}
-
-	set outcomeCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcomeCodeableConcept = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Details of the outcome or action resulting from the activity.  The reference to an \'event\' resource, such as Procedure or Encounter or Observation, is the result/outcome of the activity itself.  The activity can be conveyed using CarePlan.activity.detail OR using the CarePlan.activity.reference (a reference to a “request” resource).
-	get outcomeReference() {
-		return this.__outcomeReference;
-	}
-
-	set outcomeReference(new_value) {
-		const Reference = require('./Reference');
-		this.__outcomeReference = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Notes about the adherence/status/progress of the activity.
-	get progress() {
-		return this.__progress;
-	}
-
-	set progress(new_value) {
-		const Annotation = require('./Annotation');
-		this.__progress = Array.isArray(new_value)
-			? new_value.map(val => new Annotation(val))
-			: [new Annotation(new_value)];
-	}
-
-	// The details of the proposed activity represented in a specific resource.
-	get reference() {
-		return this.__reference;
-	}
-
-	set reference(new_value) {
-		const Reference = require('./Reference');
-		this.__reference = new Reference(new_value);
-	}
-
-	// A simple summary of a planned activity suitable for a general care plan system (e.g. form driven) that doesn\'t know about specific resources such as procedure etc.
-	get detail() {
-		return this.__detail;
-	}
-
-	set detail(new_value) {
-		const CarePlanActivityDetail = require('./CarePlanActivityDetail');
-		this.__detail = new CarePlanActivityDetail(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			outcomeCodeableConcept: this.__outcomeCodeableConcept && this.__outcomeCodeableConcept.map(v => v.toJSON()),
-			outcomeReference: this.__outcomeReference && this.__outcomeReference.map(v => v.toJSON()),
-			progress: this.__progress && this.__progress.map(v => v.toJSON()),
-			reference: this.__reference && this.__reference.toJSON(),
-			detail: this.__detail && this.__detail.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			outcomeCodeableConcept: this.outcomeCodeableConcept && this.outcomeCodeableConcept.map(v => v.toJSON()),
+			outcomeReference: this.outcomeReference && this.outcomeReference.map(v => v.toJSON()),
+			progress: this.progress && this.progress.map(v => v.toJSON()),
+			reference: this.reference && this.reference.toJSON(),
+			detail: this.detail && this.detail.toJSON(),
+		};
 	}
-}
-
-module.exports = CarePlanActivity;
+};

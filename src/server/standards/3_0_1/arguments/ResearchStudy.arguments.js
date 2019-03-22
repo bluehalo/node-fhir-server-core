@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the researchstudy query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-category',
-		documentation: 'Classifications for the study.',
+		description: 'Classifications for the study',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ResearchStudy.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-date',
-		documentation: 'When the study began and ended.',
+		description: 'When the study began and ended',
 	},
-	FOCUS: {
-		name: 'focus',
+	focus: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.focus',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-focus',
-		documentation: 'Drugs, devices, conditions, etc. under study.',
+		description: 'Drugs, devices, conditions, etc. under study',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-identifier',
-		documentation: 'Business Identifier for study.',
+		description: 'Business Identifier for study',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-jurisdiction',
-		documentation: 'Geographic region(s) for study.',
+		description: 'Geographic region(s) for study',
 	},
-	KEYWORD: {
-		name: 'keyword',
+	keyword: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.keyword',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-keyword',
-		documentation: 'Used to search for the study.',
+		description: 'Used to search for the study',
 	},
-	PARTOF: {
-		name: 'partof',
+	partof: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchStudy.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-partof',
-		documentation: 'Part of larger study.',
+		description: 'Part of larger study',
 	},
-	PRINCIPALINVESTIGATOR: {
-		name: 'principalinvestigator',
+	principalinvestigator: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchStudy.principalInvestigator',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-principalinvestigator',
-		documentation: 'The individual responsible for the study.',
+		description: 'The individual responsible for the study',
 	},
-	PROTOCOL: {
-		name: 'protocol',
+	protocol: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchStudy.protocol',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-protocol',
-		documentation: 'Steps followed in executing study.',
+		description: 'Steps followed in executing study',
 	},
-	SITE: {
-		name: 'site',
+	site: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchStudy.site',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-site',
-		documentation: 'Location involved in study execution.',
+		description: 'Location involved in study execution',
 	},
-	SPONSOR: {
-		name: 'sponsor',
+	sponsor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchStudy.sponsor',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-sponsor',
-		documentation: 'Organization responsible for the study.',
+		description: 'Organization responsible for the study',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchStudy.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-status',
-		documentation: 'draft | in-progress | suspended | stopped | completed | entered-in-error.',
+		description: 'draft | in-progress | suspended | stopped | completed | entered-in-error',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ResearchStudy.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchStudy-title',
-		documentation: 'Name for this study.',
+		description: 'Name for this study',
 	},
 };

@@ -1,191 +1,488 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary NamingSystem Class
+ */
+module.exports = class NamingSystem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class NamingSystem extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'NamingSystem';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/publication-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_kind', {
+			enumerable: true,
+			get: () => this.__data._kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._kind = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/namingsystem-type
+		Object.defineProperty(this, 'kind', {
+			enumerable: true,
+			get: () => this.__data.kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.kind = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactDetail = require('./contactdetail.js');
+				this.__data.contact = Array.isArray(value) ? value.map(v => new ContactDetail(v)) : [new ContactDetail(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_responsible', {
+			enumerable: true,
+			get: () => this.__data._responsible,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._responsible = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'responsible', {
+			enumerable: true,
+			get: () => this.__data.responsible,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.responsible = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/identifier-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let UsageContext = require('./usagecontext.js');
+				this.__data.useContext = Array.isArray(value) ? value.map(v => new UsageContext(v)) : [new UsageContext(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/jurisdiction
+		Object.defineProperty(this, 'jurisdiction', {
+			enumerable: true,
+			get: () => this.__data.jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.jurisdiction = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_usage', {
+			enumerable: true,
+			get: () => this.__data._usage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._usage = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'usage', {
+			enumerable: true,
+			get: () => this.__data.usage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.usage = value;
+			},
+		});
+
+		Object.defineProperty(this, 'uniqueId', {
+			enumerable: true,
+			get: () => this.__data.uniqueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let NamingSystemUniqueId = require('./namingsystemuniqueid.js');
+				this.__data.uniqueId = Array.isArray(value)
+					? value.map(v => new NamingSystemUniqueId(v))
+					: [new NamingSystemUniqueId(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'replacedBy', {
+			enumerable: true,
+			get: () => this.__data.replacedBy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.replacedBy = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'NamingSystem',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a NamingSystem resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'NamingSystem';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__NamingSystem = new_value;
-	}
-
-	// A natural language name identifying the naming system. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The status of this naming system. Enables tracking the life-cycle of the content.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Indicates the purpose for the naming system - what kinds of things does it make unique?.
-	get kind() {
-		return this.__kind;
-	}
-
-	set kind(new_value) {
-		this.__kind = new_value;
-	}
-
-	// The date  (and optionally time) when the naming system was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the naming system changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The name of the individual or organization that published the naming system.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contact details to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ContactDetail = require('./ContactDetail');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ContactDetail(val))
-			: [new ContactDetail(new_value)];
-	}
-
-	// The name of the organization that is responsible for issuing identifiers or codes for this namespace and ensuring their non-collision.
-	get responsible() {
-		return this.__responsible;
-	}
-
-	set responsible(new_value) {
-		this.__responsible = new_value;
-	}
-
-	// Categorizes a naming system for easier search by grouping related naming systems.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// A free text natural language description of the naming system from a consumer\'s perspective. Details about what the namespace identifies including scope, granularity, version labeling, etc.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate naming system instances.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const UsageContext = require('./UsageContext');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new UsageContext(val))
-			: [new UsageContext(new_value)];
-	}
-
-	// A legal or geographic region in which the naming system is intended to be used.
-	get jurisdiction() {
-		return this.__jurisdiction;
-	}
-
-	set jurisdiction(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__jurisdiction = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Provides guidance on the use of the namespace, including the handling of formatting characters, use of upper vs. lower case, etc.
-	get usage() {
-		return this.__usage;
-	}
-
-	set usage(new_value) {
-		this.__usage = new_value;
-	}
-
-	// Indicates how the system may be identified when referenced in electronic exchange.
-	get uniqueId() {
-		return this.__uniqueId;
-	}
-
-	set uniqueId(new_value) {
-		const NamingSystemUniqueId = require('./NamingSystemUniqueId');
-		this.__uniqueId = Array.isArray(new_value)
-			? new_value.map(val => new NamingSystemUniqueId(val))
-			: [new NamingSystemUniqueId(new_value)];
-	}
-
-	// For naming systems that are retired, indicates the naming system that should be used in their place (if any).
-	get replacedBy() {
-		return this.__replacedBy;
-	}
-
-	set replacedBy(new_value) {
-		const Reference = require('./Reference');
-		this.__replacedBy = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			name: this.__name,
-			status: this.__status,
-			kind: this.__kind,
-			date: this.__date,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			responsible: this.__responsible,
-			type: this.__type && this.__type.toJSON(),
-			description: this.__description,
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
-			usage: this.__usage,
-			uniqueId: this.__uniqueId && this.__uniqueId.map(v => v.toJSON()),
-			replacedBy: this.__replacedBy && this.__replacedBy.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_kind: this._kind && this._kind.toJSON(),
+			kind: this.kind,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_responsible: this._responsible && this._responsible.toJSON(),
+			responsible: this.responsible,
+			type: this.type && this.type.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			jurisdiction: this.jurisdiction && this.jurisdiction.map(v => v.toJSON()),
+			_usage: this._usage && this._usage.toJSON(),
+			usage: this.usage,
+			uniqueId: this.uniqueId && this.uniqueId.map(v => v.toJSON()),
+			replacedBy: this.replacedBy && this.replacedBy.toJSON(),
+		};
 	}
-}
-
-module.exports = NamingSystem;
+};

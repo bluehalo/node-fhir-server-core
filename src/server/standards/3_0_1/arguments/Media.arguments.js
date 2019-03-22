@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the media query
+ */
 module.exports = {
-	BASED_ON: {
-		name: 'based-on',
+	'based-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.basedOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-based-on',
-		documentation: 'Procedure that caused this media to be created.',
+		description: 'Procedure that caused this media to be created',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-context',
-		documentation: 'Encounter / Episode associated with media.',
+		description: 'Encounter / Episode associated with media',
 	},
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Media.content.creation',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-created',
-		documentation: 'Date attachment was first created.',
+		description: 'Date attachment was first created',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Media.occurrenceDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-date',
-		documentation: 'When Media was collected.',
+		description: 'When Media was collected',
 	},
-	DEVICE: {
-		name: 'device',
+	device: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.device',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-device',
-		documentation: 'Observing Device.',
+		description: 'Observing Device',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Media.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-identifier',
-		documentation: 'Identifier(s) for the image.',
+		description: 'Identifier(s) for the image',
 	},
-	OPERATOR: {
-		name: 'operator',
+	operator: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.operator',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-operator',
-		documentation: 'The person who generated the image.',
+		description: 'The person who generated the image',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-patient',
-		documentation: 'Who/What this Media is a record of.',
+		description: 'Who/What this Media is a record of',
 	},
-	SITE: {
-		name: 'site',
+	site: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Media.bodySite',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-site',
-		documentation: 'Body part in media.',
+		description: 'Body part in media',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Media.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-subject',
-		documentation: 'Who/What this Media is a record of.',
+		description: 'Who/What this Media is a record of',
 	},
-	SUBTYPE: {
-		name: 'subtype',
+	subtype: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Media.subtype',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-subtype',
-		documentation: 'The type of acquisition equipment/process.',
+		description: 'The type of acquisition equipment/process',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Media.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-type',
-		documentation: 'photo | video | audio.',
+		description: 'photo | video | audio',
 	},
-	VIEW: {
-		name: 'view',
+	view: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Media.view',
 		definition: 'http://hl7.org/fhir/SearchParameter/Media-view',
-		documentation: 'Imaging view, e.g. Lateral or Antero-posterior.',
+		description: 'Imaging view, e.g. Lateral or Antero-posterior',
 	},
 };

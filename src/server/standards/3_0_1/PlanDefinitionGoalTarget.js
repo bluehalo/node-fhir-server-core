@@ -1,76 +1,158 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary PlanDefinitionGoalTarget Class
+ */
+module.exports = class PlanDefinitionGoalTarget {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PlanDefinitionGoalTarget extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PlanDefinitionGoalTarget';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-codes
+		Object.defineProperty(this, 'measure', {
+			enumerable: true,
+			get: () => this.__data.measure,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.measure = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailQuantity', {
+			enumerable: true,
+			get: () => this.__data.detailQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.detailQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailRange', {
+			enumerable: true,
+			get: () => this.__data.detailRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.detailRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.detailCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.detailCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'due', {
+			enumerable: true,
+			get: () => this.__data.due,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.due = new Duration(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PlanDefinitionGoalTarget',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PlanDefinitionGoalTarget resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PlanDefinitionGoalTarget';
 	}
 
-	// The parameter whose value is to be tracked, e.g. body weigth, blood pressure, or hemoglobin A1c level.
-	get measure() {
-		return this.__measure;
-	}
-
-	set measure(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__measure = new CodeableConcept(new_value);
-	}
-
-	// The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. Whan a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value.
-	get detailQuantity() {
-		return this.__detailQuantity;
-	}
-
-	set detailQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__detailQuantity = new Quantity(new_value);
-	}
-
-	// The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. Whan a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value.
-	get detailRange() {
-		return this.__detailRange;
-	}
-
-	set detailRange(new_value) {
-		const Range = require('./Range');
-		this.__detailRange = new Range(new_value);
-	}
-
-	// The target value of the measure to be achieved to signify fulfillment of the goal, e.g. 150 pounds or 7.0%. Either the high or low or both values of the range can be specified. Whan a low value is missing, it indicates that the goal is achieved at any value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any value at or above the low value.
-	get detailCodeableConcept() {
-		return this.__detailCodeableConcept;
-	}
-
-	set detailCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__detailCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Indicates the timeframe after the start of the goal in which the goal should be met.
-	get due() {
-		return this.__due;
-	}
-
-	set due(new_value) {
-		const Duration = require('./Duration');
-		this.__due = new Duration(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			measure: this.__measure && this.__measure.toJSON(),
-			detailQuantity: this.__detailQuantity && this.__detailQuantity.toJSON(),
-			detailRange: this.__detailRange && this.__detailRange.toJSON(),
-			detailCodeableConcept: this.__detailCodeableConcept && this.__detailCodeableConcept.toJSON(),
-			due: this.__due && this.__due.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			measure: this.measure && this.measure.toJSON(),
+			detailQuantity: this.detailQuantity && this.detailQuantity.toJSON(),
+			detailRange: this.detailRange && this.detailRange.toJSON(),
+			detailCodeableConcept: this.detailCodeableConcept && this.detailCodeableConcept.toJSON(),
+			due: this.due && this.due.toJSON(),
+		};
 	}
-}
-
-module.exports = PlanDefinitionGoalTarget;
+};

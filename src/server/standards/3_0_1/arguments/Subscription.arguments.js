@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the subscription query
+ */
 module.exports = {
-	ADD_TAG: {
-		name: 'add-tag',
+	'add-tag': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Subscription.tag',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-add-tag',
-		documentation: 'A tag to be added to the resource matching the criteria.',
+		description: 'A tag to be added to the resource matching the criteria',
 	},
-	CONTACT: {
-		name: 'contact',
+	contact: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Subscription.contact',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-contact',
-		documentation: 'Contact details for the subscription.',
+		description: 'Contact details for the subscription',
 	},
-	CRITERIA: {
-		name: 'criteria',
+	criteria: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Subscription.criteria',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-criteria',
-		documentation: 'The search rules used to determine when to send a notification.',
+		description: 'The search rules used to determine when to send a notification',
 	},
-	PAYLOAD: {
-		name: 'payload',
+	payload: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Subscription.channel.payload',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-payload',
-		documentation: 'The mime-type of the notification payload.',
+		description: 'The mime-type of the notification payload',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Subscription.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-status',
-		documentation: 'The current state of the subscription.',
+		description: 'The current state of the subscription',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Subscription.channel.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-type',
-		documentation: 'The type of channel for the sent notifications.',
+		description: 'The type of channel for the sent notifications',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Subscription.channel.endpoint',
 		definition: 'http://hl7.org/fhir/SearchParameter/Subscription-url',
-		documentation: 'The uri that will receive the notifications.',
+		description: 'The uri that will receive the notifications',
 	},
 };

@@ -1,314 +1,602 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ReferralRequest Class
+ */
+module.exports = class ReferralRequest {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ReferralRequest extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ReferralRequest';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.definition = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'replaces', {
+			enumerable: true,
+			get: () => this.__data.replaces,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.replaces = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'groupIdentifier', {
+			enumerable: true,
+			get: () => this.__data.groupIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.groupIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_intent', {
+			enumerable: true,
+			get: () => this.__data._intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._intent = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-intent
+		Object.defineProperty(this, 'intent', {
+			enumerable: true,
+			get: () => this.__data.intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.intent = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/referral-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_priority', {
+			enumerable: true,
+			get: () => this.__data._priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priority = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priority = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-practice-codes
+		Object.defineProperty(this, 'serviceRequested', {
+			enumerable: true,
+			get: () => this.__data.serviceRequested,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.serviceRequested = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data._occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._occurrenceDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data.occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.occurrenceDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'occurrencePeriod', {
+			enumerable: true,
+			get: () => this.__data.occurrencePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.occurrencePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_authoredOn', {
+			enumerable: true,
+			get: () => this.__data._authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._authoredOn = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'authoredOn', {
+			enumerable: true,
+			get: () => this.__data.authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.authoredOn = value;
+			},
+		});
+
+		Object.defineProperty(this, 'requester', {
+			enumerable: true,
+			get: () => this.__data.requester,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ReferralRequestRequester = require('./referralrequestrequester.js');
+				this.__data.requester = new ReferralRequestRequester(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/practitioner-specialty
+		Object.defineProperty(this, 'specialty', {
+			enumerable: true,
+			get: () => this.__data.specialty,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.specialty = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recipient', {
+			enumerable: true,
+			get: () => this.__data.recipient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.recipient = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/clinical-findings
+		Object.defineProperty(this, 'reasonCode', {
+			enumerable: true,
+			get: () => this.__data.reasonCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonCode = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'reasonReference', {
+			enumerable: true,
+			get: () => this.__data.reasonReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reasonReference = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInfo', {
+			enumerable: true,
+			get: () => this.__data.supportingInfo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInfo = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'relevantHistory', {
+			enumerable: true,
+			get: () => this.__data.relevantHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.relevantHistory = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ReferralRequest',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ReferralRequest resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ReferralRequest';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__ReferralRequest = new_value;
-	}
-
-	// Business identifier that uniquely identifies the referral/care transfer request instance.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// A protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		const Reference = require('./Reference');
-		this.__definition = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Indicates any plans, proposals or orders that this request is intended to satisfy - in whole or in part.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Completed or terminated request(s) whose function is taken by this new request.
-	get replaces() {
-		return this.__replaces;
-	}
-
-	set replaces(new_value) {
-		const Reference = require('./Reference');
-		this.__replaces = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The business identifier of the logical \'grouping\' request/order that this referral is a part of.
-	get groupIdentifier() {
-		return this.__groupIdentifier;
-	}
-
-	set groupIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__groupIdentifier = new Identifier(new_value);
-	}
-
-	// The status of the authorization/intention reflected by the referral request record.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Distinguishes the \'level\' of authorization/demand implicit in this request.
-	get intent() {
-		return this.__intent;
-	}
-
-	set intent(new_value) {
-		this.__intent = new_value;
-	}
-
-	// An indication of the type of referral (or where applicable the type of transfer of care) request.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// An indication of the urgency of referral (or where applicable the type of transfer of care) request.
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		this.__priority = new_value;
-	}
-
-	// The service(s) that is/are requested to be provided to the patient.  For example: cardiac pacemaker insertion.
-	get serviceRequested() {
-		return this.__serviceRequested;
-	}
-
-	set serviceRequested(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__serviceRequested = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The patient who is the subject of a referral or transfer of care request.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The encounter at which the request for referral or transfer of care is initiated.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// The period of time within which the services identified in the referral/transfer of care is specified or required to occur.
-	get occurrenceDateTime() {
-		return this.__occurrenceDateTime;
-	}
-
-	set occurrenceDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field occurrenceDateTime`);
-		}
-		this.__occurrenceDateTime = new_value;
-	}
-
-	// The period of time within which the services identified in the referral/transfer of care is specified or required to occur.
-	get occurrencePeriod() {
-		return this.__occurrencePeriod;
-	}
-
-	set occurrencePeriod(new_value) {
-		const Period = require('./Period');
-		this.__occurrencePeriod = new Period(new_value);
-	}
-
-	// Date/DateTime of creation for draft requests and date of activation for active requests.
-	get authoredOn() {
-		return this.__authoredOn;
-	}
-
-	set authoredOn(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
-		}
-		this.__authoredOn = new_value;
-	}
-
-	// The individual who initiated the request and has responsibility for its activation.
-	get requester() {
-		return this.__requester;
-	}
-
-	set requester(new_value) {
-		const ReferralRequestRequester = require('./ReferralRequestRequester');
-		this.__requester = new ReferralRequestRequester(new_value);
-	}
-
-	// Indication of the clinical domain or discipline to which the referral or transfer of care request is sent.  For example: Cardiology Gastroenterology Diabetology.
-	get specialty() {
-		return this.__specialty;
-	}
-
-	set specialty(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__specialty = new CodeableConcept(new_value);
-	}
-
-	// The healthcare provider(s) or provider organization(s) who/which is to receive the referral/transfer of care request.
-	get recipient() {
-		return this.__recipient;
-	}
-
-	set recipient(new_value) {
-		const Reference = require('./Reference');
-		this.__recipient = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Description of clinical condition indicating why referral/transfer of care is requested.  For example:  Pathological Anomalies, Disabled (physical or mental),  Behavioral Management.
-	get reasonCode() {
-		return this.__reasonCode;
-	}
-
-	set reasonCode(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCode = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Indicates another resource whose existence justifies this request.
-	get reasonReference() {
-		return this.__reasonReference;
-	}
-
-	set reasonReference(new_value) {
-		const Reference = require('./Reference');
-		this.__reasonReference = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// The reason element gives a short description of why the referral is being made, the description expands on this to support a more complete clinical summary.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Any additional (administrative, financial or clinical) information required to support request for referral or transfer of care.  For example: Presenting problems/chief complaints Medical History Family History Alerts Allergy/Intolerance and Adverse Reactions Medications Observations/Assessments (may include cognitive and fundtional assessments) Diagnostic Reports Care Plan.
-	get supportingInfo() {
-		return this.__supportingInfo;
-	}
-
-	set supportingInfo(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInfo = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Comments made about the referral request by any of the participants.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Links to Provenance records for past versions of this resource or fulfilling request or event resources that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the resource.
-	get relevantHistory() {
-		return this.__relevantHistory;
-	}
-
-	set relevantHistory(new_value) {
-		const Reference = require('./Reference');
-		this.__relevantHistory = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			definition: this.__definition && this.__definition.map(v => v.toJSON()),
-			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
-			replaces: this.__replaces && this.__replaces.map(v => v.toJSON()),
-			groupIdentifier: this.__groupIdentifier && this.__groupIdentifier.toJSON(),
-			status: this.__status,
-			intent: this.__intent,
-			type: this.__type && this.__type.toJSON(),
-			priority: this.__priority,
-			serviceRequested: this.__serviceRequested && this.__serviceRequested.map(v => v.toJSON()),
-			subject: this.__subject && this.__subject.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			occurrenceDateTime: this.__occurrenceDateTime,
-			occurrencePeriod: this.__occurrencePeriod && this.__occurrencePeriod.toJSON(),
-			authoredOn: this.__authoredOn,
-			requester: this.__requester && this.__requester.toJSON(),
-			specialty: this.__specialty && this.__specialty.toJSON(),
-			recipient: this.__recipient && this.__recipient.map(v => v.toJSON()),
-			reasonCode: this.__reasonCode && this.__reasonCode.map(v => v.toJSON()),
-			reasonReference: this.__reasonReference && this.__reasonReference.map(v => v.toJSON()),
-			description: this.__description,
-			supportingInfo: this.__supportingInfo && this.__supportingInfo.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			relevantHistory: this.__relevantHistory && this.__relevantHistory.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			definition: this.definition && this.definition.map(v => v.toJSON()),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			replaces: this.replaces && this.replaces.map(v => v.toJSON()),
+			groupIdentifier: this.groupIdentifier && this.groupIdentifier.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_intent: this._intent && this._intent.toJSON(),
+			intent: this.intent,
+			type: this.type && this.type.toJSON(),
+			_priority: this._priority && this._priority.toJSON(),
+			priority: this.priority,
+			serviceRequested: this.serviceRequested && this.serviceRequested.map(v => v.toJSON()),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_occurrenceDateTime: this._occurrenceDateTime && this._occurrenceDateTime.toJSON(),
+			occurrenceDateTime: this.occurrenceDateTime,
+			occurrencePeriod: this.occurrencePeriod && this.occurrencePeriod.toJSON(),
+			_authoredOn: this._authoredOn && this._authoredOn.toJSON(),
+			authoredOn: this.authoredOn,
+			requester: this.requester && this.requester.toJSON(),
+			specialty: this.specialty && this.specialty.toJSON(),
+			recipient: this.recipient && this.recipient.map(v => v.toJSON()),
+			reasonCode: this.reasonCode && this.reasonCode.map(v => v.toJSON()),
+			reasonReference: this.reasonReference && this.reasonReference.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			supportingInfo: this.supportingInfo && this.supportingInfo.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			relevantHistory: this.relevantHistory && this.relevantHistory.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ReferralRequest;
+};

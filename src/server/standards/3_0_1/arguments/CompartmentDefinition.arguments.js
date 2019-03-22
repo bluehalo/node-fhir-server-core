@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the compartmentdefinition query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CompartmentDefinition.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-code',
-		documentation: 'Patient | Encounter | RelatedPerson | Practitioner | Device.',
+		description: 'Patient | Encounter | RelatedPerson | Practitioner | Device',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CompartmentDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-date',
-		documentation: 'The compartment definition publication date.',
+		description: 'The compartment definition publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CompartmentDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-description',
-		documentation: 'The description of the compartment definition.',
+		description: 'The description of the compartment definition',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CompartmentDefinition.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-jurisdiction',
-		documentation: 'Intended jurisdiction for the compartment definition.',
+		description: 'Intended jurisdiction for the compartment definition',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CompartmentDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-name',
-		documentation: 'Computationally friendly name of the compartment definition.',
+		description: 'Computationally friendly name of the compartment definition',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CompartmentDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-publisher',
-		documentation: 'Name of the publisher of the compartment definition.',
+		description: 'Name of the publisher of the compartment definition',
 	},
-	RESOURCE: {
-		name: 'resource',
+	resource: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CompartmentDefinition.resource.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-resource',
-		documentation: 'Name of resource type.',
+		description: 'Name of resource type',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CompartmentDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-status',
-		documentation: 'The current status of the compartment definition.',
+		description: 'The current status of the compartment definition',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'CompartmentDefinition.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-title',
-		documentation: 'The human-friendly name of the compartment definition.',
+		description: 'The human-friendly name of the compartment definition',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'CompartmentDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/CompartmentDefinition-url',
-		documentation: 'The uri that identifies the compartment definition.',
+		description: 'The uri that identifies the compartment definition',
 	},
 };

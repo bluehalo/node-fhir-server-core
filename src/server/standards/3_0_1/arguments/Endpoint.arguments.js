@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the endpoint query
+ */
 module.exports = {
-	CONNECTION_TYPE: {
-		name: 'connection-type',
+	'connection-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Endpoint.connectionType',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-connection-type',
-		documentation: 'Protocol/Profile/Standard to be used with this endpoint connection.',
+		description: 'Protocol/Profile/Standard to be used with this endpoint connection',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Endpoint.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-identifier',
-		documentation: 'Identifies this endpoint across multiple systems.',
+		description: 'Identifies this endpoint across multiple systems',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Endpoint.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-name',
-		documentation: 'A name that this endpoint can be identified by.',
+		description: 'A name that this endpoint can be identified by',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Endpoint.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-organization',
-		documentation: 'The organization that is managing the endpoint.',
+		description: 'The organization that is managing the endpoint',
 	},
-	PAYLOAD_TYPE: {
-		name: 'payload-type',
+	'payload-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Endpoint.payloadType',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-payload-type',
-		documentation: 'The type of content that may be used at this endpoint (e.g. XDS Discharge summaries).',
+		description: 'The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Endpoint.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Endpoint-status',
-		documentation: 'The current status of the Endpoint (usually expected to be active).',
+		description: 'The current status of the Endpoint (usually expected to be active)',
 	},
 };

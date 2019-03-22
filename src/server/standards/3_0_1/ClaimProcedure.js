@@ -1,75 +1,170 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ClaimProcedure Class
+ */
+module.exports = class ClaimProcedure {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimProcedure extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimProcedure';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/icd-10-procedures
+		Object.defineProperty(this, 'procedureCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.procedureCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.procedureCodeableConcept = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/icd-10-procedures
+		Object.defineProperty(this, 'procedureReference', {
+			enumerable: true,
+			get: () => this.__data.procedureReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.procedureReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimProcedure',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimProcedure resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimProcedure';
 	}
 
-	// Sequence of procedures which serves to order and provide a link.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// Date and optionally time the procedure was performed .
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The procedure code.
-	get procedureCodeableConcept() {
-		return this.__procedureCodeableConcept;
-	}
-
-	set procedureCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__procedureCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The procedure code.
-	get procedureReference() {
-		return this.__procedureReference;
-	}
-
-	set procedureReference(new_value) {
-		const Reference = require('./Reference');
-		this.__procedureReference = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			date: this.__date,
-			procedureCodeableConcept: this.__procedureCodeableConcept && this.__procedureCodeableConcept.toJSON(),
-			procedureReference: this.__procedureReference && this.__procedureReference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			procedureCodeableConcept: this.procedureCodeableConcept && this.procedureCodeableConcept.toJSON(),
+			procedureReference: this.procedureReference && this.procedureReference.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimProcedure;
+};

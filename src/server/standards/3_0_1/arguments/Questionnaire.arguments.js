@@ -1,74 +1,91 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the questionnaire query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.item.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-code',
-		documentation: 'A code that corresponds to one of its items in the questionnaire.',
+		description: 'A code that corresponds to one of its items in the questionnaire',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Questionnaire.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-date',
-		documentation: 'The questionnaire publication date.',
+		description: 'The questionnaire publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-description',
-		documentation: 'The description of the questionnaire.',
+		description: 'The description of the questionnaire',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Questionnaire.effectivePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-effective',
-		documentation: 'The time during which the questionnaire is intended to be in use.',
+		description: 'The time during which the questionnaire is intended to be in use',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-identifier',
-		documentation: 'External identifier for the questionnaire.',
+		description: 'External identifier for the questionnaire',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-jurisdiction',
-		documentation: 'Intended jurisdiction for the questionnaire.',
+		description: 'Intended jurisdiction for the questionnaire',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-name',
-		documentation: 'Computationally friendly name of the questionnaire.',
+		description: 'Computationally friendly name of the questionnaire',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-publisher',
-		documentation: 'Name of the publisher of the questionnaire.',
+		description: 'Name of the publisher of the questionnaire',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-status',
-		documentation: 'The current status of the questionnaire.',
+		description: 'The current status of the questionnaire',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Questionnaire.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-title',
-		documentation: 'The human-friendly name of the questionnaire.',
+		description: 'The human-friendly name of the questionnaire',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Questionnaire.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-url',
-		documentation: 'The uri that identifies the questionnaire.',
+		description: 'The uri that identifies the questionnaire',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Questionnaire.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Questionnaire-version',
-		documentation: 'The business version of the questionnaire.',
+		description: 'The business version of the questionnaire',
 	},
 };

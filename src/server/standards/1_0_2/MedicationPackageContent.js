@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary MedicationPackageContent Class
+ */
+module.exports = class MedicationPackageContent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MedicationPackageContent extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MedicationPackageContent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.item = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'amount', {
+			enumerable: true,
+			get: () => this.__data.amount,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.amount = new Quantity(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MedicationPackageContent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MedicationPackageContent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MedicationPackageContent';
 	}
 
-	// Identifies one of the items in the package.
-	get item() {
-		return this.__item;
-	}
-
-	set item(new_value) {
-		const Reference = require('./Reference');
-		this.__item = new Reference(new_value);
-	}
-
-	// The amount of the product that is in the package.
-	get amount() {
-		return this.__amount;
-	}
-
-	set amount(new_value) {
-		const Quantity = require('./Quantity');
-		this.__amount = new Quantity(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			item: this.__item && this.__item.toJSON(),
-			amount: this.__amount && this.__amount.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			item: this.item && this.item.toJSON(),
+			amount: this.amount && this.amount.toJSON(),
+		};
 	}
-}
-
-module.exports = MedicationPackageContent;
+};

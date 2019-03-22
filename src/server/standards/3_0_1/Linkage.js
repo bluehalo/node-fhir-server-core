@@ -1,63 +1,239 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary Linkage Class
+ */
+module.exports = class Linkage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Linkage extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Linkage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_active', {
+			enumerable: true,
+			get: () => this.__data._active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._active = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'active', {
+			enumerable: true,
+			get: () => this.__data.active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.active = value;
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let LinkageItem = require('./linkageitem.js');
+				this.__data.item = Array.isArray(value) ? value.map(v => new LinkageItem(v)) : [new LinkageItem(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Linkage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Linkage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Linkage';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Linkage = new_value;
-	}
-
-	// Indicates whether the asserted set of linkages are considered to be \'in effect\'.
-	get active() {
-		return this.__active;
-	}
-
-	set active(new_value) {
-		this.__active = new_value;
-	}
-
-	// Identifies the user or organization responsible for asserting the linkages and who establishes the context for evaluating the nature of each linkage.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = new Reference(new_value);
-	}
-
-	// Identifies one of the records that is considered to refer to the same real-world occurrence as well as how the items hould be evaluated within the collection of linked items.
-	get item() {
-		return this.__item;
-	}
-
-	set item(new_value) {
-		const LinkageItem = require('./LinkageItem');
-		this.__item = Array.isArray(new_value) ? new_value.map(val => new LinkageItem(val)) : [new LinkageItem(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			active: this.__active,
-			author: this.__author && this.__author.toJSON(),
-			item: this.__item && this.__item.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_active: this._active && this._active.toJSON(),
+			active: this.active,
+			author: this.author && this.author.toJSON(),
+			item: this.item && this.item.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Linkage;
+};

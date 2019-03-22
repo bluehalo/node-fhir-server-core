@@ -1,128 +1,154 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the structuredefinition query
+ */
 module.exports = {
-	ABSTRACT: {
-		name: 'abstract',
+	abstract: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.abstract',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-abstract',
-		documentation: 'Whether the structure is abstract.',
+		description: 'Whether the structure is abstract',
 	},
-	BASE: {
-		name: 'base',
+	base: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'StructureDefinition.base',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-base',
-		documentation: 'Structure that this set of constraints applies to.',
+		description: 'Structure that this set of constraints applies to',
 	},
-	BASE_PATH: {
-		name: 'base-path',
+	'base-path': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.snapshot.element.base.path',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-base-path',
-		documentation: 'Path that identifies the base element.',
+		description: 'Path that identifies the base element',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-code',
-		documentation: 'A code for the profile.',
+		description: 'A code for the profile',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.useContext',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-context',
-		documentation: 'A use context assigned to the structure.',
+		description: 'A use context assigned to the structure',
 	},
-	CONTEXT_TYPE: {
-		name: 'context-type',
+	'context-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.contextType',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-context-type',
-		documentation: 'resource | datatype | mapping | extension.',
+		description: 'resource | datatype | mapping | extension',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'StructureDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-date',
-		documentation: 'The profile publication date.',
+		description: 'The profile publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureDefinition.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-description',
-		documentation: 'Text search in the description of the profile.',
+		description: 'Text search in the description of the profile',
 	},
-	DISPLAY: {
-		name: 'display',
+	display: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureDefinition.display',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-display',
-		documentation: 'Use this name when displaying the value.',
+		description: 'Use this name when displaying the value',
 	},
-	EXPERIMENTAL: {
-		name: 'experimental',
+	experimental: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.experimental',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-experimental',
-		documentation: 'If for testing purposes, not real usage.',
+		description: 'If for testing purposes, not real usage',
 	},
-	EXT_CONTEXT: {
-		name: 'ext-context',
+	'ext-context': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureDefinition.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-ext-context',
-		documentation: 'Where the extension can be used in instances.',
+		description: 'Where the extension can be used in instances',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-identifier',
-		documentation: 'The identifier of the profile.',
+		description: 'The identifier of the profile',
 	},
-	KIND: {
-		name: 'kind',
+	kind: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.kind',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-kind',
-		documentation: 'datatype | resource | logical.',
+		description: 'datatype | resource | logical',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-name',
-		documentation: 'Name of the profile.',
+		description: 'Name of the profile',
 	},
-	PATH: {
-		name: 'path',
+	path: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.snapshot.element.path',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-path',
-		documentation: 'A path that is constrained in the profile.',
+		description: 'A path that is constrained in the profile',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'StructureDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-publisher',
-		documentation: 'Name of the publisher of the profile.',
+		description: 'Name of the publisher of the profile',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-status',
-		documentation: 'The current status of the profile.',
+		description: 'The current status of the profile',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.constrainedType',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-type',
-		documentation: 'Any datatype or resource, including abstract ones.',
+		description: 'Any datatype or resource, including abstract ones',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'StructureDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-url',
-		documentation: 'Absolute URL used to reference this StructureDefinition.',
+		description: 'Absolute URL used to reference this StructureDefinition',
 	},
-	VALUESET: {
-		name: 'valueset',
+	valueset: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'StructureDefinition.snapshot.element.binding.valueSetUri',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-valueset',
-		documentation: 'A vocabulary binding reference.',
+		description: 'A vocabulary binding reference',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'StructureDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/StructureDefinition-version',
-		documentation: 'The version identifier of the profile.',
+		description: 'The version identifier of the profile',
 	},
 };

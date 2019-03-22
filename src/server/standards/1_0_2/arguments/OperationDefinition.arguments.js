@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the operationdefinition query
+ */
 module.exports = {
-	BASE: {
-		name: 'base',
+	base: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OperationDefinition.base',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-base',
-		documentation: 'Marks this as a profile of the base.',
+		description: 'Marks this as a profile of the base',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-code',
-		documentation: 'Name used to invoke the operation.',
+		description: 'Name used to invoke the operation',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'OperationDefinition.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-date',
-		documentation: 'Date for this version of the operation definition.',
+		description: 'Date for this version of the operation definition',
 	},
-	INSTANCE: {
-		name: 'instance',
+	instance: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.instance',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-instance',
-		documentation: 'Invoke on an instance?.',
+		description: 'Invoke on an instance?',
 	},
-	KIND: {
-		name: 'kind',
+	kind: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.kind',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-kind',
-		documentation: 'operation | query.',
+		description: 'operation | query',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'OperationDefinition.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-name',
-		documentation: 'Informal name for this operation.',
+		description: 'Informal name for this operation',
 	},
-	PROFILE: {
-		name: 'profile',
+	profile: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'OperationDefinition.parameter.profile',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-profile',
-		documentation: 'Profile on the type.',
+		description: 'Profile on the type',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'OperationDefinition.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-publisher',
-		documentation: 'Name of the publisher (Organization or individual).',
+		description: 'Name of the publisher (Organization or individual)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-status',
-		documentation: 'draft | active | retired.',
+		description: 'draft | active | retired',
 	},
-	SYSTEM: {
-		name: 'system',
+	system: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.system',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-system',
-		documentation: 'Invoke at the system level?.',
+		description: 'Invoke at the system level?',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-type',
-		documentation: 'Invoke at resource level for these type.',
+		description: 'Invoke at resource level for these type',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'OperationDefinition.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-url',
-		documentation: 'Logical URL to reference this operation definition.',
+		description: 'Logical URL to reference this operation definition',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'OperationDefinition.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/OperationDefinition-version',
-		documentation: 'Logical id for this version of the operation definition.',
+		description: 'Logical id for this version of the operation definition',
 	},
 };

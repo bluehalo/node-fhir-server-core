@@ -1,62 +1,77 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the imagingstudy query
+ */
 module.exports = {
-	ACCESSION: {
-		name: 'accession',
+	accession: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImagingStudy.accession',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-accession',
-		documentation: 'The accession identifier for the study.',
+		description: 'The accession identifier for the study',
 	},
-	BODYSITE: {
-		name: 'bodysite',
+	bodysite: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImagingStudy.series.bodySite',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-bodysite',
-		documentation: 'The body site studied.',
+		description: 'The body site studied',
 	},
-	DICOM_CLASS: {
-		name: 'dicom-class',
+	'dicom-class': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingStudy.series.instance.sopClass',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-dicom-class',
-		documentation: 'The type of the instance.',
+		description: 'The type of the instance',
 	},
-	MODALITY: {
-		name: 'modality',
+	modality: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImagingStudy.series.modality',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-modality',
-		documentation: 'The modality of the series.',
+		description: 'The modality of the series',
 	},
-	ORDER: {
-		name: 'order',
+	order: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImagingStudy.order',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-order',
-		documentation: 'The order for the image.',
+		description: 'The order for the image',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImagingStudy.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-patient',
-		documentation: 'Who the study is about.',
+		description: 'Who the study is about',
 	},
-	SERIES: {
-		name: 'series',
+	series: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingStudy.series.uid',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-series',
-		documentation: 'The identifier of the series of images.',
+		description: 'The identifier of the series of images',
 	},
-	STARTED: {
-		name: 'started',
+	started: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ImagingStudy.started',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-started',
-		documentation: 'When the study was started.',
+		description: 'When the study was started',
 	},
-	STUDY: {
-		name: 'study',
+	study: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingStudy.uid',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-study',
-		documentation: 'The study identifier for the image.',
+		description: 'The study identifier for the image',
 	},
-	UID: {
-		name: 'uid',
+	uid: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingStudy.series.instance.uid',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingStudy-uid',
-		documentation: 'The instance unique identifier.',
+		description: 'The instance unique identifier',
 	},
 };

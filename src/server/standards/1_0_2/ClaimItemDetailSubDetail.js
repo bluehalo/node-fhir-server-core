@@ -1,123 +1,253 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ClaimItemDetailSubDetail Class
+ */
+module.exports = class ClaimItemDetailSubDetail {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimItemDetailSubDetail extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimItemDetailSubDetail';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActInvoiceGroupCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/service-uscls
+		Object.defineProperty(this, 'service', {
+			enumerable: true,
+			get: () => this.__data.service,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.service = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'unitPrice', {
+			enumerable: true,
+			get: () => this.__data.unitPrice,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.unitPrice = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_factor', {
+			enumerable: true,
+			get: () => this.__data._factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._factor = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'factor', {
+			enumerable: true,
+			get: () => this.__data.factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.factor = value;
+			},
+		});
+
+		Object.defineProperty(this, '_points', {
+			enumerable: true,
+			get: () => this.__data._points,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._points = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'points', {
+			enumerable: true,
+			get: () => this.__data.points,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.points = value;
+			},
+		});
+
+		Object.defineProperty(this, 'net', {
+			enumerable: true,
+			get: () => this.__data.net,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.net = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/udi
+		Object.defineProperty(this, 'udi', {
+			enumerable: true,
+			get: () => this.__data.udi,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.udi = new Coding(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimItemDetailSubDetail',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimItemDetailSubDetail resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimItemDetailSubDetail';
 	}
 
-	// A service line number.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The type of product or service.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// The fee for an additional  service or product or charge.
-	get service() {
-		return this.__service;
-	}
-
-	set service(new_value) {
-		const Coding = require('./Coding');
-		this.__service = new Coding(new_value);
-	}
-
-	// The number of repetitions of a service or product.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// The fee for an additional  service or product or charge.
-	get unitPrice() {
-		return this.__unitPrice;
-	}
-
-	set unitPrice(new_value) {
-		const Quantity = require('./Quantity');
-		this.__unitPrice = new Quantity(new_value);
-	}
-
-	// A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.
-	get factor() {
-		return this.__factor;
-	}
-
-	set factor(new_value) {
-		this.__factor = new_value;
-	}
-
-	// An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the good or service delivered. The concept of Points allows for assignment of point values for services and/or goods, such that a monetary amount can be assigned to each point.
-	get points() {
-		return this.__points;
-	}
-
-	set points(new_value) {
-		this.__points = new_value;
-	}
-
-	// The quantity times the unit price for an additional  service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied.
-	get net() {
-		return this.__net;
-	}
-
-	set net(new_value) {
-		const Quantity = require('./Quantity');
-		this.__net = new Quantity(new_value);
-	}
-
-	// List of Unique Device Identifiers associated with this line item.
-	get udi() {
-		return this.__udi;
-	}
-
-	set udi(new_value) {
-		const Coding = require('./Coding');
-		this.__udi = new Coding(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			type: this.__type && this.__type.toJSON(),
-			service: this.__service && this.__service.toJSON(),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			unitPrice: this.__unitPrice && this.__unitPrice.toJSON(),
-			factor: this.__factor,
-			points: this.__points,
-			net: this.__net && this.__net.toJSON(),
-			udi: this.__udi && this.__udi.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			type: this.type && this.type.toJSON(),
+			service: this.service && this.service.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			unitPrice: this.unitPrice && this.unitPrice.toJSON(),
+			_factor: this._factor && this._factor.toJSON(),
+			factor: this.factor,
+			_points: this._points && this._points.toJSON(),
+			points: this.points,
+			net: this.net && this.net.toJSON(),
+			udi: this.udi && this.udi.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimItemDetailSubDetail;
+};

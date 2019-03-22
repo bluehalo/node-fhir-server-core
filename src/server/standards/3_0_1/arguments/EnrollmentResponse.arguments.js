@@ -1,20 +1,28 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the enrollmentresponse query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EnrollmentResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentResponse-identifier',
-		documentation: 'The business identifier of the EnrollmentResponse.',
+		description: 'The business identifier of the EnrollmentResponse',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EnrollmentResponse.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentResponse-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EnrollmentResponse.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/EnrollmentResponse-request',
-		documentation: 'The reference to the claim.',
+		description: 'The reference to the claim',
 	},
 };

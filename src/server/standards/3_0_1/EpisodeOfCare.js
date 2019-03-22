@@ -1,172 +1,369 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary EpisodeOfCare Class
+ */
+module.exports = class EpisodeOfCare {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class EpisodeOfCare extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'EpisodeOfCare';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/episode-of-care-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'statusHistory', {
+			enumerable: true,
+			get: () => this.__data.statusHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let EpisodeOfCareStatusHistory = require('./episodeofcarestatushistory.js');
+				this.__data.statusHistory = Array.isArray(value)
+					? value.map(v => new EpisodeOfCareStatusHistory(v))
+					: [new EpisodeOfCareStatusHistory(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/episodeofcare-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = Array.isArray(value) ? value.map(v => new CodeableConcept(v)) : [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'diagnosis', {
+			enumerable: true,
+			get: () => this.__data.diagnosis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let EpisodeOfCareDiagnosis = require('./episodeofcarediagnosis.js');
+				this.__data.diagnosis = Array.isArray(value)
+					? value.map(v => new EpisodeOfCareDiagnosis(v))
+					: [new EpisodeOfCareDiagnosis(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'managingOrganization', {
+			enumerable: true,
+			get: () => this.__data.managingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.managingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referralRequest', {
+			enumerable: true,
+			get: () => this.__data.referralRequest,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.referralRequest = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'careManager', {
+			enumerable: true,
+			get: () => this.__data.careManager,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.careManager = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'team', {
+			enumerable: true,
+			get: () => this.__data.team,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.team = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'account', {
+			enumerable: true,
+			get: () => this.__data.account,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.account = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'EpisodeOfCare',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a EpisodeOfCare resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'EpisodeOfCare';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__EpisodeOfCare = new_value;
-	}
-
-	// The EpisodeOfCare may be known by different identifiers for different contexts of use, such as when an external agency is tracking the Episode for funding purposes.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// planned | waitlist | active | onhold | finished | cancelled.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The history of statuses that the EpisodeOfCare has been through (without requiring processing the history of the resource).
-	get statusHistory() {
-		return this.__statusHistory;
-	}
-
-	set statusHistory(new_value) {
-		const EpisodeOfCareStatusHistory = require('./EpisodeOfCareStatusHistory');
-		this.__statusHistory = Array.isArray(new_value)
-			? new_value.map(val => new EpisodeOfCareStatusHistory(val))
-			: [new EpisodeOfCareStatusHistory(new_value)];
-	}
-
-	// A classification of the type of episode of care; e.g. specialist referral, disease management, type of funded care.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The list of diagnosis relevant to this episode of care.
-	get diagnosis() {
-		return this.__diagnosis;
-	}
-
-	set diagnosis(new_value) {
-		const EpisodeOfCareDiagnosis = require('./EpisodeOfCareDiagnosis');
-		this.__diagnosis = Array.isArray(new_value)
-			? new_value.map(val => new EpisodeOfCareDiagnosis(val))
-			: [new EpisodeOfCareDiagnosis(new_value)];
-	}
-
-	// The patient who is the focus of this episode of care.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The organization that has assumed the specific responsibilities for the specified duration.
-	get managingOrganization() {
-		return this.__managingOrganization;
-	}
-
-	set managingOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__managingOrganization = new Reference(new_value);
-	}
-
-	// The interval during which the managing organization assumes the defined responsibility.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// Referral Request(s) that are fulfilled by this EpisodeOfCare, incoming referrals.
-	get referralRequest() {
-		return this.__referralRequest;
-	}
-
-	set referralRequest(new_value) {
-		const Reference = require('./Reference');
-		this.__referralRequest = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// The practitioner that is the care manager/care co-ordinator for this patient.
-	get careManager() {
-		return this.__careManager;
-	}
-
-	set careManager(new_value) {
-		const Reference = require('./Reference');
-		this.__careManager = new Reference(new_value);
-	}
-
-	// The list of practitioners that may be facilitating this episode of care for specific purposes.
-	get team() {
-		return this.__team;
-	}
-
-	set team(new_value) {
-		const Reference = require('./Reference');
-		this.__team = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The set of accounts that may be used for billing for this EpisodeOfCare.
-	get account() {
-		return this.__account;
-	}
-
-	set account(new_value) {
-		const Reference = require('./Reference');
-		this.__account = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			statusHistory: this.__statusHistory && this.__statusHistory.map(v => v.toJSON()),
-			type: this.__type && this.__type.map(v => v.toJSON()),
-			diagnosis: this.__diagnosis && this.__diagnosis.map(v => v.toJSON()),
-			patient: this.__patient && this.__patient.toJSON(),
-			managingOrganization: this.__managingOrganization && this.__managingOrganization.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			referralRequest: this.__referralRequest && this.__referralRequest.map(v => v.toJSON()),
-			careManager: this.__careManager && this.__careManager.toJSON(),
-			team: this.__team && this.__team.map(v => v.toJSON()),
-			account: this.__account && this.__account.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			statusHistory: this.statusHistory && this.statusHistory.map(v => v.toJSON()),
+			type: this.type && this.type.map(v => v.toJSON()),
+			diagnosis: this.diagnosis && this.diagnosis.map(v => v.toJSON()),
+			patient: this.patient && this.patient.toJSON(),
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			period: this.period && this.period.toJSON(),
+			referralRequest: this.referralRequest && this.referralRequest.map(v => v.toJSON()),
+			careManager: this.careManager && this.careManager.toJSON(),
+			team: this.team && this.team.map(v => v.toJSON()),
+			account: this.account && this.account.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = EpisodeOfCare;
+};

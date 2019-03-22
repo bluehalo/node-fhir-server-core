@@ -1,149 +1,350 @@
-const DomainResource = require('./DomainResource');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary RelatedPerson Class
+ */
+module.exports = class RelatedPerson {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class RelatedPerson extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'RelatedPerson';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype
+		Object.defineProperty(this, 'relationship', {
+			enumerable: true,
+			get: () => this.__data.relationship,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.relationship = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.name = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'telecom', {
+			enumerable: true,
+			get: () => this.__data.telecom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.telecom = Array.isArray(value) ? value.map(v => new ContactPoint(v)) : [new ContactPoint(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_gender', {
+			enumerable: true,
+			get: () => this.__data._gender,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._gender = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/administrative-gender
+		Object.defineProperty(this, 'gender', {
+			enumerable: true,
+			get: () => this.__data.gender,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.gender = value;
+			},
+		});
+
+		Object.defineProperty(this, '_birthDate', {
+			enumerable: true,
+			get: () => this.__data._birthDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._birthDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'birthDate', {
+			enumerable: true,
+			get: () => this.__data.birthDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.birthDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'address', {
+			enumerable: true,
+			get: () => this.__data.address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.address = Array.isArray(value) ? value.map(v => new Address(v)) : [new Address(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'photo', {
+			enumerable: true,
+			get: () => this.__data.photo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.photo = Array.isArray(value) ? value.map(v => new Attachment(v)) : [new Attachment(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'RelatedPerson',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a RelatedPerson resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'RelatedPerson';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__RelatedPerson = new_value;
-	}
-
-	// Identifier for a person within a particular scope.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The patient this person is related to.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The nature of the relationship between a patient and the related person.
-	get relationship() {
-		return this.__relationship;
-	}
-
-	set relationship(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__relationship = new CodeableConcept(new_value);
-	}
-
-	// A name associated with the person.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		const HumanName = require('./HumanName');
-		this.__name = new HumanName(new_value);
-	}
-
-	// A contact detail for the person, e.g. a telephone number or an email address.
-	get telecom() {
-		return this.__telecom;
-	}
-
-	set telecom(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value)
-			? new_value.map(val => new ContactPoint(val))
-			: [new ContactPoint(new_value)];
-	}
-
-	// Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.
-	get gender() {
-		return this.__gender;
-	}
-
-	set gender(new_value) {
-		this.__gender = new_value;
-	}
-
-	// The date on which the related person was born.
-	get birthDate() {
-		return this.__birthDate;
-	}
-
-	set birthDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field birthDate`);
-		}
-		this.__birthDate = new_value;
-	}
-
-	// Address where the related person can be contacted or visited.
-	get address() {
-		return this.__address;
-	}
-
-	set address(new_value) {
-		const Address = require('./Address');
-		this.__address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
-	}
-
-	// Image of the person.
-	get photo() {
-		return this.__photo;
-	}
-
-	set photo(new_value) {
-		const Attachment = require('./Attachment');
-		this.__photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
-	}
-
-	// The period of time that this relationship is considered to be valid. If there are no dates defined, then the interval is unknown.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			patient: this.__patient && this.__patient.toJSON(),
-			relationship: this.__relationship && this.__relationship.toJSON(),
-			name: this.__name && this.__name.toJSON(),
-			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
-			gender: this.__gender,
-			birthDate: this.__birthDate,
-			address: this.__address && this.__address.map(v => v.toJSON()),
-			photo: this.__photo && this.__photo.map(v => v.toJSON()),
-			period: this.__period && this.__period.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			patient: this.patient && this.patient.toJSON(),
+			relationship: this.relationship && this.relationship.toJSON(),
+			name: this.name && this.name.toJSON(),
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
+			_gender: this._gender && this._gender.toJSON(),
+			gender: this.gender,
+			_birthDate: this._birthDate && this._birthDate.toJSON(),
+			birthDate: this.birthDate,
+			address: this.address && this.address.map(v => v.toJSON()),
+			photo: this.photo && this.photo.map(v => v.toJSON()),
+			period: this.period && this.period.toJSON(),
+		};
 	}
-}
-
-module.exports = RelatedPerson;
+};

@@ -1,41 +1,142 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ConformanceRestInteraction Class
+ */
+module.exports = class ConformanceRestInteraction {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConformanceRestInteraction extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConformanceRestInteraction';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/system-restful-interaction
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_documentation', {
+			enumerable: true,
+			get: () => this.__data._documentation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._documentation = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'documentation', {
+			enumerable: true,
+			get: () => this.__data.documentation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.documentation = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConformanceRestInteraction',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConformanceRestInteraction resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConformanceRestInteraction';
 	}
 
-	// A coded identifier of the operation, supported by the system.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		this.__code = new_value;
-	}
-
-	// Guidance specific to the implementation of this operation, such as limitations on the kind of transactions allowed, or information about system wide search is implemented.
-	get documentation() {
-		return this.__documentation;
-	}
-
-	set documentation(new_value) {
-		this.__documentation = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code,
-			documentation: this.__documentation,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_documentation: this._documentation && this._documentation.toJSON(),
+			documentation: this.documentation,
+		};
 	}
-}
-
-module.exports = ConformanceRestInteraction;
+};

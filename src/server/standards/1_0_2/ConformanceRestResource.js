@@ -1,148 +1,377 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ConformanceRestResource Class
+ */
+module.exports = class ConformanceRestResource {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConformanceRestResource extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConformanceRestResource';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/resource-types
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, 'profile', {
+			enumerable: true,
+			get: () => this.__data.profile,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.profile = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'interaction', {
+			enumerable: true,
+			get: () => this.__data.interaction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceRestResourceInteraction = require('./conformancerestresourceinteraction.js');
+				this.__data.interaction = Array.isArray(value)
+					? value.map(v => new ConformanceRestResourceInteraction(v))
+					: [new ConformanceRestResourceInteraction(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_versioning', {
+			enumerable: true,
+			get: () => this.__data._versioning,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._versioning = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/versioning-policy
+		Object.defineProperty(this, 'versioning', {
+			enumerable: true,
+			get: () => this.__data.versioning,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.versioning = value;
+			},
+		});
+
+		Object.defineProperty(this, '_readHistory', {
+			enumerable: true,
+			get: () => this.__data._readHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._readHistory = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'readHistory', {
+			enumerable: true,
+			get: () => this.__data.readHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.readHistory = value;
+			},
+		});
+
+		Object.defineProperty(this, '_updateCreate', {
+			enumerable: true,
+			get: () => this.__data._updateCreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._updateCreate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'updateCreate', {
+			enumerable: true,
+			get: () => this.__data.updateCreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.updateCreate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_conditionalCreate', {
+			enumerable: true,
+			get: () => this.__data._conditionalCreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._conditionalCreate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'conditionalCreate', {
+			enumerable: true,
+			get: () => this.__data.conditionalCreate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.conditionalCreate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_conditionalUpdate', {
+			enumerable: true,
+			get: () => this.__data._conditionalUpdate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._conditionalUpdate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'conditionalUpdate', {
+			enumerable: true,
+			get: () => this.__data.conditionalUpdate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.conditionalUpdate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_conditionalDelete', {
+			enumerable: true,
+			get: () => this.__data._conditionalDelete,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._conditionalDelete = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/conditional-delete-status
+		Object.defineProperty(this, 'conditionalDelete', {
+			enumerable: true,
+			get: () => this.__data.conditionalDelete,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.conditionalDelete = value;
+			},
+		});
+
+		Object.defineProperty(this, '_searchInclude', {
+			enumerable: true,
+			get: () => this.__data._searchInclude,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._searchInclude = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'searchInclude', {
+			enumerable: true,
+			get: () => this.__data.searchInclude,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.searchInclude = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_searchRevInclude', {
+			enumerable: true,
+			get: () => this.__data._searchRevInclude,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._searchRevInclude = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'searchRevInclude', {
+			enumerable: true,
+			get: () => this.__data.searchRevInclude,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.searchRevInclude = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'searchParam', {
+			enumerable: true,
+			get: () => this.__data.searchParam,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConformanceRestResourceSearchParam = require('./conformancerestresourcesearchparam.js');
+				this.__data.searchParam = Array.isArray(value)
+					? value.map(v => new ConformanceRestResourceSearchParam(v))
+					: [new ConformanceRestResourceSearchParam(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConformanceRestResource',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConformanceRestResource resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConformanceRestResource';
 	}
 
-	// A type of resource exposed via the restful interface.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// A specification of the profile that describes the solution\'s overall support for the resource, including any constraints on cardinality, bindings, lengths or other limitations. See further discussion in [Using Profiles]{profiling.html#profile-uses}.
-	get profile() {
-		return this.__profile;
-	}
-
-	set profile(new_value) {
-		const Reference = require('./Reference');
-		this.__profile = new Reference(new_value);
-	}
-
-	// Identifies a restful operation supported by the solution.
-	get interaction() {
-		return this.__interaction;
-	}
-
-	set interaction(new_value) {
-		const ConformanceRestResourceInteraction = require('./ConformanceRestResourceInteraction');
-		this.__interaction = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceRestResourceInteraction(val))
-			: [new ConformanceRestResourceInteraction(new_value)];
-	}
-
-	// This field is set to no-version to specify that the system does not support (server) or use (client) versioning for this resource type. If this has some other value, the server must at least correctly track and populate the versionId meta-property on resources. If the value is \'versioned-update\', then the server supports all the versioning features, including using e-tags for version integrity in the API.
-	get versioning() {
-		return this.__versioning;
-	}
-
-	set versioning(new_value) {
-		this.__versioning = new_value;
-	}
-
-	// A flag for whether the server is able to return past versions as part of the vRead operation.
-	get readHistory() {
-		return this.__readHistory;
-	}
-
-	set readHistory(new_value) {
-		this.__readHistory = new_value;
-	}
-
-	// A flag to indicate that the server allows or needs to allow the client to create new identities on the server (e.g. that is, the client PUTs to a location where there is no existing resource). Allowing this operation means that the server allows the client to create new identities on the server.
-	get updateCreate() {
-		return this.__updateCreate;
-	}
-
-	set updateCreate(new_value) {
-		this.__updateCreate = new_value;
-	}
-
-	// A flag that indicates that the server supports conditional create.
-	get conditionalCreate() {
-		return this.__conditionalCreate;
-	}
-
-	set conditionalCreate(new_value) {
-		this.__conditionalCreate = new_value;
-	}
-
-	// A flag that indicates that the server supports conditional update.
-	get conditionalUpdate() {
-		return this.__conditionalUpdate;
-	}
-
-	set conditionalUpdate(new_value) {
-		this.__conditionalUpdate = new_value;
-	}
-
-	// A code that indicates how the server supports conditional delete.
-	get conditionalDelete() {
-		return this.__conditionalDelete;
-	}
-
-	set conditionalDelete(new_value) {
-		this.__conditionalDelete = new_value;
-	}
-
-	// A list of _include values supported by the server.
-	get searchInclude() {
-		return this.__searchInclude;
-	}
-
-	set searchInclude(new_value) {
-		this.__searchInclude = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A list of _revinclude (reverse include) values supported by the server.
-	get searchRevInclude() {
-		return this.__searchRevInclude;
-	}
-
-	set searchRevInclude(new_value) {
-		this.__searchRevInclude = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.
-	get searchParam() {
-		return this.__searchParam;
-	}
-
-	set searchParam(new_value) {
-		const ConformanceRestResourceSearchParam = require('./ConformanceRestResourceSearchParam');
-		this.__searchParam = Array.isArray(new_value)
-			? new_value.map(val => new ConformanceRestResourceSearchParam(val))
-			: [new ConformanceRestResourceSearchParam(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			profile: this.__profile && this.__profile.toJSON(),
-			interaction: this.__interaction && this.__interaction.map(v => v.toJSON()),
-			versioning: this.__versioning,
-			readHistory: this.__readHistory,
-			updateCreate: this.__updateCreate,
-			conditionalCreate: this.__conditionalCreate,
-			conditionalUpdate: this.__conditionalUpdate,
-			conditionalDelete: this.__conditionalDelete,
-			searchInclude: this.__searchInclude,
-			searchRevInclude: this.__searchRevInclude,
-			searchParam: this.__searchParam && this.__searchParam.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			profile: this.profile && this.profile.toJSON(),
+			interaction: this.interaction && this.interaction.map(v => v.toJSON()),
+			_versioning: this._versioning && this._versioning.toJSON(),
+			versioning: this.versioning,
+			_readHistory: this._readHistory && this._readHistory.toJSON(),
+			readHistory: this.readHistory,
+			_updateCreate: this._updateCreate && this._updateCreate.toJSON(),
+			updateCreate: this.updateCreate,
+			_conditionalCreate: this._conditionalCreate && this._conditionalCreate.toJSON(),
+			conditionalCreate: this.conditionalCreate,
+			_conditionalUpdate: this._conditionalUpdate && this._conditionalUpdate.toJSON(),
+			conditionalUpdate: this.conditionalUpdate,
+			_conditionalDelete: this._conditionalDelete && this._conditionalDelete.toJSON(),
+			conditionalDelete: this.conditionalDelete,
+			_searchInclude: this._searchInclude && this._searchInclude.toJSON(),
+			searchInclude: this.searchInclude,
+			_searchRevInclude: this._searchRevInclude && this._searchRevInclude.toJSON(),
+			searchRevInclude: this.searchRevInclude,
+			searchParam: this.searchParam && this.searchParam.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ConformanceRestResource;
+};

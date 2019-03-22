@@ -1,20 +1,30 @@
-const Quantity = require('./Quantity');
+/**
+ * @name exports
+ * @summary Duration Class
+ */
+module.exports = class Duration {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Duration extends Quantity {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Duration';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Duration',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Duration resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Duration';
 	}
 
 	toJSON() {
-		return Object.assign(super.toJSON(), {});
+		return {};
 	}
-}
-
-module.exports = Duration;
+};

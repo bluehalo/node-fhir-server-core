@@ -1,163 +1,288 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ClaimItemDetail Class
+ */
+module.exports = class ClaimItemDetail {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimItemDetail extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimItemDetail';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/ex-revenue-center
+		Object.defineProperty(this, 'revenue', {
+			enumerable: true,
+			get: () => this.__data.revenue,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.revenue = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/benefit-subcategory
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/service-uscls
+		Object.defineProperty(this, 'service', {
+			enumerable: true,
+			get: () => this.__data.service,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.service = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-modifiers
+		Object.defineProperty(this, 'modifier', {
+			enumerable: true,
+			get: () => this.__data.modifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.modifier = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/ex-program-code
+		Object.defineProperty(this, 'programCode', {
+			enumerable: true,
+			get: () => this.__data.programCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.programCode = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'unitPrice', {
+			enumerable: true,
+			get: () => this.__data.unitPrice,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.unitPrice = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, '_factor', {
+			enumerable: true,
+			get: () => this.__data._factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._factor = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'factor', {
+			enumerable: true,
+			get: () => this.__data.factor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.factor = value;
+			},
+		});
+
+		Object.defineProperty(this, 'net', {
+			enumerable: true,
+			get: () => this.__data.net,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.net = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, 'udi', {
+			enumerable: true,
+			get: () => this.__data.udi,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.udi = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'subDetail', {
+			enumerable: true,
+			get: () => this.__data.subDetail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimItemDetailSubDetail = require('./claimitemdetailsubdetail.js');
+				this.__data.subDetail = Array.isArray(value)
+					? value.map(v => new ClaimItemDetailSubDetail(v))
+					: [new ClaimItemDetailSubDetail(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimItemDetail',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimItemDetail resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimItemDetail';
 	}
 
-	// A service line number.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The type of reveneu or cost center providing the product and/or service.
-	get revenue() {
-		return this.__revenue;
-	}
-
-	set revenue(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__revenue = new CodeableConcept(new_value);
-	}
-
-	// Health Care Service Type Codes  to identify the classification of service or benefits.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = new CodeableConcept(new_value);
-	}
-
-	// If this is an actual service or product line, ie. not a Group, then use code to indicate the Professional Service or Product supplied (eg. CTP, HCPCS,USCLS,ICD10, NCPDP,DIN,ACHI,CCI). If a grouping item then use a group code to indicate the type of thing being grouped eg. \'glasses\' or \'compound\'.
-	get service() {
-		return this.__service;
-	}
-
-	set service(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__service = new CodeableConcept(new_value);
-	}
-
-	// Item typification or modifiers codes, eg for Oral whether the treatment is cosmetic or associated with TMJ, or for medical whether the treatment was outside the clinic or out of office hours.
-	get modifier() {
-		return this.__modifier;
-	}
-
-	set modifier(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__modifier = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// For programs which require reson codes for the inclusion, covering, of this billed item under the program or sub-program.
-	get programCode() {
-		return this.__programCode;
-	}
-
-	set programCode(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__programCode = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The number of repetitions of a service or product.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// If the item is a node then this is the fee for the product or service, otherwise this is the total of the fees for the children of the group.
-	get unitPrice() {
-		return this.__unitPrice;
-	}
-
-	set unitPrice(new_value) {
-		const Money = require('./Money');
-		this.__unitPrice = new Money(new_value);
-	}
-
-	// A real number that represents a multiplier used in determining the overall value of services delivered and/or goods received. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.
-	get factor() {
-		return this.__factor;
-	}
-
-	set factor(new_value) {
-		this.__factor = new_value;
-	}
-
-	// The quantity times the unit price for an addittional service or product or charge. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied.
-	get net() {
-		return this.__net;
-	}
-
-	set net(new_value) {
-		const Money = require('./Money');
-		this.__net = new Money(new_value);
-	}
-
-	// List of Unique Device Identifiers associated with this line item.
-	get udi() {
-		return this.__udi;
-	}
-
-	set udi(new_value) {
-		const Reference = require('./Reference');
-		this.__udi = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Third tier of goods and services.
-	get subDetail() {
-		return this.__subDetail;
-	}
-
-	set subDetail(new_value) {
-		const ClaimItemDetailSubDetail = require('./ClaimItemDetailSubDetail');
-		this.__subDetail = Array.isArray(new_value)
-			? new_value.map(val => new ClaimItemDetailSubDetail(val))
-			: [new ClaimItemDetailSubDetail(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			revenue: this.__revenue && this.__revenue.toJSON(),
-			category: this.__category && this.__category.toJSON(),
-			service: this.__service && this.__service.toJSON(),
-			modifier: this.__modifier && this.__modifier.map(v => v.toJSON()),
-			programCode: this.__programCode && this.__programCode.map(v => v.toJSON()),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			unitPrice: this.__unitPrice && this.__unitPrice.toJSON(),
-			factor: this.__factor,
-			net: this.__net && this.__net.toJSON(),
-			udi: this.__udi && this.__udi.map(v => v.toJSON()),
-			subDetail: this.__subDetail && this.__subDetail.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			revenue: this.revenue && this.revenue.toJSON(),
+			category: this.category && this.category.toJSON(),
+			service: this.service && this.service.toJSON(),
+			modifier: this.modifier && this.modifier.map(v => v.toJSON()),
+			programCode: this.programCode && this.programCode.map(v => v.toJSON()),
+			quantity: this.quantity && this.quantity.toJSON(),
+			unitPrice: this.unitPrice && this.unitPrice.toJSON(),
+			_factor: this._factor && this._factor.toJSON(),
+			factor: this.factor,
+			net: this.net && this.net.toJSON(),
+			udi: this.udi && this.udi.map(v => v.toJSON()),
+			subDetail: this.subDetail && this.subDetail.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ClaimItemDetail;
+};

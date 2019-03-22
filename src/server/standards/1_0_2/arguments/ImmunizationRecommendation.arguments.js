@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the immunizationrecommendation query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ImmunizationRecommendation.recommendation.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-date',
-		documentation: 'Date recommendation created.',
+		description: 'Date recommendation created',
 	},
-	DOSE_NUMBER: {
-		name: 'dose-number',
+	'dose-number': {
 		type: 'number',
+		fhirtype: 'number',
+		xpath: 'ImmunizationRecommendation.recommendation.doseNumber',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-dose-number',
-		documentation: 'Recommended dose number.',
+		description: 'Recommended dose number',
 	},
-	DOSE_SEQUENCE: {
-		name: 'dose-sequence',
+	'dose-sequence': {
 		type: 'number',
+		fhirtype: 'number',
+		xpath: 'ImmunizationRecommendation.recommendation.protocol.doseSequence',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-dose-sequence',
-		documentation: 'Dose number within sequence.',
+		description: 'Dose number within sequence',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImmunizationRecommendation.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-identifier',
-		documentation: 'Business identifier.',
+		description: 'Business identifier',
 	},
-	INFORMATION: {
-		name: 'information',
+	information: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImmunizationRecommendation.recommendation.supportingPatientInformation',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-information',
-		documentation: 'Patient observations supporting recommendation.',
+		description: 'Patient observations supporting recommendation',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImmunizationRecommendation.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-patient',
-		documentation: 'Who this profile is for.',
+		description: 'Who this profile is for',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImmunizationRecommendation.recommendation.forecastStatus',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-status',
-		documentation: 'Vaccine administration status.',
+		description: 'Vaccine administration status',
 	},
-	SUPPORT: {
-		name: 'support',
+	support: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImmunizationRecommendation.recommendation.supportingImmunization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-support',
-		documentation: 'Past immunizations supporting recommendation.',
+		description: 'Past immunizations supporting recommendation',
 	},
-	VACCINE_TYPE: {
-		name: 'vaccine-type',
+	'vaccine-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImmunizationRecommendation.recommendation.vaccineCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImmunizationRecommendation-vaccine-type',
-		documentation: 'Vaccine recommendation applies to.',
+		description: 'Vaccine recommendation applies to',
 	},
 };

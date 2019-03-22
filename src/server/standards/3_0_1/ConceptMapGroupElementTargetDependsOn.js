@@ -1,72 +1,196 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ConceptMapGroupElementTargetDependsOn Class
+ */
+module.exports = class ConceptMapGroupElementTargetDependsOn {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConceptMapGroupElementTargetDependsOn extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConceptMapGroupElementTargetDependsOn';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_property', {
+			enumerable: true,
+			get: () => this.__data._property,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._property = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'property', {
+			enumerable: true,
+			get: () => this.__data.property,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.property = value;
+			},
+		});
+
+		Object.defineProperty(this, '_system', {
+			enumerable: true,
+			get: () => this.__data._system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._system = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'system', {
+			enumerable: true,
+			get: () => this.__data.system,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.system = value;
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_display', {
+			enumerable: true,
+			get: () => this.__data._display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._display = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'display', {
+			enumerable: true,
+			get: () => this.__data.display,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.display = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConceptMapGroupElementTargetDependsOn',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConceptMapGroupElementTargetDependsOn resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConceptMapGroupElementTargetDependsOn';
 	}
 
-	// A reference to an element that holds a coded value that corresponds to a code system property. The idea is that the information model carries an element somwhere that is labeled to correspond with a code system property.
-	get property() {
-		return this.__property;
-	}
-
-	set property(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field property`);
-		}
-		this.__property = new_value;
-	}
-
-	// An absolute URI that identifies the code system of the dependency code (if the source/dependency is a value set that crosses code systems).
-	get system() {
-		return this.__system;
-	}
-
-	set system(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field system`);
-		}
-		this.__system = new_value;
-	}
-
-	// Identity (code or path) or the element/item/ValueSet that the map depends on / refers to.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		this.__code = new_value;
-	}
-
-	// The display for the code. The display is only provided to help editors when editing the concept map.
-	get display() {
-		return this.__display;
-	}
-
-	set display(new_value) {
-		this.__display = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			property: this.__property,
-			system: this.__system,
-			code: this.__code,
-			display: this.__display,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_property: this._property && this._property.toJSON(),
+			property: this.property,
+			_system: this._system && this._system.toJSON(),
+			system: this.system,
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_display: this._display && this._display.toJSON(),
+			display: this.display,
+		};
 	}
-}
-
-module.exports = ConceptMapGroupElementTargetDependsOn;
+};

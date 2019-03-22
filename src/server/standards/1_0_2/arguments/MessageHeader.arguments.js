@@ -1,86 +1,105 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the messageheader query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-author',
-		documentation: 'The source of the decision.',
+		description: 'The source of the decision',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageHeader.response.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-code',
-		documentation: 'ok | transient-error | fatal-error.',
+		description: 'ok | transient-error | fatal-error',
 	},
-	DATA: {
-		name: 'data',
+	data: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.data',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-data',
-		documentation: 'The actual content of the message.',
+		description: 'The actual content of the message',
 	},
-	DESTINATION: {
-		name: 'destination',
+	destination: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageHeader.destination.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-destination',
-		documentation: 'Name of system.',
+		description: 'Name of system',
 	},
-	DESTINATION_URI: {
-		name: 'destination-uri',
+	'destination-uri': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'MessageHeader.destination.endpoint',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-destination-uri',
-		documentation: 'Actual destination address or id.',
+		description: 'Actual destination address or id',
 	},
-	ENTERER: {
-		name: 'enterer',
+	enterer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.enterer',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-enterer',
-		documentation: 'The source of the data entry.',
+		description: 'The source of the data entry',
 	},
-	EVENT: {
-		name: 'event',
+	event: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageHeader.event',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-event',
-		documentation: 'Code for the event this message represents.',
+		description: 'Code for the event this message represents',
 	},
-	RECEIVER: {
-		name: 'receiver',
+	receiver: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.receiver',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-receiver',
-		documentation: "Intended 'real-world' recipient for the data.",
+		description: "Intended 'real-world' recipient for the data",
 	},
-	RESPONSE_ID: {
-		name: 'response-id',
+	'response-id': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'MessageHeader.response.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-response-id',
-		documentation: 'Id of original message.',
+		description: 'Id of original message',
 	},
-	RESPONSIBLE: {
-		name: 'responsible',
+	responsible: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.responsible',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-responsible',
-		documentation: 'Final responsibility for event.',
+		description: 'Final responsibility for event',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'MessageHeader.source.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-source',
-		documentation: 'Name of system.',
+		description: 'Name of system',
 	},
-	SOURCE_URI: {
-		name: 'source-uri',
+	'source-uri': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'MessageHeader.source.endpoint',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-source-uri',
-		documentation: 'Actual message source address or id.',
+		description: 'Actual message source address or id',
 	},
-	TARGET: {
-		name: 'target',
+	target: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'MessageHeader.destination.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-target',
-		documentation: 'Particular delivery destination within the destination.',
+		description: 'Particular delivery destination within the destination',
 	},
-	TIMESTAMP: {
-		name: 'timestamp',
+	timestamp: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'MessageHeader.timestamp',
 		definition: 'http://hl7.org/fhir/SearchParameter/MessageHeader-timestamp',
-		documentation: 'Time that the message was sent.',
+		description: 'Time that the message was sent',
 	},
 };

@@ -1,65 +1,158 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ClaimResponseItemDetail Class
+ */
+module.exports = class ClaimResponseItemDetail {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimResponseItemDetail extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimResponseItemDetail';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequenceLinkId', {
+			enumerable: true,
+			get: () => this.__data._sequenceLinkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequenceLinkId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequenceLinkId', {
+			enumerable: true,
+			get: () => this.__data.sequenceLinkId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequenceLinkId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_noteNumber', {
+			enumerable: true,
+			get: () => this.__data._noteNumber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._noteNumber = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'noteNumber', {
+			enumerable: true,
+			get: () => this.__data.noteNumber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.noteNumber = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'subDetail', {
+			enumerable: true,
+			get: () => this.__data.subDetail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimResponseItemDetailSubDetail = require('./claimresponseitemdetailsubdetail.js');
+				this.__data.subDetail = Array.isArray(value)
+					? value.map(v => new ClaimResponseItemDetailSubDetail(v))
+					: [new ClaimResponseItemDetailSubDetail(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimResponseItemDetail',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimResponseItemDetail resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimResponseItemDetail';
 	}
 
-	// A service line number.
-	get sequenceLinkId() {
-		return this.__sequenceLinkId;
-	}
-
-	set sequenceLinkId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequenceLinkId`);
-		}
-		this.__sequenceLinkId = new_value;
-	}
-
-	// A list of note references to the notes provided below.
-	get noteNumber() {
-		return this.__noteNumber;
-	}
-
-	set noteNumber(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field noteNumber`);
-		}
-		this.__noteNumber = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The third tier service adjudications for submitted services.
-	get subDetail() {
-		return this.__subDetail;
-	}
-
-	set subDetail(new_value) {
-		const ClaimResponseItemDetailSubDetail = require('./ClaimResponseItemDetailSubDetail');
-		this.__subDetail = Array.isArray(new_value)
-			? new_value.map(val => new ClaimResponseItemDetailSubDetail(val))
-			: [new ClaimResponseItemDetailSubDetail(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequenceLinkId: this.__sequenceLinkId,
-			noteNumber: this.__noteNumber,
-			subDetail: this.__subDetail && this.__subDetail.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequenceLinkId: this._sequenceLinkId && this._sequenceLinkId.toJSON(),
+			sequenceLinkId: this.sequenceLinkId,
+			_noteNumber: this._noteNumber && this._noteNumber.toJSON(),
+			noteNumber: this.noteNumber,
+			subDetail: this.subDetail && this.subDetail.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ClaimResponseItemDetail;
+};

@@ -1,8 +1,14 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the claimresponse query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ClaimResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ClaimResponse-identifier',
-		documentation: 'The identity of the insurer.',
+		description: 'The identity of the insurer',
 	},
 };

@@ -1,193 +1,445 @@
-const DomainResource = require('./DomainResource');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary Coverage Class
+ */
+module.exports = class Coverage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Coverage extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Coverage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'issuer', {
+			enumerable: true,
+			get: () => this.__data.issuer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.issuer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'bin', {
+			enumerable: true,
+			get: () => this.__data.bin,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.bin = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActCoverageTypeCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subscriberId', {
+			enumerable: true,
+			get: () => this.__data.subscriberId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.subscriberId = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_group', {
+			enumerable: true,
+			get: () => this.__data._group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._group = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'group', {
+			enumerable: true,
+			get: () => this.__data.group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.group = value;
+			},
+		});
+
+		Object.defineProperty(this, '_plan', {
+			enumerable: true,
+			get: () => this.__data._plan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._plan = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'plan', {
+			enumerable: true,
+			get: () => this.__data.plan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.plan = value;
+			},
+		});
+
+		Object.defineProperty(this, '_subPlan', {
+			enumerable: true,
+			get: () => this.__data._subPlan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._subPlan = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subPlan', {
+			enumerable: true,
+			get: () => this.__data.subPlan,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.subPlan = value;
+			},
+		});
+
+		Object.defineProperty(this, '_dependent', {
+			enumerable: true,
+			get: () => this.__data._dependent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dependent = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dependent', {
+			enumerable: true,
+			get: () => this.__data.dependent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dependent = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subscriber', {
+			enumerable: true,
+			get: () => this.__data.subscriber,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subscriber = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'network', {
+			enumerable: true,
+			get: () => this.__data.network,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.network = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contract', {
+			enumerable: true,
+			get: () => this.__data.contract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.contract = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Coverage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Coverage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Coverage';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Coverage = new_value;
-	}
-
-	// The program or plan underwriter or payor.
-	get issuer() {
-		return this.__issuer;
-	}
-
-	set issuer(new_value) {
-		const Reference = require('./Reference');
-		this.__issuer = new Reference(new_value);
-	}
-
-	// Business Identification Number (BIN number) used to identify the routing  of eclaims if the insurer themselves don\'t have a BIN number for all of their business.
-	get bin() {
-		return this.__bin;
-	}
-
-	set bin(new_value) {
-		const Identifier = require('./Identifier');
-		this.__bin = new Identifier(new_value);
-	}
-
-	// Time period during which the coverage is in force. A missing start date indicates the start date isn\'t known, a missing end date means the coverage is continuing to be in force.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The type of coverage: social program, medical plan, accident coverage (workers compensation, auto), group health.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// The id issued to the subscriber.
-	get subscriberId() {
-		return this.__subscriberId;
-	}
-
-	set subscriberId(new_value) {
-		const Identifier = require('./Identifier');
-		this.__subscriberId = new Identifier(new_value);
-	}
-
-	// The main (and possibly only) identifier for the coverage - often referred to as a Member Id, Subscriber Id, Certificate number or Personal Health Number or Case ID.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Identifies a style or collective of coverage issues by the underwriter, for example may be used to identify a class of coverage or employer group. May also be referred to as a Policy or Group ID.
-	get group() {
-		return this.__group;
-	}
-
-	set group(new_value) {
-		this.__group = new_value;
-	}
-
-	// Identifies a style or collective of coverage issues by the underwriter, for example may be used to identify a class of coverage or employer group. May also be referred to as a Policy or Group ID.
-	get plan() {
-		return this.__plan;
-	}
-
-	set plan(new_value) {
-		this.__plan = new_value;
-	}
-
-	// Identifies a sub-style or sub-collective of coverage issues by the underwriter, for example may be used to identify a specific employer group within a class of employers. May be referred to as a Section or Division ID.
-	get subPlan() {
-		return this.__subPlan;
-	}
-
-	set subPlan(new_value) {
-		this.__subPlan = new_value;
-	}
-
-	// A unique identifier for a dependent under the coverage.
-	get dependent() {
-		return this.__dependent;
-	}
-
-	set dependent(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dependent`);
-		}
-		this.__dependent = new_value;
-	}
-
-	// An optional counter for a particular instance of the identified coverage which increments upon each renewal.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The party who \'owns\' the insurance contractual relationship to the policy or to whom the benefit of the policy is due.
-	get subscriber() {
-		return this.__subscriber;
-	}
-
-	set subscriber(new_value) {
-		const Reference = require('./Reference');
-		this.__subscriber = new Reference(new_value);
-	}
-
-	// The identifier for a community of providers.
-	get network() {
-		return this.__network;
-	}
-
-	set network(new_value) {
-		const Identifier = require('./Identifier');
-		this.__network = new Identifier(new_value);
-	}
-
-	// The policy(s) which constitute this insurance coverage.
-	get contract() {
-		return this.__contract;
-	}
-
-	set contract(new_value) {
-		const Reference = require('./Reference');
-		this.__contract = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			issuer: this.__issuer && this.__issuer.toJSON(),
-			bin: this.__bin && this.__bin.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			type: this.__type && this.__type.toJSON(),
-			subscriberId: this.__subscriberId && this.__subscriberId.toJSON(),
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			group: this.__group,
-			plan: this.__plan,
-			subPlan: this.__subPlan,
-			dependent: this.__dependent,
-			sequence: this.__sequence,
-			subscriber: this.__subscriber && this.__subscriber.toJSON(),
-			network: this.__network && this.__network.toJSON(),
-			contract: this.__contract && this.__contract.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			issuer: this.issuer && this.issuer.toJSON(),
+			bin: this.bin && this.bin.toJSON(),
+			period: this.period && this.period.toJSON(),
+			type: this.type && this.type.toJSON(),
+			subscriberId: this.subscriberId && this.subscriberId.toJSON(),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_group: this._group && this._group.toJSON(),
+			group: this.group,
+			_plan: this._plan && this._plan.toJSON(),
+			plan: this.plan,
+			_subPlan: this._subPlan && this._subPlan.toJSON(),
+			subPlan: this.subPlan,
+			_dependent: this._dependent && this._dependent.toJSON(),
+			dependent: this.dependent,
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			subscriber: this.subscriber && this.subscriber.toJSON(),
+			network: this.network && this.network.toJSON(),
+			contract: this.contract && this.contract.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Coverage;
+};

@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the claim query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-identifier',
-		documentation: 'The primary identifier of the financial resource.',
+		description: 'The primary identifier of the financial resource',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-patient',
-		documentation: 'Patient.',
+		description: 'Patient',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-priority',
-		documentation: 'Processing priority requested.',
+		description: 'Processing priority requested',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Claim.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-provider',
-		documentation: 'Provider responsible for the claim.',
+		description: 'Provider responsible for the claim',
 	},
-	USE: {
-		name: 'use',
+	use: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Claim.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Claim-use',
-		documentation: 'The kind of financial resource.',
+		description: 'The kind of financial resource',
 	},
 };

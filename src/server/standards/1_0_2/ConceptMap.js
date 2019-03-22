@@ -1,245 +1,598 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ConceptMap Class
+ */
+module.exports = class ConceptMap {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ConceptMap extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ConceptMap';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/conformance-resource-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConceptMapContact = require('./conceptmapcontact.js');
+				this.__data.contact = Array.isArray(value)
+					? value.map(v => new ConceptMapContact(v))
+					: [new ConceptMapContact(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/use-context
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.useContext = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_requirements', {
+			enumerable: true,
+			get: () => this.__data._requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requirements = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requirements', {
+			enumerable: true,
+			get: () => this.__data.requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requirements = value;
+			},
+		});
+
+		Object.defineProperty(this, '_copyright', {
+			enumerable: true,
+			get: () => this.__data._copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._copyright = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'copyright', {
+			enumerable: true,
+			get: () => this.__data.copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.copyright = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sourceUri', {
+			enumerable: true,
+			get: () => this.__data._sourceUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sourceUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sourceUri', {
+			enumerable: true,
+			get: () => this.__data.sourceUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sourceUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'sourceReference', {
+			enumerable: true,
+			get: () => this.__data.sourceReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.sourceReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_targetUri', {
+			enumerable: true,
+			get: () => this.__data._targetUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._targetUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'targetUri', {
+			enumerable: true,
+			get: () => this.__data.targetUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.targetUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'targetReference', {
+			enumerable: true,
+			get: () => this.__data.targetReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.targetReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'element', {
+			enumerable: true,
+			get: () => this.__data.element,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConceptMapElement = require('./conceptmapelement.js');
+				this.__data.element = Array.isArray(value)
+					? value.map(v => new ConceptMapElement(v))
+					: [new ConceptMapElement(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ConceptMap',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ConceptMap resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ConceptMap';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__ConceptMap = new_value;
-	}
-
-	// An absolute URL that is used to identify this concept map when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this concept map is (or will be) published.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// Formal identifier that is used to identify this concept map when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// The identifier that is used to identify this version of the concept map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the profile author manually and the value should be a timestamp.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// A free text natural language name describing the concept map.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The status of the concept map.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// This ConceptMap was authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The name of the individual or organization that published the concept map.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contacts to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ConceptMapContact = require('./ConceptMapContact');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ConceptMapContact(val))
-			: [new ConceptMapContact(new_value)];
-	}
-
-	// The date this version of the concept map was published. The date must change when the business version changes, if it does, and it must change if the status code changes. In addition, it should change when the substantive content of the concept map changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// A free text natural language description of the use of the concept map - reason for definition, conditions of use, etc.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching of concept map instances.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Explains why this concept map is needed and why it has been constrained as it has.
-	get requirements() {
-		return this.__requirements;
-	}
-
-	set requirements(new_value) {
-		this.__requirements = new_value;
-	}
-
-	// A copyright statement relating to the concept map and/or its contents.
-	get copyright() {
-		return this.__copyright;
-	}
-
-	set copyright(new_value) {
-		this.__copyright = new_value;
-	}
-
-	// The source value set that specifies the concepts that are being mapped.
-	get sourceUri() {
-		return this.__sourceUri;
-	}
-
-	set sourceUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sourceUri`);
-		}
-		this.__sourceUri = new_value;
-	}
-
-	// The source value set that specifies the concepts that are being mapped.
-	get sourceReference() {
-		return this.__sourceReference;
-	}
-
-	set sourceReference(new_value) {
-		const Reference = require('./Reference');
-		this.__sourceReference = new Reference(new_value);
-	}
-
-	// The target value set provides context to the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.
-	get targetUri() {
-		return this.__targetUri;
-	}
-
-	set targetUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field targetUri`);
-		}
-		this.__targetUri = new_value;
-	}
-
-	// The target value set provides context to the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.
-	get targetReference() {
-		return this.__targetReference;
-	}
-
-	set targetReference(new_value) {
-		const Reference = require('./Reference');
-		this.__targetReference = new Reference(new_value);
-	}
-
-	// Mappings for an individual concept in the source to one or more concepts in the target.
-	get element() {
-		return this.__element;
-	}
-
-	set element(new_value) {
-		const ConceptMapElement = require('./ConceptMapElement');
-		this.__element = Array.isArray(new_value)
-			? new_value.map(val => new ConceptMapElement(val))
-			: [new ConceptMapElement(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			version: this.__version,
-			name: this.__name,
-			status: this.__status,
-			experimental: this.__experimental,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			date: this.__date,
-			description: this.__description,
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			requirements: this.__requirements,
-			copyright: this.__copyright,
-			sourceUri: this.__sourceUri,
-			sourceReference: this.__sourceReference && this.__sourceReference.toJSON(),
-			targetUri: this.__targetUri,
-			targetReference: this.__targetReference && this.__targetReference.toJSON(),
-			element: this.__element && this.__element.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			identifier: this.identifier && this.identifier.toJSON(),
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			_requirements: this._requirements && this._requirements.toJSON(),
+			requirements: this.requirements,
+			_copyright: this._copyright && this._copyright.toJSON(),
+			copyright: this.copyright,
+			_sourceUri: this._sourceUri && this._sourceUri.toJSON(),
+			sourceUri: this.sourceUri,
+			sourceReference: this.sourceReference && this.sourceReference.toJSON(),
+			_targetUri: this._targetUri && this._targetUri.toJSON(),
+			targetUri: this.targetUri,
+			targetReference: this.targetReference && this.targetReference.toJSON(),
+			element: this.element && this.element.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ConceptMap;
+};

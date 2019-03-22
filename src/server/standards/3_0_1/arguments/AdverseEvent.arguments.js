@@ -1,63 +1,78 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the adverseevent query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AdverseEvent.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-category',
-		documentation:
-			'AE | PAE  An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not.',
+		description:
+			'AE | PAE  An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AdverseEvent.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-date',
-		documentation: 'When the event occurred.',
+		description: 'When the event occurred',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-location',
-		documentation: 'Location where adverse event occurred.',
+		description: 'Location where adverse event occurred',
 	},
-	REACTION: {
-		name: 'reaction',
+	reaction: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.reaction',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-reaction',
-		documentation: 'Adverse Reaction Events linked to exposure to substance.',
+		description: 'Adverse Reaction Events linked to exposure to substance',
 	},
-	RECORDER: {
-		name: 'recorder',
+	recorder: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.recorder',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-recorder',
-		documentation: 'Who recorded the adverse event.',
+		description: 'Who recorded the adverse event',
 	},
-	SERIOUSNESS: {
-		name: 'seriousness',
+	seriousness: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AdverseEvent.seriousness',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-seriousness',
-		documentation: 'Mild | Moderate | Severe.',
+		description: 'Mild | Moderate | Severe',
 	},
-	STUDY: {
-		name: 'study',
+	study: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.study',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-study',
-		documentation: 'AdverseEvent.study.',
+		description: 'AdverseEvent.study',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-subject',
-		documentation: 'Subject or group impacted by event.',
+		description: 'Subject or group impacted by event',
 	},
-	SUBSTANCE: {
-		name: 'substance',
+	substance: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AdverseEvent.suspectEntity.instance',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-substance',
-		documentation: 'Refers to the specific entity that caused the adverse event.',
+		description: 'Refers to the specific entity that caused the adverse event',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AdverseEvent.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/AdverseEvent-type',
-		documentation: 'actual | potential.',
+		description: 'actual | potential',
 	},
 };

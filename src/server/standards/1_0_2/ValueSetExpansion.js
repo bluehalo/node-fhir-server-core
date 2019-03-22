@@ -1,99 +1,228 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ValueSetExpansion Class
+ */
+module.exports = class ValueSetExpansion {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetExpansion extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetExpansion';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_identifier', {
+			enumerable: true,
+			get: () => this.__data._identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._identifier = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.identifier = value;
+			},
+		});
+
+		Object.defineProperty(this, '_timestamp', {
+			enumerable: true,
+			get: () => this.__data._timestamp,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._timestamp = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'timestamp', {
+			enumerable: true,
+			get: () => this.__data.timestamp,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.timestamp = value;
+			},
+		});
+
+		Object.defineProperty(this, '_total', {
+			enumerable: true,
+			get: () => this.__data._total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._total = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'total', {
+			enumerable: true,
+			get: () => this.__data.total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.total = value;
+			},
+		});
+
+		Object.defineProperty(this, '_offset', {
+			enumerable: true,
+			get: () => this.__data._offset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._offset = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'offset', {
+			enumerable: true,
+			get: () => this.__data.offset,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.offset = value;
+			},
+		});
+
+		Object.defineProperty(this, 'parameter', {
+			enumerable: true,
+			get: () => this.__data.parameter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetExpansionParameter = require('./valuesetexpansionparameter.js');
+				this.__data.parameter = Array.isArray(value)
+					? value.map(v => new ValueSetExpansionParameter(v))
+					: [new ValueSetExpansionParameter(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'contains', {
+			enumerable: true,
+			get: () => this.__data.contains,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetExpansionContains = require('./valuesetexpansioncontains.js');
+				this.__data.contains = Array.isArray(value)
+					? value.map(v => new ValueSetExpansionContains(v))
+					: [new ValueSetExpansionContains(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetExpansion',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetExpansion resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetExpansion';
 	}
 
-	// An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field identifier`);
-		}
-		this.__identifier = new_value;
-	}
-
-	// The time at which the expansion was produced by the expanding system.
-	get timestamp() {
-		return this.__timestamp;
-	}
-
-	set timestamp(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field timestamp`);
-		}
-		this.__timestamp = new_value;
-	}
-
-	// The total number of concepts in the expansion. If the number of concept nodes in this resource is less than the stated number, then the server can return more using the offset parameter.
-	get total() {
-		return this.__total;
-	}
-
-	set total(new_value) {
-		this.__total = new_value;
-	}
-
-	// If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.
-	get offset() {
-		return this.__offset;
-	}
-
-	set offset(new_value) {
-		this.__offset = new_value;
-	}
-
-	// A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.
-	get parameter() {
-		return this.__parameter;
-	}
-
-	set parameter(new_value) {
-		const ValueSetExpansionParameter = require('./ValueSetExpansionParameter');
-		this.__parameter = Array.isArray(new_value)
-			? new_value.map(val => new ValueSetExpansionParameter(val))
-			: [new ValueSetExpansionParameter(new_value)];
-	}
-
-	// The codes that are contained in the value set expansion.
-	get contains() {
-		return this.__contains;
-	}
-
-	set contains(new_value) {
-		const ValueSetExpansionContains = require('./ValueSetExpansionContains');
-		this.__contains = Array.isArray(new_value)
-			? new_value.map(val => new ValueSetExpansionContains(val))
-			: [new ValueSetExpansionContains(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier,
-			timestamp: this.__timestamp,
-			total: this.__total,
-			offset: this.__offset,
-			parameter: this.__parameter && this.__parameter.map(v => v.toJSON()),
-			contains: this.__contains && this.__contains.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_identifier: this._identifier && this._identifier.toJSON(),
+			identifier: this.identifier,
+			_timestamp: this._timestamp && this._timestamp.toJSON(),
+			timestamp: this.timestamp,
+			_total: this._total && this._total.toJSON(),
+			total: this.total,
+			_offset: this._offset && this._offset.toJSON(),
+			offset: this.offset,
+			parameter: this.parameter && this.parameter.map(v => v.toJSON()),
+			contains: this.contains && this.contains.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ValueSetExpansion;
+};

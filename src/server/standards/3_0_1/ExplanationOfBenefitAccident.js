@@ -1,70 +1,157 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ExplanationOfBenefitAccident Class
+ */
+module.exports = class ExplanationOfBenefitAccident {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ExplanationOfBenefitAccident extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ExplanationOfBenefitAccident';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActIncidentCode
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'locationAddress', {
+			enumerable: true,
+			get: () => this.__data.locationAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.locationAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'locationReference', {
+			enumerable: true,
+			get: () => this.__data.locationReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.locationReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ExplanationOfBenefitAccident',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ExplanationOfBenefitAccident resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ExplanationOfBenefitAccident';
 	}
 
-	// Date of an accident which these services are addressing.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Type of accident: work, auto, etc.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Where the accident occurred.
-	get locationAddress() {
-		return this.__locationAddress;
-	}
-
-	set locationAddress(new_value) {
-		const Address = require('./Address');
-		this.__locationAddress = new Address(new_value);
-	}
-
-	// Where the accident occurred.
-	get locationReference() {
-		return this.__locationReference;
-	}
-
-	set locationReference(new_value) {
-		const Reference = require('./Reference');
-		this.__locationReference = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			date: this.__date,
-			type: this.__type && this.__type.toJSON(),
-			locationAddress: this.__locationAddress && this.__locationAddress.toJSON(),
-			locationReference: this.__locationReference && this.__locationReference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			type: this.type && this.type.toJSON(),
+			locationAddress: this.locationAddress && this.locationAddress.toJSON(),
+			locationReference: this.locationReference && this.locationReference.toJSON(),
+		};
 	}
-}
-
-module.exports = ExplanationOfBenefitAccident;
+};

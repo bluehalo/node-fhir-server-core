@@ -1,26 +1,35 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the guidanceresponse query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GuidanceResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/GuidanceResponse-identifier',
-		documentation: 'The identifier of the guidance response.',
+		description: 'The identifier of the guidance response',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'GuidanceResponse.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/GuidanceResponse-patient',
-		documentation: 'The identity of a patient to search for guidance response results.',
+		description: 'The identity of a patient to search for guidance response results',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'GuidanceResponse.requestId',
 		definition: 'http://hl7.org/fhir/SearchParameter/GuidanceResponse-request',
-		documentation: 'The identifier of the request associated with the response.',
+		description: 'The identifier of the request associated with the response',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'GuidanceResponse.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/GuidanceResponse-subject',
-		documentation: 'The subject that the guidance response is about.',
+		description: 'The subject that the guidance response is about',
 	},
 };

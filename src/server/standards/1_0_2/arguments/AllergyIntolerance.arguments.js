@@ -1,92 +1,112 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the allergyintolerance query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-category',
-		documentation: 'food | medication | environment | other - Category of Substance.',
+		description: 'food | medication | environment | other - Category of Substance',
 	},
-	CRITICALITY: {
-		name: 'criticality',
+	criticality: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.criticality',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-criticality',
-		documentation: 'CRITL | CRITH | CRITU.',
+		description: 'CRITL | CRITH | CRITU',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AllergyIntolerance.recordedDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-date',
-		documentation: 'When recorded.',
+		description: 'When recorded',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-identifier',
-		documentation: 'External ids for this item.',
+		description: 'External ids for this item',
 	},
-	LAST_DATE: {
-		name: 'last-date',
+	'last-date': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AllergyIntolerance.lastOccurence',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-last-date',
-		documentation: 'Date(/time) of last known occurrence of a reaction.',
+		description: 'Date(/time) of last known occurrence of a reaction',
 	},
-	MANIFESTATION: {
-		name: 'manifestation',
+	manifestation: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.reaction.manifestation',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-manifestation',
-		documentation: 'Clinical symptoms/signs associated with the Event.',
+		description: 'Clinical symptoms/signs associated with the Event',
 	},
-	ONSET: {
-		name: 'onset',
+	onset: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AllergyIntolerance.reaction.onset',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-onset',
-		documentation: 'Date(/time) when manifestations showed.',
+		description: 'Date(/time) when manifestations showed',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AllergyIntolerance.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-patient',
-		documentation: 'Who the sensitivity is for.',
+		description: 'Who the sensitivity is for',
 	},
-	RECORDER: {
-		name: 'recorder',
+	recorder: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AllergyIntolerance.recorder',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-recorder',
-		documentation: 'Who recorded the sensitivity.',
+		description: 'Who recorded the sensitivity',
 	},
-	REPORTER: {
-		name: 'reporter',
+	reporter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AllergyIntolerance.reporter',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-reporter',
-		documentation: 'Source of the information about the allergy.',
+		description: 'Source of the information about the allergy',
 	},
-	ROUTE: {
-		name: 'route',
+	route: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.reaction.exposureRoute',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-route',
-		documentation: 'How the subject was exposed to the substance.',
+		description: 'How the subject was exposed to the substance',
 	},
-	SEVERITY: {
-		name: 'severity',
+	severity: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.reaction.severity',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-severity',
-		documentation: 'mild | moderate | severe (of event as a whole).',
+		description: 'mild | moderate | severe (of event as a whole)',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-status',
-		documentation: 'active | unconfirmed | confirmed | inactive | resolved | refuted | entered-in-error.',
+		description: 'active | unconfirmed | confirmed | inactive | resolved | refuted | entered-in-error',
 	},
-	SUBSTANCE: {
-		name: 'substance',
+	substance: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.substance',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-substance',
-		documentation: 'Substance, (or class) considered to be responsible for risk.',
+		description: 'Substance, (or class) considered to be responsible for risk',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AllergyIntolerance.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/AllergyIntolerance-type',
-		documentation: 'allergy | intolerance - Underlying mechanism (if known).',
+		description: 'allergy | intolerance - Underlying mechanism (if known)',
 	},
 };

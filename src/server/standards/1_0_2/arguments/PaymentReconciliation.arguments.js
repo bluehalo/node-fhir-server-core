@@ -1,8 +1,14 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the paymentreconciliation query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentReconciliation.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentReconciliation-identifier',
-		documentation: 'The business identifier of the Explanation of Benefit.',
+		description: 'The business identifier of the Explanation of Benefit',
 	},
 };

@@ -1,91 +1,181 @@
-const Element = require('./Element');
-const IdScalar = require('./scalars/Id.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary Meta Class
+ */
+module.exports = class Meta {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Meta extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Meta';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_versionId', {
+			enumerable: true,
+			get: () => this.__data._versionId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._versionId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'versionId', {
+			enumerable: true,
+			get: () => this.__data.versionId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.versionId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_lastUpdated', {
+			enumerable: true,
+			get: () => this.__data._lastUpdated,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lastUpdated = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lastUpdated', {
+			enumerable: true,
+			get: () => this.__data.lastUpdated,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lastUpdated = value;
+			},
+		});
+
+		Object.defineProperty(this, '_profile', {
+			enumerable: true,
+			get: () => this.__data._profile,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._profile = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'profile', {
+			enumerable: true,
+			get: () => this.__data.profile,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.profile = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/security-labels
+		Object.defineProperty(this, 'security', {
+			enumerable: true,
+			get: () => this.__data.security,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.security = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/common-tags
+		Object.defineProperty(this, 'tag', {
+			enumerable: true,
+			get: () => this.__data.tag,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.tag = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Meta',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Meta resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Meta';
 	}
 
-	// The version specific identifier, as it appears in the version portion of the URL. This values changes when the resource is created, updated, or deleted.
-	get versionId() {
-		return this.__versionId;
-	}
-
-	set versionId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field versionId`);
-		}
-		this.__versionId = new_value;
-	}
-
-	// When the resource last changed - e.g. when the version changed.
-	get lastUpdated() {
-		return this.__lastUpdated;
-	}
-
-	set lastUpdated(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field lastUpdated`);
-		}
-		this.__lastUpdated = new_value;
-	}
-
-	// A list of profiles (references to [StructureDefinition](structuredefinition.html#) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url]().
-	get profile() {
-		return this.__profile;
-	}
-
-	set profile(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field profile`);
-		}
-		this.__profile = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.
-	get security() {
-		return this.__security;
-	}
-
-	set security(new_value) {
-		const Coding = require('./Coding');
-		this.__security = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.
-	get tag() {
-		return this.__tag;
-	}
-
-	set tag(new_value) {
-		const Coding = require('./Coding');
-		this.__tag = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			versionId: this.__versionId,
-			lastUpdated: this.__lastUpdated,
-			profile: this.__profile,
-			security: this.__security && this.__security.map(v => v.toJSON()),
-			tag: this.__tag && this.__tag.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_versionId: this._versionId && this._versionId.toJSON(),
+			versionId: this.versionId,
+			_lastUpdated: this._lastUpdated && this._lastUpdated.toJSON(),
+			lastUpdated: this.lastUpdated,
+			_profile: this._profile && this._profile.toJSON(),
+			profile: this.profile,
+			security: this.security && this.security.map(v => v.toJSON()),
+			tag: this.tag && this.tag.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Meta;
+};

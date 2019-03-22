@@ -1,47 +1,120 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ImmunizationExplanation Class
+ */
+module.exports = class ImmunizationExplanation {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImmunizationExplanation extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImmunizationExplanation';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/immunization-reason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/no-immunization-reason
+		Object.defineProperty(this, 'reasonNotGiven', {
+			enumerable: true,
+			get: () => this.__data.reasonNotGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonNotGiven = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImmunizationExplanation',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImmunizationExplanation resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImmunizationExplanation';
 	}
 
-	// Reasons why a vaccine was administered.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Reason why a vaccine was not administered.
-	get reasonNotGiven() {
-		return this.__reasonNotGiven;
-	}
-
-	set reasonNotGiven(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonNotGiven = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			reasonNotGiven: this.__reasonNotGiven && this.__reasonNotGiven.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			reasonNotGiven: this.reasonNotGiven && this.reasonNotGiven.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ImmunizationExplanation;
+};

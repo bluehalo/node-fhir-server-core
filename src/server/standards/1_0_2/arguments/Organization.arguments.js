@@ -1,74 +1,91 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the organization query
+ */
 module.exports = {
-	ACTIVE: {
-		name: 'active',
+	active: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Organization.active',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-active',
-		documentation: "Whether the organization's record is active.",
+		description: "Whether the organization's record is active",
 	},
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address',
-		documentation: 'A (part of the) address of the Organization.',
+		description: 'A (part of the) address of the Organization',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-city',
-		documentation: 'A city specified in an address.',
+		description: 'A city specified in an address',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-country',
-		documentation: 'A country specified in an address.',
+		description: 'A country specified in an address',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-postalcode',
-		documentation: 'A postal code specified in an address.',
+		description: 'A postal code specified in an address',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-state',
-		documentation: 'A state specified in an address.',
+		description: 'A state specified in an address',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Organization.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-address-use',
-		documentation: 'A use code specified in an address.',
+		description: 'A use code specified in an address',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Organization.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-identifier',
-		documentation: "Any identifier for the organization (not the accreditation issuer's identifier).",
+		description: "Any identifier for the organization (not the accreditation issuer's identifier)",
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-name',
-		documentation: "A portion of the organization's name.",
+		description: "A portion of the organization's name",
 	},
-	PARTOF: {
-		name: 'partof',
+	partof: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Organization.partOf',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-partof',
-		documentation: 'Search all organizations that are part of the given organization.',
+		description: 'Search all organizations that are part of the given organization',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Organization.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-phonetic',
-		documentation: "A portion of the organization's name using some kind of phonetic matching algorithm.",
+		description: "A portion of the organization's name using some kind of phonetic matching algorithm",
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Organization.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Organization-type',
-		documentation: 'A code for the type of organization.',
+		description: 'A code for the type of organization',
 	},
 };

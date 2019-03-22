@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the slot query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Slot.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Slot-identifier',
-		documentation: 'A Slot Identifier.',
+		description: 'A Slot Identifier',
 	},
-	SCHEDULE: {
-		name: 'schedule',
+	schedule: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Slot.schedule',
 		definition: 'http://hl7.org/fhir/SearchParameter/Slot-schedule',
-		documentation: 'The Schedule Resource that we are seeking a slot within.',
+		description: 'The Schedule Resource that we are seeking a slot within',
 	},
-	SLOT_TYPE: {
-		name: 'slot-type',
+	'slot-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Slot.serviceType',
 		definition: 'http://hl7.org/fhir/SearchParameter/Slot-slot-type',
-		documentation: 'The type of appointments that can be booked into the slot.',
+		description: 'The type of appointments that can be booked into the slot',
 	},
-	START: {
-		name: 'start',
+	start: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Slot.start',
 		definition: 'http://hl7.org/fhir/SearchParameter/Slot-start',
-		documentation: 'Appointment date/time.',
+		description: 'Appointment date/time.',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Slot.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Slot-status',
-		documentation: 'The free/busy status of the appointment.',
+		description: 'The free/busy status of the appointment',
 	},
 };

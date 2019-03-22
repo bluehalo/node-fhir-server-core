@@ -1,217 +1,378 @@
-const Element = require('./Element');
+/**
+ * @name exports
+ * @summary Dosage Class
+ */
+module.exports = class Dosage {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Dosage extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Dosage';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/additional-instruction-codes
+		Object.defineProperty(this, 'additionalInstruction', {
+			enumerable: true,
+			get: () => this.__data.additionalInstruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.additionalInstruction = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_patientInstruction', {
+			enumerable: true,
+			get: () => this.__data._patientInstruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patientInstruction = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patientInstruction', {
+			enumerable: true,
+			get: () => this.__data.patientInstruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patientInstruction = value;
+			},
+		});
+
+		Object.defineProperty(this, 'timing', {
+			enumerable: true,
+			get: () => this.__data.timing,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.timing = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, '_asNeededBoolean', {
+			enumerable: true,
+			get: () => this.__data._asNeededBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._asNeededBoolean = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+		Object.defineProperty(this, 'asNeededBoolean', {
+			enumerable: true,
+			get: () => this.__data.asNeededBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.asNeededBoolean = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-as-needed-reason
+		Object.defineProperty(this, 'asNeededCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.asNeededCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.asNeededCodeableConcept = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/approach-site-codes
+		Object.defineProperty(this, 'site', {
+			enumerable: true,
+			get: () => this.__data.site,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.site = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/route-codes
+		Object.defineProperty(this, 'route', {
+			enumerable: true,
+			get: () => this.__data.route,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.route = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/administration-method-codes
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'doseRange', {
+			enumerable: true,
+			get: () => this.__data.doseRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.doseRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'doseQuantity', {
+			enumerable: true,
+			get: () => this.__data.doseQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.doseQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxDosePerPeriod', {
+			enumerable: true,
+			get: () => this.__data.maxDosePerPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.maxDosePerPeriod = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxDosePerAdministration', {
+			enumerable: true,
+			get: () => this.__data.maxDosePerAdministration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.maxDosePerAdministration = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxDosePerLifetime', {
+			enumerable: true,
+			get: () => this.__data.maxDosePerLifetime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.maxDosePerLifetime = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateRatio', {
+			enumerable: true,
+			get: () => this.__data.rateRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.rateRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateRange', {
+			enumerable: true,
+			get: () => this.__data.rateRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.rateRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateQuantity', {
+			enumerable: true,
+			get: () => this.__data.rateQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.rateQuantity = new Quantity(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Dosage',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Dosage resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Dosage';
 	}
 
-	// Indicates the order in which the dosage instructions should be applied or interpreted.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		this.__sequence = new_value;
-	}
-
-	// Free text dosage instructions e.g. SIG.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
-	// Supplemental instruction - e.g. \'with meals\'.
-	get additionalInstruction() {
-		return this.__additionalInstruction;
-	}
-
-	set additionalInstruction(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__additionalInstruction = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Instructions in terms that are understood by the patient or consumer.
-	get patientInstruction() {
-		return this.__patientInstruction;
-	}
-
-	set patientInstruction(new_value) {
-		this.__patientInstruction = new_value;
-	}
-
-	// When medication should be administered.
-	get timing() {
-		return this.__timing;
-	}
-
-	set timing(new_value) {
-		const Timing = require('./Timing');
-		this.__timing = new Timing(new_value);
-	}
-
-	// Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).
-	get asNeededBoolean() {
-		return this.__asNeededBoolean;
-	}
-
-	set asNeededBoolean(new_value) {
-		this.__asNeededBoolean = new_value;
-	}
-
-	// Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).
-	get asNeededCodeableConcept() {
-		return this.__asNeededCodeableConcept;
-	}
-
-	set asNeededCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__asNeededCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Body site to administer to.
-	get site() {
-		return this.__site;
-	}
-
-	set site(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__site = new CodeableConcept(new_value);
-	}
-
-	// How drug should enter body.
-	get route() {
-		return this.__route;
-	}
-
-	set route(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__route = new CodeableConcept(new_value);
-	}
-
-	// Technique for administering medication.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// Amount of medication per dose.
-	get doseRange() {
-		return this.__doseRange;
-	}
-
-	set doseRange(new_value) {
-		const Range = require('./Range');
-		this.__doseRange = new Range(new_value);
-	}
-
-	// Amount of medication per dose.
-	get doseQuantity() {
-		return this.__doseQuantity;
-	}
-
-	set doseQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__doseQuantity = new Quantity(new_value);
-	}
-
-	// Upper limit on medication per unit of time.
-	get maxDosePerPeriod() {
-		return this.__maxDosePerPeriod;
-	}
-
-	set maxDosePerPeriod(new_value) {
-		const Ratio = require('./Ratio');
-		this.__maxDosePerPeriod = new Ratio(new_value);
-	}
-
-	// Upper limit on medication per administration.
-	get maxDosePerAdministration() {
-		return this.__maxDosePerAdministration;
-	}
-
-	set maxDosePerAdministration(new_value) {
-		const Quantity = require('./Quantity');
-		this.__maxDosePerAdministration = new Quantity(new_value);
-	}
-
-	// Upper limit on medication per lifetime of the patient.
-	get maxDosePerLifetime() {
-		return this.__maxDosePerLifetime;
-	}
-
-	set maxDosePerLifetime(new_value) {
-		const Quantity = require('./Quantity');
-		this.__maxDosePerLifetime = new Quantity(new_value);
-	}
-
-	// Amount of medication per unit of time.
-	get rateRatio() {
-		return this.__rateRatio;
-	}
-
-	set rateRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__rateRatio = new Ratio(new_value);
-	}
-
-	// Amount of medication per unit of time.
-	get rateRange() {
-		return this.__rateRange;
-	}
-
-	set rateRange(new_value) {
-		const Range = require('./Range');
-		this.__rateRange = new Range(new_value);
-	}
-
-	// Amount of medication per unit of time.
-	get rateQuantity() {
-		return this.__rateQuantity;
-	}
-
-	set rateQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__rateQuantity = new Quantity(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			text: this.__text,
-			additionalInstruction: this.__additionalInstruction && this.__additionalInstruction.map(v => v.toJSON()),
-			patientInstruction: this.__patientInstruction,
-			timing: this.__timing && this.__timing.toJSON(),
-			asNeededBoolean: this.__asNeededBoolean,
-			asNeededCodeableConcept: this.__asNeededCodeableConcept && this.__asNeededCodeableConcept.toJSON(),
-			site: this.__site && this.__site.toJSON(),
-			route: this.__route && this.__route.toJSON(),
-			method: this.__method && this.__method.toJSON(),
-			doseRange: this.__doseRange && this.__doseRange.toJSON(),
-			doseQuantity: this.__doseQuantity && this.__doseQuantity.toJSON(),
-			maxDosePerPeriod: this.__maxDosePerPeriod && this.__maxDosePerPeriod.toJSON(),
-			maxDosePerAdministration: this.__maxDosePerAdministration && this.__maxDosePerAdministration.toJSON(),
-			maxDosePerLifetime: this.__maxDosePerLifetime && this.__maxDosePerLifetime.toJSON(),
-			rateRatio: this.__rateRatio && this.__rateRatio.toJSON(),
-			rateRange: this.__rateRange && this.__rateRange.toJSON(),
-			rateQuantity: this.__rateQuantity && this.__rateQuantity.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+			additionalInstruction: this.additionalInstruction && this.additionalInstruction.map(v => v.toJSON()),
+			_patientInstruction: this._patientInstruction && this._patientInstruction.toJSON(),
+			patientInstruction: this.patientInstruction,
+			timing: this.timing && this.timing.toJSON(),
+			_asNeededBoolean: this._asNeededBoolean && this._asNeededBoolean.toJSON(),
+			asNeededBoolean: this.asNeededBoolean,
+			asNeededCodeableConcept: this.asNeededCodeableConcept && this.asNeededCodeableConcept.toJSON(),
+			site: this.site && this.site.toJSON(),
+			route: this.route && this.route.toJSON(),
+			method: this.method && this.method.toJSON(),
+			doseRange: this.doseRange && this.doseRange.toJSON(),
+			doseQuantity: this.doseQuantity && this.doseQuantity.toJSON(),
+			maxDosePerPeriod: this.maxDosePerPeriod && this.maxDosePerPeriod.toJSON(),
+			maxDosePerAdministration: this.maxDosePerAdministration && this.maxDosePerAdministration.toJSON(),
+			maxDosePerLifetime: this.maxDosePerLifetime && this.maxDosePerLifetime.toJSON(),
+			rateRatio: this.rateRatio && this.rateRatio.toJSON(),
+			rateRange: this.rateRange && this.rateRange.toJSON(),
+			rateQuantity: this.rateQuantity && this.rateQuantity.toJSON(),
+		};
 	}
-}
-
-module.exports = Dosage;
+};

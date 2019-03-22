@@ -1,122 +1,147 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the practitioner query
+ */
 module.exports = {
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address',
-		documentation: 'An address in any kind of address/part.',
+		description: 'An address in any kind of address/part',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address-city',
-		documentation: 'A city specified in an address.',
+		description: 'A city specified in an address',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address-country',
-		documentation: 'A country specified in an address.',
+		description: 'A country specified in an address',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address-postalcode',
-		documentation: 'A postalCode specified in an address.',
+		description: 'A postalCode specified in an address',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address-state',
-		documentation: 'A state specified in an address.',
+		description: 'A state specified in an address',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-address-use',
-		documentation: 'A use code specified in an address.',
+		description: 'A use code specified in an address',
 	},
-	COMMUNICATION: {
-		name: 'communication',
+	communication: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.communication',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-communication',
-		documentation: 'One of the languages that the practitioner can communicate with.',
+		description: 'One of the languages that the practitioner can communicate with',
 	},
-	EMAIL: {
-		name: 'email',
+	email: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Practitioner.telecom[system/@value='email']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-email',
-		documentation: 'A value in an email contact.',
+		description: 'A value in an email contact',
 	},
-	FAMILY: {
-		name: 'family',
+	family: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.name.family',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-family',
-		documentation: 'A portion of the family name.',
+		description: 'A portion of the family name',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-gender',
-		documentation: 'Gender of the practitioner.',
+		description: 'Gender of the practitioner',
 	},
-	GIVEN: {
-		name: 'given',
+	given: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.name.given',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-given',
-		documentation: 'A portion of the given name.',
+		description: 'A portion of the given name',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-identifier',
-		documentation: "A practitioner's Identifier.",
+		description: "A practitioner's Identifier",
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Practitioner.practitionerRole.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-location',
-		documentation: 'One of the locations at which this practitioner provides care.',
+		description: 'One of the locations at which this practitioner provides care',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-name',
-		documentation: 'A portion of either family or given name.',
+		description: 'A portion of either family or given name',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Practitioner.practitionerRole.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-organization',
-		documentation: 'The identity of the organization the practitioner represents / acts on behalf of.',
+		description: 'The identity of the organization the practitioner represents / acts on behalf of',
 	},
-	PHONE: {
-		name: 'phone',
+	phone: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Practitioner.telecom[system/@value='phone']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-phone',
-		documentation: 'A value in a phone contact.',
+		description: 'A value in a phone contact',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Practitioner.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-phonetic',
-		documentation: 'A portion of either family or given name using some kind of phonetic matching algorithm.',
+		description: 'A portion of either family or given name using some kind of phonetic matching algorithm',
 	},
-	ROLE: {
-		name: 'role',
+	role: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.practitionerRole.role',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-role',
-		documentation: 'The practitioner can perform this role at for the organization.',
+		description: 'The practitioner can perform this role at for the organization',
 	},
-	SPECIALTY: {
-		name: 'specialty',
+	specialty: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.practitionerRole.specialty',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-specialty',
-		documentation: 'The practitioner has this specialty at an organization.',
+		description: 'The practitioner has this specialty at an organization',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Practitioner.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/Practitioner-telecom',
-		documentation: 'The value in any kind of contact.',
+		description: 'The value in any kind of contact',
 	},
 };

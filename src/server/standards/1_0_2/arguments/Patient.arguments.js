@@ -1,165 +1,197 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the patient query
+ */
 module.exports = {
-	ACTIVE: {
-		name: 'active',
+	active: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.active',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-active',
-		documentation: 'Whether the patient record is active.',
+		description: 'Whether the patient record is active',
 	},
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address',
-		documentation: 'An address in any kind of address/part of the patient.',
+		description: 'An address in any kind of address/part of the patient',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address-city',
-		documentation: 'A city specified in an address.',
+		description: 'A city specified in an address',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address-country',
-		documentation: 'A country specified in an address.',
+		description: 'A country specified in an address',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address-postalcode',
-		documentation: 'A postalCode specified in an address.',
+		description: 'A postalCode specified in an address',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address-state',
-		documentation: 'A state specified in an address.',
+		description: 'A state specified in an address',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-address-use',
-		documentation: 'A use code specified in an address.',
+		description: 'A use code specified in an address',
 	},
-	ANIMAL_BREED: {
-		name: 'animal-breed',
+	'animal-breed': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.animal.breed',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-animal-breed',
-		documentation: 'The breed for animal patients.',
+		description: 'The breed for animal patients',
 	},
-	ANIMAL_SPECIES: {
-		name: 'animal-species',
+	'animal-species': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.animal.species',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-animal-species',
-		documentation: 'The species for animal patients.',
+		description: 'The species for animal patients',
 	},
-	BIRTHDATE: {
-		name: 'birthdate',
+	birthdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Patient.birthDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-birthdate',
-		documentation: "The patient's date of birth.",
+		description: "The patient's date of birth",
 	},
-	CAREPROVIDER: {
-		name: 'careprovider',
+	careprovider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.careProvider',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-careprovider',
-		documentation:
-			"Patient's nominated care provider, could be a care manager, not the organization that manages the record.",
+		description:
+			"Patient's nominated care provider, could be a care manager, not the organization that manages the record",
 	},
-	DEATHDATE: {
-		name: 'deathdate',
+	deathdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Patient.deceasedDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-deathdate',
-		documentation: 'The date of death has been provided and satisfies this search value.',
+		description: 'The date of death has been provided and satisfies this search value',
 	},
-	DECEASED: {
-		name: 'deceased',
+	deceased: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.deceasedBoolean',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-deceased',
-		documentation: 'This patient has been marked as deceased, or as a death date entered.',
+		description: 'This patient has been marked as deceased, or as a death date entered',
 	},
-	EMAIL: {
-		name: 'email',
+	email: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.telecom[system/@value='email']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-email',
-		documentation: 'A value in an email contact.',
+		description: 'A value in an email contact',
 	},
-	FAMILY: {
-		name: 'family',
+	family: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name.family',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-family',
-		documentation: 'A portion of the family name of the patient.',
+		description: 'A portion of the family name of the patient',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-gender',
-		documentation: 'Gender of the patient.',
+		description: 'Gender of the patient',
 	},
-	GIVEN: {
-		name: 'given',
+	given: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name.given',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-given',
-		documentation: 'A portion of the given name of the patient.',
+		description: 'A portion of the given name of the patient',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-identifier',
-		documentation: 'A patient identifier.',
+		description: 'A patient identifier',
 	},
-	LANGUAGE: {
-		name: 'language',
+	language: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.communication.language',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-language',
-		documentation: 'Language code (irrespective of use value).',
+		description: 'Language code (irrespective of use value)',
 	},
-	LINK: {
-		name: 'link',
+	link: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.link.other',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-link',
-		documentation: 'All patients linked to the given patient.',
+		description: 'All patients linked to the given patient',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-name',
-		documentation: 'A portion of either family or given name of the patient.',
+		description: 'A portion of either family or given name of the patient',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Patient.managingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-organization',
-		documentation: 'The organization at which this person is a patient.',
+		description: 'The organization at which this person is a patient',
 	},
-	PHONE: {
-		name: 'phone',
+	phone: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.telecom[system/@value='phone']",
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-phone',
-		documentation: 'A value in a phone contact.',
+		description: 'A value in a phone contact',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Patient.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-phonetic',
-		documentation: 'A portion of either family or given name using some kind of phonetic matching algorithm.',
+		description: 'A portion of either family or given name using some kind of phonetic matching algorithm',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Patient.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/Patient-telecom',
-		documentation: 'The value in any kind of telecom details of the patient.',
+		description: 'The value in any kind of telecom details of the patient',
 	},
-	RACE: {
-		name: 'race',
+	race: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.extension[@url='http://hl7.org/fhir/StructureDefinition/us-core-race']",
 		definition: 'http://hl7.org/fhir/SearchParameter/us-core-Patient-race',
-		documentation: 'Returns patients with a race extension matching the specified code.',
+		description: 'Returns patients with a race extension matching the specified code.',
 	},
-	ETHNICITY: {
-		name: 'ethnicity',
+	ethnicity: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "Patient.extension[@url='http://hl7.org/fhir/StructureDefinition/us-core-ethnicity']",
 		definition: 'http://hl7.org/fhir/SearchParameter/us-core-Patient-ethnicity',
-		documentation: 'Returns patients with an ethnicity extension matching the specified code.',
+		description: 'Returns patients with an ethnicity extension matching the specified code.',
 	},
 };

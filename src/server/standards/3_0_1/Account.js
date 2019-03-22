@@ -1,166 +1,395 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary Account Class
+ */
+module.exports = class Account {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Account extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Account';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/account-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/account-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'active', {
+			enumerable: true,
+			get: () => this.__data.active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.active = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'balance', {
+			enumerable: true,
+			get: () => this.__data.balance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.balance = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, 'coverage', {
+			enumerable: true,
+			get: () => this.__data.coverage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AccountCoverage = require('./accountcoverage.js');
+				this.__data.coverage = Array.isArray(value)
+					? value.map(v => new AccountCoverage(v))
+					: [new AccountCoverage(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'owner', {
+			enumerable: true,
+			get: () => this.__data.owner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.owner = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'guarantor', {
+			enumerable: true,
+			get: () => this.__data.guarantor,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AccountGuarantor = require('./accountguarantor.js');
+				this.__data.guarantor = Array.isArray(value)
+					? value.map(v => new AccountGuarantor(v))
+					: [new AccountGuarantor(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Account',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Account resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Account';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Account = new_value;
-	}
-
-	// Unique identifier used to reference the account.  May or may not be intended for human use (e.g. credit card number).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Indicates whether the account is presently used/usable or not.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Categorizes the account for reporting and searching purposes.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Name used for the account when displaying it to humans in reports, etc.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// Identifies the patient, device, practitioner, location or other object the account is associated with.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// Identifies the period of time the account applies to; e.g. accounts created per fiscal year, quarter, etc.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// Indicates the period of time over which the account is allowed to have transactions posted to it. This period may be different to the coveragePeriod which is the duration of time that services may occur.
-	get active() {
-		return this.__active;
-	}
-
-	set active(new_value) {
-		const Period = require('./Period');
-		this.__active = new Period(new_value);
-	}
-
-	// Represents the sum of all credits less all debits associated with the account.  Might be positive, zero or negative.
-	get balance() {
-		return this.__balance;
-	}
-
-	set balance(new_value) {
-		const Money = require('./Money');
-		this.__balance = new Money(new_value);
-	}
-
-	// The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account.
-	get coverage() {
-		return this.__coverage;
-	}
-
-	set coverage(new_value) {
-		const AccountCoverage = require('./AccountCoverage');
-		this.__coverage = Array.isArray(new_value)
-			? new_value.map(val => new AccountCoverage(val))
-			: [new AccountCoverage(new_value)];
-	}
-
-	// Indicates the organization, department, etc. with responsibility for the account.
-	get owner() {
-		return this.__owner;
-	}
-
-	set owner(new_value) {
-		const Reference = require('./Reference');
-		this.__owner = new Reference(new_value);
-	}
-
-	// Provides additional information about what the account tracks and how it is used.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Parties financially responsible for the account.
-	get guarantor() {
-		return this.__guarantor;
-	}
-
-	set guarantor(new_value) {
-		const AccountGuarantor = require('./AccountGuarantor');
-		this.__guarantor = Array.isArray(new_value)
-			? new_value.map(val => new AccountGuarantor(val))
-			: [new AccountGuarantor(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			type: this.__type && this.__type.toJSON(),
-			name: this.__name,
-			subject: this.__subject && this.__subject.toJSON(),
-			period: this.__period && this.__period.toJSON(),
-			active: this.__active && this.__active.toJSON(),
-			balance: this.__balance && this.__balance.toJSON(),
-			coverage: this.__coverage && this.__coverage.map(v => v.toJSON()),
-			owner: this.__owner && this.__owner.toJSON(),
-			description: this.__description,
-			guarantor: this.__guarantor && this.__guarantor.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			type: this.type && this.type.toJSON(),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			subject: this.subject && this.subject.toJSON(),
+			period: this.period && this.period.toJSON(),
+			active: this.active && this.active.toJSON(),
+			balance: this.balance && this.balance.toJSON(),
+			coverage: this.coverage && this.coverage.map(v => v.toJSON()),
+			owner: this.owner && this.owner.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			guarantor: this.guarantor && this.guarantor.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Account;
+};

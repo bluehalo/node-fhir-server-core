@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the substance query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Substance.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-category',
-		documentation: 'The category of the substance.',
+		description: 'The category of the substance',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Substance.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-code',
-		documentation: 'The code of the substance or ingredient.',
+		description: 'The code of the substance or ingredient',
 	},
-	CONTAINER_IDENTIFIER: {
-		name: 'container-identifier',
+	'container-identifier': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Substance.instance.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-container-identifier',
-		documentation: 'Identifier of the package/container.',
+		description: 'Identifier of the package/container',
 	},
-	EXPIRY: {
-		name: 'expiry',
+	expiry: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Substance.instance.expiry',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-expiry',
-		documentation: 'Expiry date of package or container of substance.',
+		description: 'Expiry date of package or container of substance',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Substance.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-identifier',
-		documentation: 'Unique identifier for the substance.',
+		description: 'Unique identifier for the substance',
 	},
-	QUANTITY: {
-		name: 'quantity',
+	quantity: {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'Substance.instance.quantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-quantity',
-		documentation: 'Amount of substance in the package.',
+		description: 'Amount of substance in the package',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Substance.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-status',
-		documentation: 'active | inactive | entered-in-error.',
+		description: 'active | inactive | entered-in-error',
 	},
-	SUBSTANCE_REFERENCE: {
-		name: 'substance-reference',
+	'substance-reference': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Substance.ingredient.substanceReference',
 		definition: 'http://hl7.org/fhir/SearchParameter/Substance-substance-reference',
-		documentation: 'A component of the substance.',
+		description: 'A component of the substance',
 	},
 };

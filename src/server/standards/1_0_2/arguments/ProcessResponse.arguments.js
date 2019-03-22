@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the processresponse query
+ */
 module.exports = {
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ProcessResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-identifier',
-		documentation: 'The business identifier of the Explanation of Benefit.',
+		description: 'The business identifier of the Explanation of Benefit',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessResponse.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessResponse.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-request',
-		documentation: 'The reference to the claim.',
+		description: 'The reference to the claim',
 	},
-	REQUESTORGANIZATION: {
-		name: 'requestorganization',
+	requestorganization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessResponse.requestOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-requestorganization',
-		documentation: 'The Organization who is responsible the request transaction.',
+		description: 'The Organization who is responsible the request transaction',
 	},
-	REQUESTPROVIDER: {
-		name: 'requestprovider',
+	requestprovider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ProcessResponse.requestProvider',
 		definition: 'http://hl7.org/fhir/SearchParameter/ProcessResponse-requestprovider',
-		documentation: 'The Provider who is responsible the request transaction.',
+		description: 'The Provider who is responsible the request transaction',
 	},
 };

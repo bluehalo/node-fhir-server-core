@@ -1,301 +1,557 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Procedure Class
+ */
+module.exports = class Procedure {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Procedure extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Procedure';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-category
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.category = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-code
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_notPerformed', {
+			enumerable: true,
+			get: () => this.__data._notPerformed,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._notPerformed = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'notPerformed', {
+			enumerable: true,
+			get: () => this.__data.notPerformed,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.notPerformed = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-not-performed-reason
+		Object.defineProperty(this, 'reasonNotPerformed', {
+			enumerable: true,
+			get: () => this.__data.reasonNotPerformed,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonNotPerformed = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodySite = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-reason
+		Object.defineProperty(this, 'reasonCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.reasonCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonCodeableConcept = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-reason
+		Object.defineProperty(this, 'reasonReference', {
+			enumerable: true,
+			get: () => this.__data.reasonReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reasonReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ProcedurePerformer = require('./procedureperformer.js');
+				this.__data.performer = Array.isArray(value)
+					? value.map(v => new ProcedurePerformer(v))
+					: [new ProcedurePerformer(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_performedDateTime', {
+			enumerable: true,
+			get: () => this.__data._performedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._performedDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performedDateTime', {
+			enumerable: true,
+			get: () => this.__data.performedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.performedDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'performedPeriod', {
+			enumerable: true,
+			get: () => this.__data.performedPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.performedPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.location = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'report', {
+			enumerable: true,
+			get: () => this.__data.report,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.report = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/condition-code
+		Object.defineProperty(this, 'complication', {
+			enumerable: true,
+			get: () => this.__data.complication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.complication = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/procedure-followup
+		Object.defineProperty(this, 'followUp', {
+			enumerable: true,
+			get: () => this.__data.followUp,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.followUp = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'request', {
+			enumerable: true,
+			get: () => this.__data.request,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.request = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'notes', {
+			enumerable: true,
+			get: () => this.__data.notes,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.notes = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'focalDevice', {
+			enumerable: true,
+			get: () => this.__data.focalDevice,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ProcedureFocalDevice = require('./procedurefocaldevice.js');
+				this.__data.focalDevice = Array.isArray(value)
+					? value.map(v => new ProcedureFocalDevice(v))
+					: [new ProcedureFocalDevice(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'used', {
+			enumerable: true,
+			get: () => this.__data.used,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.used = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Procedure',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Procedure resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Procedure';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Procedure = new_value;
-	}
-
-	// This records identifiers associated with this procedure that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The person, animal or group on which the procedure was performed.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// A code specifying the state of the procedure. Generally this will be in-progress or completed state.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A code that classifies the procedure for searching, sorting and display purposes (e.g. \'Surgical Procedure\').
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__category = new CodeableConcept(new_value);
-	}
-
-	// The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. \'Laparoscopic Appendectomy\').
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// Set this to true if the record is saying that the procedure was NOT performed.
-	get notPerformed() {
-		return this.__notPerformed;
-	}
-
-	set notPerformed(new_value) {
-		this.__notPerformed = new_value;
-	}
-
-	// A code indicating why the procedure was not performed.
-	get reasonNotPerformed() {
-		return this.__reasonNotPerformed;
-	}
-
-	set reasonNotPerformed(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonNotPerformed = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion.
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__bodySite = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The reason why the procedure was performed. This may be due to a Condition, may be coded entity of some type, or may simply be present as text.
-	get reasonCodeableConcept() {
-		return this.__reasonCodeableConcept;
-	}
-
-	set reasonCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The reason why the procedure was performed. This may be due to a Condition, may be coded entity of some type, or may simply be present as text.
-	get reasonReference() {
-		return this.__reasonReference;
-	}
-
-	set reasonReference(new_value) {
-		const Reference = require('./Reference');
-		this.__reasonReference = new Reference(new_value);
-	}
-
-	// Limited to \'real\' people rather than equipment.
-	get performer() {
-		return this.__performer;
-	}
-
-	set performer(new_value) {
-		const ProcedurePerformer = require('./ProcedurePerformer');
-		this.__performer = Array.isArray(new_value)
-			? new_value.map(val => new ProcedurePerformer(val))
-			: [new ProcedurePerformer(new_value)];
-	}
-
-	// The date(time)/period over which the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	get performedDateTime() {
-		return this.__performedDateTime;
-	}
-
-	set performedDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field performedDateTime`);
-		}
-		this.__performedDateTime = new_value;
-	}
-
-	// The date(time)/period over which the procedure was performed. Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	get performedPeriod() {
-		return this.__performedPeriod;
-	}
-
-	set performedPeriod(new_value) {
-		const Period = require('./Period');
-		this.__performedPeriod = new Period(new_value);
-	}
-
-	// The encounter during which the procedure was performed.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The location where the procedure actually happened.  E.g. a newborn at home, a tracheostomy at a restaurant.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		const Reference = require('./Reference');
-		this.__location = new Reference(new_value);
-	}
-
-	// The outcome of the procedure - did it resolve reasons for the procedure being performed?.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcome = new CodeableConcept(new_value);
-	}
-
-	// This could be a histology result, pathology report, surgical report, etc..
-	get report() {
-		return this.__report;
-	}
-
-	set report(new_value) {
-		const Reference = require('./Reference');
-		this.__report = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any \'post procedure\' issues.
-	get complication() {
-		return this.__complication;
-	}
-
-	set complication(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__complication = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// If the procedure required specific follow up - e.g. removal of sutures. The followup may be represented as a simple note, or could potentially be more complex in which case the CarePlan resource can be used.
-	get followUp() {
-		return this.__followUp;
-	}
-
-	set followUp(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__followUp = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A reference to a resource that contains details of the request for this procedure.
-	get request() {
-		return this.__request;
-	}
-
-	set request(new_value) {
-		const Reference = require('./Reference');
-		this.__request = new Reference(new_value);
-	}
-
-	// Any other notes about the procedure.  E.g. the operative notes.
-	get notes() {
-		return this.__notes;
-	}
-
-	set notes(new_value) {
-		const Annotation = require('./Annotation');
-		this.__notes = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.
-	get focalDevice() {
-		return this.__focalDevice;
-	}
-
-	set focalDevice(new_value) {
-		const ProcedureFocalDevice = require('./ProcedureFocalDevice');
-		this.__focalDevice = Array.isArray(new_value)
-			? new_value.map(val => new ProcedureFocalDevice(val))
-			: [new ProcedureFocalDevice(new_value)];
-	}
-
-	// Identifies medications, devices and any other substance used as part of the procedure.
-	get used() {
-		return this.__used;
-	}
-
-	set used(new_value) {
-		const Reference = require('./Reference');
-		this.__used = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			subject: this.__subject && this.__subject.toJSON(),
-			status: this.__status,
-			category: this.__category && this.__category.toJSON(),
-			code: this.__code && this.__code.toJSON(),
-			notPerformed: this.__notPerformed,
-			reasonNotPerformed: this.__reasonNotPerformed && this.__reasonNotPerformed.map(v => v.toJSON()),
-			bodySite: this.__bodySite && this.__bodySite.map(v => v.toJSON()),
-			reasonCodeableConcept: this.__reasonCodeableConcept && this.__reasonCodeableConcept.toJSON(),
-			reasonReference: this.__reasonReference && this.__reasonReference.toJSON(),
-			performer: this.__performer && this.__performer.map(v => v.toJSON()),
-			performedDateTime: this.__performedDateTime,
-			performedPeriod: this.__performedPeriod && this.__performedPeriod.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			location: this.__location && this.__location.toJSON(),
-			outcome: this.__outcome && this.__outcome.toJSON(),
-			report: this.__report && this.__report.map(v => v.toJSON()),
-			complication: this.__complication && this.__complication.map(v => v.toJSON()),
-			followUp: this.__followUp && this.__followUp.map(v => v.toJSON()),
-			request: this.__request && this.__request.toJSON(),
-			notes: this.__notes && this.__notes.map(v => v.toJSON()),
-			focalDevice: this.__focalDevice && this.__focalDevice.map(v => v.toJSON()),
-			used: this.__used && this.__used.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			subject: this.subject && this.subject.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			category: this.category && this.category.toJSON(),
+			code: this.code && this.code.toJSON(),
+			_notPerformed: this._notPerformed && this._notPerformed.toJSON(),
+			notPerformed: this.notPerformed,
+			reasonNotPerformed: this.reasonNotPerformed && this.reasonNotPerformed.map(v => v.toJSON()),
+			bodySite: this.bodySite && this.bodySite.map(v => v.toJSON()),
+			reasonCodeableConcept: this.reasonCodeableConcept && this.reasonCodeableConcept.toJSON(),
+			reasonReference: this.reasonReference && this.reasonReference.toJSON(),
+			performer: this.performer && this.performer.map(v => v.toJSON()),
+			_performedDateTime: this._performedDateTime && this._performedDateTime.toJSON(),
+			performedDateTime: this.performedDateTime,
+			performedPeriod: this.performedPeriod && this.performedPeriod.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			location: this.location && this.location.toJSON(),
+			outcome: this.outcome && this.outcome.toJSON(),
+			report: this.report && this.report.map(v => v.toJSON()),
+			complication: this.complication && this.complication.map(v => v.toJSON()),
+			followUp: this.followUp && this.followUp.map(v => v.toJSON()),
+			request: this.request && this.request.toJSON(),
+			notes: this.notes && this.notes.map(v => v.toJSON()),
+			focalDevice: this.focalDevice && this.focalDevice.map(v => v.toJSON()),
+			used: this.used && this.used.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Procedure;
+};

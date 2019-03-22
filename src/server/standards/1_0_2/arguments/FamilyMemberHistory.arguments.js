@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the familymemberhistory query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'FamilyMemberHistory.condition.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-code',
-		documentation: 'A search by a condition code.',
+		description: 'A search by a condition code',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'FamilyMemberHistory.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-date',
-		documentation: 'When history was captured/updated.',
+		description: 'When history was captured/updated',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'FamilyMemberHistory.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-gender',
-		documentation: 'A search by a gender code of a family member.',
+		description: 'A search by a gender code of a family member',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'FamilyMemberHistory.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-identifier',
-		documentation: 'A search by a record identifier.',
+		description: 'A search by a record identifier',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'FamilyMemberHistory.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-patient',
-		documentation: 'The identity of a subject to list family member history items for.',
+		description: 'The identity of a subject to list family member history items for',
 	},
-	RELATIONSHIP: {
-		name: 'relationship',
+	relationship: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'FamilyMemberHistory.relationship',
 		definition: 'http://hl7.org/fhir/SearchParameter/FamilyMemberHistory-relationship',
-		documentation: 'A search by a relationship type.',
+		description: 'A search by a relationship type',
 	},
-	CONDITION: {
-		name: 'condition',
+	condition: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/familymemberhistory-daf-FamilyMemberHistory-condition',
-		documentation: "Search for a history of a particular condition within a patient's family.",
+		description: "Search for a history of a particular condition within a patient's family.",
 	},
 };

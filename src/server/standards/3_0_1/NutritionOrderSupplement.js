@@ -1,74 +1,184 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary NutritionOrderSupplement Class
+ */
+module.exports = class NutritionOrderSupplement {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class NutritionOrderSupplement extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'NutritionOrderSupplement';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/supplement-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_productName', {
+			enumerable: true,
+			get: () => this.__data._productName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._productName = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'productName', {
+			enumerable: true,
+			get: () => this.__data.productName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.productName = value;
+			},
+		});
+
+		Object.defineProperty(this, 'schedule', {
+			enumerable: true,
+			get: () => this.__data.schedule,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.schedule = Array.isArray(value) ? value.map(v => new Timing(v)) : [new Timing(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_instruction', {
+			enumerable: true,
+			get: () => this.__data._instruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._instruction = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'instruction', {
+			enumerable: true,
+			get: () => this.__data.instruction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.instruction = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'NutritionOrderSupplement',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a NutritionOrderSupplement resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'NutritionOrderSupplement';
 	}
 
-	// The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// The product or brand name of the nutritional supplement such as \'Acme Protein Shake\'.
-	get productName() {
-		return this.__productName;
-	}
-
-	set productName(new_value) {
-		this.__productName = new_value;
-	}
-
-	// The time period and frequency at which the supplement(s) should be given.  The supplement should be given for the combination of all schedules if more than one schedule is present.
-	get schedule() {
-		return this.__schedule;
-	}
-
-	set schedule(new_value) {
-		const Timing = require('./Timing');
-		this.__schedule = Array.isArray(new_value) ? new_value.map(val => new Timing(val)) : [new Timing(new_value)];
-	}
-
-	// The amount of the nutritional supplement to be given.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// Free text or additional instructions or information pertaining to the oral supplement.
-	get instruction() {
-		return this.__instruction;
-	}
-
-	set instruction(new_value) {
-		this.__instruction = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			productName: this.__productName,
-			schedule: this.__schedule && this.__schedule.map(v => v.toJSON()),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			instruction: this.__instruction,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			_productName: this._productName && this._productName.toJSON(),
+			productName: this.productName,
+			schedule: this.schedule && this.schedule.map(v => v.toJSON()),
+			quantity: this.quantity && this.quantity.toJSON(),
+			_instruction: this._instruction && this._instruction.toJSON(),
+			instruction: this.instruction,
+		};
 	}
-}
-
-module.exports = NutritionOrderSupplement;
+};

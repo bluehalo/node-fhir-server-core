@@ -1,69 +1,170 @@
-const BackboneElement = require('./BackboneElement');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary PlanDefinitionActionRelatedAction Class
+ */
+module.exports = class PlanDefinitionActionRelatedAction {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PlanDefinitionActionRelatedAction extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PlanDefinitionActionRelatedAction';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_actionId', {
+			enumerable: true,
+			get: () => this.__data._actionId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._actionId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'actionId', {
+			enumerable: true,
+			get: () => this.__data.actionId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.actionId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_relationship', {
+			enumerable: true,
+			get: () => this.__data._relationship,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._relationship = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/action-relationship-type
+		Object.defineProperty(this, 'relationship', {
+			enumerable: true,
+			get: () => this.__data.relationship,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.relationship = value;
+			},
+		});
+
+		Object.defineProperty(this, 'offsetDuration', {
+			enumerable: true,
+			get: () => this.__data.offsetDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.offsetDuration = new Duration(value);
+			},
+		});
+
+		Object.defineProperty(this, 'offsetRange', {
+			enumerable: true,
+			get: () => this.__data.offsetRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.offsetRange = new Range(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PlanDefinitionActionRelatedAction',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PlanDefinitionActionRelatedAction resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PlanDefinitionActionRelatedAction';
 	}
 
-	// The element id of the related action.
-	get actionId() {
-		return this.__actionId;
-	}
-
-	set actionId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field actionId`);
-		}
-		this.__actionId = new_value;
-	}
-
-	// The relationship of this action to the related action.
-	get relationship() {
-		return this.__relationship;
-	}
-
-	set relationship(new_value) {
-		this.__relationship = new_value;
-	}
-
-	// A duration or range of durations to apply to the relationship. For example, 30-60 minutes before.
-	get offsetDuration() {
-		return this.__offsetDuration;
-	}
-
-	set offsetDuration(new_value) {
-		const Duration = require('./Duration');
-		this.__offsetDuration = new Duration(new_value);
-	}
-
-	// A duration or range of durations to apply to the relationship. For example, 30-60 minutes before.
-	get offsetRange() {
-		return this.__offsetRange;
-	}
-
-	set offsetRange(new_value) {
-		const Range = require('./Range');
-		this.__offsetRange = new Range(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			actionId: this.__actionId,
-			relationship: this.__relationship,
-			offsetDuration: this.__offsetDuration && this.__offsetDuration.toJSON(),
-			offsetRange: this.__offsetRange && this.__offsetRange.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_actionId: this._actionId && this._actionId.toJSON(),
+			actionId: this.actionId,
+			_relationship: this._relationship && this._relationship.toJSON(),
+			relationship: this.relationship,
+			offsetDuration: this.offsetDuration && this.offsetDuration.toJSON(),
+			offsetRange: this.offsetRange && this.offsetRange.toJSON(),
+		};
 	}
-}
-
-module.exports = PlanDefinitionActionRelatedAction;
+};

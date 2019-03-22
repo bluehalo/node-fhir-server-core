@@ -1,103 +1,199 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary PaymentReconciliationDetail Class
+ */
+module.exports = class PaymentReconciliationDetail {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PaymentReconciliationDetail extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PaymentReconciliationDetail';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/payment-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'request', {
+			enumerable: true,
+			get: () => this.__data.request,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.request = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'responce', {
+			enumerable: true,
+			get: () => this.__data.responce,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.responce = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'submitter', {
+			enumerable: true,
+			get: () => this.__data.submitter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.submitter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'payee', {
+			enumerable: true,
+			get: () => this.__data.payee,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.payee = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, 'amount', {
+			enumerable: true,
+			get: () => this.__data.amount,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.amount = new Quantity(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PaymentReconciliationDetail',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PaymentReconciliationDetail resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PaymentReconciliationDetail';
 	}
 
-	// Code to indicate the nature of the payment, adjustment, funds advance, etc.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// The claim or financial resource.
-	get request() {
-		return this.__request;
-	}
-
-	set request(new_value) {
-		const Reference = require('./Reference');
-		this.__request = new Reference(new_value);
-	}
-
-	// The claim response resource.
-	get responce() {
-		return this.__responce;
-	}
-
-	set responce(new_value) {
-		const Reference = require('./Reference');
-		this.__responce = new Reference(new_value);
-	}
-
-	// The Organization which submitted the invoice or financial transaction.
-	get submitter() {
-		return this.__submitter;
-	}
-
-	set submitter(new_value) {
-		const Reference = require('./Reference');
-		this.__submitter = new Reference(new_value);
-	}
-
-	// The organization which is receiving the payment.
-	get payee() {
-		return this.__payee;
-	}
-
-	set payee(new_value) {
-		const Reference = require('./Reference');
-		this.__payee = new Reference(new_value);
-	}
-
-	// The date of the invoice or financial resource.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Amount paid for this detail.
-	get amount() {
-		return this.__amount;
-	}
-
-	set amount(new_value) {
-		const Quantity = require('./Quantity');
-		this.__amount = new Quantity(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			request: this.__request && this.__request.toJSON(),
-			responce: this.__responce && this.__responce.toJSON(),
-			submitter: this.__submitter && this.__submitter.toJSON(),
-			payee: this.__payee && this.__payee.toJSON(),
-			date: this.__date,
-			amount: this.__amount && this.__amount.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			request: this.request && this.request.toJSON(),
+			responce: this.responce && this.responce.toJSON(),
+			submitter: this.submitter && this.submitter.toJSON(),
+			payee: this.payee && this.payee.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			amount: this.amount && this.amount.toJSON(),
+		};
 	}
-}
-
-module.exports = PaymentReconciliationDetail;
+};

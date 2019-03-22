@@ -1,59 +1,143 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary SubstanceInstance Class
+ */
+module.exports = class SubstanceInstance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SubstanceInstance extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SubstanceInstance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_expiry', {
+			enumerable: true,
+			get: () => this.__data._expiry,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._expiry = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'expiry', {
+			enumerable: true,
+			get: () => this.__data.expiry,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.expiry = value;
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SubstanceInstance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SubstanceInstance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SubstanceInstance';
 	}
 
-	// Identifier associated with the package/container (usually a label affixed directly).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// When the substance is no longer valid to use. For some substances, a single arbitrary date is used for expiry.
-	get expiry() {
-		return this.__expiry;
-	}
-
-	set expiry(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field expiry`);
-		}
-		this.__expiry = new_value;
-	}
-
-	// The amount of the substance.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			expiry: this.__expiry,
-			quantity: this.__quantity && this.__quantity.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_expiry: this._expiry && this._expiry.toJSON(),
+			expiry: this.expiry,
+			quantity: this.quantity && this.quantity.toJSON(),
+		};
 	}
-}
-
-module.exports = SubstanceInstance;
+};

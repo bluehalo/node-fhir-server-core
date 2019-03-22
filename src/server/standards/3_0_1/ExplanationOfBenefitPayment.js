@@ -1,92 +1,185 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ExplanationOfBenefitPayment Class
+ */
+module.exports = class ExplanationOfBenefitPayment {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ExplanationOfBenefitPayment extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ExplanationOfBenefitPayment';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/ex-paymenttype
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'adjustment', {
+			enumerable: true,
+			get: () => this.__data.adjustment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.adjustment = new Money(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/payment-adjustment-reason
+		Object.defineProperty(this, 'adjustmentReason', {
+			enumerable: true,
+			get: () => this.__data.adjustmentReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.adjustmentReason = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, 'amount', {
+			enumerable: true,
+			get: () => this.__data.amount,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.amount = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ExplanationOfBenefitPayment',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ExplanationOfBenefitPayment resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ExplanationOfBenefitPayment';
 	}
 
-	// Whether this represents partial or complete payment of the claim.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Adjustment to the payment of this transaction which is not related to adjudication of this transaction.
-	get adjustment() {
-		return this.__adjustment;
-	}
-
-	set adjustment(new_value) {
-		const Money = require('./Money');
-		this.__adjustment = new Money(new_value);
-	}
-
-	// Reason for the payment adjustment.
-	get adjustmentReason() {
-		return this.__adjustmentReason;
-	}
-
-	set adjustmentReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__adjustmentReason = new CodeableConcept(new_value);
-	}
-
-	// Estimated payment date.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Payable less any payment adjustment.
-	get amount() {
-		return this.__amount;
-	}
-
-	set amount(new_value) {
-		const Money = require('./Money');
-		this.__amount = new Money(new_value);
-	}
-
-	// Payment identifer.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			adjustment: this.__adjustment && this.__adjustment.toJSON(),
-			adjustmentReason: this.__adjustmentReason && this.__adjustmentReason.toJSON(),
-			date: this.__date,
-			amount: this.__amount && this.__amount.toJSON(),
-			identifier: this.__identifier && this.__identifier.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			adjustment: this.adjustment && this.adjustment.toJSON(),
+			adjustmentReason: this.adjustmentReason && this.adjustmentReason.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			amount: this.amount && this.amount.toJSON(),
+			identifier: this.identifier && this.identifier.toJSON(),
+		};
 	}
-}
-
-module.exports = ExplanationOfBenefitPayment;
+};

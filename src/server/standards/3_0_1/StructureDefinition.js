@@ -1,352 +1,840 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary StructureDefinition Class
+ */
+module.exports = class StructureDefinition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class StructureDefinition extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'StructureDefinition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_title', {
+			enumerable: true,
+			get: () => this.__data._title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._title = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.title = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/publication-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactDetail = require('./contactdetail.js');
+				this.__data.contact = Array.isArray(value) ? value.map(v => new ContactDetail(v)) : [new ContactDetail(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let UsageContext = require('./usagecontext.js');
+				this.__data.useContext = Array.isArray(value) ? value.map(v => new UsageContext(v)) : [new UsageContext(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/jurisdiction
+		Object.defineProperty(this, 'jurisdiction', {
+			enumerable: true,
+			get: () => this.__data.jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.jurisdiction = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_purpose', {
+			enumerable: true,
+			get: () => this.__data._purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._purpose = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'purpose', {
+			enumerable: true,
+			get: () => this.__data.purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.purpose = value;
+			},
+		});
+
+		Object.defineProperty(this, '_copyright', {
+			enumerable: true,
+			get: () => this.__data._copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._copyright = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'copyright', {
+			enumerable: true,
+			get: () => this.__data.copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.copyright = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/profile-code
+		Object.defineProperty(this, 'keyword', {
+			enumerable: true,
+			get: () => this.__data.keyword,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.keyword = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_fhirVersion', {
+			enumerable: true,
+			get: () => this.__data._fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fhirVersion = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fhirVersion', {
+			enumerable: true,
+			get: () => this.__data.fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fhirVersion = value;
+			},
+		});
+
+		Object.defineProperty(this, 'mapping', {
+			enumerable: true,
+			get: () => this.__data.mapping,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let StructureDefinitionMapping = require('./structuredefinitionmapping.js');
+				this.__data.mapping = Array.isArray(value)
+					? value.map(v => new StructureDefinitionMapping(v))
+					: [new StructureDefinitionMapping(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_kind', {
+			enumerable: true,
+			get: () => this.__data._kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._kind = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/structure-definition-kind
+		Object.defineProperty(this, 'kind', {
+			enumerable: true,
+			get: () => this.__data.kind,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.kind = value;
+			},
+		});
+
+		Object.defineProperty(this, '_abstract', {
+			enumerable: true,
+			get: () => this.__data._abstract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._abstract = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'abstract', {
+			enumerable: true,
+			get: () => this.__data.abstract,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.abstract = value;
+			},
+		});
+
+		Object.defineProperty(this, '_contextType', {
+			enumerable: true,
+			get: () => this.__data._contextType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._contextType = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/extension-context
+		Object.defineProperty(this, 'contextType', {
+			enumerable: true,
+			get: () => this.__data.contextType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contextType = value;
+			},
+		});
+
+		Object.defineProperty(this, '_context', {
+			enumerable: true,
+			get: () => this.__data._context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._context = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.context = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_contextInvariant', {
+			enumerable: true,
+			get: () => this.__data._contextInvariant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._contextInvariant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contextInvariant', {
+			enumerable: true,
+			get: () => this.__data.contextInvariant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contextInvariant = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/defined-types
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_baseDefinition', {
+			enumerable: true,
+			get: () => this.__data._baseDefinition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._baseDefinition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'baseDefinition', {
+			enumerable: true,
+			get: () => this.__data.baseDefinition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.baseDefinition = value;
+			},
+		});
+
+		Object.defineProperty(this, '_derivation', {
+			enumerable: true,
+			get: () => this.__data._derivation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._derivation = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/type-derivation-rule
+		Object.defineProperty(this, 'derivation', {
+			enumerable: true,
+			get: () => this.__data.derivation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.derivation = value;
+			},
+		});
+
+		Object.defineProperty(this, 'snapshot', {
+			enumerable: true,
+			get: () => this.__data.snapshot,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let StructureDefinitionSnapshot = require('./structuredefinitionsnapshot.js');
+				this.__data.snapshot = new StructureDefinitionSnapshot(value);
+			},
+		});
+
+		Object.defineProperty(this, 'differential', {
+			enumerable: true,
+			get: () => this.__data.differential,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let StructureDefinitionDifferential = require('./structuredefinitiondifferential.js');
+				this.__data.differential = new StructureDefinitionDifferential(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'StructureDefinition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a StructureDefinition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'StructureDefinition';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__StructureDefinition = new_value;
-	}
-
-	// An absolute URI that is used to identify this structure definition when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this structure definition is (or will be) published. The URL SHOULD include the major version of the structure definition. For more information see [Technical and Business Versions](resource.html#versions).
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// A formal identifier that is used to identify this structure definition when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The identifier that is used to identify this version of the structure definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// A natural language name identifying the structure definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// A short, descriptive, user-friendly title for the structure definition.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		this.__title = new_value;
-	}
-
-	// The status of this structure definition. Enables tracking the life-cycle of the content.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A boolean value to indicate that this structure definition is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The date  (and optionally time) when the structure definition was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the structure definition changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The name of the individual or organization that published the structure definition.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contact details to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ContactDetail = require('./ContactDetail');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ContactDetail(val))
-			: [new ContactDetail(new_value)];
-	}
-
-	// A free text natural language description of the structure definition from a consumer\'s perspective.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate structure definition instances.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const UsageContext = require('./UsageContext');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new UsageContext(val))
-			: [new UsageContext(new_value)];
-	}
-
-	// A legal or geographic region in which the structure definition is intended to be used.
-	get jurisdiction() {
-		return this.__jurisdiction;
-	}
-
-	set jurisdiction(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__jurisdiction = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Explaination of why this structure definition is needed and why it has been designed as it has.
-	get purpose() {
-		return this.__purpose;
-	}
-
-	set purpose(new_value) {
-		this.__purpose = new_value;
-	}
-
-	// A copyright statement relating to the structure definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the structure definition.
-	get copyright() {
-		return this.__copyright;
-	}
-
-	set copyright(new_value) {
-		this.__copyright = new_value;
-	}
-
-	// A set of key words or terms from external terminologies that may be used to assist with indexing and searching of templates.
-	get keyword() {
-		return this.__keyword;
-	}
-
-	set keyword(new_value) {
-		const Coding = require('./Coding');
-		this.__keyword = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// The version of the FHIR specification on which this StructureDefinition is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 3.0.1 for this version.
-	get fhirVersion() {
-		return this.__fhirVersion;
-	}
-
-	set fhirVersion(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fhirVersion`);
-		}
-		this.__fhirVersion = new_value;
-	}
-
-	// An external specification that the content is mapped to.
-	get mapping() {
-		return this.__mapping;
-	}
-
-	set mapping(new_value) {
-		const StructureDefinitionMapping = require('./StructureDefinitionMapping');
-		this.__mapping = Array.isArray(new_value)
-			? new_value.map(val => new StructureDefinitionMapping(val))
-			: [new StructureDefinitionMapping(new_value)];
-	}
-
-	// Defines the kind of structure that this definition is describing.
-	get kind() {
-		return this.__kind;
-	}
-
-	set kind(new_value) {
-		this.__kind = new_value;
-	}
-
-	// Whether structure this definition describes is abstract or not  - that is, whether the structure is not intended to be instantiated. For Resources and Data types, abstract types will never be exchanged  between systems.
-	get abstract() {
-		return this.__abstract;
-	}
-
-	set abstract(new_value) {
-		this.__abstract = new_value;
-	}
-
-	// If this is an extension, Identifies the context within FHIR resources where the extension can be used.
-	get contextType() {
-		return this.__contextType;
-	}
-
-	set contextType(new_value) {
-		this.__contextType = new_value;
-	}
-
-	// Identifies the types of resource or data type elements to which the extension can be applied.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		this.__context = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A set of rules as Fluent Invariants about when the extension can be used (e.g. co-occurrence variants for the extension).
-	get contextInvariant() {
-		return this.__contextInvariant;
-	}
-
-	set contextInvariant(new_value) {
-		this.__contextInvariant = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The type this structure describes. If the derivation kind is \'specialization\' then this is the master definition for a type, and there is always one of these (a data type, an extension, a resource, including abstract ones). Otherwise the structure definition is a constraint on the stated type (and in this case, the type cannot be an abstract type).
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// An absolute URI that is the base structure from which this type is derived, either by specialization or constraint.
-	get baseDefinition() {
-		return this.__baseDefinition;
-	}
-
-	set baseDefinition(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field baseDefinition`);
-		}
-		this.__baseDefinition = new_value;
-	}
-
-	// How the type relates to the baseDefinition.
-	get derivation() {
-		return this.__derivation;
-	}
-
-	set derivation(new_value) {
-		this.__derivation = new_value;
-	}
-
-	// A snapshot view is expressed in a stand alone form that can be used and interpreted without considering the base StructureDefinition.
-	get snapshot() {
-		return this.__snapshot;
-	}
-
-	set snapshot(new_value) {
-		const StructureDefinitionSnapshot = require('./StructureDefinitionSnapshot');
-		this.__snapshot = new StructureDefinitionSnapshot(new_value);
-	}
-
-	// A differential view is expressed relative to the base StructureDefinition - a statement of differences that it applies.
-	get differential() {
-		return this.__differential;
-	}
-
-	set differential(new_value) {
-		const StructureDefinitionDifferential = require('./StructureDefinitionDifferential');
-		this.__differential = new StructureDefinitionDifferential(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			version: this.__version,
-			name: this.__name,
-			title: this.__title,
-			status: this.__status,
-			experimental: this.__experimental,
-			date: this.__date,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			description: this.__description,
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
-			purpose: this.__purpose,
-			copyright: this.__copyright,
-			keyword: this.__keyword && this.__keyword.map(v => v.toJSON()),
-			fhirVersion: this.__fhirVersion,
-			mapping: this.__mapping && this.__mapping.map(v => v.toJSON()),
-			kind: this.__kind,
-			abstract: this.__abstract,
-			contextType: this.__contextType,
-			context: this.__context,
-			contextInvariant: this.__contextInvariant,
-			type: this.__type,
-			baseDefinition: this.__baseDefinition,
-			derivation: this.__derivation,
-			snapshot: this.__snapshot && this.__snapshot.toJSON(),
-			differential: this.__differential && this.__differential.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_title: this._title && this._title.toJSON(),
+			title: this.title,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			jurisdiction: this.jurisdiction && this.jurisdiction.map(v => v.toJSON()),
+			_purpose: this._purpose && this._purpose.toJSON(),
+			purpose: this.purpose,
+			_copyright: this._copyright && this._copyright.toJSON(),
+			copyright: this.copyright,
+			keyword: this.keyword && this.keyword.map(v => v.toJSON()),
+			_fhirVersion: this._fhirVersion && this._fhirVersion.toJSON(),
+			fhirVersion: this.fhirVersion,
+			mapping: this.mapping && this.mapping.map(v => v.toJSON()),
+			_kind: this._kind && this._kind.toJSON(),
+			kind: this.kind,
+			_abstract: this._abstract && this._abstract.toJSON(),
+			abstract: this.abstract,
+			_contextType: this._contextType && this._contextType.toJSON(),
+			contextType: this.contextType,
+			_context: this._context && this._context.toJSON(),
+			context: this.context,
+			_contextInvariant: this._contextInvariant && this._contextInvariant.toJSON(),
+			contextInvariant: this.contextInvariant,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_baseDefinition: this._baseDefinition && this._baseDefinition.toJSON(),
+			baseDefinition: this.baseDefinition,
+			_derivation: this._derivation && this._derivation.toJSON(),
+			derivation: this.derivation,
+			snapshot: this.snapshot && this.snapshot.toJSON(),
+			differential: this.differential && this.differential.toJSON(),
+		};
 	}
-}
-
-module.exports = StructureDefinition;
+};

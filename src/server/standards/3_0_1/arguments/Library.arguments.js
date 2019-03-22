@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the library query
+ */
 module.exports = {
-	COMPOSED_OF: {
-		name: 'composed-of',
+	'composed-of': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Library.relatedArtifact[type/@value='composed-of'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-composed-of',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Library.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-date',
-		documentation: 'The library publication date.',
+		description: 'The library publication date',
 	},
-	DEPENDS_ON: {
-		name: 'depends-on',
+	'depends-on': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Library.relatedArtifact[type/@value='depends-on'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-depends-on',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DERIVED_FROM: {
-		name: 'derived-from',
+	'derived-from': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Library.relatedArtifact[type/@value='derived-from'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-derived-from',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Library.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-description',
-		documentation: 'The description of the library.',
+		description: 'The description of the library',
 	},
-	EFFECTIVE: {
-		name: 'effective',
+	effective: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Library.effectivePeriod',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-effective',
-		documentation: 'The time during which the library is intended to be in use.',
+		description: 'The time during which the library is intended to be in use',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Library.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-identifier',
-		documentation: 'External identifier for the library.',
+		description: 'External identifier for the library',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Library.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-jurisdiction',
-		documentation: 'Intended jurisdiction for the library.',
+		description: 'Intended jurisdiction for the library',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Library.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-name',
-		documentation: 'Computationally friendly name of the library.',
+		description: 'Computationally friendly name of the library',
 	},
-	PREDECESSOR: {
-		name: 'predecessor',
+	predecessor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Library.relatedArtifact[type/@value='predecessor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-predecessor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Library.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-publisher',
-		documentation: 'Name of the publisher of the library.',
+		description: 'Name of the publisher of the library',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Library.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-status',
-		documentation: 'The current status of the library.',
+		description: 'The current status of the library',
 	},
-	SUCCESSOR: {
-		name: 'successor',
+	successor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: "Library.relatedArtifact[type/@value='successor'].resource",
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-successor',
-		documentation: 'What resource is being referenced.',
+		description: 'What resource is being referenced',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Library.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-title',
-		documentation: 'The human-friendly name of the library.',
+		description: 'The human-friendly name of the library',
 	},
-	TOPIC: {
-		name: 'topic',
+	topic: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Library.topic',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-topic',
-		documentation: 'Topics associated with the module.',
+		description: 'Topics associated with the module',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'Library.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-url',
-		documentation: 'The uri that identifies the library.',
+		description: 'The uri that identifies the library',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Library.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/Library-version',
-		documentation: 'The business version of the library.',
+		description: 'The business version of the library',
 	},
 };

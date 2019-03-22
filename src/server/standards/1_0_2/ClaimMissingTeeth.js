@@ -1,59 +1,143 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary ClaimMissingTeeth Class
+ */
+module.exports = class ClaimMissingTeeth {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimMissingTeeth extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimMissingTeeth';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/teeth
+		Object.defineProperty(this, 'tooth', {
+			enumerable: true,
+			get: () => this.__data.tooth,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.tooth = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/missing-tooth-reason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.reason = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_extractionDate', {
+			enumerable: true,
+			get: () => this.__data._extractionDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._extractionDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'extractionDate', {
+			enumerable: true,
+			get: () => this.__data.extractionDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.extractionDate = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimMissingTeeth',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimMissingTeeth resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimMissingTeeth';
 	}
 
-	// The code identifying which tooth is missing.
-	get tooth() {
-		return this.__tooth;
-	}
-
-	set tooth(new_value) {
-		const Coding = require('./Coding');
-		this.__tooth = new Coding(new_value);
-	}
-
-	// Missing reason may be: E-extraction, O-other.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const Coding = require('./Coding');
-		this.__reason = new Coding(new_value);
-	}
-
-	// The date of the extraction either known from records or patient reported estimate.
-	get extractionDate() {
-		return this.__extractionDate;
-	}
-
-	set extractionDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field extractionDate`);
-		}
-		this.__extractionDate = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			tooth: this.__tooth && this.__tooth.toJSON(),
-			reason: this.__reason && this.__reason.toJSON(),
-			extractionDate: this.__extractionDate,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			tooth: this.tooth && this.tooth.toJSON(),
+			reason: this.reason && this.reason.toJSON(),
+			_extractionDate: this._extractionDate && this._extractionDate.toJSON(),
+			extractionDate: this.extractionDate,
+		};
 	}
-}
-
-module.exports = ClaimMissingTeeth;
+};

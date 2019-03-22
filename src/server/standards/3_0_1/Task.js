@@ -1,355 +1,669 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Task Class
+ */
+module.exports = class Task {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Task extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Task';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_definitionUri', {
+			enumerable: true,
+			get: () => this.__data._definitionUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definitionUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definitionUri', {
+			enumerable: true,
+			get: () => this.__data.definitionUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definitionUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'definitionReference', {
+			enumerable: true,
+			get: () => this.__data.definitionReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.definitionReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'basedOn', {
+			enumerable: true,
+			get: () => this.__data.basedOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.basedOn = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'groupIdentifier', {
+			enumerable: true,
+			get: () => this.__data.groupIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.groupIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'partOf', {
+			enumerable: true,
+			get: () => this.__data.partOf,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.partOf = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/task-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'statusReason', {
+			enumerable: true,
+			get: () => this.__data.statusReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.statusReason = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'businessStatus', {
+			enumerable: true,
+			get: () => this.__data.businessStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.businessStatus = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_intent', {
+			enumerable: true,
+			get: () => this.__data._intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._intent = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-intent
+		Object.defineProperty(this, 'intent', {
+			enumerable: true,
+			get: () => this.__data.intent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.intent = value;
+			},
+		});
+
+		Object.defineProperty(this, '_priority', {
+			enumerable: true,
+			get: () => this.__data._priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priority = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/request-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priority = value;
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'focus', {
+			enumerable: true,
+			get: () => this.__data.focus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.focus = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'for', {
+			enumerable: true,
+			get: () => this.__data.for,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.for = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'executionPeriod', {
+			enumerable: true,
+			get: () => this.__data.executionPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.executionPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_authoredOn', {
+			enumerable: true,
+			get: () => this.__data._authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._authoredOn = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'authoredOn', {
+			enumerable: true,
+			get: () => this.__data.authoredOn,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.authoredOn = value;
+			},
+		});
+
+		Object.defineProperty(this, '_lastModified', {
+			enumerable: true,
+			get: () => this.__data._lastModified,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._lastModified = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'lastModified', {
+			enumerable: true,
+			get: () => this.__data.lastModified,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.lastModified = value;
+			},
+		});
+
+		Object.defineProperty(this, 'requester', {
+			enumerable: true,
+			get: () => this.__data.requester,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TaskRequester = require('./taskrequester.js');
+				this.__data.requester = new TaskRequester(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/task-performer-type
+		Object.defineProperty(this, 'performerType', {
+			enumerable: true,
+			get: () => this.__data.performerType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.performerType = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'owner', {
+			enumerable: true,
+			get: () => this.__data.owner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.owner = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'relevantHistory', {
+			enumerable: true,
+			get: () => this.__data.relevantHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.relevantHistory = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'restriction', {
+			enumerable: true,
+			get: () => this.__data.restriction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TaskRestriction = require('./taskrestriction.js');
+				this.__data.restriction = new TaskRestriction(value);
+			},
+		});
+
+		Object.defineProperty(this, 'input', {
+			enumerable: true,
+			get: () => this.__data.input,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TaskInput = require('./taskinput.js');
+				this.__data.input = Array.isArray(value) ? value.map(v => new TaskInput(v)) : [new TaskInput(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'output', {
+			enumerable: true,
+			get: () => this.__data.output,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TaskOutput = require('./taskoutput.js');
+				this.__data.output = Array.isArray(value) ? value.map(v => new TaskOutput(v)) : [new TaskOutput(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Task',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Task resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Task';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Task = new_value;
-	}
-
-	// The business identifier for this task.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc.
-	get definitionUri() {
-		return this.__definitionUri;
-	}
-
-	set definitionUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field definitionUri`);
-		}
-		this.__definitionUri = new_value;
-	}
-
-	// A reference to a formal or informal definition of the task.  For example, a protocol, a step within a defined workflow definition, etc.
-	get definitionReference() {
-		return this.__definitionReference;
-	}
-
-	set definitionReference(new_value) {
-		const Reference = require('./Reference');
-		this.__definitionReference = new Reference(new_value);
-	}
-
-	// BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a \'request\' resource such as a ProcedureRequest, MedicationRequest, ProcedureRequest, CarePlan, etc. which is distinct from the \'request\' resource the task is seeking to fulfil.  This latter resource is referenced by FocusOn.  For example, based on a ProcedureRequest (= BasedOn), a task is created to fulfil a procedureRequest ( = FocusOn ) to collect a specimen from a patient.
-	get basedOn() {
-		return this.__basedOn;
-	}
-
-	set basedOn(new_value) {
-		const Reference = require('./Reference');
-		this.__basedOn = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// An identifier that links together multiple tasks and other requests that were created in the same context.
-	get groupIdentifier() {
-		return this.__groupIdentifier;
-	}
-
-	set groupIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__groupIdentifier = new Identifier(new_value);
-	}
-
-	// Task that this particular task is part of.
-	get partOf() {
-		return this.__partOf;
-	}
-
-	set partOf(new_value) {
-		const Reference = require('./Reference');
-		this.__partOf = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The current status of the task.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// An explanation as to why this task is held, failed, was refused, etc.
-	get statusReason() {
-		return this.__statusReason;
-	}
-
-	set statusReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__statusReason = new CodeableConcept(new_value);
-	}
-
-	// Contains business-specific nuances of the business state.
-	get businessStatus() {
-		return this.__businessStatus;
-	}
-
-	set businessStatus(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__businessStatus = new CodeableConcept(new_value);
-	}
-
-	// Indicates the \'level\' of actionability associated with the Task.  I.e. Is this a proposed task, a planned task, an actionable task, etc.
-	get intent() {
-		return this.__intent;
-	}
-
-	set intent(new_value) {
-		this.__intent = new_value;
-	}
-
-	// Indicates how quickly the Task should be addressed with respect to other requests.
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		this.__priority = new_value;
-	}
-
-	// A name or code (or both) briefly describing what the task involves.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// A free-text description of what is to be performed.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The request being actioned or the resource being manipulated by this task.
-	get focus() {
-		return this.__focus;
-	}
-
-	set focus(new_value) {
-		const Reference = require('./Reference');
-		this.__focus = new Reference(new_value);
-	}
-
-	// The entity who benefits from the performance of the service specified in the task (e.g., the patient).
-	get for() {
-		return this.__for;
-	}
-
-	set for(new_value) {
-		const Reference = require('./Reference');
-		this.__for = new Reference(new_value);
-	}
-
-	// The healthcare event  (e.g. a patient and healthcare provider interaction) during which this task was created.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const Reference = require('./Reference');
-		this.__context = new Reference(new_value);
-	}
-
-	// Identifies the time action was first taken against the task (start) and/or the time final action was taken against the task prior to marking it as completed (end).
-	get executionPeriod() {
-		return this.__executionPeriod;
-	}
-
-	set executionPeriod(new_value) {
-		const Period = require('./Period');
-		this.__executionPeriod = new Period(new_value);
-	}
-
-	// The date and time this task was created.
-	get authoredOn() {
-		return this.__authoredOn;
-	}
-
-	set authoredOn(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field authoredOn`);
-		}
-		this.__authoredOn = new_value;
-	}
-
-	// The date and time of last modification to this task.
-	get lastModified() {
-		return this.__lastModified;
-	}
-
-	set lastModified(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field lastModified`);
-		}
-		this.__lastModified = new_value;
-	}
-
-	// The creator of the task.
-	get requester() {
-		return this.__requester;
-	}
-
-	set requester(new_value) {
-		const TaskRequester = require('./TaskRequester');
-		this.__requester = new TaskRequester(new_value);
-	}
-
-	// The type of participant that can execute the task.
-	get performerType() {
-		return this.__performerType;
-	}
-
-	set performerType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__performerType = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Individual organization or Device currently responsible for task execution.
-	get owner() {
-		return this.__owner;
-	}
-
-	set owner(new_value) {
-		const Reference = require('./Reference');
-		this.__owner = new Reference(new_value);
-	}
-
-	// A description or code indicating why this task needs to be performed.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = new CodeableConcept(new_value);
-	}
-
-	// Free-text information captured about the task as it progresses.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task.
-	get relevantHistory() {
-		return this.__relevantHistory;
-	}
-
-	set relevantHistory(new_value) {
-		const Reference = require('./Reference');
-		this.__relevantHistory = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// If the Task.focus is a request resource and the task is seeking fulfillment (i.e is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
-	get restriction() {
-		return this.__restriction;
-	}
-
-	set restriction(new_value) {
-		const TaskRestriction = require('./TaskRestriction');
-		this.__restriction = new TaskRestriction(new_value);
-	}
-
-	// Additional information that may be needed in the execution of the task.
-	get input() {
-		return this.__input;
-	}
-
-	set input(new_value) {
-		const TaskInput = require('./TaskInput');
-		this.__input = Array.isArray(new_value) ? new_value.map(val => new TaskInput(val)) : [new TaskInput(new_value)];
-	}
-
-	// Outputs produced by the Task.
-	get output() {
-		return this.__output;
-	}
-
-	set output(new_value) {
-		const TaskOutput = require('./TaskOutput');
-		this.__output = Array.isArray(new_value) ? new_value.map(val => new TaskOutput(val)) : [new TaskOutput(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			definitionUri: this.__definitionUri,
-			definitionReference: this.__definitionReference && this.__definitionReference.toJSON(),
-			basedOn: this.__basedOn && this.__basedOn.map(v => v.toJSON()),
-			groupIdentifier: this.__groupIdentifier && this.__groupIdentifier.toJSON(),
-			partOf: this.__partOf && this.__partOf.map(v => v.toJSON()),
-			status: this.__status,
-			statusReason: this.__statusReason && this.__statusReason.toJSON(),
-			businessStatus: this.__businessStatus && this.__businessStatus.toJSON(),
-			intent: this.__intent,
-			priority: this.__priority,
-			code: this.__code && this.__code.toJSON(),
-			description: this.__description,
-			focus: this.__focus && this.__focus.toJSON(),
-			for: this.__for && this.__for.toJSON(),
-			context: this.__context && this.__context.toJSON(),
-			executionPeriod: this.__executionPeriod && this.__executionPeriod.toJSON(),
-			authoredOn: this.__authoredOn,
-			lastModified: this.__lastModified,
-			requester: this.__requester && this.__requester.toJSON(),
-			performerType: this.__performerType && this.__performerType.map(v => v.toJSON()),
-			owner: this.__owner && this.__owner.toJSON(),
-			reason: this.__reason && this.__reason.toJSON(),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			relevantHistory: this.__relevantHistory && this.__relevantHistory.map(v => v.toJSON()),
-			restriction: this.__restriction && this.__restriction.toJSON(),
-			input: this.__input && this.__input.map(v => v.toJSON()),
-			output: this.__output && this.__output.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_definitionUri: this._definitionUri && this._definitionUri.toJSON(),
+			definitionUri: this.definitionUri,
+			definitionReference: this.definitionReference && this.definitionReference.toJSON(),
+			basedOn: this.basedOn && this.basedOn.map(v => v.toJSON()),
+			groupIdentifier: this.groupIdentifier && this.groupIdentifier.toJSON(),
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			statusReason: this.statusReason && this.statusReason.toJSON(),
+			businessStatus: this.businessStatus && this.businessStatus.toJSON(),
+			_intent: this._intent && this._intent.toJSON(),
+			intent: this.intent,
+			_priority: this._priority && this._priority.toJSON(),
+			priority: this.priority,
+			code: this.code && this.code.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			focus: this.focus && this.focus.toJSON(),
+			for: this.for && this.for.toJSON(),
+			context: this.context && this.context.toJSON(),
+			executionPeriod: this.executionPeriod && this.executionPeriod.toJSON(),
+			_authoredOn: this._authoredOn && this._authoredOn.toJSON(),
+			authoredOn: this.authoredOn,
+			_lastModified: this._lastModified && this._lastModified.toJSON(),
+			lastModified: this.lastModified,
+			requester: this.requester && this.requester.toJSON(),
+			performerType: this.performerType && this.performerType.map(v => v.toJSON()),
+			owner: this.owner && this.owner.toJSON(),
+			reason: this.reason && this.reason.toJSON(),
+			note: this.note && this.note.map(v => v.toJSON()),
+			relevantHistory: this.relevantHistory && this.relevantHistory.map(v => v.toJSON()),
+			restriction: this.restriction && this.restriction.toJSON(),
+			input: this.input && this.input.map(v => v.toJSON()),
+			output: this.output && this.output.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Task;
+};

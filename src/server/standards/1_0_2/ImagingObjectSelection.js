@@ -1,119 +1,323 @@
-const DomainResource = require('./DomainResource');
-const OidScalar = require('./scalars/Oid.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ImagingObjectSelection Class
+ */
+module.exports = class ImagingObjectSelection {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImagingObjectSelection extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImagingObjectSelection';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_uid', {
+			enumerable: true,
+			get: () => this.__data._uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._uid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'uid', {
+			enumerable: true,
+			get: () => this.__data.uid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.uid = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/kos-title
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.title = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_authoringTime', {
+			enumerable: true,
+			get: () => this.__data._authoringTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._authoringTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'authoringTime', {
+			enumerable: true,
+			get: () => this.__data.authoringTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.authoringTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'study', {
+			enumerable: true,
+			get: () => this.__data.study,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImagingObjectSelectionStudy = require('./imagingobjectselectionstudy.js');
+				this.__data.study = Array.isArray(value)
+					? value.map(v => new ImagingObjectSelectionStudy(v))
+					: [new ImagingObjectSelectionStudy(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImagingObjectSelection',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImagingObjectSelection resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImagingObjectSelection';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__ImagingObjectSelection = new_value;
-	}
-
-	// Instance UID of the DICOM KOS SOP Instances represented in this resource.
-	get uid() {
-		return this.__uid;
-	}
-
-	set uid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field uid`);
-		}
-		this.__uid = new_value;
-	}
-
-	// A patient resource reference which is the patient subject of all DICOM SOP Instances in this ImagingObjectSelection.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The reason for, or significance of, the selection of objects referenced in the resource.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__title = new CodeableConcept(new_value);
-	}
-
-	// Text description of the DICOM SOP instances selected in the ImagingObjectSelection. This should be aligned with the content of the title element, and can provide further explanation of the SOP instances in the selection.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Author of ImagingObjectSelection. It can be a human author or a device which made the decision of the SOP instances selected. For example, a radiologist selected a set of imaging SOP instances to attach in a diagnostic report, and a CAD application may author a selection to describe SOP instances it used to generate a detection conclusion.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = new Reference(new_value);
-	}
-
-	// Date and time when the selection of the referenced instances were made. It is (typically) different from the creation date of the selection resource, and from dates associated with the referenced instances (e.g. capture time of the referenced image).
-	get authoringTime() {
-		return this.__authoringTime;
-	}
-
-	set authoringTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field authoringTime`);
-		}
-		this.__authoringTime = new_value;
-	}
-
-	// Study identity and locating information of the DICOM SOP instances in the selection.
-	get study() {
-		return this.__study;
-	}
-
-	set study(new_value) {
-		const ImagingObjectSelectionStudy = require('./ImagingObjectSelectionStudy');
-		this.__study = Array.isArray(new_value)
-			? new_value.map(val => new ImagingObjectSelectionStudy(val))
-			: [new ImagingObjectSelectionStudy(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			uid: this.__uid,
-			patient: this.__patient && this.__patient.toJSON(),
-			title: this.__title && this.__title.toJSON(),
-			description: this.__description,
-			author: this.__author && this.__author.toJSON(),
-			authoringTime: this.__authoringTime,
-			study: this.__study && this.__study.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_uid: this._uid && this._uid.toJSON(),
+			uid: this.uid,
+			patient: this.patient && this.patient.toJSON(),
+			title: this.title && this.title.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			author: this.author && this.author.toJSON(),
+			_authoringTime: this._authoringTime && this._authoringTime.toJSON(),
+			authoringTime: this.authoringTime,
+			study: this.study && this.study.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ImagingObjectSelection;
+};

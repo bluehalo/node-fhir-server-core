@@ -1,255 +1,547 @@
-const DomainResource = require('./DomainResource');
-const DateScalar = require('./scalars/Date.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Patient Class
+ */
+module.exports = class Patient {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Patient extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Patient';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_active', {
+			enumerable: true,
+			get: () => this.__data._active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._active = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'active', {
+			enumerable: true,
+			get: () => this.__data.active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.active = value;
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.name = Array.isArray(value) ? value.map(v => new HumanName(v)) : [new HumanName(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'telecom', {
+			enumerable: true,
+			get: () => this.__data.telecom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.telecom = Array.isArray(value) ? value.map(v => new ContactPoint(v)) : [new ContactPoint(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_gender', {
+			enumerable: true,
+			get: () => this.__data._gender,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._gender = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/administrative-gender
+		Object.defineProperty(this, 'gender', {
+			enumerable: true,
+			get: () => this.__data.gender,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.gender = value;
+			},
+		});
+
+		Object.defineProperty(this, '_birthDate', {
+			enumerable: true,
+			get: () => this.__data._birthDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._birthDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'birthDate', {
+			enumerable: true,
+			get: () => this.__data.birthDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.birthDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_deceasedBoolean', {
+			enumerable: true,
+			get: () => this.__data._deceasedBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._deceasedBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'deceasedBoolean', {
+			enumerable: true,
+			get: () => this.__data.deceasedBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.deceasedBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_deceasedDateTime', {
+			enumerable: true,
+			get: () => this.__data._deceasedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._deceasedDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'deceasedDateTime', {
+			enumerable: true,
+			get: () => this.__data.deceasedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.deceasedDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'address', {
+			enumerable: true,
+			get: () => this.__data.address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.address = Array.isArray(value) ? value.map(v => new Address(v)) : [new Address(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/marital-status
+		Object.defineProperty(this, 'maritalStatus', {
+			enumerable: true,
+			get: () => this.__data.maritalStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.maritalStatus = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_multipleBirthBoolean', {
+			enumerable: true,
+			get: () => this.__data._multipleBirthBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._multipleBirthBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'multipleBirthBoolean', {
+			enumerable: true,
+			get: () => this.__data.multipleBirthBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.multipleBirthBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_multipleBirthInteger', {
+			enumerable: true,
+			get: () => this.__data._multipleBirthInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._multipleBirthInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'multipleBirthInteger', {
+			enumerable: true,
+			get: () => this.__data.multipleBirthInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.multipleBirthInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, 'photo', {
+			enumerable: true,
+			get: () => this.__data.photo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.photo = Array.isArray(value) ? value.map(v => new Attachment(v)) : [new Attachment(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PatientContact = require('./patientcontact.js');
+				this.__data.contact = Array.isArray(value)
+					? value.map(v => new PatientContact(v))
+					: [new PatientContact(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'animal', {
+			enumerable: true,
+			get: () => this.__data.animal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PatientAnimal = require('./patientanimal.js');
+				this.__data.animal = new PatientAnimal(value);
+			},
+		});
+
+		Object.defineProperty(this, 'communication', {
+			enumerable: true,
+			get: () => this.__data.communication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PatientCommunication = require('./patientcommunication.js');
+				this.__data.communication = Array.isArray(value)
+					? value.map(v => new PatientCommunication(v))
+					: [new PatientCommunication(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'generalPractitioner', {
+			enumerable: true,
+			get: () => this.__data.generalPractitioner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.generalPractitioner = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'managingOrganization', {
+			enumerable: true,
+			get: () => this.__data.managingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.managingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'link', {
+			enumerable: true,
+			get: () => this.__data.link,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PatientLink = require('./patientlink.js');
+				this.__data.link = Array.isArray(value) ? value.map(v => new PatientLink(v)) : [new PatientLink(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Patient',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Patient resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Patient';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Patient = new_value;
-	}
-
-	// An identifier for this patient.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Whether this patient record is in active use.
-	get active() {
-		return this.__active;
-	}
-
-	set active(new_value) {
-		this.__active = new_value;
-	}
-
-	// A name associated with the individual.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		const HumanName = require('./HumanName');
-		this.__name = Array.isArray(new_value) ? new_value.map(val => new HumanName(val)) : [new HumanName(new_value)];
-	}
-
-	// A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.
-	get telecom() {
-		return this.__telecom;
-	}
-
-	set telecom(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value)
-			? new_value.map(val => new ContactPoint(val))
-			: [new ContactPoint(new_value)];
-	}
-
-	// Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.
-	get gender() {
-		return this.__gender;
-	}
-
-	set gender(new_value) {
-		this.__gender = new_value;
-	}
-
-	// The date of birth for the individual.
-	get birthDate() {
-		return this.__birthDate;
-	}
-
-	set birthDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field birthDate`);
-		}
-		this.__birthDate = new_value;
-	}
-
-	// Indicates if the individual is deceased or not.
-	get deceasedBoolean() {
-		return this.__deceasedBoolean;
-	}
-
-	set deceasedBoolean(new_value) {
-		this.__deceasedBoolean = new_value;
-	}
-
-	// Indicates if the individual is deceased or not.
-	get deceasedDateTime() {
-		return this.__deceasedDateTime;
-	}
-
-	set deceasedDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field deceasedDateTime`);
-		}
-		this.__deceasedDateTime = new_value;
-	}
-
-	// Addresses for the individual.
-	get address() {
-		return this.__address;
-	}
-
-	set address(new_value) {
-		const Address = require('./Address');
-		this.__address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
-	}
-
-	// This field contains a patient\'s most recent marital (civil) status.
-	get maritalStatus() {
-		return this.__maritalStatus;
-	}
-
-	set maritalStatus(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__maritalStatus = new CodeableConcept(new_value);
-	}
-
-	// Indicates whether the patient is part of a multiple (bool) or indicates the actual birth order (integer).
-	get multipleBirthBoolean() {
-		return this.__multipleBirthBoolean;
-	}
-
-	set multipleBirthBoolean(new_value) {
-		this.__multipleBirthBoolean = new_value;
-	}
-
-	// Indicates whether the patient is part of a multiple (bool) or indicates the actual birth order (integer).
-	get multipleBirthInteger() {
-		return this.__multipleBirthInteger;
-	}
-
-	set multipleBirthInteger(new_value) {
-		this.__multipleBirthInteger = new_value;
-	}
-
-	// Image of the patient.
-	get photo() {
-		return this.__photo;
-	}
-
-	set photo(new_value) {
-		const Attachment = require('./Attachment');
-		this.__photo = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
-	}
-
-	// A contact party (e.g. guardian, partner, friend) for the patient.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const PatientContact = require('./PatientContact');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new PatientContact(val))
-			: [new PatientContact(new_value)];
-	}
-
-	// This patient is known to be an animal.
-	get animal() {
-		return this.__animal;
-	}
-
-	set animal(new_value) {
-		const PatientAnimal = require('./PatientAnimal');
-		this.__animal = new PatientAnimal(new_value);
-	}
-
-	// Languages which may be used to communicate with the patient about his or her health.
-	get communication() {
-		return this.__communication;
-	}
-
-	set communication(new_value) {
-		const PatientCommunication = require('./PatientCommunication');
-		this.__communication = Array.isArray(new_value)
-			? new_value.map(val => new PatientCommunication(val))
-			: [new PatientCommunication(new_value)];
-	}
-
-	// Patient\'s nominated care provider.
-	get generalPractitioner() {
-		return this.__generalPractitioner;
-	}
-
-	set generalPractitioner(new_value) {
-		const Reference = require('./Reference');
-		this.__generalPractitioner = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Organization that is the custodian of the patient record.
-	get managingOrganization() {
-		return this.__managingOrganization;
-	}
-
-	set managingOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__managingOrganization = new Reference(new_value);
-	}
-
-	// Link to another patient resource that concerns the same actual patient.
-	get link() {
-		return this.__link;
-	}
-
-	set link(new_value) {
-		const PatientLink = require('./PatientLink');
-		this.__link = Array.isArray(new_value) ? new_value.map(val => new PatientLink(val)) : [new PatientLink(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			active: this.__active,
-			name: this.__name && this.__name.map(v => v.toJSON()),
-			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
-			gender: this.__gender,
-			birthDate: this.__birthDate,
-			deceasedBoolean: this.__deceasedBoolean,
-			deceasedDateTime: this.__deceasedDateTime,
-			address: this.__address && this.__address.map(v => v.toJSON()),
-			maritalStatus: this.__maritalStatus && this.__maritalStatus.toJSON(),
-			multipleBirthBoolean: this.__multipleBirthBoolean,
-			multipleBirthInteger: this.__multipleBirthInteger,
-			photo: this.__photo && this.__photo.map(v => v.toJSON()),
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			animal: this.__animal && this.__animal.toJSON(),
-			communication: this.__communication && this.__communication.map(v => v.toJSON()),
-			generalPractitioner: this.__generalPractitioner && this.__generalPractitioner.map(v => v.toJSON()),
-			managingOrganization: this.__managingOrganization && this.__managingOrganization.toJSON(),
-			link: this.__link && this.__link.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_active: this._active && this._active.toJSON(),
+			active: this.active,
+			name: this.name && this.name.map(v => v.toJSON()),
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
+			_gender: this._gender && this._gender.toJSON(),
+			gender: this.gender,
+			_birthDate: this._birthDate && this._birthDate.toJSON(),
+			birthDate: this.birthDate,
+			_deceasedBoolean: this._deceasedBoolean && this._deceasedBoolean.toJSON(),
+			deceasedBoolean: this.deceasedBoolean,
+			_deceasedDateTime: this._deceasedDateTime && this._deceasedDateTime.toJSON(),
+			deceasedDateTime: this.deceasedDateTime,
+			address: this.address && this.address.map(v => v.toJSON()),
+			maritalStatus: this.maritalStatus && this.maritalStatus.toJSON(),
+			_multipleBirthBoolean: this._multipleBirthBoolean && this._multipleBirthBoolean.toJSON(),
+			multipleBirthBoolean: this.multipleBirthBoolean,
+			_multipleBirthInteger: this._multipleBirthInteger && this._multipleBirthInteger.toJSON(),
+			multipleBirthInteger: this.multipleBirthInteger,
+			photo: this.photo && this.photo.map(v => v.toJSON()),
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			animal: this.animal && this.animal.toJSON(),
+			communication: this.communication && this.communication.map(v => v.toJSON()),
+			generalPractitioner: this.generalPractitioner && this.generalPractitioner.map(v => v.toJSON()),
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			link: this.link && this.link.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Patient;
+};

@@ -1,50 +1,131 @@
-const BackboneElement = require('./BackboneElement');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary TestScriptSetupActionAssertRulesetRule Class
+ */
+module.exports = class TestScriptSetupActionAssertRulesetRule {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TestScriptSetupActionAssertRulesetRule extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TestScriptSetupActionAssertRulesetRule';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_ruleId', {
+			enumerable: true,
+			get: () => this.__data._ruleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._ruleId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ruleId', {
+			enumerable: true,
+			get: () => this.__data.ruleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.ruleId = value;
+			},
+		});
+
+		Object.defineProperty(this, 'param', {
+			enumerable: true,
+			get: () => this.__data.param,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TestScriptSetupActionAssertRulesetRuleParam = require('./testscriptsetupactionassertrulesetruleparam.js');
+				this.__data.param = Array.isArray(value)
+					? value.map(v => new TestScriptSetupActionAssertRulesetRuleParam(v))
+					: [new TestScriptSetupActionAssertRulesetRuleParam(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TestScriptSetupActionAssertRulesetRule',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TestScriptSetupActionAssertRulesetRule resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TestScriptSetupActionAssertRulesetRule';
 	}
 
-	// Id of the referenced rule within the external ruleset template.
-	get ruleId() {
-		return this.__ruleId;
-	}
-
-	set ruleId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field ruleId`);
-		}
-		this.__ruleId = new_value;
-	}
-
-	// Each rule template can take one or more parameters for rule evaluation.
-	get param() {
-		return this.__param;
-	}
-
-	set param(new_value) {
-		const TestScriptSetupActionAssertRulesetRuleParam = require('./TestScriptSetupActionAssertRulesetRuleParam');
-		this.__param = Array.isArray(new_value)
-			? new_value.map(val => new TestScriptSetupActionAssertRulesetRuleParam(val))
-			: [new TestScriptSetupActionAssertRulesetRuleParam(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			ruleId: this.__ruleId,
-			param: this.__param && this.__param.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_ruleId: this._ruleId && this._ruleId.toJSON(),
+			ruleId: this.ruleId,
+			param: this.param && this.param.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = TestScriptSetupActionAssertRulesetRule;
+};

@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the researchsubject query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ResearchSubject.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchSubject-date',
-		documentation: 'Start and end of participation.',
+		description: 'Start and end of participation',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchSubject.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchSubject-identifier',
-		documentation: 'Business Identifier for research subject.',
+		description: 'Business Identifier for research subject',
 	},
-	INDIVIDUAL: {
-		name: 'individual',
+	individual: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchSubject.individual',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchSubject-individual',
-		documentation: 'Who is part of study.',
+		description: 'Who is part of study',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ResearchSubject.individual',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchSubject-patient',
-		documentation: 'Who is part of study.',
+		description: 'Who is part of study',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ResearchSubject.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ResearchSubject-status',
-		documentation: 'candidate | enrolled | active | suspended | withdrawn | completed.',
+		description: 'candidate | enrolled | active | suspended | withdrawn | completed',
 	},
 };

@@ -1,129 +1,351 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary Medication Class
+ */
+module.exports = class Medication {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Medication extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Medication';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-codes
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_isBrand', {
+			enumerable: true,
+			get: () => this.__data._isBrand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._isBrand = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'isBrand', {
+			enumerable: true,
+			get: () => this.__data.isBrand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.isBrand = value;
+			},
+		});
+
+		Object.defineProperty(this, '_isOverTheCounter', {
+			enumerable: true,
+			get: () => this.__data._isOverTheCounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._isOverTheCounter = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'isOverTheCounter', {
+			enumerable: true,
+			get: () => this.__data.isOverTheCounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.isOverTheCounter = value;
+			},
+		});
+
+		Object.defineProperty(this, 'manufacturer', {
+			enumerable: true,
+			get: () => this.__data.manufacturer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.manufacturer = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-form-codes
+		Object.defineProperty(this, 'form', {
+			enumerable: true,
+			get: () => this.__data.form,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.form = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'ingredient', {
+			enumerable: true,
+			get: () => this.__data.ingredient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicationIngredient = require('./medicationingredient.js');
+				this.__data.ingredient = Array.isArray(value)
+					? value.map(v => new MedicationIngredient(v))
+					: [new MedicationIngredient(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'package', {
+			enumerable: true,
+			get: () => this.__data.package,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicationPackage = require('./medicationpackage.js');
+				this.__data.package = new MedicationPackage(value);
+			},
+		});
+
+		Object.defineProperty(this, 'image', {
+			enumerable: true,
+			get: () => this.__data.image,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.image = Array.isArray(value) ? value.map(v => new Attachment(v)) : [new Attachment(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Medication',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Medication resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Medication';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Medication = new_value;
-	}
-
-	// A code (or set of codes) that specify this medication, or a textual description if no code is available. Usage note: This could be a standard medication code such as a code from RxNorm, SNOMED CT, IDMP etc. It could also be a national or local formulary code, optionally with translations to other code systems.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// A code to indicate if the medication is in active use.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Set to true if the item is attributable to a specific manufacturer.
-	get isBrand() {
-		return this.__isBrand;
-	}
-
-	set isBrand(new_value) {
-		this.__isBrand = new_value;
-	}
-
-	// Set to true if the medication can be obtained without an order from a prescriber.
-	get isOverTheCounter() {
-		return this.__isOverTheCounter;
-	}
-
-	set isOverTheCounter(new_value) {
-		this.__isOverTheCounter = new_value;
-	}
-
-	// Describes the details of the manufacturer of the medication product.  This is not intended to represent the distributor of a medication product.
-	get manufacturer() {
-		return this.__manufacturer;
-	}
-
-	set manufacturer(new_value) {
-		const Reference = require('./Reference');
-		this.__manufacturer = new Reference(new_value);
-	}
-
-	// Describes the form of the item.  Powder; tablets; capsule.
-	get form() {
-		return this.__form;
-	}
-
-	set form(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__form = new CodeableConcept(new_value);
-	}
-
-	// Identifies a particular constituent of interest in the product.
-	get ingredient() {
-		return this.__ingredient;
-	}
-
-	set ingredient(new_value) {
-		const MedicationIngredient = require('./MedicationIngredient');
-		this.__ingredient = Array.isArray(new_value)
-			? new_value.map(val => new MedicationIngredient(val))
-			: [new MedicationIngredient(new_value)];
-	}
-
-	// Information that only applies to packages (not products).
-	get package() {
-		return this.__package;
-	}
-
-	set package(new_value) {
-		const MedicationPackage = require('./MedicationPackage');
-		this.__package = new MedicationPackage(new_value);
-	}
-
-	// Photo(s) or graphic representation(s) of the medication.
-	get image() {
-		return this.__image;
-	}
-
-	set image(new_value) {
-		const Attachment = require('./Attachment');
-		this.__image = Array.isArray(new_value) ? new_value.map(val => new Attachment(val)) : [new Attachment(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			code: this.__code && this.__code.toJSON(),
-			status: this.__status,
-			isBrand: this.__isBrand,
-			isOverTheCounter: this.__isOverTheCounter,
-			manufacturer: this.__manufacturer && this.__manufacturer.toJSON(),
-			form: this.__form && this.__form.toJSON(),
-			ingredient: this.__ingredient && this.__ingredient.map(v => v.toJSON()),
-			package: this.__package && this.__package.toJSON(),
-			image: this.__image && this.__image.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_isBrand: this._isBrand && this._isBrand.toJSON(),
+			isBrand: this.isBrand,
+			_isOverTheCounter: this._isOverTheCounter && this._isOverTheCounter.toJSON(),
+			isOverTheCounter: this.isOverTheCounter,
+			manufacturer: this.manufacturer && this.manufacturer.toJSON(),
+			form: this.form && this.form.toJSON(),
+			ingredient: this.ingredient && this.ingredient.map(v => v.toJSON()),
+			package: this.package && this.package.toJSON(),
+			image: this.image && this.image.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Medication;
+};

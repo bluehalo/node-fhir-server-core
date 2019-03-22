@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the paymentnotice query
+ */
 module.exports = {
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'PaymentNotice.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-created',
-		documentation: 'Creation date fro the notice.',
+		description: 'Creation date fro the notice',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentNotice.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-identifier',
-		documentation: 'The business identifier of the notice.',
+		description: 'The business identifier of the notice',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentNotice.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-organization',
-		documentation: 'The organization who generated this resource.',
+		description: 'The organization who generated this resource',
 	},
-	PAYMENT_STATUS: {
-		name: 'payment-status',
+	'payment-status': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'PaymentNotice.paymentStatus',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-payment-status',
-		documentation: 'The type of payment notice.',
+		description: 'The type of payment notice',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentNotice.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-provider',
-		documentation: 'The reference to the provider.',
+		description: 'The reference to the provider',
 	},
-	REQUEST: {
-		name: 'request',
+	request: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentNotice.request',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-request',
-		documentation: 'The Claim.',
+		description: 'The Claim',
 	},
-	RESPONSE: {
-		name: 'response',
+	response: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'PaymentNotice.response',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-response',
-		documentation: 'The ClaimResponse.',
+		description: 'The ClaimResponse',
 	},
-	STATUSDATE: {
-		name: 'statusdate',
+	statusdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'PaymentNotice.statusDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/PaymentNotice-statusdate',
-		documentation: 'The date of the payment action.',
+		description: 'The date of the payment action',
 	},
 };

@@ -1,2712 +1,4676 @@
-const Element = require('./Element');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateScalar = require('./scalars/Date.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const TimeScalar = require('./scalars/Time.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
-const OidScalar = require('./scalars/Oid.scalar');
-const IdScalar = require('./scalars/Id.scalar');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ElementDefinition Class
+ */
+module.exports = class ElementDefinition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ElementDefinition extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ElementDefinition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_path', {
+			enumerable: true,
+			get: () => this.__data._path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._path = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'path', {
+			enumerable: true,
+			get: () => this.__data.path,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.path = value;
+			},
+		});
+
+		Object.defineProperty(this, '_representation', {
+			enumerable: true,
+			get: () => this.__data._representation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._representation = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/property-representation
+		Object.defineProperty(this, 'representation', {
+			enumerable: true,
+			get: () => this.__data.representation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.representation = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_label', {
+			enumerable: true,
+			get: () => this.__data._label,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._label = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'label', {
+			enumerable: true,
+			get: () => this.__data.label,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.label = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-codes
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.code = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'slicing', {
+			enumerable: true,
+			get: () => this.__data.slicing,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.slicing = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, '_short', {
+			enumerable: true,
+			get: () => this.__data._short,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._short = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'short', {
+			enumerable: true,
+			get: () => this.__data.short,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.short = value;
+			},
+		});
+
+		Object.defineProperty(this, '_definition', {
+			enumerable: true,
+			get: () => this.__data._definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definition', {
+			enumerable: true,
+			get: () => this.__data.definition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definition = value;
+			},
+		});
+
+		Object.defineProperty(this, '_comments', {
+			enumerable: true,
+			get: () => this.__data._comments,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comments = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'comments', {
+			enumerable: true,
+			get: () => this.__data.comments,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comments = value;
+			},
+		});
+
+		Object.defineProperty(this, '_requirements', {
+			enumerable: true,
+			get: () => this.__data._requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._requirements = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requirements', {
+			enumerable: true,
+			get: () => this.__data.requirements,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.requirements = value;
+			},
+		});
+
+		Object.defineProperty(this, '_alias', {
+			enumerable: true,
+			get: () => this.__data._alias,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._alias = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'alias', {
+			enumerable: true,
+			get: () => this.__data.alias,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.alias = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_min', {
+			enumerable: true,
+			get: () => this.__data._min,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._min = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'min', {
+			enumerable: true,
+			get: () => this.__data.min,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.min = value;
+			},
+		});
+
+		Object.defineProperty(this, '_max', {
+			enumerable: true,
+			get: () => this.__data._max,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._max = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'max', {
+			enumerable: true,
+			get: () => this.__data.max,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.max = value;
+			},
+		});
+
+		Object.defineProperty(this, 'base', {
+			enumerable: true,
+			get: () => this.__data.base,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.base = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.type = Array.isArray(value) ? value.map(v => new Element(v)) : [new Element(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_nameReference', {
+			enumerable: true,
+			get: () => this.__data._nameReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._nameReference = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'nameReference', {
+			enumerable: true,
+			get: () => this.__data.nameReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.nameReference = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueBoolean', {
+			enumerable: true,
+			get: () => this.__data._defaultValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueBoolean', {
+			enumerable: true,
+			get: () => this.__data.defaultValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueInteger', {
+			enumerable: true,
+			get: () => this.__data._defaultValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueInteger', {
+			enumerable: true,
+			get: () => this.__data.defaultValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueDecimal', {
+			enumerable: true,
+			get: () => this.__data._defaultValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueDecimal', {
+			enumerable: true,
+			get: () => this.__data.defaultValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._defaultValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.defaultValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueInstant', {
+			enumerable: true,
+			get: () => this.__data._defaultValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueInstant', {
+			enumerable: true,
+			get: () => this.__data.defaultValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueString', {
+			enumerable: true,
+			get: () => this.__data._defaultValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueString', {
+			enumerable: true,
+			get: () => this.__data.defaultValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueUri', {
+			enumerable: true,
+			get: () => this.__data._defaultValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueUri', {
+			enumerable: true,
+			get: () => this.__data.defaultValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueDate', {
+			enumerable: true,
+			get: () => this.__data._defaultValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueDate', {
+			enumerable: true,
+			get: () => this.__data.defaultValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueDateTime', {
+			enumerable: true,
+			get: () => this.__data._defaultValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueDateTime', {
+			enumerable: true,
+			get: () => this.__data.defaultValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueTime', {
+			enumerable: true,
+			get: () => this.__data._defaultValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueTime', {
+			enumerable: true,
+			get: () => this.__data.defaultValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueCode', {
+			enumerable: true,
+			get: () => this.__data._defaultValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueCode', {
+			enumerable: true,
+			get: () => this.__data.defaultValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueOid', {
+			enumerable: true,
+			get: () => this.__data._defaultValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueOid', {
+			enumerable: true,
+			get: () => this.__data.defaultValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueId', {
+			enumerable: true,
+			get: () => this.__data._defaultValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueId', {
+			enumerable: true,
+			get: () => this.__data.defaultValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._defaultValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.defaultValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data._defaultValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValuePositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data.defaultValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValuePositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_defaultValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data._defaultValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._defaultValueMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data.defaultValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.defaultValueMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueAnnotation', {
+			enumerable: true,
+			get: () => this.__data.defaultValueAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.defaultValueAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueAttachment', {
+			enumerable: true,
+			get: () => this.__data.defaultValueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.defaultValueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueIdentifier', {
+			enumerable: true,
+			get: () => this.__data.defaultValueIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.defaultValueIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.defaultValueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.defaultValueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueCoding', {
+			enumerable: true,
+			get: () => this.__data.defaultValueCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.defaultValueCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueQuantity', {
+			enumerable: true,
+			get: () => this.__data.defaultValueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.defaultValueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueRange', {
+			enumerable: true,
+			get: () => this.__data.defaultValueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.defaultValueRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValuePeriod', {
+			enumerable: true,
+			get: () => this.__data.defaultValuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.defaultValuePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueRatio', {
+			enumerable: true,
+			get: () => this.__data.defaultValueRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.defaultValueRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueSampledData', {
+			enumerable: true,
+			get: () => this.__data.defaultValueSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.defaultValueSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueSignature', {
+			enumerable: true,
+			get: () => this.__data.defaultValueSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.defaultValueSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueHumanName', {
+			enumerable: true,
+			get: () => this.__data.defaultValueHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.defaultValueHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueAddress', {
+			enumerable: true,
+			get: () => this.__data.defaultValueAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.defaultValueAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueContactPoint', {
+			enumerable: true,
+			get: () => this.__data.defaultValueContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.defaultValueContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueTiming', {
+			enumerable: true,
+			get: () => this.__data.defaultValueTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.defaultValueTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueReference', {
+			enumerable: true,
+			get: () => this.__data.defaultValueReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.defaultValueReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'defaultValueMeta', {
+			enumerable: true,
+			get: () => this.__data.defaultValueMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.defaultValueMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_meaningWhenMissing', {
+			enumerable: true,
+			get: () => this.__data._meaningWhenMissing,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._meaningWhenMissing = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'meaningWhenMissing', {
+			enumerable: true,
+			get: () => this.__data.meaningWhenMissing,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.meaningWhenMissing = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedBoolean', {
+			enumerable: true,
+			get: () => this.__data._fixedBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedBoolean', {
+			enumerable: true,
+			get: () => this.__data.fixedBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedInteger', {
+			enumerable: true,
+			get: () => this.__data._fixedInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedInteger', {
+			enumerable: true,
+			get: () => this.__data.fixedInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedDecimal', {
+			enumerable: true,
+			get: () => this.__data._fixedDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedDecimal', {
+			enumerable: true,
+			get: () => this.__data.fixedDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._fixedBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.fixedBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedInstant', {
+			enumerable: true,
+			get: () => this.__data._fixedInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedInstant', {
+			enumerable: true,
+			get: () => this.__data.fixedInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedString', {
+			enumerable: true,
+			get: () => this.__data._fixedString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedString', {
+			enumerable: true,
+			get: () => this.__data.fixedString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedUri', {
+			enumerable: true,
+			get: () => this.__data._fixedUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedUri', {
+			enumerable: true,
+			get: () => this.__data.fixedUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedDate', {
+			enumerable: true,
+			get: () => this.__data._fixedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedDate', {
+			enumerable: true,
+			get: () => this.__data.fixedDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedDateTime', {
+			enumerable: true,
+			get: () => this.__data._fixedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedDateTime', {
+			enumerable: true,
+			get: () => this.__data.fixedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedTime', {
+			enumerable: true,
+			get: () => this.__data._fixedTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedTime', {
+			enumerable: true,
+			get: () => this.__data.fixedTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedCode', {
+			enumerable: true,
+			get: () => this.__data._fixedCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedCode', {
+			enumerable: true,
+			get: () => this.__data.fixedCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedOid', {
+			enumerable: true,
+			get: () => this.__data._fixedOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedOid', {
+			enumerable: true,
+			get: () => this.__data.fixedOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedId', {
+			enumerable: true,
+			get: () => this.__data._fixedId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedId', {
+			enumerable: true,
+			get: () => this.__data.fixedId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._fixedUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.fixedUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedPositiveInt', {
+			enumerable: true,
+			get: () => this.__data._fixedPositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedPositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedPositiveInt', {
+			enumerable: true,
+			get: () => this.__data.fixedPositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedPositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fixedMarkdown', {
+			enumerable: true,
+			get: () => this.__data._fixedMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fixedMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedMarkdown', {
+			enumerable: true,
+			get: () => this.__data.fixedMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fixedMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'fixedAnnotation', {
+			enumerable: true,
+			get: () => this.__data.fixedAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.fixedAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedAttachment', {
+			enumerable: true,
+			get: () => this.__data.fixedAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.fixedAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedIdentifier', {
+			enumerable: true,
+			get: () => this.__data.fixedIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.fixedIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.fixedCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.fixedCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedCoding', {
+			enumerable: true,
+			get: () => this.__data.fixedCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.fixedCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedQuantity', {
+			enumerable: true,
+			get: () => this.__data.fixedQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.fixedQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedRange', {
+			enumerable: true,
+			get: () => this.__data.fixedRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.fixedRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedPeriod', {
+			enumerable: true,
+			get: () => this.__data.fixedPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.fixedPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedRatio', {
+			enumerable: true,
+			get: () => this.__data.fixedRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.fixedRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedSampledData', {
+			enumerable: true,
+			get: () => this.__data.fixedSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.fixedSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedSignature', {
+			enumerable: true,
+			get: () => this.__data.fixedSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.fixedSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedHumanName', {
+			enumerable: true,
+			get: () => this.__data.fixedHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.fixedHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedAddress', {
+			enumerable: true,
+			get: () => this.__data.fixedAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.fixedAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedContactPoint', {
+			enumerable: true,
+			get: () => this.__data.fixedContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.fixedContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedTiming', {
+			enumerable: true,
+			get: () => this.__data.fixedTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.fixedTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedReference', {
+			enumerable: true,
+			get: () => this.__data.fixedReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.fixedReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fixedMeta', {
+			enumerable: true,
+			get: () => this.__data.fixedMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.fixedMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_patternBoolean', {
+			enumerable: true,
+			get: () => this.__data._patternBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternBoolean', {
+			enumerable: true,
+			get: () => this.__data.patternBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternInteger', {
+			enumerable: true,
+			get: () => this.__data._patternInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternInteger', {
+			enumerable: true,
+			get: () => this.__data.patternInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternDecimal', {
+			enumerable: true,
+			get: () => this.__data._patternDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternDecimal', {
+			enumerable: true,
+			get: () => this.__data.patternDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._patternBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.patternBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternInstant', {
+			enumerable: true,
+			get: () => this.__data._patternInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternInstant', {
+			enumerable: true,
+			get: () => this.__data.patternInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternString', {
+			enumerable: true,
+			get: () => this.__data._patternString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternString', {
+			enumerable: true,
+			get: () => this.__data.patternString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternUri', {
+			enumerable: true,
+			get: () => this.__data._patternUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternUri', {
+			enumerable: true,
+			get: () => this.__data.patternUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternDate', {
+			enumerable: true,
+			get: () => this.__data._patternDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternDate', {
+			enumerable: true,
+			get: () => this.__data.patternDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternDateTime', {
+			enumerable: true,
+			get: () => this.__data._patternDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternDateTime', {
+			enumerable: true,
+			get: () => this.__data.patternDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternTime', {
+			enumerable: true,
+			get: () => this.__data._patternTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternTime', {
+			enumerable: true,
+			get: () => this.__data.patternTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternCode', {
+			enumerable: true,
+			get: () => this.__data._patternCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternCode', {
+			enumerable: true,
+			get: () => this.__data.patternCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternOid', {
+			enumerable: true,
+			get: () => this.__data._patternOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternOid', {
+			enumerable: true,
+			get: () => this.__data.patternOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternId', {
+			enumerable: true,
+			get: () => this.__data._patternId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternId', {
+			enumerable: true,
+			get: () => this.__data.patternId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._patternUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.patternUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternPositiveInt', {
+			enumerable: true,
+			get: () => this.__data._patternPositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternPositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternPositiveInt', {
+			enumerable: true,
+			get: () => this.__data.patternPositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternPositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_patternMarkdown', {
+			enumerable: true,
+			get: () => this.__data._patternMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._patternMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternMarkdown', {
+			enumerable: true,
+			get: () => this.__data.patternMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.patternMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patternAnnotation', {
+			enumerable: true,
+			get: () => this.__data.patternAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.patternAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternAttachment', {
+			enumerable: true,
+			get: () => this.__data.patternAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.patternAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternIdentifier', {
+			enumerable: true,
+			get: () => this.__data.patternIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.patternIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.patternCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.patternCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternCoding', {
+			enumerable: true,
+			get: () => this.__data.patternCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.patternCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternQuantity', {
+			enumerable: true,
+			get: () => this.__data.patternQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.patternQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternRange', {
+			enumerable: true,
+			get: () => this.__data.patternRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.patternRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternPeriod', {
+			enumerable: true,
+			get: () => this.__data.patternPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.patternPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternRatio', {
+			enumerable: true,
+			get: () => this.__data.patternRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.patternRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternSampledData', {
+			enumerable: true,
+			get: () => this.__data.patternSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.patternSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternSignature', {
+			enumerable: true,
+			get: () => this.__data.patternSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.patternSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternHumanName', {
+			enumerable: true,
+			get: () => this.__data.patternHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.patternHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternAddress', {
+			enumerable: true,
+			get: () => this.__data.patternAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.patternAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternContactPoint', {
+			enumerable: true,
+			get: () => this.__data.patternContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.patternContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternTiming', {
+			enumerable: true,
+			get: () => this.__data.patternTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.patternTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternReference', {
+			enumerable: true,
+			get: () => this.__data.patternReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patternReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'patternMeta', {
+			enumerable: true,
+			get: () => this.__data.patternMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.patternMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_exampleBoolean', {
+			enumerable: true,
+			get: () => this.__data._exampleBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleBoolean', {
+			enumerable: true,
+			get: () => this.__data.exampleBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleInteger', {
+			enumerable: true,
+			get: () => this.__data._exampleInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleInteger', {
+			enumerable: true,
+			get: () => this.__data.exampleInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleDecimal', {
+			enumerable: true,
+			get: () => this.__data._exampleDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleDecimal', {
+			enumerable: true,
+			get: () => this.__data.exampleDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._exampleBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.exampleBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleInstant', {
+			enumerable: true,
+			get: () => this.__data._exampleInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleInstant', {
+			enumerable: true,
+			get: () => this.__data.exampleInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleString', {
+			enumerable: true,
+			get: () => this.__data._exampleString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleString', {
+			enumerable: true,
+			get: () => this.__data.exampleString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleUri', {
+			enumerable: true,
+			get: () => this.__data._exampleUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleUri', {
+			enumerable: true,
+			get: () => this.__data.exampleUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleDate', {
+			enumerable: true,
+			get: () => this.__data._exampleDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleDate', {
+			enumerable: true,
+			get: () => this.__data.exampleDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleDateTime', {
+			enumerable: true,
+			get: () => this.__data._exampleDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleDateTime', {
+			enumerable: true,
+			get: () => this.__data.exampleDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleTime', {
+			enumerable: true,
+			get: () => this.__data._exampleTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleTime', {
+			enumerable: true,
+			get: () => this.__data.exampleTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleCode', {
+			enumerable: true,
+			get: () => this.__data._exampleCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleCode', {
+			enumerable: true,
+			get: () => this.__data.exampleCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleOid', {
+			enumerable: true,
+			get: () => this.__data._exampleOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleOid', {
+			enumerable: true,
+			get: () => this.__data.exampleOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleId', {
+			enumerable: true,
+			get: () => this.__data._exampleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleId', {
+			enumerable: true,
+			get: () => this.__data.exampleId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._exampleUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.exampleUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_examplePositiveInt', {
+			enumerable: true,
+			get: () => this.__data._examplePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._examplePositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'examplePositiveInt', {
+			enumerable: true,
+			get: () => this.__data.examplePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.examplePositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_exampleMarkdown', {
+			enumerable: true,
+			get: () => this.__data._exampleMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._exampleMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleMarkdown', {
+			enumerable: true,
+			get: () => this.__data.exampleMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.exampleMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'exampleAnnotation', {
+			enumerable: true,
+			get: () => this.__data.exampleAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.exampleAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleAttachment', {
+			enumerable: true,
+			get: () => this.__data.exampleAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.exampleAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleIdentifier', {
+			enumerable: true,
+			get: () => this.__data.exampleIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.exampleIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.exampleCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.exampleCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleCoding', {
+			enumerable: true,
+			get: () => this.__data.exampleCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.exampleCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleQuantity', {
+			enumerable: true,
+			get: () => this.__data.exampleQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.exampleQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleRange', {
+			enumerable: true,
+			get: () => this.__data.exampleRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.exampleRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'examplePeriod', {
+			enumerable: true,
+			get: () => this.__data.examplePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.examplePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleRatio', {
+			enumerable: true,
+			get: () => this.__data.exampleRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.exampleRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleSampledData', {
+			enumerable: true,
+			get: () => this.__data.exampleSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.exampleSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleSignature', {
+			enumerable: true,
+			get: () => this.__data.exampleSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.exampleSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleHumanName', {
+			enumerable: true,
+			get: () => this.__data.exampleHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.exampleHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleAddress', {
+			enumerable: true,
+			get: () => this.__data.exampleAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.exampleAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleContactPoint', {
+			enumerable: true,
+			get: () => this.__data.exampleContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.exampleContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleTiming', {
+			enumerable: true,
+			get: () => this.__data.exampleTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.exampleTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleReference', {
+			enumerable: true,
+			get: () => this.__data.exampleReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.exampleReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'exampleMeta', {
+			enumerable: true,
+			get: () => this.__data.exampleMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.exampleMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_minValueBoolean', {
+			enumerable: true,
+			get: () => this.__data._minValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueBoolean', {
+			enumerable: true,
+			get: () => this.__data.minValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueInteger', {
+			enumerable: true,
+			get: () => this.__data._minValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueInteger', {
+			enumerable: true,
+			get: () => this.__data.minValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueDecimal', {
+			enumerable: true,
+			get: () => this.__data._minValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueDecimal', {
+			enumerable: true,
+			get: () => this.__data.minValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._minValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.minValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueInstant', {
+			enumerable: true,
+			get: () => this.__data._minValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueInstant', {
+			enumerable: true,
+			get: () => this.__data.minValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueString', {
+			enumerable: true,
+			get: () => this.__data._minValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueString', {
+			enumerable: true,
+			get: () => this.__data.minValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueUri', {
+			enumerable: true,
+			get: () => this.__data._minValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueUri', {
+			enumerable: true,
+			get: () => this.__data.minValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueDate', {
+			enumerable: true,
+			get: () => this.__data._minValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueDate', {
+			enumerable: true,
+			get: () => this.__data.minValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueDateTime', {
+			enumerable: true,
+			get: () => this.__data._minValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueDateTime', {
+			enumerable: true,
+			get: () => this.__data.minValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueTime', {
+			enumerable: true,
+			get: () => this.__data._minValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueTime', {
+			enumerable: true,
+			get: () => this.__data.minValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueCode', {
+			enumerable: true,
+			get: () => this.__data._minValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueCode', {
+			enumerable: true,
+			get: () => this.__data.minValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueOid', {
+			enumerable: true,
+			get: () => this.__data._minValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueOid', {
+			enumerable: true,
+			get: () => this.__data.minValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueId', {
+			enumerable: true,
+			get: () => this.__data._minValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueId', {
+			enumerable: true,
+			get: () => this.__data.minValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._minValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.minValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data._minValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValuePositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data.minValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValuePositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data._minValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minValueMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data.minValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minValueMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'minValueAnnotation', {
+			enumerable: true,
+			get: () => this.__data.minValueAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.minValueAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueAttachment', {
+			enumerable: true,
+			get: () => this.__data.minValueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.minValueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueIdentifier', {
+			enumerable: true,
+			get: () => this.__data.minValueIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.minValueIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.minValueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.minValueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueCoding', {
+			enumerable: true,
+			get: () => this.__data.minValueCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.minValueCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueQuantity', {
+			enumerable: true,
+			get: () => this.__data.minValueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.minValueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueRange', {
+			enumerable: true,
+			get: () => this.__data.minValueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.minValueRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValuePeriod', {
+			enumerable: true,
+			get: () => this.__data.minValuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.minValuePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueRatio', {
+			enumerable: true,
+			get: () => this.__data.minValueRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.minValueRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueSampledData', {
+			enumerable: true,
+			get: () => this.__data.minValueSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.minValueSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueSignature', {
+			enumerable: true,
+			get: () => this.__data.minValueSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.minValueSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueHumanName', {
+			enumerable: true,
+			get: () => this.__data.minValueHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.minValueHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueAddress', {
+			enumerable: true,
+			get: () => this.__data.minValueAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.minValueAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueContactPoint', {
+			enumerable: true,
+			get: () => this.__data.minValueContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.minValueContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueTiming', {
+			enumerable: true,
+			get: () => this.__data.minValueTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.minValueTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueReference', {
+			enumerable: true,
+			get: () => this.__data.minValueReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.minValueReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minValueMeta', {
+			enumerable: true,
+			get: () => this.__data.minValueMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.minValueMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueBoolean', {
+			enumerable: true,
+			get: () => this.__data._maxValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueBoolean', {
+			enumerable: true,
+			get: () => this.__data.maxValueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueInteger', {
+			enumerable: true,
+			get: () => this.__data._maxValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueInteger', {
+			enumerable: true,
+			get: () => this.__data.maxValueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueDecimal', {
+			enumerable: true,
+			get: () => this.__data._maxValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueDecimal', {
+			enumerable: true,
+			get: () => this.__data.maxValueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._maxValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.maxValueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueInstant', {
+			enumerable: true,
+			get: () => this.__data._maxValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueInstant', {
+			enumerable: true,
+			get: () => this.__data.maxValueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueString', {
+			enumerable: true,
+			get: () => this.__data._maxValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueString', {
+			enumerable: true,
+			get: () => this.__data.maxValueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueUri', {
+			enumerable: true,
+			get: () => this.__data._maxValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueUri', {
+			enumerable: true,
+			get: () => this.__data.maxValueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueDate', {
+			enumerable: true,
+			get: () => this.__data._maxValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueDate', {
+			enumerable: true,
+			get: () => this.__data.maxValueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueDateTime', {
+			enumerable: true,
+			get: () => this.__data._maxValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueDateTime', {
+			enumerable: true,
+			get: () => this.__data.maxValueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueTime', {
+			enumerable: true,
+			get: () => this.__data._maxValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueTime', {
+			enumerable: true,
+			get: () => this.__data.maxValueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueCode', {
+			enumerable: true,
+			get: () => this.__data._maxValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueCode', {
+			enumerable: true,
+			get: () => this.__data.maxValueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueOid', {
+			enumerable: true,
+			get: () => this.__data._maxValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueOid', {
+			enumerable: true,
+			get: () => this.__data.maxValueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueId', {
+			enumerable: true,
+			get: () => this.__data._maxValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueId', {
+			enumerable: true,
+			get: () => this.__data.maxValueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._maxValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.maxValueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data._maxValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValuePositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data.maxValuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValuePositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_maxValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data._maxValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxValueMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueMarkdown', {
+			enumerable: true,
+			get: () => this.__data.maxValueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxValueMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueAnnotation', {
+			enumerable: true,
+			get: () => this.__data.maxValueAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.maxValueAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueAttachment', {
+			enumerable: true,
+			get: () => this.__data.maxValueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.maxValueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueIdentifier', {
+			enumerable: true,
+			get: () => this.__data.maxValueIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.maxValueIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.maxValueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.maxValueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueCoding', {
+			enumerable: true,
+			get: () => this.__data.maxValueCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.maxValueCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueQuantity', {
+			enumerable: true,
+			get: () => this.__data.maxValueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.maxValueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueRange', {
+			enumerable: true,
+			get: () => this.__data.maxValueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.maxValueRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValuePeriod', {
+			enumerable: true,
+			get: () => this.__data.maxValuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.maxValuePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueRatio', {
+			enumerable: true,
+			get: () => this.__data.maxValueRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.maxValueRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueSampledData', {
+			enumerable: true,
+			get: () => this.__data.maxValueSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.maxValueSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueSignature', {
+			enumerable: true,
+			get: () => this.__data.maxValueSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.maxValueSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueHumanName', {
+			enumerable: true,
+			get: () => this.__data.maxValueHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.maxValueHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueAddress', {
+			enumerable: true,
+			get: () => this.__data.maxValueAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.maxValueAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueContactPoint', {
+			enumerable: true,
+			get: () => this.__data.maxValueContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.maxValueContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueTiming', {
+			enumerable: true,
+			get: () => this.__data.maxValueTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.maxValueTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueReference', {
+			enumerable: true,
+			get: () => this.__data.maxValueReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.maxValueReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxValueMeta', {
+			enumerable: true,
+			get: () => this.__data.maxValueMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.maxValueMeta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_maxLength', {
+			enumerable: true,
+			get: () => this.__data._maxLength,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._maxLength = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'maxLength', {
+			enumerable: true,
+			get: () => this.__data.maxLength,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.maxLength = value;
+			},
+		});
+
+		Object.defineProperty(this, '_condition', {
+			enumerable: true,
+			get: () => this.__data._condition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._condition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'condition', {
+			enumerable: true,
+			get: () => this.__data.condition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.condition = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'constraint', {
+			enumerable: true,
+			get: () => this.__data.constraint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.constraint = Array.isArray(value) ? value.map(v => new Element(v)) : [new Element(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_mustSupport', {
+			enumerable: true,
+			get: () => this.__data._mustSupport,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._mustSupport = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'mustSupport', {
+			enumerable: true,
+			get: () => this.__data.mustSupport,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.mustSupport = value;
+			},
+		});
+
+		Object.defineProperty(this, '_isModifier', {
+			enumerable: true,
+			get: () => this.__data._isModifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._isModifier = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'isModifier', {
+			enumerable: true,
+			get: () => this.__data.isModifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.isModifier = value;
+			},
+		});
+
+		Object.defineProperty(this, '_isSummary', {
+			enumerable: true,
+			get: () => this.__data._isSummary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._isSummary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'isSummary', {
+			enumerable: true,
+			get: () => this.__data.isSummary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.isSummary = value;
+			},
+		});
+
+		Object.defineProperty(this, 'binding', {
+			enumerable: true,
+			get: () => this.__data.binding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.binding = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'mapping', {
+			enumerable: true,
+			get: () => this.__data.mapping,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.mapping = Array.isArray(value) ? value.map(v => new Element(v)) : [new Element(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ElementDefinition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ElementDefinition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ElementDefinition';
 	}
 
-	// The path identifies the element and is expressed as a \'.\'-separated list of ancestor elements, beginning with the name of the resource or extension.
-	get path() {
-		return this.__path;
-	}
-
-	set path(new_value) {
-		this.__path = new_value;
-	}
-
-	// Codes that define how this element is represented in instances, when the deviation varies from the normal case.
-	get representation() {
-		return this.__representation;
-	}
-
-	set representation(new_value) {
-		this.__representation = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The name of this element definition (to refer to it from other element definitions using ElementDefinition.nameReference). This is a unique name referring to a specific set of constraints applied to this element. One use of this is to provide a name to different slices of the same element.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The text to display beside the element indicating its meaning or to use to prompt for the element in a user display or form.
-	get label() {
-		return this.__label;
-	}
-
-	set label(new_value) {
-		this.__label = new_value;
-	}
-
-	// A code that provides the meaning for the element according to a particular terminology.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const Coding = require('./Coding');
-		this.__code = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Indicates that the element is sliced into a set of alternative definitions (i.e. in a structure definition, there are multiple different constraints on a single element in the base resource). Slicing can be used in any resource that has cardinality ..* on the base resource, or any resource with a choice of types. The set of slices is any elements that come after this in the element sequence that have the same path, until a shorter path occurs (the shorter path terminates the set).
-	get slicing() {
-		return this.__slicing;
-	}
-
-	set slicing(new_value) {
-		const ElementDefinitionSlicing = require('./ElementDefinitionSlicing');
-		this.__slicing = new ElementDefinitionSlicing(new_value);
-	}
-
-	// A concise description of what this element means (e.g. for use in autogenerated summaries).
-	get short() {
-		return this.__short;
-	}
-
-	set short(new_value) {
-		this.__short = new_value;
-	}
-
-	// Provides a complete explanation of the meaning of the data element for human readability.  For the case of elements derived from existing elements (e.g. constraints), the definition SHALL be consistent with the base definition, but convey the meaning of the element in the particular context of use of the resource.
-	get definition() {
-		return this.__definition;
-	}
-
-	set definition(new_value) {
-		this.__definition = new_value;
-	}
-
-	// Explanatory notes and implementation guidance about the data element, including notes about how to use the data properly, exceptions to proper use, etc.
-	get comments() {
-		return this.__comments;
-	}
-
-	set comments(new_value) {
-		this.__comments = new_value;
-	}
-
-	// This element is for traceability of why the element was created and why the constraints exist as they do. This may be used to point to source materials or specifications that drove the structure of this element.
-	get requirements() {
-		return this.__requirements;
-	}
-
-	set requirements(new_value) {
-		this.__requirements = new_value;
-	}
-
-	// Identifies additional names by which this element might also be known.
-	get alias() {
-		return this.__alias;
-	}
-
-	set alias(new_value) {
-		this.__alias = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The minimum number of times this element SHALL appear in the instance.
-	get min() {
-		return this.__min;
-	}
-
-	set min(new_value) {
-		this.__min = new_value;
-	}
-
-	// The maximum number of times this element is permitted to appear in the instance.
-	get max() {
-		return this.__max;
-	}
-
-	set max(new_value) {
-		this.__max = new_value;
-	}
-
-	// Information about the base definition of the element, provided to make it unncessary for tools to trace the deviation of the element through the derived and related profiles. This information is only provided where the element definition represents a constraint on another element definition, and must be present if there is a base element definition.
-	get base() {
-		return this.__base;
-	}
-
-	set base(new_value) {
-		const ElementDefinitionBase = require('./ElementDefinitionBase');
-		this.__base = new ElementDefinitionBase(new_value);
-	}
-
-	// The data type or resource that the value of this element is permitted to be.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const ElementDefinitionType = require('./ElementDefinitionType');
-		this.__type = Array.isArray(new_value)
-			? new_value.map(val => new ElementDefinitionType(val))
-			: [new ElementDefinitionType(new_value)];
-	}
-
-	// Identifies the name of a slice defined elsewhere in the profile whose constraints should be applied to the current element.
-	get nameReference() {
-		return this.__nameReference;
-	}
-
-	set nameReference(new_value) {
-		this.__nameReference = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueBoolean() {
-		return this.__defaultValueBoolean;
-	}
-
-	set defaultValueBoolean(new_value) {
-		this.__defaultValueBoolean = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueInteger() {
-		return this.__defaultValueInteger;
-	}
-
-	set defaultValueInteger(new_value) {
-		this.__defaultValueInteger = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueDecimal() {
-		return this.__defaultValueDecimal;
-	}
-
-	set defaultValueDecimal(new_value) {
-		this.__defaultValueDecimal = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueBase64Binary() {
-		return this.__defaultValueBase64Binary;
-	}
-
-	set defaultValueBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueBase64Binary`);
-		}
-		this.__defaultValueBase64Binary = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueInstant() {
-		return this.__defaultValueInstant;
-	}
-
-	set defaultValueInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueInstant`);
-		}
-		this.__defaultValueInstant = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueString() {
-		return this.__defaultValueString;
-	}
-
-	set defaultValueString(new_value) {
-		this.__defaultValueString = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueUri() {
-		return this.__defaultValueUri;
-	}
-
-	set defaultValueUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueUri`);
-		}
-		this.__defaultValueUri = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueDate() {
-		return this.__defaultValueDate;
-	}
-
-	set defaultValueDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueDate`);
-		}
-		this.__defaultValueDate = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueDateTime() {
-		return this.__defaultValueDateTime;
-	}
-
-	set defaultValueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueDateTime`);
-		}
-		this.__defaultValueDateTime = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueTime() {
-		return this.__defaultValueTime;
-	}
-
-	set defaultValueTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueTime`);
-		}
-		this.__defaultValueTime = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueCode() {
-		return this.__defaultValueCode;
-	}
-
-	set defaultValueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueCode`);
-		}
-		this.__defaultValueCode = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueOid() {
-		return this.__defaultValueOid;
-	}
-
-	set defaultValueOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueOid`);
-		}
-		this.__defaultValueOid = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueId() {
-		return this.__defaultValueId;
-	}
-
-	set defaultValueId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueId`);
-		}
-		this.__defaultValueId = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueUnsignedInt() {
-		return this.__defaultValueUnsignedInt;
-	}
-
-	set defaultValueUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValueUnsignedInt`);
-		}
-		this.__defaultValueUnsignedInt = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValuePositiveInt() {
-		return this.__defaultValuePositiveInt;
-	}
-
-	set defaultValuePositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field defaultValuePositiveInt`);
-		}
-		this.__defaultValuePositiveInt = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueMarkdown() {
-		return this.__defaultValueMarkdown;
-	}
-
-	set defaultValueMarkdown(new_value) {
-		this.__defaultValueMarkdown = new_value;
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueAnnotation() {
-		return this.__defaultValueAnnotation;
-	}
-
-	set defaultValueAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__defaultValueAnnotation = new Annotation(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueAttachment() {
-		return this.__defaultValueAttachment;
-	}
-
-	set defaultValueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__defaultValueAttachment = new Attachment(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueIdentifier() {
-		return this.__defaultValueIdentifier;
-	}
-
-	set defaultValueIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__defaultValueIdentifier = new Identifier(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueCodeableConcept() {
-		return this.__defaultValueCodeableConcept;
-	}
-
-	set defaultValueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__defaultValueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueCoding() {
-		return this.__defaultValueCoding;
-	}
-
-	set defaultValueCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__defaultValueCoding = new Coding(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueQuantity() {
-		return this.__defaultValueQuantity;
-	}
-
-	set defaultValueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__defaultValueQuantity = new Quantity(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueRange() {
-		return this.__defaultValueRange;
-	}
-
-	set defaultValueRange(new_value) {
-		const Range = require('./Range');
-		this.__defaultValueRange = new Range(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValuePeriod() {
-		return this.__defaultValuePeriod;
-	}
-
-	set defaultValuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__defaultValuePeriod = new Period(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueRatio() {
-		return this.__defaultValueRatio;
-	}
-
-	set defaultValueRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__defaultValueRatio = new Ratio(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueSampledData() {
-		return this.__defaultValueSampledData;
-	}
-
-	set defaultValueSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__defaultValueSampledData = new SampledData(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueSignature() {
-		return this.__defaultValueSignature;
-	}
-
-	set defaultValueSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__defaultValueSignature = new Signature(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueHumanName() {
-		return this.__defaultValueHumanName;
-	}
-
-	set defaultValueHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__defaultValueHumanName = new HumanName(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueAddress() {
-		return this.__defaultValueAddress;
-	}
-
-	set defaultValueAddress(new_value) {
-		const Address = require('./Address');
-		this.__defaultValueAddress = new Address(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueContactPoint() {
-		return this.__defaultValueContactPoint;
-	}
-
-	set defaultValueContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__defaultValueContactPoint = new ContactPoint(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueTiming() {
-		return this.__defaultValueTiming;
-	}
-
-	set defaultValueTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__defaultValueTiming = new Timing(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueReference() {
-		return this.__defaultValueReference;
-	}
-
-	set defaultValueReference(new_value) {
-		const Reference = require('./Reference');
-		this.__defaultValueReference = new Reference(new_value);
-	}
-
-	// The value that should be used if there is no value stated in the instance (e.g. \'if not otherwise specified, the abstract is false\').
-	get defaultValueMeta() {
-		return this.__defaultValueMeta;
-	}
-
-	set defaultValueMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__defaultValueMeta = new Meta(new_value);
-	}
-
-	// The Implicit meaning that is to be understood when this element is missing (e.g. \'when this element is missing, the period is ongoing\'.
-	get meaningWhenMissing() {
-		return this.__meaningWhenMissing;
-	}
-
-	set meaningWhenMissing(new_value) {
-		this.__meaningWhenMissing = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedBoolean() {
-		return this.__fixedBoolean;
-	}
-
-	set fixedBoolean(new_value) {
-		this.__fixedBoolean = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedInteger() {
-		return this.__fixedInteger;
-	}
-
-	set fixedInteger(new_value) {
-		this.__fixedInteger = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDecimal() {
-		return this.__fixedDecimal;
-	}
-
-	set fixedDecimal(new_value) {
-		this.__fixedDecimal = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedBase64Binary() {
-		return this.__fixedBase64Binary;
-	}
-
-	set fixedBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedBase64Binary`);
-		}
-		this.__fixedBase64Binary = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedInstant() {
-		return this.__fixedInstant;
-	}
-
-	set fixedInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedInstant`);
-		}
-		this.__fixedInstant = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedString() {
-		return this.__fixedString;
-	}
-
-	set fixedString(new_value) {
-		this.__fixedString = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUri() {
-		return this.__fixedUri;
-	}
-
-	set fixedUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedUri`);
-		}
-		this.__fixedUri = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDate() {
-		return this.__fixedDate;
-	}
-
-	set fixedDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedDate`);
-		}
-		this.__fixedDate = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedDateTime() {
-		return this.__fixedDateTime;
-	}
-
-	set fixedDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedDateTime`);
-		}
-		this.__fixedDateTime = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedTime() {
-		return this.__fixedTime;
-	}
-
-	set fixedTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedTime`);
-		}
-		this.__fixedTime = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCode() {
-		return this.__fixedCode;
-	}
-
-	set fixedCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedCode`);
-		}
-		this.__fixedCode = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedOid() {
-		return this.__fixedOid;
-	}
-
-	set fixedOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedOid`);
-		}
-		this.__fixedOid = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedId() {
-		return this.__fixedId;
-	}
-
-	set fixedId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedId`);
-		}
-		this.__fixedId = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedUnsignedInt() {
-		return this.__fixedUnsignedInt;
-	}
-
-	set fixedUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedUnsignedInt`);
-		}
-		this.__fixedUnsignedInt = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedPositiveInt() {
-		return this.__fixedPositiveInt;
-	}
-
-	set fixedPositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fixedPositiveInt`);
-		}
-		this.__fixedPositiveInt = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedMarkdown() {
-		return this.__fixedMarkdown;
-	}
-
-	set fixedMarkdown(new_value) {
-		this.__fixedMarkdown = new_value;
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAnnotation() {
-		return this.__fixedAnnotation;
-	}
-
-	set fixedAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__fixedAnnotation = new Annotation(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAttachment() {
-		return this.__fixedAttachment;
-	}
-
-	set fixedAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__fixedAttachment = new Attachment(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedIdentifier() {
-		return this.__fixedIdentifier;
-	}
-
-	set fixedIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__fixedIdentifier = new Identifier(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCodeableConcept() {
-		return this.__fixedCodeableConcept;
-	}
-
-	set fixedCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__fixedCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedCoding() {
-		return this.__fixedCoding;
-	}
-
-	set fixedCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__fixedCoding = new Coding(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedQuantity() {
-		return this.__fixedQuantity;
-	}
-
-	set fixedQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__fixedQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedRange() {
-		return this.__fixedRange;
-	}
-
-	set fixedRange(new_value) {
-		const Range = require('./Range');
-		this.__fixedRange = new Range(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedPeriod() {
-		return this.__fixedPeriod;
-	}
-
-	set fixedPeriod(new_value) {
-		const Period = require('./Period');
-		this.__fixedPeriod = new Period(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedRatio() {
-		return this.__fixedRatio;
-	}
-
-	set fixedRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__fixedRatio = new Ratio(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedSampledData() {
-		return this.__fixedSampledData;
-	}
-
-	set fixedSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__fixedSampledData = new SampledData(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedSignature() {
-		return this.__fixedSignature;
-	}
-
-	set fixedSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__fixedSignature = new Signature(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedHumanName() {
-		return this.__fixedHumanName;
-	}
-
-	set fixedHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__fixedHumanName = new HumanName(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedAddress() {
-		return this.__fixedAddress;
-	}
-
-	set fixedAddress(new_value) {
-		const Address = require('./Address');
-		this.__fixedAddress = new Address(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedContactPoint() {
-		return this.__fixedContactPoint;
-	}
-
-	set fixedContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__fixedContactPoint = new ContactPoint(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedTiming() {
-		return this.__fixedTiming;
-	}
-
-	set fixedTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__fixedTiming = new Timing(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedReference() {
-		return this.__fixedReference;
-	}
-
-	set fixedReference(new_value) {
-		const Reference = require('./Reference');
-		this.__fixedReference = new Reference(new_value);
-	}
-
-	// Specifies a value that SHALL be exactly the value  for this element in the instance. For purposes of comparison, non-significant whitespace is ignored, and all values must be an exact match (case and accent sensitive). Missing elements/attributes must also be missing.
-	get fixedMeta() {
-		return this.__fixedMeta;
-	}
-
-	set fixedMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__fixedMeta = new Meta(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternBoolean() {
-		return this.__patternBoolean;
-	}
-
-	set patternBoolean(new_value) {
-		this.__patternBoolean = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternInteger() {
-		return this.__patternInteger;
-	}
-
-	set patternInteger(new_value) {
-		this.__patternInteger = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDecimal() {
-		return this.__patternDecimal;
-	}
-
-	set patternDecimal(new_value) {
-		this.__patternDecimal = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternBase64Binary() {
-		return this.__patternBase64Binary;
-	}
-
-	set patternBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternBase64Binary`);
-		}
-		this.__patternBase64Binary = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternInstant() {
-		return this.__patternInstant;
-	}
-
-	set patternInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternInstant`);
-		}
-		this.__patternInstant = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternString() {
-		return this.__patternString;
-	}
-
-	set patternString(new_value) {
-		this.__patternString = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUri() {
-		return this.__patternUri;
-	}
-
-	set patternUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternUri`);
-		}
-		this.__patternUri = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDate() {
-		return this.__patternDate;
-	}
-
-	set patternDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternDate`);
-		}
-		this.__patternDate = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternDateTime() {
-		return this.__patternDateTime;
-	}
-
-	set patternDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternDateTime`);
-		}
-		this.__patternDateTime = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternTime() {
-		return this.__patternTime;
-	}
-
-	set patternTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternTime`);
-		}
-		this.__patternTime = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCode() {
-		return this.__patternCode;
-	}
-
-	set patternCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternCode`);
-		}
-		this.__patternCode = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternOid() {
-		return this.__patternOid;
-	}
-
-	set patternOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternOid`);
-		}
-		this.__patternOid = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternId() {
-		return this.__patternId;
-	}
-
-	set patternId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternId`);
-		}
-		this.__patternId = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternUnsignedInt() {
-		return this.__patternUnsignedInt;
-	}
-
-	set patternUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternUnsignedInt`);
-		}
-		this.__patternUnsignedInt = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternPositiveInt() {
-		return this.__patternPositiveInt;
-	}
-
-	set patternPositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field patternPositiveInt`);
-		}
-		this.__patternPositiveInt = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternMarkdown() {
-		return this.__patternMarkdown;
-	}
-
-	set patternMarkdown(new_value) {
-		this.__patternMarkdown = new_value;
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAnnotation() {
-		return this.__patternAnnotation;
-	}
-
-	set patternAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__patternAnnotation = new Annotation(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAttachment() {
-		return this.__patternAttachment;
-	}
-
-	set patternAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__patternAttachment = new Attachment(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternIdentifier() {
-		return this.__patternIdentifier;
-	}
-
-	set patternIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__patternIdentifier = new Identifier(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCodeableConcept() {
-		return this.__patternCodeableConcept;
-	}
-
-	set patternCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__patternCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternCoding() {
-		return this.__patternCoding;
-	}
-
-	set patternCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__patternCoding = new Coding(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternQuantity() {
-		return this.__patternQuantity;
-	}
-
-	set patternQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__patternQuantity = new Quantity(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternRange() {
-		return this.__patternRange;
-	}
-
-	set patternRange(new_value) {
-		const Range = require('./Range');
-		this.__patternRange = new Range(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternPeriod() {
-		return this.__patternPeriod;
-	}
-
-	set patternPeriod(new_value) {
-		const Period = require('./Period');
-		this.__patternPeriod = new Period(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternRatio() {
-		return this.__patternRatio;
-	}
-
-	set patternRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__patternRatio = new Ratio(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternSampledData() {
-		return this.__patternSampledData;
-	}
-
-	set patternSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__patternSampledData = new SampledData(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternSignature() {
-		return this.__patternSignature;
-	}
-
-	set patternSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__patternSignature = new Signature(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternHumanName() {
-		return this.__patternHumanName;
-	}
-
-	set patternHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__patternHumanName = new HumanName(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternAddress() {
-		return this.__patternAddress;
-	}
-
-	set patternAddress(new_value) {
-		const Address = require('./Address');
-		this.__patternAddress = new Address(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternContactPoint() {
-		return this.__patternContactPoint;
-	}
-
-	set patternContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__patternContactPoint = new ContactPoint(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternTiming() {
-		return this.__patternTiming;
-	}
-
-	set patternTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__patternTiming = new Timing(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternReference() {
-		return this.__patternReference;
-	}
-
-	set patternReference(new_value) {
-		const Reference = require('./Reference');
-		this.__patternReference = new Reference(new_value);
-	}
-
-	// Specifies a value that the value in the instance SHALL follow - that is, any value in the pattern must be found in the instance. Other additional values may be found too. This is effectively constraint by example.  The values of elements present in the pattern must match exactly (case-sensitive, accent-sensitive, etc.).
-	get patternMeta() {
-		return this.__patternMeta;
-	}
-
-	set patternMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__patternMeta = new Meta(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleBoolean() {
-		return this.__exampleBoolean;
-	}
-
-	set exampleBoolean(new_value) {
-		this.__exampleBoolean = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleInteger() {
-		return this.__exampleInteger;
-	}
-
-	set exampleInteger(new_value) {
-		this.__exampleInteger = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleDecimal() {
-		return this.__exampleDecimal;
-	}
-
-	set exampleDecimal(new_value) {
-		this.__exampleDecimal = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleBase64Binary() {
-		return this.__exampleBase64Binary;
-	}
-
-	set exampleBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleBase64Binary`);
-		}
-		this.__exampleBase64Binary = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleInstant() {
-		return this.__exampleInstant;
-	}
-
-	set exampleInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleInstant`);
-		}
-		this.__exampleInstant = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleString() {
-		return this.__exampleString;
-	}
-
-	set exampleString(new_value) {
-		this.__exampleString = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleUri() {
-		return this.__exampleUri;
-	}
-
-	set exampleUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleUri`);
-		}
-		this.__exampleUri = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleDate() {
-		return this.__exampleDate;
-	}
-
-	set exampleDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleDate`);
-		}
-		this.__exampleDate = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleDateTime() {
-		return this.__exampleDateTime;
-	}
-
-	set exampleDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleDateTime`);
-		}
-		this.__exampleDateTime = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleTime() {
-		return this.__exampleTime;
-	}
-
-	set exampleTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleTime`);
-		}
-		this.__exampleTime = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleCode() {
-		return this.__exampleCode;
-	}
-
-	set exampleCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleCode`);
-		}
-		this.__exampleCode = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleOid() {
-		return this.__exampleOid;
-	}
-
-	set exampleOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleOid`);
-		}
-		this.__exampleOid = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleId() {
-		return this.__exampleId;
-	}
-
-	set exampleId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleId`);
-		}
-		this.__exampleId = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleUnsignedInt() {
-		return this.__exampleUnsignedInt;
-	}
-
-	set exampleUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field exampleUnsignedInt`);
-		}
-		this.__exampleUnsignedInt = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get examplePositiveInt() {
-		return this.__examplePositiveInt;
-	}
-
-	set examplePositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field examplePositiveInt`);
-		}
-		this.__examplePositiveInt = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleMarkdown() {
-		return this.__exampleMarkdown;
-	}
-
-	set exampleMarkdown(new_value) {
-		this.__exampleMarkdown = new_value;
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleAnnotation() {
-		return this.__exampleAnnotation;
-	}
-
-	set exampleAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__exampleAnnotation = new Annotation(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleAttachment() {
-		return this.__exampleAttachment;
-	}
-
-	set exampleAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__exampleAttachment = new Attachment(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleIdentifier() {
-		return this.__exampleIdentifier;
-	}
-
-	set exampleIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__exampleIdentifier = new Identifier(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleCodeableConcept() {
-		return this.__exampleCodeableConcept;
-	}
-
-	set exampleCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__exampleCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleCoding() {
-		return this.__exampleCoding;
-	}
-
-	set exampleCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__exampleCoding = new Coding(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleQuantity() {
-		return this.__exampleQuantity;
-	}
-
-	set exampleQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__exampleQuantity = new Quantity(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleRange() {
-		return this.__exampleRange;
-	}
-
-	set exampleRange(new_value) {
-		const Range = require('./Range');
-		this.__exampleRange = new Range(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get examplePeriod() {
-		return this.__examplePeriod;
-	}
-
-	set examplePeriod(new_value) {
-		const Period = require('./Period');
-		this.__examplePeriod = new Period(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleRatio() {
-		return this.__exampleRatio;
-	}
-
-	set exampleRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__exampleRatio = new Ratio(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleSampledData() {
-		return this.__exampleSampledData;
-	}
-
-	set exampleSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__exampleSampledData = new SampledData(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleSignature() {
-		return this.__exampleSignature;
-	}
-
-	set exampleSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__exampleSignature = new Signature(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleHumanName() {
-		return this.__exampleHumanName;
-	}
-
-	set exampleHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__exampleHumanName = new HumanName(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleAddress() {
-		return this.__exampleAddress;
-	}
-
-	set exampleAddress(new_value) {
-		const Address = require('./Address');
-		this.__exampleAddress = new Address(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleContactPoint() {
-		return this.__exampleContactPoint;
-	}
-
-	set exampleContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__exampleContactPoint = new ContactPoint(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleTiming() {
-		return this.__exampleTiming;
-	}
-
-	set exampleTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__exampleTiming = new Timing(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleReference() {
-		return this.__exampleReference;
-	}
-
-	set exampleReference(new_value) {
-		const Reference = require('./Reference');
-		this.__exampleReference = new Reference(new_value);
-	}
-
-	// A sample value for this element demonstrating the type of information that would typically be captured.
-	get exampleMeta() {
-		return this.__exampleMeta;
-	}
-
-	set exampleMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__exampleMeta = new Meta(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueBoolean() {
-		return this.__minValueBoolean;
-	}
-
-	set minValueBoolean(new_value) {
-		this.__minValueBoolean = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueInteger() {
-		return this.__minValueInteger;
-	}
-
-	set minValueInteger(new_value) {
-		this.__minValueInteger = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueDecimal() {
-		return this.__minValueDecimal;
-	}
-
-	set minValueDecimal(new_value) {
-		this.__minValueDecimal = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueBase64Binary() {
-		return this.__minValueBase64Binary;
-	}
-
-	set minValueBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueBase64Binary`);
-		}
-		this.__minValueBase64Binary = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueInstant() {
-		return this.__minValueInstant;
-	}
-
-	set minValueInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueInstant`);
-		}
-		this.__minValueInstant = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueString() {
-		return this.__minValueString;
-	}
-
-	set minValueString(new_value) {
-		this.__minValueString = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueUri() {
-		return this.__minValueUri;
-	}
-
-	set minValueUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueUri`);
-		}
-		this.__minValueUri = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueDate() {
-		return this.__minValueDate;
-	}
-
-	set minValueDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueDate`);
-		}
-		this.__minValueDate = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueDateTime() {
-		return this.__minValueDateTime;
-	}
-
-	set minValueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueDateTime`);
-		}
-		this.__minValueDateTime = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueTime() {
-		return this.__minValueTime;
-	}
-
-	set minValueTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueTime`);
-		}
-		this.__minValueTime = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueCode() {
-		return this.__minValueCode;
-	}
-
-	set minValueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueCode`);
-		}
-		this.__minValueCode = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueOid() {
-		return this.__minValueOid;
-	}
-
-	set minValueOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueOid`);
-		}
-		this.__minValueOid = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueId() {
-		return this.__minValueId;
-	}
-
-	set minValueId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueId`);
-		}
-		this.__minValueId = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueUnsignedInt() {
-		return this.__minValueUnsignedInt;
-	}
-
-	set minValueUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValueUnsignedInt`);
-		}
-		this.__minValueUnsignedInt = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValuePositiveInt() {
-		return this.__minValuePositiveInt;
-	}
-
-	set minValuePositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minValuePositiveInt`);
-		}
-		this.__minValuePositiveInt = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueMarkdown() {
-		return this.__minValueMarkdown;
-	}
-
-	set minValueMarkdown(new_value) {
-		this.__minValueMarkdown = new_value;
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueAnnotation() {
-		return this.__minValueAnnotation;
-	}
-
-	set minValueAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__minValueAnnotation = new Annotation(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueAttachment() {
-		return this.__minValueAttachment;
-	}
-
-	set minValueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__minValueAttachment = new Attachment(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueIdentifier() {
-		return this.__minValueIdentifier;
-	}
-
-	set minValueIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__minValueIdentifier = new Identifier(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueCodeableConcept() {
-		return this.__minValueCodeableConcept;
-	}
-
-	set minValueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__minValueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueCoding() {
-		return this.__minValueCoding;
-	}
-
-	set minValueCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__minValueCoding = new Coding(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueQuantity() {
-		return this.__minValueQuantity;
-	}
-
-	set minValueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__minValueQuantity = new Quantity(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueRange() {
-		return this.__minValueRange;
-	}
-
-	set minValueRange(new_value) {
-		const Range = require('./Range');
-		this.__minValueRange = new Range(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValuePeriod() {
-		return this.__minValuePeriod;
-	}
-
-	set minValuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__minValuePeriod = new Period(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueRatio() {
-		return this.__minValueRatio;
-	}
-
-	set minValueRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__minValueRatio = new Ratio(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueSampledData() {
-		return this.__minValueSampledData;
-	}
-
-	set minValueSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__minValueSampledData = new SampledData(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueSignature() {
-		return this.__minValueSignature;
-	}
-
-	set minValueSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__minValueSignature = new Signature(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueHumanName() {
-		return this.__minValueHumanName;
-	}
-
-	set minValueHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__minValueHumanName = new HumanName(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueAddress() {
-		return this.__minValueAddress;
-	}
-
-	set minValueAddress(new_value) {
-		const Address = require('./Address');
-		this.__minValueAddress = new Address(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueContactPoint() {
-		return this.__minValueContactPoint;
-	}
-
-	set minValueContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__minValueContactPoint = new ContactPoint(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueTiming() {
-		return this.__minValueTiming;
-	}
-
-	set minValueTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__minValueTiming = new Timing(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueReference() {
-		return this.__minValueReference;
-	}
-
-	set minValueReference(new_value) {
-		const Reference = require('./Reference');
-		this.__minValueReference = new Reference(new_value);
-	}
-
-	// The minimum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get minValueMeta() {
-		return this.__minValueMeta;
-	}
-
-	set minValueMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__minValueMeta = new Meta(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueBoolean() {
-		return this.__maxValueBoolean;
-	}
-
-	set maxValueBoolean(new_value) {
-		this.__maxValueBoolean = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueInteger() {
-		return this.__maxValueInteger;
-	}
-
-	set maxValueInteger(new_value) {
-		this.__maxValueInteger = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueDecimal() {
-		return this.__maxValueDecimal;
-	}
-
-	set maxValueDecimal(new_value) {
-		this.__maxValueDecimal = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueBase64Binary() {
-		return this.__maxValueBase64Binary;
-	}
-
-	set maxValueBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueBase64Binary`);
-		}
-		this.__maxValueBase64Binary = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueInstant() {
-		return this.__maxValueInstant;
-	}
-
-	set maxValueInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueInstant`);
-		}
-		this.__maxValueInstant = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueString() {
-		return this.__maxValueString;
-	}
-
-	set maxValueString(new_value) {
-		this.__maxValueString = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueUri() {
-		return this.__maxValueUri;
-	}
-
-	set maxValueUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueUri`);
-		}
-		this.__maxValueUri = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueDate() {
-		return this.__maxValueDate;
-	}
-
-	set maxValueDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueDate`);
-		}
-		this.__maxValueDate = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueDateTime() {
-		return this.__maxValueDateTime;
-	}
-
-	set maxValueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueDateTime`);
-		}
-		this.__maxValueDateTime = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueTime() {
-		return this.__maxValueTime;
-	}
-
-	set maxValueTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueTime`);
-		}
-		this.__maxValueTime = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueCode() {
-		return this.__maxValueCode;
-	}
-
-	set maxValueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueCode`);
-		}
-		this.__maxValueCode = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueOid() {
-		return this.__maxValueOid;
-	}
-
-	set maxValueOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueOid`);
-		}
-		this.__maxValueOid = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueId() {
-		return this.__maxValueId;
-	}
-
-	set maxValueId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueId`);
-		}
-		this.__maxValueId = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueUnsignedInt() {
-		return this.__maxValueUnsignedInt;
-	}
-
-	set maxValueUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValueUnsignedInt`);
-		}
-		this.__maxValueUnsignedInt = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValuePositiveInt() {
-		return this.__maxValuePositiveInt;
-	}
-
-	set maxValuePositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field maxValuePositiveInt`);
-		}
-		this.__maxValuePositiveInt = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueMarkdown() {
-		return this.__maxValueMarkdown;
-	}
-
-	set maxValueMarkdown(new_value) {
-		this.__maxValueMarkdown = new_value;
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueAnnotation() {
-		return this.__maxValueAnnotation;
-	}
-
-	set maxValueAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__maxValueAnnotation = new Annotation(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueAttachment() {
-		return this.__maxValueAttachment;
-	}
-
-	set maxValueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__maxValueAttachment = new Attachment(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueIdentifier() {
-		return this.__maxValueIdentifier;
-	}
-
-	set maxValueIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__maxValueIdentifier = new Identifier(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueCodeableConcept() {
-		return this.__maxValueCodeableConcept;
-	}
-
-	set maxValueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__maxValueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueCoding() {
-		return this.__maxValueCoding;
-	}
-
-	set maxValueCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__maxValueCoding = new Coding(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueQuantity() {
-		return this.__maxValueQuantity;
-	}
-
-	set maxValueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__maxValueQuantity = new Quantity(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueRange() {
-		return this.__maxValueRange;
-	}
-
-	set maxValueRange(new_value) {
-		const Range = require('./Range');
-		this.__maxValueRange = new Range(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValuePeriod() {
-		return this.__maxValuePeriod;
-	}
-
-	set maxValuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__maxValuePeriod = new Period(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueRatio() {
-		return this.__maxValueRatio;
-	}
-
-	set maxValueRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__maxValueRatio = new Ratio(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueSampledData() {
-		return this.__maxValueSampledData;
-	}
-
-	set maxValueSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__maxValueSampledData = new SampledData(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueSignature() {
-		return this.__maxValueSignature;
-	}
-
-	set maxValueSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__maxValueSignature = new Signature(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueHumanName() {
-		return this.__maxValueHumanName;
-	}
-
-	set maxValueHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__maxValueHumanName = new HumanName(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueAddress() {
-		return this.__maxValueAddress;
-	}
-
-	set maxValueAddress(new_value) {
-		const Address = require('./Address');
-		this.__maxValueAddress = new Address(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueContactPoint() {
-		return this.__maxValueContactPoint;
-	}
-
-	set maxValueContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__maxValueContactPoint = new ContactPoint(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueTiming() {
-		return this.__maxValueTiming;
-	}
-
-	set maxValueTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__maxValueTiming = new Timing(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueReference() {
-		return this.__maxValueReference;
-	}
-
-	set maxValueReference(new_value) {
-		const Reference = require('./Reference');
-		this.__maxValueReference = new Reference(new_value);
-	}
-
-	// The maximum allowed value for the element. The value is inclusive. This is allowed for the types date, dateTime, instant, time, decimal, integer, and Quantity.
-	get maxValueMeta() {
-		return this.__maxValueMeta;
-	}
-
-	set maxValueMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__maxValueMeta = new Meta(new_value);
-	}
-
-	// Indicates the maximum length in characters that is permitted to be present in conformant instances and which is expected to be supported by conformant consumers that support the element.
-	get maxLength() {
-		return this.__maxLength;
-	}
-
-	set maxLength(new_value) {
-		this.__maxLength = new_value;
-	}
-
-	// A reference to an invariant that may make additional statements about the cardinality or value in the instance.
-	get condition() {
-		return this.__condition;
-	}
-
-	set condition(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field condition`);
-		}
-		this.__condition = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Formal constraints such as co-occurrence and other constraints that can be computationally evaluated within the context of the instance.
-	get constraint() {
-		return this.__constraint;
-	}
-
-	set constraint(new_value) {
-		const ElementDefinitionConstraint = require('./ElementDefinitionConstraint');
-		this.__constraint = Array.isArray(new_value)
-			? new_value.map(val => new ElementDefinitionConstraint(val))
-			: [new ElementDefinitionConstraint(new_value)];
-	}
-
-	// If true, implementations that produce or consume resources SHALL provide \'support\' for the element in some meaningful way.  If false, the element may be ignored and not supported.
-	get mustSupport() {
-		return this.__mustSupport;
-	}
-
-	set mustSupport(new_value) {
-		this.__mustSupport = new_value;
-	}
-
-	// If true, the value of this element affects the interpretation of the element or resource that contains it, and the value of the element cannot be ignored. Typically, this is used for status, negation and qualification codes. The effect of this is that the element cannot be ignored by systems: they SHALL either recognize the element and process it, and/or a pre-determination has been made that it is not relevant to their particular system.
-	get isModifier() {
-		return this.__isModifier;
-	}
-
-	set isModifier(new_value) {
-		this.__isModifier = new_value;
-	}
-
-	// Whether the element should be included if a client requests a search with the parameter _summary=true.
-	get isSummary() {
-		return this.__isSummary;
-	}
-
-	set isSummary(new_value) {
-		this.__isSummary = new_value;
-	}
-
-	// Binds to a value set if this element is coded (code, Coding, CodeableConcept).
-	get binding() {
-		return this.__binding;
-	}
-
-	set binding(new_value) {
-		const ElementDefinitionBinding = require('./ElementDefinitionBinding');
-		this.__binding = new ElementDefinitionBinding(new_value);
-	}
-
-	// Identifies a concept from an external specification that roughly corresponds to this element.
-	get mapping() {
-		return this.__mapping;
-	}
-
-	set mapping(new_value) {
-		const ElementDefinitionMapping = require('./ElementDefinitionMapping');
-		this.__mapping = Array.isArray(new_value)
-			? new_value.map(val => new ElementDefinitionMapping(val))
-			: [new ElementDefinitionMapping(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			path: this.__path,
-			representation: this.__representation,
-			name: this.__name,
-			label: this.__label,
-			code: this.__code && this.__code.map(v => v.toJSON()),
-			slicing: this.__slicing && this.__slicing.toJSON(),
-			short: this.__short,
-			definition: this.__definition,
-			comments: this.__comments,
-			requirements: this.__requirements,
-			alias: this.__alias,
-			min: this.__min,
-			max: this.__max,
-			base: this.__base && this.__base.toJSON(),
-			type: this.__type && this.__type.map(v => v.toJSON()),
-			nameReference: this.__nameReference,
-			defaultValueBoolean: this.__defaultValueBoolean,
-			defaultValueInteger: this.__defaultValueInteger,
-			defaultValueDecimal: this.__defaultValueDecimal,
-			defaultValueBase64Binary: this.__defaultValueBase64Binary,
-			defaultValueInstant: this.__defaultValueInstant,
-			defaultValueString: this.__defaultValueString,
-			defaultValueUri: this.__defaultValueUri,
-			defaultValueDate: this.__defaultValueDate,
-			defaultValueDateTime: this.__defaultValueDateTime,
-			defaultValueTime: this.__defaultValueTime,
-			defaultValueCode: this.__defaultValueCode,
-			defaultValueOid: this.__defaultValueOid,
-			defaultValueId: this.__defaultValueId,
-			defaultValueUnsignedInt: this.__defaultValueUnsignedInt,
-			defaultValuePositiveInt: this.__defaultValuePositiveInt,
-			defaultValueMarkdown: this.__defaultValueMarkdown,
-			defaultValueAnnotation: this.__defaultValueAnnotation && this.__defaultValueAnnotation.toJSON(),
-			defaultValueAttachment: this.__defaultValueAttachment && this.__defaultValueAttachment.toJSON(),
-			defaultValueIdentifier: this.__defaultValueIdentifier && this.__defaultValueIdentifier.toJSON(),
-			defaultValueCodeableConcept: this.__defaultValueCodeableConcept && this.__defaultValueCodeableConcept.toJSON(),
-			defaultValueCoding: this.__defaultValueCoding && this.__defaultValueCoding.toJSON(),
-			defaultValueQuantity: this.__defaultValueQuantity && this.__defaultValueQuantity.toJSON(),
-			defaultValueRange: this.__defaultValueRange && this.__defaultValueRange.toJSON(),
-			defaultValuePeriod: this.__defaultValuePeriod && this.__defaultValuePeriod.toJSON(),
-			defaultValueRatio: this.__defaultValueRatio && this.__defaultValueRatio.toJSON(),
-			defaultValueSampledData: this.__defaultValueSampledData && this.__defaultValueSampledData.toJSON(),
-			defaultValueSignature: this.__defaultValueSignature && this.__defaultValueSignature.toJSON(),
-			defaultValueHumanName: this.__defaultValueHumanName && this.__defaultValueHumanName.toJSON(),
-			defaultValueAddress: this.__defaultValueAddress && this.__defaultValueAddress.toJSON(),
-			defaultValueContactPoint: this.__defaultValueContactPoint && this.__defaultValueContactPoint.toJSON(),
-			defaultValueTiming: this.__defaultValueTiming && this.__defaultValueTiming.toJSON(),
-			defaultValueReference: this.__defaultValueReference && this.__defaultValueReference.toJSON(),
-			defaultValueMeta: this.__defaultValueMeta && this.__defaultValueMeta.toJSON(),
-			meaningWhenMissing: this.__meaningWhenMissing,
-			fixedBoolean: this.__fixedBoolean,
-			fixedInteger: this.__fixedInteger,
-			fixedDecimal: this.__fixedDecimal,
-			fixedBase64Binary: this.__fixedBase64Binary,
-			fixedInstant: this.__fixedInstant,
-			fixedString: this.__fixedString,
-			fixedUri: this.__fixedUri,
-			fixedDate: this.__fixedDate,
-			fixedDateTime: this.__fixedDateTime,
-			fixedTime: this.__fixedTime,
-			fixedCode: this.__fixedCode,
-			fixedOid: this.__fixedOid,
-			fixedId: this.__fixedId,
-			fixedUnsignedInt: this.__fixedUnsignedInt,
-			fixedPositiveInt: this.__fixedPositiveInt,
-			fixedMarkdown: this.__fixedMarkdown,
-			fixedAnnotation: this.__fixedAnnotation && this.__fixedAnnotation.toJSON(),
-			fixedAttachment: this.__fixedAttachment && this.__fixedAttachment.toJSON(),
-			fixedIdentifier: this.__fixedIdentifier && this.__fixedIdentifier.toJSON(),
-			fixedCodeableConcept: this.__fixedCodeableConcept && this.__fixedCodeableConcept.toJSON(),
-			fixedCoding: this.__fixedCoding && this.__fixedCoding.toJSON(),
-			fixedQuantity: this.__fixedQuantity && this.__fixedQuantity.toJSON(),
-			fixedRange: this.__fixedRange && this.__fixedRange.toJSON(),
-			fixedPeriod: this.__fixedPeriod && this.__fixedPeriod.toJSON(),
-			fixedRatio: this.__fixedRatio && this.__fixedRatio.toJSON(),
-			fixedSampledData: this.__fixedSampledData && this.__fixedSampledData.toJSON(),
-			fixedSignature: this.__fixedSignature && this.__fixedSignature.toJSON(),
-			fixedHumanName: this.__fixedHumanName && this.__fixedHumanName.toJSON(),
-			fixedAddress: this.__fixedAddress && this.__fixedAddress.toJSON(),
-			fixedContactPoint: this.__fixedContactPoint && this.__fixedContactPoint.toJSON(),
-			fixedTiming: this.__fixedTiming && this.__fixedTiming.toJSON(),
-			fixedReference: this.__fixedReference && this.__fixedReference.toJSON(),
-			fixedMeta: this.__fixedMeta && this.__fixedMeta.toJSON(),
-			patternBoolean: this.__patternBoolean,
-			patternInteger: this.__patternInteger,
-			patternDecimal: this.__patternDecimal,
-			patternBase64Binary: this.__patternBase64Binary,
-			patternInstant: this.__patternInstant,
-			patternString: this.__patternString,
-			patternUri: this.__patternUri,
-			patternDate: this.__patternDate,
-			patternDateTime: this.__patternDateTime,
-			patternTime: this.__patternTime,
-			patternCode: this.__patternCode,
-			patternOid: this.__patternOid,
-			patternId: this.__patternId,
-			patternUnsignedInt: this.__patternUnsignedInt,
-			patternPositiveInt: this.__patternPositiveInt,
-			patternMarkdown: this.__patternMarkdown,
-			patternAnnotation: this.__patternAnnotation && this.__patternAnnotation.toJSON(),
-			patternAttachment: this.__patternAttachment && this.__patternAttachment.toJSON(),
-			patternIdentifier: this.__patternIdentifier && this.__patternIdentifier.toJSON(),
-			patternCodeableConcept: this.__patternCodeableConcept && this.__patternCodeableConcept.toJSON(),
-			patternCoding: this.__patternCoding && this.__patternCoding.toJSON(),
-			patternQuantity: this.__patternQuantity && this.__patternQuantity.toJSON(),
-			patternRange: this.__patternRange && this.__patternRange.toJSON(),
-			patternPeriod: this.__patternPeriod && this.__patternPeriod.toJSON(),
-			patternRatio: this.__patternRatio && this.__patternRatio.toJSON(),
-			patternSampledData: this.__patternSampledData && this.__patternSampledData.toJSON(),
-			patternSignature: this.__patternSignature && this.__patternSignature.toJSON(),
-			patternHumanName: this.__patternHumanName && this.__patternHumanName.toJSON(),
-			patternAddress: this.__patternAddress && this.__patternAddress.toJSON(),
-			patternContactPoint: this.__patternContactPoint && this.__patternContactPoint.toJSON(),
-			patternTiming: this.__patternTiming && this.__patternTiming.toJSON(),
-			patternReference: this.__patternReference && this.__patternReference.toJSON(),
-			patternMeta: this.__patternMeta && this.__patternMeta.toJSON(),
-			exampleBoolean: this.__exampleBoolean,
-			exampleInteger: this.__exampleInteger,
-			exampleDecimal: this.__exampleDecimal,
-			exampleBase64Binary: this.__exampleBase64Binary,
-			exampleInstant: this.__exampleInstant,
-			exampleString: this.__exampleString,
-			exampleUri: this.__exampleUri,
-			exampleDate: this.__exampleDate,
-			exampleDateTime: this.__exampleDateTime,
-			exampleTime: this.__exampleTime,
-			exampleCode: this.__exampleCode,
-			exampleOid: this.__exampleOid,
-			exampleId: this.__exampleId,
-			exampleUnsignedInt: this.__exampleUnsignedInt,
-			examplePositiveInt: this.__examplePositiveInt,
-			exampleMarkdown: this.__exampleMarkdown,
-			exampleAnnotation: this.__exampleAnnotation && this.__exampleAnnotation.toJSON(),
-			exampleAttachment: this.__exampleAttachment && this.__exampleAttachment.toJSON(),
-			exampleIdentifier: this.__exampleIdentifier && this.__exampleIdentifier.toJSON(),
-			exampleCodeableConcept: this.__exampleCodeableConcept && this.__exampleCodeableConcept.toJSON(),
-			exampleCoding: this.__exampleCoding && this.__exampleCoding.toJSON(),
-			exampleQuantity: this.__exampleQuantity && this.__exampleQuantity.toJSON(),
-			exampleRange: this.__exampleRange && this.__exampleRange.toJSON(),
-			examplePeriod: this.__examplePeriod && this.__examplePeriod.toJSON(),
-			exampleRatio: this.__exampleRatio && this.__exampleRatio.toJSON(),
-			exampleSampledData: this.__exampleSampledData && this.__exampleSampledData.toJSON(),
-			exampleSignature: this.__exampleSignature && this.__exampleSignature.toJSON(),
-			exampleHumanName: this.__exampleHumanName && this.__exampleHumanName.toJSON(),
-			exampleAddress: this.__exampleAddress && this.__exampleAddress.toJSON(),
-			exampleContactPoint: this.__exampleContactPoint && this.__exampleContactPoint.toJSON(),
-			exampleTiming: this.__exampleTiming && this.__exampleTiming.toJSON(),
-			exampleReference: this.__exampleReference && this.__exampleReference.toJSON(),
-			exampleMeta: this.__exampleMeta && this.__exampleMeta.toJSON(),
-			minValueBoolean: this.__minValueBoolean,
-			minValueInteger: this.__minValueInteger,
-			minValueDecimal: this.__minValueDecimal,
-			minValueBase64Binary: this.__minValueBase64Binary,
-			minValueInstant: this.__minValueInstant,
-			minValueString: this.__minValueString,
-			minValueUri: this.__minValueUri,
-			minValueDate: this.__minValueDate,
-			minValueDateTime: this.__minValueDateTime,
-			minValueTime: this.__minValueTime,
-			minValueCode: this.__minValueCode,
-			minValueOid: this.__minValueOid,
-			minValueId: this.__minValueId,
-			minValueUnsignedInt: this.__minValueUnsignedInt,
-			minValuePositiveInt: this.__minValuePositiveInt,
-			minValueMarkdown: this.__minValueMarkdown,
-			minValueAnnotation: this.__minValueAnnotation && this.__minValueAnnotation.toJSON(),
-			minValueAttachment: this.__minValueAttachment && this.__minValueAttachment.toJSON(),
-			minValueIdentifier: this.__minValueIdentifier && this.__minValueIdentifier.toJSON(),
-			minValueCodeableConcept: this.__minValueCodeableConcept && this.__minValueCodeableConcept.toJSON(),
-			minValueCoding: this.__minValueCoding && this.__minValueCoding.toJSON(),
-			minValueQuantity: this.__minValueQuantity && this.__minValueQuantity.toJSON(),
-			minValueRange: this.__minValueRange && this.__minValueRange.toJSON(),
-			minValuePeriod: this.__minValuePeriod && this.__minValuePeriod.toJSON(),
-			minValueRatio: this.__minValueRatio && this.__minValueRatio.toJSON(),
-			minValueSampledData: this.__minValueSampledData && this.__minValueSampledData.toJSON(),
-			minValueSignature: this.__minValueSignature && this.__minValueSignature.toJSON(),
-			minValueHumanName: this.__minValueHumanName && this.__minValueHumanName.toJSON(),
-			minValueAddress: this.__minValueAddress && this.__minValueAddress.toJSON(),
-			minValueContactPoint: this.__minValueContactPoint && this.__minValueContactPoint.toJSON(),
-			minValueTiming: this.__minValueTiming && this.__minValueTiming.toJSON(),
-			minValueReference: this.__minValueReference && this.__minValueReference.toJSON(),
-			minValueMeta: this.__minValueMeta && this.__minValueMeta.toJSON(),
-			maxValueBoolean: this.__maxValueBoolean,
-			maxValueInteger: this.__maxValueInteger,
-			maxValueDecimal: this.__maxValueDecimal,
-			maxValueBase64Binary: this.__maxValueBase64Binary,
-			maxValueInstant: this.__maxValueInstant,
-			maxValueString: this.__maxValueString,
-			maxValueUri: this.__maxValueUri,
-			maxValueDate: this.__maxValueDate,
-			maxValueDateTime: this.__maxValueDateTime,
-			maxValueTime: this.__maxValueTime,
-			maxValueCode: this.__maxValueCode,
-			maxValueOid: this.__maxValueOid,
-			maxValueId: this.__maxValueId,
-			maxValueUnsignedInt: this.__maxValueUnsignedInt,
-			maxValuePositiveInt: this.__maxValuePositiveInt,
-			maxValueMarkdown: this.__maxValueMarkdown,
-			maxValueAnnotation: this.__maxValueAnnotation && this.__maxValueAnnotation.toJSON(),
-			maxValueAttachment: this.__maxValueAttachment && this.__maxValueAttachment.toJSON(),
-			maxValueIdentifier: this.__maxValueIdentifier && this.__maxValueIdentifier.toJSON(),
-			maxValueCodeableConcept: this.__maxValueCodeableConcept && this.__maxValueCodeableConcept.toJSON(),
-			maxValueCoding: this.__maxValueCoding && this.__maxValueCoding.toJSON(),
-			maxValueQuantity: this.__maxValueQuantity && this.__maxValueQuantity.toJSON(),
-			maxValueRange: this.__maxValueRange && this.__maxValueRange.toJSON(),
-			maxValuePeriod: this.__maxValuePeriod && this.__maxValuePeriod.toJSON(),
-			maxValueRatio: this.__maxValueRatio && this.__maxValueRatio.toJSON(),
-			maxValueSampledData: this.__maxValueSampledData && this.__maxValueSampledData.toJSON(),
-			maxValueSignature: this.__maxValueSignature && this.__maxValueSignature.toJSON(),
-			maxValueHumanName: this.__maxValueHumanName && this.__maxValueHumanName.toJSON(),
-			maxValueAddress: this.__maxValueAddress && this.__maxValueAddress.toJSON(),
-			maxValueContactPoint: this.__maxValueContactPoint && this.__maxValueContactPoint.toJSON(),
-			maxValueTiming: this.__maxValueTiming && this.__maxValueTiming.toJSON(),
-			maxValueReference: this.__maxValueReference && this.__maxValueReference.toJSON(),
-			maxValueMeta: this.__maxValueMeta && this.__maxValueMeta.toJSON(),
-			maxLength: this.__maxLength,
-			condition: this.__condition,
-			constraint: this.__constraint && this.__constraint.map(v => v.toJSON()),
-			mustSupport: this.__mustSupport,
-			isModifier: this.__isModifier,
-			isSummary: this.__isSummary,
-			binding: this.__binding && this.__binding.toJSON(),
-			mapping: this.__mapping && this.__mapping.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_path: this._path && this._path.toJSON(),
+			path: this.path,
+			_representation: this._representation && this._representation.toJSON(),
+			representation: this.representation,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_label: this._label && this._label.toJSON(),
+			label: this.label,
+			code: this.code && this.code.map(v => v.toJSON()),
+			slicing: this.slicing && this.slicing.toJSON(),
+			_short: this._short && this._short.toJSON(),
+			short: this.short,
+			_definition: this._definition && this._definition.toJSON(),
+			definition: this.definition,
+			_comments: this._comments && this._comments.toJSON(),
+			comments: this.comments,
+			_requirements: this._requirements && this._requirements.toJSON(),
+			requirements: this.requirements,
+			_alias: this._alias && this._alias.toJSON(),
+			alias: this.alias,
+			_min: this._min && this._min.toJSON(),
+			min: this.min,
+			_max: this._max && this._max.toJSON(),
+			max: this.max,
+			base: this.base && this.base.toJSON(),
+			type: this.type && this.type.map(v => v.toJSON()),
+			_nameReference: this._nameReference && this._nameReference.toJSON(),
+			nameReference: this.nameReference,
+			_defaultValueBoolean: this._defaultValueBoolean && this._defaultValueBoolean.toJSON(),
+			defaultValueBoolean: this.defaultValueBoolean,
+			_defaultValueInteger: this._defaultValueInteger && this._defaultValueInteger.toJSON(),
+			defaultValueInteger: this.defaultValueInteger,
+			_defaultValueDecimal: this._defaultValueDecimal && this._defaultValueDecimal.toJSON(),
+			defaultValueDecimal: this.defaultValueDecimal,
+			_defaultValueBase64Binary: this._defaultValueBase64Binary && this._defaultValueBase64Binary.toJSON(),
+			defaultValueBase64Binary: this.defaultValueBase64Binary,
+			_defaultValueInstant: this._defaultValueInstant && this._defaultValueInstant.toJSON(),
+			defaultValueInstant: this.defaultValueInstant,
+			_defaultValueString: this._defaultValueString && this._defaultValueString.toJSON(),
+			defaultValueString: this.defaultValueString,
+			_defaultValueUri: this._defaultValueUri && this._defaultValueUri.toJSON(),
+			defaultValueUri: this.defaultValueUri,
+			_defaultValueDate: this._defaultValueDate && this._defaultValueDate.toJSON(),
+			defaultValueDate: this.defaultValueDate,
+			_defaultValueDateTime: this._defaultValueDateTime && this._defaultValueDateTime.toJSON(),
+			defaultValueDateTime: this.defaultValueDateTime,
+			_defaultValueTime: this._defaultValueTime && this._defaultValueTime.toJSON(),
+			defaultValueTime: this.defaultValueTime,
+			_defaultValueCode: this._defaultValueCode && this._defaultValueCode.toJSON(),
+			defaultValueCode: this.defaultValueCode,
+			_defaultValueOid: this._defaultValueOid && this._defaultValueOid.toJSON(),
+			defaultValueOid: this.defaultValueOid,
+			_defaultValueId: this._defaultValueId && this._defaultValueId.toJSON(),
+			defaultValueId: this.defaultValueId,
+			_defaultValueUnsignedInt: this._defaultValueUnsignedInt && this._defaultValueUnsignedInt.toJSON(),
+			defaultValueUnsignedInt: this.defaultValueUnsignedInt,
+			_defaultValuePositiveInt: this._defaultValuePositiveInt && this._defaultValuePositiveInt.toJSON(),
+			defaultValuePositiveInt: this.defaultValuePositiveInt,
+			_defaultValueMarkdown: this._defaultValueMarkdown && this._defaultValueMarkdown.toJSON(),
+			defaultValueMarkdown: this.defaultValueMarkdown,
+			defaultValueAnnotation: this.defaultValueAnnotation && this.defaultValueAnnotation.toJSON(),
+			defaultValueAttachment: this.defaultValueAttachment && this.defaultValueAttachment.toJSON(),
+			defaultValueIdentifier: this.defaultValueIdentifier && this.defaultValueIdentifier.toJSON(),
+			defaultValueCodeableConcept: this.defaultValueCodeableConcept && this.defaultValueCodeableConcept.toJSON(),
+			defaultValueCoding: this.defaultValueCoding && this.defaultValueCoding.toJSON(),
+			defaultValueQuantity: this.defaultValueQuantity && this.defaultValueQuantity.toJSON(),
+			defaultValueRange: this.defaultValueRange && this.defaultValueRange.toJSON(),
+			defaultValuePeriod: this.defaultValuePeriod && this.defaultValuePeriod.toJSON(),
+			defaultValueRatio: this.defaultValueRatio && this.defaultValueRatio.toJSON(),
+			defaultValueSampledData: this.defaultValueSampledData && this.defaultValueSampledData.toJSON(),
+			defaultValueSignature: this.defaultValueSignature && this.defaultValueSignature.toJSON(),
+			defaultValueHumanName: this.defaultValueHumanName && this.defaultValueHumanName.toJSON(),
+			defaultValueAddress: this.defaultValueAddress && this.defaultValueAddress.toJSON(),
+			defaultValueContactPoint: this.defaultValueContactPoint && this.defaultValueContactPoint.toJSON(),
+			defaultValueTiming: this.defaultValueTiming && this.defaultValueTiming.toJSON(),
+			defaultValueReference: this.defaultValueReference && this.defaultValueReference.toJSON(),
+			defaultValueMeta: this.defaultValueMeta && this.defaultValueMeta.toJSON(),
+			_meaningWhenMissing: this._meaningWhenMissing && this._meaningWhenMissing.toJSON(),
+			meaningWhenMissing: this.meaningWhenMissing,
+			_fixedBoolean: this._fixedBoolean && this._fixedBoolean.toJSON(),
+			fixedBoolean: this.fixedBoolean,
+			_fixedInteger: this._fixedInteger && this._fixedInteger.toJSON(),
+			fixedInteger: this.fixedInteger,
+			_fixedDecimal: this._fixedDecimal && this._fixedDecimal.toJSON(),
+			fixedDecimal: this.fixedDecimal,
+			_fixedBase64Binary: this._fixedBase64Binary && this._fixedBase64Binary.toJSON(),
+			fixedBase64Binary: this.fixedBase64Binary,
+			_fixedInstant: this._fixedInstant && this._fixedInstant.toJSON(),
+			fixedInstant: this.fixedInstant,
+			_fixedString: this._fixedString && this._fixedString.toJSON(),
+			fixedString: this.fixedString,
+			_fixedUri: this._fixedUri && this._fixedUri.toJSON(),
+			fixedUri: this.fixedUri,
+			_fixedDate: this._fixedDate && this._fixedDate.toJSON(),
+			fixedDate: this.fixedDate,
+			_fixedDateTime: this._fixedDateTime && this._fixedDateTime.toJSON(),
+			fixedDateTime: this.fixedDateTime,
+			_fixedTime: this._fixedTime && this._fixedTime.toJSON(),
+			fixedTime: this.fixedTime,
+			_fixedCode: this._fixedCode && this._fixedCode.toJSON(),
+			fixedCode: this.fixedCode,
+			_fixedOid: this._fixedOid && this._fixedOid.toJSON(),
+			fixedOid: this.fixedOid,
+			_fixedId: this._fixedId && this._fixedId.toJSON(),
+			fixedId: this.fixedId,
+			_fixedUnsignedInt: this._fixedUnsignedInt && this._fixedUnsignedInt.toJSON(),
+			fixedUnsignedInt: this.fixedUnsignedInt,
+			_fixedPositiveInt: this._fixedPositiveInt && this._fixedPositiveInt.toJSON(),
+			fixedPositiveInt: this.fixedPositiveInt,
+			_fixedMarkdown: this._fixedMarkdown && this._fixedMarkdown.toJSON(),
+			fixedMarkdown: this.fixedMarkdown,
+			fixedAnnotation: this.fixedAnnotation && this.fixedAnnotation.toJSON(),
+			fixedAttachment: this.fixedAttachment && this.fixedAttachment.toJSON(),
+			fixedIdentifier: this.fixedIdentifier && this.fixedIdentifier.toJSON(),
+			fixedCodeableConcept: this.fixedCodeableConcept && this.fixedCodeableConcept.toJSON(),
+			fixedCoding: this.fixedCoding && this.fixedCoding.toJSON(),
+			fixedQuantity: this.fixedQuantity && this.fixedQuantity.toJSON(),
+			fixedRange: this.fixedRange && this.fixedRange.toJSON(),
+			fixedPeriod: this.fixedPeriod && this.fixedPeriod.toJSON(),
+			fixedRatio: this.fixedRatio && this.fixedRatio.toJSON(),
+			fixedSampledData: this.fixedSampledData && this.fixedSampledData.toJSON(),
+			fixedSignature: this.fixedSignature && this.fixedSignature.toJSON(),
+			fixedHumanName: this.fixedHumanName && this.fixedHumanName.toJSON(),
+			fixedAddress: this.fixedAddress && this.fixedAddress.toJSON(),
+			fixedContactPoint: this.fixedContactPoint && this.fixedContactPoint.toJSON(),
+			fixedTiming: this.fixedTiming && this.fixedTiming.toJSON(),
+			fixedReference: this.fixedReference && this.fixedReference.toJSON(),
+			fixedMeta: this.fixedMeta && this.fixedMeta.toJSON(),
+			_patternBoolean: this._patternBoolean && this._patternBoolean.toJSON(),
+			patternBoolean: this.patternBoolean,
+			_patternInteger: this._patternInteger && this._patternInteger.toJSON(),
+			patternInteger: this.patternInteger,
+			_patternDecimal: this._patternDecimal && this._patternDecimal.toJSON(),
+			patternDecimal: this.patternDecimal,
+			_patternBase64Binary: this._patternBase64Binary && this._patternBase64Binary.toJSON(),
+			patternBase64Binary: this.patternBase64Binary,
+			_patternInstant: this._patternInstant && this._patternInstant.toJSON(),
+			patternInstant: this.patternInstant,
+			_patternString: this._patternString && this._patternString.toJSON(),
+			patternString: this.patternString,
+			_patternUri: this._patternUri && this._patternUri.toJSON(),
+			patternUri: this.patternUri,
+			_patternDate: this._patternDate && this._patternDate.toJSON(),
+			patternDate: this.patternDate,
+			_patternDateTime: this._patternDateTime && this._patternDateTime.toJSON(),
+			patternDateTime: this.patternDateTime,
+			_patternTime: this._patternTime && this._patternTime.toJSON(),
+			patternTime: this.patternTime,
+			_patternCode: this._patternCode && this._patternCode.toJSON(),
+			patternCode: this.patternCode,
+			_patternOid: this._patternOid && this._patternOid.toJSON(),
+			patternOid: this.patternOid,
+			_patternId: this._patternId && this._patternId.toJSON(),
+			patternId: this.patternId,
+			_patternUnsignedInt: this._patternUnsignedInt && this._patternUnsignedInt.toJSON(),
+			patternUnsignedInt: this.patternUnsignedInt,
+			_patternPositiveInt: this._patternPositiveInt && this._patternPositiveInt.toJSON(),
+			patternPositiveInt: this.patternPositiveInt,
+			_patternMarkdown: this._patternMarkdown && this._patternMarkdown.toJSON(),
+			patternMarkdown: this.patternMarkdown,
+			patternAnnotation: this.patternAnnotation && this.patternAnnotation.toJSON(),
+			patternAttachment: this.patternAttachment && this.patternAttachment.toJSON(),
+			patternIdentifier: this.patternIdentifier && this.patternIdentifier.toJSON(),
+			patternCodeableConcept: this.patternCodeableConcept && this.patternCodeableConcept.toJSON(),
+			patternCoding: this.patternCoding && this.patternCoding.toJSON(),
+			patternQuantity: this.patternQuantity && this.patternQuantity.toJSON(),
+			patternRange: this.patternRange && this.patternRange.toJSON(),
+			patternPeriod: this.patternPeriod && this.patternPeriod.toJSON(),
+			patternRatio: this.patternRatio && this.patternRatio.toJSON(),
+			patternSampledData: this.patternSampledData && this.patternSampledData.toJSON(),
+			patternSignature: this.patternSignature && this.patternSignature.toJSON(),
+			patternHumanName: this.patternHumanName && this.patternHumanName.toJSON(),
+			patternAddress: this.patternAddress && this.patternAddress.toJSON(),
+			patternContactPoint: this.patternContactPoint && this.patternContactPoint.toJSON(),
+			patternTiming: this.patternTiming && this.patternTiming.toJSON(),
+			patternReference: this.patternReference && this.patternReference.toJSON(),
+			patternMeta: this.patternMeta && this.patternMeta.toJSON(),
+			_exampleBoolean: this._exampleBoolean && this._exampleBoolean.toJSON(),
+			exampleBoolean: this.exampleBoolean,
+			_exampleInteger: this._exampleInteger && this._exampleInteger.toJSON(),
+			exampleInteger: this.exampleInteger,
+			_exampleDecimal: this._exampleDecimal && this._exampleDecimal.toJSON(),
+			exampleDecimal: this.exampleDecimal,
+			_exampleBase64Binary: this._exampleBase64Binary && this._exampleBase64Binary.toJSON(),
+			exampleBase64Binary: this.exampleBase64Binary,
+			_exampleInstant: this._exampleInstant && this._exampleInstant.toJSON(),
+			exampleInstant: this.exampleInstant,
+			_exampleString: this._exampleString && this._exampleString.toJSON(),
+			exampleString: this.exampleString,
+			_exampleUri: this._exampleUri && this._exampleUri.toJSON(),
+			exampleUri: this.exampleUri,
+			_exampleDate: this._exampleDate && this._exampleDate.toJSON(),
+			exampleDate: this.exampleDate,
+			_exampleDateTime: this._exampleDateTime && this._exampleDateTime.toJSON(),
+			exampleDateTime: this.exampleDateTime,
+			_exampleTime: this._exampleTime && this._exampleTime.toJSON(),
+			exampleTime: this.exampleTime,
+			_exampleCode: this._exampleCode && this._exampleCode.toJSON(),
+			exampleCode: this.exampleCode,
+			_exampleOid: this._exampleOid && this._exampleOid.toJSON(),
+			exampleOid: this.exampleOid,
+			_exampleId: this._exampleId && this._exampleId.toJSON(),
+			exampleId: this.exampleId,
+			_exampleUnsignedInt: this._exampleUnsignedInt && this._exampleUnsignedInt.toJSON(),
+			exampleUnsignedInt: this.exampleUnsignedInt,
+			_examplePositiveInt: this._examplePositiveInt && this._examplePositiveInt.toJSON(),
+			examplePositiveInt: this.examplePositiveInt,
+			_exampleMarkdown: this._exampleMarkdown && this._exampleMarkdown.toJSON(),
+			exampleMarkdown: this.exampleMarkdown,
+			exampleAnnotation: this.exampleAnnotation && this.exampleAnnotation.toJSON(),
+			exampleAttachment: this.exampleAttachment && this.exampleAttachment.toJSON(),
+			exampleIdentifier: this.exampleIdentifier && this.exampleIdentifier.toJSON(),
+			exampleCodeableConcept: this.exampleCodeableConcept && this.exampleCodeableConcept.toJSON(),
+			exampleCoding: this.exampleCoding && this.exampleCoding.toJSON(),
+			exampleQuantity: this.exampleQuantity && this.exampleQuantity.toJSON(),
+			exampleRange: this.exampleRange && this.exampleRange.toJSON(),
+			examplePeriod: this.examplePeriod && this.examplePeriod.toJSON(),
+			exampleRatio: this.exampleRatio && this.exampleRatio.toJSON(),
+			exampleSampledData: this.exampleSampledData && this.exampleSampledData.toJSON(),
+			exampleSignature: this.exampleSignature && this.exampleSignature.toJSON(),
+			exampleHumanName: this.exampleHumanName && this.exampleHumanName.toJSON(),
+			exampleAddress: this.exampleAddress && this.exampleAddress.toJSON(),
+			exampleContactPoint: this.exampleContactPoint && this.exampleContactPoint.toJSON(),
+			exampleTiming: this.exampleTiming && this.exampleTiming.toJSON(),
+			exampleReference: this.exampleReference && this.exampleReference.toJSON(),
+			exampleMeta: this.exampleMeta && this.exampleMeta.toJSON(),
+			_minValueBoolean: this._minValueBoolean && this._minValueBoolean.toJSON(),
+			minValueBoolean: this.minValueBoolean,
+			_minValueInteger: this._minValueInteger && this._minValueInteger.toJSON(),
+			minValueInteger: this.minValueInteger,
+			_minValueDecimal: this._minValueDecimal && this._minValueDecimal.toJSON(),
+			minValueDecimal: this.minValueDecimal,
+			_minValueBase64Binary: this._minValueBase64Binary && this._minValueBase64Binary.toJSON(),
+			minValueBase64Binary: this.minValueBase64Binary,
+			_minValueInstant: this._minValueInstant && this._minValueInstant.toJSON(),
+			minValueInstant: this.minValueInstant,
+			_minValueString: this._minValueString && this._minValueString.toJSON(),
+			minValueString: this.minValueString,
+			_minValueUri: this._minValueUri && this._minValueUri.toJSON(),
+			minValueUri: this.minValueUri,
+			_minValueDate: this._minValueDate && this._minValueDate.toJSON(),
+			minValueDate: this.minValueDate,
+			_minValueDateTime: this._minValueDateTime && this._minValueDateTime.toJSON(),
+			minValueDateTime: this.minValueDateTime,
+			_minValueTime: this._minValueTime && this._minValueTime.toJSON(),
+			minValueTime: this.minValueTime,
+			_minValueCode: this._minValueCode && this._minValueCode.toJSON(),
+			minValueCode: this.minValueCode,
+			_minValueOid: this._minValueOid && this._minValueOid.toJSON(),
+			minValueOid: this.minValueOid,
+			_minValueId: this._minValueId && this._minValueId.toJSON(),
+			minValueId: this.minValueId,
+			_minValueUnsignedInt: this._minValueUnsignedInt && this._minValueUnsignedInt.toJSON(),
+			minValueUnsignedInt: this.minValueUnsignedInt,
+			_minValuePositiveInt: this._minValuePositiveInt && this._minValuePositiveInt.toJSON(),
+			minValuePositiveInt: this.minValuePositiveInt,
+			_minValueMarkdown: this._minValueMarkdown && this._minValueMarkdown.toJSON(),
+			minValueMarkdown: this.minValueMarkdown,
+			minValueAnnotation: this.minValueAnnotation && this.minValueAnnotation.toJSON(),
+			minValueAttachment: this.minValueAttachment && this.minValueAttachment.toJSON(),
+			minValueIdentifier: this.minValueIdentifier && this.minValueIdentifier.toJSON(),
+			minValueCodeableConcept: this.minValueCodeableConcept && this.minValueCodeableConcept.toJSON(),
+			minValueCoding: this.minValueCoding && this.minValueCoding.toJSON(),
+			minValueQuantity: this.minValueQuantity && this.minValueQuantity.toJSON(),
+			minValueRange: this.minValueRange && this.minValueRange.toJSON(),
+			minValuePeriod: this.minValuePeriod && this.minValuePeriod.toJSON(),
+			minValueRatio: this.minValueRatio && this.minValueRatio.toJSON(),
+			minValueSampledData: this.minValueSampledData && this.minValueSampledData.toJSON(),
+			minValueSignature: this.minValueSignature && this.minValueSignature.toJSON(),
+			minValueHumanName: this.minValueHumanName && this.minValueHumanName.toJSON(),
+			minValueAddress: this.minValueAddress && this.minValueAddress.toJSON(),
+			minValueContactPoint: this.minValueContactPoint && this.minValueContactPoint.toJSON(),
+			minValueTiming: this.minValueTiming && this.minValueTiming.toJSON(),
+			minValueReference: this.minValueReference && this.minValueReference.toJSON(),
+			minValueMeta: this.minValueMeta && this.minValueMeta.toJSON(),
+			_maxValueBoolean: this._maxValueBoolean && this._maxValueBoolean.toJSON(),
+			maxValueBoolean: this.maxValueBoolean,
+			_maxValueInteger: this._maxValueInteger && this._maxValueInteger.toJSON(),
+			maxValueInteger: this.maxValueInteger,
+			_maxValueDecimal: this._maxValueDecimal && this._maxValueDecimal.toJSON(),
+			maxValueDecimal: this.maxValueDecimal,
+			_maxValueBase64Binary: this._maxValueBase64Binary && this._maxValueBase64Binary.toJSON(),
+			maxValueBase64Binary: this.maxValueBase64Binary,
+			_maxValueInstant: this._maxValueInstant && this._maxValueInstant.toJSON(),
+			maxValueInstant: this.maxValueInstant,
+			_maxValueString: this._maxValueString && this._maxValueString.toJSON(),
+			maxValueString: this.maxValueString,
+			_maxValueUri: this._maxValueUri && this._maxValueUri.toJSON(),
+			maxValueUri: this.maxValueUri,
+			_maxValueDate: this._maxValueDate && this._maxValueDate.toJSON(),
+			maxValueDate: this.maxValueDate,
+			_maxValueDateTime: this._maxValueDateTime && this._maxValueDateTime.toJSON(),
+			maxValueDateTime: this.maxValueDateTime,
+			_maxValueTime: this._maxValueTime && this._maxValueTime.toJSON(),
+			maxValueTime: this.maxValueTime,
+			_maxValueCode: this._maxValueCode && this._maxValueCode.toJSON(),
+			maxValueCode: this.maxValueCode,
+			_maxValueOid: this._maxValueOid && this._maxValueOid.toJSON(),
+			maxValueOid: this.maxValueOid,
+			_maxValueId: this._maxValueId && this._maxValueId.toJSON(),
+			maxValueId: this.maxValueId,
+			_maxValueUnsignedInt: this._maxValueUnsignedInt && this._maxValueUnsignedInt.toJSON(),
+			maxValueUnsignedInt: this.maxValueUnsignedInt,
+			_maxValuePositiveInt: this._maxValuePositiveInt && this._maxValuePositiveInt.toJSON(),
+			maxValuePositiveInt: this.maxValuePositiveInt,
+			_maxValueMarkdown: this._maxValueMarkdown && this._maxValueMarkdown.toJSON(),
+			maxValueMarkdown: this.maxValueMarkdown,
+			maxValueAnnotation: this.maxValueAnnotation && this.maxValueAnnotation.toJSON(),
+			maxValueAttachment: this.maxValueAttachment && this.maxValueAttachment.toJSON(),
+			maxValueIdentifier: this.maxValueIdentifier && this.maxValueIdentifier.toJSON(),
+			maxValueCodeableConcept: this.maxValueCodeableConcept && this.maxValueCodeableConcept.toJSON(),
+			maxValueCoding: this.maxValueCoding && this.maxValueCoding.toJSON(),
+			maxValueQuantity: this.maxValueQuantity && this.maxValueQuantity.toJSON(),
+			maxValueRange: this.maxValueRange && this.maxValueRange.toJSON(),
+			maxValuePeriod: this.maxValuePeriod && this.maxValuePeriod.toJSON(),
+			maxValueRatio: this.maxValueRatio && this.maxValueRatio.toJSON(),
+			maxValueSampledData: this.maxValueSampledData && this.maxValueSampledData.toJSON(),
+			maxValueSignature: this.maxValueSignature && this.maxValueSignature.toJSON(),
+			maxValueHumanName: this.maxValueHumanName && this.maxValueHumanName.toJSON(),
+			maxValueAddress: this.maxValueAddress && this.maxValueAddress.toJSON(),
+			maxValueContactPoint: this.maxValueContactPoint && this.maxValueContactPoint.toJSON(),
+			maxValueTiming: this.maxValueTiming && this.maxValueTiming.toJSON(),
+			maxValueReference: this.maxValueReference && this.maxValueReference.toJSON(),
+			maxValueMeta: this.maxValueMeta && this.maxValueMeta.toJSON(),
+			_maxLength: this._maxLength && this._maxLength.toJSON(),
+			maxLength: this.maxLength,
+			_condition: this._condition && this._condition.toJSON(),
+			condition: this.condition,
+			constraint: this.constraint && this.constraint.map(v => v.toJSON()),
+			_mustSupport: this._mustSupport && this._mustSupport.toJSON(),
+			mustSupport: this.mustSupport,
+			_isModifier: this._isModifier && this._isModifier.toJSON(),
+			isModifier: this.isModifier,
+			_isSummary: this._isSummary && this._isSummary.toJSON(),
+			isSummary: this.isSummary,
+			binding: this.binding && this.binding.toJSON(),
+			mapping: this.mapping && this.mapping.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ElementDefinition;
+};

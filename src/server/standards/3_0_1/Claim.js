@@ -1,380 +1,653 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Claim Class
+ */
+module.exports = class Claim {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Claim extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Claim';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fm-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-subtype
+		Object.defineProperty(this, 'subType', {
+			enumerable: true,
+			get: () => this.__data.subType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.subType = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_use', {
+			enumerable: true,
+			get: () => this.__data._use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._use = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/claim-use
+		Object.defineProperty(this, 'use', {
+			enumerable: true,
+			get: () => this.__data.use,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.use = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'billablePeriod', {
+			enumerable: true,
+			get: () => this.__data.billablePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.billablePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_created', {
+			enumerable: true,
+			get: () => this.__data._created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._created = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'created', {
+			enumerable: true,
+			get: () => this.__data.created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.created = value;
+			},
+		});
+
+		Object.defineProperty(this, 'enterer', {
+			enumerable: true,
+			get: () => this.__data.enterer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.enterer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'insurer', {
+			enumerable: true,
+			get: () => this.__data.insurer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.insurer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'provider', {
+			enumerable: true,
+			get: () => this.__data.provider,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.provider = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'organization', {
+			enumerable: true,
+			get: () => this.__data.organization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.organization = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/process-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.priority = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fundsreserve
+		Object.defineProperty(this, 'fundsReserve', {
+			enumerable: true,
+			get: () => this.__data.fundsReserve,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.fundsReserve = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'related', {
+			enumerable: true,
+			get: () => this.__data.related,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimRelated = require('./claimrelated.js');
+				this.__data.related = Array.isArray(value) ? value.map(v => new ClaimRelated(v)) : [new ClaimRelated(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'prescription', {
+			enumerable: true,
+			get: () => this.__data.prescription,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.prescription = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'originalPrescription', {
+			enumerable: true,
+			get: () => this.__data.originalPrescription,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.originalPrescription = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'payee', {
+			enumerable: true,
+			get: () => this.__data.payee,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimPayee = require('./claimpayee.js');
+				this.__data.payee = new ClaimPayee(value);
+			},
+		});
+
+		Object.defineProperty(this, 'referral', {
+			enumerable: true,
+			get: () => this.__data.referral,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.referral = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'facility', {
+			enumerable: true,
+			get: () => this.__data.facility,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.facility = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'careTeam', {
+			enumerable: true,
+			get: () => this.__data.careTeam,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimCareTeam = require('./claimcareteam.js');
+				this.__data.careTeam = Array.isArray(value) ? value.map(v => new ClaimCareTeam(v)) : [new ClaimCareTeam(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'information', {
+			enumerable: true,
+			get: () => this.__data.information,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimInformation = require('./claiminformation.js');
+				this.__data.information = Array.isArray(value)
+					? value.map(v => new ClaimInformation(v))
+					: [new ClaimInformation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'diagnosis', {
+			enumerable: true,
+			get: () => this.__data.diagnosis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimDiagnosis = require('./claimdiagnosis.js');
+				this.__data.diagnosis = Array.isArray(value)
+					? value.map(v => new ClaimDiagnosis(v))
+					: [new ClaimDiagnosis(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'procedure', {
+			enumerable: true,
+			get: () => this.__data.procedure,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimProcedure = require('./claimprocedure.js');
+				this.__data.procedure = Array.isArray(value)
+					? value.map(v => new ClaimProcedure(v))
+					: [new ClaimProcedure(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'insurance', {
+			enumerable: true,
+			get: () => this.__data.insurance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimInsurance = require('./claiminsurance.js');
+				this.__data.insurance = Array.isArray(value)
+					? value.map(v => new ClaimInsurance(v))
+					: [new ClaimInsurance(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'accident', {
+			enumerable: true,
+			get: () => this.__data.accident,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimAccident = require('./claimaccident.js');
+				this.__data.accident = new ClaimAccident(value);
+			},
+		});
+
+		Object.defineProperty(this, 'employmentImpacted', {
+			enumerable: true,
+			get: () => this.__data.employmentImpacted,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.employmentImpacted = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'hospitalization', {
+			enumerable: true,
+			get: () => this.__data.hospitalization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.hospitalization = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimItem = require('./claimitem.js');
+				this.__data.item = Array.isArray(value) ? value.map(v => new ClaimItem(v)) : [new ClaimItem(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'total', {
+			enumerable: true,
+			get: () => this.__data.total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.total = new Money(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Claim',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Claim resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Claim';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Claim = new_value;
-	}
-
-	// The business identifier for the instance: claim number, pre-determination or pre-authorization number.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The status of the resource instance.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The category of claim, eg, oral, pharmacy, vision, insitutional, professional.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// A finer grained suite of claim subtype codes which may convey Inpatient vs Outpatient and/or a specialty service. In the US the BillType.
-	get subType() {
-		return this.__subType;
-	}
-
-	set subType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__subType = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Complete (Bill or Claim), Proposed (Pre-Authorization), Exploratory (Pre-determination).
-	get use() {
-		return this.__use;
-	}
-
-	set use(new_value) {
-		this.__use = new_value;
-	}
-
-	// Patient Resource.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The billable period for which charges are being submitted.
-	get billablePeriod() {
-		return this.__billablePeriod;
-	}
-
-	set billablePeriod(new_value) {
-		const Period = require('./Period');
-		this.__billablePeriod = new Period(new_value);
-	}
-
-	// The date when the enclosed suite of services were performed or completed.
-	get created() {
-		return this.__created;
-	}
-
-	set created(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field created`);
-		}
-		this.__created = new_value;
-	}
-
-	// Person who created the invoice/claim/pre-determination or pre-authorization.
-	get enterer() {
-		return this.__enterer;
-	}
-
-	set enterer(new_value) {
-		const Reference = require('./Reference');
-		this.__enterer = new Reference(new_value);
-	}
-
-	// The Insurer who is target of the request.
-	get insurer() {
-		return this.__insurer;
-	}
-
-	set insurer(new_value) {
-		const Reference = require('./Reference');
-		this.__insurer = new Reference(new_value);
-	}
-
-	// The provider which is responsible for the bill, claim pre-determination, pre-authorization.
-	get provider() {
-		return this.__provider;
-	}
-
-	set provider(new_value) {
-		const Reference = require('./Reference');
-		this.__provider = new Reference(new_value);
-	}
-
-	// The organization which is responsible for the bill, claim pre-determination, pre-authorization.
-	get organization() {
-		return this.__organization;
-	}
-
-	set organization(new_value) {
-		const Reference = require('./Reference');
-		this.__organization = new Reference(new_value);
-	}
-
-	// Immediate (STAT), best effort (NORMAL), deferred (DEFER).
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__priority = new CodeableConcept(new_value);
-	}
-
-	// In the case of a Pre-Determination/Pre-Authorization the provider may request that funds in the amount of the expected Benefit be reserved (\'Patient\' or \'Provider\') to pay for the Benefits determined on the subsequent claim(s). \'None\' explicitly indicates no funds reserving is requested.
-	get fundsReserve() {
-		return this.__fundsReserve;
-	}
-
-	set fundsReserve(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__fundsReserve = new CodeableConcept(new_value);
-	}
-
-	// Other claims which are related to this claim such as prior claim versions or for related services.
-	get related() {
-		return this.__related;
-	}
-
-	set related(new_value) {
-		const ClaimRelated = require('./ClaimRelated');
-		this.__related = Array.isArray(new_value)
-			? new_value.map(val => new ClaimRelated(val))
-			: [new ClaimRelated(new_value)];
-	}
-
-	// Prescription to support the dispensing of Pharmacy or Vision products.
-	get prescription() {
-		return this.__prescription;
-	}
-
-	set prescription(new_value) {
-		const Reference = require('./Reference');
-		this.__prescription = new Reference(new_value);
-	}
-
-	// Original prescription which has been superceded by this prescription to support the dispensing of pharmacy services, medications or products. For example, a physician may prescribe a medication which the pharmacy determines is contraindicated, or for which the patient has an intolerance, and therefor issues a new precription for an alternate medication which has the same theraputic intent. The prescription from the pharmacy becomes the \'prescription\' and that from the physician becomes the \'original prescription\'.
-	get originalPrescription() {
-		return this.__originalPrescription;
-	}
-
-	set originalPrescription(new_value) {
-		const Reference = require('./Reference');
-		this.__originalPrescription = new Reference(new_value);
-	}
-
-	// The party to be reimbursed for the services.
-	get payee() {
-		return this.__payee;
-	}
-
-	set payee(new_value) {
-		const ClaimPayee = require('./ClaimPayee');
-		this.__payee = new ClaimPayee(new_value);
-	}
-
-	// The referral resource which lists the date, practitioner, reason and other supporting information.
-	get referral() {
-		return this.__referral;
-	}
-
-	set referral(new_value) {
-		const Reference = require('./Reference');
-		this.__referral = new Reference(new_value);
-	}
-
-	// Facility where the services were provided.
-	get facility() {
-		return this.__facility;
-	}
-
-	set facility(new_value) {
-		const Reference = require('./Reference');
-		this.__facility = new Reference(new_value);
-	}
-
-	// The members of the team who provided the overall service as well as their role and whether responsible and qualifications.
-	get careTeam() {
-		return this.__careTeam;
-	}
-
-	set careTeam(new_value) {
-		const ClaimCareTeam = require('./ClaimCareTeam');
-		this.__careTeam = Array.isArray(new_value)
-			? new_value.map(val => new ClaimCareTeam(val))
-			: [new ClaimCareTeam(new_value)];
-	}
-
-	// Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues. Often there are mutiple jurisdiction specific valuesets which are required.
-	get information() {
-		return this.__information;
-	}
-
-	set information(new_value) {
-		const ClaimInformation = require('./ClaimInformation');
-		this.__information = Array.isArray(new_value)
-			? new_value.map(val => new ClaimInformation(val))
-			: [new ClaimInformation(new_value)];
-	}
-
-	// List of patient diagnosis for which care is sought.
-	get diagnosis() {
-		return this.__diagnosis;
-	}
-
-	set diagnosis(new_value) {
-		const ClaimDiagnosis = require('./ClaimDiagnosis');
-		this.__diagnosis = Array.isArray(new_value)
-			? new_value.map(val => new ClaimDiagnosis(val))
-			: [new ClaimDiagnosis(new_value)];
-	}
-
-	// Ordered list of patient procedures performed to support the adjudication.
-	get procedure() {
-		return this.__procedure;
-	}
-
-	set procedure(new_value) {
-		const ClaimProcedure = require('./ClaimProcedure');
-		this.__procedure = Array.isArray(new_value)
-			? new_value.map(val => new ClaimProcedure(val))
-			: [new ClaimProcedure(new_value)];
-	}
-
-	// Financial instrument by which payment information for health care.
-	get insurance() {
-		return this.__insurance;
-	}
-
-	set insurance(new_value) {
-		const ClaimInsurance = require('./ClaimInsurance');
-		this.__insurance = Array.isArray(new_value)
-			? new_value.map(val => new ClaimInsurance(val))
-			: [new ClaimInsurance(new_value)];
-	}
-
-	// An accident which resulted in the need for healthcare services.
-	get accident() {
-		return this.__accident;
-	}
-
-	set accident(new_value) {
-		const ClaimAccident = require('./ClaimAccident');
-		this.__accident = new ClaimAccident(new_value);
-	}
-
-	// The start and optional end dates of when the patient was precluded from working due to the treatable condition(s).
-	get employmentImpacted() {
-		return this.__employmentImpacted;
-	}
-
-	set employmentImpacted(new_value) {
-		const Period = require('./Period');
-		this.__employmentImpacted = new Period(new_value);
-	}
-
-	// The start and optional end dates of when the patient was confined to a treatment center.
-	get hospitalization() {
-		return this.__hospitalization;
-	}
-
-	set hospitalization(new_value) {
-		const Period = require('./Period');
-		this.__hospitalization = new Period(new_value);
-	}
-
-	// First tier of goods and services.
-	get item() {
-		return this.__item;
-	}
-
-	set item(new_value) {
-		const ClaimItem = require('./ClaimItem');
-		this.__item = Array.isArray(new_value) ? new_value.map(val => new ClaimItem(val)) : [new ClaimItem(new_value)];
-	}
-
-	// The total value of the claim.
-	get total() {
-		return this.__total;
-	}
-
-	set total(new_value) {
-		const Money = require('./Money');
-		this.__total = new Money(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			type: this.__type && this.__type.toJSON(),
-			subType: this.__subType && this.__subType.map(v => v.toJSON()),
-			use: this.__use,
-			patient: this.__patient && this.__patient.toJSON(),
-			billablePeriod: this.__billablePeriod && this.__billablePeriod.toJSON(),
-			created: this.__created,
-			enterer: this.__enterer && this.__enterer.toJSON(),
-			insurer: this.__insurer && this.__insurer.toJSON(),
-			provider: this.__provider && this.__provider.toJSON(),
-			organization: this.__organization && this.__organization.toJSON(),
-			priority: this.__priority && this.__priority.toJSON(),
-			fundsReserve: this.__fundsReserve && this.__fundsReserve.toJSON(),
-			related: this.__related && this.__related.map(v => v.toJSON()),
-			prescription: this.__prescription && this.__prescription.toJSON(),
-			originalPrescription: this.__originalPrescription && this.__originalPrescription.toJSON(),
-			payee: this.__payee && this.__payee.toJSON(),
-			referral: this.__referral && this.__referral.toJSON(),
-			facility: this.__facility && this.__facility.toJSON(),
-			careTeam: this.__careTeam && this.__careTeam.map(v => v.toJSON()),
-			information: this.__information && this.__information.map(v => v.toJSON()),
-			diagnosis: this.__diagnosis && this.__diagnosis.map(v => v.toJSON()),
-			procedure: this.__procedure && this.__procedure.map(v => v.toJSON()),
-			insurance: this.__insurance && this.__insurance.map(v => v.toJSON()),
-			accident: this.__accident && this.__accident.toJSON(),
-			employmentImpacted: this.__employmentImpacted && this.__employmentImpacted.toJSON(),
-			hospitalization: this.__hospitalization && this.__hospitalization.toJSON(),
-			item: this.__item && this.__item.map(v => v.toJSON()),
-			total: this.__total && this.__total.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			type: this.type && this.type.toJSON(),
+			subType: this.subType && this.subType.map(v => v.toJSON()),
+			_use: this._use && this._use.toJSON(),
+			use: this.use,
+			patient: this.patient && this.patient.toJSON(),
+			billablePeriod: this.billablePeriod && this.billablePeriod.toJSON(),
+			_created: this._created && this._created.toJSON(),
+			created: this.created,
+			enterer: this.enterer && this.enterer.toJSON(),
+			insurer: this.insurer && this.insurer.toJSON(),
+			provider: this.provider && this.provider.toJSON(),
+			organization: this.organization && this.organization.toJSON(),
+			priority: this.priority && this.priority.toJSON(),
+			fundsReserve: this.fundsReserve && this.fundsReserve.toJSON(),
+			related: this.related && this.related.map(v => v.toJSON()),
+			prescription: this.prescription && this.prescription.toJSON(),
+			originalPrescription: this.originalPrescription && this.originalPrescription.toJSON(),
+			payee: this.payee && this.payee.toJSON(),
+			referral: this.referral && this.referral.toJSON(),
+			facility: this.facility && this.facility.toJSON(),
+			careTeam: this.careTeam && this.careTeam.map(v => v.toJSON()),
+			information: this.information && this.information.map(v => v.toJSON()),
+			diagnosis: this.diagnosis && this.diagnosis.map(v => v.toJSON()),
+			procedure: this.procedure && this.procedure.map(v => v.toJSON()),
+			insurance: this.insurance && this.insurance.map(v => v.toJSON()),
+			accident: this.accident && this.accident.toJSON(),
+			employmentImpacted: this.employmentImpacted && this.employmentImpacted.toJSON(),
+			hospitalization: this.hospitalization && this.hospitalization.toJSON(),
+			item: this.item && this.item.map(v => v.toJSON()),
+			total: this.total && this.total.toJSON(),
+		};
 	}
-}
-
-module.exports = Claim;
+};

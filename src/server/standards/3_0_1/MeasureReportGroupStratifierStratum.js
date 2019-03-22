@@ -1,54 +1,158 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary MeasureReportGroupStratifierStratum Class
+ */
+module.exports = class MeasureReportGroupStratifierStratum {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MeasureReportGroupStratifierStratum extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MeasureReportGroupStratifierStratum';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_value', {
+			enumerable: true,
+			get: () => this.__data._value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._value = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'value', {
+			enumerable: true,
+			get: () => this.__data.value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.value = value;
+			},
+		});
+
+		Object.defineProperty(this, 'population', {
+			enumerable: true,
+			get: () => this.__data.population,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MeasureReportGroupStratifierStratumPopulation = require('./measurereportgroupstratifierstratumpopulation.js');
+				this.__data.population = Array.isArray(value)
+					? value.map(v => new MeasureReportGroupStratifierStratumPopulation(v))
+					: [new MeasureReportGroupStratifierStratumPopulation(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_measureScore', {
+			enumerable: true,
+			get: () => this.__data._measureScore,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._measureScore = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'measureScore', {
+			enumerable: true,
+			get: () => this.__data.measureScore,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.measureScore = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MeasureReportGroupStratifierStratum',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MeasureReportGroupStratifierStratum resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MeasureReportGroupStratifierStratum';
 	}
 
-	// The value for this stratum, expressed as a string. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique.
-	get value() {
-		return this.__value;
-	}
-
-	set value(new_value) {
-		this.__value = new_value;
-	}
-
-	// The populations that make up the stratum, one for each type of population appropriate to the measure.
-	get population() {
-		return this.__population;
-	}
-
-	set population(new_value) {
-		const MeasureReportGroupStratifierStratumPopulation = require('./MeasureReportGroupStratifierStratumPopulation');
-		this.__population = Array.isArray(new_value)
-			? new_value.map(val => new MeasureReportGroupStratifierStratumPopulation(val))
-			: [new MeasureReportGroupStratifierStratumPopulation(new_value)];
-	}
-
-	// The measure score for this stratum, calculated as appropriate for the measure type and scoring method, and based on only the members of this stratum.
-	get measureScore() {
-		return this.__measureScore;
-	}
-
-	set measureScore(new_value) {
-		this.__measureScore = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			value: this.__value,
-			population: this.__population && this.__population.map(v => v.toJSON()),
-			measureScore: this.__measureScore,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_value: this._value && this._value.toJSON(),
+			value: this.value,
+			population: this.population && this.population.map(v => v.toJSON()),
+			_measureScore: this._measureScore && this._measureScore.toJSON(),
+			measureScore: this.measureScore,
+		};
 	}
-}
-
-module.exports = MeasureReportGroupStratifierStratum;
+};

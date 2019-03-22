@@ -1,92 +1,112 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the namingsystem query
+ */
 module.exports = {
-	CONTACT: {
-		name: 'contact',
+	contact: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.contact.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-contact',
-		documentation: 'Name of an individual to contact.',
+		description: 'Name of an individual to contact',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'NamingSystem.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-date',
-		documentation: 'The naming system publication date.',
+		description: 'The naming system publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-description',
-		documentation: 'The description of the naming system.',
+		description: 'The description of the naming system',
 	},
-	ID_TYPE: {
-		name: 'id-type',
+	'id-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.uniqueId.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-id-type',
-		documentation: 'oid | uuid | uri | other.',
+		description: 'oid | uuid | uri | other',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-jurisdiction',
-		documentation: 'Intended jurisdiction for the naming system.',
+		description: 'Intended jurisdiction for the naming system',
 	},
-	KIND: {
-		name: 'kind',
+	kind: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.kind',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-kind',
-		documentation: 'codesystem | identifier | root.',
+		description: 'codesystem | identifier | root',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-name',
-		documentation: 'Computationally friendly name of the naming system.',
+		description: 'Computationally friendly name of the naming system',
 	},
-	PERIOD: {
-		name: 'period',
+	period: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'NamingSystem.uniqueId.period',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-period',
-		documentation: 'When is identifier valid?.',
+		description: 'When is identifier valid?',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-publisher',
-		documentation: 'Name of the publisher of the naming system.',
+		description: 'Name of the publisher of the naming system',
 	},
-	REPLACED_BY: {
-		name: 'replaced-by',
+	'replaced-by': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'NamingSystem.replacedBy',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-replaced-by',
-		documentation: 'Use this instead.',
+		description: 'Use this instead',
 	},
-	RESPONSIBLE: {
-		name: 'responsible',
+	responsible: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.responsible',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-responsible',
-		documentation: 'Who maintains system namespace?.',
+		description: 'Who maintains system namespace?',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-status',
-		documentation: 'The current status of the naming system.',
+		description: 'The current status of the naming system',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.contact.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-telecom',
-		documentation: 'Contact details for individual or organization.',
+		description: 'Contact details for individual or organization',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'NamingSystem.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-type',
-		documentation: 'e.g. driver,  provider,  patient, bank etc.',
+		description: 'e.g. driver,  provider,  patient, bank etc.',
 	},
-	VALUE: {
-		name: 'value',
+	value: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'NamingSystem.uniqueId.value',
 		definition: 'http://hl7.org/fhir/SearchParameter/NamingSystem-value',
-		documentation: 'The unique identifier.',
+		description: 'The unique identifier',
 	},
 };

@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the procedure query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Procedure.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-code',
-		documentation: 'A code to identify a  procedure.',
+		description: 'A code to identify a  procedure',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Procedure.performedDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-date',
-		documentation: 'Date/Period the procedure was performed.',
+		description: 'Date/Period the procedure was performed',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Procedure.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-encounter',
-		documentation: 'The encounter associated with the procedure.',
+		description: 'The encounter associated with the procedure',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Procedure.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-identifier',
-		documentation: 'A unique identifier for a procedure.',
+		description: 'A unique identifier for a procedure',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Procedure.location',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-location',
-		documentation: 'Where the procedure happened.',
+		description: 'Where the procedure happened',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Procedure.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-patient',
-		documentation: 'Search by subject - a patient.',
+		description: 'Search by subject - a patient',
 	},
-	PERFORMER: {
-		name: 'performer',
+	performer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Procedure.performer.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-performer',
-		documentation: 'The reference to the practitioner.',
+		description: 'The reference to the practitioner',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Procedure.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Procedure-subject',
-		documentation: 'Search by subject.',
+		description: 'Search by subject',
 	},
 };

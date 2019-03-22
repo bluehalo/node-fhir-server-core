@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary DocumentReferenceContent Class
+ */
+module.exports = class DocumentReferenceContent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DocumentReferenceContent extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DocumentReferenceContent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'attachment', {
+			enumerable: true,
+			get: () => this.__data.attachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.attachment = new Attachment(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/formatcodes
+		Object.defineProperty(this, 'format', {
+			enumerable: true,
+			get: () => this.__data.format,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.format = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DocumentReferenceContent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DocumentReferenceContent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DocumentReferenceContent';
 	}
 
-	// The document or url of the document along with critical metadata to prove content has integrity.
-	get attachment() {
-		return this.__attachment;
-	}
-
-	set attachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__attachment = new Attachment(new_value);
-	}
-
-	// An identifier of the document encoding, structure, and template that the document conforms to beyond the base format indicated in the mimeType.
-	get format() {
-		return this.__format;
-	}
-
-	set format(new_value) {
-		const Coding = require('./Coding');
-		this.__format = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			attachment: this.__attachment && this.__attachment.toJSON(),
-			format: this.__format && this.__format.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			attachment: this.attachment && this.attachment.toJSON(),
+			format: this.format && this.format.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = DocumentReferenceContent;
+};

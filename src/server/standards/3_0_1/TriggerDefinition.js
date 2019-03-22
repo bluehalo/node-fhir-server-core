@@ -1,106 +1,222 @@
-const Element = require('./Element');
-const DateScalar = require('./scalars/Date.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary TriggerDefinition Class
+ */
+module.exports = class TriggerDefinition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TriggerDefinition extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TriggerDefinition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/trigger-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_eventName', {
+			enumerable: true,
+			get: () => this.__data._eventName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._eventName = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'eventName', {
+			enumerable: true,
+			get: () => this.__data.eventName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.eventName = value;
+			},
+		});
+
+		Object.defineProperty(this, 'eventTimingTiming', {
+			enumerable: true,
+			get: () => this.__data.eventTimingTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.eventTimingTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'eventTimingReference', {
+			enumerable: true,
+			get: () => this.__data.eventTimingReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.eventTimingReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_eventTimingDate', {
+			enumerable: true,
+			get: () => this.__data._eventTimingDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._eventTimingDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'eventTimingDate', {
+			enumerable: true,
+			get: () => this.__data.eventTimingDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.eventTimingDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_eventTimingDateTime', {
+			enumerable: true,
+			get: () => this.__data._eventTimingDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._eventTimingDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'eventTimingDateTime', {
+			enumerable: true,
+			get: () => this.__data.eventTimingDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.eventTimingDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'eventData', {
+			enumerable: true,
+			get: () => this.__data.eventData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DataRequirement = require('./datarequirement.js');
+				this.__data.eventData = new DataRequirement(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TriggerDefinition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TriggerDefinition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TriggerDefinition';
 	}
 
-	// The type of triggering event.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// The name of the event (if this is a named-event trigger).
-	get eventName() {
-		return this.__eventName;
-	}
-
-	set eventName(new_value) {
-		this.__eventName = new_value;
-	}
-
-	// The timing of the event (if this is a period trigger).
-	get eventTimingTiming() {
-		return this.__eventTimingTiming;
-	}
-
-	set eventTimingTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__eventTimingTiming = new Timing(new_value);
-	}
-
-	// The timing of the event (if this is a period trigger).
-	get eventTimingReference() {
-		return this.__eventTimingReference;
-	}
-
-	set eventTimingReference(new_value) {
-		const Reference = require('./Reference');
-		this.__eventTimingReference = new Reference(new_value);
-	}
-
-	// The timing of the event (if this is a period trigger).
-	get eventTimingDate() {
-		return this.__eventTimingDate;
-	}
-
-	set eventTimingDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field eventTimingDate`);
-		}
-		this.__eventTimingDate = new_value;
-	}
-
-	// The timing of the event (if this is a period trigger).
-	get eventTimingDateTime() {
-		return this.__eventTimingDateTime;
-	}
-
-	set eventTimingDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field eventTimingDateTime`);
-		}
-		this.__eventTimingDateTime = new_value;
-	}
-
-	// The triggering data of the event (if this is a data trigger).
-	get eventData() {
-		return this.__eventData;
-	}
-
-	set eventData(new_value) {
-		const DataRequirement = require('./DataRequirement');
-		this.__eventData = new DataRequirement(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			eventName: this.__eventName,
-			eventTimingTiming: this.__eventTimingTiming && this.__eventTimingTiming.toJSON(),
-			eventTimingReference: this.__eventTimingReference && this.__eventTimingReference.toJSON(),
-			eventTimingDate: this.__eventTimingDate,
-			eventTimingDateTime: this.__eventTimingDateTime,
-			eventData: this.__eventData && this.__eventData.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_eventName: this._eventName && this._eventName.toJSON(),
+			eventName: this.eventName,
+			eventTimingTiming: this.eventTimingTiming && this.eventTimingTiming.toJSON(),
+			eventTimingReference: this.eventTimingReference && this.eventTimingReference.toJSON(),
+			_eventTimingDate: this._eventTimingDate && this._eventTimingDate.toJSON(),
+			eventTimingDate: this.eventTimingDate,
+			_eventTimingDateTime: this._eventTimingDateTime && this._eventTimingDateTime.toJSON(),
+			eventTimingDateTime: this.eventTimingDateTime,
+			eventData: this.eventData && this.eventData.toJSON(),
+		};
 	}
-}
-
-module.exports = TriggerDefinition;
+};

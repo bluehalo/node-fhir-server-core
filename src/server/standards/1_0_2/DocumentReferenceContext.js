@@ -1,102 +1,190 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary DocumentReferenceContext Class
+ */
+module.exports = class DocumentReferenceContext {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DocumentReferenceContext extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DocumentReferenceContext';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ActCode
+		Object.defineProperty(this, 'event', {
+			enumerable: true,
+			get: () => this.__data.event,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.event = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-facilitycodes
+		Object.defineProperty(this, 'facilityType', {
+			enumerable: true,
+			get: () => this.__data.facilityType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.facilityType = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-practice-codes
+		Object.defineProperty(this, 'practiceSetting', {
+			enumerable: true,
+			get: () => this.__data.practiceSetting,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.practiceSetting = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sourcePatientInfo', {
+			enumerable: true,
+			get: () => this.__data.sourcePatientInfo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.sourcePatientInfo = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'related', {
+			enumerable: true,
+			get: () => this.__data.related,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DocumentReferenceContextRelated = require('./documentreferencecontextrelated.js');
+				this.__data.related = Array.isArray(value)
+					? value.map(v => new DocumentReferenceContextRelated(v))
+					: [new DocumentReferenceContextRelated(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DocumentReferenceContext',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DocumentReferenceContext resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DocumentReferenceContext';
 	}
 
-	// Describes the clinical encounter or type of care that the document content is associated with.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// This list of codes represents the main clinical acts, such as a colonoscopy or an appendectomy, being documented. In some cases, the event is inherent in the typeCode, such as a \'History and Physical Report\' in which the procedure being documented is necessarily a \'History and Physical\' act.
-	get event() {
-		return this.__event;
-	}
-
-	set event(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__event = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The time period over which the service that is described by the document was provided.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The kind of facility where the patient was seen.
-	get facilityType() {
-		return this.__facilityType;
-	}
-
-	set facilityType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__facilityType = new CodeableConcept(new_value);
-	}
-
-	// This property may convey specifics about the practice setting where the content was created, often reflecting the clinical specialty.
-	get practiceSetting() {
-		return this.__practiceSetting;
-	}
-
-	set practiceSetting(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__practiceSetting = new CodeableConcept(new_value);
-	}
-
-	// The Patient Information as known when the document was published. May be a reference to a version specific, or contained.
-	get sourcePatientInfo() {
-		return this.__sourcePatientInfo;
-	}
-
-	set sourcePatientInfo(new_value) {
-		const Reference = require('./Reference');
-		this.__sourcePatientInfo = new Reference(new_value);
-	}
-
-	// Related identifiers or resources associated with the DocumentReference.
-	get related() {
-		return this.__related;
-	}
-
-	set related(new_value) {
-		const DocumentReferenceContextRelated = require('./DocumentReferenceContextRelated');
-		this.__related = Array.isArray(new_value)
-			? new_value.map(val => new DocumentReferenceContextRelated(val))
-			: [new DocumentReferenceContextRelated(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			event: this.__event && this.__event.map(v => v.toJSON()),
-			period: this.__period && this.__period.toJSON(),
-			facilityType: this.__facilityType && this.__facilityType.toJSON(),
-			practiceSetting: this.__practiceSetting && this.__practiceSetting.toJSON(),
-			sourcePatientInfo: this.__sourcePatientInfo && this.__sourcePatientInfo.toJSON(),
-			related: this.__related && this.__related.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			encounter: this.encounter && this.encounter.toJSON(),
+			event: this.event && this.event.map(v => v.toJSON()),
+			period: this.period && this.period.toJSON(),
+			facilityType: this.facilityType && this.facilityType.toJSON(),
+			practiceSetting: this.practiceSetting && this.practiceSetting.toJSON(),
+			sourcePatientInfo: this.sourcePatientInfo && this.sourcePatientInfo.toJSON(),
+			related: this.related && this.related.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = DocumentReferenceContext;
+};

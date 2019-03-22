@@ -1,73 +1,196 @@
-const BackboneElement = require('./BackboneElement');
-const CodeScalar = require('./scalars/Code.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary CodeSystemProperty Class
+ */
+module.exports = class CodeSystemProperty {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CodeSystemProperty extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CodeSystemProperty';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_uri', {
+			enumerable: true,
+			get: () => this.__data._uri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._uri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'uri', {
+			enumerable: true,
+			get: () => this.__data.uri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.uri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/concept-property-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CodeSystemProperty',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CodeSystemProperty resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CodeSystemProperty';
 	}
 
-	// A code that is used to identify the property. The code is used internally (in CodeSystem.concept.property.code) and also externally, such as in property filters.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field code`);
-		}
-		this.__code = new_value;
-	}
-
-	// Reference to the formal meaning of the property. One possible source of meaning is the [Concept Properties](codesystem-concept-properties.html) code system.
-	get uri() {
-		return this.__uri;
-	}
-
-	set uri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field uri`);
-		}
-		this.__uri = new_value;
-	}
-
-	// A description of the property- why it is defined, and how its value might be used.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The type of the property value. Properties of type \'code\' contain a code defined by the code system (e.g. a reference to anotherr defined concept).
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code,
-			uri: this.__uri,
-			description: this.__description,
-			type: this.__type,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_uri: this._uri && this._uri.toJSON(),
+			uri: this.uri,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+		};
 	}
-}
-
-module.exports = CodeSystemProperty;
+};

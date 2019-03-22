@@ -1,59 +1,127 @@
-const Element = require('./Element');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Timing Class
+ */
+module.exports = class Timing {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Timing extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Timing';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_event', {
+			enumerable: true,
+			get: () => this.__data._event,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._event = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'event', {
+			enumerable: true,
+			get: () => this.__data.event,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.event = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'repeat', {
+			enumerable: true,
+			get: () => this.__data.repeat,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data.repeat = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/timing-abbreviation
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Timing',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Timing resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Timing';
 	}
 
-	// Identifies specific times when the event occurs.
-	get event() {
-		return this.__event;
-	}
-
-	set event(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field event`);
-		}
-		this.__event = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A set of rules that describe when the event is scheduled.
-	get repeat() {
-		return this.__repeat;
-	}
-
-	set repeat(new_value) {
-		const TimingRepeat = require('./TimingRepeat');
-		this.__repeat = new TimingRepeat(new_value);
-	}
-
-	// A code for the timing schedule. Some codes such as BID are ubiquitous, but many institutions define their own additional codes. If a code is provided, the code is understood to be a complete statement of whatever is specified in the structured timing data, and either the code or the data may be used to interpret the Timing, with the exception that .repeat.bounds still applies over the code (and is not contained in the code).
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			event: this.__event,
-			repeat: this.__repeat && this.__repeat.toJSON(),
-			code: this.__code && this.__code.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			_event: this._event && this._event.toJSON(),
+			event: this.event,
+			repeat: this.repeat && this.repeat.toJSON(),
+			code: this.code && this.code.toJSON(),
+		};
 	}
-}
-
-module.exports = Timing;
+};

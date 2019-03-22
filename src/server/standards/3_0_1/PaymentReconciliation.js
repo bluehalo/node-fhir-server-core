@@ -1,194 +1,423 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary PaymentReconciliation Class
+ */
+module.exports = class PaymentReconciliation {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class PaymentReconciliation extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'PaymentReconciliation';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/fm-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, '_created', {
+			enumerable: true,
+			get: () => this.__data._created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._created = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'created', {
+			enumerable: true,
+			get: () => this.__data.created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.created = value;
+			},
+		});
+
+		Object.defineProperty(this, 'organization', {
+			enumerable: true,
+			get: () => this.__data.organization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.organization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'request', {
+			enumerable: true,
+			get: () => this.__data.request,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.request = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/remittance-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_disposition', {
+			enumerable: true,
+			get: () => this.__data._disposition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._disposition = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'disposition', {
+			enumerable: true,
+			get: () => this.__data.disposition,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.disposition = value;
+			},
+		});
+
+		Object.defineProperty(this, 'requestProvider', {
+			enumerable: true,
+			get: () => this.__data.requestProvider,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.requestProvider = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requestOrganization', {
+			enumerable: true,
+			get: () => this.__data.requestOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.requestOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detail', {
+			enumerable: true,
+			get: () => this.__data.detail,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PaymentReconciliationDetail = require('./paymentreconciliationdetail.js');
+				this.__data.detail = Array.isArray(value)
+					? value.map(v => new PaymentReconciliationDetail(v))
+					: [new PaymentReconciliationDetail(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/forms
+		Object.defineProperty(this, 'form', {
+			enumerable: true,
+			get: () => this.__data.form,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.form = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'total', {
+			enumerable: true,
+			get: () => this.__data.total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.total = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, 'processNote', {
+			enumerable: true,
+			get: () => this.__data.processNote,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PaymentReconciliationProcessNote = require('./paymentreconciliationprocessnote.js');
+				this.__data.processNote = Array.isArray(value)
+					? value.map(v => new PaymentReconciliationProcessNote(v))
+					: [new PaymentReconciliationProcessNote(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'PaymentReconciliation',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a PaymentReconciliation resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'PaymentReconciliation';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__PaymentReconciliation = new_value;
-	}
-
-	// The Response business identifier.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The status of the resource instance.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The period of time for which payments have been gathered into this bulk payment for settlement.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The date when the enclosed suite of services were performed or completed.
-	get created() {
-		return this.__created;
-	}
-
-	set created(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field created`);
-		}
-		this.__created = new_value;
-	}
-
-	// The Insurer who produced this adjudicated response.
-	get organization() {
-		return this.__organization;
-	}
-
-	set organization(new_value) {
-		const Reference = require('./Reference');
-		this.__organization = new Reference(new_value);
-	}
-
-	// Original request resource reference.
-	get request() {
-		return this.__request;
-	}
-
-	set request(new_value) {
-		const Reference = require('./Reference');
-		this.__request = new Reference(new_value);
-	}
-
-	// Transaction status: error, complete.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcome = new CodeableConcept(new_value);
-	}
-
-	// A description of the status of the adjudication.
-	get disposition() {
-		return this.__disposition;
-	}
-
-	set disposition(new_value) {
-		this.__disposition = new_value;
-	}
-
-	// The practitioner who is responsible for the services rendered to the patient.
-	get requestProvider() {
-		return this.__requestProvider;
-	}
-
-	set requestProvider(new_value) {
-		const Reference = require('./Reference');
-		this.__requestProvider = new Reference(new_value);
-	}
-
-	// The organization which is responsible for the services rendered to the patient.
-	get requestOrganization() {
-		return this.__requestOrganization;
-	}
-
-	set requestOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__requestOrganization = new Reference(new_value);
-	}
-
-	// List of individual settlement amounts and the corresponding transaction.
-	get detail() {
-		return this.__detail;
-	}
-
-	set detail(new_value) {
-		const PaymentReconciliationDetail = require('./PaymentReconciliationDetail');
-		this.__detail = Array.isArray(new_value)
-			? new_value.map(val => new PaymentReconciliationDetail(val))
-			: [new PaymentReconciliationDetail(new_value)];
-	}
-
-	// The form to be used for printing the content.
-	get form() {
-		return this.__form;
-	}
-
-	set form(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__form = new CodeableConcept(new_value);
-	}
-
-	// Total payment amount.
-	get total() {
-		return this.__total;
-	}
-
-	set total(new_value) {
-		const Money = require('./Money');
-		this.__total = new Money(new_value);
-	}
-
-	// Suite of notes.
-	get processNote() {
-		return this.__processNote;
-	}
-
-	set processNote(new_value) {
-		const PaymentReconciliationProcessNote = require('./PaymentReconciliationProcessNote');
-		this.__processNote = Array.isArray(new_value)
-			? new_value.map(val => new PaymentReconciliationProcessNote(val))
-			: [new PaymentReconciliationProcessNote(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			period: this.__period && this.__period.toJSON(),
-			created: this.__created,
-			organization: this.__organization && this.__organization.toJSON(),
-			request: this.__request && this.__request.toJSON(),
-			outcome: this.__outcome && this.__outcome.toJSON(),
-			disposition: this.__disposition,
-			requestProvider: this.__requestProvider && this.__requestProvider.toJSON(),
-			requestOrganization: this.__requestOrganization && this.__requestOrganization.toJSON(),
-			detail: this.__detail && this.__detail.map(v => v.toJSON()),
-			form: this.__form && this.__form.toJSON(),
-			total: this.__total && this.__total.toJSON(),
-			processNote: this.__processNote && this.__processNote.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			period: this.period && this.period.toJSON(),
+			_created: this._created && this._created.toJSON(),
+			created: this.created,
+			organization: this.organization && this.organization.toJSON(),
+			request: this.request && this.request.toJSON(),
+			outcome: this.outcome && this.outcome.toJSON(),
+			_disposition: this._disposition && this._disposition.toJSON(),
+			disposition: this.disposition,
+			requestProvider: this.requestProvider && this.requestProvider.toJSON(),
+			requestOrganization: this.requestOrganization && this.requestOrganization.toJSON(),
+			detail: this.detail && this.detail.map(v => v.toJSON()),
+			form: this.form && this.form.toJSON(),
+			total: this.total && this.total.toJSON(),
+			processNote: this.processNote && this.processNote.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = PaymentReconciliation;
+};

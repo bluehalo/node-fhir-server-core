@@ -1,81 +1,99 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the communicationrequest query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-category',
-		documentation: 'Message category.',
+		description: 'Message category',
 	},
-	ENCOUNTER: {
-		name: 'encounter',
+	encounter: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.encounter',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-encounter',
-		documentation: 'Encounter leading to message.',
+		description: 'Encounter leading to message',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-identifier',
-		documentation: 'Unique identifier.',
+		description: 'Unique identifier',
 	},
-	MEDIUM: {
-		name: 'medium',
+	medium: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.medium',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-medium',
-		documentation: 'A channel of communication.',
+		description: 'A channel of communication',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-patient',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
-	PRIORITY: {
-		name: 'priority',
+	priority: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.priority',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-priority',
-		documentation: 'Message urgency.',
+		description: 'Message urgency',
 	},
-	RECIPIENT: {
-		name: 'recipient',
+	recipient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.recipient',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-recipient',
-		documentation: 'Message recipient.',
+		description: 'Message recipient',
 	},
-	REQUESTED: {
-		name: 'requested',
+	requested: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CommunicationRequest.requestedOn',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-requested',
-		documentation: 'When ordered or proposed.',
+		description: 'When ordered or proposed',
 	},
-	REQUESTER: {
-		name: 'requester',
+	requester: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.requester',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-requester',
-		documentation: 'An individual who requested a communication.',
+		description: 'An individual who requested a communication',
 	},
-	SENDER: {
-		name: 'sender',
+	sender: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.sender',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-sender',
-		documentation: 'Message sender.',
+		description: 'Message sender',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'CommunicationRequest.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-status',
-		documentation:
-			'proposed | planned | requested | received | accepted | in-progress | completed | suspended | rejected | failed.',
+		description:
+			'proposed | planned | requested | received | accepted | in-progress | completed | suspended | rejected | failed',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'CommunicationRequest.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-subject',
-		documentation: 'Focus of message.',
+		description: 'Focus of message',
 	},
-	TIME: {
-		name: 'time',
+	time: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'CommunicationRequest.scheduledDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-time',
-		documentation: 'When scheduled.',
+		description: 'When scheduled',
 	},
 };

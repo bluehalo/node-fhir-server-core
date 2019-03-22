@@ -1,216 +1,453 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary AdverseEvent Class
+ */
+module.exports = class AdverseEvent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AdverseEvent extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AdverseEvent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_category', {
+			enumerable: true,
+			get: () => this.__data._category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._category = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-category
+		Object.defineProperty(this, 'category', {
+			enumerable: true,
+			get: () => this.__data.category,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.category = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, 'reaction', {
+			enumerable: true,
+			get: () => this.__data.reaction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.reaction = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.location = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-seriousness
+		Object.defineProperty(this, 'seriousness', {
+			enumerable: true,
+			get: () => this.__data.seriousness,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.seriousness = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adverse-event-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recorder', {
+			enumerable: true,
+			get: () => this.__data.recorder,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.recorder = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'eventParticipant', {
+			enumerable: true,
+			get: () => this.__data.eventParticipant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.eventParticipant = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'suspectEntity', {
+			enumerable: true,
+			get: () => this.__data.suspectEntity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AdverseEventSuspectEntity = require('./adverseeventsuspectentity.js');
+				this.__data.suspectEntity = Array.isArray(value)
+					? value.map(v => new AdverseEventSuspectEntity(v))
+					: [new AdverseEventSuspectEntity(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'subjectMedicalHistory', {
+			enumerable: true,
+			get: () => this.__data.subjectMedicalHistory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subjectMedicalHistory = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'referenceDocument', {
+			enumerable: true,
+			get: () => this.__data.referenceDocument,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.referenceDocument = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'study', {
+			enumerable: true,
+			get: () => this.__data.study,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.study = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AdverseEvent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AdverseEvent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AdverseEvent';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__AdverseEvent = new_value;
-	}
-
-	// The identifier(s) of this adverse event that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itsefl is not appropriate.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// The type of event which is important to characterize what occurred and caused harm to the subject, or had the potential to cause harm to the subject.
-	get category() {
-		return this.__category;
-	}
-
-	set category(new_value) {
-		this.__category = new_value;
-	}
-
-	// This element defines the specific type of event that occurred or that was prevented from occurring.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// This subject or group impacted by the event.  With a prospective adverse event, there will be no subject as the adverse event was prevented.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The date (and perhaps time) when the adverse event occurred.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Includes information about the reaction that occurred as a result of exposure to a substance (for example, a drug or a chemical).
-	get reaction() {
-		return this.__reaction;
-	}
-
-	set reaction(new_value) {
-		const Reference = require('./Reference');
-		this.__reaction = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The information about where the adverse event occurred.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		const Reference = require('./Reference');
-		this.__location = new Reference(new_value);
-	}
-
-	// Describes the seriousness or severity of the adverse event.
-	get seriousness() {
-		return this.__seriousness;
-	}
-
-	set seriousness(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__seriousness = new CodeableConcept(new_value);
-	}
-
-	// Describes the type of outcome from the adverse event.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcome = new CodeableConcept(new_value);
-	}
-
-	// Information on who recorded the adverse event.  May be the patient or a practitioner.
-	get recorder() {
-		return this.__recorder;
-	}
-
-	set recorder(new_value) {
-		const Reference = require('./Reference');
-		this.__recorder = new Reference(new_value);
-	}
-
-	// Parties that may or should contribute or have contributed information to the Act. Such information includes information leading to the decision to perform the Act and how to perform the Act (e.g. consultant), information that the Act itself seeks to reveal (e.g. informant of clinical history), or information about what Act was performed (e.g. informant witness).
-	get eventParticipant() {
-		return this.__eventParticipant;
-	}
-
-	set eventParticipant(new_value) {
-		const Reference = require('./Reference');
-		this.__eventParticipant = new Reference(new_value);
-	}
-
-	// Describes the adverse event in text.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Describes the entity that is suspected to have caused the adverse event.
-	get suspectEntity() {
-		return this.__suspectEntity;
-	}
-
-	set suspectEntity(new_value) {
-		const AdverseEventSuspectEntity = require('./AdverseEventSuspectEntity');
-		this.__suspectEntity = Array.isArray(new_value)
-			? new_value.map(val => new AdverseEventSuspectEntity(val))
-			: [new AdverseEventSuspectEntity(new_value)];
-	}
-
-	// AdverseEvent.subjectMedicalHistory.
-	get subjectMedicalHistory() {
-		return this.__subjectMedicalHistory;
-	}
-
-	set subjectMedicalHistory(new_value) {
-		const Reference = require('./Reference');
-		this.__subjectMedicalHistory = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// AdverseEvent.referenceDocument.
-	get referenceDocument() {
-		return this.__referenceDocument;
-	}
-
-	set referenceDocument(new_value) {
-		const Reference = require('./Reference');
-		this.__referenceDocument = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// AdverseEvent.study.
-	get study() {
-		return this.__study;
-	}
-
-	set study(new_value) {
-		const Reference = require('./Reference');
-		this.__study = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			category: this.__category,
-			type: this.__type && this.__type.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			date: this.__date,
-			reaction: this.__reaction && this.__reaction.map(v => v.toJSON()),
-			location: this.__location && this.__location.toJSON(),
-			seriousness: this.__seriousness && this.__seriousness.toJSON(),
-			outcome: this.__outcome && this.__outcome.toJSON(),
-			recorder: this.__recorder && this.__recorder.toJSON(),
-			eventParticipant: this.__eventParticipant && this.__eventParticipant.toJSON(),
-			description: this.__description,
-			suspectEntity: this.__suspectEntity && this.__suspectEntity.map(v => v.toJSON()),
-			subjectMedicalHistory: this.__subjectMedicalHistory && this.__subjectMedicalHistory.map(v => v.toJSON()),
-			referenceDocument: this.__referenceDocument && this.__referenceDocument.map(v => v.toJSON()),
-			study: this.__study && this.__study.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_category: this._category && this._category.toJSON(),
+			category: this.category,
+			type: this.type && this.type.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			reaction: this.reaction && this.reaction.map(v => v.toJSON()),
+			location: this.location && this.location.toJSON(),
+			seriousness: this.seriousness && this.seriousness.toJSON(),
+			outcome: this.outcome && this.outcome.toJSON(),
+			recorder: this.recorder && this.recorder.toJSON(),
+			eventParticipant: this.eventParticipant && this.eventParticipant.toJSON(),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			suspectEntity: this.suspectEntity && this.suspectEntity.map(v => v.toJSON()),
+			subjectMedicalHistory: this.subjectMedicalHistory && this.subjectMedicalHistory.map(v => v.toJSON()),
+			referenceDocument: this.referenceDocument && this.referenceDocument.map(v => v.toJSON()),
+			study: this.study && this.study.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AdverseEvent;
+};

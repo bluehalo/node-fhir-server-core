@@ -1,89 +1,224 @@
-const BackboneElement = require('./BackboneElement');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
+/**
+ * @name exports
+ * @summary ClaimResponseInsurance Class
+ */
+module.exports = class ClaimResponseInsurance {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimResponseInsurance extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimResponseInsurance';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_sequence', {
+			enumerable: true,
+			get: () => this.__data._sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sequence = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sequence', {
+			enumerable: true,
+			get: () => this.__data.sequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sequence = value;
+			},
+		});
+
+		Object.defineProperty(this, '_focal', {
+			enumerable: true,
+			get: () => this.__data._focal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._focal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'focal', {
+			enumerable: true,
+			get: () => this.__data.focal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.focal = value;
+			},
+		});
+
+		Object.defineProperty(this, 'coverage', {
+			enumerable: true,
+			get: () => this.__data.coverage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.coverage = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_businessArrangement', {
+			enumerable: true,
+			get: () => this.__data._businessArrangement,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._businessArrangement = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'businessArrangement', {
+			enumerable: true,
+			get: () => this.__data.businessArrangement,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.businessArrangement = value;
+			},
+		});
+
+		Object.defineProperty(this, '_preAuthRef', {
+			enumerable: true,
+			get: () => this.__data._preAuthRef,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._preAuthRef = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'preAuthRef', {
+			enumerable: true,
+			get: () => this.__data.preAuthRef,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.preAuthRef = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'claimResponse', {
+			enumerable: true,
+			get: () => this.__data.claimResponse,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.claimResponse = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimResponseInsurance',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimResponseInsurance resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimResponseInsurance';
 	}
 
-	// A service line item.
-	get sequence() {
-		return this.__sequence;
-	}
-
-	set sequence(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field sequence`);
-		}
-		this.__sequence = new_value;
-	}
-
-	// The instance number of the Coverage which is the focus for adjudication. The Coverage against which the claim is to be adjudicated.
-	get focal() {
-		return this.__focal;
-	}
-
-	set focal(new_value) {
-		this.__focal = new_value;
-	}
-
-	// Reference to the program or plan identification, underwriter or payor.
-	get coverage() {
-		return this.__coverage;
-	}
-
-	set coverage(new_value) {
-		const Reference = require('./Reference');
-		this.__coverage = new Reference(new_value);
-	}
-
-	// The contract number of a business agreement which describes the terms and conditions.
-	get businessArrangement() {
-		return this.__businessArrangement;
-	}
-
-	set businessArrangement(new_value) {
-		this.__businessArrangement = new_value;
-	}
-
-	// A list of references from the Insurer to which these services pertain.
-	get preAuthRef() {
-		return this.__preAuthRef;
-	}
-
-	set preAuthRef(new_value) {
-		this.__preAuthRef = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The Coverages adjudication details.
-	get claimResponse() {
-		return this.__claimResponse;
-	}
-
-	set claimResponse(new_value) {
-		const Reference = require('./Reference');
-		this.__claimResponse = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			sequence: this.__sequence,
-			focal: this.__focal,
-			coverage: this.__coverage && this.__coverage.toJSON(),
-			businessArrangement: this.__businessArrangement,
-			preAuthRef: this.__preAuthRef,
-			claimResponse: this.__claimResponse && this.__claimResponse.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_sequence: this._sequence && this._sequence.toJSON(),
+			sequence: this.sequence,
+			_focal: this._focal && this._focal.toJSON(),
+			focal: this.focal,
+			coverage: this.coverage && this.coverage.toJSON(),
+			_businessArrangement: this._businessArrangement && this._businessArrangement.toJSON(),
+			businessArrangement: this.businessArrangement,
+			_preAuthRef: this._preAuthRef && this._preAuthRef.toJSON(),
+			preAuthRef: this.preAuthRef,
+			claimResponse: this.claimResponse && this.claimResponse.toJSON(),
+		};
 	}
-}
-
-module.exports = ClaimResponseInsurance;
+};

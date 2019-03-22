@@ -1,92 +1,185 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
+/**
+ * @name exports
+ * @summary GoalTarget Class
+ */
+module.exports = class GoalTarget {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class GoalTarget extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'GoalTarget';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/observation-codes
+		Object.defineProperty(this, 'measure', {
+			enumerable: true,
+			get: () => this.__data.measure,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.measure = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailQuantity', {
+			enumerable: true,
+			get: () => this.__data.detailQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.detailQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailRange', {
+			enumerable: true,
+			get: () => this.__data.detailRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.detailRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'detailCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.detailCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.detailCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_dueDate', {
+			enumerable: true,
+			get: () => this.__data._dueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dueDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dueDate', {
+			enumerable: true,
+			get: () => this.__data.dueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dueDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'dueDuration', {
+			enumerable: true,
+			get: () => this.__data.dueDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.dueDuration = new Duration(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'GoalTarget',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a GoalTarget resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'GoalTarget';
 	}
 
-	// The parameter whose value is being tracked, e.g. body weight, blood pressure, or hemoglobin A1c level.
-	get measure() {
-		return this.__measure;
-	}
-
-	set measure(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__measure = new CodeableConcept(new_value);
-	}
-
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	get detailQuantity() {
-		return this.__detailQuantity;
-	}
-
-	set detailQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__detailQuantity = new Quantity(new_value);
-	}
-
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	get detailRange() {
-		return this.__detailRange;
-	}
-
-	set detailRange(new_value) {
-		const Range = require('./Range');
-		this.__detailRange = new Range(new_value);
-	}
-
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	get detailCodeableConcept() {
-		return this.__detailCodeableConcept;
-	}
-
-	set detailCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__detailCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Indicates either the date or the duration after start by which the goal should be met.
-	get dueDate() {
-		return this.__dueDate;
-	}
-
-	set dueDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dueDate`);
-		}
-		this.__dueDate = new_value;
-	}
-
-	// Indicates either the date or the duration after start by which the goal should be met.
-	get dueDuration() {
-		return this.__dueDuration;
-	}
-
-	set dueDuration(new_value) {
-		const Duration = require('./Duration');
-		this.__dueDuration = new Duration(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			measure: this.__measure && this.__measure.toJSON(),
-			detailQuantity: this.__detailQuantity && this.__detailQuantity.toJSON(),
-			detailRange: this.__detailRange && this.__detailRange.toJSON(),
-			detailCodeableConcept: this.__detailCodeableConcept && this.__detailCodeableConcept.toJSON(),
-			dueDate: this.__dueDate,
-			dueDuration: this.__dueDuration && this.__dueDuration.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			measure: this.measure && this.measure.toJSON(),
+			detailQuantity: this.detailQuantity && this.detailQuantity.toJSON(),
+			detailRange: this.detailRange && this.detailRange.toJSON(),
+			detailCodeableConcept: this.detailCodeableConcept && this.detailCodeableConcept.toJSON(),
+			_dueDate: this._dueDate && this._dueDate.toJSON(),
+			dueDate: this.dueDate,
+			dueDuration: this.dueDuration && this.dueDuration.toJSON(),
+		};
 	}
-}
-
-module.exports = GoalTarget;
+};

@@ -1,102 +1,212 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary SpecimenCollection Class
+ */
+module.exports = class SpecimenCollection {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SpecimenCollection extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SpecimenCollection';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'collector', {
+			enumerable: true,
+			get: () => this.__data.collector,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.collector = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_comment', {
+			enumerable: true,
+			get: () => this.__data._comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comment = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'comment', {
+			enumerable: true,
+			get: () => this.__data.comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comment = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_collectedDateTime', {
+			enumerable: true,
+			get: () => this.__data._collectedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._collectedDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'collectedDateTime', {
+			enumerable: true,
+			get: () => this.__data.collectedDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.collectedDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'collectedPeriod', {
+			enumerable: true,
+			get: () => this.__data.collectedPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.collectedPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/specimen-collection-method
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/body-site
+		Object.defineProperty(this, 'bodySite', {
+			enumerable: true,
+			get: () => this.__data.bodySite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodySite = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SpecimenCollection',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SpecimenCollection resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SpecimenCollection';
 	}
 
-	// Person who collected the specimen.
-	get collector() {
-		return this.__collector;
-	}
-
-	set collector(new_value) {
-		const Reference = require('./Reference');
-		this.__collector = new Reference(new_value);
-	}
-
-	// To communicate any details or issues encountered during the specimen collection procedure.
-	get comment() {
-		return this.__comment;
-	}
-
-	set comment(new_value) {
-		this.__comment = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Time when specimen was collected from subject - the physiologically relevant time.
-	get collectedDateTime() {
-		return this.__collectedDateTime;
-	}
-
-	set collectedDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field collectedDateTime`);
-		}
-		this.__collectedDateTime = new_value;
-	}
-
-	// Time when specimen was collected from subject - the physiologically relevant time.
-	get collectedPeriod() {
-		return this.__collectedPeriod;
-	}
-
-	set collectedPeriod(new_value) {
-		const Period = require('./Period');
-		this.__collectedPeriod = new Period(new_value);
-	}
-
-	// The quantity of specimen collected; for instance the volume of a blood sample, or the physical measurement of an anatomic pathology sample.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// A coded value specifying the technique that is used to perform the procedure.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// Anatomical location from which the specimen was collected (if subject is a patient). This is the target site.  This element is not used for environmental specimens.
-	get bodySite() {
-		return this.__bodySite;
-	}
-
-	set bodySite(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__bodySite = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			collector: this.__collector && this.__collector.toJSON(),
-			comment: this.__comment,
-			collectedDateTime: this.__collectedDateTime,
-			collectedPeriod: this.__collectedPeriod && this.__collectedPeriod.toJSON(),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			method: this.__method && this.__method.toJSON(),
-			bodySite: this.__bodySite && this.__bodySite.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			collector: this.collector && this.collector.toJSON(),
+			_comment: this._comment && this._comment.toJSON(),
+			comment: this.comment,
+			_collectedDateTime: this._collectedDateTime && this._collectedDateTime.toJSON(),
+			collectedDateTime: this.collectedDateTime,
+			collectedPeriod: this.collectedPeriod && this.collectedPeriod.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			method: this.method && this.method.toJSON(),
+			bodySite: this.bodySite && this.bodySite.toJSON(),
+		};
 	}
-}
-
-module.exports = SpecimenCollection;
+};

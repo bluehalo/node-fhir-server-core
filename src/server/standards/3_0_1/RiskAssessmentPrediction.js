@@ -1,106 +1,239 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary RiskAssessmentPrediction Class
+ */
+module.exports = class RiskAssessmentPrediction {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class RiskAssessmentPrediction extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'RiskAssessmentPrediction';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.outcome = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_probabilityDecimal', {
+			enumerable: true,
+			get: () => this.__data._probabilityDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._probabilityDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'probabilityDecimal', {
+			enumerable: true,
+			get: () => this.__data.probabilityDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.probabilityDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, 'probabilityRange', {
+			enumerable: true,
+			get: () => this.__data.probabilityRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.probabilityRange = new Range(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/risk-probability
+		Object.defineProperty(this, 'qualitativeRisk', {
+			enumerable: true,
+			get: () => this.__data.qualitativeRisk,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.qualitativeRisk = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_relativeRisk', {
+			enumerable: true,
+			get: () => this.__data._relativeRisk,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._relativeRisk = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'relativeRisk', {
+			enumerable: true,
+			get: () => this.__data.relativeRisk,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.relativeRisk = value;
+			},
+		});
+
+		Object.defineProperty(this, 'whenPeriod', {
+			enumerable: true,
+			get: () => this.__data.whenPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.whenPeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'whenRange', {
+			enumerable: true,
+			get: () => this.__data.whenRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.whenRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, '_rationale', {
+			enumerable: true,
+			get: () => this.__data._rationale,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._rationale = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rationale', {
+			enumerable: true,
+			get: () => this.__data.rationale,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.rationale = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'RiskAssessmentPrediction',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a RiskAssessmentPrediction resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'RiskAssessmentPrediction';
 	}
 
-	// One of the potential outcomes for the patient (e.g. remission, death,  a particular condition).
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__outcome = new CodeableConcept(new_value);
-	}
-
-	// How likely is the outcome (in the specified timeframe).
-	get probabilityDecimal() {
-		return this.__probabilityDecimal;
-	}
-
-	set probabilityDecimal(new_value) {
-		this.__probabilityDecimal = new_value;
-	}
-
-	// How likely is the outcome (in the specified timeframe).
-	get probabilityRange() {
-		return this.__probabilityRange;
-	}
-
-	set probabilityRange(new_value) {
-		const Range = require('./Range');
-		this.__probabilityRange = new Range(new_value);
-	}
-
-	// How likely is the outcome (in the specified timeframe), expressed as a qualitative value (e.g. low, medium, high).
-	get qualitativeRisk() {
-		return this.__qualitativeRisk;
-	}
-
-	set qualitativeRisk(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__qualitativeRisk = new CodeableConcept(new_value);
-	}
-
-	// Indicates the risk for this particular subject (with their specific characteristics) divided by the risk of the population in general.  (Numbers greater than 1 = higher risk than the population, numbers less than 1 = lower risk.).
-	get relativeRisk() {
-		return this.__relativeRisk;
-	}
-
-	set relativeRisk(new_value) {
-		this.__relativeRisk = new_value;
-	}
-
-	// Indicates the period of time or age range of the subject to which the specified probability applies.
-	get whenPeriod() {
-		return this.__whenPeriod;
-	}
-
-	set whenPeriod(new_value) {
-		const Period = require('./Period');
-		this.__whenPeriod = new Period(new_value);
-	}
-
-	// Indicates the period of time or age range of the subject to which the specified probability applies.
-	get whenRange() {
-		return this.__whenRange;
-	}
-
-	set whenRange(new_value) {
-		const Range = require('./Range');
-		this.__whenRange = new Range(new_value);
-	}
-
-	// Additional information explaining the basis for the prediction.
-	get rationale() {
-		return this.__rationale;
-	}
-
-	set rationale(new_value) {
-		this.__rationale = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			outcome: this.__outcome && this.__outcome.toJSON(),
-			probabilityDecimal: this.__probabilityDecimal,
-			probabilityRange: this.__probabilityRange && this.__probabilityRange.toJSON(),
-			qualitativeRisk: this.__qualitativeRisk && this.__qualitativeRisk.toJSON(),
-			relativeRisk: this.__relativeRisk,
-			whenPeriod: this.__whenPeriod && this.__whenPeriod.toJSON(),
-			whenRange: this.__whenRange && this.__whenRange.toJSON(),
-			rationale: this.__rationale,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			outcome: this.outcome && this.outcome.toJSON(),
+			_probabilityDecimal: this._probabilityDecimal && this._probabilityDecimal.toJSON(),
+			probabilityDecimal: this.probabilityDecimal,
+			probabilityRange: this.probabilityRange && this.probabilityRange.toJSON(),
+			qualitativeRisk: this.qualitativeRisk && this.qualitativeRisk.toJSON(),
+			_relativeRisk: this._relativeRisk && this._relativeRisk.toJSON(),
+			relativeRisk: this.relativeRisk,
+			whenPeriod: this.whenPeriod && this.whenPeriod.toJSON(),
+			whenRange: this.whenRange && this.whenRange.toJSON(),
+			_rationale: this._rationale && this._rationale.toJSON(),
+			rationale: this.rationale,
+		};
 	}
-}
-
-module.exports = RiskAssessmentPrediction;
+};

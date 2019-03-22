@@ -1,123 +1,324 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary Organization Class
+ */
+module.exports = class Organization {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Organization extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Organization';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_active', {
+			enumerable: true,
+			get: () => this.__data._active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._active = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'active', {
+			enumerable: true,
+			get: () => this.__data.active,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.active = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/organization-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, 'telecom', {
+			enumerable: true,
+			get: () => this.__data.telecom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.telecom = Array.isArray(value) ? value.map(v => new ContactPoint(v)) : [new ContactPoint(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'address', {
+			enumerable: true,
+			get: () => this.__data.address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.address = Array.isArray(value) ? value.map(v => new Address(v)) : [new Address(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'partOf', {
+			enumerable: true,
+			get: () => this.__data.partOf,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.partOf = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let OrganizationContact = require('./organizationcontact.js');
+				this.__data.contact = Array.isArray(value)
+					? value.map(v => new OrganizationContact(v))
+					: [new OrganizationContact(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Organization',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Organization resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Organization';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Organization = new_value;
-	}
-
-	// Identifier for the organization that is used to identify the organization across multiple disparate systems.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Whether the organization\'s record is still in active use.
-	get active() {
-		return this.__active;
-	}
-
-	set active(new_value) {
-		this.__active = new_value;
-	}
-
-	// The kind of organization that this is.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// A name associated with the organization.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// A contact detail for the organization.
-	get telecom() {
-		return this.__telecom;
-	}
-
-	set telecom(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__telecom = Array.isArray(new_value)
-			? new_value.map(val => new ContactPoint(val))
-			: [new ContactPoint(new_value)];
-	}
-
-	// An address for the organization.
-	get address() {
-		return this.__address;
-	}
-
-	set address(new_value) {
-		const Address = require('./Address');
-		this.__address = Array.isArray(new_value) ? new_value.map(val => new Address(val)) : [new Address(new_value)];
-	}
-
-	// The organization of which this organization forms a part.
-	get partOf() {
-		return this.__partOf;
-	}
-
-	set partOf(new_value) {
-		const Reference = require('./Reference');
-		this.__partOf = new Reference(new_value);
-	}
-
-	// Contact for the organization for a certain purpose.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const OrganizationContact = require('./OrganizationContact');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new OrganizationContact(val))
-			: [new OrganizationContact(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			active: this.__active,
-			type: this.__type && this.__type.toJSON(),
-			name: this.__name,
-			telecom: this.__telecom && this.__telecom.map(v => v.toJSON()),
-			address: this.__address && this.__address.map(v => v.toJSON()),
-			partOf: this.__partOf && this.__partOf.toJSON(),
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_active: this._active && this._active.toJSON(),
+			active: this.active,
+			type: this.type && this.type.toJSON(),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			telecom: this.telecom && this.telecom.map(v => v.toJSON()),
+			address: this.address && this.address.map(v => v.toJSON()),
+			partOf: this.partOf && this.partOf.toJSON(),
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Organization;
+};

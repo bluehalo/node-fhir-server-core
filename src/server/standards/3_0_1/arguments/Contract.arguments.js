@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the contract query
+ */
 module.exports = {
-	AGENT: {
-		name: 'agent',
+	agent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.agent.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-agent',
-		documentation: 'Agent to the Contact.',
+		description: 'Agent to the Contact',
 	},
-	AUTHORITY: {
-		name: 'authority',
+	authority: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.authority',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-authority',
-		documentation: 'The authority of the contract.',
+		description: 'The authority of the contract',
 	},
-	DOMAIN: {
-		name: 'domain',
+	domain: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.domain',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-domain',
-		documentation: 'The domain of the contract.',
+		description: 'The domain of the contract',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Contract.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-identifier',
-		documentation: 'The identity of the contract.',
+		description: 'The identity of the contract',
 	},
-	ISSUED: {
-		name: 'issued',
+	issued: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Contract.issued',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-issued',
-		documentation: 'The date/time the contract was issued.',
+		description: 'The date/time the contract was issued',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-patient',
-		documentation: 'The identity of the subject of the contract (if a patient).',
+		description: 'The identity of the subject of the contract (if a patient)',
 	},
-	SIGNER: {
-		name: 'signer',
+	signer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.signer.party',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-signer',
-		documentation: 'Contract Signatory Party.',
+		description: 'Contract Signatory Party',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-subject',
-		documentation: 'The identity of the subject of the contract.',
+		description: 'The identity of the subject of the contract',
 	},
-	TERM_TOPIC: {
-		name: 'term-topic',
+	'term-topic': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Contract.term.topic',
 		definition: 'http://hl7.org/fhir/SearchParameter/Contract-term-topic',
-		documentation: 'The identity of the topic of the contract terms.',
+		description: 'The identity of the topic of the contract terms',
 	},
 };

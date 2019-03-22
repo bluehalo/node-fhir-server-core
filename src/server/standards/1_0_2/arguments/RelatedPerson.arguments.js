@@ -1,92 +1,112 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the relatedperson query
+ */
 module.exports = {
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address',
-		documentation: 'An address in any kind of address/part.',
+		description: 'An address in any kind of address/part',
 	},
-	ADDRESS_CITY: {
-		name: 'address-city',
+	'address-city': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.address.city',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-city',
-		documentation: 'A city specified in an address.',
+		description: 'A city specified in an address',
 	},
-	ADDRESS_COUNTRY: {
-		name: 'address-country',
+	'address-country': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.address.country',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-country',
-		documentation: 'A country specified in an address.',
+		description: 'A country specified in an address',
 	},
-	ADDRESS_POSTALCODE: {
-		name: 'address-postalcode',
+	'address-postalcode': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.address.postalCode',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-postalcode',
-		documentation: 'A postal code specified in an address.',
+		description: 'A postal code specified in an address',
 	},
-	ADDRESS_STATE: {
-		name: 'address-state',
+	'address-state': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.address.state',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-state',
-		documentation: 'A state specified in an address.',
+		description: 'A state specified in an address',
 	},
-	ADDRESS_USE: {
-		name: 'address-use',
+	'address-use': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RelatedPerson.address.use',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-address-use',
-		documentation: 'A use code specified in an address.',
+		description: 'A use code specified in an address',
 	},
-	BIRTHDATE: {
-		name: 'birthdate',
+	birthdate: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'RelatedPerson.birthDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-birthdate',
-		documentation: "The Related Person's date of birth.",
+		description: "The Related Person's date of birth",
 	},
-	EMAIL: {
-		name: 'email',
+	email: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "RelatedPerson.telecom[system/@value='email']",
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-email',
-		documentation: 'A value in an email contact.',
+		description: 'A value in an email contact',
 	},
-	GENDER: {
-		name: 'gender',
+	gender: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RelatedPerson.gender',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-gender',
-		documentation: 'Gender of the person.',
+		description: 'Gender of the person',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RelatedPerson.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-identifier',
-		documentation: 'A patient Identifier.',
+		description: 'A patient Identifier',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-name',
-		documentation: 'A portion of name in any name part.',
+		description: 'A portion of name in any name part',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'RelatedPerson.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-patient',
-		documentation: 'The patient this person is related to.',
+		description: 'The patient this person is related to',
 	},
-	PHONE: {
-		name: 'phone',
+	phone: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: "RelatedPerson.telecom[system/@value='phone']",
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-phone',
-		documentation: 'A value in a phone contact.',
+		description: 'A value in a phone contact',
 	},
-	PHONETIC: {
-		name: 'phonetic',
+	phonetic: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'RelatedPerson.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-phonetic',
-		documentation: 'A portion of name using some kind of phonetic matching algorithm.',
+		description: 'A portion of name using some kind of phonetic matching algorithm',
 	},
-	TELECOM: {
-		name: 'telecom',
+	telecom: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'RelatedPerson.telecom',
 		definition: 'http://hl7.org/fhir/SearchParameter/RelatedPerson-telecom',
-		documentation: 'The value in any kind of contact.',
+		description: 'The value in any kind of contact',
 	},
 };

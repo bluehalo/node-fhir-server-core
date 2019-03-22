@@ -1,173 +1,467 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary VisionPrescriptionDispense Class
+ */
+module.exports = class VisionPrescriptionDispense {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class VisionPrescriptionDispense extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'VisionPrescriptionDispense';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vision-product
+		Object.defineProperty(this, 'product', {
+			enumerable: true,
+			get: () => this.__data.product,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.product = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_eye', {
+			enumerable: true,
+			get: () => this.__data._eye,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._eye = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vision-eye-codes
+		Object.defineProperty(this, 'eye', {
+			enumerable: true,
+			get: () => this.__data.eye,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.eye = value;
+			},
+		});
+
+		Object.defineProperty(this, '_sphere', {
+			enumerable: true,
+			get: () => this.__data._sphere,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._sphere = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'sphere', {
+			enumerable: true,
+			get: () => this.__data.sphere,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.sphere = value;
+			},
+		});
+
+		Object.defineProperty(this, '_cylinder', {
+			enumerable: true,
+			get: () => this.__data._cylinder,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._cylinder = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'cylinder', {
+			enumerable: true,
+			get: () => this.__data.cylinder,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.cylinder = value;
+			},
+		});
+
+		Object.defineProperty(this, '_axis', {
+			enumerable: true,
+			get: () => this.__data._axis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._axis = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'axis', {
+			enumerable: true,
+			get: () => this.__data.axis,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.axis = value;
+			},
+		});
+
+		Object.defineProperty(this, '_prism', {
+			enumerable: true,
+			get: () => this.__data._prism,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._prism = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'prism', {
+			enumerable: true,
+			get: () => this.__data.prism,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.prism = value;
+			},
+		});
+
+		Object.defineProperty(this, '_base', {
+			enumerable: true,
+			get: () => this.__data._base,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._base = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/vision-base-codes
+		Object.defineProperty(this, 'base', {
+			enumerable: true,
+			get: () => this.__data.base,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.base = value;
+			},
+		});
+
+		Object.defineProperty(this, '_add', {
+			enumerable: true,
+			get: () => this.__data._add,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._add = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'add', {
+			enumerable: true,
+			get: () => this.__data.add,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.add = value;
+			},
+		});
+
+		Object.defineProperty(this, '_power', {
+			enumerable: true,
+			get: () => this.__data._power,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._power = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'power', {
+			enumerable: true,
+			get: () => this.__data.power,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.power = value;
+			},
+		});
+
+		Object.defineProperty(this, '_backCurve', {
+			enumerable: true,
+			get: () => this.__data._backCurve,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._backCurve = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'backCurve', {
+			enumerable: true,
+			get: () => this.__data.backCurve,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.backCurve = value;
+			},
+		});
+
+		Object.defineProperty(this, '_diameter', {
+			enumerable: true,
+			get: () => this.__data._diameter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._diameter = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'diameter', {
+			enumerable: true,
+			get: () => this.__data.diameter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.diameter = value;
+			},
+		});
+
+		Object.defineProperty(this, 'duration', {
+			enumerable: true,
+			get: () => this.__data.duration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.duration = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_color', {
+			enumerable: true,
+			get: () => this.__data._color,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._color = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'color', {
+			enumerable: true,
+			get: () => this.__data.color,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.color = value;
+			},
+		});
+
+		Object.defineProperty(this, '_brand', {
+			enumerable: true,
+			get: () => this.__data._brand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._brand = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'brand', {
+			enumerable: true,
+			get: () => this.__data.brand,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.brand = value;
+			},
+		});
+
+		Object.defineProperty(this, '_notes', {
+			enumerable: true,
+			get: () => this.__data._notes,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._notes = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'notes', {
+			enumerable: true,
+			get: () => this.__data.notes,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.notes = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'VisionPrescriptionDispense',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a VisionPrescriptionDispense resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'VisionPrescriptionDispense';
 	}
 
-	// Identifies the type of vision correction product which is required for the patient.
-	get product() {
-		return this.__product;
-	}
-
-	set product(new_value) {
-		const Coding = require('./Coding');
-		this.__product = new Coding(new_value);
-	}
-
-	// The eye for which the lens applies.
-	get eye() {
-		return this.__eye;
-	}
-
-	set eye(new_value) {
-		this.__eye = new_value;
-	}
-
-	// Lens power measured in diopters (0.25 units).
-	get sphere() {
-		return this.__sphere;
-	}
-
-	set sphere(new_value) {
-		this.__sphere = new_value;
-	}
-
-	// Power adjustment for astigmatism measured in diopters (0.25 units).
-	get cylinder() {
-		return this.__cylinder;
-	}
-
-	set cylinder(new_value) {
-		this.__cylinder = new_value;
-	}
-
-	// Adjustment for astigmatism measured in integer degrees.
-	get axis() {
-		return this.__axis;
-	}
-
-	set axis(new_value) {
-		this.__axis = new_value;
-	}
-
-	// Amount of prism to compensate for eye alignment in fractional units.
-	get prism() {
-		return this.__prism;
-	}
-
-	set prism(new_value) {
-		this.__prism = new_value;
-	}
-
-	// The relative base, or reference lens edge, for the prism.
-	get base() {
-		return this.__base;
-	}
-
-	set base(new_value) {
-		this.__base = new_value;
-	}
-
-	// Power adjustment for multifocal lenses measured in diopters (0.25 units).
-	get add() {
-		return this.__add;
-	}
-
-	set add(new_value) {
-		this.__add = new_value;
-	}
-
-	// Contact lens power measured in diopters (0.25 units).
-	get power() {
-		return this.__power;
-	}
-
-	set power(new_value) {
-		this.__power = new_value;
-	}
-
-	// Back curvature measured in millimeters.
-	get backCurve() {
-		return this.__backCurve;
-	}
-
-	set backCurve(new_value) {
-		this.__backCurve = new_value;
-	}
-
-	// Contact lens diameter measured in millimeters.
-	get diameter() {
-		return this.__diameter;
-	}
-
-	set diameter(new_value) {
-		this.__diameter = new_value;
-	}
-
-	// The recommended maximum wear period for the lens.
-	get duration() {
-		return this.__duration;
-	}
-
-	set duration(new_value) {
-		const Quantity = require('./Quantity');
-		this.__duration = new Quantity(new_value);
-	}
-
-	// Special color or pattern.
-	get color() {
-		return this.__color;
-	}
-
-	set color(new_value) {
-		this.__color = new_value;
-	}
-
-	// Brand recommendations or restrictions.
-	get brand() {
-		return this.__brand;
-	}
-
-	set brand(new_value) {
-		this.__brand = new_value;
-	}
-
-	// Notes for special requirements such as coatings and lens materials.
-	get notes() {
-		return this.__notes;
-	}
-
-	set notes(new_value) {
-		this.__notes = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			product: this.__product && this.__product.toJSON(),
-			eye: this.__eye,
-			sphere: this.__sphere,
-			cylinder: this.__cylinder,
-			axis: this.__axis,
-			prism: this.__prism,
-			base: this.__base,
-			add: this.__add,
-			power: this.__power,
-			backCurve: this.__backCurve,
-			diameter: this.__diameter,
-			duration: this.__duration && this.__duration.toJSON(),
-			color: this.__color,
-			brand: this.__brand,
-			notes: this.__notes,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			product: this.product && this.product.toJSON(),
+			_eye: this._eye && this._eye.toJSON(),
+			eye: this.eye,
+			_sphere: this._sphere && this._sphere.toJSON(),
+			sphere: this.sphere,
+			_cylinder: this._cylinder && this._cylinder.toJSON(),
+			cylinder: this.cylinder,
+			_axis: this._axis && this._axis.toJSON(),
+			axis: this.axis,
+			_prism: this._prism && this._prism.toJSON(),
+			prism: this.prism,
+			_base: this._base && this._base.toJSON(),
+			base: this.base,
+			_add: this._add && this._add.toJSON(),
+			add: this.add,
+			_power: this._power && this._power.toJSON(),
+			power: this.power,
+			_backCurve: this._backCurve && this._backCurve.toJSON(),
+			backCurve: this.backCurve,
+			_diameter: this._diameter && this._diameter.toJSON(),
+			diameter: this.diameter,
+			duration: this.duration && this.duration.toJSON(),
+			_color: this._color && this._color.toJSON(),
+			color: this.color,
+			_brand: this._brand && this._brand.toJSON(),
+			brand: this.brand,
+			_notes: this._notes && this._notes.toJSON(),
+			notes: this.notes,
+		};
 	}
-}
-
-module.exports = VisionPrescriptionDispense;
+};

@@ -1,233 +1,493 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
+/**
+ * @name exports
+ * @summary DocumentReference Class
+ */
+module.exports = class DocumentReference {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DocumentReference extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DocumentReference';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'masterIdentifier', {
+			enumerable: true,
+			get: () => this.__data.masterIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.masterIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/document-reference-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_docStatus', {
+			enumerable: true,
+			get: () => this.__data._docStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._docStatus = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/composition-status
+		Object.defineProperty(this, 'docStatus', {
+			enumerable: true,
+			get: () => this.__data.docStatus,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.docStatus = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-doc-typecodes
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-doc-classcodes
+		Object.defineProperty(this, 'class', {
+			enumerable: true,
+			get: () => this.__data.class,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.class = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_created', {
+			enumerable: true,
+			get: () => this.__data._created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._created = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'created', {
+			enumerable: true,
+			get: () => this.__data.created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.created = value;
+			},
+		});
+
+		Object.defineProperty(this, '_indexed', {
+			enumerable: true,
+			get: () => this.__data._indexed,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._indexed = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'indexed', {
+			enumerable: true,
+			get: () => this.__data.indexed,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.indexed = value;
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'authenticator', {
+			enumerable: true,
+			get: () => this.__data.authenticator,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.authenticator = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'custodian', {
+			enumerable: true,
+			get: () => this.__data.custodian,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.custodian = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'relatesTo', {
+			enumerable: true,
+			get: () => this.__data.relatesTo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DocumentReferenceRelatesTo = require('./documentreferencerelatesto.js');
+				this.__data.relatesTo = Array.isArray(value)
+					? value.map(v => new DocumentReferenceRelatesTo(v))
+					: [new DocumentReferenceRelatesTo(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/security-labels
+		Object.defineProperty(this, 'securityLabel', {
+			enumerable: true,
+			get: () => this.__data.securityLabel,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.securityLabel = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'content', {
+			enumerable: true,
+			get: () => this.__data.content,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DocumentReferenceContent = require('./documentreferencecontent.js');
+				this.__data.content = Array.isArray(value)
+					? value.map(v => new DocumentReferenceContent(v))
+					: [new DocumentReferenceContent(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DocumentReferenceContext = require('./documentreferencecontext.js');
+				this.__data.context = new DocumentReferenceContext(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DocumentReference',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DocumentReference resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DocumentReference';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__DocumentReference = new_value;
-	}
-
-	// Document identifier as assigned by the source of the document. This identifier is specific to this version of the document. This unique identifier may be used elsewhere to identify this version of the document.
-	get masterIdentifier() {
-		return this.__masterIdentifier;
-	}
-
-	set masterIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__masterIdentifier = new Identifier(new_value);
-	}
-
-	// Other identifiers associated with the document, including version independent identifiers.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The status of this document reference.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The status of the underlying document.
-	get docStatus() {
-		return this.__docStatus;
-	}
-
-	set docStatus(new_value) {
-		this.__docStatus = new_value;
-	}
-
-	// Specifies the particular kind of document referenced  (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the document referenced.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// A categorization for the type of document referenced - helps for indexing and searching. This may be implied by or derived from the code specified in the DocumentReference.type.
-	get class() {
-		return this.__class;
-	}
-
-	set class(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__class = new CodeableConcept(new_value);
-	}
-
-	// Who or what the document is about. The document can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of farm animals, or a set of patients that share a common exposure).
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// When the document was created.
-	get created() {
-		return this.__created;
-	}
-
-	set created(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field created`);
-		}
-		this.__created = new_value;
-	}
-
-	// When the document reference was created.
-	get indexed() {
-		return this.__indexed;
-	}
-
-	set indexed(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field indexed`);
-		}
-		this.__indexed = new_value;
-	}
-
-	// Identifies who is responsible for adding the information to the document.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Which person or organization authenticates that this document is valid.
-	get authenticator() {
-		return this.__authenticator;
-	}
-
-	set authenticator(new_value) {
-		const Reference = require('./Reference');
-		this.__authenticator = new Reference(new_value);
-	}
-
-	// Identifies the organization or group who is responsible for ongoing maintenance of and access to the document.
-	get custodian() {
-		return this.__custodian;
-	}
-
-	set custodian(new_value) {
-		const Reference = require('./Reference');
-		this.__custodian = new Reference(new_value);
-	}
-
-	// Relationships that this document has with other document references that already exist.
-	get relatesTo() {
-		return this.__relatesTo;
-	}
-
-	set relatesTo(new_value) {
-		const DocumentReferenceRelatesTo = require('./DocumentReferenceRelatesTo');
-		this.__relatesTo = Array.isArray(new_value)
-			? new_value.map(val => new DocumentReferenceRelatesTo(val))
-			: [new DocumentReferenceRelatesTo(new_value)];
-	}
-
-	// Human-readable description of the source document. This is sometimes known as the \'title\'.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// A set of Security-Tag codes specifying the level of privacy/security of the Document. Note that DocumentReference.meta.security contains the security labels of the \'reference\' to the document, while DocumentReference.securityLabel contains a snapshot of the security labels on the document the reference refers to.
-	get securityLabel() {
-		return this.__securityLabel;
-	}
-
-	set securityLabel(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__securityLabel = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The document and format referenced. There may be multiple content element repetitions, each with a different format.
-	get content() {
-		return this.__content;
-	}
-
-	set content(new_value) {
-		const DocumentReferenceContent = require('./DocumentReferenceContent');
-		this.__content = Array.isArray(new_value)
-			? new_value.map(val => new DocumentReferenceContent(val))
-			: [new DocumentReferenceContent(new_value)];
-	}
-
-	// The clinical context in which the document was prepared.
-	get context() {
-		return this.__context;
-	}
-
-	set context(new_value) {
-		const DocumentReferenceContext = require('./DocumentReferenceContext');
-		this.__context = new DocumentReferenceContext(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			masterIdentifier: this.__masterIdentifier && this.__masterIdentifier.toJSON(),
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			docStatus: this.__docStatus,
-			type: this.__type && this.__type.toJSON(),
-			class: this.__class && this.__class.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			created: this.__created,
-			indexed: this.__indexed,
-			author: this.__author && this.__author.map(v => v.toJSON()),
-			authenticator: this.__authenticator && this.__authenticator.toJSON(),
-			custodian: this.__custodian && this.__custodian.toJSON(),
-			relatesTo: this.__relatesTo && this.__relatesTo.map(v => v.toJSON()),
-			description: this.__description,
-			securityLabel: this.__securityLabel && this.__securityLabel.map(v => v.toJSON()),
-			content: this.__content && this.__content.map(v => v.toJSON()),
-			context: this.__context && this.__context.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			masterIdentifier: this.masterIdentifier && this.masterIdentifier.toJSON(),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_docStatus: this._docStatus && this._docStatus.toJSON(),
+			docStatus: this.docStatus,
+			type: this.type && this.type.toJSON(),
+			class: this.class && this.class.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			_created: this._created && this._created.toJSON(),
+			created: this.created,
+			_indexed: this._indexed && this._indexed.toJSON(),
+			indexed: this.indexed,
+			author: this.author && this.author.map(v => v.toJSON()),
+			authenticator: this.authenticator && this.authenticator.toJSON(),
+			custodian: this.custodian && this.custodian.toJSON(),
+			relatesTo: this.relatesTo && this.relatesTo.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
+			content: this.content && this.content.map(v => v.toJSON()),
+			context: this.context && this.context.toJSON(),
+		};
 	}
-}
-
-module.exports = DocumentReference;
+};

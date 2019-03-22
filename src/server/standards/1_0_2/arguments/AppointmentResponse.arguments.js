@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the appointmentresponse query
+ */
 module.exports = {
-	ACTOR: {
-		name: 'actor',
+	actor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AppointmentResponse.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-actor',
-		documentation: 'The Person, Location/HealthcareService or Device that this appointment response replies for.',
+		description: 'The Person, Location/HealthcareService or Device that this appointment response replies for',
 	},
-	APPOINTMENT: {
-		name: 'appointment',
+	appointment: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AppointmentResponse.appointment',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-appointment',
-		documentation: 'The appointment that the response is attached to.',
+		description: 'The appointment that the response is attached to',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AppointmentResponse.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-identifier',
-		documentation: 'An Identifier in this appointment response.',
+		description: 'An Identifier in this appointment response',
 	},
-	LOCATION: {
-		name: 'location',
+	location: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AppointmentResponse.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-location',
-		documentation: 'This Response is for this Location.',
+		description: 'This Response is for this Location',
 	},
-	PART_STATUS: {
-		name: 'part-status',
+	'part-status': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AppointmentResponse.participantStatus',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-part-status',
-		documentation: 'The participants acceptance status for this appointment.',
+		description: 'The participants acceptance status for this appointment',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AppointmentResponse.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-patient',
-		documentation: 'This Response is for this Patient.',
+		description: 'This Response is for this Patient',
 	},
-	PRACTITIONER: {
-		name: 'practitioner',
+	practitioner: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AppointmentResponse.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/AppointmentResponse-practitioner',
-		documentation: 'This Response is for this Practitioner.',
+		description: 'This Response is for this Practitioner',
 	},
 };

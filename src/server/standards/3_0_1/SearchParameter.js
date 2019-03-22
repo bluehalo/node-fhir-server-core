@@ -1,306 +1,784 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary SearchParameter Class
+ */
+module.exports = class SearchParameter {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SearchParameter extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SearchParameter';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/publication-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactDetail = require('./contactdetail.js');
+				this.__data.contact = Array.isArray(value) ? value.map(v => new ContactDetail(v)) : [new ContactDetail(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let UsageContext = require('./usagecontext.js');
+				this.__data.useContext = Array.isArray(value) ? value.map(v => new UsageContext(v)) : [new UsageContext(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/jurisdiction
+		Object.defineProperty(this, 'jurisdiction', {
+			enumerable: true,
+			get: () => this.__data.jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.jurisdiction = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_purpose', {
+			enumerable: true,
+			get: () => this.__data._purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._purpose = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'purpose', {
+			enumerable: true,
+			get: () => this.__data.purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.purpose = value;
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_base', {
+			enumerable: true,
+			get: () => this.__data._base,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._base = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/resource-types
+		Object.defineProperty(this, 'base', {
+			enumerable: true,
+			get: () => this.__data.base,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.base = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/search-param-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_derivedFrom', {
+			enumerable: true,
+			get: () => this.__data._derivedFrom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._derivedFrom = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'derivedFrom', {
+			enumerable: true,
+			get: () => this.__data.derivedFrom,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.derivedFrom = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_expression', {
+			enumerable: true,
+			get: () => this.__data._expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._expression = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'expression', {
+			enumerable: true,
+			get: () => this.__data.expression,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.expression = value;
+			},
+		});
+
+		Object.defineProperty(this, '_xpath', {
+			enumerable: true,
+			get: () => this.__data._xpath,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._xpath = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'xpath', {
+			enumerable: true,
+			get: () => this.__data.xpath,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.xpath = value;
+			},
+		});
+
+		Object.defineProperty(this, '_xpathUsage', {
+			enumerable: true,
+			get: () => this.__data._xpathUsage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._xpathUsage = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/search-xpath-usage
+		Object.defineProperty(this, 'xpathUsage', {
+			enumerable: true,
+			get: () => this.__data.xpathUsage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.xpathUsage = value;
+			},
+		});
+
+		Object.defineProperty(this, '_target', {
+			enumerable: true,
+			get: () => this.__data._target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._target = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/resource-types
+		Object.defineProperty(this, 'target', {
+			enumerable: true,
+			get: () => this.__data.target,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.target = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_comparator', {
+			enumerable: true,
+			get: () => this.__data._comparator,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comparator = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/search-comparator
+		Object.defineProperty(this, 'comparator', {
+			enumerable: true,
+			get: () => this.__data.comparator,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comparator = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_modifier', {
+			enumerable: true,
+			get: () => this.__data._modifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._modifier = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/search-modifier-code
+		Object.defineProperty(this, 'modifier', {
+			enumerable: true,
+			get: () => this.__data.modifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.modifier = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_chain', {
+			enumerable: true,
+			get: () => this.__data._chain,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._chain = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'chain', {
+			enumerable: true,
+			get: () => this.__data.chain,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.chain = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'component', {
+			enumerable: true,
+			get: () => this.__data.component,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SearchParameterComponent = require('./searchparametercomponent.js');
+				this.__data.component = Array.isArray(value)
+					? value.map(v => new SearchParameterComponent(v))
+					: [new SearchParameterComponent(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SearchParameter',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SearchParameter resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SearchParameter';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__SearchParameter = new_value;
-	}
-
-	// An absolute URI that is used to identify this search parameter when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this search parameter is (or will be) published. The URL SHOULD include the major version of the search parameter. For more information see [Technical and Business Versions](resource.html#versions).
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// The identifier that is used to identify this version of the search parameter when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the search parameter author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// A natural language name identifying the search parameter. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The status of this search parameter. Enables tracking the life-cycle of the content.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A boolean value to indicate that this search parameter is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The date  (and optionally time) when the search parameter was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the search parameter changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The name of the individual or organization that published the search parameter.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contact details to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ContactDetail = require('./ContactDetail');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ContactDetail(val))
-			: [new ContactDetail(new_value)];
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate search parameter instances.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const UsageContext = require('./UsageContext');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new UsageContext(val))
-			: [new UsageContext(new_value)];
-	}
-
-	// A legal or geographic region in which the search parameter is intended to be used.
-	get jurisdiction() {
-		return this.__jurisdiction;
-	}
-
-	set jurisdiction(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__jurisdiction = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Explaination of why this search parameter is needed and why it has been designed as it has.
-	get purpose() {
-		return this.__purpose;
-	}
-
-	set purpose(new_value) {
-		this.__purpose = new_value;
-	}
-
-	// The code used in the URL or the parameter name in a parameters resource for this search parameter.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field code`);
-		}
-		this.__code = new_value;
-	}
-
-	// The base resource type(s) that this search parameter can be used against.
-	get base() {
-		return this.__base;
-	}
-
-	set base(new_value) {
-		this.__base = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The type of value a search parameter refers to, and how the content is interpreted.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// Where this search parameter is originally defined. If a derivedFrom is provided, then the details in the search parameter must be consistent with the definition from which it is defined. I.e. the parameter should have the same meaning, and (usually) the functionality should be a proper subset of the underlying search parameter.
-	get derivedFrom() {
-		return this.__derivedFrom;
-	}
-
-	set derivedFrom(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field derivedFrom`);
-		}
-		this.__derivedFrom = new_value;
-	}
-
-	// A free text natural language description of the search parameter from a consumer\'s perspective. and how it used.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// A FHIRPath expression that returns a set of elements for the search parameter.
-	get expression() {
-		return this.__expression;
-	}
-
-	set expression(new_value) {
-		this.__expression = new_value;
-	}
-
-	// An XPath expression that returns a set of elements for the search parameter.
-	get xpath() {
-		return this.__xpath;
-	}
-
-	set xpath(new_value) {
-		this.__xpath = new_value;
-	}
-
-	// How the search parameter relates to the set of elements returned by evaluating the xpath query.
-	get xpathUsage() {
-		return this.__xpathUsage;
-	}
-
-	set xpathUsage(new_value) {
-		this.__xpathUsage = new_value;
-	}
-
-	// Types of resource (if a resource is referenced).
-	get target() {
-		return this.__target;
-	}
-
-	set target(new_value) {
-		this.__target = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Comparators supported for the search parameter.
-	get comparator() {
-		return this.__comparator;
-	}
-
-	set comparator(new_value) {
-		this.__comparator = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A modifier supported for the search parameter.
-	get modifier() {
-		return this.__modifier;
-	}
-
-	set modifier(new_value) {
-		this.__modifier = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Contains the names of any search parameters which may be chained to the containing search parameter. Chained parameters may be added to search parameters of type reference, and specify that resources will only be returned if they contain a reference to a resource which matches the chained parameter value. Values for this field should be drawn from SearchParameter.code for a parameter on the target resource type.
-	get chain() {
-		return this.__chain;
-	}
-
-	set chain(new_value) {
-		this.__chain = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// Used to define the parts of a composite search parameter.
-	get component() {
-		return this.__component;
-	}
-
-	set component(new_value) {
-		const SearchParameterComponent = require('./SearchParameterComponent');
-		this.__component = Array.isArray(new_value)
-			? new_value.map(val => new SearchParameterComponent(val))
-			: [new SearchParameterComponent(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			version: this.__version,
-			name: this.__name,
-			status: this.__status,
-			experimental: this.__experimental,
-			date: this.__date,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
-			purpose: this.__purpose,
-			code: this.__code,
-			base: this.__base,
-			type: this.__type,
-			derivedFrom: this.__derivedFrom,
-			description: this.__description,
-			expression: this.__expression,
-			xpath: this.__xpath,
-			xpathUsage: this.__xpathUsage,
-			target: this.__target,
-			comparator: this.__comparator,
-			modifier: this.__modifier,
-			chain: this.__chain,
-			component: this.__component && this.__component.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			jurisdiction: this.jurisdiction && this.jurisdiction.map(v => v.toJSON()),
+			_purpose: this._purpose && this._purpose.toJSON(),
+			purpose: this.purpose,
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_base: this._base && this._base.toJSON(),
+			base: this.base,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_derivedFrom: this._derivedFrom && this._derivedFrom.toJSON(),
+			derivedFrom: this.derivedFrom,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_expression: this._expression && this._expression.toJSON(),
+			expression: this.expression,
+			_xpath: this._xpath && this._xpath.toJSON(),
+			xpath: this.xpath,
+			_xpathUsage: this._xpathUsage && this._xpathUsage.toJSON(),
+			xpathUsage: this.xpathUsage,
+			_target: this._target && this._target.toJSON(),
+			target: this.target,
+			_comparator: this._comparator && this._comparator.toJSON(),
+			comparator: this.comparator,
+			_modifier: this._modifier && this._modifier.toJSON(),
+			modifier: this.modifier,
+			_chain: this._chain && this._chain.toJSON(),
+			chain: this.chain,
+			component: this.component && this.component.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = SearchParameter;
+};

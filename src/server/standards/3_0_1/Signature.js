@@ -1,133 +1,249 @@
-const Element = require('./Element');
-const InstantScalar = require('./scalars/Instant.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
+/**
+ * @name exports
+ * @summary Signature Class
+ */
+module.exports = class Signature {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Signature extends Element {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Signature';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/signature-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_when', {
+			enumerable: true,
+			get: () => this.__data._when,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._when = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'when', {
+			enumerable: true,
+			get: () => this.__data.when,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.when = value;
+			},
+		});
+
+		Object.defineProperty(this, '_whoUri', {
+			enumerable: true,
+			get: () => this.__data._whoUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._whoUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'whoUri', {
+			enumerable: true,
+			get: () => this.__data.whoUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.whoUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'whoReference', {
+			enumerable: true,
+			get: () => this.__data.whoReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.whoReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_onBehalfOfUri', {
+			enumerable: true,
+			get: () => this.__data._onBehalfOfUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._onBehalfOfUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'onBehalfOfUri', {
+			enumerable: true,
+			get: () => this.__data.onBehalfOfUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.onBehalfOfUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'onBehalfOfReference', {
+			enumerable: true,
+			get: () => this.__data.onBehalfOfReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.onBehalfOfReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_contentType', {
+			enumerable: true,
+			get: () => this.__data._contentType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._contentType = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contentType', {
+			enumerable: true,
+			get: () => this.__data.contentType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contentType = value;
+			},
+		});
+
+		Object.defineProperty(this, '_blob', {
+			enumerable: true,
+			get: () => this.__data._blob,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._blob = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'blob', {
+			enumerable: true,
+			get: () => this.__data.blob,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.blob = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Signature',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Signature resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Signature';
 	}
 
-	// An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// When the digital signature was signed.
-	get when() {
-		return this.__when;
-	}
-
-	set when(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field when`);
-		}
-		this.__when = new_value;
-	}
-
-	// A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key).
-	get whoUri() {
-		return this.__whoUri;
-	}
-
-	set whoUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field whoUri`);
-		}
-		this.__whoUri = new_value;
-	}
-
-	// A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key).
-	get whoReference() {
-		return this.__whoReference;
-	}
-
-	set whoReference(new_value) {
-		const Reference = require('./Reference');
-		this.__whoReference = new Reference(new_value);
-	}
-
-	// A reference to an application-usable description of the identity that is represented by the signature.
-	get onBehalfOfUri() {
-		return this.__onBehalfOfUri;
-	}
-
-	set onBehalfOfUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field onBehalfOfUri`);
-		}
-		this.__onBehalfOfUri = new_value;
-	}
-
-	// A reference to an application-usable description of the identity that is represented by the signature.
-	get onBehalfOfReference() {
-		return this.__onBehalfOfReference;
-	}
-
-	set onBehalfOfReference(new_value) {
-		const Reference = require('./Reference');
-		this.__onBehalfOfReference = new Reference(new_value);
-	}
-
-	// A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jwt for JWT, and image/* for a graphical image of a signature, etc.
-	get contentType() {
-		return this.__contentType;
-	}
-
-	set contentType(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field contentType`);
-		}
-		this.__contentType = new_value;
-	}
-
-	// The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.
-	get blob() {
-		return this.__blob;
-	}
-
-	set blob(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field blob`);
-		}
-		this.__blob = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.map(v => v.toJSON()),
-			when: this.__when,
-			whoUri: this.__whoUri,
-			whoReference: this.__whoReference && this.__whoReference.toJSON(),
-			onBehalfOfUri: this.__onBehalfOfUri,
-			onBehalfOfReference: this.__onBehalfOfReference && this.__onBehalfOfReference.toJSON(),
-			contentType: this.__contentType,
-			blob: this.__blob,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			type: this.type && this.type.map(v => v.toJSON()),
+			_when: this._when && this._when.toJSON(),
+			when: this.when,
+			_whoUri: this._whoUri && this._whoUri.toJSON(),
+			whoUri: this.whoUri,
+			whoReference: this.whoReference && this.whoReference.toJSON(),
+			_onBehalfOfUri: this._onBehalfOfUri && this._onBehalfOfUri.toJSON(),
+			onBehalfOfUri: this.onBehalfOfUri,
+			onBehalfOfReference: this.onBehalfOfReference && this.onBehalfOfReference.toJSON(),
+			_contentType: this._contentType && this._contentType.toJSON(),
+			contentType: this.contentType,
+			_blob: this._blob && this._blob.toJSON(),
+			blob: this.blob,
+		};
 	}
-}
-
-module.exports = Signature;
+};

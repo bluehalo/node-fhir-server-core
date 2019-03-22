@@ -1,100 +1,238 @@
-const BackboneElement = require('./BackboneElement');
-const InstantScalar = require('./scalars/Instant.scalar');
+/**
+ * @name exports
+ * @summary AuditEventEvent Class
+ */
+module.exports = class AuditEventEvent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AuditEventEvent extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AuditEventEvent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-sub-type
+		Object.defineProperty(this, 'subtype', {
+			enumerable: true,
+			get: () => this.__data.subtype,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.subtype = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_action', {
+			enumerable: true,
+			get: () => this.__data._action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._action = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-action
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.action = value;
+			},
+		});
+
+		Object.defineProperty(this, '_dateTime', {
+			enumerable: true,
+			get: () => this.__data._dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._dateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'dateTime', {
+			enumerable: true,
+			get: () => this.__data.dateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.dateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_outcome', {
+			enumerable: true,
+			get: () => this.__data._outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._outcome = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.outcome = value;
+			},
+		});
+
+		Object.defineProperty(this, '_outcomeDesc', {
+			enumerable: true,
+			get: () => this.__data._outcomeDesc,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._outcomeDesc = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'outcomeDesc', {
+			enumerable: true,
+			get: () => this.__data.outcomeDesc,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.outcomeDesc = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'purposeOfEvent', {
+			enumerable: true,
+			get: () => this.__data.purposeOfEvent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.purposeOfEvent = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AuditEventEvent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AuditEventEvent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AuditEventEvent';
 	}
 
-	// Identifier for a family of the event.  For example, a menu item, program, rule, policy, function code, application name or URL. It identifies the performed function.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// Identifier for the category of event.
-	get subtype() {
-		return this.__subtype;
-	}
-
-	set subtype(new_value) {
-		const Coding = require('./Coding');
-		this.__subtype = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Indicator for type of action performed during the event that generated the audit.
-	get action() {
-		return this.__action;
-	}
-
-	set action(new_value) {
-		this.__action = new_value;
-	}
-
-	// The time when the event occurred on the source.
-	get dateTime() {
-		return this.__dateTime;
-	}
-
-	set dateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field dateTime`);
-		}
-		this.__dateTime = new_value;
-	}
-
-	// Indicates whether the event succeeded or failed.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		this.__outcome = new_value;
-	}
-
-	// A free text description of the outcome of the event.
-	get outcomeDesc() {
-		return this.__outcomeDesc;
-	}
-
-	set outcomeDesc(new_value) {
-		this.__outcomeDesc = new_value;
-	}
-
-	// The purposeOfUse (reason) that was used during the event being recorded.
-	get purposeOfEvent() {
-		return this.__purposeOfEvent;
-	}
-
-	set purposeOfEvent(new_value) {
-		const Coding = require('./Coding');
-		this.__purposeOfEvent = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			subtype: this.__subtype && this.__subtype.map(v => v.toJSON()),
-			action: this.__action,
-			dateTime: this.__dateTime,
-			outcome: this.__outcome,
-			outcomeDesc: this.__outcomeDesc,
-			purposeOfEvent: this.__purposeOfEvent && this.__purposeOfEvent.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			subtype: this.subtype && this.subtype.map(v => v.toJSON()),
+			_action: this._action && this._action.toJSON(),
+			action: this.action,
+			_dateTime: this._dateTime && this._dateTime.toJSON(),
+			dateTime: this.dateTime,
+			_outcome: this._outcome && this._outcome.toJSON(),
+			outcome: this.outcome,
+			_outcomeDesc: this._outcomeDesc && this._outcomeDesc.toJSON(),
+			outcomeDesc: this.outcomeDesc,
+			purposeOfEvent: this.purposeOfEvent && this.purposeOfEvent.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AuditEventEvent;
+};

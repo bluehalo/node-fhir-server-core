@@ -1,178 +1,418 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary List Class
+ */
+module.exports = class List {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class List extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'List';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/list-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_mode', {
+			enumerable: true,
+			get: () => this.__data._mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._mode = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/list-mode
+		Object.defineProperty(this, 'mode', {
+			enumerable: true,
+			get: () => this.__data.mode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.mode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_title', {
+			enumerable: true,
+			get: () => this.__data._title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._title = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.title = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/list-example-codes
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, 'source', {
+			enumerable: true,
+			get: () => this.__data.source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.source = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/list-order
+		Object.defineProperty(this, 'orderedBy', {
+			enumerable: true,
+			get: () => this.__data.orderedBy,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.orderedBy = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'entry', {
+			enumerable: true,
+			get: () => this.__data.entry,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ListEntry = require('./listentry.js');
+				this.__data.entry = Array.isArray(value) ? value.map(v => new ListEntry(v)) : [new ListEntry(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/list-empty-reason
+		Object.defineProperty(this, 'emptyReason', {
+			enumerable: true,
+			get: () => this.__data.emptyReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.emptyReason = new CodeableConcept(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'List',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a List resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'List';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__List = new_value;
-	}
-
-	// Identifier for the List assigned for business purposes outside the context of FHIR.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Indicates the current state of this list.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// How this list was prepared - whether it is a working list that is suitable for being maintained on an ongoing basis, or if it represents a snapshot of a list of items from another source, or whether it is a prepared list where items may be marked as added, modified or deleted.
-	get mode() {
-		return this.__mode;
-	}
-
-	set mode(new_value) {
-		this.__mode = new_value;
-	}
-
-	// A label for the list assigned by the author.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		this.__title = new_value;
-	}
-
-	// This code defines the purpose of the list - why it was created.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__code = new CodeableConcept(new_value);
-	}
-
-	// The common subject (or patient) of the resources that are in the list, if there is one.
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The encounter that is the context in which this list was created.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The date that the list was prepared.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The entity responsible for deciding what the contents of the list were. Where the list was created by a human, this is the same as the author of the list.
-	get source() {
-		return this.__source;
-	}
-
-	set source(new_value) {
-		const Reference = require('./Reference');
-		this.__source = new Reference(new_value);
-	}
-
-	// What order applies to the items in the list.
-	get orderedBy() {
-		return this.__orderedBy;
-	}
-
-	set orderedBy(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__orderedBy = new CodeableConcept(new_value);
-	}
-
-	// Comments that apply to the overall list.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
-	// Entries in this list.
-	get entry() {
-		return this.__entry;
-	}
-
-	set entry(new_value) {
-		const ListEntry = require('./ListEntry');
-		this.__entry = Array.isArray(new_value) ? new_value.map(val => new ListEntry(val)) : [new ListEntry(new_value)];
-	}
-
-	// If the list is empty, why the list is empty.
-	get emptyReason() {
-		return this.__emptyReason;
-	}
-
-	set emptyReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__emptyReason = new CodeableConcept(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			mode: this.__mode,
-			title: this.__title,
-			code: this.__code && this.__code.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			date: this.__date,
-			source: this.__source && this.__source.toJSON(),
-			orderedBy: this.__orderedBy && this.__orderedBy.toJSON(),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-			entry: this.__entry && this.__entry.map(v => v.toJSON()),
-			emptyReason: this.__emptyReason && this.__emptyReason.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_mode: this._mode && this._mode.toJSON(),
+			mode: this.mode,
+			_title: this._title && this._title.toJSON(),
+			title: this.title,
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			source: this.source && this.source.toJSON(),
+			orderedBy: this.orderedBy && this.orderedBy.toJSON(),
+			note: this.note && this.note.map(v => v.toJSON()),
+			entry: this.entry && this.entry.map(v => v.toJSON()),
+			emptyReason: this.emptyReason && this.emptyReason.toJSON(),
+		};
 	}
-}
-
-module.exports = List;
+};

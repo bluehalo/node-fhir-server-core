@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the imagingobjectselection query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImagingObjectSelection.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-author',
-		documentation: 'Author of key DICOM object selection.',
+		description: 'Author of key DICOM object selection',
 	},
-	AUTHORING_TIME: {
-		name: 'authoring-time',
+	'authoring-time': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ImagingObjectSelection.authoringTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-authoring-time',
-		documentation: 'Time of key DICOM object selection authoring.',
+		description: 'Time of key DICOM object selection authoring',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingObjectSelection.uid',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-identifier',
-		documentation: 'UID of key DICOM object selection.',
+		description: 'UID of key DICOM object selection',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ImagingObjectSelection.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-patient',
-		documentation: 'Subject of key DICOM object selection.',
+		description: 'Subject of key DICOM object selection',
 	},
-	SELECTED_STUDY: {
-		name: 'selected-study',
+	'selected-study': {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ImagingObjectSelection.study.uid',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-selected-study',
-		documentation: 'Study selected in key DICOM object selection.',
+		description: 'Study selected in key DICOM object selection',
 	},
-	TITLE: {
-		name: 'title',
+	title: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ImagingObjectSelection.title',
 		definition: 'http://hl7.org/fhir/SearchParameter/ImagingObjectSelection-title',
-		documentation: 'Title of key DICOM object selection.',
+		description: 'Title of key DICOM object selection',
 	},
 };

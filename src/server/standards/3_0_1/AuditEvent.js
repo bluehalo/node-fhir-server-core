@@ -1,149 +1,382 @@
-const DomainResource = require('./DomainResource');
-const InstantScalar = require('./scalars/Instant.scalar');
+/**
+ * @name exports
+ * @summary AuditEvent Class
+ */
+module.exports = class AuditEvent {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class AuditEvent extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'AuditEvent';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.type = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-sub-type
+		Object.defineProperty(this, 'subtype', {
+			enumerable: true,
+			get: () => this.__data.subtype,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.subtype = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_action', {
+			enumerable: true,
+			get: () => this.__data._action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._action = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-action
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.action = value;
+			},
+		});
+
+		Object.defineProperty(this, '_recorded', {
+			enumerable: true,
+			get: () => this.__data._recorded,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._recorded = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recorded', {
+			enumerable: true,
+			get: () => this.__data.recorded,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.recorded = value;
+			},
+		});
+
+		Object.defineProperty(this, '_outcome', {
+			enumerable: true,
+			get: () => this.__data._outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._outcome = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/audit-event-outcome
+		Object.defineProperty(this, 'outcome', {
+			enumerable: true,
+			get: () => this.__data.outcome,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.outcome = value;
+			},
+		});
+
+		Object.defineProperty(this, '_outcomeDesc', {
+			enumerable: true,
+			get: () => this.__data._outcomeDesc,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._outcomeDesc = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'outcomeDesc', {
+			enumerable: true,
+			get: () => this.__data.outcomeDesc,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.outcomeDesc = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'purposeOfEvent', {
+			enumerable: true,
+			get: () => this.__data.purposeOfEvent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.purposeOfEvent = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'agent', {
+			enumerable: true,
+			get: () => this.__data.agent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AuditEventAgent = require('./auditeventagent.js');
+				this.__data.agent = Array.isArray(value)
+					? value.map(v => new AuditEventAgent(v))
+					: [new AuditEventAgent(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'source', {
+			enumerable: true,
+			get: () => this.__data.source,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AuditEventSource = require('./auditeventsource.js');
+				this.__data.source = new AuditEventSource(value);
+			},
+		});
+
+		Object.defineProperty(this, 'entity', {
+			enumerable: true,
+			get: () => this.__data.entity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AuditEventEntity = require('./auditevententity.js');
+				this.__data.entity = Array.isArray(value)
+					? value.map(v => new AuditEventEntity(v))
+					: [new AuditEventEntity(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'AuditEvent',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a AuditEvent resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'AuditEvent';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__AuditEvent = new_value;
-	}
-
-	// Identifier for a family of the event.  For example, a menu item, program, rule, policy, function code, application name or URL. It identifies the performed function.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const Coding = require('./Coding');
-		this.__type = new Coding(new_value);
-	}
-
-	// Identifier for the category of event.
-	get subtype() {
-		return this.__subtype;
-	}
-
-	set subtype(new_value) {
-		const Coding = require('./Coding');
-		this.__subtype = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// Indicator for type of action performed during the event that generated the audit.
-	get action() {
-		return this.__action;
-	}
-
-	set action(new_value) {
-		this.__action = new_value;
-	}
-
-	// The time when the event occurred on the source.
-	get recorded() {
-		return this.__recorded;
-	}
-
-	set recorded(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field recorded`);
-		}
-		this.__recorded = new_value;
-	}
-
-	// Indicates whether the event succeeded or failed.
-	get outcome() {
-		return this.__outcome;
-	}
-
-	set outcome(new_value) {
-		this.__outcome = new_value;
-	}
-
-	// A free text description of the outcome of the event.
-	get outcomeDesc() {
-		return this.__outcomeDesc;
-	}
-
-	set outcomeDesc(new_value) {
-		this.__outcomeDesc = new_value;
-	}
-
-	// The purposeOfUse (reason) that was used during the event being recorded.
-	get purposeOfEvent() {
-		return this.__purposeOfEvent;
-	}
-
-	set purposeOfEvent(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__purposeOfEvent = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// An actor taking an active role in the event or activity that is logged.
-	get agent() {
-		return this.__agent;
-	}
-
-	set agent(new_value) {
-		const AuditEventAgent = require('./AuditEventAgent');
-		this.__agent = Array.isArray(new_value)
-			? new_value.map(val => new AuditEventAgent(val))
-			: [new AuditEventAgent(new_value)];
-	}
-
-	// The system that is reporting the event.
-	get source() {
-		return this.__source;
-	}
-
-	set source(new_value) {
-		const AuditEventSource = require('./AuditEventSource');
-		this.__source = new AuditEventSource(new_value);
-	}
-
-	// Specific instances of data or objects that have been accessed.
-	get entity() {
-		return this.__entity;
-	}
-
-	set entity(new_value) {
-		const AuditEventEntity = require('./AuditEventEntity');
-		this.__entity = Array.isArray(new_value)
-			? new_value.map(val => new AuditEventEntity(val))
-			: [new AuditEventEntity(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			type: this.__type && this.__type.toJSON(),
-			subtype: this.__subtype && this.__subtype.map(v => v.toJSON()),
-			action: this.__action,
-			recorded: this.__recorded,
-			outcome: this.__outcome,
-			outcomeDesc: this.__outcomeDesc,
-			purposeOfEvent: this.__purposeOfEvent && this.__purposeOfEvent.map(v => v.toJSON()),
-			agent: this.__agent && this.__agent.map(v => v.toJSON()),
-			source: this.__source && this.__source.toJSON(),
-			entity: this.__entity && this.__entity.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			subtype: this.subtype && this.subtype.map(v => v.toJSON()),
+			_action: this._action && this._action.toJSON(),
+			action: this.action,
+			_recorded: this._recorded && this._recorded.toJSON(),
+			recorded: this.recorded,
+			_outcome: this._outcome && this._outcome.toJSON(),
+			outcome: this.outcome,
+			_outcomeDesc: this._outcomeDesc && this._outcomeDesc.toJSON(),
+			outcomeDesc: this.outcomeDesc,
+			purposeOfEvent: this.purposeOfEvent && this.purposeOfEvent.map(v => v.toJSON()),
+			agent: this.agent && this.agent.map(v => v.toJSON()),
+			source: this.source && this.source.toJSON(),
+			entity: this.entity && this.entity.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = AuditEvent;
+};

@@ -1,88 +1,187 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ObservationReferenceRange Class
+ */
+module.exports = class ObservationReferenceRange {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ObservationReferenceRange extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ObservationReferenceRange';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'low', {
+			enumerable: true,
+			get: () => this.__data.low,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.low = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'high', {
+			enumerable: true,
+			get: () => this.__data.high,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.high = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/referencerange-meaning
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/referencerange-appliesto
+		Object.defineProperty(this, 'appliesTo', {
+			enumerable: true,
+			get: () => this.__data.appliesTo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.appliesTo = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'age', {
+			enumerable: true,
+			get: () => this.__data.age,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.age = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ObservationReferenceRange',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ObservationReferenceRange resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ObservationReferenceRange';
 	}
 
-	// The value of the low bound of the reference range.  The low bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the low bound is omitted,  it is assumed to be meaningless (e.g. reference range is <=2.3).
-	get low() {
-		return this.__low;
-	}
-
-	set low(new_value) {
-		const Quantity = require('./Quantity');
-		this.__low = new Quantity(new_value);
-	}
-
-	// The value of the high bound of the reference range.  The high bound of the reference range endpoint is inclusive of the value (e.g.  reference range is >=5 - <=9).   If the high bound is omitted,  it is assumed to be meaningless (e.g. reference range is >= 2.3).
-	get high() {
-		return this.__high;
-	}
-
-	set high(new_value) {
-		const Quantity = require('./Quantity');
-		this.__high = new Quantity(new_value);
-	}
-
-	// Codes to indicate the what part of the targeted reference population it applies to. For example, the normal or therapeutic range.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Codes to indicate the target population this reference range applies to.  For example, a reference range may be based on the normal population or a particular sex or race.
-	get appliesTo() {
-		return this.__appliesTo;
-	}
-
-	set appliesTo(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__appliesTo = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so.
-	get age() {
-		return this.__age;
-	}
-
-	set age(new_value) {
-		const Range = require('./Range');
-		this.__age = new Range(new_value);
-	}
-
-	// Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of \'Negative\' or a list or table of \'normals\'.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			low: this.__low && this.__low.toJSON(),
-			high: this.__high && this.__high.toJSON(),
-			type: this.__type && this.__type.toJSON(),
-			appliesTo: this.__appliesTo && this.__appliesTo.map(v => v.toJSON()),
-			age: this.__age && this.__age.toJSON(),
-			text: this.__text,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			low: this.low && this.low.toJSON(),
+			high: this.high && this.high.toJSON(),
+			type: this.type && this.type.toJSON(),
+			appliesTo: this.appliesTo && this.appliesTo.map(v => v.toJSON()),
+			age: this.age && this.age.toJSON(),
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+		};
 	}
-}
-
-module.exports = ObservationReferenceRange;
+};

@@ -1,65 +1,144 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary NutritionOrderEnteralFormulaAdministration Class
+ */
+module.exports = class NutritionOrderEnteralFormulaAdministration {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class NutritionOrderEnteralFormulaAdministration extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'NutritionOrderEnteralFormulaAdministration';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'schedule', {
+			enumerable: true,
+			get: () => this.__data.schedule,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.schedule = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateQuantity', {
+			enumerable: true,
+			get: () => this.__data.rateQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.rateQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'rateRatio', {
+			enumerable: true,
+			get: () => this.__data.rateRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.rateRatio = new Ratio(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'NutritionOrderEnteralFormulaAdministration',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a NutritionOrderEnteralFormulaAdministration resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'NutritionOrderEnteralFormulaAdministration';
 	}
 
-	// The time period and frequency at which the enteral formula should be delivered to the patient.
-	get schedule() {
-		return this.__schedule;
-	}
-
-	set schedule(new_value) {
-		const Timing = require('./Timing');
-		this.__schedule = new Timing(new_value);
-	}
-
-	// The volume of formula to provide to the patient per the specified administration schedule.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__quantity = new Quantity(new_value);
-	}
-
-	// The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule.
-	get rateQuantity() {
-		return this.__rateQuantity;
-	}
-
-	set rateQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__rateQuantity = new Quantity(new_value);
-	}
-
-	// The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule.
-	get rateRatio() {
-		return this.__rateRatio;
-	}
-
-	set rateRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__rateRatio = new Ratio(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			schedule: this.__schedule && this.__schedule.toJSON(),
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			rateQuantity: this.__rateQuantity && this.__rateQuantity.toJSON(),
-			rateRatio: this.__rateRatio && this.__rateRatio.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			schedule: this.schedule && this.schedule.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			rateQuantity: this.rateQuantity && this.rateQuantity.toJSON(),
+			rateRatio: this.rateRatio && this.rateRatio.toJSON(),
+		};
 	}
-}
-
-module.exports = NutritionOrderEnteralFormulaAdministration;
+};

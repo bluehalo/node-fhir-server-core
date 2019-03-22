@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the eligibilityrequest query
+ */
 module.exports = {
-	CREATED: {
-		name: 'created',
+	created: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'EligibilityRequest.created',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-created',
-		documentation: 'The creation date for the EOB.',
+		description: 'The creation date for the EOB',
 	},
-	ENTERER: {
-		name: 'enterer',
+	enterer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityRequest.enterer',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-enterer',
-		documentation: 'The party who is responsible for the request.',
+		description: 'The party who is responsible for the request',
 	},
-	FACILITY: {
-		name: 'facility',
+	facility: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityRequest.facility',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-facility',
-		documentation: 'Facility responsible for the goods and services.',
+		description: 'Facility responsible for the goods and services',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'EligibilityRequest.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-identifier',
-		documentation: 'The business identifier of the Eligibility.',
+		description: 'The business identifier of the Eligibility',
 	},
-	ORGANIZATION: {
-		name: 'organization',
+	organization: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityRequest.organization',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-organization',
-		documentation: 'The reference to the providing organization.',
+		description: 'The reference to the providing organization',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityRequest.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-patient',
-		documentation: 'The reference to the patient.',
+		description: 'The reference to the patient',
 	},
-	PROVIDER: {
-		name: 'provider',
+	provider: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'EligibilityRequest.provider',
 		definition: 'http://hl7.org/fhir/SearchParameter/EligibilityRequest-provider',
-		documentation: 'The reference to the provider.',
+		description: 'The reference to the provider',
 	},
 };

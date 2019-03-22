@@ -1,68 +1,84 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the specimen query
+ */
 module.exports = {
-	ACCESSION: {
-		name: 'accession',
+	accession: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.accessionIdentifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-accession',
-		documentation: 'The accession number associated with the specimen.',
+		description: 'The accession number associated with the specimen',
 	},
-	BODYSITE: {
-		name: 'bodysite',
+	bodysite: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.collection.bodySite',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-bodysite',
-		documentation: 'The code for the body site from where the specimen originated.',
+		description: 'The code for the body site from where the specimen originated',
 	},
-	COLLECTED: {
-		name: 'collected',
+	collected: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'Specimen.collection.collectedDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-collected',
-		documentation: 'The date the specimen was collected.',
+		description: 'The date the specimen was collected',
 	},
-	COLLECTOR: {
-		name: 'collector',
+	collector: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Specimen.collection.collector',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-collector',
-		documentation: 'Who collected the specimen.',
+		description: 'Who collected the specimen',
 	},
-	CONTAINER: {
-		name: 'container',
+	container: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.container.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-container',
-		documentation: 'The kind of specimen container.',
+		description: 'The kind of specimen container',
 	},
-	CONTAINER_ID: {
-		name: 'container-id',
+	'container-id': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.container.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-container-id',
-		documentation: 'The unique identifier associated with the specimen container.',
+		description: 'The unique identifier associated with the specimen container',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-identifier',
-		documentation: 'The unique identifier associated with the specimen.',
+		description: 'The unique identifier associated with the specimen',
 	},
-	PARENT: {
-		name: 'parent',
+	parent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Specimen.parent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-parent',
-		documentation: 'The parent of the specimen.',
+		description: 'The parent of the specimen',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Specimen.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-patient',
-		documentation: 'The patient the specimen comes from.',
+		description: 'The patient the specimen comes from',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Specimen.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-subject',
-		documentation: 'The subject of the specimen.',
+		description: 'The subject of the specimen',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Specimen.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Specimen-type',
-		documentation: 'The specimen type.',
+		description: 'The specimen type',
 	},
 };

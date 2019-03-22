@@ -1,500 +1,842 @@
-const BackboneElement = require('./BackboneElement');
-const Base64BinaryScalar = require('./scalars/Base64Binary.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
-const DateScalar = require('./scalars/Date.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const IdScalar = require('./scalars/Id.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
-const OidScalar = require('./scalars/Oid.scalar');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
-const TimeScalar = require('./scalars/Time.scalar');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary TaskOutput Class
+ */
+module.exports = class TaskOutput {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class TaskOutput extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'TaskOutput';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_valueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data._valueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueBase64Binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueBase64Binary', {
+			enumerable: true,
+			get: () => this.__data.valueBase64Binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueBase64Binary = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueBoolean', {
+			enumerable: true,
+			get: () => this.__data._valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueBoolean', {
+			enumerable: true,
+			get: () => this.__data.valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueCode', {
+			enumerable: true,
+			get: () => this.__data._valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCode', {
+			enumerable: true,
+			get: () => this.__data.valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueCode = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDate', {
+			enumerable: true,
+			get: () => this.__data._valueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDate', {
+			enumerable: true,
+			get: () => this.__data.valueDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDateTime', {
+			enumerable: true,
+			get: () => this.__data._valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDateTime', {
+			enumerable: true,
+			get: () => this.__data.valueDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDecimal', {
+			enumerable: true,
+			get: () => this.__data._valueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDecimal', {
+			enumerable: true,
+			get: () => this.__data.valueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueId', {
+			enumerable: true,
+			get: () => this.__data._valueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueId = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueId', {
+			enumerable: true,
+			get: () => this.__data.valueId,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueId = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueInstant', {
+			enumerable: true,
+			get: () => this.__data._valueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueInstant = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueInstant', {
+			enumerable: true,
+			get: () => this.__data.valueInstant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueInstant = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueInteger', {
+			enumerable: true,
+			get: () => this.__data._valueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueInteger', {
+			enumerable: true,
+			get: () => this.__data.valueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueMarkdown', {
+			enumerable: true,
+			get: () => this.__data._valueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueMarkdown = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueMarkdown', {
+			enumerable: true,
+			get: () => this.__data.valueMarkdown,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueMarkdown = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueOid', {
+			enumerable: true,
+			get: () => this.__data._valueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueOid = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueOid', {
+			enumerable: true,
+			get: () => this.__data.valueOid,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueOid = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data._valuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valuePositiveInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valuePositiveInt', {
+			enumerable: true,
+			get: () => this.__data.valuePositiveInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valuePositiveInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueString', {
+			enumerable: true,
+			get: () => this.__data._valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueString', {
+			enumerable: true,
+			get: () => this.__data.valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueTime', {
+			enumerable: true,
+			get: () => this.__data._valueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueTime', {
+			enumerable: true,
+			get: () => this.__data.valueTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data._valueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueUnsignedInt = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueUnsignedInt', {
+			enumerable: true,
+			get: () => this.__data.valueUnsignedInt,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueUnsignedInt = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueUri', {
+			enumerable: true,
+			get: () => this.__data._valueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueUri', {
+			enumerable: true,
+			get: () => this.__data.valueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valueAddress', {
+			enumerable: true,
+			get: () => this.__data.valueAddress,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Address = require('./address.js');
+				this.__data.valueAddress = new Address(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueAge', {
+			enumerable: true,
+			get: () => this.__data.valueAge,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Age = require('./age.js');
+				this.__data.valueAge = new Age(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueAnnotation', {
+			enumerable: true,
+			get: () => this.__data.valueAnnotation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.valueAnnotation = new Annotation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueAttachment', {
+			enumerable: true,
+			get: () => this.__data.valueAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.valueAttachment = new Attachment(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.valueCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.valueCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCoding', {
+			enumerable: true,
+			get: () => this.__data.valueCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.valueCoding = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueContactPoint', {
+			enumerable: true,
+			get: () => this.__data.valueContactPoint,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.valueContactPoint = new ContactPoint(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCount', {
+			enumerable: true,
+			get: () => this.__data.valueCount,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Count = require('./count.js');
+				this.__data.valueCount = new Count(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDistance', {
+			enumerable: true,
+			get: () => this.__data.valueDistance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Distance = require('./distance.js');
+				this.__data.valueDistance = new Distance(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDuration', {
+			enumerable: true,
+			get: () => this.__data.valueDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Duration = require('./duration.js');
+				this.__data.valueDuration = new Duration(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueHumanName', {
+			enumerable: true,
+			get: () => this.__data.valueHumanName,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let HumanName = require('./humanname.js');
+				this.__data.valueHumanName = new HumanName(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueIdentifier', {
+			enumerable: true,
+			get: () => this.__data.valueIdentifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.valueIdentifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueMoney', {
+			enumerable: true,
+			get: () => this.__data.valueMoney,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.valueMoney = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valuePeriod', {
+			enumerable: true,
+			get: () => this.__data.valuePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.valuePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueQuantity', {
+			enumerable: true,
+			get: () => this.__data.valueQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.valueQuantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueRange', {
+			enumerable: true,
+			get: () => this.__data.valueRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Range = require('./range.js');
+				this.__data.valueRange = new Range(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueRatio', {
+			enumerable: true,
+			get: () => this.__data.valueRatio,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.valueRatio = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueReference', {
+			enumerable: true,
+			get: () => this.__data.valueReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.valueReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueSampledData', {
+			enumerable: true,
+			get: () => this.__data.valueSampledData,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SampledData = require('./sampleddata.js');
+				this.__data.valueSampledData = new SampledData(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueSignature', {
+			enumerable: true,
+			get: () => this.__data.valueSignature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.valueSignature = new Signature(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueTiming', {
+			enumerable: true,
+			get: () => this.__data.valueTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.valueTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueMeta', {
+			enumerable: true,
+			get: () => this.__data.valueMeta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.valueMeta = new Meta(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'TaskOutput',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a TaskOutput resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'TaskOutput';
 	}
 
-	// The name of the Output parameter.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueBase64Binary() {
-		return this.__valueBase64Binary;
-	}
-
-	set valueBase64Binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = Base64BinaryScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueBase64Binary`);
-		}
-		this.__valueBase64Binary = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueBoolean() {
-		return this.__valueBoolean;
-	}
-
-	set valueBoolean(new_value) {
-		this.__valueBoolean = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueCode() {
-		return this.__valueCode;
-	}
-
-	set valueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueCode`);
-		}
-		this.__valueCode = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueDate() {
-		return this.__valueDate;
-	}
-
-	set valueDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueDate`);
-		}
-		this.__valueDate = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueDateTime() {
-		return this.__valueDateTime;
-	}
-
-	set valueDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueDateTime`);
-		}
-		this.__valueDateTime = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueDecimal() {
-		return this.__valueDecimal;
-	}
-
-	set valueDecimal(new_value) {
-		this.__valueDecimal = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueId() {
-		return this.__valueId;
-	}
-
-	set valueId(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueId`);
-		}
-		this.__valueId = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueInstant() {
-		return this.__valueInstant;
-	}
-
-	set valueInstant(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueInstant`);
-		}
-		this.__valueInstant = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueInteger() {
-		return this.__valueInteger;
-	}
-
-	set valueInteger(new_value) {
-		this.__valueInteger = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueMarkdown() {
-		return this.__valueMarkdown;
-	}
-
-	set valueMarkdown(new_value) {
-		this.__valueMarkdown = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueOid() {
-		return this.__valueOid;
-	}
-
-	set valueOid(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = OidScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueOid`);
-		}
-		this.__valueOid = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valuePositiveInt() {
-		return this.__valuePositiveInt;
-	}
-
-	set valuePositiveInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valuePositiveInt`);
-		}
-		this.__valuePositiveInt = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueString() {
-		return this.__valueString;
-	}
-
-	set valueString(new_value) {
-		this.__valueString = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueTime() {
-		return this.__valueTime;
-	}
-
-	set valueTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueTime`);
-		}
-		this.__valueTime = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueUnsignedInt() {
-		return this.__valueUnsignedInt;
-	}
-
-	set valueUnsignedInt(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueUnsignedInt`);
-		}
-		this.__valueUnsignedInt = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueUri() {
-		return this.__valueUri;
-	}
-
-	set valueUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueUri`);
-		}
-		this.__valueUri = new_value;
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueAddress() {
-		return this.__valueAddress;
-	}
-
-	set valueAddress(new_value) {
-		const Address = require('./Address');
-		this.__valueAddress = new Address(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueAge() {
-		return this.__valueAge;
-	}
-
-	set valueAge(new_value) {
-		const Age = require('./Age');
-		this.__valueAge = new Age(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueAnnotation() {
-		return this.__valueAnnotation;
-	}
-
-	set valueAnnotation(new_value) {
-		const Annotation = require('./Annotation');
-		this.__valueAnnotation = new Annotation(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueAttachment() {
-		return this.__valueAttachment;
-	}
-
-	set valueAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__valueAttachment = new Attachment(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueCodeableConcept() {
-		return this.__valueCodeableConcept;
-	}
-
-	set valueCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__valueCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueCoding() {
-		return this.__valueCoding;
-	}
-
-	set valueCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__valueCoding = new Coding(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueContactPoint() {
-		return this.__valueContactPoint;
-	}
-
-	set valueContactPoint(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__valueContactPoint = new ContactPoint(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueCount() {
-		return this.__valueCount;
-	}
-
-	set valueCount(new_value) {
-		const Count = require('./Count');
-		this.__valueCount = new Count(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueDistance() {
-		return this.__valueDistance;
-	}
-
-	set valueDistance(new_value) {
-		const Distance = require('./Distance');
-		this.__valueDistance = new Distance(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueDuration() {
-		return this.__valueDuration;
-	}
-
-	set valueDuration(new_value) {
-		const Duration = require('./Duration');
-		this.__valueDuration = new Duration(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueHumanName() {
-		return this.__valueHumanName;
-	}
-
-	set valueHumanName(new_value) {
-		const HumanName = require('./HumanName');
-		this.__valueHumanName = new HumanName(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueIdentifier() {
-		return this.__valueIdentifier;
-	}
-
-	set valueIdentifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__valueIdentifier = new Identifier(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueMoney() {
-		return this.__valueMoney;
-	}
-
-	set valueMoney(new_value) {
-		const Money = require('./Money');
-		this.__valueMoney = new Money(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valuePeriod() {
-		return this.__valuePeriod;
-	}
-
-	set valuePeriod(new_value) {
-		const Period = require('./Period');
-		this.__valuePeriod = new Period(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueQuantity() {
-		return this.__valueQuantity;
-	}
-
-	set valueQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__valueQuantity = new Quantity(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueRange() {
-		return this.__valueRange;
-	}
-
-	set valueRange(new_value) {
-		const Range = require('./Range');
-		this.__valueRange = new Range(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueRatio() {
-		return this.__valueRatio;
-	}
-
-	set valueRatio(new_value) {
-		const Ratio = require('./Ratio');
-		this.__valueRatio = new Ratio(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueReference() {
-		return this.__valueReference;
-	}
-
-	set valueReference(new_value) {
-		const Reference = require('./Reference');
-		this.__valueReference = new Reference(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueSampledData() {
-		return this.__valueSampledData;
-	}
-
-	set valueSampledData(new_value) {
-		const SampledData = require('./SampledData');
-		this.__valueSampledData = new SampledData(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueSignature() {
-		return this.__valueSignature;
-	}
-
-	set valueSignature(new_value) {
-		const Signature = require('./Signature');
-		this.__valueSignature = new Signature(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueTiming() {
-		return this.__valueTiming;
-	}
-
-	set valueTiming(new_value) {
-		const Timing = require('./Timing');
-		this.__valueTiming = new Timing(new_value);
-	}
-
-	// The value of the Output parameter as a basic type.
-	get valueMeta() {
-		return this.__valueMeta;
-	}
-
-	set valueMeta(new_value) {
-		const Meta = require('./Meta');
-		this.__valueMeta = new Meta(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type && this.__type.toJSON(),
-			valueBase64Binary: this.__valueBase64Binary,
-			valueBoolean: this.__valueBoolean,
-			valueCode: this.__valueCode,
-			valueDate: this.__valueDate,
-			valueDateTime: this.__valueDateTime,
-			valueDecimal: this.__valueDecimal,
-			valueId: this.__valueId,
-			valueInstant: this.__valueInstant,
-			valueInteger: this.__valueInteger,
-			valueMarkdown: this.__valueMarkdown,
-			valueOid: this.__valueOid,
-			valuePositiveInt: this.__valuePositiveInt,
-			valueString: this.__valueString,
-			valueTime: this.__valueTime,
-			valueUnsignedInt: this.__valueUnsignedInt,
-			valueUri: this.__valueUri,
-			valueAddress: this.__valueAddress && this.__valueAddress.toJSON(),
-			valueAge: this.__valueAge && this.__valueAge.toJSON(),
-			valueAnnotation: this.__valueAnnotation && this.__valueAnnotation.toJSON(),
-			valueAttachment: this.__valueAttachment && this.__valueAttachment.toJSON(),
-			valueCodeableConcept: this.__valueCodeableConcept && this.__valueCodeableConcept.toJSON(),
-			valueCoding: this.__valueCoding && this.__valueCoding.toJSON(),
-			valueContactPoint: this.__valueContactPoint && this.__valueContactPoint.toJSON(),
-			valueCount: this.__valueCount && this.__valueCount.toJSON(),
-			valueDistance: this.__valueDistance && this.__valueDistance.toJSON(),
-			valueDuration: this.__valueDuration && this.__valueDuration.toJSON(),
-			valueHumanName: this.__valueHumanName && this.__valueHumanName.toJSON(),
-			valueIdentifier: this.__valueIdentifier && this.__valueIdentifier.toJSON(),
-			valueMoney: this.__valueMoney && this.__valueMoney.toJSON(),
-			valuePeriod: this.__valuePeriod && this.__valuePeriod.toJSON(),
-			valueQuantity: this.__valueQuantity && this.__valueQuantity.toJSON(),
-			valueRange: this.__valueRange && this.__valueRange.toJSON(),
-			valueRatio: this.__valueRatio && this.__valueRatio.toJSON(),
-			valueReference: this.__valueReference && this.__valueReference.toJSON(),
-			valueSampledData: this.__valueSampledData && this.__valueSampledData.toJSON(),
-			valueSignature: this.__valueSignature && this.__valueSignature.toJSON(),
-			valueTiming: this.__valueTiming && this.__valueTiming.toJSON(),
-			valueMeta: this.__valueMeta && this.__valueMeta.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			type: this.type && this.type.toJSON(),
+			_valueBase64Binary: this._valueBase64Binary && this._valueBase64Binary.toJSON(),
+			valueBase64Binary: this.valueBase64Binary,
+			_valueBoolean: this._valueBoolean && this._valueBoolean.toJSON(),
+			valueBoolean: this.valueBoolean,
+			_valueCode: this._valueCode && this._valueCode.toJSON(),
+			valueCode: this.valueCode,
+			_valueDate: this._valueDate && this._valueDate.toJSON(),
+			valueDate: this.valueDate,
+			_valueDateTime: this._valueDateTime && this._valueDateTime.toJSON(),
+			valueDateTime: this.valueDateTime,
+			_valueDecimal: this._valueDecimal && this._valueDecimal.toJSON(),
+			valueDecimal: this.valueDecimal,
+			_valueId: this._valueId && this._valueId.toJSON(),
+			valueId: this.valueId,
+			_valueInstant: this._valueInstant && this._valueInstant.toJSON(),
+			valueInstant: this.valueInstant,
+			_valueInteger: this._valueInteger && this._valueInteger.toJSON(),
+			valueInteger: this.valueInteger,
+			_valueMarkdown: this._valueMarkdown && this._valueMarkdown.toJSON(),
+			valueMarkdown: this.valueMarkdown,
+			_valueOid: this._valueOid && this._valueOid.toJSON(),
+			valueOid: this.valueOid,
+			_valuePositiveInt: this._valuePositiveInt && this._valuePositiveInt.toJSON(),
+			valuePositiveInt: this.valuePositiveInt,
+			_valueString: this._valueString && this._valueString.toJSON(),
+			valueString: this.valueString,
+			_valueTime: this._valueTime && this._valueTime.toJSON(),
+			valueTime: this.valueTime,
+			_valueUnsignedInt: this._valueUnsignedInt && this._valueUnsignedInt.toJSON(),
+			valueUnsignedInt: this.valueUnsignedInt,
+			_valueUri: this._valueUri && this._valueUri.toJSON(),
+			valueUri: this.valueUri,
+			valueAddress: this.valueAddress && this.valueAddress.toJSON(),
+			valueAge: this.valueAge && this.valueAge.toJSON(),
+			valueAnnotation: this.valueAnnotation && this.valueAnnotation.toJSON(),
+			valueAttachment: this.valueAttachment && this.valueAttachment.toJSON(),
+			valueCodeableConcept: this.valueCodeableConcept && this.valueCodeableConcept.toJSON(),
+			valueCoding: this.valueCoding && this.valueCoding.toJSON(),
+			valueContactPoint: this.valueContactPoint && this.valueContactPoint.toJSON(),
+			valueCount: this.valueCount && this.valueCount.toJSON(),
+			valueDistance: this.valueDistance && this.valueDistance.toJSON(),
+			valueDuration: this.valueDuration && this.valueDuration.toJSON(),
+			valueHumanName: this.valueHumanName && this.valueHumanName.toJSON(),
+			valueIdentifier: this.valueIdentifier && this.valueIdentifier.toJSON(),
+			valueMoney: this.valueMoney && this.valueMoney.toJSON(),
+			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
+			valueQuantity: this.valueQuantity && this.valueQuantity.toJSON(),
+			valueRange: this.valueRange && this.valueRange.toJSON(),
+			valueRatio: this.valueRatio && this.valueRatio.toJSON(),
+			valueReference: this.valueReference && this.valueReference.toJSON(),
+			valueSampledData: this.valueSampledData && this.valueSampledData.toJSON(),
+			valueSignature: this.valueSignature && this.valueSignature.toJSON(),
+			valueTiming: this.valueTiming && this.valueTiming.toJSON(),
+			valueMeta: this.valueMeta && this.valueMeta.toJSON(),
+		};
 	}
-}
-
-module.exports = TaskOutput;
+};

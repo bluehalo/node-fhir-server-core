@@ -1,205 +1,541 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary CompartmentDefinition Class
+ */
+module.exports = class CompartmentDefinition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class CompartmentDefinition extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'CompartmentDefinition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_title', {
+			enumerable: true,
+			get: () => this.__data._title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._title = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.title = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/publication-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactDetail = require('./contactdetail.js');
+				this.__data.contact = Array.isArray(value) ? value.map(v => new ContactDetail(v)) : [new ContactDetail(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, '_purpose', {
+			enumerable: true,
+			get: () => this.__data._purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._purpose = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'purpose', {
+			enumerable: true,
+			get: () => this.__data.purpose,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.purpose = value;
+			},
+		});
+
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let UsageContext = require('./usagecontext.js');
+				this.__data.useContext = Array.isArray(value) ? value.map(v => new UsageContext(v)) : [new UsageContext(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/jurisdiction
+		Object.defineProperty(this, 'jurisdiction', {
+			enumerable: true,
+			get: () => this.__data.jurisdiction,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.jurisdiction = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/compartment-type
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+
+		Object.defineProperty(this, '_search', {
+			enumerable: true,
+			get: () => this.__data._search,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._search = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'search', {
+			enumerable: true,
+			get: () => this.__data.search,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.search = value;
+			},
+		});
+
+		Object.defineProperty(this, 'resource', {
+			enumerable: true,
+			get: () => this.__data.resource,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompartmentDefinitionResource = require('./compartmentdefinitionresource.js');
+				this.__data.resource = Array.isArray(value)
+					? value.map(v => new CompartmentDefinitionResource(v))
+					: [new CompartmentDefinitionResource(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'CompartmentDefinition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a CompartmentDefinition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'CompartmentDefinition';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__CompartmentDefinition = new_value;
-	}
-
-	// An absolute URI that is used to identify this compartment definition when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this compartment definition is (or will be) published. The URL SHOULD include the major version of the compartment definition. For more information see [Technical and Business Versions](resource.html#versions).
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// A natural language name identifying the compartment definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// A short, descriptive, user-friendly title for the compartment definition.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		this.__title = new_value;
-	}
-
-	// The status of this compartment definition. Enables tracking the life-cycle of the content.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A boolean value to indicate that this compartment definition is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The date  (and optionally time) when the compartment definition was published. The date must change if and when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the compartment definition changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// The name of the individual or organization that published the compartment definition.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contact details to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ContactDetail = require('./ContactDetail');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ContactDetail(val))
-			: [new ContactDetail(new_value)];
-	}
-
-	// A free text natural language description of the compartment definition from a consumer\'s perspective.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Explaination of why this compartment definition is needed and why it has been designed as it has.
-	get purpose() {
-		return this.__purpose;
-	}
-
-	set purpose(new_value) {
-		this.__purpose = new_value;
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate compartment definition instances.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const UsageContext = require('./UsageContext');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new UsageContext(val))
-			: [new UsageContext(new_value)];
-	}
-
-	// A legal or geographic region in which the compartment definition is intended to be used.
-	get jurisdiction() {
-		return this.__jurisdiction;
-	}
-
-	set jurisdiction(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__jurisdiction = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Which compartment this definition describes.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		this.__code = new_value;
-	}
-
-	// Whether the search syntax is supported,.
-	get search() {
-		return this.__search;
-	}
-
-	set search(new_value) {
-		this.__search = new_value;
-	}
-
-	// Information about how a resource is related to the compartment.
-	get resource() {
-		return this.__resource;
-	}
-
-	set resource(new_value) {
-		const CompartmentDefinitionResource = require('./CompartmentDefinitionResource');
-		this.__resource = Array.isArray(new_value)
-			? new_value.map(val => new CompartmentDefinitionResource(val))
-			: [new CompartmentDefinitionResource(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			name: this.__name,
-			title: this.__title,
-			status: this.__status,
-			experimental: this.__experimental,
-			date: this.__date,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			description: this.__description,
-			purpose: this.__purpose,
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			jurisdiction: this.__jurisdiction && this.__jurisdiction.map(v => v.toJSON()),
-			code: this.__code,
-			search: this.__search,
-			resource: this.__resource && this.__resource.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_title: this._title && this._title.toJSON(),
+			title: this.title,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			_purpose: this._purpose && this._purpose.toJSON(),
+			purpose: this.purpose,
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			jurisdiction: this.jurisdiction && this.jurisdiction.map(v => v.toJSON()),
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			_search: this._search && this._search.toJSON(),
+			search: this.search,
+			resource: this.resource && this.resource.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = CompartmentDefinition;
+};

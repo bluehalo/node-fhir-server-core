@@ -1,58 +1,156 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary OperationDefinitionParameterBinding Class
+ */
+module.exports = class OperationDefinitionParameterBinding {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class OperationDefinitionParameterBinding extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'OperationDefinitionParameterBinding';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_strength', {
+			enumerable: true,
+			get: () => this.__data._strength,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._strength = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/binding-strength
+		Object.defineProperty(this, 'strength', {
+			enumerable: true,
+			get: () => this.__data.strength,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.strength = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueSetUri', {
+			enumerable: true,
+			get: () => this.__data._valueSetUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueSetUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueSetUri', {
+			enumerable: true,
+			get: () => this.__data.valueSetUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueSetUri = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valueSetReference', {
+			enumerable: true,
+			get: () => this.__data.valueSetReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.valueSetReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'OperationDefinitionParameterBinding',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a OperationDefinitionParameterBinding resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'OperationDefinitionParameterBinding';
 	}
 
-	// Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances.
-	get strength() {
-		return this.__strength;
-	}
-
-	set strength(new_value) {
-		this.__strength = new_value;
-	}
-
-	// Points to the value set or external definition (e.g. implicit value set) that identifies the set of codes to be used.
-	get valueSetUri() {
-		return this.__valueSetUri;
-	}
-
-	set valueSetUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueSetUri`);
-		}
-		this.__valueSetUri = new_value;
-	}
-
-	// Points to the value set or external definition (e.g. implicit value set) that identifies the set of codes to be used.
-	get valueSetReference() {
-		return this.__valueSetReference;
-	}
-
-	set valueSetReference(new_value) {
-		const Reference = require('./Reference');
-		this.__valueSetReference = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			strength: this.__strength,
-			valueSetUri: this.__valueSetUri,
-			valueSetReference: this.__valueSetReference && this.__valueSetReference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_strength: this._strength && this._strength.toJSON(),
+			strength: this.strength,
+			_valueSetUri: this._valueSetUri && this._valueSetUri.toJSON(),
+			valueSetUri: this.valueSetUri,
+			valueSetReference: this.valueSetReference && this.valueSetReference.toJSON(),
+		};
 	}
-}
-
-module.exports = OperationDefinitionParameterBinding;
+};

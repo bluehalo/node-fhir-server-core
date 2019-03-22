@@ -1,288 +1,578 @@
-const DomainResource = require('./DomainResource');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
-const InstantScalar = require('./scalars/Instant.scalar');
-const PositiveIntScalar = require('./scalars/PositiveInt.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Appointment Class
+ */
+module.exports = class Appointment {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Appointment extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Appointment';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/appointmentstatus
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/service-category
+		Object.defineProperty(this, 'serviceCategory', {
+			enumerable: true,
+			get: () => this.__data.serviceCategory,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.serviceCategory = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/service-type
+		Object.defineProperty(this, 'serviceType', {
+			enumerable: true,
+			get: () => this.__data.serviceType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.serviceType = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/c80-practice-codes
+		Object.defineProperty(this, 'specialty', {
+			enumerable: true,
+			get: () => this.__data.specialty,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.specialty = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v2-0276
+		Object.defineProperty(this, 'appointmentType', {
+			enumerable: true,
+			get: () => this.__data.appointmentType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.appointmentType = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/encounter-reason
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'indication', {
+			enumerable: true,
+			get: () => this.__data.indication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.indication = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_priority', {
+			enumerable: true,
+			get: () => this.__data._priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priority = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priority = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInformation', {
+			enumerable: true,
+			get: () => this.__data.supportingInformation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInformation = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_start', {
+			enumerable: true,
+			get: () => this.__data._start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._start = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'start', {
+			enumerable: true,
+			get: () => this.__data.start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.start = value;
+			},
+		});
+
+		Object.defineProperty(this, '_end', {
+			enumerable: true,
+			get: () => this.__data._end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._end = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'end', {
+			enumerable: true,
+			get: () => this.__data.end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.end = value;
+			},
+		});
+
+		Object.defineProperty(this, '_minutesDuration', {
+			enumerable: true,
+			get: () => this.__data._minutesDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._minutesDuration = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'minutesDuration', {
+			enumerable: true,
+			get: () => this.__data.minutesDuration,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.minutesDuration = value;
+			},
+		});
+
+		Object.defineProperty(this, 'slot', {
+			enumerable: true,
+			get: () => this.__data.slot,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.slot = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_created', {
+			enumerable: true,
+			get: () => this.__data._created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._created = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'created', {
+			enumerable: true,
+			get: () => this.__data.created,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.created = value;
+			},
+		});
+
+		Object.defineProperty(this, '_comment', {
+			enumerable: true,
+			get: () => this.__data._comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._comment = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'comment', {
+			enumerable: true,
+			get: () => this.__data.comment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.comment = value;
+			},
+		});
+
+		Object.defineProperty(this, 'incomingReferral', {
+			enumerable: true,
+			get: () => this.__data.incomingReferral,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.incomingReferral = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'participant', {
+			enumerable: true,
+			get: () => this.__data.participant,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let AppointmentParticipant = require('./appointmentparticipant.js');
+				this.__data.participant = Array.isArray(value)
+					? value.map(v => new AppointmentParticipant(v))
+					: [new AppointmentParticipant(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'requestedPeriod', {
+			enumerable: true,
+			get: () => this.__data.requestedPeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.requestedPeriod = Array.isArray(value) ? value.map(v => new Period(v)) : [new Period(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Appointment',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Appointment resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Appointment';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Appointment = new_value;
-	}
-
-	// This records identifiers associated with this appointment concern that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// The overall status of the Appointment. Each of the participants has their own participation status which indicates their involvement in the process, however this status indicates the shared status.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A broad categorisation of the service that is to be performed during this appointment.
-	get serviceCategory() {
-		return this.__serviceCategory;
-	}
-
-	set serviceCategory(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__serviceCategory = new CodeableConcept(new_value);
-	}
-
-	// The specific service that is to be performed during this appointment.
-	get serviceType() {
-		return this.__serviceType;
-	}
-
-	set serviceType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__serviceType = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The specialty of a practitioner that would be required to perform the service requested in this appointment.
-	get specialty() {
-		return this.__specialty;
-	}
-
-	set specialty(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__specialty = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The style of appointment or patient that has been booked in the slot (not service type).
-	get appointmentType() {
-		return this.__appointmentType;
-	}
-
-	set appointmentType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__appointmentType = new CodeableConcept(new_value);
-	}
-
-	// The reason that this appointment is being scheduled. This is more clinical than administrative.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Reason the appointment has been scheduled to take place, as specified using information from another resource. When the patient arrives and the encounter begins it may be used as the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure.
-	get indication() {
-		return this.__indication;
-	}
-
-	set indication(new_value) {
-		const Reference = require('./Reference');
-		this.__indication = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority).
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field priority`);
-		}
-		this.__priority = new_value;
-	}
-
-	// The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// Additional information to support the appointment provided when making the appointment.
-	get supportingInformation() {
-		return this.__supportingInformation;
-	}
-
-	set supportingInformation(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInformation = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// Date/Time that the appointment is to take place.
-	get start() {
-		return this.__start;
-	}
-
-	set start(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field start`);
-		}
-		this.__start = new_value;
-	}
-
-	// Date/Time that the appointment is to conclude.
-	get end() {
-		return this.__end;
-	}
-
-	set end(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = InstantScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field end`);
-		}
-		this.__end = new_value;
-	}
-
-	// Number of minutes that the appointment is to take. This can be less than the duration between the start and end times (where actual time of appointment is only an estimate or is a planned appointment request).
-	get minutesDuration() {
-		return this.__minutesDuration;
-	}
-
-	set minutesDuration(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = PositiveIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field minutesDuration`);
-		}
-		this.__minutesDuration = new_value;
-	}
-
-	// The slots from the participants\' schedules that will be filled by the appointment.
-	get slot() {
-		return this.__slot;
-	}
-
-	set slot(new_value) {
-		const Reference = require('./Reference');
-		this.__slot = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The date that this appointment was initially created. This could be different to the meta.lastModified value on the initial entry, as this could have been before the resource was created on the FHIR server, and should remain unchanged over the lifespan of the appointment.
-	get created() {
-		return this.__created;
-	}
-
-	set created(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field created`);
-		}
-		this.__created = new_value;
-	}
-
-	// Additional comments about the appointment.
-	get comment() {
-		return this.__comment;
-	}
-
-	set comment(new_value) {
-		this.__comment = new_value;
-	}
-
-	// The referral request this appointment is allocated to assess (incoming referral).
-	get incomingReferral() {
-		return this.__incomingReferral;
-	}
-
-	set incomingReferral(new_value) {
-		const Reference = require('./Reference');
-		this.__incomingReferral = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// List of participants involved in the appointment.
-	get participant() {
-		return this.__participant;
-	}
-
-	set participant(new_value) {
-		const AppointmentParticipant = require('./AppointmentParticipant');
-		this.__participant = Array.isArray(new_value)
-			? new_value.map(val => new AppointmentParticipant(val))
-			: [new AppointmentParticipant(new_value)];
-	}
-
-	// A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within. When using these values, the minutes duration should be provided to indicate the length of the appointment to fill and populate the start/end times for the actual allocated time.
-	get requestedPeriod() {
-		return this.__requestedPeriod;
-	}
-
-	set requestedPeriod(new_value) {
-		const Period = require('./Period');
-		this.__requestedPeriod = Array.isArray(new_value) ? new_value.map(val => new Period(val)) : [new Period(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			serviceCategory: this.__serviceCategory && this.__serviceCategory.toJSON(),
-			serviceType: this.__serviceType && this.__serviceType.map(v => v.toJSON()),
-			specialty: this.__specialty && this.__specialty.map(v => v.toJSON()),
-			appointmentType: this.__appointmentType && this.__appointmentType.toJSON(),
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			indication: this.__indication && this.__indication.map(v => v.toJSON()),
-			priority: this.__priority,
-			description: this.__description,
-			supportingInformation: this.__supportingInformation && this.__supportingInformation.map(v => v.toJSON()),
-			start: this.__start,
-			end: this.__end,
-			minutesDuration: this.__minutesDuration,
-			slot: this.__slot && this.__slot.map(v => v.toJSON()),
-			created: this.__created,
-			comment: this.__comment,
-			incomingReferral: this.__incomingReferral && this.__incomingReferral.map(v => v.toJSON()),
-			participant: this.__participant && this.__participant.map(v => v.toJSON()),
-			requestedPeriod: this.__requestedPeriod && this.__requestedPeriod.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			serviceCategory: this.serviceCategory && this.serviceCategory.toJSON(),
+			serviceType: this.serviceType && this.serviceType.map(v => v.toJSON()),
+			specialty: this.specialty && this.specialty.map(v => v.toJSON()),
+			appointmentType: this.appointmentType && this.appointmentType.toJSON(),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			indication: this.indication && this.indication.map(v => v.toJSON()),
+			_priority: this._priority && this._priority.toJSON(),
+			priority: this.priority,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			supportingInformation: this.supportingInformation && this.supportingInformation.map(v => v.toJSON()),
+			_start: this._start && this._start.toJSON(),
+			start: this.start,
+			_end: this._end && this._end.toJSON(),
+			end: this.end,
+			_minutesDuration: this._minutesDuration && this._minutesDuration.toJSON(),
+			minutesDuration: this.minutesDuration,
+			slot: this.slot && this.slot.map(v => v.toJSON()),
+			_created: this._created && this._created.toJSON(),
+			created: this.created,
+			_comment: this._comment && this._comment.toJSON(),
+			comment: this.comment,
+			incomingReferral: this.incomingReferral && this.incomingReferral.map(v => v.toJSON()),
+			participant: this.participant && this.participant.map(v => v.toJSON()),
+			requestedPeriod: this.requestedPeriod && this.requestedPeriod.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Appointment;
+};

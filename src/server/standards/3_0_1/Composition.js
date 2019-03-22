@@ -1,206 +1,454 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary Composition Class
+ */
+module.exports = class Composition {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Composition extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Composition';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/composition-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/doc-typecodes
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/doc-classcodes
+		Object.defineProperty(this, 'class', {
+			enumerable: true,
+			get: () => this.__data.class,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.class = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, 'author', {
+			enumerable: true,
+			get: () => this.__data.author,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.author = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_title', {
+			enumerable: true,
+			get: () => this.__data._title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._title = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'title', {
+			enumerable: true,
+			get: () => this.__data.title,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.title = value;
+			},
+		});
+
+		Object.defineProperty(this, '_confidentiality', {
+			enumerable: true,
+			get: () => this.__data._confidentiality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._confidentiality = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-ConfidentialityClassification
+		Object.defineProperty(this, 'confidentiality', {
+			enumerable: true,
+			get: () => this.__data.confidentiality,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.confidentiality = value;
+			},
+		});
+
+		Object.defineProperty(this, 'attester', {
+			enumerable: true,
+			get: () => this.__data.attester,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompositionAttester = require('./compositionattester.js');
+				this.__data.attester = Array.isArray(value)
+					? value.map(v => new CompositionAttester(v))
+					: [new CompositionAttester(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'custodian', {
+			enumerable: true,
+			get: () => this.__data.custodian,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.custodian = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'relatesTo', {
+			enumerable: true,
+			get: () => this.__data.relatesTo,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompositionRelatesTo = require('./compositionrelatesto.js');
+				this.__data.relatesTo = Array.isArray(value)
+					? value.map(v => new CompositionRelatesTo(v))
+					: [new CompositionRelatesTo(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'event', {
+			enumerable: true,
+			get: () => this.__data.event,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompositionEvent = require('./compositionevent.js');
+				this.__data.event = Array.isArray(value)
+					? value.map(v => new CompositionEvent(v))
+					: [new CompositionEvent(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'section', {
+			enumerable: true,
+			get: () => this.__data.section,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompositionSection = require('./compositionsection.js');
+				this.__data.section = Array.isArray(value)
+					? value.map(v => new CompositionSection(v))
+					: [new CompositionSection(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Composition',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Composition resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Composition';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Composition = new_value;
-	}
-
-	// Logical identifier for the composition, assigned when created. This identifier stays constant as the composition is changed over time.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// The workflow/clinical status of this composition. The status is a marker for the clinical standing of the document.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// Specifies the particular kind of composition (e.g. History and Physical, Discharge Summary, Progress Note). This usually equates to the purpose of making the composition.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// A categorization for the type of the composition - helps for indexing and searching. This may be implied by or derived from the code specified in the Composition Type.
-	get class() {
-		return this.__class;
-	}
-
-	set class(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__class = new CodeableConcept(new_value);
-	}
-
-	// Who or what the composition is about. The composition can be about a person, (patient or healthcare practitioner), a device (e.g. a machine) or even a group of subjects (such as a document about a herd of livestock, or a set of patients that share a common exposure).
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// Describes the clinical encounter or type of care this documentation is associated with.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The composition editing time, when the composition was last logically changed by the author.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// Identifies who is responsible for the information in the composition, not necessarily who typed it in.
-	get author() {
-		return this.__author;
-	}
-
-	set author(new_value) {
-		const Reference = require('./Reference');
-		this.__author = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Official human-readable label for the composition.
-	get title() {
-		return this.__title;
-	}
-
-	set title(new_value) {
-		this.__title = new_value;
-	}
-
-	// The code specifying the level of confidentiality of the Composition.
-	get confidentiality() {
-		return this.__confidentiality;
-	}
-
-	set confidentiality(new_value) {
-		this.__confidentiality = new_value;
-	}
-
-	// A participant who has attested to the accuracy of the composition/document.
-	get attester() {
-		return this.__attester;
-	}
-
-	set attester(new_value) {
-		const CompositionAttester = require('./CompositionAttester');
-		this.__attester = Array.isArray(new_value)
-			? new_value.map(val => new CompositionAttester(val))
-			: [new CompositionAttester(new_value)];
-	}
-
-	// Identifies the organization or group who is responsible for ongoing maintenance of and access to the composition/document information.
-	get custodian() {
-		return this.__custodian;
-	}
-
-	set custodian(new_value) {
-		const Reference = require('./Reference');
-		this.__custodian = new Reference(new_value);
-	}
-
-	// Relationships that this composition has with other compositions or documents that already exist.
-	get relatesTo() {
-		return this.__relatesTo;
-	}
-
-	set relatesTo(new_value) {
-		const CompositionRelatesTo = require('./CompositionRelatesTo');
-		this.__relatesTo = Array.isArray(new_value)
-			? new_value.map(val => new CompositionRelatesTo(val))
-			: [new CompositionRelatesTo(new_value)];
-	}
-
-	// The clinical service, such as a colonoscopy or an appendectomy, being documented.
-	get event() {
-		return this.__event;
-	}
-
-	set event(new_value) {
-		const CompositionEvent = require('./CompositionEvent');
-		this.__event = Array.isArray(new_value)
-			? new_value.map(val => new CompositionEvent(val))
-			: [new CompositionEvent(new_value)];
-	}
-
-	// The root of the sections that make up the composition.
-	get section() {
-		return this.__section;
-	}
-
-	set section(new_value) {
-		const CompositionSection = require('./CompositionSection');
-		this.__section = Array.isArray(new_value)
-			? new_value.map(val => new CompositionSection(val))
-			: [new CompositionSection(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			status: this.__status,
-			type: this.__type && this.__type.toJSON(),
-			class: this.__class && this.__class.toJSON(),
-			subject: this.__subject && this.__subject.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			date: this.__date,
-			author: this.__author && this.__author.map(v => v.toJSON()),
-			title: this.__title,
-			confidentiality: this.__confidentiality,
-			attester: this.__attester && this.__attester.map(v => v.toJSON()),
-			custodian: this.__custodian && this.__custodian.toJSON(),
-			relatesTo: this.__relatesTo && this.__relatesTo.map(v => v.toJSON()),
-			event: this.__event && this.__event.map(v => v.toJSON()),
-			section: this.__section && this.__section.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			type: this.type && this.type.toJSON(),
+			class: this.class && this.class.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			author: this.author && this.author.map(v => v.toJSON()),
+			_title: this._title && this._title.toJSON(),
+			title: this.title,
+			_confidentiality: this._confidentiality && this._confidentiality.toJSON(),
+			confidentiality: this.confidentiality,
+			attester: this.attester && this.attester.map(v => v.toJSON()),
+			custodian: this.custodian && this.custodian.toJSON(),
+			relatesTo: this.relatesTo && this.relatesTo.map(v => v.toJSON()),
+			event: this.event && this.event.map(v => v.toJSON()),
+			section: this.section && this.section.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = Composition;
+};

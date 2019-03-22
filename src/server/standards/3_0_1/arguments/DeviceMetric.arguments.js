@@ -1,32 +1,42 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the devicemetric query
+ */
 module.exports = {
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DeviceMetric.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceMetric-category',
-		documentation: 'The category of the metric.',
+		description: 'The category of the metric',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DeviceMetric.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceMetric-identifier',
-		documentation: 'The identifier of the metric.',
+		description: 'The identifier of the metric',
 	},
-	PARENT: {
-		name: 'parent',
+	parent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceMetric.parent',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceMetric-parent',
-		documentation: 'The parent DeviceMetric resource.',
+		description: 'The parent DeviceMetric resource',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DeviceMetric.source',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceMetric-source',
-		documentation: 'The device resource.',
+		description: 'The device resource',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DeviceMetric.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/DeviceMetric-type',
-		documentation: 'The component type.',
+		description: 'The component type',
 	},
 };

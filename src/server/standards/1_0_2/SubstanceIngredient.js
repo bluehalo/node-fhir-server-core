@@ -1,43 +1,116 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary SubstanceIngredient Class
+ */
+module.exports = class SubstanceIngredient {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SubstanceIngredient extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SubstanceIngredient';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Ratio = require('./ratio.js');
+				this.__data.quantity = new Ratio(value);
+			},
+		});
+
+		Object.defineProperty(this, 'substance', {
+			enumerable: true,
+			get: () => this.__data.substance,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.substance = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SubstanceIngredient',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SubstanceIngredient resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SubstanceIngredient';
 	}
 
-	// The amount of the ingredient in the substance - a concentration ratio.
-	get quantity() {
-		return this.__quantity;
-	}
-
-	set quantity(new_value) {
-		const Ratio = require('./Ratio');
-		this.__quantity = new Ratio(new_value);
-	}
-
-	// Another substance that is a component of this substance.
-	get substance() {
-		return this.__substance;
-	}
-
-	set substance(new_value) {
-		const Reference = require('./Reference');
-		this.__substance = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			quantity: this.__quantity && this.__quantity.toJSON(),
-			substance: this.__substance && this.__substance.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			quantity: this.quantity && this.quantity.toJSON(),
+			substance: this.substance && this.substance.toJSON(),
+		};
 	}
-}
-
-module.exports = SubstanceIngredient;
+};

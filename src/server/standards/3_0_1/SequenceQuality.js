@@ -1,164 +1,427 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary SequenceQuality Class
+ */
+module.exports = class SequenceQuality {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class SequenceQuality extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'SequenceQuality';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/quality-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/sequence-quality-standardSequence
+		Object.defineProperty(this, 'standardSequence', {
+			enumerable: true,
+			get: () => this.__data.standardSequence,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.standardSequence = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_start', {
+			enumerable: true,
+			get: () => this.__data._start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._start = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'start', {
+			enumerable: true,
+			get: () => this.__data.start,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.start = value;
+			},
+		});
+
+		Object.defineProperty(this, '_end', {
+			enumerable: true,
+			get: () => this.__data._end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._end = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'end', {
+			enumerable: true,
+			get: () => this.__data.end,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.end = value;
+			},
+		});
+
+		Object.defineProperty(this, 'score', {
+			enumerable: true,
+			get: () => this.__data.score,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.score = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/sequence-quality-method
+		Object.defineProperty(this, 'method', {
+			enumerable: true,
+			get: () => this.__data.method,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.method = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_truthTP', {
+			enumerable: true,
+			get: () => this.__data._truthTP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._truthTP = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'truthTP', {
+			enumerable: true,
+			get: () => this.__data.truthTP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.truthTP = value;
+			},
+		});
+
+		Object.defineProperty(this, '_queryTP', {
+			enumerable: true,
+			get: () => this.__data._queryTP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._queryTP = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'queryTP', {
+			enumerable: true,
+			get: () => this.__data.queryTP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.queryTP = value;
+			},
+		});
+
+		Object.defineProperty(this, '_truthFN', {
+			enumerable: true,
+			get: () => this.__data._truthFN,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._truthFN = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'truthFN', {
+			enumerable: true,
+			get: () => this.__data.truthFN,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.truthFN = value;
+			},
+		});
+
+		Object.defineProperty(this, '_queryFP', {
+			enumerable: true,
+			get: () => this.__data._queryFP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._queryFP = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'queryFP', {
+			enumerable: true,
+			get: () => this.__data.queryFP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.queryFP = value;
+			},
+		});
+
+		Object.defineProperty(this, '_gtFP', {
+			enumerable: true,
+			get: () => this.__data._gtFP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._gtFP = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'gtFP', {
+			enumerable: true,
+			get: () => this.__data.gtFP,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.gtFP = value;
+			},
+		});
+
+		Object.defineProperty(this, '_precision', {
+			enumerable: true,
+			get: () => this.__data._precision,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._precision = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'precision', {
+			enumerable: true,
+			get: () => this.__data.precision,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.precision = value;
+			},
+		});
+
+		Object.defineProperty(this, '_recall', {
+			enumerable: true,
+			get: () => this.__data._recall,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._recall = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'recall', {
+			enumerable: true,
+			get: () => this.__data.recall,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.recall = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fScore', {
+			enumerable: true,
+			get: () => this.__data._fScore,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fScore = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fScore', {
+			enumerable: true,
+			get: () => this.__data.fScore,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fScore = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'SequenceQuality',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a SequenceQuality resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'SequenceQuality';
 	}
 
-	// INDEL / SNP / Undefined variant.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// Gold standard sequence used for comparing against.
-	get standardSequence() {
-		return this.__standardSequence;
-	}
-
-	set standardSequence(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__standardSequence = new CodeableConcept(new_value);
-	}
-
-	// Start position of the sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	get start() {
-		return this.__start;
-	}
-
-	set start(new_value) {
-		this.__start = new_value;
-	}
-
-	// End position of the sequence.If the coordinate system is 0-based then end is is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	get end() {
-		return this.__end;
-	}
-
-	set end(new_value) {
-		this.__end = new_value;
-	}
-
-	// The score of an experimentally derived feature such as a p-value ([SO:0001685](http://www.sequenceontology.org/browser/current_svn/term/SO:0001685)).
-	get score() {
-		return this.__score;
-	}
-
-	set score(new_value) {
-		const Quantity = require('./Quantity');
-		this.__score = new Quantity(new_value);
-	}
-
-	// Which method is used to get sequence quality.
-	get method() {
-		return this.__method;
-	}
-
-	set method(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__method = new CodeableConcept(new_value);
-	}
-
-	// True positives, from the perspective of the truth data, i.e. the number of sites in the Truth Call Set for which there are paths through the Query Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.
-	get truthTP() {
-		return this.__truthTP;
-	}
-
-	set truthTP(new_value) {
-		this.__truthTP = new_value;
-	}
-
-	// True positives, from the perspective of the query data, i.e. the number of sites in the Query Call Set for which there are paths through the Truth Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.
-	get queryTP() {
-		return this.__queryTP;
-	}
-
-	set queryTP(new_value) {
-		this.__queryTP = new_value;
-	}
-
-	// False negatives, i.e. the number of sites in the Truth Call Set for which there is no path through the Query Call Set that is consistent with all of the alleles at this site, or sites for which there is an inaccurate genotype call for the event. Sites with correct variant but incorrect genotype are counted here.
-	get truthFN() {
-		return this.__truthFN;
-	}
-
-	set truthFN(new_value) {
-		this.__truthFN = new_value;
-	}
-
-	// False positives, i.e. the number of sites in the Query Call Set for which there is no path through the Truth Call Set that is consistent with this site. Sites with correct variant but incorrect genotype are counted here.
-	get queryFP() {
-		return this.__queryFP;
-	}
-
-	set queryFP(new_value) {
-		this.__queryFP = new_value;
-	}
-
-	// The number of false positives where the non-REF alleles in the Truth and Query Call Sets match (i.e. cases where the truth is 1/1 and the query is 0/1 or similar).
-	get gtFP() {
-		return this.__gtFP;
-	}
-
-	set gtFP(new_value) {
-		this.__gtFP = new_value;
-	}
-
-	// QUERY.TP / (QUERY.TP + QUERY.FP).
-	get precision() {
-		return this.__precision;
-	}
-
-	set precision(new_value) {
-		this.__precision = new_value;
-	}
-
-	// TRUTH.TP / (TRUTH.TP + TRUTH.FN).
-	get recall() {
-		return this.__recall;
-	}
-
-	set recall(new_value) {
-		this.__recall = new_value;
-	}
-
-	// Harmonic mean of Recall and Precision, computed as: 2 * precision * recall / (precision + recall).
-	get fScore() {
-		return this.__fScore;
-	}
-
-	set fScore(new_value) {
-		this.__fScore = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			type: this.__type,
-			standardSequence: this.__standardSequence && this.__standardSequence.toJSON(),
-			start: this.__start,
-			end: this.__end,
-			score: this.__score && this.__score.toJSON(),
-			method: this.__method && this.__method.toJSON(),
-			truthTP: this.__truthTP,
-			queryTP: this.__queryTP,
-			truthFN: this.__truthFN,
-			queryFP: this.__queryFP,
-			gtFP: this.__gtFP,
-			precision: this.__precision,
-			recall: this.__recall,
-			fScore: this.__fScore,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			standardSequence: this.standardSequence && this.standardSequence.toJSON(),
+			_start: this._start && this._start.toJSON(),
+			start: this.start,
+			_end: this._end && this._end.toJSON(),
+			end: this.end,
+			score: this.score && this.score.toJSON(),
+			method: this.method && this.method.toJSON(),
+			_truthTP: this._truthTP && this._truthTP.toJSON(),
+			truthTP: this.truthTP,
+			_queryTP: this._queryTP && this._queryTP.toJSON(),
+			queryTP: this.queryTP,
+			_truthFN: this._truthFN && this._truthFN.toJSON(),
+			truthFN: this.truthFN,
+			_queryFP: this._queryFP && this._queryFP.toJSON(),
+			queryFP: this.queryFP,
+			_gtFP: this._gtFP && this._gtFP.toJSON(),
+			gtFP: this.gtFP,
+			_precision: this._precision && this._precision.toJSON(),
+			precision: this.precision,
+			_recall: this._recall && this._recall.toJSON(),
+			recall: this.recall,
+			_fScore: this._fScore && this._fScore.toJSON(),
+			fScore: this.fScore,
+		};
 	}
-}
-
-module.exports = SequenceQuality;
+};

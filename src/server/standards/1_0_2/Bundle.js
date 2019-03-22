@@ -1,90 +1,223 @@
-const Resource = require('./Resource');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
+/**
+ * @name exports
+ * @summary Bundle Class
+ */
+module.exports = class Bundle {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Bundle extends Resource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Bundle';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, '_type', {
+			enumerable: true,
+			get: () => this.__data._type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._type = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/bundle-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.type = value;
+			},
+		});
+
+		Object.defineProperty(this, '_total', {
+			enumerable: true,
+			get: () => this.__data._total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._total = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'total', {
+			enumerable: true,
+			get: () => this.__data.total,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.total = value;
+			},
+		});
+
+		Object.defineProperty(this, 'link', {
+			enumerable: true,
+			get: () => this.__data.link,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleLink = require('./bundlelink.js');
+				this.__data.link = Array.isArray(value) ? value.map(v => new BundleLink(v)) : [new BundleLink(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'entry', {
+			enumerable: true,
+			get: () => this.__data.entry,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleEntry = require('./bundleentry.js');
+				this.__data.entry = Array.isArray(value) ? value.map(v => new BundleEntry(v)) : [new BundleEntry(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'signature', {
+			enumerable: true,
+			get: () => this.__data.signature,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Signature = require('./signature.js');
+				this.__data.signature = new Signature(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Bundle',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Bundle resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Bundle';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Bundle = new_value;
-	}
-
-	// Indicates the purpose of this bundle- how it was intended to be used.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		this.__type = new_value;
-	}
-
-	// If a set of search matches, this is the total number of matches for the search (as opposed to the number of results in this bundle).
-	get total() {
-		return this.__total;
-	}
-
-	set total(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field total`);
-		}
-		this.__total = new_value;
-	}
-
-	// A series of links that provide context to this bundle.
-	get link() {
-		return this.__link;
-	}
-
-	set link(new_value) {
-		const BundleLink = require('./BundleLink');
-		this.__link = Array.isArray(new_value) ? new_value.map(val => new BundleLink(val)) : [new BundleLink(new_value)];
-	}
-
-	// An entry in a bundle resource - will either contain a resource, or information about a resource (transactions and history only).
-	get entry() {
-		return this.__entry;
-	}
-
-	set entry(new_value) {
-		const BundleEntry = require('./BundleEntry');
-		this.__entry = Array.isArray(new_value) ? new_value.map(val => new BundleEntry(val)) : [new BundleEntry(new_value)];
-	}
-
-	// Digital Signature - base64 encoded. XML DigSIg or a JWT.
-	get signature() {
-		return this.__signature;
-	}
-
-	set signature(new_value) {
-		const Signature = require('./Signature');
-		this.__signature = new Signature(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			type: this.__type,
-			total: this.__total,
-			link: this.__link && this.__link.map(v => v.toJSON()),
-			entry: this.__entry && this.__entry.map(v => v.toJSON()),
-			signature: this.__signature && this.__signature.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			_type: this._type && this._type.toJSON(),
+			type: this.type,
+			_total: this._total && this._total.toJSON(),
+			total: this.total,
+			link: this.link && this.link.map(v => v.toJSON()),
+			entry: this.entry && this.entry.map(v => v.toJSON()),
+			signature: this.signature && this.signature.toJSON(),
+		};
 	}
-}
-
-module.exports = Bundle;
+};

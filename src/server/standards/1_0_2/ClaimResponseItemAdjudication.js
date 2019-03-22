@@ -1,53 +1,143 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary ClaimResponseItemAdjudication Class
+ */
+module.exports = class ClaimResponseItemAdjudication {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ClaimResponseItemAdjudication extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ClaimResponseItemAdjudication';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/adjudication
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.code = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, 'amount', {
+			enumerable: true,
+			get: () => this.__data.amount,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.amount = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, '_value', {
+			enumerable: true,
+			get: () => this.__data._value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._value = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'value', {
+			enumerable: true,
+			get: () => this.__data.value,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.value = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ClaimResponseItemAdjudication',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ClaimResponseItemAdjudication resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ClaimResponseItemAdjudication';
 	}
 
-	// Code indicating: Co-Pay, deductible, eligible, benefit, tax, etc.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		const Coding = require('./Coding');
-		this.__code = new Coding(new_value);
-	}
-
-	// Monetary amount associated with the code.
-	get amount() {
-		return this.__amount;
-	}
-
-	set amount(new_value) {
-		const Quantity = require('./Quantity');
-		this.__amount = new Quantity(new_value);
-	}
-
-	// A non-monetary value for example a percentage. Mutually exclusive to the amount element above.
-	get value() {
-		return this.__value;
-	}
-
-	set value(new_value) {
-		this.__value = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			code: this.__code && this.__code.toJSON(),
-			amount: this.__amount && this.__amount.toJSON(),
-			value: this.__value,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			amount: this.amount && this.amount.toJSON(),
+			_value: this._value && this._value.toJSON(),
+			value: this.value,
+		};
 	}
-}
-
-module.exports = ClaimResponseItemAdjudication;
+};

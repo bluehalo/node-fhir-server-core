@@ -1,56 +1,70 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the expansionprofile query
+ */
 module.exports = {
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ExpansionProfile.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-date',
-		documentation: 'The expansion profile publication date.',
+		description: 'The expansion profile publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ExpansionProfile.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-description',
-		documentation: 'The description of the expansion profile.',
+		description: 'The description of the expansion profile',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ExpansionProfile.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-identifier',
-		documentation: 'External identifier for the expansion profile.',
+		description: 'External identifier for the expansion profile',
 	},
-	JURISDICTION: {
-		name: 'jurisdiction',
+	jurisdiction: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ExpansionProfile.jurisdiction',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-jurisdiction',
-		documentation: 'Intended jurisdiction for the expansion profile.',
+		description: 'Intended jurisdiction for the expansion profile',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ExpansionProfile.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-name',
-		documentation: 'Computationally friendly name of the expansion profile.',
+		description: 'Computationally friendly name of the expansion profile',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ExpansionProfile.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-publisher',
-		documentation: 'Name of the publisher of the expansion profile.',
+		description: 'Name of the publisher of the expansion profile',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ExpansionProfile.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-status',
-		documentation: 'The current status of the expansion profile.',
+		description: 'The current status of the expansion profile',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ExpansionProfile.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-url',
-		documentation: 'The uri that identifies the expansion profile.',
+		description: 'The uri that identifies the expansion profile',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ExpansionProfile.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ExpansionProfile-version',
-		documentation: 'The business version of the expansion profile.',
+		description: 'The business version of the expansion profile',
 	},
 };

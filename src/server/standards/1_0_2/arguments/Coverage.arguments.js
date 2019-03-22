@@ -1,50 +1,63 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the coverage query
+ */
 module.exports = {
-	DEPENDENT: {
-		name: 'dependent',
+	dependent: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.dependent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-dependent',
-		documentation: 'Dependent number.',
+		description: 'Dependent number',
 	},
-	GROUP: {
-		name: 'group',
+	group: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.group',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-group',
-		documentation: 'Group identifier.',
+		description: 'Group identifier',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-identifier',
-		documentation: 'The primary identifier of the insured.',
+		description: 'The primary identifier of the insured',
 	},
-	ISSUER: {
-		name: 'issuer',
+	issuer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Coverage.issuer',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-issuer',
-		documentation: 'The identity of the insurer.',
+		description: 'The identity of the insurer',
 	},
-	PLAN: {
-		name: 'plan',
+	plan: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.plan',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-plan',
-		documentation: 'A plan or policy identifier.',
+		description: 'A plan or policy identifier',
 	},
-	SEQUENCE: {
-		name: 'sequence',
+	sequence: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.sequence',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-sequence',
-		documentation: 'Sequence number.',
+		description: 'Sequence number',
 	},
-	SUBPLAN: {
-		name: 'subplan',
+	subplan: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.subPlan',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subplan',
-		documentation: 'Sub-plan identifier.',
+		description: 'Sub-plan identifier',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-type',
-		documentation: 'The kind of coverage.',
+		description: 'The kind of coverage',
 	},
 };

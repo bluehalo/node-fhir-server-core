@@ -1,29 +1,38 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the bundle query
+ */
 module.exports = {
-	COMPOSITION: {
-		name: 'composition',
+	composition: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Bundle.entry[0].resource',
 		definition: 'http://hl7.org/fhir/SearchParameter/Bundle-composition',
-		documentation:
-			"The first resource in the bundle, if the bundle type is 'document' - this is a composition, and this parameter provides access to searches its contents.",
+		description:
+			"The first resource in the bundle, if the bundle type is 'document' - this is a composition, and this parameter provides access to searches its contents",
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Bundle.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Bundle-identifier',
-		documentation: 'Persistent identifier for the bundle.',
+		description: 'Persistent identifier for the bundle',
 	},
-	MESSAGE: {
-		name: 'message',
+	message: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Bundle.entry[0].resource',
 		definition: 'http://hl7.org/fhir/SearchParameter/Bundle-message',
-		documentation:
-			"The first resource in the bundle, if the bundle type is 'message' - this is a message header, and this parameter provides access to search its contents.",
+		description:
+			"The first resource in the bundle, if the bundle type is 'message' - this is a message header, and this parameter provides access to search its contents",
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Bundle.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Bundle-type',
-		documentation:
-			'document | message | transaction | transaction-response | batch | batch-response | history | searchset | collection.',
+		description:
+			'document | message | transaction | transaction-response | batch | batch-response | history | searchset | collection',
 	},
 };

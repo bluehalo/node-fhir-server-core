@@ -1,240 +1,575 @@
-const DomainResource = require('./DomainResource');
-const UriScalar = require('./scalars/Uri.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const IdScalar = require('./scalars/Id.scalar');
+/**
+ * @name exports
+ * @summary ImplementationGuide Class
+ */
+module.exports = class ImplementationGuide {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImplementationGuide extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImplementationGuide';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		Object.defineProperty(this, '_version', {
+			enumerable: true,
+			get: () => this.__data._version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._version = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'version', {
+			enumerable: true,
+			get: () => this.__data.version,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.version = value;
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/conformance-resource-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_experimental', {
+			enumerable: true,
+			get: () => this.__data._experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._experimental = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'experimental', {
+			enumerable: true,
+			get: () => this.__data.experimental,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.experimental = value;
+			},
+		});
+
+		Object.defineProperty(this, '_publisher', {
+			enumerable: true,
+			get: () => this.__data._publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._publisher = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'publisher', {
+			enumerable: true,
+			get: () => this.__data.publisher,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.publisher = value;
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuideContact = require('./implementationguidecontact.js');
+				this.__data.contact = Array.isArray(value)
+					? value.map(v => new ImplementationGuideContact(v))
+					: [new ImplementationGuideContact(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_date', {
+			enumerable: true,
+			get: () => this.__data._date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._date = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'date', {
+			enumerable: true,
+			get: () => this.__data.date,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.date = value;
+			},
+		});
+
+		Object.defineProperty(this, '_description', {
+			enumerable: true,
+			get: () => this.__data._description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._description = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'description', {
+			enumerable: true,
+			get: () => this.__data.description,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.description = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/use-context
+		Object.defineProperty(this, 'useContext', {
+			enumerable: true,
+			get: () => this.__data.useContext,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.useContext = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_copyright', {
+			enumerable: true,
+			get: () => this.__data._copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._copyright = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'copyright', {
+			enumerable: true,
+			get: () => this.__data.copyright,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.copyright = value;
+			},
+		});
+
+		Object.defineProperty(this, '_fhirVersion', {
+			enumerable: true,
+			get: () => this.__data._fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._fhirVersion = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'fhirVersion', {
+			enumerable: true,
+			get: () => this.__data.fhirVersion,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.fhirVersion = value;
+			},
+		});
+
+		Object.defineProperty(this, 'dependency', {
+			enumerable: true,
+			get: () => this.__data.dependency,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuideDependency = require('./implementationguidedependency.js');
+				this.__data.dependency = Array.isArray(value)
+					? value.map(v => new ImplementationGuideDependency(v))
+					: [new ImplementationGuideDependency(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'package', {
+			enumerable: true,
+			get: () => this.__data.package,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuidePackage = require('./implementationguidepackage.js');
+				this.__data.package = Array.isArray(value)
+					? value.map(v => new ImplementationGuidePackage(v))
+					: [new ImplementationGuidePackage(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'global', {
+			enumerable: true,
+			get: () => this.__data.global,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuideGlobal = require('./implementationguideglobal.js');
+				this.__data.global = Array.isArray(value)
+					? value.map(v => new ImplementationGuideGlobal(v))
+					: [new ImplementationGuideGlobal(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_binary', {
+			enumerable: true,
+			get: () => this.__data._binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._binary = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'binary', {
+			enumerable: true,
+			get: () => this.__data.binary,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.binary = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'page', {
+			enumerable: true,
+			get: () => this.__data.page,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuidePage = require('./implementationguidepage.js');
+				this.__data.page = new ImplementationGuidePage(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImplementationGuide',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImplementationGuide resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImplementationGuide';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__ImplementationGuide = new_value;
-	}
-
-	// An absolute URL that is used to identify this implementation guide when it is referenced in a specification, model, design or an instance. This SHALL be a URL, SHOULD be globally unique, and SHOULD be an address at which this implementation guide is (or will be) published.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
-	// The identifier that is used to identify this version of the Implementation Guide when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the Implementation Guide author manually.
-	get version() {
-		return this.__version;
-	}
-
-	set version(new_value) {
-		this.__version = new_value;
-	}
-
-	// A free text natural language name identifying the Implementation Guide.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The status of the Implementation Guide.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// This Implementation Guide was authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	get experimental() {
-		return this.__experimental;
-	}
-
-	set experimental(new_value) {
-		this.__experimental = new_value;
-	}
-
-	// The name of the individual or organization that published the implementation guide.
-	get publisher() {
-		return this.__publisher;
-	}
-
-	set publisher(new_value) {
-		this.__publisher = new_value;
-	}
-
-	// Contacts to assist a user in finding and communicating with the publisher.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ImplementationGuideContact = require('./ImplementationGuideContact');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ImplementationGuideContact(val))
-			: [new ImplementationGuideContact(new_value)];
-	}
-
-	// The date this version of the implementation guide was published. The date must change when the business version changes, if it does, and it must change if the status code changes. In addition, it should change when the substantive content of the implementation guide changes.
-	get date() {
-		return this.__date;
-	}
-
-	set date(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field date`);
-		}
-		this.__date = new_value;
-	}
-
-	// A free text natural language description of the Implementation Guide and its use.
-	get description() {
-		return this.__description;
-	}
-
-	set description(new_value) {
-		this.__description = new_value;
-	}
-
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching of implementation guides. The most common use of this element is to represent the country / jurisdiction for which this implementation guide was defined.
-	get useContext() {
-		return this.__useContext;
-	}
-
-	set useContext(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__useContext = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the details of the constraints and mappings.
-	get copyright() {
-		return this.__copyright;
-	}
-
-	set copyright(new_value) {
-		this.__copyright = new_value;
-	}
-
-	// The version of the FHIR specification on which this ImplementationGuide is based - this is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 1.0.2 for this version.
-	get fhirVersion() {
-		return this.__fhirVersion;
-	}
-
-	set fhirVersion(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field fhirVersion`);
-		}
-		this.__fhirVersion = new_value;
-	}
-
-	// Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.
-	get dependency() {
-		return this.__dependency;
-	}
-
-	set dependency(new_value) {
-		const ImplementationGuideDependency = require('./ImplementationGuideDependency');
-		this.__dependency = Array.isArray(new_value)
-			? new_value.map(val => new ImplementationGuideDependency(val))
-			: [new ImplementationGuideDependency(new_value)];
-	}
-
-	// A logical group of resources. Logical groups can be used when building pages.
-	get package() {
-		return this.__package;
-	}
-
-	set package(new_value) {
-		const ImplementationGuidePackage = require('./ImplementationGuidePackage');
-		this.__package = Array.isArray(new_value)
-			? new_value.map(val => new ImplementationGuidePackage(val))
-			: [new ImplementationGuidePackage(new_value)];
-	}
-
-	// A set of profiles that all resources covered by this implementation guide must conform to.
-	get global() {
-		return this.__global;
-	}
-
-	set global(new_value) {
-		const ImplementationGuideGlobal = require('./ImplementationGuideGlobal');
-		this.__global = Array.isArray(new_value)
-			? new_value.map(val => new ImplementationGuideGlobal(val))
-			: [new ImplementationGuideGlobal(new_value)];
-	}
-
-	// A binary file that is included in the  implementation guide when it is published.
-	get binary() {
-		return this.__binary;
-	}
-
-	set binary(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field binary`);
-		}
-		this.__binary = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// A page / section in the implementation guide. The root page is the implementation guide home page.
-	get page() {
-		return this.__page;
-	}
-
-	set page(new_value) {
-		const ImplementationGuidePage = require('./ImplementationGuidePage');
-		this.__page = new ImplementationGuidePage(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			url: this.__url,
-			version: this.__version,
-			name: this.__name,
-			status: this.__status,
-			experimental: this.__experimental,
-			publisher: this.__publisher,
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			date: this.__date,
-			description: this.__description,
-			useContext: this.__useContext && this.__useContext.map(v => v.toJSON()),
-			copyright: this.__copyright,
-			fhirVersion: this.__fhirVersion,
-			dependency: this.__dependency && this.__dependency.map(v => v.toJSON()),
-			package: this.__package && this.__package.map(v => v.toJSON()),
-			global: this.__global && this.__global.map(v => v.toJSON()),
-			binary: this.__binary,
-			page: this.__page && this.__page.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+			_version: this._version && this._version.toJSON(),
+			version: this.version,
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_experimental: this._experimental && this._experimental.toJSON(),
+			experimental: this.experimental,
+			_publisher: this._publisher && this._publisher.toJSON(),
+			publisher: this.publisher,
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			_date: this._date && this._date.toJSON(),
+			date: this.date,
+			_description: this._description && this._description.toJSON(),
+			description: this.description,
+			useContext: this.useContext && this.useContext.map(v => v.toJSON()),
+			_copyright: this._copyright && this._copyright.toJSON(),
+			copyright: this.copyright,
+			_fhirVersion: this._fhirVersion && this._fhirVersion.toJSON(),
+			fhirVersion: this.fhirVersion,
+			dependency: this.dependency && this.dependency.map(v => v.toJSON()),
+			package: this.package && this.package.map(v => v.toJSON()),
+			global: this.global && this.global.map(v => v.toJSON()),
+			_binary: this._binary && this._binary.toJSON(),
+			binary: this.binary,
+			page: this.page && this.page.toJSON(),
+		};
 	}
-}
-
-module.exports = ImplementationGuide;
+};

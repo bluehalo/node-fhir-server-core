@@ -1,215 +1,464 @@
-const DomainResource = require('./DomainResource');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary MedicationAdministration Class
+ */
+module.exports = class MedicationAdministration {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class MedicationAdministration extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'MedicationAdministration';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/medication-admin-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'patient', {
+			enumerable: true,
+			get: () => this.__data.patient,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.patient = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'practitioner', {
+			enumerable: true,
+			get: () => this.__data.practitioner,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.practitioner = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'prescription', {
+			enumerable: true,
+			get: () => this.__data.prescription,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.prescription = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_wasNotGiven', {
+			enumerable: true,
+			get: () => this.__data._wasNotGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._wasNotGiven = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'wasNotGiven', {
+			enumerable: true,
+			get: () => this.__data.wasNotGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.wasNotGiven = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/reason-medication-not-given-codes
+		Object.defineProperty(this, 'reasonNotGiven', {
+			enumerable: true,
+			get: () => this.__data.reasonNotGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonNotGiven = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/reason-medication-given-codes
+		Object.defineProperty(this, 'reasonGiven', {
+			enumerable: true,
+			get: () => this.__data.reasonGiven,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reasonGiven = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_effectiveTimeDateTime', {
+			enumerable: true,
+			get: () => this.__data._effectiveTimeDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._effectiveTimeDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'effectiveTimeDateTime', {
+			enumerable: true,
+			get: () => this.__data.effectiveTimeDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.effectiveTimeDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'effectiveTimePeriod', {
+			enumerable: true,
+			get: () => this.__data.effectiveTimePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.effectiveTimePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'medicationCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.medicationCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.medicationCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'medicationReference', {
+			enumerable: true,
+			get: () => this.__data.medicationReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.medicationReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'device', {
+			enumerable: true,
+			get: () => this.__data.device,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.device = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_note', {
+			enumerable: true,
+			get: () => this.__data._note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._note = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.note = value;
+			},
+		});
+
+		Object.defineProperty(this, 'dosage', {
+			enumerable: true,
+			get: () => this.__data.dosage,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicationAdministrationDosage = require('./medicationadministrationdosage.js');
+				this.__data.dosage = new MedicationAdministrationDosage(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'MedicationAdministration',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a MedicationAdministration resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'MedicationAdministration';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__MedicationAdministration = new_value;
-	}
-
-	// External identifier - FHIR will generate its own internal identifiers (probably URLs) which do not need to be explicitly managed by the resource.  The identifier here is one that would be used by another non-FHIR system - for example an automated medication pump would provide a record each time it operated; an administration while the patient was off the ward might be made with a different system and entered after the event.  Particularly important if these records have to be updated.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// Will generally be set to show that the administration has been completed.  For some long running administrations such as infusions it is possible for an administration to be started but not completed or it may be paused while some other process is under way.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The person or animal receiving the medication.
-	get patient() {
-		return this.__patient;
-	}
-
-	set patient(new_value) {
-		const Reference = require('./Reference');
-		this.__patient = new Reference(new_value);
-	}
-
-	// The individual who was responsible for giving the medication to the patient.
-	get practitioner() {
-		return this.__practitioner;
-	}
-
-	set practitioner(new_value) {
-		const Reference = require('./Reference');
-		this.__practitioner = new Reference(new_value);
-	}
-
-	// The visit, admission or other contact between patient and health care provider the medication administration was performed as part of.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// The original request, instruction or authority to perform the administration.
-	get prescription() {
-		return this.__prescription;
-	}
-
-	set prescription(new_value) {
-		const Reference = require('./Reference');
-		this.__prescription = new Reference(new_value);
-	}
-
-	// Set this to true if the record is saying that the medication was NOT administered.
-	get wasNotGiven() {
-		return this.__wasNotGiven;
-	}
-
-	set wasNotGiven(new_value) {
-		this.__wasNotGiven = new_value;
-	}
-
-	// A code indicating why the administration was not performed.
-	get reasonNotGiven() {
-		return this.__reasonNotGiven;
-	}
-
-	set reasonNotGiven(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonNotGiven = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A code indicating why the medication was given.
-	get reasonGiven() {
-		return this.__reasonGiven;
-	}
-
-	set reasonGiven(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reasonGiven = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A specific date/time or interval of time during which the administration took place (or did not take place, when the \'notGiven\' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	get effectiveTimeDateTime() {
-		return this.__effectiveTimeDateTime;
-	}
-
-	set effectiveTimeDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field effectiveTimeDateTime`);
-		}
-		this.__effectiveTimeDateTime = new_value;
-	}
-
-	// A specific date/time or interval of time during which the administration took place (or did not take place, when the \'notGiven\' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	get effectiveTimePeriod() {
-		return this.__effectiveTimePeriod;
-	}
-
-	set effectiveTimePeriod(new_value) {
-		const Period = require('./Period');
-		this.__effectiveTimePeriod = new Period(new_value);
-	}
-
-	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	get medicationCodeableConcept() {
-		return this.__medicationCodeableConcept;
-	}
-
-	set medicationCodeableConcept(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__medicationCodeableConcept = new CodeableConcept(new_value);
-	}
-
-	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	get medicationReference() {
-		return this.__medicationReference;
-	}
-
-	set medicationReference(new_value) {
-		const Reference = require('./Reference');
-		this.__medicationReference = new Reference(new_value);
-	}
-
-	// The device used in administering the medication to the patient.  For example, a particular infusion pump.
-	get device() {
-		return this.__device;
-	}
-
-	set device(new_value) {
-		const Reference = require('./Reference');
-		this.__device = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Extra information about the medication administration that is not conveyed by the other attributes.
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		this.__note = new_value;
-	}
-
-	// Describes the medication dosage information details e.g. dose, rate, site, route, etc.
-	get dosage() {
-		return this.__dosage;
-	}
-
-	set dosage(new_value) {
-		const MedicationAdministrationDosage = require('./MedicationAdministrationDosage');
-		this.__dosage = new MedicationAdministrationDosage(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			patient: this.__patient && this.__patient.toJSON(),
-			practitioner: this.__practitioner && this.__practitioner.toJSON(),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			prescription: this.__prescription && this.__prescription.toJSON(),
-			wasNotGiven: this.__wasNotGiven,
-			reasonNotGiven: this.__reasonNotGiven && this.__reasonNotGiven.map(v => v.toJSON()),
-			reasonGiven: this.__reasonGiven && this.__reasonGiven.map(v => v.toJSON()),
-			effectiveTimeDateTime: this.__effectiveTimeDateTime,
-			effectiveTimePeriod: this.__effectiveTimePeriod && this.__effectiveTimePeriod.toJSON(),
-			medicationCodeableConcept: this.__medicationCodeableConcept && this.__medicationCodeableConcept.toJSON(),
-			medicationReference: this.__medicationReference && this.__medicationReference.toJSON(),
-			device: this.__device && this.__device.map(v => v.toJSON()),
-			note: this.__note,
-			dosage: this.__dosage && this.__dosage.toJSON(),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			patient: this.patient && this.patient.toJSON(),
+			practitioner: this.practitioner && this.practitioner.toJSON(),
+			encounter: this.encounter && this.encounter.toJSON(),
+			prescription: this.prescription && this.prescription.toJSON(),
+			_wasNotGiven: this._wasNotGiven && this._wasNotGiven.toJSON(),
+			wasNotGiven: this.wasNotGiven,
+			reasonNotGiven: this.reasonNotGiven && this.reasonNotGiven.map(v => v.toJSON()),
+			reasonGiven: this.reasonGiven && this.reasonGiven.map(v => v.toJSON()),
+			_effectiveTimeDateTime: this._effectiveTimeDateTime && this._effectiveTimeDateTime.toJSON(),
+			effectiveTimeDateTime: this.effectiveTimeDateTime,
+			effectiveTimePeriod: this.effectiveTimePeriod && this.effectiveTimePeriod.toJSON(),
+			medicationCodeableConcept: this.medicationCodeableConcept && this.medicationCodeableConcept.toJSON(),
+			medicationReference: this.medicationReference && this.medicationReference.toJSON(),
+			device: this.device && this.device.map(v => v.toJSON()),
+			_note: this._note && this._note.toJSON(),
+			note: this.note,
+			dosage: this.dosage && this.dosage.toJSON(),
+		};
 	}
-}
-
-module.exports = MedicationAdministration;
+};

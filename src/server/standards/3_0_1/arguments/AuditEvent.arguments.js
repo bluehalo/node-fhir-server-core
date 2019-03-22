@@ -1,122 +1,147 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the auditevent query
+ */
 module.exports = {
-	ACTION: {
-		name: 'action',
+	action: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.action',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-action',
-		documentation: 'Type of action performed during the event.',
+		description: 'Type of action performed during the event',
 	},
-	ADDRESS: {
-		name: 'address',
+	address: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'AuditEvent.agent.network.address',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-address',
-		documentation: 'Identifier for the network access point of the user device.',
+		description: 'Identifier for the network access point of the user device',
 	},
-	AGENT: {
-		name: 'agent',
+	agent: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.agent.reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-agent',
-		documentation: 'Direct reference to resource.',
+		description: 'Direct reference to resource',
 	},
-	AGENT_NAME: {
-		name: 'agent-name',
+	'agent-name': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'AuditEvent.agent.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-agent-name',
-		documentation: 'Human-meaningful name for the agent.',
+		description: 'Human-meaningful name for the agent',
 	},
-	AGENT_ROLE: {
-		name: 'agent-role',
+	'agent-role': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.agent.role',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-agent-role',
-		documentation: 'Agent role in the event.',
+		description: 'Agent role in the event',
 	},
-	ALTID: {
-		name: 'altid',
+	altid: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.agent.altId',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-altid',
-		documentation: 'Alternative User id e.g. authentication.',
+		description: 'Alternative User id e.g. authentication',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'AuditEvent.recorded',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-date',
-		documentation: 'Time when the event occurred on source.',
+		description: 'Time when the event occurred on source',
 	},
-	ENTITY: {
-		name: 'entity',
+	entity: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.entity.reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-entity',
-		documentation: 'Specific instance of resource.',
+		description: 'Specific instance of resource',
 	},
-	ENTITY_ID: {
-		name: 'entity-id',
+	'entity-id': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.entity.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-entity-id',
-		documentation: 'Specific instance of object.',
+		description: 'Specific instance of object',
 	},
-	ENTITY_NAME: {
-		name: 'entity-name',
+	'entity-name': {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'AuditEvent.entity.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-entity-name',
-		documentation: 'Descriptor for entity.',
+		description: 'Descriptor for entity',
 	},
-	ENTITY_ROLE: {
-		name: 'entity-role',
+	'entity-role': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.entity.role',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-entity-role',
-		documentation: 'What role the entity played.',
+		description: 'What role the entity played',
 	},
-	ENTITY_TYPE: {
-		name: 'entity-type',
+	'entity-type': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.entity.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-entity-type',
-		documentation: 'Type of entity involved.',
+		description: 'Type of entity involved',
 	},
-	OUTCOME: {
-		name: 'outcome',
+	outcome: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.outcome',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-outcome',
-		documentation: 'Whether the event succeeded or failed.',
+		description: 'Whether the event succeeded or failed',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'AuditEvent.agent.reference',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-patient',
-		documentation: 'Direct reference to resource.',
+		description: 'Direct reference to resource',
 	},
-	POLICY: {
-		name: 'policy',
+	policy: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'AuditEvent.agent.policy',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-policy',
-		documentation: 'Policy that authorized event.',
+		description: 'Policy that authorized event',
 	},
-	SITE: {
-		name: 'site',
+	site: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.source.site',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-site',
-		documentation: 'Logical source location within the enterprise.',
+		description: 'Logical source location within the enterprise',
 	},
-	SOURCE: {
-		name: 'source',
+	source: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.source.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-source',
-		documentation: 'The identity of source detecting the event.',
+		description: 'The identity of source detecting the event',
 	},
-	SUBTYPE: {
-		name: 'subtype',
+	subtype: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.subtype',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-subtype',
-		documentation: 'More specific type/id for the event.',
+		description: 'More specific type/id for the event',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-type',
-		documentation: 'Type/identifier of event.',
+		description: 'Type/identifier of event',
 	},
-	USER: {
-		name: 'user',
+	user: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'AuditEvent.agent.userId',
 		definition: 'http://hl7.org/fhir/SearchParameter/AuditEvent-user',
-		documentation: 'Unique identifier for the user.',
+		description: 'Unique identifier for the user',
 	},
 };

@@ -1,104 +1,126 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the chargeitem query
+ */
 module.exports = {
-	ACCOUNT: {
-		name: 'account',
+	account: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.account',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-account',
-		documentation: 'Account to place this charge.',
+		description: 'Account to place this charge',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ChargeItem.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-code',
-		documentation: 'A code that identifies the charge, like a billing code.',
+		description: 'A code that identifies the charge, like a billing code',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.context',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-context',
-		documentation: 'Encounter / Episode associated with event.',
+		description: 'Encounter / Episode associated with event',
 	},
-	ENTERED_DATE: {
-		name: 'entered-date',
+	'entered-date': {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ChargeItem.enteredDate',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-entered-date',
-		documentation: 'Date the charge item was entered.',
+		description: 'Date the charge item was entered',
 	},
-	ENTERER: {
-		name: 'enterer',
+	enterer: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.enterer',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-enterer',
-		documentation: 'Individual who was entering.',
+		description: 'Individual who was entering',
 	},
-	FACTOR_OVERRIDE: {
-		name: 'factor-override',
+	'factor-override': {
 		type: 'number',
+		fhirtype: 'number',
+		xpath: 'ChargeItem.factorOverride',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-factor-override',
-		documentation: 'Factor overriding the associated rules.',
+		description: 'Factor overriding the associated rules',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ChargeItem.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-identifier',
-		documentation: 'Business Identifier for item.',
+		description: 'Business Identifier for item',
 	},
-	OCCURRENCE: {
-		name: 'occurrence',
+	occurrence: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ChargeItem.occurrenceDateTime',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-occurrence',
-		documentation: 'When the charged service was applied.',
+		description: 'When the charged service was applied',
 	},
-	PARTICIPANT_ACTOR: {
-		name: 'participant-actor',
+	'participant-actor': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.participant.actor',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-participant-actor',
-		documentation: 'Individual who was performing.',
+		description: 'Individual who was performing',
 	},
-	PARTICIPANT_ROLE: {
-		name: 'participant-role',
+	'participant-role': {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ChargeItem.participant.role',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-participant-role',
-		documentation: 'What type of performance was done.',
+		description: 'What type of performance was done',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-patient',
-		documentation: 'Individual service was done for/to.',
+		description: 'Individual service was done for/to',
 	},
-	PERFORMING_ORGANIZATION: {
-		name: 'performing-organization',
+	'performing-organization': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.performingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-performing-organization',
-		documentation: 'Organization providing the charged sevice.',
+		description: 'Organization providing the charged sevice',
 	},
-	PRICE_OVERRIDE: {
-		name: 'price-override',
+	'price-override': {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'ChargeItem.priceOverride',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-price-override',
-		documentation: 'Price overriding the associated rules.',
+		description: 'Price overriding the associated rules',
 	},
-	QUANTITY: {
-		name: 'quantity',
+	quantity: {
 		type: 'quantity',
+		fhirtype: 'quantity',
+		xpath: 'ChargeItem.quantity',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-quantity',
-		documentation: 'Quantity of which the charge item has been serviced.',
+		description: 'Quantity of which the charge item has been serviced',
 	},
-	REQUESTING_ORGANIZATION: {
-		name: 'requesting-organization',
+	'requesting-organization': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.requestingOrganization',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-requesting-organization',
-		documentation: 'Organization requesting the charged service.',
+		description: 'Organization requesting the charged service',
 	},
-	SERVICE: {
-		name: 'service',
+	service: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.service',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-service',
-		documentation: 'Which rendered service is being charged?.',
+		description: 'Which rendered service is being charged?',
 	},
-	SUBJECT: {
-		name: 'subject',
+	subject: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'ChargeItem.subject',
 		definition: 'http://hl7.org/fhir/SearchParameter/ChargeItem-subject',
-		documentation: 'Individual service was done for/to.',
+		description: 'Individual service was done for/to',
 	},
 };

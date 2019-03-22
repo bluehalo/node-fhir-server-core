@@ -1,53 +1,142 @@
-const BackboneElement = require('./BackboneElement');
-const UnsignedIntScalar = require('./scalars/UnsignedInt.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary ImagingObjectSelectionStudySeriesInstanceFrames Class
+ */
+module.exports = class ImagingObjectSelectionStudySeriesInstanceFrames {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ImagingObjectSelectionStudySeriesInstanceFrames extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ImagingObjectSelectionStudySeriesInstanceFrames';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_frameNumbers', {
+			enumerable: true,
+			get: () => this.__data._frameNumbers,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._frameNumbers = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'frameNumbers', {
+			enumerable: true,
+			get: () => this.__data.frameNumbers,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.frameNumbers = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_url', {
+			enumerable: true,
+			get: () => this.__data._url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._url = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'url', {
+			enumerable: true,
+			get: () => this.__data.url,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.url = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ImagingObjectSelectionStudySeriesInstanceFrames',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ImagingObjectSelectionStudySeriesInstanceFrames resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ImagingObjectSelectionStudySeriesInstanceFrames';
 	}
 
-	// The frame numbers in the frame set.
-	get frameNumbers() {
-		return this.__frameNumbers;
-	}
-
-	set frameNumbers(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UnsignedIntScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field frameNumbers`);
-		}
-		this.__frameNumbers = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// WADO-RS URL to retrieve the DICOM frames.
-	get url() {
-		return this.__url;
-	}
-
-	set url(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field url`);
-		}
-		this.__url = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			frameNumbers: this.__frameNumbers,
-			url: this.__url,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_frameNumbers: this._frameNumbers && this._frameNumbers.toJSON(),
+			frameNumbers: this.frameNumbers,
+			_url: this._url && this._url.toJSON(),
+			url: this.url,
+		};
 	}
-}
-
-module.exports = ImagingObjectSelectionStudySeriesInstanceFrames;
+};

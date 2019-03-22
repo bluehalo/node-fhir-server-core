@@ -1,171 +1,386 @@
-const DomainResource = require('./DomainResource');
+/**
+ * @name exports
+ * @summary DiagnosticOrder Class
+ */
+module.exports = class DiagnosticOrder {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class DiagnosticOrder extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'DiagnosticOrder';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'orderer', {
+			enumerable: true,
+			get: () => this.__data.orderer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.orderer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'encounter', {
+			enumerable: true,
+			get: () => this.__data.encounter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.encounter = new Reference(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/condition-code
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInformation', {
+			enumerable: true,
+			get: () => this.__data.supportingInformation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInformation = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'specimen', {
+			enumerable: true,
+			get: () => this.__data.specimen,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.specimen = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, '_priority', {
+			enumerable: true,
+			get: () => this.__data._priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._priority = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/diagnostic-order-priority
+		Object.defineProperty(this, 'priority', {
+			enumerable: true,
+			get: () => this.__data.priority,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.priority = value;
+			},
+		});
+
+		Object.defineProperty(this, 'event', {
+			enumerable: true,
+			get: () => this.__data.event,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DiagnosticOrderEvent = require('./diagnosticorderevent.js');
+				this.__data.event = Array.isArray(value)
+					? value.map(v => new DiagnosticOrderEvent(v))
+					: [new DiagnosticOrderEvent(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let DiagnosticOrderItem = require('./diagnosticorderitem.js');
+				this.__data.item = Array.isArray(value)
+					? value.map(v => new DiagnosticOrderItem(v))
+					: [new DiagnosticOrderItem(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'DiagnosticOrder',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a DiagnosticOrder resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'DiagnosticOrder';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__DiagnosticOrder = new_value;
-	}
-
-	// Who or what the investigation is to be performed on. This is usually a human patient, but diagnostic tests can also be requested on animals, groups of humans or animals, devices such as dialysis machines, or even locations (typically for environmental scans).
-	get subject() {
-		return this.__subject;
-	}
-
-	set subject(new_value) {
-		const Reference = require('./Reference');
-		this.__subject = new Reference(new_value);
-	}
-
-	// The practitioner that holds legal responsibility for ordering the investigation.
-	get orderer() {
-		return this.__orderer;
-	}
-
-	set orderer(new_value) {
-		const Reference = require('./Reference');
-		this.__orderer = new Reference(new_value);
-	}
-
-	// Identifiers assigned to this order instance by the orderer and/or  the receiver and/or order fulfiller.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// An encounter that provides additional information about the healthcare context in which this request is made.
-	get encounter() {
-		return this.__encounter;
-	}
-
-	set encounter(new_value) {
-		const Reference = require('./Reference');
-		this.__encounter = new Reference(new_value);
-	}
-
-	// An explanation or justification for why this diagnostic investigation is being requested.   This is often for billing purposes.  May relate to the resources referred to in supportingInformation.
-	get reason() {
-		return this.__reason;
-	}
-
-	set reason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__reason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Additional clinical information about the patient or specimen that may influence test interpretations.  This includes observations explicitly requested by the producer(filler) to provide context or supporting information needed to complete the order.
-	get supportingInformation() {
-		return this.__supportingInformation;
-	}
-
-	set supportingInformation(new_value) {
-		const Reference = require('./Reference');
-		this.__supportingInformation = Array.isArray(new_value)
-			? new_value.map(val => new Reference(val))
-			: [new Reference(new_value)];
-	}
-
-	// One or more specimens that the diagnostic investigation is about.
-	get specimen() {
-		return this.__specimen;
-	}
-
-	set specimen(new_value) {
-		const Reference = require('./Reference');
-		this.__specimen = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// The status of the order.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// The clinical priority associated with this order.
-	get priority() {
-		return this.__priority;
-	}
-
-	set priority(new_value) {
-		this.__priority = new_value;
-	}
-
-	// A summary of the events of interest that have occurred as the request is processed; e.g. when the order was made, various processing steps (specimens received), when it was completed.
-	get event() {
-		return this.__event;
-	}
-
-	set event(new_value) {
-		const DiagnosticOrderEvent = require('./DiagnosticOrderEvent');
-		this.__event = Array.isArray(new_value)
-			? new_value.map(val => new DiagnosticOrderEvent(val))
-			: [new DiagnosticOrderEvent(new_value)];
-	}
-
-	// The specific diagnostic investigations that are requested as part of this request. Sometimes, there can only be one item per request, but in most contexts, more than one investigation can be requested.
-	get item() {
-		return this.__item;
-	}
-
-	set item(new_value) {
-		const DiagnosticOrderItem = require('./DiagnosticOrderItem');
-		this.__item = Array.isArray(new_value)
-			? new_value.map(val => new DiagnosticOrderItem(val))
-			: [new DiagnosticOrderItem(new_value)];
-	}
-
-	// Any other notes associated with this patient, specimen or order (e.g. \'patient hates needles\').
-	get note() {
-		return this.__note;
-	}
-
-	set note(new_value) {
-		const Annotation = require('./Annotation');
-		this.__note = Array.isArray(new_value) ? new_value.map(val => new Annotation(val)) : [new Annotation(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			subject: this.__subject && this.__subject.toJSON(),
-			orderer: this.__orderer && this.__orderer.toJSON(),
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			encounter: this.__encounter && this.__encounter.toJSON(),
-			reason: this.__reason && this.__reason.map(v => v.toJSON()),
-			supportingInformation: this.__supportingInformation && this.__supportingInformation.map(v => v.toJSON()),
-			specimen: this.__specimen && this.__specimen.map(v => v.toJSON()),
-			status: this.__status,
-			priority: this.__priority,
-			event: this.__event && this.__event.map(v => v.toJSON()),
-			item: this.__item && this.__item.map(v => v.toJSON()),
-			note: this.__note && this.__note.map(v => v.toJSON()),
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			subject: this.subject && this.subject.toJSON(),
+			orderer: this.orderer && this.orderer.toJSON(),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			encounter: this.encounter && this.encounter.toJSON(),
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			supportingInformation: this.supportingInformation && this.supportingInformation.map(v => v.toJSON()),
+			specimen: this.specimen && this.specimen.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			_priority: this._priority && this._priority.toJSON(),
+			priority: this.priority,
+			event: this.event && this.event.map(v => v.toJSON()),
+			item: this.item && this.item.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = DiagnosticOrder;
+};

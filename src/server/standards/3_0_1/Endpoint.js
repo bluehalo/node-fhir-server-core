@@ -1,165 +1,405 @@
-const DomainResource = require('./DomainResource');
-const CodeScalar = require('./scalars/Code.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary Endpoint Class
+ */
+module.exports = class Endpoint {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Endpoint extends DomainResource {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'Endpoint';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/languages
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/endpoint-status
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/endpoint-connection-type
+		Object.defineProperty(this, 'connectionType', {
+			enumerable: true,
+			get: () => this.__data.connectionType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.connectionType = new Coding(value);
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, 'managingOrganization', {
+			enumerable: true,
+			get: () => this.__data.managingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.managingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contact', {
+			enumerable: true,
+			get: () => this.__data.contact,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContactPoint = require('./contactpoint.js');
+				this.__data.contact = Array.isArray(value) ? value.map(v => new ContactPoint(v)) : [new ContactPoint(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'period', {
+			enumerable: true,
+			get: () => this.__data.period,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.period = new Period(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/endpoint-payload-type
+		Object.defineProperty(this, 'payloadType', {
+			enumerable: true,
+			get: () => this.__data.payloadType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.payloadType = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_payloadMimeType', {
+			enumerable: true,
+			get: () => this.__data._payloadMimeType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._payloadMimeType = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'payloadMimeType', {
+			enumerable: true,
+			get: () => this.__data.payloadMimeType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.payloadMimeType = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_address', {
+			enumerable: true,
+			get: () => this.__data._address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._address = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'address', {
+			enumerable: true,
+			get: () => this.__data.address,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.address = value;
+			},
+		});
+
+		Object.defineProperty(this, '_header', {
+			enumerable: true,
+			get: () => this.__data._header,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._header = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'header', {
+			enumerable: true,
+			get: () => this.__data.header,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.header = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Endpoint',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Endpoint resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Endpoint';
 	}
 
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Endpoint = new_value;
-	}
-
-	// Identifier for the organization that is used to identify the endpoint across multiple disparate systems.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = Array.isArray(new_value)
-			? new_value.map(val => new Identifier(val))
-			: [new Identifier(new_value)];
-	}
-
-	// active | suspended | error | off | test.
-	get status() {
-		return this.__status;
-	}
-
-	set status(new_value) {
-		this.__status = new_value;
-	}
-
-	// A coded value that represents the technical details of the usage of this endpoint, such as what WSDLs should be used in what way. (e.g. XDS.b/DICOM/cds-hook).
-	get connectionType() {
-		return this.__connectionType;
-	}
-
-	set connectionType(new_value) {
-		const Coding = require('./Coding');
-		this.__connectionType = new Coding(new_value);
-	}
-
-	// A friendly name that this endpoint can be referred to with.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The organization that manages this endpoint (even if technically another organisation is hosting this in the cloud, it is the organisation associated with the data).
-	get managingOrganization() {
-		return this.__managingOrganization;
-	}
-
-	set managingOrganization(new_value) {
-		const Reference = require('./Reference');
-		this.__managingOrganization = new Reference(new_value);
-	}
-
-	// Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
-	get contact() {
-		return this.__contact;
-	}
-
-	set contact(new_value) {
-		const ContactPoint = require('./ContactPoint');
-		this.__contact = Array.isArray(new_value)
-			? new_value.map(val => new ContactPoint(val))
-			: [new ContactPoint(new_value)];
-	}
-
-	// The interval during which the endpoint is expected to be operational.
-	get period() {
-		return this.__period;
-	}
-
-	set period(new_value) {
-		const Period = require('./Period');
-		this.__period = new Period(new_value);
-	}
-
-	// The payload type describes the acceptable content that can be communicated on the endpoint.
-	get payloadType() {
-		return this.__payloadType;
-	}
-
-	set payloadType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__payloadType = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType).
-	get payloadMimeType() {
-		return this.__payloadMimeType;
-	}
-
-	set payloadMimeType(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field payloadMimeType`);
-		}
-		this.__payloadMimeType = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
-	// The uri that describes the actual end-point to connect to.
-	get address() {
-		return this.__address;
-	}
-
-	set address(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field address`);
-		}
-		this.__address = new_value;
-	}
-
-	// Additional headers / information to send as part of the notification.
-	get header() {
-		return this.__header;
-	}
-
-	set header(new_value) {
-		this.__header = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			resourceType: this.__resourceType,
-			identifier: this.__identifier && this.__identifier.map(v => v.toJSON()),
-			status: this.__status,
-			connectionType: this.__connectionType && this.__connectionType.toJSON(),
-			name: this.__name,
-			managingOrganization: this.__managingOrganization && this.__managingOrganization.toJSON(),
-			contact: this.__contact && this.__contact.map(v => v.toJSON()),
-			period: this.__period && this.__period.toJSON(),
-			payloadType: this.__payloadType && this.__payloadType.map(v => v.toJSON()),
-			payloadMimeType: this.__payloadMimeType,
-			address: this.__address,
-			header: this.__header,
-		});
+		return {
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			connectionType: this.connectionType && this.connectionType.toJSON(),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			managingOrganization: this.managingOrganization && this.managingOrganization.toJSON(),
+			contact: this.contact && this.contact.map(v => v.toJSON()),
+			period: this.period && this.period.toJSON(),
+			payloadType: this.payloadType && this.payloadType.map(v => v.toJSON()),
+			_payloadMimeType: this._payloadMimeType && this._payloadMimeType.toJSON(),
+			payloadMimeType: this.payloadMimeType,
+			_address: this._address && this._address.toJSON(),
+			address: this.address,
+			_header: this._header && this._header.toJSON(),
+			header: this.header,
+		};
 	}
-}
-
-module.exports = Endpoint;
+};

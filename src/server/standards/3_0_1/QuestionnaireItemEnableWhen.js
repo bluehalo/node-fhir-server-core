@@ -1,189 +1,414 @@
-const BackboneElement = require('./BackboneElement');
-const DateScalar = require('./scalars/Date.scalar');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
-const TimeScalar = require('./scalars/Time.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
+/**
+ * @name exports
+ * @summary QuestionnaireItemEnableWhen Class
+ */
+module.exports = class QuestionnaireItemEnableWhen {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class QuestionnaireItemEnableWhen extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'QuestionnaireItemEnableWhen';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_question', {
+			enumerable: true,
+			get: () => this.__data._question,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._question = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'question', {
+			enumerable: true,
+			get: () => this.__data.question,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.question = value;
+			},
+		});
+
+		Object.defineProperty(this, '_hasAnswer', {
+			enumerable: true,
+			get: () => this.__data._hasAnswer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._hasAnswer = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'hasAnswer', {
+			enumerable: true,
+			get: () => this.__data.hasAnswer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.hasAnswer = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerBoolean', {
+			enumerable: true,
+			get: () => this.__data._answerBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerBoolean = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerBoolean', {
+			enumerable: true,
+			get: () => this.__data.answerBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDecimal', {
+			enumerable: true,
+			get: () => this.__data._answerDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDecimal = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDecimal', {
+			enumerable: true,
+			get: () => this.__data.answerDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerInteger', {
+			enumerable: true,
+			get: () => this.__data._answerInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerInteger = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerInteger', {
+			enumerable: true,
+			get: () => this.__data.answerInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDate', {
+			enumerable: true,
+			get: () => this.__data._answerDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDate = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDate', {
+			enumerable: true,
+			get: () => this.__data.answerDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDateTime', {
+			enumerable: true,
+			get: () => this.__data._answerDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDateTime = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDateTime', {
+			enumerable: true,
+			get: () => this.__data.answerDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerTime', {
+			enumerable: true,
+			get: () => this.__data._answerTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerTime = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerTime', {
+			enumerable: true,
+			get: () => this.__data.answerTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerString', {
+			enumerable: true,
+			get: () => this.__data._answerString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerString = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerString', {
+			enumerable: true,
+			get: () => this.__data.answerString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerUri', {
+			enumerable: true,
+			get: () => this.__data._answerUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerUri = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerUri', {
+			enumerable: true,
+			get: () => this.__data.answerUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerUri = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerAttachment', {
+			enumerable: true,
+			get: () => this.__data.answerAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.answerAttachment = new Attachment(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerCoding', {
+			enumerable: true,
+			get: () => this.__data.answerCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.answerCoding = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerQuantity', {
+			enumerable: true,
+			get: () => this.__data.answerQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.answerQuantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerReference', {
+			enumerable: true,
+			get: () => this.__data.answerReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.answerReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'QuestionnaireItemEnableWhen',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a QuestionnaireItemEnableWhen resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'QuestionnaireItemEnableWhen';
 	}
 
-	// The linkId for the question whose answer (or lack of answer) governs whether this item is enabled.
-	get question() {
-		return this.__question;
-	}
-
-	set question(new_value) {
-		this.__question = new_value;
-	}
-
-	// An indication that this item should be enabled only if the specified question is answered (hasAnswer=true) or not answered (hasAnswer=false).
-	get hasAnswer() {
-		return this.__hasAnswer;
-	}
-
-	set hasAnswer(new_value) {
-		this.__hasAnswer = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerBoolean() {
-		return this.__answerBoolean;
-	}
-
-	set answerBoolean(new_value) {
-		this.__answerBoolean = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDecimal() {
-		return this.__answerDecimal;
-	}
-
-	set answerDecimal(new_value) {
-		this.__answerDecimal = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerInteger() {
-		return this.__answerInteger;
-	}
-
-	set answerInteger(new_value) {
-		this.__answerInteger = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDate() {
-		return this.__answerDate;
-	}
-
-	set answerDate(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field answerDate`);
-		}
-		this.__answerDate = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerDateTime() {
-		return this.__answerDateTime;
-	}
-
-	set answerDateTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field answerDateTime`);
-		}
-		this.__answerDateTime = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerTime() {
-		return this.__answerTime;
-	}
-
-	set answerTime(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = TimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field answerTime`);
-		}
-		this.__answerTime = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerString() {
-		return this.__answerString;
-	}
-
-	set answerString(new_value) {
-		this.__answerString = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerUri() {
-		return this.__answerUri;
-	}
-
-	set answerUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field answerUri`);
-		}
-		this.__answerUri = new_value;
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerAttachment() {
-		return this.__answerAttachment;
-	}
-
-	set answerAttachment(new_value) {
-		const Attachment = require('./Attachment');
-		this.__answerAttachment = new Attachment(new_value);
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerCoding() {
-		return this.__answerCoding;
-	}
-
-	set answerCoding(new_value) {
-		const Coding = require('./Coding');
-		this.__answerCoding = new Coding(new_value);
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerQuantity() {
-		return this.__answerQuantity;
-	}
-
-	set answerQuantity(new_value) {
-		const Quantity = require('./Quantity');
-		this.__answerQuantity = new Quantity(new_value);
-	}
-
-	// An answer that the referenced question must match in order for the item to be enabled.
-	get answerReference() {
-		return this.__answerReference;
-	}
-
-	set answerReference(new_value) {
-		const Reference = require('./Reference');
-		this.__answerReference = new Reference(new_value);
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			question: this.__question,
-			hasAnswer: this.__hasAnswer,
-			answerBoolean: this.__answerBoolean,
-			answerDecimal: this.__answerDecimal,
-			answerInteger: this.__answerInteger,
-			answerDate: this.__answerDate,
-			answerDateTime: this.__answerDateTime,
-			answerTime: this.__answerTime,
-			answerString: this.__answerString,
-			answerUri: this.__answerUri,
-			answerAttachment: this.__answerAttachment && this.__answerAttachment.toJSON(),
-			answerCoding: this.__answerCoding && this.__answerCoding.toJSON(),
-			answerQuantity: this.__answerQuantity && this.__answerQuantity.toJSON(),
-			answerReference: this.__answerReference && this.__answerReference.toJSON(),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_question: this._question && this._question.toJSON(),
+			question: this.question,
+			_hasAnswer: this._hasAnswer && this._hasAnswer.toJSON(),
+			hasAnswer: this.hasAnswer,
+			_answerBoolean: this._answerBoolean && this._answerBoolean.toJSON(),
+			answerBoolean: this.answerBoolean,
+			_answerDecimal: this._answerDecimal && this._answerDecimal.toJSON(),
+			answerDecimal: this.answerDecimal,
+			_answerInteger: this._answerInteger && this._answerInteger.toJSON(),
+			answerInteger: this.answerInteger,
+			_answerDate: this._answerDate && this._answerDate.toJSON(),
+			answerDate: this.answerDate,
+			_answerDateTime: this._answerDateTime && this._answerDateTime.toJSON(),
+			answerDateTime: this.answerDateTime,
+			_answerTime: this._answerTime && this._answerTime.toJSON(),
+			answerTime: this.answerTime,
+			_answerString: this._answerString && this._answerString.toJSON(),
+			answerString: this.answerString,
+			_answerUri: this._answerUri && this._answerUri.toJSON(),
+			answerUri: this.answerUri,
+			answerAttachment: this.answerAttachment && this.answerAttachment.toJSON(),
+			answerCoding: this.answerCoding && this.answerCoding.toJSON(),
+			answerQuantity: this.answerQuantity && this.answerQuantity.toJSON(),
+			answerReference: this.answerReference && this.answerReference.toJSON(),
+		};
 	}
-}
-
-module.exports = QuestionnaireItemEnableWhen;
+};

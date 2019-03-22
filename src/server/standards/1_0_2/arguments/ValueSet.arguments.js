@@ -1,80 +1,98 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the valueset query
+ */
 module.exports = {
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.codeSystem.concept.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-code',
-		documentation: 'A code defined in the value set.',
+		description: 'A code defined in the value set',
 	},
-	CONTEXT: {
-		name: 'context',
+	context: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.useContext',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-context',
-		documentation: 'A use context assigned to the value set.',
+		description: 'A use context assigned to the value set',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'ValueSet.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-date',
-		documentation: 'The value set publication date.',
+		description: 'The value set publication date',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-description',
-		documentation: 'Text search in the description of the value set.',
+		description: 'Text search in the description of the value set',
 	},
-	EXPANSION: {
-		name: 'expansion',
+	expansion: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.expansion.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-expansion',
-		documentation: 'Uniquely identifies this expansion.',
+		description: 'Uniquely identifies this expansion',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-identifier',
-		documentation: 'The identifier for the value set.',
+		description: 'The identifier for the value set',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-name',
-		documentation: 'The name of the value set.',
+		description: 'The name of the value set',
 	},
-	PUBLISHER: {
-		name: 'publisher',
+	publisher: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'ValueSet.publisher',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-publisher',
-		documentation: 'Name of the publisher of the value set.',
+		description: 'Name of the publisher of the value set',
 	},
-	REFERENCE: {
-		name: 'reference',
+	reference: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.compose.include.system',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-reference',
-		documentation: 'A code system included or excluded in the value set or an imported value set.',
+		description: 'A code system included or excluded in the value set or an imported value set',
 	},
-	STATUS: {
-		name: 'status',
+	status: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.status',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-status',
-		documentation: 'The status of the value set.',
+		description: 'The status of the value set',
 	},
-	SYSTEM: {
-		name: 'system',
+	system: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.codeSystem.system',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-system',
-		documentation: 'The system for any codes defined by this value set.',
+		description: 'The system for any codes defined by this value set',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'ValueSet.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-url',
-		documentation: 'The logical URL for the value set.',
+		description: 'The logical URL for the value set',
 	},
-	VERSION: {
-		name: 'version',
+	version: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'ValueSet.version',
 		definition: 'http://hl7.org/fhir/SearchParameter/ValueSet-version',
-		documentation: 'The version identifier of the value set.',
+		description: 'The version identifier of the value set',
 	},
 };

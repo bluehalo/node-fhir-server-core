@@ -1,38 +1,49 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the detectedissue query
+ */
 module.exports = {
-	AUTHOR: {
-		name: 'author',
+	author: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DetectedIssue.author',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-author',
-		documentation: 'The provider or device that identified the issue.',
+		description: 'The provider or device that identified the issue',
 	},
-	CATEGORY: {
-		name: 'category',
+	category: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DetectedIssue.category',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-category',
-		documentation: 'Issue Category, e.g. drug-drug, duplicate therapy, etc.',
+		description: 'Issue Category, e.g. drug-drug, duplicate therapy, etc.',
 	},
-	DATE: {
-		name: 'date',
+	date: {
 		type: 'date',
+		fhirtype: 'date',
+		xpath: 'DetectedIssue.date',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-date',
-		documentation: 'When identified.',
+		description: 'When identified',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'DetectedIssue.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-identifier',
-		documentation: 'Unique id for the detected issue.',
+		description: 'Unique id for the detected issue',
 	},
-	IMPLICATED: {
-		name: 'implicated',
+	implicated: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DetectedIssue.implicated',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-implicated',
-		documentation: 'Problem resource.',
+		description: 'Problem resource',
 	},
-	PATIENT: {
-		name: 'patient',
+	patient: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'DetectedIssue.patient',
 		definition: 'http://hl7.org/fhir/SearchParameter/DetectedIssue-patient',
-		documentation: 'Associated patient.',
+		description: 'Associated patient',
 	},
 };

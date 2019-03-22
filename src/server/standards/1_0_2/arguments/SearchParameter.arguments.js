@@ -1,44 +1,56 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the searchparameter query
+ */
 module.exports = {
-	BASE: {
-		name: 'base',
+	base: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SearchParameter.base',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-base',
-		documentation: 'The resource type this search parameter applies to.',
+		description: 'The resource type this search parameter applies to',
 	},
-	CODE: {
-		name: 'code',
+	code: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SearchParameter.code',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-code',
-		documentation: 'Code used in URL.',
+		description: 'Code used in URL',
 	},
-	DESCRIPTION: {
-		name: 'description',
+	description: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'SearchParameter.description',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-description',
-		documentation: 'Documentation for  search parameter.',
+		description: 'Documentation for  search parameter',
 	},
-	NAME: {
-		name: 'name',
+	name: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'SearchParameter.name',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-name',
-		documentation: 'Informal name for this search parameter.',
+		description: 'Informal name for this search parameter',
 	},
-	TARGET: {
-		name: 'target',
+	target: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SearchParameter.target',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-target',
-		documentation: 'Types of resource (if a resource reference).',
+		description: 'Types of resource (if a resource reference)',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'SearchParameter.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-type',
-		documentation: 'number | date | string | token | reference | composite | quantity | uri.',
+		description: 'number | date | string | token | reference | composite | quantity | uri',
 	},
-	URL: {
-		name: 'url',
+	url: {
 		type: 'uri',
+		fhirtype: 'uri',
+		xpath: 'SearchParameter.url',
 		definition: 'http://hl7.org/fhir/SearchParameter/SearchParameter-url',
-		documentation: 'Absolute URL used to reference this search parameter.',
+		description: 'Absolute URL used to reference this search parameter',
 	},
 };

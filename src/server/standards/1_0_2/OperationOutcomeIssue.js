@@ -1,72 +1,210 @@
-const BackboneElement = require('./BackboneElement');
+/**
+ * @name exports
+ * @summary OperationOutcomeIssue Class
+ */
+module.exports = class OperationOutcomeIssue {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class OperationOutcomeIssue extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'OperationOutcomeIssue';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_severity', {
+			enumerable: true,
+			get: () => this.__data._severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._severity = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/issue-severity
+		Object.defineProperty(this, 'severity', {
+			enumerable: true,
+			get: () => this.__data.severity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.severity = value;
+			},
+		});
+
+		Object.defineProperty(this, '_code', {
+			enumerable: true,
+			get: () => this.__data._code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._code = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/issue-type
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.code = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/operation-outcome
+		Object.defineProperty(this, 'details', {
+			enumerable: true,
+			get: () => this.__data.details,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.details = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, '_diagnostics', {
+			enumerable: true,
+			get: () => this.__data._diagnostics,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._diagnostics = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'diagnostics', {
+			enumerable: true,
+			get: () => this.__data.diagnostics,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.diagnostics = value;
+			},
+		});
+
+		Object.defineProperty(this, '_location', {
+			enumerable: true,
+			get: () => this.__data._location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._location = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'location', {
+			enumerable: true,
+			get: () => this.__data.location,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.location = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'OperationOutcomeIssue',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a OperationOutcomeIssue resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'OperationOutcomeIssue';
 	}
 
-	// Indicates whether the issue indicates a variation from successful processing.
-	get severity() {
-		return this.__severity;
-	}
-
-	set severity(new_value) {
-		this.__severity = new_value;
-	}
-
-	// Describes the type of the issue. The system that creates an OperationOutcome SHALL choose the most applicable code from the IssueType value set, and may additional provide its own code for the error in the details element.
-	get code() {
-		return this.__code;
-	}
-
-	set code(new_value) {
-		this.__code = new_value;
-	}
-
-	// Additional details about the error. This may be a text description of the error, or a system code that identifies the error.
-	get details() {
-		return this.__details;
-	}
-
-	set details(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__details = new CodeableConcept(new_value);
-	}
-
-	// Additional diagnostic information about the issue.  Typically, this may be a description of how a value is erroneous, or a stack dump to help trace the issue.
-	get diagnostics() {
-		return this.__diagnostics;
-	}
-
-	set diagnostics(new_value) {
-		this.__diagnostics = new_value;
-	}
-
-	// A simple XPath limited to element names, repetition indicators and the default child access that identifies one of the elements in the resource that caused this issue to be raised.
-	get location() {
-		return this.__location;
-	}
-
-	set location(new_value) {
-		this.__location = Array.isArray(new_value) ? new_value : [new_value];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			severity: this.__severity,
-			code: this.__code,
-			details: this.__details && this.__details.toJSON(),
-			diagnostics: this.__diagnostics,
-			location: this.__location,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_severity: this._severity && this._severity.toJSON(),
+			severity: this.severity,
+			_code: this._code && this._code.toJSON(),
+			code: this.code,
+			details: this.details && this.details.toJSON(),
+			_diagnostics: this._diagnostics && this._diagnostics.toJSON(),
+			diagnostics: this.diagnostics,
+			_location: this._location && this._location.toJSON(),
+			location: this.location,
+		};
 	}
-}
-
-module.exports = OperationOutcomeIssue;
+};

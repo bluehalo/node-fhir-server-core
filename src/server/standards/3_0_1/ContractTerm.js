@@ -1,165 +1,290 @@
-const BackboneElement = require('./BackboneElement');
-const DateTimeScalar = require('./scalars/DateTime.scalar');
+/**
+ * @name exports
+ * @summary ContractTerm Class
+ */
+module.exports = class ContractTerm {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ContractTerm extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ContractTerm';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = new Identifier(value);
+			},
+		});
+
+		Object.defineProperty(this, '_issued', {
+			enumerable: true,
+			get: () => this.__data._issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._issued = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'issued', {
+			enumerable: true,
+			get: () => this.__data.issued,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.issued = value;
+			},
+		});
+
+		Object.defineProperty(this, 'applies', {
+			enumerable: true,
+			get: () => this.__data.applies,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.applies = new Period(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-term-type
+		Object.defineProperty(this, 'type', {
+			enumerable: true,
+			get: () => this.__data.type,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.type = new CodeableConcept(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-term-subtype
+		Object.defineProperty(this, 'subType', {
+			enumerable: true,
+			get: () => this.__data.subType,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.subType = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'topic', {
+			enumerable: true,
+			get: () => this.__data.topic,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.topic = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/contract-action
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.action = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/v3-PurposeOfUse
+		Object.defineProperty(this, 'actionReason', {
+			enumerable: true,
+			get: () => this.__data.actionReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.actionReason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/security-labels
+		Object.defineProperty(this, 'securityLabel', {
+			enumerable: true,
+			get: () => this.__data.securityLabel,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.securityLabel = Array.isArray(value) ? value.map(v => new Coding(v)) : [new Coding(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'agent', {
+			enumerable: true,
+			get: () => this.__data.agent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractTermAgent = require('./contracttermagent.js');
+				this.__data.agent = Array.isArray(value)
+					? value.map(v => new ContractTermAgent(v))
+					: [new ContractTermAgent(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_text', {
+			enumerable: true,
+			get: () => this.__data._text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._text = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.text = value;
+			},
+		});
+
+		Object.defineProperty(this, 'valuedItem', {
+			enumerable: true,
+			get: () => this.__data.valuedItem,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractTermValuedItem = require('./contracttermvalueditem.js');
+				this.__data.valuedItem = Array.isArray(value)
+					? value.map(v => new ContractTermValuedItem(v))
+					: [new ContractTermValuedItem(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ContractTerm',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ContractTerm resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ContractTerm';
 	}
 
-	// Unique identifier for this particular Contract Provision.
-	get identifier() {
-		return this.__identifier;
-	}
-
-	set identifier(new_value) {
-		const Identifier = require('./Identifier');
-		this.__identifier = new Identifier(new_value);
-	}
-
-	// When this Contract Provision was issued.
-	get issued() {
-		return this.__issued;
-	}
-
-	set issued(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = DateTimeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field issued`);
-		}
-		this.__issued = new_value;
-	}
-
-	// Relevant time or time-period when this Contract Provision is applicable.
-	get applies() {
-		return this.__applies;
-	}
-
-	set applies(new_value) {
-		const Period = require('./Period');
-		this.__applies = new Period(new_value);
-	}
-
-	// Type of Contract Provision such as specific requirements, purposes for actions, obligations, prohibitions, e.g. life time maximum benefit.
-	get type() {
-		return this.__type;
-	}
-
-	set type(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__type = new CodeableConcept(new_value);
-	}
-
-	// Subtype of this Contract Provision, e.g. life time maximum payment for a contract term for specific valued item, e.g. disability payment.
-	get subType() {
-		return this.__subType;
-	}
-
-	set subType(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__subType = new CodeableConcept(new_value);
-	}
-
-	// The matter of concern in the context of this provision of the agrement.
-	get topic() {
-		return this.__topic;
-	}
-
-	set topic(new_value) {
-		const Reference = require('./Reference');
-		this.__topic = Array.isArray(new_value) ? new_value.map(val => new Reference(val)) : [new Reference(new_value)];
-	}
-
-	// Action stipulated by this Contract Provision.
-	get action() {
-		return this.__action;
-	}
-
-	set action(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__action = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// Reason or purpose for the action stipulated by this Contract Provision.
-	get actionReason() {
-		return this.__actionReason;
-	}
-
-	set actionReason(new_value) {
-		const CodeableConcept = require('./CodeableConcept');
-		this.__actionReason = Array.isArray(new_value)
-			? new_value.map(val => new CodeableConcept(val))
-			: [new CodeableConcept(new_value)];
-	}
-
-	// A set of security labels that define which terms are controlled by this condition.
-	get securityLabel() {
-		return this.__securityLabel;
-	}
-
-	set securityLabel(new_value) {
-		const Coding = require('./Coding');
-		this.__securityLabel = Array.isArray(new_value) ? new_value.map(val => new Coding(val)) : [new Coding(new_value)];
-	}
-
-	// An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place.
-	get agent() {
-		return this.__agent;
-	}
-
-	set agent(new_value) {
-		const ContractTermAgent = require('./ContractTermAgent');
-		this.__agent = Array.isArray(new_value)
-			? new_value.map(val => new ContractTermAgent(val))
-			: [new ContractTermAgent(new_value)];
-	}
-
-	// Human readable form of this Contract Provision.
-	get text() {
-		return this.__text;
-	}
-
-	set text(new_value) {
-		this.__text = new_value;
-	}
-
-	// Contract Provision Valued Item List.
-	get valuedItem() {
-		return this.__valuedItem;
-	}
-
-	set valuedItem(new_value) {
-		const ContractTermValuedItem = require('./ContractTermValuedItem');
-		this.__valuedItem = Array.isArray(new_value)
-			? new_value.map(val => new ContractTermValuedItem(val))
-			: [new ContractTermValuedItem(new_value)];
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			identifier: this.__identifier && this.__identifier.toJSON(),
-			issued: this.__issued,
-			applies: this.__applies && this.__applies.toJSON(),
-			type: this.__type && this.__type.toJSON(),
-			subType: this.__subType && this.__subType.toJSON(),
-			topic: this.__topic && this.__topic.map(v => v.toJSON()),
-			action: this.__action && this.__action.map(v => v.toJSON()),
-			actionReason: this.__actionReason && this.__actionReason.map(v => v.toJSON()),
-			securityLabel: this.__securityLabel && this.__securityLabel.map(v => v.toJSON()),
-			agent: this.__agent && this.__agent.map(v => v.toJSON()),
-			text: this.__text,
-			valuedItem: this.__valuedItem && this.__valuedItem.map(v => v.toJSON()),
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.toJSON(),
+			_issued: this._issued && this._issued.toJSON(),
+			issued: this.issued,
+			applies: this.applies && this.applies.toJSON(),
+			type: this.type && this.type.toJSON(),
+			subType: this.subType && this.subType.toJSON(),
+			topic: this.topic && this.topic.map(v => v.toJSON()),
+			action: this.action && this.action.map(v => v.toJSON()),
+			actionReason: this.actionReason && this.actionReason.map(v => v.toJSON()),
+			securityLabel: this.securityLabel && this.securityLabel.map(v => v.toJSON()),
+			agent: this.agent && this.agent.map(v => v.toJSON()),
+			_text: this._text && this._text.toJSON(),
+			text: this.text,
+			valuedItem: this.valuedItem && this.valuedItem.map(v => v.toJSON()),
+		};
 	}
-}
-
-module.exports = ContractTerm;
+};

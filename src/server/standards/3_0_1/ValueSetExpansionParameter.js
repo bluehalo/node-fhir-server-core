@@ -1,103 +1,277 @@
-const BackboneElement = require('./BackboneElement');
-const UriScalar = require('./scalars/Uri.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary ValueSetExpansionParameter Class
+ */
+module.exports = class ValueSetExpansionParameter {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class ValueSetExpansionParameter extends BackboneElement {
-	constructor(opt) {
-		super(opt);
-		this.__resourceType = 'ValueSetExpansionParameter';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_name', {
+			enumerable: true,
+			get: () => this.__data._name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._name = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'name', {
+			enumerable: true,
+			get: () => this.__data.name,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.name = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueString', {
+			enumerable: true,
+			get: () => this.__data._valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueString = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueString', {
+			enumerable: true,
+			get: () => this.__data.valueString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueBoolean', {
+			enumerable: true,
+			get: () => this.__data._valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueBoolean = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueBoolean', {
+			enumerable: true,
+			get: () => this.__data.valueBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueInteger', {
+			enumerable: true,
+			get: () => this.__data._valueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueInteger = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueInteger', {
+			enumerable: true,
+			get: () => this.__data.valueInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueDecimal', {
+			enumerable: true,
+			get: () => this.__data._valueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueDecimal = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueDecimal', {
+			enumerable: true,
+			get: () => this.__data.valueDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueUri', {
+			enumerable: true,
+			get: () => this.__data._valueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueUri', {
+			enumerable: true,
+			get: () => this.__data.valueUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueUri = value;
+			},
+		});
+
+		Object.defineProperty(this, '_valueCode', {
+			enumerable: true,
+			get: () => this.__data._valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._valueCode = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'valueCode', {
+			enumerable: true,
+			get: () => this.__data.valueCode,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.valueCode = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ValueSetExpansionParameter',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a ValueSetExpansionParameter resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'ValueSetExpansionParameter';
 	}
 
-	// The name of the parameter.
-	get name() {
-		return this.__name;
-	}
-
-	set name(new_value) {
-		this.__name = new_value;
-	}
-
-	// The value of the parameter.
-	get valueString() {
-		return this.__valueString;
-	}
-
-	set valueString(new_value) {
-		this.__valueString = new_value;
-	}
-
-	// The value of the parameter.
-	get valueBoolean() {
-		return this.__valueBoolean;
-	}
-
-	set valueBoolean(new_value) {
-		this.__valueBoolean = new_value;
-	}
-
-	// The value of the parameter.
-	get valueInteger() {
-		return this.__valueInteger;
-	}
-
-	set valueInteger(new_value) {
-		this.__valueInteger = new_value;
-	}
-
-	// The value of the parameter.
-	get valueDecimal() {
-		return this.__valueDecimal;
-	}
-
-	set valueDecimal(new_value) {
-		this.__valueDecimal = new_value;
-	}
-
-	// The value of the parameter.
-	get valueUri() {
-		return this.__valueUri;
-	}
-
-	set valueUri(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueUri`);
-		}
-		this.__valueUri = new_value;
-	}
-
-	// The value of the parameter.
-	get valueCode() {
-		return this.__valueCode;
-	}
-
-	set valueCode(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field valueCode`);
-		}
-		this.__valueCode = new_value;
-	}
-
 	toJSON() {
-		return Object.assign(super.toJSON(), {
-			name: this.__name,
-			valueString: this.__valueString,
-			valueBoolean: this.__valueBoolean,
-			valueInteger: this.__valueInteger,
-			valueDecimal: this.__valueDecimal,
-			valueUri: this.__valueUri,
-			valueCode: this.__valueCode,
-		});
+		return {
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_name: this._name && this._name.toJSON(),
+			name: this.name,
+			_valueString: this._valueString && this._valueString.toJSON(),
+			valueString: this.valueString,
+			_valueBoolean: this._valueBoolean && this._valueBoolean.toJSON(),
+			valueBoolean: this.valueBoolean,
+			_valueInteger: this._valueInteger && this._valueInteger.toJSON(),
+			valueInteger: this.valueInteger,
+			_valueDecimal: this._valueDecimal && this._valueDecimal.toJSON(),
+			valueDecimal: this.valueDecimal,
+			_valueUri: this._valueUri && this._valueUri.toJSON(),
+			valueUri: this.valueUri,
+			_valueCode: this._valueCode && this._valueCode.toJSON(),
+			valueCode: this.valueCode,
+		};
 	}
-}
-
-module.exports = ValueSetExpansionParameter;
+};

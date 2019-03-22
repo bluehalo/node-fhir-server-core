@@ -1,88 +1,127 @@
-const IdScalar = require('./scalars/Id.scalar');
-const UriScalar = require('./scalars/Uri.scalar');
-const CodeScalar = require('./scalars/Code.scalar');
+/**
+ * @name exports
+ * @summary Resource Class
+ */
+module.exports = class Resource {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
 
-class Resource {
-	constructor(opt) {
-		this.__resourceType = 'Resource';
-		Object.assign(this, opt);
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'Resource',
+			enumerable: true,
+			writable: false,
+		});
 	}
 
-	// This is a Resource resource
-	static get __resourceType() {
+	static get resourceType() {
 		return 'Resource';
-	}
-
-	// Type of this resource.
-	get resourceType() {
-		return this.__resourceType;
-	}
-
-	set resourceType(new_value) {
-		this.__Resource = new_value;
-	}
-
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	get id() {
-		return this.__id;
-	}
-
-	set id(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = IdScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field id`);
-		}
-		this.__id = new_value;
-	}
-
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content may not always be associated with version changes to the resource.
-	get meta() {
-		return this.__meta;
-	}
-
-	set meta(new_value) {
-		const Meta = require('./Meta');
-		this.__meta = new Meta(new_value);
-	}
-
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content.
-	get implicitRules() {
-		return this.__implicitRules;
-	}
-
-	set implicitRules(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = UriScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field implicitRules`);
-		}
-		this.__implicitRules = new_value;
-	}
-
-	// The base language in which the resource is written.
-	get language() {
-		return this.__language;
-	}
-
-	set language(new_value) {
-		// Throw if new value does not match the pattern
-		let pattern = CodeScalar.regex();
-		if (new_value && !pattern.test(new_value)) {
-			throw new Error(`Invalid format for ${new_value} on field language`);
-		}
-		this.__language = new_value;
 	}
 
 	toJSON() {
 		return {
-			resourceType: this.__resourceType,
-			id: this.__id,
-			meta: this.__meta && this.__meta.toJSON(),
-			implicitRules: this.__implicitRules,
-			language: this.__language,
+			resourceType: this.resourceType,
+			_id: this._id && this._id.toJSON(),
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
 		};
 	}
-}
-
-module.exports = Resource;
+};

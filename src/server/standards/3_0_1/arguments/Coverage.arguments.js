@@ -1,86 +1,105 @@
+/**
+ * @name exports
+ * @static
+ * @summary Arguments for the coverage query
+ */
 module.exports = {
-	BENEFICIARY: {
-		name: 'beneficiary',
+	beneficiary: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Coverage.beneficiary',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-beneficiary',
-		documentation: 'Covered party.',
+		description: 'Covered party',
 	},
-	CLASS: {
-		name: 'class',
+	class: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.class',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-class',
-		documentation: 'Class identifier.',
+		description: 'Class identifier',
 	},
-	DEPENDENT: {
-		name: 'dependent',
+	dependent: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.dependent',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-dependent',
-		documentation: 'Dependent number.',
+		description: 'Dependent number',
 	},
-	GROUP: {
-		name: 'group',
+	group: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.group',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-group',
-		documentation: 'Group identifier.',
+		description: 'Group identifier',
 	},
-	IDENTIFIER: {
-		name: 'identifier',
+	identifier: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.identifier',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-identifier',
-		documentation: 'The primary identifier of the insured and the coverage.',
+		description: 'The primary identifier of the insured and the coverage',
 	},
-	PAYOR: {
-		name: 'payor',
+	payor: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Coverage.payor',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-payor',
-		documentation: 'The identity of the insurer or party paying for services.',
+		description: 'The identity of the insurer or party paying for services',
 	},
-	PLAN: {
-		name: 'plan',
+	plan: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.plan',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-plan',
-		documentation: 'A plan or policy identifier.',
+		description: 'A plan or policy identifier',
 	},
-	POLICY_HOLDER: {
-		name: 'policy-holder',
+	'policy-holder': {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Coverage.policyHolder',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-policy-holder',
-		documentation: 'Reference to the policyholder.',
+		description: 'Reference to the policyholder',
 	},
-	SEQUENCE: {
-		name: 'sequence',
+	sequence: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.sequence',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-sequence',
-		documentation: 'Sequence number.',
+		description: 'Sequence number',
 	},
-	SUBCLASS: {
-		name: 'subclass',
+	subclass: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.subClass',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subclass',
-		documentation: 'Sub-class identifier.',
+		description: 'Sub-class identifier',
 	},
-	SUBGROUP: {
-		name: 'subgroup',
+	subgroup: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.subGroup',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subgroup',
-		documentation: 'Sub-group identifier.',
+		description: 'Sub-group identifier',
 	},
-	SUBPLAN: {
-		name: 'subplan',
+	subplan: {
 		type: 'string',
+		fhirtype: 'string',
+		xpath: 'Coverage.grouping.subPlan',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subplan',
-		documentation: 'Sub-plan identifier.',
+		description: 'Sub-plan identifier',
 	},
-	SUBSCRIBER: {
-		name: 'subscriber',
+	subscriber: {
 		type: 'reference',
+		fhirtype: 'reference',
+		xpath: 'Coverage.subscriber',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-subscriber',
-		documentation: 'Reference to the subscriber.',
+		description: 'Reference to the subscriber',
 	},
-	TYPE: {
-		name: 'type',
+	type: {
 		type: 'token',
+		fhirtype: 'token',
+		xpath: 'Coverage.type',
 		definition: 'http://hl7.org/fhir/SearchParameter/Coverage-type',
-		documentation: 'The kind of coverage (health plan, auto, Workers Compensation).',
+		description: 'The kind of coverage (health plan, auto, Workers Compensation)',
 	},
 };
