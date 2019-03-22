@@ -42,6 +42,7 @@ module.exports = class Extension {
 					return;
 				}
 
+				// eslint-disable-next-line no-shadow
 				let Extension = require('./extension.js');
 				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
 			},
