@@ -13,15 +13,16 @@ let common_args_array = Object.getOwnPropertyNames(common_args).map(arg_name => 
  * @return {function} valid express middleware
  */
 let getSearchParamaters = (profileKey, version, customArgsModule, logger) => {
+	let lowercaseProfile = profileKey.toLowerCase();
 	let fileIndex;
 	let files;
-	if (profileKey && typeof profileKey === 'string') {
+	if (lowercaseProfile && typeof lowercaseProfile === 'string') {
 		files = fs.readdirSync(path.resolve(__dirname + `/../standards/${version}/arguments/`)).map(filename => {
 			return filename;
 		});
 
 		const filesLowerCase = files.map(elm => elm.split('.')[0].toLowerCase());
-		fileIndex = filesLowerCase.indexOf(profileKey);
+		fileIndex = filesLowerCase.indexOf(lowercaseProfile);
 	}
 
 	let resource_specific_args = null;
@@ -33,7 +34,7 @@ let getSearchParamaters = (profileKey, version, customArgsModule, logger) => {
 	}
 	if (!resource_specific_args) {
 		resource_specific_args = require(`../standards/${version}/arguments/${
-			files[fileIndex] ? files[fileIndex] : profileKey + '.arguments'
+			files[fileIndex] ? files[fileIndex] : lowercaseProfile + '.arguments'
 		}`);
 	}
 	// Set paramaters
