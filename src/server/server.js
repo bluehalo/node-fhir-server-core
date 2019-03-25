@@ -1,5 +1,5 @@
+const { resolveSchema } = require('./utils/resolve.utils.js');
 const deprecate = require('./utils/deprecation.notice.js');
-const errorUtils = require('./utils/error.utils.js');
 const invariant = require('./utils/invariant.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -25,7 +25,7 @@ function mergeDefaults(providedConfig) {
 		profiles: {},
 		server: {},
 		logging: {
-			level: 'error',
+			level: 'debug',
 		},
 	};
 
@@ -229,19 +229,27 @@ class Server {
 		this.app.use((err, req, res, next) => {
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1];
+			// Get an operation outcome for this instance
+			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			// If there is an error and it is an OperationOutcome
+			if (err && err.resourceType === OperationOutcome.resourceType) {
+				let status = err.statusCode || 500;
+				res.status(status).json(err);
+			} else if (err) {
+				let error = new OperationOutcome({
+					statusCode: 500,
+					issue: [{
+						severity: 'error',
+						code: 'internal',
+						details: {
+							text: `Unexpected: ${err.message}`
+						}
+					}]
+				});
 
-			// If there is an error and it is our error type
-			if (err && errorUtils.isServerError(err, base)) {
-				res.status(err.statusCode).json(err);
-			}
-			// If there is still an error, throw a 500 and pass the message through
-			else if (err) {
-				let error = errorUtils.internal(err.message, base);
-				logger.error(error.statusCode, err);
+				logger.error(error);
 				res.status(error.statusCode).json(error);
-			}
-			// No error
-			else {
+			} else {
 				next();
 			}
 		});
@@ -249,8 +257,21 @@ class Server {
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
 			// get base from URL instead of params since it might not be forwarded
-			let error = errorUtils.notFound();
-			logger.error(error.statusCode, req.path);
+			let base = req.url.split('/')[1];
+			// Get an operation outcome for this instance
+			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			let error = new OperationOutcome({
+				statusCode: 404,
+				issue: [{
+					severity: 'error',
+					code: 'not-found',
+					details: {
+						text: `Invalid url: ${req.path}`
+					}
+				}]
+			});
+
+			logger.error(error);
 			res.status(error.statusCode).json(error);
 		});
 

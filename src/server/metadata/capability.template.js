@@ -12,7 +12,7 @@ module.exports = {
 
 		// Return our conformance statement
 		return {
-			type: Resource.__resourceType,
+			type: Resource.resourceType,
 			profile: {
 				reference: `http://hl7.org/fhir/${key}.html`,
 			},

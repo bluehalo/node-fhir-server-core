@@ -76,7 +76,7 @@ let customMakeResource = args => {
 
 	// Return our conformance statement
 	return {
-		type: Resource.__resourceType,
+		type: Resource.resourceType,
 		profile: {
 			reference: `http://example.org/fhir/${args.key}.html`,
 		},
@@ -191,7 +191,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that every profile gets a custom resource entry ', async () => {
 		//Add a custom make resource to the test services
-		let mock_service = require('../profiles/service.mock.js');
+		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
@@ -215,7 +215,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that every profile gets a custom resource entry from config', async () => {
 		//Add a custom make resource to the test services
-		let mock_service = require('../profiles/service.mock.js');
+		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
