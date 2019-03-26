@@ -33,8 +33,7 @@ module.exports.searchByVersionId = function searchByVersionId({ profile, logger,
 				),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -57,8 +56,7 @@ module.exports.search = function search({ profile, logger, config, app }) {
 				}),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -79,8 +77,7 @@ module.exports.searchById = function searchById({ profile, logger, app }) {
 				responseUtils.handleSingleReadResponse(res, next, base_version, ImmunizationRecommendation, results);
 			})
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -118,8 +115,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 				}),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -157,8 +153,7 @@ module.exports.update = function update({ profile, logger, config }) {
 				}),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -202,8 +197,7 @@ module.exports.history = function history({ profile, logger, config }) {
 				}),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -227,8 +221,7 @@ module.exports.historyById = function historyById({ profile, logger, config }) {
 				}),
 			)
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
