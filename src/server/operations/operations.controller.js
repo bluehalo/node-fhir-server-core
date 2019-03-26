@@ -17,8 +17,7 @@ module.exports.operationsPost = function operationsPost({ profile, logger, funcN
 				responseUtils.handleOperationResponse(res, next, base_version, results);
 			})
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
@@ -35,8 +34,7 @@ module.exports.operationsGet = function operationsGet({ profile, logger, funcNam
 				responseUtils.handleOperationResponse(res, next, base_version, results);
 			})
 			.catch(err => {
-				logger.error(err);
-				next(errors.internal(err.message, base_version));
+				next(errors.internal(err, base_version));
 			});
 	};
 };
