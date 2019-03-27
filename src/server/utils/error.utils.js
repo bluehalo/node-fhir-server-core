@@ -1,6 +1,7 @@
 const { resolveFromVersion } = require('./resolve.utils');
 const { ISSUE, VERSIONS } = require('../../constants');
-
+const Logger = require('../winston');
+const logger = new Logger({level: 'error'});
 // Helper to determine which operation outcome to retrieve
 let getErrorConstructor = base_version => {
 	if (!base_version || !VERSIONS.hasOwnProperty(base_version)) {
@@ -131,18 +132,48 @@ let deleted = (message, base_version) => {
 	});
 };
 
-let internal = (message, base_version) => {
+/**
+ * @function customError
+ * @description Take a custom error from user implementation and return an operation outcome
+ * @param {Error<statusCode, code, severity, message>} err - error or custom error object
+ * @param {String} base_version - dstu2 or stu3
+ * @return {OperationOutcome}
+ */
+let customError = (err, base_version) => {
 	let ErrorConstructor = getErrorConstructor(base_version);
+	return new ErrorConstructor({
+		statusCode: err.statusCode,
+		text: {
+			status: 'generated',
+			div: div_content(err.severity, err.message),
+		},
+		issue: {
+			code: err.code,
+			severity: err.severity,
+			diagnostics: err.message,
+		},
+		isCustom: true
+	});
+};
+
+let internal = (err, base_version) => {
+	if (err.isCustom) {
+		return customError(err, base_version);
+	}
+	logger.error(err);
+
+	let ErrorConstructor = getErrorConstructor(base_version);
+
 	return new ErrorConstructor({
 		statusCode: 500,
 		text: {
 			status: 'generated',
-			div: div_content(ISSUE.SEVERITY.ERROR, message || 'Internal server error'),
+			div: div_content(ISSUE.SEVERITY.ERROR, err.message || 'Internal server error'),
 		},
 		issue: {
 			code: ISSUE.CODE.EXCEPTION,
 			severity: ISSUE.SEVERITY.ERROR,
-			diagnostics: message || '500: Internal server error',
+			diagnostics: err.message || '500: Internal server error',
 		},
 	});
 };
@@ -163,5 +194,6 @@ module.exports = {
 	notFound,
 	deleted,
 	internal,
+	customError,
 	isServerError,
 };
