@@ -333,6 +333,21 @@ module.exports = class Invoice {
 			},
 		});
 
+		Object.defineProperty(this, 'totalPriceComponent', {
+			enumerable: true,
+			get: () => this.__data.totalPriceComponent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let InvoiceLineItemPriceComponent = require('./invoicelineitempricecomponent.js');
+				this.__data.totalPriceComponent = Array.isArray(value)
+					? value.map(v => new InvoiceLineItemPriceComponent(v))
+					: [new InvoiceLineItemPriceComponent(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'totalNet', {
 			enumerable: true,
 			get: () => this.__data.totalNet,
@@ -440,6 +455,7 @@ module.exports = class Invoice {
 			issuer: this.issuer && this.issuer.toJSON(),
 			account: this.account && this.account.toJSON(),
 			lineItem: this.lineItem && this.lineItem.map(v => v.toJSON()),
+			totalPriceComponent: this.totalPriceComponent && this.totalPriceComponent.map(v => v.toJSON()),
 			totalNet: this.totalNet && this.totalNet.toJSON(),
 			totalGross: this.totalGross && this.totalGross.toJSON(),
 			_paymentTerms: this._paymentTerms && this._paymentTerms.toJSON(),

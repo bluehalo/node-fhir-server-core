@@ -263,6 +263,21 @@ module.exports = class OperationDefinitionParameter {
 			},
 		});
 
+		Object.defineProperty(this, 'part', {
+			enumerable: true,
+			get: () => this.__data.part,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let OperationDefinitionParameter = require('./operationdefinitionparameter.js');
+				this.__data.part = Array.isArray(value)
+					? value.map(v => new OperationDefinitionParameter(v))
+					: [new OperationDefinitionParameter(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -300,6 +315,7 @@ module.exports = class OperationDefinitionParameter {
 			searchType: this.searchType,
 			profile: this.profile && this.profile.toJSON(),
 			binding: this.binding && this.binding.toJSON(),
+			part: this.part && this.part.map(v => v.toJSON()),
 		};
 	}
 };

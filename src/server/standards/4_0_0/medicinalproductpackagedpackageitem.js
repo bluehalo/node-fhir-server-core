@@ -157,6 +157,21 @@ module.exports = class MedicinalProductPackagedPackageItem {
 			},
 		});
 
+		Object.defineProperty(this, 'packageItem', {
+			enumerable: true,
+			get: () => this.__data.packageItem,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicinalProductPackagedPackageItem = require('./medicinalproductpackagedpackageitem.js');
+				this.__data.packageItem = Array.isArray(value)
+					? value.map(v => new MedicinalProductPackagedPackageItem(v))
+					: [new MedicinalProductPackagedPackageItem(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'physicalCharacteristics', {
 			enumerable: true,
 			get: () => this.__data.physicalCharacteristics,
@@ -241,6 +256,7 @@ module.exports = class MedicinalProductPackagedPackageItem {
 			alternateMaterial: this.alternateMaterial && this.alternateMaterial.map(v => v.toJSON()),
 			device: this.device && this.device.map(v => v.toJSON()),
 			manufacturedItem: this.manufacturedItem && this.manufacturedItem.map(v => v.toJSON()),
+			packageItem: this.packageItem && this.packageItem.map(v => v.toJSON()),
 			physicalCharacteristics: this.physicalCharacteristics && this.physicalCharacteristics.toJSON(),
 			otherCharacteristics: this.otherCharacteristics && this.otherCharacteristics.map(v => v.toJSON()),
 			shelfLifeStorage: this.shelfLifeStorage && this.shelfLifeStorage.map(v => v.toJSON()),

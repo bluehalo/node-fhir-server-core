@@ -212,6 +212,36 @@ module.exports = class ValueSetExpansionContains {
 			},
 		});
 
+		Object.defineProperty(this, 'designation', {
+			enumerable: true,
+			get: () => this.__data.designation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetComposeIncludeConceptDesignation = require('./valuesetcomposeincludeconceptdesignation.js');
+				this.__data.designation = Array.isArray(value)
+					? value.map(v => new ValueSetComposeIncludeConceptDesignation(v))
+					: [new ValueSetComposeIncludeConceptDesignation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'contains', {
+			enumerable: true,
+			get: () => this.__data.contains,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ValueSetExpansionContains = require('./valuesetexpansioncontains.js');
+				this.__data.contains = Array.isArray(value)
+					? value.map(v => new ValueSetExpansionContains(v))
+					: [new ValueSetExpansionContains(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -245,6 +275,8 @@ module.exports = class ValueSetExpansionContains {
 			code: this.code,
 			_display: this._display && this._display.toJSON(),
 			display: this.display,
+			designation: this.designation && this.designation.map(v => v.toJSON()),
+			contains: this.contains && this.contains.map(v => v.toJSON()),
 		};
 	}
 };

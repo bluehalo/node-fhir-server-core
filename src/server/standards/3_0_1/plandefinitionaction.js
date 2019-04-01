@@ -576,6 +576,21 @@ module.exports = class PlanDefinitionAction {
 			},
 		});
 
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let PlanDefinitionAction = require('./plandefinitionaction.js');
+				this.__data.action = Array.isArray(value)
+					? value.map(v => new PlanDefinitionAction(v))
+					: [new PlanDefinitionAction(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -636,6 +651,7 @@ module.exports = class PlanDefinitionAction {
 			definition: this.definition && this.definition.toJSON(),
 			transform: this.transform && this.transform.toJSON(),
 			dynamicValue: this.dynamicValue && this.dynamicValue.map(v => v.toJSON()),
+			action: this.action && this.action.map(v => v.toJSON()),
 		};
 	}
 };

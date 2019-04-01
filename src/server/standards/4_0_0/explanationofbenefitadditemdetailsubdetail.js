@@ -179,6 +179,21 @@ module.exports = class ExplanationOfBenefitAddItemDetailSubDetail {
 			},
 		});
 
+		Object.defineProperty(this, 'adjudication', {
+			enumerable: true,
+			get: () => this.__data.adjudication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExplanationOfBenefitItemAdjudication = require('./explanationofbenefititemadjudication.js');
+				this.__data.adjudication = Array.isArray(value)
+					? value.map(v => new ExplanationOfBenefitItemAdjudication(v))
+					: [new ExplanationOfBenefitItemAdjudication(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -209,6 +224,7 @@ module.exports = class ExplanationOfBenefitAddItemDetailSubDetail {
 			net: this.net && this.net.toJSON(),
 			_noteNumber: this._noteNumber && this._noteNumber.toJSON(),
 			noteNumber: this.noteNumber,
+			adjudication: this.adjudication && this.adjudication.map(v => v.toJSON()),
 		};
 	}
 };

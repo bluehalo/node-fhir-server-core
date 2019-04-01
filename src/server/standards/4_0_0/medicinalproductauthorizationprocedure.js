@@ -126,6 +126,21 @@ module.exports = class MedicinalProductAuthorizationProcedure {
 			},
 		});
 
+		Object.defineProperty(this, 'application', {
+			enumerable: true,
+			get: () => this.__data.application,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicinalProductAuthorizationProcedure = require('./medicinalproductauthorizationprocedure.js');
+				this.__data.application = Array.isArray(value)
+					? value.map(v => new MedicinalProductAuthorizationProcedure(v))
+					: [new MedicinalProductAuthorizationProcedure(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -152,6 +167,7 @@ module.exports = class MedicinalProductAuthorizationProcedure {
 			datePeriod: this.datePeriod && this.datePeriod.toJSON(),
 			_dateDateTime: this._dateDateTime && this._dateDateTime.toJSON(),
 			dateDateTime: this.dateDateTime,
+			application: this.application && this.application.map(v => v.toJSON()),
 		};
 	}
 };

@@ -210,6 +210,21 @@ module.exports = class ConsentProvision {
 			},
 		});
 
+		Object.defineProperty(this, 'provision', {
+			enumerable: true,
+			get: () => this.__data.provision,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ConsentProvision = require('./consentprovision.js');
+				this.__data.provision = Array.isArray(value)
+					? value.map(v => new ConsentProvision(v))
+					: [new ConsentProvision(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -242,6 +257,7 @@ module.exports = class ConsentProvision {
 			code: this.code && this.code.map(v => v.toJSON()),
 			dataPeriod: this.dataPeriod && this.dataPeriod.toJSON(),
 			data: this.data && this.data.map(v => v.toJSON()),
+			provision: this.provision && this.provision.map(v => v.toJSON()),
 		};
 	}
 };

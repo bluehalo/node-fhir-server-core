@@ -112,6 +112,21 @@ module.exports = class ExampleScenarioProcessStepAlternative {
 			},
 		});
 
+		Object.defineProperty(this, 'step', {
+			enumerable: true,
+			get: () => this.__data.step,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExampleScenarioProcessStep = require('./examplescenarioprocessstep.js');
+				this.__data.step = Array.isArray(value)
+					? value.map(v => new ExampleScenarioProcessStep(v))
+					: [new ExampleScenarioProcessStep(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -137,6 +152,7 @@ module.exports = class ExampleScenarioProcessStepAlternative {
 			title: this.title,
 			_description: this._description && this._description.toJSON(),
 			description: this.description,
+			step: this.step && this.step.map(v => v.toJSON()),
 		};
 	}
 };

@@ -39,17 +39,11 @@ let getSearchParamaters = (profileKey, version, customArgsModule, logger) => {
 	}
 	// Set paramaters
 	let resource_args_array = Object.getOwnPropertyNames(resource_specific_args).map(arg_name =>
-		Object.assign(
-			{ versions: version, name: arg_name },
-			resource_specific_args[arg_name]
-		)
+		Object.assign({ versions: version, name: arg_name }, resource_specific_args[arg_name]),
 	);
 
 	let search_args_array = Object.getOwnPropertyNames(search_args).map(arg_name =>
-		Object.assign(
-			{ versions: version, name: arg_name },
-			search_args[arg_name]
-		),
+		Object.assign({ versions: version, name: arg_name }, search_args[arg_name]),
 	);
 
 	let resource_all_arguments = [route_args.BASE, ...search_args_array, ...common_args_array, ...resource_args_array];

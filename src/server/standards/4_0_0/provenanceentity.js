@@ -100,6 +100,21 @@ module.exports = class ProvenanceEntity {
 			},
 		});
 
+		Object.defineProperty(this, 'agent', {
+			enumerable: true,
+			get: () => this.__data.agent,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ProvenanceAgent = require('./provenanceagent.js');
+				this.__data.agent = Array.isArray(value)
+					? value.map(v => new ProvenanceAgent(v))
+					: [new ProvenanceAgent(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -124,6 +139,7 @@ module.exports = class ProvenanceEntity {
 			_role: this._role && this._role.toJSON(),
 			role: this.role,
 			what: this.what && this.what.toJSON(),
+			agent: this.agent && this.agent.map(v => v.toJSON()),
 		};
 	}
 };

@@ -62,6 +62,21 @@ module.exports = class ExampleScenarioProcessStep {
 			},
 		});
 
+		Object.defineProperty(this, 'process', {
+			enumerable: true,
+			get: () => this.__data.process,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExampleScenarioProcess = require('./examplescenarioprocess.js');
+				this.__data.process = Array.isArray(value)
+					? value.map(v => new ExampleScenarioProcess(v))
+					: [new ExampleScenarioProcess(value)];
+			},
+		});
+
 		Object.defineProperty(this, '_pause', {
 			enumerable: true,
 			get: () => this.__data._pause,
@@ -136,6 +151,7 @@ module.exports = class ExampleScenarioProcessStep {
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			process: this.process && this.process.map(v => v.toJSON()),
 			_pause: this._pause && this._pause.toJSON(),
 			pause: this.pause,
 			operation: this.operation && this.operation.toJSON(),

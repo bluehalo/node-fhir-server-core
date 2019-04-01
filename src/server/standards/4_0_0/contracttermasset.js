@@ -260,6 +260,21 @@ module.exports = class ContractTermAsset {
 			},
 		});
 
+		Object.defineProperty(this, 'answer', {
+			enumerable: true,
+			get: () => this.__data.answer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractTermOfferAnswer = require('./contracttermofferanswer.js');
+				this.__data.answer = Array.isArray(value)
+					? value.map(v => new ContractTermOfferAnswer(v))
+					: [new ContractTermOfferAnswer(value)];
+			},
+		});
+
 		Object.defineProperty(this, '_securityLabelNumber', {
 			enumerable: true,
 			get: () => this.__data._securityLabelNumber,
@@ -336,6 +351,7 @@ module.exports = class ContractTermAsset {
 			text: this.text,
 			_linkId: this._linkId && this._linkId.toJSON(),
 			linkId: this.linkId,
+			answer: this.answer && this.answer.map(v => v.toJSON()),
 			_securityLabelNumber: this._securityLabelNumber && this._securityLabelNumber.toJSON(),
 			securityLabelNumber: this.securityLabelNumber,
 			valuedItem: this.valuedItem && this.valuedItem.map(v => v.toJSON()),

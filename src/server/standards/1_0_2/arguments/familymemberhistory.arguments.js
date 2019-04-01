@@ -52,5 +52,5 @@ module.exports = {
 		xpath: '',
 		definition: 'http://hl7.org/fhir/SearchParameter/familymemberhistory-daf-FamilyMemberHistory-condition',
 		description: "Search for a history of a particular condition within a patient's family.",
-	}
+	},
 };

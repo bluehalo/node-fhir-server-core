@@ -62,6 +62,21 @@ module.exports = class ChargeItemDefinitionPropertyGroup {
 			},
 		});
 
+		Object.defineProperty(this, 'applicability', {
+			enumerable: true,
+			get: () => this.__data.applicability,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ChargeItemDefinitionApplicability = require('./chargeitemdefinitionapplicability.js');
+				this.__data.applicability = Array.isArray(value)
+					? value.map(v => new ChargeItemDefinitionApplicability(v))
+					: [new ChargeItemDefinitionApplicability(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'priceComponent', {
 			enumerable: true,
 			get: () => this.__data.priceComponent,
@@ -98,6 +113,7 @@ module.exports = class ChargeItemDefinitionPropertyGroup {
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			applicability: this.applicability && this.applicability.map(v => v.toJSON()),
 			priceComponent: this.priceComponent && this.priceComponent.map(v => v.toJSON()),
 		};
 	}

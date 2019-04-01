@@ -258,6 +258,21 @@ module.exports = class ExplanationOfBenefitItemDetail {
 			},
 		});
 
+		Object.defineProperty(this, 'adjudication', {
+			enumerable: true,
+			get: () => this.__data.adjudication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExplanationOfBenefitItemAdjudication = require('./explanationofbenefititemadjudication.js');
+				this.__data.adjudication = Array.isArray(value)
+					? value.map(v => new ExplanationOfBenefitItemAdjudication(v))
+					: [new ExplanationOfBenefitItemAdjudication(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'subDetail', {
 			enumerable: true,
 			get: () => this.__data.subDetail,
@@ -309,6 +324,7 @@ module.exports = class ExplanationOfBenefitItemDetail {
 			udi: this.udi && this.udi.map(v => v.toJSON()),
 			_noteNumber: this._noteNumber && this._noteNumber.toJSON(),
 			noteNumber: this.noteNumber,
+			adjudication: this.adjudication && this.adjudication.map(v => v.toJSON()),
 			subDetail: this.subDetail && this.subDetail.map(v => v.toJSON()),
 		};
 	}

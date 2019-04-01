@@ -22,26 +22,8 @@ module.exports.searchByVersionId = function searchByVersionId({ profile, logger,
 
 		return service
 			.searchByVersionId(req.sanitized_args, req.contexts, logger)
-			.then(results => responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results, version_id))
-			.catch(err => {
-				next(errors.internal(err, base_version));
-			});
-	};
-};
-
-module.exports.search = function search({ profile, logger, config, app }) {
-	let {serviceModule: service} = profile;
-
-	return (req, res, next) => {
-		let {base_version} = req.sanitized_args;
-		let Observation = getResourceConstructor(base_version);
-
-		return service
-			.search(req.sanitized_args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleBundleReadResponse(res, base_version, Observation, results, {
-					resourceUrl: config.auth.resourceServer
-				}),
+				responseUtils.handleSingleReadResponse(res, next, base_version, Observation, results, version_id),
 			)
 			.catch(err => {
 				next(errors.internal(err, base_version));
@@ -49,6 +31,25 @@ module.exports.search = function search({ profile, logger, config, app }) {
 	};
 };
 
+module.exports.search = function search({ profile, logger, config, app }) {
+	let { serviceModule: service } = profile;
+
+	return (req, res, next) => {
+		let { base_version } = req.sanitized_args;
+		let Observation = getResourceConstructor(base_version);
+
+		return service
+			.search(req.sanitized_args, req.contexts, logger)
+			.then(results =>
+				responseUtils.handleBundleReadResponse(res, base_version, Observation, results, {
+					resourceUrl: config.auth.resourceServer,
+				}),
+			)
+			.catch(err => {
+				next(errors.internal(err, base_version));
+			});
+	};
+};
 
 module.exports.searchById = function searchById({ profile, logger, app }) {
 	let { serviceModule: service } = profile;

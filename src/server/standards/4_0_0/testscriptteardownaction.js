@@ -62,6 +62,19 @@ module.exports = class TestScriptTeardownAction {
 			},
 		});
 
+		Object.defineProperty(this, 'operation', {
+			enumerable: true,
+			get: () => this.__data.operation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TestScriptSetupActionOperation = require('./testscriptsetupactionoperation.js');
+				this.__data.operation = new TestScriptSetupActionOperation(value);
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -83,6 +96,7 @@ module.exports = class TestScriptTeardownAction {
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			operation: this.operation && this.operation.toJSON(),
 		};
 	}
 };

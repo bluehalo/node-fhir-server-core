@@ -262,6 +262,19 @@ module.exports = class ExampleScenarioProcessStepOperation {
 			},
 		});
 
+		Object.defineProperty(this, 'request', {
+			enumerable: true,
+			get: () => this.__data.request,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExampleScenarioInstanceContainedInstance = require('./examplescenarioinstancecontainedinstance.js');
+				this.__data.request = new ExampleScenarioInstanceContainedInstance(value);
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -299,6 +312,7 @@ module.exports = class ExampleScenarioProcessStepOperation {
 			initiatorActive: this.initiatorActive,
 			_receiverActive: this._receiverActive && this._receiverActive.toJSON(),
 			receiverActive: this.receiverActive,
+			request: this.request && this.request.toJSON(),
 		};
 	}
 };

@@ -16,7 +16,7 @@ module.exports = class Element {
 				if (value === undefined || value === null) {
 					return;
 				}
-				// eslint-disable-next-line no-shadow
+
 				let Element = require('./element.js');
 				this.__data._id = new Element(value);
 			},

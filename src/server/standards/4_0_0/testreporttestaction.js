@@ -62,6 +62,32 @@ module.exports = class TestReportTestAction {
 			},
 		});
 
+		Object.defineProperty(this, 'operation', {
+			enumerable: true,
+			get: () => this.__data.operation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TestReportSetupActionOperation = require('./testreportsetupactionoperation.js');
+				this.__data.operation = new TestReportSetupActionOperation(value);
+			},
+		});
+
+		Object.defineProperty(this, 'assert', {
+			enumerable: true,
+			get: () => this.__data.assert,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let TestReportSetupActionAssert = require('./testreportsetupactionassert.js');
+				this.__data.assert = new TestReportSetupActionAssert(value);
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -83,6 +109,8 @@ module.exports = class TestReportTestAction {
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			operation: this.operation && this.operation.toJSON(),
+			assert: this.assert && this.assert.toJSON(),
 		};
 	}
 };

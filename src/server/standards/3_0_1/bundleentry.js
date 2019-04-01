@@ -62,6 +62,19 @@ module.exports = class BundleEntry {
 			},
 		});
 
+		Object.defineProperty(this, 'link', {
+			enumerable: true,
+			get: () => this.__data.link,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let BundleLink = require('./bundlelink.js');
+				this.__data.link = Array.isArray(value) ? value.map(v => new BundleLink(v)) : [new BundleLink(value)];
+			},
+		});
+
 		Object.defineProperty(this, '_fullUrl', {
 			enumerable: true,
 			get: () => this.__data._fullUrl,
@@ -159,6 +172,7 @@ module.exports = class BundleEntry {
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			link: this.link && this.link.map(v => v.toJSON()),
 			_fullUrl: this._fullUrl && this._fullUrl.toJSON(),
 			fullUrl: this.fullUrl,
 			resource: this.resource,

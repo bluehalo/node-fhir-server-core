@@ -165,6 +165,21 @@ module.exports = class QuestionnaireResponseItem {
 			},
 		});
 
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let QuestionnaireResponseItem = require('./questionnaireresponseitem.js');
+				this.__data.item = Array.isArray(value)
+					? value.map(v => new QuestionnaireResponseItem(v))
+					: [new QuestionnaireResponseItem(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -194,6 +209,7 @@ module.exports = class QuestionnaireResponseItem {
 			text: this.text,
 			subject: this.subject && this.subject.toJSON(),
 			answer: this.answer && this.answer.map(v => v.toJSON()),
+			item: this.item && this.item.map(v => v.toJSON()),
 		};
 	}
 };
