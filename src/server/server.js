@@ -229,6 +229,7 @@ class Server {
 		this.app.use((err, req, res, next) => {
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1];
+<<<<<<< HEAD
 			// Get an operation outcome for this instance
 			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
 			// If there is an error and it is an OperationOutcome
@@ -250,6 +251,24 @@ class Server {
 				logger.error(error);
 				res.status(error.statusCode).json(error);
 			} else {
+=======
+			// If implementer used custom error
+			if (err && err.isCustom) {
+				return res.status(err.statusCode).json(err);
+			}
+			// If there is an error and it is our error type
+			if (err && errorUtils.isServerError(err, base)) {
+				return res.status(err.statusCode).json(err);
+			}
+			// If there is still an error, throw a 500 and pass the message through
+			else if (err) {
+				let error = errorUtils.internal(err.message, base);
+				this.logger.error(error.statusCode, err);
+				return res.status(error.statusCode).json(error);
+			}
+			// No error
+			else {
+>>>>>>> 3a83a43fb01d126ba810c1f4e8c2f77aef997713
 				next();
 			}
 		});

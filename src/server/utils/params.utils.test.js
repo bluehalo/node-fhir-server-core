@@ -2,6 +2,7 @@ const path = require('path');
 const { getSearchParameters } = require(path.resolve('./src/server/utils/params.utils'));
 
 describe('Param Utils Tests', () => {
+<<<<<<< HEAD
 	describe('getSearchParameters', () => {
 		test('should grab the common parameters for all versions', () => {
 			let dstu2Params = getSearchParameters('patient', '1_0_2');
@@ -37,5 +38,27 @@ describe('Param Utils Tests', () => {
 			expect(Array.isArray(stu3Params)).toBeTruthy();
 			expect(stu3Params).toHaveLength(17);
 		});
+=======
+	test('Should get the built in arguments when no custom module provided', () => {
+		let params = getSearchParameters('Patient', '3_0_1');
+		expect(typeof params).toEqual('object');
+		expect(params.length).toEqual(41);
+	});
+	test('Should get the built in arguments when custom module provided but with no matching version', () => {
+		let params = getSearchParameters('Patient', '1_0_2');
+		expect(typeof params).toEqual('object');
+		expect(params.length).toEqual(43);
+	});
+	test('Should get the custom arguments when custom module provided', () => {
+		let params = getSearchParameters(
+			'Patient',
+			'3_0_1',
+			path.resolve('./src/server/utils/params.utils.test.arguments.js'),
+		);
+		expect(typeof params).toEqual('object');
+		expect(params.length).toEqual(27);
+		let bar = params.find(p => p.name === 'bar');
+		expect(typeof bar).toEqual('object');
+>>>>>>> 3a83a43fb01d126ba810c1f4e8c2f77aef997713
 	});
 });

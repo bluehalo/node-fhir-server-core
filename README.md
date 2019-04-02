@@ -83,6 +83,9 @@ We believe in establishing a robust security, especially when it comes to health
 ## Contributing
 Please see [CONTRIBUTING.md](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/CONTRIBUTING.md) for more details regarding contributing issues or code.
 
+## Questions
+If you are experiencing a bug, please feel free to file an [issue](https://github.com/Asymmetrik/node-fhir-server-core/issues). For general questions, please post them to [StackOverflow](https://stackoverflow.com/) with the tag `node-fhir-server-core` or `javascript-fhir`.
+
 ## Attention
 This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 **BUT** not 8.5.
 
