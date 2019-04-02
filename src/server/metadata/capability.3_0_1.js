@@ -20,7 +20,7 @@ module.exports.makeStatement = function(resources) {
 		kind: 'instance',
 		software: {
 			name: 'FHIR Server',
-			version: '0.0.1',
+			version: '1.4.0',
 		},
 		implementation: {
 			description: 'FHIR Test Server (STU3)',
