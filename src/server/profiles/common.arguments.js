@@ -84,7 +84,7 @@ module.exports.common_args = {
 		name: '_filter',
 		type: 'string',
 		definition: 'http://hl7.org/fhir/search_filter.html',
-		documentation: undefined
+		documentation: undefined,
 	},
 	_ID: {
 		name: '_id',

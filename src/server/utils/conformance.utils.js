@@ -1,18 +1,19 @@
 const { getSearchParamaters } = require('./params.utils');
 
-/**
- * @description Reduce function for removing duplicates from the search params array
- * @param {Object} collection - Cumulutaive array for reduce function
- * @param {Object} route_arg - route argument
- * @return {Object} collection
- */
-let conformanceSearchParamsReduce = (collection, route_arg) => {
-	// Use the name to find duplicates, we should not have arguments with the same name
-	if (!collection.find(item => item.name === route_arg.name)) {
-		collection.push(route_arg);
-	}
-	return collection;
-};
+// /**
+//  * @description Reduce function for removing duplicates from the search params array
+//  * @param {Object} collection - Cumulutaive array for reduce function
+//  * @param {Object} route_arg - route argument
+//  * @return {Object} collection
+//  */
+// let conformanceSearchParamsReduce = (collection, route_arg) => {
+// 	console.log(collection);
+// 	// Use the name to find duplicates, we should not have arguments with the same name
+// 	if (!collection.find(item => item.name === route_arg.name)) {
+// 		collection.push(route_arg);
+// 	}
+// 	return collection;
+// };
 
 /**
  * @description Filter function for determining which searchParam fields are needed
@@ -46,32 +47,32 @@ let conformanceSearchParamsMap = version => route_arg => {
 		name: route_arg.name,
 		type: route_arg.type,
 		definition: route_arg.definition,
-		documentation: route_arg.documentation,
+		documentation: route_arg.documentation || route_arg.description,
 	};
 };
 
-/**
- * Function to take the routes and the FHIR version and return an array of search parameters
- * @param {Array<Object>} routes - an array of routes from the profile config files
- * @param {string} version - Which FHIR version was hit
- * @return {Array<Object>} an array of filtered and mapped routes to show in the conformance statement
- */
-let generateSearchParamsForConformance = (routes, version) => {
-	return (
-		routes
-			// Get a flat list of all of our router arguments
-			.reduce((all, route) => all.concat(route.args), [])
-			// Filter parameters that should be excluded from this conformance
-			// statement based on version or if it is a route parameter (e.g. version or id)
-			// route parameters will have a conformance_hide property
-			.filter(conformanceSearchParamsFilter(version))
-			// Remove any duplicates from the array based on their name
-			.reduce(conformanceSearchParamsReduce, [])
-			// Route arguments have additional parameters necessary for generating routes
-			// map over the routes and remove those parameters
-			.map(conformanceSearchParamsMap(version))
-	);
-};
+// /**
+//  * Function to take the routes and the FHIR version and return an array of search parameters
+//  * @param {Array<Object>} routes - an array of routes from the profile config files
+//  * @param {string} version - Which FHIR version was hit
+//  * @return {Array<Object>} an array of filtered and mapped routes to show in the conformance statement
+//  */
+// let generateSearchParamsForConformance = (routes, version) => {
+// 	return (
+// 		routes
+// 			// Get a flat list of all of our router arguments
+// 			.reduce((all, route) => all.concat(route.args), [])
+// 			// Filter parameters that should be excluded from this conformance
+// 			// statement based on version or if it is a route parameter (e.g. version or id)
+// 			// route parameters will have a conformance_hide property
+// 			.filter(conformanceSearchParamsFilter(version))
+// 			// Remove any duplicates from the array based on their name
+// 			.reduce(conformanceSearchParamsReduce, [])
+// 			// Route arguments have additional parameters necessary for generating routes
+// 			// map over the routes and remove those parameters
+// 			.map(conformanceSearchParamsMap(version))
+// 	);
+// };
 
 let getSearchParams = (profileKey, version) => {
 	let params = getSearchParamaters(profileKey, version).filter(conformanceSearchParamsFilter(version));
@@ -89,6 +90,6 @@ let getSearchParams = (profileKey, version) => {
 };
 
 module.exports = {
-	generateSearchParamsForConformance,
+	// generateSearchParamsForConformance,
 	getSearchParams,
 };

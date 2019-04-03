@@ -191,6 +191,7 @@ exports.INTERACTIONS = {
 exports.VERSIONS = {
 	'1_0_2': '1_0_2',
 	'3_0_1': '3_0_1',
+	'4_0_0': '4_0_0',
 };
 
 /**
