@@ -84,10 +84,10 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		let resource_body = req.body;
 		let Substance = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (Substance.__resourceType !== resource_body.resourceType) {
+		if (Substance.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Substance.__resourceType}', received '${
+					`'resourceType' expected to have value of '${Substance.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -101,7 +101,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, Substance.__resourceType, results, {
+				responseUtils.handleCreateResponse(res, base_version, Substance.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -122,10 +122,10 @@ module.exports.update = function update({ profile, logger, config }) {
 		let resource_body = req.body;
 		let Substance = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (Substance.__resourceType !== resource_body.resourceType) {
+		if (Substance.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Substance.__resourceType}', received '${
+					`'resourceType' expected to have value of '${Substance.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -139,7 +139,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, Substance.__resourceType, results, {
+				responseUtils.handleUpdateResponse(res, base_version, Substance.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)

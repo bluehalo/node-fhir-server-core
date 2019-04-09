@@ -81,10 +81,10 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		// Get a version specific observation
 		let Observation = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (Observation.__resourceType !== resource_body.resourceType) {
+		if (Observation.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Observation.__resourceType}', received '${
+					`'resourceType' expected to have value of '${Observation.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -98,7 +98,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, Observation.__resourceType, results, {
+				responseUtils.handleCreateResponse(res, base_version, Observation.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -121,10 +121,10 @@ module.exports.update = function update({ profile, logger, config }) {
 		// Get a version specific observation
 		let Observation = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (Observation.__resourceType !== resource_body.resourceType) {
+		if (Observation.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Observation.__resourceType}', received '${
+					`'resourceType' expected to have value of '${Observation.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -138,7 +138,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, Observation.__resourceType, results, {
+				responseUtils.handleUpdateResponse(res, base_version, Observation.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
