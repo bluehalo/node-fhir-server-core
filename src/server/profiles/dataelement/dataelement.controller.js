@@ -86,10 +86,10 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		let resource_body = req.body;
 		let DataElement = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (DataElement.__resourceType !== resource_body.resourceType) {
+		if (DataElement.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${DataElement.__resourceType}', received '${
+					`'resourceType' expected to have value of '${DataElement.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -103,7 +103,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, DataElement.__resourceType, results, {
+				responseUtils.handleCreateResponse(res, base_version, DataElement.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -124,10 +124,10 @@ module.exports.update = function update({ profile, logger, config }) {
 		let resource_body = req.body;
 		let DataElement = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (DataElement.__resourceType !== resource_body.resourceType) {
+		if (DataElement.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${DataElement.__resourceType}', received '${
+					`'resourceType' expected to have value of '${DataElement.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -141,7 +141,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, DataElement.__resourceType, results, {
+				responseUtils.handleUpdateResponse(res, base_version, DataElement.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)

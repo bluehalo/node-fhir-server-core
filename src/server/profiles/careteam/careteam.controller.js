@@ -84,10 +84,10 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		let resource_body = req.body;
 		let CareTeam = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (CareTeam.__resourceType !== resource_body.resourceType) {
+		if (CareTeam.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${CareTeam.__resourceType}', received '${
+					`'resourceType' expected to have value of '${CareTeam.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -101,7 +101,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, CareTeam.__resourceType, results, {
+				responseUtils.handleCreateResponse(res, base_version, CareTeam.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -122,10 +122,10 @@ module.exports.update = function update({ profile, logger, config }) {
 		let resource_body = req.body;
 		let CareTeam = getResourceConstructor(base_version);
 		// Validate the resource type before creating it
-		if (CareTeam.__resourceType !== resource_body.resourceType) {
+		if (CareTeam.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${CareTeam.__resourceType}', received '${
+					`'resourceType' expected to have value of '${CareTeam.resourceType}', received '${
 						resource_body.resourceType
 					}'`,
 					base_version,
@@ -139,7 +139,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, CareTeam.__resourceType, results, {
+				responseUtils.handleUpdateResponse(res, base_version, CareTeam.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
