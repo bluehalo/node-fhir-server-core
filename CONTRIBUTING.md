@@ -3,33 +3,42 @@ Contributing
 
 First off, Contributions are always welcome and we appreciate any help you can offer. Please take a moment to read the entire contributors guide.
 
-General guidelines for contributing to `@asymmetrik/fhir-server-core` are listed below as well as some basic steps to getting the project up and running locally. Towards the bottom of the documentation you will see some descriptions of how various pieces work to help you better understand the architecture.
+## Before you begin
+Below are some general guidelines we try to stick to on all of our FHIR related repositories. When contributing to `@asymmetrik/node-fhir-server-core`, we do ask that you do your best to follow these guidelines.
+
+### Branch Organization
+We do our best to keep `master` in a stable state. We also started cutting release branches, for example, `release/1.4.0`, to make it easier to contribute to specific versions and maintain older versions. When you submit pull requests, please make sure to fork from and submit back to `master`.
+
+### Semantic Versioning
+We try to follow [semantic versioning](https://semver.org/) for this repo as close as we can. If we ever publish breaking changes, there will be something in the release notes. There have been occasionally breaking changes in the past on minor updates, which is something we won't be doing going forwards.
+
+### Conventional Commits
+We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/) which helps keep commit messages clean and useful. It also is helpful because we use the changelog cli generator (`yarn changelog`) to automatically generate changelogs when cutting new releases.
+
+### Style Guide
+In an attempt to never have a debate about style or tabs versus spaces in a PR, we use [prettier](https://prettier.io/), an opinionated code formatter. We ask everyone to run this before submitting a pull request and have some general configurations defined in our package.json.
 
 ## Getting Started
-Getting setup is really easy, just follow the installation steps below. For more instructions for each environment, dev, prod, testing, see their respective sections below.
+Getting setup is really easy, however, this project does require that you have Node.js and preferrably yarn installed. You can install the latest LTS for [Node.js here](https://nodejs.org/en/).
 
 ### Installation
-1. Install the latest LTS for [Node.js](https://nodejs.org/en/).
-2. [Fork](https://help.github.com/articles/fork-a-repo/) this repo to your GitHub account and clone it.
-3. Run `yarn install`.
+1. [Fork](https://help.github.com/articles/fork-a-repo/) this repo to your GitHub account and clone it.
+2. Run `yarn install`.
 
-### Development
-There is a development script setup with Nodemon to watch for changes. Once you start this script, it will watch files in the src directory and restart the server anytime you make a change.
+### Development Workflow
+After cloning and installing all the dependencies, there are several commands we can use for local development.
 
-To start local development, run `yarn nodemon` and open your browser to [localhost:3000](http://localhost:3000).
+* `yarn lint` - Lint's everything in src directory
+* `yarn jest` - Run's jest over all tests in src directory
+* `yarn test` - Run's yarn lint and yarn jest together
+* `yarn nodemon` - Start's a development server with live reload. Available on `localhost:3000` unless you specify your own PORT.
 
-### Production
-You can test production locally. Before you can, you will need to generate a self-signed certificate. You can do this with `openssl` as long as you have it installed on your system. Once complete, make sure you set the `HTTPS_KEY_PATH` and `HTTPS_CERT_PATH` environment variables or you set the path in the config passed into this module (`config.server.ssl`). When you pull up the app in the browser, you will have to allow self-signed certs in order to continue. This is fine for local development but you should get real certs for an actual production deploy. See [Generate self signed certs](#Generate-self-signed-certs)
+### Production Workflow
 
-To test production locally, run `yarn start` and open your browser to [https://localhost:3000](https://localhost:3000).
+* `yarn start` - Runs a production version. No live reload and NODE_ENV is defaulted to `production`.
 
-Before deploying to production, obtain valid certs and change the port in the config to `443`.
-
-### Testing
-We use jest for testing and collect coverage from just about everything in the src directory. You can run tests by simple running `yarn test`. Please try to add more tests if you are introducing new features.
-
-#### Generate self signed certs
-Make sure you have openssl installed and run the following commands.
+#### Optional
+You can test the server in https mode if you provide certs. For local testing, you can easily generate self signed certs. To generate self signed certs, run the following commands:
 
 ```shell
 openssl genrsa -out key.pem 2048
@@ -37,26 +46,31 @@ openssl req -new -sha256 -key key.pem -out client-csr.pem
 openssl x509 -req -in client-csr.pem -signkey key.pem -out cert.pem
 ```
 
-## Filing Issues
-Please file your issues [here](https://github.com/Asymmetrik/node-fhir-server-core/issues) and try to provide as much information in the template as possible/relevant.
+Then populate the `HTTPS_KEY_PATH` and `HTTPS_CERT_PATH` environment variables before starting the server.
 
-## Branching
-While we do not enforce this with an iron fist, we do encourage you use the following branching strategy.
+## Pull Request Checklist
+When submitting a pull request, please make sure you have completed the following otherwise the pull request will not be accepted.
 
-* For features or documentation updates. use `feat/<feature-name>`.
-* For bugs, use `fix/<bug-or-issue-number>`.
+1. Run `yarn prettier`.
+2. `yarn test` passes. This is integrated in our CI so if this fails the PR will be automatically blocked until tests pass.
+3. If documentation needs to be added, include a snippet of what should be added and where.
+4. If new code is being introduced or a bug is being fixed, add relevant test cases.
+5. Pull request base branch is set to `master`. All pull requests should be forked from and merged back to `master`.
 
-### Commit messages
-We want to simplify the process for generating change logs. We are going to start using the conventional commit standard as many tools can use this for automation. We prefer you use these messages when committing but if not, we will try to reformat them when we merge your PR's into this format.
+## Release process
+When cutting a release, the following steps need to be performed.
 
-## Submitting pull requests
-Before submitting a pull request, try to make sure you have done the following.
+1. `package.json` needs to have a version update based on the content being released, remember semver.
+2. Changelogs should be generated with `yarn changelog`.
+3. Create a release branch with the convention `release/x.x.x`.
+4. Create a tag for the version, naming convention is just the version, so x.x.x.
+5. Push the tag to github.
+6. Publish to npm.
+6. Draft a release in the release tab with release notes. You can copy these from the changelog, but feel free to add any additional information if necessary or if it is missing from the changelogs. Follow previous releases if you are unsure on the format.
 
-1. Run `yarn prettier`. This formats code so we won't need any debates on style.
-2. Run all the tests with `yarn test`.
-3. If documentation should be added, please add it to the correct location. If the [Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki) should be updated, make note of that in your PR and try to prepare a snippet we can add once your PR is merged.
-
-Once everything is ready to go, submit a PR to the `master` branch.
 
 ## Resources
 For more information about how things are designed and how they work, please consult our [wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki).
+
+## Issues
+Please file your issues [here](https://github.com/Asymmetrik/node-fhir-server-core/issues) and try to provide as much information in the template as possible/relevant.
