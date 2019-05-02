@@ -87,9 +87,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		if (Claim.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Claim.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Claim.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);
@@ -125,9 +123,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		if (Claim.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Claim.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Claim.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);

@@ -87,9 +87,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		if (Basic.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Basic.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Basic.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);
@@ -125,9 +123,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		if (Basic.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Basic.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Basic.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);
