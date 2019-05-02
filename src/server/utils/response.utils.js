@@ -184,7 +184,7 @@ const handlePreferedResponse = ({
   id,
   resource_version,
   resourceUrl,
-  status,
+  status = 201,
   date,
   prefer,
   operationOutcome,
@@ -202,7 +202,7 @@ const handlePreferedResponse = ({
       if (date) {
         res.set('Last-Modified', date.toISOString());
       }
-      return res.status(201).end();
+      return res.status(status).end();
     case acceptedPreferTypes[1]:
       if (resource_version) {
         res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
@@ -213,7 +213,7 @@ const handlePreferedResponse = ({
         res.set('Last-Modified', date.toISOString());
       }
       res.set('Location', `${base_version}/${type}/${id}`);
-      return res.status(201).json(results);
+      return res.status(status).json(results);
     case acceptedPreferTypes[2]:
       if (resource_version) {
         res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
@@ -224,7 +224,7 @@ const handlePreferedResponse = ({
         res.set('Last-Modified', date.toISOString());
       }
       res.set('Location', `${base_version}/${type}/${id}`);
-      return res.status(201).json(operationOutcome || defaultOperation);
+      return res.status(status).json(operationOutcome || defaultOperation);
     default:
       if (resource_version) {
         res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
@@ -235,7 +235,7 @@ const handlePreferedResponse = ({
         res.set('Last-Modified', date.toISOString());
       }
       res.set('Location', `${base_version}/${type}/${id}`);
-      return res.status(201).end();
+      return res.status(status).end();
   }
 };
 
