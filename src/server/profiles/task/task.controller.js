@@ -99,7 +99,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, Task.resourceType, results, {
+				responseUtils.handleCreateResponse(req, res, base_version, Task.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -135,7 +135,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, Task.resourceType, results, {
+				responseUtils.handleUpdateResponse(req, res, base_version, Task.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
