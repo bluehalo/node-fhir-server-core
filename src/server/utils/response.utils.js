@@ -4,21 +4,21 @@ const errors = require('./error.utils');
 const path = require('path');
 
 const defaultOperation = {
-	resourceType: 'OperationOutcome',
-	id: 'allok',
-	text: {
-		status: 'generated',
-		div: '<div xmlns="http://www.w3.org/1999/xhtml">\n      <p>All OK</p>\n    </div>',
-	},
-	issue: [
-		{
-			severity: 'information',
-			code: 'informational',
-			details: {
-				text: 'All OK',
-			},
-		},
-	],
+  resourceType: 'OperationOutcome',
+  id: 'allok',
+  text: {
+    status: 'generated',
+    div: '<div xmlns="http://www.w3.org/1999/xhtml">\n      <p>All OK</p>\n    </div>',
+  },
+  issue: [
+    {
+      severity: 'information',
+      code: 'informational',
+      details: {
+        text: 'All OK',
+      },
+    },
+  ],
 };
 
 /**
@@ -28,16 +28,16 @@ const defaultOperation = {
  * @param {*} base_version
  */
 let getContentType = base_version => {
-	const DSTU2_TYPE = 'application/json+fhir';
-	const STU3_TYPE = 'application/fhir+json';
+  const DSTU2_TYPE = 'application/json+fhir';
+  const STU3_TYPE = 'application/fhir+json';
 
-	if (base_version === VERSIONS['1_0_2']) {
-		return DSTU2_TYPE;
-	} else if ([VERSIONS['3_0_1'], VERSIONS['4_0_0']].includes(base_version)) {
-		return STU3_TYPE;
-	} else {
-		return 'application/json';
-	}
+  if (base_version === VERSIONS['1_0_2']) {
+    return DSTU2_TYPE;
+  } else if ([VERSIONS['3_0_1'], VERSIONS['4_0_0']].includes(base_version)) {
+    return STU3_TYPE;
+  } else {
+    return 'application/json';
+  }
 };
 
 /**
@@ -51,15 +51,15 @@ let getContentType = base_version => {
  * @param {object} resource_json - resulting json to be passed in to the class
  */
 let handleSingleReadResponse = (res, next, base_version, Resource, resource_json) => {
-	if (resource_json) {
-		res.set('ETag', `W/"${resource_json.meta.versionId}"`);
-		res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
-		res.type(getContentType(base_version));
+  if (resource_json) {
+    res.set('ETag', `W/"${resource_json.meta.versionId}"`);
+    res.set('Last-Modified', `${resource_json.meta.lastUpdated}`);
+    res.type(getContentType(base_version));
 
-		res.status(200).json(new Resource(resource_json));
-	} else {
-		next(errors.notFound(`${Resource.__resourceType} not found.`, base_version));
-	}
+    res.status(200).json(new Resource(resource_json));
+  } else {
+    next(errors.notFound(`${Resource.__resourceType} not found.`, base_version));
+  }
 };
 
 /**
@@ -72,9 +72,9 @@ let handleSingleReadResponse = (res, next, base_version, Resource, resource_json
  * @param {object} resource_json - resulting json to be passed in to the class
  */
 let handleOperationResponse = (res, next, base_version, resource_json) => {
-	//An Operation should always return some sort of out <Parameter>.
-	res.type(getContentType(base_version));
-	res.status(200).json(resource_json);
+  //An Operation should always return some sort of out <Parameter>.
+  res.type(getContentType(base_version));
+  res.status(200).json(resource_json);
 };
 
 /**
@@ -95,44 +95,44 @@ let handleOperationResponse = (res, next, base_version, resource_json) => {
  * the filter function should expect a resource to be passed in and return a boolean
  */
 let handleBundleReadResponse = (res, base_version, Resource, resource_json = [], options) => {
-	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
-	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
-	let { resourceUrl, resourceType = Resource.__resourceType } = options;
+  let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
+  let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
+  let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
-	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
-	let self_link = new BundleLink({ url: full_url, relation: 'self' });
-	let results = new Bundle({ type: 'searchset', link: self_link });
-	let entries = [];
+  let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
+  let self_link = new BundleLink({ url: full_url, relation: 'self' });
+  let results = new Bundle({ type: 'searchset', link: self_link });
+  let entries = [];
 
-	if (resource_json) {
-		for (let resource of resource_json) {
-			let type = resource.resourceType;
+  if (resource_json) {
+    for (let resource of resource_json) {
+      let type = resource.resourceType;
 
-			// Modes:
-			// match - This resource matched the search specification.
-			// include - This resource is returned because it is referred to from another resource in the search set.
-			// outcome - An OperationOutcome that provides additional information about the processing of a search.
-			if (type === resourceType) {
-				entries.push({
-					search: { mode: 'match' },
-					resource,
-					fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
-				});
-			} else {
-				entries.push({
-					search: { mode: 'include' },
-					resource,
-					fullUrl: `${resourceUrl}/${base_version}/${type}/${resource.id}`,
-				});
-			}
-		}
-	}
+      // Modes:
+      // match - This resource matched the search specification.
+      // include - This resource is returned because it is referred to from another resource in the search set.
+      // outcome - An OperationOutcome that provides additional information about the processing of a search.
+      if (type === resourceType) {
+        entries.push({
+          search: { mode: 'match' },
+          resource,
+          fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
+        });
+      } else {
+        entries.push({
+          search: { mode: 'include' },
+          resource,
+          fullUrl: `${resourceUrl}/${base_version}/${type}/${resource.id}`,
+        });
+      }
+    }
+  }
 
-	results.entry = entries;
-	results.total = entries.length;
+  results.entry = entries;
+  results.total = entries.length;
 
-	res.type(getContentType(base_version));
-	res.status(200).json(results);
+  res.type(getContentType(base_version));
+  res.status(200).json(results);
 };
 
 /**
@@ -152,16 +152,16 @@ let handleBundleReadResponse = (res, base_version, Resource, resource_json = [],
  * the filter function should expect a resource to be passed in and return a boolean
  */
 let handleExpandReadResponse = (res, base_version, Resource, resource_json = []) => {
-	let ValueSet = require(resolveFromVersion(base_version, 'ValueSet'));
-	let results = new ValueSet(resource_json);
+  let ValueSet = require(resolveFromVersion(base_version, 'ValueSet'));
+  let results = new ValueSet(resource_json);
 
-	res.type(getContentType(base_version));
-	res.status(200).json(results);
+  res.type(getContentType(base_version));
+  res.status(200).json(results);
 };
 
 /**
  * @description Handle a preferred response type https://www.hl7.org/fhir/http.html#return
- * @function handlePreferedResponse
+ * @function handlePreferredResponse
  * @param {object} params - The parameters for this function
  * @param {Express.response} params.res - Express response object
  * @param {string} params.base_version - Which spec version is this request coming from
@@ -176,67 +176,67 @@ let handleExpandReadResponse = (res, base_version, Resource, resource_json = [])
  * @param {object} params.operationOutcome - If the prefer type is OperationOutcome, this
  * should be included, otherwise a default message is sent.
  */
-const handlePreferedResponse = ({
-	res,
-	base_version,
-	type,
-	results,
-	id,
-	resource_version,
-	resourceUrl,
-	status = 201,
-	date,
-	prefer,
-	operationOutcome,
+const handlePreferredResponse = ({
+  res,
+  base_version,
+  type,
+  results,
+  id,
+  resource_version,
+  resourceUrl,
+  status = 201,
+  date,
+  prefer,
+  operationOutcome,
 }) => {
-	const acceptedPreferTypes = ['return=minimal', 'return=representation', 'return=OperationOutcome'];
+  const acceptedPreferTypes = ['return=minimal', 'return=representation', 'return=OperationOutcome'];
 
-	switch (prefer) {
-		case acceptedPreferTypes[0]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
+  switch (prefer) {
+    case acceptedPreferTypes[0]:
+      if (resource_version) {
+        res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+        res.set('ETag', `W/"${resource_version}"`);
+      }
 
-			res.set('Location', `${base_version}/${type}/${id}`);
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			return res.status(status).end();
-		case acceptedPreferTypes[1]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
+      res.set('Location', `${base_version}/${type}/${id}`);
+      if (date) {
+        res.set('Last-Modified', date.toISOString());
+      }
+      return res.status(status).end();
+    case acceptedPreferTypes[1]:
+      if (resource_version) {
+        res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+        res.set('ETag', `W/"${resource_version}"`);
+      }
 
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
-			return res.status(status).json(results);
-		case acceptedPreferTypes[2]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
+      if (date) {
+        res.set('Last-Modified', date.toISOString());
+      }
+      res.set('Location', `${base_version}/${type}/${id}`);
+      return res.status(status).json(results);
+    case acceptedPreferTypes[2]:
+      if (resource_version) {
+        res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+        res.set('ETag', `W/"${resource_version}"`);
+      }
 
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
-			return res.status(status).json(operationOutcome || defaultOperation);
-		default:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
+      if (date) {
+        res.set('Last-Modified', date.toISOString());
+      }
+      res.set('Location', `${base_version}/${type}/${id}`);
+      return res.status(status).json(operationOutcome || defaultOperation);
+    default:
+      if (resource_version) {
+        res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+        res.set('ETag', `W/"${resource_version}"`);
+      }
 
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
-			return res.status(status).end();
-	}
+      if (date) {
+        res.set('Last-Modified', date.toISOString());
+      }
+      res.set('Location', `${base_version}/${type}/${id}`);
+      return res.status(status).end();
+  }
 };
 
 /**
@@ -251,30 +251,30 @@ const handlePreferedResponse = ({
  * @param {string} results.resource_version - Version number of the updated resource
  */
 let handleCreateResponse = (req, res, base_version, type, results, options) => {
-	let { id, resource_version } = results;
-	let { resourceUrl } = options;
+  let { id, resource_version } = results;
+  let { resourceUrl } = options;
 
-	if (req.headers.prefer) {
-		return handlePreferedResponse({
-			res,
-			base_version,
-			type,
-			results,
-			id,
-			resource_version,
-			resourceUrl,
-			status: 201,
-			prefer: req.headers.prefer,
-		});
-	}
+  if (req.headers.prefer) {
+    return handlePreferredResponse({
+      res,
+      base_version,
+      type,
+      results,
+      id,
+      resource_version,
+      resourceUrl,
+      status: 201,
+      prefer: req.headers.prefer,
+    });
+  }
 
-	if (resource_version) {
-		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-		res.set('ETag', `W/"${resource_version}"`);
-	}
+  if (resource_version) {
+    res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+    res.set('ETag', `W/"${resource_version}"`);
+  }
 
-	res.set('Location', `${base_version}/${type}/${id}`);
-	res.status(201).end();
+  res.set('Location', `${base_version}/${type}/${id}`);
+  res.status(201).end();
 };
 
 /**
@@ -290,36 +290,36 @@ let handleCreateResponse = (req, res, base_version, type, results, options) => {
  * @param {string} results.resource_version - Version number of the updated resource
  */
 let handleUpdateResponse = (req, res, base_version, type, results, options) => {
-	let { id, created = false, resource_version } = results;
-	let { resourceUrl } = options;
+  let { id, created = false, resource_version } = results;
+  let { resourceUrl } = options;
 
-	let status = created ? 201 : 200;
-	let date = new Date();
+  let status = created ? 201 : 200;
+  let date = new Date();
 
-	if (req.headers.prefer) {
-		return handlePreferedResponse({
-			res,
-			base_version,
-			type,
-			results,
-			id,
-			resource_version,
-			resourceUrl,
-			status,
-			date,
-			prefer: req.headers.prefer,
-		});
-	}
+  if (req.headers.prefer) {
+    return handlePreferredResponse({
+      res,
+      base_version,
+      type,
+      results,
+      id,
+      resource_version,
+      resourceUrl,
+      status,
+      date,
+      prefer: req.headers.prefer,
+    });
+  }
 
-	if (resource_version) {
-		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-		res.set('ETag', `${resource_version}`);
-	}
+  if (resource_version) {
+    res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+    res.set('ETag', `${resource_version}`);
+  }
 
-	res.type(getContentType(base_version));
-	res.set('Location', `${path.join(resourceUrl, base_version, type, id)}`);
-	res.set('Last-Modified', date.toISOString());
-	res.status(status).end();
+  res.type(getContentType(base_version));
+  res.set('Location', `${path.join(resourceUrl, base_version, type, id)}`);
+  res.set('Last-Modified', date.toISOString());
+  res.status(status).end();
 };
 
 /**
@@ -329,11 +329,11 @@ let handleUpdateResponse = (req, res, base_version, type, results, options) => {
  * @param {Express.response} res - Express response object
  */
 let handleDeleteResponse = (res, results) => {
-	if (results && results.deleted) {
-		res.set('ETag', `${results.deleted}`);
-	}
+  if (results && results.deleted) {
+    res.set('ETag', `${results.deleted}`);
+  }
 
-	res.status(204).end();
+  res.status(204).end();
 };
 
 /**
@@ -343,18 +343,18 @@ let handleDeleteResponse = (res, results) => {
  * @param {Express.response} res - Express response object
  */
 let handleDeleteRejection = (res, next, base_version, err) => {
-	// Make sure the error code is valid
-	if (err.code !== 405 && err.code !== 409) {
-		let error = new Error('Invalid response code. Expected service to return an error code of either 405 or 409.');
-		return next(error);
-	}
-	// pass the error through
-	let error =
-		err.code === 405
-			? errors.methodNotAllowed(err.message, base_version)
-			: errors.deleteConflict(err.message, base_version);
+  // Make sure the error code is valid
+  if (err.code !== 405 && err.code !== 409) {
+    let error = new Error('Invalid response code. Expected service to return an error code of either 405 or 409.');
+    return next(error);
+  }
+  // pass the error through
+  let error =
+    err.code === 405
+      ? errors.methodNotAllowed(err.message, base_version)
+      : errors.deleteConflict(err.message, base_version);
 
-	next(error);
+  next(error);
 };
 
 /**
@@ -375,40 +375,40 @@ let handleDeleteRejection = (res, next, base_version, err) => {
  * the filter function should expect a resource to be passed in and return a boolean
  */
 let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = [], options) => {
-	let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
-	let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
-	let BundleEntryRequest = require(resolveFromVersion(base_version, 'BundleEntryRequest'));
+  let Bundle = require(resolveFromVersion(base_version, 'Bundle'));
+  let BundleLink = require(resolveFromVersion(base_version, 'BundleLink'));
+  let BundleEntryRequest = require(resolveFromVersion(base_version, 'BundleEntryRequest'));
 
-	let { resourceUrl, resourceType = Resource.__resourceType } = options;
+  let { resourceUrl, resourceType = Resource.__resourceType } = options;
 
-	let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
-	let self_link = new BundleLink({ url: full_url, relation: 'self' });
-	let results = new Bundle({ link: self_link, type: 'history' });
-	let entries = [];
+  let full_url = res.req.protocol + '://' + res.req.get('host') + res.req.originalUrl;
+  let self_link = new BundleLink({ url: full_url, relation: 'self' });
+  let results = new Bundle({ link: self_link, type: 'history' });
+  let entries = [];
 
-	if (resource_json) {
-		for (let resource of resource_json) {
-			let history_url = `${res.req.protocol}://${res.req.get('host')}/${resource.id}/_history/${
-				resource.meta.versionId
-			}`;
-			let bundle_request = new BundleEntryRequest({
-				url: history_url,
-				method: 'PUT',
-			});
+  if (resource_json) {
+    for (let resource of resource_json) {
+      let history_url = `${res.req.protocol}://${res.req.get('host')}/${resource.id}/_history/${
+        resource.meta.versionId
+      }`;
+      let bundle_request = new BundleEntryRequest({
+        url: history_url,
+        method: 'PUT',
+      });
 
-			entries.push({
-				resource,
-				fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
-				request: bundle_request,
-			});
-		}
-	}
+      entries.push({
+        resource,
+        fullUrl: `${resourceUrl}/${base_version}/${resourceType}/${resource.id}`,
+        request: bundle_request,
+      });
+    }
+  }
 
-	results.entry = entries;
-	results.total = entries.length;
+  results.entry = entries;
+  results.total = entries.length;
 
-	res.type(getContentType(base_version));
-	res.status(200).json(results);
+  res.type(getContentType(base_version));
+  res.status(200).json(results);
 };
 
 /**
@@ -417,13 +417,13 @@ let handleBundleHistoryResponse = (res, base_version, Resource, resource_json = 
  * @summary Various express response utils
  */
 module.exports = {
-	handleSingleReadResponse,
-	handleOperationResponse,
-	handleBundleReadResponse,
-	handleCreateResponse,
-	handleUpdateResponse,
-	handleDeleteResponse,
-	handleDeleteRejection,
-	handleBundleHistoryResponse,
-	handleExpandReadResponse,
+  handleSingleReadResponse,
+  handleOperationResponse,
+  handleBundleReadResponse,
+  handleCreateResponse,
+  handleUpdateResponse,
+  handleDeleteResponse,
+  handleDeleteRejection,
+  handleBundleHistoryResponse,
+  handleExpandReadResponse,
 };
