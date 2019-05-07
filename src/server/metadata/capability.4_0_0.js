@@ -1,11 +1,11 @@
 const moment = require('moment-timezone');
-const { resolveSchema } = require('../utils/resolve.utils');
+const { resolveFromVersion } = require('../utils/resolve.utils');
 
 /**
  * @description Construct a resource with base_version/uscore path
  */
 let getCapabilityStatementResource = () => {
-	return require(resolveSchema('3_0_1', 'CapabilityStatement'));
+	return require(resolveFromVersion('4_0_0', 'CapabilityStatement'));
 };
 
 module.exports.makeStatement = function(resources) {
@@ -23,9 +23,9 @@ module.exports.makeStatement = function(resources) {
 			version: '1.4.0',
 		},
 		implementation: {
-			description: 'FHIR Test Server (STU3)',
+			description: 'FHIR Test Server (R4)',
 		},
-		fhirVersion: '3.0.1',
+		fhirVersion: '4.0.0',
 		acceptUnknown: 'extensions',
 		format: ['application/fhir+json'],
 		rest: [resources],

@@ -4,76 +4,27 @@ Asymmetrik FHIR API Server
 
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
-
 The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.  This server framework currently supports both DSTU2 (1.0.2) and STU3 (3.0.1) simultaneously.  You can decide to support both or just one by editing the configuration.
 
 The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
 
 For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
-
 <img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
-
 ## Prerequisites
-[Node.js](https://nodejs.org/en/) version later than 7.6, **but** not 8.5 (see [Attention](#attention)), and an understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) usage are required.
-
-Familiarity of the FHIR specification and whatever database containing the resources will assist in querying data and returning them in a format conforming to specification.
+[Node.js](https://nodejs.org/en/) version later than 7.6 is required, **but** you should not use 8.5 (see [Attention](#attention)).  A basic understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and a familiarity of the FHIR specification is not required, but will be very helpful.
 
 ## Getting Started
-Install `node-fhir-server-core` as followed:
+Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
 
-```shell
-# For yarn users
-yarn add @asymmetrik/node-fhir-server-core
-
-# For npm users
-npm install --save @asymmetrik/node-fhir-server-core
-```
-
-Once installed, the server can be required in the application.
-
-```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
-const { VERSIONS } = FHIRServer.constants;
-
-/**
-* The server will not run unless you have specified
-* at least one valid profile configuration
-*/
-const config = {
-	profiles: {
-		patient: {
-			service: path.resolve('./profiles/patient/patient.service'),
-			versions: [ VERSIONS['3_0_1'] ]
-		}
-	}
-};
-
-let main = function () {
-	let server = FHIRServer.initialize(config);
-	server.logger.info('FHIR Server successfully validated.');
-	// Start our server
-	server.listen(3000, () =>
-		server.logger.info('FHIR Server listening on localhost:' + 3000)
-	);
-};
-
-main();
-```
-
-## Usage
-For a complete list of all configuration options, supported profiles, their setups, best practices, authentication, etc. please consult our [Wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki). More documentation and examples will be added over time.
-
-## Roadmap
-- Support for more versions
-	- Multiple versions within DSTU2 and STU3
-	- R4
-- Remaining Endpoints (Terminology Operations)
-- Validation Service
-- Enhancing Authentication and adding additional scope checks
-- Better documentation on setup and configurations
-- Implementation guides and demos
+## Frequently Asked Questions
+- [What configurations does `FHIRServer.initialize()` accept?](./docs/ServerConfiguration.md)
+- [How do I configure a "profile"?](./docs/ConfiguringProfiles.md)
+- [Can I add more loggers or customize how the logger works?](./docs/CustomizeLogging.md)
+- [How do I customize the capability statement?](./docs/CustomCapability.md)
+- [How do I add custom operations?](./docs/CustomOperations.md)
+- [How do I enable/disable/customize access control (authentication)?](./docs/AccessControl.md)
 
 ## Philosophy
 Our project vision is to build an easy to use FHIR server that supports all resource profiles defined in the [US Core implementation guide](http://www.hl7.org/fhir/us/core/) and is built with security in mind from the ground up. We decided to use a plugin style architecture so implementors could focus on writing queries and not worry about all the other technical difficulties of securing the server.  As this project matures, we plan to support more resources, custom extensions, versions, write capabilities, etc.  

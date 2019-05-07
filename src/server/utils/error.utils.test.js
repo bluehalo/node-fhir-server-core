@@ -128,7 +128,6 @@ describe('Error Utils Tests', () => {
 		expect(issueWithMessage.diagnostics).toBe('Internal Server Error.');
 		expect(issueWithoutMessage.diagnostics).toBe('500: Internal server error');
 		expect(customIssueWithMessage.diagnostics).toBe('This is custom.');
-
 	});
 
 	test('should correctly determine if an error is an OperationOutcome', () => {

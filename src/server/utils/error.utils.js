@@ -1,6 +1,11 @@
 const { ISSUE, VERSIONS } = require('../../constants');
+<<<<<<< HEAD
 const { resolveSchema } = require('./resolve.utils');
 
+=======
+const Logger = require('../winston');
+const logger = new Logger({ level: 'error' });
+>>>>>>> cb20b031b68d1e99e33b722c48dd19791784570b
 // Helper to determine which operation outcome to retrieve
 let getErrorConstructor = base_version => {
 	if (!base_version || !VERSIONS.hasOwnProperty(base_version)) {
@@ -151,7 +156,7 @@ let customError = (err, base_version) => {
 			severity: err.severity,
 			diagnostics: err.message,
 		},
-		isCustom: true
+		isCustom: true,
 	});
 };
 
