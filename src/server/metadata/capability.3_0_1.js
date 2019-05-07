@@ -5,7 +5,7 @@ const { resolveSchema } = require('../utils/resolve.utils');
  * @description Construct a resource with base_version/uscore path
  */
 let getCapabilityStatementResource = () => {
-	return require(resolveSchema('3_0_1', 'CapabilityStatement'));
+	return require(resolveSchema('3_0_1', 'capabilitystatement'));
 };
 
 module.exports.makeStatement = function(resources) {

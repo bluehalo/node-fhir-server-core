@@ -5,7 +5,7 @@ const { resolveSchema } = require('../utils/resolve.utils');
  * @description Construct a resource with base_version/uscore path
  */
 let getConformanceResource = () => {
-	return require(resolveSchema('1_0_2', 'Conformance'));
+	return require(resolveSchema('1_0_2', 'conformance'));
 };
 
 module.exports.makeStatement = function(resources) {
