@@ -46,13 +46,8 @@ module.exports = {
 			versions: ['3_0_1'],
 		},
 		Patient: {
-<<<<<<< HEAD
 			service: './src/server/service.mock.js',
-			versions: ['1_0_2', '3_0_1'],
-=======
-			service: './src/server/profiles/service.mock.js',
-			versions: [VERSIONS['4_0_0'], VERSIONS['3_0_1'], VERSIONS['1_0_2']],
->>>>>>> cb20b031b68d1e99e33b722c48dd19791784570b
+			versions: ['1_0_2', '3_0_1', '4_0_0'],
 		},
 		Questionnaire: {
 			service: './src/server/service.mock.js',
