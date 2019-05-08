@@ -37,7 +37,8 @@ module.exports.everything = (args, context, logger) => {
     } catch(err) {
       reject(err)
     }
-}
+	});
+};
 ```
 
 Restarting your server and navigating your browser to `/3_0_1/Patient/$everything`, your logger should generate the message above, and your should return an empty array.
