@@ -214,4 +214,4 @@ const fhirConfig = {
 ```
 
 #### `profiles[key]`
-All profiles configurations are defined in the profiles section, [https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#profile-configuration](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#profile-configuration). There are also examples of them in the [Getting Started](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#getting-started) section of the Profiles wiki page.
+Please see [ConfiguringProfiles](./ConfiguringProfiles.md) for instructions on how to setup and configure profiles. There is also an example of creating one in the [Getting Started](./GettingStarted.md) guide.
