@@ -12,11 +12,14 @@ For an example implementation using MongoDB, please refer to our Github reposito
 
 <img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
+## node-fhir-server-core@2.0.0
+Please view the Migration guide for version 2.0.0. We **will absolutely** continue supporting previous versions but **will prioritize** new features going to 2.0.0 unless we receive requests to retrofit them to older versions.
+
 ## Prerequisites
 [Node.js](https://nodejs.org/en/) version later than 7.6 is required, **but** you should not use 8.5 (see [Attention](#attention)).  A basic understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and a familiarity of the FHIR specification is not required, but will be very helpful.
 
 ## Getting Started
-Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
+Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server. 
 
 ## Frequently Asked Questions
 - [What configurations does `FHIRServer.initialize()` accept?](./docs/ServerConfiguration.md)

@@ -238,13 +238,15 @@ class Server {
 			} else if (err) {
 				let error = new OperationOutcome({
 					statusCode: 500,
-					issue: [{
-						severity: 'error',
-						code: 'internal',
-						details: {
-							text: `Unexpected: ${err.message}`
-						}
-					}]
+					issue: [
+						{
+							severity: 'error',
+							code: 'internal',
+							details: {
+								text: `Unexpected: ${err.message}`,
+							},
+						},
+					],
 				});
 
 				logger.error(error);
@@ -262,13 +264,15 @@ class Server {
 			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
 			let error = new OperationOutcome({
 				statusCode: 404,
-				issue: [{
-					severity: 'error',
-					code: 'not-found',
-					details: {
-						text: `Invalid url: ${req.path}`
-					}
-				}]
+				issue: [
+					{
+						severity: 'error',
+						code: 'not-found',
+						details: {
+							text: `Invalid url: ${req.path}`,
+						},
+					},
+				],
 			});
 
 			logger.error(error);
