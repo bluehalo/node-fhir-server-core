@@ -290,6 +290,21 @@ module.exports = class OperationDefinitionParameter {
 			},
 		});
 
+		Object.defineProperty(this, 'part', {
+			enumerable: true,
+			get: () => this.__data.part,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let OperationDefinitionParameter = require('./operationdefinitionparameter.js');
+				this.__data.part = Array.isArray(value)
+					? value.map(v => new OperationDefinitionParameter(v))
+					: [new OperationDefinitionParameter(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -307,7 +322,6 @@ module.exports = class OperationDefinitionParameter {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -329,6 +343,7 @@ module.exports = class OperationDefinitionParameter {
 			searchType: this.searchType,
 			binding: this.binding && this.binding.toJSON(),
 			referencedFrom: this.referencedFrom && this.referencedFrom.map(v => v.toJSON()),
+			part: this.part && this.part.map(v => v.toJSON()),
 		};
 	}
 };

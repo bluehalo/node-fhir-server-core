@@ -267,6 +267,21 @@ module.exports = class ObservationComponent {
 			},
 		});
 
+		Object.defineProperty(this, 'referenceRange', {
+			enumerable: true,
+			get: () => this.__data.referenceRange,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ObservationReferenceRange = require('./observationreferencerange.js');
+				this.__data.referenceRange = Array.isArray(value)
+					? value.map(v => new ObservationReferenceRange(v))
+					: [new ObservationReferenceRange(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -284,7 +299,6 @@ module.exports = class ObservationComponent {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -304,6 +318,7 @@ module.exports = class ObservationComponent {
 			valuePeriod: this.valuePeriod && this.valuePeriod.toJSON(),
 			dataAbsentReason: this.dataAbsentReason && this.dataAbsentReason.toJSON(),
 			interpretation: this.interpretation && this.interpretation.toJSON(),
+			referenceRange: this.referenceRange && this.referenceRange.map(v => v.toJSON()),
 		};
 	}
 };

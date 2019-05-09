@@ -155,6 +155,21 @@ module.exports = class CapabilityStatementRest {
 			},
 		});
 
+		Object.defineProperty(this, 'searchParam', {
+			enumerable: true,
+			get: () => this.__data.searchParam,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CapabilityStatementRestResourceSearchParam = require('./capabilitystatementrestresourcesearchparam.js');
+				this.__data.searchParam = Array.isArray(value)
+					? value.map(v => new CapabilityStatementRestResourceSearchParam(v))
+					: [new CapabilityStatementRestResourceSearchParam(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'operation', {
 			enumerable: true,
 			get: () => this.__data.operation,
@@ -212,7 +227,6 @@ module.exports = class CapabilityStatementRest {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -223,6 +237,7 @@ module.exports = class CapabilityStatementRest {
 			security: this.security && this.security.toJSON(),
 			resource: this.resource && this.resource.map(v => v.toJSON()),
 			interaction: this.interaction && this.interaction.map(v => v.toJSON()),
+			searchParam: this.searchParam && this.searchParam.map(v => v.toJSON()),
 			operation: this.operation && this.operation.map(v => v.toJSON()),
 			_compartment: this._compartment && this._compartment.toJSON(),
 			compartment: this.compartment,

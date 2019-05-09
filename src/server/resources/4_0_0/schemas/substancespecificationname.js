@@ -183,6 +183,21 @@ module.exports = class SubstanceSpecificationName {
 			},
 		});
 
+		Object.defineProperty(this, 'synonym', {
+			enumerable: true,
+			get: () => this.__data.synonym,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SubstanceSpecificationName = require('./substancespecificationname.js');
+				this.__data.synonym = Array.isArray(value)
+					? value.map(v => new SubstanceSpecificationName(v))
+					: [new SubstanceSpecificationName(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'official', {
 			enumerable: true,
 			get: () => this.__data.official,
@@ -228,7 +243,6 @@ module.exports = class SubstanceSpecificationName {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -241,6 +255,7 @@ module.exports = class SubstanceSpecificationName {
 			language: this.language && this.language.map(v => v.toJSON()),
 			domain: this.domain && this.domain.map(v => v.toJSON()),
 			jurisdiction: this.jurisdiction && this.jurisdiction.map(v => v.toJSON()),
+			synonym: this.synonym && this.synonym.map(v => v.toJSON()),
 			official: this.official && this.official.map(v => v.toJSON()),
 			source: this.source && this.source.map(v => v.toJSON()),
 		};

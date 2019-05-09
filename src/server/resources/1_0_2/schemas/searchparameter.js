@@ -533,7 +533,6 @@ module.exports = class SearchParameter {
 	toJSON() {
 		return {
 			resourceType: this.resourceType,
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			meta: this.meta && this.meta.toJSON(),
 			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),

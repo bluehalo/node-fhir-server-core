@@ -114,7 +114,6 @@ module.exports = class Narrative {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_status: this._status && this._status.toJSON(),

@@ -964,6 +964,21 @@ module.exports = class ParametersParameter {
 			},
 		});
 
+		Object.defineProperty(this, 'part', {
+			enumerable: true,
+			get: () => this.__data.part,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ParametersParameter = require('./parametersparameter.js');
+				this.__data.part = Array.isArray(value)
+					? value.map(v => new ParametersParameter(v))
+					: [new ParametersParameter(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -981,7 +996,6 @@ module.exports = class ParametersParameter {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -1056,6 +1070,7 @@ module.exports = class ParametersParameter {
 			valueUsageContext: this.valueUsageContext && this.valueUsageContext.toJSON(),
 			valueDosage: this.valueDosage && this.valueDosage.toJSON(),
 			resource: this.resource,
+			part: this.part && this.part.map(v => v.toJSON()),
 		};
 	}
 };

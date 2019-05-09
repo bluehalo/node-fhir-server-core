@@ -461,6 +461,21 @@ module.exports = class RequestGroupAction {
 			},
 		});
 
+		Object.defineProperty(this, 'action', {
+			enumerable: true,
+			get: () => this.__data.action,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let RequestGroupAction = require('./requestgroupaction.js');
+				this.__data.action = Array.isArray(value)
+					? value.map(v => new RequestGroupAction(v))
+					: [new RequestGroupAction(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -478,7 +493,6 @@ module.exports = class RequestGroupAction {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -513,6 +527,7 @@ module.exports = class RequestGroupAction {
 			_cardinalityBehavior: this._cardinalityBehavior && this._cardinalityBehavior.toJSON(),
 			cardinalityBehavior: this.cardinalityBehavior,
 			resource: this.resource && this.resource.toJSON(),
+			action: this.action && this.action.map(v => v.toJSON()),
 		};
 	}
 };

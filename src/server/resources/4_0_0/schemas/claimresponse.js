@@ -447,6 +447,21 @@ module.exports = class ClaimResponse {
 			},
 		});
 
+		Object.defineProperty(this, 'adjudication', {
+			enumerable: true,
+			get: () => this.__data.adjudication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimResponseItemAdjudication = require('./claimresponseitemadjudication.js');
+				this.__data.adjudication = Array.isArray(value)
+					? value.map(v => new ClaimResponseItemAdjudication(v))
+					: [new ClaimResponseItemAdjudication(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'total', {
 			enumerable: true,
 			get: () => this.__data.total,
@@ -592,7 +607,6 @@ module.exports = class ClaimResponse {
 	toJSON() {
 		return {
 			resourceType: this.resourceType,
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			meta: this.meta && this.meta.toJSON(),
 			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
@@ -626,6 +640,7 @@ module.exports = class ClaimResponse {
 			payeeType: this.payeeType && this.payeeType.toJSON(),
 			item: this.item && this.item.map(v => v.toJSON()),
 			addItem: this.addItem && this.addItem.map(v => v.toJSON()),
+			adjudication: this.adjudication && this.adjudication.map(v => v.toJSON()),
 			total: this.total && this.total.map(v => v.toJSON()),
 			payment: this.payment && this.payment.toJSON(),
 			fundsReserve: this.fundsReserve && this.fundsReserve.toJSON(),

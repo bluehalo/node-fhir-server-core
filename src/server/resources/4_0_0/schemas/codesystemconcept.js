@@ -167,6 +167,21 @@ module.exports = class CodeSystemConcept {
 			},
 		});
 
+		Object.defineProperty(this, 'concept', {
+			enumerable: true,
+			get: () => this.__data.concept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeSystemConcept = require('./codesystemconcept.js');
+				this.__data.concept = Array.isArray(value)
+					? value.map(v => new CodeSystemConcept(v))
+					: [new CodeSystemConcept(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -184,7 +199,6 @@ module.exports = class CodeSystemConcept {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -196,6 +210,7 @@ module.exports = class CodeSystemConcept {
 			definition: this.definition,
 			designation: this.designation && this.designation.map(v => v.toJSON()),
 			property: this.property && this.property.map(v => v.toJSON()),
+			concept: this.concept && this.concept.map(v => v.toJSON()),
 		};
 	}
 };

@@ -705,6 +705,21 @@ module.exports = class ExplanationOfBenefit {
 			},
 		});
 
+		Object.defineProperty(this, 'adjudication', {
+			enumerable: true,
+			get: () => this.__data.adjudication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ExplanationOfBenefitItemAdjudication = require('./explanationofbenefititemadjudication.js');
+				this.__data.adjudication = Array.isArray(value)
+					? value.map(v => new ExplanationOfBenefitItemAdjudication(v))
+					: [new ExplanationOfBenefitItemAdjudication(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'total', {
 			enumerable: true,
 			get: () => this.__data.total,
@@ -820,7 +835,6 @@ module.exports = class ExplanationOfBenefit {
 	toJSON() {
 		return {
 			resourceType: this.resourceType,
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			meta: this.meta && this.meta.toJSON(),
 			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
@@ -873,6 +887,7 @@ module.exports = class ExplanationOfBenefit {
 			accident: this.accident && this.accident.toJSON(),
 			item: this.item && this.item.map(v => v.toJSON()),
 			addItem: this.addItem && this.addItem.map(v => v.toJSON()),
+			adjudication: this.adjudication && this.adjudication.map(v => v.toJSON()),
 			total: this.total && this.total.map(v => v.toJSON()),
 			payment: this.payment && this.payment.toJSON(),
 			formCode: this.formCode && this.formCode.toJSON(),

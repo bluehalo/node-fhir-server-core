@@ -248,6 +248,19 @@ module.exports = class ContractTerm {
 			},
 		});
 
+		Object.defineProperty(this, 'group', {
+			enumerable: true,
+			get: () => this.__data.group,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ContractTerm = require('./contractterm.js');
+				this.__data.group = Array.isArray(value) ? value.map(v => new ContractTerm(v)) : [new ContractTerm(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -265,7 +278,6 @@ module.exports = class ContractTerm {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -283,6 +295,7 @@ module.exports = class ContractTerm {
 			offer: this.offer && this.offer.toJSON(),
 			asset: this.asset && this.asset.map(v => v.toJSON()),
 			action: this.action && this.action.map(v => v.toJSON()),
+			group: this.group && this.group.map(v => v.toJSON()),
 		};
 	}
 };

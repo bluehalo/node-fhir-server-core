@@ -179,6 +179,21 @@ module.exports = class ClaimResponseAddItem {
 			},
 		});
 
+		Object.defineProperty(this, 'adjudication', {
+			enumerable: true,
+			get: () => this.__data.adjudication,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ClaimResponseItemAdjudication = require('./claimresponseitemadjudication.js');
+				this.__data.adjudication = Array.isArray(value)
+					? value.map(v => new ClaimResponseItemAdjudication(v))
+					: [new ClaimResponseItemAdjudication(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'detail', {
 			enumerable: true,
 			get: () => this.__data.detail,
@@ -211,7 +226,6 @@ module.exports = class ClaimResponseAddItem {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -224,6 +238,7 @@ module.exports = class ClaimResponseAddItem {
 			fee: this.fee && this.fee.toJSON(),
 			_noteNumber: this._noteNumber && this._noteNumber.toJSON(),
 			noteNumber: this.noteNumber,
+			adjudication: this.adjudication && this.adjudication.map(v => v.toJSON()),
 			detail: this.detail && this.detail.map(v => v.toJSON()),
 		};
 	}

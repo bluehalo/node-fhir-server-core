@@ -351,6 +351,21 @@ module.exports = class SubstanceSpecification {
 			},
 		});
 
+		Object.defineProperty(this, 'molecularWeight', {
+			enumerable: true,
+			get: () => this.__data.molecularWeight,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SubstanceSpecificationStructureIsotopeMolecularWeight = require('./substancespecificationstructureisotopemolecularweight.js');
+				this.__data.molecularWeight = Array.isArray(value)
+					? value.map(v => new SubstanceSpecificationStructureIsotopeMolecularWeight(v))
+					: [new SubstanceSpecificationStructureIsotopeMolecularWeight(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'relationship', {
 			enumerable: true,
 			get: () => this.__data.relationship,
@@ -436,7 +451,6 @@ module.exports = class SubstanceSpecification {
 	toJSON() {
 		return {
 			resourceType: this.resourceType,
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			meta: this.meta && this.meta.toJSON(),
 			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
@@ -462,6 +476,7 @@ module.exports = class SubstanceSpecification {
 			structure: this.structure && this.structure.toJSON(),
 			code: this.code && this.code.map(v => v.toJSON()),
 			name: this.name && this.name.map(v => v.toJSON()),
+			molecularWeight: this.molecularWeight && this.molecularWeight.map(v => v.toJSON()),
 			relationship: this.relationship && this.relationship.map(v => v.toJSON()),
 			nucleicAcid: this.nucleicAcid && this.nucleicAcid.toJSON(),
 			polymer: this.polymer && this.polymer.toJSON(),

@@ -302,7 +302,6 @@ module.exports = class Address {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_use: this._use && this._use.toJSON(),

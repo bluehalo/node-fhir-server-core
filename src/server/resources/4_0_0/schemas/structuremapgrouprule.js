@@ -117,6 +117,21 @@ module.exports = class StructureMapGroupRule {
 			},
 		});
 
+		Object.defineProperty(this, 'rule', {
+			enumerable: true,
+			get: () => this.__data.rule,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let StructureMapGroupRule = require('./structuremapgrouprule.js');
+				this.__data.rule = Array.isArray(value)
+					? value.map(v => new StructureMapGroupRule(v))
+					: [new StructureMapGroupRule(value)];
+			},
+		});
+
 		Object.defineProperty(this, 'dependent', {
 			enumerable: true,
 			get: () => this.__data.dependent,
@@ -174,7 +189,6 @@ module.exports = class StructureMapGroupRule {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -182,6 +196,7 @@ module.exports = class StructureMapGroupRule {
 			name: this.name,
 			source: this.source && this.source.map(v => v.toJSON()),
 			target: this.target && this.target.map(v => v.toJSON()),
+			rule: this.rule && this.rule.map(v => v.toJSON()),
 			dependent: this.dependent && this.dependent.map(v => v.toJSON()),
 			_documentation: this._documentation && this._documentation.toJSON(),
 			documentation: this.documentation,

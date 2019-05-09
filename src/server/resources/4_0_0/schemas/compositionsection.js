@@ -203,6 +203,21 @@ module.exports = class CompositionSection {
 			},
 		});
 
+		Object.defineProperty(this, 'section', {
+			enumerable: true,
+			get: () => this.__data.section,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CompositionSection = require('./compositionsection.js');
+				this.__data.section = Array.isArray(value)
+					? value.map(v => new CompositionSection(v))
+					: [new CompositionSection(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -220,7 +235,6 @@ module.exports = class CompositionSection {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -235,6 +249,7 @@ module.exports = class CompositionSection {
 			orderedBy: this.orderedBy && this.orderedBy.toJSON(),
 			entry: this.entry && this.entry.map(v => v.toJSON()),
 			emptyReason: this.emptyReason && this.emptyReason.toJSON(),
+			section: this.section && this.section.map(v => v.toJSON()),
 		};
 	}
 };

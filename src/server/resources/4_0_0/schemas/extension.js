@@ -954,7 +954,6 @@ module.exports = class Extension {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_url: this._url && this._url.toJSON(),

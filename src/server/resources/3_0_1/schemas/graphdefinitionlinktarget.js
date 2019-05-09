@@ -127,6 +127,21 @@ module.exports = class GraphDefinitionLinkTarget {
 			},
 		});
 
+		Object.defineProperty(this, 'link', {
+			enumerable: true,
+			get: () => this.__data.link,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let GraphDefinitionLink = require('./graphdefinitionlink.js');
+				this.__data.link = Array.isArray(value)
+					? value.map(v => new GraphDefinitionLink(v))
+					: [new GraphDefinitionLink(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -144,7 +159,6 @@ module.exports = class GraphDefinitionLinkTarget {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -153,6 +167,7 @@ module.exports = class GraphDefinitionLinkTarget {
 			_profile: this._profile && this._profile.toJSON(),
 			profile: this.profile,
 			compartment: this.compartment && this.compartment.map(v => v.toJSON()),
+			link: this.link && this.link.map(v => v.toJSON()),
 		};
 	}
 };

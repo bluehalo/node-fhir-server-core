@@ -203,7 +203,6 @@ module.exports = class Signature {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			type: this.type && this.type.map(v => v.toJSON()),

@@ -75,6 +75,21 @@ module.exports = class MedicinalProductIngredientSubstance {
 			},
 		});
 
+		Object.defineProperty(this, 'strength', {
+			enumerable: true,
+			get: () => this.__data.strength,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let MedicinalProductIngredientSpecifiedSubstanceStrength = require('./medicinalproductingredientspecifiedsubstancestrength.js');
+				this.__data.strength = Array.isArray(value)
+					? value.map(v => new MedicinalProductIngredientSpecifiedSubstanceStrength(v))
+					: [new MedicinalProductIngredientSpecifiedSubstanceStrength(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -92,11 +107,11 @@ module.exports = class MedicinalProductIngredientSubstance {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
 			code: this.code && this.code.toJSON(),
+			strength: this.strength && this.strength.map(v => v.toJSON()),
 		};
 	}
 };

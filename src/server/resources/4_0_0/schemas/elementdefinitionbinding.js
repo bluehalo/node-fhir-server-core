@@ -139,7 +139,6 @@ module.exports = class ElementDefinitionBinding {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_strength: this._strength && this._strength.toJSON(),

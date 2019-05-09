@@ -239,7 +239,6 @@ module.exports = class ParameterDefinition {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_name: this._name && this._name.toJSON(),

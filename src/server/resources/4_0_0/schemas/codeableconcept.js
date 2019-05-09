@@ -102,7 +102,6 @@ module.exports = class CodeableConcept {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			coding: this.coding && this.coding.map(v => v.toJSON()),

@@ -395,6 +395,21 @@ module.exports = class QuestionnaireItem {
 			},
 		});
 
+		Object.defineProperty(this, 'item', {
+			enumerable: true,
+			get: () => this.__data.item,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let QuestionnaireItem = require('./questionnaireitem.js');
+				this.__data.item = Array.isArray(value)
+					? value.map(v => new QuestionnaireItem(v))
+					: [new QuestionnaireItem(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -412,7 +427,6 @@ module.exports = class QuestionnaireItem {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -442,6 +456,7 @@ module.exports = class QuestionnaireItem {
 			answerValueSet: this.answerValueSet,
 			answerOption: this.answerOption && this.answerOption.map(v => v.toJSON()),
 			initial: this.initial && this.initial.map(v => v.toJSON()),
+			item: this.item && this.item.map(v => v.toJSON()),
 		};
 	}
 };

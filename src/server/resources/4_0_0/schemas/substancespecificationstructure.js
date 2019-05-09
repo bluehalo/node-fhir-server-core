@@ -153,6 +153,19 @@ module.exports = class SubstanceSpecificationStructure {
 			},
 		});
 
+		Object.defineProperty(this, 'molecularWeight', {
+			enumerable: true,
+			get: () => this.__data.molecularWeight,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let SubstanceSpecificationStructureIsotopeMolecularWeight = require('./substancespecificationstructureisotopemolecularweight.js');
+				this.__data.molecularWeight = new SubstanceSpecificationStructureIsotopeMolecularWeight(value);
+			},
+		});
+
 		Object.defineProperty(this, 'source', {
 			enumerable: true,
 			get: () => this.__data.source,
@@ -198,7 +211,6 @@ module.exports = class SubstanceSpecificationStructure {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -209,6 +221,7 @@ module.exports = class SubstanceSpecificationStructure {
 			_molecularFormulaByMoiety: this._molecularFormulaByMoiety && this._molecularFormulaByMoiety.toJSON(),
 			molecularFormulaByMoiety: this.molecularFormulaByMoiety,
 			isotope: this.isotope && this.isotope.map(v => v.toJSON()),
+			molecularWeight: this.molecularWeight && this.molecularWeight.toJSON(),
 			source: this.source && this.source.map(v => v.toJSON()),
 			representation: this.representation && this.representation.map(v => v.toJSON()),
 		};

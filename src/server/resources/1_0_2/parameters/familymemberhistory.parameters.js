@@ -53,11 +53,4 @@ module.exports = {
 		definition: 'http://hl7.org/fhir/SearchParameter/familymemberhistory-daf-FamilyMemberHistory-condition',
 		description: "Search for a history of a particular condition within a patient's family.",
 	},
-	relationship: {
-		type: 'token',
-		fhirtype: 'token',
-		xpath: '',
-		definition: 'http://hl7.org/fhir/SearchParameter/familymemberhistory-daf-FamilyMemberHistory-relationship',
-		description: 'Search for family history of members based on relationship',
-	},
 };

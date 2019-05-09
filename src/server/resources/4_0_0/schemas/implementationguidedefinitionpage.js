@@ -150,6 +150,21 @@ module.exports = class ImplementationGuideDefinitionPage {
 			},
 		});
 
+		Object.defineProperty(this, 'page', {
+			enumerable: true,
+			get: () => this.__data.page,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ImplementationGuideDefinitionPage = require('./implementationguidedefinitionpage.js');
+				this.__data.page = Array.isArray(value)
+					? value.map(v => new ImplementationGuideDefinitionPage(v))
+					: [new ImplementationGuideDefinitionPage(value)];
+			},
+		});
+
 		// Merge in any defaults
 		Object.assign(this, opts);
 
@@ -167,7 +182,6 @@ module.exports = class ImplementationGuideDefinitionPage {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
@@ -178,6 +192,7 @@ module.exports = class ImplementationGuideDefinitionPage {
 			title: this.title,
 			_generation: this._generation && this._generation.toJSON(),
 			generation: this.generation,
+			page: this.page && this.page.map(v => v.toJSON()),
 		};
 	}
 };

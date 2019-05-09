@@ -152,7 +152,6 @@ module.exports = class ElementDefinitionSlicing {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			discriminator: this.discriminator && this.discriminator.map(v => v.toJSON()),

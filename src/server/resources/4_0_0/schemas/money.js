@@ -114,7 +114,6 @@ module.exports = class Money {
 
 	toJSON() {
 		return {
-			_id: this._id && this._id.toJSON(),
 			id: this.id,
 			extension: this.extension && this.extension.map(v => v.toJSON()),
 			_value: this._value && this._value.toJSON(),
