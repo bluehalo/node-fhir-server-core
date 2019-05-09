@@ -21,13 +21,14 @@ Here is an example config with all the currently supported options. See descript
 {
 	auth: {
 		type: 'auth-type',
-                strategy: {
-                        name: 'bearer',
-                        useSession: false,
-                        service: 'path/to/authentication.service.js'
-                }
+    strategy: {
+	    name: 'bearer',
+	    useSession: false,
+	    service: 'path/to/authentication.service.js'
+    }
 	},
 	server: {
+		favicon: path.posix.resolve('path to favicon'),
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -42,14 +43,14 @@ Here is an example config with all the currently supported options. See descript
 	logging: {
 		level: 'debug'
 	},
-        events: {
-                auditEvent: service.writeAuditEventRecords,
-                provenance: service.writeProvenanceRecords,
-        },
+  events: {
+		auditEvent: service.writeAuditEventRecords,
+		provenance: service.writeProvenanceRecords,
+  },
 	profiles: {
 		patient: {
 			service: './patient/patient.controller',
-                        versions: [ VERSIONS.STU3 ],
+			versions: [ VERSIONS['3_0_1'] ],
 			corsOptions: {
 				// Have a different max age for all the routes in the patient profile
 				maxAge: 3600
@@ -57,7 +58,7 @@ Here is an example config with all the currently supported options. See descript
 		},
 		observation: {
 			service: require('./observation/observation.controller'),
-                        versions: [ VERSIONS.STU3 ]
+			versions: [ VERSIONS['4_0_0'] ]
 			corsOptions: {
 				// Disable cors on this profile, maybe this is for internal use only
 				origin: false
@@ -108,6 +109,13 @@ Here is an example config with all the currently supported options. See descript
 - **Description:** Port the express app will listen to.
 - **Required:** Yes
 - **Default:** `none`
+
+#### `server.favicon`
+
+- **Type:** `string`
+- **Description:** Path to the favicon you would like to use
+- **Required:** No
+- **Default:** `path.posix.resolve('./src/assets/phoenix.ico')`
 
 #### `server.corsOptions`
 

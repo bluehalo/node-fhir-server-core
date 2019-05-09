@@ -3,6 +3,7 @@ const deprecate = require('./utils/deprecation.notice.js');
 const invariant = require('./utils/invariant.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 const loggers = require('./winston.js');
 const router = require('./router.js');
 const passport = require('passport');
@@ -141,6 +142,8 @@ class Server {
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+		// Set favicon
+		this.app.use(favicon(this.config.server.favicon || path.posix.resolve('./src/assets/phoenix.ico')));
 		// return self for chaining
 		return this;
 	}
@@ -227,15 +230,18 @@ class Server {
 		// Generic catch all error handler
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
+			console.log('here1');
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1];
 			// Get an operation outcome for this instance
 			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
 			// If there is an error and it is an OperationOutcome
 			if (err && err.resourceType === OperationOutcome.resourceType) {
+				console.log('here2');
 				let status = err.statusCode || 500;
 				res.status(status).json(err);
 			} else if (err) {
+				console.log('here3');
 				let error = new OperationOutcome({
 					statusCode: 500,
 					issue: [
