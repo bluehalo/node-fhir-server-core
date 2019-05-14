@@ -1,3 +1,7 @@
+## [1.4.2](https://github.com/Asymmetrik/node-fhir-server-core/compare/1.4.1...1.4.2) (2019-05-14)
+
+
+
 ## [1.4.1](https://github.com/Asymmetrik/node-fhir-server-core/compare/1.4.0...1.4.1) (2019-04-09)
 
 
