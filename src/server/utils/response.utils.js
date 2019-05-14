@@ -3,6 +3,36 @@ const { VERSIONS } = require('../../constants');
 const errors = require('./error.utils');
 const path = require('path');
 
+const defaultOperation = {
+	resourceType: 'OperationOutcome',
+	id: 'allok',
+	text: {
+		status: 'generated',
+		div: '<div xmlns="http://www.w3.org/1999/xhtml">\n      <p>All OK</p>\n    </div>',
+	},
+	issue: [
+		{
+			severity: 'information',
+			code: 'informational',
+			details: {
+				text: 'All OK',
+			},
+		},
+	],
+};
+
+/**
+ * Helper function to generate the OperationOutCome
+ * @param  {object} args
+ * @param  {string} args.id The id of the operation, defaults to `allok`
+ * @param  {object} args.text The `text` you want to provide for an OperationOutcome
+ * @param  {array}  args.issue The array of issues you want to include in your OperationOutcome
+ * @return {[type]}      [description]
+ */
+const generateOperationOutcome = args => {
+	return Object.assign({}, defaultOperation, args);
+};
+
 /**
  * Gets the content type based on the version.  DSUT2 returns 'application/json+fhir' where STU3
  * 'application/fhir+json'.
@@ -15,7 +45,7 @@ let getContentType = base_version => {
 
 	if (base_version === VERSIONS['1_0_2']) {
 		return DSTU2_TYPE;
-	} else if (base_version === VERSIONS['3_0_1']) {
+	} else if ([VERSIONS['3_0_1'], VERSIONS['4_0_0']].includes(base_version)) {
 		return STU3_TYPE;
 	} else {
 		return 'application/json';
@@ -142,6 +172,62 @@ let handleExpandReadResponse = (res, base_version, Resource, resource_json = [])
 };
 
 /**
+ * @description Handle a preferred response type https://www.hl7.org/fhir/http.html#return
+ * @function handlePreferredResponse
+ * @param {object} params - The parameters for this function
+ * @param {Express.response} params.res - Express response object
+ * @param {string} params.base_version - Which spec version is this request coming from
+ * @param {string} params.type - type of resource, e.g. Patient or Observation
+ * @param {object} params.results - Results from the operation
+ * @param {string} params.id - Id of the updated/created resource
+ * @param {string} params.resource_version - Version number of the updated resource
+ * @param {string} params.resourceUrl - The resource url
+ * @param {number} params.status - The status to return
+ * @param {Date} params.date - If included, will add a Last-Modified header
+ * @param {string} params.prefer - The request Prefer: string
+ * @param {object} params.operationOutcome - If the prefer type is OperationOutcome, this
+ * should be included, otherwise a default message is sent.
+ */
+const handlePreferredResponse = ({
+	res,
+	base_version,
+	type,
+	results,
+	id,
+	resource_version,
+	resourceUrl,
+	status = 201,
+	date,
+	prefer,
+	operationOutcome,
+}) => {
+	const acceptedPreferTypes = ['return=minimal', 'return=representation', 'return=OperationOutcome'];
+
+	if (resource_version) {
+		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+		res.set('ETag', `W/"${resource_version}"`);
+	}
+
+	res.set('Location', `${base_version}/${type}/${id}`);
+	if (date) {
+		res.set('Last-Modified', date.toISOString());
+	}
+
+	switch (prefer) {
+		case acceptedPreferTypes[0]:
+			return res.status(status).end();
+		case acceptedPreferTypes[1]:
+			return res.status(status).json(results);
+		case acceptedPreferTypes[2]:
+			return res
+				.status(status)
+				.json(operationOutcome ? generateOperationOutcome(operationOutcome) : generateOperationOutcome());
+		default:
+			return res.status(status).end();
+	}
+};
+
+/**
  * @description When resources are passed to the create[resource] controller functions
  * they all need to respond in a similar manner with similar headers
  * @function handleCreateResponse
@@ -152,9 +238,23 @@ let handleExpandReadResponse = (res, base_version, Resource, resource_json = [])
  * @param {string} results.id - Id of the updated/created resource
  * @param {string} results.resource_version - Version number of the updated resource
  */
-let handleCreateResponse = (res, base_version, type, results, options) => {
+let handleCreateResponse = (req, res, base_version, type, results, options) => {
 	let { id, resource_version } = results;
 	let { resourceUrl } = options;
+
+	if (req.headers.prefer) {
+		return handlePreferredResponse({
+			res,
+			base_version,
+			type,
+			results,
+			id,
+			resource_version,
+			resourceUrl,
+			status: 201,
+			prefer: req.headers.prefer,
+		});
+	}
 
 	if (resource_version) {
 		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
@@ -177,12 +277,27 @@ let handleCreateResponse = (res, base_version, type, results, options) => {
  * @param {boolean} results.created - Did the update result in a new resource being created
  * @param {string} results.resource_version - Version number of the updated resource
  */
-let handleUpdateResponse = (res, base_version, type, results, options) => {
+let handleUpdateResponse = (req, res, base_version, type, results, options) => {
 	let { id, created = false, resource_version } = results;
 	let { resourceUrl } = options;
 
 	let status = created ? 201 : 200;
 	let date = new Date();
+
+	if (req.headers.prefer) {
+		return handlePreferredResponse({
+			res,
+			base_version,
+			type,
+			results,
+			id,
+			resource_version,
+			resourceUrl,
+			status,
+			date,
+			prefer: req.headers.prefer,
+		});
+	}
 
 	if (resource_version) {
 		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);

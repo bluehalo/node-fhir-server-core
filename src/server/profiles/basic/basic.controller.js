@@ -87,9 +87,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		if (Basic.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Basic.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Basic.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);
@@ -101,7 +99,7 @@ module.exports.create = function create({ profile, logger, app, config }) {
 		return service
 			.create(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleCreateResponse(res, base_version, Basic.resourceType, results, {
+				responseUtils.handleCreateResponse(req, res, base_version, Basic.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
@@ -125,9 +123,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		if (Basic.resourceType !== resource_body.resourceType) {
 			return next(
 				errors.invalidParameter(
-					`'resourceType' expected to have value of '${Basic.resourceType}', received '${
-						resource_body.resourceType
-					}'`,
+					`'resourceType' expected to have value of '${Basic.resourceType}', received '${resource_body.resourceType}'`,
 					base_version,
 				),
 			);
@@ -139,7 +135,7 @@ module.exports.update = function update({ profile, logger, config }) {
 		return service
 			.update(args, req.contexts, logger)
 			.then(results =>
-				responseUtils.handleUpdateResponse(res, base_version, Basic.resourceType, results, {
+				responseUtils.handleUpdateResponse(req, res, base_version, Basic.resourceType, results, {
 					resourceUrl: config.auth.resourceServer,
 				}),
 			)
