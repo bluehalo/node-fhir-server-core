@@ -3,24 +3,24 @@ This guide represents all the known changes that will need your attention when m
 
 We think this will simplify things a lot for developers on both sides, contributors and users alike. We also plan to maintain the older versions and even do bug fixes. However, newer features are going to be prioritized on version 2.0.0 and only retrofit to older branches when requested.
 
-* [Breaking changes]
-	* [Return types]
-		* [Custom errors]
-	* [Logging]
-		* [Old way]
-		* [New way]
-* [New features]
-	* [New methods]
-		* [resolveSchema]
-	* [Logging container]
-	* [Tools migration]
-	* [Favicon]
-* [Bugs]
-	* [Missing profiles]
-	* [Bundle return types]
-	* [All files lowercased]
-* [Missing]
-	* [Sanitize params]
+* [Breaking changes](#breaking-changes)
+	* [Return types](#return-types)
+		* [Custom errors](#custom-errors)
+	* [Logging](#logging)
+		* [Old way](#old-way)
+		* [New way](#new-way)
+* [New features](#new-features)
+	* [New methods](#new-methods)
+		* [resolveSchema](#resolveSchema)
+	* [Logging container](#logging-container)
+	* [Tools migration](#tools-migration)
+	* [Favicon](#favicon)
+* [Bugs](#bugs)
+	* [Missing profiles](#missing-profiles)
+	* [Bundle return types](#bundle-return-types)
+	* [All files lowercased](#all-files-lowercased)
+* [Missing](#missing)
+	* [Sanitize params](#sanitize-params)
 
 ## Breaking changes
 
