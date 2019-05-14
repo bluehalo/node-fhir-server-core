@@ -22,6 +22,18 @@ const defaultOperation = {
 };
 
 /**
+ * Helper function to generate the OperationOutCome
+ * @param  {object} args
+ * @param  {string} args.id The id of the operation, defaults to `allok`
+ * @param  {object} args.text The `text` you want to provide for an OperationOutcome
+ * @param  {array}  args.issue The array of issues you want to include in your OperationOutcome
+ * @return {[type]}      [description]
+ */
+const generateOperationOutcome = args => {
+	return Object.assign({}, defaultOperation, args);
+};
+
+/**
  * Gets the content type based on the version.  DSUT2 returns 'application/json+fhir' where STU3
  * 'application/fhir+json'.
  *
@@ -191,50 +203,26 @@ const handlePreferredResponse = ({
 }) => {
 	const acceptedPreferTypes = ['return=minimal', 'return=representation', 'return=OperationOutcome'];
 
+	if (resource_version) {
+		res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
+		res.set('ETag', `W/"${resource_version}"`);
+	}
+
+	res.set('Location', `${base_version}/${type}/${id}`);
+	if (date) {
+		res.set('Last-Modified', date.toISOString());
+	}
+
 	switch (prefer) {
 		case acceptedPreferTypes[0]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
-
-			res.set('Location', `${base_version}/${type}/${id}`);
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
 			return res.status(status).end();
 		case acceptedPreferTypes[1]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
-
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
 			return res.status(status).json(results);
 		case acceptedPreferTypes[2]:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
-
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
-			return res.status(status).json(operationOutcome || defaultOperation);
+			return res
+				.status(status)
+				.json(operationOutcome ? generateOperationOutcome(operationOutcome) : generateOperationOutcome());
 		default:
-			if (resource_version) {
-				res.set('Content-Location', `${path.join(resourceUrl, base_version, type, id, '_history', resource_version)}`);
-				res.set('ETag', `W/"${resource_version}"`);
-			}
-
-			if (date) {
-				res.set('Last-Modified', date.toISOString());
-			}
-			res.set('Location', `${base_version}/${type}/${id}`);
 			return res.status(status).end();
 	}
 };
