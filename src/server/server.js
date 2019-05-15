@@ -1,6 +1,7 @@
 const { resolveSchema } = require('./utils/resolve.utils.js');
 const deprecate = require('./utils/deprecation.notice.js');
 const invariant = require('./utils/invariant.js');
+const { VERSIONS } = require('../constants.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
@@ -143,7 +144,7 @@ class Server {
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
 		// Set favicon
-		this.app.use(favicon(this.config.server.favicon || path.posix.resolve('./src/assets/phoenix.ico')));
+		this.app.use(favicon(this.config.server.favicon || path.posix.join(__dirname, '../assets/phoenix.ico')));
 		// return self for chaining
 		return this;
 	}
@@ -231,7 +232,7 @@ class Server {
 		// Errors should be thrown with next and passed through
 		this.app.use((err, req, res, next) => {
 			// get base from URL instead of params since it might not be forwarded
-			let base = req.url.split('/')[1];
+			let base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 			// Get an operation outcome for this instance
 			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
 			// If there is an error and it is an OperationOutcome
@@ -262,7 +263,7 @@ class Server {
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
 			// get base from URL instead of params since it might not be forwarded
-			let base = req.url.split('/')[1];
+			let base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 			// Get an operation outcome for this instance
 			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
 			let error = new OperationOutcome({
