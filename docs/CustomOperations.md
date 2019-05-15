@@ -4,7 +4,7 @@ We now support custom $operations in node-fhir-server-core.  Let's walk through 
 
 First, we will need to define an operation in our config.
 
-```js
+```javascript
 const config = {
 	profiles: {
 		patient: {
@@ -27,9 +27,9 @@ If we FHIR up our server (GET IT? FHIR UP!?), we should get an error that tells 
 
 In our patient.js file, just like our other routes, we will add a method for everything.
 
-```js
+```javascript
 module.exports.everything = (args, context, logger) => {
-  logger.info(`Running Patient $everything operation`)
+  logger.info('Running Patient $everything operation');
   return new Promise((resolve, reject) => {
     try { 
       // execute whatever custom operation you want.
@@ -37,7 +37,8 @@ module.exports.everything = (args, context, logger) => {
     } catch(err) {
       reject(err)
     }
-}
+	});
+};
 ```
 
 Restarting your server and navigating your browser to `/3_0_1/Patient/$everything`, your logger should generate the message above, and your should return an empty array.
@@ -48,7 +49,7 @@ Now let's say you want to have a custom operation by Id.  Fear not, let's light 
 
 Let's add everything-by-id in patient. Go back to your config.
 
-```js
+```javascript
 const config = {
 	profiles: {
 		patient: {
@@ -74,7 +75,7 @@ If we restart the server we should see an error telling us to make a function ca
 
 Back in our `patient.js`
 
-```js
+```javascript
 module.exports.everythingById = (args, context, logger) => {
   logger.info(`Running Patient /:id/$everything`)
   return new Promise((resolve, reject) => {

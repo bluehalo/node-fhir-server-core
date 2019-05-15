@@ -2,7 +2,7 @@
 
 This FHIR server library is intended to simplify the process of standing up your own FHIR server. We try to abstract a lot of the complicated pieces away so all you need to do is provide some configurations and write queries. In this getting started guide, we will walk you through using this library to get started building your own FHIR server. 
 
-**NOTE**: These instructions are for unix based systems. If you are using Windows, you may need to change some commands out for their Windows equivalent.
+**NOTE**: These instructions are for unix based systems. If you are using Windows, you may need to swap some commands for their Windows equivalent.
 
 ## Creating a server
 
@@ -37,13 +37,14 @@ Simply run `yarn add @asymmetrik/node-fhir-server-core`.
 Let's start by creating an `index.js` file in the root of the project and add the following code to it.
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
 
-let config = { profiles: {}};
-let server = FHIRServer.initialize(config);
+let config = {};
+let server = initialize(config);
+let logger = loggers.get('default');
 
 server.listen(3000, () => {
-	server.logger.info('Starting the FHIR Server at localhost:3000');
+	logger.info('Starting the FHIR Server at localhost:3000');
 });
 ```
 
@@ -81,9 +82,9 @@ Finally, run `yarn start` to start the server.
 
 If you have done everything correctly so far, you will receive the following error.
 
-> Error: No profiles configured. You must configure atleast 1 profile to run this server. Please review the README.md section on Configuring Profiles.
+> Error: No profiles configured. We do not enable any profiles by default so please review the profile wiki for how to enable profiles and capabilities. See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md.
 
-By default, our library does not provide support for any profiles, and without a profile, what is the point to having a server. Next, let's walk you through setting up a simple patient profile. A profile corresponds to a queryable FHIR resource and we support many.
+By default, our library does not configure any profiles, and without a profile, what is the point to having a server. Next, let's walk you through setting up a simple patient profile. A profile corresponds to a queryable FHIR resource and we support all the standard searchable resources.
 
 ### Creating a patient profile
 
@@ -103,42 +104,38 @@ fhir-server
 Add the following code to the patient service.
 
 ```javascript
-module.exports.search = (args, logger) => new Promise((resolve, reject) => {
-	reject(new Error('Unable to locate patients'));
-});
+module.exports.search = async (args, logger) => {
+	throw new Error('Unable to locate patients');
+};
 ```
 
-We are going to add support for the search interaction. Each profile can support many interactions. We have some documentation on profiles and how they work in the [Profile wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile) with more updates coming soon to cover everything. For now, let's start with a simple search.
+We are going to add support for the search interaction. Each profile can support many interactions. We have some documentation on profiles and how they work in the [Profile documentation](./ConfiguringProfiles.md) with more updates coming soon to cover everything. For now, let's start with a simple search.
 
 The next thing we need to do is update our config in `index.js` to tell it we want to support the patient profile.
 
 In `index.js`, add the following to the top of the file:
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
-const path = require('path');
-
-const { VERSIONS } = FHIRServer.constants;
+const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
+const { VERSIONS } = constants;
 ```
 
-and then change `let config = { profiles: {}};` to the following:
+and then change `let config = {};` to the following:
 
 ```javascript
 let config = {
-	server: {},
-	logging: {
-		level: 'debug'
-	},
 	profiles: {
 		patient: {
-			service: path.posix.resolve('./patient.service.js'),
-			versions: [ VERSIONS['3_0_1'] ]
+			service: './patient.service.js',
+			versions: [
+				VERSIONS['4_0_0']
+			]
 		}
 	}
 };
 ```
 
-Here we are telling the FHIR server where to locate the patient service and that we intend to support it on STU3(3.0.1 specifically). We are also enabling logging and providing a base value for server config (the server config is required at the moment but will not be in the future, for now, just give it an empty object). We are still adding documentation for all the various options you can set here so when it is available, we will add more links to it here.
+Here we are telling the FHIR server where to locate the patient service and that we intend to support it on R4(4.0.0 specifically). See the [server configuration docs](./ServerConfiguration.md) for more configuration options.
 
 Now run `yarn start` one more time. You should something very similar to the following:
 
@@ -146,7 +143,7 @@ Now run `yarn start` one more time. You should something very similar to the fol
 2019-01-08T20:56:50.563Z - info: Starting the FHIR Server at localhost:3000
 ```
 
-Open [http://localhost:3000/3_0_1/metadata](http://localhost:3000/3_0_1/metadata) in your browser and you should see a capability statement resource indicating you support the Patient resource. You can also open [http://localhost:3000/3_0_1/Patient](http://localhost:3000/3_0_1/Patient) to attempt a patient query. You should see an operation outcome that looks something like this:
+Open [http://localhost:3000/4_0_0/metadata](http://localhost:3000/4_0_0/metadata) in your browser and you should see a capability statement resource indicating you support the Patient resource. You can also open [http://localhost:3000/4_0_0/Patient](http://localhost:3000/4_0_0/Patient) to attempt a patient query. You should see an operation outcome that looks something like this:
 
 ```json
 {
@@ -165,4 +162,4 @@ Open [http://localhost:3000/3_0_1/metadata](http://localhost:3000/3_0_1/metadata
 
 This is good as this is the error we created in the `patient.service.js`. `patient.service.js` is where you want to execute your queries and return your patient JSON. So you may need to connect to a database, query your data, and possibly even map your data back to a FHIR format if it is not already in a FHIR format.
 
-If you made it this far, thanks for sticking it out and completing the Getting Started guide. Please browse the other wiki pages for more information and feel free to file issues/questions on our [issues](https://github.com/Asymmetrik/node-fhir-server-core/issues) page.
+If you made it this far, thanks for sticking it out and completing the Getting Started guide. Please browse the other [documentation pages](../docs) for more information and feel free to file issues/questions on our [issues](https://github.com/Asymmetrik/node-fhir-server-core/issues) page.

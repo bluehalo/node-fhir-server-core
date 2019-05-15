@@ -1,6 +1,7 @@
+const { resolveSchema } = require('./server/utils/resolve.utils');
+const winston = require('./server/winston.js');
 const Server = require('./server/server');
 const constants = require('./constants');
-const { resolveFromVersion } = require('./server/utils/resolve.utils');
 
 /**
  * @name exports
@@ -21,9 +22,15 @@ module.exports = {
 	Server: Server,
 
 	/**
-	 * @description Export function to allow
+	 * @description Export function to support easier loading of classes
 	 */
-	resolveFromVersion: resolveFromVersion,
+	resolveSchema: resolveSchema,
+
+	/**
+	 * @description Export logger to allow for customization and easy access to
+	 * various loggers
+	 */
+	loggers: winston,
 
 	/**
 	 * @description Initialize is useful for building a server with all the defaults

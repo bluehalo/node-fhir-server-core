@@ -1,10 +1,9 @@
-const responseUtils = require('../utils/response.utils');
-const errors = require('../utils/error.utils');
+const handler = require('@asymmetrik/fhir-response-util');
 
 /**
  * @description Controller for all POST operations
  */
-module.exports.operationsPost = function operationsPost({ profile, logger, funcName }) {
+module.exports.operationsPost = function operationsPost({ profile, name, logger: deprecatedLogger }) {
 	let { serviceModule: service } = profile;
 
 	return (req, res, next) => {
@@ -12,29 +11,20 @@ module.exports.operationsPost = function operationsPost({ profile, logger, funcN
 		let resource_body = req.body;
 		let args = { id: resource_id, base_version, resource: resource_body };
 
-		service[funcName](args, req.contexts, logger)
-			.then(results => {
-				responseUtils.handleOperationResponse(res, next, base_version, results);
-			})
-			.catch(err => {
-				next(errors.internal(err, base_version));
-			});
+		service[name](args, { req }, deprecatedLogger)
+			.then(results => handler.read(req, res, results))
+			.catch(next);
 	};
 };
 
 /**
  * @description Controller for all GET operations
  */
-module.exports.operationsGet = function operationsGet({ profile, logger, funcName }) {
+module.exports.operationsGet = function operationsGet({ profile, name, logger: deprecatedLogger }) {
 	let { serviceModule: service } = profile;
 	return (req, res, next) => {
-		let { base_version } = req.sanitized_args;
-		service[funcName](req.sanitized_args, req.contexts, logger)
-			.then(results => {
-				responseUtils.handleOperationResponse(res, next, base_version, results);
-			})
-			.catch(err => {
-				next(errors.internal(err, base_version));
-			});
+		service[name](req.sanitized_args, { req }, deprecatedLogger)
+			.then(results => handler.read(req, res, results))
+			.catch(next);
 	};
 };

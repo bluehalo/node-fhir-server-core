@@ -1,10 +1,10 @@
 /* eslint-disable */
-const moment = require('moment-timezone');
+const { resolveSchema } = require('../utils/resolve.utils');
 const test_config = require('../../test.config');
 const { VERSIONS } = require('../../constants');
+const moment = require('moment-timezone');
 const request = require('supertest');
 const Server = require('../server');
-const resolve_utils = require('../utils/resolve.utils');
 const path = require('path');
 let server;
 
@@ -39,7 +39,7 @@ customSecurityStatement = securityUrls => ({
 
 //Helper function to build a custom capability statement
 customCapabilityStatement = function(resources) {
-	let CapabilityStatement = require(resolve_utils.resolveFromVersion('3_0_1', 'CapabilityStatement'));
+	let CapabilityStatement = require(resolveSchema('3_0_1', 'CapabilityStatement'));
 
 	return new CapabilityStatement({
 		status: 'active',
@@ -63,7 +63,7 @@ customCapabilityStatement = function(resources) {
 };
 
 //A custom statementGenerator getter
-let customGetStatementGenerators = (args, logger) => {
+let customGetStatementGenerators = args => {
 	return {
 		makeStatement: customCapabilityStatement,
 		securityStatement: customSecurityStatement,
@@ -71,8 +71,8 @@ let customGetStatementGenerators = (args, logger) => {
 };
 
 //A function to make a custom resource conformance statement
-let customMakeResource = (args, logger) => {
-	let Resource = require(resolve_utils.resolveFromVersion(args.base_version, args.key));
+let customMakeResource = args => {
+	let Resource = require(resolveSchema(args.base_version, args.key));
 
 	// Return our conformance statement
 	return {
@@ -191,7 +191,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that every profile gets a custom resource entry ', async () => {
 		//Add a custom make resource to the test services
-		let mock_service = require('../profiles/service.mock.js');
+		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
@@ -217,7 +217,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that every profile gets a custom resource entry from config', async () => {
 		//Add a custom make resource to the test services
-		let mock_service = require('../profiles/service.mock.js');
+		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });

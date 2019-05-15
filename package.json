@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "Node FHIR Rest API Server",
   "main": "src/index",
   "author": "Asymmetrik Ltd.",
@@ -32,6 +32,7 @@
   },
   "jest": {
     "verbose": true,
+    "clearMocks": true,
     "collectCoverage": true,
     "coverageReporters": [
       "text",
@@ -39,11 +40,11 @@
       "json"
     ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/server/standards/",
-      "<rootDir>/src/server/profiles/"
+      "<rootDir>/src/server/resources/"
     ]
   },
   "dependencies": {
+    "@asymmetrik/fhir-response-util": "^1.0.0",
     "@asymmetrik/sof-scope-checker": "^1.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
@@ -63,10 +64,11 @@
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "sanitize-html": "^1.16.1",
+    "serve-favicon": "^2.5.0",
     "snyk": "^1.116.2",
     "superagent": "^3.8.3",
     "validator": "^9.1.2",
-    "winston": "^2.4.0",
+    "winston": "^3.2.1",
     "xss": "^0.3.4"
   },
   "devDependencies": {

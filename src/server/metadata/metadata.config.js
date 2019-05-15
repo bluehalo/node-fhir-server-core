@@ -1,5 +1,5 @@
-const { route_args } = require('../profiles/common.arguments');
-const controller = require('./metadata.controller');
+const controller = require('./metadata.controller.js');
+const { route_args } = require('../route.config.js');
 
 let route = {
 	type: 'get',

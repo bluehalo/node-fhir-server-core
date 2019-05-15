@@ -1,9 +1,11 @@
-const errorUtils = require('./utils/error.utils.js');
+const { resolveSchema } = require('./utils/resolve.utils.js');
+const deprecate = require('./utils/deprecation.notice.js');
 const invariant = require('./utils/invariant.js');
-const routeSetter = require('./route-setter.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const Logger = require('./winston.js');
+const favicon = require('serve-favicon');
+const loggers = require('./winston.js');
+const router = require('./router.js');
 const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
@@ -24,7 +26,7 @@ function mergeDefaults(providedConfig) {
 		profiles: {},
 		server: {},
 		logging: {
-			level: 'error',
+			level: 'debug',
 		},
 	};
 
@@ -75,7 +77,7 @@ function validate(config) {
 	invariant(
 		!config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
 		'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
-			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Configuration',
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 	);
 
 	// If we have no profiles configured, notify them now
@@ -83,7 +85,7 @@ function validate(config) {
 		Object.keys(config.profiles).length > 0,
 		'No profiles configured. We do not enable any profiles by default so please ' +
 			'review the profile wiki for how to enable profiles and capabilities. ' +
-			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
 	);
 
 	// We need to verify that each provided key is valid and that the config
@@ -95,7 +97,7 @@ function validate(config) {
 		errors.length === 0,
 		'Encountered the following errors attempting to load your provided profiles:' +
 			`\n${errors.join('\n')}\n` +
-			'See https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
 	);
 }
 
@@ -103,10 +105,17 @@ class Server {
 	constructor(config = {}) {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
+		// Setup a logger for the application
+		loggers.initialize(this.config.logging);
 		// Validate the config has minimum required settings to run
 		validate(this.config);
-		// Setup a logger for the application
-		this.logger = new Logger(this.config.logging);
+
+		// TODO: REMOVE: logger in future versions, emit notices for now
+		this.logger = deprecate(
+			loggers.get('default'),
+			'Using the logger this way is deprecated. Please see the documentation on ' +
+				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+		);
 		// Setup our express instance
 		this.app = express();
 		// Setup some environment variables handy for setup
@@ -133,6 +142,8 @@ class Server {
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+		// Set favicon
+		this.app.use(favicon(this.config.server.favicon || path.posix.resolve('./src/assets/phoenix.ico')));
 		// return self for chaining
 		return this;
 	}
@@ -203,13 +214,14 @@ class Server {
 
 	// Setup profile routes
 	setProfileRoutes() {
-		routeSetter.setRoutes(this);
+		router.setRoutes(this);
 		// return self for chaining
 		return this;
 	}
 
 	// Setup error routes
 	setErrorRoutes() {
+		let logger = loggers.get('default');
 		//Enable error tracking error handler if supplied in config
 		if (this.config.errorTracking && this.config.errorTracking.errorHandler) {
 			this.app.use(this.config.errorTracking.errorHandler());
@@ -220,22 +232,29 @@ class Server {
 		this.app.use((err, req, res, next) => {
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1];
-			// If implementer used custom error
-			if (err && err.isCustom) {
-				return res.status(err.statusCode).json(err);
-			}
-			// If there is an error and it is our error type
-			if (err && errorUtils.isServerError(err, base)) {
-				return res.status(err.statusCode).json(err);
-			}
-			// If there is still an error, throw a 500 and pass the message through
-			else if (err) {
-				let error = errorUtils.internal(err.message, base);
-				this.logger.error(error.statusCode, err);
-				return res.status(error.statusCode).json(error);
-			}
-			// No error
-			else {
+			// Get an operation outcome for this instance
+			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			// If there is an error and it is an OperationOutcome
+			if (err && err.resourceType === OperationOutcome.resourceType) {
+				let status = err.statusCode || 500;
+				res.status(status).json(err);
+			} else if (err) {
+				let error = new OperationOutcome({
+					statusCode: 500,
+					issue: [
+						{
+							severity: 'error',
+							code: 'internal',
+							details: {
+								text: `Unexpected: ${err.message}`,
+							},
+						},
+					],
+				});
+
+				logger.error(error);
+				res.status(error.statusCode).json(error);
+			} else {
 				next();
 			}
 		});
@@ -243,9 +262,23 @@ class Server {
 		// Nothing has responded by now, respond with 404
 		this.app.use((req, res) => {
 			// get base from URL instead of params since it might not be forwarded
+			let base = req.url.split('/')[1];
+			// Get an operation outcome for this instance
+			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			let error = new OperationOutcome({
+				statusCode: 404,
+				issue: [
+					{
+						severity: 'error',
+						code: 'not-found',
+						details: {
+							text: `Invalid url: ${req.path}`,
+						},
+					},
+				],
+			});
 
-			let error = errorUtils.notFound();
-			this.logger.error(error.statusCode, req.path);
+			logger.error(error);
 			res.status(error.statusCode).json(error);
 		});
 
@@ -260,7 +293,7 @@ class Server {
 		invariant(
 			port || server.port,
 			'Missing port. Please provide a port when initializing the server. See ' +
-				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Configuration',
+				'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 		);
 
 		// Update the express app to be in instance of createServer

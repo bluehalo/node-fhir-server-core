@@ -21,13 +21,14 @@ Here is an example config with all the currently supported options. See descript
 {
 	auth: {
 		type: 'auth-type',
-                strategy: {
-                        name: 'bearer',
-                        useSession: false,
-                        service: 'path/to/authentication.service.js'
-                }
+    strategy: {
+	    name: 'bearer',
+	    useSession: false,
+	    service: 'path/to/authentication.service.js'
+    }
 	},
 	server: {
+		favicon: path.posix.resolve('path to favicon'),
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -42,14 +43,14 @@ Here is an example config with all the currently supported options. See descript
 	logging: {
 		level: 'debug'
 	},
-        events: {
-                auditEvent: service.writeAuditEventRecords,
-                provenance: service.writeProvenanceRecords,
-        },
+  events: {
+		auditEvent: service.writeAuditEventRecords,
+		provenance: service.writeProvenanceRecords,
+  },
 	profiles: {
 		patient: {
 			service: './patient/patient.controller',
-                        versions: [ VERSIONS.STU3 ],
+			versions: [ VERSIONS['3_0_1'] ],
 			corsOptions: {
 				// Have a different max age for all the routes in the patient profile
 				maxAge: 3600
@@ -57,7 +58,7 @@ Here is an example config with all the currently supported options. See descript
 		},
 		observation: {
 			service: require('./observation/observation.controller'),
-                        versions: [ VERSIONS.STU3 ]
+			versions: [ VERSIONS['4_0_0'] ]
 			corsOptions: {
 				// Disable cors on this profile, maybe this is for internal use only
 				origin: false
@@ -108,6 +109,13 @@ Here is an example config with all the currently supported options. See descript
 - **Description:** Port the express app will listen to.
 - **Required:** Yes
 - **Default:** `none`
+
+#### `server.favicon`
+
+- **Type:** `string`
+- **Description:** Path to the favicon you would like to use
+- **Required:** No
+- **Default:** `path.posix.resolve('./src/assets/phoenix.ico')`
 
 #### `server.corsOptions`
 
@@ -214,4 +222,4 @@ const fhirConfig = {
 ```
 
 #### `profiles[key]`
-All profiles configurations are defined in the profiles section, [https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#profile-configuration](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#profile-configuration). There are also examples of them in the [Getting Started](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profiles#getting-started) section of the Profiles wiki page.
+Please see [ConfiguringProfiles](./ConfiguringProfiles.md) for instructions on how to setup and configure profiles. There is also an example of creating one in the [Getting Started](./GettingStarted.md) guide.

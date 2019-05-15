@@ -1,5 +1,9 @@
 const { INTERACTIONS } = require('../constants');
 
+/**
+ * @name routes
+ * @description Common express routes used for all resources
+ */
 let routes = [
 	{
 		type: 'patch',
@@ -71,9 +75,32 @@ let routes = [
 ];
 
 /**
+ * @name route_args
+ * @description Common express arguments used on many routes as route params
+ */
+let route_args = {
+	BASE: {
+		name: 'base_version',
+		type: 'string',
+		conformance_hide: true,
+	},
+	ID: {
+		name: 'id',
+		type: 'string',
+		conformance_hide: true,
+	},
+	VERSION_ID: {
+		name: 'version_id',
+		type: 'string',
+		conformance_hide: true,
+	},
+};
+
+/**
  * @name exports
  * @summary Route config
  */
 module.exports = {
+	route_args,
 	routes,
 };

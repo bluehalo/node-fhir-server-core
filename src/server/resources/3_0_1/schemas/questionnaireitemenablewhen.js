@@ -1,0 +1,413 @@
+/**
+ * @name exports
+ * @summary QuestionnaireItemEnableWhen Class
+ */
+module.exports = class QuestionnaireItemEnableWhen {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
+
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_question', {
+			enumerable: true,
+			get: () => this.__data._question,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._question = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'question', {
+			enumerable: true,
+			get: () => this.__data.question,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.question = value;
+			},
+		});
+
+		Object.defineProperty(this, '_hasAnswer', {
+			enumerable: true,
+			get: () => this.__data._hasAnswer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._hasAnswer = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'hasAnswer', {
+			enumerable: true,
+			get: () => this.__data.hasAnswer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.hasAnswer = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerBoolean', {
+			enumerable: true,
+			get: () => this.__data._answerBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerBoolean = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerBoolean', {
+			enumerable: true,
+			get: () => this.__data.answerBoolean,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerBoolean = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDecimal', {
+			enumerable: true,
+			get: () => this.__data._answerDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDecimal = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDecimal', {
+			enumerable: true,
+			get: () => this.__data.answerDecimal,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDecimal = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerInteger', {
+			enumerable: true,
+			get: () => this.__data._answerInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerInteger = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerInteger', {
+			enumerable: true,
+			get: () => this.__data.answerInteger,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerInteger = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDate', {
+			enumerable: true,
+			get: () => this.__data._answerDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDate = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDate', {
+			enumerable: true,
+			get: () => this.__data.answerDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDate = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerDateTime', {
+			enumerable: true,
+			get: () => this.__data._answerDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerDateTime = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerDateTime', {
+			enumerable: true,
+			get: () => this.__data.answerDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerTime', {
+			enumerable: true,
+			get: () => this.__data._answerTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerTime = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerTime', {
+			enumerable: true,
+			get: () => this.__data.answerTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerTime = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerString', {
+			enumerable: true,
+			get: () => this.__data._answerString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerString = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerString', {
+			enumerable: true,
+			get: () => this.__data.answerString,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerString = value;
+			},
+		});
+
+		Object.defineProperty(this, '_answerUri', {
+			enumerable: true,
+			get: () => this.__data._answerUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._answerUri = new Element(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerUri', {
+			enumerable: true,
+			get: () => this.__data.answerUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.answerUri = value;
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerAttachment', {
+			enumerable: true,
+			get: () => this.__data.answerAttachment,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Attachment = require('./attachment.js');
+				this.__data.answerAttachment = new Attachment(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerCoding', {
+			enumerable: true,
+			get: () => this.__data.answerCoding,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Coding = require('./coding.js');
+				this.__data.answerCoding = new Coding(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerQuantity', {
+			enumerable: true,
+			get: () => this.__data.answerQuantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.answerQuantity = new Quantity(value);
+			},
+		});
+		// valueSetReference: http://hl7.org/fhir/ValueSet/questionnaire-answers
+		Object.defineProperty(this, 'answerReference', {
+			enumerable: true,
+			get: () => this.__data.answerReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.answerReference = new Reference(value);
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'QuestionnaireItemEnableWhen',
+			enumerable: true,
+			writable: false,
+		});
+	}
+
+	static get resourceType() {
+		return 'QuestionnaireItemEnableWhen';
+	}
+
+	toJSON() {
+		return {
+			id: this.id,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			_question: this._question && this._question.toJSON(),
+			question: this.question,
+			_hasAnswer: this._hasAnswer && this._hasAnswer.toJSON(),
+			hasAnswer: this.hasAnswer,
+			_answerBoolean: this._answerBoolean && this._answerBoolean.toJSON(),
+			answerBoolean: this.answerBoolean,
+			_answerDecimal: this._answerDecimal && this._answerDecimal.toJSON(),
+			answerDecimal: this.answerDecimal,
+			_answerInteger: this._answerInteger && this._answerInteger.toJSON(),
+			answerInteger: this.answerInteger,
+			_answerDate: this._answerDate && this._answerDate.toJSON(),
+			answerDate: this.answerDate,
+			_answerDateTime: this._answerDateTime && this._answerDateTime.toJSON(),
+			answerDateTime: this.answerDateTime,
+			_answerTime: this._answerTime && this._answerTime.toJSON(),
+			answerTime: this.answerTime,
+			_answerString: this._answerString && this._answerString.toJSON(),
+			answerString: this.answerString,
+			_answerUri: this._answerUri && this._answerUri.toJSON(),
+			answerUri: this.answerUri,
+			answerAttachment: this.answerAttachment && this.answerAttachment.toJSON(),
+			answerCoding: this.answerCoding && this.answerCoding.toJSON(),
+			answerQuantity: this.answerQuantity && this.answerQuantity.toJSON(),
+			answerReference: this.answerReference && this.answerReference.toJSON(),
+		};
+	}
+};

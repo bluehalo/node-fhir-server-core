@@ -1,34 +1,61 @@
-// Simple wrapper to use for functions
-function deprecationWrapper(func, msg) {
+/**
+ * @function wrapper
+ * @description wrapper function used by notice to wrap properties with a log
+ * @param {Function} func - function to wrap
+ * @param {String} message - message to log
+ * @return {Function}
+ */
+function wrapper(func, message) {
 	return function() {
-		console.log(msg);
-		return func(...arguments);
+		let results = func(...arguments);
+		console.log(message);
+		return results;
 	};
 }
 
 /**
- * @description Simple wrapper function that logs a deprecation notice when a
- * provided function is used. We can use this to help us encourage users to
- * migrate to newer options.
- * @param {Function|Object} funcOrObject - Function we want to mark as deprecated or
- * an object whose function properties we want to mark as deprecated
- * @param {String} message - Deprecation Notice
- * @return {function} Wrapper around provided function
+ * @function isBasePrototype
+ * @description Is the provided proto one of the base prototypes
+ * @param {Object} proto - prototype to evaluate
+ * @return {Boolean}
  */
-module.exports = function deprecationNotice(funcOrObject, message) {
-	// If we have a function simply wrap it
-	if (typeof funcOrObject === 'function') {
-		return deprecationWrapper(funcOrObject, message);
+function isBasePrototype(proto) {
+	return [Array.prototype, Object.prototype, Function.prototype].some(val => {
+		return val === proto;
+	});
+}
+
+/**
+ * @function notice
+ * @description Utility to wrap objects or functions and log when any function
+ * associated with this is used. Only wraps properties on the top level.
+ * @param {Function|Object} item - Item we intend to wrap with log messages
+ * @param {String} message - Message for logging
+ * @return {Function|Object} wrapped version of the given object
+ */
+function notice(item, message) {
+	if (typeof item === 'function') {
+		return wrapper(item, message);
 	}
 
-	// If we have an object, enumerate its properties and wrap all functions
-	return Object.getOwnPropertyNames(funcOrObject).reduce((newObj, name) => {
-		let maybeFunc = funcOrObject[name];
-		if (typeof maybeFunc === 'function') {
-			newObj[name] = deprecationWrapper(maybeFunc, message);
+	let proto = Object.getPrototypeOf(item);
+	let keys = Object.getOwnPropertyNames(item);
+
+	if (proto && !isBasePrototype(proto)) {
+		keys = keys.concat(Object.getOwnPropertyNames(proto));
+	}
+
+	return keys.reduce((all, key) => {
+		let property = item[key];
+
+		if (typeof property === 'function') {
+			all[key] = wrapper(property, message);
 		} else {
-			newObj[name] = maybeFunc;
+			all[key] = property;
 		}
-		return newObj;
-	}, {});
-};
+
+		return all;
+	}, Object.create(Object.getPrototypeOf(item)));
+}
+
+module.exports = notice;

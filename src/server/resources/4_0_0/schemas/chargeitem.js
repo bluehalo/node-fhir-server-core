@@ -1,0 +1,688 @@
+/**
+ * @name exports
+ * @summary ChargeItem Class
+ */
+module.exports = class ChargeItem {
+	constructor(opts) {
+		// Create an object to store all props
+		Object.defineProperty(this, '__data', { value: {} });
+
+		// Define getters and setters as enumerable
+
+		Object.defineProperty(this, '_id', {
+			enumerable: true,
+			get: () => this.__data._id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._id = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'id', {
+			enumerable: true,
+			get: () => this.__data.id,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.id = value;
+			},
+		});
+
+		Object.defineProperty(this, 'meta', {
+			enumerable: true,
+			get: () => this.__data.meta,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Meta = require('./meta.js');
+				this.__data.meta = new Meta(value);
+			},
+		});
+
+		Object.defineProperty(this, '_implicitRules', {
+			enumerable: true,
+			get: () => this.__data._implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._implicitRules = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'implicitRules', {
+			enumerable: true,
+			get: () => this.__data.implicitRules,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.implicitRules = value;
+			},
+		});
+
+		Object.defineProperty(this, '_language', {
+			enumerable: true,
+			get: () => this.__data._language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._language = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'language', {
+			enumerable: true,
+			get: () => this.__data.language,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.language = value;
+			},
+		});
+
+		Object.defineProperty(this, 'text', {
+			enumerable: true,
+			get: () => this.__data.text,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Narrative = require('./narrative.js');
+				this.__data.text = new Narrative(value);
+			},
+		});
+
+		Object.defineProperty(this, 'contained', {
+			enumerable: true,
+			get: () => this.__data.contained,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.contained = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, 'extension', {
+			enumerable: true,
+			get: () => this.__data.extension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.extension = Array.isArray(value) ? value.map(v => new Extension(v)) : [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'modifierExtension', {
+			enumerable: true,
+			get: () => this.__data.modifierExtension,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Extension = require('./extension.js');
+				this.__data.modifierExtension = Array.isArray(value)
+					? value.map(v => new Extension(v))
+					: [new Extension(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'identifier', {
+			enumerable: true,
+			get: () => this.__data.identifier,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Identifier = require('./identifier.js');
+				this.__data.identifier = Array.isArray(value) ? value.map(v => new Identifier(v)) : [new Identifier(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_definitionUri', {
+			enumerable: true,
+			get: () => this.__data._definitionUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definitionUri = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definitionUri', {
+			enumerable: true,
+			get: () => this.__data.definitionUri,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definitionUri = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_definitionCanonical', {
+			enumerable: true,
+			get: () => this.__data._definitionCanonical,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._definitionCanonical = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'definitionCanonical', {
+			enumerable: true,
+			get: () => this.__data.definitionCanonical,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.definitionCanonical = Array.isArray(value) ? value.map(v => v) : [value];
+			},
+		});
+
+		Object.defineProperty(this, '_status', {
+			enumerable: true,
+			get: () => this.__data._status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._status = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'status', {
+			enumerable: true,
+			get: () => this.__data.status,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.status = value;
+			},
+		});
+
+		Object.defineProperty(this, 'partOf', {
+			enumerable: true,
+			get: () => this.__data.partOf,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.partOf = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'code', {
+			enumerable: true,
+			get: () => this.__data.code,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.code = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'subject', {
+			enumerable: true,
+			get: () => this.__data.subject,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.subject = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'context', {
+			enumerable: true,
+			get: () => this.__data.context,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.context = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data._occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._occurrenceDateTime = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceDateTime', {
+			enumerable: true,
+			get: () => this.__data.occurrenceDateTime,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.occurrenceDateTime = value;
+			},
+		});
+
+		Object.defineProperty(this, 'occurrencePeriod', {
+			enumerable: true,
+			get: () => this.__data.occurrencePeriod,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Period = require('./period.js');
+				this.__data.occurrencePeriod = new Period(value);
+			},
+		});
+
+		Object.defineProperty(this, 'occurrenceTiming', {
+			enumerable: true,
+			get: () => this.__data.occurrenceTiming,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Timing = require('./timing.js');
+				this.__data.occurrenceTiming = new Timing(value);
+			},
+		});
+
+		Object.defineProperty(this, 'performer', {
+			enumerable: true,
+			get: () => this.__data.performer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let ChargeItemPerformer = require('./chargeitemperformer.js');
+				this.__data.performer = Array.isArray(value)
+					? value.map(v => new ChargeItemPerformer(v))
+					: [new ChargeItemPerformer(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'performingOrganization', {
+			enumerable: true,
+			get: () => this.__data.performingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.performingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'requestingOrganization', {
+			enumerable: true,
+			get: () => this.__data.requestingOrganization,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.requestingOrganization = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'costCenter', {
+			enumerable: true,
+			get: () => this.__data.costCenter,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.costCenter = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'quantity', {
+			enumerable: true,
+			get: () => this.__data.quantity,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Quantity = require('./quantity.js');
+				this.__data.quantity = new Quantity(value);
+			},
+		});
+
+		Object.defineProperty(this, 'bodysite', {
+			enumerable: true,
+			get: () => this.__data.bodysite,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.bodysite = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, '_factorOverride', {
+			enumerable: true,
+			get: () => this.__data._factorOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._factorOverride = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'factorOverride', {
+			enumerable: true,
+			get: () => this.__data.factorOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.factorOverride = value;
+			},
+		});
+
+		Object.defineProperty(this, 'priceOverride', {
+			enumerable: true,
+			get: () => this.__data.priceOverride,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Money = require('./money.js');
+				this.__data.priceOverride = new Money(value);
+			},
+		});
+
+		Object.defineProperty(this, '_overrideReason', {
+			enumerable: true,
+			get: () => this.__data._overrideReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._overrideReason = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'overrideReason', {
+			enumerable: true,
+			get: () => this.__data.overrideReason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.overrideReason = value;
+			},
+		});
+
+		Object.defineProperty(this, 'enterer', {
+			enumerable: true,
+			get: () => this.__data.enterer,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.enterer = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, '_enteredDate', {
+			enumerable: true,
+			get: () => this.__data._enteredDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Element = require('./element.js');
+				this.__data._enteredDate = new Element(value);
+			},
+		});
+
+		Object.defineProperty(this, 'enteredDate', {
+			enumerable: true,
+			get: () => this.__data.enteredDate,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				this.__data.enteredDate = value;
+			},
+		});
+
+		Object.defineProperty(this, 'reason', {
+			enumerable: true,
+			get: () => this.__data.reason,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.reason = Array.isArray(value)
+					? value.map(v => new CodeableConcept(v))
+					: [new CodeableConcept(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'service', {
+			enumerable: true,
+			get: () => this.__data.service,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.service = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'productReference', {
+			enumerable: true,
+			get: () => this.__data.productReference,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.productReference = new Reference(value);
+			},
+		});
+
+		Object.defineProperty(this, 'productCodeableConcept', {
+			enumerable: true,
+			get: () => this.__data.productCodeableConcept,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let CodeableConcept = require('./codeableconcept.js');
+				this.__data.productCodeableConcept = new CodeableConcept(value);
+			},
+		});
+
+		Object.defineProperty(this, 'account', {
+			enumerable: true,
+			get: () => this.__data.account,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.account = Array.isArray(value) ? value.map(v => new Reference(v)) : [new Reference(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'note', {
+			enumerable: true,
+			get: () => this.__data.note,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Annotation = require('./annotation.js');
+				this.__data.note = Array.isArray(value) ? value.map(v => new Annotation(v)) : [new Annotation(value)];
+			},
+		});
+
+		Object.defineProperty(this, 'supportingInformation', {
+			enumerable: true,
+			get: () => this.__data.supportingInformation,
+			set: value => {
+				if (value === undefined || value === null) {
+					return;
+				}
+
+				let Reference = require('./reference.js');
+				this.__data.supportingInformation = Array.isArray(value)
+					? value.map(v => new Reference(v))
+					: [new Reference(value)];
+			},
+		});
+
+		// Merge in any defaults
+		Object.assign(this, opts);
+
+		// Define a default non-writable resourceType property
+		Object.defineProperty(this, 'resourceType', {
+			value: 'ChargeItem',
+			enumerable: true,
+			writable: false,
+		});
+	}
+
+	static get resourceType() {
+		return 'ChargeItem';
+	}
+
+	toJSON() {
+		return {
+			resourceType: this.resourceType,
+			id: this.id,
+			meta: this.meta && this.meta.toJSON(),
+			_implicitRules: this._implicitRules && this._implicitRules.toJSON(),
+			implicitRules: this.implicitRules,
+			_language: this._language && this._language.toJSON(),
+			language: this.language,
+			text: this.text && this.text.toJSON(),
+			contained: this.contained,
+			extension: this.extension && this.extension.map(v => v.toJSON()),
+			modifierExtension: this.modifierExtension && this.modifierExtension.map(v => v.toJSON()),
+			identifier: this.identifier && this.identifier.map(v => v.toJSON()),
+			_definitionUri: this._definitionUri && this._definitionUri.toJSON(),
+			definitionUri: this.definitionUri,
+			_definitionCanonical: this._definitionCanonical && this._definitionCanonical.toJSON(),
+			definitionCanonical: this.definitionCanonical,
+			_status: this._status && this._status.toJSON(),
+			status: this.status,
+			partOf: this.partOf && this.partOf.map(v => v.toJSON()),
+			code: this.code && this.code.toJSON(),
+			subject: this.subject && this.subject.toJSON(),
+			context: this.context && this.context.toJSON(),
+			_occurrenceDateTime: this._occurrenceDateTime && this._occurrenceDateTime.toJSON(),
+			occurrenceDateTime: this.occurrenceDateTime,
+			occurrencePeriod: this.occurrencePeriod && this.occurrencePeriod.toJSON(),
+			occurrenceTiming: this.occurrenceTiming && this.occurrenceTiming.toJSON(),
+			performer: this.performer && this.performer.map(v => v.toJSON()),
+			performingOrganization: this.performingOrganization && this.performingOrganization.toJSON(),
+			requestingOrganization: this.requestingOrganization && this.requestingOrganization.toJSON(),
+			costCenter: this.costCenter && this.costCenter.toJSON(),
+			quantity: this.quantity && this.quantity.toJSON(),
+			bodysite: this.bodysite && this.bodysite.map(v => v.toJSON()),
+			_factorOverride: this._factorOverride && this._factorOverride.toJSON(),
+			factorOverride: this.factorOverride,
+			priceOverride: this.priceOverride && this.priceOverride.toJSON(),
+			_overrideReason: this._overrideReason && this._overrideReason.toJSON(),
+			overrideReason: this.overrideReason,
+			enterer: this.enterer && this.enterer.toJSON(),
+			_enteredDate: this._enteredDate && this._enteredDate.toJSON(),
+			enteredDate: this.enteredDate,
+			reason: this.reason && this.reason.map(v => v.toJSON()),
+			service: this.service && this.service.map(v => v.toJSON()),
+			productReference: this.productReference && this.productReference.toJSON(),
+			productCodeableConcept: this.productCodeableConcept && this.productCodeableConcept.toJSON(),
+			account: this.account && this.account.map(v => v.toJSON()),
+			note: this.note && this.note.map(v => v.toJSON()),
+			supportingInformation: this.supportingInformation && this.supportingInformation.map(v => v.toJSON()),
+		};
+	}
+};
