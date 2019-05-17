@@ -1,4 +1,5 @@
 const { resolveSchema } = require('./server/utils/resolve.utils');
+const ServerError = require('./server/utils/server.error');
 const winston = require('./server/winston.js');
 const Server = require('./server/server');
 const constants = require('./constants');
@@ -12,6 +13,12 @@ module.exports = {
 	 * @description Export constants so users can have access to these
 	 */
 	constants: constants,
+
+	/**
+	 * @description Export Server Error class for people to throw from services
+	 * This will in turn generate an operation outcome
+	 */
+	ServerError: ServerError,
 
 	/**
 	 * @description Export the server class so someone can build it themselves. This gives them

@@ -22,7 +22,6 @@
     "start": "node src/runner",
     "nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
     "lint": "eslint \"src/**/*.js\"",
-    "jest": "jest src",
     "test": "cross-env NODE_ENV=test; set -e; npm run lint; npm run jest;",
     "changelog": "conventional-changelog -p angular -s -r 0 -i CHANGELOG.md",
     "prettier": "prettier \"src/**/*.js\" --write",

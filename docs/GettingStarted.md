@@ -104,7 +104,7 @@ fhir-server
 Add the following code to the patient service.
 
 ```javascript
-module.exports.search = async (args, logger) => {
+module.exports.search = async (args, context) => {
 	throw new Error('Unable to locate patients');
 };
 ```
