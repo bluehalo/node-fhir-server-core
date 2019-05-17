@@ -1,5 +1,6 @@
 const { resolveSchema } = require('./utils/resolve.utils.js');
 const deprecate = require('./utils/deprecation.notice.js');
+const ServerError = require('./utils/server.error.js');
 const invariant = require('./utils/invariant.js');
 const { VERSIONS } = require('../constants.js');
 const compression = require('compression');
@@ -239,6 +240,9 @@ class Server {
 			if (err && err.resourceType === OperationOutcome.resourceType) {
 				let status = err.statusCode || 500;
 				res.status(status).json(err);
+			} else if (err instanceof ServerError) {
+				let status = err.statusCode || 500;
+				res.status(status).json(new OperationOutcome(err));
 			} else if (err) {
 				let error = new OperationOutcome({
 					statusCode: 500,

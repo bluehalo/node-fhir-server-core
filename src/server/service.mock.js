@@ -1,73 +1,77 @@
+const ServerError = require('./utils/server.error.js');
 const { container } = require('./winston.js');
 
 let logger = container.get('default');
 
-module.exports.search = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'search'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+const errorDetails = message => ({
+	statusCode: 500,
+	issue: [
+		{
+			severity: 'error',
+			code: 'internal',
+			details: {
+				text: `Unexpected: ${message}`,
+			},
+		},
+	]
+});
 
-module.exports.searchByVersionId = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'searchByVersionId'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.search = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'search'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.searchById = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'searchById'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.searchByVersionId = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'searchByVersionId'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.create = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'create'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.searchById = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'searchById'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.update = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'update'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.create = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'create'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.remove = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'remove'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.update = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'update'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.patch = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'patch'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.remove = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'remove'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.history = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'history'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.patch = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'patch'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.historyById = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'historyById'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.history = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'history'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
 
-module.exports.expandById = (_args, _context) =>
-	new Promise((resolve, reject) => {
-		let message = "Calling mock service. Did you forget to implement 'expandById'.";
-		logger.info(message);
-		reject(new Error(message));
-	});
+module.exports.historyById = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'historyById'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
+
+module.exports.expandById = async (_args, _context) => {
+	let message = "Calling mock service. Did you forget to implement 'expandById'.";
+	logger.info(message);
+	throw new ServerError(message, errorDetails(message));
+};
