@@ -218,7 +218,7 @@ module.exports.patch = async (args, context) => {
 - **Routes:** Enables `/:base_version/[profile_name]/:id` via DELETE
 - **Example:**
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema, ServerError } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
 	let OperationOutcome = require(resolveSchema(args.base_version, 'operationoutcome'));
@@ -230,7 +230,7 @@ module.exports.remove = async (args, context) => {
 		// 405 if you do not want to allow the delete
 		// 409 if you can't delete because of referential
 		// integrity or some other reason
-		let outcome = new OperationOutcome({
+		let outcome = new ServerError({
 			statusCode: 409,
 			issue: [{
 				severity: 'error',
