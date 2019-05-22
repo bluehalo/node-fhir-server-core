@@ -217,11 +217,9 @@ module.exports.patch = async (args, context) => {
 - **Routes:** Enables `/:base_version/[profile_name]/:id` via DELETE
 - **Example:**
 ```javascript
-const { resolveSchema, ServerError } = require('@asymmetrik/node-fhir-server-core');
+const { ServerError } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
-	let OperationOutcome = require(resolveSchema(args.base_version, 'operationoutcome'));
-	
 	try {
 		await db.patients.remove({ _id: args.id });
 	} catch (err) {
