@@ -1,3 +1,12 @@
+## [2.0.2](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.1...2.0.2) (2019-05-22)
+
+
+### Features
+
+* Custom errors and updated documentation ([#176](https://github.com/Asymmetrik/node-fhir-server-core/issues/176)) ([7e4a8bb](https://github.com/Asymmetrik/node-fhir-server-core/commit/7e4a8bb))
+
+
+
 ## [2.0.1](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.0...2.0.1) (2019-05-15)
 
 
