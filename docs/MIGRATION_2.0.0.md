@@ -41,14 +41,14 @@ module.exports.search = async (args, context) => {
 	// You will need to build your query based on the sanitized args
 	let query = myCustomQueryBuilder(args);
 	let results = await db.patients.find(query).toArray();
+	// Cast all the results to the correct FHIR resources
 	let patients = results.filter(result => result.resourceType === 'Patient').map(result => new Patient(result));
 	let observations = results.filter(result => result.resourceType === 'Observation').map(result => new Observation(result));
 	let entries = Array.prototype.concat(
 		patients.map(patient => new BundleEntry({ resource: patient })),
 		observations.map(observation => new BundleEntry({ resource: observation }))
 	);
-	let bundle = new Bundle({ entry: entries });
-	return bundle;
+	return new Bundle({ entry: entries });
 };
 ```
 

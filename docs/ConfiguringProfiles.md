@@ -66,8 +66,7 @@ module.exports.search = async (args, context) => {
 	let results = await db.patients.find(query).toArray();
 	let patients = results.map(result => new Patient(result));
 	let entries = patients.map(patient => new BundleEntry({ resource: patient }));
-	let bundle = new Bundle({ entry: entries });
-	return bundle;
+	return new Bundle({ entry: entries });
 };
 ```
 
@@ -230,7 +229,7 @@ module.exports.remove = async (args, context) => {
 		// 405 if you do not want to allow the delete
 		// 409 if you can't delete because of referential
 		// integrity or some other reason
-		let outcome = new ServerError({
+		throw new ServerError({
 			statusCode: 409,
 			issue: [{
 				severity: 'error',
@@ -240,8 +239,6 @@ module.exports.remove = async (args, context) => {
 				}
 			}]
 		});
-		
-		throw outcome;
 	}
 
 	return;
