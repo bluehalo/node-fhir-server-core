@@ -1,5 +1,7 @@
+const winston = require('../server/winston.js');
 const nodemon = require('nodemon');
-const logger = require('../server/winston')({ level: 'debug' });
+
+let logger = winston.get('default');
 
 nodemon({
 	ignore: ['node_modules'],

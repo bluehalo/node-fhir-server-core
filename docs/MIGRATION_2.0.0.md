@@ -41,14 +41,14 @@ module.exports.search = async (args, context) => {
 	// You will need to build your query based on the sanitized args
 	let query = myCustomQueryBuilder(args);
 	let results = await db.patients.find(query).toArray();
+	// Cast all the results to the correct FHIR resources
 	let patients = results.filter(result => result.resourceType === 'Patient').map(result => new Patient(result));
 	let observations = results.filter(result => result.resourceType === 'Observation').map(result => new Observation(result));
 	let entries = Array.prototype.concat(
 		patients.map(patient => new BundleEntry({ resource: patient })),
 		observations.map(observation => new BundleEntry({ resource: observation }))
 	);
-	let bundle = new Bundle({ entry: entries });
-	return bundle;
+	return new Bundle({ entry: entries });
 };
 ```
 
@@ -68,15 +68,16 @@ module.exports.searchById = async (args, context) => {
 Previously, when you threw an error in your service, we just took the error message and a status code and passed in to some utility that wrapped it in a minimal operation outcome. But what if you want to customize the operation outcome or use a different code than we had available. There was no way to do that. In version 2.0.0, since we changed how you return data in your services, you can create your own and just return it. We also allow you to add additional properties to it so you can control other things, such as the HTTP response code. For example, let's throw an error for attempting to delete a resource that other resources depend on. The spec says the HTTP status code must be a 409 in this case, for conflict. You could implement that like so:
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { ServerError } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
-	let OperationOutcome = require(resolveSchema(args.base_version, 'operationoutcome'));
 	try {
 		await db.patients.remove({ _id: args.id });
 	} catch (err) {
 		// For argument sake, assume we failed because an Observation references this patient
-		let outcome = new OperationOutcome({
+		// Express will catch this and we will wrap it in an actual operation outcome
+		// for the correct version, so make sure your JSON is formatted correctly
+		throw new ServerError({
 			// Set this to make the HTTP status code 409
 			statusCode: 409,
 			// Add any normal operation outcome stuff here
