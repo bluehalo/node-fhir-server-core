@@ -8,11 +8,7 @@ module.exports = class ServerError extends Error {
   constructor(message, options) {
     super(message);
 
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(this, ServerError.prototype);
-    } else {
-      this.__proto__ = ServerError.prototype;
-    }
+    Object.setPrototypeOf(this, ServerError.prototype);
 
     // Make message enumerable
     Object.defineProperty(this, 'message', {
