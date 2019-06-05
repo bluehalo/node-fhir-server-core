@@ -23,7 +23,7 @@ const FHIRServer = require('@asymmetrik/node-fhir-server-core');
  * @param {object} resources - The list of the supported resources. This is taken from supported Profiles declared in the FHIR Server config.
  */
 let customCapabilityStatement = resources => {
-  let CapabilityStatement = require(FHIRServer.resolveFromVersion(base_version, 'CapabilityStatement'));
+  let CapabilityStatement = require(FHIRServer.resolveSchema(base_version, 'CapabilityStatement'));
 
   return new CapabilityStatement({
     status: 'draft',
@@ -41,7 +41,8 @@ let customCapabilityStatement = resources => {
     },
     fhirVersion: base_version.replace(/_/g, '.'),
     acceptUnknown: 'extensions',
-    format: ['application/fhir+json']
+    format: ['application/fhir+json'],
+    rest: resources
   });
 };
 
