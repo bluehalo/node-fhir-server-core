@@ -77,16 +77,15 @@ module.exports.remove = async (args, context) => {
 		// For argument sake, assume we failed because an Observation references this patient
 		// Express will catch this and we will wrap it in an actual operation outcome
 		// for the correct version, so make sure your JSON is formatted correctly
-		throw new ServerError({
+		let message = 'Failed to delete patient because Resource XYZ depends on it.';
+		throw new ServerError(message, {
 			// Set this to make the HTTP status code 409
 			statusCode: 409,
 			// Add any normal operation outcome stuff here
 			issue: [{
 				severity: 'error',
 				code: 'internal',
-				details: {
-					text: 'Failed to delete patient because Resource XYZ depends on it.'
-				}
+				details: { text: message }
 			}]
 		});
 	}
