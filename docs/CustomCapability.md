@@ -7,7 +7,7 @@ You can decide to include this code where you define your Asymmetrik Server conf
 First, we're going to require in the Asymmetrik FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
 Then we'll create a function that will require in the CapabilityStatement class, and return a new instance that contains your information! Please make sure you remain compliant with the FHIR Specification.
 
-Next, we're going to create a custom Security Statement. This is apart of the Capability Statement. It provides information about the security of the current implementation. 
+Next, we're going to create a custom Security Statement. This is separate from the Capability Statement. It provides information about the security of the current implementation. 
 If provided, this will be derived from the information you pass to the 'security' property from the FHIR Server Config.
 The below Security Statement is the default one provided by Asymmetrik, but can be customized to fit your needs. 
 
@@ -48,7 +48,7 @@ let customCapabilityStatement = resources => {
 
 /**
  * Generates a custom Security Statement
- * @param {object} securityUrls - This is apart of the Capability Statement. It provides information about the Security of the current implementation.
+ * @param {object} securityUrls - This is separate from the Capability Statement. It provides information about the Security of the current implementation.
  * If provided, this will be derived from the information you pass to the 'Security' property from the FHIR Server Config.
  * The below Security Statement is returned by default. This is probably only a place holder for now.
  */
@@ -91,14 +91,17 @@ module.exports.generateStatements = (args) => {
 ### Using the Statement Generator in the Config
 Now that we've built out our Statement Generator and have customized the Capability Statement info to our liking, we can add it to our configuration by doing the following: 
 ```javascript
-// require in the statement generator file
-const generateCapabilityStatement = require('path to your statement generator file').generateStatements;
+const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const generateCapabilityStatement = require('path to your statement generator file').generateStatements; // require in the statement generator file
 
 let config = {
   ...other config options,
   statementGenerator: generateCapabilityStatement,
   security: [] // Remember: What you assign to this will be what your custom security statement will use. Omitting this entirely will not output any security information. Leaving it blank, like it is here, will output the default info we have in the above 'customSecurityStatement' function.
 };
+
+let server = FHIRServer.initialize(config);
+...
 ```
 
 And voila! You can now output a custom Capability Statement.
