@@ -227,7 +227,7 @@ module.exports.remove = async (args, context) => {
 		// 405 if you do not want to allow the delete
 		// 409 if you can't delete because of referential
 		// integrity or some other reason
-		throw new ServerError({
+		throw new ServerError(err.message, {
 			statusCode: 409,
 			issue: [{
 				severity: 'error',
