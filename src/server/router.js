@@ -229,7 +229,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 				cors(corsOptions),
 				versionValidationMiddleware(profile),
 				sanitizeMiddleware(route.args),
-				authenticationMiddleware({ config }),
+				authenticationMiddleware( config ),
 				sofScopeMiddleware({ route, auth: config.auth, name: key }),
 				loadController(lowercaseKey, route.interaction, profile.serviceModule),
 			);
