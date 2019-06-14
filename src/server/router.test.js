@@ -160,6 +160,7 @@ describe('Router Tests', () => {
 			}
 		};
 		config.profiles.patient.serviceModule = mockServiceModule;
+		config.profiles.patient.operation = mockOperationConfig;
 
 		try {
 			router.setRoutes({ app, config });
@@ -167,8 +168,9 @@ describe('Router Tests', () => {
 			// Failed
 		}
 
-		expect(passport.authenticate.mock.calls.length).toBe(2);
+		expect(passport.authenticate.mock.calls.length).toBe(3);
 
 		process.env.NODE_ENV = originalEnv;
 	});
+
 });

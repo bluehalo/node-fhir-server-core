@@ -116,7 +116,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 			cors(corsOptions),
 			versionValidationMiddleware(profile),
 			sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
-			authenticationMiddleware({ config }),
+			authenticationMiddleware( config ),
 			sofScopeMiddleware({ route, auth: config.auth, name: key }),
 			// TODO: REMOVE: logger in future versions
 			operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger }),
