@@ -3,6 +3,9 @@ jest.mock('./middleware/version-validation.middleware.js');
 const router = require('./router.js');
 const path = require('path');
 
+const passport = require('passport');
+jest.mock('passport');
+
 let app, config;
 
 let mockServiceModule = {
@@ -145,4 +148,29 @@ describe('Router Tests', () => {
 		expect(app.post.mock.calls[0][0]).toBe('/:base_version/patient/([$])aggregate-results');
 		expect(app.post.mock.calls[1][0]).toBe('/:base_version/patient/_search');
 	});
+
+	test('config should not be wrapped in another object before being passed to authentication middleware', () => {
+		let originalEnv = process.env.NODE_ENV;
+		process.env.NODE_ENV = 'development';
+
+		config.auth = {
+			strategy: {
+				name: 'test',
+				useSession: true,
+			}
+		};
+		config.profiles.patient.serviceModule = mockServiceModule;
+		config.profiles.patient.operation = mockOperationConfig;
+
+		try {
+			router.setRoutes({ app, config });
+		} catch (e) {
+			// Failed
+		}
+
+		expect(passport.authenticate.mock.calls.length).toBe(3);
+
+		process.env.NODE_ENV = originalEnv;
+	});
+
 });
