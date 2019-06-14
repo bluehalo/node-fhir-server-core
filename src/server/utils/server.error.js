@@ -5,13 +5,12 @@
  * @class ServerError
  */
 module.exports = class ServerError extends Error {
-
-	constructor (message, options) {
+	constructor(message, options) {
 		super(message);
 
 		// Make message enumerable
 		Object.defineProperty(this, 'message', {
-			enumerable: true
+			enumerable: true,
 		});
 
 		// Keep stack trace for V8
@@ -22,5 +21,4 @@ module.exports = class ServerError extends Error {
 		// Mixin any additional options
 		Object.assign(this, options);
 	}
-
 };
