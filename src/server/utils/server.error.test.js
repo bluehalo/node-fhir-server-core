@@ -11,9 +11,11 @@ describe('ServerError', () => {
 	test('should mixin any additional custom properties', () => {
 		let error = new ServerError('Foobar', {
 			statusCode: 409,
-			issue: [{
-				foo: 'bar'
-			}]
+			issue: [
+				{
+					foo: 'bar',
+				},
+			],
 		});
 
 		expect(error.message).toBe('Foobar');
@@ -25,21 +27,23 @@ describe('ServerError', () => {
 	test('should be able to be passed directly to other classes', () => {
 		let error = new ServerError('Foobar', {
 			statusCode: 409,
-			issue: [{
-				foo: 'bar'
-			}]
+			issue: [
+				{
+					foo: 'bar',
+				},
+			],
 		});
 
 		// This mimics the concept of a resource we generate
 		class Operation {
-			constructor (options) {
+			constructor(options) {
 				Object.assign(this, options);
 			}
 
 			toJSON() {
 				return {
 					statusCode: this.statusCode,
-					message: this.message
+					message: this.message,
 				};
 			}
 		}

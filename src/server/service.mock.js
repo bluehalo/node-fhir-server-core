@@ -13,7 +13,7 @@ const errorDetails = message => ({
 				text: `Unexpected: ${message}`,
 			},
 		},
-	]
+	],
 });
 
 module.exports.search = async (_args, _context) => {
