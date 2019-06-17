@@ -1,3 +1,18 @@
+## [2.0.3](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.2...2.0.3) (2019-06-17)
+
+
+### Bug Fixes
+
+* authenticationMiddleware config ([#183](https://github.com/Asymmetrik/node-fhir-server-core/issues/183)) ([d9654bd](https://github.com/Asymmetrik/node-fhir-server-core/commit/d9654bd))
+* documentation error, error class missing message argument ([#177](https://github.com/Asymmetrik/node-fhir-server-core/issues/177)) ([3680a31](https://github.com/Asymmetrik/node-fhir-server-core/commit/3680a31))
+
+
+### Features
+
+* pull in binary resource controller and parameters file into v4_0_0 ([#181](https://github.com/Asymmetrik/node-fhir-server-core/issues/181)) ([db5a344](https://github.com/Asymmetrik/node-fhir-server-core/commit/db5a344))
+
+
+
 ## [2.0.2](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.1...2.0.2) (2019-05-22)
 
 
