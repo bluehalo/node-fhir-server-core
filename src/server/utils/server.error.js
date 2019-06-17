@@ -8,6 +8,8 @@ module.exports = class ServerError extends Error {
 	constructor(message, options) {
 		super(message);
 
+		Object.setPrototypeOf(this, ServerError.prototype);
+
 		// Make message enumerable
 		Object.defineProperty(this, 'message', {
 			enumerable: true,
