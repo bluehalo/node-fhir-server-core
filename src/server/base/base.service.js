@@ -30,10 +30,14 @@ const makeBatchResultBundle = (results, res, baseVersion) => {
 
 module.exports.batch = (req, res) => new Promise((batchResolve, batchReject) => {
 	logger.info('Base >>> batch');
-	let {resourceType, entry: entries} = req.body;
+	let {resourceType, type, entry: entries} = req.body;
 	let {base_version: baseVersion} = req.params;
 	if (resourceType !== 'Bundle') {
 		return batchReject(errors.internal(`Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`,
+			baseVersion));
+	}
+	if (type.toLowerCase() !== 'batch') {
+		return batchReject(errors.internal(`Expected 'type: batch'. Received 'type: ${type}'.`,
 			baseVersion));
 	}
 	let {protocol, baseUrl} = req;
