@@ -4,19 +4,19 @@ Asymmetrik FHIR API Server
 
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
-The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.  This server framework currently supports both DSTU2 (1.0.2) and STU3 (3.0.1) simultaneously.  You can decide to support both or just one by editing the configuration.
+The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API.  This server framework currently supports **DSTU2** (1.0.2), **STU3** (3.0.1), and **R4** (4.0.0) simultaneously.  You can decide to support all three or just one by editing the configuration.
 
 The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
 
-For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge, [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
+For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge: [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
 <img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
 ## node-fhir-server-core@2.0.0
-Please view the Migration guide for version 2.0.0. We **will absolutely** continue supporting previous versions but **will prioritize** new features going to 2.0.0 unless we receive requests to retrofit them to older versions.
+Please view the [Migration Guide]() for version `2.0.0`. We **will absolutely** continue supporting previous versions but **will prioritize** new features going to `2.0.0` unless we receive requests to retrofit them to older versions.
 
 ## Prerequisites
-[Node.js](https://nodejs.org/en/) version later than 7.6 is required, **but** you should not use 8.5 (see [Attention](#attention)).  A basic understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and a familiarity of the FHIR specification is not required, but will be very helpful.
+[Node.js](https://nodejs.org/en/) version later than `>7.6` is required, **but** you should **NOT** use `8.5` (see [Attention](#attention)).  A basic understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and a familiarity of the FHIR specification is not required, but will be very helpful.
 
 ## Getting Started
 Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server. 
@@ -41,7 +41,7 @@ Please see [CONTRIBUTING.md](https://github.com/Asymmetrik/node-fhir-server-core
 If you are experiencing a bug, please feel free to file an [issue](https://github.com/Asymmetrik/node-fhir-server-core/issues). For general questions, please post them to [StackOverflow](https://stackoverflow.com/) with the tag `node-fhir-server-core` or `javascript-fhir`.
 
 ## Attention
-This library makes use of node's path module. This is potentially exploitable in node version 8.5, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than 7.6 **BUT** not 8.5.
+This library makes use of node's path module. This is potentially exploitable in node version `8.5`, see [here](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). When deploying this, you need to deploy with a node version later than `>7.6` but **NOT** `8.5`.
 
 ## License
 `@asymmetrik/node-fhir-server-core` is [MIT licensed](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/LICENSE).
