@@ -1,6 +1,6 @@
 Asymmetrik FHIR API Server
 ==========================
-> A Secure Rest implementation for the [HL7 FHIR Specification](https://www.hl7.org/fhir/). For API documentation, please see [https://github.com/Asymmetrik/node-fhir-server-core/wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki).
+> A Secure Rest implementation for the [HL7 FHIR Specification](https://www.hl7.org/fhir/). For API documentation, please see [our documents](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/docs).
 
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
@@ -13,7 +13,7 @@ For an example implementation using MongoDB, please refer to our Github reposito
 <img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
 ## node-fhir-server-core@2.0.0
-Please view the [Migration Guide]() for version `2.0.0`. We **will absolutely** continue supporting previous versions but **will prioritize** new features going to `2.0.0` unless we receive requests to retrofit them to older versions.
+Please view the [Migration Guide](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/MIGRATION_2.0.0.md) for version `2.0.0`. We **will absolutely** continue supporting previous versions but **will prioritize** new features going to `2.0.0` unless we receive requests to retrofit them to older versions.
 
 ## Prerequisites
 [Node.js](https://nodejs.org/en/) version later than `>7.6` is required, **but** you should **NOT** use `8.5` (see [Attention](#attention)).  A basic understanding of [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and a familiarity of the FHIR specification is not required, but will be very helpful.
