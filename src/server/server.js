@@ -145,7 +145,7 @@ class Server {
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
 		// Set favicon
-		this.app.use(favicon(this.config.server.favicon || path.posix.join(__dirname, '../assets/phoenix.ico')));
+		this.app.use(favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico')));
 		// return self for chaining
 		return this;
 	}

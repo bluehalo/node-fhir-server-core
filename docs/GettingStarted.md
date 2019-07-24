@@ -1,25 +1,27 @@
-## Quick Overview
+## Overview
 
-This FHIR server library is intended to simplify the process of standing up your own FHIR server. We try to abstract a lot of the complicated pieces away so all you need to do is provide some configurations and write queries. In this getting started guide, we will walk you through using this library to get started building your own FHIR server. 
+This FHIR server library is intended to simplify the process of standing up your own FHIR server. We abstract a lot of the complicated pieces away, so all that you need to do is provide some configurations and write queries. In this getting started guide, we will walk you through using this library to start building your own FHIR server. 
 
-**NOTE**: These instructions are for unix based systems. If you are using Windows, you may need to swap some commands for their Windows equivalent.
+**NOTE**: These instructions are for `Unix` based systems. If you are using Windows, you may need to swap some commands for their Windows equivalent.
 
-## Creating a server
+## Creating a Server
 
 Let's get started by installing some prerequisites.
 
 ### Prerequisites
 
-1. Install the latest LTS for [Node.js](https://nodejs.org/en/). **You must have Node >= 7.7 installed**.
+1. Install the latest LTS for [Node.js](https://nodejs.org/en/). **You must have Node `>= 7.7` installed**.
 2. Install [yarn](https://yarnpkg.com/en/docs/install).
 
-### Project setup
+### Project Setup
 
 In terminal, run the following:
 
-1. `mkdir fhir-server`
-2. `cd fhir-server`
-3. `yarn init`
+```shell
+mkdir fhir-server
+cd fhir-server
+yarn init
+```
 
 You will now have a folder structure that looks like this:
 
@@ -30,11 +32,14 @@ fhir-server
 
 ### Install `node-fhir-server-core`
 
-Simply run `yarn add @asymmetrik/node-fhir-server-core`.
+Next, run:
+ ```shell
+yarn add @asymmetrik/node-fhir-server-core
+```
 
 ### Create an entry file and a start script
 
-Let's start by creating an `index.js` file in the root of the project and add the following code to it.
+Let's start by creating an `index.js` file in the root of the project and add the following code to it:
 
 ```javascript
 const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
@@ -48,7 +53,7 @@ server.listen(3000, () => {
 });
 ```
 
-What we are doing here is loading the core library and then calling initialize on it. Internally this will setup middleware, various security features, public directory routes, error routes, and routes for FHIR resources. Then finally we tell the server to listen on port 3000 which makes the server available at `http://www.localhost:3000`.
+What we are doing here is loading the core library and then calling initialize on it. Internally, this will setup middleware, various security features, public directory routes, error routes, and routes for FHIR resources. Then finally, we tell the server to listen on port 3000 which makes the server available at `http://www.localhost:3000`.
 
 You will now have a folder structure that looks like this:
 
@@ -60,7 +65,7 @@ fhir-server
 - yarn.lock
 ```
 
-The next thing we want to do is run this file in node. Let's add a script to our `package.json`, it should look something like this:
+The next thing we want to do is run this file in node. Let's add a script to our `package.json`. It should look something like this:
 
 **NOTE:** You may have different values for some fields which is fine, the "scripts" block is the important part
 ```json
@@ -78,17 +83,20 @@ The next thing we want to do is run this file in node. Let's add a script to our
 }
 ```
 
-Finally, run `yarn start` to start the server.
+Finally, start the server:
+```shell
+yarn start
+```
 
 If you have done everything correctly so far, you will receive the following error.
 
 > Error: No profiles configured. We do not enable any profiles by default so please review the profile wiki for how to enable profiles and capabilities. See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md.
 
-By default, our library does not configure any profiles, and without a profile, what is the point to having a server. Next, let's walk you through setting up a simple patient profile. A profile corresponds to a queryable FHIR resource and we support all the standard searchable resources.
+By default, our library does not configure any profiles. Without a profile, what is the point of having a server? Next, let's walk you through setting up a simple patient profile. A profile corresponds to a queryable FHIR resource, and we support all the standard searchable resources.
 
 ### Creating a patient profile
 
-We will need to do a few things to add support for Patient resources in our server. Let's start by adding a patient service. Create a `patient.service.js` file in the root.
+We will need to do a few things to add support for `Patient` resources in our server. Let's start by adding a patient service. Create a `patient.service.js` file in the root.
 
 You will now have a folder structure that looks like this:
 
@@ -135,7 +143,7 @@ let config = {
 };
 ```
 
-Here we are telling the FHIR server where to locate the patient service and that we intend to support it on R4(4.0.0 specifically). See the [server configuration docs](./ServerConfiguration.md) for more configuration options.
+Here we are telling the FHIR server where to locate the patient service and that we intend to support it on R4 (`4.0.0` specifically). See the [server configuration docs](./ServerConfiguration.md) for more configuration options.
 
 Now run `yarn start` one more time. You should something very similar to the following:
 
