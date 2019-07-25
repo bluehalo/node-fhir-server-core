@@ -264,4 +264,4 @@ module.exports.remove = async (args, context) => {
 ```
 
 ## Arguments
-Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](../src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each  version folder is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources such as resource and/or domain resource.
+Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](../src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each  version folder there is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources.

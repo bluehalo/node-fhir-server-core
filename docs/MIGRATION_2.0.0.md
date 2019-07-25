@@ -28,7 +28,7 @@ We think this will simplify things a lot for developers on both sides, contribut
 
 ### Return types
 
-One major change for version `2.0.0` is how your services returned resources. Everything before `2.0.0` returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and do more than they really needed to do. Response utils have since moved to an external package, which you can find at [fhir-response-util](https://github.com/Asymmetrik/phx-tools/tree/master/packages/fhir-response-util). They are now very simple to work with and easier to modify in the future.
+One major change for version `2.0.0` is how your services returned resources. Everything before `2.0.0` returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and they were doing more than they really needed to do. Response utils have since moved to an external package, which you can find at [fhir-response-util](https://github.com/Asymmetrik/phx-tools/tree/master/packages/fhir-response-util). They are now very simple to work with and easier to modify in the future.
 
 What this means for developers is that they will now need to be explicit when returning data from a service and use the schemas we are providing.
  
