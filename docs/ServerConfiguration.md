@@ -4,9 +4,9 @@ The config drives the entire server.  We try to make it easy to adopt this solut
 #### Auth
 > NOTE: This section may change slightly as we work on some optional integrations and see what works best for the most use cases.
 
-This section of the config drives the authentication and authorization layer of the server.  If you are using SMART on FHIR we provide a [passportjs](http://www.passportjs.org/) strategy and authorization middleware you can use out of the box with just some minor configurations. We also allow you to provide your own custom passport strategy. Both authentication and authorization are disabled by default for development sake. To run them on you just need to provide a few options outlined below.
+This section of the config drives the authentication and authorization layer of the server.  If you are using SMART on FHIR we provide a [Passportjs](http://www.passportjs.org/) strategy and authorization middleware you can use out of the box with just some minor configurations. We also allow you to provide your own custom passport strategy. Both authentication and authorization are disabled by default for development sake. To run them, you just need to provide a few options outlined below.
 
-Please see the [Access Control](https://github.com/Asymmetrik/node-fhir-server-core/wiki/Access-Control) wiki for a step by step guide to enable it in your application or how to add your own custom setup.
+Please see the [Access Control](./AccessControl.md) document for a step-by-step guide to enable it in your application or how to add your own custom setup.
 
 #### Server
 This section of the config sets up the [Express](https://expressjs.com/) framework and certain middleware.  You can specify which port your app runs on, the cors options, and ssl support.  For more information, scroll down to the description of each property below.
@@ -28,7 +28,7 @@ Here is an example config with all the currently supported options. See descript
     }
 	},
 	server: {
-		favicon: path.posix.resolve('path to favicon'),
+		favicon: path.resolve('path to favicon'),
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -106,7 +106,7 @@ Here is an example config with all the currently supported options. See descript
 #### `server.port`
 
 - **Type:** `number`
-- **Description:** Port the express app will listen to.
+- **Description:** Port the Express app will listen to.
 - **Required:** Yes
 - **Default:** `none`
 
@@ -115,7 +115,7 @@ Here is an example config with all the currently supported options. See descript
 - **Type:** `string`
 - **Description:** Path to the favicon you would like to use
 - **Required:** No
-- **Default:** `path.posix.resolve('./src/assets/phoenix.ico')`
+- **Default:** `path.resolve('./src/assets/phoenix.ico')`
 
 #### `server.corsOptions`
 
