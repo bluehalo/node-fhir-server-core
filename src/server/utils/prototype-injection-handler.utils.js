@@ -10,11 +10,11 @@ module.exports = prototypeInjectionHandler = (req, res, next) => {
 	} catch (error) {
 		let OperationOutcome = require(resolveSchema('3_0_1', 'operationoutcome'));
 		let err = new OperationOutcome({
-			statusCode: 403,
+			statusCode: 400,
 			issue: [
 				{
 					severity: 'error',
-					code: 'forbidden',
+					code: 'invalid',
 					details: {
 						text: error.message,
 					},

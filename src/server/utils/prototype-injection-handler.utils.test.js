@@ -25,7 +25,7 @@ describe('Prototype Injection Handler', () => {
 			.set('Content-Type', 'application/fhir+json')
 			.send(JSON.parse(test))
 			.then(response => {
-				expect(response.statusCode).toBe(403);
+				expect(response.statusCode).toBe(400);
 				expect(response.body.issue[0].details.text).toBe('Object contains forbidden prototype property');
 				done();
 			});
