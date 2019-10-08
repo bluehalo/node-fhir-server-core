@@ -293,12 +293,19 @@ class Server {
 
 	// Start the server
 	listen(port = process.env.PORT, host = process.env.HOST, callback) {
+		// port and host will override configuration here if specified,
+		// if not, the params need to be reassigned appropriately
 		if (typeof host === 'function') {
-			// host param is optional
 			callback = host;
 			host = process.env.HOST;
 		}
 		
+		if (typeof port === 'function') {
+			callback = port;
+			port = process.env.PORT;
+			host = process.env.HOST;
+		}
+
 		let server = this.config.server;		
 		// If we are missing a port, let's notify them
 		invariant(
