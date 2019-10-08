@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "@asymmetrik/fhir-response-util": "^1.0.0",
-    "@asymmetrik/node-fhir-server-core": "^2.0.4",
     "@asymmetrik/sof-scope-checker": "^1.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
