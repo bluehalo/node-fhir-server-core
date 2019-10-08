@@ -3,7 +3,7 @@ const { resolveSchema } = require('./resolve.utils');
 
 // Helper to determine which operation outcome to retrieve
 let getErrorConstructor = base_version => {
-	if (!base_version || !VERSIONS.hasOwnProperty(base_version)) {
+	if (!base_version || !Object.prototype.hasOwnProperty.call(VERSIONS, base_version)) {
 		return require(resolveSchema(VERSIONS['3_0_1'], 'OperationOutcome'));
 	} else {
 		return require(resolveSchema(base_version, 'OperationOutcome'));
