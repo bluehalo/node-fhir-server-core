@@ -7,16 +7,17 @@ The capability statement now allows for the configuration of what information ge
 ### Creating a Statement Generator
 You can include this code where you define your Asymmetrik Server configurations or include it in another file and require it in. For this example, we will go with the latter option.
 
-First, we're going to require in the Asymmetrik FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
+First, we're going to require the Asymmetrik FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
 
 ```javascript
-// require in the Asymmetrik FHIR Server
+// require the Asymmetrik FHIR Server
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
 ```
-
-Then we'll create a function that will require in the `CapabilityStatement` class, and return a new instance that contains your information. Please make sure you remain compliant with the FHIR specification.
+Then we'll create a function that will require the `CapabilityStatement` class, and return a new instance that contains your information. Please make sure you remain compliant with the FHIR specification.
 
 ```javascript
+const base_version = '4_0_0'
+
 let customCapabilityStatement = resources => {
   let CapabilityStatement = require(FHIRServer.resolveSchema(base_version, 'CapabilityStatement'));
 
@@ -98,7 +99,7 @@ module.exports.generateStatements = (args) => {
 Now that we've built out our Statement Generator and have customized the Capability Statement info to our liking, we can add it to our configuration by doing the following: 
 ```javascript
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
-const generateCapabilityStatement = require('path to your statement generator file').generateStatements; // require in the statement generator file
+const generateCapabilityStatement = require('path to your statement generator file').generateStatements; // require the statement generator file
 
 let config = {
   ...other config options,
