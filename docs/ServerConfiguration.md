@@ -21,6 +21,7 @@ Here is an example config with all the currently supported options. See descript
 {
 	auth: {
 		type: 'auth-type',
+		customScopeKey: 'custom',
     strategy: {
 	    name: 'bearer',
 	    useSession: false,
@@ -74,6 +75,13 @@ Here is an example config with all the currently supported options. See descript
 - **Description:** The type of authentication used. Currently this is only needed to enable SMART authentication. If you want to use SMART authentication, set this value to `smart`. 
 - **Required:** false
 - **Default:** undefined
+
+#### `auth.customScopeKey`
+
+- **Type:** `string`
+- **Description:** Specify the customScopeKey option to use a custom claim instead of the scope. 
+- **Required:** false
+- **Default:** `'scope'`
 
 #### `auth.strategy`
 

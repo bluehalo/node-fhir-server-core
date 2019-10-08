@@ -6,7 +6,9 @@
   "author": "Asymmetrik Ltd.",
   "contributors": [
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
-    "Jon Lee <jlee@asymmetrik.com>"
+    "Jon Lee <jlee@asymmetrik.com>",
+    "Sumeet Shah <sshah@asymmetrik.com>",
+    "Shane O'Neill <soneill@asymmetrik.com>"
   ],
   "license": "MIT",
   "prettier": {
@@ -51,7 +53,7 @@
     "compression": "^1.7.1",
     "cors": "^2.8.4",
     "cross-env": "^5.1.4",
-    "eslint": "^4.12.1",
+    "eslint": "^6.1.0",
     "express": "^4.16.2",
     "glob": "^7.1.2",
     "helmet": "^3.9.0",
