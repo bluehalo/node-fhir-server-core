@@ -145,7 +145,7 @@ let config = {
 
 Here we are telling the FHIR server where to locate the patient service and that we intend to support it on R4 (`4.0.0` specifically). See the [server configuration docs](./ServerConfiguration.md) for more configuration options.
 
-Now run `yarn start` one more time. You should something very similar to the following:
+Now run `yarn start` one more time. You should see something very similar to the following:
 
 ```shell
 2019-01-08T20:56:50.563Z - info: Starting the FHIR Server at localhost:3000
