@@ -292,15 +292,21 @@ class Server {
 	}
 
 	// Start the server
-	listen(port = process.env.PORT, callback) {
-		let server = this.config.server;
+	listen(port = process.env.PORT, host = process.env.HOST, callback) {
+		if (typeof host === 'function') {
+			// host param is optional
+			callback = host;
+			host = process.env.HOST;
+		}
+		
+		let server = this.config.server;		
 		// If we are missing a port, let's notify them
 		invariant(
 			port || server.port,
 			'Missing port. Please provide a port when initializing the server. See ' +
 				'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 		);
-
+		
 		// Update the express app to be in instance of createServer
 		this.app = !this.env.USE_HTTPS
 			? http.createServer(this.app)
@@ -309,11 +315,11 @@ class Server {
 						key: fs.readFileSync(server.ssl.key),
 						cert: fs.readFileSync(server.ssl.cert),
 					},
-					this.app,
+					this.app
 			  );
 
-		// Start the app
-		this.app.listen(port || server.port, callback);
+		// Start the app - will listen on 0.0.0.0 [::] if host is falsy
+		this.app.listen(port || server.port, host || server.host, callback);
 	}
 }
 
