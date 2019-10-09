@@ -38,11 +38,11 @@ function deriveActionFromInteraction(interaction) {
  */
 function parseScopes(user = {}, scopeKey = 'scope') {
 	let scopes = user[scopeKey];
-	
+
 	if (Array.isArray(scopes)) {
 		return scopes;
 	}
-	
+
 	return typeof scopes === 'string' ? scopes.split(/[, ]/) : [];
 }
 
