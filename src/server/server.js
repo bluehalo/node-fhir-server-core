@@ -299,7 +299,7 @@ class Server {
 			callback = host;
 			host = process.env.HOST;
 		}
-		
+
 		if (typeof port === 'function') {
 			callback = port;
 			port = process.env.PORT;
@@ -313,7 +313,7 @@ class Server {
 			'Missing port. Please provide a port when initializing the server. See ' +
 				'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 		);
-		
+
 		// Update the express app to be in instance of createServer
 		this.app = !this.env.USE_HTTPS
 			? http.createServer(this.app)
