@@ -306,7 +306,7 @@ class Server {
 			host = process.env.HOST;
 		}
 
-		let server = this.config.server;		
+		let server = this.config.server;
 		// If we are missing a port, let's notify them
 		invariant(
 			port || server.port,
