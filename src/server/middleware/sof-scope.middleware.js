@@ -34,7 +34,7 @@ function deriveActionFromInteraction(interaction) {
  * @name parseScopes
  * @summary Parse scopes from a user context
  * @param {Object} user
- * @param {Object} scopeKey
+ * @param {String} scopeKey
  * @return {Array<String>} scopes assigned to a particular user
  */
 function parseScopes(user = {}, scopeKey = 'scope') {
