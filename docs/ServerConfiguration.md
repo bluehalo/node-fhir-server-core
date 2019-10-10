@@ -9,7 +9,7 @@ This section of the config drives the authentication and authorization layer of 
 Please see the [Access Control](./AccessControl.md) document for a step-by-step guide to enable it in your application or how to add your own custom setup.
 
 #### Server
-This section of the config sets up the [Express](https://expressjs.com/) framework and certain middleware.  You can specify which port your app runs on, the cors options, and ssl support.  For more information, scroll down to the description of each property below.
+This section of the config sets up the [Express](https://expressjs.com/) framework and certain middleware.  You can specify which interface + port your app runs on, the cors options and ssl support.  For more information, scroll down to the description of each property below.
 
 #### Profiles
 This section of the config sets up which version of the FHIR specification you want to support and which resource from that version you want to support.  You can support multiple versions.  The core library will automatically set up all of the routes and required parameters for each version and resource.
@@ -30,6 +30,7 @@ Here is an example config with all the currently supported options. See descript
 	},
 	server: {
 		favicon: path.resolve('path to favicon'),
+		host: '127.0.0.1',
 		port: 3000,
 		corsOptions: {
 			maxAge: 86400
@@ -111,10 +112,17 @@ Here is an example config with all the currently supported options. See descript
 - **Required:** false
 - **Default:** undefined
 
+#### `server.host`
+
+- **Type:** `string`
+- **Description:** Host interface the Express app will listen on.
+- **Required:** No
+- **Default:** `all interfaces`
+
 #### `server.port`
 
 - **Type:** `number`
-- **Description:** Port the Express app will listen to.
+- **Description:** Port the Express app will listen on.
 - **Required:** Yes
 - **Default:** `none`
 
