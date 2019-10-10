@@ -2,6 +2,7 @@ const { resolveSchema } = require('./utils/resolve.utils.js');
 const deprecate = require('./utils/deprecation.notice.js');
 const ServerError = require('./utils/server.error.js');
 const invariant = require('./utils/invariant.js');
+const prototypeInjectionHandler = require('./utils/prototype-injection-handler.utils.js');
 const { VERSIONS } = require('../constants.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -144,6 +145,8 @@ class Server {
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+		// Enable @hapi/bourne to protect against prototype injection
+		this.app.use(prototypeInjectionHandler);
 		// Set favicon
 		this.app.use(favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico')));
 		// return self for chaining
