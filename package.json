@@ -68,7 +68,7 @@
     "passport-http-bearer": "^1.0.1",
     "sanitize-html": "^1.16.1",
     "serve-favicon": "^2.5.0",
-    "snyk": "^1.192.0",
+    "snyk": "^1.231.0",
     "superagent": "^3.8.3",
     "validator": "^9.1.2",
     "winston": "^3.2.1",
