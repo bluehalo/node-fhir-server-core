@@ -107,6 +107,7 @@ describe('Server Class', () => {
 	});
 
 	test('Method: listen', () => {
+		server.listen = jest.fn();
 		let listen = jest.spyOn(server, 'listen');
 		let callback = jest.fn();
 		// Start listening on a port and pass the callback through
