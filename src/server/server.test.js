@@ -1,5 +1,16 @@
 jest.mock('compression', () => jest.fn());
 jest.mock('helmet', () => jest.fn());
+jest.mock('express', () => {
+	let mock = jest.fn(() => ({
+		use: jest.fn(),
+		set: jest.fn(),
+		get: jest.fn(),
+		listen: jest.fn(),
+	}));
+	// Mock the static directory function
+	mock.static = jest.fn();
+	return mock;
+});
 
 // Mock express and body parser
 jest.mock('body-parser', () => ({
@@ -48,7 +59,6 @@ describe('Server Class', () => {
 				},
 			},
 		});
-		console.log('listen', server.listen);
 	});
 
 	beforeEach(() => {
@@ -88,10 +98,11 @@ describe('Server Class', () => {
 		server.configureSession();
 	});
 
-	test('Method: configureLoggers', () => {
+	test('Method: configureLoggers', done => {
 		server.configureLoggers((container, transports) => {
 			expect(container).toBeInstanceOf(winston.Container);
 			expect(Object.keys(transports)).toContain('Console');
+			done();
 		});
 	});
 
@@ -99,9 +110,9 @@ describe('Server Class', () => {
 		let listen = jest.spyOn(server, 'listen');
 		let callback = jest.fn();
 		// Start listening on a port and pass the callback through
-		server.listen(3001, callback);
+		server.listen(3000, callback);
 		expect(listen).toHaveBeenCalledTimes(1);
-		expect(listen.mock.calls[0][0]).toBe(3001);
+		expect(listen.mock.calls[0][0]).toBe(3000);
 		expect(listen.mock.calls[0][1]).toBe(callback);
 	});
 });
