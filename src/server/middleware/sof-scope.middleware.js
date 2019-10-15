@@ -34,10 +34,17 @@ function deriveActionFromInteraction(interaction) {
  * @name parseScopes
  * @summary Parse scopes from a user context
  * @param {Object} user
+ * @param {String} scopeKey
  * @return {Array<String>} scopes assigned to a particular user
  */
-function parseScopes(user = {}) {
-	return typeof user.scope === 'string' ? user.scope.split(/[, ]/) : [];
+function parseScopes(user = {}, scopeKey = 'scope') {
+	let scopes = user[scopeKey];
+
+	if (Array.isArray(scopes)) {
+		return scopes;
+	}
+
+	return typeof scopes === 'string' ? scopes.split(/[, ]/) : [];
 }
 
 /**
@@ -62,7 +69,7 @@ module.exports = function sofScopeCheckMiddleware(options = {}) {
 		// name is lowercased, we want upper, foo -> Foo
 		let resource = name.slice(0, 1).toUpperCase() + name.slice(1);
 		let action = deriveActionFromInteraction(route.interaction);
-		let scopes = parseScopes(req && req.user);
+		let scopes = parseScopes(req && req.user, auth.customScopeKey);
 		// Check if they have permission
 		let { error } = scopeChecker(resource, action, scopes);
 
