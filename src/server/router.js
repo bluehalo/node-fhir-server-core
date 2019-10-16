@@ -191,7 +191,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 
 			// Calculate the cors setting we want for this route
 			let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
-				methods: [corsDefaults.methods || route.type.toUpperCase()],
+				methods: [route.type.toUpperCase()],
 			});
 
 			// Define the arguments based on the interactions
