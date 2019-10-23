@@ -42,10 +42,11 @@ module.exports = {
 	/**
 	 * @description Initialize is useful for building a server with all the defaults
 	 * @param {Object} config - FHIR Server configuration object
+	 * @param {Object} app - Express instance to use on server
 	 * @return {Server}
 	 */
-	initialize: config =>
-		new Server(config)
+	initialize: (config, app) =>
+		new Server(config, app)
 			.configureMiddleware()
 			.configureSession()
 			.configureHelmet()
