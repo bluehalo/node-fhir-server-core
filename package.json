@@ -1,6 +1,6 @@
 {
-  "name": "@hvs/node-fhir-server-core",
-  "version": "2.0.4",
+  "name": "@asymmetrik/node-fhir-server-core",
+  "version": "2.0.5",
   "description": "Node FHIR Rest API Server",
   "main": "src/index",
   "author": "Asymmetrik Ltd.",
@@ -8,8 +8,7 @@
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",
     "Sumeet Shah <sshah@asymmetrik.com>",
-    "Shane O'Neill <soneill@asymmetrik.com>",
-    "Michele Korell <michele.korell@hopitalvs.ch"
+    "Shane O'Neill <soneill@asymmetrik.com>"
   ],
   "license": "MIT",
   "prettier": {
