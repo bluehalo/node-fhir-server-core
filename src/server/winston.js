@@ -6,15 +6,15 @@ const { Container, transports } = require('winston');
  * - export multiple loggers
  * - export a default logger
  * - try not to be too much of a breaking change
+ * - expose core container to allow for use in different implementations
  */
 
-let container = new Container();
+const container = new Container();
 
 /**
  * @description Logging container that can be used to modify any loggers
  * availablie in the current application
  */
-module.exports.container = container;
 
 /**
  * @function get
@@ -25,13 +25,13 @@ module.exports.container = container;
  * adding a logger
  * @return {winston.logger}
  */
-module.exports.get = (name = 'default', options) => container.get(name, options);
+const get = (name = 'default', options) => container.get(name, options);
 
 /**
  * @function initialize
  * @description Initialize a default console logger
  */
-module.exports.initialize = (config = {}) => {
+const initialize = (config = {}) => {
 	let transport = new transports.Console({
 		level: config.level,
 		timestamp: true,
@@ -51,4 +51,11 @@ module.exports.initialize = (config = {}) => {
 			transports: [transport],
 		});
 	}
+};
+
+module.exports = {
+	container,
+	get,
+	initialize,
+	transports,
 };

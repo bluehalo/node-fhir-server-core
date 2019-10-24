@@ -224,6 +224,13 @@ class Server {
 		return this;
 	}
 
+	// Setup custom logging
+	configureLoggers(fun) {
+		fun(loggers.container, loggers.transports);
+		// return self for chaining
+		return this;
+	}
+
 	// Setup error routes
 	setErrorRoutes() {
 		let logger = loggers.get('default');
@@ -325,7 +332,7 @@ class Server {
 						key: fs.readFileSync(server.ssl.key),
 						cert: fs.readFileSync(server.ssl.cert),
 					},
-					this.app
+					this.app,
 			  );
 
 		// Start the app - will listen on 0.0.0.0 [::] if host is falsy
