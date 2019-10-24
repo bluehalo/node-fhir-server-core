@@ -105,7 +105,7 @@ function validate(config) {
 }
 
 class Server {
-	constructor(config = {}, app = {}) {
+	constructor(config = {}, app) {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
 		// Setup a logger for the application
