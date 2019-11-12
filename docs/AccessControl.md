@@ -116,7 +116,9 @@ let server = new Server(config)
 	.setErrorRoutes();
 ```
 
-Provide to the server a personal express instance. So you can do the following:
+## Using your own express instance
+
+You can `initialize` a server with your own express app if you need further customization.
 
 ```javascript
 const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
