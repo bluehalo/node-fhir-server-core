@@ -105,7 +105,7 @@ function validate(config) {
 }
 
 class Server {
-	constructor(config = {}) {
+	constructor(config = {}, app) {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
 		// Setup a logger for the application
@@ -119,8 +119,8 @@ class Server {
 			'Using the logger this way is deprecated. Please see the documentation on ' +
 				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 		);
-		// Setup our express instance
-		this.app = express();
+		// Use external express instance or setup new one
+		this.app = app ? app : express();
 		// Setup some environment variables handy for setup
 		let { server = {} } = this.config;
 
