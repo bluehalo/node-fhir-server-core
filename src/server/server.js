@@ -126,7 +126,7 @@ class Server {
 
 		this.env = {
 			IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
-			USE_HTTPS: (server.ssl && server.ssl.key && server.ssl.cert) ? server.ssl : undefined,
+			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert ? server.ssl : undefined,
 		};
 		// return self for chaining
 		return this;
