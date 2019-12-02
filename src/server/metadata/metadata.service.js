@@ -99,8 +99,11 @@ let generateCapabilityStatement = (args, config) =>
 		let customMakeResource = null;
 		server_statement.resource = active_profiles.map(profile => {
 			if (profile.metadata) {
-				customMakeResource = require(profile.metadata).makeResource;
+				customMakeResource =
+					typeof profile.metadata === 'string' ? require(profile.metadata).makeResource : profile.metadata.makeResource;
+				// customMakeResource = require(profile.metadata).makeResource;
 			} else {
+				// Global makeResource function if no metadata definition overload
 				customMakeResource = profile.service.makeResource;
 			}
 			let resource = customMakeResource

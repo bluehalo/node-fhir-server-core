@@ -116,26 +116,32 @@ let server = new Server(config)
 	.setErrorRoutes();
 ```
 
-This server instance exposes the express app instance via an `app` property. So you can do the following:
+## Using your own express instance
+
+You can `initialize` a server with your own express app if you need further customization.
 
 ```javascript
-const { Server } = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
+const express = require('express');
 
-let server = new Server(config);
+let config = {};
+let app = express();
+let router = express.Router();
 
-// Write your own custom middleware here for validating roles or using passport
-server.app.use(function (req, res, next) {
-	
+// Example: create express router for graphql operations
+router.use('/', (req, res, next) => {
+  // ... Code to handle graphql ...
+  next();
 });
 
-// Call whichever of these functions you would like
-server.configureMiddleware()
-	.configureSession()
-	.configureHelmet()
-	.setPublicDirectory()
-	.setProfileRoutes()
-	.setErrorRoutes();
+// Add router to express app
+app.use('/graphql', router);
 
-// Finally start the server
-server.listen(3000);	
+// Initialize FHIR server with custom app
+let server = initialize(config, app);
+let logger = loggers.get('default');
+
+server.listen(3000, () => {
+	logger.info('Starting the FHIR Server at localhost:3000');
+});
 ```

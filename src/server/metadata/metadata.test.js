@@ -177,7 +177,8 @@ describe('Conformance Tests', () => {
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
-		let keys = Object.keys(server.config.profiles);
+		// Exclude QuestionnaireResponse because it as a special metadata object associate and require a special mock
+		let keys = Object.keys(server.config.profiles).filter(k => k !== 'QuestionnaireResponse');
 		let { routes } = require('../route.config');
 
 		let response = await request(server.app)['get']('/3_0_1/metadata');
@@ -223,7 +224,8 @@ describe('Conformance Tests', () => {
 		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
-		let keys = Object.keys(server.config.profiles);
+		// Exclude QuestionnaireResponse because it as a special metadata object associate and require a special mock
+		let keys = Object.keys(server.config.profiles).filter(k => k !== 'QuestionnaireResponse');
 		//Patch the test config to include our custom metadata module
 		for (let key of keys) {
 			server.config.profiles[key].metadata = path.resolve(__dirname, 'metadata.test.metadata.js');

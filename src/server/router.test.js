@@ -157,7 +157,7 @@ describe('Router Tests', () => {
 			strategy: {
 				name: 'test',
 				useSession: true,
-			}
+			},
 		};
 		config.profiles.patient.serviceModule = mockServiceModule;
 		config.profiles.patient.operation = mockOperationConfig;
@@ -172,5 +172,4 @@ describe('Router Tests', () => {
 
 		process.env.NODE_ENV = originalEnv;
 	});
-
 });
