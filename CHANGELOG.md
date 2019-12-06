@@ -1,3 +1,7 @@
+## [2.0.7](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.6...2.0.7) (2019-12-05)
+
+* Upgrade jwk-to-pem
+
 ## [2.0.6](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.5...2.0.6) (2019-11-15)
 
 * Miscellaneous Bug Fixes
