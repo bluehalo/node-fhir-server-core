@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "description": "Node FHIR Rest API Server",
   "main": "src/index",
   "author": "Asymmetrik Ltd.",
@@ -59,7 +59,7 @@
     "helmet": "^3.9.0",
     "jsonschema": "^1.2.2",
     "jsonwebtoken": "^8.1.0",
-    "jwk-to-pem": "^1.2.6",
+    "jwk-to-pem": "^2.0.2",
     "method-override": "^2.3.10",
     "moment": "^2.19.4",
     "moment-timezone": "^0.5.14",
