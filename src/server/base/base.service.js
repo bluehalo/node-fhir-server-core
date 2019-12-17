@@ -1,11 +1,11 @@
-const { container } = require('../winston.js');
+const {container} = require('../winston.js');
 let logger = container.get('default');
 const path = require('path');
 const request = require('superagent');
 const errors = require('../utils/error.utils');
 
 
-const makeBatchResultBundle = (results, res, baseVersion) => {
+const makeBatchResultBundle = (requests, responses, res, baseVersion) => {
 	let Bundle = require(`../resources/${baseVersion}/schemas/bundle`);
 	let BundleLink = require(`../resources/${baseVersion}/schemas/bundlelink`);
 	let BundleEntry = require(`../resources/${baseVersion}/schemas/bundleentry`);
@@ -13,13 +13,19 @@ const makeBatchResultBundle = (results, res, baseVersion) => {
 		url: `${res.req.protocol}://${path.join(res.req.get('host'), res.req.baseUrl)}`,
 		relation: 'self',
 	});
-	let bundle = new Bundle({ link: selfLink, type: 'batch' });
+	let bundle = new Bundle({
+		link: selfLink,
+		timestamp: new Date().toISOString(),
+		type: 'batch-response'
+	});
 	let entries = [];
-	results.forEach(result => {
+	responses.forEach((response, i) => {
+		let request = requests[i];
 		entries.push(
 			new BundleEntry({
-				response: result,
-				request: result,
+				response: response,
+				resource: response.body,
+				request: request
 			}),
 		);
 	});
@@ -43,31 +49,29 @@ module.exports.batch = (req, res) => new Promise((batchResolve, batchReject) => 
 	let {protocol, baseUrl} = req;
 
 	let requestPromises = [];
-	let results = [];
+	let requests = [];
 	entries.forEach((entry) => {
 		let {method, url} = entry.request;
 		let resource = entry.resource;
 		let destinationUrl = `${protocol}://${path.join(req.headers.host, baseUrl, baseVersion, url)}`;
-		results.push({
+		requests.push({
 			method: method,
 			url: destinationUrl,
+
 		});
 		requestPromises.push(new Promise((resolve, reject) => {
-			resolve(request[method.toLowerCase()](destinationUrl)
-				.send(resource)
-				.set('Content-Type', 'application/json+fhir'));
-		})
-			.catch(err => {
-				return (err);
+				resolve(request[method.toLowerCase()](destinationUrl)
+					.send(resource)
+					.set('Content-Type', 'application/json+fhir'));
 			})
+				.catch(err => {
+					return (err);
+				})
 		);
 	});
 	return Promise.all(requestPromises)
 		.then(responses => {
-			for (let i = 0; i < responses.length; i++) {
-				results[i].status = responses[i].status;
-			}
-			let resultsBundle = makeBatchResultBundle(results, res, baseVersion);
+			let resultsBundle = makeBatchResultBundle(requests, responses, res, baseVersion);
 			batchResolve(resultsBundle);
 		});
 });
