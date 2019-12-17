@@ -23,10 +23,13 @@ const makeBatchResultBundle = (requests, responses, res, baseVersion) => {
 		let request = requests[i];
 		entries.push(
 			new BundleEntry({
-				response: response,
-				resource: response.body,
+				response: {
+					status: response.resp.status,
+					outcome: response.error ? response.resp.body : undefined
+				},
+				resource: response.error ? undefined : response.resp.body,
 				request: request
-			}),
+			})
 		);
 	});
 	bundle.entry = entries;
@@ -56,22 +59,26 @@ module.exports.batch = (req, res) => new Promise((batchResolve, batchReject) => 
 		let destinationUrl = `${protocol}://${path.join(req.headers.host, baseUrl, baseVersion, url)}`;
 		requests.push({
 			method: method,
-			url: destinationUrl,
-
+			url: destinationUrl
 		});
+
+		let bReq = request[method.toLowerCase()](destinationUrl)
+			.set('Content-Type', 'application/json+fhir')
+			.send(resource);
+
+		if (req.get('Authorization')) {
+			bReq.set('Authorization', req.get('Authorization'))
+		}
+
 		requestPromises.push(new Promise((resolve, reject) => {
-				resolve(request[method.toLowerCase()](destinationUrl)
-					.send(resource)
-					.set('Content-Type', 'application/json+fhir'));
-			})
-				.catch(err => {
-					return (err);
-				})
-		);
+			bReq.then(resp => resolve({error: false, resp}))
+				.catch(err => resolve({error: true, resp: err.response}));
+		}));
 	});
 	return Promise.all(requestPromises)
 		.then(responses => {
 			let resultsBundle = makeBatchResultBundle(requests, responses, res, baseVersion);
 			batchResolve(resultsBundle);
-		});
+		})
+		.catch(batchReject);
 });
