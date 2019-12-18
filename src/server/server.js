@@ -2,6 +2,7 @@ const { resolveSchema } = require('./utils/resolve.utils.js');
 const deprecate = require('./utils/deprecation.notice.js');
 const ServerError = require('./utils/server.error.js');
 const invariant = require('./utils/invariant.js');
+const prototypeInjectionHandler = require('./utils/prototype-injection-handler.utils.js');
 const { VERSIONS } = require('../constants.js');
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -104,7 +105,7 @@ function validate(config) {
 }
 
 class Server {
-	constructor(config = {}) {
+	constructor(config = {}, app) {
 		// Merge in any defaults we want to set at the server level
 		this.config = mergeDefaults(config);
 		// Setup a logger for the application
@@ -118,14 +119,14 @@ class Server {
 			'Using the logger this way is deprecated. Please see the documentation on ' +
 				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 		);
-		// Setup our express instance
-		this.app = express();
+		// Use external express instance or setup new one
+		this.app = app ? app : express();
 		// Setup some environment variables handy for setup
 		let { server = {} } = this.config;
 
 		this.env = {
 			IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
-			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert,
+			USE_HTTPS: (server.ssl && server.ssl.key && server.ssl.cert) ? server.ssl : undefined,
 		};
 		// return self for chaining
 		return this;
@@ -144,8 +145,10 @@ class Server {
 		// Enable the body parser
 		this.app.use(bodyParser.urlencoded({ extended: true }));
 		this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+		// Enable @hapi/bourne to protect against prototype injection
+		this.app.use(prototypeInjectionHandler);
 		// Set favicon
-		this.app.use(favicon(this.config.server.favicon || path.posix.join(__dirname, '../assets/phoenix.ico')));
+		this.app.use(favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico')));
 		// return self for chaining
 		return this;
 	}
@@ -221,6 +224,13 @@ class Server {
 		return this;
 	}
 
+	// Setup custom logging
+	configureLoggers(fun) {
+		fun(loggers.container, loggers.transports);
+		// return self for chaining
+		return this;
+	}
+
 	// Setup error routes
 	setErrorRoutes() {
 		let logger = loggers.get('default');
@@ -292,7 +302,20 @@ class Server {
 	}
 
 	// Start the server
-	listen(port = process.env.PORT, callback) {
+	listen(port = process.env.PORT, host = process.env.HOST, callback) {
+		// port and host will override configuration here if specified,
+		// if not, the params need to be reassigned appropriately
+		if (typeof host === 'function') {
+			callback = host;
+			host = process.env.HOST;
+		}
+
+		if (typeof port === 'function') {
+			callback = port;
+			port = process.env.PORT;
+			host = process.env.HOST;
+		}
+
 		let server = this.config.server;
 		// If we are missing a port, let's notify them
 		invariant(
@@ -312,8 +335,8 @@ class Server {
 					this.app,
 			  );
 
-		// Start the app
-		this.app.listen(port || server.port, callback);
+		// Start the app - will listen on 0.0.0.0 [::] if host is falsy
+		this.app.listen(port || server.port, host || server.host, callback);
 	}
 }
 

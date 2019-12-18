@@ -1,3 +1,19 @@
+## [2.0.7](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.6...2.0.7) (2019-12-05)
+
+* Upgrade jwk-to-pem
+
+## [2.0.6](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.5...2.0.6) (2019-11-15)
+
+* Miscellaneous Bug Fixes
+
+## [2.0.4](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.3...2.0.4) (2019-08-19)
+
+
+### Bug Fixes
+
+* chore: updated and cleaned up documentation for readability + fix path.posix bug([#187](https://github.com/Asymmetrik/node-fhir-server-core/pull/187))([a32e628](https://github.com/Asymmetrik/node-fhir-server-core/pull/187/commits/a32e628))
+
+
 ## [2.0.3](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.2...2.0.3) (2019-06-17)
 
 
@@ -97,6 +113,3 @@ properties
 
 
 # [1.2.0](https://github.com/Asymmetrik/node-fhir-server-core/compare/1.1.0...1.2.0) (2018-10-25)
-
-
-

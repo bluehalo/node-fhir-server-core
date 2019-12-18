@@ -80,8 +80,8 @@ module.exports = class Timing {
 					return;
 				}
 
-				let Element = require('./element.js');
-				this.__data.repeat = new Element(value);
+				let TimingRepeat = require('./timingrepeat.js');
+				this.__data.repeat = new TimingRepeat(value);
 			},
 		});
 		// valueSetReference: http://hl7.org/fhir/ValueSet/timing-abbreviation

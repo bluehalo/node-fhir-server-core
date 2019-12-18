@@ -116,7 +116,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 			cors(corsOptions),
 			versionValidationMiddleware(profile),
 			sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
-			authenticationMiddleware( config ),
+			authenticationMiddleware(config),
 			sofScopeMiddleware({ route, auth: config.auth, name: key }),
 			// TODO: REMOVE: logger in future versions
 			operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger }),
@@ -218,7 +218,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 
 			// Calculate the cors setting we want for this route
 			let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
-				methods: [corsDefaults.methods || route.type.toUpperCase()],
+				methods: [route.type.toUpperCase()],
 			});
 
 			// Define the arguments based on the interactions
@@ -256,7 +256,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 				cors(corsOptions),
 				versionValidationMiddleware(profile),
 				sanitizeMiddleware(route.args),
-				authenticationMiddleware( config ),
+				authenticationMiddleware(config),
 				sofScopeMiddleware({ route, auth: config.auth, name: key }),
 				loadController(lowercaseKey, route.interaction, profile.serviceModule),
 			);

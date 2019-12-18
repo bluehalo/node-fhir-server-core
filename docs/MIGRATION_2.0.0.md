@@ -1,8 +1,10 @@
 # Migrating to Version 2.0.0
-This guide represents all the known changes that will need your attention when migrating to version 2.0.0. If we are missing anything, please open an issue so we can update this guide for the benefit of everyone. Before we continue, I would like to talk about why we are making these changes. We think opinions are good, but too many can be bad. We had a lot of logic in the code that made customizing things difficult or impossible, and also made the source code a pain to work with. We recently started moving things to separate packages, [phx-tools](https://github.com/Asymmetrik/phx-tools), and have been making the code that we generate leaner and leaner.
+This guide represents all the known changes that will need your attention when migrating to version `2.0.0`. If we are missing anything, please open an issue so we can update this guide for the benefit of everyone. Before we continue, I would like to talk about why we are making these changes. We think opinions are good, but too many can be bad. We had a lot of logic in the code that made customizing things difficult or impossible, and also made the source code a pain to work with. We recently started moving things to separate packages, [phx-tools](https://github.com/Asymmetrik/phx-tools), and have been making the code that we generate leaner and leaner.
 
-We think this will simplify things a lot for developers on both sides, contributors and users alike. We also plan to maintain the older versions and even do bug fixes. However, newer features are going to be prioritized on version 2.0.0 and only retrofit to older branches when requested.
+We think this will simplify things a lot for developers on both sides, contributors and users alike. We also plan to maintain the older versions and even do bug fixes. However, newer features are going to be prioritized on version `2.0.0` and only retrofit to older branches when requested.
 
+
+## Table of Contents
 * [Breaking changes](#breaking-changes)
 	* [Return types](#return-types)
 		* [Custom errors](#custom-errors)
@@ -26,9 +28,11 @@ We think this will simplify things a lot for developers on both sides, contribut
 
 ### Return types
 
-One major change for version 2.0.0 is how your services returned resources. Everything before 2.0.0 returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and do more than they really needed to do. Response utils have since moved to an external package, which you can find at https://github.com/Asymmetrik/phx-tools/tree/master/packages/fhir-response-util. They are now very simple to work with and easier to modify in the future.
+One major change for version `2.0.0` is how your services returned resources. Everything before `2.0.0` returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and they were doing more than they really needed to do. Response utils have since moved to an external package, which you can find at [fhir-response-util](https://github.com/Asymmetrik/phx-tools/tree/master/packages/fhir-response-util). They are now very simple to work with and easier to modify in the future.
 
-What this means for developers is that they will now need to be explicit when returning data from a service and use the schemas we are providing. Here is two examples, one that searches by id and one that searches for multiple resources.
+What this means for developers is that they will now need to be explicit when returning data from a service and use the schemas we are providing.
+ 
+ Here is an example that searches for multiple resources:
 
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
@@ -51,7 +55,7 @@ module.exports.search = async (args, context) => {
 	return new Bundle({ entry: entries });
 };
 ```
-
+And here is another example that searches by id:
 
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
@@ -63,9 +67,13 @@ module.exports.searchById = async (args, context) => {
 };
 ```
 
-#### Custom errors
+#### Custom Errors
 
-Previously, when you threw an error in your service, we just took the error message and a status code and passed in to some utility that wrapped it in a minimal operation outcome. But what if you want to customize the operation outcome or use a different code than we had available. There was no way to do that. In version 2.0.0, since we changed how you return data in your services, you can create your own and just return it. We also allow you to add additional properties to it so you can control other things, such as the HTTP response code. For example, let's throw an error for attempting to delete a resource that other resources depend on. The spec says the HTTP status code must be a 409 in this case, for conflict. You could implement that like so:
+Previously, when you threw an error in your service, we took the error message and a status code which were passed in to some utility that wrapped it in a minimal operation outcome. But what if you want to customize the operation outcome or use a different code than we had available? There was no way to do that. 
+
+In version `2.0.0`, we changed how you return data in your services, so now you can create your own error message and just return it. We also allow you to add additional properties to it so you can control other things, such as the HTTP response code. 
+
+For example, let's throw an error for attempting to delete a resource that other resources depend on. The spec says the HTTP status code must be a 409 in this case, for conflict. You could implement that like so:
 
 ```javascript
 const { ServerError } = require('@asymmetrik/node-fhir-server-core');
@@ -94,7 +102,7 @@ module.exports.remove = async (args, context) => {
 
 ### Logging
 
-#### Old way
+#### Old Way
 The logger was passed around as a parameter traditionally. So you are probably used to receiving it in your services like so:
 
 ```javascript
@@ -117,10 +125,12 @@ server.listen(3000, () => {
 });
 ```
 
-You can still use the logger attached to the server object, but it is marked as deprecated so we highly discourage it. You **cannot** use it in your services as it is no longer passed in.
+You can still use the logger attached to the server object, but it is marked as deprecated so we highly discourage it. 
 
-#### New way
-The new way to use the logger is to require it and invoke get on the loggers container. We expose a winston container object so you can also add your own custom loggers with their own transports, as well as modify the default one if you would like.
+You **CANNOT** use it in your `services` as it is no longer passed in.
+
+#### New Way
+The new way to use the logger is to require it and invoke `get` on the loggers container. We expose a [`winston`](https://github.com/winstonjs/winston) container object so you can also add your own custom loggers with their own transports, as well as modify the default one if you would like.
 
 To get the logger anywhere in your code, just add the following:
 
@@ -167,9 +177,9 @@ server.listen(3000, () => {
 });
 ```
 
-## New features
+## New Features
 
-### New methods
+### New Methods
 
 #### `resolveSchema`
 - **Description:** Load a resource by their lowercased names and version.
@@ -186,8 +196,8 @@ let Patient = require(resolveSchema('3_0_1', 'patient'));
 
 Allowed values can be found in the [resources](../src/server/resources) directory. Each top level folder represents a version and inside each version folder is a schemas directory which contains all the available schemas you can load.
 
-### Logging container
-As mentioned above under breaking changes, we changed how logging works entirely. With winston, you can use containers to get, add, and even update loggers. It also makes it really easy to add your own transports or other loggers. For example, if you are happy with the default logger only logging to console, and want a custom logger for only your things, you can add your own transport and have it write logs to anywhere you desire. Rotating logs, AWS, Mongo, and many more.
+### Logging Container
+As mentioned above under breaking changes, we changed how logging works entirely. With `winston`, you can use containers to get, add, and even update loggers. It also makes it really easy to add your own transports or other loggers. For example, if you are happy with the default logger only logging to console, and want a custom logger for only your things, you can add your own transport and have it write logs to anywhere you desire. Rotating logs, AWS, Mongo, and many more.
 
 Please check out the following links for more info:
 * https://github.com/winstonjs/winston#working-with-multiple-loggers-in-winston
@@ -205,15 +215,15 @@ const { container } = require('@asymmetrik/node-fhir-server-core').loggers;
 const logger = container.get('default');
 ```
 
-### Tools migration
-More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. You can see all the packages we have available here: https://github.com/Asymmetrik/phx-tools. Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils and passport strategies, query builders, and parameter sanitization logic. 
+### Tools Migration
+More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. You can see all the packages we have available here: https://github.com/Asymmetrik/phx-tools. Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils, passport strategies, query builders, and parameter sanitization logic. 
 
 ### Favicon
 You can now provide a favicon by supplying it in your config under the server object. See [ServerConfiguration.md](./ServerConfiguration.md) for an example.
 
 ## Bugs
 
-### Missing profiles
+### Missing Profiles
 Prior to 2.0, profiles were manually added and used across all versions. So we had a folder structure that looked like this:
 
 ```shell
@@ -241,16 +251,16 @@ Generated code was separate from the profiles so there was always a temporary di
 
 This means when we generate new resources, we immediately support all new features/resources of that version because we generate the whole package.
 
-### Bundle return types
+### Bundle Return Types
 Bundle's prior to 2.0, never casted their entries, it was up to you. This was kind of wonky. A request comes in, you query your database, then you have to cast all the resources yourselves but then don't place them in the bundle, hand them back to us, we attempt to put them in a bundle and don't do anything with the entries. If you want to be conformant, this made it more difficult than it should be. Now, the response utils don't create resources for you anymore, this was mentioned in the breaking change but this fixes the issue of not knowing how or why bundles behaved the way they did. Now, you must be explicit in your return types.
 
-### All files lowercased
+### All Files Lowercased
 All generated code is now lowercased and using a simple naming convention. We had a lot of logic to try to know when to lowercase certain things and when not to which caused bugs to re-appear after being fixed. This was because most development is done on macs, which are case insensitive at times. We added CI testing on a linux machine and lowercased all files so we do not need to worry about this ever again.
 
 ## Missing
 Some features did not quite make it in because we think the change would be too much all at once. We are testing them on other internal tools and may migrate them in the future if it's something the community wants. Below you will find all major features that may be incorporated at some point. We will keep the current status of each one listed up to date per any discussions.
 
-### Sanitize params
+### Sanitize Params
 **Status:** Currently not in any milestones
 
 We have a parameter sanitization util which goes much further that the one currently implemented here. The one currently is missing support for many features and has to ignore certain parameters because of prefixes, pipes, and modifiers. The new version would change the way it returns objects. So if the field type is quantity, currently a request like this wouldn't work, `foo=10|bar|baz`, you would recieve foo = 10 and lose the code and system it applies to. The new sanitizer, would return something like this: 
