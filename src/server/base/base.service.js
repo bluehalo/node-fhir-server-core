@@ -67,10 +67,10 @@ module.exports.batch = (req, res) => new Promise((batchResolve, batchReject) => 
 			.send(resource);
 
 		if (req.get('Authorization')) {
-			bReq.set('Authorization', req.get('Authorization'))
+			bReq.set('Authorization', req.get('Authorization'));
 		}
 
-		requestPromises.push(new Promise((resolve, reject) => {
+		requestPromises.push(new Promise((resolve) => {
 			bReq.then(resp => resolve({error: false, resp}))
 				.catch(err => resolve({error: true, resp: err.response}));
 		}));
