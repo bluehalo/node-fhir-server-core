@@ -14,7 +14,7 @@ const cors = require('cors');
 let deprecatedLogger = deprecate(
 	container.get('default'),
 	'Using the logger this way is deprecated. Please see the documentation on ' +
-		'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+	'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 );
 
 /**
@@ -172,8 +172,8 @@ function enableResourceRoutes(app, config, corsDefaults) {
 		} catch (err) {
 			throw new Error(
 				`${key} is an invalid profile configuration, please see the wiki for ` +
-					'instructions on how to enable a profile in your server, ' +
-					'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+				'instructions on how to enable a profile in your server, ' +
+				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
 			);
 		}
 
@@ -237,6 +237,32 @@ function enableResourceRoutes(app, config, corsDefaults) {
 	}
 }
 
+function enableBaseRoute(app, config, corsDefaults) {
+	let { route } = require('./base/base.config');
+
+	// Determine which versions need a base endpoint, we need to loop through
+	// all the configured profiles and find all the uniquely provided versions
+	let versionValidationConfiguration = {
+		versions: getAllConfiguredVersions(config.profiles),
+	};
+
+	let corsOptions = Object.assign({}, corsDefaults, {
+		methods: [route.type.toUpperCase()],
+	});
+
+	// Enable cors with preflight
+	app.options(route.path, cors(corsOptions));
+
+	// Enable base route
+	app[route.type](
+		route.path,
+		cors(corsOptions),
+		versionValidationMiddleware(versionValidationConfiguration),
+		sanitizeMiddleware(route.args),
+		route.controller({ config }),
+	);
+}
+
 function setRoutes(options = {}) {
 	let { app, config } = options;
 	let { server } = config;
@@ -245,6 +271,7 @@ function setRoutes(options = {}) {
 	let corsDefaults = Object.assign({}, server.corsOptions);
 
 	// Enable all routes, operations are enabled inside enableResourceRoutes
+	enableBaseRoute(app, config, corsDefaults);
 	enableMetadataRoute(app, config, corsDefaults);
 	enableResourceRoutes(app, config, corsDefaults);
 }
