@@ -237,9 +237,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 	}
 }
 
-function enableBaseRoute(app, config, corsDefaults) {
-	let { route } = require('./base/base.config');
-
+function enableBaseRoute(route, app, config, corsDefaults) {
 	// Determine which versions need a base endpoint, we need to loop through
 	// all the configured profiles and find all the uniquely provided versions
 	let versionValidationConfiguration = {
@@ -261,21 +259,23 @@ function enableBaseRoute(app, config, corsDefaults) {
 		sanitizeMiddleware(route.args),
 		route.controller({ config }),
 	);
+
 }
 
 function setRoutes(options = {}) {
 	let { app, config } = options;
 	let { server } = config;
-
+	let { routes } = require('./base/base.config');
 	// Setup default cors options
 	let corsDefaults = Object.assign({}, server.corsOptions);
 
 	// Enable all routes, operations are enabled inside enableResourceRoutes
-	enableBaseRoute(app, config, corsDefaults);
 	enableMetadataRoute(app, config, corsDefaults);
 	enableResourceRoutes(app, config, corsDefaults);
+	// Enable all routes, operations base: Batch and Transactions
+	routes.forEach(route => enableBaseRoute(route, app, config, corsDefaults));
 }
 
 module.exports = {
-	setRoutes,
+	setRoutes
 };
