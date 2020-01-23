@@ -53,15 +53,14 @@ module.exports.batch = (req, res) => new Promise((resolve, reject) => {
             url: destinationUrl,
         });
 
-        requestPromises.push(new Promise((resolve, reject) => {
+        requestPromises.push(new Promise((resolve) => {
 
             resolve(request[method.toLowerCase()](destinationUrl)
                 .send(resource)
                 .set('Content-Type', 'application/json+fhir'));
+        }).catch(err => {
+            return (err);
         })
-            .catch(err => {
-                return (err);
-            })
 
         );
     });
