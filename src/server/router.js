@@ -132,7 +132,6 @@ function enableMetadataRoute(app, config, corsDefaults) {
 	let versionValidationConfiguration = {
 		versions: getAllConfiguredVersions(config.profiles),
 	};
-
 	let corsOptions = Object.assign({}, corsDefaults, {
 		methods: [route.type.toUpperCase()],
 	});
@@ -141,6 +140,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
 	app.options(route.path, cors(corsOptions));
 
 	// Enable metadata route
+
 	app[route.type](
 		route.path,
 		cors(corsOptions),
@@ -237,43 +237,41 @@ function enableResourceRoutes(app, config, corsDefaults) {
 	}
 }
 
-function enableBaseRoute(route, app, config, corsDefaults) {
+function enableBaseRoute(app, config, corsDefaults) {
 	// Determine which versions need a base endpoint, we need to loop through
 	// all the configured profiles and find all the uniquely provided versions
-	let versionValidationConfiguration = {
-		versions: getAllConfiguredVersions(config.profiles),
-	};
+	let routes = require('./base/base.config');
+	for (let i; routes.length; i++) {
+		let versionValidationConfiguration = {
+			versions: getAllConfiguredVersions(config.profiles),
+		};
+		let corsOptions = Object.assign({}, corsDefaults, {
+			methods: [routes[i].type.toUpperCase()],
+		});
 
-	let corsOptions = Object.assign({}, corsDefaults, {
-		methods: [route.type.toUpperCase()],
-	});
-
-	// Enable cors with preflight
-	app.options(route.path, cors(corsOptions));
-
-	// Enable base route
-	app[route.type](
-		route.path,
-		cors(corsOptions),
-		versionValidationMiddleware(versionValidationConfiguration),
-		sanitizeMiddleware(route.args),
-		route.controller({ config }),
-	);
-
+		// Enable cors with preflight
+		app.options(routes[i].path, cors(corsOptions));
+		// Enable base route
+		app[routes[i].type](
+			routes[i].path,
+			cors(corsOptions),
+			versionValidationMiddleware(versionValidationConfiguration),
+			sanitizeMiddleware(routes[i].args),
+			routes[i].controller({ config }),
+		);
+	}
 }
 
 function setRoutes(options = {}) {
 	let { app, config } = options;
 	let { server } = config;
-	let { routes } = require('./base/base.config');
 	// Setup default cors options
 	let corsDefaults = Object.assign({}, server.corsOptions);
-
 	// Enable all routes, operations are enabled inside enableResourceRoutes
 	enableMetadataRoute(app, config, corsDefaults);
 	enableResourceRoutes(app, config, corsDefaults);
 	// Enable all routes, operations base: Batch and Transactions
-	routes.forEach(route => enableBaseRoute(route, app, config, corsDefaults));
+	enableBaseRoute(app, config, corsDefaults);
 }
 
 module.exports = {

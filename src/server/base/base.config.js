@@ -1,4 +1,5 @@
 const controller = require('./base.controller.js');
+// const { route_args } = require('../route.config.js');
 
 let routes = [{
     type: 'put',
@@ -23,15 +24,6 @@ let routes = [{
     path: '/:base_version',
     corsOptions: {
         methods: ['GET'],
-    },
-    args: [],
-    controller: controller.batch
-},
-{
-    type: 'delete',
-    path: '/:base_version',
-    corsOptions: {
-        methods: ['DELETE'],
     },
     args: [],
     controller: controller.batch
