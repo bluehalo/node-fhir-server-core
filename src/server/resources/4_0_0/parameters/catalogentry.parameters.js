@@ -3,6 +3,4 @@
  * @static
  * @summary Arguments for the catalogentry query
  */
-module.exports = {
-    
-}
+module.exports = {};
