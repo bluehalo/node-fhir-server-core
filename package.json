@@ -1,86 +1,86 @@
 {
-	"name": "@asymmetrik/node-fhir-server-core",
-	"version": "2.0.7",
-	"description": "Node FHIR Rest API Server",
-	"main": "src/index",
-	"author": "Asymmetrik Ltd.",
-	"contributors": [
-		"Robert Winterbottom <rwinterbottom@asymmetrik.com>",
-		"Jon Lee <jlee@asymmetrik.com>",
-		"Sumeet Shah <sshah@asymmetrik.com>",
-		"Shane O'Neill <soneill@asymmetrik.com>"
-	],
-	"license": "MIT",
-	"prettier": {
-		"printWidth": 120,
-		"semi": true,
-		"singleQuote": true,
-		"trailingComma": "all"
-	},
-	"engines": {
-		"node": "^8.10.0 || ^10.13.0 || >=11.10.1"
-	},
-	"scripts": {
-		"start": "node src/runner",
-		"nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
-		"lint": "eslint \"src/**/*.js\"",
-		"jest": "jest src",
-		"test": "cross-env NODE_ENV=test; set -e; npm run lint; npm run jest;",
-		"changelog": "conventional-changelog -p angular -s -i CHANGELOG.md",
-		"prettier": "prettier \"src/**/*.js\" --write",
-		"snyk": "snyk",
-		"snyk-protect": "snyk protect",
-		"prepublish": "yarn run snyk-protect"
-	},
-	"jest": {
-		"verbose": true,
-		"clearMocks": true,
-		"collectCoverage": true,
-		"coverageReporters": [
-			"text",
-			"lcov",
-			"json"
-		],
-		"coveragePathIgnorePatterns": [
-			"<rootDir>/src/server/resources/"
-		]
-	},
-	"dependencies": {
-		"@asymmetrik/fhir-response-util": "^1.0.0",
-		"@asymmetrik/sof-scope-checker": "^1.0.1",
-		"@hapi/bourne": "^1.3.2",
-		"body-parser": "^1.18.2",
-		"compression": "^1.7.1",
-		"cors": "^2.8.4",
-		"cross-env": "^5.1.4",
-		"eslint": "^6.1.0",
-		"express": "^4.16.2",
-		"glob": "^7.1.2",
-		"helmet": "^3.9.0",
-		"jsonschema": "^1.2.2",
-		"jsonwebtoken": "^8.1.0",
-		"jwk-to-pem": "^2.0.2",
-		"method-override": "^2.3.10",
-		"moment": "^2.19.4",
-		"moment-timezone": "^0.5.14",
-		"mongodb": "^3.0.0-rc0",
-		"passport": "^0.4.0",
-		"passport-http-bearer": "^1.0.1",
-		"sanitize-html": "^1.16.1",
-		"serve-favicon": "^2.5.0",
-		"snyk": "^1.316.1",
-		"superagent": "^3.8.3",
-		"validator": "^9.1.2",
-		"winston": "^3.2.1",
-		"xss": "^0.3.4"
-	},
-	"devDependencies": {
-		"conventional-changelog-cli": "^2.0.11",
-		"jest": "^24.0.0",
-		"nock": "^9.1.5",
-		"nodemon": "^1.18.6",
-		"prettier": "^1.15.3",
-		"supertest": "^3.0.0"
-	},
-	"snyk": true
+  "name": "@asymmetrik/node-fhir-server-core",
+  "version": "2.0.7",
+  "description": "Node FHIR Rest API Server",
+  "main": "src/index",
+  "author": "Asymmetrik Ltd.",
+  "contributors": [
+    "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
+    "Jon Lee <jlee@asymmetrik.com>",
+    "Sumeet Shah <sshah@asymmetrik.com>",
+    "Shane O'Neill <soneill@asymmetrik.com>"
+  ],
+  "license": "MIT",
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "engines": {
+    "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
+  },
+  "scripts": {
+    "start": "node src/runner",
+    "nodemon": "cross-env NODE_ENV=development; node src/scripts/nodemon",
+    "lint": "eslint \"src/**/*.js\"",
+    "jest": "jest src",
+    "test": "cross-env NODE_ENV=test; set -e; npm run lint; npm run jest;",
+    "changelog": "conventional-changelog -p angular -s -i CHANGELOG.md",
+    "prettier": "prettier \"src/**/*.js\" --write",
+    "snyk": "snyk",
+    "snyk-protect": "snyk protect",
+    "prepublish": "yarn run snyk-protect"
+  },
+  "jest": {
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/server/resources/"
+    ]
+  },
+  "dependencies": {
+    "@asymmetrik/fhir-response-util": "^1.0.0",
+    "@asymmetrik/sof-scope-checker": "^1.0.1",
+    "@hapi/bourne": "^1.3.2",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "cross-env": "^5.1.4",
+    "eslint": "^6.1.0",
+    "express": "^4.16.2",
+    "glob": "^7.1.2",
+    "helmet": "^3.9.0",
+    "jsonschema": "^1.2.2",
+    "jsonwebtoken": "^8.1.0",
+    "jwk-to-pem": "^2.0.2",
+    "method-override": "^2.3.10",
+    "moment": "^2.19.4",
+    "moment-timezone": "^0.5.14",
+    "mongodb": "^3.0.0-rc0",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "sanitize-html": "^1.16.1",
+    "serve-favicon": "^2.5.0",
+    "snyk": "^1.334.0",
+    "superagent": "^3.8.3",
+    "validator": "^9.1.2",
+    "winston": "^3.2.1",
+    "xss": "^0.3.4"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^2.0.11",
+    "jest": "^24.0.0",
+    "nock": "^9.1.5",
+    "nodemon": "^1.18.6",
+    "prettier": "^1.15.3",
+    "supertest": "^3.0.0"
+  },
+  "snyk": true
 }
