@@ -66,3 +66,11 @@ patch:
         patched: '2020-06-01T16:04:48.555Z'
     - eslint > table > lodash:
         patched: '2020-06-01T16:04:48.555Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > table > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
