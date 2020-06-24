@@ -1,3 +1,28 @@
+## [2.0.8](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.7...2.0.8) (2020-06-24)
+
+
+### Bug Fixes
+
+* .snyk & package.json to reduce vulnerabilities ([0980bc7](https://github.com/Asymmetrik/node-fhir-server-core/commit/0980bc78178fee4d015bfbdb8a79f94a7e2d9433))
+* .snyk & package.json to reduce vulnerabilities ([a807586](https://github.com/Asymmetrik/node-fhir-server-core/commit/a80758644059e7b87da1381a51d5d1ba95b0885c))
+* linting problems ([1d3b27f](https://github.com/Asymmetrik/node-fhir-server-core/commit/1d3b27f5ad3db830eee102790a6ad7a6f8a1c3bf))
+* linting problems ([1dc4d7f](https://github.com/Asymmetrik/node-fhir-server-core/commit/1dc4d7fe3467098d301953376c1f61a4d4fec42d))
+* package.json, yarn.lock & .snyk to reduce vulnerabilities ([1177927](https://github.com/Asymmetrik/node-fhir-server-core/commit/1177927b4c9b5d6aaa761e5434e58d9314835615))
+* package.json, yarn.lock & .snyk to reduce vulnerabilities ([55a775f](https://github.com/Asymmetrik/node-fhir-server-core/commit/55a775f5cf15691fd4d407172e2293bac70f66dd))
+* potentially fix travis ci (let's see) ([114df8e](https://github.com/Asymmetrik/node-fhir-server-core/commit/114df8e6224f2823d2ecd47969d899ce7c86cc8f))
+* update node engine ([fcf5387](https://github.com/Asymmetrik/node-fhir-server-core/commit/fcf53873ee6a3cd99c84f80b2518a83ec4e508fd))
+* use before_install ([bb2e02b](https://github.com/Asymmetrik/node-fhir-server-core/commit/bb2e02baefb77b505f1fc9582dfe817e166ffc52))
+* use latest node ([eeb5717](https://github.com/Asymmetrik/node-fhir-server-core/commit/eeb5717de36dc857849f8e3cd2398eae39425dca))
+
+
+### Features
+
+* **bundle:** Fix test that fails. ([6fb2de5](https://github.com/Asymmetrik/node-fhir-server-core/commit/6fb2de562f5f299f10fbecdc8475ca7c109cb0f1))
+* Add router for bundle using batch ([49087f8](https://github.com/Asymmetrik/node-fhir-server-core/commit/49087f82af34489c28d233401114a0e7589136b6))
+* **core:** add bundle batch ([7a28a54](https://github.com/Asymmetrik/node-fhir-server-core/commit/7a28a5410f84459fcbabe58906196ab1ded76efe))
+
+
+
 ## [2.0.7](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.6...2.0.7) (2019-12-05)
 
 * Upgrade jwk-to-pem
