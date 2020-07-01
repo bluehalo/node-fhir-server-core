@@ -1,3 +1,9 @@
+## [2.0.10](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.9...2.0.10) (2020-07-01)
+
+### Bug Fixes
+
+- Fix dosageAndRate schema ([4f51d3e](https://github.com/Asymmetrik/node-fhir-server-core/commit/4f51d3e3cd073159850fce15a22d7969693e5d3b)
+
 ## [2.0.9](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.7...2.0.9) (2020-06-24)
 
 ### Bug Fixes
