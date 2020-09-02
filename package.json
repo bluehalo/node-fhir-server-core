@@ -1,6 +1,6 @@
 {
 	"name": "@asymmetrik/node-fhir-server-core",
-	"version": "2.0.10",
+	"version": "2.0.11",
 	"description": "Node FHIR Rest API Server",
 	"main": "src/index",
 	"author": "Asymmetrik Ltd.",
@@ -11,12 +11,6 @@
 		"Shane O'Neill <soneill@asymmetrik.com>"
 	],
 	"license": "MIT",
-	"prettier": {
-		"printWidth": 120,
-		"semi": true,
-		"singleQuote": true,
-		"trailingComma": "all"
-	},
 	"engines": {
 		"node": "^8.10.0 || ^10.13.0 || >=11.10.1"
 	},
@@ -46,7 +40,7 @@
 		]
 	},
 	"dependencies": {
-		"@asymmetrik/fhir-response-util": "^1.0.0",
+		"@asymmetrik/fhir-response-util": "^1.1.0",
 		"@asymmetrik/sof-scope-checker": "^1.0.1",
 		"@hapi/bourne": "^1.3.2",
 		"body-parser": "^1.18.2",

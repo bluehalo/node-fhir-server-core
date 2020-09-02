@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asymmetrik/fhir-response-util@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@asymmetrik/fhir-response-util/-/fhir-response-util-1.0.0.tgz#2bb47bc05e48eebdeb2dd5f03937a80a7b762949"
-  integrity sha512-eZ54mnhmzHRS/dY3hMhFagynCSrRnAxIhWVcUzh9X14qUL0BGGlfxi7xFenqG2KhR3e2fycwk3+Bu7zA0LyD+A==
+"@asymmetrik/fhir-response-util@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/fhir-response-util/-/fhir-response-util-1.2.0.tgz#c355777c3f79b9e811d1c6d68df3385083ee35a1"
+  integrity sha512-cwdS1/7GryPh4EqBCblCcZDyJBqDnAIbL0k1Cj7UJPd18KLnRiCfz4JBSSs/RMRb4UpgDnEbkCK/tcOeZte2rQ==
 
 "@asymmetrik/sof-scope-checker@^1.0.1":
   version "1.0.2"
