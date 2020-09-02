@@ -1,3 +1,7 @@
+## [2.0.11](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.0.11) (2020-09-02)
+
+- Upgrade fhir-response-utils to respond with a 404 on Search By ID
+
 ## [2.0.10](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.9...2.0.10) (2020-07-01)
 
 ### Bug Fixes
