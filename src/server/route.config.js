@@ -72,6 +72,23 @@ let routes = [
 		path: '/:base_version/:resource',
 		interaction: INTERACTIONS.OPERATIONS_GET,
 	},
+	// bundle
+	{
+		type: 'get',
+		path: '/:base_version',
+		interaction: INTERACTIONS.OPERATIONS_GET,
+	},
+	{
+		type: 'post',
+		path: '/:base_version',
+		interaction: INTERACTIONS.OPERATIONS_POST,
+	},
+	{
+		type: 'put',
+		path: '/:base_version/',
+		interaction: INTERACTIONS.OPERATIONS_PUT,
+
+	}
 ];
 
 /**

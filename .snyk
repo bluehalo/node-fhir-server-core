@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:chownr:20180731':
@@ -57,3 +57,20 @@ patch:
         patched: '2019-10-06T03:55:21.413Z'
     - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
         patched: '2019-10-06T03:55:21.413Z'
+  SNYK-JS-LODASH-567746:
+    - winston > async > lodash:
+        patched: '2020-05-01T03:53:22.668Z'
+    - eslint > lodash:
+        patched: '2020-06-01T16:04:48.555Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-06-01T16:04:48.555Z'
+    - eslint > table > lodash:
+        patched: '2020-06-01T16:04:48.555Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-06-01T16:32:15.272Z'
+    - eslint > table > lodash:
+        patched: '2020-06-01T16:32:15.272Z'

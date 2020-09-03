@@ -250,8 +250,8 @@ module.exports = class Dosage {
 					return;
 				}
 
-				let Element = require('./element.js');
-				this.__data.doseAndRate = Array.isArray(value) ? value.map(v => new Element(v)) : [new Element(value)];
+				let DosageDoseAndRate = require('./dosagedoseandrate.js');
+				this.__data.doseAndRate = Array.isArray(value) ? value.map(v => new DosageDoseAndRate(v)) : [new DosageDoseAndRate(value)];
 			},
 		});
 
