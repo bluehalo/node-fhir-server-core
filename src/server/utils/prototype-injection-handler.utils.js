@@ -1,5 +1,5 @@
 const Bourne = require('@hapi/bourne');
-const { resolveSchema } = require('./resolve.utils.js');
+const { resolveSchema } = require('./schema.utils');
 // eslint-disable-next-line no-undef
 module.exports = prototypeInjectionHandler = (req, res, next) => {
 	try {
@@ -8,7 +8,7 @@ module.exports = prototypeInjectionHandler = (req, res, next) => {
 		}
 		next();
 	} catch (error) {
-		let OperationOutcome = require(resolveSchema('3_0_1', 'operationoutcome'));
+		let OperationOutcome = resolveSchema('3_0_1', 'operationoutcome');
 		let err = new OperationOutcome({
 			statusCode: 400,
 			issue: [

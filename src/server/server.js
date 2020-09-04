@@ -1,14 +1,14 @@
-const { resolveSchema } = require('./utils/resolve.utils.js');
-const deprecate = require('./utils/deprecation.notice.js');
-const ServerError = require('./utils/server.error.js');
-const invariant = require('./utils/invariant.js');
-const prototypeInjectionHandler = require('./utils/prototype-injection-handler.utils.js');
-const { VERSIONS } = require('../constants.js');
+const { resolveSchema } = require('./utils/schema.utils');
+const deprecate = require('./utils/deprecation.notice');
+const ServerError = require('./utils/server.error');
+const invariant = require('./utils/invariant');
+const prototypeInjectionHandler = require('./utils/prototype-injection-handler.utils');
+const { VERSIONS } = require('../constants');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-const loggers = require('./winston.js');
-const router = require('./router.js');
+const loggers = require('./winston');
+const router = require('./router');
 const passport = require('passport');
 const express = require('express');
 const helmet = require('helmet');
@@ -80,15 +80,15 @@ function validate(config) {
 	invariant(
 		!config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
 		'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
-		'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 	);
 
 	// If we have no profiles configured, notify them now
 	invariant(
 		Object.keys(config.profiles).length > 0,
 		'No profiles configured. We do not enable any profiles by default so please ' +
-		'review the profile wiki for how to enable profiles and capabilities. ' +
-		'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
+			'review the profile wiki for how to enable profiles and capabilities. ' +
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
 	);
 
 	// We need to verify that each provided key is valid and that the config
@@ -99,8 +99,8 @@ function validate(config) {
 	invariant(
 		errors.length === 0,
 		'Encountered the following errors attempting to load your provided profiles:' +
-		`\n${errors.join('\n')}\n` +
-		'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
+			`\n${errors.join('\n')}\n` +
+			'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
 	);
 }
 
@@ -117,7 +117,7 @@ class Server {
 		this.logger = deprecate(
 			loggers.get('default'),
 			'Using the logger this way is deprecated. Please see the documentation on ' +
-			'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+				'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 		);
 		// Use external express instance or setup new one
 		this.app = app ? app : express();
@@ -126,7 +126,7 @@ class Server {
 
 		this.env = {
 			IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
-			USE_HTTPS: (server.ssl && server.ssl.key && server.ssl.cert) ? server.ssl : undefined,
+			USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert ? server.ssl : undefined,
 		};
 		// return self for chaining
 		return this;
@@ -245,7 +245,7 @@ class Server {
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 			// Get an operation outcome for this instance
-			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			let OperationOutcome = resolveSchema(base, 'operationoutcome');
 			// If there is an error and it is an OperationOutcome
 			if (err && err.resourceType === OperationOutcome.resourceType) {
 				let status = err.statusCode || 500;
@@ -279,7 +279,7 @@ class Server {
 			// get base from URL instead of params since it might not be forwarded
 			let base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 			// Get an operation outcome for this instance
-			let OperationOutcome = require(resolveSchema(base, 'operationoutcome'));
+			let OperationOutcome = resolveSchema(base, 'operationoutcome');
 			let error = new OperationOutcome({
 				statusCode: 404,
 				issue: [
@@ -321,19 +321,19 @@ class Server {
 		invariant(
 			port || server.port,
 			'Missing port. Please provide a port when initializing the server. See ' +
-			'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
+				'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
 		);
 
 		// Update the express app to be in instance of createServer
 		this.app = !this.env.USE_HTTPS
 			? http.createServer(this.app)
 			: https.createServer(
-				{
-					key: fs.readFileSync(server.ssl.key),
-					cert: fs.readFileSync(server.ssl.cert),
-				},
-				this.app,
-			);
+					{
+						key: fs.readFileSync(server.ssl.key),
+						cert: fs.readFileSync(server.ssl.cert),
+					},
+					this.app,
+			  );
 
 		// Start the app - will listen on 0.0.0.0 [::] if host is falsy
 		this.app.listen(port || server.port, host || server.host, callback);

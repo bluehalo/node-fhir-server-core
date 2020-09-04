@@ -87,15 +87,14 @@ let routes = [
 		type: 'put',
 		path: '/:base_version/',
 		interaction: INTERACTIONS.OPERATIONS_PUT,
-
-	}
+	},
 ];
 
 /**
- * @name route_args
+ * @name routeArgs
  * @description Common express arguments used on many routes as route params
  */
-let route_args = {
+let routeArgs = {
 	BASE: {
 		name: 'base_version',
 		type: 'string',
@@ -118,6 +117,6 @@ let route_args = {
  * @summary Route config
  */
 module.exports = {
-	route_args,
+	routeArgs: routeArgs,
 	routes,
 };

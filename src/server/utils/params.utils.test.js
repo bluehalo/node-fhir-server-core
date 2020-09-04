@@ -1,7 +1,22 @@
 const path = require('path');
-const { getSearchParameters } = require(path.resolve('./src/server/utils/params.utils'));
+const { getSearchParameters, getParameters } = require('./params.utils');
 
 describe('Param Utils Tests', () => {
+	describe('getParameters', () => {
+		test('should get R4 parameters', () => {
+			const parameters = getParameters('4_0_0', 'patient');
+			expect(parameters).toBeTruthy();
+		});
+		test('should get STU3 parameters', () => {
+			const parameters = getParameters('3_0_1', 'patient');
+			expect(parameters).toBeTruthy();
+		});
+		test('should get V1 parameters', () => {
+			const parameters = getParameters('1_0_2', 'patient');
+			expect(parameters).toBeTruthy();
+		});
+	});
+
 	describe('getSearchParameters', () => {
 		test('should grab the common parameters for all versions', () => {
 			let dstu2Params = getSearchParameters('patient', '1_0_2');
@@ -21,7 +36,7 @@ describe('Param Utils Tests', () => {
 				/* eslint-disable no-unused-vars */
 				let badParams = getSearchParameters('foobar', '2.3.4');
 				/* eslint-enable no-unused-vars */
-			}).toThrowError('Cannot find module');
+			}).toThrowError('Cannot convert undefined or null to object');
 		});
 
 		test('should return an array with name added to each argument', () => {

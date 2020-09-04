@@ -1,20 +1,22 @@
 const versionValidationMiddleware = require('./middleware/version-validation.middleware.js');
 const authenticationMiddleware = require('./middleware/authentication.middleware.js');
 const sofScopeMiddleware = require('./middleware/sof-scope.middleware.js');
-const { route_args: routeArgs, routes } = require('./route.config');
+const { route: metadataConfig } = require('./metadata/metadata.config');
+const { routeArgs, routes } = require('./route.config');
 const hyphenToCamelcase = require('./utils/hyphen-to-camel.utils');
 const { sanitizeMiddleware } = require('./utils/sanitize.utils');
-const { resolveFromVersion } = require('./utils/resolve.utils');
+const { getController } = require('./utils/controllers.utils');
 const { getSearchParameters } = require('./utils/params.utils');
 const { VERSIONS, INTERACTIONS } = require('../constants');
 const deprecate = require('./utils/deprecation.notice.js');
+const operationsController = require('./operations/operations.controller');
 const { container } = require('./winston.js');
 const cors = require('cors');
 
 let deprecatedLogger = deprecate(
 	container.get('default'),
 	'Using the logger this way is deprecated. Please see the documentation on ' +
-	'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+		'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 );
 
 /**
@@ -58,9 +60,8 @@ function hasValidService(route = {}, profile = {}) {
  */
 function loadController(lowercaseKey, interaction, service) {
 	return (req, res, next) => {
-		let controller = require(resolveFromVersion(
-			`${req.params.base_version}/controllers/${lowercaseKey}.controller.js`,
-		));
+		const { base_version } = req.params;
+		const controller = getController(base_version, lowercaseKey);
 		// Invoke the correct interaction on our controller
 		controller[interaction](service)(req, res, next);
 	};
@@ -77,7 +78,6 @@ function loadController(lowercaseKey, interaction, service) {
  * @param {Object} corsDefaults - Default cors settings
  */
 function enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults) {
-	const operationsController = require('./operations/operations.controller');
 	// Error message we will use for invalid configurations
 	let errorMessage =
 		`Invalid operation configuration for ${key}. Please ` +
@@ -125,14 +125,13 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 }
 
 function enableMetadataRoute(app, config, corsDefaults) {
-	let { route } = require('./metadata/metadata.config');
-
+	const route = metadataConfig;
 	// Determine which versions need a metadata endpoint, we need to loop through
 	// all the configured profiles and find all the uniquely provided versions
-	let versionValidationConfiguration = {
+	const versionValidationConfiguration = {
 		versions: getAllConfiguredVersions(config.profiles),
 	};
-	let corsOptions = Object.assign({}, corsDefaults, {
+	const corsOptions = Object.assign({}, corsDefaults, {
 		methods: [route.type.toUpperCase()],
 	});
 
@@ -141,6 +140,8 @@ function enableMetadataRoute(app, config, corsDefaults) {
 
 	// Enable metadata route
 
+	console.log(route.type);
+	console.log(route.path);
 	app[route.type](
 		route.path,
 		cors(corsOptions),
@@ -172,8 +173,8 @@ function enableResourceRoutes(app, config, corsDefaults) {
 		} catch (err) {
 			throw new Error(
 				`${key} is an invalid profile configuration, please see the wiki for ` +
-				'instructions on how to enable a profile in your server, ' +
-				'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+					'instructions on how to enable a profile in your server, ' +
+					'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
 			);
 		}
 
@@ -275,5 +276,5 @@ function setRoutes(options = {}) {
 }
 
 module.exports = {
-	setRoutes
+	setRoutes,
 };

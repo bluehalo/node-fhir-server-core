@@ -1,5 +1,5 @@
 const controller = require('./metadata.controller.js');
-const { route_args } = require('../route.config.js');
+const { routeArgs: routeArgs } = require('../route.config.js');
 
 let route = {
 	type: 'get',
@@ -7,7 +7,7 @@ let route = {
 	corsOptions: {
 		methods: ['GET'],
 	},
-	args: [route_args.BASE],
+	args: [routeArgs.BASE],
 	controller: controller.getCapabilityStatement,
 };
 

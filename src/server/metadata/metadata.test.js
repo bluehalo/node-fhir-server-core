@@ -1,6 +1,6 @@
 /* eslint-disable */
-const { resolveSchema } = require('../utils/resolve.utils');
-const test_config = require('../../test.config');
+const { resolveSchema } = require('../utils/schema.utils');
+const testConfig = require('../../test.config');
 const { VERSIONS } = require('../../constants');
 const moment = require('moment-timezone');
 const request = require('supertest');
@@ -39,7 +39,7 @@ customSecurityStatement = securityUrls => ({
 
 //Helper function to build a custom capability statement
 customCapabilityStatement = function(resources) {
-	let CapabilityStatement = require(resolveSchema('3_0_1', 'CapabilityStatement'));
+	let CapabilityStatement = resolveSchema('3_0_1', 'CapabilityStatement');
 
 	return new CapabilityStatement({
 		status: 'active',
@@ -72,7 +72,7 @@ let customGetStatementGenerators = args => {
 
 //A function to make a custom resource conformance statement
 let customMakeResource = args => {
-	let Resource = require(resolveSchema(args.base_version, args.key));
+	let Resource = resolveSchema(args.base_version, args.key);
 
 	// Return our conformance statement
 	return {
@@ -94,7 +94,7 @@ let customMakeResource = args => {
 describe('Conformance Tests', () => {
 	test('Test that the server returns a default capability statement', async () => {
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
 		let keys = Object.keys(server.config.profiles);
@@ -107,7 +107,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that the server returns a default security statement', async () => {
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		config.security = [
 			{
 				url: 'authorize',
@@ -132,7 +132,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that the server returns a custom security statement', async () => {
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		config.security = [
 			{
 				url: 'authorize',
@@ -160,7 +160,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that the server returns a custom capability statement', async () => {
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		config.statementGenerator = customGetStatementGenerators;
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
@@ -174,7 +174,7 @@ describe('Conformance Tests', () => {
 
 	test('Test that every profile gets a default resource entry ', async () => {
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
 		let keys = Object.keys(server.config.profiles);
@@ -194,7 +194,7 @@ describe('Conformance Tests', () => {
 		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
 		let keys = Object.keys(server.config.profiles);
@@ -220,7 +220,7 @@ describe('Conformance Tests', () => {
 		let mock_service = require('../service.mock.js');
 		mock_service.makeResource = customMakeResource;
 		// Standup a basic server
-		let config = Object.assign({}, test_config, { logging: { level: 'emerg' } });
+		let config = Object.assign({}, testConfig, { logging: { level: 'emerg' } });
 		server = new Server(config).setProfileRoutes().setErrorRoutes();
 
 		let keys = Object.keys(server.config.profiles);

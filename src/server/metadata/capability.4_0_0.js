@@ -1,11 +1,11 @@
 const moment = require('moment-timezone');
-const { resolveSchema } = require('../utils/resolve.utils');
+const { resolveSchema } = require('../utils/schema.utils');
 
 /**
  * @description Construct a resource with base_version/uscore path
  */
 let getCapabilityStatementResource = () => {
-	return require(resolveSchema('4_0_0', 'capabilitystatement'));
+	return resolveSchema('4_0_0', 'capabilitystatement');
 };
 
 module.exports.makeStatement = function(resources) {

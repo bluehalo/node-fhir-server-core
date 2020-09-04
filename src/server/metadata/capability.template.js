@@ -1,14 +1,14 @@
 const { getSearchParams } = require('../utils/conformance.utils');
-const { resolveSchema } = require('../utils/resolve.utils');
+const { resolveSchema } = require('../utils/schema.utils');
 
 /**
  * @name exports
  * @summary Conformance statement
  */
 module.exports = {
-	resource: (base_version, key) => {
-		let searchParams = getSearchParams(key, base_version);
-		let Resource = require(resolveSchema(base_version, key));
+	resource: (baseVersion, key) => {
+		let searchParams = getSearchParams(key, baseVersion);
+		let Resource = resolveSchema(baseVersion, key);
 
 		// Return our conformance statement
 		return {
