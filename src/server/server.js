@@ -280,7 +280,7 @@ class Server {
       const base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 
       let OperationOutcome;
-      if (!Object.keys(VERSIONS).includes(base)) {
+      if (Object.keys(VERSIONS).includes(base)) {
         OperationOutcome = resolveSchema(base, 'operationoutcome');
       } else {
         // if it's a misplaced URL, just return an R4 OperationOutcome
