@@ -16,10 +16,12 @@ let getSearchParameters = (profile, version, customArgsModule, logger) => {
 	// If we have a custom args module, we will use this to populate the allowed
 	// args for this particular route instead of the default arguments included
 	if (customArgsModule) {
-		let paramsAsArray = require(String(customArgsModule)).makeResource(
-			Object.assign({}, { base_version: version, key: lowercaseProfileName }),
-			logger,
-		).searchParam;
+		const makeResourceFn =
+			typeof customArgsModule === 'string'
+				? require(String(customArgsModule)).makeResource
+				: customArgsModule.makeResource;
+		let paramsAsArray = makeResourceFn(Object.assign({}, { base_version: version, key: lowercaseProfileName }), logger)
+			.searchParam;
 		// We need to key these by name so we can remove duplicates on assign
 		allArguments = paramsAsArray.reduce((all, arg) => {
 			all[arg.name] = arg;

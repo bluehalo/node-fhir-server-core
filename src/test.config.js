@@ -55,7 +55,27 @@ module.exports = {
 		},
 		QuestionnaireResponse: {
 			service: './src/server/service.mock.js',
-			versions: ['3_0_1'],
+			versions: ['3_0_1', '4_0_0'],
+			metadata: {
+				makeResource: args => {
+					return {
+						type: args.key,
+						profile: {
+							reference: `http://example.org/fhir/${args.key}.html`,
+						},
+						searchParam: [
+							{
+								name: 'identifier',
+								type: 'token',
+								fhirtype: 'token',
+								xpath: 'QuestionnaireResponse.identifier',
+								definition: 'http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-identifier',
+								description: 'The unique identifier for the questionnaire response',
+							},
+						],
+					};
+				},
+			},
 		},
 	},
 };
