@@ -16,3 +16,4 @@ npm-debug.log
 !/src/server/profiles/coverage/
 .vscode
 .history
+dist

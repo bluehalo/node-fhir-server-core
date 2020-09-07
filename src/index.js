@@ -1,4 +1,4 @@
-const { resolveSchema } = require('./server/utils/resolve.utils');
+const { resolveSchema } = require('./server/utils/schema.utils');
 const ServerError = require('./server/utils/server.error');
 const winston = require('./server/winston.js');
 const Server = require('./server/server');
