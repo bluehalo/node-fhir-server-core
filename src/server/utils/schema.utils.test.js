@@ -15,7 +15,6 @@ describe('Schema Utils tests', () => {
   });
   test('should get R4 parameters for OperationOutcome', () => {
     const schema = resolveSchema('4_0_0', 'OperationOutcome');
-    console.log(schema);
     expect(schema).toBeTruthy();
   });
   test('should get STU3 parameters for OperationOutcome', () => {
