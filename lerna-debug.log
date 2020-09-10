@@ -1,0 +1,22 @@
+0 silly argv {
+0 silly argv   _: [ 'create' ],
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'lerna',
+0 silly argv   name: 'test-package'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/soneill/Projects/node-fhir-server-core
+3 info versioning independent
+4 error Error: canceled
+4 error     at Interface.<anonymous> (/Users/soneill/Projects/node-fhir-server-core/node_modules/read/lib/read.js:66:13)
+4 error     at Interface.emit (events.js:315:20)
+4 error     at Interface._ttyWrite (readline.js:868:16)
+4 error     at ReadStream.onkeypress (readline.js:205:10)
+4 error     at ReadStream.emit (events.js:315:20)
+4 error     at emitKeys (internal/readline/utils.js:335:14)
+4 error     at emitKeys.next (<anonymous>)
+4 error     at ReadStream.onData (readline.js:1137:36)
+4 error     at ReadStream.emit (events.js:315:20)
+4 error     at addChunk (_stream_readable.js:295:12)
+4 error     at readableAddChunk (_stream_readable.js:271:9)
+4 error     at ReadStream.Readable.push (_stream_readable.js:212:10)

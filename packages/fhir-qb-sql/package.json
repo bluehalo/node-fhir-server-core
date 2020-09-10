@@ -1,0 +1,45 @@
+{
+	"name": "@asymmetrik/fhir-qb-sql",
+	"version": "1.1.2",
+	"description": "FHIR query builder for SQL",
+	"homepage": "https://github.com/Asymmetrik/phx-tools",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Asymmetrik/phx-tools.git"
+	},
+	"license": "MIT",
+	"author": "Sumeet-S <sshah@asymmetrik.com>",
+	"contributors": [
+		"Shane O'Neill <soneill@asymmetrik.com>",
+		"Sumeet-S <sshah@asymmetrik.com>",
+		"Tracy Nguyen <tnguyen@asymmetrik.com>"
+	],
+	"main": "index.js",
+	"scripts": {
+		"test": "jest"
+	},
+  
+	"jest": {
+		"collectCoverage": false,
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/src/testutils/"
+		],
+		"coverageReporters": [
+			"text",
+			"lcov",
+			"json"
+		],
+		"testEnvironment": "node",
+		"verbose": true
+	},
+	"dependencies": {
+		"sequelize": "^5.18.4",
+		"xregexp": "^4.2.0"
+	},
+	"devDependencies": {
+		"jest": "^24.5.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
