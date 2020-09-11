@@ -14,15 +14,14 @@
   "scripts": {
     "build": "babel src -d dist --copy-files",
     "changelog": "conventional-changelog -p angular -s -i CHANGELOG.md",
-    "jest": "jest src",
     "lint": "eslint \"src/**/*.js\"",
-    "nodemon": "cross-env NODE_ENV=development; node scripts/nodemon.js",
+    "nodemon": "cross-env NODE_ENV=development node scripts/nodemon.js",
     "prettier": "prettier \"src/**/*.js\" --write",
     "prepublish": "yarn snyk-protect && yarn build",
     "snyk": "snyk",
     "snyk-protect": "snyk protect",
     "start": "node scripts/runner.js",
-    "test": "cross-env NODE_ENV=test; set -e; yarn lint; yarn jest;"
+    "test": "cross-env NODE_ENV=test jest src"
   },
   "jest": {
     "clearMocks": true,
