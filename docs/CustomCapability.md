@@ -1,10 +1,11 @@
 ## Overview
 
-The capability statement now allows for the configuration of what information gets returned in the `/metadata` route. 
+The capability statement now allows for the configuration of what information gets returned in the `/metadata` route.
 
-## Customizing the Capability Statement 
+## Customizing the Capability Statement
 
 ### Creating a Statement Generator
+
 You can include this code where you define your Asymmetrik Server configurations or include it in another file and require it in. For this example, we will go with the latter option.
 
 First, we're going to require the Asymmetrik FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
@@ -13,12 +14,13 @@ First, we're going to require the Asymmetrik FHIR Server source code. This will 
 // require the Asymmetrik FHIR Server
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
 ```
+
 Then we'll create a function that will require the `CapabilityStatement` class, and return a new instance that contains your information. Please make sure you remain compliant with the FHIR specification.
 
 ```javascript
-const base_version = '4_0_0'
+const base_version = '4_0_0';
 
-let customCapabilityStatement = resources => {
+let customCapabilityStatement = (resources) => {
   let CapabilityStatement = require(FHIRServer.resolveSchema(base_version, 'CapabilityStatement'));
 
   return new CapabilityStatement({
@@ -29,23 +31,23 @@ let customCapabilityStatement = resources => {
     software: {
       name: 'My super cool Software',
       version: '1.0.0',
-      releaseDate: '20190418'
+      releaseDate: '20190418',
     },
     implementation: {
       description: 'Your FHIR Server',
-      url: 'http://yourfhirserver.com/'
+      url: 'http://yourfhirserver.com/',
     },
     fhirVersion: base_version.replace(/_/g, '.'),
     acceptUnknown: 'extensions',
     format: ['application/fhir+json'],
-    rest: resources
+    rest: resources,
   });
 };
 ```
 
-Next, we're going to create a custom Security Statement. This is separate from the Capability Statement. It provides information about the security of the current implementation. 
+Next, we're going to create a custom Security Statement. This is separate from the Capability Statement. It provides information about the security of the current implementation.
 If provided, this will be derived from the information you pass to the 'security' property from the FHIR Server Config.
-The below Security Statement is the default one provided by Asymmetrik, but can be customized to fit your needs. 
+The below Security Statement is the default one provided by Asymmetrik, but can be customized to fit your needs.
 
 ```javascript
 /**
@@ -54,7 +56,7 @@ The below Security Statement is the default one provided by Asymmetrik, but can 
  * If provided, this will be derived from the information you pass to the 'Security' property from the FHIR Server Config.
  * The below Security Statement is returned by default. This is probably only a place holder for now.
  */
-let customSecurityStatement = securityUrls => {
+let customSecurityStatement = (securityUrls) => {
   return {
     cors: true,
     service: [
@@ -62,18 +64,18 @@ let customSecurityStatement = securityUrls => {
         coding: [
           {
             system: 'http://hl7.org/fhir/restful-security-service',
-            code: 'SMART-on-FHIR'
+            code: 'SMART-on-FHIR',
           },
         ],
-        text: 'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
+        text: 'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)',
       },
     ],
     extension: [
       {
         url: 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris',
-        extension: securityUrls
-      }
-    ]
+        extension: securityUrls,
+      },
+    ],
   };
 };
 ```
@@ -90,13 +92,15 @@ module.exports.generateStatements = (args) => {
   base_version = args.base_version;
   return {
     makeStatement: customCapabilityStatement,
-    securityStatement: customSecurityStatement
+    securityStatement: customSecurityStatement,
   };
 };
 ```
 
 ### Using the Statement Generator in the Config
-Now that we've built out our Statement Generator and have customized the Capability Statement info to our liking, we can add it to our configuration by doing the following: 
+
+Now that we've built out our Statement Generator and have customized the Capability Statement info to our liking, we can add it to our configuration by doing the following:
+
 ```javascript
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
 const generateCapabilityStatement = require('path to your statement generator file').generateStatements; // require the statement generator file

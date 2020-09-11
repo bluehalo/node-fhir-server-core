@@ -1,7 +1,7 @@
 const { initialize, loggers } = require('../src/index.js');
 const config = require('../src/test.config');
 
-let main = function() {
+let main = function () {
   let server = initialize(config);
   let logger = loggers.get();
 

@@ -127,7 +127,10 @@ let sanitizeNumber = function ({ field, value, type = 'number' }) {
   const expectedValue = Number(coercedVal);
   const givenValue = Number(value);
 
-  invariant(expectedValue === givenValue, `Expected value: ${expectedValue} does not equal given value: ${givenValue}`);
+  invariant(
+    expectedValue === givenValue,
+    `Expected value: ${expectedValue} does not equal given value: ${givenValue}`
+  );
   return { prefix, value };
 };
 
@@ -223,7 +226,7 @@ let sanitizeSearchResultParameter = function ({ field, value }) {
     sanitizedValue = Number(value);
     invariant(
       Number.isInteger(sanitizedValue) && sanitizedValue > 0,
-      mismatchError({ field, type: 'positive integer' }),
+      mismatchError({ field, type: 'positive integer' })
     );
   }
 
@@ -231,7 +234,7 @@ let sanitizeSearchResultParameter = function ({ field, value }) {
   if (validValues[field]) {
     invariant(
       validValues[field].includes(sanitizedValue),
-      mismatchError({ field, type: validValues[field].toString() }),
+      mismatchError({ field, type: validValues[field].toString() })
     );
   }
 

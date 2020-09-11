@@ -8,16 +8,16 @@ const controllers1 = require('../resources/1_0_2/controllers');
  * @param {String} resourceName
  */
 const getController = (version, resourceName) => {
-	switch (version) {
-		case '4_0_0':
-			return controllersR4[resourceName];
-		case '3_0_1':
-			return controllers3[resourceName];
-		case '1_0_2':
-			return controllers1[resourceName];
-	}
+  switch (version) {
+    case '4_0_0':
+      return controllersR4[resourceName];
+    case '3_0_1':
+      return controllers3[resourceName];
+    case '1_0_2':
+      return controllers1[resourceName];
+  }
 };
 
 module.exports = {
-	getController,
+  getController,
 };

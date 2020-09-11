@@ -5,22 +5,22 @@
  * @class ServerError
  */
 module.exports = class ServerError extends Error {
-	constructor(message, options) {
-		super(message);
+  constructor(message, options) {
+    super(message);
 
-		Object.setPrototypeOf(this, ServerError.prototype);
+    Object.setPrototypeOf(this, ServerError.prototype);
 
-		// Make message enumerable
-		Object.defineProperty(this, 'message', {
-			enumerable: true,
-		});
+    // Make message enumerable
+    Object.defineProperty(this, 'message', {
+      enumerable: true,
+    });
 
-		// Keep stack trace for V8
-		if (Error.captureStackTrace) {
-			Error.captureStackTrace(this, ServerError);
-		}
+    // Keep stack trace for V8
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ServerError);
+    }
 
-		// Mixin any additional options
-		Object.assign(this, options);
-	}
+    // Mixin any additional options
+    Object.assign(this, options);
+  }
 };

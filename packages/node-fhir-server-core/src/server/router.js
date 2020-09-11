@@ -16,7 +16,7 @@ const cors = require('cors');
 let deprecatedLogger = deprecate(
   container.get('default'),
   'Using the logger this way is deprecated. Please see the documentation on ' +
-    'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+    'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
 );
 
 /**
@@ -29,14 +29,16 @@ function getAllConfiguredVersions(profiles = {}) {
   let supportedVersions = Object.values(VERSIONS);
   let providedVersions = Object.getOwnPropertyNames(profiles).reduce((set, profile_key) => {
     let { versions = [] } = profiles[profile_key];
-    versions.forEach(version => set.add(version));
+    versions.forEach((version) => set.add(version));
     return set;
   }, new Set());
 
   // Filter the provided versions by ones we actually support. We need to check this to make
   // sure some user does not pass in a version we do not officially support in core for whatever
   // reason. Otherwise there may be some compliance issues.
-  return Array.from(providedVersions).filter(version => supportedVersions.indexOf(version) !== -1);
+  return Array.from(providedVersions).filter(
+    (version) => supportedVersions.indexOf(version) !== -1
+  );
 }
 
 /**
@@ -86,7 +88,9 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 
   for (let op of profile.operation) {
     let functionName = hyphenToCamelcase(op.name || '');
-    let hasController = profile.serviceModule ? Object.keys(profile.serviceModule).includes(functionName) : false;
+    let hasController = profile.serviceModule
+      ? Object.keys(profile.serviceModule).includes(functionName)
+      : false;
     // Check for required configurations, must have name, route, method, and
     // a matching controller
     if (!op.name || !op.route || !op.method || !hasController) {
@@ -94,9 +98,10 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
     }
 
     let lowercaseMethod = op.method.toLowerCase();
-    let interaction = lowercaseMethod === 'post' ? INTERACTIONS.OPERATIONS_POST : INTERACTIONS.OPERATIONS_GET;
+    let interaction =
+      lowercaseMethod === 'post' ? INTERACTIONS.OPERATIONS_POST : INTERACTIONS.OPERATIONS_GET;
 
-    let route = routes.find(rt => rt.interaction === interaction);
+    let route = routes.find((rt) => rt.interaction === interaction);
     let corsOptions = Object.assign({}, corsDefaults, {
       methods: [route.type.toUpperCase()],
     });
@@ -119,7 +124,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
       authenticationMiddleware(config),
       sofScopeMiddleware({ route, auth: config.auth, name: key }),
       // TODO: REMOVE: logger in future versions
-      operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger }),
+      operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger })
     );
   }
 }
@@ -145,7 +150,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
     cors(corsOptions),
     versionValidationMiddleware(versionValidationConfiguration),
     sanitizeMiddleware(route.args),
-    route.controller({ config }),
+    route.controller({ config })
   );
 }
 
@@ -166,13 +171,13 @@ function enableResourceRoutes(app, config, corsDefaults) {
     try {
       parameters = versions.reduce(
         (all, version) => all.concat(getSearchParameters(lowercaseKey, version, overrideArguments)),
-        [],
+        []
       );
     } catch (err) {
       throw new Error(
         `${key} is an invalid profile configuration, please see the wiki for ` +
           'instructions on how to enable a profile in your server, ' +
-          'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+          'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile'
       );
     }
 
@@ -230,7 +235,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
         sanitizeMiddleware(route.args),
         authenticationMiddleware(config),
         sofScopeMiddleware({ route, auth: config.auth, name: key }),
-        loadController(lowercaseKey, route.interaction, profile.serviceModule),
+        loadController(lowercaseKey, route.interaction, profile.serviceModule)
       );
     }
   }
@@ -256,7 +261,7 @@ function enableBaseRoute(app, config, corsDefaults) {
       cors(corsOptions),
       versionValidationMiddleware(versionValidationConfiguration),
       sanitizeMiddleware(routes[i].args),
-      routes[i].controller({ config }),
+      routes[i].controller({ config })
     );
   }
 }

@@ -6,12 +6,12 @@ const handler = require('@asymmetrik/fhir-response-util');
  * @return Promise
  */
 module.exports.search = function search(service) {
-	return (req, res, next) => {
-		return service
-			.search(req.sanitized_args, { req })
-			.then(bundle => handler.read(req, res, bundle))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .search(req.sanitized_args, { req })
+      .then((bundle) => handler.read(req, res, bundle))
+      .catch(next);
+  };
 };
 
 /**
@@ -20,12 +20,12 @@ module.exports.search = function search(service) {
  * @return Promise
  */
 module.exports.searchById = function searchById(service) {
-	return (req, res, next) => {
-		return service
-			.searchById(req.sanitized_args, { req })
-			.then(resource => handler.readOne(req, res, resource))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .searchById(req.sanitized_args, { req })
+      .then((resource) => handler.readOne(req, res, resource))
+      .catch(next);
+  };
 };
 
 /**
@@ -34,12 +34,12 @@ module.exports.searchById = function searchById(service) {
  * @return Promise
  */
 module.exports.searchByVersionId = function searchByVersionId(service) {
-	return (req, res, next) => {
-		return service
-			.searchByVersionId(req.sanitized_args, { req })
-			.then(resource => handler.readOne(req, res, resource))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .searchByVersionId(req.sanitized_args, { req })
+      .then((resource) => handler.readOne(req, res, resource))
+      .catch(next);
+  };
 };
 
 /**
@@ -48,13 +48,13 @@ module.exports.searchByVersionId = function searchByVersionId(service) {
  * @return Promise
  */
 module.exports.create = function create(service) {
-	let options = { type: 'ExpansionProfile' };
-	return (req, res, next) => {
-		return service
-			.create(req.sanitized_args, { req })
-			.then(json => handler.create(req, res, json, options))
-			.catch(next);
-	};
+  let options = { type: 'ExpansionProfile' };
+  return (req, res, next) => {
+    return service
+      .create(req.sanitized_args, { req })
+      .then((json) => handler.create(req, res, json, options))
+      .catch(next);
+  };
 };
 
 /**
@@ -63,13 +63,13 @@ module.exports.create = function create(service) {
  * @return Promise
  */
 module.exports.update = function update(service) {
-	let options = { type: 'ExpansionProfile' };
-	return (req, res, next) => {
-		return service
-			.update(req.sanitized_args, { req })
-			.then(json => handler.update(req, res, json, options))
-			.catch(next);
-	};
+  let options = { type: 'ExpansionProfile' };
+  return (req, res, next) => {
+    return service
+      .update(req.sanitized_args, { req })
+      .then((json) => handler.update(req, res, json, options))
+      .catch(next);
+  };
 };
 
 /**
@@ -78,12 +78,12 @@ module.exports.update = function update(service) {
  * @return Promise
  */
 module.exports.remove = function remove(service) {
-	return (req, res, next) => {
-		return service
-			.remove(req.sanitized_args, { req })
-			.then(json => handler.remove(req, res, json))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .remove(req.sanitized_args, { req })
+      .then((json) => handler.remove(req, res, json))
+      .catch(next);
+  };
 };
 
 /**
@@ -92,13 +92,13 @@ module.exports.remove = function remove(service) {
  * @return Promise
  */
 module.exports.patch = function patch(service) {
-	let options = { type: 'ExpansionProfile' };
-	return (req, res, next) => {
-		return service
-			.patch(req.sanitized_args, { req })
-			.then(json => handler.update(req, res, json, options))
-			.catch(next);
-	};
+  let options = { type: 'ExpansionProfile' };
+  return (req, res, next) => {
+    return service
+      .patch(req.sanitized_args, { req })
+      .then((json) => handler.update(req, res, json, options))
+      .catch(next);
+  };
 };
 
 /**
@@ -107,12 +107,12 @@ module.exports.patch = function patch(service) {
  * @return Promise
  */
 module.exports.history = function history(service) {
-	return (req, res, next) => {
-		return service
-			.history(req.sanitized_args, { req })
-			.then(bundle => handler.history(req, res, bundle))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .history(req.sanitized_args, { req })
+      .then((bundle) => handler.history(req, res, bundle))
+      .catch(next);
+  };
 };
 
 /**
@@ -121,10 +121,10 @@ module.exports.history = function history(service) {
  * @return Promise
  */
 module.exports.historyById = function historyById(service) {
-	return (req, res, next) => {
-		return service
-			.historyById(req.sanitized_args, { req })
-			.then(bundle => handler.history(req, res, bundle))
-			.catch(next);
-	};
+  return (req, res, next) => {
+    return service
+      .historyById(req.sanitized_args, { req })
+      .then((bundle) => handler.history(req, res, bundle))
+      .catch(next);
+  };
 };

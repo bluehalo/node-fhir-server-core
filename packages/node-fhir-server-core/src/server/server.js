@@ -48,7 +48,7 @@ function verifyAndLoadProfiles(profiles) {
   // support for the given profile. We will do that in the when setting up routes
   // This may change for future versions when we generate new resources and we
   // can more easily perform the validation here
-  Object.getOwnPropertyNames(profiles).forEach(name => {
+  Object.getOwnPropertyNames(profiles).forEach((name) => {
     let versions = profiles[name].versions;
     let service = profiles[name].service;
     let message;
@@ -57,7 +57,8 @@ function verifyAndLoadProfiles(profiles) {
       message = `Invalid ${name} configuration. Missing service and/or versions.`;
     } else {
       try {
-        profiles[name].serviceModule = typeof service === 'string' ? require(path.resolve(service)) : service;
+        profiles[name].serviceModule =
+          typeof service === 'string' ? require(path.resolve(service)) : service;
       } catch (err) {
         message = `Invalid ${name} configuration. ${err.message}`;
       }
@@ -80,7 +81,7 @@ function validate(config) {
   invariant(
     !config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
     'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
+      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
   );
 
   // If we have no profiles configured, notify them now
@@ -88,7 +89,7 @@ function validate(config) {
     Object.keys(config.profiles).length > 0,
     'No profiles configured. We do not enable any profiles by default so please ' +
       'review the profile wiki for how to enable profiles and capabilities. ' +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
+      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
   );
 
   // We need to verify that each provided key is valid and that the config
@@ -100,7 +101,7 @@ function validate(config) {
     errors.length === 0,
     'Encountered the following errors attempting to load your provided profiles:' +
       `\n${errors.join('\n')}\n` +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
+      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
   );
 }
 
@@ -117,7 +118,7 @@ class Server {
     this.logger = deprecate(
       loggers.get('default'),
       'Using the logger this way is deprecated. Please see the documentation on ' +
-        'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
+        'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
     );
     // Use external express instance or setup new one
     this.app = app ? app : express();
@@ -148,7 +149,9 @@ class Server {
     // Enable @hapi/bourne to protect against prototype injection
     this.app.use(prototypeInjectionHandler);
     // Set favicon
-    this.app.use(favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico')));
+    this.app.use(
+      favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico'))
+    );
     // return self for chaining
     return this;
   }
@@ -170,8 +173,8 @@ class Server {
         helmetConfig || {
           // Needs https running first
           hsts: this.env.USE_HTTPS,
-        },
-      ),
+        }
+      )
     );
     // return self for chaining
     return this;
@@ -329,7 +332,7 @@ class Server {
     invariant(
       port || server.port,
       'Missing port. Please provide a port when initializing the server. See ' +
-        'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
+        'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
     );
 
     // Update the express app to be in instance of createServer
@@ -340,7 +343,7 @@ class Server {
             key: fs.readFileSync(server.ssl.key),
             cert: fs.readFileSync(server.ssl.cert),
           },
-          this.app,
+          this.app
         );
 
     // Start the app - will listen on 0.0.0.0 [::] if host is falsy

@@ -42,22 +42,25 @@ NOTE: The error returned is an extension of the native JS error. It adds a type 
 
 ## Arguments
 
-`@asymmetrik/sof-scope-checker` exports a single function which takes three arguments. 
+`@asymmetrik/sof-scope-checker` exports a single function which takes three arguments.
 
 #### `name`
-Name of the resource or patient. 
+
+Name of the resource or patient.
 
 Type: `String`  
-Required: `true`  
+Required: `true`
 
 #### `action`
+
 The action the user wants to take. Can be `read`, `write`, or `*`.
 
 Type: `String`  
-Required: `true`  
+Required: `true`
 
 #### `scopes`
+
 The scopes available to the user.
 
 Type: `Array<String>`  
-Required: `true`  
+Required: `true`

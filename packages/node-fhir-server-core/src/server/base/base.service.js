@@ -15,12 +15,12 @@ const makeResultBundle = (results, res, baseVersion, type) => {
 
   let bundle = new Bundle({ link: selfLink, type: type });
   let entries = [];
-  results.forEach(result => {
+  results.forEach((result) => {
     entries.push(
       new BundleEntry({
         response: result,
         request: result,
-      }),
+      })
     );
   });
   bundle.entry = entries;
@@ -34,39 +34,49 @@ module.exports.batch = (req, res) =>
     let { base_version: baseVersion } = req.params;
     if (resourceType !== 'Bundle') {
       return reject(
-        errors.internal(`Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`, baseVersion),
+        errors.internal(
+          `Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`,
+          baseVersion
+        )
       );
     }
     if (type.toLowerCase() !== 'batch') {
-      return reject(errors.internal(`Expected 'type: batch'. Received 'type: ${type}'.`, baseVersion));
+      return reject(
+        errors.internal(`Expected 'type: batch'. Received 'type: ${type}'.`, baseVersion)
+      );
     }
     let { protocol, baseUrl } = req;
 
     let requestPromises = [];
     let results = [];
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       let { url, method } = entry.request;
       let resource = entry.resource;
-      let destinationUrl = `${protocol}://${path.join(req.headers.host, baseUrl, baseVersion, url)}`;
+      let destinationUrl = `${protocol}://${path.join(
+        req.headers.host,
+        baseUrl,
+        baseVersion,
+        url
+      )}`;
       results.push({
         method: method,
         url: destinationUrl,
       });
 
       requestPromises.push(
-        new Promise(resolve => {
+        new Promise((resolve) => {
           resolve(
             request[method.toLowerCase()](destinationUrl)
               .send(resource)
-              .set('Content-Type', 'application/json+fhir'),
+              .set('Content-Type', 'application/json+fhir')
           );
-        }).catch(err => {
+        }).catch((err) => {
           return err;
-        }),
+        })
       );
     });
 
-    return Promise.all(requestPromises).then(responses => {
+    return Promise.all(requestPromises).then((responses) => {
       for (let i = 0; i < responses.length; i++) {
         results[i].status = responses[i].status;
       }
@@ -83,38 +93,48 @@ module.exports.transaction = (req, res) =>
     let { base_version: baseVersion } = req.params;
     if (resourceType !== 'Bundle') {
       return reject(
-        errors.internal(`Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`, baseVersion),
+        errors.internal(
+          `Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`,
+          baseVersion
+        )
       );
     }
     if (type.toLowerCase() !== 'transaction') {
-      return reject(errors.internal(`Expected 'type: transaction'. Received 'type: ${type}'.`, baseVersion));
+      return reject(
+        errors.internal(`Expected 'type: transaction'. Received 'type: ${type}'.`, baseVersion)
+      );
     }
     let { protocol, baseUrl } = req;
 
     let requestPromises = [];
     let results = [];
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       let { url, method } = entry.request;
       let resource = entry.resource;
-      let destinationUrl = `${protocol}://${path.join(req.headers.host, baseUrl, baseVersion, url)}`;
+      let destinationUrl = `${protocol}://${path.join(
+        req.headers.host,
+        baseUrl,
+        baseVersion,
+        url
+      )}`;
       results.push({
         method: method,
         url: destinationUrl,
       });
       requestPromises.push(
-        new Promise(resolve => {
+        new Promise((resolve) => {
           resolve(
             request[method.toLowerCase()](destinationUrl)
               .send(resource)
-              .set('Content-Type', 'application/json+fhir'),
+              .set('Content-Type', 'application/json+fhir')
           );
-        }).catch(err => {
+        }).catch((err) => {
           return err;
-        }),
+        })
       );
     });
 
-    return Promise.all(requestPromises).then(responses => {
+    return Promise.all(requestPromises).then((responses) => {
       for (let i = 0; i < responses.length; i++) {
         results[i].status = responses[i].status;
       }

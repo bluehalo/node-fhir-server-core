@@ -9,7 +9,7 @@ A [profile](https://www.hl7.org/fhir/profilelist.html) corresponds to a queryabl
 - Which resource elements are or are not used
 - Additional elements that are not part of the base specifications
 - Which API features are used and how
-- Which terminologies are used in particular elements 
+- Which terminologies are used in particular elements
 - Descriptions of how the resource elements and API features map to local requirements or implementations
 
 ## Profile Configuration
@@ -37,7 +37,7 @@ Profiles have the following configuration options:
 #### `corsOptions`
 
 - **Type:** `object`
-- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config.  Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
+- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
 - **Required:** `No`
 - **Default:** `none`
 
@@ -60,127 +60,141 @@ const logger = loggers.get('default');
 ### Available Methods
 
 #### `search`
-- **Description:** Get the resource given one of several valid argument(s) and/or  combination(s) of arguments in the req.query.
+
+- **Description:** Get the resource given one of several valid argument(s) and/or combination(s) of arguments in the req.query.
 - **Return:** `Promise.<object, Error>`
-- **Routes:** 
-  - **GET** - `/:base_version/[profile_name]` 
+- **Routes:**
+  - **GET** - `/:base_version/[profile_name]`
   - **POST** - `/:base_version/[profile_name]/_search`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.search = async (args, context) => {
-	let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-	let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	// You will need to build your query based on the sanitized args
-	let query = myCustomQueryBuilder(args);
-	let results = await db.patients.find(query).toArray();
-	let patients = results.map(result => new Patient(result));
-	let entries = patients.map(patient => new BundleEntry({ resource: patient }));
-	return new Bundle({ entry: entries });
+  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
+  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  // You will need to build your query based on the sanitized args
+  let query = myCustomQueryBuilder(args);
+  let results = await db.patients.find(query).toArray();
+  let patients = results.map((result) => new Patient(result));
+  let entries = patients.map((patient) => new BundleEntry({ resource: patient }));
+  return new Bundle({ entry: entries });
 };
 ```
 
 #### `searchById`
+
 - **Description:** Get the patient given an id in the req.params.
 - **Return:** `Promise.<object, Error>`
-- **Routes:** 
+- **Routes:**
   - **GET** - `:base_version/[profile_name]/:id`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.searchById = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	let result = await db.patients.find({ _id: args.id });
-	return new Patient(result);
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let result = await db.patients.find({ _id: args.id });
+  return new Patient(result);
 };
 ```
 
 #### `searchByVersionId`
+
 - **Description:** Get the patient given an id and version id in the req.params.
 - **Return:** `Promise.<object, Error>`
-- **Routes:** 
+- **Routes:**
   - **GET** - `:base_version/[profile_name]/:id/_history/:version_id`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.searchByVersionId = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	let result = await db.patients.find({ _id: args.id, versionId: args.version_id });
-	return new Patient(result);
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let result = await db.patients.find({ _id: args.id, versionId: args.version_id });
+  return new Patient(result);
 };
 ```
 
 #### `history`
-- **Description:** Get the resource history given one of several valid argument(s) and/or  combination(s) of arguments in the req.query.
+
+- **Description:** Get the resource history given one of several valid argument(s) and/or combination(s) of arguments in the req.query.
 - **Return:** `Promise.<object, Error>`
 - **Routes:**
   - **GET** - `/:base_version/[profile_name]/_history`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.history = async (args, context) => {
-	let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-	let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	// You will need to build your query based on the sanitized args
-	let query = myCustomQueryBuilder(args);
-	let results = await db.patientHistory.find(query);
-	let patients = results.map(result => new Patient(result));
-	let entries = patients.map(patient => new BundleEntry({ resource: patient }));
-	let bundle = new Bundle({ entry: entries });
-	return bundle;
+  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
+  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  // You will need to build your query based on the sanitized args
+  let query = myCustomQueryBuilder(args);
+  let results = await db.patientHistory.find(query);
+  let patients = results.map((result) => new Patient(result));
+  let entries = patients.map((patient) => new BundleEntry({ resource: patient }));
+  let bundle = new Bundle({ entry: entries });
+  return bundle;
 };
 ```
 
 #### `historyById`
+
 - **Description:** Get the patient given an id in the req.params.
 - **Return:** `Promise.<object, Error>`
-- **Routes:** 
+- **Routes:**
   - **GET** - `/:base_version/[profile_name]/:id/_history`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.historyById = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	let result = await db.patientHistory.find({ _id: args.id });
-	return new Patient(result);
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let result = await db.patientHistory.find({ _id: args.id });
+  return new Patient(result);
 };
 ```
 
 #### `create`
+
 - **Description:** Create a FHIR resource.
 - **Return:** `Promise.<{ id: string, resource_version: string }, Error>`
-- **Routes:** 
-  - **POST** -`/:base_version/[profile_name]` 
+- **Routes:**
+  - **POST** -`/:base_version/[profile_name]`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.create = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
-	let doc = new Patient(args.resource).toJSON();
-	let results = await db.patients.insertOne(doc);
+  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let doc = new Patient(args.resource).toJSON();
+  let results = await db.patients.insertOne(doc);
 
-	return {
-		id: results._id,
-		// This is optional if you support versions
-		resource_version: 1,
-	};
+  return {
+    id: results._id,
+    // This is optional if you support versions
+    resource_version: 1,
+  };
 };
 ```
 
 #### `update`
+
 - **Description:** Create or update a FHIR resource.
 - **Return:** `Promise.<{ id: string, resource_version: string }, Error>`
-- **Routes:** 
+- **Routes:**
   - **PUT** - `/:base_version/[profile_name]/:id`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
@@ -202,11 +216,13 @@ module.exports.update = async (args, context) => {
 ```
 
 #### `patch`
+
 - **Description:** Patch the resource given an id in the req.params.
 - **Return:** `Promise.<object, Error>`
 - **Routes:**
   - **PATCH** - `/:base_version/[profile_name]/:id`
 - **Example:**
+
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
@@ -215,7 +231,7 @@ module.exports.patch = async (args, context) => {
 	let doc = new Patient(args.resource).toJSON();
 	let current = await db.patients.findOne({ _id: args.id });
 	let patch = insertPatchLibraryHereAndPatchDocuments(doc, current);
-	
+
 	let results = await db.patients.findOneAndUpdate({
 		{ _id: args.id },
 		{ $set: patch },
@@ -231,37 +247,42 @@ module.exports.patch = async (args, context) => {
 ```
 
 #### `remove`
+
 - **Description:** Delete a FHIR resource.
 - **Return:** `Promise.<object, { code: string, message: string}>`
 - **Routes:**
   - **DELETE** - `/:base_version/[profile_name]/:id`
 - **Example:**
+
 ```javascript
 const { ServerError } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
-	try {
-		await db.patients.remove({ _id: args.id });
-	} catch (err) {
-		// Must be 405 (Method Not Allowed) or 409 (Conflict)
-		// 405 if you do not want to allow the delete
-		// 409 if you can't delete because of referential
-		// integrity or some other reason
-		throw new ServerError(err.message, {
-			statusCode: 409,
-			issue: [{
-				severity: 'error',
-				code: 'internal',
-				details: {
-					text: err.message
-				}
-			}]
-		});
-	}
+  try {
+    await db.patients.remove({ _id: args.id });
+  } catch (err) {
+    // Must be 405 (Method Not Allowed) or 409 (Conflict)
+    // 405 if you do not want to allow the delete
+    // 409 if you can't delete because of referential
+    // integrity or some other reason
+    throw new ServerError(err.message, {
+      statusCode: 409,
+      issue: [
+        {
+          severity: 'error',
+          code: 'internal',
+          details: {
+            text: err.message,
+          },
+        },
+      ],
+    });
+  }
 
-	return;
+  return;
 };
 ```
 
 ## Arguments
-Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](../src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each  version folder there is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources.
+
+Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](../src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each version folder there is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources.

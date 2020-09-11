@@ -1,15 +1,15 @@
 module.exports.makeResource = () => {
-	return {
-		profile: {
-			reference: 'https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1',
-		},
-		searchParam: [
-			{
-				documentation: 'The ID of the resource',
-				name: '_id',
-				type: 'string',
-			},
-		],
-		type: 'Foobar',
-	};
+  return {
+    profile: {
+      reference: 'https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1',
+    },
+    searchParam: [
+      {
+        documentation: 'The ID of the resource',
+        name: '_id',
+        type: 'string',
+      },
+    ],
+    type: 'Foobar',
+  };
 };

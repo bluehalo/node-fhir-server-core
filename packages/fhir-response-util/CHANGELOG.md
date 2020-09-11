@@ -5,7 +5,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # 1.0.0 (2019-02-13)
 
-
 ### Features
 
-* Package/fhir response utils ([#11](https://github.com/Asymmetrik/phx-tools/issues/11)) ([7d2073d](https://github.com/Asymmetrik/phx-tools/commit/7d2073d))
+- Package/fhir response utils ([#11](https://github.com/Asymmetrik/phx-tools/issues/11)) ([7d2073d](https://github.com/Asymmetrik/phx-tools/commit/7d2073d))

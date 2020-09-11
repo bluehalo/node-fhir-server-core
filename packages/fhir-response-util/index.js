@@ -6,15 +6,15 @@ const path = require('path');
  * @param {String} version Version of resources we are working with
  */
 function getContentType(version) {
-	switch (version) {
-		case '1_0_2':
-			return 'application/json+fhir';
-		case '3_0_1':
-		case '4_0_0':
-			return 'application/fhir+json';
-		default:
-			return 'application/json';
-	}
+  switch (version) {
+    case '1_0_2':
+      return 'application/json+fhir';
+    case '3_0_1':
+    case '4_0_0':
+      return 'application/fhir+json';
+    default:
+      return 'application/json';
+  }
 }
 
 /**
@@ -25,9 +25,9 @@ function getContentType(version) {
  * @param {Object} json - json to send to client
  */
 function read(req, res, json) {
-	let fhirVersion = req.params.base_version;
-	res.type(getContentType(fhirVersion));
-	res.status(200).json(json);
+  let fhirVersion = req.params.base_version;
+  res.type(getContentType(fhirVersion));
+  res.status(200).json(json);
 }
 
 /**
@@ -38,20 +38,20 @@ function read(req, res, json) {
  * @param {Object} resource - resource to send to client
  */
 function readOne(req, res, resource) {
-	let fhirVersion = req.params.base_version;
+  let fhirVersion = req.params.base_version;
 
-	if (resource && resource.meta) {
-		res.set('Last-Modified', resource.meta.lastUpdated);
-		res.set('ETag', `W/"${resource.meta.versionId}"`);
-	}
+  if (resource && resource.meta) {
+    res.set('Last-Modified', resource.meta.lastUpdated);
+    res.set('ETag', `W/"${resource.meta.versionId}"`);
+  }
 
-	res.type(getContentType(fhirVersion));
+  res.type(getContentType(fhirVersion));
 
-	if (!resource) {
-		res.sendStatus(404);
-	} else {
-		res.status(200).json(resource);
-	}
+  if (!resource) {
+    res.sendStatus(404);
+  } else {
+    res.status(200).json(resource);
+  }
 }
 
 /**
@@ -63,18 +63,18 @@ function readOne(req, res, resource) {
  * @param {Object} options - Any additional options necessary to generate response
  */
 function create(req, res, json, options) {
-	let fhirVersion = req.params.base_version;
-	let baseUrl = `${req.protocol}://${req.get('host')}`;
-	let location = `${fhirVersion}/${options.type}/${json.id}`;
+  let fhirVersion = req.params.base_version;
+  let baseUrl = `${req.protocol}://${req.get('host')}`;
+  let location = `${fhirVersion}/${options.type}/${json.id}`;
 
-	if (json.resource_version) {
-		let pathname = path.posix.join(location, '_history', json.resource_version);
-		res.set('Content-Location', `${baseUrl}/${pathname}`);
-		res.set('ETag', json.resource_version);
-	}
+  if (json.resource_version) {
+    let pathname = path.posix.join(location, '_history', json.resource_version);
+    res.set('Content-Location', `${baseUrl}/${pathname}`);
+    res.set('ETag', json.resource_version);
+  }
 
-	res.set('Location', location);
-	res.status(201).end();
+  res.set('Location', location);
+  res.status(201).end();
 }
 
 /**
@@ -86,22 +86,22 @@ function create(req, res, json, options) {
  * @param {Object} options - Any additional options necessary to generate response
  */
 function update(req, res, json, options) {
-	let fhirVersion = req.params.base_version;
-	let baseUrl = `${req.protocol}://${req.get('host')}`;
-	let location = `${fhirVersion}/${options.type}/${json.id}`;
-	let status = json.created ? 201 : 200;
-	let date = new Date();
+  let fhirVersion = req.params.base_version;
+  let baseUrl = `${req.protocol}://${req.get('host')}`;
+  let location = `${fhirVersion}/${options.type}/${json.id}`;
+  let status = json.created ? 201 : 200;
+  let date = new Date();
 
-	if (json.resource_version) {
-		let pathname = path.posix.join(location, '_history', json.resource_version);
-		res.set('Content-Location', `${baseUrl}/${pathname}`);
-		res.set('ETag', json.resource_version);
-	}
+  if (json.resource_version) {
+    let pathname = path.posix.join(location, '_history', json.resource_version);
+    res.set('Content-Location', `${baseUrl}/${pathname}`);
+    res.set('ETag', json.resource_version);
+  }
 
-	res.set('Last-Modified', date.toISOString());
-	res.type(getContentType(fhirVersion));
-	res.set('Location', location);
-	res.status(status).end();
+  res.set('Last-Modified', date.toISOString());
+  res.type(getContentType(fhirVersion));
+  res.set('Location', location);
+  res.status(status).end();
 }
 
 /**
@@ -112,11 +112,11 @@ function update(req, res, json, options) {
  * @param {Object} json - json to send to client
  */
 function remove(_req, res, json) {
-	if (json && json.deleted) {
-		res.set('ETag', json.deleted);
-	}
+  if (json && json.deleted) {
+    res.set('ETag', json.deleted);
+  }
 
-	res.status(204).end();
+  res.status(204).end();
 }
 
 /**
@@ -127,17 +127,17 @@ function remove(_req, res, json) {
  * @param {Object} json - json to send to client
  */
 function history(req, res, json) {
-	let version = req.params.base_version;
-	res.type(getContentType(version));
-	res.status(200).json(json);
+  let version = req.params.base_version;
+  res.type(getContentType(version));
+  res.status(200).json(json);
 }
 
 module.exports = {
-	getContentType,
-	read,
-	readOne,
-	create,
-	update,
-	remove,
-	history,
+  getContentType,
+  read,
+  readOne,
+  create,
+  update,
+  remove,
+  history,
 };

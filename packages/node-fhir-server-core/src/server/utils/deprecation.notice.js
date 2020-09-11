@@ -6,11 +6,11 @@
  * @return {Function}
  */
 function wrapper(func, message) {
-	return function() {
-		let results = func(...arguments);
-		console.log(message);
-		return results;
-	};
+  return function () {
+    let results = func(...arguments);
+    console.log(message);
+    return results;
+  };
 }
 
 /**
@@ -20,9 +20,9 @@ function wrapper(func, message) {
  * @return {Boolean}
  */
 function isBasePrototype(proto) {
-	return [Array.prototype, Object.prototype, Function.prototype].some(val => {
-		return val === proto;
-	});
+  return [Array.prototype, Object.prototype, Function.prototype].some((val) => {
+    return val === proto;
+  });
 }
 
 /**
@@ -34,28 +34,28 @@ function isBasePrototype(proto) {
  * @return {Function|Object} wrapped version of the given object
  */
 function notice(item, message) {
-	if (typeof item === 'function') {
-		return wrapper(item, message);
-	}
+  if (typeof item === 'function') {
+    return wrapper(item, message);
+  }
 
-	let proto = Object.getPrototypeOf(item);
-	let keys = Object.getOwnPropertyNames(item);
+  let proto = Object.getPrototypeOf(item);
+  let keys = Object.getOwnPropertyNames(item);
 
-	if (proto && !isBasePrototype(proto)) {
-		keys = keys.concat(Object.getOwnPropertyNames(proto));
-	}
+  if (proto && !isBasePrototype(proto)) {
+    keys = keys.concat(Object.getOwnPropertyNames(proto));
+  }
 
-	return keys.reduce((all, key) => {
-		let property = item[key];
+  return keys.reduce((all, key) => {
+    let property = item[key];
 
-		if (typeof property === 'function') {
-			all[key] = wrapper(property, message);
-		} else {
-			all[key] = property;
-		}
+    if (typeof property === 'function') {
+      all[key] = wrapper(property, message);
+    } else {
+      all[key] = property;
+    }
 
-		return all;
-	}, Object.create(Object.getPrototypeOf(item)));
+    return all;
+  }, Object.create(Object.getPrototypeOf(item)));
 }
 
 module.exports = notice;

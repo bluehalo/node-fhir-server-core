@@ -1,6 +1,6 @@
 ## Overview
 
-This FHIR server library is intended to simplify the process of standing up your own FHIR server. We abstract a lot of the complicated pieces away, so all that you need to do is provide some configurations and write queries. In this getting started guide, we will walk you through using this library to start building your own FHIR server. 
+This FHIR server library is intended to simplify the process of standing up your own FHIR server. We abstract a lot of the complicated pieces away, so all that you need to do is provide some configurations and write queries. In this getting started guide, we will walk you through using this library to start building your own FHIR server.
 
 **NOTE**: These instructions are for `Unix` based systems. If you are using Windows, you may need to swap some commands for their Windows equivalent.
 
@@ -33,7 +33,8 @@ fhir-server
 ### Install `node-fhir-server-core`
 
 Next, run:
- ```shell
+
+```shell
 yarn add @asymmetrik/node-fhir-server-core
 ```
 
@@ -49,7 +50,7 @@ let server = initialize(config);
 let logger = loggers.get('default');
 
 server.listen(3000, () => {
-	logger.info('Starting the FHIR Server at localhost:3000');
+  logger.info('Starting the FHIR Server at localhost:3000');
 });
 ```
 
@@ -68,6 +69,7 @@ fhir-server
 The next thing we want to do is run this file in node. Let's add a script to our `package.json`. It should look something like this:
 
 **NOTE:** You may have different values for some fields which is fine, the "scripts" block is the important part
+
 ```json
 {
   "name": "fhir-server",
@@ -84,6 +86,7 @@ The next thing we want to do is run this file in node. Let's add a script to our
 ```
 
 Finally, start the server:
+
 ```shell
 yarn start
 ```
@@ -113,7 +116,7 @@ Add the following code to the patient service.
 
 ```javascript
 module.exports.search = async (args, context) => {
-	throw new Error('Unable to locate patients');
+  throw new Error('Unable to locate patients');
 };
 ```
 
@@ -132,14 +135,12 @@ and then change `let config = {};` to the following:
 
 ```javascript
 let config = {
-	profiles: {
-		patient: {
-			service: './patient.service.js',
-			versions: [
-				VERSIONS['4_0_0']
-			]
-		}
-	}
+  profiles: {
+    patient: {
+      service: './patient.service.js',
+      versions: [VERSIONS['4_0_0']],
+    },
+  },
 };
 ```
 
@@ -155,16 +156,18 @@ Open [http://localhost:3000/4_0_0/metadata](http://localhost:3000/4_0_0/metadata
 
 ```json
 {
-    "resourceType": "OperationOutcome",
-    "text": {
-        "status": "generated",
-        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h1>Operation Outcome</h1><table border=\"0\"><table border=\"0\"><tr><td style=\"font-weight: bold;\">error</td><td><pre>Unable to locate patients</pre></td></tr></table></div>"
-    },
-    "issue": [{
-        "severity": "error",
-        "code": "exception",
-        "diagnostics": "Unable to locate patients"
-    }]
+  "resourceType": "OperationOutcome",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h1>Operation Outcome</h1><table border=\"0\"><table border=\"0\"><tr><td style=\"font-weight: bold;\">error</td><td><pre>Unable to locate patients</pre></td></tr></table></div>"
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "exception",
+      "diagnostics": "Unable to locate patients"
+    }
+  ]
 }
 ```
 

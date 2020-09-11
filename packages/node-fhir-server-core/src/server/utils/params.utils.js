@@ -31,7 +31,7 @@ const getSearchParameters = (profile, version, customArgsModule, logger) => {
   if (customArgsModule) {
     let paramsAsArray = require(String(customArgsModule)).makeResource(
       Object.assign({}, { base_version: version, key: lowercaseProfileName }),
-      logger,
+      logger
     ).searchParam;
     // We need to key these by name so we can remove duplicates on assign
     allArguments = paramsAsArray.reduce((all, arg) => {
@@ -52,7 +52,7 @@ const getSearchParameters = (profile, version, customArgsModule, logger) => {
   }
 
   // Convert these into an array
-  return Object.getOwnPropertyNames(allArguments).map(name => {
+  return Object.getOwnPropertyNames(allArguments).map((name) => {
     return Object.assign({ versions: version, name }, allArguments[name]);
   });
 };

@@ -1,7 +1,7 @@
 # `SOF-GraphQL-Invariant`
 
 > Utility for validating patient and user level scopes for the SMART on FHIR
-specification in a GraphQL based server.
+> specification in a GraphQL based server.
 
 # Install
 
@@ -10,6 +10,7 @@ yarn add @asymmetrik/sof-graphql-invariant
 ```
 
 ## Usage
+
 In this example, we will implement this on a single schema, PatientSchema. It
 can work on queries and mutations. It does have some required arguments so
 please see [Arguments](#arguments) below for more information. This will reject
@@ -57,18 +58,21 @@ See [sof-graphql-invariant tests](https://github.com/Asymmetrik/phx-tools/blob/m
 ### Environment variables
 
 #### `SOF_AUTHENTICATION`
+
 Disable authentication, it is enabled by default. See [disabling](#disabling).
 
 Type: `String`  
-Value: `false` 
+Value: `false`
 
 #### `HAS_GRAPHIQL`
+
 Disable authentication for graphiql only while keeping it on other endpoints. See [Disabling for Graphiql only](#disabling-for-graphiql-only).
 
 Type: `String`  
-Value: `true`  
+Value: `true`
 
 ### Disabling
+
 If you use this invariant, it will check scopes on all incoming requests. If you want to disable this or provide a toggle mechanism, you can do so by setting an environment variable. To disable authentication, set `SOF_AUTHENTICATION` to false. It will only disable authentication if this is explicitly set to false.
 
 ```javascript
@@ -95,8 +99,8 @@ const ExamplePatientQuery = {
 };
 ```
 
-
 ### Disabling for Graphiql only
+
 Sometimes it is useful to enable authentication in development but disable it when you are using the graphiql explorer. This requires two things. First is an environment variable stating you are using it, `HAS_GRAPHIQL`. Second, that the endpoint ends with `$graphiql`. If you do this, you can have authentication enabled on your graphql schemas but not if the request is coming from GraphiQL.
 
 ```javascript
@@ -127,29 +131,34 @@ const ExamplePatientMutation = {
 `@asymmetrik/sof-graphql-invariant` exports a single function which takes two arguments. One is a set of options and the other is a resolver function.
 
 ### Options
+
 The first argument we have is an options object, it contains all of the following:
 
 #### `name`
-Name of the resource as it would appear in SMART on FHIR scopes. 
+
+Name of the resource as it would appear in SMART on FHIR scopes.
 
 Type: `String`  
-Required: `true`  
+Required: `true`
 
 #### `action`
+
 The action the user wants to take. Can be `read`, `write`, or `*`.
 
 Type: `String`  
-Required: `true`  
+Required: `true`
 
 #### `schema`
+
 The GraphQLInputObjectType that represents an OperationOutcome error.
 
 Type: `GraphQLInputObjectType`  
 Required: `true`
 
 ### Resolver
+
 The second argument is the resolver function you want to be invoked after this invariant checker checks the
 user scopes against the allowed scopes for the action being performed.
 
 Type: `Function`  
-Required: `true`  
+Required: `true`

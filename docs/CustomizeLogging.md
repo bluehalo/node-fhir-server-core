@@ -18,8 +18,8 @@ module.exports.search = async (args, context) => {
   // You will need to build your query based on the sanitized args
   let query = { my: 'query' };
   let results = db.patients.find(query);
-  let patients = results.map(result => new Patient(result));
-  let entries = patients.map(patient => new BundleEntry({ resource: patient }));
+  let patients = results.map((result) => new Patient(result));
+  let entries = patients.map((patient) => new BundleEntry({ resource: patient }));
   return new Bundle({ entry: entries });
 };
 ```
