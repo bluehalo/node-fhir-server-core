@@ -17,10 +17,7 @@
     "xss": "^1.0.3"
   },
   "scripts": {
-		"test": "jest"
-	},
-  "devDependencies": {
-    "jest": "^24.5.0"
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"

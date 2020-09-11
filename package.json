@@ -1,51 +1,53 @@
 {
-	"name": "node-fhir-server-core-project",
-	"private": true,
-	"version": "2.0.11",
-	"description": "Node FHIR Rest API Server and surrounding ecosystem",
-	"homepage": "https://github.com/Asymmetrik/node-fhir-server-core#readme",
-	"bugs": {
-		"url": "https://github.com/Asymmetrik/node-fhir-server-core/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Asymmetrik/node-fhir-server-core.git"
-	},
-	"license": "MIT",
-	"author": "Asymmetrik Ltd.",
-	"contributors": [
-		"Robert Winterbottom <rwinterbottom@asymmetrik.com>",
-		"Jon Lee <jlee@asymmetrik.com>",
-		"Sumeet Shah <sshah@asymmetrik.com>",
-		"Shane O'Neill <soneill@asymmetrik.com>"
-	],
-	"main": "src/index",
-	"scripts": {
+  "name": "node-fhir-server-core-project",
+  "private": true,
+  "version": "2.0.11",
+  "description": "Node FHIR Rest API Server and surrounding ecosystem",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core#readme",
+  "bugs": {
+    "url": "https://github.com/Asymmetrik/node-fhir-server-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Asymmetrik/node-fhir-server-core.git"
+  },
+  "license": "MIT",
+  "author": "Asymmetrik Ltd.",
+  "contributors": [
+    "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
+    "Jon Lee <jlee@asymmetrik.com>",
+    "Sumeet Shah <sshah@asymmetrik.com>",
+    "Shane O'Neill <soneill@asymmetrik.com>"
+  ],
+  "main": "src/index",
+  "scripts": {
     "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
-		"prettier-check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
-		"prettier-fix": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
-		"lint": "run-p lint-typescript prettier-check lint-eslint",
-		"lint-staged": "lint-staged"
-	},
-	"jest": {
-		"clearMocks": true,
-		"collectCoverage": true,
-		"coveragePathIgnorePatterns": [
-			"<rootDir>/src/server/resources/"
-		],
-		"coverageReporters": [
-			"text",
-			"lcov",
-			"json"
-		],
-		"verbose": true
-	},
-	"devDependencies": {
-		"lerna": "^3.22.1",
-		"prettier": "^2.1.1"
-	},
-	"engines": {
-		"node": ">=10.13.0"
-	}
+    "prettier-check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
+    "prettier-fix": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
+    "lint": "run-p prettier-check lint-eslint",
+    "lint-staged": "lint-staged"
+  },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/server/resources/"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json"
+    ],
+    "verbose": true
+  },
+  "devDependencies": {
+    "jest-cli": "^26.4.2",
+    "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  }
 }
