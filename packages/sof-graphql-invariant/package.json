@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/sof-graphql-invariant",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Smart on FHIR scope checker for GraphQL",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
@@ -11,7 +11,7 @@
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",
   "main": "index.js",
   "dependencies": {
-    "@asymmetrik/sof-scope-checker": "^1.0.4",
+    "@asymmetrik/sof-scope-checker": "^1.0.5",
     "graphql": "^14.0.2"
   },
   "publishConfig": {

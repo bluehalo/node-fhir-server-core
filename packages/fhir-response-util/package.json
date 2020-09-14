@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-response-util",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Utility for handling the headers, content, and status types for a response.",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {

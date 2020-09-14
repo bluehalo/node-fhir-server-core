@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-qb-mongo",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "FHIR query builder for Mongo DB",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
