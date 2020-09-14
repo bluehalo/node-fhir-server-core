@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-secrets",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "AWS KMS Secrets retrieval promisified",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {

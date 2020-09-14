@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/sof-scope-checker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Smart on FHIR scope checker",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
