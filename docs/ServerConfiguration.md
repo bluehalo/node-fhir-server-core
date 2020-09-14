@@ -1,20 +1,25 @@
 ## Overview
-The config drives the entire server.  We try to make it easy to adopt this solution by passing in which part of the server you want to use.  There are 3 main sections of the config.  
+
+The config drives the entire server. We try to make it easy to adopt this solution by passing in which part of the server you want to use. There are 3 main sections of the config.
 
 #### Auth
+
 > NOTE: This section may change slightly as we work on some optional integrations and see what works best for the most use cases.
 
-This section of the config drives the authentication and authorization layer of the server.  If you are using SMART on FHIR we provide a [Passportjs](http://www.passportjs.org/) strategy and authorization middleware you can use out of the box with just some minor configurations. We also allow you to provide your own custom passport strategy. Both authentication and authorization are disabled by default for development sake. To run them, you just need to provide a few options outlined below.
+This section of the config drives the authentication and authorization layer of the server. If you are using SMART on FHIR we provide a [Passportjs](http://www.passportjs.org/) strategy and authorization middleware you can use out of the box with just some minor configurations. We also allow you to provide your own custom passport strategy. Both authentication and authorization are disabled by default for development sake. To run them, you just need to provide a few options outlined below.
 
 Please see the [Access Control](./AccessControl.md) document for a step-by-step guide to enable it in your application or how to add your own custom setup.
 
 #### Server
-This section of the config sets up the [Express](https://expressjs.com/) framework and certain middleware.  You can specify which interface + port your app runs on, the cors options and ssl support.  For more information, scroll down to the description of each property below.
+
+This section of the config sets up the [Express](https://expressjs.com/) framework and certain middleware. You can specify which interface + port your app runs on, the cors options and ssl support. For more information, scroll down to the description of each property below.
 
 #### Profiles
-This section of the config sets up which version of the FHIR specification you want to support and which resource from that version you want to support.  You can support multiple versions.  The core library will automatically set up all of the routes and required parameters for each version and resource.
+
+This section of the config sets up which version of the FHIR specification you want to support and which resource from that version you want to support. You can support multiple versions. The core library will automatically set up all of the routes and required parameters for each version and resource.
 
 ## Configurations
+
 Here is an example config with all the currently supported options. See descriptions below.
 
 ```javascript
@@ -73,14 +78,14 @@ Here is an example config with all the currently supported options. See descript
 #### `auth.type`
 
 - **Type:** `string`
-- **Description:** The type of authentication used. Currently this is only needed to enable SMART authentication. If you want to use SMART authentication, set this value to `smart`. 
+- **Description:** The type of authentication used. Currently this is only needed to enable SMART authentication. If you want to use SMART authentication, set this value to `smart`.
 - **Required:** false
 - **Default:** undefined
 
 #### `auth.customScopeKey`
 
 - **Type:** `string`
-- **Description:** Specify the customScopeKey option to use a custom claim instead of the scope. 
+- **Description:** Specify the customScopeKey option to use a custom claim instead of the scope.
 - **Required:** false
 - **Default:** `'scope'`
 
@@ -148,22 +153,23 @@ Here is an example config with all the currently supported options. See descript
 ```javascript
 const session = require('express-session');
 const expressSessionStore = session({
-	resave: true,
-	saveUninitialized: true,
-	secret: appConfig.auth.sessionSecret,
-	cookie: appConfig.auth.sessionCookie,
-	store: new MongoStore({
-		mongooseConnection: connection,
-		collection: appConfig.auth.collection
-	})
+  resave: true,
+  saveUninitialized: true,
+  secret: appConfig.auth.sessionSecret,
+  cookie: appConfig.auth.sessionCookie,
+  store: new MongoStore({
+    mongooseConnection: connection,
+    collection: appConfig.auth.collection,
+  }),
 });
 
 const fhirConfig = {
-	server: {
-		sessionStore: expressSessionStore
-	}
-}
+  server: {
+    sessionStore: expressSessionStore,
+  },
+};
 ```
+
 - **Required:** No
 - **Default:** `none`
 
@@ -189,6 +195,7 @@ const fhirConfig = {
 - **Default:** `none`
 
 #### `logging.level`
+
 > Currently this is the only logging configuration supported. We use Winston for logging and will eventually add support for more options.
 
 - **Type:** `string`
@@ -197,6 +204,7 @@ const fhirConfig = {
 - **Default:** `error`
 
 #### `events.auditEvent`
+
 > Subscribe to incidents that create audit events.
 
 - **Type:** `function`
@@ -218,6 +226,7 @@ const fhirConfig = {
 ```
 
 #### `events.provenance`
+
 > Subscribe to incidents that create provenance resources.
 
 - **Type:** `function`
@@ -238,4 +247,5 @@ const fhirConfig = {
 ```
 
 #### `profiles[key]`
+
 Please see [ConfiguringProfiles](./ConfiguringProfiles.md) for instructions on how to setup and configure profiles. There is also an example of creating one in the [Getting Started](./GettingStarted.md) guide.

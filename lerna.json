@@ -1,0 +1,10 @@
+{
+	"npmClient": "yarn",
+	"packages": ["packages/*"],
+	"version": "independent",
+	"command": {
+		"publish": {
+			"npmClient": "npm"
+		}
+	}
+}
