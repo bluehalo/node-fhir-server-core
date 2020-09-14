@@ -17,7 +17,7 @@
     "lint": "eslint \"src/**/*.js\"",
     "nodemon": "cross-env NODE_ENV=development node scripts/nodemon.js",
     "prettier": "prettier \"src/**/*.js\" --write",
-    "prepublish": "yarn snyk-protect && yarn build",
+    "prepublish": "yarn build",
     "snyk": "snyk",
     "snyk-protect": "snyk protect",
     "start": "node scripts/runner.js",
@@ -78,5 +78,6 @@
   "engines": {
     "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
   },
-  "snyk": true
+  "snyk": true,
+  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
 }
