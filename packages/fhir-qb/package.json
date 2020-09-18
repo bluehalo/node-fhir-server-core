@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-qb",
-  "version": "0.12.2",
+  "version": "0.12.4",
   "description": "FHIR query builder",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
