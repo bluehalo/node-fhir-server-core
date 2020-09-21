@@ -72,9 +72,9 @@ const logger = loggers.get('default');
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.search = async (args, context) => {
-  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
+  let Bundle = resolveSchema(args.base_version, 'bundle');
+  let Patient = resolveSchema(args.base_version, 'patient');
   // You will need to build your query based on the sanitized args
   let query = myCustomQueryBuilder(args);
   let results = await db.patients.find(query).toArray();
@@ -96,7 +96,7 @@ module.exports.search = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.searchById = async (args, context) => {
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let Patient = resolveSchema(args.base_version, 'patient');
   let result = await db.patients.find({ _id: args.id });
   return new Patient(result);
 };
@@ -114,7 +114,7 @@ module.exports.searchById = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.searchByVersionId = async (args, context) => {
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let Patient = resolveSchema(args.base_version, 'patient');
   let result = await db.patients.find({ _id: args.id, versionId: args.version_id });
   return new Patient(result);
 };
@@ -132,9 +132,9 @@ module.exports.searchByVersionId = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.history = async (args, context) => {
-  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
+  let Bundle = resolveSchema(args.base_version, 'bundle');
+  let Patient = resolveSchema(args.base_version, 'patient');
   // You will need to build your query based on the sanitized args
   let query = myCustomQueryBuilder(args);
   let results = await db.patientHistory.find(query);
@@ -157,7 +157,7 @@ module.exports.history = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.historyById = async (args, context) => {
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let Patient = resolveSchema(args.base_version, 'patient');
   let result = await db.patientHistory.find({ _id: args.id });
   return new Patient(result);
 };
@@ -175,7 +175,7 @@ module.exports.historyById = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.create = async (args, context) => {
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let Patient = resolveSchema(args.base_version, 'patient');
   let doc = new Patient(args.resource).toJSON();
   let results = await db.patients.insertOne(doc);
 
@@ -199,7 +199,7 @@ module.exports.create = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.update = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
+	let Patient = resolveSchema(args.base_version, 'patient');
 	let doc = new Patient(args.resource).toJSON();
 	let results = await db.patients.findOneAndUpdate({
 		{ _id: args.id },
@@ -227,7 +227,7 @@ module.exports.update = async (args, context) => {
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service
 module.exports.patch = async (args, context) => {
-	let Patient = require(resolveSchema(args.base_version, 'patient'));
+	let Patient = resolveSchema(args.base_version, 'patient');
 	let doc = new Patient(args.resource).toJSON();
 	let current = await db.patients.findOne({ _id: args.id });
 	let patch = insertPatchLibraryHereAndPatchDocuments(doc, current);
