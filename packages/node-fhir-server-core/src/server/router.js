@@ -13,6 +13,8 @@ const operationsController = require('./operations/operations.controller');
 const { container } = require('./winston.js');
 const cors = require('cors');
 
+const uniques = list => list.filter((val, index, self) => val && self.indexOf(val) === index);
+
 let deprecatedLogger = deprecate(
   container.get('default'),
   'Using the logger this way is deprecated. Please see the documentation on ' +
@@ -29,16 +31,14 @@ function getAllConfiguredVersions(profiles = {}) {
   let supportedVersions = Object.values(VERSIONS);
   let providedVersions = Object.getOwnPropertyNames(profiles).reduce((set, profile_key) => {
     let { versions = [] } = profiles[profile_key];
-    versions.forEach((version) => set.add(version));
+    versions.forEach(version => set.add(version));
     return set;
   }, new Set());
 
   // Filter the provided versions by ones we actually support. We need to check this to make
   // sure some user does not pass in a version we do not officially support in core for whatever
   // reason. Otherwise there may be some compliance issues.
-  return Array.from(providedVersions).filter(
-    (version) => supportedVersions.indexOf(version) !== -1
-  );
+  return Array.from(providedVersions).filter(version => supportedVersions.indexOf(version) !== -1);
 }
 
 /**
@@ -101,9 +101,9 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
     let interaction =
       lowercaseMethod === 'post' ? INTERACTIONS.OPERATIONS_POST : INTERACTIONS.OPERATIONS_GET;
 
-    let route = routes.find((rt) => rt.interaction === interaction);
+    let route = routes.find(rt => rt.interaction === interaction);
     let corsOptions = Object.assign({}, corsDefaults, {
-      methods: [route.type.toUpperCase()],
+      methods: [route.type.toUpperCase()]
     });
 
     let operationRoute = route.path
@@ -130,28 +130,65 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 }
 
 function enableMetadataRoute(app, config, corsDefaults) {
-  const route = metadataConfig;
+  const { profiles, security, statementGenerator } = config;
+
+  const customBaseUrlProfiles = Object.keys(profiles)
+    .map(profileName => {
+      const profile = profiles[profileName];
+      if (profile.baseUrl) {
+        return profile;
+      }
+    })
+    .filter(profile => profile);
+
+  const inferredProfiles = Object.keys(profiles)
+    .map(profileName => {
+      const profile = profiles[profileName];
+      if (!profile.baseUrl) {
+        return profile;
+      }
+    })
+    .filter(profile => profile);
+
   // Determine which versions need a metadata endpoint, we need to loop through
   // all the configured profiles and find all the uniquely provided versions
   const versionValidationConfiguration = {
-    versions: getAllConfiguredVersions(config.profiles),
+    versions: getAllConfiguredVersions(profiles)
   };
+
   const corsOptions = Object.assign({}, corsDefaults, {
-    methods: [route.type.toUpperCase()],
+    methods: ['GET']
   });
 
-  // Enable cors with preflight
-  app.options(route.path, cors(corsOptions));
+  if (customBaseUrlProfiles.length) {
+    const baseUrls = uniques(customBaseUrlProfiles.map(profile => profile.baseUrl));
+    baseUrls.forEach(baseUrl => {
+      const metadataPath = `${baseUrl}/metadata`;
+      app.options(metadataPath, cors(corsOptions));
 
-  // Enable metadata route
+      // Enable metadata route
+      app.get(
+        metadataPath,
+        cors(corsOptions),
+        sanitizeMiddleware(metadataConfig.args),
+        metadataConfig.controller({ profiles, security, statementGenerator })
+      );
+    });
+  }
 
-  app[route.type](
-    route.path,
-    cors(corsOptions),
-    versionValidationMiddleware(versionValidationConfiguration),
-    sanitizeMiddleware(route.args),
-    route.controller({ config })
-  );
+  if (inferredProfiles.length) {
+    // Enable cors with preflight
+    app.options(metadataConfig.path, cors(corsOptions));
+
+    // Enable metadata route
+    app.get(
+      metadataConfig.path,
+      cors(corsOptions),
+      versionValidationMiddleware(versionValidationConfiguration),
+      sanitizeMiddleware(metadataConfig.args),
+      metadataConfig.controller({ profiles, security, statementGenerator })
+    );
+  }
 }
 
 function enableResourceRoutes(app, config, corsDefaults) {
@@ -195,7 +232,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 
       // Calculate the cors setting we want for this route
       let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
-        methods: [route.type.toUpperCase()],
+        methods: [route.type.toUpperCase()]
       });
 
       // Define the arguments based on the interactions
@@ -247,10 +284,10 @@ function enableBaseRoute(app, config, corsDefaults) {
   let routes = require('./base/base.config');
   for (let i; routes.length; i++) {
     let versionValidationConfiguration = {
-      versions: getAllConfiguredVersions(config.profiles),
+      versions: getAllConfiguredVersions(config.profiles)
     };
     let corsOptions = Object.assign({}, corsDefaults, {
-      methods: [routes[i].type.toUpperCase()],
+      methods: [routes[i].type.toUpperCase()]
     });
 
     // Enable cors with preflight
@@ -279,5 +316,5 @@ function setRoutes(options = {}) {
 }
 
 module.exports = {
-  setRoutes,
+  setRoutes
 };
