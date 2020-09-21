@@ -11,9 +11,9 @@ const logger = loggers.get('default');
 module.exports.search = async (args, context) => {
   logger.info('Patient >>> Search');
 
-  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
+  let Bundle = resolveSchema(args.base_version, 'bundle');
+  let Patient = resolveSchema(args.base_version, 'patient');
 
   // You will need to build your query based on the sanitized args
   let query = { my: 'query' };

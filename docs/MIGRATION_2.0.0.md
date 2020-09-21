@@ -39,10 +39,10 @@ Here is an example that searches for multiple resources:
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service, this returns a bundle
 module.exports.search = async (args, context) => {
-  let BundleEntry = require(resolveSchema(args.base_version, 'bundleentry'));
-  let Bundle = require(resolveSchema(args.base_version, 'bundle'));
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
-  let Observation = require(resolveSchema(args.base_version, 'observation'));
+  let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
+  let Bundle = resolveSchema(args.base_version, 'bundle');
+  let Patient = resolveSchema(args.base_version, 'patient');
+  let Observation = resolveSchema(args.base_version, 'observation');
   // You will need to build your query based on the sanitized args
   let query = myCustomQueryBuilder(args);
   let results = await db.patients.find(query).toArray();
@@ -67,7 +67,7 @@ And here is another example that searches by id:
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // In patient service, this returns a bundle
 module.exports.searchById = async (args, context) => {
-  let Patient = require(resolveSchema(args.base_version, 'patient'));
+  let Patient = resolveSchema(args.base_version, 'patient');
   let result = await db.patients.findOne({ _id: args.id });
   return new Patient(result);
 };
@@ -203,9 +203,9 @@ server.listen(3000, () => {
 ```javascript
 const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
 // Load R4 Operation Outcome
-let OperationOutcome = require(resolveSchema('4_0_0', 'operationoutcome'));
+let OperationOutcome = resolveSchema('4_0_0', 'operationoutcome');
 // Load STU3 Patient class
-let Patient = require(resolveSchema('3_0_1', 'patient'));
+let Patient = resolveSchema('3_0_1', 'patient');
 ```
 
 Allowed values can be found in the [resources](../src/server/resources) directory. Each top level folder represents a version and inside each version folder is a schemas directory which contains all the available schemas you can load.
