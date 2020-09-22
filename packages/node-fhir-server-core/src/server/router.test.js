@@ -62,7 +62,7 @@ describe('Router Tests', () => {
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
       versions: ['4_0_0'],
-      baseUrl: '/'
+      baseUrls: ['/']
     };
     // Run the router with some defaults
     router.setRoutes({ app, config });

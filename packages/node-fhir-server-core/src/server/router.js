@@ -135,7 +135,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
   const customBaseUrlProfiles = Object.keys(profiles)
     .map(profileName => {
       const profile = profiles[profileName];
-      if (profile.baseUrl) {
+      if (profile.baseUrls && profile.baseUrls.length) {
         return profile;
       }
     })
@@ -144,12 +144,13 @@ function enableMetadataRoute(app, config, corsDefaults) {
   const inferredProfiles = Object.keys(profiles)
     .map(profileName => {
       const profile = profiles[profileName];
-      if (!profile.baseUrl) {
+      if (!profile.baseUrls || !profile.baseUrls.length) {
         return profile;
       }
     })
     .filter(profile => profile);
 
+  console.log(inferredProfiles);
   // Determine which versions need a metadata endpoint, we need to loop through
   // all the configured profiles and find all the uniquely provided versions
   const versionValidationConfiguration = {
@@ -161,9 +162,15 @@ function enableMetadataRoute(app, config, corsDefaults) {
   });
 
   if (customBaseUrlProfiles.length) {
-    const baseUrls = uniques(customBaseUrlProfiles.map(profile => profile.baseUrl));
+    const baseUrls = uniques(
+      customBaseUrlProfiles
+        .map(profile => profile.baseUrls)
+        .reduce((accum, val) => accum.concat(val), [])
+    );
+
     baseUrls.forEach(baseUrl => {
       const metadataPath = baseUrl === '/' ? '/metadata' : `${baseUrl}/metadata`;
+
       app.options(metadataPath, cors(corsOptions));
 
       // Enable metadata route
