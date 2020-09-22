@@ -109,13 +109,14 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
     });
 
     if (profile.baseUrls && profile.baseUrls.length && profile.baseUrls.includes('/')) {
+      const operationsRoute = '/'.concat(op.route).replace('$', '([$])');
       // Enable cors with preflight
-      app.options('/', cors(corsOptions));
+      app.options(operationsRoute, cors(corsOptions));
 
       // Enable this operation route
       app[route.type](
         // We need to allow the $ to exist in these routes
-        '/'.concat(op.route).replace('$', '([$])'),
+        operationsRoute,
         cors(corsOptions),
         versionValidationMiddleware(profile),
         sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
@@ -126,7 +127,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
       );
     }
 
-    let operationRoute = route.path
+    const operationRoute = route.path
       .replace(':resource', key)
       .concat(op.route)
       .replace('$', '([$])');
@@ -260,6 +261,8 @@ function enableResourceRoutes(app, config, corsDefaults) {
       let corsOptions = Object.assign({}, corsDefaults, profile.corsOptions, {
         methods: [route.type.toUpperCase()]
       });
+
+      console.log('corsOptions', corsOptions);
 
       // Define the arguments based on the interactions
       switch (route.interaction) {
