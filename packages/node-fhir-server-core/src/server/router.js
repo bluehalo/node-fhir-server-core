@@ -163,7 +163,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
   if (customBaseUrlProfiles.length) {
     const baseUrls = uniques(customBaseUrlProfiles.map(profile => profile.baseUrl));
     baseUrls.forEach(baseUrl => {
-      const metadataPath = `${baseUrl}/metadata`;
+      const metadataPath = baseUrl === '/' ? '/metadata' : `${baseUrl}/metadata`;
       app.options(metadataPath, cors(corsOptions));
 
       // Enable metadata route

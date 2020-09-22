@@ -10,15 +10,15 @@ let app, config;
 
 let mockServiceModule = {
   search: () => Promise.resolve(),
-  aggregateResults: () => Promise.resolve(),
+  aggregateResults: () => Promise.resolve()
 };
 
 let mockOperationConfig = [
   {
     name: 'aggregate-results',
     route: '/$aggregate-results',
-    method: 'POST',
-  },
+    method: 'POST'
+  }
 ];
 
 describe('Router Tests', () => {
@@ -26,16 +26,16 @@ describe('Router Tests', () => {
     app = {
       get: jest.fn(),
       post: jest.fn(),
-      options: jest.fn(),
+      options: jest.fn()
     };
     config = {
       server: {},
       profiles: {
         patient: {
           service: path.resolve('./src/server/profiles/service.mock.js'),
-          versions: ['4_0_0'],
-        },
-      },
+          versions: ['4_0_0']
+        }
+      }
     };
   });
 
@@ -43,7 +43,7 @@ describe('Router Tests', () => {
     // Add another version via a different route
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
-      versions: ['4_0_0'],
+      versions: ['4_0_0']
     };
     // Run the router with some defaults
     router.setRoutes({ app, config });
@@ -55,6 +55,20 @@ describe('Router Tests', () => {
     // selected
     let versionValidationMockReturn = app.get.mock.calls[0][2];
     expect(versionValidationMockReturn.versions).toEqual(expect.arrayContaining(['4_0_0']));
+  });
+
+  test('should enable metadata routes for profiles with a custom baseUrl', () => {
+    // Add another version via a different route
+    config.profiles.observation = {
+      service: path.resolve('./src/server/profiles/service.mock.js'),
+      versions: ['4_0_0'],
+      baseUrl: '/'
+    };
+    // Run the router with some defaults
+    router.setRoutes({ app, config });
+
+    expect(app.get.mock.calls).toHaveLength(2);
+    expect(app.get.mock.calls[0][0]).toEqual('/metadata');
   });
 
   test('should throw for invalid profile configurations', () => {
@@ -105,8 +119,8 @@ describe('Router Tests', () => {
     config.profiles.patient.operation = [
       {
         name: 'foo-bar',
-        route: '/$foo-bar',
-      },
+        route: '/$foo-bar'
+      }
     ];
     expect(() => {
       router.setRoutes({ app, config });
@@ -116,8 +130,8 @@ describe('Router Tests', () => {
       {
         name: 'foo-bar',
         route: '/$foo-bar',
-        method: 'POST',
-      },
+        method: 'POST'
+      }
     ];
     expect(() => {
       router.setRoutes({ app, config });
@@ -156,8 +170,8 @@ describe('Router Tests', () => {
     config.auth = {
       strategy: {
         name: 'test',
-        useSession: true,
-      },
+        useSession: true
+      }
     };
     config.profiles.patient.serviceModule = mockServiceModule;
     config.profiles.patient.operation = mockOperationConfig;
