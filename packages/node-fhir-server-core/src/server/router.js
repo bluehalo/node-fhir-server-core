@@ -63,7 +63,8 @@ function hasValidService(route = {}, profile = {}) {
 function loadController(lowercaseKey, interaction, service) {
   return (req, res, next) => {
     const { base_version } = req.params;
-    const controller = getController(base_version, lowercaseKey);
+    const fhirVersion = VERSIONS[base_version] || VERSIONS['4_0_0']; // fallback to r4 for custom baseUrl
+    const controller = getController(fhirVersion, lowercaseKey);
     // Invoke the correct interaction on our controller
     controller[interaction](service)(req, res, next);
   };
@@ -91,6 +92,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
     let hasController = profile.serviceModule
       ? Object.keys(profile.serviceModule).includes(functionName)
       : false;
+
     // Check for required configurations, must have name, route, method, and
     // a matching controller
     if (!op.name || !op.route || !op.method || !hasController) {
@@ -105,6 +107,24 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
     let corsOptions = Object.assign({}, corsDefaults, {
       methods: [route.type.toUpperCase()]
     });
+
+    if (profile.baseUrls && profile.baseUrls.length && profile.baseUrls.includes('/')) {
+      // Enable cors with preflight
+      app.options('/', cors(corsOptions));
+
+      // Enable this operation route
+      app[route.type](
+        // We need to allow the $ to exist in these routes
+        '/'.concat(op.route).replace('$', '([$])'),
+        cors(corsOptions),
+        versionValidationMiddleware(profile),
+        sanitizeMiddleware([routeArgs.BASE, routeArgs.ID, ...parameters]),
+        authenticationMiddleware(config),
+        sofScopeMiddleware({ route, auth: config.auth, name: key }),
+        // TODO: REMOVE: logger in future versions
+        operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger })
+      );
+    }
 
     let operationRoute = route.path
       .replace(':resource', key)
@@ -150,7 +170,6 @@ function enableMetadataRoute(app, config, corsDefaults) {
     })
     .filter(profile => profile);
 
-  console.log(inferredProfiles);
   // Determine which versions need a metadata endpoint, we need to loop through
   // all the configured profiles and find all the uniquely provided versions
   const versionValidationConfiguration = {
@@ -200,9 +219,9 @@ function enableMetadataRoute(app, config, corsDefaults) {
 
 function enableResourceRoutes(app, config, corsDefaults) {
   // Iterate over all of our provided profiles
-  for (let key in config.profiles) {
-    let lowercaseKey = key.toLowerCase();
-    let profile = config.profiles[key];
+  for (let profileName in config.profiles) {
+    let lowercaseKey = profileName.toLowerCase();
+    let profile = config.profiles[profileName];
     let versions = profile.versions;
     // User's can override arguments by providing their own metadata
     // function, may have more use in other areas in the future
@@ -219,7 +238,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
       );
     } catch (err) {
       throw new Error(
-        `${key} is an invalid profile configuration, please see the wiki for ` +
+        `${profileName} is an invalid profile configuration, please see the wiki for ` +
           'instructions on how to enable a profile in your server, ' +
           'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile'
       );
@@ -227,7 +246,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
 
     // Enable all provided operations for this profile
     if (profile.operation && profile.operation.length) {
-      enableOperationRoutesForProfile(app, config, profile, key, parameters, corsDefaults);
+      enableOperationRoutesForProfile(app, config, profile, profileName, parameters, corsDefaults);
     }
 
     // Start iterating over potential routes to enable for this profile
@@ -266,21 +285,40 @@ function enableResourceRoutes(app, config, corsDefaults) {
           break;
       }
 
-      let profileRoute = route.path.replace(':resource', key);
+      if (profile.baseUrls && profile.baseUrls.includes('/')) {
+        let profileRoute = route.path
+          .replace(':resource', profileName)
+          .replace(':base_version/', '');
 
-      // Enable cors with preflight
-      app.options(profileRoute, cors(corsOptions));
+        // Enable cors with preflight
+        app.options(profileRoute, cors(corsOptions));
 
-      // Enable this operation route
-      app[route.type](
-        profileRoute,
-        cors(corsOptions),
-        versionValidationMiddleware(profile),
-        sanitizeMiddleware(route.args),
-        authenticationMiddleware(config),
-        sofScopeMiddleware({ route, auth: config.auth, name: key }),
-        loadController(lowercaseKey, route.interaction, profile.serviceModule)
-      );
+        // Enable this operation route
+        app[route.type](
+          profileRoute,
+          cors(corsOptions),
+          sanitizeMiddleware(route.args),
+          authenticationMiddleware(config),
+          sofScopeMiddleware({ route, auth: config.auth, name: profileName }),
+          loadController(lowercaseKey, route.interaction, profile.serviceModule)
+        );
+      } else {
+        let profileRoute = route.path.replace(':resource', profileName);
+
+        // Enable cors with preflight
+        app.options(profileRoute, cors(corsOptions));
+
+        // Enable this operation route
+        app[route.type](
+          profileRoute,
+          cors(corsOptions),
+          versionValidationMiddleware(profile),
+          sanitizeMiddleware(route.args),
+          authenticationMiddleware(config),
+          sofScopeMiddleware({ route, auth: config.auth, name: profileName }),
+          loadController(lowercaseKey, route.interaction, profile.serviceModule)
+        );
+      }
     }
   }
 }

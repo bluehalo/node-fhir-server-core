@@ -247,8 +247,16 @@ class Server {
     this.app.use((err, req, res, next) => {
       // get base from URL instead of params since it might not be forwarded
       const base = req.url.split('/')[1] || VERSIONS['4_0_0'];
+
       // Get an operation outcome for this instance
-      const OperationOutcome = resolveSchema(base, 'operationoutcome');
+      let OperationOutcome;
+      if (Object.keys(VERSIONS).includes(base)) {
+        OperationOutcome = resolveSchema(base, 'operationoutcome');
+      } else {
+        // if it's a misplaced URL, just return an R4 OperationOutcome
+        OperationOutcome = resolveSchema('4_0_0', 'operationoutcome');
+      }
+
       // If there is an error and it is an OperationOutcome
       if (err && err.resourceType === OperationOutcome.resourceType) {
         const status = err.statusCode || 500;
