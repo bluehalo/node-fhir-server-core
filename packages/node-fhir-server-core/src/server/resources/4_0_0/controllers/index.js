@@ -1,6 +1,7 @@
 const account = require('./account.controller.js');
 const activitydefinition = require('./activitydefinition.controller.js');
 const adverseevent = require('./adverseevent.controller.js');
+const allergyintolerance = require('./allergyintolerance.controller.js');
 const appointment = require('./appointment.controller.js');
 const appointmentresponse = require('./appointmentresponse.controller.js');
 const auditevent = require('./auditevent.controller.js');
@@ -134,6 +135,7 @@ module.exports = {
   account,
   activitydefinition,
   adverseevent,
+  allergyintolerance,
   appointment,
   appointmentresponse,
   auditevent,

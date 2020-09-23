@@ -53,5 +53,5 @@ module.exports = {
       .configurePassport()
       .setPublicDirectory()
       .setProfileRoutes()
-      .setErrorRoutes()
+      .setErrorRoutes(),
 };
