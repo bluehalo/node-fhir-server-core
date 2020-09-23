@@ -1,6 +1,7 @@
 const account = require('./account');
 const activitydefinition = require('./activitydefinition');
 const adverseevent = require('./adverseevent');
+const allergyintolerance = require('./allergyintolerance');
 const appointment = require('./appointment');
 const appointmentresponse = require('./appointmentresponse');
 const auditevent = require('./auditevent');
@@ -82,6 +83,8 @@ const medicinalproductpackaged = require('./medicinalproductpackaged');
 const medicinalproductpharmaceutical = require('./medicinalproductpharmaceutical');
 const messagedefinition = require('./messagedefinition');
 const messageheader = require('./messageheader');
+const meta = require('./meta');
+const metadataresource = require('./metadataresource');
 const molecularsequence = require('./molecularsequence');
 const namingsystem = require('./namingsystem');
 const nutritionorder = require('./nutritionorder');
@@ -135,6 +138,7 @@ module.exports = {
   account,
   activitydefinition,
   adverseevent,
+  allergyintolerance,
   appointment,
   appointmentresponse,
   auditevent,
@@ -216,6 +220,8 @@ module.exports = {
   medicinalproductpharmaceutical,
   messagedefinition,
   messageheader,
+  meta,
+  metadataresource,
   molecularsequence,
   namingsystem,
   nutritionorder,
@@ -263,5 +269,5 @@ module.exports = {
   testscript,
   valueset,
   verificationresult,
-  visionprescription,
+  visionprescription
 };
