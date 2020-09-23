@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-sanitize-param",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Sanitization tool for FHIR parameters",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
