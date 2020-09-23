@@ -21,5 +21,5 @@ const getController = (version, resourceName) => {
 };
 
 module.exports = {
-  getController
+  getController,
 };
