@@ -21,7 +21,7 @@ Then we'll create a function that will require the `CapabilityStatement` class, 
 const base_version = '4_0_0';
 
 let customCapabilityStatement = (resources) => {
-  let CapabilityStatement = require(FHIRServer.resolveSchema(base_version, 'CapabilityStatement'));
+  let CapabilityStatement = FHIRServer.resolveSchema(base_version, 'CapabilityStatement');
 
   return new CapabilityStatement({
     status: 'draft',
