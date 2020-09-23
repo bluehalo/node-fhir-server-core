@@ -15,9 +15,11 @@ const getController = (version, resourceName) => {
       return controllers3[resourceName];
     case '1_0_2':
       return controllers1[resourceName];
+    default:
+      return controllersR4[resourceName];
   }
 };
 
 module.exports = {
-  getController,
+  getController
 };
