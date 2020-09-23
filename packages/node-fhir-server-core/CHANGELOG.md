@@ -1,3 +1,15 @@
+## [2.1.2](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.1.2) (2020-09-23)
+
+### Bug Fixes
+
+- add allergyintolerance ([a91bc21](https://github.com/Asymmetrik/node-fhir-server-core/commit/a91bc210bff103d3bb8a68a8ca89a0b028ace04e))
+- just return an R4 operation outcome on lost URLs ([86451ec](https://github.com/Asymmetrik/node-fhir-server-core/commit/86451ec2a362b22e39674c99cff48f241f0a57d0))
+
+### Features
+
+- add index files for each resource ([7410e4a](https://github.com/Asymmetrik/node-fhir-server-core/commit/7410e4a1090a7718d4b4170c37409c044ba2b72f))
+- improve package bundling ([a30db64](https://github.com/Asymmetrik/node-fhir-server-core/commit/a30db64f8f3f9e2015b0138f8c931a3c2039df52))
+
 ## [2.0.11](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.0.11) (2020-09-02)
 
 - Upgrade fhir-response-utils to respond with a 404 on Search By ID
