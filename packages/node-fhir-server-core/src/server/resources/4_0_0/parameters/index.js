@@ -1,6 +1,7 @@
 const account = require('./account.parameters.js');
 const activitydefinition = require('./activitydefinition.parameters.js');
 const adverseevent = require('./adverseevent.parameters.js');
+const allergyintolerance = require('./allergyintolerance.parameters');
 const appointment = require('./appointment.parameters.js');
 const appointmentresponse = require('./appointmentresponse.parameters.js');
 const auditevent = require('./auditevent.parameters.js');
@@ -134,6 +135,7 @@ module.exports = {
   account,
   activitydefinition,
   adverseevent,
+  allergyintolerance,
   appointment,
   appointmentresponse,
   auditevent,
