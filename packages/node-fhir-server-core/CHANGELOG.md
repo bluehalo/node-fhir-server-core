@@ -1,3 +1,22 @@
+# [2.2.1](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.2.0) (2020-09-29)
+
+### Bug Fixes
+
+- add allergyintolerance ([a91bc21](https://github.com/Asymmetrik/node-fhir-server-core/commit/a91bc210bff103d3bb8a68a8ca89a0b028ace04e))
+- add allergyintrolerance controller and default to r4 if no version is found ([85af3a2](https://github.com/Asymmetrik/node-fhir-server-core/commit/85af3a279bcd37132f9516400fb91acef90c8eba))
+- fix bug involving custom baseUrls ([d825ad3](https://github.com/Asymmetrik/node-fhir-server-core/commit/d825ad30ef94531b5ae2b75d8dcc382adaf6d1d3))
+- just return an R4 operation outcome on lost URLs ([86451ec](https://github.com/Asymmetrik/node-fhir-server-core/commit/86451ec2a362b22e39674c99cff48f241f0a57d0))
+
+### Features
+
+- add allergyintolerance schema ([268cb8a](https://github.com/Asymmetrik/node-fhir-server-core/commit/268cb8a8ca0a8659fbaa0c341d612f7cf8986d17))
+- add index files for each resource ([7410e4a](https://github.com/Asymmetrik/node-fhir-server-core/commit/7410e4a1090a7718d4b4170c37409c044ba2b72f))
+- allow for the ability to specify a baseUrl for profiles ([933a77b](https://github.com/Asymmetrik/node-fhir-server-core/commit/933a77bd47b9feda106346d7d8767d964b7bf51a))
+- allow for the ability to specify a list of custom baseUrls ([156de6b](https://github.com/Asymmetrik/node-fhir-server-core/commit/156de6b0cda37e88e16d1bc8a44df84426eaab3d))
+- fix operations route ([fb79d06](https://github.com/Asymmetrik/node-fhir-server-core/commit/fb79d0675dc4b5010dab1cd4606d16df254506bf))
+- import support for custom baseUrls ([e242268](https://github.com/Asymmetrik/node-fhir-server-core/commit/e24226850b7e87f63a2346036109c9f9d410ef6b))
+- improve package bundling ([a30db64](https://github.com/Asymmetrik/node-fhir-server-core/commit/a30db64f8f3f9e2015b0138f8c931a3c2039df52))
+
 ## [2.1.3](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.1.3) (2020-09-23)
 
 ### Bug Fixes
