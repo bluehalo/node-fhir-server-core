@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
   "author": "Asymmetrik Ltd.",
@@ -37,7 +37,7 @@
     "verbose": true
   },
   "dependencies": {
-    "@asymmetrik/fhir-response-util": "^1.2.3",
+    "@asymmetrik/fhir-response-util": "^1.2.4",
     "@asymmetrik/sof-scope-checker": "^1.0.7",
     "@hapi/bourne": "^1.3.2",
     "body-parser": "^1.18.2",
