@@ -1,4 +1,4 @@
-const { resolveSchema } = require('./utils/schema.utils');
+const { resolveSchema, isValidVersion } = require('./utils/schema.utils');
 const deprecate = require('./utils/deprecation.notice');
 const ServerError = require('./utils/server.error');
 const invariant = require('./utils/invariant');
@@ -29,8 +29,8 @@ function mergeDefaults(providedConfig) {
     profiles: {},
     server: {},
     logging: {
-      level: 'debug'
-    }
+      level: 'debug',
+    },
   };
 
   return Object.assign(defaults, providedConfig);
@@ -48,7 +48,7 @@ function verifyAndLoadProfiles(profiles) {
   // support for the given profile. We will do that in the when setting up routes
   // This may change for future versions when we generate new resources and we
   // can more easily perform the validation here
-  Object.getOwnPropertyNames(profiles).forEach(name => {
+  Object.getOwnPropertyNames(profiles).forEach((name) => {
     let versions = profiles[name].versions;
     let service = profiles[name].service;
     let message;
@@ -127,7 +127,7 @@ class Server {
 
     this.env = {
       IS_PRODUCTION: !process.env.NODE_ENV || process.env.NODE_ENV === 'production',
-      USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert ? server.ssl : undefined
+      USE_HTTPS: server.ssl && server.ssl.key && server.ssl.cert ? server.ssl : undefined,
     };
     // return self for chaining
     return this;
@@ -172,7 +172,7 @@ class Server {
       helmet(
         helmetConfig || {
           // Needs https running first
-          hsts: this.env.USE_HTTPS
+          hsts: this.env.USE_HTTPS,
         }
       )
     );
@@ -246,16 +246,13 @@ class Server {
     // Errors should be thrown with next and passed through
     this.app.use((err, req, res, next) => {
       // get base from URL instead of params since it might not be forwarded
-      const base = req.url.split('/')[1] || VERSIONS['4_0_0'];
+      const base = req.url.split('/')[1];
 
       // Get an operation outcome for this instance
-      let OperationOutcome;
-      if (Object.keys(VERSIONS).includes(base)) {
-        OperationOutcome = resolveSchema(base, 'operationoutcome');
-      } else {
-        // if it's a misplaced URL, just return an R4 OperationOutcome
-        OperationOutcome = resolveSchema('4_0_0', 'operationoutcome');
-      }
+      const OperationOutcome = resolveSchema(
+        isValidVersion(base) ? base : VERSIONS['4_0_0'],
+        'operationoutcome'
+      );
 
       // If there is an error and it is an OperationOutcome
       if (err && err.resourceType === OperationOutcome.resourceType) {
@@ -272,10 +269,10 @@ class Server {
               severity: 'error',
               code: 'internal',
               details: {
-                text: `Unexpected: ${err.message}`
-              }
-            }
-          ]
+                text: `Unexpected: ${err.message}`,
+              },
+            },
+          ],
         });
 
         logger.error(error);
@@ -306,10 +303,10 @@ class Server {
             severity: 'error',
             code: 'not-found',
             details: {
-              text: `Invalid url: ${req.path}`
-            }
-          }
-        ]
+              text: `Invalid url: ${req.path}`,
+            },
+          },
+        ],
       });
 
       logger.error(error);
@@ -349,7 +346,7 @@ class Server {
       : https.createServer(
           {
             key: fs.readFileSync(server.ssl.key),
-            cert: fs.readFileSync(server.ssl.cert)
+            cert: fs.readFileSync(server.ssl.cert),
           },
           this.app
         );

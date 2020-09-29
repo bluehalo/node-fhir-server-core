@@ -1,4 +1,4 @@
-const { resolveSchema } = require('./schema.utils');
+const { resolveSchema, isValidVersion } = require('./schema.utils');
 
 describe('Schema Utils tests', () => {
   test('should get R4 parameters', () => {
@@ -24,5 +24,13 @@ describe('Schema Utils tests', () => {
   test('should get V1 parameters for OperationOutcome', () => {
     const schema = resolveSchema('1_0_2', 'OperationOutcome');
     expect(schema).toBeTruthy();
+  });
+  test('should evaluate that a string is an invalid fhir version', () => {
+    const version = 'foobar';
+    expect(isValidVersion(version)).toEqual(false);
+  });
+  test('should evaluate that a string is an valid fhir version', () => {
+    const version = '4_0_0';
+    expect(isValidVersion(version)).toEqual(true);
   });
 });

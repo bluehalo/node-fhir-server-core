@@ -73,7 +73,6 @@ function create(req, res, json, options) {
     location = `${fhirVersion}/${options.type}/${json.id}`;
   }
 
-  console.log(location);
   if (json.resource_version) {
     let pathname = path.posix.join(location, '_history', json.resource_version);
     res.set('Content-Location', `${baseUrl}/${pathname}`);

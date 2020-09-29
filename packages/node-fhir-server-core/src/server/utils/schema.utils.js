@@ -1,3 +1,5 @@
+const { VERSIONS } = require('../../constants');
+
 const schemasR4 = require('../resources/4_0_0/schemas');
 const schemas3 = require('../resources/3_0_1/schemas');
 const schemas1 = require('../resources/1_0_2/schemas');
@@ -19,6 +21,16 @@ const resolveSchema = (version = '4_0_0', schema = '') => {
   }
 };
 
+/**
+ * Utility helpful for checking if a given string is a valid FHIR version
+ * within node-fhir-server-core
+ * @param {String} version
+ */
+const isValidVersion = (version) => {
+  return Object.keys(VERSIONS).includes(version);
+};
+
 module.exports = {
   resolveSchema,
+  isValidVersion,
 };
