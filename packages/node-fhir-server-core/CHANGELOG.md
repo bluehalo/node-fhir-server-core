@@ -1,4 +1,4 @@
-# [2.2.1](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.2.0) (2020-09-29)
+# [2.2.0](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.2.0) (2020-09-29)
 
 ### Bug Fixes
 
