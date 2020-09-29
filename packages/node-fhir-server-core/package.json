@@ -13,6 +13,7 @@
   "main": "dist/index",
   "scripts": {
     "build": "babel src -d dist --copy-files",
+    "build:watch": "babel src -w -d dist --copy-files",
     "changelog": "conventional-changelog -p angular -s -i CHANGELOG.md",
     "lint": "eslint \"src/**/*.js\"",
     "nodemon": "cross-env NODE_ENV=development node scripts/nodemon.js",
