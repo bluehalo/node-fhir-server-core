@@ -4,10 +4,10 @@ const { routeArgs: routeArgs } = require('../route.config.js');
 let route = {
   path: '/:base_version/metadata',
   corsOptions: {
-    methods: ['GET']
+    methods: ['GET'],
   },
   args: [routeArgs.BASE],
-  controller: controller.getCapabilityStatement
+  controller: controller.getCapabilityStatement,
 };
 
 /**
@@ -15,5 +15,5 @@ let route = {
  * @summary Metadata config
  */
 module.exports = {
-  route
+  route,
 };

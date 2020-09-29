@@ -10,15 +10,15 @@ let app, config;
 
 let mockServiceModule = {
   search: () => Promise.resolve(),
-  aggregateResults: () => Promise.resolve()
+  aggregateResults: () => Promise.resolve(),
 };
 
 let mockOperationConfig = [
   {
     name: 'aggregate-results',
     route: '/$aggregate-results',
-    method: 'POST'
-  }
+    method: 'POST',
+  },
 ];
 
 describe('Router Tests', () => {
@@ -26,16 +26,16 @@ describe('Router Tests', () => {
     app = {
       get: jest.fn(),
       post: jest.fn(),
-      options: jest.fn()
+      options: jest.fn(),
     };
     config = {
       server: {},
       profiles: {
         patient: {
           service: path.resolve('./src/server/profiles/service.mock.js'),
-          versions: ['4_0_0']
-        }
-      }
+          versions: ['4_0_0'],
+        },
+      },
     };
   });
 
@@ -43,7 +43,7 @@ describe('Router Tests', () => {
     // Add another version via a different route
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
-      versions: ['4_0_0']
+      versions: ['4_0_0'],
     };
     // Run the router with some defaults
     router.setRoutes({ app, config });
@@ -62,7 +62,7 @@ describe('Router Tests', () => {
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
       versions: ['4_0_0'],
-      baseUrls: ['/']
+      baseUrls: ['/'],
     };
     // Run the router with some defaults
     router.setRoutes({ app, config });
@@ -119,8 +119,8 @@ describe('Router Tests', () => {
     config.profiles.patient.operation = [
       {
         name: 'foo-bar',
-        route: '/$foo-bar'
-      }
+        route: '/$foo-bar',
+      },
     ];
     expect(() => {
       router.setRoutes({ app, config });
@@ -130,8 +130,8 @@ describe('Router Tests', () => {
       {
         name: 'foo-bar',
         route: '/$foo-bar',
-        method: 'POST'
-      }
+        method: 'POST',
+      },
     ];
     expect(() => {
       router.setRoutes({ app, config });
@@ -170,8 +170,8 @@ describe('Router Tests', () => {
     config.auth = {
       strategy: {
         name: 'test',
-        useSession: true
-      }
+        useSession: true,
+      },
     };
     config.profiles.patient.serviceModule = mockServiceModule;
     config.profiles.patient.operation = mockOperationConfig;

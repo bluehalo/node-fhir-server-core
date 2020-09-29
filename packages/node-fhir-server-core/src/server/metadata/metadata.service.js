@@ -9,7 +9,7 @@ let logger = container.get('default');
 /**
  * Load the correct statement generators for the right version
  */
-let getStatementGenerators = base_version => {
+let getStatementGenerators = (base_version) => {
   if (base_version) {
     return require(`./capability.${base_version}`);
   } else {
@@ -29,7 +29,7 @@ let generateCapabilityStatement = ({
   fhirVersion,
   profiles,
   security,
-  statementGenerator = getStatementGenerators
+  statementGenerator = getStatementGenerators,
 }) =>
   new Promise((resolve, reject) => {
     logger.info('Metadata.generateCapabilityStatement');
@@ -37,16 +37,16 @@ let generateCapabilityStatement = ({
     // create profile list
     let keys = Object.keys(profiles);
     let active_profiles = keys
-      .map(profile_name => {
+      .map((profile_name) => {
         return {
           key: profile_name,
           makeResource: conformanceTemplate.resource,
           versions: profiles[profile_name] && profiles[profile_name].versions,
           service: profiles[profile_name] && profiles[profile_name].serviceModule,
-          metadata: profiles[profile_name] && profiles[profile_name].metadata
+          metadata: profiles[profile_name] && profiles[profile_name].metadata,
         };
       })
-      .filter(profile => profile.versions.indexOf(fhirVersion) !== -1);
+      .filter((profile) => profile.versions.indexOf(fhirVersion) !== -1);
 
     // TODO: REMOVE: Logger deprecatedLogger
     let deprecatedLogger = deprecate(
@@ -65,7 +65,7 @@ let generateCapabilityStatement = ({
 
     // Let's start building our confromance/capability statement
     const serverStatement = {
-      mode: 'server'
+      mode: 'server',
     };
 
     // Add security information if available
@@ -77,14 +77,14 @@ let generateCapabilityStatement = ({
     let operations = keys.reduce((ops, profile_name) => {
       const opsInProfile = profiles[profile_name].operation;
       if (opsInProfile && opsInProfile.length) {
-        opsInProfile.forEach(opInProfile => {
+        opsInProfile.forEach((opInProfile) => {
           const op = {
             name: opInProfile.name,
             definition: {
               reference: opInProfile.reference
                 ? opInProfile.reference
-                : `/OperationOutcome/${opInProfile.name}`
-            }
+                : `/OperationOutcome/${opInProfile.name}`,
+            },
           };
           ops.push(op);
         });
@@ -99,7 +99,7 @@ let generateCapabilityStatement = ({
 
     // Make the resource and give it the version so it can only include valid search params
     let customMakeResource = null;
-    serverStatement.resource = active_profiles.map(profile => {
+    serverStatement.resource = active_profiles.map((profile) => {
       if (profile.metadata) {
         customMakeResource = require(profile.metadata).makeResource;
       } else {
@@ -122,5 +122,5 @@ let generateCapabilityStatement = ({
  * @summary Metadata service
  */
 module.exports = {
-  generateCapabilityStatement
+  generateCapabilityStatement,
 };

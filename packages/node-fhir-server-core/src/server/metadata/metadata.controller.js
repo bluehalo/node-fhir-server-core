@@ -15,9 +15,9 @@ module.exports.getCapabilityStatement = ({ profiles, security, statementGenerato
         fhirVersion: fhirVersion || VERSIONS['4_0_0'],
         profiles,
         security,
-        statementGenerator
+        statementGenerator,
       })
-      .then(statement => res.status(200).json(statement))
-      .catch(err => next(err));
+      .then((statement) => res.status(200).json(statement))
+      .catch((err) => next(err));
   };
 };
