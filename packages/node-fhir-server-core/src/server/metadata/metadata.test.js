@@ -10,79 +10,84 @@ let server;
 
 // Helper function to replace express params with mock values
 let fillRoute = (route, key) =>
-  route.replace(':base_version', VERSIONS['3_0_1']).replace(':id', 1).replace(':resource', key);
+  route
+    .replace(':base_version', VERSIONS['3_0_1'])
+    .replace(':id', 1)
+    .replace(':resource', key);
 
 //Helper function build a custom security statement
-const customSecurityStatement = (securityUrls) => ({
+const customSecurityStatement = securityUrls => ({
   cors: true,
   service: [
     {
       coding: [
         {
           system: 'http://hl7.org/fhir/restful-security-service',
-          code: 'SMART-on-FHIR',
-        },
+          code: 'SMART-on-FHIR'
+        }
       ],
-      text: 'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)',
-    },
+      text: 'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
+    }
   ],
   extension: [
     {
       url: 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris',
-      extension: securityUrls,
-    },
-  ],
+      extension: securityUrls
+    }
+  ]
 });
 
 // Helper function to build a custom capability statement
-const customCapabilityStatement = function (resources) {
+const customCapabilityStatement = function(resources) {
   let CapabilityStatement = resolveSchema('3_0_1', 'CapabilityStatement');
 
   return new CapabilityStatement({
     status: 'active',
-    date: moment().tz('America/New_York').format(),
+    date: moment()
+      .tz('America/New_York')
+      .format(),
     publisher: 'Not provided',
     kind: 'instance',
     software: {
       name: 'FHIR Server',
-      version: '0.0.1',
+      version: '0.0.1'
     },
     implementation: {
-      description: 'FHIR Custom Server (STU3)',
+      description: 'FHIR Custom Server (STU3)'
     },
     fhirVersion: '3.0.1',
     acceptUnknown: 'extensions',
     format: ['application/fhir+json'],
-    rest: [resources],
+    rest: [resources]
   });
 };
 
 //A custom statementGenerator getter
-let customGetStatementGenerators = (args) => {
+let customGetStatementGenerators = args => {
   return {
     makeStatement: customCapabilityStatement,
-    securityStatement: customSecurityStatement,
+    securityStatement: customSecurityStatement
   };
 };
 
 //A function to make a custom resource conformance statement
-let customMakeResource = (args) => {
+let customMakeResource = args => {
   let Resource = resolveSchema(args.base_version, args.key);
 
   // Return our conformance statement
   return {
     type: Resource.resourceType,
     profile: {
-      reference: `http://example.org/fhir/${args.key}.html`,
+      reference: `http://example.org/fhir/${args.key}.html`
     },
     conditionalDelete: 'not-supported',
     searchParam: [
       {
         name: '_id',
         type: 'token',
-        documentation: 'The ID of the resource',
-      },
-    ],
+        documentation: 'The ID of the resource'
+      }
+    ]
   };
 };
 
@@ -106,12 +111,12 @@ describe('Conformance Tests', () => {
     config.security = [
       {
         url: 'authorize',
-        valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize',
+        valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize'
       },
       {
         url: 'token',
-        valueUri: 'https://afternoon-springs-39948.herokuapp.com/token',
-      },
+        valueUri: 'https://afternoon-springs-39948.herokuapp.com/token'
+      }
     ];
     server = new Server(config).setProfileRoutes().setErrorRoutes();
 
@@ -133,12 +138,12 @@ describe('Conformance Tests', () => {
     config.security = [
       {
         url: 'authorize',
-        valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize',
+        valueUri: 'https://afternoon-springs-39948.herokuapp.com/authorize'
       },
       {
         url: 'token',
-        valueUri: 'https://afternoon-springs-39948.herokuapp.com/token',
-      },
+        valueUri: 'https://afternoon-springs-39948.herokuapp.com/token'
+      }
     ];
     config.statementGenerator = customGetStatementGenerators;
     server = new Server(config).setProfileRoutes().setErrorRoutes();
@@ -181,7 +186,7 @@ describe('Conformance Tests', () => {
     expect(response.body.resourceType).toBe('CapabilityStatement');
     //Check that the reference for each resource is the default
     for (let key of keys) {
-      let resource = response.body.rest[0].resource.find((rsc) => rsc.type === key);
+      let resource = response.body.rest[0].resource.find(rsc => rsc.type === key);
       expect(resource.profile.reference).toBe(`http://hl7.org/fhir/${key}.html`);
     }
   }, 60000);
@@ -205,7 +210,7 @@ describe('Conformance Tests', () => {
     expect(response.body.resourceType).toBe('CapabilityStatement');
     //Check the reference for each resource is the customised one
     for (let key of keys) {
-      let account_resource = response.body.rest[0].resource.find((rsc) => {
+      let account_resource = response.body.rest[0].resource.find(rsc => {
         return rsc.type === key;
       });
       expect(account_resource.profile.reference).toBe(`http://example.org/fhir/${key}.html`);
@@ -232,7 +237,7 @@ describe('Conformance Tests', () => {
     expect(response.body.resourceType).toBe('CapabilityStatement');
     //Check the reference for each resource is the customised one
     for (let key of keys) {
-      let account_resource = response.body.rest[0].resource.find((rsc) => rsc.type === 'Foobar');
+      let account_resource = response.body.rest[0].resource.find(rsc => rsc.type === 'Foobar');
       expect(account_resource.profile.reference).toBe(
         `https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1`
       );

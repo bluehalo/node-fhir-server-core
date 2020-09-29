@@ -8,10 +8,22 @@ const errors = require('../utils/error.utils');
  * @return {function} valid express middleware
  */
 module.exports = function versionValidationMiddleware(profile = {}) {
-  let { versions = [] } = profile;
+  const { versions = [], baseUrls = [] } = profile;
 
-  return function validationMiddleware(req, res, next) {
-    let base_version = req.params && req.params.base_version;
+  if (baseUrls.length) {
+    return (req, res, next) => {
+      const base_version = req.params && req.params.base_version;
+
+      if (baseUrls.indexOf(`/${base_version}`) === -1) {
+        return next(errors.notFound(undefined, base_version));
+      }
+
+      next();
+    };
+  }
+
+  return (req, res, next) => {
+    const base_version = req.params && req.params.base_version;
 
     if (!base_version || versions.indexOf(base_version) === -1) {
       return next(errors.notFound(undefined, base_version));

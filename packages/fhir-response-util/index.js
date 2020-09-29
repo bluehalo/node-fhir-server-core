@@ -63,10 +63,17 @@ function readOne(req, res, resource) {
  * @param {Object} options - Any additional options necessary to generate response
  */
 function create(req, res, json, options) {
-  let fhirVersion = req.params.base_version;
+  let fhirVersion = req.params.base_version ? req.params.base_version : '';
   let baseUrl = `${req.protocol}://${req.get('host')}`;
-  let location = `${fhirVersion}/${options.type}/${json.id}`;
 
+  let location;
+  if (fhirVersion === '') {
+    location = `${options.type}/${json.id}`;
+  } else {
+    location = `${fhirVersion}/${options.type}/${json.id}`;
+  }
+
+  console.log(location);
   if (json.resource_version) {
     let pathname = path.posix.join(location, '_history', json.resource_version);
     res.set('Content-Location', `${baseUrl}/${pathname}`);
