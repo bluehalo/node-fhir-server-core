@@ -1,4 +1,4 @@
-const VERSIONS = require('../../constants');
+const { VERSIONS } = require('../../constants');
 const service = require('./metadata.service.js');
 
 /**
