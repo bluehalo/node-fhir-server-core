@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
   "author": "Asymmetrik Ltd.",
