@@ -5,6 +5,7 @@ const auditevent = require('./auditevent');
 const basic = require('./basic');
 const binary = require('./binary');
 const bundle = require('./bundle');
+const bundleentry = require('./bundleentry');
 const careplan = require('./careplan');
 const claim = require('./claim');
 const claimresponse = require('./claimresponse');
@@ -84,6 +85,7 @@ module.exports = {
   basic,
   binary,
   bundle,
+  bundleentry,
   careplan,
   claim,
   claimresponse,

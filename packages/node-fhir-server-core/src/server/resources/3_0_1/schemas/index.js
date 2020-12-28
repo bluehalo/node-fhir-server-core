@@ -7,6 +7,7 @@ const auditevent = require('./auditevent');
 const basic = require('./basic');
 const binary = require('./binary');
 const bundle = require('./bundle');
+const bundleentry = require('./bundleentry');
 const capabilitystatement = require('./capabilitystatement');
 const careplan = require('./careplan');
 const careteam = require('./careteam');
@@ -113,6 +114,7 @@ module.exports = {
   basic,
   binary,
   bundle,
+  bundleentry,
   capabilitystatement,
   careplan,
   careteam,

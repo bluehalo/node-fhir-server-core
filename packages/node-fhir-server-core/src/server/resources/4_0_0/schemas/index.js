@@ -9,6 +9,7 @@ const basic = require('./basic');
 const binary = require('./binary');
 const bodystructure = require('./bodystructure');
 const bundle = require('./bundle');
+const bundleentry = require('./bundleentry');
 const capabilitystatement = require('./capabilitystatement');
 const careplan = require('./careplan');
 const careteam = require('./careteam');
@@ -146,6 +147,7 @@ module.exports = {
   binary,
   bodystructure,
   bundle,
+  bundleentry,
   capabilitystatement,
   careplan,
   careteam,
