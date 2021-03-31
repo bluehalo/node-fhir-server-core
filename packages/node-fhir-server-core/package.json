@@ -21,7 +21,8 @@
     "snyk": "snyk",
     "snyk-protect": "snyk protect",
     "start": "node scripts/runner.js",
-    "test": "cross-env NODE_ENV=test jest src"
+    "test": "cross-env NODE_ENV=test jest src",
+    "tsc": "tsc"
   },
   "jest": {
     "clearMocks": true,
@@ -40,6 +41,7 @@
     "@asymmetrik/fhir-response-util": "^1.2.4",
     "@asymmetrik/sof-scope-checker": "^1.0.7",
     "@hapi/bourne": "^1.3.2",
+    "@types/fhir": "^3.0.2",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -72,7 +74,8 @@
     "conventional-changelog-cli": "^2.0.11",
     "nock": "^9.1.5",
     "nodemon": "^1.18.6",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "typescript": "^4.1.5"
   },
   "engines": {
     "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
