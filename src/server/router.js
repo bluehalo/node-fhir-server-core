@@ -94,7 +94,16 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
 		}
 
 		let lowercaseMethod = op.method.toLowerCase();
-		let interaction = lowercaseMethod === 'post' ? INTERACTIONS.OPERATIONS_POST : INTERACTIONS.OPERATIONS_GET;
+		switch(lowercaseMethod) {
+			case 'post':
+				interaction = INTERACTIONS.OPERATIONS_POST
+				break;
+			case 'put':
+				interaction = INTERACTIONS.OPERATIONS_PUT;
+				break;
+			default:
+				interaction = INTERACTIONS.OPERATIONS_GET;
+		}
 
 		let route = routes.find(rt => rt.interaction === interaction);
 		let corsOptions = Object.assign({}, corsDefaults, {
