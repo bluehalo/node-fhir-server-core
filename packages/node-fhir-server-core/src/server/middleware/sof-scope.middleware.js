@@ -24,6 +24,7 @@ function deriveActionFromInteraction(interaction) {
     case INTERACTIONS.UPDATE:
     case INTERACTIONS.DELETE:
     case INTERACTIONS.OPERATIONS_POST:
+    case INTERACTIONS.OPERATIONS_PUT:
       return 'write';
     default:
       return '*';

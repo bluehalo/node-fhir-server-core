@@ -63,6 +63,7 @@ exports.INTERACTIONS = {
   PATCH: 'patch',
   OPERATIONS_POST: 'operationsPost',
   OPERATIONS_GET: 'operationsGet',
+  OPERATIONS_PUT: 'operationsPut',
 };
 
 /**
