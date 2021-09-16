@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/sof-graphql-invariant",
-  "version": "1.1.7",
+  "version": "1.1.7rc1",
   "description": "Smart on FHIR scope checker for GraphQL",
   "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
