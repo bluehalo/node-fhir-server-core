@@ -5,7 +5,7 @@
   "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/node-fhir-server-core.git"
+    "directory": "packages/fhir-qb-sql"
   },
   "license": "MIT",
   "author": "Sumeet-S <sshah@asymmetrik.com>",
