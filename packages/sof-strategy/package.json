@@ -2,10 +2,10 @@
   "name": "@asymmetrik/sof-strategy",
   "version": "1.1.5",
   "description": "Smart on FHIR authorization strategy for passport",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "url": "https://github.com/Asymmetrik/node-fhir-server-core.git"
   },
   "license": "MIT",
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",

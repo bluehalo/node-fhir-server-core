@@ -2,10 +2,10 @@
   "name": "@asymmetrik/fhir-secrets",
   "version": "0.9.6",
   "description": "AWS KMS Secrets retrieval promisified",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "url": "https://github.com/Asymmetrik/node-fhir-server-core.git"
   },
   "license": "MIT",
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",

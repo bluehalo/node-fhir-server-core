@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.1.5](https://github.com/Asymmetrik/phx-tools/compare/@asymmetrik/sof-strategy@1.1.4...@asymmetrik/sof-strategy@1.1.5) (2021-09-16)
+## [1.1.5](https://github.com/Asymmetrik/node-fhir-server-core/compare/@asymmetrik/sof-strategy@1.1.4...@asymmetrik/sof-strategy@1.1.5) (2021-09-16)
 
 ### Update Dependency
 * update superagent to 6.1.0

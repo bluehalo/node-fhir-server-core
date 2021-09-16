@@ -53,7 +53,7 @@ let root = new GraphQLObjectType({
 });
 ```
 
-See [sof-graphql-invariant tests](https://github.com/Asymmetrik/phx-tools/blob/master/packages/sof-graphql-invariant/index.test.js) for more usage examples.
+See [sof-graphql-invariant tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-graphql-invariant/index.test.js) for more usage examples.
 
 ### Environment variables
 

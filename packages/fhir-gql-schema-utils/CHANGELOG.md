@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 
-## [1.1.5](https://github.com/Asymmetrik/phx-tools/compare/@asymmetrik/sof-graphql-invariant@1.1.4...@asymmetrik/sof-graphql-invariant@1.1.5) (2021-09-16)
+## [1.1.5](https://github.com/Asymmetrik/node-fhir-server-core/compare/@asymmetrik/sof-graphql-invariant@1.1.4...@asymmetrik/sof-graphql-invariant@1.1.5) (2021-09-16)
 
 ### Update Dependency
 * Update graphql to 15.5.3
