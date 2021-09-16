@@ -233,7 +233,7 @@ const logger = container.get('default');
 
 ### Tools Migration
 
-More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. You can see all the packages we have available here: https://github.com/Asymmetrik/node-fhir-server-core. Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils, passport strategies, query builders, and parameter sanitization logic.
+More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. All packages are available here: https://github.com/Asymmetrik/node-fhir-server-core. (Previously located here: https://github.com/Asymmetrik/phx-tools.) Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils, passport strategies, query builders, and parameter sanitization logic.
 
 ### Favicon
 
