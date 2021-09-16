@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/sof-strategy",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Smart on FHIR authorization strategy for passport",
   "homepage": "https://github.com/Asymmetrik/phx-tools",
   "repository": {
@@ -12,7 +12,7 @@
   "main": "index.js",
   "dependencies": {
     "passport-http-bearer": "^1.0.1",
-    "superagent": "^4.1.0"
+    "superagent": "^6.1.0"
   },
   "publishConfig": {
     "access": "public"
