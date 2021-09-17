@@ -1,6 +1,10 @@
 const controllerUtils = require('./controllers.utils');
 
 describe('Controller Utils test', () => {
+  test('should get the proper R401 controller by resource name', () => {
+    const controller = controllerUtils.getController('4_0_1', 'patient');
+    expect(controller).toBeTruthy();
+  });
   test('should get the proper R4 controller by resource name', () => {
     const controller = controllerUtils.getController('4_0_0', 'patient');
     expect(controller).toBeTruthy();
