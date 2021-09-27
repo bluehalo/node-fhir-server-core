@@ -16,7 +16,11 @@
   "main": "index.js",
   "dependencies": {
     "@asymmetrik/sof-scope-checker": "^1.0.7",
-    "graphql": "^15.6.0"
+    "graphql": "^15.6.0",
+    "jest": "^27.2.2"
+  },
+  "scripts": {
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public"
