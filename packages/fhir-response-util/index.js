@@ -11,6 +11,7 @@ function getContentType(version) {
       return 'application/json+fhir';
     case '3_0_1':
     case '4_0_0':
+    case '4_0_1':
       return 'application/fhir+json';
     default:
       return 'application/json';
