@@ -16,7 +16,7 @@
   "main": "index.js",
   "dependencies": {
     "@asymmetrik/sof-scope-checker": "^1.0.7",
-    "graphql": "^15.5.3"
+    "graphql": "^15.6.0"
   },
   "publishConfig": {
     "access": "public"
