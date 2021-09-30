@@ -1,10 +1,11 @@
 const controllerUtils = require('./controllers.utils');
+const testConfig = require('../../test.config');
 
-const SUPPORTED_VERSIONS = ['1_0_2', '3_0_1', '4_0_0', '4_0_1'];
+const SUPPORTED_VERSIONS = testConfig.profiles.Patient.versions;
 
 describe('Controller Utils test', () => {
-  test('should get proper controller for all resource versions', () => {
-    SUPPORTED_VERSIONS.forEach((version) => {
+  SUPPORTED_VERSIONS.forEach((version) => {
+    test(`should get proper controller for version ${version}`, () => {
       const controller = controllerUtils.getController(version, 'patient');
       expect(controller).toBeTruthy();
     });

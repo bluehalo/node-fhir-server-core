@@ -1,17 +1,18 @@
 const { resolveSchema, isValidVersion } = require('./schema.utils');
+const testConfig = require('../../test.config');
 
-const SUPPORTED_VERSIONS = ['1_0_2', '3_0_1', '4_0_0', '4_0_1'];
+const SUPPORTED_VERSIONS = testConfig.profiles.Patient.versions;
 
 describe('Schema Utils tests', () => {
-  test('should get parameters for all versions', () => {
-    SUPPORTED_VERSIONS.forEach((version) => {
+  SUPPORTED_VERSIONS.forEach((version) => {
+    test(`should get parameters for version ${version}`, () => {
       const schema = resolveSchema(version, 'patient');
       expect(schema).toBeTruthy();
     });
   });
 
-  test('should get parameters for OperationOutcome for all versions', () => {
-    SUPPORTED_VERSIONS.forEach((version) => {
+  SUPPORTED_VERSIONS.forEach((version) => {
+    test(`should get parameters for OperationOutcome for version ${version}`, () => {
       const schema = resolveSchema(version, 'OperationOutcome');
       expect(schema).toBeTruthy();
     });
@@ -23,7 +24,8 @@ describe('Schema Utils tests', () => {
   });
 
   test('should evaluate that a string is an valid fhir version', () => {
-    const version = '4_0_1';
+    // get latest supported version
+    const version = SUPPORTED_VERSIONS[SUPPORTED_VERSIONS.length - 1];
     expect(isValidVersion(version)).toEqual(true);
   });
 });

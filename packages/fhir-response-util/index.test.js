@@ -30,11 +30,9 @@ describe('FHIR Response Utility', () => {
 
   describe('getContentType', () => {
     test('should set correct content type for version', () => {
-      expect(handler.getContentType('1_0_2')).toBe('application/json+fhir');
-      expect(handler.getContentType('3_0_1')).toBe('application/fhir+json');
-      expect(handler.getContentType('4_0_0')).toBe('application/fhir+json');
-      expect(handler.getContentType('4_0_1')).toBe('application/fhir+json');
-      expect(handler.getContentType('Unsupported')).toBe('application/json');
+      Object.entries(handler.contentTypeMap).forEach(([version, header]) => {
+        expect(handler.getContentType(version)).toBe(header);
+      });
     });
   });
 
