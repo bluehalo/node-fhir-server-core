@@ -1,20 +1,12 @@
 const controllerUtils = require('./controllers.utils');
 
+const SUPPORTED_VERSIONS = ['1_0_2', '3_0_1', '4_0_0', '4_0_1'];
+
 describe('Controller Utils test', () => {
-  test('should get the proper R401 controller by resource name', () => {
-    const controller = controllerUtils.getController('4_0_1', 'patient');
-    expect(controller).toBeTruthy();
-  });
-  test('should get the proper R4 controller by resource name', () => {
-    const controller = controllerUtils.getController('4_0_0', 'patient');
-    expect(controller).toBeTruthy();
-  });
-  test('should get the proper STU3 controller by resource name', () => {
-    const controller = controllerUtils.getController('3_0_1', 'patient');
-    expect(controller).toBeTruthy();
-  });
-  test('should get the proper V1 controller by resource name', () => {
-    const controller = controllerUtils.getController('1_0_2', 'patient');
-    expect(controller).toBeTruthy();
+  test('should get proper controller for all resource versions', () => {
+    SUPPORTED_VERSIONS.forEach((version) => {
+      const controller = controllerUtils.getController(version, 'patient');
+      expect(controller).toBeTruthy();
+    });
   });
 });
