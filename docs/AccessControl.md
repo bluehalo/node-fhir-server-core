@@ -34,7 +34,7 @@ And that is all that is needed as far as config goes, but let's take a look at h
 
 #### Step Two: Define a service
 
-If you are not familiar with writing passport strategies, you can use [`@asymmetrik/sof-strategy`](https://github.com/Asymmetrik/phx-tools/tree/master/packages/sof-strategy). To use this, create a file that looks like this:
+If you are not familiar with writing passport strategies, you can use [`@asymmetrik/sof-strategy`](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-strategy). To use this, create a file that looks like this:
 
 ```javascript
 const smartBearerStrategy = require('@asymmetrik/sof-strategy');

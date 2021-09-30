@@ -1,6 +1,6 @@
 # Migrating to Version 2.0.0
 
-This guide represents all the known changes that will need your attention when migrating to version `2.0.0`. If we are missing anything, please open an issue so we can update this guide for the benefit of everyone. Before we continue, I would like to talk about why we are making these changes. We think opinions are good, but too many can be bad. We had a lot of logic in the code that made customizing things difficult or impossible, and also made the source code a pain to work with. We recently started moving things to separate packages, [phx-tools](https://github.com/Asymmetrik/phx-tools), and have been making the code that we generate leaner and leaner.
+This guide represents all the known changes that will need your attention when migrating to version `2.0.0`. If we are missing anything, please open an issue so we can update this guide for the benefit of everyone. Before we continue, I would like to talk about why we are making these changes. We think opinions are good, but too many can be bad. We had a lot of logic in the code that made customizing things difficult or impossible, and also made the source code a pain to work with. We recently started moving things to separate packages, [packages](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages), and have been making the code that we generate leaner and leaner.
 
 We think this will simplify things a lot for developers on both sides, contributors and users alike. We also plan to maintain the older versions and even do bug fixes. However, newer features are going to be prioritized on version `2.0.0` and only retrofit to older branches when requested.
 
@@ -29,7 +29,7 @@ We think this will simplify things a lot for developers on both sides, contribut
 
 ### Return types
 
-One major change for version `2.0.0` is how your services returned resources. Everything before `2.0.0` returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and they were doing more than they really needed to do. Response utils have since moved to an external package, which you can find at [fhir-response-util](https://github.com/Asymmetrik/phx-tools/tree/master/packages/fhir-response-util). They are now very simple to work with and easier to modify in the future.
+One major change for version `2.0.0` is how your services returned resources. Everything before `2.0.0` returned JSON and only JSON. Bundles would attempt to set correct properties based on a variety of things, but ultimately, would not cast resources because it did not want to assume all resources were the same type. Doing the casting and crafting these responses made the response utils very ugly and they were doing more than they really needed to do. Response utils have since moved to an external package, which you can find at [fhir-response-util](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/fhir-response-util). They are now very simple to work with and easier to modify in the future.
 
 What this means for developers is that they will now need to be explicit when returning data from a service and use the schemas we are providing.
 
@@ -233,7 +233,7 @@ const logger = container.get('default');
 
 ### Tools Migration
 
-More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. You can see all the packages we have available here: https://github.com/Asymmetrik/phx-tools. Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils, passport strategies, query builders, and parameter sanitization logic.
+More and more logic is being removed and developed in separate tools. They are all inside a monorepo that is managed by Lerna. This makes it easier to have better unit testing and upgrades. We can just apply patches there and publish versions independently of the core library. All packages are available here: https://github.com/Asymmetrik/node-fhir-server-core. (Previously located here: https://github.com/Asymmetrik/phx-tools.) Some are GraphQL specific but the majority are not. We have response utils, Smart on FHIR scope utils, passport strategies, query builders, and parameter sanitization logic.
 
 ### Favicon
 

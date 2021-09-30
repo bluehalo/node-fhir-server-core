@@ -2,10 +2,10 @@
   "name": "@asymmetrik/fhir-qb-sql",
   "version": "1.1.5",
   "description": "FHIR query builder for SQL",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "directory": "packages/fhir-qb-sql"
   },
   "license": "MIT",
   "author": "Sumeet-S <sshah@asymmetrik.com>",

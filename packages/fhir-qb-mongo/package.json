@@ -2,10 +2,10 @@
   "name": "@asymmetrik/fhir-qb-mongo",
   "version": "0.12.3",
   "description": "FHIR query builder for Mongo DB",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "directory": "packages/fhir-qb-mongo"
   },
   "license": "MIT",
   "author": "Sumeet-S <sshah@asymmetrik.com>",
