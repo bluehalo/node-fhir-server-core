@@ -33,6 +33,8 @@ describe('FHIR Response Utility', () => {
       Object.entries(handler.contentTypeMap).forEach(([version, header]) => {
         expect(handler.getContentType(version)).toBe(header);
       });
+
+      expect(handler.getContentType('Unsupported')).toBe('application/json');
     });
   });
 
