@@ -1,5 +1,5 @@
 {
-  "name": "projecttacoma-node-fhir-server-core-project",
+  "name": "@projecttacoma/node-fhir-server-core-project",
   "private": false,
   "version": "2.0.12",
   "description": "Node FHIR Rest API Server and surrounding ecosystem",
