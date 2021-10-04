@@ -1,5 +1,5 @@
 {
-  "name": "@projecttacoma/fhir-response-util",
+  "name": "@asymmetrik/fhir-response-util",
   "version": "1.2.4",
   "description": "Utility for handling the headers, content, and status types for a response.",
   "homepage": "https://github.com/projecttacoma/node-fhir-server-core",

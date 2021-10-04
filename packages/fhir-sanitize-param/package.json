@@ -1,5 +1,5 @@
 {
-  "name": "@projecttacoma/fhir-sanitize-param",
+  "name": "@asymmetrik/fhir-sanitize-param",
   "version": "1.1.6",
   "description": "Sanitization tool for FHIR parameters",
   "homepage": "https://github.com/projecttacoma/node-fhir-server-core",

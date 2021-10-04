@@ -1,5 +1,5 @@
 {
-  "name": "@projecttacoma/fhir-secrets",
+  "name": "@asymmetrik/fhir-secrets",
   "version": "0.9.6",
   "description": "AWS KMS Secrets retrieval promisified",
   "homepage": "https://github.com/projecttacoma/node-fhir-server-core",

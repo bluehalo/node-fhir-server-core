@@ -1,5 +1,5 @@
 {
-  "name": "@projecttacoma/fhir-qb-mongo",
+  "name": "@asymmetrik/fhir-qb-mongo",
   "version": "0.12.3",
   "description": "FHIR query builder for Mongo DB",
   "homepage": "https://github.com/projecttacoma/node-fhir-server-core",

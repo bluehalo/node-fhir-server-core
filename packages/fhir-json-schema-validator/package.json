@@ -1,5 +1,5 @@
 {
-  "name": "@projecttacoma/fhir-json-schema-validator",
+  "name": "@asymmetrik/fhir-json-schema-validator",
   "version": "0.9.8",
   "description": "FHIR json schema validator",
   "homepage": "https://github.com/projecttacoma/node-fhir-server-core",
