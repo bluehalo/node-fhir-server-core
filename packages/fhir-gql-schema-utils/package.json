@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-gql-schema-utils",
+  "name": "@projecttacoma/fhir-gql-schema-utils",
   "version": "1.1.5",
   "description": "Suite of FHIR related utilities for GraphQL schemas.",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/projecttacoma/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-gql-schema-utils"
