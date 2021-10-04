@@ -2,7 +2,7 @@
   "name": "@asymmetrik/fhir-json-schema-validator",
   "version": "0.9.9",
   "description": "FHIR json schema validator",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/projecttacoma/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-json-schema-validator"
