@@ -1,3 +1,4 @@
+const { getSearchParameters } = require('./server/utils/params.utils');
 const { resolveSchema } = require('./server/utils/schema.utils');
 const ServerError = require('./server/utils/server.error');
 const winston = require('./server/winston.js');
@@ -32,6 +33,11 @@ module.exports = {
    * @description Export function to support easier loading of classes
    */
   resolveSchema,
+
+  /**
+   * @description Export function to support easier lookup of search parameters
+   */
+  getSearchParameters,
 
   /**
    * @description Export logger to allow for customization and easy access to
