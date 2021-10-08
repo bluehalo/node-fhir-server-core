@@ -1,0 +1,25 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cleaning the cache
+        run: yarn cache clean
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: bootstrap
+        run: yarn bootstrap
+      - name: Run unit tests
+        run: yarn lerna run test
