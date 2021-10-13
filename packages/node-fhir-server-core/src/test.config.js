@@ -48,6 +48,13 @@ module.exports = {
     Patient: {
       service: './src/server/service.mock.js',
       versions: ['1_0_2', '3_0_1', '4_0_0', '4_0_1'],
+      operation: [
+        {
+          name: 'testPost',
+          route: '/$testPost',
+          method: 'POST',
+        },
+      ],
     },
     Questionnaire: {
       service: './src/server/service.mock.js',

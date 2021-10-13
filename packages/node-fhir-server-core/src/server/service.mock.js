@@ -75,3 +75,9 @@ module.exports.expandById = async (_args, _context) => {
   logger.info(message);
   throw new ServerError(message, errorDetails(message));
 };
+
+module.exports.testPost = async (_args, { req }) => {
+  let message = 'Calling mock service. Testing testPost';
+  logger.info(message);
+  return {};
+};
