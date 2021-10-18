@@ -54,6 +54,11 @@ module.exports = {
           route: '/$testPost',
           method: 'POST',
         },
+        {
+          name: 'testOp',
+          route: '/$testOp',
+          method: 'POST',
+        },
       ],
     },
     Questionnaire: {
