@@ -12,9 +12,9 @@ module.exports.operationsPost = function operationsPost({
 
   return (req, res, next) => {
     let { base_version, id } = req.sanitized_args;
-    req.sanitized_args.resource = req.body; 
+    req.sanitized_args.resource = req.body;
     service[name](req.sanitized_args, { req }, deprecatedLogger)
-      .then((results) => handler.read(req, res, results))
+      .then((results) => handler.operation(req, res, results))
       .catch(next);
   };
 };
@@ -26,7 +26,7 @@ module.exports.operationsGet = function operationsGet({ profile, name, logger: d
   let { serviceModule: service } = profile;
   return (req, res, next) => {
     service[name](req.sanitized_args, { req }, deprecatedLogger)
-      .then((results) => handler.read(req, res, results))
+      .then((results) => handler.operation(req, res, results))
       .catch(next);
   };
 };

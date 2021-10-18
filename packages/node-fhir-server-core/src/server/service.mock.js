@@ -81,3 +81,9 @@ module.exports.testPost = async (_args, { req }) => {
   logger.info(message);
   return {};
 };
+module.exports.testOp = async (_args, { req }) => {
+  let message = 'Calling mock service. Testing testOp';
+  logger.info(message);
+  req.res.status(202);
+  return {};
+};

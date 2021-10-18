@@ -17,6 +17,23 @@ function getContentType(version) {
 }
 
 /**
+ * @function operation
+ * @description Used when you are calling a custom operation
+ * @param {Express.req} req - Express request object
+ * @param {Express.res} res - Express response object
+ * @param {Object} json - json to send to client
+ */
+function operation(req, res, json) {
+  let fhirVersion = req.params.base_version;
+  res.type(getContentType(fhirVersion));
+  if (res.statusCode) {
+    return res.json(json);
+  }
+  // default to 200
+  return res.status(200).json(json);
+}
+
+/**
  * @function read
  * @description Used when you are returning a Bundle of resources
  * @param {Express.req} req - Express request object
@@ -146,4 +163,5 @@ module.exports = {
   update,
   remove,
   history,
+  operation,
 };

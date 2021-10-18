@@ -25,6 +25,7 @@ describe('FHIR Response Utility', () => {
         end: end,
         json: json,
       })),
+      json: jest.fn(() => json),
     };
   });
 
@@ -35,6 +36,30 @@ describe('FHIR Response Utility', () => {
       });
 
       expect(handler.getContentType('Unsupported')).toBe('application/json');
+    });
+  });
+
+  describe('operation', () => {
+    test('should not overwrite response code when statusCode is already set', () => {
+      const results = { results: 'GOLD' };
+      res.statusCode = 202;
+      handler.operation(req, res, results);
+      // res.status should be called 0 times
+      expect(res.status.mock.calls).toHaveLength(0);
+
+      expect(res.type.mock.calls).toHaveLength(1);
+      expect(res.type.mock.calls[0][0]).toBe('application/fhir+json');
+    });
+
+    test('should default to 200 when statusCode is not set', () => {
+      const results = { results: 'GOLD' };
+      handler.operation(req, res, results);
+
+      expect(res.type.mock.calls).toHaveLength(1);
+      expect(res.type.mock.calls[0][0]).toBe('application/fhir+json');
+
+      expect(res.status.mock.calls).toHaveLength(1);
+      expect(res.status.mock.calls[0][0]).toBe(200);
     });
   });
 
