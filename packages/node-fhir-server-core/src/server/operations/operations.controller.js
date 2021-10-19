@@ -1,4 +1,4 @@
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@projecttacoma/fhir-response-util');
 
 /**
  * @description Controller for all POST operations
