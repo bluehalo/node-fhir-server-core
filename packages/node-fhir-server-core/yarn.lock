@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@asymmetrik/sof-scope-checker@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/sof-scope-checker/-/sof-scope-checker-1.0.7.tgz#f56580977ef4b965b3ae41007ce9b7bbba86c920"
+  integrity sha512-QzLGDRMaVX/R/iAqQu4MuDV29d/0mvSyT1i4p/C3Xi5sSQXPtSa8e/uUChBfpPGOdbIQv1Uv84tkRifRKUKtZA==
+
 "@babel/cli@^7.15.7":
   version "7.15.7"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.15.7.tgz#62658abedb786d09c1f70229224b11a65440d7a1"
@@ -854,6 +859,11 @@
   version "2.1.8-no-fsevents.3"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
   integrity sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==
+
+"@projecttacoma/fhir-response-util@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@projecttacoma/fhir-response-util/-/fhir-response-util-1.2.5.tgz#8c86690236cce0ac963b9d2d50df632e06c28f27"
+  integrity sha512-Vvz3DcXZ2YRWwPbKeqAzeheykiWYcRO5WdXEz6iQKlPgFQHFB3rml7g3NcEkTrxlwwDb0C86Yg682PJDW1Q0GA==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
