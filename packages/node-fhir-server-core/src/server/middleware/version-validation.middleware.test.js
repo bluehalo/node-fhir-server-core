@@ -51,15 +51,15 @@ describe('Version Validation Middleware', () => {
   test('should return a not found error if no base_version is present in the url with baseUrls', () => {
     let profiles = { versions: [], baseUrls: ['/fhir'] };
     let middleware = versionValidationMiddleware(profiles);
-    let req = {}
+    let req = {};
     let next = jest.fn();
-    let res = {}
+    let res = {};
 
     middleware(req, res, next);
     expect(next).toHaveBeenCalledTimes(1);
     let operationOutcome = next.mock.calls[0][0];
     expect(operationOutcome.resourceType).toBe('OperationOutcome');
-  })
+  });
 
   test('should call next if the version is a valid version', () => {
     let profiles = { versions: ['1_0_2'] };
