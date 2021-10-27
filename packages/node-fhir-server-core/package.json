@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/node-fhir-server-core",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
   "author": "Asymmetrik Ltd.",
@@ -8,7 +8,8 @@
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",
     "Sumeet Shah <sshah@asymmetrik.com>",
-    "Shane O'Neill <soneill@asymmetrik.com>"
+    "Shane O'Neill <soneill@asymmetrik.com>",
+    "Luan <luan@asymmetrik.com>"
   ],
   "main": "dist/index",
   "scripts": {
@@ -46,34 +47,34 @@
     "cross-env": "^5.1.4",
     "eslint": "^6.1.0",
     "express": "^4.16.2",
-    "glob": "^7.1.2",
+    "glob": "^7.2.0",
     "helmet": "^3.9.0",
-    "jsonschema": "^1.2.2",
+    "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.1.0",
-    "jwk-to-pem": "^2.0.2",
+    "jwk-to-pem": "^2.0.5",
     "method-override": "^2.3.10",
-    "moment": "^2.19.4",
-    "moment-timezone": "^0.5.14",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
     "mongodb": "^3.0.0-rc0",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "sanitize-html": "^1.16.1",
     "serve-favicon": "^2.5.0",
-    "snyk": "^1.334.0",
+    "snyk": "^1.746.0",
     "superagent": "^3.8.3",
     "validator": "^9.1.2",
     "winston": "^3.2.1",
     "xss": "^0.3.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "conventional-changelog-cli": "^2.0.11",
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "conventional-changelog-cli": "^2.1.1",
     "jest": "^27.3.1",
-    "nock": "^9.1.5",
-    "nodemon": "^1.18.6",
-    "supertest": "^3.0.0"
+    "nock": "^13.1.4",
+    "nodemon": "^2.0.14",
+    "supertest": "^6.1.6"
   },
   "engines": {
     "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
