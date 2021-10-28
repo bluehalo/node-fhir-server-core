@@ -20,6 +20,19 @@ describe('Mongo Query Builder Tests', () => {
       expect(observedResult).toEqual(expectedResult);
     });
   });
+  describe('buildTokenQuery Tests', () => {
+    test('Should return a query based on paths', () => {
+      const expectedResult = [{ foo: 'baz' }, { bar: 'qux' }];
+      let observedResult = mongoQB.buildTokenQuery({
+        systemPath: 'foo',
+        codePath: 'bar',
+        system: 'baz',
+        code: 'qux',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+  });
+
   describe('buildComparatorQuery Tests', () => {
     test('Should return mongo $gt query given a key, value, and gt', () => {
       const expectedResult = { foo: { $gt: 'bar' } };

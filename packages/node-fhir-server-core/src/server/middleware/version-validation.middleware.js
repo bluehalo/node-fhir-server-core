@@ -18,7 +18,7 @@ module.exports = function versionValidationMiddleware(profile = {}) {
         if (baseUrl.indexOf(`/${base_version}`) > -1) {
           return next();
         }
-      })
+      });
 
       return next(errors.notFound(undefined, base_version));
     };
