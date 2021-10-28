@@ -451,15 +451,6 @@ class QueryBuilder {
         tokenQuery = this.qb.buildAndQuery(queries);
         break;
       case 'Identifier':
-        queries = this.qb.buildTokenQuery({
-          name: field,
-          systemPath: `${field}.system`,
-          codePath: `${field}.value`,
-          system: system,
-          code: code,
-        });
-        tokenQuery = this.qb.buildAndQuery(queries);
-        break;
       case 'ContactPoint':
         queries = this.qb.buildTokenQuery({
           name: field,
@@ -647,14 +638,11 @@ class QueryBuilder {
           throw new Error(`Unknown parameter '${parameter}'`);
         }
 
-        let field;
         let { type, fhirtype, xpath } = parameterDefinition;
-
-        if (this.columnIdentifierStrategy === 'parameter') {
-          field = [parameter];
-        } else {
-          field = QueryBuilder.parseXPath(xpath);
-        }
+        let field =
+          this.columnIdentifierStrategy === 'parameter'
+            ? [parameter]
+            : QueryBuilder.parseXPath(xpath);
 
         // Handle implicit URI logic before handling explicit modifiers
         if (type === 'uri') {
@@ -672,21 +660,20 @@ class QueryBuilder {
 
         let valuesToAnd = Array.isArray(parameterValue) ? parameterValue : [parameterValue];
         valuesToAnd.forEach((valuesToOr) => {
-          let values = valuesToOr.split(',');
-
-          if (matchModifiers[modifier] !== undefined) {
-            // If the modifier indicates that we don't need a join, simply add the request to the push a new match request
-            // using the new information to the list of match requests.
-            rawMatchesToPerform.push({
-              field,
-              values,
-              type,
-              fhirtype,
-              modifier,
-            });
-          } else {
+          if (matchModifiers[modifier] === undefined) {
             throw new Error(`Search modifier '${modifier}' is not currently supported`);
           }
+
+          // If the modifier indicates that we don't need a join, simply add the request to the push a new match request
+          // using the new information to the list of match requests.
+          let values = valuesToOr.split(',');
+          rawMatchesToPerform.push({
+            field,
+            values,
+            type,
+            fhirtype,
+            modifier,
+          });
         });
       });
 
@@ -707,11 +694,7 @@ class QueryBuilder {
             fieldRawMatch.value = value;
             const { type, subQuery } = this.getSubSearchQuery(fieldRawMatch);
             // implementations need these explicility separated
-            if (type === 'token') {
-              tokenOrStatements.push(subQuery);
-            } else {
-              orStatements.push(subQuery);
-            }
+            type === 'token' ? tokenOrStatements.push(subQuery) : orStatements.push(subQuery);
           });
         });
         matchesToPerform.push(orStatements);
