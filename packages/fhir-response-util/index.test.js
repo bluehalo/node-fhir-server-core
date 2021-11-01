@@ -109,7 +109,7 @@ describe('FHIR Response Utility', () => {
     });
   });
 
-  describe('create', () => {
+  describe('create Tests', () => {
     test('should set the correct status code', () => {
       const results = { id: 'foo' };
       handler.create(req, res, results, { type: 'Patient' });
@@ -124,7 +124,7 @@ describe('FHIR Response Utility', () => {
       const results = { id: 'foo', resource_version: '1' };
       handler.create(req, res, results, { type: 'Patient' });
 
-      let expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
+      const expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
 
       expect(res.set.mock.calls).toHaveLength(3);
       expect(res.set.mock.calls[0][0]).toBe('Content-Location');
@@ -147,6 +147,25 @@ describe('FHIR Response Utility', () => {
       expect(res.set.mock.calls).toHaveLength(1);
       expect(res.set.mock.calls[0][0]).toBe('Location');
       expect(res.set.mock.calls[0][1]).toBe('4_0_0/Patient/foo');
+
+      expect(res.status.mock.calls).toHaveLength(1);
+      expect(res.status.mock.calls[0][0]).toBe(201);
+
+      expect(end.mock.calls).toHaveLength(1);
+    });
+
+    test('should set the correct location without a fhirVersion', () => {
+      const results = { id: 'foo' };
+      const emptyFhirVersion = {
+        protocol: 'https',
+        get: (_prop) => 'localhost:3000',
+        params: {},
+      };
+      handler.create(emptyFhirVersion, res, results, { type: 'Patient' });
+
+      expect(res.set.mock.calls).toHaveLength(1);
+      expect(res.set.mock.calls[0][0]).toBe('Location');
+      expect(res.set.mock.calls[0][1]).toBe('Patient/foo');
 
       expect(res.status.mock.calls).toHaveLength(1);
       expect(res.status.mock.calls[0][0]).toBe(201);
@@ -176,7 +195,7 @@ describe('FHIR Response Utility', () => {
       const results = { id: 'foo', resource_version: '1', created: true };
       handler.update(req, res, results, { type: 'Patient' });
 
-      let expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
+      const expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
 
       expect(res.set.mock.calls).toHaveLength(4);
       expect(res.set.mock.calls[0][0]).toBe('Content-Location');
@@ -192,16 +211,16 @@ describe('FHIR Response Utility', () => {
 
     test('should set the correct Location and Last-modified headers always', () => {
       const results = { id: 'foo' };
-      let expectedDate = new Date().getTime();
+      const expectedDate = new Date().getTime();
       // Number of milliseconds tolerance we want to allow
-      let tolerance = 60 * 1000;
+      const tolerance = 60 * 1000;
 
       handler.update(req, res, results, { type: 'Patient' });
 
       expect(res.set.mock.calls).toHaveLength(2);
 
-      let lastModifiedISO = res.set.mock.calls[0][1];
-      let lastModifiedTime = new Date(lastModifiedISO).getTime();
+      const lastModifiedISO = res.set.mock.calls[0][1];
+      const lastModifiedTime = new Date(lastModifiedISO).getTime();
 
       expect(res.set.mock.calls[0][0]).toBe('Last-Modified');
       // The dates wont be exact due to the time the test takes to run, we give
