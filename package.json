@@ -27,7 +27,9 @@
     "prettier-fix": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
     "lint": "run-p prettier-check lint-eslint",
     "lint-staged": "lint-staged",
-    "lint-eslint": "eslint . --ext js,jsx,ts,tsx"
+    "lint-eslint": "eslint . --ext js,jsx,ts,tsx",
+    "snyk": "snyk",
+    "snyk-test": "snyk test --all-projects"
   },
   "jest": {
     "clearMocks": true,
@@ -47,7 +49,8 @@
     "jest-cli": "^26.4.2",
     "lerna": "^3.22.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.1",
+    "snyk": "^1.749.0"
   },
   "engines": {
     "node": ">=10.13.0"
