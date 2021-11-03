@@ -13,5 +13,8 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "test": "jest"
+  },
   "gitHead": "3a9dcc15708246b92bff6a208adff787555f7351"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/fhir-secrets",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "AWS KMS Secrets retrieval promisified",
   "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "aws-sdk": "^2.435.0"
+    "aws-sdk": "^2.1018.0"
   },
   "publishConfig": {
     "access": "public"
