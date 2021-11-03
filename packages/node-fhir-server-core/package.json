@@ -61,7 +61,7 @@
     "serve-favicon": "^2.5.0",
     "snyk": "^1.334.0",
     "superagent": "^3.8.3",
-    "validator": "^9.1.2",
+    "validator": "^13.7.0",
     "winston": "^3.2.1",
     "xss": "^0.3.4"
   },
