@@ -22,6 +22,7 @@
   "main": "src/index",
   "scripts": {
     "lerna": "lerna",
+    "test": "lerna run test",
     "bootstrap": "lerna bootstrap",
     "prettier-check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
     "prettier-fix": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
