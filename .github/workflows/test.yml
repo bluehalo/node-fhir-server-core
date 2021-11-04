@@ -15,7 +15,8 @@ jobs:
         uses: actions/setup-node@v1
 
       - name: Install Dependencies
-        run: npm install
+        run: yarn install;
+          yarn bootstrap
 
       - name: Run Tests
-        run: npm test
+        run: yarn test
