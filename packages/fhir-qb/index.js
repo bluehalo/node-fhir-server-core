@@ -694,7 +694,11 @@ class QueryBuilder {
             fieldRawMatch.value = value;
             const { type, subQuery } = this.getSubSearchQuery(fieldRawMatch);
             // implementations need these explicility separated
-            type === 'token' ? tokenOrStatements.push(subQuery) : orStatements.push(subQuery);
+            if (type === 'token') {
+              tokenOrStatements.push(subQuery);
+            } else {
+              orStatements.push(subQuery);
+            }
           });
         });
         matchesToPerform.push(orStatements);
