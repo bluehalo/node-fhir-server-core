@@ -4,7 +4,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildEqualToQuery Tests', () => {
     test('Should return mongo equals query given a key and a value', () => {
       const expectedResult = { foo: 'bar' };
-      let observedResult = mongoQB.buildEqualToQuery({
+      const observedResult = mongoQB.buildEqualToQuery({
         field: 'foo',
         value: 'bar',
       });
@@ -12,18 +12,54 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $ne query given a key, value, and invert = true', () => {
       const expectedResult = { foo: { $ne: 'bar' } };
-      let observedResult = mongoQB.buildEqualToQuery({
+      const observedResult = mongoQB.buildEqualToQuery({
         field: 'foo',
         value: 'bar',
         invert: true,
       });
       expect(observedResult).toEqual(expectedResult);
     });
+    test('Should use buildTokenURIQuery to run buildEqualToQuery', () => {
+      const expectedResult = { foo: 'bar' };
+      const observedResult = mongoQB.buildTokenURIQuery({ field: 'foo', value: 'bar' });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should use buildTokenStringQuery to run buildEqualToQuery', () => {
+      const expectedResult = { foo: 'bar' };
+      const observedResult = mongoQB.buildTokenStringQuery({ field: 'foo', value: 'bar' });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should use buildTokenEqualToQuery to run buildEqualToQuery', () => {
+      const expectedResult = { foo: 'bar' };
+      const observedResult = mongoQB.buildTokenEqualToQuery({ field: 'foo', value: 'bar' });
+      expect(observedResult).toEqual(expectedResult);
+    });
   });
+  describe('buildTokenQuery Tests', () => {
+    test('Should return a query based on paths', () => {
+      const expectedResult = [{ foo: 'baz' }, { bar: 'qux' }];
+      const observedResult = mongoQB.buildTokenQuery({
+        systemPath: 'foo',
+        codePath: 'bar',
+        system: 'baz',
+        code: 'qux',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should return an empty array when given no system or code', () => {
+      const expectedResult = [];
+      const observedResult = mongoQB.buildTokenQuery({
+        systemPath: 'foo',
+        codePath: 'bar',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+  });
+
   describe('buildComparatorQuery Tests', () => {
     test('Should return mongo $gt query given a key, value, and gt', () => {
       const expectedResult = { foo: { $gt: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'gt',
@@ -32,7 +68,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $gte query given a key, value, and ge', () => {
       const expectedResult = { foo: { $gte: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'ge',
@@ -41,7 +77,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $lt query given a key, value, and lt', () => {
       const expectedResult = { foo: { $lt: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'lt',
@@ -50,7 +86,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $lte query given a key, value, and le', () => {
       const expectedResult = { foo: { $lte: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'le',
@@ -59,7 +95,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $gt query given a key, value, and sa', () => {
       const expectedResult = { foo: { $gt: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'sa',
@@ -68,7 +104,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $lt query given a key, value, and eb', () => {
       const expectedResult = { foo: { $lt: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'eb',
@@ -77,7 +113,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return mongo $ne query given a key, value, and ne', () => {
       const expectedResult = { foo: { $ne: 'bar' } };
-      let observedResult = mongoQB.buildComparatorQuery({
+      const observedResult = mongoQB.buildComparatorQuery({
         field: 'foo',
         value: 'bar',
         comparator: 'ne',
@@ -88,14 +124,14 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildOrQuery Tests', () => {
     test('Should return $or of given queries', () => {
       const expectedResult = { $or: [{ foo: 'bar' }, { bar: 'foo' }] };
-      let observedResult = mongoQB.buildOrQuery({
+      const observedResult = mongoQB.buildOrQuery({
         queries: [{ foo: 'bar' }, { bar: 'foo' }],
       });
       expect(observedResult).toEqual(expectedResult);
     });
     test('Should return $nor of given queries if invert option is true', () => {
       const expectedResult = { $nor: [{ foo: 'bar' }, { bar: 'foo' }] };
-      let observedResult = mongoQB.buildOrQuery({
+      const observedResult = mongoQB.buildOrQuery({
         queries: [{ foo: 'bar' }, { bar: 'foo' }],
         invert: true,
       });
@@ -105,7 +141,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildContainsQuery Tests', () => {
     test('Should return case sensitive match regex query', () => {
       const expectedResult = { foo: { $options: '', $regex: 'bar' } };
-      let observedResult = mongoQB.buildContainsQuery({
+      const observedResult = mongoQB.buildContainsQuery({
         field: 'foo',
         value: 'bar',
         caseSensitive: true,
@@ -114,7 +150,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return case insensitive match regex query', () => {
       const expectedResult = { foo: { $options: 'i', $regex: 'bar' } };
-      let observedResult = mongoQB.buildContainsQuery({
+      const observedResult = mongoQB.buildContainsQuery({
         field: 'foo',
         value: 'bar',
       });
@@ -124,7 +160,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildStartsWithQuery Tests', () => {
     test('Should return case sensitive front of word match regex query', () => {
       const expectedResult = { foo: { $options: '', $regex: '^bar' } };
-      let observedResult = mongoQB.buildStartsWithQuery({
+      const observedResult = mongoQB.buildStartsWithQuery({
         field: 'foo',
         value: 'bar',
         caseSensitive: true,
@@ -133,7 +169,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return case insensitive front of word match regex query', () => {
       const expectedResult = { foo: { $options: 'i', $regex: '^bar' } };
-      let observedResult = mongoQB.buildStartsWithQuery({
+      const observedResult = mongoQB.buildStartsWithQuery({
         field: 'foo',
         value: 'bar',
       });
@@ -143,7 +179,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildEndsWithQuery Tests', () => {
     test('Should return case sensitive front of word match regex query', () => {
       const expectedResult = { foo: { $options: '', $regex: 'bar$' } };
-      let observedResult = mongoQB.buildEndsWithQuery({
+      const observedResult = mongoQB.buildEndsWithQuery({
         field: 'foo',
         value: 'bar',
         caseSensitive: true,
@@ -152,7 +188,7 @@ describe('Mongo Query Builder Tests', () => {
     });
     test('Should return case insensitive front of word match regex query', () => {
       const expectedResult = { foo: { $options: 'i', $regex: 'bar$' } };
-      let observedResult = mongoQB.buildEndsWithQuery({
+      const observedResult = mongoQB.buildEndsWithQuery({
         field: 'foo',
         value: 'bar',
       });
@@ -162,7 +198,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildExistsQuery Tests', () => {
     test('Should return a range query', () => {
       const expectedResult = { foo: { $exists: true } };
-      let observedResult = mongoQB.buildExistsQuery({
+      const observedResult = mongoQB.buildExistsQuery({
         field: 'foo',
         exists: true,
       });
@@ -172,7 +208,7 @@ describe('Mongo Query Builder Tests', () => {
   describe('buildInRangeQuery Tests', () => {
     test('Should return a range query', () => {
       const expectedResult = { foo: { $gte: 1, $lte: 10 } };
-      let observedResult = mongoQB.buildInRangeQuery({
+      const observedResult = mongoQB.buildInRangeQuery({
         field: 'foo',
         lowerBound: 1,
         upperBound: 10,
@@ -183,7 +219,7 @@ describe('Mongo Query Builder Tests', () => {
       const expectedResult = {
         $or: [{ foo: { $lt: 1 } }, { foo: { $gt: 10 } }],
       };
-      let observedResult = mongoQB.buildInRangeQuery({
+      const observedResult = mongoQB.buildInRangeQuery({
         field: 'foo',
         lowerBound: 1,
         upperBound: 10,
@@ -211,7 +247,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [],
         searchResultTransformations: {},
@@ -250,7 +286,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [{ from: 'foo', localKey: 'bar', foreignKey: 'baz' }],
         matchesToPerform: [],
         searchResultTransformations: {},
@@ -280,7 +316,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [[]],
         tokenMatches: [],
@@ -311,7 +347,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [[{ foo: { $gte: 1, $lte: 10 } }]],
         searchResultTransformations: {},
@@ -343,7 +379,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [],
         searchResultTransformations: { _count: 3 },
@@ -384,7 +420,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [],
         searchResultTransformations: {},
@@ -437,7 +473,7 @@ describe('Mongo Query Builder Tests', () => {
           },
         },
       ];
-      let observedResult = mongoQB.assembleSearchQuery({
+      const observedResult = mongoQB.assembleSearchQuery({
         joinsToPerform: [],
         matchesToPerform: [],
         searchResultTransformations: {},

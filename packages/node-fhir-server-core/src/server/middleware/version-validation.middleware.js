@@ -14,11 +14,13 @@ module.exports = function versionValidationMiddleware(profile = {}) {
     return (req, res, next) => {
       const base_version = req.params && req.params.base_version;
 
-      if (baseUrls.indexOf(`/${base_version}`) === -1) {
-        return next(errors.notFound(undefined, base_version));
-      }
+      baseUrls.forEach((baseUrl) => {
+        if (baseUrl.indexOf(`/${base_version}`) > -1) {
+          return next();
+        }
+      });
 
-      next();
+      return next(errors.notFound(undefined, base_version));
     };
   }
 

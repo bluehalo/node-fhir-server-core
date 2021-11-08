@@ -1,6 +1,6 @@
 {
   "name": "@asymmetrik/sof-strategy",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Smart on FHIR authorization strategy for passport",
   "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
@@ -16,6 +16,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "test": "jest"
   },
   "gitHead": "3a9dcc15708246b92bff6a208adff787555f7351"
 }

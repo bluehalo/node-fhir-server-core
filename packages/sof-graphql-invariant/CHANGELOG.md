@@ -6,7 +6,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## [2.0.0](https://github.com/Asymmetrik/node-fhir-server-core/compare/chore/convert-repo-to-monorepo...task/upgrade-graphql-15-5-3) (2021-09-16)
 
 ### Update Dependency
-* Update graphql to 15.6.0
+
+- Update graphql to 15.6.0
 
 **Note:** This is a breaking change and requires code updates
 
