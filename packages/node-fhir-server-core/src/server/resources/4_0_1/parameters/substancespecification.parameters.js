@@ -9,6 +9,6 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'SubstanceSpecification.code.code',
     definition: 'http://hl7.org/fhir/SearchParameter/SubstanceSpecification-code',
-    description: 'Codes associated with the substance',
+    description: 'The specific code',
   },
 };
