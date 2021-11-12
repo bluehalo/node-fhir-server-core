@@ -1310,6 +1310,19 @@ module.exports = class ElementDefinition {
       },
     });
 
+    Object.defineProperty(this, 'defaultValueMeta', {
+      enumerable: true,
+      get: () => this.__data.defaultValueMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.defaultValueMeta = new Meta(value);
+      },
+    });
+
     Object.defineProperty(this, '_meaningWhenMissing', {
       enumerable: true,
       get: () => this.__data._meaningWhenMissing,
@@ -2225,6 +2238,19 @@ module.exports = class ElementDefinition {
       },
     });
 
+    Object.defineProperty(this, 'fixedMeta', {
+      enumerable: true,
+      get: () => this.__data.fixedMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.fixedMeta = new Meta(value);
+      },
+    });
+
     Object.defineProperty(this, '_patternBase64Binary', {
       enumerable: true,
       get: () => this.__data._patternBase64Binary,
@@ -3090,6 +3116,19 @@ module.exports = class ElementDefinition {
       },
     });
 
+    Object.defineProperty(this, 'patternMeta', {
+      enumerable: true,
+      get: () => this.__data.patternMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.patternMeta = new Meta(value);
+      },
+    });
+
     Object.defineProperty(this, 'example', {
       enumerable: true,
       get: () => this.__data.example,
@@ -3855,6 +3894,7 @@ module.exports = class ElementDefinition {
       defaultValueUsageContext:
         this.defaultValueUsageContext && this.defaultValueUsageContext.toJSON(),
       defaultValueDosage: this.defaultValueDosage && this.defaultValueDosage.toJSON(),
+      defaultValueMeta: this.defaultValueMeta && this.defaultValueMeta.toJSON(),
       _meaningWhenMissing: this._meaningWhenMissing && this._meaningWhenMissing.toJSON(),
       meaningWhenMissing: this.meaningWhenMissing,
       _orderMeaning: this._orderMeaning && this._orderMeaning.toJSON(),
@@ -3928,6 +3968,7 @@ module.exports = class ElementDefinition {
       fixedTriggerDefinition: this.fixedTriggerDefinition && this.fixedTriggerDefinition.toJSON(),
       fixedUsageContext: this.fixedUsageContext && this.fixedUsageContext.toJSON(),
       fixedDosage: this.fixedDosage && this.fixedDosage.toJSON(),
+      fixedMeta: this.fixedMeta && this.fixedMeta.toJSON(),
       _patternBase64Binary: this._patternBase64Binary && this._patternBase64Binary.toJSON(),
       patternBase64Binary: this.patternBase64Binary,
       _patternBoolean: this._patternBoolean && this._patternBoolean.toJSON(),
@@ -3998,6 +4039,7 @@ module.exports = class ElementDefinition {
         this.patternTriggerDefinition && this.patternTriggerDefinition.toJSON(),
       patternUsageContext: this.patternUsageContext && this.patternUsageContext.toJSON(),
       patternDosage: this.patternDosage && this.patternDosage.toJSON(),
+      patternMeta: this.patternMeta && this.patternMeta.toJSON(),
       example: this.example && this.example.map((v) => v.toJSON()),
       _minValueDate: this._minValueDate && this._minValueDate.toJSON(),
       minValueDate: this.minValueDate,

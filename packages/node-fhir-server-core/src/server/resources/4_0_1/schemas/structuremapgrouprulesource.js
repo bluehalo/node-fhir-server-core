@@ -1029,6 +1029,19 @@ module.exports = class StructureMapGroupRuleSource {
       },
     });
 
+    Object.defineProperty(this, 'defaultValueMeta', {
+      enumerable: true,
+      get: () => this.__data.defaultValueMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.defaultValueMeta = new Meta(value);
+      },
+    });
+
     Object.defineProperty(this, '_element', {
       enumerable: true,
       get: () => this.__data._element,
@@ -1288,6 +1301,7 @@ module.exports = class StructureMapGroupRuleSource {
       defaultValueUsageContext:
         this.defaultValueUsageContext && this.defaultValueUsageContext.toJSON(),
       defaultValueDosage: this.defaultValueDosage && this.defaultValueDosage.toJSON(),
+      defaultValueMeta: this.defaultValueMeta && this.defaultValueMeta.toJSON(),
       _element: this._element && this._element.toJSON(),
       element: this.element,
       _listMode: this._listMode && this._listMode.toJSON(),

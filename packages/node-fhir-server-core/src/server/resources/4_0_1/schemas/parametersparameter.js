@@ -954,6 +954,19 @@ module.exports = class ParametersParameter {
       },
     });
 
+    Object.defineProperty(this, 'valueMeta', {
+      enumerable: true,
+      get: () => this.__data.valueMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.valueMeta = new Meta(value);
+      },
+    });
+
     Object.defineProperty(this, 'resource', {
       enumerable: true,
       get: () => this.__data.resource,
@@ -1072,6 +1085,7 @@ module.exports = class ParametersParameter {
       valueTriggerDefinition: this.valueTriggerDefinition && this.valueTriggerDefinition.toJSON(),
       valueUsageContext: this.valueUsageContext && this.valueUsageContext.toJSON(),
       valueDosage: this.valueDosage && this.valueDosage.toJSON(),
+      valueMeta: this.valueMeta && this.valueMeta.toJSON(),
       resource: this.resource,
       part: this.part && this.part.map((v) => v.toJSON()),
     };

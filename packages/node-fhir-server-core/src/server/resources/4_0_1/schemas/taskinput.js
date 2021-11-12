@@ -942,6 +942,19 @@ module.exports = class TaskInput {
       },
     });
 
+    Object.defineProperty(this, 'valueMeta', {
+      enumerable: true,
+      get: () => this.__data.valueMeta,
+      set: (value) => {
+        if (value === undefined || value === null) {
+          return;
+        }
+
+        let Meta = require('./meta.js');
+        this.__data.valueMeta = new Meta(value);
+      },
+    });
+
     // Merge in any defaults
     Object.assign(this, opts);
 
@@ -1032,6 +1045,7 @@ module.exports = class TaskInput {
       valueTriggerDefinition: this.valueTriggerDefinition && this.valueTriggerDefinition.toJSON(),
       valueUsageContext: this.valueUsageContext && this.valueUsageContext.toJSON(),
       valueDosage: this.valueDosage && this.valueDosage.toJSON(),
+      valueMeta: this.valueMeta && this.valueMeta.toJSON(),
     };
   }
 };
