@@ -1,5 +1,5 @@
 const scopeChecker = require('@asymmetrik/sof-scope-checker');
-const { GraphQLError, coerceValue, isInputType } = require('graphql');
+const { GraphQLError, coerceInputValue, isInputType } = require('graphql');
 
 /**
  * @name formatError
@@ -75,7 +75,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
     let message = 'Invalid resolver, resolver argument must be a function.';
     return formatError(
       message,
-      coerceValue(operationOutcome(message, 'exception', 'error'), schema).value
+      coerceInputValue(operationOutcome(message, 'exception', 'error'), schema)
     );
   }
 
@@ -103,7 +103,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
     if (errorType === 'internal') {
       return formatError(
         error.message,
-        coerceValue(operationOutcome(error.message, 'exception', 'error'), schema).value
+        coerceInputValue(operationOutcome(error.message, 'exception', 'error'), schema)
       );
     }
     // if scopeChecker detected invalid scopes, add more to the message
@@ -114,7 +114,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
 
       return formatError(
         currentMessage,
-        coerceValue(operationOutcome(currentMessage, 'forbidden', 'error'), schema).value
+        coerceInputValue(operationOutcome(currentMessage, 'forbidden', 'error'), schema)
       );
     }
     // We are all clear

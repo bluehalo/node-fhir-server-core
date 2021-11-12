@@ -13,7 +13,7 @@ describe('Prototype Injection Handler', () => {
     server = new Server(config).configureMiddleware().setProfileRoutes().setErrorRoutes();
   });
 
-  test('it should return an operation outcome if a request body with "__proto__" comes in', async (done) => {
+  it('should return an operation outcome if a request body with "__proto__" comes in', (done) => {
     const test =
       '{"resourceType":"Parameters","parameter":[{"name":"ndc","valueString":"00006404500","__proto__":{ "b":5}},{"name":"gcnseqno","valueString":"1417"}]}';
     request(server.app)

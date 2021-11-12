@@ -1,21 +1,24 @@
 {
   "name": "@asymmetrik/sof-strategy",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Smart on FHIR authorization strategy for passport",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "directory": "packages/sof-strategy"
   },
   "license": "MIT",
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",
   "main": "index.js",
   "dependencies": {
     "passport-http-bearer": "^1.0.1",
-    "superagent": "^4.1.0"
+    "superagent": "^6.1.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "test": "jest"
   },
   "gitHead": "3a9dcc15708246b92bff6a208adff787555f7351"
 }

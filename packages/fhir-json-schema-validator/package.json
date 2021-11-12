@@ -1,11 +1,11 @@
 {
   "name": "@asymmetrik/fhir-json-schema-validator",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "FHIR json schema validator",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "directory": "packages/fhir-json-schema-validator"
   },
   "license": "MIT",
   "author": "Sumeet-S <sshah@asymmetrik.com>",
@@ -27,7 +27,7 @@
     "verbose": true
   },
   "dependencies": {
-    "ajv": "^6.10.0"
+    "ajv": "^6.12.6"
   },
   "publishConfig": {
     "access": "public"

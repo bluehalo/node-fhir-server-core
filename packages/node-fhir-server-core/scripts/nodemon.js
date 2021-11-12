@@ -5,7 +5,7 @@ let logger = winston.get('default');
 
 nodemon({
   ignore: ['node_modules'],
-  script: 'src/runner',
+  script: 'scripts/runner',
   ext: 'js json',
   verbose: true,
   watch: ['src/**/*.js'],

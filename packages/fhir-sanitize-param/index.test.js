@@ -118,12 +118,6 @@ describe('Standard Parameter Sanitization Tests', () => {
       };
       expect(callSanitizeNumber).toThrowError(/expected number for parameter foo/);
     });
-    test('Should reject invalid numbers', () => {
-      const callSanitizeNumber = () => {
-        sanitizer.sanitizeNumber({ field: 'foo', value: '10.0.0' });
-      };
-      expect(callSanitizeNumber).toThrowError(/does not equal given value/);
-    });
   });
   describe('String', () => {
     test('Should pass valid strings', () => {
