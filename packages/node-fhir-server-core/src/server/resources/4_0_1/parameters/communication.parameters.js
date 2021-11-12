@@ -101,7 +101,7 @@ module.exports = {
     xpath: 'Communication.status',
     definition: 'http://hl7.org/fhir/SearchParameter/Communication-status',
     description:
-      'preparation | in-progress | not-done | suspended | aborted | completed | entered-in-error',
+      'preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown',
   },
   subject: {
     type: 'reference',

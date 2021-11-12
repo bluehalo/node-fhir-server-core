@@ -83,7 +83,8 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'ServiceRequest.intent',
     definition: 'http://hl7.org/fhir/SearchParameter/ServiceRequest-intent',
-    description: 'proposal | plan | order +',
+    description:
+      'proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option',
   },
   occurrence: {
     type: 'date',
@@ -146,7 +147,7 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'ServiceRequest.status',
     definition: 'http://hl7.org/fhir/SearchParameter/ServiceRequest-status',
-    description: 'draft | active | suspended | completed | entered-in-error | cancelled',
+    description: 'draft | active | on-hold | revoked | completed | entered-in-error | unknown',
   },
   subject: {
     type: 'reference',

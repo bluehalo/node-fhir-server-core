@@ -72,7 +72,7 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'CommunicationRequest.priority',
     definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-priority',
-    description: 'Message urgency',
+    description: 'routine | urgent | asap | stat',
   },
   recipient: {
     type: 'reference',
@@ -107,7 +107,7 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'CommunicationRequest.status',
     definition: 'http://hl7.org/fhir/SearchParameter/CommunicationRequest-status',
-    description: 'draft | active | suspended | cancelled | completed | entered-in-error | unknown',
+    description: 'draft | active | on-hold | revoked | completed | entered-in-error | unknown',
   },
   subject: {
     type: 'reference',

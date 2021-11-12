@@ -81,7 +81,7 @@ module.exports = {
     fhirtype: 'token',
     xpath: 'ClinicalImpression.status',
     definition: 'http://hl7.org/fhir/SearchParameter/ClinicalImpression-status',
-    description: 'draft | completed | entered-in-error',
+    description: 'in-progress | completed | entered-in-error',
   },
   subject: {
     type: 'reference',

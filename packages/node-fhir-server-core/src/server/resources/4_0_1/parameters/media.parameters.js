@@ -73,7 +73,7 @@ module.exports = {
     xpath: 'Media.status',
     definition: 'http://hl7.org/fhir/SearchParameter/Media-status',
     description:
-      'preparation | in-progress | not-done | suspended | aborted | completed | entered-in-error | unknown',
+      'preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown',
   },
   subject: {
     type: 'reference',
