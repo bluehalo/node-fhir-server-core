@@ -1,19 +1,20 @@
 const path = require('path');
 
-const contentTypeMap = {
-  '1_0_2': 'application/json+fhir',
-  '3_0_1': 'application/fhir+json',
-  '4_0_0': 'application/fhir+json',
-  '4_0_1': 'application/fhir+json',
-};
-
 /**
  * @function getContentType
  * @description Get the correct application type for the response
  * @param {String} version Version of resources we are working with
  */
 function getContentType(version) {
-  return contentTypeMap[version] || 'application/json';
+  switch (version) {
+    case '1_0_2':
+      return 'application/json+fhir';
+    case '3_0_1':
+    case '4_0_0':
+      return 'application/fhir+json';
+    default:
+      return 'application/json';
+  }
 }
 
 /**
@@ -138,7 +139,6 @@ function history(req, res, json) {
 }
 
 module.exports = {
-  contentTypeMap,
   getContentType,
   read,
   readOne,

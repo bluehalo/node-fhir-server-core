@@ -19,7 +19,7 @@ describe('Resolve Utils Test', () => {
     test('should default to version 4 when no arguments are provided', () => {
       let base = resolveFromVersion();
       let project_base = base.substr(base.indexOf('src'));
-      expect(project_base).toEqual('src/server/resources/4_0_1');
+      expect(project_base).toEqual('src/server/resources/4_0_0');
     });
 
     test('should resolve to `src/resources/r4` when no relatve path is provided and version is r4', () => {
@@ -39,7 +39,7 @@ describe('Resolve Utils Test', () => {
     test('should default to version 4 when no arguments are provided', () => {
       let base = resolveSchema();
       let project_base = base.substr(base.indexOf('src'));
-      expect(project_base).toEqual('src/server/resources/4_0_1/schemas');
+      expect(project_base).toEqual('src/server/resources/4_0_0/schemas');
     });
 
     test('should resolve to `src/resources/r4` when no relatve path is provided and version is r4', () => {
