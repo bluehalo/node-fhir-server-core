@@ -2,11 +2,11 @@ const path = require('path');
 
 const base = path.join(__dirname, '../..');
 
-const resolveFromVersion = (version = '4_0_0', relative_path = '') => {
+const resolveFromVersion = (version = '4_0_1', relative_path = '') => {
   return path.join(base, '/server/resources/', version, relative_path);
 };
 
-const resolveSchema = (version = '4_0_0', schema = '') => {
+const resolveSchema = (version = '4_0_1', schema = '') => {
   let lowercaseKey = schema.toLowerCase();
   return path.join(base, '/server/resources/', version, 'schemas', lowercaseKey);
 };

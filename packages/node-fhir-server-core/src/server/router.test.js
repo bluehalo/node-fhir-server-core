@@ -33,7 +33,7 @@ describe('Router Tests', () => {
       profiles: {
         patient: {
           service: path.resolve('./src/server/profiles/service.mock.js'),
-          versions: ['4_0_0'],
+          versions: ['4_0_1'],
         },
       },
     };
@@ -43,7 +43,7 @@ describe('Router Tests', () => {
     // Add another version via a different route
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
-      versions: ['4_0_0'],
+      versions: ['4_0_1'],
     };
     // Run the router with some defaults
     router.setRoutes({ app, config });
@@ -54,14 +54,14 @@ describe('Router Tests', () => {
     // It returns the options given to it so we can see which versions were
     // selected
     let versionValidationMockReturn = app.get.mock.calls[0][2];
-    expect(versionValidationMockReturn.versions).toEqual(expect.arrayContaining(['4_0_0']));
+    expect(versionValidationMockReturn.versions).toEqual(expect.arrayContaining(['4_0_1']));
   });
 
   test('should enable metadata routes for profiles with a custom baseUrl', () => {
     // Add another version via a different route
     config.profiles.observation = {
       service: path.resolve('./src/server/profiles/service.mock.js'),
-      versions: ['4_0_0'],
+      versions: ['4_0_1'],
       baseUrls: ['/'],
     };
     // Run the router with some defaults
