@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-let getSortOrder = function (sortable) {
+const getSortOrder = function (sortable) {
   if (sortable && sortable[0] === '-') {
     return [sortable.substring(1), 'DESC'];
   }
@@ -11,7 +11,7 @@ let getSortOrder = function (sortable) {
 /**
  * Given a comma seperated list of strings to order on, return a list of column and direction lists
  */
-let parseSortQuery = function (sortables) {
+const parseSortQuery = function (sortables) {
   const split = sortables.split(',');
   return split.map(getSortOrder);
 };
@@ -38,7 +38,7 @@ const supportedSearchTransformations = {
 /**
  * Form a Sequelize date comparison given a date and column
  */
-let formDateComparison = function (comparator, date, colName = 'value') {
+const formDateComparison = function (comparator, date, colName = 'value') {
   return Sequelize.where(Sequelize.fn('date', Sequelize.col(colName)), comparator, date);
 };
 
@@ -185,8 +185,8 @@ const buildEndsWithQuery = function ({ field, value, caseSensitive = false }) {
 /**
  * Build a token query
  */
-let buildTokenQuery = function ({ name, system, code }) {
-  let queries = [{ name: name }];
+const buildTokenQuery = function ({ name, system, code }) {
+  const queries = [{ name: name }];
   if (system) {
     queries.push({
       system: system,
@@ -203,21 +203,21 @@ let buildTokenQuery = function ({ name, system, code }) {
 /**
  *
  */
-let buildTokenStringQuery = function ({ field, value, system }) {
+const buildTokenStringQuery = function ({ field, value, system }) {
   return buildAndQuery(buildTokenQuery({ name: field, code: value, system }));
 };
 
 /**
  *
  */
-let buildTokenURIQuery = function ({ field, value }) {
+const buildTokenURIQuery = function ({ field, value }) {
   return buildAndQuery([{ name: field }, { code: value }]);
 };
 
 /**
  *
  */
-let buildTokenEqualToQuery = function ({ field, value }) {
+const buildTokenEqualToQuery = function ({ field, value }) {
   return buildAndQuery([{ name: field }, { code: value }]);
 };
 
@@ -226,7 +226,7 @@ let buildTokenEqualToQuery = function ({ field, value }) {
  * @param query
  * @param searchResultTransformations
  */
-let applySearchResultTransformations = function ({ query, searchResultTransformations }) {
+const applySearchResultTransformations = function ({ query, searchResultTransformations }) {
   Object.keys(searchResultTransformations).forEach((transformation) => {
     const transformer = supportedSearchTransformations[transformation];
     const label = transformer.label;
@@ -246,7 +246,7 @@ let applySearchResultTransformations = function ({ query, searchResultTransforma
  * @param resultsPerPage
  * @returns {Array}
  */
-let assembleSearchQuery = function ({
+const assembleSearchQuery = function ({
   matchesToPerform,
   tokenMatches,
   searchResultTransformations,
@@ -255,7 +255,7 @@ let assembleSearchQuery = function ({
   let query = {};
 
   // Check that the necessary implementation parameters were passed through
-  let { archivedParamPath } = implementationParameters;
+  const { archivedParamPath } = implementationParameters;
   if (!archivedParamPath) {
     throw new Error("Missing required implementation parameter 'archivedParamPath'");
   }

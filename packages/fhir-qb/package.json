@@ -1,11 +1,11 @@
 {
   "name": "@asymmetrik/fhir-qb",
-  "version": "0.12.5",
+  "version": "0.12.6",
   "description": "FHIR query builder",
-  "homepage": "https://github.com/Asymmetrik/phx-tools",
+  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asymmetrik/phx-tools.git"
+    "directory": "packages/fhir-qb"
   },
   "license": "MIT",
   "author": "Sumeet-S <sshah@asymmetrik.com>",
@@ -34,10 +34,10 @@
   "dependencies": {
     "@asymmetrik/fhir-qb-mongo": "^0.12.3",
     "@asymmetrik/fhir-sanitize-param": "^1.1.6",
-    "mathjs": "^5.2.3",
+    "mathjs": "^9.5.1",
     "moment": "^2.24.0",
-    "sequelize": "^5.19.0",
-    "xregexp": "^4.2.0"
+    "sequelize": "^6.8.0",
+    "xregexp": "^4.4.1"
   },
   "publishConfig": {
     "access": "public"

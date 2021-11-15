@@ -47,7 +47,7 @@ secrets
   .catch(console.error);
 ```
 
-See [fhir-secrets tests](https://github.com/Asymmetrik/phx-tools/blob/master/packages/fhir-secrets/index.test.js) for more usage examples.
+See [fhir-secrets tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/fhir-secrets/index.test.js) for more usage examples.
 
 ## Methods
 

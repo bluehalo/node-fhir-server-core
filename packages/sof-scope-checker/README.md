@@ -36,7 +36,7 @@ app.get(
 )
 ```
 
-See [sof-scope-checker tests](https://github.com/Asymmetrik/phx-tools/blob/master/packages/sof-scope-checker/index.test.js) for more usage examples.
+See [sof-scope-checker tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-scope-checker/index.test.js) for more usage examples.
 
 NOTE: The error returned is an extension of the native JS error. It adds a type property to the error which can have a value of 'internal' representing a misconfiguration, or 'forbidden' representing a case where the scopes are not sufficient.
 

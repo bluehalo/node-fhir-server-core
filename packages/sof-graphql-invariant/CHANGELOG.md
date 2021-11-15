@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/Asymmetrik/node-fhir-server-core/compare/chore/convert-repo-to-monorepo...task/upgrade-graphql-15-5-3) (2021-09-16)
+
+### Update Dependency
+
+- Update graphql to 15.6.0
+
+**Note:** This is a breaking change and requires code updates
+
 ## [1.1.1](https://github.com/Asymmetrik/phx-tools/compare/@asymmetrik/sof-graphql-invariant@1.0.3...@asymmetrik/sof-graphql-invariant@1.1.1) (2019-04-05)
 
 **Note:** Version bump only for package @asymmetrik/sof-graphql-invariant

@@ -123,6 +123,21 @@ describe('SQL Query Builder Tests', () => {
       });
       expect(observedResult).toEqual(expectedResult);
     });
+    test('Should return SQL Equal query given a key, value, ne, and date', () => {
+      const expectedResult = {
+        [Op.and]: [
+          { name: 'foo' },
+          Sequelize.where(Sequelize.fn('date', Sequelize.col('value')), undefined, 'bar'),
+        ],
+      };
+      let observedResult = sqlQB.buildComparatorQuery({
+        field: 'foo',
+        value: 'bar',
+        comparator: '>=',
+        isDate: true,
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
   });
   describe('buildOrQuery Tests', () => {
     test('Should return an OR of given queries', () => {
@@ -233,6 +248,128 @@ describe('SQL Query Builder Tests', () => {
       });
       expect(observedResult).toEqual(expectedResult);
     });
+    test('Should return a range query with date', () => {
+      const expectedResult = {
+        [Op.and]: [
+          { name: 'foo' },
+          Sequelize.where(Sequelize.fn('date', Sequelize.col('value')), '>=', 1),
+          Sequelize.where(Sequelize.fn('date', Sequelize.col('value')), '<=', 10),
+        ],
+      };
+      let observedResult = sqlQB.buildInRangeQuery({
+        field: 'foo',
+        lowerBound: 1,
+        upperBound: 10,
+        isDate: true,
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should return a range query with date given an invert flag', () => {
+      const expectedResult = {
+        [Op.and]: [
+          {
+            name: 'foo',
+          },
+          Sequelize.where(Sequelize.fn('date', Sequelize.col('value')), '<=', 1),
+          Sequelize.where(Sequelize.fn('date', Sequelize.col('value')), '>=', 10),
+        ],
+      };
+      let observedResult = sqlQB.buildInRangeQuery({
+        field: 'foo',
+        lowerBound: 1,
+        upperBound: 10,
+        invert: true,
+        isDate: true,
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+  });
+  describe('buildTokenQuery Tests', () => {
+    test('It should build a token query without a system or code', () => {
+      const expectedResult = [
+        {
+          name: 'foo',
+        },
+      ];
+      let observedResult = sqlQB.buildTokenQuery({
+        name: 'foo',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('It should properly build a token query', () => {
+      const expectedResult = [
+        {
+          name: 'foo',
+        },
+        {
+          system: 'bar',
+        },
+        {
+          code: 'baz',
+        },
+      ];
+      let observedResult = sqlQB.buildTokenQuery({
+        name: 'foo',
+        system: 'bar',
+        code: 'baz',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('It should properly build a token string query', () => {
+      const expectedResult = {
+        [Op.and]: [
+          {
+            name: 'foo',
+          },
+          {
+            system: 'baz',
+          },
+          {
+            code: 'bar',
+          },
+        ],
+      };
+      let observedResult = sqlQB.buildTokenStringQuery({
+        field: 'foo',
+        value: 'bar',
+        system: 'baz',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('It should properly build a token uri query', () => {
+      const expectedResult = {
+        [Op.and]: [
+          {
+            name: 'foo',
+          },
+          {
+            code: 'bar',
+          },
+        ],
+      };
+      let observedResult = sqlQB.buildTokenURIQuery({
+        field: 'foo',
+        value: 'bar',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('It should properly build a token equal to query', () => {
+      const expectedResult = {
+        [Op.and]: [
+          {
+            name: 'foo',
+          },
+          {
+            code: 'bar',
+          },
+        ],
+      };
+      let observedResult = sqlQB.buildTokenEqualToQuery({
+        field: 'foo',
+        value: 'bar',
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
   });
   describe('assembleSearchQuery Tests', () => {
     test('Should return empty pipeline (except for archival and paging) if no matches or joins to perform', () => {
@@ -287,6 +424,45 @@ describe('SQL Query Builder Tests', () => {
         joinsToPerform: [],
         matchesToPerform: [[{ foo: { [Op.gte]: 1, [Op.lte]: 10 } }]],
         tokenMatches: [],
+        searchResultTransformations: {},
+        implementationParameters: { archivedParamPath: 'meta._isArchived' },
+        includeArchived: false,
+        pageNumber: 1,
+        resultsPerPage: 10,
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should handle token matches appropriately', () => {
+      const expectedResult = {
+        tokens: {
+          [Op.and]: [{ [Op.or]: ['foo', 'bar', 'baz'] }],
+        },
+        where: {
+          [Op.and]: [{ [Op.or]: [{ foo: { [Op.gte]: 1, [Op.lte]: 10 } }] }],
+        },
+      };
+      let observedResult = sqlQB.assembleSearchQuery({
+        joinsToPerform: [],
+        matchesToPerform: [[{ foo: { [Op.gte]: 1, [Op.lte]: 10 } }]],
+        tokenMatches: [['foo', 'bar', 'baz']],
+        searchResultTransformations: {},
+        implementationParameters: { archivedParamPath: 'meta._isArchived' },
+        includeArchived: false,
+        pageNumber: 1,
+        resultsPerPage: 10,
+      });
+      expect(observedResult).toEqual(expectedResult);
+    });
+    test('Should handle ignore invalid token matches', () => {
+      const expectedResult = {
+        where: {
+          [Op.and]: [{ [Op.or]: [{ foo: { [Op.gte]: 1, [Op.lte]: 10 } }] }],
+        },
+      };
+      let observedResult = sqlQB.assembleSearchQuery({
+        joinsToPerform: [],
+        matchesToPerform: [[{ foo: { [Op.gte]: 1, [Op.lte]: 10 } }]],
+        tokenMatches: [[]],
         searchResultTransformations: {},
         implementationParameters: { archivedParamPath: 'meta._isArchived' },
         includeArchived: false,
