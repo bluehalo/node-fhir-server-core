@@ -47,7 +47,7 @@ module.exports = {
     },
     Patient: {
       service: './src/server/service.mock.js',
-      versions: ['1_0_2', '3_0_1', '4_0_0'],
+      versions: ['1_0_2', '3_0_1', '4_0_0', '4_0_1'],
     },
     Questionnaire: {
       service: './src/server/service.mock.js',

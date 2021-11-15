@@ -12,7 +12,7 @@ module.exports.getCapabilityStatement = ({ profiles, security, statementGenerato
 
     return service
       .generateCapabilityStatement({
-        fhirVersion: fhirVersion || VERSIONS['4_0_0'],
+        fhirVersion: fhirVersion || VERSIONS['4_0_1'],
         profiles,
         security,
         statementGenerator,

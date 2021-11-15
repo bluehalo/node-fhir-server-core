@@ -55,7 +55,7 @@ describe('Server Class', () => {
       profiles: {
         Patient: {
           service: './src/server/service.mock.js',
-          versions: ['4_0_0'],
+          versions: ['4_0_1'],
         },
       },
     });
