@@ -15,5 +15,6 @@
   },
   "scripts": {
     "test": "jest"
-  }
+  },
+  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
 }
