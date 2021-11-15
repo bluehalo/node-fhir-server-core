@@ -9,7 +9,7 @@ let server;
 
 // Helper function to replace express params with mock values
 let fillRoute = (route, key) =>
-  route.replace(':base_version', VERSIONS['4_0_1']).replace(':id', 1).replace(':resource', key);
+  route.replace(':base_version', VERSIONS['4_0_0']).replace(':id', 1).replace(':resource', key);
 
 describe('Generic Profile Tests', () => {
   beforeAll(() => {

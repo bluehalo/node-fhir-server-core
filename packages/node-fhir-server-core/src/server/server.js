@@ -250,7 +250,7 @@ class Server {
 
       // Get an operation outcome for this instance
       const OperationOutcome = resolveSchema(
-        isValidVersion(base) ? base : VERSIONS['4_0_1'],
+        isValidVersion(base) ? base : VERSIONS['4_0_0'],
         'operationoutcome'
       );
 
@@ -285,14 +285,14 @@ class Server {
     // Nothing has responded by now, respond with 404
     this.app.use((req, res) => {
       // get base from URL instead of params since it might not be forwarded
-      const base = req.url.split('/')[1] || VERSIONS['4_0_1'];
+      const base = req.url.split('/')[1] || VERSIONS['4_0_0'];
 
       let OperationOutcome;
       if (Object.keys(VERSIONS).includes(base)) {
         OperationOutcome = resolveSchema(base, 'operationoutcome');
       } else {
         // if it's a misplaced URL, just return an R4 OperationOutcome
-        OperationOutcome = resolveSchema('4_0_1', 'operationoutcome');
+        OperationOutcome = resolveSchema('4_0_0', 'operationoutcome');
       }
 
       // Get an operation outcome for this instance

@@ -1,12 +1,9 @@
-const parametersR401 = require('../resources/4_0_1/parameters');
 const parametersR4 = require('../resources/4_0_0/parameters');
 const parameters3 = require('../resources/3_0_1/parameters');
 const parameters1 = require('../resources/1_0_2/parameters');
 
 const getParameters = (version, resource) => {
   switch (version) {
-    case '4_0_1':
-      return parametersR401[resource];
     case '4_0_0':
       return parametersR4[resource];
     case '3_0_1':

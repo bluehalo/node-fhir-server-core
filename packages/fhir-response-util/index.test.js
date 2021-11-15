@@ -4,7 +4,7 @@ const req = {
   protocol: 'https',
   get: (_prop) => 'localhost:3000',
   params: {
-    base_version: '4_0_1',
+    base_version: '4_0_0',
   },
 };
 
@@ -30,10 +30,9 @@ describe('FHIR Response Utility', () => {
 
   describe('getContentType', () => {
     test('should set correct content type for version', () => {
-      Object.entries(handler.contentTypeMap).forEach(([version, header]) => {
-        expect(handler.getContentType(version)).toBe(header);
-      });
-
+      expect(handler.getContentType('1_0_2')).toBe('application/json+fhir');
+      expect(handler.getContentType('3_0_1')).toBe('application/fhir+json');
+      expect(handler.getContentType('4_0_0')).toBe('application/fhir+json');
       expect(handler.getContentType('Unsupported')).toBe('application/json');
     });
   });
@@ -125,7 +124,7 @@ describe('FHIR Response Utility', () => {
       const results = { id: 'foo', resource_version: '1' };
       handler.create(req, res, results, { type: 'Patient' });
 
-      const expectedContentLocation = 'https://localhost:3000/4_0_1/Patient/foo/_history/1';
+      const expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
 
       expect(res.set.mock.calls).toHaveLength(3);
       expect(res.set.mock.calls[0][0]).toBe('Content-Location');
@@ -133,7 +132,7 @@ describe('FHIR Response Utility', () => {
       expect(res.set.mock.calls[1][0]).toBe('ETag');
       expect(res.set.mock.calls[1][1]).toBe(results.resource_version);
       expect(res.set.mock.calls[2][0]).toBe('Location');
-      expect(res.set.mock.calls[2][1]).toBe('4_0_1/Patient/foo');
+      expect(res.set.mock.calls[2][1]).toBe('4_0_0/Patient/foo');
 
       expect(res.status.mock.calls).toHaveLength(1);
       expect(res.status.mock.calls[0][0]).toBe(201);
@@ -147,7 +146,7 @@ describe('FHIR Response Utility', () => {
 
       expect(res.set.mock.calls).toHaveLength(1);
       expect(res.set.mock.calls[0][0]).toBe('Location');
-      expect(res.set.mock.calls[0][1]).toBe('4_0_1/Patient/foo');
+      expect(res.set.mock.calls[0][1]).toBe('4_0_0/Patient/foo');
 
       expect(res.status.mock.calls).toHaveLength(1);
       expect(res.status.mock.calls[0][0]).toBe(201);
@@ -196,7 +195,7 @@ describe('FHIR Response Utility', () => {
       const results = { id: 'foo', resource_version: '1', created: true };
       handler.update(req, res, results, { type: 'Patient' });
 
-      const expectedContentLocation = 'https://localhost:3000/4_0_1/Patient/foo/_history/1';
+      const expectedContentLocation = 'https://localhost:3000/4_0_0/Patient/foo/_history/1';
 
       expect(res.set.mock.calls).toHaveLength(4);
       expect(res.set.mock.calls[0][0]).toBe('Content-Location');
@@ -228,7 +227,7 @@ describe('FHIR Response Utility', () => {
       // ourselves a 60 second buffer incase the CI is slow or the test stalls
       expect(Math.abs(lastModifiedTime - expectedDate) < tolerance).toBeTruthy();
       expect(res.set.mock.calls[1][0]).toBe('Location');
-      expect(res.set.mock.calls[1][1]).toBe('4_0_1/Patient/foo');
+      expect(res.set.mock.calls[1][1]).toBe('4_0_0/Patient/foo');
 
       expect(res.type.mock.calls).toHaveLength(1);
       expect(res.type.mock.calls[0][0]).toBe('application/fhir+json');
