@@ -329,8 +329,8 @@ function enableResourceRoutes(app, config, corsDefaults) {
 function enableBaseRoute(app, config, corsDefaults) {
   // Determine which versions need a base endpoint, we need to loop through
   // all the configured profiles and find all the uniquely provided versions
-  let routes = require('./base/base.config');
-  for (let i; routes.length; i++) {
+  let routes = require('./base/base.config').routes;
+  for (let i = 0; i < routes.length; i++) {
     let versionValidationConfiguration = {
       versions: getAllConfiguredVersions(config.profiles),
     };
