@@ -1,16 +1,16 @@
 {
-  "name": "@asymmetrik/node-fhir-server-core",
+  "name": "@xcaliber-health/node-fhir-server-core",
   "version": "2.2.4",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
-  "author": "Asymmetrik Ltd.",
-  "contributors": [
-    "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
-    "Jon Lee <jlee@asymmetrik.com>",
-    "Sumeet Shah <sshah@asymmetrik.com>",
-    "Shane O'Neill <soneill@asymmetrik.com>",
-    "Luan <luan@asymmetrik.com>"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xcaliber-health/node-fhir-server-core",
+    "directory": "packages/node-fhir-server-core"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "main": "dist/index",
   "scripts": {
     "build": "babel src -d dist --copy-files",
@@ -38,7 +38,7 @@
     "verbose": true
   },
   "dependencies": {
-    "@asymmetrik/fhir-response-util": "^1.2.4",
+    "@xcaliber-health/fhir-response-util": "^1.2.4",
     "@asymmetrik/sof-scope-checker": "^1.0.7",
     "@hapi/bourne": "^2.0.0",
     "body-parser": "^1.19.0",
