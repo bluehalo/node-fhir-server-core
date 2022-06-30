@@ -1,18 +1,17 @@
 {
-  "name": "@asymmetrik/fhir-response-util",
+  "name": "@xcaliber-health/fhir-response-util",
   "version": "1.2.4",
   "description": "Utility for handling the headers, content, and status types for a response.",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
   "repository": {
     "type": "git",
+    "url": "https://github.com/xcaliber-health/node-fhir-server-core",
     "directory": "packages/fhir-response-util"
   },
-  "license": "MIT",
-  "author": "Robert-W <rwinterbottom@asymmetrik.com>",
-  "main": "index.js",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com/"
   },
+  "license": "MIT",
+  "main": "index.js",
   "scripts": {
     "test": "jest"
   },
