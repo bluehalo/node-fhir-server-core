@@ -79,7 +79,7 @@ function create(req, res, json, options) {
   }
 
   res.set('Location', location);
-  res.status(201).end();
+  res.status(201).json(json).end();
 }
 
 /**
@@ -106,7 +106,7 @@ function update(req, res, json, options) {
   res.set('Last-Modified', date.toISOString());
   res.type(getContentType(fhirVersion));
   res.set('Location', location);
-  res.status(status).end();
+  res.status(status).json(json).end();
 }
 
 /**
