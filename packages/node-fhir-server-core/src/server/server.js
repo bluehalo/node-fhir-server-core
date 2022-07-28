@@ -145,7 +145,7 @@ class Server {
     this.app.use(compression({ level: 9 }));
     // Enable the body parser
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+    this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir', 'application/json'] }));
     // Enable @hapi/bourne to protect against prototype injection
     this.app.use(prototypeInjectionHandler);
     // Set favicon

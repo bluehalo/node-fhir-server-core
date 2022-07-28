@@ -3,7 +3,7 @@ const path = require('path');
 const contentTypeMap = {
   '1_0_2': 'application/json+fhir',
   '3_0_1': 'application/fhir+json',
-  '4_0_0': 'application/fhir+json',
+  '4_0_0': 'application/json',
   '4_0_1': 'application/fhir+json',
 };
 

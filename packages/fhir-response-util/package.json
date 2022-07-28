@@ -1,6 +1,6 @@
 {
   "name": "@xcaliber-health/fhir-response-util",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Utility for handling the headers, content, and status types for a response.",
   "repository": {
     "type": "git",

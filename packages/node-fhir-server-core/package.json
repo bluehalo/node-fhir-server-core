@@ -1,6 +1,6 @@
 {
   "name": "@xcaliber-health/node-fhir-server-core",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
   "repository": {
@@ -49,6 +49,9 @@
     "express": "^4.17.1",
     "glob": "^7.2.0",
     "helmet": "^4.6.0",
+    "http": "^0.0.1-security",
+    "http-proxy": "^1.18.1",
+    "https": "^1.0.0",
     "jsonschema": "^1.4.0",
     "jsonwebtoken": "^8.1.0",
     "jwk-to-pem": "^2.0.5",
@@ -62,6 +65,7 @@
     "serve-favicon": "^2.5.0",
     "snyk": "^1.746.0",
     "superagent": "^6.1.0",
+    "url": "^0.11.0",
     "validator": "^13.6.0",
     "winston": "^3.3.3",
     "xss": "^1.0.10"
