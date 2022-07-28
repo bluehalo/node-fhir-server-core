@@ -16,6 +16,7 @@ const https = require('https');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const proxy= require('./proxy');
 
 /**
  * @name mergeDefaults
@@ -122,6 +123,7 @@ class Server {
     );
     // Use external express instance or setup new one
     this.app = app ? app : express();
+    this.proxyApp= express();
     // Setup some environment variables handy for setup
     let { server = {} } = this.config;
 
@@ -145,7 +147,7 @@ class Server {
     this.app.use(compression({ level: 9 }));
     // Enable the body parser
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir'] }));
+    this.app.use(bodyParser.json({ type: ['application/fhir+json', 'application/json+fhir', 'application/json'] }));
     // Enable @hapi/bourne to protect against prototype injection
     this.app.use(prototypeInjectionHandler);
     // Set favicon
@@ -317,6 +319,24 @@ class Server {
     return this;
   }
 
+  setProxy(actualPort,actualHost) {
+    const proxyHandler = proxy(actualPort,actualHost);
+    this.proxyApp.use('/api/v1/*', proxyHandler)
+    this.proxyApp.use((req,res)=>{
+      const error = {
+        resourceType: "OperationOutcome",
+        issue: [{
+          severity: 'error',
+          code: 'not-found',
+          details: {
+            text: `Invalid url: ${req.path}`
+          }
+        }]
+      };
+      res.status(404).json(error);
+    })
+  }
+
   // Start the server
   listen(port = process.env.PORT, host = process.env.HOST, callback) {
     // port and host will override configuration here if specified,
@@ -350,9 +370,21 @@ class Server {
           },
           this.app
         );
-
+    const serverPort= 5001;
+    //Proxy will forward to localhost if host is falsy
+    this.setProxy(serverPort, host ? host : server.host)
+    this.proxyApp= !this.env.USE_HTTPS
+      ? http.createServer(this.proxyApp)
+      : https.createServer(
+          {
+            key: fs.readFileSync(server.ssl.key),
+            cert: fs.readFileSync(server.ssl.cert),
+          },
+          this.proxyApp
+        );
     // Start the app - will listen on 0.0.0.0 [::] if host is falsy
-    this.app.listen(port || server.port, host || server.host, callback);
+    this.app.listen(serverPort, host || server.host, callback); 
+    this.proxyApp.listen(port || server.port, host || server.host);
   }
 }
 
