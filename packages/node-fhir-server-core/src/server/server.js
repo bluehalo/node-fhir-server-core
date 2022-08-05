@@ -257,28 +257,12 @@ class Server {
       );
 
       // If there is an error and it is an OperationOutcome
-      if (err && err.resourceType === OperationOutcome.resourceType) {
+      if (err) {
         const status = err.statusCode || 500;
         res.status(status).json(err);
       } else if (err instanceof ServerError) {
         const status = err.statusCode || 500;
         res.status(status).json(new OperationOutcome(err));
-      } else if (err) {
-        const error = new OperationOutcome({
-          statusCode: 500,
-          issue: [
-            {
-              severity: 'error',
-              code: 'internal',
-              details: {
-                text: `Unexpected: ${err.message}`,
-              },
-            },
-          ],
-        });
-
-        logger.error(error);
-        res.status(error.statusCode).json(error);
       } else {
         next();
       }
