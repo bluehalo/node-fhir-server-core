@@ -45,7 +45,7 @@ module.exports = {
    * @param {Object} app - Express instance to use on server
    * @return {Server}
    */
-  initialize: (config, app, postProcessingMiddleware) =>
+  initialize: (config, app, postProcessingMiddleware = []) =>
     new Server(config, app)
       .configureMiddleware()
       .configureSession()

@@ -1,7 +1,7 @@
 {
   "name": "node-fhir-server-core-project",
   "private": true,
-  "version": "2.0.11",
+  "version": "2.2.7",
   "description": "Node FHIR Rest API Server and surrounding ecosystem",
   "homepage": "https://github.com/Asymmetrik/node-fhir-server-core#readme",
   "bugs": {
