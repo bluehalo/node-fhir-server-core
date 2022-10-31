@@ -45,7 +45,7 @@ module.exports = {
    * @param {Object} app - Express instance to use on server
    * @return {Server}
    */
-  initialize: (config, app) =>
+  initialize: (config, app, postProcessingMiddleware = []) =>
     new Server(config, app)
       .configureMiddleware()
       .configureSession()
@@ -53,5 +53,6 @@ module.exports = {
       .configurePassport()
       .setPublicDirectory()
       .setProfileRoutes()
+      .configurePostProcessingMiddleware(postProcessingMiddleware)
       .setErrorRoutes(),
 };
