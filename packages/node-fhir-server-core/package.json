@@ -1,6 +1,6 @@
 {
   "name": "@xcaliber-health/node-fhir-server-core",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
   "repository": {
