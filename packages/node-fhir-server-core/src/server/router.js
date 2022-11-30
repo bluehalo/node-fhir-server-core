@@ -92,7 +92,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
   for (let op of profile.operation) {
     let functionName = hyphenToCamelcase(op.name || '');
     let hasController = profile.serviceModule
-      ? Object.keys(profile.serviceModule).includes(functionName)
+      ? typeof profile.serviceModule[functionName] === 'function'
       : false;
 
     // Check for required configurations, must have name, route, method, and
