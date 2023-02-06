@@ -9,6 +9,16 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@asymmetrik/fhir-response-util@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/fhir-response-util/-/fhir-response-util-1.2.4.tgz#8269c4d8a7d639e3bef7225a6ccfa9df5ea5a0bb"
+  integrity sha512-GL75AWd0kYkfBv8YVZv1yLpIqzSx/TA5Se9GGGg3YlIrUNoVqqO6aRLGGjuYHJGJY56h2LnV8z9f9+lIl/31kg==
+
+"@asymmetrik/sof-scope-checker@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/sof-scope-checker/-/sof-scope-checker-1.0.7.tgz#f56580977ef4b965b3ae41007ce9b7bbba86c920"
+  integrity sha512-QzLGDRMaVX/R/iAqQu4MuDV29d/0mvSyT1i4p/C3Xi5sSQXPtSa8e/uUChBfpPGOdbIQv1Uv84tkRifRKUKtZA==
+
 "@babel/cli@^7.15.7":
   version "7.17.6"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.17.6.tgz#169e5935f1795f0b62ded5a2accafeedfe5c5363"
@@ -3935,11 +3945,9 @@ json-stringify-safe@^5.0.1:
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
 json5@^2.1.2:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
-  integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
-  dependencies:
-    minimist "^1.2.5"
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
 jsonparse@^1.2.0:
   version "1.3.1"
