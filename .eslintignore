@@ -1,2 +1,5 @@
 node_modules
-coverage
+**/dist/**
+**/__tmp__/**
+lerna.json
+coverage/
