@@ -1,3 +1,42 @@
+## [2.2.5](https://github.com/bluehalo/node-fhir-server-core/compare/2.0.10...2.2.5) (2023-02-06)
+
+
+### Bug Fixes
+
+* add allergyintolerance ([a91bc21](https://github.com/bluehalo/node-fhir-server-core/commit/a91bc210bff103d3bb8a68a8ca89a0b028ace04e))
+* add allergyintrolerance controller and default to r4 if no version is found ([85af3a2](https://github.com/bluehalo/node-fhir-server-core/commit/85af3a279bcd37132f9516400fb91acef90c8eba))
+* add mock ([bd0f42c](https://github.com/bluehalo/node-fhir-server-core/commit/bd0f42c8f52f83d4ff546d0b3b1c2c53596c1d49))
+* add value meta properties ([f4381a7](https://github.com/bluehalo/node-fhir-server-core/commit/f4381a7b65b86de6cfcfc1a14cf373bda5ce70df))
+* bump lerna ([5256ee5](https://github.com/bluehalo/node-fhir-server-core/commit/5256ee5b325a71e646838b59d4a293a1cb1090f2))
+* **docs:** update doc links ([2651a11](https://github.com/bluehalo/node-fhir-server-core/commit/2651a110b30bf9c6ce11fea4681d218b66a65e3c))
+* export bundleentry ([255e012](https://github.com/bluehalo/node-fhir-server-core/commit/255e01288626fc24e7fb8cb2ab29cd8bae57732e))
+* fix bug involving custom baseUrls ([b27ea72](https://github.com/bluehalo/node-fhir-server-core/commit/b27ea728992dba1b022953b1286fb5e51e646a83))
+* fix bug involving custom baseUrls ([d825ad3](https://github.com/bluehalo/node-fhir-server-core/commit/d825ad30ef94531b5ae2b75d8dcc382adaf6d1d3))
+* ignore long lines ([6272247](https://github.com/bluehalo/node-fhir-server-core/commit/6272247943afd336cd08f54273cd68b70666db12))
+* just return an R4 operation outcome on lost URLs ([86451ec](https://github.com/bluehalo/node-fhir-server-core/commit/86451ec2a362b22e39674c99cff48f241f0a57d0))
+* remove test for fixed issue ([813c9f3](https://github.com/bluehalo/node-fhir-server-core/commit/813c9f3042228605e89d564e3841e2f1449b3be9))
+* update baseUrl logic ([c12c21a](https://github.com/bluehalo/node-fhir-server-core/commit/c12c21a3e98ad952f38cba188d2eda9e87f279d9))
+* update description ([ac57130](https://github.com/bluehalo/node-fhir-server-core/commit/ac571301c18af48c17f5535102aa7e928eea7c94))
+* update package version ([5297521](https://github.com/bluehalo/node-fhir-server-core/commit/52975217a1eb9d89228838dfd10094b97241a65a))
+* update tests ([47bc4b0](https://github.com/bluehalo/node-fhir-server-core/commit/47bc4b0cc42f047558332012bdb42add612d17be))
+* update tests ([b9892cb](https://github.com/bluehalo/node-fhir-server-core/commit/b9892cb1e5705046367cfe6418426cd764d4385f))
+* updated reference to uri ([82e16a5](https://github.com/bluehalo/node-fhir-server-core/commit/82e16a55165fce04ca066827113695cce1bbaa17))
+* updated token options ([d86e35b](https://github.com/bluehalo/node-fhir-server-core/commit/d86e35b35ccd4193f4f98fb423ca8f3a19994198))
+
+
+### Features
+
+* add allergyintolerance schema ([268cb8a](https://github.com/bluehalo/node-fhir-server-core/commit/268cb8a8ca0a8659fbaa0c341d612f7cf8986d17))
+* add index files for each resource ([7410e4a](https://github.com/bluehalo/node-fhir-server-core/commit/7410e4a1090a7718d4b4170c37409c044ba2b72f))
+* add snyk ([b9d57bb](https://github.com/bluehalo/node-fhir-server-core/commit/b9d57bb61ba05bc26a6938d061d0e9fbf90343e7))
+* allow for the ability to specify a baseUrl for profiles ([933a77b](https://github.com/bluehalo/node-fhir-server-core/commit/933a77bd47b9feda106346d7d8767d964b7bf51a))
+* allow for the ability to specify a list of custom baseUrls ([156de6b](https://github.com/bluehalo/node-fhir-server-core/commit/156de6b0cda37e88e16d1bc8a44df84426eaab3d))
+* fix operations route ([fb79d06](https://github.com/bluehalo/node-fhir-server-core/commit/fb79d0675dc4b5010dab1cd4606d16df254506bf))
+* import support for custom baseUrls ([e242268](https://github.com/bluehalo/node-fhir-server-core/commit/e24226850b7e87f63a2346036109c9f9d410ef6b))
+* improve package bundling ([a30db64](https://github.com/bluehalo/node-fhir-server-core/commit/a30db64f8f3f9e2015b0138f8c931a3c2039df52))
+
+
+
 ## [2.2.4](https://github.com/Asymmetrik/node-fhir-server-core/compare/2.0.10...2.2.4) (2021-11-15)
 
 ### Bug Fixes
