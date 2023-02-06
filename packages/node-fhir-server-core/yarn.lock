@@ -5287,9 +5287,9 @@ smart-buffer@^4.2.0:
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
 
 snyk@^1.746.0:
-  version "1.856.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.856.0.tgz#5b744c5b7dd9a57ee45414cd89f701174ad19ee4"
-  integrity sha512-pJc09EVtmErs6hFwHv3jPt1iHNqfkN4QqES20sl5eGRXQaXeG+HAQXx00QezSZDdZ9eXyEbtJdIsk0V/4WzWVA==
+  version "1.1064.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1064.0.tgz#e73b3a1aff585f6266f73ddd498c5cfd5e67aff0"
+  integrity sha512-f9mNO5rUc5nVVZ1sN+do2i5/RGHKlOQoNk5HiEO9WkPEn2pFllJv2XAw5Bn7sFj1eLXNFVUOUlo6SVqGnX7lXw==
 
 socks@^2.6.1:
   version "2.6.2"
