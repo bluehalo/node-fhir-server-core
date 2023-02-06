@@ -9,6 +9,16 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@asymmetrik/fhir-response-util@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/fhir-response-util/-/fhir-response-util-1.2.4.tgz#8269c4d8a7d639e3bef7225a6ccfa9df5ea5a0bb"
+  integrity sha512-GL75AWd0kYkfBv8YVZv1yLpIqzSx/TA5Se9GGGg3YlIrUNoVqqO6aRLGGjuYHJGJY56h2LnV8z9f9+lIl/31kg==
+
+"@asymmetrik/sof-scope-checker@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@asymmetrik/sof-scope-checker/-/sof-scope-checker-1.0.7.tgz#f56580977ef4b965b3ae41007ce9b7bbba86c920"
+  integrity sha512-QzLGDRMaVX/R/iAqQu4MuDV29d/0mvSyT1i4p/C3Xi5sSQXPtSa8e/uUChBfpPGOdbIQv1Uv84tkRifRKUKtZA==
+
 "@babel/cli@^7.15.7":
   version "7.17.6"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.17.6.tgz#169e5935f1795f0b62ded5a2accafeedfe5c5363"
@@ -4322,9 +4332,9 @@ minimist-options@4.1.0:
     kind-of "^6.0.3"
 
 minimist@^1.2.0, minimist@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
-  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
+  integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
 modify-values@^1.0.0:
   version "1.0.1"
