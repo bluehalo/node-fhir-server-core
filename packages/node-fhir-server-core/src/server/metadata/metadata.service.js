@@ -52,7 +52,7 @@ let generateCapabilityStatement = ({
     let deprecatedLogger = deprecate(
       container.get('default'),
       'Using the logger this way is deprecated. Please see the documentation on ' +
-        'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
+      'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
     );
 
     // Get the necessary functions to generate statements
@@ -78,7 +78,7 @@ let generateCapabilityStatement = ({
       const opsInProfile = profiles[profile_name].operation;
       if (opsInProfile && opsInProfile.length) {
         opsInProfile.forEach((opInProfile) => {
-          const op = {
+          const op = opInProfile.definition ? opInProfile : {
             name: opInProfile.name,
             definition: {
               reference: opInProfile.reference
