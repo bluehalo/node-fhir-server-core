@@ -80,11 +80,12 @@ let generateCapabilityStatement = ({
         opsInProfile.forEach((opInProfile) => {
           const op = opInProfile.definition ? opInProfile : {
             name: opInProfile.name,
-            definition: {
+            definition: opInProfile.definition ? opInprofile.definition : ({
               reference: opInProfile.reference
                 ? opInProfile.reference
                 : `/OperationOutcome/${opInProfile.name}`,
-            },
+
+            }),
           };
           ops.push(op);
         });
