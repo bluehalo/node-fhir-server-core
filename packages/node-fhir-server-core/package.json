@@ -55,7 +55,7 @@
     "glob": "^7.2.0",
     "helmet": "^4.6.0",
     "jsonschema": "^1.4.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "jwk-to-pem": "^2.0.5",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
