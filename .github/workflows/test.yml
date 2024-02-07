@@ -16,8 +16,7 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: yarn install;
-          yarn bootstrap
+        run: yarn install
 
       - name: Run Tests
         run: yarn test
