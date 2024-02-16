@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-secrets",
+  "name": "@bluehalo/fhir-secrets",
   "version": "0.9.7",
   "description": "AWS KMS Secrets retrieval promisified",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-secrets"

@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-qb-sql",
+  "name": "@bluehalo/fhir-qb-sql",
   "version": "1.1.6",
   "description": "FHIR query builder for SQL",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-qb-sql"

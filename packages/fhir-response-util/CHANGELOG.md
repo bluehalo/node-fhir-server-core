@@ -7,4 +7,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- Package/fhir response utils ([#11](https://github.com/Asymmetrik/phx-tools/issues/11)) ([7d2073d](https://github.com/Asymmetrik/phx-tools/commit/7d2073d))
+- Package/fhir response utils ([#11](https://github.com/BlueHalo/phx-tools/issues/11)) ([7d2073d](https://github.com/BlueHalo/phx-tools/commit/7d2073d))
