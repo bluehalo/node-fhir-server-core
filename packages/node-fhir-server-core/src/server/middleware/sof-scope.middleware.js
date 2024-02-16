@@ -1,4 +1,4 @@
-const scopeChecker = require('@asymmetrik/sof-scope-checker');
+const scopeChecker = require('@bluehalo/sof-scope-checker');
 const noOpMiddleware = require('./noop.middleware.js');
 const { INTERACTIONS } = require('../../constants');
 const errors = require('../utils/error.utils');
