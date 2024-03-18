@@ -81,7 +81,7 @@ function validate(config) {
   invariant(
     !config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
     'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
   );
 
   // If we have no profiles configured, notify them now
@@ -89,7 +89,7 @@ function validate(config) {
     Object.keys(config.profiles).length > 0,
     'No profiles configured. We do not enable any profiles by default so please ' +
       'review the profile wiki for how to enable profiles and capabilities. ' +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
   );
 
   // We need to verify that each provided key is valid and that the config
@@ -101,7 +101,7 @@ function validate(config) {
     errors.length === 0,
     'Encountered the following errors attempting to load your provided profiles:' +
       `\n${errors.join('\n')}\n` +
-      'See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
   );
 }
 
@@ -337,7 +337,7 @@ class Server {
     invariant(
       port || server.port,
       'Missing port. Please provide a port when initializing the server. See ' +
-        'https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
+        'https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
     );
 
     // Update the express app to be in instance of createServer

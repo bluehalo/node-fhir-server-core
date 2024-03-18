@@ -5,4 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.9.1 (2019-05-16)
 
-**Note:** Version bump only for package @asymmetrik/fhir-json-schema-validator
+**Note:** Version bump only for package @bluehalo/fhir-json-schema-validator

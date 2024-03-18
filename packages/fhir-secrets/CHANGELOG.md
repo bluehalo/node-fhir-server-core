@@ -5,4 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.9.1 (2019-04-05)
 
-**Note:** Version bump only for package @asymmetrik/fhir-secrets
+**Note:** Version bump only for package @bluehalo/fhir-secrets

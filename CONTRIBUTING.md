@@ -4,7 +4,7 @@ First off, Contributions are always welcome and we appreciate any help you can o
 
 ## Before you begin
 
-Below are some general guidelines we try to stick to on all of our FHIR related repositories. When contributing to `@asymmetrik/node-fhir-server-core`, we do ask that you do your best to follow these guidelines.
+Below are some general guidelines we try to stick to on all of our FHIR related repositories. When contributing to `@bluehalo/node-fhir-server-core`, we do ask that you do your best to follow these guidelines.
 
 ### Branch Organization
 
@@ -80,8 +80,8 @@ When cutting a release, the following steps need to be performed.
 
 ## Resources
 
-For more information about how things are designed and how they work, please consult our [wiki](https://github.com/Asymmetrik/node-fhir-server-core/wiki).
+For more information about how things are designed and how they work, please consult our [wiki](https://github.com/bluehalo/node-fhir-server-core/wiki).
 
 ## Issues
 
-Please file your issues [here](https://github.com/Asymmetrik/node-fhir-server-core/issues) and try to provide as much information in the template as possible/relevant.
+Please file your issues [here](https://github.com/bluehalo/node-fhir-server-core/issues) and try to provide as much information in the template as possible/relevant.

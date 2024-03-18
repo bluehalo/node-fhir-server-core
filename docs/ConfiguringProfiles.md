@@ -16,7 +16,7 @@ A [profile](https://www.hl7.org/fhir/profilelist.html) corresponds to a queryabl
 
 ### Supported Profiles
 
-To find a list of all supported profiles, please go to [src/server/resources/base_version/parameters](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/node-fhir-server-core/src/server/resources/4_0_0/parameters) for your corresponding FHIR version (this links to version `4.0.0`).
+To find a list of all supported profiles, please go to [src/server/resources/base_version/parameters](https://github.com/bluehalo/node-fhir-server-core/tree/master/packages/node-fhir-server-core/src/server/resources/4_0_0/parameters) for your corresponding FHIR version (this links to version `4.0.0`).
 
 Profiles have the following configuration options:
 
@@ -30,14 +30,14 @@ Profiles have the following configuration options:
 #### `versions`
 
 - **Type:** `Array<string>`
-- **Description:** An array of strings containing the versions you intend to support. You cannot add anything you want here, only valid versions supported in core will be used. See [`exports.VERSIONS`](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/packages/node-fhir-server-core/src/constants.js) in the constants file.
+- **Description:** An array of strings containing the versions you intend to support. You cannot add anything you want here, only valid versions supported in core will be used. See [`exports.VERSIONS`](https://github.com/bluehalo/node-fhir-server-core/blob/master/packages/node-fhir-server-core/src/constants.js) in the constants file.
 - **Required:** `Yes`
 - **Default:** `none`
 
 #### `corsOptions`
 
 - **Type:** `object`
-- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
+- **Description:** Set profile specific cors options. These will override the default `corsOptions` set in the server config. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. This is controlled by `@bluehalo/node-fhir-server-core` and cannot be overridden.
 - **Required:** `No`
 - **Default:** `none`
 
@@ -51,7 +51,7 @@ Each profile has a pre-defined set of methods it can implement. If you do not wa
 **NOTE** - We used to pass the logger in as an argument. We have made several changes to loggers in general to make them more flexible and less annoying to pass around. You now need to load them yourselves from the core library. You also need to load the schemas and return the objects explicitly as we no longer do the casting ourselves. A service will commonly at least have the following setup:
 
 ```javascript
-const { loggers, resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { loggers, resolveSchema } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 ```
 
@@ -69,7 +69,7 @@ const logger = loggers.get('default');
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.search = async (args, context) => {
   let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
@@ -93,7 +93,7 @@ module.exports.search = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.searchById = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -111,7 +111,7 @@ module.exports.searchById = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.searchByVersionId = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -129,7 +129,7 @@ module.exports.searchByVersionId = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.history = async (args, context) => {
   let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
@@ -154,7 +154,7 @@ module.exports.history = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.historyById = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -172,7 +172,7 @@ module.exports.historyById = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.create = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -196,7 +196,7 @@ module.exports.create = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.update = async (args, context) => {
 	let Patient = resolveSchema(args.base_version, 'patient');
@@ -224,7 +224,7 @@ module.exports.update = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.patch = async (args, context) => {
 	let Patient = resolveSchema(args.base_version, 'patient');
@@ -255,7 +255,7 @@ module.exports.patch = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { ServerError } = require('@asymmetrik/node-fhir-server-core');
+const { ServerError } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
   try {
@@ -285,4 +285,4 @@ module.exports.remove = async (args, context) => {
 
 ## Arguments
 
-Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/packages/node-fhir-server-core/src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each version folder there is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources.
+Each resource supports the arguments defined by the specification for its own version. You can either review the official FHIR documentation, or you can look in the [resources](https://github.com/bluehalo/node-fhir-server-core/blob/master/packages/node-fhir-server-core/src/server/resources) directory of this project. Each `version` folder represents a version we support, and in each version folder there is a `parameters` folder which defines the parameters for each resource. When an API endpoint is hit, each resource will allow its own arguments and any inherited arguments from parent resources.

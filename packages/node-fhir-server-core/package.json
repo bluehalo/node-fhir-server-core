@@ -1,9 +1,9 @@
 {
-  "name": "@asymmetrik/node-fhir-server-core",
+  "name": "@bluehalo/node-fhir-server-core",
   "version": "2.2.5",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
-  "author": "Asymmetrik Ltd.",
+  "author": "BlueHalo",
   "contributors": [
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",
@@ -43,8 +43,8 @@
     "verbose": true
   },
   "dependencies": {
-    "@asymmetrik/fhir-response-util": "^1.2.4",
-    "@asymmetrik/sof-scope-checker": "^1.0.7",
+    "@bluehalo/fhir-response-util": "^1.2.4",
+    "@bluehalo/sof-scope-checker": "^1.0.7",
     "@hapi/bourne": "^2.0.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",

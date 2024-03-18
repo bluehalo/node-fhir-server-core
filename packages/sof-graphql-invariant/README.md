@@ -6,7 +6,7 @@
 # Install
 
 ```shell
-yarn add @asymmetrik/sof-graphql-invariant
+yarn add @bluehalo/sof-graphql-invariant
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ requests on a resource level instead of across the entire request and will
 reject them in a manner that meets conformance standards for FHIR and GraphQL.
 
 ```javascript
-const scopeInvariant = require('@asymmetrik/sof-graphql-invariant');
+const scopeInvariant = require('@bluehalo/sof-graphql-invariant');
 
 // NOTE: All the paths for the following modules are fictional, you will need
 // to provide your own path to these resources, these are for example only
@@ -53,7 +53,7 @@ let root = new GraphQLObjectType({
 });
 ```
 
-See [sof-graphql-invariant tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-graphql-invariant/index.test.js) for more usage examples.
+See [sof-graphql-invariant tests](https://github.com/BlueHalo/node-fhir-server-core/tree/master/packages/sof-graphql-invariant/index.test.js) for more usage examples.
 
 ### Environment variables
 
@@ -76,7 +76,7 @@ Value: `true`
 If you use this invariant, it will check scopes on all incoming requests. If you want to disable this or provide a toggle mechanism, you can do so by setting an environment variable. To disable authentication, set `SOF_AUTHENTICATION` to false. It will only disable authentication if this is explicitly set to false.
 
 ```javascript
-const scopeInvariant = require('@asymmetrik/sof-graphql-invariant');
+const scopeInvariant = require('@bluehalo/sof-graphql-invariant');
 
 // Set the ENV
 process.env.SOF_AUTHENTICATION = 'false';
@@ -104,7 +104,7 @@ const ExamplePatientQuery = {
 Sometimes it is useful to enable authentication in development but disable it when you are using the graphiql explorer. This requires two things. First is an environment variable stating you are using it, `HAS_GRAPHIQL`. Second, that the endpoint ends with `$graphiql`. If you do this, you can have authentication enabled on your graphql schemas but not if the request is coming from GraphiQL.
 
 ```javascript
-const scopeInvariant = require('@asymmetrik/sof-graphql-invariant');
+const scopeInvariant = require('@bluehalo/sof-graphql-invariant');
 // Set the ENV
 process.env.HAS_GRAPHIQL = 'true';
 
@@ -128,7 +128,7 @@ const ExamplePatientMutation = {
 
 ## Arguments
 
-`@asymmetrik/sof-graphql-invariant` exports a single function which takes two arguments. One is a set of options and the other is a resolver function.
+`@bluehalo/sof-graphql-invariant` exports a single function which takes two arguments. One is a set of options and the other is a resolver function.
 
 ### Options
 

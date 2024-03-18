@@ -9,16 +9,6 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@asymmetrik/fhir-response-util@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@asymmetrik/fhir-response-util/-/fhir-response-util-1.2.4.tgz#8269c4d8a7d639e3bef7225a6ccfa9df5ea5a0bb"
-  integrity sha512-GL75AWd0kYkfBv8YVZv1yLpIqzSx/TA5Se9GGGg3YlIrUNoVqqO6aRLGGjuYHJGJY56h2LnV8z9f9+lIl/31kg==
-
-"@asymmetrik/sof-scope-checker@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@asymmetrik/sof-scope-checker/-/sof-scope-checker-1.0.7.tgz#f56580977ef4b965b3ae41007ce9b7bbba86c920"
-  integrity sha512-QzLGDRMaVX/R/iAqQu4MuDV29d/0mvSyT1i4p/C3Xi5sSQXPtSa8e/uUChBfpPGOdbIQv1Uv84tkRifRKUKtZA==
-
 "@babel/cli@^7.15.7":
   version "7.17.6"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.17.6.tgz#169e5935f1795f0b62ded5a2accafeedfe5c5363"
@@ -947,6 +937,16 @@
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
+
+"@bluehalo/fhir-response-util@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@bluehalo/fhir-response-util/-/fhir-response-util-1.2.4.tgz#5bba9f631d3ca17559ff2efcfc59e9367d04939e"
+  integrity sha512-VcStCsLT/rx9c7ReIt+6Bty3Myt1tyShyg1J5yn2CiG11M5qlOJfSWl7YT1bDzVLjzxhl96vTBqG0JWATzv/7g==
+
+"@bluehalo/sof-scope-checker@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@bluehalo/sof-scope-checker/-/sof-scope-checker-1.0.7.tgz#eba5e6c9b408ecc91c1083531db12bfa2a6afea0"
+  integrity sha512-WnyGIBiTqwcvFINB6qBzPJK2TQefEb2Cwd58ACk+XV82mym/infMTvH8H1YwBUzmhBGvvmpK2U7AlHHNyjWpHw==
 
 "@colors/colors@1.5.0":
   version "1.5.0"

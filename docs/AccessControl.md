@@ -13,7 +13,7 @@ We have built-in support if you are using [SMART on FHIR](http://docs.smarthealt
 When setting up your FHIR server, add the following config entries to your current configuration:
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@bluehalo/node-fhir-server-core');
 
 let server = FHIRServer.initialize({
   auth: {
@@ -34,10 +34,10 @@ And that is all that is needed as far as config goes, but let's take a look at h
 
 #### Step Two: Define a service
 
-If you are not familiar with writing passport strategies, you can use [`@asymmetrik/sof-strategy`](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-strategy). To use this, create a file that looks like this:
+If you are not familiar with writing passport strategies, you can use [`@bluehalo/sof-strategy`](https://github.com/bluehalo/node-fhir-server-core/tree/master/packages/sof-strategy). To use this, create a file that looks like this:
 
 ```javascript
-const smartBearerStrategy = require('@asymmetrik/sof-strategy');
+const smartBearerStrategy = require('@bluehalo/sof-strategy');
 
 module.exports.strategy = smartBearerStrategy({
   introspectionUrl: process.env.INTROSPECTION_URL,
@@ -46,10 +46,10 @@ module.exports.strategy = smartBearerStrategy({
 });
 ```
 
-You will also need to add `@asymmetrik/sof-strategy` as a dependency by running:
+You will also need to add `@bluehalo/sof-strategy` as a dependency by running:
 
 ```shell
-yarn add @asymmetrik/sof-strategy
+yarn add @bluehalo/sof-strategy
 ```
 
 And define these environment variables: `INTROSPECTION_URL`, `CLIENT_ID`, and `CLIENT_SECRET`.
@@ -102,7 +102,7 @@ There are also more advanced ways to set up the server. By default, if you do no
 In our [Getting Started](GettingStarted.md) section, we showed you how to create a FHIR server by calling `initialize` and giving it some config, like so:
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@bluehalo/node-fhir-server-core');
 
 let server = FHIRServer.initialize({ ...someConfig });
 ```
@@ -110,7 +110,7 @@ let server = FHIRServer.initialize({ ...someConfig });
 What initialize is actually doing is just calling several internal methods. You can replicate the initialize method by doing the following:
 
 ```javascript
-const { Server } = require('@asymmetrik/node-fhir-server-core');
+const { Server } = require('@bluehalo/node-fhir-server-core');
 
 let server = new Server(config)
   .configureMiddleware()
@@ -127,7 +127,7 @@ let server = new Server(config)
 You can `initialize` a server with your own express app if you need further customization.
 
 ```javascript
-const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers, constants } = require('@bluehalo/node-fhir-server-core');
 const express = require('express');
 
 let config = {};
