@@ -20,7 +20,7 @@ const makeResultBundle = (results, res, baseVersion, type) => {
       new BundleEntry({
         response: result,
         request: result,
-      })
+      }),
     );
   });
   bundle.entry = entries;
@@ -36,13 +36,13 @@ module.exports.batch = (req, res) =>
       return reject(
         errors.internal(
           `Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`,
-          baseVersion
-        )
+          baseVersion,
+        ),
       );
     }
     if (type.toLowerCase() !== 'batch') {
       return reject(
-        errors.internal(`Expected 'type: batch'. Received 'type: ${type}'.`, baseVersion)
+        errors.internal(`Expected 'type: batch'. Received 'type: ${type}'.`, baseVersion),
       );
     }
     let { protocol, baseUrl } = req;
@@ -56,7 +56,7 @@ module.exports.batch = (req, res) =>
         req.headers.host,
         baseUrl,
         baseVersion,
-        url
+        url,
       )}`;
       results.push({
         method: method,
@@ -64,15 +64,15 @@ module.exports.batch = (req, res) =>
       });
 
       requestPromises.push(
-        new Promise((resolve) => {
-          resolve(
+        new Promise((r) => {
+          r(
             request[method.toLowerCase()](destinationUrl)
               .send(resource)
-              .set('Content-Type', 'application/json+fhir')
+              .set('Content-Type', 'application/json+fhir'),
           );
         }).catch((err) => {
           return err;
-        })
+        }),
       );
     });
 
@@ -95,13 +95,13 @@ module.exports.transaction = (req, res) =>
       return reject(
         errors.internal(
           `Expected 'resourceType: Bundle'. Received 'resourceType: ${resourceType}'.`,
-          baseVersion
-        )
+          baseVersion,
+        ),
       );
     }
     if (type.toLowerCase() !== 'transaction') {
       return reject(
-        errors.internal(`Expected 'type: transaction'. Received 'type: ${type}'.`, baseVersion)
+        errors.internal(`Expected 'type: transaction'. Received 'type: ${type}'.`, baseVersion),
       );
     }
     let { protocol, baseUrl } = req;
@@ -115,22 +115,22 @@ module.exports.transaction = (req, res) =>
         req.headers.host,
         baseUrl,
         baseVersion,
-        url
+        url,
       )}`;
       results.push({
         method: method,
         url: destinationUrl,
       });
       requestPromises.push(
-        new Promise((resolve) => {
-          resolve(
+        new Promise((r) => {
+          r(
             request[method.toLowerCase()](destinationUrl)
               .send(resource)
-              .set('Content-Type', 'application/json+fhir')
+              .set('Content-Type', 'application/json+fhir'),
           );
         }).catch((err) => {
           return err;
-        })
+        }),
       );
     });
 

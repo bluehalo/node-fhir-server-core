@@ -272,7 +272,7 @@ const assembleSearchQuery = function ({
 
   if (tokenMatches.length > 0) {
     let listOfOrs = tokenMatches
-      .filter((match) => match && match.length !== 0 && match !== {})
+      .filter((match) => match && match.length !== 0 && Object.keys(match).length > 0)
       .map((match) => buildOrQuery({ queries: match }));
     if (listOfOrs.length) {
       query.tokens = buildAndQuery(listOfOrs);

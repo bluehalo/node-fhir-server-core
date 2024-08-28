@@ -294,7 +294,7 @@ describe('Standard Parameter Sanitization Tests', () => {
     });
     test('Should truncate id to 64 characters', () => {
       let result = sanitizer.sanitizeId(
-        '123456789012345678901234567890123456789012345678901234567890123456790'
+        '123456789012345678901234567890123456789012345678901234567890123456790',
       );
       expect(result).toEqual('1234567890123456789012345678901234567890123456789012345678901234');
     });
@@ -332,7 +332,7 @@ describe('Standard Parameter Sanitization Tests', () => {
         });
       };
       expect(callSanitizeQuantity).toThrowError(
-        'Type mismatch, expected positive integer for parameter _count'
+        'Type mismatch, expected positive integer for parameter _count',
       );
     });
     test('Should throw an error if _count param is not positive', () => {
@@ -343,7 +343,7 @@ describe('Standard Parameter Sanitization Tests', () => {
         });
       };
       expect(callSanitizeQuantity).toThrowError(
-        'Type mismatch, expected positive integer for parameter _count'
+        'Type mismatch, expected positive integer for parameter _count',
       );
     });
     test('Should throw an error if _count param is not an integer', () => {
@@ -354,7 +354,7 @@ describe('Standard Parameter Sanitization Tests', () => {
         });
       };
       expect(callSanitizeQuantity).toThrowError(
-        'Type mismatch, expected positive integer for parameter _count'
+        'Type mismatch, expected positive integer for parameter _count',
       );
     });
     test('Should throw an error if _summary param has an invalid value', () => {

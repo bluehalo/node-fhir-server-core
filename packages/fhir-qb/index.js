@@ -61,8 +61,8 @@ class QueryBuilder {
     } else {
       throw new Error(
         `Supplied columnIdentifierStrategy value '${columnIdentifierStrategy}' not one of currently supported columnIdentifierStrategy values: ${supportedColumnIdentifierStrategies.join(
-          ', '
-        )}`
+          ', ',
+        )}`,
       );
     }
   }
@@ -480,7 +480,7 @@ class QueryBuilder {
         break;
       default:
         throw new Error(
-          `Unsupported fhirtype '${fhirtype}' supplied for token parameter '${field}'`
+          `Unsupported fhirtype '${fhirtype}' supplied for token parameter '${field}'`,
         );
     }
     return tokenQuery;
@@ -603,13 +603,13 @@ class QueryBuilder {
             sanitize.sanitizeNumber({
               field: parameter,
               value: parameterValue,
-            }).value
+            }).value,
           );
           if (pageNumber < 1 || !Number.isInteger(pageNumber)) {
             throw new Error(
               `Value for page parameter '${
                 this.pageParam
-              }' must be a positive integer. Received ${JSON.stringify(pageNumber)}`
+              }' must be a positive integer. Received ${JSON.stringify(pageNumber)}`,
             );
           }
           return;
@@ -652,7 +652,7 @@ class QueryBuilder {
           if (parameterValue.startsWith('urn') && modifier) {
             // Modifiers cannot be used with URN values. If a modifier was supplied
             throw new Error(
-              `Search modifiers are not supported for parameter '${parameter}' as a URN of type uri.`
+              `Search modifiers are not supported for parameter '${parameter}' as a URN of type uri.`,
             );
           }
         }

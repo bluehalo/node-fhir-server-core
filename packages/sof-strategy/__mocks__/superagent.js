@@ -32,7 +32,7 @@ superagent.send = jest.fn(
       } else {
         resolve(superagent.__mockResults);
       }
-    })
+    }),
 );
 
 superagent.__reset = __reset;

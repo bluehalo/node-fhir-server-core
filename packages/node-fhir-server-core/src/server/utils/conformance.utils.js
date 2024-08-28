@@ -39,7 +39,6 @@ let conformanceSearchParamsFilter = (base_version) => (route_arg) => {
  * @param {string} version - which version (not necessary now, but may be in the future)
  * @return {function} map function for array.map
  */
-/* eslint-disable no-unused-vars */
 let conformanceSearchParamsMap = (version) => (route_arg) => {
   // The router adds extra arguments and those need to be discarded
   // these are the only fields we currently care about
@@ -76,7 +75,7 @@ let conformanceSearchParamsMap = (version) => (route_arg) => {
 
 let getSearchParams = (profileKey, version) => {
   let params = getSearchParameters(profileKey, version).filter(
-    conformanceSearchParamsFilter(version)
+    conformanceSearchParamsFilter(version),
   );
 
   for (let key of Object.keys(params)) {

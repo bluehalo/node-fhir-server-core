@@ -18,7 +18,7 @@ const uniques = (list) => list.filter((val, index, self) => val && self.indexOf(
 let deprecatedLogger = deprecate(
   container.get('default'),
   'Using the logger this way is deprecated. Please see the documentation on ' +
-    'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
+    'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
 );
 
 /**
@@ -39,7 +39,7 @@ function getAllConfiguredVersions(profiles = {}) {
   // sure some user does not pass in a version we do not officially support in core for whatever
   // reason. Otherwise there may be some compliance issues.
   return Array.from(providedVersions).filter(
-    (version) => supportedVersions.indexOf(version) !== -1
+    (version) => supportedVersions.indexOf(version) !== -1,
   );
 }
 
@@ -125,7 +125,11 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
         authenticationMiddleware(config),
         sofScopeMiddleware({ route, auth: config.auth, name: key }),
         // TODO: REMOVE: logger in future versions
-        operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger })
+        operationsController[interaction]({
+          profile,
+          name: functionName,
+          logger: deprecatedLogger,
+        }),
       );
     }
 
@@ -147,7 +151,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
       authenticationMiddleware(config),
       sofScopeMiddleware({ route, auth: config.auth, name: key }),
       // TODO: REMOVE: logger in future versions
-      operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger })
+      operationsController[interaction]({ profile, name: functionName, logger: deprecatedLogger }),
     );
   }
 }
@@ -187,7 +191,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
     const baseUrls = uniques(
       customBaseUrlProfiles
         .map((profile) => profile.baseUrls)
-        .reduce((accum, val) => accum.concat(val), [])
+        .reduce((accum, val) => accum.concat(val), []),
     );
 
     baseUrls.forEach((baseUrl) => {
@@ -200,7 +204,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
         metadataPath,
         cors(corsOptions),
         sanitizeMiddleware(metadataConfig.args),
-        metadataConfig.controller({ profiles, security, statementGenerator })
+        metadataConfig.controller({ profiles, security, statementGenerator }),
       );
     });
   }
@@ -215,7 +219,7 @@ function enableMetadataRoute(app, config, corsDefaults) {
       cors(corsOptions),
       versionValidationMiddleware(versionValidationConfiguration),
       sanitizeMiddleware(metadataConfig.args),
-      metadataConfig.controller({ profiles, security, statementGenerator })
+      metadataConfig.controller({ profiles, security, statementGenerator }),
     );
   }
 }
@@ -237,13 +241,13 @@ function enableResourceRoutes(app, config, corsDefaults) {
     try {
       parameters = versions.reduce(
         (all, version) => all.concat(getSearchParameters(lowercaseKey, version, overrideArguments)),
-        []
+        [],
       );
-    } catch (err) {
+    } catch (_) {
       throw new Error(
         `${profileName} is an invalid profile configuration, please see the wiki for ` +
           'instructions on how to enable a profile in your server, ' +
-          'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile'
+          'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
       );
     }
 
@@ -303,7 +307,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
           sanitizeMiddleware(route.args),
           authenticationMiddleware(config),
           sofScopeMiddleware({ route, auth: config.auth, name: profileName }),
-          loadController(lowercaseKey, route.interaction, profile.serviceModule)
+          loadController(lowercaseKey, route.interaction, profile.serviceModule),
         );
       } else {
         let profileRoute = route.path.replace(':resource', profileName);
@@ -319,7 +323,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
           sanitizeMiddleware(route.args),
           authenticationMiddleware(config),
           sofScopeMiddleware({ route, auth: config.auth, name: profileName }),
-          loadController(lowercaseKey, route.interaction, profile.serviceModule)
+          loadController(lowercaseKey, route.interaction, profile.serviceModule),
         );
       }
     }
@@ -329,24 +333,24 @@ function enableResourceRoutes(app, config, corsDefaults) {
 function enableBaseRoute(app, config, corsDefaults) {
   // Determine which versions need a base endpoint, we need to loop through
   // all the configured profiles and find all the uniquely provided versions
-  let routes = require('./base/base.config');
-  for (let i; routes.length; i++) {
+  let rts = require('./base/base.config');
+  for (let i; rts.length; i++) {
     let versionValidationConfiguration = {
       versions: getAllConfiguredVersions(config.profiles),
     };
     let corsOptions = Object.assign({}, corsDefaults, {
-      methods: [routes[i].type.toUpperCase()],
+      methods: [rts[i].type.toUpperCase()],
     });
 
     // Enable cors with preflight
-    app.options(routes[i].path, cors(corsOptions));
+    app.options(rts[i].path, cors(corsOptions));
     // Enable base route
-    app[routes[i].type](
-      routes[i].path,
+    app[rts[i].type](
+      rts[i].path,
       cors(corsOptions),
       versionValidationMiddleware(versionValidationConfiguration),
-      sanitizeMiddleware(routes[i].args),
-      routes[i].controller({ config })
+      sanitizeMiddleware(rts[i].args),
+      rts[i].controller({ config }),
     );
   }
 }

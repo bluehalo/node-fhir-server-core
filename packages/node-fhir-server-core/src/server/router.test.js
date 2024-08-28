@@ -178,7 +178,7 @@ describe('Router Tests', () => {
 
     try {
       router.setRoutes({ app, config });
-    } catch (e) {
+    } catch (_) {
       // Failed
     }
 

@@ -49,7 +49,7 @@ module.exports = function SmartOnFHIRScopeChecker(name, action, scopes) {
     return {
       error: new FhirError(
         'Invalid name. This parameter should be an asterisk or valid resource type.',
-        'internal'
+        'internal',
       ),
       success: false,
     };
@@ -59,7 +59,7 @@ module.exports = function SmartOnFHIRScopeChecker(name, action, scopes) {
     return {
       error: new FhirError(
         'Invalid action. This parameter should be (read | write | *).',
-        'internal'
+        'internal',
       ),
       success: false,
     };

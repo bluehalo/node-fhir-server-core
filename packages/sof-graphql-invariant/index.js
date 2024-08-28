@@ -16,7 +16,7 @@ function formatError(message, resource) {
     null,
     ['sof-graphql-invariant'],
     null,
-    resource ? { resource } : null
+    resource ? { resource } : null,
   );
 }
 
@@ -75,7 +75,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
     let message = 'Invalid resolver, resolver argument must be a function.';
     return formatError(
       message,
-      coerceInputValue(operationOutcome(message, 'exception', 'error'), schema)
+      coerceInputValue(operationOutcome(message, 'exception', 'error'), schema),
     );
   }
 
@@ -103,7 +103,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
     if (errorType === 'internal') {
       return formatError(
         error.message,
-        coerceInputValue(operationOutcome(error.message, 'exception', 'error'), schema)
+        coerceInputValue(operationOutcome(error.message, 'exception', 'error'), schema),
       );
     }
     // if scopeChecker detected invalid scopes, add more to the message
@@ -114,7 +114,7 @@ module.exports = function smartOnFHIRScopeInvariant(options = {}, resolver) {
 
       return formatError(
         currentMessage,
-        coerceInputValue(operationOutcome(currentMessage, 'forbidden', 'error'), schema)
+        coerceInputValue(operationOutcome(currentMessage, 'forbidden', 'error'), schema),
       );
     }
     // We are all clear

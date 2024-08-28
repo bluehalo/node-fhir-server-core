@@ -55,7 +55,7 @@ module.exports.search = async (args, context) => {
     .map((result) => new Observation(result));
   let entries = Array.prototype.concat(
     patients.map((patient) => new BundleEntry({ resource: patient })),
-    observations.map((observation) => new BundleEntry({ resource: observation }))
+    observations.map((observation) => new BundleEntry({ resource: observation })),
   );
   return new Bundle({ entry: entries });
 };

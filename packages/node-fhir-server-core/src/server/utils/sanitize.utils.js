@@ -128,14 +128,14 @@ let sanitizeMiddleware = function (config) {
         if (value) {
           cleanArgs[field] = parseValue(conf.type, value);
         }
-      } catch (err) {
+      } catch (_) {
         return next(errors.invalidParameter(conf.name + ' is invalid', req.params.base_version));
       }
 
       // If we have the arg and the type is wrong, throw invalid arg
       if (cleanArgs[field] !== undefined && !validateType(conf.type, cleanArgs[field])) {
         return next(
-          errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base_version)
+          errors.invalidParameter('Invalid parameter: ' + conf.name, req.params.base_version),
         );
       }
     }

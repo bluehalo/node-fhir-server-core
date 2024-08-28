@@ -40,9 +40,7 @@ describe('Param Utils Tests', () => {
 
     test('should throw an error if given an invalid parameter name', () => {
       expect(() => {
-        /* eslint-disable no-unused-vars */
         let badParams = getSearchParameters('foobar', '2.3.4');
-        /* eslint-enable no-unused-vars */
       }).toThrowError('Cannot convert undefined or null to object');
     });
 
