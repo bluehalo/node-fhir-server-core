@@ -5,14 +5,14 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/fhir-response-util
+yarn add @bluehalo/fhir-response-util
 ```
 
 ## Usage
 
 The response utility exposes the following methods which can be used to for different scenarios and different types of responses. They all make certain assumptions about the arguments they receive which are documented below in the [arguments](#arguments) section.
 
-This is designed to be used in [node-fhir-server-core](https://github.com/Asymmetrik/node-fhir-server-core) and similar FHIR servers. There is some pseudocode with each method's description to give an idea of how this might work. If you read the source code for resource controllers in node-fhir-server-core, you can see how we are using this internally.
+This is designed to be used in [node-fhir-server-core](https://github.com/Bluehalo/node-fhir-server-core) and similar FHIR servers. There is some pseudocode with each method's description to give an idea of how this might work. If you read the source code for resource controllers in node-fhir-server-core, you can see how we are using this internally.
 
 ### read
 
@@ -21,7 +21,7 @@ This is designed to be used in [node-fhir-server-core](https://github.com/Asymme
 This will set the correct Content-Type and status code while sending the json back to the client.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function getPatientsController(req, res, next) {
@@ -45,7 +45,7 @@ function getPatientsController(req, res, next) {
 This will set the correct Content-Type and status code while sending the json back to the client.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function getPatientController(req, res, next) {
@@ -68,7 +68,7 @@ function getPatientController(req, res, next) {
 This will set the correct Content-Location, Location, and ETag headers. As well as set the correct status code.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function createPatientController(req, res, next) {
@@ -94,7 +94,7 @@ function createPatientController(req, res, next) {
 This will set the correct Content-Location, Last-Modified, Location, and ETag headers. As well as set the correct Content-Type and status code.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function updatePatientController(req, res, next) {
@@ -120,7 +120,7 @@ function updatePatientController(req, res, next) {
 This will set the correct ETag header and status code.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function removePatientController(req, res, next) {
@@ -145,7 +145,7 @@ function removePatientController(req, res, next) {
 This will set the correct Content-Type and status code while sending the json back to the client.
 
 ```javascript
-const handler = require('@asymmetrik/fhir-response-util');
+const handler = require('@bluehalo/fhir-response-util');
 
 // Some controller
 function getPatientHistoryController(req, res, next) {

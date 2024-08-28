@@ -5,7 +5,7 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/fhir-sanitize-param
+yarn add @bluehalo/fhir-sanitize-param
 ```
 
 ## Usage

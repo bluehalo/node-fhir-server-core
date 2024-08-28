@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-json-schema-validator",
-  "version": "0.9.9",
+  "name": "@bluehalo/fhir-json-schema-validator",
+  "version": "0.10.0",
   "description": "FHIR json schema validator",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-json-schema-validator"
@@ -28,6 +28,9 @@
   },
   "dependencies": {
     "ajv": "^6.12.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   },
   "publishConfig": {
     "access": "public"

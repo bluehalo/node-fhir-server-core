@@ -1,7 +1,6 @@
 const moment = require('moment');
-const xRegExp = require('xregexp');
 const math = require('mathjs');
-const sanitize = require('@asymmetrik/fhir-sanitize-param');
+const sanitize = require('@bluehalo/fhir-sanitize-param');
 
 const prefixes = {
   EQUAL: 'eq',
@@ -45,7 +44,7 @@ const supportedColumnIdentifierStrategies = ['xpath', 'parameter'];
 
 class QueryBuilder {
   constructor({
-    packageName = '@asymmetrik/fhir-qb-mongo',
+    packageName = '@bluehalo/fhir-qb-mongo',
     globalParameterDefinitions = {},
     pageParam = 'page',
     resultsPerPage = 10,
@@ -74,16 +73,15 @@ class QueryBuilder {
    * @returns {number}
    */
   static getNumberDecimals(value) {
-    const numberRegex = xRegExp(
-      `^
-			(?<sign> 		      \\+|-)?		# positive or negative sign
-								     [0-9]*\\.? 	# digits preceding decimal point
-			(?<decimalPlaces>[0-9]*)?		# digits following decimal point
-			$`,
-      'x'
-    );
-    let { decimalPlaces = '' } = xRegExp.exec(value, numberRegex);
-    return decimalPlaces.length;
+    // Regular expression to match a number with optional decimal places
+    const numberRegex = /^[-+]?(\d+)(?:\.(\d+))?$/;
+    const match = value.match(numberRegex);
+
+    if (match && match[2]) {
+      return match[2].length; // Return the number of digits after the decimal point
+    }
+
+    return 0; // Return 0 if there are no decimal places
   }
 
   /**
@@ -282,6 +280,7 @@ class QueryBuilder {
    *
    * @param field
    * @param value
+   * @param system
    */
   buildTokenStringQuery({ field, value, system }) {
     value = sanitize.sanitizeString({ field, value });

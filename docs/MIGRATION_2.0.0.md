@@ -36,7 +36,7 @@ What this means for developers is that they will now need to be explicit when re
 Here is an example that searches for multiple resources:
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service, this returns a bundle
 module.exports.search = async (args, context) => {
   let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
@@ -64,7 +64,7 @@ module.exports.search = async (args, context) => {
 And here is another example that searches by id:
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service, this returns a bundle
 module.exports.searchById = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -82,7 +82,7 @@ In version `2.0.0`, we changed how you return data in your services, so now you 
 For example, let's throw an error for attempting to delete a resource that other resources depend on. The spec says the HTTP status code must be a 409 in this case, for conflict. You could implement that like so:
 
 ```javascript
-const { ServerError } = require('@asymmetrik/node-fhir-server-core');
+const { ServerError } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
   try {
@@ -125,7 +125,7 @@ module.exports.search = (args, contexts, logger) =>
 Or seeing it attached to the server object, like this:
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@bluehalo/node-fhir-server-core');
 
 let config = { ... };
 let server = FHIRServer.initialize(config);
@@ -146,14 +146,14 @@ The new way to use the logger is to require it and invoke `get` on the loggers c
 To get the logger anywhere in your code, just add the following:
 
 ```javascript
-const { loggers } = require('@asymmetrik/node-fhir-server-core');
+const { loggers } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 ```
 
 If you want to access the winston container, you can do the following:
 
 ```javascript
-const { container } = require('@asymmetrik/node-fhir-server-core').loggers;
+const { container } = require('@bluehalo/node-fhir-server-core').loggers;
 const logger = container.get('default');
 ```
 
@@ -162,7 +162,7 @@ You can read more on the Container API here, https://github.com/winstonjs/winsto
 A common change will be to update your service to look like this now:
 
 ```javascript
-const { loggers } = require('@asymmetrik/node-fhir-server-core');
+const { loggers } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 // In a patient service for example, with async
 module.exports.search = async (args, context) => {
@@ -178,7 +178,7 @@ module.exports.update = (args, context) =>
 and for your server startup:
 
 ```javascript
-const { initialize, loggers } = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 
 let config = { ... };
@@ -201,7 +201,7 @@ server.listen(3000, () => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // Load R4 Operation Outcome
 let OperationOutcome = resolveSchema('4_0_0', 'operationoutcome');
 // Load STU3 Patient class
@@ -223,11 +223,11 @@ Please check out the following links for more info:
 Again, you can access these like so:
 
 ```javascript
-const { loggers } = require('@asymmetrik/node-fhir-server-core');
+const { loggers } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 
 // Or with the container, this will still get the same default logger
-const { container } = require('@asymmetrik/node-fhir-server-core').loggers;
+const { container } = require('@bluehalo/node-fhir-server-core').loggers;
 const logger = container.get('default');
 ```
 

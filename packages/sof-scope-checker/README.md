@@ -5,13 +5,13 @@
 # Install
 
 ```shell
-yarn add @asymmetrik/sof-scope-checker
+yarn add @bluehalo/sof-scope-checker
 ```
 
 ## Usage
 
 ```
-const scopeChecker = require('@asymmetrik/sof-scope-checker');
+const scopeChecker = require('@bluehalo/sof-scope-checker');
 
 let hasValidScopes = (name, action) => {
   return function (req, res, next) {
@@ -36,13 +36,13 @@ app.get(
 )
 ```
 
-See [sof-scope-checker tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-scope-checker/index.test.js) for more usage examples.
+See [sof-scope-checker tests](https://github.com/Bluehalo/node-fhir-server-core/tree/master/packages/sof-scope-checker/index.test.js) for more usage examples.
 
 NOTE: The error returned is an extension of the native JS error. It adds a type property to the error which can have a value of 'internal' representing a misconfiguration, or 'forbidden' representing a case where the scopes are not sufficient.
 
 ## Arguments
 
-`@asymmetrik/sof-scope-checker` exports a single function which takes three arguments.
+`@bluehalo/sof-scope-checker` exports a single function which takes three arguments.
 
 #### `name`
 

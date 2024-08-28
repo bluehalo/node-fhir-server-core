@@ -5,16 +5,16 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/fhir-qb
+yarn add @bluehalo/fhir-qb
 ```
 
 ## Arguments
 
-`@asymmetrik/fhir-qb` exports a single class called QueryBuilder. The QueryBuilder constructor takes 4 arguments:
+`@bluehalo/fhir-qb` exports a single class called QueryBuilder. The QueryBuilder constructor takes 4 arguments:
 
 #### `packageName`
 
-Query builder implementation package to be required. Default: `@asymmetrik/fhir-qb-mongo`
+Query builder implementation package to be required. Default: `@bluehalo/fhir-qb-mongo`
 
 #### `globalParameterDefinitions`
 

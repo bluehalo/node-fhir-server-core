@@ -5,14 +5,14 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/sof-strategy
+yarn add @bluehalo/sof-strategy
 ```
 
 ## Usage
 
 ```javascript
 // Returns a helper function to setup your strategy
-const smartBearerStrategy = require('@asymmetrik/sof-strategy');
+const smartBearerStrategy = require('@bluehalo/sof-strategy');
 const passport = require('passport');
 
 // Create our strategy by giving it some config options, all are required
@@ -35,11 +35,11 @@ let options = { session: false };
 app.use('/some/protected/route/', passport.authenticate(name, options), someRouteController);
 ```
 
-See [sof-strategy tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/sof-strategy/index.test.js) for more usage examples.
+See [sof-strategy tests](https://github.com/Bluehalo/node-fhir-server-core/tree/master/packages/sof-strategy/index.test.js) for more usage examples.
 
 ## Arguments
 
-`@asymmetrik/sof-strategy` exports a single function which takes a single options argument with the following properties.
+`@bluehalo/sof-strategy` exports a single function which takes a single options argument with the following properties.
 
 #### `introspectionUrl`
 

@@ -12,7 +12,7 @@ First, we're going to require the Asymmetrik FHIR Server source code. This will 
 
 ```javascript
 // require the Asymmetrik FHIR Server
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@bluehalo/node-fhir-server-core');
 ```
 
 Then we'll create a function that will require the `CapabilityStatement` class, and return a new instance that contains your information. Please make sure you remain compliant with the FHIR specification.
@@ -102,7 +102,7 @@ module.exports.generateStatements = (args) => {
 Now that we've built out our Statement Generator and have customized the Capability Statement info to our liking, we can add it to our configuration by doing the following:
 
 ```javascript
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+const FHIRServer = require('@bluehalo/node-fhir-server-core');
 const generateCapabilityStatement = require('path to your statement generator file').generateStatements; // require the statement generator file
 
 let config = {

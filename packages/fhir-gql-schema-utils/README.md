@@ -5,7 +5,7 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/fhir-gql-schema-utils
+yarn add @bluehalo/fhir-gql-schema-utils
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ GraphQLObjectType's into a single set of fields. Essentially allowing you to
 extend other schemas more easily.
 
 ```javascript
-const { extendSchema } = require(' @asymmetrik/fhir-gql-schema-utils');
+const { extendSchema } = require(' @bluehalo/fhir-gql-schema-utils');
 
 // Create a schema and merge in other schemas or JSON objects
 // to include fields in a schema
@@ -40,7 +40,7 @@ See [fhir-gql-schema-utils tests](https://github.com/Asymmetrik/node-fhir-server
 
 ## Arguments
 
-`@asymmetrik/fhir-gql-schema-utils` currently only contains the one utility. We will be adding more over time but for now you can only use `extendSchema`.
+`@bluehalo/fhir-gql-schema-utils` currently only contains the one utility. We will be adding more over time but for now you can only use `extendSchema`.
 
 ### extendSchema
 

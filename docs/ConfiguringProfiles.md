@@ -51,7 +51,7 @@ Each profile has a pre-defined set of methods it can implement. If you do not wa
 **NOTE** - We used to pass the logger in as an argument. We have made several changes to loggers in general to make them more flexible and less annoying to pass around. You now need to load them yourselves from the core library. You also need to load the schemas and return the objects explicitly as we no longer do the casting ourselves. A service will commonly at least have the following setup:
 
 ```javascript
-const { loggers, resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { loggers, resolveSchema } = require('@bluehalo/node-fhir-server-core');
 const logger = loggers.get('default');
 ```
 
@@ -69,7 +69,7 @@ const logger = loggers.get('default');
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.search = async (args, context) => {
   let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
@@ -93,7 +93,7 @@ module.exports.search = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.searchById = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -111,7 +111,7 @@ module.exports.searchById = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.searchByVersionId = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -129,7 +129,7 @@ module.exports.searchByVersionId = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.history = async (args, context) => {
   let BundleEntry = resolveSchema(args.base_version, 'bundleentry');
@@ -154,7 +154,7 @@ module.exports.history = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.historyById = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -172,7 +172,7 @@ module.exports.historyById = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.create = async (args, context) => {
   let Patient = resolveSchema(args.base_version, 'patient');
@@ -196,7 +196,7 @@ module.exports.create = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.update = async (args, context) => {
 	let Patient = resolveSchema(args.base_version, 'patient');
@@ -224,7 +224,7 @@ module.exports.update = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+const { resolveSchema } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.patch = async (args, context) => {
 	let Patient = resolveSchema(args.base_version, 'patient');
@@ -255,7 +255,7 @@ module.exports.patch = async (args, context) => {
 - **Example:**
 
 ```javascript
-const { ServerError } = require('@asymmetrik/node-fhir-server-core');
+const { ServerError } = require('@bluehalo/node-fhir-server-core');
 // In patient service
 module.exports.remove = async (args, context) => {
   try {

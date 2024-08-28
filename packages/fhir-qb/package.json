@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-qb",
-  "version": "0.12.6",
+  "name": "@bluehalo/fhir-qb",
+  "version": "0.13.0",
   "description": "FHIR query builder",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-qb"
@@ -32,12 +32,15 @@
     "verbose": true
   },
   "dependencies": {
-    "@asymmetrik/fhir-qb-mongo": "^0.12.3",
-    "@asymmetrik/fhir-sanitize-param": "^1.1.6",
-    "mathjs": "^9.5.1",
-    "moment": "^2.24.0",
-    "sequelize": "^6.8.0",
-    "xregexp": "^4.4.1"
+    "@bluehalo/fhir-qb-mongo": "^0.13.0",
+    "@bluehalo/fhir-sanitize-param": "^1.2.0",
+    "mathjs": "^13.1.1",
+    "moment": "^2.30.1",
+    "sequelize": "^6.37.3",
+    "xregexp": "^5.1.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   },
   "publishConfig": {
     "access": "public"

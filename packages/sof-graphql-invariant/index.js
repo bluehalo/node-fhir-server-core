@@ -1,11 +1,11 @@
-const scopeChecker = require('@asymmetrik/sof-scope-checker');
+const scopeChecker = require('@bluehalo/sof-scope-checker');
 const { GraphQLError, coerceInputValue, isInputType } = require('graphql');
 
 /**
  * @name formatError
  * @description Wrapper to wrap an operation outcome in a GraphQLError
  * @param {string} message - Generic error message for GraphQL
- * @param {Object} operationOutcome - OperationOutcome instance
+ * @param {Object} resource - OperationOutcome instance
  * @return {GraphQLError}
  */
 function formatError(message, resource) {

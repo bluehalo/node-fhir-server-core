@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/sof-scope-checker",
-  "version": "1.0.7",
+  "name": "@bluehalo/sof-scope-checker",
+  "version": "1.1.0",
   "description": "Smart on FHIR scope checker",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/sof-scope-checker"
@@ -16,5 +16,8 @@
   "scripts": {
     "test": "jest"
   },
-  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
+  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

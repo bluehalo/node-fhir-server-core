@@ -4,13 +4,13 @@
 
 [![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
 
-The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API. This server framework currently supports **DSTU2** (1.0.2), **STU3** (3.0.1), and **R4** (4.0.0) simultaneously. You can decide to support all three or just one by editing the configuration.
+The Bluehalo Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API. This server framework currently supports **DSTU2** (1.0.2), **STU3** (3.0.1), and **R4** (4.0.0) simultaneously. You can decide to support all three or just one by editing the configuration.
 
 The framework defines a core server, `node-fhir-server-core`, a simple, secure Node.js module built according to the FHIR specification and compliant with the [US Core](http://www.hl7.org/fhir/us/core/) implementation.
 
-For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge: [https://github.com/Asymmetrik/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
+For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge: [https://github.com/Bluehalo/node-fhir-server-mongo](https://github.com/Asymmetrik/node-fhir-server-mongo).
 
-<img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
+<img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800" alt="">
 
 ## node-fhir-server-core@2.0.0
 
@@ -22,16 +22,16 @@ Please view the [Migration Guide](https://github.com/Asymmetrik/node-fhir-server
 
 ## Getting Started
 
-Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
+Please see our [Getting Started](./../../docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
 
 ## Frequently Asked Questions
 
-- [What configurations does `FHIRServer.initialize()` accept?](./docs/ServerConfiguration.md)
-- [How do I configure a "profile"?](./docs/ConfiguringProfiles.md)
-- [Can I add more loggers or customize how the logger works?](./docs/CustomizeLogging.md)
-- [How do I customize the capability statement?](./docs/CustomCapability.md)
-- [How do I add custom operations?](./docs/CustomOperations.md)
-- [How do I enable/disable/customize access control (authentication)?](./docs/AccessControl.md)
+- [What configurations does `FHIRServer.initialize()` accept?](./../../docs/ServerConfiguration.md)
+- [How do I configure a "profile"?](./../../docs/ConfiguringProfiles.md)
+- [Can I add more loggers or customize how the logger works?](./../../docs/CustomizeLogging.md)
+- [How do I customize the capability statement?](./../../docs/CustomCapability.md)
+- [How do I add custom operations?](./../../docs/CustomOperations.md)
+- [How do I enable/disable/customize access control (authentication)?](./../../docs/AccessControl.md)
 
 ## Philosophy
 
