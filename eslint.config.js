@@ -14,13 +14,13 @@ module.exports = [
   {
     ignores: [
       'eslint.config.js',
-      'coverage/**/*',
-      'node_modules/**/*',
-      '/package/**/node_modules/**/*',
+      'coverage/**',
+      'node_modules/**',
+      '**/node_modules/**',
       '**/dist/**/*',
       '**/__tmp__/**/*',
       'lerna.json',
-      '**/resources/**/*',
+      '**/resources/**',
     ],
   },
   {
