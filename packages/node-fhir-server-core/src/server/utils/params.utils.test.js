@@ -40,7 +40,7 @@ describe('Param Utils Tests', () => {
 
     test('should throw an error if given an invalid parameter name', () => {
       expect(() => {
-        let badParams = getSearchParameters('foobar', '2.3.4');
+        getSearchParameters('foobar', '2.3.4');
       }).toThrowError('Cannot convert undefined or null to object');
     });
 
