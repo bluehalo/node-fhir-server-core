@@ -24,8 +24,6 @@
     "lint": "eslint \"src/**/*.js\"",
     "nodemon": "cross-env NODE_ENV=development node scripts/nodemon.js",
     "prepublish": "yarn build",
-    "snyk": "snyk",
-    "snyk-protect": "snyk protect",
     "start": "node scripts/runner.js",
     "test": "cross-env NODE_ENV=test jest src"
   },
@@ -65,7 +63,6 @@
     "passport-http-bearer": "^1.0.1",
     "sanitize-html": "^2.5.2",
     "serve-favicon": "^2.5.0",
-    "snyk": "^1.746.0",
     "superagent": "^6.1.0",
     "validator": "^13.6.0",
     "winston": "^3.3.3",
@@ -84,6 +81,5 @@
   "engines": {
     "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
   },
-  "snyk": true,
   "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
 }
