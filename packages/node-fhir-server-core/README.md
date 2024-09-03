@@ -2,7 +2,7 @@
 
 > A Secure Rest implementation for the [HL7 FHIR Specification](https://www.hl7.org/fhir/). For API documentation, please see [our documents](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/docs).
 
-[![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core) [![Known Vulnerabilities](https://snyk.io/test/github/asymmetrik/node-fhir-server-core/badge.svg?targetFile=package.json)](https://snyk.io/test/github/asymmetrik/node-fhir-server-core?targetFile=package.json)
+[![Build Status](https://travis-ci.org/Asymmetrik/node-fhir-server-core.svg?branch=develop)](https://travis-ci.org/Asymmetrik/node-fhir-server-core)
 
 The Asymmetrik Extensible Server Framework for Healthcare allows organizations to build secure, interoperable solutions that can aggregate and expose healthcare resources via a common HL7® FHIR®-compatible REST API. This server framework currently supports **DSTU2** (1.0.2), **STU3** (3.0.1), and **R4** (4.0.0) simultaneously. You can decide to support all three or just one by editing the configuration.
 
