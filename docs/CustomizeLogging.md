@@ -1,6 +1,6 @@
 ## Overview
 
-If you simply need to use the core fhir server `winston` Container you can do so by requiring it from `@asymmetrik/fhir-server-core`
+If you simply need to use the core fhir server `winston` Container you can do so by requiring it from `@bluehalo/fhir-server-core`
 
 ```javascript
 // Your patient.service.js

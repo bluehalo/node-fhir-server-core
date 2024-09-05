@@ -2,7 +2,7 @@
   "name": "@bluehalo/fhir-qb-mongo",
   "version": "0.13.0",
   "description": "FHIR query builder for Mongo DB",
-  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-qb-mongo"

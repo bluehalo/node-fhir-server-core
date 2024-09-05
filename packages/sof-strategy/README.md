@@ -35,7 +35,7 @@ let options = { session: false };
 app.use('/some/protected/route/', passport.authenticate(name, options), someRouteController);
 ```
 
-See [sof-strategy tests](https://github.com/Bluehalo/node-fhir-server-core/tree/master/packages/sof-strategy/index.test.js) for more usage examples.
+See [sof-strategy tests](https://github.com/BlueHalo/node-fhir-server-core/tree/master/packages/sof-strategy/index.test.js) for more usage examples.
 
 ## Arguments
 

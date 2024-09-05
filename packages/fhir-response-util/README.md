@@ -12,7 +12,7 @@ yarn add @bluehalo/fhir-response-util
 
 The response utility exposes the following methods which can be used to for different scenarios and different types of responses. They all make certain assumptions about the arguments they receive which are documented below in the [arguments](#arguments) section.
 
-This is designed to be used in [node-fhir-server-core](https://github.com/Bluehalo/node-fhir-server-core) and similar FHIR servers. There is some pseudocode with each method's description to give an idea of how this might work. If you read the source code for resource controllers in node-fhir-server-core, you can see how we are using this internally.
+This is designed to be used in [node-fhir-server-core](https://github.com/BlueHalo/node-fhir-server-core) and similar FHIR servers. There is some pseudocode with each method's description to give an idea of how this might work. If you read the source code for resource controllers in node-fhir-server-core, you can see how we are using this internally.
 
 ### read
 

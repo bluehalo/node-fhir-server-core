@@ -87,7 +87,7 @@ function enableOperationRoutesForProfile(app, config, profile, key, parameters, 
   let errorMessage =
     `Invalid operation configuration for ${key}. Please ` +
     'see the Operations wiki for instructions on how to use operations. ' +
-    'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Operations';
+    'https://github.com/BlueHalo/node-fhir-server-core/wiki/Operations';
 
   for (let op of profile.operation) {
     let functionName = hyphenToCamelcase(op.name || '');
@@ -247,7 +247,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
       throw new Error(
         `${profileName} is an invalid profile configuration, please see the wiki for ` +
           'instructions on how to enable a profile in your server, ' +
-          'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile',
+          'https://github.com/BlueHalo/node-fhir-server-core/wiki/Profile'
       );
     }
 

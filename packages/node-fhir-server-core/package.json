@@ -3,7 +3,7 @@
   "version": "2.3.0",
   "description": "Node FHIR Rest API Server",
   "license": "MIT",
-  "author": "Bluehalo Ltd.",
+  "author": "BlueHalo",
   "contributors": [
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",
@@ -24,8 +24,6 @@
     "lint": "eslint \"src/**/*.js\"",
     "nodemon": "cross-env NODE_ENV=development node scripts/nodemon.js",
     "prepublish": "yarn build",
-    "snyk": "snyk",
-    "snyk-protect": "snyk protect",
     "start": "node scripts/runner.js",
     "test": "cross-env NODE_ENV=test jest src"
   },
@@ -65,7 +63,6 @@
     "passport-http-bearer": "^1.0.1",
     "sanitize-html": "^2.13.0",
     "serve-favicon": "^2.5.0",
-    "snyk": "^1.1292.4",
     "superagent": "^10.1.0",
     "validator": "^13.12.0",
     "winston": "^3.14.2",
@@ -84,6 +81,5 @@
   "engines": {
     "node": "^8.10.0 || ^10.13.0 || >=11.10.1"
   },
-  "snyk": true,
   "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
 }

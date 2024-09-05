@@ -36,7 +36,7 @@ let FooSchema = new GraphQLObjectType({
 // and AnotherSchema have.
 ```
 
-See [fhir-gql-schema-utils tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/fhir-gql-schema-utils/index.test.js) for more usage examples.
+See [fhir-gql-schema-utils tests](https://github.com/BlueHalo/node-fhir-server-core/tree/master/packages/fhir-gql-schema-utils/index.test.js) for more usage examples.
 
 ## Arguments
 

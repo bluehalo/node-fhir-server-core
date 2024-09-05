@@ -46,7 +46,7 @@ module.exports = {
 With this code we say that only "identifier" and "birthdate" are implemented as search parameters for patients.
 Each search parameter must be defined and added to the searchParam list.
 
-All available parameters for the variable can be found at the following place `node_modules/@asymmetrik/node-fhir-server-core/src/server/resources/4_0_0/parameters/patient.parameters.js`
+All available parameters for the variable can be found at the following place `node_modules/@bluehalo/node-fhir-server-core/src/server/resources/4_0_0/parameters/patient.parameters.js`
 
 ### Updating profiles
 

@@ -141,7 +141,7 @@ Here is an example config with all the currently supported options. See descript
 #### `server.corsOptions`
 
 - **Type:** `object`
-- **Description:** Any default cors options you would like applied to all routes. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@asymmetrik/node-fhir-server-core` and cannot be overridden.
+- **Description:** Any default cors options you would like applied to all routes. Please see [https://github.com/expressjs/cors#configuration-options](https://github.com/expressjs/cors#configuration-options) for details. The `methods` configuration will not be honored if specified here. That is the only option controlled by `@bluehalo/node-fhir-server-core` and cannot be overridden.
 - **Required:** No
 - **Default:** `none`
 
@@ -176,14 +176,14 @@ const fhirConfig = {
 #### `server.ssl.key`
 
 - **Type:** `string`
-- **Description:** Path to your private key. See [Contributor's guide](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/CONTRIBUTING.md#optional) for how to generate a self-signed cert for local development.
+- **Description:** Path to your private key. See [Contributor's guide](https://github.com/BlueHalo/node-fhir-server-core/blob/master/CONTRIBUTING.md#optional) for how to generate a self-signed cert for local development.
 - **Required:** No. If you want to setup express to use ssl, you need both a key and cert.
 - **Default:** `none`
 
 #### `server.ssl.cert`
 
 - **Type:** `string`
-- **Description:** Path to your certificate. See [Contributor's guide](https://github.com/Asymmetrik/node-fhir-server-core/blob/master/CONTRIBUTING.md#optional) for how to generate a self-signed cert for local development.
+- **Description:** Path to your certificate. See [Contributor's guide](https://github.com/BlueHalo/node-fhir-server-core/blob/master/CONTRIBUTING.md#optional) for how to generate a self-signed cert for local development.
 - **Required:** No. If you want to setup express to use ssl, you need both a key and cert.
 - **Default:** `none`
 

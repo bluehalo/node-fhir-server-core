@@ -2,7 +2,7 @@
   "name": "@bluehalo/sof-scope-checker",
   "version": "1.1.0",
   "description": "Smart on FHIR scope checker",
-  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/sof-scope-checker"

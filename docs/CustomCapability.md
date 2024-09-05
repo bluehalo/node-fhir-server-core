@@ -6,12 +6,12 @@ The capability statement now allows for the configuration of what information ge
 
 ### Creating a Statement Generator
 
-You can include this code where you define your Asymmetrik Server configurations or include it in another file and require it in. For this example, we will go with the latter option.
+You can include this code where you define your BlueHalo Server configurations or include it in another file and require it in. For this example, we will go with the latter option.
 
-First, we're going to require the Asymmetrik FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
+First, we're going to require the BlueHalo FHIR Server source code. This will allow us to have access to the class that is responsible for generating the Capability Statement so that we can create our own.
 
 ```javascript
-// require the Asymmetrik FHIR Server
+// require the BlueHalo FHIR Server
 const FHIRServer = require('@bluehalo/node-fhir-server-core');
 ```
 
@@ -47,7 +47,7 @@ let customCapabilityStatement = (resources) => {
 
 Next, we're going to create a custom Security Statement. This is separate from the Capability Statement. It provides information about the security of the current implementation.
 If provided, this will be derived from the information you pass to the 'security' property from the FHIR Server Config.
-The below Security Statement is the default one provided by Asymmetrik, but can be customized to fit your needs.
+The below Security Statement is the default one provided by BlueHalo, but can be customized to fit your needs.
 
 ```javascript
 /**

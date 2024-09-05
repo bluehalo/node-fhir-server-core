@@ -2,7 +2,7 @@
   "name": "@bluehalo/sof-strategy",
   "version": "1.2.0",
   "description": "Smart on FHIR authorization strategy for passport",
-  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
+  "homepage": "https://github.com/blueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/sof-strategy"
