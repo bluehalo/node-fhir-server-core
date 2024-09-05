@@ -5,7 +5,7 @@
 ## Install
 
 ```shell
-yarn add @asymmetrik/fhir-qb-sql
+yarn add @bluehalo/fhir-qb-sql
 ```
 
 ## Usage

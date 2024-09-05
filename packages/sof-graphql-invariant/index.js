@@ -1,4 +1,4 @@
-const scopeChecker = require('@asymmetrik/sof-scope-checker');
+const scopeChecker = require('@bluehalo/sof-scope-checker');
 const { GraphQLError, coerceInputValue, isInputType } = require('graphql');
 
 /**

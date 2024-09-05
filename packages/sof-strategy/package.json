@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/sof-strategy",
+  "name": "@bluehalo/sof-strategy",
   "version": "1.1.6",
   "description": "Smart on FHIR authorization strategy for passport",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/sof-strategy"

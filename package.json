@@ -3,16 +3,16 @@
   "private": true,
   "version": "2.0.11",
   "description": "Node FHIR Rest API Server and surrounding ecosystem",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core#readme",
+  "homepage": "https://github.com/bluehalo/node-fhir-server-core#readme",
   "bugs": {
-    "url": "https://github.com/Asymmetrik/node-fhir-server-core/issues"
+    "url": "https://github.com/bluehalo/node-fhir-server-core/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Asymmetrik/node-fhir-server-core.git"
+    "url": "git+https://github.com/bluehalo/node-fhir-server-core.git"
   },
   "license": "MIT",
-  "author": "Asymmetrik Ltd.",
+  "author": "BlueHalo",
   "contributors": [
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",

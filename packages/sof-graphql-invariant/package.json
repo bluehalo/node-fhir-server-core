@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/sof-graphql-invariant",
+  "name": "@bluehalo/sof-graphql-invariant",
   "version": "2.0.0",
   "description": "Smart on FHIR scope checker for GraphQL",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/sof-graphql-invariant"
@@ -15,7 +15,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@asymmetrik/sof-scope-checker": "^1.0.7",
+    "@bluehalo/sof-scope-checker": "^1.0.7",
     "graphql": "^15.6.0"
   },
   "scripts": {

@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-qb-mongo",
+  "name": "@bluehalo/fhir-qb-mongo",
   "version": "0.12.4",
   "description": "FHIR query builder for Mongo DB",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-qb-mongo"

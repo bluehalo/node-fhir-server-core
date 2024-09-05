@@ -35,7 +35,7 @@ fhir-server
 Next, run:
 
 ```shell
-yarn add @asymmetrik/node-fhir-server-core
+yarn add @bluehalo/node-fhir-server-core
 ```
 
 ### Create an entry file and a start script
@@ -43,7 +43,7 @@ yarn add @asymmetrik/node-fhir-server-core
 Let's start by creating an `index.js` file in the root of the project and add the following code to it:
 
 ```javascript
-const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers, constants } = require('@bluehalo/node-fhir-server-core');
 
 let config = {};
 let server = initialize(config);
@@ -80,7 +80,7 @@ The next thing we want to do is run this file in node. Let's add a script to our
     "start": "node index.js"
   },
   "dependencies": {
-    "@asymmetrik/node-fhir-server-core": "^1.3.0"
+    "@bluehalo/node-fhir-server-core": "^1.3.0"
   }
 }
 ```
@@ -93,7 +93,7 @@ yarn start
 
 If you have done everything correctly so far, you will receive the following error.
 
-> Error: No profiles configured. We do not enable any profiles by default so please review the profile wiki for how to enable profiles and capabilities. See https://github.com/Asymmetrik/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md.
+> Error: No profiles configured. We do not enable any profiles by default so please review the profile wiki for how to enable profiles and capabilities. See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md.
 
 By default, our library does not configure any profiles. Without a profile, what is the point of having a server? Next, let's walk you through setting up a simple patient profile. A profile corresponds to a queryable FHIR resource, and we support all the standard searchable resources.
 
@@ -127,7 +127,7 @@ The next thing we need to do is update our config in `index.js` to tell it we wa
 In `index.js`, add the following to the top of the file:
 
 ```javascript
-const { initialize, loggers, constants } = require('@asymmetrik/node-fhir-server-core');
+const { initialize, loggers, constants } = require('@bluehalo/node-fhir-server-core');
 const { VERSIONS } = constants;
 ```
 
@@ -173,4 +173,4 @@ Open [http://localhost:3000/4_0_0/metadata](http://localhost:3000/4_0_0/metadata
 
 This is good as this is the error we created in the `patient.service.js`. `patient.service.js` is where you want to execute your queries and return your patient JSON. So you may need to connect to a database, query your data, and possibly even map your data back to a FHIR format if it is not already in a FHIR format.
 
-If you made it this far, thanks for sticking it out and completing the Getting Started guide. Please browse the other [documentation pages](../docs) for more information and feel free to file issues/questions on our [issues](https://github.com/Asymmetrik/node-fhir-server-core/issues) page.
+If you made it this far, thanks for sticking it out and completing the Getting Started guide. Please browse the other [documentation pages](../docs) for more information and feel free to file issues/questions on our [issues](https://github.com/BlueHalo/node-fhir-server-core/issues) page.

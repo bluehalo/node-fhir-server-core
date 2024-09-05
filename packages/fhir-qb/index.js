@@ -1,7 +1,7 @@
 const moment = require('moment');
 const xRegExp = require('xregexp');
 const math = require('mathjs');
-const sanitize = require('@asymmetrik/fhir-sanitize-param');
+const sanitize = require('@bluehalo/fhir-sanitize-param');
 
 const prefixes = {
   EQUAL: 'eq',
@@ -45,7 +45,7 @@ const supportedColumnIdentifierStrategies = ['xpath', 'parameter'];
 
 class QueryBuilder {
   constructor({
-    packageName = '@asymmetrik/fhir-qb-mongo',
+    packageName = '@bluehalo/fhir-qb-mongo',
     globalParameterDefinitions = {},
     pageParam = 'page',
     resultsPerPage = 10,
