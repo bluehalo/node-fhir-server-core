@@ -247,7 +247,7 @@ function enableResourceRoutes(app, config, corsDefaults) {
       throw new Error(
         `${profileName} is an invalid profile configuration, please see the wiki for ` +
           'instructions on how to enable a profile in your server, ' +
-          'https://github.com/BlueHalo/node-fhir-server-core/wiki/Profile'
+          'https://github.com/BlueHalo/node-fhir-server-core/wiki/Profile',
       );
     }
 
