@@ -36,7 +36,7 @@
     "@bluehalo/fhir-sanitize-param": "^1.1.6",
     "mathjs": "^9.5.1",
     "moment": "^2.24.0",
-    "sequelize": "^6.8.0",
+    "sequelize": "^6.33.0",
     "xregexp": "^4.4.1"
   },
   "publishConfig": {
