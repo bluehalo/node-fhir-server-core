@@ -11,7 +11,7 @@
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",
   "main": "index.js",
   "dependencies": {
-    "moment-timezone": "^0.5.33",
+    "moment-timezone": "^0.5.41",
     "sanitize-html": "^2.5.2",
     "validator": "^13.6.0",
     "xss": "^1.0.10"
