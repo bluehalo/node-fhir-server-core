@@ -32,7 +32,7 @@
     "verbose": true
   },
   "dependencies": {
-    "sequelize": "^6.8.0",
+    "sequelize": "^6.33.0",
     "xregexp": "^4.4.1"
   },
   "publishConfig": {
