@@ -1,5 +1,4 @@
 const moment = require('moment');
-const xRegExp = require('xregexp');
 const math = require('mathjs');
 const sanitize = require('@bluehalo/fhir-sanitize-param');
 
@@ -62,8 +61,8 @@ class QueryBuilder {
     } else {
       throw new Error(
         `Supplied columnIdentifierStrategy value '${columnIdentifierStrategy}' not one of currently supported columnIdentifierStrategy values: ${supportedColumnIdentifierStrategies.join(
-          ', '
-        )}`
+          ', ',
+        )}`,
       );
     }
   }
@@ -74,16 +73,15 @@ class QueryBuilder {
    * @returns {number}
    */
   static getNumberDecimals(value) {
-    const numberRegex = xRegExp(
-      `^
-			(?<sign> 		      \\+|-)?		# positive or negative sign
-								     [0-9]*\\.? 	# digits preceding decimal point
-			(?<decimalPlaces>[0-9]*)?		# digits following decimal point
-			$`,
-      'x'
-    );
-    let { decimalPlaces = '' } = xRegExp.exec(value, numberRegex);
-    return decimalPlaces.length;
+    // Regular expression to match a number with optional decimal places
+    const numberRegex = /^[-+]?(\d+)(?:\.(\d+))?$/;
+    const match = value.match(numberRegex);
+
+    if (match && match[2]) {
+      return match[2].length; // Return the number of digits after the decimal point
+    }
+
+    return 0; // Return 0 if there are no decimal places
   }
 
   /**
@@ -282,6 +280,7 @@ class QueryBuilder {
    *
    * @param field
    * @param value
+   * @param system
    */
   buildTokenStringQuery({ field, value, system }) {
     value = sanitize.sanitizeString({ field, value });
@@ -481,7 +480,7 @@ class QueryBuilder {
         break;
       default:
         throw new Error(
-          `Unsupported fhirtype '${fhirtype}' supplied for token parameter '${field}'`
+          `Unsupported fhirtype '${fhirtype}' supplied for token parameter '${field}'`,
         );
     }
     return tokenQuery;
@@ -604,13 +603,13 @@ class QueryBuilder {
             sanitize.sanitizeNumber({
               field: parameter,
               value: parameterValue,
-            }).value
+            }).value,
           );
           if (pageNumber < 1 || !Number.isInteger(pageNumber)) {
             throw new Error(
               `Value for page parameter '${
                 this.pageParam
-              }' must be a positive integer. Received ${JSON.stringify(pageNumber)}`
+              }' must be a positive integer. Received ${JSON.stringify(pageNumber)}`,
             );
           }
           return;
@@ -653,7 +652,7 @@ class QueryBuilder {
           if (parameterValue.startsWith('urn') && modifier) {
             // Modifiers cannot be used with URN values. If a modifier was supplied
             throw new Error(
-              `Search modifiers are not supported for parameter '${parameter}' as a URN of type uri.`
+              `Search modifiers are not supported for parameter '${parameter}' as a URN of type uri.`,
             );
           }
         }

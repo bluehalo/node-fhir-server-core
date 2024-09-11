@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 const test_config = require('../../test.config');
 const request = require('supertest');
 const Server = require('../server');
@@ -24,7 +22,7 @@ describe('Prototype Injection Handler', () => {
       .then((response) => {
         expect(response.statusCode).toBe(400);
         expect(response.body.issue[0].details.text).toBe(
-          'Object contains forbidden prototype property'
+          'Object contains forbidden prototype property',
         );
         done();
       });

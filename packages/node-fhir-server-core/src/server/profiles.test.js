@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 const test_config = require('../test.config');
 const { VERSIONS } = require('../constants');
 const request = require('supertest');

@@ -1,4 +1,4 @@
-# BlueHalo FHIR API Server
+# Bluehalo FHIR API Server
 
 > A Secure Rest implementation for the [HL7 FHIR Specification](https://www.hl7.org/fhir/). For API documentation, please see [our documents](https://github.com/bluehalo/node-fhir-server-core/tree/master/docs).
 
@@ -10,7 +10,7 @@ The framework defines a core server, `node-fhir-server-core`, a simple, secure N
 
 For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge: [https://github.com/bluehalo/node-fhir-server-mongo](https://github.com/bluehalo/node-fhir-server-mongo).
 
-<img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
+<img src="https://www.bluehalo.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800" alt="">
 
 ## node-fhir-server-core@2.0.0
 
