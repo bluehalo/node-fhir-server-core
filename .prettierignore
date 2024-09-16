@@ -3,3 +3,4 @@ node_modules
 **/__tmp__/**
 lerna.json
 coverage/
+/.nx/workspace-data
