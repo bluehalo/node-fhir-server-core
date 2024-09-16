@@ -1,6 +1,6 @@
 {
   "name": "@bluehalo/fhir-gql-schema-utils",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Suite of FHIR related utilities for GraphQL schemas.",
   "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
   "repository": {
