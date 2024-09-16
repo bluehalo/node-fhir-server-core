@@ -2636,7 +2636,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -2682,7 +2682,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -2728,7 +2728,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       // TODO - Should I throw an error in this situation? Hours without minutes is not allowed.
       test(
@@ -2775,7 +2775,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -2821,7 +2821,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -2867,7 +2867,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -2913,7 +2913,7 @@ describe('Mongo Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
     });
   });
@@ -3002,7 +3002,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       test("Should default to 'eq' prefix.", () => {
         const req = {
@@ -3140,7 +3140,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('lt, le, gt, ge Modifier Tests', () => {
@@ -3671,7 +3671,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('ne Modifier Tests', () => {
@@ -3775,7 +3775,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       test(
         'Should return $or that fully excludes range with upper lower bounds equal to +/- 0.5 * the most significant ' +
@@ -3831,7 +3831,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('lt, le, gt, ge Modifier Tests', () => {
@@ -4225,7 +4225,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to +/- 10% * the most significant given a quantity' +
@@ -4274,7 +4274,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('System Parameter Tests', () => {
@@ -4332,7 +4332,7 @@ describe('Mongo Tests', () => {
           ];
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
   });
@@ -4482,7 +4482,7 @@ describe('Mongo Tests', () => {
         });
         expect(errors).toHaveLength(1);
         expect(errors[0].message).toContain(
-          "Search modifiers are not supported for parameter 'foo' as a URN of type uri"
+          "Search modifiers are not supported for parameter 'foo' as a URN of type uri",
         );
       });
     });
@@ -5962,7 +5962,7 @@ describe('Mongo Tests', () => {
         });
         expect(errors).toHaveLength(1);
         expect(errors[0].message).toContain(
-          "Unsupported fhirtype 'unsupported' supplied for token parameter 'foo'"
+          "Unsupported fhirtype 'unsupported' supplied for token parameter 'foo'",
         );
       });
     });
@@ -6025,7 +6025,7 @@ describe('Mongo Tests', () => {
       });
       expect(errors).toHaveLength(1);
       expect(errors[0].message).toContain(
-        "Unsupported type 'unsupported' supplied for parameter 'foo'"
+        "Unsupported type 'unsupported' supplied for parameter 'foo'",
       );
     });
   });
@@ -6196,7 +6196,7 @@ describe('Mongo Tests', () => {
       });
       expect(errors).toHaveLength(1);
       expect(errors[0].message).toContain(
-        "Search modifier 'unsupportedModifier' is not currently supported"
+        "Search modifier 'unsupportedModifier' is not currently supported",
       );
     });
   });
@@ -6411,7 +6411,7 @@ describe('Mongo Tests', () => {
 
       expect(errors).toHaveLength(1);
       expect(errors[0].message).toContain(
-        "Value for page parameter 'page' must be a positive integer. Received -1"
+        "Value for page parameter 'page' must be a positive integer. Received -1",
       );
     });
   });
@@ -8691,7 +8691,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -8737,7 +8737,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -8784,7 +8784,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       // TODO - Should I throw an error in this situation? Hours without minutes is not allowed.
       test(
@@ -8832,7 +8832,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -8879,7 +8879,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -8926,7 +8926,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
       test(
         'Should return range with upper lower bounds equal to the target date +/- 0.1 * the amount of time ' +
@@ -8973,7 +8973,7 @@ describe('SQL Tests', () => {
           expect(correctLowerBound).toBe(true);
           expect(correctUpperBound).toBe(true);
           expect(errors).toHaveLength(0);
-        }
+        },
       );
     });
   });
@@ -9048,7 +9048,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       test("Should default to 'eq' prefix.", () => {
         const req = {
@@ -9152,7 +9152,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('lt, le, gt, ge Modifier Tests', () => {
@@ -9612,7 +9612,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('ne Modifier Tests', () => {
@@ -9688,7 +9688,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       test(
         'Should return $or that fully excludes range with upper lower bounds equal to +/- 0.5 * the most significant ' +
@@ -9727,7 +9727,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('lt, le, gt, ge Modifier Tests', () => {
@@ -10085,7 +10085,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
       //TODO: This seems a bit off - come back and verify calculation.
       test(
@@ -10125,7 +10125,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
     describe('System Parameter Tests', () => {
@@ -10174,7 +10174,7 @@ describe('SQL Tests', () => {
           };
           expect(errors).toHaveLength(0);
           expect(query).toEqual(expectedResult);
-        }
+        },
       );
     });
   });
@@ -10306,7 +10306,7 @@ describe('SQL Tests', () => {
         });
         expect(errors).toHaveLength(1);
         expect(errors[0].message).toContain(
-          "Search modifiers are not supported for parameter 'foo' as a URN of type uri"
+          "Search modifiers are not supported for parameter 'foo' as a URN of type uri",
         );
       });
     });
@@ -11326,7 +11326,7 @@ describe('SQL Tests', () => {
         });
         expect(errors).toHaveLength(1);
         expect(errors[0].message).toContain(
-          "Unsupported fhirtype 'unsupported' supplied for token parameter 'foo'"
+          "Unsupported fhirtype 'unsupported' supplied for token parameter 'foo'",
         );
       });
     });
@@ -11389,7 +11389,7 @@ describe('SQL Tests', () => {
       });
       expect(errors).toHaveLength(1);
       expect(errors[0].message).toContain(
-        "Unsupported type 'unsupported' supplied for parameter 'foo'"
+        "Unsupported type 'unsupported' supplied for parameter 'foo'",
       );
     });
   });
@@ -11545,7 +11545,7 @@ describe('SQL Tests', () => {
       });
       expect(errors).toHaveLength(1);
       expect(errors[0].message).toContain(
-        "Search modifier 'unsupportedModifier' is not currently supported"
+        "Search modifier 'unsupportedModifier' is not currently supported",
       );
     });
   });
@@ -11812,7 +11812,7 @@ describe('Constructor Tests', () => {
     test('Should throw error when given unsupported columnIdentifierStrategy', () => {
       let expectedError = new Error(
         "Supplied columnIdentifierStrategy value 'foo' not one of currently " +
-          'supported columnIdentifierStrategy values: xpath, parameter'
+          'supported columnIdentifierStrategy values: xpath, parameter',
       );
       let qb;
       let observedError;

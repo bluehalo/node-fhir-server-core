@@ -81,7 +81,7 @@ function validate(config) {
   invariant(
     !config.server.ssl || (config.server.ssl && config.server.ssl.key && config.server.ssl.cert),
     'Invalid SSL Configuration, Please see the Wiki for a guide on how to setup SSL. ' +
-      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
   );
 
   // If we have no profiles configured, notify them now
@@ -89,7 +89,7 @@ function validate(config) {
     Object.keys(config.profiles).length > 0,
     'No profiles configured. We do not enable any profiles by default so please ' +
       'review the profile wiki for how to enable profiles and capabilities. ' +
-      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
   );
 
   // We need to verify that each provided key is valid and that the config
@@ -101,7 +101,7 @@ function validate(config) {
     errors.length === 0,
     'Encountered the following errors attempting to load your provided profiles:' +
       `\n${errors.join('\n')}\n` +
-      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md'
+      'See https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ConfiguringProfiles.md',
   );
 }
 
@@ -118,7 +118,7 @@ class Server {
     this.logger = deprecate(
       loggers.get('default'),
       'Using the logger this way is deprecated. Please see the documentation on ' +
-        'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.'
+        'BREAKING CHANGES in version 2.0.0 for instructions on how to upgrade.',
     );
     // Use external express instance or setup new one
     this.app = app ? app : express();
@@ -150,7 +150,7 @@ class Server {
     this.app.use(prototypeInjectionHandler);
     // Set favicon
     this.app.use(
-      favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico'))
+      favicon(this.config.server.favicon || path.join(__dirname, '../assets/phoenix.ico')),
     );
     // return self for chaining
     return this;
@@ -173,8 +173,8 @@ class Server {
         helmetConfig || {
           // Needs https running first
           hsts: this.env.USE_HTTPS,
-        }
-      )
+        },
+      ),
     );
     // return self for chaining
     return this;
@@ -251,7 +251,7 @@ class Server {
       // Get an operation outcome for this instance
       const OperationOutcome = resolveSchema(
         isValidVersion(base) ? base : VERSIONS['4_0_1'],
-        'operationoutcome'
+        'operationoutcome',
       );
 
       // If there is an error and it is an OperationOutcome
@@ -337,7 +337,7 @@ class Server {
     invariant(
       port || server.port,
       'Missing port. Please provide a port when initializing the server. See ' +
-        'https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md'
+        'https://github.com/BlueHalo/node-fhir-server-core/blob/master/docs/ServerConfiguration.md',
     );
 
     // Update the express app to be in instance of createServer
@@ -348,7 +348,7 @@ class Server {
             key: fs.readFileSync(server.ssl.key),
             cert: fs.readFileSync(server.ssl.cert),
           },
-          this.app
+          this.app,
         );
 
     // Start the app - will listen on 0.0.0.0 [::] if host is falsy

@@ -34,7 +34,7 @@ const getSearchParameters = (profile, version, customArgsModule, logger) => {
   if (customArgsModule) {
     let paramsAsArray = require(String(customArgsModule)).makeResource(
       Object.assign({}, { base_version: version, key: lowercaseProfileName }),
-      logger
+      logger,
     ).searchParam;
     // We need to key these by name so we can remove duplicates on assign
     allArguments = paramsAsArray.reduce((all, arg) => {

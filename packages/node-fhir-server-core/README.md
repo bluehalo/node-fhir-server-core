@@ -10,7 +10,7 @@ The framework defines a core server, `node-fhir-server-core`, a simple, secure N
 
 For an example implementation using MongoDB, please refer to our Github repository that we used for the ONC FHIR Secure API Server Showdown Challenge: [https://github.com/BlueHalo/node-fhir-server-mongo](https://github.com/BlueHalo/node-fhir-server-mongo).
 
-<img src="https://www.asymmetrik.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
+<img src="https://www.bluehalo.com/wp-content/uploads/2018/01/FHIR-Server-Architecture_Update.png" width="800">
 
 ## node-fhir-server-core@2.0.0
 
@@ -22,16 +22,16 @@ Please view the [Migration Guide](https://github.com/BlueHalo/node-fhir-server-c
 
 ## Getting Started
 
-Please see our [Getting Started](./docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
+Please see our [Getting Started](./../../docs/GettingStarted.md) guide for a walkthrough of how to set up our FHIR server.
 
 ## Frequently Asked Questions
 
-- [What configurations does `FHIRServer.initialize()` accept?](./docs/ServerConfiguration.md)
-- [How do I configure a "profile"?](./docs/ConfiguringProfiles.md)
-- [Can I add more loggers or customize how the logger works?](./docs/CustomizeLogging.md)
-- [How do I customize the capability statement?](./docs/CustomCapability.md)
-- [How do I add custom operations?](./docs/CustomOperations.md)
-- [How do I enable/disable/customize access control (authentication)?](./docs/AccessControl.md)
+- [What configurations does `FHIRServer.initialize()` accept?](./../../docs/ServerConfiguration.md)
+- [How do I configure a "profile"?](./../../docs/ConfiguringProfiles.md)
+- [Can I add more loggers or customize how the logger works?](./../../docs/CustomizeLogging.md)
+- [How do I customize the capability statement?](./../../docs/CustomCapability.md)
+- [How do I add custom operations?](./../../docs/CustomOperations.md)
+- [How do I enable/disable/customize access control (authentication)?](./../../docs/AccessControl.md)
 
 ## Philosophy
 

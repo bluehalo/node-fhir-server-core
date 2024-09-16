@@ -47,7 +47,7 @@ secrets
   .catch(console.error);
 ```
 
-See [fhir-secrets tests](https://github.com/BlueHalo/node-fhir-server-core/tree/master/packages/fhir-secrets/index.test.js) for more usage examples.
+See [fhir-secrets tests](https://github.com/Bluehalo/node-fhir-server-core/tree/master/packages/fhir-secrets/index.test.js) for more usage examples.
 
 ## Methods
 

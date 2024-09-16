@@ -1,8 +1,8 @@
 {
   "name": "@bluehalo/fhir-response-util",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "Utility for handling the headers, content, and status types for a response.",
-  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-response-util"
@@ -16,5 +16,8 @@
   "scripts": {
     "test": "jest"
   },
-  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930"
+  "gitHead": "717c4ad053a5034563d778318b9ccb673d025930",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }

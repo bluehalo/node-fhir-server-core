@@ -1,8 +1,8 @@
 {
   "name": "@bluehalo/fhir-sanitize-param",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "Sanitization tool for FHIR parameters",
-  "homepage": "https://github.com/BlueHalo/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-sanitize-param"
@@ -11,10 +11,13 @@
   "author": "Robert-W <rwinterbottom@asymmetrik.com>",
   "main": "index.js",
   "dependencies": {
-    "moment-timezone": "^0.5.33",
-    "sanitize-html": "^2.5.2",
-    "validator": "^13.6.0",
-    "xss": "^1.0.10"
+    "moment-timezone": "^0.5.45",
+    "sanitize-html": "^2.13.0",
+    "validator": "^13.12.0",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   },
   "scripts": {
     "test": "jest"
