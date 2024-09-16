@@ -2,11 +2,11 @@ services:
   verdaccio:
     image: verdaccio/verdaccio
     ports:
-    - '4873:4873'
+      - '4873:4873'
     volumes:
-    - './config:/verdaccio/conf'
+      - './config:/verdaccio/conf'
     networks:
-    - node-network
+      - node-network
 networks:
   node-network:
     driver: bridge
