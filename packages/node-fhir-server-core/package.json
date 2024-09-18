@@ -41,8 +41,8 @@
     "verbose": true
   },
   "dependencies": {
-    "@bluehalo/fhir-response-util": "^1.3.0",
-    "@bluehalo/sof-scope-checker": "^1.1.0",
+    "@bluehalo/fhir-response-util": "*",
+    "@bluehalo/sof-scope-checker": "*",
     "@hapi/bourne": "^3.0.0",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",

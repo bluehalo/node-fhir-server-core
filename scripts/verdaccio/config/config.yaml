@@ -1,0 +1,59 @@
+# The configuration file for Verdaccio
+# Documentation: https://verdaccio.org/docs/en/configuration
+
+# This section defines the base URL and port for your Verdaccio server
+listen:
+  - 127.0.0.1:4873
+
+# URL to the upstream registry to proxy (npmjs.org)
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+# This section defines the local storage path for Verdaccio
+storage: ./storage
+
+# Log level and settings
+logs:
+  - { type: stdout, format: pretty, level: http }
+
+# The list of users and their roles
+auth:
+  htpasswd:
+    file: ./htpasswd
+    max_users: 1000
+
+# Access control configuration
+packages:
+  '@bluehalo/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  '@*/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  '**':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+web:
+  enable: true
+  darkMode: true
+  login: false
+  showInfo: true
+  showSettings: true
+  showSearch: true
+  showDownloadTarball: true
+  showRaw: true
+  pkgManagers:
+    - npm
+    - yarn
+    - pnpm
+
+server:
+  # host for the server
+  host: 0.0.0.0
+  # port for the server
+  port: 4873
