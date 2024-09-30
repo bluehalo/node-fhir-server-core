@@ -45,7 +45,8 @@ Here is an example config with all the currently supported options. See descript
 			key: 'path/to/key.pem',
 			cert: 'path/to.cert.pem'
 		},
-		publicDirectory: '/path/to/public'
+		publicDirectory: '/path/to/public',
+		requestSizeLimit: '10mb'
 	},
 	logging: {
 		level: 'debug'
@@ -191,6 +192,13 @@ const fhirConfig = {
 
 - **Type:** `string`
 - **Description:** Path to your public directory. Some certificate authorities need to validate your server, for example, Let's Encrypt. You can use this to enable a public directory to serve the challenge file from `/.well-known/acme-challenge`.
+- **Required:** No.
+- **Default:** `none`
+
+#### `server.requestSizeLimit`
+
+- **Type:** `string`
+- **Description:** Controls the maximum request body size. The value is passed to [body-parser](https://www.npmjs.com/package/body-parser) library. If no value is provided, the library uses default `'100kb'`.
 - **Required:** No.
 - **Default:** `none`
 
