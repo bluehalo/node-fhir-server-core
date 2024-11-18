@@ -112,8 +112,8 @@ Here is an example config with all the currently supported options. See descript
 
 #### `auth.strategy.service`
 
-- **Type:** `string`
-- **Description:** A relative path to a authentication service module. It currently must export a strategy property which is set to a valid [passport strategy](http://www.passportjs.org/packages/).
+- **Type:** `string|object`
+- **Description:** A relative path to an authentication service module, or the actual module itself (e.g. `require('path/to/service')`). It currently must export a strategy property which is set to a valid [passport strategy](http://www.passportjs.org/packages/).
 - **Required:** false
 - **Default:** undefined
 
