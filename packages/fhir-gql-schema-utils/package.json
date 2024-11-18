@@ -1,8 +1,8 @@
 {
-  "name": "@asymmetrik/fhir-gql-schema-utils",
-  "version": "1.1.5",
+  "name": "@bluehalo/fhir-gql-schema-utils",
+  "version": "1.2.0",
   "description": "Suite of FHIR related utilities for GraphQL schemas.",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core",
+  "homepage": "https://github.com/Bluehalo/node-fhir-server-core",
   "repository": {
     "type": "git",
     "directory": "packages/fhir-gql-schema-utils"
@@ -14,7 +14,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "graphql": "^15.6.0"
+    "graphql": "^16.9.0",
+    "jest": "^29.7.0"
   },
   "publishConfig": {
     "access": "public"

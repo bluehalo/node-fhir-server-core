@@ -45,17 +45,20 @@ function notice(item, message) {
     keys = keys.concat(Object.getOwnPropertyNames(proto));
   }
 
-  return keys.reduce((all, key) => {
-    let property = item[key];
+  return keys.reduce(
+    (all, key) => {
+      let property = item[key];
 
-    if (typeof property === 'function') {
-      all[key] = wrapper(property, message);
-    } else {
-      all[key] = property;
-    }
+      if (typeof property === 'function') {
+        all[key] = wrapper(property, message);
+      } else {
+        all[key] = property;
+      }
 
-    return all;
-  }, Object.create(Object.getPrototypeOf(item)));
+      return all;
+    },
+    Object.create(Object.getPrototypeOf(item)),
+  );
 }
 
 module.exports = notice;

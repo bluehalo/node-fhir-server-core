@@ -74,7 +74,7 @@ describe('Router Tests', () => {
   test('should throw for invalid profile configurations', () => {
     // Both of these errors should link them to the profile wiki
     // to help them fix the issue
-    let profileWiki = 'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Profile';
+    let profileWiki = 'https://github.com/BlueHalo/node-fhir-server-core/wiki/Profile';
     // test an invalid version
     config.profiles.patient.versions = ['2_0_0'];
     expect(() => {
@@ -103,7 +103,7 @@ describe('Router Tests', () => {
 
   test('should throw for invalid operation configurations', () => {
     // All errors should direct them to the operations wiki page
-    let operationWiki = 'https://github.com/Asymmetrik/node-fhir-server-core/wiki/Operations';
+    let operationWiki = 'https://github.com/BlueHalo/node-fhir-server-core/wiki/Operations';
     // Should throw for missing name, route, method, or a matching controller
     // Name throws first
     config.profiles.patient.operation = [{}];
@@ -178,7 +178,7 @@ describe('Router Tests', () => {
 
     try {
       router.setRoutes({ app, config });
-    } catch (e) {
+    } catch (_) {
       // Failed
     }
 

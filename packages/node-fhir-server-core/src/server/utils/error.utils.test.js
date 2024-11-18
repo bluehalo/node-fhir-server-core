@@ -45,7 +45,7 @@ describe('Error Utils Tests', () => {
   test('should return correct OperationOutcome for an insufficientScope error', () => {
     let errorWithMessage = insufficientScope(
       'Not enough scope for this action.',
-      VERSIONS['3_0_1']
+      VERSIONS['3_0_1'],
     );
     let errorWithoutMessage = insufficientScope('', VERSIONS['3_0_1']);
 

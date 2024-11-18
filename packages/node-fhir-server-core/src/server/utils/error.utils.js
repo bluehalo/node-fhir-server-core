@@ -10,12 +10,10 @@ let getErrorConstructor = (baseVersion) => {
   }
 };
 
-/* eslint-disable no-useless-escape */
 let div_content = (severity, diagnostics) =>
   '<div xmlns="http://www.w3.org/1999/xhtml"><h1>Operation Outcome</h1><table border="0">' +
   `<table border=\"0\"><tr><td style=\"font-weight: bold;\">${severity}</td>` +
   `<td><pre>${diagnostics}</pre></td></tr></table></div>`;
-/* eslint-enable no-useless-escape */
 
 // Invalid or Missing parameter from request
 let invalidParameter = (message, base_version) => {

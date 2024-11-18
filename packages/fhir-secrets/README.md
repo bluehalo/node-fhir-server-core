@@ -5,7 +5,7 @@
 # Install
 
 ```shell
-yarn add @asymmetrik/fhir-secrets
+yarn add @bluehalo/fhir-secrets
 ```
 
 ## Prerequisites
@@ -19,7 +19,7 @@ yarn add @asymmetrik/fhir-secrets
 Depending on where you are running this code, the setup portion may change. If you have a default AWS profile with region and everything else set, you can use the decrypt function as follows:
 
 ```javascript
-const secrets = require('@asymmetrik/fhir-secrets');
+const secrets = require('@bluehalo/fhir-secrets');
 
 // This is output when you encrypt a secret with kms
 // https://docs.aws.amazon.com/cli/latest/reference/kms/encrypt.html
@@ -38,7 +38,7 @@ secrets
 If you need to configure the setup process with region or other properties in the client class constructor, you can do so and chain the process.
 
 ```javascript
-const secrets = require('@asymmetrik/fhir-secrets');
+const secrets = require('@bluehalo/fhir-secrets');
 
 secrets
   .configure({ region: 'us-east-2' })
@@ -47,7 +47,7 @@ secrets
   .catch(console.error);
 ```
 
-See [fhir-secrets tests](https://github.com/Asymmetrik/node-fhir-server-core/tree/master/packages/fhir-secrets/index.test.js) for more usage examples.
+See [fhir-secrets tests](https://github.com/Bluehalo/node-fhir-server-core/tree/master/packages/fhir-secrets/index.test.js) for more usage examples.
 
 ## Methods
 

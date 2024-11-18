@@ -89,7 +89,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: BadSchema,
       },
-      function ResolverNoOp() {}
+      function ResolverNoOp() {},
     );
 
     let noResolverConfig = scopeInvariant({
@@ -104,7 +104,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: OperationOutcome,
       },
-      function ResolverNoOp() {}
+      function ResolverNoOp() {},
     );
 
     let expected = 'Invalid schema, schema must be an input type schema.';
@@ -144,7 +144,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: OperationOutcome,
       },
-      () => expected
+      () => expected,
     );
 
     expect(typeof resolver).toEqual('function');
@@ -164,7 +164,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: OperationOutcome,
       },
-      () => expected
+      () => expected,
     );
 
     expect(typeof resolver).toEqual('function');
@@ -184,7 +184,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: OperationOutcome,
       },
-      () => {}
+      () => {},
     );
 
     expect(typeof resolver).toEqual('function');
@@ -206,7 +206,7 @@ describe('GraphQL Scope Checker Test', () => {
         name: 'Patient',
         schema: OperationOutcome,
       },
-      () => expected
+      () => expected,
     );
 
     expect(typeof resolver).toEqual('function');

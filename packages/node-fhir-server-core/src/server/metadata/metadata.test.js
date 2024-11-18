@@ -123,7 +123,7 @@ describe('Conformance Tests', () => {
 
     let security = response.body.rest[0].security;
     expect(security.service[0].text).toBe(
-      'OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
+      'OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)',
     );
   }, 60000);
 
@@ -151,7 +151,7 @@ describe('Conformance Tests', () => {
 
     let security = response.body.rest[0].security;
     expect(security.service[0].text).toBe(
-      'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)'
+      'Custom OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org)',
     );
   }, 60000);
 
@@ -234,7 +234,7 @@ describe('Conformance Tests', () => {
     for (let key of keys) {
       let account_resource = response.body.rest[0].resource.find((rsc) => rsc.type === 'Foobar');
       expect(account_resource.profile.reference).toBe(
-        `https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1`
+        `https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1`,
       );
     }
   }, 60000);

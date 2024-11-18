@@ -1,18 +1,18 @@
 {
   "name": "node-fhir-server-core-project",
   "private": true,
-  "version": "2.0.11",
+  "version": "2.1.0",
   "description": "Node FHIR Rest API Server and surrounding ecosystem",
-  "homepage": "https://github.com/Asymmetrik/node-fhir-server-core#readme",
+  "homepage": "https://github.com/bluehalo/node-fhir-server-core#readme",
   "bugs": {
-    "url": "https://github.com/Asymmetrik/node-fhir-server-core/issues"
+    "url": "https://github.com/bluehalo/node-fhir-server-core/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Asymmetrik/node-fhir-server-core.git"
+    "url": "git+https://github.com/bluehalo/node-fhir-server-core.git"
   },
   "license": "MIT",
-  "author": "Asymmetrik Ltd.",
+  "author": "Bluehalo",
   "contributors": [
     "Robert Winterbottom <rwinterbottom@asymmetrik.com>",
     "Jon Lee <jlee@asymmetrik.com>",
@@ -23,14 +23,11 @@
   "scripts": {
     "lerna": "lerna",
     "test": "lerna run test",
-    "bootstrap": "lerna bootstrap",
     "prettier-check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
     "prettier-fix": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
     "lint": "run-p prettier-check lint-eslint",
     "lint-staged": "lint-staged",
-    "lint-eslint": "eslint . --ext js,jsx,ts,tsx",
-    "snyk": "snyk",
-    "snyk-test": "snyk test --all-projects"
+    "lint-eslint": "eslint . '**/*.{js,jsx,ts,tsx}'"
   },
   "jest": {
     "clearMocks": true,
@@ -46,14 +43,19 @@
     "verbose": true
   },
   "devDependencies": {
-    "eslint": "^8.33.0",
-    "jest-cli": "^29.4.1",
-    "lerna": "^6.4.1",
+    "eslint": "^9.9",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "jest-cli": "^29.7.0",
+    "lerna": "^8.1.8",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.3",
-    "snyk": "^1.1096.0"
+    "prettier": "^3.3.3",
+    "yarn-audit-fix": "^10.0.7"
   },
   "engines": {
     "node": ">=10.13.0"
-  }
+  },
+  "workspaces": [
+    "./packages/*"
+  ]
 }

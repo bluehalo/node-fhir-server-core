@@ -6,7 +6,7 @@ describe('Scope Checker Test', () => {
       let responseObject = scopeChecker('', 'read', []);
       expect(responseObject.error.type).toBe('internal');
       expect(responseObject.error.message).toContain(
-        'Invalid name. This parameter should be an asterisk or valid resource type.'
+        'Invalid name. This parameter should be an asterisk or valid resource type.',
       );
     });
 
@@ -14,7 +14,7 @@ describe('Scope Checker Test', () => {
       let responseObject = scopeChecker('Patient', 'writ', []);
       expect(responseObject.error.type).toBe('internal');
       expect(responseObject.error.message).toContain(
-        'Invalid action. This parameter should be (read | write | *).'
+        'Invalid action. This parameter should be (read | write | *).',
       );
     });
 
@@ -22,7 +22,7 @@ describe('Scope Checker Test', () => {
       let responseObject = scopeChecker('Patient', 'read', 'user/*.*');
       expect(responseObject.error.type).toBe('internal');
       expect(responseObject.error.message).toContain(
-        'Invalid scopes. This parameter should be an array.'
+        'Invalid scopes. This parameter should be an array.',
       );
     });
   });
@@ -32,7 +32,7 @@ describe('Scope Checker Test', () => {
       let responseObject = scopeChecker('Patient', 'write', ['user/*.read']);
       expect(responseObject.error.type).toBe('forbidden');
       expect(responseObject.error.message).toContain(
-        'None of the provided scopes matched an allowed scope'
+        'None of the provided scopes matched an allowed scope',
       );
       expect(responseObject.success).toBeFalsy();
     });

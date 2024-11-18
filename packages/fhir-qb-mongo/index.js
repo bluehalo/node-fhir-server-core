@@ -128,7 +128,7 @@ let buildEndsWithQuery = function ({ field, value, caseSensitive = false }) {
 let applySearchResultTransformations = function ({ query, searchResultTransformations }) {
   Object.keys(searchResultTransformations).forEach((transformation) => {
     query.push(
-      supportedSearchTransformations[transformation](searchResultTransformations[transformation])
+      supportedSearchTransformations[transformation](searchResultTransformations[transformation]),
     );
   });
   return query;
