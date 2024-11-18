@@ -148,13 +148,13 @@ class Server {
       bodyParser.urlencoded({
         extended: true,
         limit: this.config.server.requestSizeLimit,
-      })
+      }),
     );
     this.app.use(
       bodyParser.json({
         type: ['application/fhir+json', 'application/json+fhir'],
         limit: this.config.server.requestSizeLimit,
-      })
+      }),
     );
     // Enable @hapi/bourne to protect against prototype injection
     this.app.use(prototypeInjectionHandler);
