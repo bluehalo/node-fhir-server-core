@@ -1,7 +1,10 @@
 {
-  "name": "@asymmetrik/node-fhir-server-core",
-  "version": "2.2.5",
-  "description": "Node FHIR Rest API Server",
+  "name": "@caremesh/node-fhir-server-core",
+  "version": "2.2.7",
+  "description": "Node FHIR Rest API Server (careMESH fork)",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "license": "MIT",
   "author": "Asymmetrik Ltd.",
   "contributors": [
@@ -13,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bluehalo/node-fhir-server-core",
+    "url": "https://github.com/caremesh/node-fhir-server-core",
     "directory": "packages/node-fhir-server-core"
   },
   "main": "dist/index",
