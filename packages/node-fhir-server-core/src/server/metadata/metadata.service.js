@@ -83,10 +83,10 @@ let generateCapabilityStatement = ({
             definition: opInProfile.definition
               ? opInProfile.definition
               : {
-                reference: opInProfile.reference
-                  ? opInProfile.reference
-                  : `/OperationOutcome/${opInProfile.name}`,
-              },
+                  reference: opInProfile.reference
+                    ? opInProfile.reference
+                    : `/OperationOutcome/${opInProfile.name}`,
+                },
           };
           ops.push(op);
         });
