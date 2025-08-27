@@ -200,7 +200,8 @@ class Server {
 
   configurePassport() {
     if (this.config.auth && this.config.auth.strategy) {
-      let { strategy } = require(path.resolve(this.config.auth.strategy.service));
+      const service = this.config.auth.strategy.service;
+      let { strategy } = typeof service === 'string' ? require(path.resolve(service)) : service;
       passport.use(strategy);
     }
 
