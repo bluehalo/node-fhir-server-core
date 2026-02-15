@@ -27,7 +27,7 @@
     "verbose": true
   },
   "dependencies": {
-    "ajv": "^6.12.6"
+    "ajv": "^8.18.0"
   },
   "devDependencies": {
     "jest": "^29.7.0"
