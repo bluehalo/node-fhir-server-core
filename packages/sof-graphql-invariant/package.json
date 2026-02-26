@@ -15,7 +15,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@bluehalo/sof-scope-checker": "^1.1.0",
+    "@bluehalo/sof-scope-checker": "*",
     "graphql": "^16.9.0"
   },
   "devDependencies": {

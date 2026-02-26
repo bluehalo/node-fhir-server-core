@@ -32,8 +32,8 @@
     "verbose": true
   },
   "dependencies": {
-    "@bluehalo/fhir-qb-mongo": "^0.13.0",
-    "@bluehalo/fhir-sanitize-param": "^1.2.0",
+    "@bluehalo/fhir-qb-mongo": "*",
+    "@bluehalo/fhir-sanitize-param": "*",
     "mathjs": "^13.1.1",
     "moment": "^2.30.1",
     "sequelize": "^6.37.3",

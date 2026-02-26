@@ -1,10 +1,11 @@
 {
-	"npmClient": "yarn",
-	"packages": ["packages/*"],
-	"version": "independent",
-	"command": {
-		"publish": {
-			"npmClient": "npm"
-		}
-	}
+  "npmClient": "yarn",
+  "packages": ["packages/*"],
+  "version": "independent",
+  "command": {
+    "publish": {
+      "npmClient": "npm"
+    }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
