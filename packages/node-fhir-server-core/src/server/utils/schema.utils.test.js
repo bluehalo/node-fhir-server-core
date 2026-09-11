@@ -18,6 +18,14 @@ describe('Schema Utils tests', () => {
     });
   });
 
+  SUPPORTED_VERSIONS.forEach((version) => {
+    test(`should get Reference schema for version ${version}`, () => {
+      const schema = resolveSchema(version, 'reference');
+      expect(schema).toBeTruthy();
+      expect(schema.resourceType).toEqual('Reference');
+    });
+  });
+
   test('should evaluate that a string is an invalid fhir version', () => {
     const version = 'foobar';
     expect(isValidVersion(version)).toEqual(false);

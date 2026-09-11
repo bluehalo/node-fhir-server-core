@@ -82,6 +82,7 @@ const procedure = require('./procedure');
 const provenance = require('./provenance');
 const questionnaire = require('./questionnaire');
 const questionnaireresponse = require('./questionnaireresponse');
+const reference = require('./reference');
 const relatedperson = require('./relatedperson');
 const requestgroup = require('./requestgroup');
 const researchstudy = require('./researchstudy');
@@ -189,6 +190,7 @@ module.exports = {
   provenance,
   questionnaire,
   questionnaireresponse,
+  reference,
   relatedperson,
   requestgroup,
   researchstudy,
